@@ -33,6 +33,7 @@ import matplotlib.pyplot as plt
 
 from semantic_detector import SemanticDetector
 from semantic.semantic_map import SemanticMap2D
+from semantic.ssc_completer import SSCCompleter
 from loop.semantic_vlad import SemanticVLADExtractor
 from loop.loop_detector import LoopDetector
 
@@ -156,6 +157,7 @@ def main():
     # Semantic modules (optional)
     semantic_detector = None
     semantic_map2d = None
+    ssc_completer = None
     loop_vlad_extractor = None
     loop_detector = None
     loop_last_detection_step = [-1 for _ in range(num_scenes)]
@@ -228,6 +230,20 @@ def main():
                 semantic_weights[idx] = semantic_priority.get(name, 1.0)
             semantic_map2d.set_class_weights(semantic_weights)
         semantic_map2d.to_device(device)
+        
+        # 初始化 SSC 补全器（如果启用）
+        if hasattr(args, 'use_ssc_completion') and args.use_ssc_completion:
+            print("[初始化] 正在初始化语义场景补全（SSC）模块...")
+            ssc_completer = SSCCompleter(
+                num_classes=semantic_detector.num_classes,
+                model_path=getattr(args, 'ssc_model_path', None),
+                device=device,
+                confidence_thresh=getattr(args, 'ssc_confidence_thresh', 0.5),
+                use_deep_learning=(getattr(args, 'ssc_model_path', None) is not None)
+            )
+            print("[初始化] SSC 模块初始化完成")
+        else:
+            ssc_completer = None
 
     # Origin of local map
     origins = np.zeros((num_scenes, 3))
@@ -617,6 +633,44 @@ def main():
                             lmb_e=lmb[e],
                             full_pose=None  # 暂时不使用，使用局部位姿即可
                         )
+                        
+                        # 应用 SSC 语义场景补全（定期更新）
+                        if (hasattr(args, 'use_ssc_completion') and args.use_ssc_completion and 
+                            ssc_completer is not None and
+                            total_num_steps % max(1, getattr(args, 'ssc_update_interval', 10)) == 0):
+                            try:
+                                # 获取全局地图信息用于补全
+                                # 需要从 full_map 获取全局信息
+                                gx1, gx2, gy1, gy2 = int(planner_pose_inputs[e][3]), int(planner_pose_inputs[e][4]), \
+                                                     int(planner_pose_inputs[e][5]), int(planner_pose_inputs[e][6])
+                                
+                                # 获取全局探索地图和障碍物地图
+                                explored_global = full_map[e, 1, :, :].detach().cpu().numpy()  # 全局探索地图
+                                obstacle_global = full_map[e, 0, :, :].detach().cpu().numpy()  # 全局障碍物地图
+                                
+                                # 获取门框信息（如果环境支持）
+                                door_map = None
+                                if hasattr(infos[e], 'get') and 'door_map' in infos[e]:
+                                    door_map = infos[e].get('door_map', None)
+                                
+                                # 调用 SSC 补全（使用全局地图）
+                                semantic_map2d.apply_ssc_completion(
+                                    scene_idx=e,
+                                    ssc_completer=ssc_completer,
+                                    explored_map=explored_global,
+                                    obstacle_map=obstacle_global,
+                                    visited_map=None,  # 可以传入 visited_vis 如果可用
+                                    door_map=door_map,
+                                    rgb_image=None,  # 深度学习模式需要，暂时不使用
+                                    depth_image=None
+                                )
+                                
+                                if total_num_steps % 100 == 0:
+                                    print(f"[SSC] 场景 {e} 语义补全完成 (step {total_num_steps})")
+                            except Exception as ex:
+                                if total_num_steps % 100 == 0:
+                                    print(f"[SSC] 补全失败 (env {e}): {ex}")
+                        
                         if args.use_loop_detection:
                             infos[e]['loop_detected'] = False
                             infos[e]['loop_match'] = None

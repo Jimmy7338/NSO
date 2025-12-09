@@ -172,6 +172,62 @@ class SemanticMap2D:
         window = weighted_full[scene_idx, 0, gx1:gx2, gy1:gy2].detach().cpu().numpy()
         return window
 
+    def apply_ssc_completion(self,
+                            scene_idx: int,
+                            ssc_completer,
+                            explored_map: np.ndarray,
+                            obstacle_map: np.ndarray,
+                            visited_map: Optional[np.ndarray] = None,
+                            door_map: Optional[np.ndarray] = None,
+                            rgb_image: Optional[np.ndarray] = None,
+                            depth_image: Optional[np.ndarray] = None):
+        """
+        应用语义场景补全（SSC）来补全未观测区域的语义信息
+        
+        Args:
+            scene_idx: 场景索引
+            ssc_completer: SSCCompleter 实例
+            explored_map: (H, W) 已探索区域
+            obstacle_map: (H, W) 障碍物地图
+            visited_map: (H, W) 已访问区域（可选）
+            door_map: (H, W) 门框地图（可选）
+            rgb_image: (H, W, 3) RGB 图像（深度学习模式需要）
+            depth_image: (H, W) 深度图像（深度学习模式需要）
+        """
+        # 获取当前语义地图（numpy 格式）
+        semantic_map_np = self.full_sem_counts[scene_idx].detach().cpu().numpy()  # (C, H, W)
+        
+        # 调用 SSC 补全器
+        completed_semantic_map, confidence_map = ssc_completer.complete(
+            semantic_map=semantic_map_np,
+            explored_map=explored_map,
+            obstacle_map=obstacle_map,
+            visited_map=visited_map,
+            door_map=door_map,
+            rgb_image=rgb_image,
+            depth_image=depth_image
+        )
+        
+        # 只更新置信度足够高的补全区域
+        high_confidence_mask = confidence_map > ssc_completer.completer.confidence_thresh
+        if np.any(high_confidence_mask):
+            # 将补全后的语义信息更新到地图中
+            # 使用加权平均：原有值 * (1 - confidence) + 补全值 * confidence
+            for c in range(self.num_classes):
+                original = self.full_sem_counts[scene_idx, c].detach().cpu().numpy()
+                completed = completed_semantic_map[c]
+                # 只在未探索区域应用补全
+                unobserved_mask = (explored_map == 0) & high_confidence_mask
+                if np.any(unobserved_mask):
+                    updated = original.copy()
+                    updated[unobserved_mask] = (
+                        original[unobserved_mask] * (1 - confidence_map[unobserved_mask]) +
+                        completed[unobserved_mask] * confidence_map[unobserved_mask]
+                    )
+                    self.full_sem_counts[scene_idx, c] = torch.from_numpy(updated).to(
+                        self.full_sem_counts.device
+                    )
+
     def save_visualizations(self, step_global: int, scene_idx: int):
         """
         保存彩色密度图（仅作为可视化参考）。

@@ -72,6 +72,19 @@ def get_args():
     parser.add_argument('--open_kernel', type=int, default=9,
                         help='开阔区域均值核大小（奇数）')
 
+    parser.add_argument('--use_ssc_completion', action='store_true', default=False,
+                        help='启用语义场景补全（SSC）功能，预测未观测区域的语义信息')
+    parser.add_argument('--ssc_confidence_thresh', type=float, default=0.5,
+                        help='SSC 补全结果的置信度阈值（默认0.5）')
+    parser.add_argument('--ssc_update_interval', type=int, default=10,
+                        help='SSC 更新的间隔步数（默认10，减少计算开销）')
+    parser.add_argument('--ssc_model_path', type=str, default=None,
+                        help='SSC 深度学习模型路径（如果为 None，使用基于规则的补全）')
+    parser.add_argument('--ssc_max_distance', type=int, default=10,
+                        help='SSC 最大补全距离（格子数，默认10）')
+    parser.add_argument('--ssc_use_structural_prior', action='store_true', default=True,
+                        help='使用结构先验（门框等）进行语义补全')
+
     parser.add_argument('--use_loop_detection', action='store_true', default=False,
                         help='启用语义增强 NetVLAD 回环检测')
     parser.add_argument('--loop_interval', type=int, default=100,
