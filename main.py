@@ -22,13 +22,19 @@ import algo
 import sys
 import matplotlib
 
-if sys.platform == 'darwin':
-    matplotlib.use("tkagg")
+# if sys.platform == 'darwin':
+#     matplotlib.use("tkagg")
+matplotlib.use("TkAgg")
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 # plt.ion()
 # fig, ax = plt.subplots(1,4, figsize=(10, 2.5), facecolor="whitesmoke")
 
+from semantic_detector import SemanticDetector
+from semantic.semantic_map import SemanticMap2D
+from loop.semantic_vlad import SemanticVLADExtractor
+from loop.loop_detector import LoopDetector
 
 args = get_args()
 
@@ -38,6 +44,8 @@ torch.manual_seed(args.seed)
 if args.cuda:
     torch.cuda.manual_seed(args.seed)
 
+if args.use_loop_detection and not args.use_semantic:
+    raise ValueError("启用回环检测需要同时开启 --use_semantic 以提供语义信息。")
 
 def get_local_map_boundaries(agent_loc, local_sizes, full_sizes):
     loc_r, loc_c = agent_loc
@@ -115,9 +123,12 @@ def main():
     g_process_rewards = np.zeros((num_scenes))
 
     # Starting environments
+    print("[初始化] 开始初始化环境...")
     torch.set_num_threads(1)
     envs = make_vec_envs(args)
+    print("[初始化] 环境初始化完成，正在重置环境...")
     obs, infos = envs.reset()
+    print("[初始化] 环境重置完成，开始训练循环...")
 
     # Initialize map variables
     ### Full map consists of 4 channels containing the following:
@@ -141,6 +152,82 @@ def main():
     # Initial full and local pose
     full_pose = torch.zeros(num_scenes, 3).float().to(device)
     local_pose = torch.zeros(num_scenes, 3).float().to(device)
+
+    # Semantic modules (optional)
+    semantic_detector = None
+    semantic_map2d = None
+    loop_vlad_extractor = None
+    loop_detector = None
+    loop_last_detection_step = [-1 for _ in range(num_scenes)]
+    if args.use_semantic:
+        print("[初始化] 开始初始化语义检测器...")
+        # 根据参数决定是否使用类别映射
+        use_mapping = not (hasattr(args, 'semantic_use_all_classes') and args.semantic_use_all_classes)
+        # 决定是否启用室内场景过滤
+        # 默认启用室内过滤（除非使用--semantic_use_all_classes且明确禁用）
+        if hasattr(args, 'semantic_no_indoor_filter') and args.semantic_no_indoor_filter:
+            indoor_only = False  # 明确禁用
+        elif hasattr(args, 'semantic_indoor_only') and args.semantic_indoor_only:
+            indoor_only = True  # 明确启用
+        else:
+            # 默认启用室内过滤（适合模拟器场景）
+            indoor_only = True
+        print(f"[初始化] 正在加载YOLO模型 (yolov8n.pt)，这可能需要一些时间...")
+        semantic_detector = SemanticDetector(
+            model_name="yolov8n.pt", 
+            device=device,
+            use_custom_mapping=use_mapping,
+            indoor_only=indoor_only
+        )
+        print("[初始化] 语义检测器初始化完成")
+        if not use_mapping:
+            if indoor_only:
+                print("[Semantic] 使用所有YOLO类别（共80类），但过滤掉不合理的室外物体（如飞机、火车、红绿灯等）")
+            else:
+                print("[Semantic] 使用所有YOLO类别（共80类），不进行类别映射过滤")
+        semantic_map2d = SemanticMap2D(
+            num_scenes=num_scenes,
+            num_classes=semantic_detector.num_classes,
+            full_w=full_w,
+            full_h=full_h,
+            local_w=local_w,
+            local_h=local_h,
+            map_resolution_cm=args.map_resolution,
+            vision_range=args.vision_range,
+            dump_dir=dump_dir
+        )
+        if semantic_detector.use_custom_mapping:
+            semantic_priority = {
+                'person': 1.5,
+                'chair': 1.2,
+                'couch': 1.2,
+                'bed': 1.2,
+                'dining table': 1.3,
+                'cup': 1.15,
+                'bottle': 1.1,
+                'bowl': 1.1,
+                'tv': 1.35,
+                'laptop': 1.35,
+                'mouse': 1.2,
+                'keyboard': 1.2,
+                'cell phone': 1.2,
+                'remote': 1.1,
+                'microwave': 1.2,
+                'oven': 1.15,
+                'toaster': 1.1,
+                'refrigerator': 1.2,
+                'sink': 1.1,
+                'book': 1.05,
+                'clock': 1.05,
+                'vase': 1.1,
+                'potted plant': 1.15,
+                'toilet': 1.05,
+            }
+            semantic_weights = np.ones(semantic_detector.num_classes, dtype=np.float32)
+            for idx, name in enumerate(semantic_detector.get_class_names()):
+                semantic_weights[idx] = semantic_priority.get(name, 1.0)
+            semantic_map2d.set_class_weights(semantic_weights)
+        semantic_map2d.to_device(device)
 
     # Origin of local map
     origins = np.zeros((num_scenes, 3))
@@ -312,6 +399,18 @@ def main():
         p_input['map_pred'] = global_input[e, 0, :, :].detach().cpu().numpy()
         p_input['exp_pred'] = global_input[e, 1, :, :].detach().cpu().numpy()
         p_input['pose_pred'] = planner_pose_inputs[e]
+        # 添加语义密度图（如果启用）- 使用全局地图的对应窗口
+        if args.use_semantic:
+            try:
+                # 获取全局语义密度图的对应窗口区域
+                gx1, gx2, gy1, gy2 = int(planner_pose_inputs[e][3]), int(planner_pose_inputs[e][4]), \
+                                     int(planner_pose_inputs[e][5]), int(planner_pose_inputs[e][6])
+                semantic_density = semantic_map2d.get_full_density_window(e, gx1, gx2, gy1, gy2)
+                p_input['semantic_density'] = semantic_density
+            except Exception:
+                p_input['semantic_density'] = None
+        else:
+            p_input['semantic_density'] = None
 
     # Output stores local goals as well as the the ground-truth action
     output = envs.get_short_term_goal(planner_inputs)
@@ -360,6 +459,10 @@ def main():
             # ------------------------------------------------------------------
             # Env step
             obs, rew, done, infos = envs.step(l_action)
+            if args.use_loop_detection:
+                for e in range(num_scenes):
+                    infos[e]['loop_detected'] = False
+                    infos[e]['loop_match'] = None
 
             l_masks = torch.FloatTensor([0 if x else 1
                                          for x in done]).to(device)
@@ -414,6 +517,147 @@ def main():
                                 int(c * 100.0 / args.map_resolution)]
 
                 local_map[e, 2:, loc_r - 2:loc_r + 3, loc_c - 2:loc_c + 3] = 1.
+            # ------------------------------------------------------------------
+            # Semantic Detection and Map Update (optional, minimal intrusion)
+            if args.use_semantic and (total_num_steps % max(1, args.semantic_interval) == 0):
+                try:
+                    # obs: (num_scenes, C, H, W), assumed uint8 [0,255] or float in [0,255]
+                    # Convert to uint8 if needed
+                    obs_for_det = obs
+                    if obs_for_det.dtype != torch.uint8:
+                        obs_for_det = torch.clamp(obs_for_det, 0, 255).to(torch.uint8)
+                    # 使用可配置的置信度阈值（默认0.2，平衡检测数量和准确率）
+                    conf_thresh = args.semantic_conf_thresh if hasattr(args, 'semantic_conf_thresh') else 0.2
+                    det_results = semantic_detector.detect_batch(obs_for_det, conf=conf_thresh)
+                    
+                    # 统计并记录检测到的语义类别和标签
+                    class_names = semantic_detector.get_class_names()
+                    total_detections = 0
+                    for e in range(num_scenes):
+                        det = det_results[e]
+                        if det is not None and len(det.get("classes", [])) > 0:
+                            total_detections += len(det.get("classes", []))
+                            classes = det["classes"]
+                            scores = det["scores"]
+                            boxes = det.get("boxes", None)
+                            # 统计每个类别出现的次数和平均置信度
+                            class_counts = {}
+                            class_scores = {}
+                            for cls_id, score in zip(classes, scores):
+                                cls_id = int(cls_id)
+                                if cls_id < len(class_names):
+                                    cls_name = class_names[cls_id]
+                                    if cls_name not in class_counts:
+                                        class_counts[cls_name] = 0
+                                        class_scores[cls_name] = []
+                                    class_counts[cls_name] += 1
+                                    class_scores[cls_name].append(float(score))
+                            
+                            # 计算平均置信度
+                            class_avg_scores = {name: np.mean(scores) for name, scores in class_scores.items()}
+
+                            # 构建带框的检测信息
+                            detection_overlays = []
+                            if boxes is not None and len(boxes) == len(classes):
+                                for box, cls_id, score in zip(boxes, classes, scores):
+                                    cls_id = int(cls_id)
+                                    if 0 <= cls_id < len(class_names):
+                                        label = class_names[cls_id]
+                                    else:
+                                        label = f"class_{cls_id}"
+                                    if hasattr(box, "tolist"):
+                                        box_coords = box.tolist()
+                                    else:
+                                        box_coords = [float(b) for b in box]
+                                    detection_overlays.append({
+                                        "box": box_coords,
+                                        "label": label,
+                                        "score": float(score)
+                                    })
+                            
+                            # 存储到infos中供可视化使用
+                            infos[e]['detected_classes'] = list(class_counts.keys())
+                            infos[e]['class_counts'] = class_counts
+                            infos[e]['class_avg_scores'] = class_avg_scores
+                            infos[e]['detection_overlays'] = detection_overlays
+                        else:
+                            infos[e]['detected_classes'] = []
+                            infos[e]['class_counts'] = {}
+                            infos[e]['class_avg_scores'] = {}
+                            infos[e]['detection_overlays'] = []
+                    
+                    loop_detection_this_step = args.use_loop_detection and \
+                        (total_num_steps % max(1, args.loop_interval) == 0)
+                    # 延迟初始化：只在真正需要回环检测时才创建extractor
+                    if args.use_loop_detection and loop_vlad_extractor is None and loop_detection_this_step:
+                        print("[Loop] 初始化语义增强 NetVLAD 提取器...")
+                        loop_vlad_extractor = SemanticVLADExtractor(
+                            num_semantic_classes=semantic_detector.num_classes,
+                            device=device,
+                            lazy_load=True  # 延迟加载模型
+                        )
+                    if args.use_loop_detection and loop_detection_this_step and loop_detector is None:
+                        # 先等会在循环内通过首个描述子初始化
+                        pass
+
+                    # 调试信息：每100步打印一次检测统计
+                    if total_num_steps % 100 == 0:
+                        print(f"[Semantic Detection] Step {total_num_steps}: "
+                              f"Total detections={total_detections}, "
+                              f"conf_thresh={conf_thresh:.2f}, "
+                              f"interval={args.semantic_interval}")
+                    
+                    # Update per scene
+                    for e in range(num_scenes):
+                        semantic_map2d.update_with_detections(
+                            scene_idx=e,
+                            detections=det_results[e],
+                            local_map=local_map[e],
+                            local_pose=local_pose[e],
+                            lmb_e=lmb[e],
+                            full_pose=None  # 暂时不使用，使用局部位姿即可
+                        )
+                        if args.use_loop_detection:
+                            infos[e]['loop_detected'] = False
+                            infos[e]['loop_match'] = None
+
+                        if args.use_loop_detection and loop_detection_this_step:
+                            rgb_tensor = obs[e].detach()
+                            # 使用轻量级模式（如果启用）可以显著提升速度
+                            lightweight = hasattr(args, 'loop_use_lightweight') and args.loop_use_lightweight
+                            desc = loop_vlad_extractor.encode(rgb_tensor, det_results[e], lightweight=lightweight)
+                            if loop_detector is None:
+                                loop_detector = LoopDetector(
+                                    descriptor_dim=desc.shape[0],
+                                    semantic_dim=semantic_detector.num_classes,
+                                    sim_thresh=args.loop_sim_thresh,
+                                    semantic_thresh=args.loop_sem_thresh,
+                                    min_step_gap=args.loop_min_gap,
+                                    top_k=args.loop_top_k
+                                )
+                            pose_np = full_pose[e].detach().cpu().numpy()
+                            global_step = total_num_steps * num_scenes + e
+                            match = loop_detector.detect_loop(desc, pose_np, global_step)
+                            if match is not None:
+                                infos[e]['loop_detected'] = True
+                                infos[e]['loop_match'] = {
+                                    'matched_step': match.matched_step,
+                                    'current_step': match.current_step,
+                                    'distance': match.distance,
+                                    'semantic_sim': match.semantic_sim
+                                }
+                                if loop_last_detection_step[e] != match.current_step:
+                                    loop_last_detection_step[e] = match.current_step
+                                    print(f"[Loop] Env {e} step {match.current_step} "
+                                          f"matched {match.matched_step} "
+                                          f"(sim={match.distance:.3f}, sem={match.semantic_sim:.3f})")
+                            loop_detector.add_keyframe(desc, pose_np, global_step)
+                    # Optional visualization
+                    if args.print_images:
+                        for e in range(num_scenes):
+                            semantic_map2d.save_visualizations(total_num_steps * num_scenes, e)
+                except Exception as _:
+                    pass
             # ------------------------------------------------------------------
 
             # ------------------------------------------------------------------
@@ -530,6 +774,18 @@ def main():
                 p_input['exp_pred'] = local_map[e, 1, :, :].cpu().numpy()
                 p_input['pose_pred'] = planner_pose_inputs[e]
                 p_input['goal'] = global_goals[e]
+                # 添加语义密度图（如果启用）- 使用全局地图的对应窗口
+                if args.use_semantic:
+                    try:
+                        # 获取全局语义密度图的对应窗口区域
+                        gx1, gx2, gy1, gy2 = int(planner_pose_inputs[e][3]), int(planner_pose_inputs[e][4]), \
+                                             int(planner_pose_inputs[e][5]), int(planner_pose_inputs[e][6])
+                        semantic_density = semantic_map2d.get_full_density_window(e, gx1, gx2, gy1, gy2)
+                        p_input['semantic_density'] = semantic_density
+                    except Exception:
+                        p_input['semantic_density'] = None
+                else:
+                    p_input['semantic_density'] = None
 
             output = envs.get_short_term_goal(planner_inputs)
             # ------------------------------------------------------------------
@@ -681,6 +937,33 @@ def main():
                             np.mean(exp_costs),
                             np.mean(pose_costs))
                     ])
+
+                if args.use_semantic:
+                    # 收集所有有效的语义奖励值（包括0.0，因为0.0也是有效值）
+                    sem_vals = [info.get('sem_reward', 0.0) for info in infos if 'sem_reward' in info]
+                    if len(sem_vals) > 0:
+                        # 计算平均值，即使有些值是0.0也要显示
+                        sem_mean = np.mean(sem_vals)
+                        log += " ".join([
+                            " Semantic Reward:",
+                            "{:.4f},".format(sem_mean)
+                        ])
+                    
+                    # 输出检测到的语义类别统计
+                    all_detected = []
+                    for info in infos:
+                        detected = info.get('detected_classes', [])
+                        if detected:
+                            all_detected.extend(detected)
+                    if all_detected:
+                        from collections import Counter
+                        class_freq = Counter(all_detected)
+                        log += " Detected classes: " + ", ".join([f"{name}({count})" for name, count in class_freq.most_common(5)])
+                    
+                    # 结构奖励（若可用）
+                    if hasattr(args, 'structural_reward_coeff') and args.structural_reward_coeff > 0:
+                        # exploration_env 已将结构奖励并入 total reward，不单列
+                        pass
 
                 print(log)
                 logging.info(log)

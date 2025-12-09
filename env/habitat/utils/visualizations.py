@@ -3,18 +3,30 @@ import sys
 import matplotlib
 import numpy as np
 
-if sys.platform == 'darwin':
-    matplotlib.use("tkagg")
-else:
-    matplotlib.use('Agg')
+# matplotlib.use('Agg')
+# if sys.platform == 'darwin':
+#     matplotlib.use("tkagg")
+# else:
+#     matplotlib.use('Agg')
+# matplotlib.use('TkAgg')
+matplotlib.use('TkAgg')
+
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 import seaborn as sns
 import skimage
 
+try:
+    import cv2
+    HAS_CV2 = True
+except ImportError:
+    HAS_CV2 = False
+
 
 def visualize(fig, ax, img, grid, pos, gt_pos, dump_dir, rank, ep_no, t,
-              visualize, print_images, vis_style):
+              visualize, print_images, vis_style,
+              detected_classes=None, class_counts=None, class_avg_scores=None):
     for i in range(2):
         ax[i].clear()
         ax[i].set_yticks([])
@@ -24,7 +36,7 @@ def visualize(fig, ax, img, grid, pos, gt_pos, dump_dir, rank, ep_no, t,
 
     ax[0].imshow(img)
     ax[0].set_title("Observation", family='sans-serif',
-                    fontname='Helvetica',
+                    fontname='DejaVu Sans',
                     fontsize=20)
 
     if vis_style == 1:
@@ -34,7 +46,7 @@ def visualize(fig, ax, img, grid, pos, gt_pos, dump_dir, rank, ep_no, t,
 
     ax[1].imshow(grid)
     ax[1].set_title(title, family='sans-serif',
-                    fontname='Helvetica',
+                    fontname='DejaVu Sans',
                     fontsize=20)
 
     # Draw GT agent pose
@@ -67,6 +79,65 @@ def visualize(fig, ax, img, grid, pos, gt_pos, dump_dir, rank, ep_no, t,
     for _ in range(5):
         plt.tight_layout()
 
+    # 在第二个子图（地图）的右上角添加语义标签列表显示
+    # 注意：必须在tight_layout()之后添加，否则会被移除
+    # 获取图像尺寸（注意：imshow的坐标系统，y轴从上到下）
+    img_height, img_width = grid.shape[:2]
+    
+    # 显示语义标签信息
+    # 添加调试：打印参数状态
+    if detected_classes is not None:
+        # 准备显示的文本
+        if len(detected_classes) > 0:
+            text_lines = ["Detected Objects:", ""]
+            # 按出现次数排序
+            if class_counts and len(class_counts) > 0:
+                sorted_classes = sorted(class_counts.items(), key=lambda x: x[1], reverse=True)
+                for cls_name, count in sorted_classes[:10]:  # 最多显示10个
+                    avg_score = class_avg_scores.get(cls_name, 0.0) if class_avg_scores else 0.0
+                    text_lines.append(f"{cls_name}: {count} ({avg_score:.2f})")
+            elif len(detected_classes) > 0:
+                for cls_name in detected_classes[:10]:
+                    text_lines.append(f"{cls_name}")
+            
+            if len(text_lines) > 2:  # 至少有实际内容（除了标题和空行）
+                # 构建完整文本
+                full_text = "\n".join(text_lines)
+                
+                # 计算文本位置（使用图像坐标，右上角）
+                # 使用相对位置，确保在不同图像尺寸下都能显示
+                text_x = img_width * 0.98  # 距离右边缘2%
+                text_y = img_height * 0.02  # 距离上边缘2%
+                
+                # 在ax[1]上添加文本，使用数据坐标系统
+                # 使用zorder确保文本在最上层
+                try:
+                    text_obj = ax[1].text(text_x, text_y, full_text,
+                          fontsize=8, family='monospace',
+                          verticalalignment='top',
+                          horizontalalignment='right',
+                          bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.95, 
+                                   edgecolor='black', linewidth=1.5),
+                          color='black',
+                          zorder=1000,  # 确保在最上层
+                          transform=ax[1].transData)  # 使用数据坐标系统
+                    # 强制刷新，确保文本显示
+                    ax[1].figure.canvas.draw_idle()
+                except Exception as e:
+                    # 如果出错，尝试使用axes坐标系统
+                    try:
+                        ax[1].text(0.98, 0.98, full_text,
+                              fontsize=8, family='monospace',
+                              verticalalignment='top',
+                              horizontalalignment='right',
+                              bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.95, 
+                                       edgecolor='black', linewidth=1.5),
+                              color='black',
+                              zorder=1000,
+                              transform=ax[1].transAxes)  # 使用axes坐标系统
+                    except:
+                        pass  # 如果还是失败，静默忽略
+
     if visualize:
         plt.gcf().canvas.flush_events()
         fig.canvas.start_event_loop(0.001)
@@ -93,7 +164,15 @@ def fill_color(colored, mat, color):
 
 
 def get_colored_map(mat, collision_map, visited, visited_gt, goal,
-                    explored, gt_map, gt_map_explored):
+                    explored, gt_map, gt_map_explored,
+                    semantic_density=None, semantic_freshness=None,
+                    structural_map=None):
+    """
+    生成彩色地图，可选叠加语义密度图
+    Args:
+        semantic_density: (H, W) numpy array，语义密度图，值越大表示语义密度越高
+        semantic_freshness: (H, W) numpy array，表示“已观测但未到达”的语义价值
+    """
     m, n = mat.shape
     colored = np.zeros((m, n, 3))
     pal = sns.color_palette("Paired")
@@ -135,4 +214,71 @@ def get_colored_map(mat, collision_map, visited, visited_gt, goal,
     colored = 1 - colored
     colored *= 255
     colored = colored.astype(np.uint8)
+    
+    # 叠加语义密度图（如果提供）- 改进的可视化效果
+    if semantic_density is not None and semantic_density.shape == (m, n) and HAS_CV2:
+        # 归一化语义密度到 [0, 1]，使用更平滑的归一化
+        sem_norm = semantic_density.astype(np.float32)
+        sem_max = np.max(sem_norm)
+        if sem_max > 0:
+            # 使用更平滑的归一化，避免过度饱和
+            sem_norm = np.clip(sem_norm / (sem_max * 0.8 + 1e-6), 0, 1)
+        
+        # 使用更精细的热力图颜色映射
+        sem_uint8 = (sem_norm * 255).astype(np.uint8)
+        # 使用JET colormap，提供更平滑的渐变效果
+        sem_colored = cv2.applyColorMap(sem_uint8, cv2.COLORMAP_JET)
+        sem_colored = cv2.cvtColor(sem_colored, cv2.COLOR_BGR2RGB)
+        
+        # 使用自适应阈值和更精细的叠加
+        # 只显示有意义的语义密度区域（阈值可调，现在更低以显示更多细节）
+        sem_mask = sem_norm > 0.05  # 降低阈值以显示更多细节
+        
+        # 使用自适应透明度：密度越高，叠加越明显
+        alpha_base = 0.3  # 基础透明度
+        alpha_map = alpha_base + sem_norm * 0.3  # 密度越高，透明度越高（0.3-0.6）
+        alpha_map = np.clip(alpha_map, 0, 0.6)  # 限制最大透明度
+        
+        # 精细叠加：逐像素混合
+        for c in range(3):
+            colored[:, :, c] = np.where(
+                sem_mask,
+                colored[:, :, c] * (1 - alpha_map) + sem_colored[:, :, c] * alpha_map,
+                colored[:, :, c]
+            )
+
+    # 叠加语义新鲜度（如果提供）：突出已观测但未到达的高价值语义区域
+    if semantic_freshness is not None and semantic_freshness.shape == (m, n) and HAS_CV2:
+        fresh_norm = np.clip(semantic_freshness.astype(np.float32), 0.0, 1.0)
+        fresh_uint8 = (fresh_norm * 255).astype(np.uint8)
+        fresh_colored = cv2.applyColorMap(fresh_uint8, cv2.COLORMAP_WINTER)
+        fresh_colored = cv2.cvtColor(fresh_colored, cv2.COLOR_BGR2RGB)
+
+        fresh_mask = fresh_norm > 0.05
+        alpha_fresh = np.clip(0.25 + fresh_norm * 0.35, 0.25, 0.6)
+        for c in range(3):
+            colored[:, :, c] = np.where(
+                fresh_mask,
+                colored[:, :, c] * (1 - alpha_fresh) + fresh_colored[:, :, c] * alpha_fresh,
+                colored[:, :, c]
+            )
+    
+    # 叠加结构内容图（门框/狭窄/开阔）的综合值
+    if structural_map is not None and structural_map.shape == (m, n) and HAS_CV2:
+        struct_norm = structural_map.astype(np.float32)
+        smax = np.max(struct_norm)
+        if smax > 0:
+            struct_norm = np.clip(struct_norm / (smax * 0.8 + 1e-6), 0, 1)
+        struct_uint8 = (struct_norm * 255).astype(np.uint8)
+        struct_colored = cv2.applyColorMap(struct_uint8, cv2.COLORMAP_AUTUMN)
+        struct_colored = cv2.cvtColor(struct_colored, cv2.COLOR_BGR2RGB)
+        struct_mask = struct_norm > 0.05
+        alpha_struct = np.clip(0.25 + struct_norm * 0.3, 0.25, 0.55)
+        for c in range(3):
+            colored[:, :, c] = np.where(
+                struct_mask,
+                colored[:, :, c] * (1 - alpha_struct) + struct_colored[:, :, c] * alpha_struct,
+                colored[:, :, c]
+            )
+
     return colored

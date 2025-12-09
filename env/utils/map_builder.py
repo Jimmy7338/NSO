@@ -26,7 +26,7 @@ class MapBuilder(object):
 
         self.map = np.zeros((self.map_size_cm // self.resolution,
                              self.map_size_cm // self.resolution,
-                             len(self.z_bins) + 1), dtype=np.float32)
+                             len(self.z_bins) + 1), dtype=np.float64)
 
         self.agent_height = params['agent_height']
         self.agent_view_angle = params['agent_view_angle']
@@ -94,7 +94,7 @@ class MapBuilder(object):
 
         self.map = np.zeros((self.map_size_cm // self.resolution,
                              self.map_size_cm // self.resolution,
-                             len(self.z_bins) + 1), dtype=np.float32)
+                             len(self.z_bins) + 1), dtype=np.float64)
 
     def get_map(self):
         return self.map

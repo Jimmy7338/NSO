@@ -1,10 +1,38 @@
-# Instructions
+# 使用说明
 
-## Training
-For training the complete Active Neural SLAM model on the Exploration task:
-```
+> 本文档提供基础使用说明。更详细的文档请参考 [完整项目指南](./COMPLETE_PROJECT_GUIDE.md)。
+
+## 训练
+
+### 基础训练
+训练完整的模型（所有模块）：
+```bash
 python main.py
 ```
+
+### 使用语义信息训练（推荐）
+本项目支持语义增强的探索策略，可以显著提高探索效率：
+```bash
+python main.py \
+  --use_semantic \
+  --semantic_use_all_classes \
+  --semantic_conf_thresh 0.1 \
+  --semantic_interval 1 \
+  --semantic_reward_coeff 0.12 \
+  --structural_reward_coeff 0.12 \
+  --frontier_reward_coeff 0.15 \
+  --w_struct_door 2.0 \
+  --door_boost_distance 5.0 \
+  --room_exploration_boost 1.5 \
+  --exp_name training_with_semantic
+```
+
+或使用提供的脚本：
+```bash
+bash scripts/train_with_semantic.sh
+```
+
+详细说明请参考 [语义训练指南](./TRAINING_WITH_SEMANTIC.md)。
 
 ### Specifying number of threads
 The code runs multiple parallel threads for training. Each thread loads a scene on a GPU. The code automatically decides the total number of threads and number of threads on each GPU based on the available GPUs.
@@ -68,17 +96,22 @@ Most of the default hyper-parameters should work fine. Some hyperparameters are 
 The code uses actuation and sensor noise based on models trained on real-world data. To turn off the
 actuation and sensor noise use `--noisy_actions 0` and `--noisy_odometry 0`, respectively.
 
-## Downloading pre-trained models
-```
+## 下载预训练模型
+
+如需使用基础版本的预训练模型进行评估（不包含语义增强功能），可以下载：
+
+```bash
 mkdir pretrained_models
-wget -O pretrained_models/model_best.global http://www.cs.cmu.edu/~dchaplot/projects/active_neural_slam/model_best.global
-wget -O pretrained_models/model_best.local http://www.cs.cmu.edu/~dchaplot/projects/active_neural_slam/model_best.local
-wget -O pretrained_models/model_best.slam http://www.cs.cmu.edu/~dchaplot/projects/active_neural_slam/model_best.slam
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1UK2hT0GWzoTaVR5lAI6i8o27tqEmYeyY' -O pretrained_models/model_best.global
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1A1s_HNnbpvdYBUAiw2y1JmmELRLfAJb8' -O pretrained_models/model_best.local
+wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1o5OG7DIUKZyvi5stozSqRpAEae1F2BmX' -O pretrained_models/model_best.slam
 ```
 
-## Evaluation
+**注意：** 基础版本的预训练模型不包含语义增强功能。如需使用本项目的语义增强功能，需要重新训练模型。
 
-The following are instructions to evaluate on the Gibson val set.
+## 评估
+
+以下是在 Gibson 验证集上评估的说明。
 
 ### Converting datasets
 To parallelize evaluation for speed, we provide a script to convert the Gibson val set into multi-threading format:

@@ -17,29 +17,29 @@ class HabitatMaps(object):
             zx, self.padding, self.resolution)
 
         zx = zx - self.origin
-        self.zx = (zx / self.resolution).astype(np.int)
+        self.zx = (zx / self.resolution).astype(np.int64)
 
     def get_map(self, y, lb, ub):
         ids = np.logical_and(self.y > y + lb, self.y < y + ub)
-        num_points = np.zeros((self.size[1], self.size[0]), dtype=np.int32)
+        num_points = np.zeros((self.size[1], self.size[0]), dtype=np.int64)
         np.add.at(num_points, (self.zx[ids, 1], self.zx[ids, 0]), 1)
         return num_points
 
     def _make_map(self, zx, padding, resolution):
         """Returns a map structure."""
         min_, max_ = self._get_xy_bounding_box(zx, padding=padding)
-        sz = np.ceil((max_ - min_ + 1) / resolution).astype(np.int32)
+        sz = np.ceil((max_ - min_ + 1) / resolution).astype(np.int64)
         max_ = min_ + sz * resolution - 1
         return min_, sz, max_
 
     def _get_xy_bounding_box(self, zx, padding):
         """Returns the xy bounding box of the environment."""
-        min_ = np.floor(np.min(zx, axis=0) - padding).astype(np.int)
-        max_ = np.ceil(np.max(zx, axis=0) + padding).astype(np.int)
+        min_ = np.floor(np.min(zx, axis=0) - padding).astype(np.int64)
+        max_ = np.ceil(np.max(zx, axis=0) + padding).astype(np.int64)
         return min_, max_
 
     def _sample_points(self, env, N):
-        pts = np.zeros((N, 3), dtype=np.float32)
+        pts = np.zeros((N, 3), dtype=np.float64)
         for i in range(N):
             pts[i, :] = env.sim.sample_navigable_point()
         return pts

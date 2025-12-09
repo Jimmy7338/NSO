@@ -92,6 +92,9 @@ class RolloutStorage(object):
 
         num_steps, num_processes = self.rewards.size()[0:2]
         batch_size = num_processes * num_steps
+        if num_mini_batch == 0:
+            raise ValueError("num_mini_batch cannot be zero")
+        
         mini_batch_size = batch_size // num_mini_batch
         assert batch_size >= num_mini_batch, (
             "PPO requires the number of processes ({}) "

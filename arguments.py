@@ -16,7 +16,8 @@ def get_args():
                                 Overridden when auto_gpu_config=1
                                 and training on gpus """)
     parser.add_argument('--num_processes_per_gpu', type=int, default=11)
-    parser.add_argument('--num_processes_on_first_gpu', type=int, default=0)
+    parser.add_argument('--num_processes_on_first_gpu', type=int, default=1,
+                        help='第一个GPU上的进程数（默认1，只显示一个窗口）')
     parser.add_argument('--num_episodes', type=int, default=1000000,
                         help='number of training episodes (default: 1000000)')
     parser.add_argument('--no_cuda', action='store_true', default=False,
@@ -32,6 +33,59 @@ def get_args():
     parser.add_argument('--train_slam', type=int, default=1,
                         help="""0: Do not train the Neural SLAM Module
                                 1: Train the Neural SLAM Module (default: 1)""")
+
+
+    parser.add_argument('--use_semantic', default=False, action='store_true',
+                        help='是否使用语义信息')
+    parser.add_argument('--semantic_conf_thresh', type=float, default=0.2,
+                        help='语义检测置信度阈值（默认0.2，平衡检测数量和准确率）')
+    parser.add_argument('--semantic_use_all_classes', action='store_true', default=False,
+                        help='使用所有YOLO类别（不进行类别映射过滤），可检测更多对象')
+    parser.add_argument('--semantic_indoor_only', action='store_true', default=False,
+                        help='仅使用室内场景相关类别（过滤掉飞机、火车等室外物体）')
+    parser.add_argument('--semantic_no_indoor_filter', action='store_true', default=False,
+                        help='禁用室内场景过滤（允许检测所有类别，包括不合理的室外物体）')
+    parser.add_argument('--train_semantic', default=False, action='store_true',
+                        help='是否训练语义模型')
+    parser.add_argument('--load_semantic', type=str, default="0",
+                        help='预训练语义模型的路径')
+    parser.add_argument('--semantic_interval', type=int, default=1,
+                        help='处理语义信息的间隔步数')
+    parser.add_argument('--semantic_reward_coeff', type=float, default=0.1,
+                        help='语义奖励系数')
+    parser.add_argument('--structural_reward_coeff', type=float, default=0.1,
+                        help='结构内容奖励系数（门框/狭窄通道/开阔区）')
+    parser.add_argument('--frontier_reward_coeff', type=float, default=0.15,
+                        help='前沿区域奖励系数（可见但未访问的区域）')
+    parser.add_argument('--w_struct_door', type=float, default=2.0,
+                        help='门框区域权重（提高以优先探索门框）')
+    parser.add_argument('--w_struct_narrow', type=float, default=1.0,
+                        help='狭窄通道区域权重')
+    parser.add_argument('--w_struct_open', type=float, default=0.5,
+                        help='开阔区域权重')
+    parser.add_argument('--door_boost_distance', type=float, default=5.0,
+                        help='门框增强距离（格子数，门框附近区域额外奖励）')
+    parser.add_argument('--room_exploration_boost', type=float, default=1.5,
+                        help='房间探索增强系数（通过门框进入未探测房间的额外奖励）')
+    parser.add_argument('--narrow_width_cells', type=int, default=4,
+                        help='狭窄通道宽度阈值（格子）')
+    parser.add_argument('--open_kernel', type=int, default=9,
+                        help='开阔区域均值核大小（奇数）')
+
+    parser.add_argument('--use_loop_detection', action='store_true', default=False,
+                        help='启用语义增强 NetVLAD 回环检测')
+    parser.add_argument('--loop_interval', type=int, default=100,
+                        help='执行回环检测的步间隔（默认100，较大值可提升性能）')
+    parser.add_argument('--loop_min_gap', type=int, default=200,
+                        help='同一轨迹两关键帧之间的最小间隔，用于过滤短周期回环')
+    parser.add_argument('--loop_top_k', type=int, default=5,
+                        help='检索候选的数量（FAISS top-k）')
+    parser.add_argument('--loop_sim_thresh', type=float, default=0.75,
+                        help='NetVLAD 相似度阈值（内积）')
+    parser.add_argument('--loop_sem_thresh', type=float, default=0.6,
+                        help='语义向量余弦相似度阈值')
+    parser.add_argument('--loop_use_lightweight', action='store_true', default=False,
+                        help='使用轻量级特征提取（仅语义直方图，不使用NetVLAD，速度更快但精度较低）')
 
     # Logging, loading models, visualization
     parser.add_argument('--log_interval', type=int, default=10,
@@ -81,6 +135,8 @@ def get_args():
                         help="path to config yaml containing task information")
     parser.add_argument("--split", type=str, default="train",
                         help="dataset split (train | val | val_mini) ")
+    parser.add_argument("--priority_scene", type=str, default=None,
+                        help="优先使用的场景名称（如：Cantwell, Denmark等），该场景会被优先加载")
     parser.add_argument('-na', '--noisy_actions', type=int, default=1)
     parser.add_argument('-no', '--noisy_odometry', type=int, default=1)
     parser.add_argument('--camera_height', type=float, default=1.25,
@@ -198,7 +254,8 @@ def get_args():
                             /1024/1024/1024 > 10.0, "Insufficient GPU memory"
 
             num_processes_per_gpu = int(gpu_memory/1.4)
-            num_processes_on_first_gpu = int((gpu_memory - 10.0)/1.4)
+            # num_processes_on_first_gpu = int((gpu_memory - 10.0)/1.4)
+            num_processes_on_first_gpu = 1  # 改为1，只显示一个窗口
 
             if num_gpus == 1:
                 args.num_processes_on_first_gpu = num_processes_on_first_gpu
@@ -241,8 +298,10 @@ def get_args():
         args.train_local = 0
 
     if args.num_mini_batch == "auto":
-        args.num_mini_batch = args.num_processes // 2
+        args.num_mini_batch = max(1, args.num_processes // 2)  # 确保至少为1
     else:
         args.num_mini_batch = int(args.num_mini_batch)
+        if args.num_mini_batch < 1:
+            args.num_mini_batch = 1  # 确保至少为1
 
     return args

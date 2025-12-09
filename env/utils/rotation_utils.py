@@ -29,7 +29,7 @@ def get_r_matrix(ax_, angle):
     if np.abs(angle) > ANGLE_EPS:
         S_hat = np.array(
             [[0.0, -ax[2], ax[1]], [ax[2], 0.0, -ax[0]], [-ax[1], ax[0], 0.0]],
-            dtype=np.float32)
+            dtype=np.float64)
         R = np.eye(3) + np.sin(angle) * S_hat + \
             (1 - np.cos(angle)) * (np.linalg.matrix_power(S_hat, 2))
     else:

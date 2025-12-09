@@ -13,10 +13,15 @@ from PIL import Image
 from torch.nn import functional as F
 from torchvision import transforms
 
-if sys.platform == 'darwin':
-    matplotlib.use("tkagg")
-else:
-    matplotlib.use('Agg')
+
+# if sys.platform == 'darwin':
+#     matplotlib.use("tkagg")
+# else:
+#     matplotlib.use('Agg')
+# matplotlib.use('TkAgg')
+# matplotlib.use('Agg')
+
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 import habitat
@@ -50,6 +55,9 @@ def _preprocess_depth(depth):
 class Exploration_Env(habitat.RLEnv):
 
     def __init__(self, args, rank, config_env, config_baseline, dataset):
+        self.figure = None
+        self.ax = None
+
         if args.visualize:
             plt.ion()
         if args.print_images or args.visualize:
@@ -98,6 +106,13 @@ class Exploration_Env(habitat.RLEnv):
                                       interpolation = Image.NEAREST)])
         self.scene_name = None
         self.maps_dict = {}
+        self.semantic_bonus_acc = 0.0
+        self.structural_bonus_acc = 0.0
+        self.frontier_bonus_acc = 0.0
+        self._last_semantic_density = None
+        self._last_fresh_sem = None
+        self._last_door_map = None
+        self._last_frontier_map = None
 
     def randomize_env(self):
         self._env._episode_iterator._shuffle_iterator()
@@ -130,6 +145,15 @@ class Exploration_Env(habitat.RLEnv):
         self.timestep = 0
         self._previous_action = None
         self.trajectory_states = []
+        self.semantic_bonus_acc = 0.0
+        self.structural_bonus_acc = 0.0
+        self.frontier_bonus_acc = 0.0
+        self._last_sem_reward = 0.0
+        self._last_area_reward = 0.0
+        self._last_semantic_density = None
+        self._last_fresh_sem = None
+        self._last_door_map = None
+        self._last_frontier_map = None
 
         if args.randomize_env_every > 0:
             if np.mod(self.episode_no, args.randomize_env_every) == 0:
@@ -185,6 +209,16 @@ class Exploration_Env(habitat.RLEnv):
             'fp_explored': fp_explored,
             'sensor_pose': [0., 0., 0.],
             'pose_err': [0., 0., 0.],
+            'exp_reward': None,
+            'exp_ratio': None,
+            'sem_reward': 0.0,
+            'area_reward': 0.0,
+            'loop_detected': False,
+            'loop_match': None,
+            'detected_classes': [],
+            'class_counts': {},
+            'class_avg_scores': {},
+            'detection_overlays': [],
         }
 
         self.save_position()
@@ -195,6 +229,9 @@ class Exploration_Env(habitat.RLEnv):
 
         args = self.args
         self.timestep += 1
+
+        self.info['loop_detected'] = False
+        self.info['loop_match'] = None
 
         # Action remapping
         if action == 2: # Forward
@@ -291,12 +328,34 @@ class Exploration_Env(habitat.RLEnv):
 
 
         if self.timestep%args.num_local_steps==0:
-            area, ratio = self.get_global_reward()
-            self.info['exp_reward'] = area
+            total_reward, ratio, sem_bonus, area_reward = self.get_global_reward()
+            self.info['exp_reward'] = total_reward
             self.info['exp_ratio'] = ratio
+            self.info['sem_reward'] = sem_bonus
+            self.info['area_reward'] = area_reward
+            # 保存当前的语义奖励值，以便在非全局奖励步骤时也能显示
+            self._last_sem_reward = sem_bonus
+            self._last_area_reward = area_reward
         else:
             self.info['exp_reward'] = None
             self.info['exp_ratio'] = None
+            # 保留上一次的语义奖励值，而不是设置为0.0
+            # 这样在日志记录时就能看到正确的语义奖励值
+            if hasattr(self, '_last_sem_reward'):
+                self.info['sem_reward'] = self._last_sem_reward
+            else:
+                self.info['sem_reward'] = 0.0
+            # area_reward 也保留上一次的值
+            if hasattr(self, '_last_area_reward'):
+                self.info['area_reward'] = self._last_area_reward
+            else:
+                self.info['area_reward'] = 0.0
+            # 保持语义检测信息（如果存在）
+            if 'detected_classes' not in self.info:
+                self.info['detected_classes'] = []
+                self.info['class_counts'] = {}
+                self.info['class_avg_scores'] = {}
+                self.info['detection_overlays'] = []
 
         self.save_position()
 
@@ -329,7 +388,25 @@ class Exploration_Env(habitat.RLEnv):
 
         m_reward *= 0.02 # Reward Scaling
 
-        return m_reward, m_ratio
+        semantic_bonus = self.semantic_bonus_acc * self.args.semantic_reward_coeff
+        structural_bonus = self.structural_bonus_acc
+        frontier_bonus = self.frontier_bonus_acc * self.args.frontier_reward_coeff
+        
+        # 调试信息：每100步打印一次最终奖励值
+        if self.timestep % 100 == 0 and self.args.use_semantic:
+            print(f"[Semantic Reward Final] Step {self.timestep}: "
+                  f"semantic_bonus_acc={self.semantic_bonus_acc:.6f}, "
+                  f"semantic_bonus={semantic_bonus:.6f}, "
+                  f"coeff={self.args.semantic_reward_coeff:.4f}")
+        
+        self.semantic_bonus_acc = 0.0
+        self.structural_bonus_acc = 0.0
+        self.frontier_bonus_acc = 0.0
+
+        # 结构奖励按窗口期直接加入，前沿奖励鼓励探索可见但未访问的区域
+        total_reward = m_reward + semantic_bonus + self.args.structural_reward_coeff * structural_bonus + frontier_bonus
+
+        return total_reward, m_ratio, semantic_bonus, m_reward
 
     def get_done(self, observations):
         # This function is not used, Habitat-RLEnv requires this function
@@ -412,6 +489,13 @@ class Exploration_Env(habitat.RLEnv):
         # Get Map prediction
         map_pred = inputs['map_pred']
         exp_pred = inputs['exp_pred']
+        semantic_density = inputs.get('semantic_density')
+        self._last_semantic_density = semantic_density
+        self._last_fresh_sem = None
+        
+        # 存储语义密度图用于可视化
+        if args.use_semantic and 'semantic_density' in inputs:
+            self._last_semantic_density = inputs.get('semantic_density', None)
 
         grid = np.rint(map_pred)
         explored = np.rint(exp_pred)
@@ -466,6 +550,166 @@ class Exploration_Env(habitat.RLEnv):
             y = int(last_start[1] + (start_gt[1] - last_start[1]) * (i+1) / steps)
             self.visited_gt[x, y] = 1
 
+
+        # 语义新鲜度奖励（优先探索已观测但未到达的高语义区域）
+        semantic_bonus = 0.0
+        if semantic_density is not None:
+            semantic_density = semantic_density.astype(np.float32)
+            if semantic_density.shape == (gx2 - gx1, gy2 - gy1):
+                semantic_density = np.maximum(semantic_density, 0.0)
+                visited_window = self.visited_vis[gx1:gx2, gy1:gy2].astype(np.float32)
+                observed_window = self.explored_map[gx1:gx2, gy1:gy2].astype(np.float32)
+                fresh_mask = np.clip(observed_window - visited_window, 0.0, 1.0)
+                fresh_sem = semantic_density * fresh_mask
+                sem_max = np.max(semantic_density)
+                sem_sum = np.sum(semantic_density)
+                if sem_max > 0:
+                    fresh_sem_norm = fresh_sem / (sem_max + 1e-6)
+                else:
+                    fresh_sem_norm = fresh_sem
+                active_cells = float(np.count_nonzero(fresh_mask))
+                observed_cells = float(np.count_nonzero(observed_window))
+                visited_cells = float(np.count_nonzero(visited_window))
+                
+                # 调试信息：每100步打印一次语义奖励诊断信息
+                if self.timestep % 100 == 0 and args.use_semantic:
+                    fresh_sem_sum = np.sum(fresh_sem) if active_cells > 0 else 0.0
+                    fresh_sem_norm_sum = np.sum(fresh_sem_norm) if active_cells > 0 else 0.0
+                    print(f"[Semantic Reward Debug] Step {self.timestep}: "
+                          f"sem_max={sem_max:.4f}, sem_sum={sem_sum:.4f}, "
+                          f"active_cells={active_cells:.0f}, observed={observed_cells:.0f}, "
+                          f"visited={visited_cells:.0f}, fresh_mask_sum={np.sum(fresh_mask):.0f}, "
+                          f"fresh_sem_sum={fresh_sem_sum:.4f}, fresh_sem_norm_sum={fresh_sem_norm_sum:.4f}")
+                
+                if active_cells > 0:
+                    # 计算新鲜区域的语义密度平均值（归一化后）
+                    fresh_sem_sum = np.sum(fresh_sem_norm)
+                    semantic_bonus = float(fresh_sem_sum / (active_cells + 1e-6))
+                    
+                    # 如果归一化后的值太小，使用原始语义密度的相对值
+                    # 这样可以确保即使归一化后值小，也能给予合理的奖励
+                    if semantic_bonus < 0.01 and sem_max > 0:
+                        # 使用新鲜区域的原始语义密度，按比例缩放
+                        fresh_sem_raw_sum = np.sum(fresh_sem)
+                        semantic_bonus = float(fresh_sem_raw_sum / (active_cells * sem_max + 1e-6))
+                        # 限制在合理范围内
+                        semantic_bonus = min(semantic_bonus, 1.0)
+                else:
+                    # 如果没有新鲜区域，但语义密度不为0，仍然给予少量奖励（鼓励探索有语义的区域）
+                    if sem_max > 0:
+                        # 使用已观测但可能已访问的区域，给予较小的奖励
+                        semantic_bonus = float(sem_sum / (observed_cells * sem_max + 1e-6)) * 0.1
+                        semantic_bonus = min(semantic_bonus, 0.1)
+                self._last_fresh_sem = fresh_sem_norm
+                
+                # 调试信息：每100步打印一次语义奖励值
+                if self.timestep % 100 == 0 and args.use_semantic:
+                    print(f"[Semantic Reward Step] Step {self.timestep}: "
+                          f"semantic_bonus={semantic_bonus:.6f}, "
+                          f"semantic_bonus_acc={self.semantic_bonus_acc:.6f}")
+            else:
+                # 形状不匹配时的调试信息
+                if self.timestep % 100 == 0 and args.use_semantic:
+                    print(f"[Semantic Reward Debug] Step {self.timestep}: "
+                          f"Shape mismatch! semantic_density.shape={semantic_density.shape if semantic_density is not None else None}, "
+                          f"expected=({gx2 - gx1}, {gy2 - gy1})")
+        else:
+            # semantic_density为None时的调试信息
+            if self.timestep % 100 == 0 and args.use_semantic:
+                print(f"[Semantic Reward Debug] Step {self.timestep}: semantic_density is None")
+        self.semantic_bonus_acc += semantic_bonus
+
+        # 结构内容奖励（门框/狭窄/开阔）
+        structural_bonus = 0.0
+        structural_map = None
+        frontier_bonus = 0.0
+        frontier_map = None
+        try:
+            grid_bin = np.rint(map_pred).astype(np.uint8)  # 1=obstacle
+            free = (1 - grid_bin).astype(np.uint8)
+            observed_window = self.explored_map[gx1:gx2, gy1:gy2].astype(np.float32)
+            visited_window = self.visited_vis[gx1:gx2, gy1:gy2].astype(np.float32)
+            fresh_mask = np.clip(observed_window - visited_window, 0.0, 1.0)
+
+            # 增强的门框检测：更精确地识别门框
+            # 方法1：左右或上下两侧为障碍，中间为可通行
+            left = np.roll(grid_bin, 1, axis=1)
+            right = np.roll(grid_bin, -1, axis=1)
+            up = np.roll(grid_bin, -1, axis=0)
+            down = np.roll(grid_bin, 1, axis=0)
+            door_h = (left == 1) & (right == 1) & (free == 1)
+            door_v = (up == 1) & (down == 1) & (free == 1)
+            door_mask = (door_h | door_v).astype(np.float32)
+            
+            # 方法2：检测狭窄通道（可能是门框）
+            import cv2
+            dist = cv2.distanceTransform((free * observed_window).astype(np.uint8), cv2.DIST_L2, 3)
+            narrow_thresh = max(1, int(self.args.narrow_width_cells // 2))
+            narrow_mask = (dist > 0) & (dist < narrow_thresh * 1.5)  # 稍微放宽阈值
+            
+            # 方法3：结合两种方法，门框区域增强
+            door_mask_enhanced = np.maximum(door_mask, narrow_mask.astype(np.float32) * 0.5)
+            
+            # 门框附近区域增强（鼓励接近门框）
+            if np.any(door_mask_enhanced > 0):
+                door_dist = cv2.distanceTransform((1 - door_mask_enhanced).astype(np.uint8), cv2.DIST_L2, 3)
+                door_boost_radius = int(self.args.door_boost_distance)
+                door_proximity = np.clip(1.0 - door_dist / max(door_boost_radius, 1), 0.0, 1.0)
+                door_mask_enhanced = np.maximum(door_mask_enhanced, door_proximity * 0.3)
+            
+            door_mask = door_mask_enhanced
+            self._last_door_map = door_mask
+
+            # 狭窄通道：自由空间的距离变换较小（但>0）
+            # dist已在上面计算，这里直接使用
+            narrow_thresh = max(1, int(self.args.narrow_width_cells // 2))
+            narrow_score = np.clip((narrow_thresh - dist) / max(narrow_thresh, 1), 0.0, 1.0)
+
+            # 开阔区域：自由空间的局部均值较高
+            k = max(3, int(self.args.open_kernel) | 1)  # 保证奇数
+            free_float = (free * observed_window).astype(np.float32)
+            open_score = cv2.blur(free_float, (k, k))
+            if np.max(open_score) > 0:
+                open_score = open_score / (np.max(open_score) + 1e-6)
+
+            # 综合结构价值（仅在 fresh 区域有效）
+            structural_map = (self.args.w_struct_door * door_mask +
+                              self.args.w_struct_narrow * narrow_score +
+                              self.args.w_struct_open * open_score).astype(np.float32)
+            structural_map *= fresh_mask
+
+            active_cells_s = float(np.count_nonzero(fresh_mask))
+            if active_cells_s > 0:
+                structural_bonus = float(np.sum(structural_map) / (active_cells_s + 1e-6))
+            
+            # 前沿区域奖励（可见但未访问的区域）
+            # 前沿 = 已观测但未访问的区域，且不是障碍物
+            frontier_mask = fresh_mask * free.astype(np.float32)
+            
+            # 如果前沿区域靠近门框，给予额外奖励（鼓励通过门框探索新房间）
+            if self._last_door_map is not None and np.any(self._last_door_map > 0):
+                door_dist = cv2.distanceTransform((1 - self._last_door_map).astype(np.uint8), cv2.DIST_L2, 3)
+                door_boost_radius = int(self.args.door_boost_distance * 2)  # 更大的影响范围
+                door_proximity = np.clip(1.0 - door_dist / max(door_boost_radius, 1), 0.0, 1.0)
+                # 门框附近的前沿区域获得额外奖励
+                frontier_map = frontier_mask * (1.0 + door_proximity * self.args.room_exploration_boost)
+            else:
+                frontier_map = frontier_mask
+            
+            active_cells_f = float(np.count_nonzero(frontier_mask))
+            if active_cells_f > 0:
+                frontier_bonus = float(np.sum(frontier_map) / (active_cells_f + 1e-6))
+            else:
+                frontier_bonus = 0.0
+            
+            self._last_frontier_map = frontier_map
+        except Exception as e:
+            structural_map = None
+            frontier_map = None
+            import traceback
+            traceback.print_exc()
+        self.structural_bonus_acc += structural_bonus
+        self.frontier_bonus_acc += frontier_bonus
 
         # Get goal
         goal = inputs['goal']
@@ -537,6 +781,14 @@ class Exploration_Env(habitat.RLEnv):
                 os.makedirs(ep_dir)
 
             if args.vis_type == 1: # Visualize predicted map and pose
+                # 获取语义密度图（如果提供）
+                semantic_density = None
+                if args.use_semantic and hasattr(self, '_last_semantic_density'):
+                    semantic_density = self._last_semantic_density
+                    # 确保尺寸匹配
+                    if semantic_density.shape != (gx2-gx1, gy2-gy1):
+                        semantic_density = None
+                
                 vis_grid = vu.get_colored_map(np.rint(map_pred),
                                 self.collison_map[gx1:gx2, gy1:gy2],
                                 self.visited_vis[gx1:gx2, gy1:gy2],
@@ -545,7 +797,16 @@ class Exploration_Env(habitat.RLEnv):
                                 self.explored_map[gx1:gx2, gy1:gy2],
                                 self.explorable_map[gx1:gx2, gy1:gy2],
                                 self.map[gx1:gx2, gy1:gy2] *
-                                    self.explored_map[gx1:gx2, gy1:gy2])
+                                    self.explored_map[gx1:gx2, gy1:gy2],
+                                semantic_density=semantic_density,
+                                semantic_freshness=self._last_fresh_sem,
+                                structural_map=structural_map)
+                # 获取语义检测信息用于可视化
+                detected_classes = self.info.get('detected_classes', [])
+                class_counts = self.info.get('class_counts', {})
+                class_avg_scores = self.info.get('class_avg_scores', {})
+                detection_overlays = self.info.get('detection_overlays', [])
+                
                 vis_grid = np.flipud(vis_grid)
                 vu.visualize(self.figure, self.ax, self.obs, vis_grid[:,:,::-1],
                             (start_x - gy1*args.map_resolution/100.0,
@@ -556,7 +817,10 @@ class Exploration_Env(habitat.RLEnv):
                              start_o_gt),
                             dump_dir, self.rank, self.episode_no,
                             self.timestep, args.visualize,
-                            args.print_images, args.vis_type)
+                            args.print_images, args.vis_type,
+                            detected_classes=detected_classes,
+                            class_counts=class_counts,
+                            class_avg_scores=class_avg_scores)
 
             else: # Visualize ground-truth map and pose
                 vis_grid = vu.get_colored_map(self.map,
@@ -567,13 +831,22 @@ class Exploration_Env(habitat.RLEnv):
                                 self.explored_map,
                                 self.explorable_map,
                                 self.map*self.explored_map)
+                # 获取语义检测信息用于可视化
+                detected_classes = self.info.get('detected_classes', [])
+                class_counts = self.info.get('class_counts', {})
+                class_avg_scores = self.info.get('class_avg_scores', {})
+                detection_overlays = self.info.get('detection_overlays', [])
+                
                 vis_grid = np.flipud(vis_grid)
                 vu.visualize(self.figure, self.ax, self.obs, vis_grid[:,:,::-1],
                             (start_x_gt, start_y_gt, start_o_gt),
                             (start_x_gt, start_y_gt, start_o_gt),
                             dump_dir, self.rank, self.episode_no,
                             self.timestep, args.visualize,
-                            args.print_images, args.vis_type)
+                            args.print_images, args.vis_type,
+                            detected_classes=detected_classes,
+                            class_counts=class_counts,
+                            class_avg_scores=class_avg_scores)
 
         return output
 
@@ -653,6 +926,34 @@ class Exploration_Env(habitat.RLEnv):
         episode_map[episode_map > 0] = 1.
 
         return episode_map
+
+    def _get_plain_semantic_map(self, gx1, gx2, gy1, gy2):
+        """
+        为语义窗口构建“原始地图”背景：
+        - 未知区域：深灰
+        - 可达区域：浅灰
+        - 障碍/占用：深色
+        不绘制轨迹、目标或其他叠加元素。
+        """
+        h = max(gx2 - gx1, 1)
+        w = max(gy2 - gy1, 1)
+        plain = np.zeros((h, w, 3), dtype=np.uint8)
+        # 默认未知区域
+        plain[:] = 35
+
+        if hasattr(self, 'explorable_map') and self.explorable_map is not None:
+            explorable_patch = self.explorable_map[gx1:gx2, gy1:gy2]
+            explorable_mask = explorable_patch > 0
+            plain[explorable_mask] = [215, 215, 215]
+
+        if hasattr(self, 'map') and self.map is not None:
+            map_patch = self.map[gx1:gx2, gy1:gy2]
+            obstacle_mask = map_patch > 0.5
+            plain[obstacle_mask] = [70, 70, 70]
+
+        # 与主窗口保持一致的朝向
+        plain = np.flipud(plain)
+        return plain
 
 
     def _get_stg(self, grid, explored, start, goal, planning_window):

@@ -101,9 +101,9 @@ def bin_points(XYZ_cms, map_size, z_bins, xy_resolution):
     isvalids = []
     for XYZ_cm in XYZ_cms:
         isnotnan = np.logical_not(np.isnan(XYZ_cm[:, :, 0]))
-        X_bin = np.round(XYZ_cm[:, :, 0] / xy_resolution).astype(np.int32)
-        Y_bin = np.round(XYZ_cm[:, :, 1] / xy_resolution).astype(np.int32)
-        Z_bin = np.digitize(XYZ_cm[:, :, 2], bins=z_bins).astype(np.int32)
+        X_bin = np.round(XYZ_cm[:, :, 0] / xy_resolution).astype(np.int64)
+        Y_bin = np.round(XYZ_cm[:, :, 1] / xy_resolution).astype(np.int64)
+        Z_bin = np.digitize(XYZ_cm[:, :, 2], bins=z_bins).astype(np.int64)
 
         isvalid = np.array([X_bin >= 0, X_bin < map_size, Y_bin >= 0, Y_bin < map_size,
                             Z_bin >= 0, Z_bin < n_z_bins, isnotnan])
@@ -111,7 +111,7 @@ def bin_points(XYZ_cms, map_size, z_bins, xy_resolution):
 
         ind = (Y_bin * map_size + X_bin) * n_z_bins + Z_bin
         ind[np.logical_not(isvalid)] = 0
-        count = np.bincount(ind.ravel(), isvalid.ravel().astype(np.int32),
+        count = np.bincount(ind.ravel(), isvalid.ravel().astype(np.int64),
                             minlength=map_size * map_size * n_z_bins)
         counts = np.reshape(count, [map_size, map_size, n_z_bins])
 

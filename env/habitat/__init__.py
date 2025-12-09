@@ -12,17 +12,20 @@ from .habitat_api.habitat_baselines.config.default import get_config as cfg_base
 
 
 def make_env_fn(args, config_env, config_baseline, rank):
+    print(f"[环境初始化] 进程 {rank}: 开始加载数据集...")
     dataset = PointNavDatasetV1(config_env.DATASET)
     config_env.defrost()
     config_env.SIMULATOR.SCENE = dataset.episodes[0].scene_id
-    print("Loading {}".format(config_env.SIMULATOR.SCENE))
+    print(f"[环境初始化] 进程 {rank}: 正在加载场景 {config_env.SIMULATOR.SCENE}")
     config_env.freeze()
 
+    print(f"[环境初始化] 进程 {rank}: 正在创建 Exploration_Env...")
     env = Exploration_Env(args=args, rank=rank,
                           config_env=config_env, config_baseline=config_baseline, dataset=dataset
                           )
 
     env.seed(rank)
+    print(f"[环境初始化] 进程 {rank}: 环境创建完成")
     return env
 
 
@@ -38,6 +41,17 @@ def construct_envs(args):
     basic_config.freeze()
 
     scenes = PointNavDatasetV1.get_scenes_to_load(basic_config.DATASET)
+
+    # 如果指定了优先场景，将其移到列表最前面
+    if hasattr(args, 'priority_scene') and args.priority_scene:
+        priority = args.priority_scene
+        if priority in scenes:
+            scenes.remove(priority)
+            scenes.insert(0, priority)
+            print(f"[Scene] 优先使用场景: {priority}")
+        else:
+            print(f"[Scene] 警告: 场景 '{priority}' 不在可用场景列表中")
+            print(f"[Scene] 可用场景: {', '.join(scenes[:10])}..." if len(scenes) > 10 else f"[Scene] 可用场景: {', '.join(scenes)}")
 
     if len(scenes) > 0:
         assert len(scenes) >= args.num_processes, (
@@ -94,6 +108,8 @@ def construct_envs(args):
 
         args_list.append(args)
 
+    print(f"[环境初始化] 正在创建 {args.num_processes} 个并行环境...")
+    print(f"[环境初始化] 这可能需要一些时间，特别是首次加载场景数据时...")
     envs = VectorEnv(
         make_env_fn=make_env_fn,
         env_fn_args=tuple(
@@ -103,5 +119,6 @@ def construct_envs(args):
             )
         ),
     )
+    print(f"[环境初始化] 环境创建完成")
 
     return envs
