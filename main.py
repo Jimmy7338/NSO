@@ -34,6 +34,8 @@ import matplotlib.pyplot as plt
 from semantic_detector import SemanticDetector
 from semantic.semantic_map import SemanticMap2D
 from semantic.ssc_completer import SSCCompleter
+from semantic.exploration_map_completer import ExplorationMapCompleter
+from semantic.voxel_based_completion import VoxelBasedCompletion
 from loop.semantic_vlad import SemanticVLADExtractor
 from loop.loop_detector import LoopDetector
 
@@ -158,6 +160,8 @@ def main():
     semantic_detector = None
     semantic_map2d = None
     ssc_completer = None
+    exploration_completer = None
+    voxel_based_completer = None
     loop_vlad_extractor = None
     loop_detector = None
     loop_last_detection_step = [-1 for _ in range(num_scenes)]
@@ -244,6 +248,35 @@ def main():
             print("[初始化] SSC 模块初始化完成")
         else:
             ssc_completer = None
+        
+        # 初始化探索地图补全器（如果启用）
+        if hasattr(args, 'use_exploration_completion') and args.use_exploration_completion:
+            print("[初始化] 正在初始化探索地图补全模块...")
+            exploration_completer = ExplorationMapCompleter(
+                confidence_thresh=getattr(args, 'exploration_completion_thresh', 0.5),
+                max_completion_distance=getattr(args, 'exploration_completion_distance', 15)
+            )
+            print("[初始化] 探索地图补全模块初始化完成")
+        else:
+            exploration_completer = None
+        
+        # 初始化基于3D体素的语义补全器（如果启用）
+        if hasattr(args, 'use_voxel_based_completion') and args.use_voxel_based_completion:
+            print("[初始化] 正在初始化基于3D体素的语义补全模块...")
+            voxel_based_completer = VoxelBasedCompletion(
+                voxel_size=getattr(args, 'voxel_size', 0.05),
+                voxel_grid_size=(
+                    getattr(args, 'voxel_grid_x', 200),
+                    getattr(args, 'voxel_grid_y', 200),
+                    getattr(args, 'voxel_grid_z', 50)
+                ),
+                map_resolution_cm=args.map_resolution,
+                use_semantic_segmentation=getattr(args, 'use_semantic_segmentation', True),
+                device=device
+            )
+            print("[初始化] 基于3D体素的语义补全模块初始化完成")
+        else:
+            voxel_based_completer = None
 
     # Origin of local map
     origins = np.zeros((num_scenes, 3))
@@ -654,6 +687,11 @@ def main():
                                     door_map = infos[e].get('door_map', None)
                                 
                                 # 调用 SSC 补全（使用全局地图）
+                                # 在评估模式下且启用图像保存时，保存对比图
+                                save_comparison = (args.eval and 
+                                                 hasattr(args, 'print_images') and 
+                                                 args.print_images and
+                                                 total_num_steps % max(1, getattr(args, 'ssc_update_interval', 10)) == 0)
                                 semantic_map2d.apply_ssc_completion(
                                     scene_idx=e,
                                     ssc_completer=ssc_completer,
@@ -662,14 +700,116 @@ def main():
                                     visited_map=None,  # 可以传入 visited_vis 如果可用
                                     door_map=door_map,
                                     rgb_image=None,  # 深度学习模式需要，暂时不使用
-                                    depth_image=None
+                                    depth_image=None,
+                                    save_comparison=save_comparison,
+                                    step_global=total_num_steps * num_scenes + e
                                 )
                                 
                                 if total_num_steps % 100 == 0:
                                     print(f"[SSC] 场景 {e} 语义补全完成 (step {total_num_steps})")
+                                    if save_comparison:
+                                        print(f"[SSC] 已保存补全前后对比图到 images/ 目录")
                             except Exception as ex:
                                 if total_num_steps % 100 == 0:
                                     print(f"[SSC] 补全失败 (env {e}): {ex}")
+                        
+                        # 应用探索地图补全（如果启用）
+                        if (hasattr(args, 'use_exploration_completion') and 
+                            args.use_exploration_completion and 
+                            exploration_completer is not None and
+                            total_num_steps % max(1, getattr(args, 'exploration_completion_update_interval', 10)) == 0):
+                            try:
+                                # 获取全局地图信息
+                                explored_global = full_map[e, 1, :, :].detach().cpu().numpy()  # 全局探索地图
+                                obstacle_global = full_map[e, 0, :, :].detach().cpu().numpy()  # 全局障碍物地图
+                                
+                                # 获取语义地图（用于引导补全）
+                                semantic_map_for_completion = None
+                                if semantic_map2d is not None:
+                                    try:
+                                        gx1, gx2, gy1, gy2 = int(planner_pose_inputs[e][3]), int(planner_pose_inputs[e][4]), \
+                                                             int(planner_pose_inputs[e][5]), int(planner_pose_inputs[e][6])
+                                        # 获取全局语义地图
+                                        semantic_density_global = semantic_map2d.get_full_density_window(e, gx1, gx2, gy1, gy2)
+                                        # 扩展到全局尺寸（简化处理，实际应该获取完整全局地图）
+                                        semantic_map_for_completion = semantic_density_global
+                                    except Exception:
+                                        pass
+                                
+                                # 获取门框信息
+                                door_map = None
+                                if hasattr(infos[e], 'get') and 'door_map' in infos[e]:
+                                    door_map = infos[e].get('door_map', None)
+                                
+                                # 调用探索地图补全
+                                completed_explored, completion_confidence = exploration_completer.complete_exploration_map(
+                                    explored_map=explored_global,
+                                    obstacle_map=obstacle_global,
+                                    semantic_map=semantic_map_for_completion,
+                                    door_map=door_map,
+                                    visited_map=None
+                                )
+                                
+                                # 存储到环境信息中（用于奖励计算和可视化）
+                                infos[e]['completed_explored_map'] = completed_explored
+                                infos[e]['exploration_completion_confidence'] = completion_confidence
+                                
+                                # 更新环境中的补全地图（用于奖励计算）
+                                if hasattr(envs.venv.envs[e], '_completed_explored_map'):
+                                    envs.venv.envs[e]._completed_explored_map = completed_explored
+                                    envs.venv.envs[e]._exploration_completion_confidence = completion_confidence
+                                
+                                # 保存补全前后对比图（评估模式）
+                                if (args.eval and 
+                                    hasattr(args, 'print_images') and 
+                                    args.print_images):
+                                    try:
+                                        from env.habitat.utils.exploration_completion_viz import save_exploration_completion_comparison
+                                        
+                                        # 获取语义地图用于可视化
+                                        semantic_for_viz = None
+                                        if semantic_map2d is not None:
+                                            try:
+                                                semantic_density_global = semantic_map2d.get_full_density_window(e, 0, explored_global.shape[0], 0, explored_global.shape[1])
+                                                semantic_for_viz = semantic_density_global
+                                            except Exception:
+                                                pass
+                                        
+                                        # 保存对比图
+                                        images_dir = os.path.join(dump_dir, "images")
+                                        os.makedirs(images_dir, exist_ok=True)
+                                        output_path = os.path.join(images_dir, 
+                                                                  f"exploration_completion_{e}_{total_num_steps * num_scenes + e:08d}.png")
+                                        
+                                        save_exploration_completion_comparison(
+                                            original_explored_map=explored_global,
+                                            completed_explored_map=completed_explored,
+                                            confidence_map=completion_confidence,
+                                            obstacle_map=obstacle_global,
+                                            semantic_map=semantic_for_viz,
+                                            output_path=output_path,
+                                            scene_idx=e,
+                                            step=total_num_steps * num_scenes + e
+                                        )
+                                        
+                                        if total_num_steps % 100 == 0:
+                                            print(f"[Exploration Completion] 已保存对比图: {output_path}")
+                                    except Exception as viz_ex:
+                                        if total_num_steps % 100 == 0:
+                                            print(f"[Exploration Completion] 保存对比图失败: {viz_ex}")
+                                
+                                if total_num_steps % 100 == 0:
+                                    original_area = np.sum(explored_global > 0)
+                                    completed_area = np.sum(completed_explored > 0.3)
+                                    area_increase = completed_area - original_area
+                                    if original_area > 0:
+                                        print(f"[Exploration Completion] 场景 {e}: "
+                                              f"原始面积={original_area:.0f}, "
+                                              f"补全后面积={completed_area:.0f}, "
+                                              f"增加={area_increase:.0f} ({area_increase/original_area*100:.1f}%)")
+                            except Exception as ex:
+                                if total_num_steps % 100 == 0:
+                                    print(f"[Exploration Completion] 补全失败 (env {e}): {ex}")
                         
                         if args.use_loop_detection:
                             infos[e]['loop_detected'] = False

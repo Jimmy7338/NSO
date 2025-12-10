@@ -84,6 +84,27 @@ def get_args():
                         help='SSC 最大补全距离（格子数，默认10）')
     parser.add_argument('--ssc_use_structural_prior', action='store_true', default=True,
                         help='使用结构先验（门框等）进行语义补全')
+    parser.add_argument('--use_exploration_completion', action='store_true', default=False,
+                        help='启用探索地图补全（预测未观测但可能存在的可探索区域，让覆盖地图更大）')
+    parser.add_argument('--exploration_completion_thresh', type=float, default=0.5,
+                        help='探索地图补全的置信度阈值（默认0.5）')
+    parser.add_argument('--exploration_completion_distance', type=int, default=15,
+                        help='探索地图补全的最大距离（格子数，默认15）')
+    parser.add_argument('--exploration_completion_update_interval', type=int, default=10,
+                        help='探索地图补全的更新间隔（步数，默认10）')
+    
+    parser.add_argument('--use_voxel_based_completion', action='store_true', default=False,
+                        help='启用基于3D体素的语义补全（使用深度图+相机内参+语义分割，更精确）')
+    parser.add_argument('--voxel_size', type=float, default=0.05,
+                        help='体素大小（米，默认0.05m=5cm）')
+    parser.add_argument('--voxel_grid_x', type=int, default=200,
+                        help='体素网格X方向尺寸（默认200）')
+    parser.add_argument('--voxel_grid_y', type=int, default=200,
+                        help='体素网格Y方向尺寸（默认200）')
+    parser.add_argument('--voxel_grid_z', type=int, default=50,
+                        help='体素网格Z方向尺寸（默认50）')
+    parser.add_argument('--use_semantic_segmentation', action='store_true', default=True,
+                        help='使用语义分割（True）或目标检测（False）进行像素级标注')
 
     parser.add_argument('--use_loop_detection', action='store_true', default=False,
                         help='启用语义增强 NetVLAD 回环检测')

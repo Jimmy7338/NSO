@@ -180,7 +180,9 @@ class SemanticMap2D:
                             visited_map: Optional[np.ndarray] = None,
                             door_map: Optional[np.ndarray] = None,
                             rgb_image: Optional[np.ndarray] = None,
-                            depth_image: Optional[np.ndarray] = None):
+                            depth_image: Optional[np.ndarray] = None,
+                            save_comparison: bool = False,
+                            step_global: int = 0):
         """
         应用语义场景补全（SSC）来补全未观测区域的语义信息
         
@@ -193,9 +195,12 @@ class SemanticMap2D:
             door_map: (H, W) 门框地图（可选）
             rgb_image: (H, W, 3) RGB 图像（深度学习模式需要）
             depth_image: (H, W) 深度图像（深度学习模式需要）
+            save_comparison: 是否保存补全前后对比图
+            step_global: 全局步数（用于保存对比图）
         """
         # 获取当前语义地图（numpy 格式）
         semantic_map_np = self.full_sem_counts[scene_idx].detach().cpu().numpy()  # (C, H, W)
+        original_semantic_map = semantic_map_np.copy()  # 保存原始地图用于对比
         
         # 调用 SSC 补全器
         completed_semantic_map, confidence_map = ssc_completer.complete(
@@ -207,6 +212,20 @@ class SemanticMap2D:
             rgb_image=rgb_image,
             depth_image=depth_image
         )
+        
+        # 保存对比可视化（如果启用）
+        if save_comparison:
+            try:
+                self.save_ssc_comparison(
+                    scene_idx=scene_idx,
+                    step_global=step_global,
+                    original_semantic_map=original_semantic_map,
+                    completed_semantic_map=completed_semantic_map,
+                    confidence_map=confidence_map,
+                    explored_map=explored_map
+                )
+            except Exception as e:
+                print(f"[SSC] 保存对比图失败: {e}")
         
         # 只更新置信度足够高的补全区域
         high_confidence_mask = confidence_map > ssc_completer.completer.confidence_thresh
@@ -243,5 +262,89 @@ class SemanticMap2D:
         fd_color = cv2.applyColorMap(fd, cv2.COLORMAP_INFERNO)
         cv2.imwrite(os.path.join(self.dump_images_dir, f"local_sem_density_{scene_idx}_{step_global:08d}.png"), ld_color)
         cv2.imwrite(os.path.join(self.dump_images_dir, f"full_sem_density_{scene_idx}_{step_global:08d}.png"), fd_color)
+    
+    def save_ssc_comparison(self,
+                           scene_idx: int,
+                           step_global: int,
+                           original_semantic_map: np.ndarray,
+                           completed_semantic_map: np.ndarray,
+                           confidence_map: np.ndarray,
+                           explored_map: np.ndarray):
+        """
+        保存 SSC 补全前后的对比可视化
+        
+        Args:
+            scene_idx: 场景索引
+            step_global: 全局步数
+            original_semantic_map: (num_classes, H, W) 补全前的语义地图
+            completed_semantic_map: (num_classes, H, W) 补全后的语义地图
+            confidence_map: (H, W) 置信度地图
+            explored_map: (H, W) 已探索区域
+        """
+        try:
+            import matplotlib
+            matplotlib.use('Agg')  # 非交互式后端
+            import matplotlib.pyplot as plt
+        except ImportError:
+            print("[SSC] 警告: matplotlib 未安装，无法保存对比图")
+            return None
+        
+        # 计算密度图
+        weight_map = self.class_weights.view(1, self.num_classes, 1, 1).detach().cpu().numpy()
+        
+        original_density = np.sum(original_semantic_map * weight_map[0], axis=0)
+        completed_density = np.sum(completed_semantic_map * weight_map[0], axis=0)
+        
+        # 归一化
+        max_val = max(np.max(original_density), np.max(completed_density), 1e-6)
+        original_density_norm = original_density / max_val
+        completed_density_norm = completed_density / max_val
+        
+        # 创建对比图
+        fig, axes = plt.subplots(2, 2, figsize=(12, 12))
+        
+        # 补全前的语义地图
+        axes[0, 0].imshow(original_density_norm, cmap='inferno', vmin=0, vmax=1)
+        axes[0, 0].set_title('Before SSC Completion', fontsize=12)
+        axes[0, 0].axis('off')
+        
+        # 补全后的语义地图
+        axes[0, 1].imshow(completed_density_norm, cmap='inferno', vmin=0, vmax=1)
+        axes[0, 1].set_title('After SSC Completion', fontsize=12)
+        axes[0, 1].axis('off')
+        
+        # 差异图（补全增加的部分）
+        diff_map = completed_density_norm - original_density_norm
+        diff_map = np.clip(diff_map, 0, 1)  # 只显示增加的部分
+        axes[1, 0].imshow(diff_map, cmap='hot', vmin=0, vmax=1)
+        axes[1, 0].set_title('Completion Difference (Added)', fontsize=12)
+        axes[1, 0].axis('off')
+        
+        # 置信度地图
+        axes[1, 1].imshow(confidence_map, cmap='viridis', vmin=0, vmax=1)
+        axes[1, 1].set_title('Completion Confidence', fontsize=12)
+        axes[1, 1].axis('off')
+        
+        # 添加探索区域轮廓
+        try:
+            from scipy import ndimage
+            for ax in axes.flat:
+                explored_contour = explored_map > 0.5
+                if np.any(explored_contour):
+                    contour = ndimage.binary_erosion(explored_contour) ^ explored_contour
+                    y, x = np.where(contour)
+                    if len(x) > 0 and len(y) > 0:
+                        ax.plot(x, y, 'c-', linewidth=0.5, alpha=0.5)
+        except ImportError:
+            pass  # scipy 未安装，跳过轮廓绘制
+        
+        plt.tight_layout()
+        
+        # 保存图像
+        output_path = os.path.join(self.dump_images_dir, f"ssc_comparison_{scene_idx}_{step_global:08d}.png")
+        plt.savefig(output_path, dpi=150, bbox_inches='tight')
+        plt.close()
+        
+        return output_path
 
 
