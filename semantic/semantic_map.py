@@ -247,6 +247,49 @@ class SemanticMap2D:
                         self.full_sem_counts.device
                     )
 
+    def update_with_voxel_completion(self,
+                                     scene_idx: int,
+                                     topdown_occupancy: np.ndarray,
+                                     topdown_semantic: np.ndarray,
+                                     map_origin: np.ndarray,
+                                     map_resolution_cm: int):
+        """
+        使用体素补全结果更新语义地图
+        
+        Args:
+            scene_idx: 场景索引
+            topdown_occupancy: (H, W) 体素补全的占据地图
+            topdown_semantic: (H, W) 体素补全的语义地图（类别ID）
+            map_origin: (2,) 地图原点
+            map_resolution_cm: 地图分辨率（厘米）
+        """
+        # 体素网格尺寸
+        voxel_h, voxel_w = topdown_occupancy.shape
+        
+        # 地图尺寸
+        map_h, map_w = self.full_sem_counts.shape[2], self.full_sem_counts.shape[3]
+        
+        # 计算缩放比例（体素网格到地图网格）
+        scale_x = map_w / voxel_w if voxel_w > 0 else 1.0
+        scale_y = map_h / voxel_h if voxel_h > 0 else 1.0
+        
+        # 更新语义计数
+        # 将体素语义标签映射到地图网格
+        for vy in range(voxel_h):
+            for vx in range(voxel_w):
+                if topdown_occupancy[vy, vx] > 0:
+                    sem_label = int(topdown_semantic[vy, vx])
+                    if 0 < sem_label <= self.num_classes:
+                        # 计算对应的地图坐标
+                        map_y = int(vy * scale_y)
+                        map_x = int(vx * scale_x)
+                        
+                        # 确保坐标在范围内
+                        if 0 <= map_y < map_h and 0 <= map_x < map_w:
+                            # 累加语义计数（使用占据值作为权重）
+                            occupancy_value = float(topdown_occupancy[vy, vx])
+                            self.full_sem_counts[scene_idx, sem_label - 1, map_y, map_x] += occupancy_value
+    
     def save_visualizations(self, step_global: int, scene_idx: int):
         """
         保存彩色密度图（仅作为可视化参考）。

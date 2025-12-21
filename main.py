@@ -46,6 +46,11 @@ torch.manual_seed(args.seed)
 
 if args.cuda:
     torch.cuda.manual_seed(args.seed)
+    
+# 多GPU训练支持：设置当前进程使用的GPU
+if args.cuda and hasattr(args, 'gpu_id'):
+    torch.cuda.set_device(args.gpu_id)
+    print(f"[多GPU] 当前进程使用 GPU {args.gpu_id}")
 
 if args.use_loop_detection and not args.use_semantic:
     raise ValueError("启用回环检测需要同时开启 --use_semantic 以提供语义信息。")
@@ -73,10 +78,43 @@ def get_local_map_boundaries(agent_loc, local_sizes, full_sizes):
     return [gx1, gx2, gy1, gy2]
 
 
+def sync_models_multi_gpu(g_policy, l_policy, nslam_module, args, log_dir, current_gpu_id, total_num_steps):
+    """
+    多GPU训练时，同步模型参数。
+    策略：每个GPU定期保存模型到共享目录，其他GPU可以加载（如果需要）。
+    """
+    num_gpus = getattr(args, 'num_gpus', 1)
+    if num_gpus <= 1:
+        return
+    
+    sync_dir = os.path.join(args.dump_location, args.exp_name + "_sync")
+    if not os.path.exists(sync_dir):
+        os.makedirs(sync_dir)
+    
+    # 保存当前GPU的模型参数
+    current_model_path = os.path.join(sync_dir, f"gpu{current_gpu_id}_models.pt")
+    torch.save({
+        'g_policy': g_policy.state_dict(),
+        'l_policy': l_policy.state_dict(),
+        'nslam_module': nslam_module.state_dict(),
+        'gpu_id': current_gpu_id,
+        'step': total_num_steps
+    }, current_model_path)
+    
+    if total_num_steps % 100 == 0:
+        print(f"[多GPU同步] GPU {current_gpu_id} 已保存模型参数到 {current_model_path} (step={total_num_steps})")
+
+
 def main():
     # Setup Logging
-    log_dir = "{}/models/{}/".format(args.dump_location, args.exp_name)
-    dump_dir = "{}/dump/{}/".format(args.dump_location, args.exp_name)
+    # 多GPU支持：为每个GPU进程添加标识
+    gpu_id = getattr(args, 'gpu_id', 0)
+    if getattr(args, 'num_gpus', 1) > 1:
+        log_dir = "{}/models/{}_gpu{}/".format(args.dump_location, args.exp_name, gpu_id)
+        dump_dir = "{}/dump/{}_gpu{}/".format(args.dump_location, args.exp_name, gpu_id)
+    else:
+        log_dir = "{}/models/{}/".format(args.dump_location, args.exp_name)
+        dump_dir = "{}/dump/{}/".format(args.dump_location, args.exp_name)
 
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
@@ -84,17 +122,23 @@ def main():
     if not os.path.exists("{}/images/".format(dump_dir)):
         os.makedirs("{}/images/".format(dump_dir))
 
+    log_file = log_dir + f'train_gpu{gpu_id}.log' if getattr(args, 'num_gpus', 1) > 1 else log_dir + 'train.log'
     logging.basicConfig(
-        filename=log_dir + 'train.log',
+        filename=log_file,
         level=logging.INFO)
     print("Dumping at {}".format(log_dir))
+    print(f"[GPU {gpu_id}] 训练进程启动")
     print(args)
+    logging.info(f"[GPU {gpu_id}] 训练进程启动")
     logging.info(args)
 
     # Logging and loss variables
     num_scenes = args.num_processes
     num_episodes = int(args.num_episodes)
-    device = args.device = torch.device("cuda:0" if args.cuda else "cpu")
+    # 多GPU支持：使用指定的GPU ID
+    gpu_id = getattr(args, 'gpu_id', 0)
+    device = args.device = torch.device(f"cuda:{gpu_id}" if args.cuda else "cpu")
+    print(f"[设备] 使用设备: {device}")
     policy_loss = 0
 
     best_cost = 100000
@@ -713,6 +757,164 @@ def main():
                                 if total_num_steps % 100 == 0:
                                     print(f"[SSC] 补全失败 (env {e}): {ex}")
                         
+                        # 应用基于3D体素的语义补全（如果启用）
+                        if (hasattr(args, 'use_voxel_based_completion') and 
+                            args.use_voxel_based_completion and 
+                            voxel_based_completer is not None and
+                            total_num_steps % max(1, args.semantic_interval) == 0):
+                            try:
+                                # 从环境获取原始RGB和深度图
+                                # 尝试多种方式访问环境
+                                env = None
+                                rgb_image = None
+                                depth_image = None
+                                
+                                # 方式1: 尝试 envs.venv.envs[e] (如果venv有envs属性)
+                                try:
+                                    if hasattr(envs, 'venv') and hasattr(envs.venv, 'envs'):
+                                        env = envs.venv.envs[e]
+                                except (AttributeError, IndexError, TypeError, KeyError):
+                                    pass
+                                
+                                # 方式2: 尝试 envs.venv[e] (VectorEnv可能支持直接索引)
+                                if env is None:
+                                    try:
+                                        if hasattr(envs, 'venv'):
+                                            # 尝试直接索引访问
+                                            env = envs.venv[e]
+                                    except (AttributeError, IndexError, TypeError, KeyError):
+                                        pass
+                                
+                                # 方式3: 尝试从环境获取观测
+                                if env is not None:
+                                    try:
+                                        if hasattr(env, 'habitat_env') and hasattr(env.habitat_env, 'sim'):
+                                            # 获取当前观察
+                                            current_obs = env.habitat_env.sim.get_observations()
+                                            rgb_image = current_obs.get('rgb', None)
+                                            depth_image = current_obs.get('depth', None)
+                                    except Exception as obs_ex:
+                                        if total_num_steps % 100 == 0:
+                                            print(f"[Voxel Completion] 获取观测失败: {obs_ex}")
+                                
+                                # 如果无法获取，跳过体素补全
+                                if rgb_image is None or depth_image is None:
+                                    if total_num_steps % 100 == 0:
+                                        print(f"[Voxel Completion] 场景 {e}: 无法获取原始RGB-D观测，跳过体素补全")
+                                    continue
+                                    
+                                    if rgb_image is not None and depth_image is not None:
+                                        # 转换格式
+                                        if isinstance(rgb_image, np.ndarray):
+                                            rgb_image = rgb_image.astype(np.uint8)
+                                        else:
+                                            rgb_image = np.array(rgb_image).astype(np.uint8)
+                                        
+                                        if isinstance(depth_image, np.ndarray):
+                                            # Habitat深度图处理
+                                            if depth_image.ndim == 3:
+                                                depth_image = depth_image[:, :, 0]
+                                            depth_image = depth_image.astype(np.float32)
+                                            # Habitat深度图单位判断和转换
+                                            if depth_image.max() <= 1.0:
+                                                # 归一化深度，转换为米（假设最大深度10米）
+                                                depth_image = depth_image * 10.0
+                                            elif depth_image.max() > 10.0:
+                                                # 可能是毫米，转换为米
+                                                depth_image = depth_image / 1000.0
+                                        else:
+                                            depth_image = np.array(depth_image).astype(np.float32)
+                                        
+                                        # 获取相机位姿（绝对位姿，单位：米，弧度）
+                                        abs_pose = full_pose[e].detach().cpu().numpy()  # [x, y, theta]
+                                        # 确保theta是弧度（如果>10可能是度数）
+                                        if abs(abs_pose[2]) > 10.0:
+                                            abs_pose[2] = np.deg2rad(abs_pose[2])
+                                        camera_pose = abs_pose
+                                        
+                                        # 处理RGB-D帧
+                                        topdown_occupancy, topdown_semantic = voxel_based_completer.process_rgbd_frame(
+                                            rgb_image=rgb_image,
+                                            depth_image=depth_image,
+                                            camera_pose=camera_pose,
+                                            frame_width=args.frame_width,
+                                            frame_height=args.frame_height,
+                                            hfov=args.hfov
+                                        )
+                                        
+                                        # 融合到语义地图
+                                        if semantic_map2d is not None:
+                                            # 获取现有语义地图和探索地图（保存补全前的状态用于可视化）
+                                            existing_semantic = semantic_map2d.full_sem_counts[e].detach().cpu().numpy()
+                                            existing_explored = full_map[e, 1, :, :].detach().cpu().numpy()
+                                            
+                                            # 计算地图原点
+                                            map_origin = np.array([
+                                                -args.map_size_cm / 100.0 / 2.0,
+                                                -args.map_size_cm / 100.0 / 2.0
+                                            ])
+                                            
+                                            # 融合地图
+                                            fused_semantic, fused_explored = voxel_based_completer.fuse_with_existing_map(
+                                                new_topdown_occupancy=topdown_occupancy,
+                                                new_topdown_semantic=topdown_semantic,
+                                                existing_semantic_map=existing_semantic,
+                                                existing_explored_map=existing_explored,
+                                                map_origin=map_origin,
+                                                map_resolution_cm=args.map_resolution
+                                            )
+                                            
+                                            # 保存可视化（评估模式且满足条件时）
+                                            if (args.eval and 
+                                                hasattr(args, 'print_images') and 
+                                                args.print_images and
+                                                total_num_steps % max(1, args.semantic_interval * 2) == 0):
+                                                try:
+                                                    from semantic.voxel_visualization import save_voxel_completion_comparison
+                                                    
+                                                    # 将语义计数地图转换为类别标签地图（用于可视化）
+                                                    # existing_semantic 是 (num_classes, H, W)，需要转换为 (H, W) 的类别标签
+                                                    original_sem_labels = np.argmax(existing_semantic, axis=0)
+                                                    completed_sem_labels = np.argmax(fused_semantic, axis=0)
+                                                    
+                                                    # 获取占据地图（补全前使用existing_explored，补全后使用fused_explored）
+                                                    # 但topdown_occupancy是新的占据信息，需要与现有地图融合
+                                                    original_occupancy = existing_explored
+                                                    completed_occupancy = fused_explored
+                                                    
+                                                    # 获取探索地图
+                                                    explored_map = full_map[e, 1, :, :].detach().cpu().numpy()
+                                                    
+                                                    # 保存可视化
+                                                    save_voxel_completion_comparison(
+                                                        scene_idx=e,
+                                                        step_global=total_num_steps,
+                                                        original_semantic_map=existing_semantic,
+                                                        completed_semantic_map=fused_semantic,
+                                                        original_occupancy=original_occupancy,
+                                                        completed_occupancy=completed_occupancy,
+                                                        explored_map=explored_map,
+                                                        dump_dir=dump_dir,
+                                                        num_classes=semantic_map2d.num_classes
+                                                    )
+                                                except Exception as viz_ex:
+                                                    if total_num_steps % 100 == 0:
+                                                        print(f"[Voxel Visualization] 保存可视化失败: {viz_ex}")
+                                            
+                                            # 更新语义地图
+                                            semantic_map2d.full_sem_counts[e] = torch.from_numpy(fused_semantic).to(
+                                                semantic_map2d.full_sem_counts.device
+                                            )
+                                        
+                                        if total_num_steps % 100 == 0:
+                                            occupied_voxels = np.sum(topdown_occupancy > 0)
+                                            semantic_voxels = np.sum(topdown_semantic > 0)
+                                            print(f"[Voxel Completion] 场景 {e}: "
+                                                  f"占据体素数={occupied_voxels}, "
+                                                  f"语义体素数={semantic_voxels}")
+                            except Exception as ex:
+                                if total_num_steps % 100 == 0:
+                                    print(f"[Voxel Completion] 处理失败 (env {e}): {ex}")
                         # 应用探索地图补全（如果启用）
                         if (hasattr(args, 'use_exploration_completion') and 
                             args.use_exploration_completion and 
@@ -1191,6 +1393,12 @@ def main():
                     torch.save(g_policy.state_dict(),
                                os.path.join(log_dir, "model_best.global"))
                     best_g_reward = np.mean(g_episode_rewards)
+                
+                # 多GPU训练：模型参数同步
+                if getattr(args, 'num_gpus', 1) > 1 and \
+                   (total_num_steps * num_scenes) % getattr(args, 'sync_interval', 1000) == 0:
+                    sync_models_multi_gpu(g_policy, l_policy, nslam_module, 
+                                         args, log_dir, gpu_id, total_num_steps)
 
             # Save periodic models
             if (total_num_steps * num_scenes) % args.save_periodic < \

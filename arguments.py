@@ -22,6 +22,12 @@ def get_args():
                         help='number of training episodes (default: 1000000)')
     parser.add_argument('--no_cuda', action='store_true', default=False,
                         help='disables CUDA training')
+    parser.add_argument('--gpu_id', type=int, default=0,
+                        help='当前进程使用的GPU ID（默认0，用于多GPU训练）')
+    parser.add_argument('--num_gpus', type=int, default=1,
+                        help='使用的GPU数量（默认1，设置为2可启用双GPU训练）')
+    parser.add_argument('--sync_interval', type=int, default=1000,
+                        help='多GPU训练时，模型参数同步间隔（全局步数，默认1000）')
     parser.add_argument('--eval', type=int, default=0,
                         help='1: evaluate models (default: 0)')
     parser.add_argument('--train_global', type=int, default=1,
