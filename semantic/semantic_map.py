@@ -305,7 +305,7 @@ class SemanticMap2D:
         fd_color = cv2.applyColorMap(fd, cv2.COLORMAP_INFERNO)
         cv2.imwrite(os.path.join(self.dump_images_dir, f"local_sem_density_{scene_idx}_{step_global:08d}.png"), ld_color)
         cv2.imwrite(os.path.join(self.dump_images_dir, f"full_sem_density_{scene_idx}_{step_global:08d}.png"), fd_color)
-    
+
     def save_ssc_comparison(self,
                            scene_idx: int,
                            step_global: int,

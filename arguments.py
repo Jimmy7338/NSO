@@ -101,6 +101,24 @@ def get_args():
     
     parser.add_argument('--use_voxel_based_completion', action='store_true', default=False,
                         help='启用基于3D体素的语义补全（使用深度图+相机内参+语义分割，更精确）')
+    
+    # 全局目标可达性评估网络参数
+    parser.add_argument('--use_goal_reachability', action='store_true', default=False,
+                        help='启用全局目标可达性评估网络，在生成目标前评估可达性')
+    parser.add_argument('--train_goal_reachability', action='store_true', default=False,
+                        help='训练目标可达性评估网络')
+    parser.add_argument('--goal_reachability_threshold', type=float, default=0.5,
+                        help='目标可达性阈值，超过此值认为目标可达（默认0.5）')
+    parser.add_argument('--goal_reachability_model_path', type=str, default=None,
+                        help='预训练的目标可达性评估网络路径')
+    parser.add_argument('--goal_reachability_lr', type=float, default=1e-4,
+                        help='目标可达性网络学习率（默认1e-4）')
+    parser.add_argument('--goal_reachability_collect_data', action='store_true', default=False,
+                        help='收集目标可达性训练数据')
+    parser.add_argument('--goal_reachability_data_dir', type=str, default='tmp/goal_reachability_data',
+                        help='目标可达性数据保存目录')
+    parser.add_argument('--goal_reachability_max_candidates', type=int, default=10,
+                        help='生成候选目标点的最大数量，从中选择可达性最高的（默认10）')
     parser.add_argument('--voxel_size', type=float, default=0.05,
                         help='体素大小（米，默认0.05m=5cm）')
     parser.add_argument('--voxel_grid_x', type=int, default=200,
