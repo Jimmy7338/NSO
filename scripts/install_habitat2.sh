@@ -32,6 +32,7 @@ else
   log "安装 habitat-lab (editable)..."
   if [[ -d "$TP/habitat-lab" ]]; then
     pip install -e "$TP/habitat-lab"
+  pip install 'hydra-core>=1.2.0,<1.4' omegaconf
   elif [[ -f "$TP/setup.py" ]] || [[ -d "$TP/habitat" ]]; then
     pip install -e "$TP"
   else

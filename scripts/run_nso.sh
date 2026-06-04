@@ -4,7 +4,12 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CONDA_DIR="${CONDA_DIR:-$HOME/miniconda3}"
-ENV_NAME="${ENV_NAME:-nso}"
+if [[ "${NSO_HABITAT_VERSION:-}" == "2" ]]; then
+  ENV_NAME="${ENV_NAME:-nso_h2}"
+else
+  ENV_NAME="${ENV_NAME:-nso}"
+fi
+export ENV_NAME
 
 if [[ ! -f "$CONDA_DIR/etc/profile.d/conda.sh" ]]; then
   echo "未找到 conda，请先运行: bash scripts/install_server.sh" >&2
@@ -13,6 +18,7 @@ fi
 # shellcheck source=/dev/null
 source "$CONDA_DIR/etc/profile.d/conda.sh"
 conda activate "$ENV_NAME"
+echo "[环境] 使用 conda: $ENV_NAME ($(command -v python))"
 
 cd "$PROJECT_DIR"
 export PYTHONPATH="$PROJECT_DIR:${PYTHONPATH:-}"
@@ -22,6 +28,10 @@ if [[ "${NSO_HABITAT_VERSION:-}" == "2" ]]; then
   H2_LAB="$PROJECT_DIR/third_party/habitat-lab/habitat-lab"
   if [[ -d "$H2_LAB" ]]; then
     export PYTHONPATH="$H2_LAB:$PYTHONPATH"
+  fi
+  if ! python -c "import hydra; from habitat.config import read_write" 2>/dev/null; then
+    echo "错误: 环境 $ENV_NAME 缺少 hydra，请: conda activate $ENV_NAME && bash scripts/install_habitat2.sh" >&2
+    exit 1
   fi
 fi
 

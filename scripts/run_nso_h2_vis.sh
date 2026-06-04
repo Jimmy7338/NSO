@@ -7,7 +7,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 CONDA_DIR="${CONDA_DIR:-$HOME/miniconda3}"
-ENV_NAME="${ENV_NAME:-nso_h2}"
+export ENV_NAME="${ENV_NAME:-nso_h2}"
 
 if [[ -z "${DISPLAY:-}" ]]; then
   echo "错误: DISPLAY 未设置，无法弹出实时窗口。" >&2
@@ -60,6 +60,12 @@ fi
 # shellcheck source=/dev/null
 source "$CONDA_DIR/etc/profile.d/conda.sh"
 conda activate "$ENV_NAME"
+if ! python -c "import hydra; from habitat.config import read_write" 2>/dev/null; then
+  echo "错误: 环境 $ENV_NAME 缺少 hydra 或 habitat-lab，请运行:" >&2
+  echo "  bash scripts/install_habitat2.sh" >&2
+  exit 1
+fi
+echo "[环境] 使用 conda: $ENV_NAME ($(command -v python))"
 
 mkdir -p "$NSO_LIVE_VIS_DIR"
 VIEWER_LOG="$NSO_LIVE_VIS_DIR/viewer.log"
