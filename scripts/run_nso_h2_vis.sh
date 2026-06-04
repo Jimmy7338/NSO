@@ -27,9 +27,10 @@ export NSO_VIS_HIGH_QUALITY=1
 export NSO_VIS_FULL_MAP=1
 export NSO_VIS_JPEG=1
 export NSO_VIS_JPEG_QUALITY=95
-export NSO_LIVE_OBS_W=640
-export NSO_LIVE_OBS_H=480
-export NSO_LIVE_MAP_SIZE=480
+export NSO_VIS_MAP_ZOOM=1
+export NSO_LIVE_OBS_W=720
+export NSO_LIVE_OBS_H=540
+export NSO_LIVE_MAP_SIZE=540
 export NSO_VIEWER_GEOM=1280x720
 export NSO_VIEWER_MAX_W=1280
 export NSO_VIEWER_MAX_H=720
@@ -102,8 +103,8 @@ DEFAULT_ARGS=(
   -no 0
   --num_episodes 1
   --max_episode_length 200
-  --env_frame_width 384
-  --env_frame_height 384
+  --env_frame_width 512
+  --env_frame_height 512
   "${LOAD_ARGS[@]}"
   --train_global 0
   --train_local 0

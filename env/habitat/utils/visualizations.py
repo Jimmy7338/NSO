@@ -55,6 +55,52 @@ def _cv_resize(img, out_w, out_h):
     return cv2.resize(img, (out_w, out_h), interpolation=interp)
 
 
+def _map_px_from_pose(pos, map_h):
+    """与 _draw_pose_cv2 一致的地图像素坐标。"""
+    x, y, _ = pos
+    px = int(x * 100.0 / 5.0)
+    py = int(map_h - y * 100.0 / 5.0)
+    return px, py
+
+
+def _crop_map_for_live(grid_u8, pos, gt_pos):
+    """全局地图缩到窗口前，先裁到已探索区域，避免右侧几乎全灰。"""
+    if os.environ.get("NSO_VIS_MAP_ZOOM", "1") != "1":
+        return grid_u8
+    h, w = grid_u8.shape[:2]
+    if grid_u8.ndim == 2:
+        activity = grid_u8 < 250
+    else:
+        # 未探索区多为浅灰/白，已探索/障碍/轨迹颜色差异更大
+        activity = np.any(grid_u8 < 248, axis=2)
+    for pose in (pos, gt_pos):
+        px, py = _map_px_from_pose(pose, h)
+        r = 48
+        y0, y1 = max(0, py - r), min(h, py + r)
+        x0, x1 = max(0, px - r), min(w, px + r)
+        activity[y0:y1, x0:x1] = True
+    ys, xs = np.where(activity)
+    if len(xs) < 8:
+        return grid_u8
+    pad = int(os.environ.get("NSO_VIS_MAP_ZOOM_PAD", "32"))
+    x0 = max(0, int(xs.min()) - pad)
+    x1 = min(w, int(xs.max()) + pad + 1)
+    y0 = max(0, int(ys.min()) - pad)
+    y1 = min(h, int(ys.max()) + pad + 1)
+    min_side = int(os.environ.get("NSO_VIS_MAP_ZOOM_MIN", "160"))
+    if (x1 - x0) < min_side:
+        cx = (x0 + x1) // 2
+        x0 = max(0, cx - min_side // 2)
+        x1 = min(w, x0 + min_side)
+        x0 = max(0, x1 - min_side)
+    if (y1 - y0) < min_side:
+        cy = (y0 + y1) // 2
+        y0 = max(0, cy - min_side // 2)
+        y1 = min(h, y0 + min_side)
+        y0 = max(0, y1 - min_side)
+    return grid_u8[y0:y1, x0:x1]
+
+
 def _live_canvas_size():
     obs_w = int(os.environ.get("NSO_LIVE_OBS_W", "640"))
     obs_h = int(os.environ.get("NSO_LIVE_OBS_H", "480"))
@@ -85,6 +131,7 @@ def _save_live_frame_cv2(obs, grid, live_dir, pos, gt_pos, timestep=None):
     grid_u8 = np.clip(grid, 0, 255).astype(np.uint8)
     if grid_u8.ndim == 2:
         grid_u8 = cv2.cvtColor(grid_u8, cv2.COLOR_GRAY2RGB)
+    grid_u8 = _crop_map_for_live(grid_u8, pos, gt_pos)
     obs_r = _cv_resize(obs_u8, obs_w, obs_h)
     map_r = _cv_resize(grid_u8, map_w, map_h)
     map_bgr = cv2.cvtColor(map_r, cv2.COLOR_RGB2BGR)
