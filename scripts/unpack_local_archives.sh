@@ -66,9 +66,11 @@ if [[ -f "$MP3D_EX_ZIP" ]] && [[ ! -f "$DATA_DIR/scene_datasets/17DRP5sb8fy/17DR
 fi
 
 log "========== 数据检查 =========="
+log "Gibson 场景: bash scripts/setup_gibson_habitat.sh"
 for f in \
   "$DATA_DIR/datasets/pointnav/gibson/v1/val/val.json.gz" \
   "$DATA_DIR/datasets/pointnav/mp3d/v1/val/val.json.gz" \
+  "$DATA_DIR/scene_datasets/gibson/Cantwell.glb" \
   "$DATA_DIR/scene_datasets/17DRP5sb8fy/17DRP5sb8fy.glb" \
   "$DATA_DIR/datasets/pointnav/habitat-test-scenes/v1/val/val.json.gz"; do
   if [[ -f "$f" ]]; then echo "  OK $f"; else echo "  -- 缺失 $f"; fi
