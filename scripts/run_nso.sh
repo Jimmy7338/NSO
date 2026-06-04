@@ -35,12 +35,18 @@ if [[ "${NSO_HABITAT_VERSION:-}" == "2" ]]; then
   fi
 fi
 
-# habitat-sim 在服务器上须用 xvfb + NVIDIA 渲染；勿与 MobaXterm X11 转发混用（会 GLXBadContextTag）
-USE_XVFB_GPU=0
-if [[ -n "${NSO_USE_XVFB_GPU:-}" ]]; then
+# 原始 X11 可视化：全程走用户 DISPLAY（Xming），不用 xvfb / NSO Live
+if [[ "${NSO_VIS_NATIVE:-}" == "1" ]]; then
+  USE_XVFB_GPU=0
+  export MPLBACKEND=TkAgg
+  unset NSO_USE_XVFB_GPU NSO_X11_DISPLAY NSO_LIVE_VIS NSO_LIVE_FAST
+  unset __GLX_VENDOR_LIBRARY_NAME
+elif [[ -n "${NSO_USE_XVFB_GPU:-}" ]]; then
   USE_XVFB_GPU=1
 elif [[ -z "${DISPLAY:-}" ]]; then
   USE_XVFB_GPU=1
+else
+  USE_XVFB_GPU=0
 fi
 
 if [[ "$USE_XVFB_GPU" == 1 ]] && command -v nvidia-smi >/dev/null 2>&1; then

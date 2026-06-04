@@ -32,9 +32,11 @@ import algo
 
 import sys
 
-# 实时可视化：先设 MPLBACKEND，再在 Exploration_Env 里切 DISPLAY 后 import pyplot
-if os.environ.get("NSO_X11_DISPLAY"):
+# 可视化后端：原始 X11 用 TkAgg；NSO Live 帧导出用 Agg；无 DISPLAY 用 Agg
+if os.environ.get("NSO_VIS_NATIVE") == "1":
     os.environ.setdefault("MPLBACKEND", "TkAgg")
+elif os.environ.get("NSO_X11_DISPLAY"):
+    os.environ.setdefault("MPLBACKEND", "Agg")
 elif not os.environ.get("DISPLAY"):
     os.environ.setdefault("MPLBACKEND", "Agg")
 

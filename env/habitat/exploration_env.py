@@ -125,11 +125,15 @@ class Exploration_Env(habitat.RLEnv):
         self.figure = None
         self.ax = None
 
-        # 实时窗口：独立子进程走 MobaXterm X11；habitat 留在 xvfb+GPU
+        # NSO Live 帧导出（仅 NSO_LIVE_VIS=1）；默认 NSO_VIS_NATIVE 走原始 TkAgg 窗口
+        self._native_x11 = os.environ.get("NSO_VIS_NATIVE") == "1"
         self._user_x11_display = os.environ.get("NSO_X11_DISPLAY")
         self._sim_display = os.environ.get("DISPLAY")
         self._use_live_viewer = bool(
-            args.visualize and self._user_x11_display)
+            args.visualize
+            and not self._native_x11
+            and os.environ.get("NSO_LIVE_VIS") == "1"
+            and self._user_x11_display)
 
         self._live_fast_vis = False
         if args.print_images or args.visualize:
@@ -145,23 +149,32 @@ class Exploration_Env(habitat.RLEnv):
                 args.visualize and not self._live_fast_vis)
             if need_mpl_figure:
                 import matplotlib
-                matplotlib.use("Agg", force=True)
+                if self._native_x11 or (
+                        args.visualize and not self._use_live_viewer):
+                    matplotlib.use("TkAgg", force=True)
+                else:
+                    matplotlib.use("Agg", force=True)
                 import matplotlib.pyplot as plt
                 self._plt = plt
-                if args.visualize and not self._use_live_viewer:
+                if args.visualize and (
+                        self._native_x11 or not self._use_live_viewer):
                     plt.ion()
                 self.figure, self.ax = plt.subplots(
                     1, 2, figsize=(6 * 16 / 9, 6),
                     facecolor="whitesmoke",
                     num="Thread {}".format(rank))
-                if args.visualize and not self._use_live_viewer:
+                if args.visualize and (
+                        self._native_x11 or not self._use_live_viewer):
                     try:
                         self.figure.show()
                     except Exception:
                         pass
-            if self._use_live_viewer and rank == 0:
+            if self._native_x11 and args.visualize and rank == 0:
+                print("[可视化] 原始 matplotlib 窗口 (TkAgg, DISPLAY={})".format(
+                    os.environ.get("DISPLAY", "")))
+            elif self._use_live_viewer and rank == 0:
                 mode = "OpenCV 快速" if self._live_fast_vis else "matplotlib"
-                print("[可视化] 实时窗口「NSO Live」→ MobaXterm（{}，DISPLAY={}）".format(
+                print("[可视化] NSO Live 帧导出（{}，DISPLAY={}）".format(
                     mode, self._user_x11_display))
 
         self.args = args
@@ -195,8 +208,9 @@ class Exploration_Env(habitat.RLEnv):
                     "CustomActionSpaceConfiguration"
                 )
 
-        # habitat 使用 xvfb + NVIDIA（恢复 sim DISPLAY，避免 GLXBadContextTag）
-        if self._sim_display:
+        # xvfb+GPU 模式：恢复 sim 的 DISPLAY，避免与 X11 转发混用
+        if (not self._native_x11 and self._user_x11_display
+                and self._sim_display):
             os.environ["DISPLAY"] = self._sim_display
         if os.environ.get("NSO_USE_XVFB_GPU") and os.uname().sysname == "Linux":
             if os.system("command -v nvidia-smi >/dev/null 2>&1") == 0:

@@ -6,6 +6,8 @@ import numpy as np
 
 if os.environ.get("NSO_VIEWER_PROCESS"):
     matplotlib.use("TkAgg")
+elif os.environ.get("NSO_VIS_NATIVE") == "1":
+    matplotlib.use("TkAgg")
 elif os.environ.get("NSO_USE_XVFB_GPU") or os.environ.get("NSO_X11_DISPLAY"):
     matplotlib.use("Agg")
 else:
@@ -173,6 +175,8 @@ def _save_live_frame_cv2(obs, grid, live_dir, pos, gt_pos, timestep=None):
 
 
 def live_vis_fast_enabled():
+    if os.environ.get("NSO_VIS_NATIVE") == "1":
+        return False
     return (os.environ.get("NSO_LIVE_FAST", "1") == "1"
             and os.environ.get("NSO_LIVE_VIS_DIR")
             and HAS_CV2)
