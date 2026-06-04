@@ -1,7 +1,9 @@
 import math
 import os
 import pickle
+import subprocess
 import sys
+import time
 
 import gym
 import matplotlib
@@ -21,11 +23,28 @@ from torchvision import transforms
 # matplotlib.use('TkAgg')
 # matplotlib.use('Agg')
 
-matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
-
 import habitat
 from habitat import logger
+
+
+def _get_sim_actions():
+    try:
+        from habitat.sims.habitat_simulator.actions import HabitatSimActions
+        return HabitatSimActions
+    except ImportError:
+        return habitat.SimulatorActions
+
+
+def _scene_name_from_sim(habitat_env):
+    sim = habitat_env.sim
+    if hasattr(sim, "config") and hasattr(sim.config, "SCENE"):
+        return sim.config.SCENE
+    if hasattr(sim, "curr_scene_name"):
+        return sim.curr_scene_name
+    ep = habitat_env.current_episode
+    if ep is not None:
+        return ep.scene_id
+    return "unknown"
 
 from env.utils.map_builder import MapBuilder
 from env.utils.fmm_planner import FMMPlanner
@@ -54,16 +73,96 @@ def _preprocess_depth(depth):
 
 class Exploration_Env(habitat.RLEnv):
 
+    _live_viewer_proc = None
+
+    @property
+    def original_action_space(self):
+        """Habitat 2 VectorEnv 初始化时会查询该属性。"""
+        return self.action_space
+
+    @classmethod
+    def _start_live_viewer(cls, user_display, live_dir):
+        if cls._live_viewer_proc is not None and cls._live_viewer_proc.poll() is None:
+            return
+        os.makedirs(live_dir, exist_ok=True)
+        log_path = os.path.join(live_dir, "viewer.log")
+        try:
+            open(log_path, "w", encoding="utf-8").close()
+        except OSError:
+            pass
+        script = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), "../../scripts/nso_live_viewer.py"))
+        env = os.environ.copy()
+        env["DISPLAY"] = user_display
+        env["NSO_VIEWER_PROCESS"] = "1"
+        env.pop("__GLX_VENDOR_LIBRARY_NAME", None)
+        env.pop("NSO_USE_XVFB_GPU", None)
+        env.pop("MPLBACKEND", None)
+        log_f = open(log_path, "a", encoding="utf-8")
+        cls._live_viewer_proc = subprocess.Popen(
+            [sys.executable, script, live_dir],
+            env=env,
+            stdout=log_f,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+        time.sleep(1.2)
+        if cls._live_viewer_proc.poll() is not None:
+            log_f.close()
+            try:
+                with open(log_path, encoding="utf-8") as f:
+                    tail = f.read()[-800:]
+            except OSError:
+                tail = ""
+            print("[可视化] 查看器启动失败，详见 {}:\n{}".format(
+                log_path, tail or "(无日志)"))
+            cls._live_viewer_proc = None
+        else:
+            print("[可视化] 查看器进程 pid={}，日志 {}".format(
+                cls._live_viewer_proc.pid, log_path))
+
     def __init__(self, args, rank, config_env, config_baseline, dataset):
         self.figure = None
         self.ax = None
 
-        if args.visualize:
-            plt.ion()
+        # 实时窗口：独立子进程走 MobaXterm X11；habitat 留在 xvfb+GPU
+        self._user_x11_display = os.environ.get("NSO_X11_DISPLAY")
+        self._sim_display = os.environ.get("DISPLAY")
+        self._use_live_viewer = bool(
+            args.visualize and self._user_x11_display)
+
+        self._live_fast_vis = False
         if args.print_images or args.visualize:
-            self.figure, self.ax = plt.subplots(1,2, figsize=(6*16/9, 6),
-                                                facecolor="whitesmoke",
-                                                num="Thread {}".format(rank))
+            if self._use_live_viewer:
+                self._live_vis_dir = os.environ.get(
+                    "NSO_LIVE_VIS_DIR", "/tmp/nso_vis_live")
+                os.makedirs(self._live_vis_dir, exist_ok=True)
+                os.environ["NSO_LIVE_VIS_DIR"] = self._live_vis_dir
+                from env.habitat.utils import visualizations as _vu
+                self._live_fast_vis = (
+                    not args.print_images and _vu.live_vis_fast_enabled())
+            need_mpl_figure = args.print_images or (
+                args.visualize and not self._live_fast_vis)
+            if need_mpl_figure:
+                import matplotlib
+                matplotlib.use("Agg", force=True)
+                import matplotlib.pyplot as plt
+                self._plt = plt
+                if args.visualize and not self._use_live_viewer:
+                    plt.ion()
+                self.figure, self.ax = plt.subplots(
+                    1, 2, figsize=(6 * 16 / 9, 6),
+                    facecolor="whitesmoke",
+                    num="Thread {}".format(rank))
+                if args.visualize and not self._use_live_viewer:
+                    try:
+                        self.figure.show()
+                    except Exception:
+                        pass
+            if self._use_live_viewer and rank == 0:
+                mode = "OpenCV 快速" if self._live_fast_vis else "matplotlib"
+                print("[可视化] 实时窗口「NSO Live」→ MobaXterm（{}，DISPLAY={}）".format(
+                    mode, self._user_x11_display))
 
         self.args = args
         self.num_actions = 3
@@ -78,17 +177,46 @@ class Exploration_Env(habitat.RLEnv):
         self.sensor_noise_left = \
                 pickle.load(open("noise_models/sensor_noise_left.pkl", 'rb'))
 
-        habitat.SimulatorActions.extend_action_space("NOISY_FORWARD")
-        habitat.SimulatorActions.extend_action_space("NOISY_RIGHT")
-        habitat.SimulatorActions.extend_action_space("NOISY_LEFT")
+        sim_actions = _get_sim_actions()
+        sim_actions.extend_action_space("NOISY_FORWARD")
+        sim_actions.extend_action_space("NOISY_RIGHT")
+        sim_actions.extend_action_space("NOISY_LEFT")
 
-        config_env.defrost()
-        config_env.SIMULATOR.ACTION_SPACE_CONFIG = \
+        if hasattr(config_env, "defrost"):
+            config_env.defrost()
+            config_env.SIMULATOR.ACTION_SPACE_CONFIG = (
                 "CustomActionSpaceConfiguration"
-        config_env.freeze()
+            )
+            config_env.freeze()
+        elif hasattr(config_env, "habitat"):
+            from habitat.config import read_write
+            with read_write(config_env):
+                config_env.habitat.simulator.action_space_config = (
+                    "CustomActionSpaceConfiguration"
+                )
 
+        # habitat 使用 xvfb + NVIDIA（恢复 sim DISPLAY，避免 GLXBadContextTag）
+        if self._sim_display:
+            os.environ["DISPLAY"] = self._sim_display
+        if os.environ.get("NSO_USE_XVFB_GPU") and os.uname().sysname == "Linux":
+            if os.system("command -v nvidia-smi >/dev/null 2>&1") == 0:
+                os.environ["CUDA_VISIBLE_DEVICES"] = os.environ.get(
+                    "CUDA_VISIBLE_DEVICES", "0")
+                os.environ["__GLX_VENDOR_LIBRARY_NAME"] = "nvidia"
 
         super().__init__(config_env, dataset)
+
+        if self._use_live_viewer and rank == 0:
+            if os.environ.get("NSO_VIEWER_EXTERNAL"):
+                pid = os.environ.get("NSO_VIEWER_PID", "")
+                alive = pid.isdigit() and os.path.exists("/proc/{}".format(pid))
+                if alive:
+                    print("[可视化] 使用 SSH 会话查看器 pid={}".format(pid))
+                else:
+                    print("[可视化] 警告: 外部查看器未运行，请重新 bash scripts/run_nso_vis.sh")
+            else:
+                self._start_live_viewer(
+                    self._user_x11_display, self._live_vis_dir)
 
         self.action_space = gym.spaces.Discrete(self.num_actions)
 
@@ -195,7 +323,7 @@ class Exploration_Env(habitat.RLEnv):
             self.mapper.update_map(depth, mapper_gt_pose)
 
         # Initialize variables
-        self.scene_name = self.habitat_env.sim.config.SCENE
+        self.scene_name = _scene_name_from_sim(self.habitat_env)
         self.visited = np.zeros(self.map.shape)
         self.visited_vis = np.zeros(self.map.shape)
         self.visited_gt = np.zeros(self.map.shape)
@@ -236,13 +364,13 @@ class Exploration_Env(habitat.RLEnv):
         # Action remapping
         if action == 2: # Forward
             action = 1
-            noisy_action = habitat.SimulatorActions.NOISY_FORWARD
+            noisy_action = _get_sim_actions().NOISY_FORWARD
         elif action == 1: # Right
             action = 3
-            noisy_action = habitat.SimulatorActions.NOISY_RIGHT
+            noisy_action = _get_sim_actions().NOISY_RIGHT
         elif action == 0: # Left
             action = 2
-            noisy_action = habitat.SimulatorActions.NOISY_LEFT
+            noisy_action = _get_sim_actions().NOISY_LEFT
 
         self.last_loc = np.copy(self.curr_loc)
         self.last_loc_gt = np.copy(self.curr_loc_gt)
@@ -788,19 +916,59 @@ class Exploration_Env(habitat.RLEnv):
                     # 确保尺寸匹配
                     if semantic_density.shape != (gx2-gx1, gy2-gy1):
                         semantic_density = None
-                
-                vis_grid = vu.get_colored_map(np.rint(map_pred),
-                                self.collison_map[gx1:gx2, gy1:gy2],
-                                self.visited_vis[gx1:gx2, gy1:gy2],
-                                self.visited_gt[gx1:gx2, gy1:gy2],
-                                goal,
-                                self.explored_map[gx1:gx2, gy1:gy2],
-                                self.explorable_map[gx1:gx2, gy1:gy2],
-                                self.map[gx1:gx2, gy1:gy2] *
+
+                # 实时窗口默认显示全局探索图（右侧不再只有局部灰块）
+                if os.environ.get("NSO_VIS_FULL_MAP", "1") == "1":
+                    goal_full = (
+                        int(np.clip(gx1 + goal[0], 0, self.map.shape[0] - 1)),
+                        int(np.clip(gy1 + goal[1], 0, self.map.shape[1] - 1)),
+                    )
+                    vis_grid = vu.get_colored_map(
+                        np.rint(self.map),
+                        self.collison_map,
+                        self.visited_vis,
+                        self.visited_gt,
+                        goal_full,
+                        self.explored_map,
+                        self.explorable_map,
+                        self.map * self.explored_map,
+                        semantic_density=None,
+                        semantic_freshness=None,
+                        structural_map=None,
+                    )
+                    pos = (
+                        self.curr_loc[0] * 100.0 / args.map_resolution,
+                        self.curr_loc[1] * 100.0 / args.map_resolution,
+                        self.curr_loc[2],
+                    )
+                    gt_pos = (
+                        self.curr_loc_gt[0] * 100.0 / args.map_resolution,
+                        self.curr_loc_gt[1] * 100.0 / args.map_resolution,
+                        self.curr_loc_gt[2],
+                    )
+                else:
+                    vis_grid = vu.get_colored_map(np.rint(map_pred),
+                                    self.collison_map[gx1:gx2, gy1:gy2],
+                                    self.visited_vis[gx1:gx2, gy1:gy2],
+                                    self.visited_gt[gx1:gx2, gy1:gy2],
+                                    goal,
                                     self.explored_map[gx1:gx2, gy1:gy2],
-                                semantic_density=semantic_density,
-                                semantic_freshness=self._last_fresh_sem,
-                                structural_map=structural_map)
+                                    self.explorable_map[gx1:gx2, gy1:gy2],
+                                    self.map[gx1:gx2, gy1:gy2] *
+                                        self.explored_map[gx1:gx2, gy1:gy2],
+                                    semantic_density=semantic_density,
+                                    semantic_freshness=self._last_fresh_sem,
+                                    structural_map=structural_map)
+                    pos = (
+                        start_x - gy1 * args.map_resolution / 100.0,
+                        start_y - gx1 * args.map_resolution / 100.0,
+                        start_o,
+                    )
+                    gt_pos = (
+                        start_x_gt - gy1 * args.map_resolution / 100.0,
+                        start_y_gt - gx1 * args.map_resolution / 100.0,
+                        start_o_gt,
+                    )
                 # 获取语义检测信息用于可视化
                 detected_classes = self.info.get('detected_classes', [])
                 class_counts = self.info.get('class_counts', {})
@@ -809,12 +977,8 @@ class Exploration_Env(habitat.RLEnv):
                 
                 vis_grid = np.flipud(vis_grid)
                 vu.visualize(self.figure, self.ax, self.obs, vis_grid[:,:,::-1],
-                            (start_x - gy1*args.map_resolution/100.0,
-                             start_y - gx1*args.map_resolution/100.0,
-                             start_o),
-                            (start_x_gt - gy1*args.map_resolution/100.0,
-                             start_y_gt - gx1*args.map_resolution/100.0,
-                             start_o_gt),
+                            pos,
+                            gt_pos,
                             dump_dir, self.rank, self.episode_no,
                             self.timestep, args.visualize,
                             args.print_images, args.vis_type,
@@ -851,7 +1015,7 @@ class Exploration_Env(habitat.RLEnv):
         return output
 
     def _get_gt_map(self, full_map_size):
-        self.scene_name = self.habitat_env.sim.config.SCENE
+        self.scene_name = _scene_name_from_sim(self.habitat_env)
         logger.error('Computing map for %s', self.scene_name)
 
         # Get map in habitat simulator coordinates
@@ -1097,3 +1261,20 @@ class Exploration_Env(habitat.RLEnv):
             gt_action = 2
 
         return gt_action
+
+    def close(self):
+        if self.figure is not None:
+            try:
+                import matplotlib.pyplot as plt
+                plt.close(self.figure)
+            except Exception:
+                pass
+            self.figure = None
+            self.ax = None
+        if (self.rank == 0
+                and not os.environ.get("NSO_VIEWER_EXTERNAL")
+                and Exploration_Env._live_viewer_proc is not None):
+            if Exploration_Env._live_viewer_proc.poll() is None:
+                Exploration_Env._live_viewer_proc.terminate()
+            Exploration_Env._live_viewer_proc = None
+        super().close()

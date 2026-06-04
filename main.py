@@ -4,6 +4,17 @@ from collections import deque
 import os
 
 os.environ["OMP_NUM_THREADS"] = "1"
+
+# Habitat 2 须在其它模块 import habitat 之前固定为 0.2.x
+if os.environ.get("NSO_HABITAT_VERSION") == "2":
+    import importlib.util
+
+    _h2_lab = os.path.join(
+        os.path.dirname(__file__), "env", "habitat2", "_lab.py")
+    _spec = importlib.util.spec_from_file_location("nso_habitat2_lab", _h2_lab)
+    _mod = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_mod)
+    _mod.setup_habitat2_lab()
 import numpy as np
 import torch
 import torch.nn as nn
@@ -20,13 +31,12 @@ from model import RL_Policy, Local_IL_Policy, Neural_SLAM_Module
 import algo
 
 import sys
-import matplotlib
 
-# if sys.platform == 'darwin':
-#     matplotlib.use("tkagg")
-matplotlib.use("TkAgg")
-# matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+# 实时可视化：先设 MPLBACKEND，再在 Exploration_Env 里切 DISPLAY 后 import pyplot
+if os.environ.get("NSO_X11_DISPLAY"):
+    os.environ.setdefault("MPLBACKEND", "TkAgg")
+elif not os.environ.get("DISPLAY"):
+    os.environ.setdefault("MPLBACKEND", "Agg")
 
 # plt.ion()
 # fig, ax = plt.subplots(1,4, figsize=(10, 2.5), facecolor="whitesmoke")
@@ -316,7 +326,9 @@ def main():
                 ),
                 map_resolution_cm=args.map_resolution,
                 use_semantic_segmentation=getattr(args, 'use_semantic_segmentation', True),
-                device=device
+                device=device,
+                vision_range=args.vision_range,
+                agent_height=args.camera_height,
             )
             print("[初始化] 基于3D体素的语义补全模块初始化完成")
         else:
@@ -802,116 +814,97 @@ def main():
                                     if total_num_steps % 100 == 0:
                                         print(f"[Voxel Completion] 场景 {e}: 无法获取原始RGB-D观测，跳过体素补全")
                                     continue
-                                    
-                                    if rgb_image is not None and depth_image is not None:
-                                        # 转换格式
-                                        if isinstance(rgb_image, np.ndarray):
-                                            rgb_image = rgb_image.astype(np.uint8)
-                                        else:
-                                            rgb_image = np.array(rgb_image).astype(np.uint8)
-                                        
-                                        if isinstance(depth_image, np.ndarray):
-                                            # Habitat深度图处理
-                                            if depth_image.ndim == 3:
-                                                depth_image = depth_image[:, :, 0]
-                                            depth_image = depth_image.astype(np.float32)
-                                            # Habitat深度图单位判断和转换
-                                            if depth_image.max() <= 1.0:
-                                                # 归一化深度，转换为米（假设最大深度10米）
-                                                depth_image = depth_image * 10.0
-                                            elif depth_image.max() > 10.0:
-                                                # 可能是毫米，转换为米
-                                                depth_image = depth_image / 1000.0
-                                        else:
-                                            depth_image = np.array(depth_image).astype(np.float32)
-                                        
-                                        # 获取相机位姿（绝对位姿，单位：米，弧度）
-                                        abs_pose = full_pose[e].detach().cpu().numpy()  # [x, y, theta]
-                                        # 确保theta是弧度（如果>10可能是度数）
-                                        if abs(abs_pose[2]) > 10.0:
-                                            abs_pose[2] = np.deg2rad(abs_pose[2])
-                                        camera_pose = abs_pose
-                                        
-                                        # 处理RGB-D帧
-                                        topdown_occupancy, topdown_semantic = voxel_based_completer.process_rgbd_frame(
-                                            rgb_image=rgb_image,
-                                            depth_image=depth_image,
-                                            camera_pose=camera_pose,
-                                            frame_width=args.frame_width,
-                                            frame_height=args.frame_height,
-                                            hfov=args.hfov
-                                        )
-                                        
-                                        # 融合到语义地图
-                                        if semantic_map2d is not None:
-                                            # 获取现有语义地图和探索地图（保存补全前的状态用于可视化）
-                                            existing_semantic = semantic_map2d.full_sem_counts[e].detach().cpu().numpy()
-                                            existing_explored = full_map[e, 1, :, :].detach().cpu().numpy()
-                                            
-                                            # 计算地图原点
-                                            map_origin = np.array([
-                                                -args.map_size_cm / 100.0 / 2.0,
-                                                -args.map_size_cm / 100.0 / 2.0
-                                            ])
-                                            
-                                            # 融合地图
-                                            fused_semantic, fused_explored = voxel_based_completer.fuse_with_existing_map(
-                                                new_topdown_occupancy=topdown_occupancy,
-                                                new_topdown_semantic=topdown_semantic,
-                                                existing_semantic_map=existing_semantic,
-                                                existing_explored_map=existing_explored,
-                                                map_origin=map_origin,
-                                                map_resolution_cm=args.map_resolution
+
+                                # 转换格式
+                                if isinstance(rgb_image, np.ndarray):
+                                    rgb_image = rgb_image.astype(np.uint8)
+                                else:
+                                    rgb_image = np.array(rgb_image).astype(np.uint8)
+
+                                if isinstance(depth_image, np.ndarray):
+                                    # Habitat深度图处理
+                                    if depth_image.ndim == 3:
+                                        depth_image = depth_image[:, :, 0]
+                                    depth_image = depth_image.astype(np.float32)
+                                    # Habitat深度图单位判断和转换
+                                    if depth_image.max() <= 1.0:
+                                        # 归一化深度，转换为米（假设最大深度10米）
+                                        depth_image = depth_image * 10.0
+                                    elif depth_image.max() > 10.0:
+                                        # 可能是毫米，转换为米
+                                        depth_image = depth_image / 1000.0
+                                else:
+                                    depth_image = np.array(depth_image).astype(np.float32)
+
+                                # 获取相机位姿（绝对位姿，单位：米，弧度）
+                                abs_pose = full_pose[e].detach().cpu().numpy()  # [x, y, theta]
+                                # 确保theta是弧度（如果>10可能是度数）
+                                if abs(abs_pose[2]) > 10.0:
+                                    abs_pose[2] = np.deg2rad(abs_pose[2])
+                                camera_pose = abs_pose
+
+                                # 处理RGB-D帧
+                                topdown_occupancy, topdown_semantic = voxel_based_completer.process_rgbd_frame(
+                                    rgb_image=rgb_image,
+                                    depth_image=depth_image,
+                                    camera_pose=camera_pose,
+                                    frame_width=args.frame_width,
+                                    frame_height=args.frame_height,
+                                    hfov=args.hfov
+                                )
+
+                                # 融合到语义地图
+                                if semantic_map2d is not None:
+                                    existing_semantic = semantic_map2d.full_sem_counts[e].detach().cpu().numpy()
+                                    existing_explored = full_map[e, 1, :, :].detach().cpu().numpy()
+
+                                    map_origin = np.array([
+                                        -args.map_size_cm / 100.0 / 2.0,
+                                        -args.map_size_cm / 100.0 / 2.0
+                                    ])
+
+                                    fused_semantic, fused_explored = voxel_based_completer.fuse_with_existing_map(
+                                        new_topdown_occupancy=topdown_occupancy,
+                                        new_topdown_semantic=topdown_semantic,
+                                        existing_semantic_map=existing_semantic,
+                                        existing_explored_map=existing_explored,
+                                        map_origin=map_origin,
+                                        map_resolution_cm=args.map_resolution
+                                    )
+
+                                    if (args.eval and
+                                        hasattr(args, 'print_images') and
+                                        args.print_images and
+                                        total_num_steps % max(1, args.semantic_interval * 2) == 0):
+                                        try:
+                                            from semantic.voxel_visualization import save_voxel_completion_comparison
+
+                                            explored_map = full_map[e, 1, :, :].detach().cpu().numpy()
+                                            save_voxel_completion_comparison(
+                                                scene_idx=e,
+                                                step_global=total_num_steps,
+                                                original_semantic_map=existing_semantic,
+                                                completed_semantic_map=fused_semantic,
+                                                original_occupancy=existing_explored,
+                                                completed_occupancy=fused_explored,
+                                                explored_map=explored_map,
+                                                dump_dir=dump_dir,
+                                                num_classes=semantic_map2d.num_classes
                                             )
-                                            
-                                            # 保存可视化（评估模式且满足条件时）
-                                            if (args.eval and 
-                                                hasattr(args, 'print_images') and 
-                                                args.print_images and
-                                                total_num_steps % max(1, args.semantic_interval * 2) == 0):
-                                                try:
-                                                    from semantic.voxel_visualization import save_voxel_completion_comparison
-                                                    
-                                                    # 将语义计数地图转换为类别标签地图（用于可视化）
-                                                    # existing_semantic 是 (num_classes, H, W)，需要转换为 (H, W) 的类别标签
-                                                    original_sem_labels = np.argmax(existing_semantic, axis=0)
-                                                    completed_sem_labels = np.argmax(fused_semantic, axis=0)
-                                                    
-                                                    # 获取占据地图（补全前使用existing_explored，补全后使用fused_explored）
-                                                    # 但topdown_occupancy是新的占据信息，需要与现有地图融合
-                                                    original_occupancy = existing_explored
-                                                    completed_occupancy = fused_explored
-                                                    
-                                                    # 获取探索地图
-                                                    explored_map = full_map[e, 1, :, :].detach().cpu().numpy()
-                                                    
-                                                    # 保存可视化
-                                                    save_voxel_completion_comparison(
-                                                        scene_idx=e,
-                                                        step_global=total_num_steps,
-                                                        original_semantic_map=existing_semantic,
-                                                        completed_semantic_map=fused_semantic,
-                                                        original_occupancy=original_occupancy,
-                                                        completed_occupancy=completed_occupancy,
-                                                        explored_map=explored_map,
-                                                        dump_dir=dump_dir,
-                                                        num_classes=semantic_map2d.num_classes
-                                                    )
-                                                except Exception as viz_ex:
-                                                    if total_num_steps % 100 == 0:
-                                                        print(f"[Voxel Visualization] 保存可视化失败: {viz_ex}")
-                                            
-                                            # 更新语义地图
-                                            semantic_map2d.full_sem_counts[e] = torch.from_numpy(fused_semantic).to(
-                                                semantic_map2d.full_sem_counts.device
-                                            )
-                                        
-                                        if total_num_steps % 100 == 0:
-                                            occupied_voxels = np.sum(topdown_occupancy > 0)
-                                            semantic_voxels = np.sum(topdown_semantic > 0)
-                                            print(f"[Voxel Completion] 场景 {e}: "
-                                                  f"占据体素数={occupied_voxels}, "
-                                                  f"语义体素数={semantic_voxels}")
+                                        except Exception as viz_ex:
+                                            if total_num_steps % 100 == 0:
+                                                print(f"[Voxel Visualization] 保存可视化失败: {viz_ex}")
+
+                                    semantic_map2d.full_sem_counts[e] = torch.from_numpy(fused_semantic).to(
+                                        semantic_map2d.full_sem_counts.device
+                                    )
+
+                                if total_num_steps % 100 == 0:
+                                    occupied_voxels = np.sum(topdown_occupancy > 0)
+                                    semantic_voxels = np.sum(topdown_semantic > 0)
+                                    print(f"[Voxel Completion] 场景 {e}: "
+                                          f"占据体素数={occupied_voxels}, "
+                                          f"语义体素数={semantic_voxels}")
                             except Exception as ex:
                                 if total_num_steps % 100 == 0:
                                     print(f"[Voxel Completion] 处理失败 (env {e}): {ex}")

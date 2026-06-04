@@ -1,9 +1,15 @@
 import torch
 
-from .habitat import construct_envs
-
 
 def make_vec_envs(args):
+    version = int(getattr(args, "habitat_version", 0) or 0)
+    if version == 0:
+        import os
+        version = int(os.environ.get("NSO_HABITAT_VERSION", "1"))
+    if version == 2:
+        from .habitat2 import construct_envs
+    else:
+        from .habitat import construct_envs
     envs = construct_envs(args)
     envs = VecPyTorch(envs, args.device)
     return envs
@@ -15,8 +21,14 @@ class VecPyTorch():
     def __init__(self, venv, device):
         self.venv = venv
         self.num_envs = venv.num_envs
-        self.observation_space = venv.observation_space
-        self.action_space = venv.action_space
+        if hasattr(venv, "observation_space"):
+            self.observation_space = venv.observation_space
+        else:
+            self.observation_space = venv.observation_spaces[0]
+        if hasattr(venv, "action_space"):
+            self.action_space = venv.action_space
+        else:
+            self.action_space = venv.action_spaces[0]
         self.device = device
 
     def reset(self):

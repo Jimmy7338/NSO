@@ -1,15 +1,15 @@
+import os
 import sys
 
 import matplotlib
 import numpy as np
 
-# matplotlib.use('Agg')
-# if sys.platform == 'darwin':
-#     matplotlib.use("tkagg")
-# else:
-#     matplotlib.use('Agg')
-# matplotlib.use('TkAgg')
-matplotlib.use('TkAgg')
+if os.environ.get("NSO_VIEWER_PROCESS"):
+    matplotlib.use("TkAgg")
+elif os.environ.get("NSO_USE_XVFB_GPU") or os.environ.get("NSO_X11_DISPLAY"):
+    matplotlib.use("Agg")
+else:
+    matplotlib.use("TkAgg")
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -23,10 +23,123 @@ try:
 except ImportError:
     HAS_CV2 = False
 
+_live_export_counter = 0
+
+
+def _live_vis_every():
+    return max(1, int(os.environ.get("NSO_VIS_EVERY", "1")))
+
+
+def _should_export_live():
+    global _live_export_counter
+    every = _live_vis_every()
+    _live_export_counter += 1
+    return (_live_export_counter % every) == 0
+
+
+def _live_frame_path(live_dir):
+    if os.environ.get("NSO_VIS_JPEG", "1") == "1":
+        return os.path.join(live_dir, "frame.jpg")
+    return os.path.join(live_dir, "frame.png")
+
+
+def _cv_resize(img, out_w, out_h):
+    """放大用 CUBIC、缩小用 AREA，避免 INTER_AREA 放大导致发糊。"""
+    h, w = img.shape[:2]
+    if w == out_w and h == out_h:
+        return img
+    if out_w > w or out_h > h:
+        interp = cv2.INTER_CUBIC
+    else:
+        interp = cv2.INTER_AREA
+    return cv2.resize(img, (out_w, out_h), interpolation=interp)
+
+
+def _live_canvas_size():
+    obs_w = int(os.environ.get("NSO_LIVE_OBS_W", "640"))
+    obs_h = int(os.environ.get("NSO_LIVE_OBS_H", "480"))
+    map_sz = int(os.environ.get("NSO_LIVE_MAP_SIZE", "480"))
+    return obs_w, obs_h, map_sz
+
+
+def _draw_pose_cv2(canvas, pos, color_bgr, agent_size=8):
+    h, w = canvas.shape[:2]
+    x, y, o = pos
+    x = int(x * 100.0 / 5.0)
+    y = int(h - y * 100.0 / 5.0)
+    dx = int(np.cos(np.deg2rad(o)) * agent_size)
+    dy = int(-np.sin(np.deg2rad(o)) * agent_size * 1.25)
+    cv2.arrowedLine(
+        canvas, (x - dx, y - dy), (x + dx, y + dy),
+        color_bgr, 2, tipLength=0.35)
+
+
+def _save_live_frame_cv2(obs, grid, live_dir, pos, gt_pos, timestep=None):
+    """OpenCV 拼接帧，比 matplotlib savefig 快一个数量级。"""
+    import tempfile
+    obs_w, obs_h, map_sz = _live_canvas_size()
+    map_w = map_h = map_sz
+    obs_u8 = np.clip(obs, 0, 255).astype(np.uint8)
+    if obs_u8.ndim == 2:
+        obs_u8 = cv2.cvtColor(obs_u8, cv2.COLOR_GRAY2RGB)
+    grid_u8 = np.clip(grid, 0, 255).astype(np.uint8)
+    if grid_u8.ndim == 2:
+        grid_u8 = cv2.cvtColor(grid_u8, cv2.COLOR_GRAY2RGB)
+    obs_r = _cv_resize(obs_u8, obs_w, obs_h)
+    map_r = _cv_resize(grid_u8, map_w, map_h)
+    map_bgr = cv2.cvtColor(map_r, cv2.COLOR_RGB2BGR)
+    _draw_pose_cv2(map_bgr, gt_pos, (160, 160, 160))
+    _draw_pose_cv2(map_bgr, pos, (0, 0, 255))
+    obs_bgr = cv2.cvtColor(obs_r, cv2.COLOR_RGB2BGR)
+    canvas = np.hstack([obs_bgr, map_bgr])
+    if timestep is not None:
+        cv2.putText(
+            canvas, "step {}".format(int(timestep)),
+            (12, 28), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (255, 255, 255), 2, cv2.LINE_AA)
+    frame_path = _live_frame_path(live_dir)
+    os.makedirs(live_dir, exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(dir=live_dir, suffix=".tmp")
+    os.close(fd)
+    try:
+        quality = int(os.environ.get("NSO_VIS_JPEG_QUALITY", "95"))
+        ok = False
+        if frame_path.endswith(".jpg"):
+            try:
+                from PIL import Image as PILImage
+                rgb = cv2.cvtColor(canvas, cv2.COLOR_BGR2RGB)
+                PILImage.fromarray(rgb).save(
+                    tmp_path, format="JPEG", quality=quality, optimize=True)
+                ok = True
+            except Exception:
+                ok = cv2.imwrite(
+                    tmp_path, canvas, [cv2.IMWRITE_JPEG_QUALITY, quality])
+        else:
+            ok = cv2.imwrite(tmp_path, canvas)
+        if ok:
+            os.replace(tmp_path, frame_path)
+        elif os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+        raise
+
+
+def live_vis_fast_enabled():
+    return (os.environ.get("NSO_LIVE_FAST", "1") == "1"
+            and os.environ.get("NSO_LIVE_VIS_DIR")
+            and HAS_CV2)
+
 
 def visualize(fig, ax, img, grid, pos, gt_pos, dump_dir, rank, ep_no, t,
               visualize, print_images, vis_style,
               detected_classes=None, class_counts=None, class_avg_scores=None):
+    live_dir = os.environ.get("NSO_LIVE_VIS_DIR")
+    if (visualize and live_dir and live_vis_fast_enabled()
+            and not print_images and _should_export_live()):
+        _save_live_frame_cv2(img, grid, live_dir, pos, gt_pos, timestep=t)
+        return
+
     for i in range(2):
         ax[i].clear()
         ax[i].set_yticks([])
@@ -139,9 +252,29 @@ def visualize(fig, ax, img, grid, pos, gt_pos, dump_dir, rank, ep_no, t,
                         pass  # 如果还是失败，静默忽略
 
     if visualize:
-        plt.gcf().canvas.flush_events()
-        fig.canvas.start_event_loop(0.001)
-        plt.gcf().canvas.flush_events()
+        fig.canvas.draw_idle()
+        if live_dir and not live_vis_fast_enabled():
+            frame_path = _live_frame_path(live_dir)
+            import tempfile
+            os.makedirs(live_dir, exist_ok=True)
+            fd, tmp_path = tempfile.mkstemp(dir=live_dir, suffix=".png")
+            os.close(fd)
+            dpi = int(os.environ.get("NSO_VIS_DPI", "72"))
+            try:
+                fig.savefig(
+                    tmp_path,
+                    dpi=dpi,
+                    bbox_inches="tight",
+                    facecolor=fig.get_facecolor(),
+                )
+                os.replace(tmp_path, frame_path)
+            except Exception:
+                if os.path.exists(tmp_path):
+                    os.unlink(tmp_path)
+                raise
+        elif not live_dir:
+            fig.canvas.flush_events()
+            plt.pause(0.05)
 
     if print_images:
         fn = '{}/episodes/{}/{}/{}-{}-Vis-{}.png'.format(

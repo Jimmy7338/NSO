@@ -163,12 +163,12 @@ class Neural_SLAM_Module(nn.Module):
         conv_output = self.conv(resnet_output)
 
         proj1 = nn.ReLU()(self.proj1(
-                          conv_output.view(-1, self.conv_output_size)))
+                          conv_output.reshape(-1, self.conv_output_size)))
         if self.dropout > 0:
             proj1 = self.dropout1(proj1)
         proj3 = nn.ReLU()(self.proj2(proj1))
 
-        deconv_input = proj3.view(bs, 64, 8, 8)
+        deconv_input = proj3.reshape(bs, 64, 8, 8)
         deconv_output = self.deconv(deconv_input)
         pred = torch.sigmoid(deconv_output)
 
@@ -182,12 +182,12 @@ class Neural_SLAM_Module(nn.Module):
             conv_output = self.conv(resnet_output)
 
             proj1 = nn.ReLU()(self.proj1(
-                              conv_output.view(-1, self.conv_output_size)))
+                              conv_output.reshape(-1, self.conv_output_size)))
             if self.dropout > 0:
                 proj1 = self.dropout1(proj1)
             proj3 = nn.ReLU()(self.proj2(proj1))
 
-            deconv_input = proj3.view(bs, 64, 8, 8)
+            deconv_input = proj3.reshape(bs, 64, 8, 8)
             deconv_output = self.deconv(deconv_input)
             pred_last = torch.sigmoid(deconv_output)
 
@@ -222,8 +222,8 @@ class Neural_SLAM_Module(nn.Module):
         pose_est_input = torch.cat((pred.detach(), pred_last_st.detach()),
                                    dim=1)
         pose_conv_output = self.pose_conv(pose_est_input)
-        pose_conv_output = pose_conv_output.view(-1,
-                                                 self.pose_conv_output_size)
+        pose_conv_output = pose_conv_output.reshape(-1,
+                                                    self.pose_conv_output_size)
 
         proj1 = nn.ReLU()(self.pose_proj1(pose_conv_output))
 
@@ -363,13 +363,13 @@ class Local_IL_Policy(NNBase):
             resnet_output = self.resnet_l5(rgb[:, :3, :, :])
             conv_output = self.conv(resnet_output)
 
-            proj1 = nn.ReLU()(self.proj1(conv_output.view(
+            proj1 = nn.ReLU()(self.proj1(conv_output.reshape(
                 -1, self.conv_output_size)))
             if self.dropout > 0:
                 proj1 = self.dropout1(proj1)
 
-            angle_emb = self.embedding_angle(extras[:, 0]).view(-1, 8)
-            dist_emb = self.embedding_dist(extras[:, 1]).view(-1, 8)
+            angle_emb = self.embedding_angle(extras[:, 0]).reshape(-1, 8)
+            dist_emb = self.embedding_dist(extras[:, 1]).reshape(-1, 8)
             x = torch.cat((proj1, angle_emb, dist_emb), 1)
             x = nn.ReLU()(self.linear(x))
             if self.is_recurrent:

@@ -188,6 +188,8 @@ def get_args():
                                 Doom (default: 180)""")
     parser.add_argument("--sim_gpu_id", type=int, default=0,
                         help="gpu id on which scenes are loaded")
+    parser.add_argument("--habitat_version", type=int, default=1, choices=[1, 2],
+                        help="1=Habitat 0.1 (nso), 2=Habitat-Lab 0.2.4 (nso_h2)")
     parser.add_argument("--task_config", type=str,
                         default="tasks/pointnav_gibson.yaml",
                         help="path to config yaml containing task information")

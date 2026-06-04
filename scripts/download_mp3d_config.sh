@@ -7,7 +7,8 @@ echo "=========================================="
 echo "下载Matterport3D数据集配置"
 echo "=========================================="
 
-PROJECT_DIR="/home/ubuntu/lzy/ANS/Neural-SLAM"
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+GHFAST="${GHFAST:-https://ghfast.top/https://github.com}"
 cd "$PROJECT_DIR"
 
 # 创建目录结构

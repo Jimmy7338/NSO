@@ -1,17 +1,24 @@
 # Parts of the code in this file have been borrowed from:
 #    https://github.com/facebookresearch/habitat-api
 
-import numpy as np
-import torch
-from habitat.config.default import get_config as cfg_env
-from habitat.datasets.pointnav.pointnav_dataset import PointNavDatasetV1
+import os
 
-from .exploration_env import Exploration_Env
-from .habitat_api.habitat.core.vector_env import VectorEnv
-from .habitat_api.habitat_baselines.config.default import get_config as cfg_baseline
+# Habitat 2 仅复用 exploration_env / sync_vector_env，勿加载 vendored habitat_api
+if os.environ.get("NSO_HABITAT_VERSION") == "2":
+    from .sync_vector_env import SyncVectorEnv  # noqa: F401
+else:
+    import numpy as np
+    import torch
+    from habitat.config.default import get_config as cfg_env
+    from habitat.datasets.pointnav.pointnav_dataset import PointNavDatasetV1
+
+    from .exploration_env import Exploration_Env
+    from .habitat_api.habitat.core.vector_env import ThreadedVectorEnv, VectorEnv
+    from .sync_vector_env import SyncVectorEnv
+    from .habitat_api.habitat_baselines.config.default import get_config as cfg_baseline
 
 
-def make_env_fn(args, config_env, config_baseline, rank):
+def make_env_fn(args, config_env, config_baseline, rank):  # pragma: no cover - H1 only
     print(f"[环境初始化] 进程 {rank}: 开始加载数据集...")
     dataset = PointNavDatasetV1(config_env.DATASET)
     config_env.defrost()
@@ -75,7 +82,10 @@ def construct_envs(args):
         else:
             gpu_id = int((i - args.num_processes_on_first_gpu)
                          // args.num_processes_per_gpu) + args.sim_gpu_id
-        gpu_id = min(torch.cuda.device_count() - 1, gpu_id)
+        if torch.cuda.is_available() and torch.cuda.device_count() > 0:
+            gpu_id = min(torch.cuda.device_count() - 1, gpu_id)
+        else:
+            gpu_id = 0
         config_env.SIMULATOR.HABITAT_SIM_V0.GPU_DEVICE_ID = gpu_id
 
         agent_sensors = []
@@ -110,15 +120,34 @@ def construct_envs(args):
 
     print(f"[环境初始化] 正在创建 {args.num_processes} 个并行环境...")
     print(f"[环境初始化] 这可能需要一些时间，特别是首次加载场景数据时...")
-    envs = VectorEnv(
-        make_env_fn=make_env_fn,
-        env_fn_args=tuple(
-            tuple(
-                zip(args_list, env_configs, baseline_configs,
-                    range(args.num_processes))
-            )
-        ),
+    # 单进程时用线程版 VectorEnv，避免子进程 GLX/EGL 与 xvfb 不兼容
+    env_fn_args = tuple(
+        tuple(
+            zip(args_list, env_configs, baseline_configs,
+                range(args.num_processes))
+        )
     )
+    use_main_thread_vis = (
+        args.num_processes == 1
+        and (getattr(args, "visualize", 0) or getattr(args, "print_images", 0))
+    )
+    if use_main_thread_vis:
+        print("[环境初始化] 可视化模式：主线程单环境（SyncVectorEnv）")
+        envs = SyncVectorEnv(
+            make_env_fn=make_env_fn,
+            env_fn_args=env_fn_args,
+        )
+    elif args.num_processes == 1:
+        envs = ThreadedVectorEnv(
+            make_env_fn=make_env_fn,
+            env_fn_args=env_fn_args,
+        )
+    else:
+        envs = VectorEnv(
+            make_env_fn=make_env_fn,
+            env_fn_args=env_fn_args,
+            multiprocessing_start_method="forkserver",
+        )
     print(f"[环境初始化] 环境创建完成")
 
     return envs

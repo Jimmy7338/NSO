@@ -3,13 +3,27 @@ import pickle
 import attr
 import habitat
 import habitat_sim
+
+try:
+    from habitat.sims.habitat_simulator.actions import HabitatSimActions as _SimActions
+except ImportError:
+    _SimActions = habitat.SimulatorActions
 import habitat_sim.utils
 import magnum as mn
 import numpy as np
-from habitat.sims.habitat_simulator.action_spaces import (
-    HabitatSimV0ActionSpaceConfiguration,
-)
-from habitat_sim.agent.controls import register_move_fn
+try:
+    from habitat.sims.habitat_simulator.action_spaces import (
+        HabitatSimV0ActionSpaceConfiguration,
+    )
+except ModuleNotFoundError:
+    from habitat.sims.habitat_simulator.actions import (
+        HabitatSimV0ActionSpaceConfiguration,
+    )
+try:
+    from habitat_sim.agent.controls import register_move_fn
+except ImportError:
+    from habitat_sim.registry import registry
+    register_move_fn = registry.register_move_fn
 
 actuation_noise_fwd = pickle.load(open("noise_models/actuation_noise_fwd.pkl", 'rb'))
 actuation_noise_right = pickle.load(open("noise_models/actuation_noise_right.pkl", 'rb'))
@@ -104,15 +118,15 @@ class CustomActionSpaceConfiguration(HabitatSimV0ActionSpaceConfiguration):
     def get(self):
         config = super().get()
 
-        config[habitat.SimulatorActions.NOISY_FORWARD] = habitat_sim.ActionSpec(
+        config[_SimActions.NOISY_FORWARD] = habitat_sim.ActionSpec(
             "noisy_forward",
             CustomActuationSpec(0),
         )
-        config[habitat.SimulatorActions.NOISY_RIGHT] = habitat_sim.ActionSpec(
+        config[_SimActions.NOISY_RIGHT] = habitat_sim.ActionSpec(
             "noisy_right",
             CustomActuationSpec(1),
         )
-        config[habitat.SimulatorActions.NOISY_LEFT] = habitat_sim.ActionSpec(
+        config[_SimActions.NOISY_LEFT] = habitat_sim.ActionSpec(
             "noisy_left",
             CustomActuationSpec(2),
         )
