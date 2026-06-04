@@ -931,8 +931,8 @@ class Exploration_Env(habitat.RLEnv):
                     if semantic_density.shape != (gx2-gx1, gy2-gy1):
                         semantic_density = None
 
-                # 实时窗口默认显示全局探索图（右侧不再只有局部灰块）
-                if os.environ.get("NSO_VIS_FULL_MAP", "1") == "1":
+                # 全局图 + 掩码裁切；默认用局部 planning window（与论文原始可视化一致）
+                if os.environ.get("NSO_VIS_FULL_MAP", "0") == "1":
                     goal_full = (
                         int(np.clip(gx1 + goal[0], 0, self.map.shape[0] - 1)),
                         int(np.clip(gy1 + goal[1], 0, self.map.shape[1] - 1)),
@@ -960,6 +960,15 @@ class Exploration_Env(habitat.RLEnv):
                         self.curr_loc_gt[1] * 100.0 / args.map_resolution,
                         self.curr_loc_gt[2],
                     )
+                    if os.environ.get("NSO_VIS_MAP_ZOOM", "1") == "1":
+                        activity = (
+                            (self.visited_vis > 0)
+                            | (self.explored_map > 0)
+                            | (np.rint(self.map) > 0)
+                        )
+                        vis_grid, pos, gt_pos = vu.crop_map_and_poses_from_mask(
+                            vis_grid, pos, gt_pos, activity)
+                        os.environ["NSO_VIS_MASK_CROP_DONE"] = "1"
                 else:
                     vis_grid = vu.get_colored_map(np.rint(map_pred),
                                     self.collison_map[gx1:gx2, gy1:gy2],
@@ -990,15 +999,18 @@ class Exploration_Env(habitat.RLEnv):
                 detection_overlays = self.info.get('detection_overlays', [])
                 
                 vis_grid = np.flipud(vis_grid)
-                vu.visualize(self.figure, self.ax, self.obs, vis_grid[:,:,::-1],
-                            pos,
-                            gt_pos,
-                            dump_dir, self.rank, self.episode_no,
-                            self.timestep, args.visualize,
-                            args.print_images, args.vis_type,
-                            detected_classes=detected_classes,
-                            class_counts=class_counts,
-                            class_avg_scores=class_avg_scores)
+                try:
+                    vu.visualize(self.figure, self.ax, self.obs, vis_grid[:,:,::-1],
+                                pos,
+                                gt_pos,
+                                dump_dir, self.rank, self.episode_no,
+                                self.timestep, args.visualize,
+                                args.print_images, args.vis_type,
+                                detected_classes=detected_classes,
+                                class_counts=class_counts,
+                                class_avg_scores=class_avg_scores)
+                finally:
+                    os.environ.pop("NSO_VIS_MASK_CROP_DONE", None)
 
             else: # Visualize ground-truth map and pose
                 vis_grid = vu.get_colored_map(self.map,

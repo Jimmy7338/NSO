@@ -74,6 +74,64 @@ def _shift_pose_after_crop(pos, x0, y0, orig_h, crop_h):
     )
 
 
+def crop_map_and_poses_from_mask(grid, pos, gt_pos, mask, pad=None, min_side=None):
+    """按 visited/explored 等布尔掩码裁切地图，并平移位姿（比颜色阈值可靠）。"""
+    if os.environ.get("NSO_VIS_MAP_ZOOM", "1") != "1":
+        return grid, pos, gt_pos
+    mask = np.asarray(mask).astype(bool)
+    h, w = mask.shape[:2]
+    activity = mask.copy()
+    for pose in (pos, gt_pos):
+        px, py = _map_px_from_pose(pose, h)
+        r = 48
+        activity[max(0, py - r):min(h, py + r),
+                 max(0, px - r):min(w, px + r)] = True
+    ys, xs = np.where(activity)
+    if len(xs) < 1:
+        return grid, pos, gt_pos
+    if pad is None:
+        pad = int(os.environ.get("NSO_VIS_MAP_ZOOM_PAD", "48"))
+    if min_side is None:
+        min_side = int(os.environ.get("NSO_VIS_MAP_ZOOM_MIN", "200"))
+    x0 = max(0, int(xs.min()) - pad)
+    x1 = min(w, int(xs.max()) + pad + 1)
+    y0 = max(0, int(ys.min()) - pad)
+    y1 = min(h, int(ys.max()) + pad + 1)
+    if (x1 - x0) < min_side:
+        cx = (x0 + x1) // 2
+        x0 = max(0, cx - min_side // 2)
+        x1 = min(w, x0 + min_side)
+        x0 = max(0, x1 - min_side)
+    if (y1 - y0) < min_side:
+        cy = (y0 + y1) // 2
+        y0 = max(0, cy - min_side // 2)
+        y1 = min(h, y0 + min_side)
+        y0 = max(0, y1 - min_side)
+    crop_h = y1 - y0
+    cropped = grid[y0:y1, x0:x1]
+    pos = _shift_pose_after_crop(pos, x0, y0, h, crop_h)
+    gt_pos = _shift_pose_after_crop(gt_pos, x0, y0, h, crop_h)
+    return cropped, pos, gt_pos
+
+
+def _lock_map_axes(ax, grid):
+    """防止箭头坐标把坐标轴撑大，导致地图缩在角落。"""
+    mh, mw = grid.shape[0], grid.shape[1]
+    ax.set_xlim(0, mw)
+    ax.set_ylim(mh, 0)
+    ax.set_aspect("equal", adjustable="box")
+
+
+def _pose_to_imshow_xy(pose, grid):
+    mh, mw = grid.shape[0], grid.shape[1]
+    x, y, o = pose
+    px = float(x) * 100.0 / 5.0
+    py = mh - float(y) * 100.0 / 5.0
+    px = float(np.clip(px, 0, max(mw - 1, 0)))
+    py = float(np.clip(py, 0, max(mh - 1, 0)))
+    return px, py, o
+
+
 def _crop_map_for_live(grid_u8, pos, gt_pos):
     """全局地图显示前裁到已探索区域，并同步平移位姿坐标。"""
     if os.environ.get("NSO_VIS_MAP_ZOOM", "1") != "1":
@@ -220,42 +278,32 @@ def visualize(fig, ax, img, grid, pos, gt_pos, dump_dir, rank, ep_no, t,
         title = "Ground-Truth Map and Pose"
 
     grid = np.clip(grid, 0, 255).astype(np.uint8)
-    grid, pos, gt_pos = _crop_map_for_live(grid, pos, gt_pos)
+    if not os.environ.get("NSO_VIS_MASK_CROP_DONE"):
+        grid, pos, gt_pos = _crop_map_for_live(grid, pos, gt_pos)
 
-    ax[1].imshow(grid)
+    ax[1].imshow(grid, origin="upper")
     ax[1].set_title(title, family='sans-serif',
                     fontname='DejaVu Sans',
                     fontsize=20)
 
-    # Draw GT agent pose
     agent_size = 8
-    x, y, o = gt_pos
-    x, y = x * 100.0 / 5.0, grid.shape[1] - y * 100.0 / 5.0
 
-    dx = 0
-    dy = 0
-    fc = 'Grey'
-    dx = np.cos(np.deg2rad(o))
-    dy = -np.sin(np.deg2rad(o))
-    ax[1].arrow(x - 1 * dx, y - 1 * dy, dx * agent_size, dy * (agent_size * 1.25),
-                head_width=agent_size, head_length=agent_size * 1.25,
-                length_includes_head=True, fc=fc, ec=fc, alpha=0.9)
+    def _draw_arrow(pose, fc, alpha):
+        x, y, o = _pose_to_imshow_xy(pose, grid)
+        dx = np.cos(np.deg2rad(o))
+        dy = -np.sin(np.deg2rad(o))
+        ax[1].arrow(
+            x - dx, y - dy, dx * agent_size, dy * agent_size * 1.25,
+            head_width=agent_size, head_length=agent_size * 1.25,
+            length_includes_head=True, fc=fc, ec=fc, alpha=alpha,
+            clip_on=True)
 
-    # Draw predicted agent pose
-    x, y, o = pos
-    x, y = x * 100.0 / 5.0, grid.shape[1] - y * 100.0 / 5.0
-
-    dx = 0
-    dy = 0
-    fc = 'Red'
-    dx = np.cos(np.deg2rad(o))
-    dy = -np.sin(np.deg2rad(o))
-    ax[1].arrow(x - 1 * dx, y - 1 * dy, dx * agent_size, dy * agent_size * 1.25,
-                head_width=agent_size, head_length=agent_size * 1.25,
-                length_includes_head=True, fc=fc, ec=fc, alpha=0.6)
+    _draw_arrow(gt_pos, "Grey", 0.9)
+    _draw_arrow(pos, "Red", 0.6)
 
     for _ in range(5):
         plt.tight_layout()
+    _lock_map_axes(ax[1], grid)
 
     # 在第二个子图（地图）的右上角添加语义标签列表显示
     # 注意：必须在tight_layout()之后添加，否则会被移除
