@@ -75,6 +75,14 @@ class SyncVectorEnv:
         results = [env.get_short_term_goal(inp) for env, inp in zip(self._envs, inputs)]
         return np.stack(results)
 
+    def get_reachability_supervision(self, inputs):
+        maps, labels = [], []
+        for env, inp in zip(self._envs, inputs):
+            m, lab = env.get_reachability_supervision(inp)
+            maps.append(m)
+            labels.append(lab)
+        return np.stack(maps), np.asarray(labels, dtype=np.float32)
+
     def close(self) -> None:
         if getattr(self, "_is_closed", True):
             return

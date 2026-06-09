@@ -86,5 +86,16 @@ class VectorEnvCompat:
             results.append(self.venv.call_at(i, "get_rewards", {"inputs": inp}))
         return np.stack(results)
 
+    def get_reachability_supervision(self, inputs):
+        if hasattr(self.venv, "get_reachability_supervision"):
+            return self.venv.get_reachability_supervision(inputs)
+        maps, labels = [], []
+        for i, inp in zip(range(self.num_envs), inputs):
+            m, lab = self.venv.call_at(
+                i, "get_reachability_supervision", {"inputs": inp})
+            maps.append(m)
+            labels.append(lab)
+        return np.stack(maps), np.asarray(labels, dtype=np.float32)
+
     def close(self):
         return self.venv.close()

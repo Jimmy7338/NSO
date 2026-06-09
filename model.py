@@ -450,3 +450,23 @@ class RL_Policy(nn.Module):
         dist_entropy = dist.entropy().mean()
 
         return value, action_log_probs, dist_entropy, rnn_hxs
+
+
+class ReachabilityHead(nn.Module):
+    """可达性预测网络 (RPN)，论文式 (2)(3)。"""
+
+    def __init__(self, in_channels: int = 2, hidden: int = 32):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Conv2d(in_channels, hidden, 3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(hidden, hidden, 3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(hidden, 1, 1),
+        )
+
+    def forward(self, x):
+        return self.net(x).squeeze(1)
+
+    def predict_proba(self, x):
+        return torch.sigmoid(self.forward(x))

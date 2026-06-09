@@ -46,6 +46,26 @@ def _scene_name_from_sim(habitat_env):
         return ep.scene_id
     return "unknown"
 
+
+def _get_sim_actions():
+    try:
+        from habitat.sims.habitat_simulator.actions import HabitatSimActions
+        return HabitatSimActions
+    except ImportError:
+        return habitat.SimulatorActions
+
+
+def _scene_name_from_sim(habitat_env):
+    sim = habitat_env.sim
+    if hasattr(sim, "config") and hasattr(sim.config, "SCENE"):
+        return sim.config.SCENE
+    if hasattr(sim, "curr_scene_name"):
+        return sim.curr_scene_name
+    ep = habitat_env.current_episode
+    if ep is not None:
+        return ep.scene_id
+    return "unknown"
+
 from env.utils.map_builder import MapBuilder
 from env.utils.fmm_planner import FMMPlanner
 
@@ -74,6 +94,11 @@ def _preprocess_depth(depth):
 class Exploration_Env(habitat.RLEnv):
 
     _live_viewer_proc = None
+
+    @property
+    def original_action_space(self):
+        """Habitat 2 VectorEnv 初始化时会查询该属性。"""
+        return self.action_space
 
     @property
     def original_action_space(self):
@@ -255,6 +280,8 @@ class Exploration_Env(habitat.RLEnv):
         self._last_fresh_sem = None
         self._last_door_map = None
         self._last_frontier_map = None
+        self._last_global_goal = None
+        self._last_intrinsic_val = 0.0
 
     def randomize_env(self):
         self._env._episode_iterator._shuffle_iterator()
@@ -296,6 +323,8 @@ class Exploration_Env(habitat.RLEnv):
         self._last_fresh_sem = None
         self._last_door_map = None
         self._last_frontier_map = None
+        self._last_global_goal = None
+        self._last_intrinsic_val = 0.0
 
         if args.randomize_env_every > 0:
             if np.mod(self.episode_no, args.randomize_env_every) == 0:
@@ -545,8 +574,24 @@ class Exploration_Env(habitat.RLEnv):
         self.structural_bonus_acc = 0.0
         self.frontier_bonus_acc = 0.0
 
-        # 结构奖励按窗口期直接加入，前沿奖励鼓励探索可见但未访问的区域
-        total_reward = m_reward + semantic_bonus + self.args.structural_reward_coeff * structural_bonus + frontier_bonus
+        # 论文式 (4)：R_total = R_map + λ_sem R_sem + λ_struct R_struct + λ_front R_front
+        use_paper = bool(getattr(self.args, 'paper_rewards', 0))
+        struct_coeff = self.args.structural_reward_coeff
+        if not (getattr(self.args, 'use_structural_reward', 0) or use_paper):
+            structural_bonus = 0.0
+            frontier_bonus = 0.0
+        if not self.args.use_semantic:
+            semantic_bonus = 0.0
+
+        intrinsic_penalty = 0.0
+        if getattr(self.args, 'use_intrinsic_goal_penalty', 0) or use_paper:
+            coeff = getattr(self.args, 'intrinsic_reward_coeff', 0.05)
+            intrinsic_penalty = coeff * float(self._last_intrinsic_val)
+
+        total_reward = (m_reward + semantic_bonus
+                        + struct_coeff * structural_bonus
+                        + frontier_bonus
+                        + intrinsic_penalty)
 
         return total_reward, m_ratio, semantic_bonus, m_reward
 
@@ -693,9 +738,12 @@ class Exploration_Env(habitat.RLEnv):
             self.visited_gt[x, y] = 1
 
 
-        # 语义新鲜度奖励（优先探索已观测但未到达的高语义区域）
+        use_structural = (getattr(args, 'use_structural_reward', 0)
+                          or getattr(args, 'paper_rewards', 0))
+
+        # 语义新鲜度奖励 R_sem（论文式 6）
         semantic_bonus = 0.0
-        if semantic_density is not None:
+        if args.use_semantic and semantic_density is not None:
             semantic_density = semantic_density.astype(np.float32)
             if semantic_density.shape == (gx2 - gx1, gy2 - gy1):
                 semantic_density = np.maximum(semantic_density, 0.0)
@@ -759,97 +807,90 @@ class Exploration_Env(habitat.RLEnv):
             # semantic_density为None时的调试信息
             if self.timestep % 100 == 0 and args.use_semantic:
                 print(f"[Semantic Reward Debug] Step {self.timestep}: semantic_density is None")
-        self.semantic_bonus_acc += semantic_bonus
+        if args.use_semantic:
+            self.semantic_bonus_acc += semantic_bonus
 
-        # 结构内容奖励（门框/狭窄/开阔）
+        # 结构内容奖励 R_struct、前沿 R_front（论文式 7 与 3.4.4）
         structural_bonus = 0.0
         structural_map = None
         frontier_bonus = 0.0
         frontier_map = None
-        try:
-            grid_bin = np.rint(map_pred).astype(np.uint8)  # 1=obstacle
-            free = (1 - grid_bin).astype(np.uint8)
-            observed_window = self.explored_map[gx1:gx2, gy1:gy2].astype(np.float32)
-            visited_window = self.visited_vis[gx1:gx2, gy1:gy2].astype(np.float32)
-            fresh_mask = np.clip(observed_window - visited_window, 0.0, 1.0)
+        if use_structural:
+            try:
+                import cv2
+                grid_bin = np.rint(map_pred).astype(np.uint8)
+                free = (1 - grid_bin).astype(np.uint8)
+                observed_window = self.explored_map[gx1:gx2, gy1:gy2].astype(np.float32)
+                visited_window = self.visited_vis[gx1:gx2, gy1:gy2].astype(np.float32)
+                fresh_mask = np.clip(observed_window - visited_window, 0.0, 1.0)
 
-            # 增强的门框检测：更精确地识别门框
-            # 方法1：左右或上下两侧为障碍，中间为可通行
-            left = np.roll(grid_bin, 1, axis=1)
-            right = np.roll(grid_bin, -1, axis=1)
-            up = np.roll(grid_bin, -1, axis=0)
-            down = np.roll(grid_bin, 1, axis=0)
-            door_h = (left == 1) & (right == 1) & (free == 1)
-            door_v = (up == 1) & (down == 1) & (free == 1)
-            door_mask = (door_h | door_v).astype(np.float32)
-            
-            # 方法2：检测狭窄通道（可能是门框）
-            import cv2
-            dist = cv2.distanceTransform((free * observed_window).astype(np.uint8), cv2.DIST_L2, 3)
-            narrow_thresh = max(1, int(self.args.narrow_width_cells // 2))
-            narrow_mask = (dist > 0) & (dist < narrow_thresh * 1.5)  # 稍微放宽阈值
-            
-            # 方法3：结合两种方法，门框区域增强
-            door_mask_enhanced = np.maximum(door_mask, narrow_mask.astype(np.float32) * 0.5)
-            
-            # 门框附近区域增强（鼓励接近门框）
-            if np.any(door_mask_enhanced > 0):
-                door_dist = cv2.distanceTransform((1 - door_mask_enhanced).astype(np.uint8), cv2.DIST_L2, 3)
-                door_boost_radius = int(self.args.door_boost_distance)
-                door_proximity = np.clip(1.0 - door_dist / max(door_boost_radius, 1), 0.0, 1.0)
-                door_mask_enhanced = np.maximum(door_mask_enhanced, door_proximity * 0.3)
-            
-            door_mask = door_mask_enhanced
-            self._last_door_map = door_mask
+                left = np.roll(grid_bin, 1, axis=1)
+                right = np.roll(grid_bin, -1, axis=1)
+                up = np.roll(grid_bin, -1, axis=0)
+                down = np.roll(grid_bin, 1, axis=0)
+                door_h = (left == 1) & (right == 1) & (free == 1)
+                door_v = (up == 1) & (down == 1) & (free == 1)
+                door_mask = (door_h | door_v).astype(np.float32)
 
-            # 狭窄通道：自由空间的距离变换较小（但>0）
-            # dist已在上面计算，这里直接使用
-            narrow_thresh = max(1, int(self.args.narrow_width_cells // 2))
-            narrow_score = np.clip((narrow_thresh - dist) / max(narrow_thresh, 1), 0.0, 1.0)
+                dist = cv2.distanceTransform(
+                    (free * observed_window).astype(np.uint8), cv2.DIST_L2, 3)
+                narrow_thresh = max(1, int(self.args.narrow_width_cells // 2))
+                narrow_mask = (dist > 0) & (dist < narrow_thresh * 1.5)
+                door_mask_enhanced = np.maximum(
+                    door_mask, narrow_mask.astype(np.float32) * 0.5)
 
-            # 开阔区域：自由空间的局部均值较高
-            k = max(3, int(self.args.open_kernel) | 1)  # 保证奇数
-            free_float = (free * observed_window).astype(np.float32)
-            open_score = cv2.blur(free_float, (k, k))
-            if np.max(open_score) > 0:
-                open_score = open_score / (np.max(open_score) + 1e-6)
+                if np.any(door_mask_enhanced > 0):
+                    door_dist = cv2.distanceTransform(
+                        (1 - door_mask_enhanced).astype(np.uint8), cv2.DIST_L2, 3)
+                    door_boost_radius = int(self.args.door_boost_distance)
+                    door_proximity = np.clip(
+                        1.0 - door_dist / max(door_boost_radius, 1), 0.0, 1.0)
+                    door_mask_enhanced = np.maximum(
+                        door_mask_enhanced, door_proximity * 0.3)
 
-            # 综合结构价值（仅在 fresh 区域有效）
-            structural_map = (self.args.w_struct_door * door_mask +
-                              self.args.w_struct_narrow * narrow_score +
-                              self.args.w_struct_open * open_score).astype(np.float32)
-            structural_map *= fresh_mask
+                door_mask = door_mask_enhanced
+                self._last_door_map = door_mask
+                narrow_score = np.clip(
+                    (narrow_thresh - dist) / max(narrow_thresh, 1), 0.0, 1.0)
 
-            active_cells_s = float(np.count_nonzero(fresh_mask))
-            if active_cells_s > 0:
-                structural_bonus = float(np.sum(structural_map) / (active_cells_s + 1e-6))
-            
-            # 前沿区域奖励（可见但未访问的区域）
-            # 前沿 = 已观测但未访问的区域，且不是障碍物
-            frontier_mask = fresh_mask * free.astype(np.float32)
-            
-            # 如果前沿区域靠近门框，给予额外奖励（鼓励通过门框探索新房间）
-            if self._last_door_map is not None and np.any(self._last_door_map > 0):
-                door_dist = cv2.distanceTransform((1 - self._last_door_map).astype(np.uint8), cv2.DIST_L2, 3)
-                door_boost_radius = int(self.args.door_boost_distance * 2)  # 更大的影响范围
-                door_proximity = np.clip(1.0 - door_dist / max(door_boost_radius, 1), 0.0, 1.0)
-                # 门框附近的前沿区域获得额外奖励
-                frontier_map = frontier_mask * (1.0 + door_proximity * self.args.room_exploration_boost)
-            else:
-                frontier_map = frontier_mask
-            
-            active_cells_f = float(np.count_nonzero(frontier_mask))
-            if active_cells_f > 0:
-                frontier_bonus = float(np.sum(frontier_map) / (active_cells_f + 1e-6))
-            else:
-                frontier_bonus = 0.0
-            
-            self._last_frontier_map = frontier_map
-        except Exception as e:
-            structural_map = None
-            frontier_map = None
-            import traceback
-            traceback.print_exc()
+                k = max(3, int(self.args.open_kernel) | 1)
+                free_float = (free * observed_window).astype(np.float32)
+                open_score = cv2.blur(free_float, (k, k))
+                if np.max(open_score) > 0:
+                    open_score = open_score / (np.max(open_score) + 1e-6)
+
+                structural_map = (
+                    self.args.w_struct_door * door_mask
+                    + self.args.w_struct_narrow * narrow_score
+                    + self.args.w_struct_open * open_score
+                ).astype(np.float32)
+                structural_map *= fresh_mask
+
+                active_cells_s = float(np.count_nonzero(fresh_mask))
+                if active_cells_s > 0:
+                    structural_bonus = float(
+                        np.sum(structural_map) / (active_cells_s + 1e-6))
+
+                frontier_mask = fresh_mask * free.astype(np.float32)
+                if self._last_door_map is not None and np.any(self._last_door_map > 0):
+                    door_dist = cv2.distanceTransform(
+                        (1 - self._last_door_map).astype(np.uint8), cv2.DIST_L2, 3)
+                    door_boost_radius = int(self.args.door_boost_distance * 2)
+                    door_proximity = np.clip(
+                        1.0 - door_dist / max(door_boost_radius, 1), 0.0, 1.0)
+                    frontier_map = frontier_mask * (
+                        1.0 + door_proximity * self.args.room_exploration_boost)
+                else:
+                    frontier_map = frontier_mask
+
+                active_cells_f = float(np.count_nonzero(frontier_mask))
+                if active_cells_f > 0:
+                    frontier_bonus = float(
+                        np.sum(frontier_map) / (active_cells_f + 1e-6))
+                self._last_frontier_map = frontier_map
+            except Exception:
+                structural_map = None
+                frontier_map = None
         self.structural_bonus_acc += structural_bonus
         self.frontier_bonus_acc += frontier_bonus
 
@@ -857,6 +898,9 @@ class Exploration_Env(habitat.RLEnv):
         goal = inputs['goal']
         goal = pu.threshold_poses(goal, grid.shape)
 
+        # 记录全局目标与内在惩罚（论文：避免选择已探索栅格）
+        self._last_global_goal = [int(goal[0]), int(goal[1])]
+        self._last_intrinsic_val = float(-exp_pred[goal[0], goal[1]])
 
         # Get intrinsic reward for global policy
         # Negative reward for exploring explored areas i.e.
@@ -1039,6 +1083,34 @@ class Exploration_Env(habitat.RLEnv):
                             class_avg_scores=class_avg_scores)
 
         return output
+
+    def get_reachability_supervision(self, inputs):
+        """为 RPN 提供 FMM 可达性监督（论文 3.3.3）。"""
+        from env.habitat.reachability_utils import (
+            build_traversible_local,
+            fmm_reachability_map,
+            goal_reachable_label,
+        )
+
+        args = self.args
+        map_pred = np.rint(inputs['map_pred'])
+        explored = np.rint(inputs['exp_pred'])
+        start_x, start_y, start_o, gx1, gx2, gy1, gy2 = inputs['pose_pred']
+        gx1, gx2, gy1, gy2 = int(gx1), int(gx2), int(gy1), int(gy2)
+        goal = pu.threshold_poses(inputs['goal'], map_pred.shape)
+
+        r, c = start_y, start_x
+        start = [int(r * 100.0 / args.map_resolution - gx1),
+                 int(c * 100.0 / args.map_resolution - gy1)]
+        start = pu.threshold_poses(start, map_pred.shape)
+
+        visited_window = self.visited_vis[gx1:gx2, gy1:gy2]
+        collision_window = self.collison_map[gx1:gx2, gy1:gy2]
+        traversible = build_traversible_local(
+            map_pred, explored, visited_window, collision_window, self.selem)
+        reach_map = fmm_reachability_map(traversible, tuple(start), dt=self.dt)
+        label = goal_reachable_label(traversible, tuple(start), tuple(goal), dt=self.dt)
+        return reach_map.astype(np.float32), float(label)
 
     def _get_gt_map(self, full_map_size):
         self.scene_name = _scene_name_from_sim(self.habitat_env)
@@ -1287,6 +1359,23 @@ class Exploration_Env(habitat.RLEnv):
             gt_action = 2
 
         return gt_action
+
+    def close(self):
+        if self.figure is not None:
+            try:
+                import matplotlib.pyplot as plt
+                plt.close(self.figure)
+            except Exception:
+                pass
+            self.figure = None
+            self.ax = None
+        if (self.rank == 0
+                and not os.environ.get("NSO_VIEWER_EXTERNAL")
+                and Exploration_Env._live_viewer_proc is not None):
+            if Exploration_Env._live_viewer_proc.poll() is None:
+                Exploration_Env._live_viewer_proc.terminate()
+            Exploration_Env._live_viewer_proc = None
+        super().close()
 
     def close(self):
         if self.figure is not None:

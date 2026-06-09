@@ -119,6 +119,20 @@ def get_args():
                         help='目标可达性数据保存目录')
     parser.add_argument('--goal_reachability_max_candidates', type=int, default=10,
                         help='生成候选目标点的最大数量，从中选择可达性最高的（默认10）')
+    parser.add_argument('--reachability_mask_alpha', type=float, default=2.0,
+                        help='论文式(2) 可达性掩码系数 α')
+    parser.add_argument('--paper_rewards', type=int, default=0,
+                        help='1: 启用论文式(4)完整奖励（语义+结构+前沿+内在惩罚）')
+    parser.add_argument('--use_structural_reward', type=int, default=0,
+                        help='1: 启用结构/前沿奖励项')
+    parser.add_argument('--use_intrinsic_goal_penalty', type=int, default=0,
+                        help='1: 对已探索栅格目标施加内在惩罚')
+    parser.add_argument('--intrinsic_reward_coeff', type=float, default=0.05,
+                        help='内在目标惩罚系数')
+    parser.add_argument('--loop_pose_correction', type=int, default=0,
+                        help='1: 回环检测后轻量位姿校正（论文3.5.1）')
+    parser.add_argument('--loop_pose_correction_weight', type=float, default=0.35,
+                        help='回环位姿校正混合权重')
     parser.add_argument('--voxel_size', type=float, default=0.05,
                         help='体素大小（米，默认0.05m=5cm）')
     parser.add_argument('--voxel_grid_x', type=int, default=200,

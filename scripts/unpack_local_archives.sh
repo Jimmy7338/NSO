@@ -65,8 +65,15 @@ if [[ -f "$MP3D_EX_ZIP" ]] && [[ ! -f "$DATA_DIR/scene_datasets/17DRP5sb8fy/17DR
   log "MP3D example -> data/scene_datasets/"
 fi
 
+# --- Gibson Habitat 场景 (.glb) ---
+if [[ -f "$PROJECT_DIR/gibson_habitat_trainval.zip" ]] || [[ -f "$PROJECT_DIR/gibson_habitat.zip" ]]; then
+  if [[ "$(find "$DATA_DIR/scene_datasets/gibson" -maxdepth 1 -name '*.glb' 2>/dev/null | wc -l)" -lt 5 ]]; then
+    log "解压 Gibson Habitat 场景..."
+    bash "$PROJECT_DIR/scripts/setup_gibson_habitat.sh" || log "Gibson 场景解压未完成（见上方日志）"
+  fi
+fi
+
 log "========== 数据检查 =========="
-log "Gibson 场景: bash scripts/setup_gibson_habitat.sh"
 for f in \
   "$DATA_DIR/datasets/pointnav/gibson/v1/val/val.json.gz" \
   "$DATA_DIR/datasets/pointnav/mp3d/v1/val/val.json.gz" \

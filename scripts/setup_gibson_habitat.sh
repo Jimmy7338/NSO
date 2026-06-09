@@ -4,8 +4,14 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+CLOUD_ROOT="${NSO_CLOUD_DATA:-/mnt/nso_data}"
 DATA_DIR="$PROJECT_DIR/data"
 GIBSON_DIR="$DATA_DIR/scene_datasets/gibson"
+# 大 zip 优先放云盘，避免占满 40G 系统盘
+ARCHIVE_DIR="$CLOUD_ROOT/archives"
+if [[ -d "$CLOUD_ROOT" ]]; then
+  mkdir -p "$ARCHIVE_DIR"
+fi
 CONFIG_URL="https://dl.fbaipublicfiles.com/habitat/gibson/config_v1/gibson_semantic.scene_dataset_config.json"
 EXPECTED_TRAINVAL_SIZE=10833075327
 
@@ -22,8 +28,13 @@ PY
 }
 
 pick_zip() {
-  local trainval="$PROJECT_DIR/gibson_habitat_trainval.zip"
-  local challenge="$PROJECT_DIR/gibson_habitat.zip"
+  local trainval="" challenge=""
+  for base in "$ARCHIVE_DIR" "$PROJECT_DIR"; do
+    [[ -f "$base/gibson_habitat_trainval.zip" ]] && trainval="$base/gibson_habitat_trainval.zip"
+    [[ -f "$base/gibson_habitat.zip" ]] && challenge="$base/gibson_habitat.zip"
+  done
+  trainval="${trainval:-$PROJECT_DIR/gibson_habitat_trainval.zip}"
+  challenge="${challenge:-$PROJECT_DIR/gibson_habitat.zip}"
   if [[ -f "$trainval" ]]; then
     local sz
     sz=$(stat -c%s "$trainval")
@@ -32,7 +43,8 @@ pick_zip() {
       return 0
     fi
     log "警告: gibson_habitat_trainval.zip 不完整 ($(($sz / 1024 / 1024))MB / 约 10100MB)"
-    log "续传: wget -c -O $trainval https://dl.fbaipublicfiles.com/habitat/data/scene_datasets/gibson_habitat_trainval.zip"
+    log "续传（建议下到云盘）: wget -c -O $ARCHIVE_DIR/gibson_habitat_trainval.zip \\"
+    log "  https://dl.fbaipublicfiles.com/habitat/data/scene_datasets/gibson_habitat_trainval.zip"
   fi
   if [[ -f "$challenge" ]] && check_zip_ok "$challenge"; then
     echo "$challenge"
@@ -96,10 +108,20 @@ main() {
     exit 1
   fi
 
-  if [[ "$(find "$GIBSON_DIR" -maxdepth 1 -name '*.glb' 2>/dev/null | wc -l)" -lt 5 ]]; then
+  local glb_count
+  glb_count=$(find "$GIBSON_DIR" -maxdepth 1 -name '*.glb' 2>/dev/null | wc -l)
+  if [[ "${FORCE_GIBSON_REEXTRACT:-0}" == 1 ]]; then
+    log "强制重新解压（清空旧场景）..."
+    rm -f "$GIBSON_DIR"/*.glb "$GIBSON_DIR"/*.navmesh 2>/dev/null || true
+    extract_zip "$zip"
+  elif [[ "$glb_count" -lt 5 ]]; then
+    extract_zip "$zip"
+  elif [[ "$zip" == *trainval* ]] && [[ "$glb_count" -lt 200 ]]; then
+    log "检测到 trainval 包但场景数偏少 ($glb_count)，重新解压..."
+    rm -f "$GIBSON_DIR"/*.glb "$GIBSON_DIR"/*.navmesh 2>/dev/null || true
     extract_zip "$zip"
   else
-    log "Gibson 场景已存在，跳过解压"
+    log "Gibson 场景已存在 ($glb_count 个)，跳过解压"
   fi
   if [[ ! -f "$GIBSON_DIR/gibson_semantic.scene_dataset_config.json" ]]; then
     log "下载 scene_dataset 配置..."

@@ -15,6 +15,17 @@ if os.environ.get("NSO_HABITAT_VERSION") == "2":
     _mod = importlib.util.module_from_spec(_spec)
     _spec.loader.exec_module(_mod)
     _mod.setup_habitat2_lab()
+
+# Habitat 2 须在其它模块 import habitat 之前固定为 0.2.x
+if os.environ.get("NSO_HABITAT_VERSION") == "2":
+    import importlib.util
+
+    _h2_lab = os.path.join(
+        os.path.dirname(__file__), "env", "habitat2", "_lab.py")
+    _spec = importlib.util.spec_from_file_location("nso_habitat2_lab", _h2_lab)
+    _mod = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_mod)
+    _mod.setup_habitat2_lab()
 import numpy as np
 import torch
 import torch.nn as nn
@@ -50,6 +61,9 @@ from semantic.exploration_map_completer import ExplorationMapCompleter
 from semantic.voxel_based_completion import VoxelBasedCompletion
 from loop.semantic_vlad import SemanticVLADExtractor
 from loop.loop_detector import LoopDetector
+from loop.pose_correction import apply_loop_pose_correction
+from model import ReachabilityHead
+from env.habitat.reachability_utils import mask_global_goals
 
 args = get_args()
 
@@ -170,6 +184,7 @@ def main():
         explored_ratio_log = np.zeros((num_scenes, num_episodes, traj_lengths))
 
     g_episode_rewards = deque(maxlen=1000)
+    reach_losses = deque(maxlen=1000)
 
     l_action_losses = deque(maxlen=1000)
 
@@ -446,6 +461,22 @@ def main():
 
     if not args.train_global:
         g_policy.eval()
+
+    reachability_head = None
+    reachability_optimizer = None
+    if args.use_goal_reachability:
+        reachability_head = ReachabilityHead(in_channels=2).to(device)
+        reachability_optimizer = get_optimizer(
+            reachability_head.parameters(),
+            f'adam,lr={args.goal_reachability_lr}')
+        if args.goal_reachability_model_path:
+            print("Loading reachability {}".format(args.goal_reachability_model_path))
+            state_dict = torch.load(
+                args.goal_reachability_model_path,
+                map_location=lambda storage, loc: storage)
+            reachability_head.load_state_dict(state_dict)
+        if not args.train_goal_reachability:
+            reachability_head.eval()
 
     if args.load_local != "0":
         print("Loading local {}".format(args.load_local))
@@ -1037,6 +1068,12 @@ def main():
                                     'distance': match.distance,
                                     'semantic_sim': match.semantic_sim
                                 }
+                                if getattr(args, 'loop_pose_correction', 0):
+                                    apply_loop_pose_correction(
+                                        full_pose, origins, lmb, e,
+                                        pose_np, match.matched_pose,
+                                        weight=args.loop_pose_correction_weight,
+                                        device=device)
                                 if loop_last_detection_step[e] != match.current_step:
                                     loop_last_detection_step[e] = match.current_step
                                     print(f"[Loop] Env {e} step {match.current_step} "
@@ -1153,6 +1190,23 @@ def main():
                                  int(action[1] * local_h)]
                                 for action in cpu_actions]
 
+                if reachability_head is not None:
+                    rpn_in = torch.stack(
+                        [local_map[:, 0], local_map[:, 1]], dim=1)
+                    with torch.set_grad_enabled(args.train_goal_reachability):
+                        m_reach = reachability_head.predict_proba(rpn_in)
+                    free_maps = [
+                        (local_map[e, 0].cpu().numpy() < 0.5)
+                        for e in range(num_scenes)
+                    ]
+                    global_goals = mask_global_goals(
+                        global_goals,
+                        m_reach.detach().cpu().numpy(),
+                        local_w, local_h,
+                        alpha=args.reachability_mask_alpha,
+                        num_candidates=args.goal_reachability_max_candidates,
+                        free_maps=free_maps)
+
                 g_reward = 0
                 g_masks = torch.ones(num_scenes).float().to(device)
             # ------------------------------------------------------------------
@@ -1179,10 +1233,35 @@ def main():
                     p_input['semantic_density'] = None
 
             output = envs.get_short_term_goal(planner_inputs)
+
             # ------------------------------------------------------------------
 
             ### TRAINING
             torch.set_grad_enabled(True)
+            # ------------------------------------------------------------------
+            # Train Reachability Head (RPN, 论文 3.3.3)
+            if (reachability_head is not None
+                    and args.train_goal_reachability
+                    and l_step == args.num_local_steps - 1):
+                reach_gt_maps, reach_labels = envs.venv.get_reachability_supervision(
+                    planner_inputs)
+                rpn_in = torch.stack(
+                    [local_map[:, 0], local_map[:, 1]], dim=1)
+                m_reach = reachability_head.predict_proba(rpn_in)
+                gt_t = torch.from_numpy(reach_gt_maps).float().to(device)
+                map_loss = F.binary_cross_entropy(m_reach, gt_t)
+                point_loss = 0.0
+                for e in range(num_scenes):
+                    gy = int(np.clip(global_goals[e][0], 0, local_w - 1))
+                    gx = int(np.clip(global_goals[e][1], 0, local_h - 1))
+                    point_loss = point_loss + F.binary_cross_entropy(
+                        m_reach[e, gy, gx],
+                        torch.tensor(reach_labels[e], device=device))
+                reach_loss = map_loss + point_loss / max(num_scenes, 1)
+                reachability_optimizer.zero_grad()
+                reach_loss.backward()
+                reachability_optimizer.step()
+                reach_losses.append(reach_loss.item())
             # ------------------------------------------------------------------
             # Train Neural SLAM Module
             if args.train_slam and len(slam_memory) > args.slam_batch_size:
@@ -1329,6 +1408,12 @@ def main():
                             np.mean(pose_costs))
                     ])
 
+                if args.train_goal_reachability and len(reach_losses) > 0:
+                    log += " ".join([
+                        " Reach Loss:",
+                        "{:.4f},".format(np.mean(reach_losses))
+                    ])
+
                 if args.use_semantic:
                     # 收集所有有效的语义奖励值（包括0.0，因为0.0也是有效值）
                     sem_vals = [info.get('sem_reward', 0.0) for info in infos if 'sem_reward' in info]
@@ -1411,6 +1496,19 @@ def main():
                     torch.save(g_policy.state_dict(),
                                os.path.join(dump_dir,
                                             "periodic_{}.global".format(step)))
+                if (reachability_head is not None
+                        and args.train_goal_reachability):
+                    torch.save(reachability_head.state_dict(),
+                               os.path.join(dump_dir,
+                                            "periodic_{}.reach".format(step)))
+            # ------------------------------------------------------------------
+
+            if (reachability_head is not None
+                    and args.train_goal_reachability
+                    and len(reach_losses) >= 50
+                    and (total_num_steps * num_scenes) % args.save_interval < num_scenes):
+                torch.save(reachability_head.state_dict(),
+                           os.path.join(log_dir, "model_best.reach"))
             # ------------------------------------------------------------------
 
     # Print and save model performance numbers during evaluation

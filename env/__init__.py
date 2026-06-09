@@ -63,5 +63,10 @@ class VecPyTorch():
         stg = torch.from_numpy(stg).float()
         return stg
 
+    def get_reachability_supervision(self, inputs):
+        if not hasattr(self.venv, "get_reachability_supervision"):
+            raise NotImplementedError("当前 VectorEnv 未实现 get_reachability_supervision")
+        return self.venv.get_reachability_supervision(inputs)
+
     def close(self):
         return self.venv.close()
