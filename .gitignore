@@ -1,165 +1,64 @@
-# Byte-compiled / optimized / DLL files
+# =============================================================================
+# Python / 构建 / IDE（标准忽略）
+# =============================================================================
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.venv
+.venv/
 venv/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
 .mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# VIM
-*.swp
-
-# DS_Store
-*.DS_Store
-
-# 项目特定文件
-pointnav_gibson_v1.zip
-gibson_habitat*.zip
-*.pdf
-tmp/
-comparison_results/
-data/scene_datasets/
-data/datasets/
-pretrained_models/*.global
-pretrained_models/*.local
-pretrained_models/*.slam
-*.pt
-yolov8*.pt
-=*.0
-image/
-noise_models/
-
-# 日志和输出
-*.log
-*.out
-*.err
-
-# IDE
+.pytest_cache/
+.hypothesis/
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+*.DS_Store
 
-# 临时文件
-*.tmp
-*.bak
-*.cache
+# =============================================================================
+# 运行中间产物（不上传）
+# =============================================================================
+# smoke / 临时实验目录
+tmp/
+comparison_results/
+image/
+
+# 训练与评估过程日志
+*.log
+*.out
+*.err
+
+# 可视化中间帧、轨迹图（--print_images / dump 输出）
+**/dump/**/images/
+**/dump/**/episodes/
+**/dump/**/tensorboard/
+
+# episode 内周期 checkpoint、评估曲线（非最终 model_best）
+**/dump/**/periodic_*
+**/dump/**/explored_area.txt
+**/dump/**/explored_ratio.txt
+
+# 默认云盘训练输出目录（若在项目内克隆了一份）
+nso_runs/
+
+# 未归档的 torch 权重碎片（显式保留 yolov8n.pt，见下方 ! 规则）
+*.pt
+!yolov8n.pt
+
+# =============================================================================
+# 需要纳入版本库（请勿忽略）
+# -----------------------------------------------------------------------------
+# pretrained_models/     官方预训练 model_best.{slam,local,global}
+# trained_models/        自训练各阶段最终 model_best.*
+# data/                  数据集配置、场景元数据、pointnav json
+# noise_models/          动作/传感器噪声 pkl
+# *.pdf                  论文与数据协议文档
+# yolov8n.pt             语义检测权重
+# pointnav_*.zip         数据集压缩包（可选，与 data/ 二选一或并存）
+# =============================================================================
