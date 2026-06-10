@@ -16,16 +16,6 @@ if os.environ.get("NSO_HABITAT_VERSION") == "2":
     _spec.loader.exec_module(_mod)
     _mod.setup_habitat2_lab()
 
-# Habitat 2 须在其它模块 import habitat 之前固定为 0.2.x
-if os.environ.get("NSO_HABITAT_VERSION") == "2":
-    import importlib.util
-
-    _h2_lab = os.path.join(
-        os.path.dirname(__file__), "env", "habitat2", "_lab.py")
-    _spec = importlib.util.spec_from_file_location("nso_habitat2_lab", _h2_lab)
-    _mod = importlib.util.module_from_spec(_spec)
-    _spec.loader.exec_module(_mod)
-    _mod.setup_habitat2_lab()
 import numpy as np
 import torch
 import torch.nn as nn
@@ -64,8 +54,27 @@ from loop.loop_detector import LoopDetector
 from loop.pose_correction import apply_loop_pose_correction
 from model import ReachabilityHead
 from env.habitat.reachability_utils import mask_global_goals
+from utils.paper_eval import PaperMetricsTracker
 
 args = get_args()
+
+
+def build_rpn_input(local_map_tensor, semantic_map2d, planner_pose_inputs,
+                    num_scenes, use_semantic, device):
+    """构建 RPN 输入：障碍、探索、语义密度、访问频率（论文多通道地图）。"""
+    channels = [local_map_tensor[:, 0], local_map_tensor[:, 1]]
+    if use_semantic:
+        sem_ch = torch.zeros(
+            num_scenes, local_map_tensor.shape[-2], local_map_tensor.shape[-1],
+            device=device)
+        for e in range(num_scenes):
+            gx1, gx2 = int(planner_pose_inputs[e][3]), int(planner_pose_inputs[e][4])
+            gy1, gy2 = int(planner_pose_inputs[e][5]), int(planner_pose_inputs[e][6])
+            sem_np = semantic_map2d.get_full_density_window(e, gx1, gx2, gy1, gy2)
+            sem_ch[e] = torch.from_numpy(sem_np).to(device)
+        channels.append(sem_ch)
+        channels.append(local_map_tensor[:, 2])
+    return torch.stack(channels, dim=1)
 
 np.random.seed(args.seed)
 torch.manual_seed(args.seed)
@@ -464,8 +473,9 @@ def main():
 
     reachability_head = None
     reachability_optimizer = None
+    rpn_in_channels = 4 if args.use_semantic else 2
     if args.use_goal_reachability:
-        reachability_head = ReachabilityHead(in_channels=2).to(device)
+        reachability_head = ReachabilityHead(in_channels=rpn_in_channels).to(device)
         reachability_optimizer = get_optimizer(
             reachability_head.parameters(),
             f'adam,lr={args.goal_reachability_lr}')
@@ -529,6 +539,7 @@ def main():
     cpu_actions = nn.Sigmoid()(g_action).cpu().numpy()
     global_goals = [[int(action[0] * local_w), int(action[1] * local_h)]
                     for action in cpu_actions]
+    prev_global_goals = list(global_goals)
 
     # Compute planner inputs
     planner_inputs = [{} for e in range(num_scenes)]
@@ -559,6 +570,10 @@ def main():
 
     total_num_steps = -1
     g_reward = 0
+    paper_metrics = [
+        PaperMetricsTracker(map_resolution_cm=args.map_resolution)
+        for _ in range(num_scenes)
+    ]
 
     torch.set_grad_enabled(False)
 
@@ -602,6 +617,19 @@ def main():
                     infos[e]['loop_detected'] = False
                     infos[e]['loop_match'] = None
 
+            for e in range(num_scenes):
+                paper_metrics[e].update_step(
+                    pose_err=infos[e].get('pose_err'),
+                    sem_reward=infos[e].get('sem_reward'),
+                    unreachable=bool(infos[e].get('path_unreachable', False)),
+                    loop_detected=bool(infos[e].get('loop_detected', False)),
+                )
+                if infos[e].get('exp_ratio') is not None:
+                    paper_metrics[e].update_step(
+                        exp_ratio=infos[e]['exp_ratio'],
+                        exp_reward=infos[e].get('exp_reward'),
+                    )
+
             l_masks = torch.FloatTensor([0 if x else 1
                                          for x in done]).to(device)
             g_masks *= l_masks
@@ -610,6 +638,10 @@ def main():
             # ------------------------------------------------------------------
             # Reinitialize variables when episode ends
             if step == args.max_episode_length - 1:  # Last episode step
+                for e in range(num_scenes):
+                    snap = paper_metrics[e].snapshot()
+                    infos[e]['paper_metrics'] = snap.to_dict()
+                    paper_metrics[e].reset_episode()
                 init_map_and_pose()
                 del last_obs
                 last_obs = obs.detach()
@@ -1091,6 +1123,7 @@ def main():
             # ------------------------------------------------------------------
             # Global Policy
             if l_step == args.num_local_steps - 1:
+                prev_global_goals = list(global_goals)
                 # For every global step, update the full and local maps
                 for e in range(num_scenes):
                     full_map[e, :, lmb[e, 0]:lmb[e, 1], lmb[e, 2]:lmb[e, 3]] = \
@@ -1191,8 +1224,9 @@ def main():
                                 for action in cpu_actions]
 
                 if reachability_head is not None:
-                    rpn_in = torch.stack(
-                        [local_map[:, 0], local_map[:, 1]], dim=1)
+                    rpn_in = build_rpn_input(
+                        local_map, semantic_map2d, planner_pose_inputs,
+                        num_scenes, args.use_semantic, device)
                     with torch.set_grad_enabled(args.train_goal_reachability):
                         m_reach = reachability_head.predict_proba(rpn_in)
                     free_maps = [
@@ -1234,6 +1268,12 @@ def main():
 
             output = envs.get_short_term_goal(planner_inputs)
 
+            for e in range(num_scenes):
+                if infos[e].get('embodied_goal_success') is not None:
+                    paper_metrics[e].update_step(
+                        embodied_success=infos[e]['embodied_goal_success'],
+                    )
+
             # ------------------------------------------------------------------
 
             ### TRAINING
@@ -1243,17 +1283,23 @@ def main():
             if (reachability_head is not None
                     and args.train_goal_reachability
                     and l_step == args.num_local_steps - 1):
+                reach_supervision_inputs = []
+                for e, p_input in enumerate(planner_inputs):
+                    sup = dict(p_input)
+                    sup['goal'] = prev_global_goals[e]
+                    reach_supervision_inputs.append(sup)
                 reach_gt_maps, reach_labels = envs.venv.get_reachability_supervision(
-                    planner_inputs)
-                rpn_in = torch.stack(
-                    [local_map[:, 0], local_map[:, 1]], dim=1)
+                    reach_supervision_inputs)
+                rpn_in = build_rpn_input(
+                    local_map, semantic_map2d, planner_pose_inputs,
+                    num_scenes, args.use_semantic, device)
                 m_reach = reachability_head.predict_proba(rpn_in)
                 gt_t = torch.from_numpy(reach_gt_maps).float().to(device)
                 map_loss = F.binary_cross_entropy(m_reach, gt_t)
                 point_loss = 0.0
                 for e in range(num_scenes):
-                    gy = int(np.clip(global_goals[e][0], 0, local_w - 1))
-                    gx = int(np.clip(global_goals[e][1], 0, local_h - 1))
+                    gy = int(np.clip(prev_global_goals[e][0], 0, local_w - 1))
+                    gx = int(np.clip(prev_global_goals[e][1], 0, local_h - 1))
                     point_loss = point_loss + F.binary_cross_entropy(
                         m_reach[e, gy, gx],
                         torch.tensor(reach_labels[e], device=device))
@@ -1414,6 +1460,16 @@ def main():
                         "{:.4f},".format(np.mean(reach_losses))
                     ])
 
+                if args.paper_mode or args.paper_rewards:
+                    pm = paper_metrics[0].snapshot()
+                    log += " ".join([
+                        " Paper[cov={:.1f}% drift={:.1f}cm unr={}]".format(
+                            pm.coverage_ratio * 100,
+                            pm.trajectory_drift_rmse_cm,
+                            pm.unreachable_goal_count,
+                        )
+                    ])
+
                 if args.use_semantic:
                     # 收集所有有效的语义奖励值（包括0.0，因为0.0也是有效值）
                     sem_vals = [info.get('sem_reward', 0.0) for info in infos if 'sem_reward' in info]
@@ -1467,7 +1523,10 @@ def main():
                     best_local_loss = np.mean(l_action_losses)
 
                 # Save Global Policy Model
-                if len(g_episode_rewards) >= 100 and \
+                # 单进程 + max_episode_length=500 时，30k 步仅 ~60 个 episode，
+                # 原阈值 100 导致 model_best.global 永远无法写出。
+                min_g_episodes_for_save = min(100, max(5, args.num_episodes // 20))
+                if len(g_episode_rewards) >= min_g_episodes_for_save and \
                         (np.mean(g_episode_rewards) >= best_g_reward) \
                         and not args.eval:
                     torch.save(g_policy.state_dict(),

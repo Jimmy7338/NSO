@@ -1,3 +1,9 @@
+# NSO：语义-结构联合感知层次化主动覆盖探索
+
+> **NSO**（Neural Semantic-Structure Active exploration）在 Active Neural SLAM 基础上扩展了语义密度奖励、拓扑结构感知、自监督可达性预测（RPN）、双重回环检测与语义场景补全（SSC）。论文见 `Semantic_Enhanced_Active_SLAM_Paper.tex`；一键复现论文配置：`bash scripts/run_nso_paper_train.sh` 或 `python main.py --paper_mode ...`。
+
+---
+
 # Active Neural SLAM 完整项目指南
 
 > **本文档旨在为完全不了解项目的读者提供全面、深入的项目介绍，涵盖项目背景、技术原理、实现细节、使用方法等所有方面。**

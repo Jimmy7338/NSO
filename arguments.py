@@ -57,10 +57,12 @@ def get_args():
                         help='预训练语义模型的路径')
     parser.add_argument('--semantic_interval', type=int, default=1,
                         help='处理语义信息的间隔步数')
-    parser.add_argument('--semantic_reward_coeff', type=float, default=0.1,
-                        help='语义奖励系数')
-    parser.add_argument('--structural_reward_coeff', type=float, default=0.1,
-                        help='结构内容奖励系数（门框/狭窄通道/开阔区）')
+    parser.add_argument('--paper_mode', action='store_true', default=False,
+                        help='论文完整配置：语义+结构奖励+RPN+回环+SSC 一键启用')
+    parser.add_argument('--semantic_reward_coeff', type=float, default=0.12,
+                        help='语义奖励系数（论文 λ_sem=0.12）')
+    parser.add_argument('--structural_reward_coeff', type=float, default=0.12,
+                        help='结构内容奖励系数（论文 λ_struct=0.12）')
     parser.add_argument('--frontier_reward_coeff', type=float, default=0.15,
                         help='前沿区域奖励系数（可见但未访问的区域）')
     parser.add_argument('--w_struct_door', type=float, default=2.0,
@@ -377,5 +379,23 @@ def get_args():
         args.num_mini_batch = int(args.num_mini_batch)
         if args.num_mini_batch < 1:
             args.num_mini_batch = 1  # 确保至少为1
+
+    if args.paper_mode:
+        args.paper_rewards = 1
+        args.use_structural_reward = 1
+        args.use_intrinsic_goal_penalty = 1
+        args.use_semantic = True
+        args.semantic_reward_coeff = 0.12
+        args.structural_reward_coeff = 0.12
+        args.frontier_reward_coeff = 0.15
+        args.use_goal_reachability = True
+        args.train_goal_reachability = True
+        args.reachability_mask_alpha = 2.0
+        args.goal_reachability_max_candidates = 16
+        args.use_loop_detection = True
+        args.loop_pose_correction = 1
+        args.loop_interval = 100
+        args.use_ssc_completion = True
+        args.ssc_update_interval = 10
 
     return args

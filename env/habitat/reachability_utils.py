@@ -51,6 +51,20 @@ def fmm_reachability_map(traversible: np.ndarray, start: tuple, dt: int = 10) ->
     return reach.astype(np.float32)
 
 
+def embodied_goal_reached(
+    agent_rc: tuple,
+    goal_rc: tuple,
+    success_radius_cells: int = 10,
+) -> float:
+    """
+    论文式 (3) 具身回溯标签：智能体是否在邻域内抵达目标。
+    success_radius_cells: 50cm @ 5cm/格 => 10 格。
+    """
+    dr = abs(int(agent_rc[0]) - int(goal_rc[0]))
+    dc = abs(int(agent_rc[1]) - int(goal_rc[1]))
+    return 1.0 if max(dr, dc) <= success_radius_cells else 0.0
+
+
 def goal_reachable_label(traversible: np.ndarray, start: tuple, goal: tuple,
                          dt: int = 10) -> float:
     """单点标签：FMM 能否规划到 goal（无 replan）。"""

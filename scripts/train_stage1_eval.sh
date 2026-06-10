@@ -16,10 +16,8 @@ for f in slam local; do
   fi
 done
 
+bash "$SCRIPT_DIR/restore_global_ckpt.sh" stage1_slam_local >/dev/null
 GLOBAL_CKPT="$STAGE1_DIR/model_best.global"
-if [[ ! -f "$GLOBAL_CKPT" ]]; then
-  GLOBAL_CKPT="$PRETRAINED/model_best.global"
-fi
 
 echo "阶段 1 评估 | slam/local: $STAGE1_DIR | global: $GLOBAL_CKPT"
 

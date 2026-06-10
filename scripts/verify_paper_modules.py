@@ -49,10 +49,31 @@ def test_fmm_utils():
     assert len(goals) == 1
 
 
+def test_paper_eval():
+    from utils.paper_eval import PaperMetricsTracker, aggregate_episode_metrics
+
+    tracker = PaperMetricsTracker()
+    tracker.update_step(pose_err=[0.01, 0.02, 0.0], exp_ratio=0.5)
+    snap = tracker.snapshot()
+    assert snap.coverage_ratio == 0.5
+    agg = aggregate_episode_metrics([snap, snap])
+    assert "coverage_ratio" in agg
+
+
+def test_embodied_reach():
+    import importlib.util
+    path = os.path.join(ROOT, "env/habitat/reachability_utils.py")
+    spec = importlib.util.spec_from_file_location("reachability_utils", path)
+    ru = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ru)
+    assert ru.embodied_goal_reached((10, 10), (12, 12), 10) == 1.0
+    assert ru.embodied_goal_reached((10, 10), (25, 25), 10) == 0.0
+
+
 def test_global_reward_flags():
     text = open(os.path.join(ROOT, "arguments.py"), encoding="utf-8").read()
     for name in [
-        "paper_rewards", "use_structural_reward",
+        "paper_rewards", "paper_mode", "use_structural_reward",
         "use_intrinsic_goal_penalty", "reachability_mask_alpha",
         "loop_pose_correction",
     ]:
@@ -71,6 +92,8 @@ def main():
     tests = [
         test_reachability_head,
         test_fmm_utils,
+        test_paper_eval,
+        test_embodied_reach,
         test_global_reward_flags,
         test_exploration_env_methods,
     ]

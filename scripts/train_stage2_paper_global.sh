@@ -8,7 +8,12 @@ export MPLBACKEND=Agg
 RUN_ROOT="${NSO_RUN_ROOT:-/mnt/nso_data/nso_runs}"
 mkdir -p "$RUN_ROOT"
 
-PREV="${STAGE2_LOAD_DIR:-$RUN_ROOT/models/stage1_slam_local}"
+STAGE2_DIR="$RUN_ROOT/models/stage2_paper_global"
+if [[ -f "$STAGE2_DIR/model_best.slam" && -f "$STAGE2_DIR/model_best.local" ]]; then
+  PREV="${STAGE2_LOAD_DIR:-$STAGE2_DIR}"
+else
+  PREV="${STAGE2_LOAD_DIR:-$RUN_ROOT/models/stage1_slam_local}"
+fi
 PRETRAINED="$SCRIPT_DIR/../pretrained_models"
 GLOBAL_CKPT="$PREV/model_best.global"
 [[ -f "$GLOBAL_CKPT" ]] || GLOBAL_CKPT="$PRETRAINED/model_best.global"

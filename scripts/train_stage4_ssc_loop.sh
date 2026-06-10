@@ -9,14 +9,38 @@ RUN_ROOT="${NSO_RUN_ROOT:-/mnt/nso_data/nso_runs}"
 mkdir -p "$RUN_ROOT"
 
 PREV="${STAGE4_LOAD_DIR:-$RUN_ROOT/models/stage3_rpn}"
+STAGE2="${STAGE4_SLAM_FALLBACK_DIR:-$RUN_ROOT/models/stage2_paper_global}"
 PRETRAINED="$SCRIPT_DIR/../pretrained_models"
+
+# 阶段 3 train_slam=0 时通常不会写出 model_best.slam，按优先级回退
+SLAM_CKPT="$PREV/model_best.slam"
+if [[ ! -f "$SLAM_CKPT" ]]; then
+  if [[ -f "$STAGE2/model_best.slam" ]]; then
+    SLAM_CKPT="$STAGE2/model_best.slam"
+    echo "警告: $PREV 无 model_best.slam，回退 stage2: $SLAM_CKPT"
+  elif [[ -f "$PRETRAINED/model_best.slam" ]]; then
+    SLAM_CKPT="$PRETRAINED/model_best.slam"
+    echo "警告: 回退 pretrained: $SLAM_CKPT"
+  else
+    echo "错误: 找不到 model_best.slam（已查 stage3/stage2/pretrained）" >&2
+    exit 1
+  fi
+fi
+
 GLOBAL_CKPT="$PREV/model_best.global"
 [[ -f "$GLOBAL_CKPT" ]] || GLOBAL_CKPT="$PRETRAINED/model_best.global"
+
+LOCAL_CKPT="$PREV/model_best.local"
+if [[ ! -f "$LOCAL_CKPT" && -f "$STAGE2/model_best.local" ]]; then
+  LOCAL_CKPT="$STAGE2/model_best.local"
+  echo "警告: $PREV 无 model_best.local，回退 stage2: $LOCAL_CKPT"
+fi
+
 REACH="${STAGE4_REACH_LOAD:-0}"
 LOAD_ARGS=(
-  --load_slam "$PREV/model_best.slam"
+  --load_slam "$SLAM_CKPT"
   --load_global "$GLOBAL_CKPT"
-  --load_local "$PREV/model_best.local"
+  --load_local "$LOCAL_CKPT"
 )
 if [[ -f "$PREV/model_best.reach" ]]; then
   REACH="$PREV/model_best.reach"

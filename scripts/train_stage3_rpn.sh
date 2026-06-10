@@ -12,12 +12,24 @@ PREV="${STAGE3_LOAD_DIR:-$RUN_ROOT/models/stage2_paper_global}"
 PRETRAINED="$SCRIPT_DIR/../pretrained_models"
 GLOBAL_CKPT="$PREV/model_best.global"
 [[ -f "$GLOBAL_CKPT" ]] || GLOBAL_CKPT="$PRETRAINED/model_best.global"
+
+SLAM_CKPT="$PREV/model_best.slam"
+[[ -f "$SLAM_CKPT" ]] || SLAM_CKPT="$PRETRAINED/model_best.slam"
+
 REACH="${STAGE3_REACH_LOAD:-0}"
 LOAD_ARGS=(
-  --load_slam "$PREV/model_best.slam"
+  --load_slam "$SLAM_CKPT"
   --load_global "$GLOBAL_CKPT"
   --load_local "$PREV/model_best.local"
 )
+
+# 阶段 3 不训练 SLAM，启动前把 slam 权重拷到输出目录，供阶段 4 直接加载
+STAGE3_OUT="$RUN_ROOT/models/stage3_rpn"
+mkdir -p "$STAGE3_OUT"
+if [[ ! -f "$STAGE3_OUT/model_best.slam" && -f "$SLAM_CKPT" ]]; then
+  cp -f "$SLAM_CKPT" "$STAGE3_OUT/model_best.slam"
+  echo "已预置 stage3 model_best.slam <- $SLAM_CKPT"
+fi
 if [[ -f "$PREV/model_best.reach" ]]; then
   REACH="$PREV/model_best.reach"
 fi

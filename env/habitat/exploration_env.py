@@ -47,25 +47,6 @@ def _scene_name_from_sim(habitat_env):
     return "unknown"
 
 
-def _get_sim_actions():
-    try:
-        from habitat.sims.habitat_simulator.actions import HabitatSimActions
-        return HabitatSimActions
-    except ImportError:
-        return habitat.SimulatorActions
-
-
-def _scene_name_from_sim(habitat_env):
-    sim = habitat_env.sim
-    if hasattr(sim, "config") and hasattr(sim.config, "SCENE"):
-        return sim.config.SCENE
-    if hasattr(sim, "curr_scene_name"):
-        return sim.curr_scene_name
-    ep = habitat_env.current_episode
-    if ep is not None:
-        return ep.scene_id
-    return "unknown"
-
 from env.utils.map_builder import MapBuilder
 from env.utils.fmm_planner import FMMPlanner
 
@@ -282,6 +263,10 @@ class Exploration_Env(habitat.RLEnv):
         self._last_frontier_map = None
         self._last_global_goal = None
         self._last_intrinsic_val = 0.0
+        self._pending_global_goal = None
+        self._pending_goal_start_rc = None
+        self._last_path_unreachable = False
+        self._last_embodied_success = None
 
     def randomize_env(self):
         self._env._episode_iterator._shuffle_iterator()
@@ -325,6 +310,10 @@ class Exploration_Env(habitat.RLEnv):
         self._last_frontier_map = None
         self._last_global_goal = None
         self._last_intrinsic_val = 0.0
+        self._pending_global_goal = None
+        self._pending_goal_start_rc = None
+        self._last_path_unreachable = False
+        self._last_embodied_success = None
 
         if args.randomize_env_every > 0:
             if np.mod(self.episode_no, args.randomize_env_every) == 0:
@@ -390,6 +379,8 @@ class Exploration_Env(habitat.RLEnv):
             'class_counts': {},
             'class_avg_scores': {},
             'detection_overlays': [],
+            'path_unreachable': False,
+            'embodied_goal_success': None,
         }
 
         self.save_position()
@@ -902,6 +893,22 @@ class Exploration_Env(habitat.RLEnv):
         self._last_global_goal = [int(goal[0]), int(goal[1])]
         self._last_intrinsic_val = float(-exp_pred[goal[0], goal[1]])
 
+        # 具身可达性监督：记录本周期长期目标起点
+        if self._pending_global_goal is not None:
+            from env.habitat.reachability_utils import embodied_goal_reached
+            self._last_embodied_success = embodied_goal_reached(
+                (start[0], start[1]),
+                tuple(self._pending_global_goal),
+                success_radius_cells=max(1, int(50 / args.map_resolution)),
+            )
+            self.info['embodied_goal_success'] = self._last_embodied_success
+        else:
+            self._last_embodied_success = None
+            self.info['embodied_goal_success'] = None
+
+        self._pending_global_goal = [int(goal[0]), int(goal[1])]
+        self._pending_goal_start_rc = (int(start[0]), int(start[1]))
+
         # Get intrinsic reward for global policy
         # Negative reward for exploring explored areas i.e.
         # for choosing explored cell as long-term goal
@@ -909,7 +916,10 @@ class Exploration_Env(habitat.RLEnv):
         self.intrinsic_rew = -exp_pred[goal[0], goal[1]]
 
         # Get short-term goal
-        stg = self._get_stg(grid, explored, start, np.copy(goal), planning_window)
+        stg, path_unreachable = self._get_stg(
+            grid, explored, start, np.copy(goal), planning_window)
+        self._last_path_unreachable = path_unreachable
+        self.info['path_unreachable'] = path_unreachable
 
         # Find GT action
         if self.args.eval or not self.args.train_local:
@@ -1084,10 +1094,17 @@ class Exploration_Env(habitat.RLEnv):
 
         return output
 
+    def get_embodied_reach_label(self) -> float:
+        """返回上一周期长期目标的具身回溯标签（论文式 3）。"""
+        if self._last_embodied_success is None:
+            return 0.0
+        return float(self._last_embodied_success)
+
     def get_reachability_supervision(self, inputs):
-        """为 RPN 提供 FMM 可达性监督（论文 3.3.3）。"""
+        """为 RPN 提供 FMM + 具身回溯混合监督（论文 3.3.3）。"""
         from env.habitat.reachability_utils import (
             build_traversible_local,
+            embodied_goal_reached,
             fmm_reachability_map,
             goal_reachable_label,
         )
@@ -1109,7 +1126,15 @@ class Exploration_Env(habitat.RLEnv):
         traversible = build_traversible_local(
             map_pred, explored, visited_window, collision_window, self.selem)
         reach_map = fmm_reachability_map(traversible, tuple(start), dt=self.dt)
-        label = goal_reachable_label(traversible, tuple(start), tuple(goal), dt=self.dt)
+        fmm_label = goal_reachable_label(
+            traversible, tuple(start), tuple(goal), dt=self.dt)
+        embodied_label = embodied_goal_reached(
+            tuple(start), tuple(goal),
+            success_radius_cells=max(1, int(50 / args.map_resolution)),
+        )
+        if self._last_embodied_success is not None:
+            embodied_label = float(self._last_embodied_success)
+        label = max(float(fmm_label), embodied_label)
         return reach_map.astype(np.float32), float(label)
 
     def _get_gt_map(self, full_map_size):
@@ -1281,16 +1306,17 @@ class Exploration_Env(habitat.RLEnv):
         planner = FMMPlanner(traversible, 360//self.dt)
 
         reachable = planner.set_goal([goal[1]-y1+1, goal[0]-x1+1])
+        path_unreachable = not np.any(reachable)
 
         stg_x, stg_y = start[0] - x1 + 1, start[1] - y1 + 1
         for i in range(self.args.short_goal_dist):
             stg_x, stg_y, replan = planner.get_short_term_goal([stg_x, stg_y])
-        if replan:
+        if replan or path_unreachable:
             stg_x, stg_y = start[0], start[1]
         else:
             stg_x, stg_y = stg_x + x1 - 1, stg_y + y1 - 1
 
-        return (stg_x, stg_y)
+        return (stg_x, stg_y), bool(path_unreachable or replan)
 
 
     def _get_gt_action(self, grid, start, goal, planning_window, start_o):
