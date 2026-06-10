@@ -1,6 +1,16 @@
 # 使用语义信息进行训练
 
-## 问题诊断：语义奖励为0
+> **⚠️ 归档文档（2025-12）**  
+> 作者：李兆宇。本文描述的是早期 **YOLOv8 固定类别**语义训练流程。  
+> **论文主线**已切换为 **OV-SDF（CLIP + GroundingDINO）**，请使用：
+> ```bash
+> python main.py --paper_mode --eval 0
+> ```
+> 语义奖励调试见 [SEMANTIC_REWARD_EXPLANATION.md](./SEMANTIC_REWARD_EXPLANATION.md)（含历史 YOLO 方案说明）。
+
+---
+
+## 问题诊断：语义奖励为0（YOLOv8 方案）
 
 如果训练过程中语义奖励一直为0，可能的原因包括：
 

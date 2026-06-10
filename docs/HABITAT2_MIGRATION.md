@@ -1,5 +1,8 @@
 # NSO → Habitat 2 迁移方案
 
+> **作者：** 李兆宇  
+> 论文主实验在 Habitat 1.x（`nso` 环境）完成；Habitat 2 为可选升级路径。
+
 ## 目标
 
 在**保留 NSO 算法代码**（`model.py`、`algo/`、`main.py` 训练循环）的前提下，将仿真与数据集从 **Habitat 0.1.7 + vendored habitat-api** 升级到 **Habitat-Lab v0.2.4 + habitat-sim 0.2.4**，并继续使用现有 `data/` 目录中的 Gibson / MP3D / 测试场景。

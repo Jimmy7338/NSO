@@ -1,5 +1,11 @@
 # SSCNav 语义补全地图集成指南
 
+> **⚠️ 归档文档（2025-12）**  
+> 作者：李兆宇。SSC 不作为 NSO 论文创新点；代码仍保留于 `semantic/ssc_completer.py` 供消融参考。  
+> **当前推荐：** `--paper_mode` + OV-SDF，见 [完整项目指南](./COMPLETE_PROJECT_GUIDE.md)。
+
+---
+
 ## 概述
 
 本文档说明如何将 SSCNav 的语义场景补全（Semantic Scene Completion, SSC）功能集成到项目中，以提高地图覆盖率和探索效率。

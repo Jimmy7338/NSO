@@ -1,182 +1,121 @@
-# 使用说明
+# NSO 使用说明
 
-> 本文档提供基础使用说明。更详细的文档请参考 [完整项目指南](./COMPLETE_PROJECT_GUIDE.md)。
+> 作者：李兆宇  
+> 更完整的技术说明见 [完整项目指南](./COMPLETE_PROJECT_GUIDE.md)，论文复现流程见 [训练与实验方案](./TRAINING_AND_EVALUATION_PLAN.md)。
 
-## 训练
+---
 
-### 基础训练
-训练完整的模型（所有模块）：
-```bash
-python main.py
-```
+## 推荐：论文完整配置
 
-### 使用语义信息训练（推荐）
-本项目支持语义增强的探索策略，可以显著提高探索效率：
-```bash
-python main.py \
-  --use_semantic \
-  --semantic_use_all_classes \
-  --semantic_conf_thresh 0.1 \
-  --semantic_interval 1 \
-  --semantic_reward_coeff 0.12 \
-  --structural_reward_coeff 0.12 \
-  --frontier_reward_coeff 0.15 \
-  --w_struct_door 2.0 \
-  --door_boost_distance 5.0 \
-  --room_exploration_boost 1.5 \
-  --exp_name training_with_semantic
-```
-
-或使用提供的脚本：
-```bash
-bash scripts/train_with_semantic.sh
-```
-
-详细说明请参考 [语义训练指南](./TRAINING_WITH_SEMANTIC.md)。
-
-### Specifying number of threads
-The code runs multiple parallel threads for training. Each thread loads a scene on a GPU. The code automatically decides the total number of threads and number of threads on each GPU based on the available GPUs.
-
-If you would like to not use the auto gpu config, you need to specify the following:
-```
--n, --num_processes NUM_PROCESSES
---num_processes_per_gpu NUM_PROCESSES_PER_GPU
-```
-`NUM_PROCESSES_PER_GPU` will depend on your GPU memory, 11 works well of 16GB GPUs.
-`NUM_PROCESSES` depends on the number of GPUs used for training and `NUM_PROCESSES_PER_GPU` such that 
-```
-NUM_PROCESSES <= min(NUM_PROCESSES_PER_GPU * number of GPUs, 72)
-```
-The Gibson training set consists of 72 scenes.
-
-For example, on a 8 GPU system, with 16GB memory per GPU:
-```
-python main.py --auto_gpu_config 0 -n 72 --num_processes_per_gpu 11 --sim_gpu_id 1
-```
-Here, `sim_gpu_id = 1` specifies simulator threads to run from GPUs 1 onwards, and using GPU 0 only for pytorch model.
-Each GPU from 1 to 6 will run 11 threads each, and GPU 7 will run 6 threads.
-
-### Specifying log location, periodic model dumps
-```
-python main.py -d saved/ --exp_name exp1 --save_periodic 100000
-```
-The above will save the best model files and training log at `saved/models/exp1/` and save all models periodically every 100000 steps at `saved/dump/exp1/`. Each module will be saved in a separate file. 
-
-### Specifying which modules to train and load
-The Active Neural SLAM model consists of three independent modules: a Global Policy, a Local Policy
-and a Neural SLAM Module. The model and code is modular, which means any subset of modules can be
-trained. Specifying which modules need to trained using 
-```
-  --train_global TRAIN_GLOBAL
-        0: Do not train the Global Policy
-        1: Train the Global Policy (default: 1)
-  --train_local TRAIN_LOCAL
-        0: Do not train the Local Policy
-        1: Train the Local Policy (default: 1)
-  --train_slam TRAIN_SLAM
-        0: Do not train the Neural SLAM Module
-        1: Train the Neural SLAM Module (default: 1)
-```
-Each module can also be loaded independently using `--load_global`, `--load_local` and `--load_slam`
-arguments.
-
-### Using deterministic local policy
-Instead of training the local policy, a deterministic local policy can be used which results in much
-faster training and slightly lower final performance. Add `--use_deterministic_local 1` argument to
-use the deterministic local policy.
-
-### Hyper-parameters
-Most of the default hyper-parameters should work fine. Some hyperparameters are set for training with 72 threads, which might need to be tuned when using fewer threads. Fewer threads lead to smaller batch size for Local and Global Policy. Consequently, their learning rates might need to be tuned:
-```
---local_optimizer, (default='adam,lr=0.0001')
---global_lr, (default=2.5e-5)
-```
-
-### Specifying actuation and sensor noise
-The code uses actuation and sensor noise based on models trained on real-world data. To turn off the
-actuation and sensor noise use `--noisy_actions 0` and `--noisy_odometry 0`, respectively.
-
-## 下载预训练模型
-
-如需使用基础版本的预训练模型进行评估（不包含语义增强功能），可以下载：
+我设计 `--paper_mode` 作为一键开关，启用 OV-SDF、STGHP、RPN-UQ、IGCR 四项创新及回环后端：
 
 ```bash
-mkdir pretrained_models
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1UK2hT0GWzoTaVR5lAI6i8o27tqEmYeyY' -O pretrained_models/model_best.global
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1A1s_HNnbpvdYBUAiw2y1JmmELRLfAJb8' -O pretrained_models/model_best.local
-wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1o5OG7DIUKZyvi5stozSqRpAEae1F2BmX' -O pretrained_models/model_best.slam
+conda activate nso   # Habitat 1.x；Habitat 2.x 用 nso_h2，见 HABITAT2_MIGRATION.md
+cd NSO
+
+python main.py --paper_mode --eval 0 \
+  --exp_name paper_nso \
+  -d /path/to/output/
 ```
 
-**注意：** 基础版本的预训练模型不包含语义增强功能。如需使用本项目的语义增强功能，需要重新训练模型。
+或使用脚本：
+
+```bash
+bash scripts/run_nso_paper_train.sh
+```
+
+---
+
+## 分阶段训练（推荐流水线）
+
+我按模块依赖关系设计了分阶段训练，便于调试与消融：
+
+| 阶段 | 脚本 | 训练内容 | 产出 |
+|------|------|---------|------|
+| 0 | `train_stage0_smoke.sh` | 冒烟测试 | — |
+| 1 | `train_stage1_slam_local.sh` | SLAM + Local | `trained_models/stage1_slam_local/` |
+| 2 | `train_stage2_paper_global.sh` | 全局 PPO + 融合奖励 | `trained_models/stage2_paper_global/` |
+| 3 | `train_stage3_rpn.sh` | RPN-UQ 自监督 | 云盘 `stage3_rpn/` |
+| 4 | `train_stage4_ssc_loop.sh` | 回环后端联调（旧流水线） | 云盘 `stage4_ssc_loop/` |
+
+阶段 1 可直接复用 `pretrained_models/model_best.*`（ANS 官方权重）跳过。
+
+```bash
+# 示例：从 stage1 权重启动 stage2
+STAGE2_LOAD_DIR=trained_models/stage1_slam_local \
+  bash scripts/train_stage2_paper_global.sh
+```
+
+---
 
 ## 评估
 
-以下是在 Gibson 验证集上评估的说明。
-
-### Converting datasets
-To parallelize evaluation for speed, we provide a script to convert the Gibson val set into multi-threading format:
-```
-python scripts/convert_datasets.py 
-```
-The above will create a multi-thread version of the val set at `data/datasets/pointnav/gibson/v1//val_mt/`.
-
-### Specifying number of threads and number of episodes
-Specify number of threads for evaluation using `--num_processes` and number of evaluation episodes per thread using `--num_episodes`.
-The Gibson val set consists of 14 scenes and 71 episodes per scene. Thus, we recommend using 14 threads for evaluation, and 71 episodes per thread.
-
-For example, if you have 2 GPUs:
-```
-python  main.py --split val_mt --eval 1 \
---auto_gpu_config 0 -n 14 --num_episodes 71 --num_processes_per_gpu 7 \
---load_global pretrained_models/model_best.global --train_global 0 \
---load_local pretrained_models/model_best.local  --train_local 0 \
---load_slam pretrained_models/model_best.slam  --train_slam 0
+```bash
+python main.py --paper_mode --eval 1 \
+  --load_global path/to/model_best.global \
+  --load_slam path/to/model_best.slam \
+  --load_local path/to/model_best.local \
+  --goal_reachability_model_path path/to/model_best.reach \
+  --num_episodes 50 \
+  --max_episode_length 1000
 ```
 
-### Specifying map sizes
-The full and local map sizes are specified using the following arguments:
-```
---map_size_cm (default: 2400) 
---global_downscaling (default:2)
-```
-The default arguments lead to full map size of `M = 480 (=24m)` and local map size of `G = 240 (=12m)`. 
-Although the pre-trained models are trained with default map size for better training speed, they can be evaluated with larger full map size to improve performance.
-The full map size can be increased to `M = 960 (=48m)` using `--map_size_cm 4800 --global_downscaling 4`:
-```
-python  main.py --split val_mt --eval 1 \
---auto_gpu_config 0 -n 14 --num_episodes 71 --num_processes_per_gpu 7 \
---map_size_cm 4800 --global_downscaling 4 \
---load_global pretrained_models/model_best.global --train_global 0 \
---load_local pretrained_models/model_best.local  --train_local 0 \
---load_slam pretrained_models/model_best.slam  --train_slam 0 
-``` 
+论文指标（覆盖率、漂移、无效目标等）由 `utils/paper_eval.py` 自动记录。
 
-### Evaluating on small and large scenes
-To evaluate on small and large scenes on the gibson set separately, create small and large splits using:
-```
-python scripts/convert_datasets.py --split_by_size 1
-```
-This will create two datasets at `data/datasets/pointnav/gibson/v1//val_mt_small/` (10 scenes) and `data/datasets/pointnav/gibson/v1//val_mt_large/` (4 scenes).
-You can evaluate models on these datasets by changing `--split` and `-n` arguments in the above command to `val_mt_small` and `10` or `val_mt_large` and `4`. 
+消融实验：
 
-### Visualization and printing images
-For visualizing the agent observations and predicted map and pose, add `-v 1` as an argument to the above command. This will require a display to be attached to the system.
-
-To visualize on headless systems (without display), use `--print_images 1 -d results/ --exp_name exp1`. This will save the visualization images in `results/dump/exp1/episodes/`.
-
-Both `-v 1` and `--print_images 1` can be used together to visualize and print images at the same time. 
-
-## Troubleshooting
-- `ImportError: cannot import name 'PILLOW_VERSION' from 'PIL'`. New Pillow version breaks torchvision, see the issue [here]( https://github.com/pytorch/vision/issues/1712). Downgrading the pillow version seems to work:
-```
-pip install "pillow<7"
+```bash
+python scripts/eval_nso_paper.py --ablation all
 ```
 
+---
 
-## Tips
-To silence habitat sim log add the following to your `~/.bashrc` (Linux) or `~/.bash_profile` (Mac) 
-```
-export GLOG_minloglevel=2
-export MAGNUM_LOG="quiet"
+## 指定场景
+
+```bash
+python main.py --paper_mode --priority_scene Cantwell
 ```
 
+论文主实验场景：Cantwell（161.2 m²）、Adrian（94.7 m²）、Beechwood（203.5 m²）。
+
+---
+
+## 模块开关（消融用）
+
+| 参数 | 创新点 |
+|------|--------|
+| `--use_open_vocab_semantic` | OV-SDF |
+| `--use_topo_graph` | STGHP |
+| `--use_rpn_uq` | RPN-UQ |
+| `--use_igcr` | IGCR |
+| `--use_loop_detection` | 回环后端（系统组件） |
+
+关闭 `--use_open_vocab_semantic` 并启用 `--use_semantic` 可回退到 YOLOv8 固定类别（论文 NSO-fixed 消融）。
+
+---
+
+## 并行线程与 GPU
+
+```bash
+python main.py --auto_gpu_config 0 -n 4 --num_processes_per_gpu 4
+```
+
+单卡 RTX 3090（24 GB）建议 `-n 1`，避免 Adrian 等场景的 navmesh 构建内存峰值。
+
+---
+
+## 日志与模型保存
+
+```bash
+python main.py --paper_mode -d /mnt/nso_data/nso_runs/ --exp_name my_exp --save_periodic 50000
+```
+
+产出路径：`{dump_location}/models/{exp_name}/model_best.{global,local,slam,reach}`
+
+---
+
+## 相关文档
+
+- [训练与实验方案](./TRAINING_AND_EVALUATION_PLAN.md)
+- [语义奖励说明](./SEMANTIC_REWARD_EXPLANATION.md)（历史文档，OV-SDF 见论文 §4.2）
+- [故障排除](./TROUBLESHOOTING.md)

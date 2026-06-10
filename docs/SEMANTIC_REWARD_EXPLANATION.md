@@ -1,5 +1,10 @@
 # 语义奖励计算详解
 
+> **作者：** 李兆宇  
+> **说明：** 下文以早期 **YOLOv8 固定类别 + fresh_mask** 方案为例。论文主线 **OV-SDF** 的 `R_sem` 由 `nso/clip_semantic_map.py` 生成，经 `utils/reward.py` 的 `NSO_RewardComputer` 融合；机制类似（高语义密度 + 未访问区域加权），但查询词可自然语言配置。完整公式见论文式 (11) 与 [完整项目指南](./COMPLETE_PROJECT_GUIDE.md) §5。
+
+---
+
 ## 1. 日志数据是否符合预期？
 
 **✅ 是的，完全符合预期！**

@@ -1,6 +1,12 @@
 # SSCNav 语义补全地图功能集成总结
 
-## ✅ 已完成的工作
+> **⚠️ 归档文档（2025-12）**  
+> 作者：李兆宇。SSC 深度网络**已从论文核心贡献中移除**，当前 NSO 主线为 OV-SDF / STGHP / RPN-UQ / IGCR（见 [`Semantic_Enhanced_Active_SLAM_Paper.tex`](../Semantic_Enhanced_Active_SLAM_Paper.tex)）。  
+> 本文档仅保留早期实验记录；新训练请使用 `--paper_mode`，见 [训练与实验方案](./TRAINING_AND_EVALUATION_PLAN.md)。
+
+---
+
+## ✅ 已完成的工作（历史记录）
 
 ### 1. 核心模块实现
 

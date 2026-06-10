@@ -1,28 +1,45 @@
 # 场景选择与数据集使用指南
 
-## 一、当前项目中的场景
+> **作者：** 李兆宇  
+> **论文实验场景：** 见 [`Semantic_Enhanced_Active_SLAM_Paper.tex`](../Semantic_Enhanced_Active_SLAM_Paper.tex) §5.1
 
-### 1. Gibson数据集（当前使用）
+---
+
+## 一、论文主实验场景（20 场景）
+
+### Gibson（10 场景）
+
+Cantwell、Adrian、Denmark、Eastville、Edgemere、Elmira、Eudora、Greigsville、Pablo、Sands
+
+- **Cantwell**（161.2 m²）：论文典型分析场景，多房间长走廊
+- **Adrian**（94.7 m²）：中等尺度，navmesh 预计算较慢，冒烟时可跳过
+
+### MP3D（10 场景）
+
+从 val split 选取可行进面积 **> 80 m²** 的 10 个场景（具体列表见论文附录 / `data/datasets/pointnav/mp3d/` 配置）。
+
+### 查看本地可用场景
+
+```bash
+cd ~/NSO
+ls data/scene_datasets/gibson/*.glb 2>/dev/null | xargs -n1 basename | sed 's/.glb//' | sort
+# 注意：data/scene_datasets/ 多为软链接，指向云盘 /mnt/nso_data/
+```
+
+---
+
+## 二、Gibson 数据集概况
 
 **特点**：
-- 88个室内场景
-- 场景大小：中等（主要是住宅和办公室）
-- 所有场景都是室内环境
-
-**验证集中的场景**（14个）：
-- Cantwell, Denmark, Eastville, Edgemere, Elmira, Eudora, Greigsville, Mosquito, Pablo, Ribera, Sands, Scioto, Sisters, Swormville
-
-**查看所有可用场景**：
-```bash
-cd /home/ubuntu/lzy/ANS/Neural-SLAM
-ls data/scene_datasets/gibson/*.glb | xargs -n1 basename | sed 's/.glb//' | sort
-```
+- 88 个室内场景
+- 场景大小：中等（住宅与办公室）
+- 验证集 14 场景：Cantwell, Denmark, Eastville, Edgemere, Elmira, Eudora, Greigsville, Mosquito, Pablo, Ribera, Sands, Scioto, Sisters, Swormville
 
 ### 2. 场景大小对比
 
 Gibson数据集中的场景都是室内场景，没有室外场景。如果您需要更大的场景，建议使用Matterport3D或HM3D数据集。
 
-## 二、如何指定优先运行某个场景
+## 三、如何指定优先运行某个场景
 
 ### 方法1：修改代码指定场景（推荐）
 

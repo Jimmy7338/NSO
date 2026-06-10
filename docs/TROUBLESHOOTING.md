@@ -1,5 +1,55 @@
 # 故障排除指南
 
+> **作者：** 李兆宇  
+> **适用版本：** NSO 论文主线（`--paper_mode`）及 ANS 基础训练。  
+> 训练流程见 [训练与实验方案](./TRAINING_AND_EVALUATION_PLAN.md)。
+
+---
+
+## NSO 特有问题
+
+### Adrian / 大场景卡在 "Computing map"
+
+**现象：** 日志停在 `Computing map for Adrian`，GPU 利用率 0%，长时间无进展。
+
+**原因：** Habitat navmesh 预计算在大场景上耗时极长，或单进程资源争用。
+
+**应对：**
+```bash
+# 单进程冒烟
+python main.py --paper_mode --num_processes 1 --auto_gpu_config 0 --num_episodes 1
+# 或暂时跳过该场景，先用 Cantwell 验证流水线
+```
+
+### CLIP / GroundingDINO 未安装
+
+**现象：** OV-SDF 报错或回退到 YOLOv8。
+
+**应对：**
+```bash
+pip install git+https://github.com/openai/CLIP.git
+# 可选：pip install groundingdino-py
+python scripts/eval_nso_paper.py   # 确认 OV-SDF 模块通过
+```
+
+### RPN-UQ 早期不确定性偏高
+
+**现象：** 前 50k 步无效目标仍较多。
+
+**应对：** 属预期；可增大 `rpn_lambda_ece` 或延长 stage3 校准。见训练方案 §五。
+
+### Git 推送大文件失败
+
+**现象：** `TLS disconnect` / 超时（~400 MB+）。
+
+**应对：** 使用 `git lfs push origin main --all`，或本地 bundle 中转：
+```bash
+git bundle create nso_push.bundle origin/main..HEAD
+# 在可连 GitHub 的机器：git pull /path/to/nso_push.bundle main
+```
+
+---
+
 ## 常见错误及解决方案
 
 ### 1. EOFError in multiprocessing
