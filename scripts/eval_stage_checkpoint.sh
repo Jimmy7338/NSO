@@ -7,6 +7,8 @@ export ENV_NAME="${ENV_NAME:-nso_h2}"
 export MPLBACKEND=Agg
 RUN_ROOT="${NSO_RUN_ROOT:-/mnt/nso_data/nso_runs}"
 PRETRAINED="${PRETRAINED_DIR:-$SCRIPT_DIR/../pretrained_models}"
+STAGE3_DIR="${STAGE3_LOAD_DIR:-$RUN_ROOT/models/stage3_rpn}"
+STAGE2_DIR="${STAGE2_LOAD_DIR:-$RUN_ROOT/models/stage2_paper_global}"
 
 STAGE="${1:?用法: eval_stage_checkpoint.sh <stage1|stage2|stage3|stage4> [episodes]}"
 EVAL_EPISODES="${2:-${EVAL_EPISODES:-20}}"
@@ -22,9 +24,27 @@ esac
 
 bash "$SCRIPT_DIR/restore_global_ckpt.sh" "$(basename "$STAGE_DIR")" >/dev/null
 
-for f in slam local; do
-  [[ -f "$STAGE_DIR/model_best.$f" ]] || { echo "缺少 $STAGE_DIR/model_best.$f" >&2; exit 1; }
-done
+resolve_ckpt() {
+  local name="$1"
+  local primary="$STAGE_DIR/model_best.$name"
+  if [[ -f "$primary" ]]; then
+    echo "$primary"
+    return 0
+  fi
+  if [[ "$STAGE" == stage4|4 ]]; then
+    for fb in "$STAGE3_DIR/model_best.$name" "$STAGE2_DIR/model_best.$name" "$PRETRAINED/model_best.$name"; do
+      if [[ -f "$fb" ]]; then
+        echo "警告: $STAGE_DIR 无 model_best.$name，回退 $fb" >&2
+        echo "$fb"
+        return 0
+      fi
+    done
+  fi
+  return 1
+}
+
+SLAM_CKPT="$(resolve_ckpt slam)" || { echo "缺少 model_best.slam（已查 stage 目录与回退）" >&2; exit 1; }
+LOCAL_CKPT="$(resolve_ckpt local)" || { echo "缺少 model_best.local" >&2; exit 1; }
 
 GLOBAL_CKPT="$STAGE_DIR/model_best.global"
 [[ -f "$GLOBAL_CKPT" ]] || GLOBAL_CKPT="$PRETRAINED/model_best.global"
@@ -38,8 +58,13 @@ esac
 case "$STAGE" in
   stage3|3|stage4|4)
     EXTRA+=(--use_goal_reachability)
-    [[ -f "$STAGE_DIR/model_best.reach" ]] && \
-      EXTRA+=(--goal_reachability_model_path "$STAGE_DIR/model_best.reach")
+    REACH_CKPT="$STAGE_DIR/model_best.reach"
+    if [[ -f "$REACH_CKPT" ]]; then
+      EXTRA+=(--goal_reachability_model_path "$REACH_CKPT")
+      RPN_CH="$(bash "$SCRIPT_DIR/infer_rpn_channels.sh" "$REACH_CKPT")"
+      EXTRA+=(--rpn_in_channels "$RPN_CH")
+      echo "  reach: $REACH_CKPT (${RPN_CH}ch)"
+    fi
     ;;
 esac
 case "$STAGE" in
@@ -51,6 +76,8 @@ esac
 echo "========== 评估 $STAGE | $EVAL_EPISODES ep | split=$SPLIT =========="
 echo "  dir: $STAGE_DIR"
 echo "  global: $GLOBAL_CKPT"
+echo "  slam: $SLAM_CKPT"
+echo "  local: $LOCAL_CKPT"
 
 bash "$SCRIPT_DIR/run_nso.sh" \
   --habitat_version 2 \
@@ -65,9 +92,9 @@ bash "$SCRIPT_DIR/run_nso.sh" \
   -na 0 -no 0 -v 0 --print_images 0 \
   -d "$RUN_ROOT/" \
   --exp_name "$EXP" \
-  --load_slam "$STAGE_DIR/model_best.slam" \
+  --load_slam "$SLAM_CKPT" \
   --load_global "$GLOBAL_CKPT" \
-  --load_local "$STAGE_DIR/model_best.local" \
+  --load_local "$LOCAL_CKPT" \
   "${EXTRA[@]}"
 
 LOG="$RUN_ROOT/models/$EXP/train.log"

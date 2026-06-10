@@ -1,14 +1,42 @@
-"""可达性预测网络 (RPN)，对应论文式 (2)(3)。"""
+"""
+可达性预测网络（向后兼容入口）
+
+旧接口（ReachabilityHead 点估计）保留在此文件。
+新 RPN-UQ 实现（MC-Dropout 不确定性感知）在 nso/reachability_uq.py。
+
+main.py 和 env/habitat/reachability_utils.py 中引用的旧接口不受影响。
+"""
 from __future__ import annotations
+
+import os
 
 import torch
 import torch.nn as nn
 
 
+def infer_rpn_in_channels(checkpoint_path: str) -> int:
+    """从 checkpoint 第一层卷积权重推断 RPN 输入通道数（2 或 4）。"""
+    if not checkpoint_path or not os.path.isfile(checkpoint_path):
+        raise FileNotFoundError(checkpoint_path)
+    state = torch.load(checkpoint_path, map_location="cpu")
+    # 兼容新旧两种 checkpoint 格式
+    weight = (
+        state.get("encoder.0.weight")
+        or state.get("net.0.weight")
+    )
+    if weight is None:
+        raise KeyError(f"无效的 RPN checkpoint: {checkpoint_path}")
+    return int(weight.shape[1])
+
+
+def default_rpn_in_channels(use_semantic: bool) -> int:
+    return 4 if use_semantic else 2
+
+
 class ReachabilityHead(nn.Module):
     """
-    从局部地图张量预测 M_reach ∈ [0,1]^{H×W}。
-    输入通道默认 4：障碍、探索、当前位置、语义密度（无则零填充）。
+    原始点估计 RPN（向后兼容）。
+    新代码请使用 nso.reachability_uq.ReachabilityHeadUQ。
     """
 
     def __init__(self, in_channels: int = 4, hidden: int = 32):

@@ -8,53 +8,72 @@ export MPLBACKEND=Agg
 RUN_ROOT="${NSO_RUN_ROOT:-/mnt/nso_data/nso_runs}"
 mkdir -p "$RUN_ROOT"
 
-PREV="${STAGE4_LOAD_DIR:-$RUN_ROOT/models/stage3_rpn}"
+STAGE3="${STAGE3_LOAD_DIR:-$RUN_ROOT/models/stage3_rpn}"
+STAGE4="${STAGE4_LOAD_DIR:-$RUN_ROOT/models/stage4_ssc_loop}"
 STAGE2="${STAGE4_SLAM_FALLBACK_DIR:-$RUN_ROOT/models/stage2_paper_global}"
 PRETRAINED="$SCRIPT_DIR/../pretrained_models"
 
-# 阶段 3 train_slam=0 时通常不会写出 model_best.slam，按优先级回退
-SLAM_CKPT="$PREV/model_best.slam"
+# STAGE4_RESUME=1：从 stage4 目录恢复 global/reach，slam/local 仍用 stage3
+RESUME="${STAGE4_RESUME:-0}"
+if [[ "$RESUME" == "1" || -f "$STAGE4/model_best.reach" ]]; then
+  WEIGHT_SRC="$STAGE3"
+  GLOBAL_CKPT="$STAGE4/model_best.global"
+  [[ -f "$GLOBAL_CKPT" ]] || GLOBAL_CKPT="$STAGE3/model_best.global"
+  REACH="$STAGE4/model_best.reach"
+  if [[ ! -f "$REACH" ]]; then
+    REACH="$STAGE3/model_best.reach"
+  fi
+  echo "阶段4 恢复训练 | global/reach 来自 stage4，骨干来自 stage3"
+else
+  WEIGHT_SRC="$STAGE3"
+  GLOBAL_CKPT="$STAGE3/model_best.global"
+  REACH="$STAGE3/model_best.reach"
+  echo "阶段 4 | SSC+回环 | 加载: $STAGE3"
+fi
+
+[[ -f "$GLOBAL_CKPT" ]] || GLOBAL_CKPT="$PRETRAINED/model_best.global"
+
+SLAM_CKPT="$WEIGHT_SRC/model_best.slam"
 if [[ ! -f "$SLAM_CKPT" ]]; then
   if [[ -f "$STAGE2/model_best.slam" ]]; then
     SLAM_CKPT="$STAGE2/model_best.slam"
-    echo "警告: $PREV 无 model_best.slam，回退 stage2: $SLAM_CKPT"
+    echo "警告: stage3 无 model_best.slam，回退 stage2: $SLAM_CKPT"
   elif [[ -f "$PRETRAINED/model_best.slam" ]]; then
     SLAM_CKPT="$PRETRAINED/model_best.slam"
     echo "警告: 回退 pretrained: $SLAM_CKPT"
   else
-    echo "错误: 找不到 model_best.slam（已查 stage3/stage2/pretrained）" >&2
+    echo "错误: 找不到 model_best.slam" >&2
     exit 1
   fi
 fi
 
-GLOBAL_CKPT="$PREV/model_best.global"
-[[ -f "$GLOBAL_CKPT" ]] || GLOBAL_CKPT="$PRETRAINED/model_best.global"
-
-LOCAL_CKPT="$PREV/model_best.local"
+LOCAL_CKPT="$WEIGHT_SRC/model_best.local"
 if [[ ! -f "$LOCAL_CKPT" && -f "$STAGE2/model_best.local" ]]; then
   LOCAL_CKPT="$STAGE2/model_best.local"
-  echo "警告: $PREV 无 model_best.local，回退 stage2: $LOCAL_CKPT"
+  echo "警告: stage3 无 model_best.local，回退 stage2: $LOCAL_CKPT"
 fi
 
-REACH="${STAGE4_REACH_LOAD:-0}"
 LOAD_ARGS=(
   --load_slam "$SLAM_CKPT"
   --load_global "$GLOBAL_CKPT"
   --load_local "$LOCAL_CKPT"
 )
-if [[ -f "$PREV/model_best.reach" ]]; then
-  REACH="$PREV/model_best.reach"
-fi
-if [[ "$REACH" != "0" && -f "$REACH" ]]; then
-  LOAD_ARGS+=(--goal_reachability_model_path "$REACH")
+if [[ -n "${REACH:-}" && -f "$REACH" ]]; then
+  RPN_CH="$(bash "$SCRIPT_DIR/infer_rpn_channels.sh" "$REACH")"
+  LOAD_ARGS+=(--goal_reachability_model_path "$REACH" --rpn_in_channels "$RPN_CH")
+  echo "  reach: $REACH (${RPN_CH}ch, 自动推断)"
 fi
 
-echo "阶段 4 | SSC+回环 | 加载: $PREV"
+PRIOR_STEPS=0
+if [[ -f "$RUN_ROOT/models/stage4_ssc_loop/train.log" ]]; then
+  PRIOR_STEPS="$(grep -oP 'num timesteps \K[0-9]+' "$RUN_ROOT/models/stage4_ssc_loop/train.log" 2>/dev/null | sort -n | tail -1 || echo 0)"
+fi
+echo "  历史步数(日志): ${PRIOR_STEPS}（本次从 checkpoint 热启动，步数计数器归零）"
 
 exec bash "$SCRIPT_DIR/run_nso.sh" \
   --habitat_version 2 \
   --task_config pointnav_gibson.yaml \
-  --split "${NSO_GIBSON_SPLIT:-val}" \
+  --split "${NSO_GIBSON_SPLIT:-train}" \
   --eval 0 \
   --paper_rewards 1 \
   --use_structural_reward 1 \

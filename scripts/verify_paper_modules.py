@@ -60,6 +60,22 @@ def test_paper_eval():
     assert "coverage_ratio" in agg
 
 
+def test_infer_rpn_channels():
+    import importlib.util
+    path = os.path.join(ROOT, "env/habitat/reachability_utils.py")
+    spec = importlib.util.spec_from_file_location("reachability_utils", path)
+    ru = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(ru)
+    assert ru.default_rpn_in_channels(True) == 4
+    assert ru.default_rpn_in_channels(False) == 2
+    reach = "/mnt/nso_data/nso_runs/models/stage3_rpn/model_best.reach"
+    if not os.path.isfile(reach):
+        reach = os.path.join(ROOT, "pretrained_models/model_best.reach")
+    if os.path.isfile(reach):
+        ch = ru.infer_rpn_in_channels(reach)
+        assert ch in (2, 4), ch
+
+
 def test_embodied_reach():
     import importlib.util
     path = os.path.join(ROOT, "env/habitat/reachability_utils.py")
@@ -93,6 +109,7 @@ def main():
         test_reachability_head,
         test_fmm_utils,
         test_paper_eval,
+        test_infer_rpn_channels,
         test_embodied_reach,
         test_global_reward_flags,
         test_exploration_env_methods,

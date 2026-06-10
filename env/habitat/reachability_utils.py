@@ -1,10 +1,28 @@
 """FMM 可达性标签与论文式 (2) 全局目标掩码。"""
 from __future__ import annotations
 
+import os
+
 import numpy as np
 import skimage.morphology
 
 from env.utils.fmm_planner import FMMPlanner
+
+
+def infer_rpn_in_channels(checkpoint_path: str) -> int:
+    """从 RPN checkpoint 第一层卷积权重推断输入通道数（2 或 4）。"""
+    import torch
+    if not checkpoint_path or not os.path.isfile(checkpoint_path):
+        raise FileNotFoundError(checkpoint_path)
+    state = torch.load(checkpoint_path, map_location="cpu")
+    weight = state.get("net.0.weight")
+    if weight is None:
+        raise KeyError(f"无效的 RPN checkpoint: {checkpoint_path}")
+    return int(weight.shape[1])
+
+
+def default_rpn_in_channels(use_semantic: bool) -> int:
+    return 4 if use_semantic else 2
 
 
 def build_traversible_local(grid: np.ndarray, explored: np.ndarray,

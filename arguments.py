@@ -123,6 +123,8 @@ def get_args():
                         help='生成候选目标点的最大数量，从中选择可达性最高的（默认10）')
     parser.add_argument('--reachability_mask_alpha', type=float, default=2.0,
                         help='论文式(2) 可达性掩码系数 α')
+    parser.add_argument('--rpn_in_channels', type=int, default=0,
+                        help='RPN 输入通道数；0=从 reach checkpoint 自动推断，否则 2/4')
     parser.add_argument('--paper_rewards', type=int, default=0,
                         help='1: 启用论文式(4)完整奖励（语义+结构+前沿+内在惩罚）')
     parser.add_argument('--use_structural_reward', type=int, default=0,
@@ -145,6 +147,51 @@ def get_args():
                         help='体素网格Z方向尺寸（默认50）')
     parser.add_argument('--use_semantic_segmentation', action='store_true', default=True,
                         help='使用语义分割（True）或目标检测（False）进行像素级标注')
+
+    # ----------------------------------------------------------------
+    # NSO 新增参数：OV-SDF、STGHP、RPN-UQ、IGCR
+    # ----------------------------------------------------------------
+    # OV-SDF：开放词汇语义密度场
+    parser.add_argument('--use_open_vocab_semantic', action='store_true', default=False,
+                        help='启用 CLIP+GroundingDINO 开放词汇语义密度场（替代固定类别 YOLOv8）')
+    parser.add_argument('--clip_model', type=str, default='ViT-B/32',
+                        help='CLIP 模型名称（默认 ViT-B/32）')
+    parser.add_argument('--ov_queries', type=str,
+                        default='indoor furniture and appliances,doorway and passage',
+                        help='开放词汇查询词，逗号分隔')
+    parser.add_argument('--ov_query_weights', type=str, default='0.7,0.3',
+                        help='查询权重，逗号分隔，与 ov_queries 对应')
+    parser.add_argument('--gdino_config', type=str, default=None,
+                        help='GroundingDINO 配置文件路径（None=降级到 YOLOv8）')
+    parser.add_argument('--gdino_weights', type=str, default=None,
+                        help='GroundingDINO 权重文件路径')
+    # STGHP：语义拓扑图层次规划
+    parser.add_argument('--use_topo_graph', action='store_true', default=False,
+                        help='启用语义拓扑图层次规划（STGHP）')
+    parser.add_argument('--topo_update_period', type=int, default=100,
+                        help='拓扑图更新周期（步数，对应论文 N_topo=100）')
+    parser.add_argument('--topo_lambda_F', type=float, default=1.0,
+                        help='拓扑目标选择：前沿长度权重 λ_F')
+    parser.add_argument('--topo_lambda_S', type=float, default=0.5,
+                        help='拓扑目标选择：语义密度权重 λ_S')
+    parser.add_argument('--topo_lambda_D', type=float, default=0.3,
+                        help='拓扑目标选择：图距离惩罚权重 λ_D')
+    # RPN-UQ：MC-Dropout 不确定性感知
+    parser.add_argument('--use_rpn_uq', action='store_true', default=False,
+                        help='启用 RPN 不确定性估计（MC-Dropout，对应 RPN-UQ）')
+    parser.add_argument('--rpn_mc_samples', type=int, default=10,
+                        help='MC-Dropout 采样次数 T_MC（默认10）')
+    parser.add_argument('--rpn_dropout', type=float, default=0.1,
+                        help='RPN MC-Dropout 概率（默认0.1）')
+    parser.add_argument('--reachability_mask_beta', type=float, default=1.0,
+                        help='RPN-UQ 方差惩罚强度 β（论文公式6）')
+    parser.add_argument('--rpn_lambda_ece', type=float, default=0.1,
+                        help='RPN 损失中 ECE 正则化系数（论文公式9）')
+    # IGCR：信息增益覆盖奖励
+    parser.add_argument('--use_igcr', action='store_true', default=False,
+                        help='启用信息增益覆盖奖励（IGCR，替代面积增量）')
+    parser.add_argument('--intrinsic_penalty', type=float, default=0.1,
+                        help='重复目标内在惩罚幅度')
 
     parser.add_argument('--use_loop_detection', action='store_true', default=False,
                         help='启用语义增强 NetVLAD 回环检测')
@@ -381,6 +428,7 @@ def get_args():
             args.num_mini_batch = 1  # 确保至少为1
 
     if args.paper_mode:
+        # 论文完整配置（NSO：四项核心创新全部启用）
         args.paper_rewards = 1
         args.use_structural_reward = 1
         args.use_intrinsic_goal_penalty = 1
@@ -388,14 +436,35 @@ def get_args():
         args.semantic_reward_coeff = 0.12
         args.structural_reward_coeff = 0.12
         args.frontier_reward_coeff = 0.15
+        # OV-SDF：开放词汇语义密度场
+        args.use_open_vocab_semantic = True
+        args.clip_model = getattr(args, "clip_model", "ViT-B/32")
+        args.ov_queries = getattr(
+            args, "ov_queries",
+            "indoor furniture and appliances,doorway and passage"
+        )
+        # STGHP：语义拓扑图层次规划
+        args.use_topo_graph = True
+        args.topo_update_period = getattr(args, "topo_update_period", 100)
+        args.topo_lambda_F = getattr(args, "topo_lambda_F", 1.0)
+        args.topo_lambda_S = getattr(args, "topo_lambda_S", 0.5)
+        args.topo_lambda_D = getattr(args, "topo_lambda_D", 0.3)
+        # RPN-UQ：不确定性感知可达性预测
         args.use_goal_reachability = True
         args.train_goal_reachability = True
+        args.use_rpn_uq = True
+        args.rpn_mc_samples = getattr(args, "rpn_mc_samples", 10)
+        args.rpn_dropout = getattr(args, "rpn_dropout", 0.1)
         args.reachability_mask_alpha = 2.0
+        args.reachability_mask_beta = getattr(args, "reachability_mask_beta", 1.0)
         args.goal_reachability_max_candidates = 16
+        # IGCR：信息增益覆盖奖励
+        args.use_igcr = True
+        # 回环检测（系统组件）
         args.use_loop_detection = True
         args.loop_pose_correction = 1
         args.loop_interval = 100
-        args.use_ssc_completion = True
-        args.ssc_update_interval = 10
+        # 禁用未完成的 SSC 深度网络（仅保留规则传播作为后处理）
+        args.use_ssc_completion = False
 
     return args

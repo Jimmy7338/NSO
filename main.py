@@ -53,17 +53,36 @@ from loop.semantic_vlad import SemanticVLADExtractor
 from loop.loop_detector import LoopDetector
 from loop.pose_correction import apply_loop_pose_correction
 from model import ReachabilityHead
-from env.habitat.reachability_utils import mask_global_goals
+from nso.reachability_uq import ReachabilityHeadUQ, apply_uq_mask, apply_mask_point_estimate
+from nso.components import NSO_Components
+from env.habitat.reachability_utils import (
+    default_rpn_in_channels, infer_rpn_in_channels, mask_global_goals)
 from utils.paper_eval import PaperMetricsTracker
 
 args = get_args()
 
+# 全局 NSO 组件管理器（在 main() 中调用 initialize）
+_nso_components: NSO_Components = NSO_Components(args)
+
+
+def resolve_rpn_in_channels(args) -> int:
+    if args.rpn_in_channels and args.rpn_in_channels > 0:
+        return int(args.rpn_in_channels)
+    reach_path = args.goal_reachability_model_path
+    if reach_path and os.path.isfile(reach_path):
+        ch = infer_rpn_in_channels(reach_path)
+        print(f"RPN 输入通道: 从 checkpoint 推断为 {ch} ({reach_path})")
+        return ch
+    ch = default_rpn_in_channels(args.use_semantic)
+    print(f"RPN 输入通道: 默认 {ch}")
+    return ch
+
 
 def build_rpn_input(local_map_tensor, semantic_map2d, planner_pose_inputs,
-                    num_scenes, use_semantic, device):
-    """构建 RPN 输入：障碍、探索、语义密度、访问频率（论文多通道地图）。"""
+                    num_scenes, in_channels, device):
+    """构建 RPN 输入：2ch=障碍+探索；4ch=+语义密度+访问频率。"""
     channels = [local_map_tensor[:, 0], local_map_tensor[:, 1]]
-    if use_semantic:
+    if in_channels >= 4:
         sem_ch = torch.zeros(
             num_scenes, local_map_tensor.shape[-2], local_map_tensor.shape[-1],
             device=device)
@@ -235,6 +254,20 @@ def main():
     # Initial full and local pose
     full_pose = torch.zeros(num_scenes, 3).float().to(device)
     local_pose = torch.zeros(num_scenes, 3).float().to(device)
+
+    # ----------------------------------------------------------------
+    # NSO 核心组件初始化（OV-SDF / STGHP / RPN-UQ / IGCR）
+    # ----------------------------------------------------------------
+    _nso_components.initialize(
+        device=device,
+        num_scenes=num_scenes,
+        full_w=full_w,
+        full_h=full_h,
+        local_w=local_w,
+        local_h=local_h,
+        rpn_in_channels=resolve_rpn_in_channels(args),
+    )
+    nso = _nso_components
 
     # Semantic modules (optional)
     semantic_detector = None
@@ -473,7 +506,7 @@ def main():
 
     reachability_head = None
     reachability_optimizer = None
-    rpn_in_channels = 4 if args.use_semantic else 2
+    rpn_in_channels = resolve_rpn_in_channels(args)
     if args.use_goal_reachability:
         reachability_head = ReachabilityHead(in_channels=rpn_in_channels).to(device)
         reachability_optimizer = get_optimizer(
@@ -1226,7 +1259,7 @@ def main():
                 if reachability_head is not None:
                     rpn_in = build_rpn_input(
                         local_map, semantic_map2d, planner_pose_inputs,
-                        num_scenes, args.use_semantic, device)
+                        num_scenes, rpn_in_channels, device)
                     with torch.set_grad_enabled(args.train_goal_reachability):
                         m_reach = reachability_head.predict_proba(rpn_in)
                     free_maps = [
@@ -1292,7 +1325,7 @@ def main():
                     reach_supervision_inputs)
                 rpn_in = build_rpn_input(
                     local_map, semantic_map2d, planner_pose_inputs,
-                    num_scenes, args.use_semantic, device)
+                    num_scenes, rpn_in_channels, device)
                 m_reach = reachability_head.predict_proba(rpn_in)
                 gt_t = torch.from_numpy(reach_gt_maps).float().to(device)
                 map_loss = F.binary_cross_entropy(m_reach, gt_t)
