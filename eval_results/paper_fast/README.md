@@ -1,5 +1,7 @@
 # paper_fast 评估结果
 
+> 完整分析报告见 [`docs/PAPER_FAST_EVAL_REPORT.md`](../../docs/PAPER_FAST_EVAL_REPORT.md)
+
 | 项目 | 值 |
 |------|-----|
 | 权重 | `trained_models/paper_fast/model_best.{global,reach}` |
@@ -27,6 +29,7 @@
 | `explored_area.txt` | 每回合逐步探索面积 |
 | `train.log` | main.py 评估日志 |
 | `eval_console.log` | 完整终端输出 |
+| `training_final_excerpt.txt` | 训练日志首尾摘录（完整训练日志在服务器云盘） |
 
 ## 复现命令
 
