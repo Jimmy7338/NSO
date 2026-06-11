@@ -1224,9 +1224,10 @@ def main():
 
                 if args.eval:
                     exp_ratio = torch.from_numpy(np.asarray(
-                        [infos[env_idx]['exp_ratio'] for env_idx
-                         in range(num_scenes)])
-                    ).float()
+                        [float(infos[env_idx].get('exp_ratio') or 0.0)
+                         for env_idx in range(num_scenes)],
+                        dtype=np.float32,
+                    )).float()
 
                     for e in range(num_scenes):
                         explored_area_log[e, ep_num, eval_g_step - 1] = \
