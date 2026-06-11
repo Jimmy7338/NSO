@@ -9,6 +9,7 @@
 |------|------|------|------|
 | `stage1_slam_local/` | 1 | `model_best.slam`, `model_best.local` | SLAM + 局部策略微调 |
 | `stage2_paper_global/` | 2 | `model_best.slam`, `model_best.local` | 论文融合奖励 + 全局 PPO |
+| `paper_fast/` | 3 | `model_best.global`, `model_best.reach` | 快速论文模式（冻结 SLAM/Local，4 进程） |
 
 ## 云盘上的最新权重（未纳入 git）
 
@@ -17,7 +18,8 @@
 | 目录 | 说明 |
 |------|------|
 | `stage3_rpn/` | RPN-UQ 训练后：`global`, `local`, `slam`, **`reach`** |
-| `stage4_ssc_loop/` | 回环后端联调：`global`, **`reach`**（2025-06 最新） |
+| `stage4_ssc_loop/` | 回环后端联调：`global`, **`reach`** |
+| `paper_fast/` | 已归档至 `trained_models/paper_fast/`（2025-06 最新） |
 
 ## 加载示例
 
