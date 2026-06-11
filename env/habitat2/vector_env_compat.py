@@ -1,9 +1,51 @@
 """将 habitat-lab 0.2.x VectorEnv 适配为 NSO 使用的 H0.1 接口。"""
 from __future__ import annotations
 
-from typing import Any, List, Sequence
+from typing import Any, List, Sequence, Tuple, Union
 
 import numpy as np
+
+_OBS_KEY = "obs"
+
+
+def _normalize_obs(obs: Any) -> np.ndarray:
+    """从 EnvObsDictWrapper / Exploration_Env 输出提取 (C,H,W) float32 数组。"""
+    if isinstance(obs, dict):
+        if _OBS_KEY in obs:
+            obs = obs[_OBS_KEY]
+        elif len(obs) == 1:
+            obs = next(iter(obs.values()))
+    if isinstance(obs, np.ndarray):
+        return obs.astype(np.float32, copy=False)
+    return np.asarray(obs, dtype=np.float32)
+
+
+def _split_reset_result(result: Any) -> Tuple[np.ndarray, dict]:
+    if isinstance(result, tuple) and len(result) == 2:
+        obs, info = result
+        return _normalize_obs(obs), info if isinstance(info, dict) else {}
+    return _normalize_obs(result), {}
+
+
+def _unwrap_obs_and_info(obs: Any, info: dict) -> Tuple[np.ndarray, dict]:
+    """处理 auto_reset 后 obs 被赋值为 reset() 完整返回 (obs, info) 的情况。"""
+    if isinstance(obs, tuple) and len(obs) == 2:
+        inner_obs, inner_info = obs
+        if isinstance(inner_info, dict):
+            merged = dict(info)
+            merged.update(inner_info)
+            info = merged
+        obs = inner_obs
+    return _normalize_obs(obs), info
+
+
+def _split_step_result(result: Any) -> Tuple[np.ndarray, float, bool, dict]:
+    if isinstance(result, tuple) and len(result) == 4:
+        obs, rew, done, info = result
+        info = info if isinstance(info, dict) else {}
+        obs, info = _unwrap_obs_and_info(obs, info)
+        return obs, float(rew), bool(done), info
+    raise TypeError(f"unexpected step result: {type(result)}")
 
 
 class VectorEnvCompat:
@@ -21,23 +63,13 @@ class VectorEnvCompat:
         else:
             self.action_space = venv.action_spaces[0]
 
-    def _split_reset_result(self, result):
-        if isinstance(result, tuple) and len(result) == 2:
-            return result
-        return result, {}
-
-    def _split_step_result(self, result):
-        if isinstance(result, tuple) and len(result) == 4:
-            return result
-        raise TypeError(f"unexpected step result: {type(result)}")
-
     def reset(self):
         raw = self.venv.reset()
         if not isinstance(raw, list):
             raw = [raw]
         obs_list, infos = [], []
         for item in raw:
-            o, i = self._split_reset_result(item)
+            o, i = _split_reset_result(item)
             obs_list.append(o)
             infos.append(i)
         return np.stack(obs_list), tuple(infos)
@@ -57,7 +89,7 @@ class VectorEnvCompat:
             raw = [raw]
         obs, rews, dones, infos = [], [], [], []
         for item in raw:
-            o, r, d, i = self._split_step_result(item)
+            o, r, d, i = _split_step_result(item)
             obs.append(o)
             rews.append(r)
             dones.append(d)

@@ -1204,8 +1204,9 @@ def main():
 
                 # Get exploration reward and metrics
                 g_reward = torch.from_numpy(np.asarray(
-                    [infos[env_idx]['exp_reward'] for env_idx
-                     in range(num_scenes)])
+                    [infos[env_idx].get('exp_reward') or 0.0
+                     for env_idx in range(num_scenes)],
+                    dtype=np.float32)
                 ).float().to(device)
 
                 if args.eval:

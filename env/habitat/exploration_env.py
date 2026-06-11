@@ -1137,27 +1137,90 @@ class Exploration_Env(habitat.RLEnv):
         label = max(float(fmm_label), embodied_label)
         return reach_map.astype(np.float32), float(label)
 
+    # GT 地图缓存目录（类变量，避免重复计算）
+    _gt_map_cache_dir = None
+    _gt_map_cache = {}  # 内存缓存: scene_name -> (sim_map, origin, max_coords)
+
     def _get_gt_map(self, full_map_size):
         self.scene_name = _scene_name_from_sim(self.habitat_env)
-        logger.error('Computing map for %s', self.scene_name)
+        
+        # 初始化缓存目录
+        if Exploration_Env._gt_map_cache_dir is None:
+            cache_dir = os.path.join(
+                os.environ.get('NSO_RUN_ROOT', '/tmp'),
+                'cache', 'gt_maps'
+            )
+            os.makedirs(cache_dir, exist_ok=True)
+            Exploration_Env._gt_map_cache_dir = cache_dir
 
-        # Get map in habitat simulator coordinates
-        self.map_obj = HabitatMaps(self.habitat_env)
-        if self.map_obj.size[0] < 1 or self.map_obj.size[1] < 1:
-            logger.error("Invalid map: {}/{}".format(
-                            self.scene_name, self.episode_no))
-            return None
+        # 尝试从缓存加载 sim_map 和元数据
+        cache_key = self.scene_name
+        cache_file = os.path.join(
+            Exploration_Env._gt_map_cache_dir,
+            f"{cache_key}.npz"
+        )
+        
+        if cache_key in Exploration_Env._gt_map_cache:
+            # 内存缓存命中
+            cached = Exploration_Env._gt_map_cache[cache_key]
+            sim_map = cached['sim_map']
+            origin = cached['origin']
+            max_coords = cached['max_coords']
+            logger.info('GT map cache hit (memory) for %s', self.scene_name)
+        elif os.path.exists(cache_file):
+            # 磁盘缓存命中
+            try:
+                data = np.load(cache_file)
+                sim_map = data['sim_map']
+                origin = data['origin']
+                max_coords = data['max_coords']
+                # 存入内存缓存
+                Exploration_Env._gt_map_cache[cache_key] = {
+                    'sim_map': sim_map, 'origin': origin, 'max_coords': max_coords
+                }
+                logger.info('GT map cache hit (disk) for %s', self.scene_name)
+            except Exception as e:
+                logger.warning('Failed to load cache for %s: %s', self.scene_name, e)
+                sim_map = None
+        else:
+            sim_map = None
 
-        agent_y = self._env.sim.get_agent_state().position.tolist()[1]*100.
-        sim_map = self.map_obj.get_map(agent_y, -50., 50.0)
+        # 缓存未命中，重新计算
+        if sim_map is None:
+            logger.error('Computing map for %s (will be cached)', self.scene_name)
+            
+            # Get map in habitat simulator coordinates
+            self.map_obj = HabitatMaps(self.habitat_env)
+            if self.map_obj.size[0] < 1 or self.map_obj.size[1] < 1:
+                logger.error("Invalid map: {}/{}".format(
+                                self.scene_name, self.episode_no))
+                return None
 
-        sim_map[sim_map > 0] = 1.
+            agent_y = self._env.sim.get_agent_state().position.tolist()[1]*100.
+            sim_map = self.map_obj.get_map(agent_y, -50., 50.0)
+            sim_map[sim_map > 0] = 1.
+            origin = self.map_obj.origin.copy()
+            max_coords = self.map_obj.max.copy()
+            
+            # 保存到磁盘和内存缓存
+            try:
+                np.savez_compressed(cache_file, 
+                    sim_map=sim_map, origin=origin, max_coords=max_coords)
+                Exploration_Env._gt_map_cache[cache_key] = {
+                    'sim_map': sim_map, 'origin': origin, 'max_coords': max_coords
+                }
+                logger.info('GT map cached for %s', self.scene_name)
+            except Exception as e:
+                logger.warning('Failed to cache GT map: %s', e)
+        else:
+            # 使用缓存数据初始化 map_obj 属性（后续代码可能需要）
+            self.map_obj = HabitatMaps(self.habitat_env)
 
         # Transform the map to align with the agent
-        min_x, min_y = self.map_obj.origin/100.0
+        min_x, min_y = origin / 100.0
         x, y, o = self.get_sim_location()
         x, y = -x - min_x, -y - min_y
-        range_x, range_y = self.map_obj.max/100. - self.map_obj.origin/100.
+        range_x, range_y = max_coords / 100. - origin / 100.
 
         map_size = sim_map.shape
         scale = 2.
@@ -1206,8 +1269,6 @@ class Exploration_Env(habitat.RLEnv):
                               (grid_size - full_map_size)//2 + full_map_size,
                               (grid_size - full_map_size)//2:
                               (grid_size - full_map_size)//2 + full_map_size]
-
-
 
         episode_map = episode_map.numpy()
         episode_map[episode_map > 0] = 1.

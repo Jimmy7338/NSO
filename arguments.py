@@ -193,8 +193,8 @@ def get_args():
     parser.add_argument('--intrinsic_penalty', type=float, default=0.1,
                         help='重复目标内在惩罚幅度')
 
-    parser.add_argument('--use_loop_detection', action='store_true', default=False,
-                        help='启用语义增强 NetVLAD 回环检测')
+    parser.add_argument('--use_loop_detection', type=int, default=None,
+                        help='启用语义增强 NetVLAD 回环检测（0=关闭, 1=开启, None=由 paper_mode 决定）')
     parser.add_argument('--loop_interval', type=int, default=100,
                         help='执行回环检测的步间隔（默认100，较大值可提升性能）')
     parser.add_argument('--loop_min_gap', type=int, default=200,
@@ -377,8 +377,9 @@ def get_args():
                             /1024/1024/1024 > 10.0, "Insufficient GPU memory"
 
             num_processes_per_gpu = int(gpu_memory/1.4)
-            # num_processes_on_first_gpu = int((gpu_memory - 10.0)/1.4)
-            num_processes_on_first_gpu = 1  # 改为1，只显示一个窗口
+            # 单卡时：默认 4 进程（3090 24GB 可支持 4-8），可通过 -n 覆盖
+            # 若显存不足会 OOM，可降到 2-3
+            num_processes_on_first_gpu = min(4, max(1, int((gpu_memory - 2.0) / 3.0)))
 
             if num_gpus == 1:
                 args.num_processes_on_first_gpu = num_processes_on_first_gpu
@@ -427,6 +428,14 @@ def get_args():
         if args.num_mini_batch < 1:
             args.num_mini_batch = 1  # 确保至少为1
 
+    # 处理 use_loop_detection 的命令行覆盖
+    if args.use_loop_detection is not None:
+        args._loop_detection_set_by_cli = True
+        args.use_loop_detection = bool(args.use_loop_detection)
+    else:
+        args._loop_detection_set_by_cli = False
+        args.use_loop_detection = False  # 默认关闭
+
     if args.paper_mode:
         # 论文完整配置（NSO：四项核心创新全部启用）
         args.paper_rewards = 1
@@ -460,10 +469,11 @@ def get_args():
         args.goal_reachability_max_candidates = 16
         # IGCR：信息增益覆盖奖励
         args.use_igcr = True
-        # 回环检测（系统组件）
-        args.use_loop_detection = True
-        args.loop_pose_correction = 1
-        args.loop_interval = 100
+        # 回环检测（系统组件）- 可通过命令行 --use_loop_detection 0 关闭
+        if not hasattr(args, '_loop_detection_set_by_cli'):
+            args.use_loop_detection = True
+            args.loop_pose_correction = 1
+            args.loop_interval = 100
         # 禁用未完成的 SSC 深度网络（仅保留规则传播作为后处理）
         args.use_ssc_completion = False
 
