@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "passed_full": false,
+  "partial": false,
+  "run": "/root/NSO/eval_results/counterfactual_candidate_augmentation_v6_20260911",
+  "verifier_sha256": "5afa1ad95876bfa2f766a7da115b049e278137125d1da259f4eb023ff51dd29d",
+  "max_branches": null,
+  "workers": 2,
+  "started_unix": 1789090970.705203,
+  "python": "3.12.3",
+  "scope": "archived-source raw-sensor replay and accounting; not efficacy or independent confirmation",
+  "policy_regenerated": false,
+  "raw_artifacts_modified": false,
+  "error": "fixture main_751_a5beedada7c6: candidate identifiers/0: integer differs",
+  "traceback": "concurrent.futures.process._RemoteTraceback: \n\"\"\"\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/concurrent/futures/process.py\", line 263, in _process_worker\n    r = call_item.fn(*call_item.args, **call_item.kwargs)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/NSO/scripts/replay_counterfactual_views.py\", line 431, in verify_fixture\n    compare([r['candidate_id'] for r in routes], list(range(len(routes))), 'candidate identifiers')\n  File \"/root/NSO/scripts/replay_counterfactual_views.py\", line 85, in compare\n    compare(left, right, f'{context}/{i}', tolerance)\n  File \"/root/NSO/scripts/replay_counterfactual_views.py\", line 89, in compare\n    require(isinstance(actual, (int, np.integer)) and not isinstance(actual, bool) and actual == expected,\n  File \"/root/NSO/scripts/replay_counterfactual_views.py\", line 41, in require\n    raise ValueError(message)\nValueError: candidate identifiers/0: integer differs\n\"\"\"\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/NSO/scripts/replay_counterfactual_views.py\", line 568, in verify\n    results.append(future.result())\n                   ^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 449, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\nValueError: candidate identifiers/0: integer differs\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/NSO/scripts/replay_counterfactual_views.py\", line 570, in verify\n    raise ValueError(f\"fixture {futures[future]}: {exc}\") from exc\nValueError: fixture main_751_a5beedada7c6: candidate identifiers/0: integer differs\n",
+  "elapsed_s": 27.91676902770996
+}

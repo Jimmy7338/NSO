@@ -1,0 +1,33 @@
+# User-confirmed hardware; topic names below are examples to verify on the robot.
+hardware:
+  middleware: ROS1
+  stereo_camera: ZED_model_unconfirmed
+  planar_lidar: Leishen_model_unconfirmed
+  imu: present_model_unconfirmed
+  gps: present_model_unconfirmed
+  onboard_nvidia_or_jetson: unconfirmed
+  zed_depth_and_pose_publishing_ros1: confirmed_by_user
+  controller_model_note: exact_model_to_verify_existing_ZED_pipeline_operational
+topics:
+  rgb: /zed/zed_node/left/image_rect_color
+  depth: /zed/zed_node/depth/depth_registered
+  camera_info: /zed/zed_node/depth/camera_info
+  scan: /scan
+  imu: /imu/data
+  gps: /fix
+  transforms: [/tf, /tf_static]
+contract:
+  depth_unit: metre
+  depth_invalid: 0
+  camera_axes: x_right_y_down_z_forward
+  world_axes: x_east_y_north_z_up
+  pose: world_from_camera_optical
+  optical_frame: VERIFY_ON_ROBOT
+  laser_extrinsic: MEASURE_ON_ROBOT
+  base_to_camera: MEASURE_ON_ROBOT
+  time_sync_max_s: 0.05
+deployment:
+  stage: recorder_and_offline_reconstruction_first
+  command_output: disabled
+  localization_source: existing_lab_stack_to_verify
+  indoor_gps_use: disabled_until_validated

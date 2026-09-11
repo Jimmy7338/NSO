@@ -1,0 +1,100 @@
+{
+  "status": "passed",
+  "main_experiment": {
+    "status": "complete",
+    "files_sha256": {
+      "configs/virtual3d/inspection_v1.json": "66c61ebb51d6b5262bacd16373947716eb01ebbb81902fef8a8b531939e83f76",
+      "env/grid_exploration.py": "50ea90774a24951b54a68a088ec82ed94801be3b05a291005ad4d2d89fc2bb30",
+      "env/virtual3d.py": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+      "nso/coverage_planner_v2.py": "edc6c97a0430ffa05f88030f87fd0176c1e49a449789272ee1d603d1e9c22179",
+      "nso/frontier_policy.py": "f5b402b678403e82a6b0519c6b34ab4e1e0c0566f14dbfb028154e1dab87a0cf",
+      "nso/grid_mechanisms.py": "aac855c207fe24a1c9aae0ac240abc947cdc2476c4361fc569d06bda0f96086a",
+      "nso/grid_topology.py": "8e61a9a669470e8637882db9226a856287eb2c84222b65399d5f9556bf3bc762",
+      "nso/mapping3d.py": "275144d68c1bc6e8876ac622629f19916d09ca07651681dd8cf2b11dbe64b38f",
+      "nso/navigable_frontier_v2.py": "61f35b9131b2bbf4ea2e8f1fc58d65f0ddd752c68d158e681187716f04b031c7",
+      "nso/quality_coverage3d.py": "b7bf1448e02021bf64e93fb30ad7c4df44537aab70a3319409ad0d93aefa7903",
+      "nso/route_coverage_v2.py": "f01e604ea866bf19609f382527e5475d25010f5fda4f2ca0ab9478d66f57c3bb",
+      "requirements-3d.lock.txt": "7b8817ceaf3ef95a2d80e6496d830f3089bd57527d025a3066634911633bdb61",
+      "scripts/analyze_inspection_mechanism.py": "fbb3586aeeb1904b7d7b29321fdf7e5619c9c7ff5006c2719dcaab2c39255f1b",
+      "scripts/eval_inspection_mechanism.py": "9b46136ae2220a53cd5f249f7566b8462b6572a166ff26bfe57e8d3bfbe8f8e1",
+      "tests/virtual3d/test_inspection.py": "541d094dfe677c3edeb24cd27a04de29a08b8b1cd13f828f095108888b13c870",
+      "utils/cpu_protocol.py": "11ab8ca96e1b04637c9a749df3d6ad149eb3e3bffca7143254c5a0b881505d21",
+      "utils/grid_geometry.py": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b",
+      "utils/inspection_benchmark.py": "fac0c3ebd75fa60bd9be5eab41f40e8d36a50aa24c1339fda1aa885a1dd442fc",
+      "utils/paper_eval.py": "68b9973910cae0ae069c445e972ffd965d396cfb2bc3fa31feb9896a3d098491",
+      "utils/reconstruction_metrics.py": "92731c70a02d527812260d4487c817bd3829d9c4a35accd65c1320a62833987c",
+      "utils/rgbd_contract.py": "93d647c6dae79748d75f32148adf6aa9479a9f46950129557da99c6b28bb7f87"
+    },
+    "config_sha256": "d10554faf811038aa0921b1953eea8c1af5ab62ff1ed1e04f79e63cf86d62990",
+    "expected_branches": 224,
+    "scope": "controlled endpoint sensing; not navigation, SLAM or semantic efficacy validation",
+    "pose_source": "perfect",
+    "cpu_only": true,
+    "open3d": "0.19.0",
+    "branches": 224,
+    "checkpoints": 672,
+    "stored_frames": 2432,
+    "wall_time_s": 49.7215908318758,
+    "peak_rss_mib": 264.98046875
+  },
+  "mesh_verification": {
+    "status": "passed",
+    "checked_mesh_checkpoints": 672,
+    "checked_baselines": 32,
+    "artifact_hashes": 3228,
+    "matrix_complete": true,
+    "no_update_zero_gain": true,
+    "archived_sources_verified": true,
+    "geometry_instances": 8,
+    "independent_seed_blocks": 4,
+    "noise_conditions_are_paired_not_independent": true,
+    "navigation_claim": false,
+    "semantic_increment_claim": false
+  },
+  "rgbd_replay": [
+    {
+      "scene": "shelf_101",
+      "noise": "iid_01",
+      "branch": "near",
+      "frames": 16,
+      "vertices": 7637,
+      "exact_match": true
+    },
+    {
+      "scene": "shelf_103",
+      "noise": "fixed_01",
+      "branch": "opposite",
+      "frames": 16,
+      "vertices": 8666,
+      "exact_match": true
+    }
+  ],
+  "fine_backend_replay": {
+    "scene": "shelf_103",
+    "noise": "iid_01",
+    "branch": "side",
+    "voxel_m": 0.03,
+    "frames": 16,
+    "exact_mesh_match": true
+  },
+  "resolution_diagnostic": {
+    "status": "complete",
+    "scope": "post-hoc engineering sensitivity; voxel and truncation jointly changed",
+    "source": "/root/NSO/eval_results/inspection_mechanism_v1_20260910",
+    "source_manifest_sha256": "9921b5785c42b0d268185f8e70bf9f826227745048518ad8c43d79986c082f8e",
+    "script_sha256": "aee81621225b80fd329f40559becf36834db6556015257ae1c85f5e11b8aa56c",
+    "comparisons": 32,
+    "wall_time_s": 10.271461742930114,
+    "prediction_samples": 240000,
+    "default_backend_changed": false
+  },
+  "tests": {
+    "virtual3d_total": 13,
+    "new_inspection": 5,
+    "passed": true
+  },
+  "previous_frozen_2d_protocol_valid": true,
+  "previous_3d_source_hashes_unchanged": true,
+  "default_backend_and_policy_changed": false,
+  "robot_execution": false
+}

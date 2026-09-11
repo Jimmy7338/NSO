@@ -1,0 +1,48 @@
+{
+  "scope": "development object hypotheses; observed semantics mandatory, generic and occluded controls opaque=False",
+  "environment": {
+    "width_m": 16,
+    "height_m": 12,
+    "max_steps": 280,
+    "voxel_m": 0.03,
+    "truncation_m": 0.12
+  },
+  "planner": {
+    "quality_weight": 1.0,
+    "semantic_weight": 1.0,
+    "hypothesis_weight": 4.0
+  },
+  "evaluation_interval": 20,
+  "thresholds_m": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "reference_samples": 16000,
+  "save_frames": true,
+  "save_checkpoint_meshes": false,
+  "methods": [
+    "geometry_v2",
+    "full_v2",
+    "no_hypotheses_v3"
+  ],
+  "scenes": [
+    {
+      "layout": "rooms",
+      "seed": 202,
+      "environment": {
+        "occluded_objects": false
+      }
+    },
+    {
+      "layout": "warehouse",
+      "seed": 202,
+      "environment": {
+        "occluded_objects": false
+      }
+    }
+  ],
+  "workers": 4,
+  "camera_coverage": true,
+  "object_hypotheses": true
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "hierarchical_options_v10_unit_review/1",
+  "status": "passed_unit_feasibility_contracts",
+  "utc": "2026-09-11T05:45:16.506769+00:00",
+  "source_sha256": {
+    "nso/hierarchical_options_v10.py": "b46b274c775aa8a1e606a269ce3feab40184a0e6cd2694e78331ff01307d2083",
+    "tests/virtual3d/test_hierarchical_options_v10.py": "f9f2d94e539cf238c1649cf7778a4c8f328296968821c3faf209ab731c40b0ad"
+  },
+  "old_version_hashes_verified_unchanged": {
+    "nso/competition_candidates_v8_1.py": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab",
+    "nso/competition_prior_v8.py": "a7fa1093259a6cd800a311374f74390757c24c3aa2606825ef04d1044b23f510",
+    "nso/execution_guard_v8.py": "94affb7c6e513471aae87d6ffddd94c2d1678f663f9dd1fc67b50c2c51eb17ca"
+  },
+  "test_command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv-3d/bin/python -m unittest tests.virtual3d.test_hierarchical_options_v10 -v",
+  "test_exit_code": 0,
+  "test_count": 9,
+  "reported_test_elapsed_s": 1.468,
+  "test_cases": [
+    "test_same_cell_new_heading_is_paid_and_anchor_heading_is_restored",
+    "test_zero_action_target_is_never_inserted_to_fill_a_pool",
+    "test_fixed_anchor_is_not_replaced_by_current_position",
+    "test_latest_unknown_footprint_and_disconnected_anchor_refuse_options",
+    "test_no_object_fallback_sees_unknown_but_never_routes_through_it",
+    "test_zero_one_three_observed_objects_and_budget_above_48",
+    "test_swapped_and_missing_labels_do_not_change_any_route_or_geometry_audit",
+    "test_candidate_cap_records_omission_and_never_adds_fake_object_views",
+    "test_input_immutability_and_invalid_budget"
+  ],
+  "fixtures": "synthetic measured geometry/maps only; no virtual world or future outcome execution",
+  "independent_assertion_methods": [
+    "direct padded free-cell footprint stencil",
+    "orientation-state BFS for each outbound/return leg",
+    "manual atomic-action transition checks"
+  ],
+  "performance_evidence": false,
+  "full_four_module_integration_validated": false
+}

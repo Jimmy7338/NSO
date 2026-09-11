@@ -1,0 +1,4369 @@
+{
+  "schema": "cpu_v10_rotation_stall_review/1",
+  "scope": "post-run development diagnosis; no new policy execution",
+  "status": "completed",
+  "root_cause": "candidate screening and non-realizable persistent observation proxy; not absence of known-safe translation space",
+  "input_run": "/root/NSO/eval_results/cpu_four_module_v10_integration_20260911",
+  "raw_packets": 33,
+  "paid_actions": 32,
+  "actions": {
+    "right": 16,
+    "left": 16
+  },
+  "distinct_cells": 1,
+  "distinct_full_poses": 3,
+  "choices": 25,
+  "submitted_candidates": 47,
+  "submitted_translation_candidates": 0,
+  "choices_with_budget_feasible_translation": 22,
+  "choices_without_budget_feasible_translation": [
+    28,
+    29,
+    31
+  ],
+  "rate_prefilter_at_current_cell_count": 25,
+  "choices_where_translation_endpoint_total_proxy_exceeds_selected_coverage": 22,
+  "all_47_semantic_potentials_zero": true,
+  "action_observations_with_zero_new_2d": 27,
+  "action_observations_with_zero_new_camera_2d": 22,
+  "igcr_no_progress_events": 1,
+  "summed_predicted_selected_camera_cells": 2028,
+  "summed_realized_predicted_selected_camera_cells": 277,
+  "selected_plans_zero_realized_predicted_camera_cells": 17,
+  "independent_full_33_packet_mapper_replay": true,
+  "final_belief_camera_exact_match": true,
+  "independent_footprint_and_bfs": true,
+  "archived_candidate_pool_reproduced": true,
+  "archived_scores_common_breakdown_reproduced": true,
+  "source_and_all_run_artifact_hashes_verified": true,
+  "world_constructed": false,
+  "new_future_sensor_actions": 0,
+  "gt_map_read": false,
+  "evaluator_reconstruction_metrics_computed": false,
+  "rule_or_source_modified": false,
+  "semantic_packet_intervention_scope": {
+    "verification_path": "audit_results/cpu_semantic_packet_v10_development_20260911/verification.json",
+    "actual_prefix_packets_per_replay": 151,
+    "actual_prefix_replays": 3,
+    "S_score_changed": true,
+    "interpretation": "Separate 150-paid-action prefix condition; input causality does not show semantics activated or effective in this fresh episode."
+  },
+  "source_archive_sha256": "2fb98e8e55c354602e83900317c49aba02092c565d7f6e7e89b87b6e6ba77970",
+  "run_manifest_sha256": "4dd772892c0db1fe9a47650e73e34b2b883915868c850ee04cdbfd45328ef6d4",
+  "raw_manifest_sha256": "8187b0a86f938de305629113d93c1788b1eb4a0c2e549e0685ad634bbd47cc2f",
+  "module_calls_sha256": "b22685dafae38855db5c935228e2b1b7f8ce65671f7fc80f53b366bda02f4167",
+  "worker_sha256": "c1e914701e1da7abe1b3dea8f495f77d02427162ca52c6de4106be4fc2c35922",
+  "decisions": [
+    {
+      "action_id": 0,
+      "call_id": 4,
+      "remaining_budget": 32,
+      "safe_cell_count": 585,
+      "reachable_cell_count": 585,
+      "feasible_state_count": 863,
+      "feasible_translation_state_count": 860,
+      "feasible_translation_cell_count": 228,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 1,
+      "generated_translation_count": 0,
+      "observed_asset_count": 2,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 2,
+        "deep_requires_available_entry": 2
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 7.160000000000001,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 7.160000000000001,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 7.160000000000001,
+          "quality_proxy": 0.0
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 179,
+        "unknown_cells": 179,
+        "cost": 2,
+        "rate": 89.5
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          18,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 381,
+        "camera_unknown_cells": 339,
+        "unknown_cells": 720,
+        "cost": 32,
+        "rate": 22.5
+      },
+      "best_translation_rate": {
+        "pose": [
+          32,
+          21,
+          1
+        ],
+        "radar_unknown_cells": 9,
+        "camera_unknown_cells": 195,
+        "unknown_cells": 204,
+        "cost": 6,
+        "rate": 34.0
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          18,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 381,
+        "camera_unknown_cells": 339,
+        "unknown_cells": 720,
+        "cost": 32,
+        "rate": 22.5
+      },
+      "actual_arrival_action_id": 1,
+      "actual_new_observed_2d_cells": 6,
+      "actual_new_camera_projection_cells": 149,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 179,
+      "realized_predicted_camera_cells": 120,
+      "predicted_camera_cells_still_unseen_at_arrival": 59,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 1,
+      "call_id": 9,
+      "remaining_budget": 31,
+      "safe_cell_count": 583,
+      "reachable_cell_count": 583,
+      "feasible_state_count": 771,
+      "feasible_translation_state_count": 768,
+      "feasible_translation_cell_count": 198,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          21,
+          1
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            21,
+            1
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            21,
+            1
+          ],
+          [
+            32,
+            21,
+            2
+          ],
+          [
+            32,
+            21,
+            3
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 1,
+      "generated_translation_count": 0,
+      "observed_asset_count": 3,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 3,
+        "deep_requires_available_entry": 3
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 3.1200000000000006,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.1200000000000006,
+        "quality_proxy": 5.464378949326942e-19
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.1200000000000006,
+          "quality_proxy": 5.464378949326942e-19
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 78,
+        "unknown_cells": 78,
+        "cost": 1,
+        "rate": 78.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          19,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 351,
+        "camera_unknown_cells": 333,
+        "unknown_cells": 684,
+        "cost": 31,
+        "rate": 22.06451612903226
+      },
+      "best_translation_rate": {
+        "pose": [
+          32,
+          21,
+          3
+        ],
+        "radar_unknown_cells": 9,
+        "camera_unknown_cells": 152,
+        "unknown_cells": 161,
+        "cost": 5,
+        "rate": 32.2
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          19,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 351,
+        "camera_unknown_cells": 333,
+        "unknown_cells": 684,
+        "cost": 31,
+        "rate": 22.06451612903226
+      },
+      "actual_arrival_action_id": 2,
+      "actual_new_observed_2d_cells": 2,
+      "actual_new_camera_projection_cells": 5,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 78,
+      "realized_predicted_camera_cells": 3,
+      "predicted_camera_cells_still_unseen_at_arrival": 75,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 2,
+      "call_id": 14,
+      "remaining_budget": 30,
+      "safe_cell_count": 583,
+      "reachable_cell_count": 583,
+      "feasible_state_count": 743,
+      "feasible_translation_state_count": 740,
+      "feasible_translation_cell_count": 197,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 3,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 3,
+        "deep_requires_available_entry": 3
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 6.520000000000001,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 6.520000000000001,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 6.520000000000001,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.3600000000000003,
+          "quality_proxy": 2.2237851326139847e-18
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 163,
+        "unknown_cells": 163,
+        "cost": 2,
+        "rate": 81.5
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          19,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 349,
+        "camera_unknown_cells": 333,
+        "unknown_cells": 682,
+        "cost": 30,
+        "rate": 22.733333333333334
+      },
+      "best_translation_rate": {
+        "pose": [
+          31,
+          20,
+          3
+        ],
+        "radar_unknown_cells": 12,
+        "camera_unknown_cells": 171,
+        "unknown_cells": 183,
+        "cost": 6,
+        "rate": 30.5
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          19,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 349,
+        "camera_unknown_cells": 333,
+        "unknown_cells": 682,
+        "cost": 30,
+        "rate": 22.733333333333334
+      },
+      "actual_arrival_action_id": 3,
+      "actual_new_observed_2d_cells": 37,
+      "actual_new_camera_projection_cells": 205,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 163,
+      "realized_predicted_camera_cells": 147,
+      "predicted_camera_cells_still_unseen_at_arrival": 16,
+      "predicted_camera_cells_still_unseen_at_run_end": 15
+    },
+    {
+      "action_id": 3,
+      "call_id": 19,
+      "remaining_budget": 29,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 657,
+      "feasible_translation_state_count": 654,
+      "feasible_translation_cell_count": 169,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          19,
+          3
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            19,
+            3
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            19,
+            3
+          ],
+          [
+            32,
+            19,
+            0
+          ],
+          [
+            32,
+            19,
+            1
+          ],
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "left"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 3,
+        "target_projection_error_exceeds_limit": 1,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 3.000000993112526,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.0000000000000004,
+        "quality_proxy": 9.93112525648514e-07
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 9.93112525648514e-07
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.3600000000000003,
+          "quality_proxy": 2.2237851326139847e-18
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          20,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 299,
+        "camera_unknown_cells": 301,
+        "unknown_cells": 600,
+        "cost": 29,
+        "rate": 20.689655172413794
+      },
+      "best_translation_rate": {
+        "pose": [
+          20,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 299,
+        "camera_unknown_cells": 301,
+        "unknown_cells": 600,
+        "cost": 29,
+        "rate": 20.689655172413794
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          20,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 299,
+        "camera_unknown_cells": 301,
+        "unknown_cells": 600,
+        "cost": 29,
+        "rate": 20.689655172413794
+      },
+      "actual_arrival_action_id": 4,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 75,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 75,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 4,
+      "call_id": 24,
+      "remaining_budget": 28,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 631,
+      "feasible_translation_state_count": 628,
+      "feasible_translation_cell_count": 168,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.3600000000000003,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.3600000000000003,
+        "quality_proxy": 2.2237851326139847e-18
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.3600000000000003,
+          "quality_proxy": 2.2237851326139847e-18
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 0.6000000000000001,
+          "quality_proxy": 3.530573673464762e-18
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 59,
+        "unknown_cells": 59,
+        "cost": 2,
+        "rate": 29.5
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          20,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 299,
+        "camera_unknown_cells": 301,
+        "unknown_cells": 600,
+        "cost": 28,
+        "rate": 21.428571428571427
+      },
+      "best_translation_rate": {
+        "pose": [
+          20,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 299,
+        "camera_unknown_cells": 301,
+        "unknown_cells": 600,
+        "cost": 28,
+        "rate": 21.428571428571427
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          20,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 299,
+        "camera_unknown_cells": 301,
+        "unknown_cells": 600,
+        "cost": 28,
+        "rate": 21.428571428571427
+      },
+      "actual_arrival_action_id": 5,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 1,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 59,
+      "realized_predicted_camera_cells": 1,
+      "predicted_camera_cells_still_unseen_at_arrival": 58,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 5,
+      "call_id": 29,
+      "remaining_budget": 27,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 559,
+      "feasible_translation_state_count": 556,
+      "feasible_translation_cell_count": 144,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          21,
+          1
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            21,
+            1
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            21,
+            1
+          ],
+          [
+            32,
+            21,
+            2
+          ],
+          [
+            32,
+            21,
+            3
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "old_surface_rotation",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 2,
+      "selected_total_score": 3.6000000000000005,
+      "selected_score_parts": {
+        "candidate_id": 1,
+        "group": "old_surface_rotation",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.6000000000000005,
+        "quality_proxy": 3.530573673464762e-18
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.6000000000000005,
+          "quality_proxy": 3.530573673464762e-18
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          21,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 277,
+        "camera_unknown_cells": 279,
+        "unknown_cells": 556,
+        "cost": 27,
+        "rate": 20.59259259259259
+      },
+      "best_translation_rate": {
+        "pose": [
+          21,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 277,
+        "camera_unknown_cells": 279,
+        "unknown_cells": 556,
+        "cost": 27,
+        "rate": 20.59259259259259
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          21,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 277,
+        "camera_unknown_cells": 279,
+        "unknown_cells": 556,
+        "cost": 27,
+        "rate": 20.59259259259259
+      },
+      "actual_arrival_action_id": 7,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 4,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 90,
+      "realized_predicted_camera_cells": 1,
+      "predicted_camera_cells_still_unseen_at_arrival": 89,
+      "predicted_camera_cells_still_unseen_at_run_end": 87
+    },
+    {
+      "action_id": 7,
+      "call_id": 38,
+      "remaining_budget": 25,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 469,
+      "feasible_translation_state_count": 466,
+      "feasible_translation_cell_count": 121,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          19,
+          3
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            19,
+            3
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            19,
+            3
+          ],
+          [
+            32,
+            19,
+            0
+          ],
+          [
+            32,
+            19,
+            1
+          ],
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "left"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 3.0000000000000004,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.0000000000000004,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.3200000000000003,
+          "quality_proxy": 0.0011905465309096682
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          22,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 254,
+        "camera_unknown_cells": 256,
+        "unknown_cells": 510,
+        "cost": 25,
+        "rate": 20.4
+      },
+      "best_translation_rate": {
+        "pose": [
+          22,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 254,
+        "camera_unknown_cells": 256,
+        "unknown_cells": 510,
+        "cost": 25,
+        "rate": 20.4
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          22,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 254,
+        "camera_unknown_cells": 256,
+        "unknown_cells": 510,
+        "cost": 25,
+        "rate": 20.4
+      },
+      "actual_arrival_action_id": 8,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 75,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 75,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 8,
+      "call_id": 43,
+      "remaining_budget": 24,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 447,
+      "feasible_translation_state_count": 444,
+      "feasible_translation_cell_count": 120,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.32119054653091,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.3200000000000003,
+        "quality_proxy": 0.0011905465309096682
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.3200000000000003,
+          "quality_proxy": 0.0011905465309096682
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 0.56,
+          "quality_proxy": 0.0009929693415326112
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 58,
+        "unknown_cells": 58,
+        "cost": 2,
+        "rate": 29.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          22,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 254,
+        "camera_unknown_cells": 256,
+        "unknown_cells": 510,
+        "cost": 24,
+        "rate": 21.25
+      },
+      "best_translation_rate": {
+        "pose": [
+          22,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 254,
+        "camera_unknown_cells": 256,
+        "unknown_cells": 510,
+        "cost": 24,
+        "rate": 21.25
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          22,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 254,
+        "camera_unknown_cells": 256,
+        "unknown_cells": 510,
+        "cost": 24,
+        "rate": 21.25
+      },
+      "actual_arrival_action_id": 9,
+      "actual_new_observed_2d_cells": 1,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 58,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 58,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 9,
+      "call_id": 48,
+      "remaining_budget": 23,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 387,
+      "feasible_translation_state_count": 384,
+      "feasible_translation_cell_count": 100,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          21,
+          1
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            21,
+            1
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            21,
+            1
+          ],
+          [
+            32,
+            21,
+            2
+          ],
+          [
+            32,
+            21,
+            3
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "old_surface_rotation",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 2,
+      "selected_total_score": 3.560992969341533,
+      "selected_score_parts": {
+        "candidate_id": 1,
+        "group": "old_surface_rotation",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.5600000000000005,
+        "quality_proxy": 0.0009929693415326112
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.5600000000000005,
+          "quality_proxy": 0.0009929693415326112
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          23,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 220,
+        "camera_unknown_cells": 229,
+        "unknown_cells": 449,
+        "cost": 23,
+        "rate": 19.52173913043478
+      },
+      "best_translation_rate": {
+        "pose": [
+          23,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 220,
+        "camera_unknown_cells": 229,
+        "unknown_cells": 449,
+        "cost": 23,
+        "rate": 19.52173913043478
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          23,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 220,
+        "camera_unknown_cells": 229,
+        "unknown_cells": 449,
+        "cost": 23,
+        "rate": 19.52173913043478
+      },
+      "actual_arrival_action_id": 11,
+      "actual_new_observed_2d_cells": 1,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 89,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 89,
+      "predicted_camera_cells_still_unseen_at_run_end": 87
+    },
+    {
+      "action_id": 11,
+      "call_id": 57,
+      "remaining_budget": 21,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 313,
+      "feasible_translation_state_count": 310,
+      "feasible_translation_cell_count": 81,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          19,
+          3
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            19,
+            3
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            19,
+            3
+          ],
+          [
+            32,
+            19,
+            0
+          ],
+          [
+            32,
+            19,
+            1
+          ],
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "left"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 3.0000000000000004,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.0000000000000004,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.3200000000000003,
+          "quality_proxy": 0.0012292150107869328
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          24,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 198,
+        "camera_unknown_cells": 202,
+        "unknown_cells": 400,
+        "cost": 21,
+        "rate": 19.047619047619047
+      },
+      "best_translation_rate": {
+        "pose": [
+          24,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 198,
+        "camera_unknown_cells": 202,
+        "unknown_cells": 400,
+        "cost": 21,
+        "rate": 19.047619047619047
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          24,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 198,
+        "camera_unknown_cells": 202,
+        "unknown_cells": 400,
+        "cost": 21,
+        "rate": 19.047619047619047
+      },
+      "actual_arrival_action_id": 12,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 75,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 75,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 12,
+      "call_id": 62,
+      "remaining_budget": 20,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 295,
+      "feasible_translation_state_count": 292,
+      "feasible_translation_cell_count": 80,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.321229215010787,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.3200000000000003,
+        "quality_proxy": 0.0012292150107869328
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.3200000000000003,
+          "quality_proxy": 0.0012292150107869328
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 0.56,
+          "quality_proxy": 0.0005645226871860097
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 58,
+        "unknown_cells": 58,
+        "cost": 2,
+        "rate": 29.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          24,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 198,
+        "camera_unknown_cells": 202,
+        "unknown_cells": 400,
+        "cost": 20,
+        "rate": 20.0
+      },
+      "best_translation_rate": {
+        "pose": [
+          24,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 198,
+        "camera_unknown_cells": 202,
+        "unknown_cells": 400,
+        "cost": 20,
+        "rate": 20.0
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          24,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 198,
+        "camera_unknown_cells": 202,
+        "unknown_cells": 400,
+        "cost": 20,
+        "rate": 20.0
+      },
+      "actual_arrival_action_id": 13,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 2,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 58,
+      "realized_predicted_camera_cells": 2,
+      "predicted_camera_cells_still_unseen_at_arrival": 56,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 13,
+      "call_id": 67,
+      "remaining_budget": 19,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 247,
+      "feasible_translation_state_count": 244,
+      "feasible_translation_cell_count": 64,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          21,
+          1
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            21,
+            1
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            21,
+            1
+          ],
+          [
+            32,
+            21,
+            2
+          ],
+          [
+            32,
+            21,
+            3
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "old_surface_rotation",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 2,
+      "selected_total_score": 3.5605645226871867,
+      "selected_score_parts": {
+        "candidate_id": 1,
+        "group": "old_surface_rotation",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.5600000000000005,
+        "quality_proxy": 0.0005645226871860097
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.5600000000000005,
+          "quality_proxy": 0.0005645226871860097
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          25,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 166,
+        "camera_unknown_cells": 180,
+        "unknown_cells": 346,
+        "cost": 19,
+        "rate": 18.210526315789473
+      },
+      "best_translation_rate": {
+        "pose": [
+          25,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 166,
+        "camera_unknown_cells": 180,
+        "unknown_cells": 346,
+        "cost": 19,
+        "rate": 18.210526315789473
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          25,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 166,
+        "camera_unknown_cells": 180,
+        "unknown_cells": 346,
+        "cost": 19,
+        "rate": 18.210526315789473
+      },
+      "actual_arrival_action_id": 15,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 89,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 89,
+      "predicted_camera_cells_still_unseen_at_run_end": 87
+    },
+    {
+      "action_id": 15,
+      "call_id": 76,
+      "remaining_budget": 17,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 189,
+      "feasible_translation_state_count": 186,
+      "feasible_translation_cell_count": 49,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          19,
+          3
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            19,
+            3
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            19,
+            3
+          ],
+          [
+            32,
+            19,
+            0
+          ],
+          [
+            32,
+            19,
+            1
+          ],
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "left"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 3.0000000000000004,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.0000000000000004,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.24,
+          "quality_proxy": 0.0006734940151562144
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          26,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 140,
+        "camera_unknown_cells": 165,
+        "unknown_cells": 305,
+        "cost": 17,
+        "rate": 17.941176470588236
+      },
+      "best_translation_rate": {
+        "pose": [
+          26,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 140,
+        "camera_unknown_cells": 165,
+        "unknown_cells": 305,
+        "cost": 17,
+        "rate": 17.941176470588236
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          26,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 140,
+        "camera_unknown_cells": 165,
+        "unknown_cells": 305,
+        "cost": 17,
+        "rate": 17.941176470588236
+      },
+      "actual_arrival_action_id": 16,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 75,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 75,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 16,
+      "call_id": 81,
+      "remaining_budget": 16,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 175,
+      "feasible_translation_state_count": 172,
+      "feasible_translation_cell_count": 48,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.2406734940151565,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.24,
+        "quality_proxy": 0.0006734940151562144
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.24,
+          "quality_proxy": 0.0006734940151562144
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 0.56,
+          "quality_proxy": 4.361173281060629e-05
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 56,
+        "unknown_cells": 56,
+        "cost": 2,
+        "rate": 28.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          26,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 140,
+        "camera_unknown_cells": 165,
+        "unknown_cells": 305,
+        "cost": 16,
+        "rate": 19.0625
+      },
+      "best_translation_rate": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 145,
+        "unknown_cells": 231,
+        "cost": 12,
+        "rate": 19.25
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          26,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 140,
+        "camera_unknown_cells": 165,
+        "unknown_cells": 305,
+        "cost": 16,
+        "rate": 19.0625
+      },
+      "actual_arrival_action_id": 17,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 56,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 56,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 17,
+      "call_id": 86,
+      "remaining_budget": 15,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 139,
+      "feasible_translation_state_count": 136,
+      "feasible_translation_cell_count": 36,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          21,
+          1
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            21,
+            1
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            21,
+            1
+          ],
+          [
+            32,
+            21,
+            2
+          ],
+          [
+            32,
+            21,
+            3
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "old_surface_rotation",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 2,
+      "selected_total_score": 3.560043611732811,
+      "selected_score_parts": {
+        "candidate_id": 1,
+        "group": "old_surface_rotation",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.5600000000000005,
+        "quality_proxy": 4.3611732810606284e-05
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.0000000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.5600000000000005,
+          "quality_proxy": 4.3611732810606284e-05
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 75,
+        "unknown_cells": 75,
+        "cost": 1,
+        "rate": 75.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          27,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 114,
+        "camera_unknown_cells": 152,
+        "unknown_cells": 266,
+        "cost": 15,
+        "rate": 17.733333333333334
+      },
+      "best_translation_rate": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 145,
+        "unknown_cells": 231,
+        "cost": 13,
+        "rate": 17.76923076923077
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          27,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 114,
+        "camera_unknown_cells": 152,
+        "unknown_cells": 266,
+        "cost": 15,
+        "rate": 17.733333333333334
+      },
+      "actual_arrival_action_id": 19,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 2,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 89,
+      "realized_predicted_camera_cells": 2,
+      "predicted_camera_cells_still_unseen_at_arrival": 87,
+      "predicted_camera_cells_still_unseen_at_run_end": 87
+    },
+    {
+      "action_id": 19,
+      "call_id": 95,
+      "remaining_budget": 13,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 97,
+      "feasible_translation_state_count": 94,
+      "feasible_translation_cell_count": 25,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          19,
+          3
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            19,
+            3
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            19,
+            3
+          ],
+          [
+            32,
+            19,
+            0
+          ],
+          [
+            32,
+            19,
+            1
+          ],
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "left"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.9200000000000004,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.9200000000000004,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.9200000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.24,
+          "quality_proxy": 0.0003419480240775156
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 144,
+        "unknown_cells": 230,
+        "cost": 13,
+        "rate": 17.692307692307693
+      },
+      "best_translation_rate": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 144,
+        "unknown_cells": 230,
+        "cost": 13,
+        "rate": 17.692307692307693
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 144,
+        "unknown_cells": 230,
+        "cost": 13,
+        "rate": 17.692307692307693
+      },
+      "actual_arrival_action_id": 20,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 73,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 73,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 20,
+      "call_id": 100,
+      "remaining_budget": 12,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 87,
+      "feasible_translation_state_count": 84,
+      "feasible_translation_cell_count": 24,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.240341948024078,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.24,
+        "quality_proxy": 0.0003419480240775156
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.24,
+          "quality_proxy": 0.0003419480240775156
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 0.56,
+          "quality_proxy": 0.00045189030172631736
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 56,
+        "unknown_cells": 56,
+        "cost": 2,
+        "rate": 28.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 144,
+        "unknown_cells": 230,
+        "cost": 12,
+        "rate": 19.166666666666668
+      },
+      "best_translation_rate": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 144,
+        "unknown_cells": 230,
+        "cost": 12,
+        "rate": 19.166666666666668
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          28,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 86,
+        "camera_unknown_cells": 144,
+        "unknown_cells": 230,
+        "cost": 12,
+        "rate": 19.166666666666668
+      },
+      "actual_arrival_action_id": 21,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 56,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 56,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 21,
+      "call_id": 105,
+      "remaining_budget": 11,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 63,
+      "feasible_translation_state_count": 60,
+      "feasible_translation_cell_count": 16,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          21,
+          1
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            21,
+            1
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            21,
+            1
+          ],
+          [
+            32,
+            21,
+            2
+          ],
+          [
+            32,
+            21,
+            3
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "old_surface_rotation",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 2,
+      "selected_total_score": 3.480451890301727,
+      "selected_score_parts": {
+        "candidate_id": 1,
+        "group": "old_surface_rotation",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.480000000000001,
+        "quality_proxy": 0.00045189030172631736
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.9200000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.480000000000001,
+          "quality_proxy": 0.00045189030172631736
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          29,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 59,
+        "camera_unknown_cells": 126,
+        "unknown_cells": 185,
+        "cost": 11,
+        "rate": 16.818181818181817
+      },
+      "best_translation_rate": {
+        "pose": [
+          29,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 59,
+        "camera_unknown_cells": 126,
+        "unknown_cells": 185,
+        "cost": 11,
+        "rate": 16.818181818181817
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          29,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 59,
+        "camera_unknown_cells": 126,
+        "unknown_cells": 185,
+        "cost": 11,
+        "rate": 16.818181818181817
+      },
+      "actual_arrival_action_id": 23,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 87,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 87,
+      "predicted_camera_cells_still_unseen_at_run_end": 87
+    },
+    {
+      "action_id": 23,
+      "call_id": 114,
+      "remaining_budget": 9,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 37,
+      "feasible_translation_state_count": 34,
+      "feasible_translation_cell_count": 9,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          19,
+          3
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            19,
+            3
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            19,
+            3
+          ],
+          [
+            32,
+            19,
+            0
+          ],
+          [
+            32,
+            19,
+            1
+          ],
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "left"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.9200000000000004,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.9200000000000004,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.9200000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.24,
+          "quality_proxy": 0.00021517831969861467
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          30,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 35,
+        "camera_unknown_cells": 109,
+        "unknown_cells": 144,
+        "cost": 9,
+        "rate": 16.0
+      },
+      "best_translation_rate": {
+        "pose": [
+          30,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 35,
+        "camera_unknown_cells": 109,
+        "unknown_cells": 144,
+        "cost": 9,
+        "rate": 16.0
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          30,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 35,
+        "camera_unknown_cells": 109,
+        "unknown_cells": 144,
+        "cost": 9,
+        "rate": 16.0
+      },
+      "actual_arrival_action_id": 24,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 73,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 73,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 24,
+      "call_id": 119,
+      "remaining_budget": 8,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 31,
+      "feasible_translation_state_count": 28,
+      "feasible_translation_cell_count": 8,
+      "independent_translation_witness": {
+        "target": [
+          31,
+          20,
+          0
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            0
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            31,
+            20,
+            0
+          ],
+          [
+            31,
+            20,
+            1
+          ],
+          [
+            31,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            2
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 5,
+        "total_cost": 6,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.2402151783196986,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.24,
+        "quality_proxy": 0.00021517831969861467
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.24,
+          "quality_proxy": 0.00021517831969861467
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 0.56,
+          "quality_proxy": 7.872176915967281e-05
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 56,
+        "unknown_cells": 56,
+        "cost": 2,
+        "rate": 28.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          30,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 35,
+        "camera_unknown_cells": 109,
+        "unknown_cells": 144,
+        "cost": 8,
+        "rate": 18.0
+      },
+      "best_translation_rate": {
+        "pose": [
+          30,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 35,
+        "camera_unknown_cells": 109,
+        "unknown_cells": 144,
+        "cost": 8,
+        "rate": 18.0
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          30,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 35,
+        "camera_unknown_cells": 109,
+        "unknown_cells": 144,
+        "cost": 8,
+        "rate": 18.0
+      },
+      "actual_arrival_action_id": 25,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 1,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 56,
+      "realized_predicted_camera_cells": 1,
+      "predicted_camera_cells_still_unseen_at_arrival": 55,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 25,
+      "call_id": 124,
+      "remaining_budget": 7,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 19,
+      "feasible_translation_state_count": 16,
+      "feasible_translation_cell_count": 4,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          21,
+          1
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            21,
+            1
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            21,
+            1
+          ],
+          [
+            32,
+            21,
+            2
+          ],
+          [
+            32,
+            21,
+            3
+          ],
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "right"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "old_surface_rotation",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 2,
+      "selected_total_score": 3.4800787217691607,
+      "selected_score_parts": {
+        "candidate_id": 1,
+        "group": "old_surface_rotation",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.480000000000001,
+        "quality_proxy": 7.872176915967281e-05
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.9200000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.480000000000001,
+          "quality_proxy": 7.872176915967281e-05
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          32,
+          22,
+          1
+        ],
+        "radar_unknown_cells": 19,
+        "camera_unknown_cells": 85,
+        "unknown_cells": 104,
+        "cost": 7,
+        "rate": 14.857142857142858
+      },
+      "best_translation_rate": {
+        "pose": [
+          32,
+          21,
+          0
+        ],
+        "radar_unknown_cells": 9,
+        "camera_unknown_cells": 72,
+        "unknown_cells": 81,
+        "cost": 5,
+        "rate": 16.2
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          32,
+          22,
+          1
+        ],
+        "radar_unknown_cells": 19,
+        "camera_unknown_cells": 85,
+        "unknown_cells": 104,
+        "cost": 7,
+        "rate": 14.857142857142858
+      },
+      "actual_arrival_action_id": 27,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 87,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 87,
+      "predicted_camera_cells_still_unseen_at_run_end": 87
+    },
+    {
+      "action_id": 27,
+      "call_id": 133,
+      "remaining_budget": 5,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 7,
+      "feasible_translation_state_count": 4,
+      "feasible_translation_cell_count": 1,
+      "independent_translation_witness": {
+        "target": [
+          32,
+          19,
+          3
+        ],
+        "outbound_states": [
+          [
+            32,
+            20,
+            3
+          ],
+          [
+            32,
+            19,
+            3
+          ]
+        ],
+        "outbound_actions": [
+          "forward"
+        ],
+        "return_states": [
+          [
+            32,
+            19,
+            3
+          ],
+          [
+            32,
+            19,
+            0
+          ],
+          [
+            32,
+            19,
+            1
+          ],
+          [
+            32,
+            20,
+            1
+          ],
+          [
+            32,
+            20,
+            0
+          ]
+        ],
+        "return_actions": [
+          "right",
+          "right",
+          "forward",
+          "left"
+        ],
+        "outbound_cost": 1,
+        "return_cost": 4,
+        "total_cost": 5,
+        "anchor": [
+          32,
+          20,
+          0
+        ]
+      },
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.9200000000000004,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.9200000000000004,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.9200000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.2000000000000006,
+          "quality_proxy": 0.0
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          32,
+          19,
+          0
+        ],
+        "radar_unknown_cells": 5,
+        "camera_unknown_cells": 72,
+        "unknown_cells": 77,
+        "cost": 5,
+        "rate": 15.4
+      },
+      "best_translation_rate": {
+        "pose": [
+          32,
+          19,
+          0
+        ],
+        "radar_unknown_cells": 5,
+        "camera_unknown_cells": 72,
+        "unknown_cells": 77,
+        "cost": 5,
+        "rate": 15.4
+      },
+      "largest_translation_endpoint_proxy": {
+        "pose": [
+          32,
+          19,
+          0
+        ],
+        "radar_unknown_cells": 5,
+        "camera_unknown_cells": 72,
+        "unknown_cells": 77,
+        "cost": 5,
+        "rate": 15.4
+      },
+      "actual_arrival_action_id": 28,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 73,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 73,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    },
+    {
+      "action_id": 28,
+      "call_id": 138,
+      "remaining_budget": 4,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 3,
+      "feasible_translation_state_count": 0,
+      "feasible_translation_cell_count": 0,
+      "independent_translation_witness": null,
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        1
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.2000000000000006,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.2000000000000006,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            1
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.2000000000000006,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 0.56,
+          "quality_proxy": 3.999804468426724e-05
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 55,
+        "unknown_cells": 55,
+        "cost": 2,
+        "rate": 27.5
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          32,
+          20,
+          1
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 55,
+        "unknown_cells": 55,
+        "cost": 2,
+        "rate": 27.5
+      },
+      "best_translation_rate": null,
+      "largest_translation_endpoint_proxy": null,
+      "actual_arrival_action_id": 29,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 55,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 55,
+      "predicted_camera_cells_still_unseen_at_run_end": 55
+    },
+    {
+      "action_id": 29,
+      "call_id": 143,
+      "remaining_budget": 3,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 3,
+      "feasible_translation_state_count": 0,
+      "feasible_translation_cell_count": 0,
+      "independent_translation_witness": null,
+      "generated_candidate_count": 2,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "old_surface_rotation",
+      "selected_pose": [
+        32,
+        20,
+        3
+      ],
+      "selected_outbound_cost": 2,
+      "selected_total_score": 3.4800399980446852,
+      "selected_score_parts": {
+        "candidate_id": 1,
+        "group": "old_surface_rotation",
+        "pose": [
+          32,
+          20,
+          3
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 3.480000000000001,
+        "quality_proxy": 3.999804468426723e-05
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.9200000000000004,
+          "quality_proxy": 0.0
+        },
+        {
+          "candidate_id": 1,
+          "group": "old_surface_rotation",
+          "pose": [
+            32,
+            20,
+            3
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 3.480000000000001,
+          "quality_proxy": 3.999804468426723e-05
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "best_translation_rate": null,
+      "largest_translation_endpoint_proxy": null,
+      "actual_arrival_action_id": 31,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 87,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 87,
+      "predicted_camera_cells_still_unseen_at_run_end": 87
+    },
+    {
+      "action_id": 31,
+      "call_id": 152,
+      "remaining_budget": 1,
+      "safe_cell_count": 579,
+      "reachable_cell_count": 579,
+      "feasible_state_count": 1,
+      "feasible_translation_state_count": 0,
+      "feasible_translation_cell_count": 0,
+      "independent_translation_witness": null,
+      "generated_candidate_count": 1,
+      "generated_translation_count": 0,
+      "observed_asset_count": 4,
+      "missing_asset_role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      },
+      "selected_group": "coverage_anchor",
+      "selected_pose": [
+        32,
+        20,
+        0
+      ],
+      "selected_outbound_cost": 1,
+      "selected_total_score": 2.9200000000000004,
+      "selected_score_parts": {
+        "candidate_id": 0,
+        "group": "coverage_anchor",
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_area_proxy_m2": 0.0,
+        "camera_area_proxy_m2": 2.9200000000000004,
+        "quality_proxy": 0.0
+      },
+      "candidate_score_parts": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_anchor",
+          "pose": [
+            32,
+            20,
+            0
+          ],
+          "radar_area_proxy_m2": 0.0,
+          "camera_area_proxy_m2": 2.9200000000000004,
+          "quality_proxy": 0.0
+        }
+      ],
+      "rate_prefilter_winner": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "largest_endpoint_total_proxy": {
+        "pose": [
+          32,
+          20,
+          0
+        ],
+        "radar_unknown_cells": 0,
+        "camera_unknown_cells": 73,
+        "unknown_cells": 73,
+        "cost": 1,
+        "rate": 73.0
+      },
+      "best_translation_rate": null,
+      "largest_translation_endpoint_proxy": null,
+      "actual_arrival_action_id": 32,
+      "actual_new_observed_2d_cells": 0,
+      "actual_new_camera_projection_cells": 0,
+      "predicted_radar_unknown_cells": 0,
+      "predicted_camera_unknown_cells": 73,
+      "realized_predicted_camera_cells": 0,
+      "predicted_camera_cells_still_unseen_at_arrival": 73,
+      "predicted_camera_cells_still_unseen_at_run_end": 73
+    }
+  ]
+}

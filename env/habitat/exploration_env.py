@@ -5,6 +5,8 @@ import subprocess
 import sys
 import time
 
+from utils.paper_eval import coverage_metrics, GoalMetrics
+
 import gym
 import matplotlib
 import numpy as np
@@ -314,6 +316,7 @@ class Exploration_Env(habitat.RLEnv):
         self._pending_goal_start_rc = None
         self._last_path_unreachable = False
         self._last_embodied_success = None
+        self._goal_metrics = GoalMetrics(args.num_local_steps, 50.0 / args.map_resolution)
 
         if args.randomize_env_every > 0:
             if np.mod(self.episode_no, args.randomize_env_every) == 0:
@@ -383,6 +386,18 @@ class Exploration_Env(habitat.RLEnv):
             'embodied_goal_success': None,
         }
 
+        episode = getattr(self.habitat_env, 'current_episode', None)
+        self.info.update({
+            'scene_id': str(getattr(episode, 'scene_id', self.scene_name)),
+            'episode_id': str(getattr(episode, 'episode_id', self.episode_no)),
+            'env_rank': self.rank,
+            'env_seed': getattr(self, '_seed_value', None),
+            'semantic_reward_sample': None,
+        })
+        self.info.update(coverage_metrics(self.explored_map, self.explorable_map,
+                                          args.map_resolution))
+        self.info.update(self._goal_metrics.snapshot())
+        self._previous_observed_cells = self.info['observed_free_cells']
         self.save_position()
 
         return state, self.info
@@ -489,11 +504,27 @@ class Exploration_Env(habitat.RLEnv):
                                  do_gt - do_base]
 
 
+        physical = coverage_metrics(self.explored_map, self.explorable_map,
+                                    args.map_resolution)
+        new_cells = physical['observed_free_cells'] - self._previous_observed_cells
+        self._previous_observed_cells = physical['observed_free_cells']
+        self.info.update(physical)
+        self.info['coverage_delta'] = (new_cells / physical['explorable_free_cells']
+                                      if physical['explorable_free_cells'] else None)
+        self.info['explored_area_delta_m2'] = new_cells * (args.map_resolution / 100.0) ** 2
+        self.info['semantic_reward_sample'] = None
+        self._goal_metrics.advance(
+            (self.curr_loc_gt[1] * 100.0 / args.map_resolution,
+             self.curr_loc_gt[0] * 100.0 / args.map_resolution),
+            terminal=self.timestep >= args.max_episode_length)
+        self.info.update(self._goal_metrics.snapshot())
+
         if self.timestep%args.num_local_steps==0:
             total_reward, ratio, sem_bonus, area_reward = self.get_global_reward()
             self.info['exp_reward'] = total_reward
             self.info['exp_ratio'] = ratio
             self.info['sem_reward'] = sem_bonus
+            self.info['semantic_reward_sample'] = sem_bonus
             self.info['area_reward'] = area_reward
             # 保存当前的语义奖励值，以便在非全局奖励步骤时也能显示
             self._last_sem_reward = sem_bonus
@@ -539,13 +570,14 @@ class Exploration_Env(habitat.RLEnv):
         return 0.
 
     def get_global_reward(self):
-        curr_explored = self.explored_map*self.explorable_map
-        curr_explored_area = curr_explored.sum()
+        physical = coverage_metrics(self.explored_map, self.explorable_map,
+                                    self.args.map_resolution)
+        curr_explored_area = physical['observed_free_cells']
 
-        reward_scale = self.explorable_map.sum()
+        reward_scale = physical['explorable_free_cells']
         m_reward = (curr_explored_area - self.prev_explored_area)*1.
-        m_ratio = m_reward/reward_scale
-        m_reward = m_reward * 25./10000. # converting to m^2
+        m_ratio = m_reward/reward_scale if reward_scale else None
+        m_reward *= (self.args.map_resolution / 100.0) ** 2
         self.prev_explored_area = curr_explored_area
 
         m_reward *= 0.02 # Reward Scaling
@@ -596,6 +628,7 @@ class Exploration_Env(habitat.RLEnv):
         return info
 
     def seed(self, seed):
+        self._seed_value = int(seed)
         self.rng = np.random.RandomState(seed)
 
     def get_spaces(self):
@@ -893,21 +926,23 @@ class Exploration_Env(habitat.RLEnv):
         self._last_global_goal = [int(goal[0]), int(goal[1])]
         self._last_intrinsic_val = float(-exp_pred[goal[0], goal[1]])
 
-        # 具身可达性监督：记录本周期长期目标起点
+        # Preserve the existing training label path; evaluation uses the
+        # separate budget-based counter below, never this per-step proxy.
         if self._pending_global_goal is not None:
             from env.habitat.reachability_utils import embodied_goal_reached
             self._last_embodied_success = embodied_goal_reached(
-                (start[0], start[1]),
-                tuple(self._pending_global_goal),
-                success_radius_cells=max(1, int(50 / args.map_resolution)),
-            )
-            self.info['embodied_goal_success'] = self._last_embodied_success
+                (start[0], start[1]), tuple(self._pending_global_goal),
+                success_radius_cells=max(1, int(50 / args.map_resolution)))
         else:
             self._last_embodied_success = None
-            self.info['embodied_goal_success'] = None
 
+        # Evaluation uses one global target per local-step budget. Coordinates
+        # include the moving local-map origin; repeated local replans are not attempts.
+        if inputs.get('new_global_goal', False):
+            self._goal_metrics.start((goal[0] + gx1, goal[1] + gy1))
         self._pending_global_goal = [int(goal[0]), int(goal[1])]
         self._pending_goal_start_rc = (int(start[0]), int(start[1]))
+        self.info['embodied_goal_success'] = None  # legacy per-step proxy retired
 
         # Get intrinsic reward for global policy
         # Negative reward for exploring explored areas i.e.
@@ -920,6 +955,7 @@ class Exploration_Env(habitat.RLEnv):
             grid, explored, start, np.copy(goal), planning_window)
         self._last_path_unreachable = path_unreachable
         self.info['path_unreachable'] = path_unreachable
+        self._goal_metrics.mark_unreachable(path_unreachable)
 
         # Find GT action
         if self.args.eval or not self.args.train_local:

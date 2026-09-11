@@ -1,0 +1,57 @@
+{
+  "schema": "cpu_grid_v1",
+  "purpose": "development soft action-budget comparator; fixed sigmoid scale of 4 actions, no sweep",
+  "map_size": 128,
+  "door_width": 5,
+  "max_candidates": 24,
+  "environment": {
+    "resolution_m": 0.1,
+    "robot_radius_m": 0.1,
+    "sensor_range_m": 1.5,
+    "sensor_fov_deg": 90,
+    "max_steps": 500
+  },
+  "maps": [
+    {
+      "layout": "single_room",
+      "seed": 31
+    },
+    {
+      "layout": "multi_room",
+      "seed": 31
+    },
+    {
+      "layout": "corridor",
+      "seed": 31
+    },
+    {
+      "layout": "dead_end",
+      "seed": 31
+    },
+    {
+      "layout": "loop",
+      "seed": 31
+    },
+    {
+      "layout": "hall",
+      "seed": 31
+    }
+  ],
+  "start_seeds": [
+    101
+  ],
+  "methods": [
+    "gain_semantic_structure_budget_soft"
+  ],
+  "semantics": {
+    "source": "synthetic_visible_salience_v1",
+    "seed_offset": 10000
+  },
+  "mechanisms": {
+    "semantic_weight": 1.0,
+    "structure_weight": 1.0,
+    "goal_budget": 32,
+    "topology_period": 10,
+    "max_door_width": 7
+  }
+}

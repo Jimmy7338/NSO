@@ -408,14 +408,6 @@ def get_args():
             print("Number of processes per GPU: {}".format(
                                       args.num_processes_per_gpu))
 
-    if args.eval == 1:
-        if args.train_global:
-            print("WARNING: Training Global Policy during evaluation")
-        if args.train_local:
-            print("WARNING: Training Local Policy during evaluation")
-        if args.train_slam:
-            print("WARNING: Training Neural SLAM module during evaluation")
-
     assert args.short_goal_dist >= 1, "args.short_goal_dist >= 1"
 
     if args.use_deterministic_local:
@@ -477,4 +469,6 @@ def get_args():
         # 禁用未完成的 SSC 深度网络（仅保留规则传播作为后处理）
         args.use_ssc_completion = False
 
-    return args
+    # Apply after all presets, including paper_mode.
+    from utils.eval_protocol import enforce_eval_mode
+    return enforce_eval_mode(args)

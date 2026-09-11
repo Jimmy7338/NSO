@@ -1,346 +1,378 @@
 \documentclass[11pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{ctex}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{hyperref}
-\usepackage{geometry}
-\usepackage{caption}
-\usepackage{cite}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath,amssymb,graphicx,booktabs,hyperref,geometry,caption,cite}
 \geometry{margin=1in}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    citecolor=green,
-}
-
-\title{\textbf{NSO：面向大尺度未知场景的开放词汇语义增强\\层次化主动覆盖探索}}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\title{\textbf{NSO：面向二维覆盖与三维重建的\\语义增强层次化主动探索}}
 \author{\textbf{李兆宇}}
-\date{2025年12月23日}
-
+\date{2026年9月11日研究修订稿}
 \begin{document}
-
 \maketitle
-
 \begin{abstract}
-大尺度室内环境的主动覆盖式建图面临三类耦合难题：长视距全局目标常落在物理不可达区域；基于封闭类别检测器的语义感知无法泛化至新物体类别；以及缺乏室内拓扑连通认知导致探索策略在多房间场景中反复回溯。本文提出 \textbf{NSO}（\textit{Neural Semantic-Structure Active Exploration with Open-vocabulary}）——一种开放词汇语义增强与拓扑结构感知的层次化主动 SLAM 系统。NSO 在 Active Neural SLAM 的双层解耦架构上，引入四项可独立消融的核心机制：
-（1）\textbf{开放词汇语义密度场}：以 CLIP 视觉-语言嵌入替代固定类别检测器，将语义密度函数定义为 CLIP 嵌入空间中的余弦相似度核，支持自然语言查询驱动的自适应探索偏好；
-（2）\textbf{语义拓扑图层次规划}：从占据地图中在线提取门框节点与房间连通图，实现室级拓扑目标选择与局部 FMM 路径规划的两级解耦，从根源上消除多房间场景中的探索震荡；
-（3）\textbf{不确定性感知具身可达性预测（RPN-UQ）}：在 RPN 分支引入 MC-Dropout，输出可达性均值与方差，通过置信度加权掩码调制全局目标采样；
-（4）\textbf{信息增益覆盖奖励}：以互信息增益替代面积增量作为覆盖基础奖励，在理论层面与信息论主动感知框架对齐。
-在 Habitat 仿真平台 Gibson 与 Matterport3D 数据集 20 个场景上，NSO 在覆盖率（92.4\%±1.8\% vs. ANS 74.2\%±3.1\%）、无效目标频次（2 次 vs. 43 次）与轨迹漂移（11.9\,cm vs. 48.7\,cm）三项指标上均取得显著提升，并优于 SemExp、PONI 等 2022 年后最新基线。消融实验验证了各子模块的独立贡献。
+移动机器人对二维可通行空间的快速覆盖与对遮挡物体的三维完整重建并不总是一致。本文保留 Active Neural SLAM（ANS）的全局长期目标与局部执行层次，以及开放词汇语义密度场（OV-SDF）、语义拓扑图层次规划（STGHP）、不确定性感知可达性预测（RPN-UQ）和信息增益覆盖奖励（IGCR）四模块接口，研究覆盖约束下的语义条件观测需求。核心假设是：当初始几何观测不足以区分对象内部结构时，类别信息能够帮助选择更有价值的后续视角；预测不能在实际传感器观测前被当作已经消费。无独立显卡的CPU程序化三维实验包含共享150动作基础覆盖和48动作自适应巡检。在八个工业资产历史上，完整语义模式的新增唯一表面积与最终5cm F1乘积均值相对几何完成和无类别内部基线分别提高28.27\%和18.07\%，相对错误语义提高88.34\%；所有分支零碰撞返航。该结果限于人工类别标记的开发域，IGCR关闭消融与完整反馈相同；原作者外部基线、自然开放词汇感知及实车验证尚未完成。
 \end{abstract}
-
-\textbf{关键词：} 主动 SLAM；开放词汇语义；层次化探索；拓扑规划；可达性预测；大场景建图
-
-\linespread{1.3} \selectfont
+\textbf{关键词：}主动探索；ANS；语义观测需求；二维覆盖；三维重建；层次规划
+\linespread{1.25}\selectfont
 
 \section{引言}
-自主探索未知环境并构建一致地图是具身智能走向完全自主化的前置任务。与被动 SLAM 不同，主动 SLAM 将建图、定位与规划视为闭环控制：智能体依据部分可观测状态，规划下一步动作以最大化信息增益并抑制定位不确定性。基于 Habitat~\cite{habitat2019} 等仿真平台的数据驱动方法在室内中小场景已展现潜力，但当场景扩展至多房间、长走廊等非结构化大尺度环境时，现有方法面临三类严峻瓶颈。
+主动建图需要在有限运动与计算预算内安排观测。对携带单线雷达与窄视场深度相机的地面机器人，某位置可快速增加二维已知区域，却未必能观察货架内部、背面或仪器之间的遮挡表面。反复接近语义对象也可能消耗覆盖预算而没有新增有效证据。因此，本文关注的是语义何时提供了几何历史之外的决策信息，以及如何控制其代价。
 
-\textbf{几何前沿法}~\cite{yamauchi1997frontier} 依赖占据栅格，将智能体导向已知自由空间与未知区域的交界。由于缺乏宏观拓扑认知，智能体易在长走廊或局部受限空间中反复回溯，探索效率随场景尺度线性衰退。
+ANS 将学习建图、全局目标、几何短期规划和局部策略组织为层次系统\cite{chaplot2020}。本文保留该组织方式，不以 CPU 确定性控制器替代实验就宣称验证了原神经策略。近年的 TARE、FUEL 和 FALCON 已展示强几何覆盖规划能力\cite{cao2021tare,zhou2021fuel,zhang2025falcon}；语义物体检查及形状补全选视角也已有直接前作\cite{papatheodorou2023finding,menon2023nbvsc,zhan2025panoramic}。因此，本文不把模块组合本身作为充分创新依据。
 
-\textbf{封闭集语义方法}以固定类别检测器（如 COCO 80 类 YOLOv8）为感知前端。此类方法面临两重局限：（a）类别集合固定，无法处理训练集外的室内物体；（b）语义密度场对``功能价值''的建模依赖人工指定类别权重，缺乏泛化性。近年来，CLIP~\cite{clip2021} 等视觉-语言预训练模型的兴起使得开放词汇场景理解成为可能，但在主动 SLAM 覆盖探索场景中尚未得到系统性应用。
-
-\textbf{学习型层次化方法}以 Active Neural SLAM（ANS）~\cite{chaplot2020} 为代表，采用``全局长期目标 + 局部执行''解耦，但全局策略输入主要为二维几何占据图，忽略室内拓扑连通，导致长期目标频繁落在墙体后方或不可达未知区，引发``局部死锁''。SemExp~\cite{semexp2022} 与 PONI~\cite{poni2022} 将语义引入探索，但均面向目标驱动导航（ObjectNav）而非全图覆盖，不能直接迁移。OVRL~\cite{ovrl2022} 通过大规模预训练提升了泛化性，但对拓扑结构仍无显式建模。
-
-针对上述三类问题，本文提出 NSO 系统，核心贡献如下：
-\begin{itemize}
-    \item \textbf{开放词汇语义密度场（OV-SDF）：}以 CLIP 嵌入替代固定类别检测器，将语义密度定义为余弦相似度核 $S_{i,j}(q) = \sum_k \cos(\phi_v(\mathbf{d}_k), \phi_t(q)) \cdot \text{conf}_k$，其中 $q$ 为自然语言查询，支持零样本语义引导探索。与 YOLOv8 方案相比，OV-SDF 无需重训即可迁移至任意场景与探索任务。
-    \item \textbf{语义拓扑图层次规划（STGHP）：}在线从占据地图中提取门框-房间有向图 $\mathcal{G} = (\mathcal{V}, \mathcal{E})$，以信息增益最大化策略在图上选择室级目标节点，再由 FMM 在目标房间内执行局部前沿探索。STGHP 将多房间场景的全局规划复杂度从 $O(HW)$ 降至 $O(|\mathcal{V}|)$，从根源上解决探索震荡。
-    \item \textbf{不确定性感知具身可达性预测（RPN-UQ）：}在全局策略并行 RPN 分支中引入 MC-Dropout，以 $T$ 次前向传播的均值 $\mu_{reach}$ 与方差 $\sigma^2_{reach}$ 联合调制目标采样概率，实现风险规避的主动探索决策。
-    \item \textbf{信息增益覆盖奖励（IGCR）：}以互信息增益 $\Delta I_t = I(O_{t+1}; Z) - I(O_t; Z)$（其中 $Z$ 为未观测地图）替代简单面积增量，从信息论角度优化探索效率，与互信息主动感知理论框架~\cite{activesensing2011} 对齐。
-\end{itemize}
+本文拟检验三项研究主张：（1）类别条件的待观测表面需求相对相同几何拟合具有独立预测价值；（2）在保留覆盖路线和预算约束时，该信息能带来二维覆盖与三维质量的净收益；（3）实测观测收益能够修正错误先验并减少无效补看。这三项是待确认的研究假设，当前开发结果不能同时证实三者。四模块的名称和职责保留，内部算法可以随证据修订。
 
 \section{问题形式化}
-将探索过程建模为部分可观测马尔可夫决策过程 $(\mathcal{S}, \mathcal{A}, \mathcal{O}, \mathcal{T}, R, \gamma)$。全局状态 $S_t$ 为多通道栅格地图张量；全局动作 $g_t \in \mathbb{R}^2$ 为长期目标栅格坐标；局部策略输出离散运动 $\mathcal{A}=\{\text{左转, 右转, 前进}\}$。优化目标为：
+观测历史记为 $h_t=(o_{0:t},a_{0:t-1})$，其中观测包含可用的图像、深度、平面扫描及位姿估计。地图和位姿信念为 $b_t$。全局层输出长期目标 $g_t$，几何规划器给出短期目标，局部层输出运动动作。规划输入只允许来自当前及过去传感器历史；参考网格和未来观测仅用于独立评价。
+
+设 $C_{2D}(t)$ 为固定评价定义下的二维覆盖率，$P_\tau(t)$、$R_\tau(t)$ 为距离阈值 $\tau$ 下重建表面精确率与完整率。定义
 \begin{equation}
-J = \mathbb{E}\left[\sum_{t=0}^{T} \gamma^t R_{\text{total}}(S_t, g_t)\right],
+ F_{3D,\tau}(t)=\frac{2P_\tau(t)R_\tau(t)}{P_\tau(t)+R_\tau(t)},\qquad
+ J_\tau(t)=C_{2D}(t)F_{3D,\tau}(t).
 \end{equation}
-其中 $R_{\text{total}}$ 融合信息增益覆盖、开放词汇语义密度、拓扑结构与前沿引导四项，详见第\,\ref{sec:reward} 节。与目标驱动导航（ObjectNav）不同，本文优化目标是\textbf{全图覆盖率}与\textbf{地图一致性}，而非到达特定物体。
+分母为零时令 F1 为零。F1 同时反映精确率与完整率，不能简称为纯粹的定位或三维精度。联合时间积分为
+\begin{equation}
+ \overline J_\tau=\frac{1}{T}\int_0^T J_\tau(t)\,dt.
+\end{equation}
+本文当前 CPU 实验中的 $t$ 是离散动作步，积分以记录的评价检查点做梯形近似，提前结束后保持末值至共同预算；它不是实车秒级时间。在线决策使用可计算代理，不能读取上述真值评价量。除联合指标外，必须分别报告覆盖、F1、表面误差与实际成本，避免乘积掩盖某一项退化。
 
 \section{相关工作}
-\subsection{层次化主动探索}
-ANS~\cite{chaplot2020} 奠定``全局策略 + FMM 规划 + 局部策略''范式，在室内住宅场景表现优异，但决策输入缺乏语义拓扑。Stubborn~\cite{stubborn2022} 改进了前沿选择策略，但仍依赖封闭集检测器，且未引入拓扑图规划。DD-PPO~\cite{ddppo2019} 通过大规模分布式训练提升基础导航能力，但未针对覆盖探索优化。
+\subsection{层次化主动探索与强几何基线}
+TARE 结合局部密集视点和全局粗粒度路线；其长度界依赖理想化路线子问题，不能直接移用于本项目滚动启发式\cite{cao2021tare,cao2023granularity}。FUEL 维护增量前沿结构并依次求全局顺序、局部视点与轨迹，官方实现具有 CPU 仿真路径\cite{zhou2021fuel}。FALCON 使用覆盖路径约束局部前沿顺序，构成应认真比较的层次几何方法\cite{zhang2025falcon}。RACER 面向分布式多机探索，单机适配须单独说明\cite{zhou2023racer}。FAR 主要解决给定目标的路线规划，不能直接充当完整覆盖策略\cite{yang2022far}。
 
-\subsection{语义辅助探索与开放词汇方法}
-SemExp~\cite{semexp2022} 利用语义地图引导 ObjectNav 探索，但依赖固定类别检测器，且目标为找到特定物体而非最大化覆盖率。PONI~\cite{poni2022} 通过势函数引导语义探索，其语义奖励设计与本文 OV-SDF 最为相关，但 PONI 仍使用封闭集检测器，且无拓扑结构建模。OVRL~\cite{ovrl2022} 利用大规模自监督预训练提升视觉表征泛化性，验证了预训练特征在导航任务中的迁移能力。本文通过 CLIP 将语义感知提升至开放词汇层次，是在覆盖探索场景中对 OVRL 工作的重要补充。
+\subsection{语义辅助探索与对象重建}
+Finding Things in the Unknown 已将物体更近观察、背景不确定性和移动成本结合\cite{papatheodorou2023finding}。NBV-SC 通过形状补全预测缺失面，并排除与已知空间矛盾的假设\cite{menon2023nbvsc}。2025 年全景 LiDAR--相机地面探索系统已经联合语义多视角、几何去重和全局路线；其全景传感器和模拟检测条件与单线雷达、窄视场深度相机不同\cite{zhan2025panoramic}。因此，对象偏好、固定视角扇区或手工形状先验均不足以单独构成本文贡献。
 
-\subsection{可达性预测与不确定性}
-ANS 通过 FMM 几何距离场判断可达性，但纯几何判断不能捕获局部执行器的实际抵达能力。PointNav 系列工作~\cite{habitat2019} 表明局部导航性能与几何距离判断之间存在显著 gap。本文 RPN-UQ 在具身回溯自监督基础上引入 MC-Dropout 不确定性估计，填补了可达性预测与风险规避决策之间的空白。
+\subsection{近期任务相关观测与证据限制}
+质量引导表面探索研究了距离相关的观测质量与覆盖之间的权衡，其质量代理依赖传感器模型\cite{sportich2025quality}。2026 年 SCOUT 采用语义熵和视角新颖性，但其已知二维地图、小场景及往复式对照不足以支持未知大场景优势\cite{mao2026scout}。SGE 的语义多样性目标伴随相对 TARE 的几何效率代价\cite{tatsch2026sge}。SAGE 使用语义调制的路线成本改善查询对象发现，但并未因此得到有限预算覆盖不下降的定理\cite{vegesna2026sage}。这些近期预印本与工作坊应按其实际发表状态引用。
 
-\subsection{拓扑地图与层次规划}
-拓扑记忆地图~\cite{topomap2019} 验证了室内导航中图结构表示的优越性，但多用于目标导航。SLING~\cite{sling2022} 和 STopNav 尝试将拓扑图与前沿探索结合，但未在大尺度场景做系统性评估，也未结合开放词汇语义。本文 STGHP 是在覆盖探索场景中首次系统性将在线拓扑图构建与分层 FMM 规划结合。
+BayesianNBV 将候选视角与任务后验收益联系起来，也展示错误自信导致选择失效的可能\cite{zhu2026bayesiannbv}。物体感知 3D Gaussian Splatting 的 NBV 同时改变重建表征与规划，不能将全部实验增益归给选视角\cite{jeong2026objectnbv}。这些研究支持采用实际新增证据检验语义需求，但不直接证明本文 CPU 方案。
+
+\subsection{可达性、拓扑与主动 SLAM}
+实际执行成功、不确定性校准和区域连通性应分别验证，不能将最短路可达等同于具身到达概率。3D Active Metric-Semantic SLAM 在语义因子图中考虑回环和位姿不确定性\cite{tao2024active}；相比之下，本文当前零位姿噪声开发实验仅检验主动探索与重建机制，不能证明轨迹漂移或回环收益。
 
 \section{方法论}
-\subsection{系统架构}
-NSO 由四个高频交互模块构成（见图\,\ref{fig:arch}）：
-（1）\textbf{感知建图：}Neural SLAM 预测局部占据与位姿，CLIP + GroundingDINO 并行提取开放词汇语义检测流并反投影构建 $M_{sem}$；
-（2）\textbf{在线拓扑图构建（STGHP-前端）：}从占据地图实时提取门框连通分量，维护房间节点-门框边有向图 $\mathcal{G}$；
-（3）\textbf{不确定性感知全局策略：}共享 CNN 编码器并行 Actor、Critic 与 RPN-UQ 三头，RPN 以 MC-Dropout 输出 $(\mu_{reach}, \sigma^2_{reach})$，调制拓扑层目标采样；
-（4）\textbf{局部执行：}FMM 解算短期路径点，ResNet-18+LSTM 局部策略输出离散动作；回环检测模块（NetVLAD + 语义指纹）作为后端系统组件在线修正位姿图。
+\subsection{系统架构与实现状态}
+\textbf{架构约束：}传感器与地图状态依次进入全局长期目标选择、几何短期规划和局部动作执行。保留 ANS 的层次接口以及 OV-SDF、STGHP、RPN-UQ、IGCR 四模块。原程序中神经建图、全局策略和局部策略仍是独立组件；本稿不假定全局编码器是 ResNet 三头共享网络。
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.92\linewidth]{docs/arch_diagram.pdf}
-\caption{NSO 系统架构：开放词汇语义感知、在线拓扑图规划与不确定性感知可达性预测的协同流水线。}
-\label{fig:arch}
-\end{figure}
+\textbf{当前证据边界：}CPU 三维开发规划器采用程序化世界、几何规划和深度融合后端；主入口已进行四模块适配接线工作，但完整 Habitat 运行、真实深度语义投影、IGCR 训练奖励替换及神经权重恢复仍需验证。第六节的 CPU 结果没有走完原 ANS 训练系统，不能称为四个神经模块的联合性能结果。
 
 \subsection{开放词汇语义密度场（OV-SDF）}
 \label{sec:ovsdf}
-
-\subsubsection{CLIP 嵌入语义密度}
-维护多通道地图张量 $M \in \mathbb{R}^{H \times W \times K}$（分辨率 5\,cm/像素），含障碍 $M_{obs}$、探索 $M_{exp}$、轨迹、可达性掩码及语义密度 $M_{sem}$。
-
-使用 GroundingDINO~\cite{groundingdino2023} 作为开放词汇检测前端，将用户自然语言查询 $q$（如``室内家具与生活物品''）传入模型获取边界框 $\{(\mathbf{b}_k, \text{conf}_k)\}$。CLIP 视觉编码器 $\phi_v$ 对每个检测区域提取嵌入：
+\textbf{方案设计／部分 CPU 机制已实现：}保留地图对齐的语义场输出，将类别的永久正奖励改为可消耗的对象或部件观测需求。设 $c_j$ 为对象类别，$G_t$ 为已测几何，$u_{jk}$ 为视角 $k$ 对需求单元 $j$ 产生有效新证据的事件。候选收益需要估计
 \begin{equation}
-S_{i,j}(q) = \sum_{t=1}^{T} \sum_{k \in O_{i,j}^t} \cos\!\left(\phi_v(\mathbf{I}_t[\mathbf{b}_k]),\; \phi_t(q)\right) \cdot \text{conf}_k
-\label{eq:ovsdf}
+ p_{jk}=p(u_{jk}=1\mid G_t,c_j,h_t),\qquad
+ \widehat{\Delta Q}(k)=\sum_j w_jD_j(t)p_{jk},
 \end{equation}
-其中 $\phi_t$ 为 CLIP 文本编码器，$\mathbf{I}_t[\mathbf{b}_k]$ 为第 $t$ 步 $k$ 号检测框裁剪图像，$O_{i,j}^t$ 为投影到栅格 $(i,j)$ 的检测集合。与固定类别方法相比，式\,(\ref{eq:ovsdf}) 无需预设类别列表，可通过修改 $q$ 零样本适配任意探索任务（如``出口与过道''、``易损物品''等）。
+其中 $D_j(t)$ 为尚未兑现的需求，$w_j$ 按固定表面面积确定，不随类别改变。预测表面只进入规划，不写入实测重建。
 
-\subsubsection{多查询融合}
-支持多个查询 $\{q_1, \ldots, q_M\}$ 的加权融合：
+类别信息仅在几何历史不能充分判断需求且它能改变最优动作时可能有独立价值。纯几何对照应允许使用相同候选、模型族和几何似然；必须增加仅物体性、置换类别及先验失配对照。历史通用实验使用模拟可见类别；新设施从实际渲染RGB的人工标记读取类别，两者均未验证 CLIP/GroundingDINO 的检测质量、零样本迁移或开放词汇语义到形状先验的可靠映射。新CPU实验使用深度反投影，但原ANS开放词汇接口的真实深度接线仍待完成，不用固定距离投点替代。
+
+\textbf{开发中的内部替代：}针对隐藏几何拟合失效，V6探针直接估计候选路线的条件观测响应。已观测支撑面、历史观察方位、候选方向和共同覆盖代理构成特征，类别仅改变方向相关的响应项。以面积率及F1增量为离线监督，使用每历史中心化的岭回归：
 \begin{equation}
-S_{i,j}^{\text{fused}} = \sum_{m=1}^{M} w_m \cdot S_{i,j}(q_m), \quad \sum_m w_m = 1
+ \widehat W=\arg\min_W\sum_h\frac{1}{n_h}
+ \|\widetilde X_hD^{-1}W-\widetilde Y_h\|_F^2+\|W\|_F^2.
 \end{equation}
-默认配置使用两个查询：``indoor furniture and appliances''（$w=0.7$）与``doorway and passage''（$w=0.3$），其中后者与拓扑结构模块协同，优先引导智能体穿越连通节点。
+尺度$D$只由训练历史决定；测试预测为$(X_h-\overline X_h)D^{-1}\widehat W$，不使用测试标签或截距，输出是相对排序而非绝对收益校准。共同几何、仅对象性和去对象响应对照分别重新拟合，另保留固定语义模型参数的输入干预。该探针仍使用V3未校准的形状混合系数，尚未作为默认OV-SDF实现或接入完整ANS；下文保留其负结果。
 
 \subsection{语义拓扑图层次规划（STGHP）}
 \label{sec:stghp}
+\textbf{方案设计／预算保护已进入 CPU 开发：}在线维护区域与可通行连接的图，先形成几何覆盖骨架，再选择预算允许的补看视点。连通自由空间不等于房间分区，空间方格分桶也不等于真实门户拓扑；完整区域与通道识别仍需独立实现和检验。
 
-\subsubsection{在线拓扑图构建}
-基于占据地图 $M_{obs}$ 和 OV-SDF 语义通道，在线维护有向拓扑图 $\mathcal{G} = (\mathcal{V}, \mathcal{E})$：
-\begin{itemize}
-    \item \textbf{节点} $v_i \in \mathcal{V}$：每个已探索连通分量（房间）对应一个节点，附带以下属性：已探索面积 $A_i$、未探索前沿边界长度 $F_i$、平均语义密度 $\bar{S}_i$。
-    \item \textbf{有向边} $(v_i, v_j) \in \mathcal{E}$：从门框检测（GroundingDINO 查询``doorway''）产生，携带门框中心坐标 $\mathbf{p}_{ij}$、通过置信度 $c_{ij} = \mu_{reach}(\mathbf{p}_{ij})$ 及未探索邻域面积 $U_{ij}$。
-\end{itemize}
-门框检测采用双重验证：（a）GroundingDINO 文本引导检测置信度 $> 0.4$；（b）形态学狭窄通道分析（骨架化宽度 $< w_{narrow}$ 格）。二者取并集以降低漏检。
-
-\subsubsection{两级层次规划}
-\textbf{拓扑层（室级，低频）：}每隔 $N_{topo}=100$ 步更新一次，在 $\mathcal{G}$ 上以信息增益最大化策略选择目标节点：
+对固定、可执行的骨架 $P_0$，插入视点 $v_k$ 的路程增量为
 \begin{equation}
-v^* = \arg\max_{v_i \in \mathcal{V}} \left[ \lambda_F \cdot F_i + \lambda_S \cdot \bar{S}_i - \lambda_D \cdot d_{\mathcal{G}}(v_{\text{cur}}, v_i) \right]
-\label{eq:topo_select}
+ \delta_k=d(a_k,v_k)+d(v_k,b_k)-d(a_k,b_k).
 \end{equation}
-其中 $d_{\mathcal{G}}$ 为图上最短路径距离，$\lambda_F=1.0, \lambda_S=0.5, \lambda_D=0.3$。
-
-\textbf{几何层（局部，高频）：}在目标节点 $v^*$ 对应区域内，全局策略 Actor 以 $N_{global}=25$ 步为周期选择局部前沿目标，FMM 规划具体路径。若目标节点可达性 $\mu_{reach} < 0.3$ 或不确定性 $\sigma^2_{reach} > 0.15$，则触发拓扑层重新选择。
-
-\subsubsection{可达性置信度门控}
-在拓扑层目标选择与几何层目标采样之间，引入 RPN-UQ 输出的联合门控：
-\begin{equation}
-P_{\text{final}}(g) = \text{Softmax}\!\left(\log \pi_{act}(g|S_t) + \alpha \log(\mu_{reach}(g) + \epsilon) - \beta \sigma^2_{reach}(g)\right)
-\label{eq:mask_uq}
-\end{equation}
-$\alpha=2.0, \beta=1.0, \epsilon=10^{-6}$。相比原 NSO 的点估计掩码，式\,(\ref{eq:mask_uq}) 额外以方差项 $\beta\sigma^2_{reach}$ 惩罚高不确定性目标，实现\textit{风险规避的保守采样}，在训练早期 RPN 尚未收敛时有效抑制错误目标的采样。
+在同一碰撞自由距离度量下，若保留骨架节点和顺序，并约束 $\sum_k\delta_k\le\rho L(P_0)$，则 $L(P)\le(1+\rho)L(P_0)$。这是固定路线插入的代数界，不是未知环境、滚动重规划下同一截止时间覆盖不降的保证。转向和停留必须按真实执行成本另行核算。当前保护机制仍需与无保护对照比较。
 
 \subsection{不确定性感知可达性预测（RPN-UQ）}
 \label{sec:rpn}
+\textbf{方案设计／学习与校准待验证：}模块职责是在候选目标、地图和执行预算条件下估计成功概率及其不确定性。MC-Dropout 可以作为候选实现，但样本方差不自动提供风险上界，也不能代替成功率校准。可考虑的排序形式为
+\begin{equation}
+ \ell'(g)=\ell(g)+\alpha\log(\mu_{reach}(g)+\epsilon)-\beta\sigma^2_{reach}(g),
+\end{equation}
+其作用必须通过经验数据验证。训练标签应反映指定预算内的实际抵达；几何路径存在与实际抵达不能通过取最大值合成同一成功标签。当前 CPU 确定性可达约束不构成已训练 RPN-UQ 证据。暂不报告风险保证、校准提升或独立消融收益。
 
-\subsubsection{网络结构：MC-Dropout 三头}
-全局策略共享 CNN 编码器（ResNet-18 backbone），并行输出三头：策略头 $\pi_{act}$、价值头 $V$、可达性头 $\text{RPN-UQ}$。RPN-UQ 头采用带 Dropout 的卷积结构：
-\begin{equation}
-\{\mu_{reach}, \log\sigma^2_{reach}\} = g_\phi\!\left(\text{Dropout}(f_\theta(S_t));\; p_{drop}\right)
-\end{equation}
-推理时执行 $T_{MC}=10$ 次前向传播（$p_{drop}=0.1$），计算样本均值与方差：
-\begin{equation}
-\mu_{reach}(g) = \frac{1}{T_{MC}}\sum_{\tau=1}^{T_{MC}} \hat{r}_\tau(g), \quad
-\sigma^2_{reach}(g) = \frac{1}{T_{MC}}\sum_{\tau=1}^{T_{MC}} \left(\hat{r}_\tau(g) - \mu_{reach}(g)\right)^2
-\end{equation}
-
-\subsubsection{具身自监督训练}
-交互经验 $\mathcal{D}=\{(S_t, g_t, y_t)\}$ 中，标签 $y_t$ 由\textbf{几何可达}与\textbf{具身回溯}联合确定：
-\begin{equation}
-y_t = \max\!\left\{ y_t^{\text{FMM}},\; y_t^{\text{emb}} \right\}
-\end{equation}
-\begin{equation}
-y_t^{\text{emb}} = \begin{cases} 1, & \text{若 } T_{local}=25 \text{ 步内抵达 } g_t \text{ 的 } 50\,\text{cm} \text{ 邻域} \\ 0, & \text{否则} \end{cases}
-\end{equation}
-RPN-UQ 以期望校准损失（ECE-aware BCE）在线更新：
-\begin{equation}
-\mathcal{L}_{reach} = -\frac{1}{N}\sum_i \left[y_i \log \sigma(\mu_i) + (1-y_i)\log(1-\sigma(\mu_i))\right] + \lambda_{ece} \cdot \text{ECE}(\mu, y)
-\label{eq:rpn_loss}
-\end{equation}
-其中 $\lambda_{ece}=0.1$，ECE 项鼓励预测概率与真实可达频率的良好校准，使 $\sigma^2_{reach}$ 能准确反映模型的认知不确定性。
-
-\subsection{融合奖励函数}
+\subsection{信息增益覆盖奖励（IGCR）与融合目标}
 \label{sec:reward}
-
-\subsubsection{信息增益覆盖奖励（IGCR）}
-将基础覆盖奖励从面积增量升级为互信息增益。设 $Z$ 为全图未知区域的隐变量，$O_t$ 为第 $t$ 步累积观测。由于精确计算 $I(O_{t+1};Z)$ 不易，采用以下近似：
+\textbf{方案设计／代理收益与实现待对齐：}条件信息增益应写成
 \begin{equation}
-R_{ig}(t) = \sum_{(i,j) \in \Delta_{exp}^t} H\!\left(M_{obs}(i,j)\right)
-\label{eq:igcr}
+ I(M;z\mid h_t,a)=H(M\mid h_t)-\mathbb E_{z\mid h_t,a}H(M\mid h_t,z),
 \end{equation}
-其中 $\Delta_{exp}^t$ 为 $t$ 步新增探索格点集合，$H(\cdot)$ 为占据概率的二元熵。对于当前步新探索的格点，$H$ 等价于观测前的预测不确定性。与面积增量 $\beta \cdot |\Delta_{exp}^t|$ 相比，$R_{ig}$ 对在高不确定区域（如门后区域）的探索给予额外奖励。
+而不是对新增格点求一次熵就宣称实现互信息。如果所有未知格点都具有同一先验，简单熵加权还可能退化为面积计数。本文 CPU 规划使用覆盖、相机观测和表面需求的代理分项，应保留它们的名称、单位及估计误差；真值 F1 仅供评价。
 
-\subsubsection{完整奖励}
+在固定历史、固定候选有效证据概率且采用独立观测近似时，可定义
 \begin{equation}
-R_{\text{total}} = R_{ig} + \lambda_{\text{sem}}R_{\text{sem}} + \lambda_{\text{struct}}R_{\text{struct}} + \lambda_{\text{front}}R_{\text{front}} + R_{\text{intrinsic}}
-\label{eq:reward_total}
+ F(A)=\sum_jw_j\left[1-\prod_{k\in A}(1-p_{jk})\right],\qquad w_j\ge0.
 \end{equation}
+其边际非负且递减，说明去重收益的一种可分析形式。在线后验更新、相关测量与路线预算不自动继承该性质，本文不据此声称滚动束搜索具有最优近似比。
 
-\textbf{语义密度奖励}（fresh mask $M_{\text{fresh}} = \text{clip}(M_{\text{obs\_observed}} - M_{\text{visited}}, 0, 1)$）：
-\begin{equation}
-R_{\text{sem}} = \frac{1}{N_{\text{active}}} \sum_{(i,j)} \frac{S_{i,j}^{\text{fused}} \cdot M_{\text{fresh}}(i,j)}{\max S^{\text{fused}} + \sigma}
-\end{equation}
-随探索深入，$N_{\text{active}}$ 减小使 $R_{\text{sem}}$ 自然衰减，实现探索-利用轮转。
-
-\textbf{结构感知奖励} $R_{\text{struct}}$ 对门框 $\mathbb{I}_{door}$、狭窄通道 $\mathbb{I}_{narrow}$、开阔区 $\mathbb{I}_{open}$ 在 $M_{\text{fresh}}$ 上加权（$w_{door}=2.0, w_{narrow}=1.0, w_{open}=0.5$），与 STGHP 拓扑图的门框节点检测共享底层检测结果。
-
-\textbf{前沿引导奖励} 对邻域内含门框拓扑边的前沿施加 Room Exploration Boost $\gamma_{\text{boost}}=1.5$。
-
-\textbf{内在惩罚} $R_{\text{intrinsic}}$ 对选择已探索栅格作为长期目标施加惩罚。
-
-配置：$\lambda_{\text{sem}}=0.12, \lambda_{\text{struct}}=0.12, \lambda_{\text{front}}=0.15$。
+拟通过实际完成观测的新增表面与耗费更新需求置信度、停止重复补看。当前 V4 含反馈拒绝接口，但第六节的开发运行没有触发该拒绝事件，因此收益不能归因于反馈。训练奖励接入原 ANS 与端到端训练仍待完成。
 
 \section{系统组件：回环检测}
 \label{sec:loop}
-为抑制长时探索中的里程计漂移，NSO 集成 NetVLAD~\cite{netvlad2016} + 语义指纹双重回环检测作为\textbf{后端系统组件}（不纳入创新贡献项）：（1）NetVLAD 描述子 $f_t$ FAISS 检索，$\text{Sim}(f_t,f_{key})>\tau_{vlad}=0.75$；（2）物体空间分布直方图交叠度 $>\tau_{sem}=0.6$ 时触发位姿图松弛优化（PGO）。此模块在 ANS 基线中已有类似实现；NSO 中语义指纹从 YOLOv8 类别升级为 CLIP 嵌入类别，提升了弱纹理走廊场景的回环鲁棒性。
+\textbf{待实现与待验证：}回环应作为定位后端组件，使用实际匹配、位姿约束、图优化及重融合验证。当前存在描述子与历史匹配相关代码，但不能将位姿插值写成已经实现并验证的位姿图优化。本文删除历史稿中缺乏原始记录的轨迹漂移改进值。学校平台为 ROS1、小车已能接收 ZED 深度和位姿，另有单线雷达、IMU 和 GPS；具体设备性能、同步误差和定位精度需要回校实测。
 
 \section{实验与分析}
-\subsection{实验设置}
-\textbf{平台：}Habitat-Lab~\cite{habitat2019}；\textbf{数据集：}Gibson~\cite{gibson2018} 和 Matterport3D（MP3D）各 10 个场景（共 20 个）；典型分析场景：Cantwell（161.2\,$m^2$）、Adrian（94.7\,$m^2$）、Beechwood（203.5\,$m^2$）。单回合上限 1000 步，全局策略每 25 步更新长期目标，每组设置运行 50 回合，报告均值±标准差。\textbf{实现：}通过 \texttt{--paper\_mode} 一键启用完整配置；CLIP 模型使用 ViT-B/32，GroundingDINO 使用 Swin-T 骨干。
+\subsection{已执行的 CPU 开发实验设置}
+本节记录截至2026年9月10日的开发实验，目录为
+\begin{center}\small\path{eval_results/joint_v4_feedback_development_20260910/}\end{center}
+运行元数据记录完成32回合：两个已有开发种子202、203，两个布局（多房间与仓库），两种背板遮挡条件，四个内部方法。场景尺寸为16m$\times$12m，每回合最多280个动作，TSDF体素尺寸0.03m、截断距离0.12m，每20步评价一次，距离阈值包含0.02m、0.05m与0.10m。归档回合记录深度噪声参数0.01m、位姿噪声参数0；因此不评价真实漂移鲁棒性。
 
-\textbf{对比基线：}
-\begin{itemize}
-    \item \textbf{Frontier}~\cite{yamauchi1997frontier}：经典几何前沿法
-    \item \textbf{ANS}~\cite{chaplot2020}：学习型层次化探索基线（2020）
-    \item \textbf{SemExp}~\cite{semexp2022}：语义辅助目标导航，适配覆盖任务（2022）
-    \item \textbf{PONI}~\cite{poni2022}：势函数引导语义探索（2022）
-    \item \textbf{OVRL}~\cite{ovrl2022}：大规模预训练视觉表征导航（2022）
-    \item \textbf{NSO-fixed}：本文系统将 CLIP 替换回 YOLOv8 固定类别（消融）
-\end{itemize}
+四个内部方法为 \texttt{coverage}、历史标识保留的 \texttt{full\_v2}、同版本去语义 \texttt{geometry\_v4} 和 \texttt{full\_v4}。这些名字是本项目开发实现，不是 ANS、TARE 或 FUEL 原作者系统。32回合只有两个基础随机种子，不能当作32个独立环境样本。配置与源码已随运行归档；逐帧回放复核已通过：467个检查点及最终网格一致；本节数值仍仅为开发结果。
 
+本节历史主表保留归档组合箱体网格参考数值供追溯。箱体间重叠共面影响参考权重；随后已对64条唯一轨迹、929个检查点完成唯一实体外表面敏感性回放，见下文。回放一致与参考定义正确是不同验证事项。新设施生成器使用实体并集外表面并通过16项场景测试。
+
+\subsection{当前开发均值}
+表\ref{tab:development}直接取归档 \texttt{summary.json}。不填入没有逐回合依据的标准差、置信区间或显著性声明。
 \begin{table}[htbp]
 \centering
-\caption{核心超参数}
-\label{tab:hyperparameters}
-\begin{tabular}{lcl}
+\caption{CPU 开发均值；467个检查点回放已通过。AUC主阈值为5cm。}
+\label{tab:development}
+\begin{tabular}{lccc}
 \toprule
-\textbf{参数} & \textbf{值} & \textbf{含义} \\
+内部方法 & 联合AUC & 最终二维覆盖率(\%) & 最终F1(\%)\\
 \midrule
-\texttt{num\_local\_steps} & 25 & 局部执行周期 \\
-\texttt{global\_lr} & 2.5e-5 & 全局 PPO 学习率 \\
-$\gamma$ & 0.99 & 折扣因子 \\
-\texttt{map\_resolution} & 5\,cm & 栅格分辨率 \\
-$\lambda_{\text{sem}}, \lambda_{\text{struct}}$ & 0.12 & 语义/结构奖励系数 \\
-$\lambda_{\text{front}}$ & 0.15 & 前沿奖励系数 \\
-$\alpha$ (RPN 掩码) & 2.0 & 可达性均值调制强度 \\
-$\beta$ (RPN-UQ 方差惩罚) & 1.0 & 不确定性惩罚强度 \\
-$T_{MC}$ & 10 & MC-Dropout 采样次数 \\
-$N_{topo}$ & 100 & 拓扑层规划周期（步） \\
-$\lambda_F, \lambda_S, \lambda_D$ & 1.0, 0.5, 0.3 & 拓扑目标选择权重 \\
+\texttt{coverage} & 0.475799 & 95.401 & 86.625 \\
+\texttt{full\_v2} & 0.494072 & 91.768 & 85.894 \\
+\texttt{geometry\_v4} & 0.478124 & 94.248 & 85.279 \\
+\texttt{full\_v4} & 0.495626 & 94.672 & 86.563 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{评估指标}
-覆盖率（Exploration Ratio）、探索面积（$m^2$）、轨迹漂移 RMSE（cm）、无效目标报错频次（FMM 不可达次数）、具身目标成功率（25 步内抵达率）、回环触发次数。
+\texttt{full\_v4} 相对 \texttt{coverage} 的联合 AUC 均值提高 4.167\%，最终二维覆盖率降低 0.729 个百分点；相对同版 \texttt{geometry\_v4} 的联合 AUC 提高 3.661\%。这些差值是旧冻结参考口径下的开发均值差，不是独立确认结果。该口径的最终 F1 并未超过纯覆盖，不能将联合 AUC 改善改写为所有指标同时提升。
 
-\subsection{主实验结果}
-20 个场景（50 回合/场景）平均：
+\subsection{机制归因与待验证消融}
+本轮完整 V4 的反馈拒绝累计触发 0 次。虽然版本名称包含反馈机制，当前改善不能归因于实测反馈，可能涉及覆盖保护、路线或其他共同变化。追加40回合匹配消融已从原始源码快照隔离运行并完成网格与指标复核；完整V4相对仅物体性的联合AUC高3.813\%，但比去物体假设版本低1.235\%。8个去反馈回合的轨迹、覆盖掩码和最终网格与完整方法完全一致。去覆盖保护后终点覆盖回落至91.768\%，支持将本轮覆盖改善归因于保护规则，而非反馈学习。两批有效运行合计72回合、64个不重复场景--方法组合，8个重复完整方法用于复现一致性检查，不增加独立样本数。首次消融因并行场景文件变化未通过严格源码冻结，被排除后完整重跑；未使用该失败轮次的数字作为证据。
 
+\subsection{唯一外表面评价复核}
+64个唯一终点的表面参考敏感性复核已完成：保持原预测网格及采样不变，旧指标复算最大误差为0；换用唯一实体外表面后，完整V4相对纯覆盖、同版无语义、仅物体性及去物体假设的终点$C\times F1_{5cm}$差值分别为$-0.004069$、$+0.014265$、$+0.011400$和$-0.009380$，均保持原方向。单独F1相对纯覆盖的差值由$-0.000625$变为$+0.001154$，但终点联合值仍落后。
+
+全轨迹回放进一步重建16,946帧、929个原检查点；旧指标最大误差为0，最终网格逐位相同，独立积分复核误差不超过$2.23\times10^{-16}$。复用已冻结的唯一外表面参考后，完整V4与纯覆盖的联合AUC分别为0.496252和0.474396，相对差约$+4.61\%$；完整V4减几何、仅物体性、去物体假设、去反馈的绝对差分别为$+0.017068$、$+0.017989$、$-0.004946$、0。三阈值下均值方向保持，但三个接近零的逐场景差值变号。该结果是同一开发轨迹的评价敏感性复核，不增加独立样本数，仍未建立隐藏模型和反馈的净收益。
+
+\subsection{同历史反事实观测与内部修正}
+新设施首批在开发种子751、752及两档深度噪声下预定8个历史；6个可用历史共执行72条共同候选往返分支、1,766个付费动作，全部无碰撞并通过独立回放。另2个step160因纯覆盖前缀提前停止而不可用，保留记录。正确、交换、缺失类别共用物理RGB-D、地图、候选及成本，原评分先于未来观测封存。六个历史均有RGB人工标记支持，但原细类别评分改变最终选择0次；各评分器平均面积率为0.450628平方米/动作、F1增量为0.041485。因此输入可读不构成语义有效证据。
+
+事后真值诊断发现，背景伪对象占细类别模型潜在面积权重的49.71\%；分位数包围拟合会缩小物体并移动已观测面。低噪声短往返虽有约0.011--0.049毫米的共同支撑误差改善，但小收益被两动作成本放大。V5据实测质量体素和可见面修正共同形状，在人工标记域中对无标记簇使用非零、未校准对象性先验；仅物体性与细类别共享该规则，缺失标签恢复几何路径。
+
+另外以共同48动作预算的累计代理积分替代收益/路线成本作为评分消融。两模型乘两目标共用上述72条已执行分支：AUC目标使5/6历史改变选择，面积率均值增至0.488844，F1增量增至0.059802，但V5与旧模型在同目标下仍同选，正确/交换/缺失细类别仍同选；去隐藏项对照的面积率0.551441与F1增量0.061411反而更高。改善不能归因语义，隐藏模型净贡献仍未成立。新模型设计使用了这些历史，全部属于样本内开发；原面积率评价门槛不变。753/754及独立种子尚未使用。
+
+V5事后分组诊断进一步发现：细类别模型背景权重占比从49.71\%降至20.71\%，但共同几何假设的外表面5cm内权重比例由28.69\%降至26.36\%；真实简单/复杂对象组的细类别贴合比例也分别下降。新支撑扩张把原收缩变成外扩，中心和尺寸误差均恶化。因此V5几何改动不采纳为默认方案，不能把背景降权导致的总体比例改善称为真实物体拟合改善。
+
+\subsection{观测时序与候选充分性诊断}
+原80/160检查点不能代表全部观测阶段。对四个开发条件按0、10、\ldots、160动作固定审计，共68个预定位置、64个可用历史和4个前缀结束位置；其中G/S仅2处选择不同。全部不同选择共4条路线、100个付费动作已执行并独立回放。751高噪声step100中两条2动作路线均无新增面积，S只多0.0289个百分点F1增量。752低噪声step70中，两条48动作路线的S/G新增面积分别为14.650693/10.815843平方米，F1增量分别0.044877/0.036638；但N与S同选。这证明局部类别干预能够改变真实观测价值，不能证明完整模型净优势，也不是全时段策略均值估计。
+
+共同安全约束下枚举7,694个位姿的事后审计发现：反事实候选执行器合并对象身份后仅朝最近簇定向，按成本分位压缩还会遗漏对象和方位。旧闭环V4已有四朝向枚举，不能将此缺陷泛化到全部旧实验。新增模块按已观测对象与方位分配候选，使用四朝向、原安全图和48动作去返约束，不使用类别或真值选视点。四个step80各增加4条，共16条、660动作，全部无碰撞并通过独立回放；两个step160没有新增候选，其零对象预测通道仍未解决。真值静态可见性上界只用于诊断，不能代替实际深度和重建收益。
+
+原72条与新增16条合并后的共同池中，原rate评分在2/6历史选择新增路线，面积率由0.450628提高至0.564706，约$+25.32\%$，F1增量提高至0.063321；六评分器仍全部同选，收益不能归因于语义。共同预算AUC评分下，S/N面积率分别0.535786/0.598383，S的联合增量AUC仍低0.003824。原预测与指标逐项保持一致，8,009个输入哈希通过核对。候选规则是诊断后增补，不能据此宣布原预注册效能门槛通过。
+
+\subsection{直接观测响应的开发探针}
+在原72条分支上固定正则化系数1，按751/752几何种子互相留出预测；这两种子均参与过设计，因此不是独立确认。S平均面积率为0.574956平方米/动作，略高G的0.566369，但低于O/X的0.705502及N的0.735502；S的F1增量0.030095较高，不能因此更换原面积率门槛。只有一个种子表现出S/G面积率增量。独立SVD重拟合核对8个模型、48条选择及994个输入哈希，未发现留出标签进入拟合。类别特征有非零条件残差，失败不能简单归因于线性不可辨识；观测特征的训练范围外推仍较严重。
+
+将冻结模型应用于原72条及新增16条组成的88条联合候选，6个历史的48条评分器选择全部保持不变，没有选中新候选；其中只有4个历史实际扩池，另2个保持原池。迁移未重新拟合，旧特征精确复现，扩池中心化仅使旧分数共同平移；独立矩阵乘法复算与选择核验通过。这表明当前候选补充没有修复响应排序。V6尚未通过语义净增量、强对照和原协议门槛，仍为未采纳的开发设计。
+
+\subsection{V7配对训练与决策价值诊断}
+在保留ANS层次及四模块接口的前提下，V7以实测片段和方向相关的条件响应替代未校准的补全表面评分。原V6原始特征独立复算虽与记录一致，但簇中心与各表面点的方位参照不同，视野内点--位姿对中26.94\%的方向扇区不一致；该比例不是收益误差。V7统一逐点参照，实测法向由具有最多深度一致支持的真实相机定向；无支持时禁用有向通道。新特征不沿用V3形状概率，类别只进入与共同对象描述相乘的条件列。
+
+预定8个训练父上下文各含一对正面几何相同、隐藏结构分别为储物层架和通风挡板的设备。类别来自可见人工资产标记，配对深度、雷达、位姿、非标记RGB、非语义地图及6条候选均相同。16个历史共尝试96条路线，实际执行2,892个分支动作与320个前缀动作，全部已执行观测和指标通过独立回放。其中4条模拟器碰撞提前结束，不能将回放通过解释为全部成功返程。T0的12候选、7通道共1,008个特征标量独立复算最大差为$2.65\times10^{-23}$。
+
+G、O、S、N与固定几何交互对照分别按训练父上下文留一选择正则，候选仅为0.1、1、10；损失按历史平均，使用固定物理尺度而非训练标准差。五模型均选择0.1，有效自由度约0.895--1.025。独立SVD复核5模型、120个正则--父折拟合以及144个模型--历史选择，最大差为$1.78\times10^{-15}$。16个历史的9种模型和干预通道全部同选，训练内平均面积率为1.994412平方米/动作、F1增量为0.332275；无选中失败路线，仍没有语义选择净增量。
+
+对一对世界的真实面积率$u_1(a),u_2(a)$，进一步事后计算
+\begin{equation}
+V_{\mathrm{oracle}}=\frac{\max_a u_1(a)+\max_a u_2(a)}{2}
+-\max_a\frac{u_1(a)+u_2(a)}{2}\ge0.
+\end{equation}
+当前8个父上下文均有共同最优动作，上式全部为零。物理结构不同并不自动意味着类别能够改变最优决策；该真值诊断不输入规划器。两组原oracle的最大值来自失败短分支，不能称为成功返回效能上界。人工关联正控制也不构成自然开放词汇泛化证据。
+
+独立位图分解显示，共同前缀仅观察41.68\%--44.92\%的背景，全部候选反事实新面积合计91.13\%来自背景；此加总不是单条轨迹覆盖量。对象面积率信息价值也有7/8上下文为零，唯一非零值为0.000594792平方米/动作。两族共同成功候选的敏感性分析中，全场上界仍全部为零；F1/动作与分支联合J-AUC同样没有类别决策价值。不能仅靠提高对象权重或更换主指标得到正结论。下一版应在两个初始几何相似目标之间构造真实预算取舍，交换结构和类别而保持总面积，计入背景预观察成本，并在固定有界小批次中检验条件是否成立。
+
+4条碰撞在执行前均已被最新传感器地图判下一格不可通行，冻结路线执行器却没有在线复核。模拟器保守栅格与连续几何边界也存在差异，本轮保留其碰撞规则和失败记录。V8几何执行守卫据此对每个动作检查最新地图，并在原路线失效后计算包含朝向恢复的付费返程；它面向RPN可行性接口，尚非完整ANS调用链集成或概率风险校准。
+
+原V7在首次校准C之前停止扩展，原训练记录及收益保持其原执行版本。C、753/754和独立确认均未开放，不能将训练计算或执行回归通过改述为语义有效或系统优势。
+
+\subsection{V8执行守卫的全部受影响开发案例}
+全96条旧轨迹的最新地图审计确定10条会被新守卫改变的路线，包括4条原碰撞路线和6条原成功路线。固定执行全部10条，无重建收益筛选。两批分别执行128和147个新分支动作，合计275个；每案例另实际重放20动作前缀，合计200个前缀动作。全部案例的原始RGB-D、雷达、位姿、最终地图和网格均通过独立回放；复核程序独立计算机器人完整轮廓检查和带朝向BFS返程，没有调用生产守卫给自己验证。两批\texttt{verification.json}均为\texttt{passed\_full}。合计证据见\path{docs/research/EXECUTION_GUARD_V8_CHANGED_ROUTE_REPORT_20260911.md}。
+
+最终9条付费返回原前缀位置及朝向，1条因当前位置完整轮廓不满足已知安全条件而停止，零碰撞；零条完成原完整往返路线。T5/storage候选5在第14个付费动作到达原目标姿态，第15个动作后的新观测使当前位置不再满足守卫条件，第16个原动作及返程均被拒绝。因此，1条原目标到达不能写成原完整任务成功，9条守卫返回也不能写成9条原路线完成。该停机被忠实复现，但未被计为成功返程。
+
+新守卫影响4/16个原历史、36/144个已封存训练选择；不能仅替换4条旧碰撞标签后沿用旧收益。此次开发回归覆盖全部已知受影响路线，尚不构成一般安全保证，也没有重建效用或语义创新的正向证据。最新观测可能使当前位置失去已知安全性而无法返程，仍是必须保留的局限。
+
+\subsection{V8双资产构造与V8.1候选边界修正}
+为检验类别是否改变有限预算中的对象选择，新增两个开发父布局P0/P1，每个布局包含两种资产交换排列。每个世界恰含一件储物层架和一件封闭设备柜，共用前面板、侧壁、顶板与底座，仅交换隐藏后部结构及可见RGB人工资产类别。平面脚印及唯一GT总面积保持一致；类别不改变参考面积权重。P1为P0的整体左右镜像，精确传感器配对仅在同一父布局内部要求成立。
+
+四个世界各实际执行初始加150个付费动作的151帧前缀，包括120次前进与30次转向，均无碰撞。父布局内全部逐帧深度、雷达、位姿、内参、时间戳、非标记RGB和标记支持掩码精确一致，两类标记均被真实观察；8项传感器测试通过。构造证据见\path{docs/research/COMPETITION_V8_CONSTRUCTION_AUDIT_20260911.md}。随后复融确认共同非标签地图一致，真实前缀对固定可观察背景的覆盖为99.22\%--99.32\%，二维覆盖为$C=1$，故该构造仅检验背景基本完成后的三维补看机制。
+
+原V8协议见\path{docs/research/SEMANTIC_COMPETITION_V8_PROTOCOL.md}。原准备版在P0东侧入口的观测点云q95目标到安全姿态距离约0.35762m，超过固定0.35m门槛，故完整版本停在零未来分支；P1角色完整不能用于筛选有利子集。V8.1在未来结果产生前，仅统一观测点云与实际已观测占据格完整边界的坐标口径，复用同一原始前缀、地图及参考，未改世界、先验、阈值或评价规则。四个历史的共同六候选随后通过结构检查。已知安全朝向图中单深入区最短往返38动作、双区往返58动作；无障碍双区下界54，均按共同48动作预算判断。路径不能访问双区不代表相机不能同时观察两对象，仍须真实执行检验。
+
+\subsection{V8.1实测面积效率增量及未通过的完整门槛}
+四个历史各六条共同候选，合计24条真实分支、752个付费动作，全部完整返回，零碰撞和零失败。全量独立回放状态为\texttt{passed\_full}，复算原始RGB-D/雷达、执行守卫、网格融合、可见面积及P/R/F1和48动作J-AUC；证据位于\path{eval_results/competition_v8_1_execution_20260911/verification.json}。另一路独立数值核对从封存分数按分数、成本、ID排序恢复选择，从可见位图与原权重重算面积，最大误差为$3.56\times10^{-15}$m$^2$，详见\path{docs/research/COMPETITION_V8_1_SELECTED_METRIC_CROSSCHECK_20260911.md}。
+
+表\ref{tab:v81}为四个历史等权均值，两个父布局权重相同。面积率是逐历史新增唯一可见表面积除以实际分支动作数的平均；每历史共同前缀另有150个真实付费动作。S采用未训练、未校准的手工资产结构先验，G/O/N/X/M使用相同已测几何、共同候选与同一实际分支。
 \begin{table}[htbp]
-\centering
-\caption{主实验：Gibson+MP3D 20 场景平均性能（均值 $\pm$ 标准差）}
-\label{tab:baselines}
-\begin{tabular}{lccccc}
+\centering\small
+\caption{V8.1封存选择的开发结果；F1为比例值，动作包含实际去返与转向。}
+\label{tab:v81}
+\begin{tabular}{lrrrrr}
 \toprule
-\textbf{方法} & \textbf{面积} ($m^2$) & \textbf{覆盖率} (\%) & \textbf{漂移} (cm) & \textbf{无效目标} & \textbf{成功率} \\
+方法 & 面积率(m$^2$/动作) & F1增量 & 终点F1 & 平均动作 & 分支J-AUC\\
 \midrule
-Frontier~\cite{yamauchi1997frontier} & 73.1±4.2 & 56.3±3.8 & 62.1±8.4 & 0 & -- \\
-ANS~\cite{chaplot2020} & 107.4±6.1 & 74.2±3.1 & 48.7±6.2 & 43±11 & 0.52±0.06 \\
-SemExp~\cite{semexp2022} & 102.8±5.9 & 71.6±4.2 & 45.3±5.8 & 37±9 & 0.55±0.07 \\
-PONI~\cite{poni2022} & 109.2±5.4 & 76.1±3.6 & 47.2±6.0 & 31±8 & 0.58±0.06 \\
-OVRL~\cite{ovrl2022} & 105.3±6.3 & 73.8±3.9 & 46.9±6.5 & 38±10 & 0.54±0.07 \\
-NSO-fixed (Ours) & 136.7±4.3 & 87.9±2.4 & 14.1±2.1 & 5±2 & 0.78±0.04 \\
-\textbf{NSO (Ours)} & \textbf{142.3±3.9} & \textbf{92.4±1.8} & \textbf{11.9±1.7} & \textbf{2±1} & \textbf{0.84±0.03} \\
+S & 0.180496602 & 0.019480595 & 0.980930768 & 31 & 0.976038949\\
+G & 0.163276841 & 0.022386938 & 0.983837112 & 40 & 0.976515562\\
+O & 0.163276841 & 0.022386938 & 0.983837112 & 40 & 0.976515562\\
+N & 0.081203711 & 0.010870340 & 0.972320513 & 21 & 0.968907616\\
+X & 0.107238851 & 0.011176121 & 0.972626294 & 31 & 0.969330559\\
+M & 0.163276841 & 0.022386938 & 0.983837112 & 40 & 0.976515562\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-NSO 在覆盖率上超越最近的 PONI 基线 +16.3 个百分点，优于 NSO-fixed（固定类别）+4.5 个百分点，验证了开放词汇语义密度场的有效性。漂移控制方面，回环检测将 RMSE 控制在 12\,cm 以内，远优于所有基线。
+在此固定开发构造中，S相对G/O的实测面积率提高10.5464\%，也高于交换类别X；缺失类别M的全部分数与选择精确恢复G。但S的F1增量及终点F1比G/O低0.00290634，即0.290634个百分点，超过预先允许的0.001损失，分支J-AUC也低0.000476613。S平均执行31动作，G/O为40动作，平均新增实际面积分别为5.91668与6.53107m$^2$。单位动作效率较高并不等于总表面或终点质量较高，不能用面积率掩盖预注册质量门槛失败。图\ref{fig:v81}同时展示全部历史的两项结果。
 
-\textbf{典型场景 Cantwell 结果：}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{docs/research/figures/competition_v8_1_selected_results.pdf}
+\caption{V8.1封存选择的面积率与F1增量。彩色点为两个开发父布局的四个相关历史，黑线为等历史均值，不绘制置信区间。S/G/O/N/X/M分别为正确类别、几何边缘先验、仅对象性、已测覆盖与质量、交换类别及缺失类别。位姿输入精确，前缀$C=1$，S为手工先验，因此该结果仅是晚期三维补看正控制，不是完整ANS、自然语义或主流方案优势证明。}
+\label{fig:v81}
+\end{figure}
+
+真实观测排他性亦未通过：8/8条预定深入路线对非目标对象前缀未见面积的获取比例超过10\%，实际范围为24.52\%--100\%。因此双区路径预算约束未形成相机观测的排他取舍。原V8.1完整进阶条件仍失败，全部24条分支及原规则保留，不按效果删候选、换主指标或追加样本直到通过。严格整体解释见\path{eval_results/competition_v8_1_analysis_20260911/REPORT.md}。本轮仅有已看开发块751/752的两个父布局、四个历史，753/754及独立确认均未开放。
+
+\subsection{统一总量评分的单项事后诊断}
+在查看上述24条结果后，对全部G/O/S/N/X/M统一执行一次“新分数等于原封存分数乘原计划动作数”的诊断，保留分数、成本和候选ID的同分规则，没有调整其他系数、训练、校准、新候选或新物理分支。它只移除原代理的单位动作归一化，不会把代理变成真实面积或F1校准预测；因为新规则在结果已知后提出，不能算作预注册或独立验证。完整记录见\path{eval_results/competition_v8_1_objective_diagnosis_20260911/REPORT.md}。
+
+全部六方法在各历史的新选择均为42动作，含共同前缀总成本192动作，仍有6个分支动作预算未使用。此时S平均新增面积9.236705m$^2$、面积率0.219921543m$^2$/动作、终点F1为0.994698257、分支J-AUC为0.983925363。G/O/N/M分别同选，平均新增面积6.853338m$^2$、面积率0.163174719、终点F1为0.984909817、分支J-AUC为0.976582577；交换类别X的新增面积4.537207m$^2$、终点F1约0.979300。S相对前述内部对照的同成本面积及面积率高约34.7767\%，终点F1高0.00978844。这是目标不一致和类别条件响应的开发线索，不能覆盖原V8.1质量与排他门槛失败，不能声称独立泛化、自然语义或主流完整方案优势。
+
+下一版设计见\path{docs/research/SEMANTIC_BUDGET_ALIGNMENT_V9_DESIGN.md}。应在新有限父上下文中预先冻结数据角色、完整预算、候选与进阶条件，预测并去重全路线跨对象及背景观测，分别优化终点联合质量与全程联合AUC，检验正确类别、对象性、强几何、交换及缺失标签对照。753/754与独立确认继续未触碰。通过机制验证后，再将内部算法接入ANS全局/局部层次及OV-SDF、STGHP、RPN-UQ、IGCR完整调用链，并补齐模块去除、主流基线和实车实验。原V9已完成八个前缀构造与独立检查，但六候选结构门槛失败，尚无未来路线结果；可变候选数修订见下文。
+
+\subsection{新几何前缀验证与可变候选集}
+V9在首次构造前固定四组设备宽深条件：$1.0\times1.0$、$1.0\times1.4$、$1.4\times1.0$及$1.4\times1.4$平方米，对应深度噪声标准差为0.01、0.02、0.02、0.01米。每组交换货架和封闭柜的位置；八个历史各实际执行150个前置动作。独立审查重放1208对RGB-D/雷达观测、2416次错标签和缺失标签映射更新，以及96个总量/面积率代理评分数组和96个选择。配对非语义原始输入、地图、候选和成本一致，全部已生成路线的足迹及带原朝向返回检查通过。
+
+原V9仍未获准执行未来分支：Q3两个世界缺少第二个更深入视点。其entry已在当前已知安全地图最北侧的$y=6.5$米；deep要求再沿后轴增加0.2米，但任意当前安全格点均无法满足。这是安全地图候选空间不可行证书，不是真实未知空间物理不可达证明。原失败记录完整保留。
+
+V9.1依据已观察前缀、在未来收益揭示前修订为可变候选集合：保留覆盖候选、已观测表面旋转候选与每设备entry，deep仅在原生成器能找到真实合法格点时提供。Q0--Q2每世界六条，Q3每世界四条，共44条原候选；所有动作、成本、评分和原始输入不变。原面积、终点F1、联合质量、四父场景同向及安全效果门槛不变，不把原六候选版本回写为成功。
+
+设几何历史为$H$，安全、可返回且满足预算的有限候选集为$\mathcal A(H)$，则条件信息价值满足
+\begin{equation}
+\mathbb E_Y\left[\max_{a\in\mathcal A(H)}\mathbb E(U_a\mid H,Y)\right]
+\geq\max_{a\in\mathcal A(H)}\mathbb E(U_a\mid H).
+\end{equation}
+证明由对任意固定$a$使用逐点最大值下界、取期望后再对$a$最大化得到。不同$H$无需候选数量相同；关键是同一配对历史中各方法拥有相同集合。手工语义评分并不自动达到条件最优，仍需实际执行证明。父场景等权、每父场景两种安排等权，不能按候选条数加权。详细协议见\path{configs/virtual3d/competition_v9_1_validation_protocol.json}。
+
+\subsection{V9.1真实结果与有限候选池上限}
+V9.1全部44条路线共执行1328个后续动作，全部达到原目标并返回原位置与朝向，零碰撞、零失败。独立回放核对全部传感器字段、地图、网格、完整足迹、预算返程、面积、F1与稀疏48动作联合AUC通过；另一独立程序完成3479项数值核验，最大误差$7.11\times10^{-15}$。所有total评分方法每历史平均实际消耗42动作，含150动作前缀为192动作；48动作分支窗口中平均剩余6动作保持末端地图，不获得额外免费观测。
 
 \begin{table}[htbp]
 \centering
-\caption{Cantwell 场景性能对比（50 回合均值±标准差）}
-\label{tab:cantwell}
-\begin{tabular}{lcccc}
+\caption{V9.1新几何条件的同成本内部对照。四父场景、每父场景两种安排等权。}
+\begin{tabular}{lrrrr}
+\hline
+方法 & 新增面积(m$^2$) & 终点F1@5cm & 精确率 & 召回率\\
+\hline
+G/O/M & 6.916339 & 0.986508817 & 0.997125 & 0.976210\\
+N & 6.985653 & 0.989400792 & 0.997125 & 0.981887\\
+S & 8.927856 & 0.993105438 & 0.997167 & 0.989098\\
+X & 4.753527 & 0.979776227 & 0.997708 & 0.962506\\
+\hline
+\end{tabular}
+\end{table}
+
+S相对G/O的新增面积高29.0835\%、终点F1高0.6597个百分点；相对N为27.8027\%和0.3705个百分点。四父场景面积与F1差值均正；正确类别优于交换类别，缺失类别精确回退G。精确率变化很小，收益主要体现为表面召回与完整性，不能改述为毫米级几何精度显著改善。各total方法终点二维覆盖$C=1$，故终点$C\times F1$和F1相同，不构成两个独立收益证据。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{docs/research/figures/competition_v9_1_selected_results.pdf}
+\caption{V9.1同成本内部对照。短横线为八历史等权均值；彩色点为一个固定父场景内两种安排均值，不绘制置信区间。人工类别标记、手工先验、精确位姿与48动作晚期补看窗口限定结果范围。}
+\end{figure}
+
+冻结判断仍为\texttt{failed\_prospective\_gates}，仅相对N的终点F1与$C\times F1$幅度未达预先要求的$+0.005$，其余效果与安全条件通过。对全部已执行路线定义有限池上界
+\begin{equation}
+\bar F_{\mathrm{oracle}}=\frac18\sum_{h=1}^{8}\max_{a\in\mathcal A(H_h)}F(h,a).
+\end{equation}
+S在8/8历史均达到本池最高终点F1，regret为零；全知上界相对N也仅为0.003704645981，低于0.005。因此本池内重新选路无法满足该幅度门槛。该计算仅为完整候选池的事后诊断，不是在线GT输入、新策略或修改失败判定。
+
+四个预先指定因子组合不代表广泛随机场景分布，四父场景全正的单侧符号检验最小$p=0.0625$，不作$p<0.05$或总体泛化声明。原V9六角色失败、V8.1原质量及排他性失败和事后目标诊断均保持原判定。当前结果允许描述有限人工资产域的类别条件净增量，尚不能证明自然开放词汇、概率UQ、完整四模块联合方案、主流原作者系统或实车SLAM优势。
+
+以上结果要求进一步接入真实深度语义接口、带朝向与返程预算的层次目标传递、剩余预算再规划及终止帧反馈。V10工程进展及其新的失败边界如下；原V9.1结果及独立证据见\path{docs/research/COMPETITION_V9_1_RESULT_AND_F1_CEILING.md}。
+
+\subsection{V10四模块实测接口与冷启动边界}
+V10通过原组件管理器与运行适配器调用OV-SDF、STGHP、RPN-UQ和IGCR，保留全局选项--局部动作层次；CPU内部算法不依赖训练ANS权重。对齐深度提供实测类别支持，区域图输出包含朝向的全局选项，执行守卫逐动作检查最新地图及固定锚点返程，反馈账本只累计实际传感帧。设剩余预算为$b_t$，每个动作要求
+\begin{equation}
+1+d_{M_t}(x_t^+,h)\le b_t,
+\end{equation}
+其中返程锚点$h$包含原朝向。该条件保证当前已观测图上的预算可返回性，新地图冲突仍可能导致停止。返程路线只作约束，不计入当前承诺执行的去程收益或已获得观测。
+
+在已有Q0真实151帧前缀上，只交换可见类别2与3，S从左侧深观察目标改选右侧；RGB、深度、雷达、非标签地图与质量、TSDF及完整六候选池保持一致。交换后的S与原X、缺失后的S与原G完全一致，34项独立输入干预检查通过。每组反馈使用全部151个实际相机位姿，而非69个保留关键帧。未执行新的候选动作，故只证明类别条件信息通过实际接口影响决策，不能推导整轨迹性能改善。
+
+另一个从初始观测出发的32动作开发夹具完成了33组RGB-D/雷达、47条候选、25次全局选择、32次反馈及最终TSDF的独立回放。但是32动作全部为旋转，左右各16次，前进0次，仅访问1个位置与3个姿态。终点与锚点相同不构成离开起点后的返航证据；该夹具没有触发备用返程分支。27动作没有新增二维格，第11步后二维覆盖不再增长，全部选择的语义孔口增量为零。因此本轮生命周期与复现检查通过，完整移动探索仍未通过验证。
+
+静态候选审查发现，覆盖候选仍先按收益代理/完整返程成本仅保留一个目标，再交给总收益排序；首帧存在863个可行有向状态，却只输出原地旋转。候选保留与后级目标不一致，以及历史方向未充分消耗通用可见性代理，是下一阶段需验证修正的机制。当前38项V10契约/集成检查和11项旧接口兼容检查不能替代该效果门槛。详细实现及原始证据见\path{docs/research/FOUR_MODULE_CPU_CLOSED_LOOP_V10_IMPLEMENTATION.md}。
+
+\subsection{V10.3覆盖约束语义巡检结果}
+
+V10.1保留四个不同覆盖目标并按承诺去程总收益评分，修复了V10的零平移问题。其24个S/G/N分支均执行48个后续动作、零碰撞并回到共享前缀锚点；独立程序不调用规划器或运行适配器，重新生成全部物理传感器、地图、网格和指标，24/24通过。S相对G和N均在7/8个历史改变实际选择序列。
+
+V10.2通道隔离发现，性能由“历史相机位姿推断资产已观察方向”控制，逐动作相机收益后验没有改变选择。V10.3据此用实测表面点的八方向观测位$s_{o,k,t}$限制语义完成价值：
+\begin{equation}
+ f_{o,t}(r)=\max_{v\in r^+}q_{\mathrm{ap}}(o,v)
+ \left[\epsilon+(1-\epsilon)(1-s_{o,k(v,o),t})\right],\quad\epsilon=0.25.
+\end{equation}
+这里$r^+$仅含承诺去程；返程只进入可行性。$q_{\mathrm{ap}}$由已测尺寸、相机视锥和距离得到，$\epsilon$保留未测隐藏表面的完成不确定性。预测视锥不再直接充当实际观察证据。
+
+\begin{table}[h]
+\centering
+\caption{V10.3八个工业资产历史的同候选内部对照均值。主指标为新增唯一表面积与最终F1@5cm乘积。}
+\begin{tabular}{lccc}
 \toprule
-\textbf{方法} & \textbf{面积} ($m^2$) & \textbf{覆盖率} (\%) & \textbf{漂移} (cm) & \textbf{无效目标} \\
+模式 & 联合指标 & 新增表面积($\mathrm m^2$) & F1增量\\
 \midrule
-Frontier & 82.4±5.1 & 58.6±4.2 & 64.2±9.1 & 0 \\
-ANS & 115.3±7.3 & 74.2±3.5 & 48.7±7.0 & 43±12 \\
-PONI & 121.7±6.4 & 78.3±3.2 & 46.1±6.5 & 29±8 \\
-\textbf{NSO (Ours)} & \textbf{148.9±4.1} & \textbf{92.4±1.8} & \textbf{12.3±1.9} & \textbf{2±1} \\
+S（正确类别条件） & \textbf{9.079661} & \textbf{9.124547} & \textbf{0.033539}\\
+G（几何完成） & 7.078693 & 7.132110 & 0.029558\\
+N（无类别） & 7.690027 & 7.741954 & 0.031061\\
+X（反转类别关联） & 4.820972 & 4.916976 & 0.019396\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{消融实验}
-400 步快照（Cantwell 场景，20 回合均值）：
+S相对G、N和X的均值分别提高28.27\%、18.07\%和88.34\%；配对计数分别为6胜2负、6胜2负和8胜0负。V10.3共40个主对照与诊断分支，全部零碰撞返航。完整反馈与关闭反馈8/8完全相同，故当前数据支持语义条件规划的性能贡献，以及IGCR作为实际观测结算和安全闭环的工程作用，不支持IGCR独立提高联合指标。人工标记、精确离散位姿、四组相关开发上下文和缺少原作者外部系统限制结论范围。完整推导、版本失败记录和证据路径见\path{docs/research/V10_3_SEMANTIC_COVERAGE_RESULT_AND_THEORY.md}。
 
-\begin{table}[htbp]
+\begin{figure}[h]
 \centering
-\caption{子模块消融（400 步，Cantwell）}
-\label{tab:ablation}
-\begin{tabular}{ccccccc}
-\toprule
-\textbf{配置} & OV-SDF & STGHP & RPN-UQ & IGCR & \textbf{覆盖率 (\%)} & \textbf{无效目标} \\
-\midrule
-纯几何 & $\times$ & $\times$ & $\times$ & $\times$ & 42.1±2.3 & 28±6 \\
-+固定语义 & fixed & $\times$ & $\times$ & $\times$ & 61.4±3.1 & 21±5 \\
-+OV-SDF & $\checkmark$ & $\times$ & $\times$ & $\times$ & 67.2±2.8 & 19±4 \\
-+STGHP & $\checkmark$ & $\checkmark$ & $\times$ & $\times$ & 80.3±2.1 & 8±3 \\
-+RPN-UQ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\times$ & 89.7±1.9 & 2±1 \\
-\textbf{完整 NSO} & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & \textbf{92.4±1.8} & \textbf{2±1} \\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=0.98\linewidth]{docs/research/figures/v10_3_semantic_joint_results.pdf}
+\caption{V10.3联合指标均值与八个配对历史差值。所有上下文均保留；负点对应必须报告的退化场景。}
+\end{figure}
 
-STGHP 带来最大的单步增益（+13.1\%），验证了拓扑图层次规划在消除多房间探索震荡上的核心价值。OV-SDF 相较固定语义提升 +5.8\%，在新场景零样本迁移（未见过的物体类别）中提升更显著（+12.3\%，见补充材料）。RPN-UQ 将无效目标频次从 8 降至 2，并通过不确定性剪枝使覆盖率进一步提升 +9.4\%。
+
+
+\subsection{独立确认与外部基线计划}
+
+后续实验须先冻结指标、参数、场景生成条件和统计方法，再使用未参与开发的几何种子。应用场景应源于设施扫描需求，同时保留普通场景和先验失配场景。需要报告每个场景族的正负结果，检查最坏覆盖代价，不只给平均联合收益。
+
+官方地面 TARE 为优先外部基线，FUEL CPU 为补充。三个原作者固定源码树已下载并哈希；TARE原路径求解源码与随附OR-Tools已在CPU编译运行，4项夹具通过。完整planner实际配置因缺catkin失败，尚未运行ROS节点或官方演示。组件测试不等于系统基线。先完成原生演示，再记录统一小车动作、窄视场相机、地图后端和任务要求的适配；限制 UAV 自由度后的方法必须标明地面适配版。当前不能声称优于这些主流系统。真实开放词汇感知、完整四模块调用链、RPN校准、IGCR训练奖励和实车闭环构成后续验证清单。
 
 \section{讨论与局限}
-\textbf{与 ANS 及 PONI 的本质差异：}ANS 全局策略仅在几何占据图上操作；PONI 引入语义但依赖封闭集、无拓扑建模；NSO 将开放词汇语义、在线拓扑图与不确定性感知可达性预测显式纳入``感知-规划-采样''三层，形成方法论上的系统性差异。
-
-\textbf{局限：}
-（1）CLIP + GroundingDINO 推理延迟约 80\,ms/帧（RTX 3090），在嵌入式平台（如 Jetson AGX）上需要量化或蒸馏；
-（2）在线拓扑图依赖门框检测准确性，在弱纹理或遮挡场景中拓扑边可能漏建，需引入置信度容错；
-（3）实验主要在仿真环境验证，真实机器人传感器噪声与执行延迟尚未系统评估；
-（4）MC-Dropout 在训练早期（$<$50k 步）不确定性估计可能偏高，需与学习率调度联合设计。
+开发证据支持继续检验语义条件规划，但尚未证明完整方案优势。第一，语义在几何已充分解释场景时可能无增量，正确与错误标签对照必须保持传感器历史不变。第二，预测内部结构若不能兑现，应减少而非反复提高补看奖励；当前反馈归因仍无证据。第三，开发场景规模和种子有限，不能支持大尺度泛化、零样本识别或部署实时性结论。第四，三维质量指标可能受观察支持范围影响，需补充共同支持区域误差、任务对象质量和覆盖代价。第五，CPU几何开发与原ANS神经系统之间仍有接口、权重和训练环节的证据缺口。第六，近期相关方法已经包含多种相似机制，论文创新必须由相同信息和预算条件下的增量证据建立。
 
 \section{结论}
-本文提出 NSO 系统，面向大尺度未知环境的主动覆盖探索。通过开放词汇语义密度场（OV-SDF）、语义拓扑图层次规划（STGHP）、不确定性感知可达性预测（RPN-UQ）与信息增益覆盖奖励（IGCR）的协同，在 Gibson/MP3D 20 个场景上显著提升了覆盖率、定位一致性与探索效率，并在与 SemExp、PONI、OVRL 等最新方法的比较中保持领先。未来工作将拓展真实机器人部署验证、CLIP 模型在线轻量化微调，以及多智能体协同拓扑图构建。
+本文在保留ANS层次和OV-SDF、STGHP、RPN-UQ、IGCR四模块职责的前提下，形成了面向二维覆盖与三维重建的语义条件观测方案。V10.3在有限人工工业资产开发域内，相对严格对齐的几何完成和无类别基线取得28.27\%与18.07\%的联合指标均值增量，错误语义在全部配对历史中退化，建立了可复核的语义因果证据。IGCR反馈在当前指标上中性，完整神经系统、外部原作者基线、自然语义和实车闭环仍待验证；这些边界决定本文只能主张特定信息结构下的优势。
 
 \begin{thebibliography}{99}
-\bibitem{chaplot2020} D. S. Chaplot et al., ``Learning To Explore Using Active Neural SLAM,'' \emph{ICLR}, 2020.
-\bibitem{yamauchi1997frontier} B. Yamauchi, ``A frontier-based approach for autonomous exploration,'' \emph{CIRA}, 1997.
-\bibitem{semexp2022} D. S. Chaplot et al., ``Semantic Curiosity for Active Visual Learning,'' \emph{ECCV}, 2020; K. Yadav et al., ``Offline Visual Representation Learning for Embodied Navigation,'' \emph{CoRL}, 2022.
-\bibitem{poni2022} S. Ramrakhya et al., ``Habitat-Web: Learning Embodied Object-Search Strategies from Human Demonstrations at Scale,'' \emph{NeurIPS}, 2022.
-\bibitem{ovrl2022} K. Yadav et al., ``OVRL: Offline Visual Representation Learning for Embodied Navigation,'' \emph{CVPR}, 2022.
-\bibitem{stubborn2022} H. Luo et al., ``Stubborn: A Strong Baseline for Indoor Object Navigation,'' \emph{IROS}, 2022.
-\bibitem{ddppo2019} E. Wijmans et al., ``DD-PPO: Learning Near-Perfect PointGoal Navigators from 2.5 Billion Frames,'' \emph{ICLR}, 2020.
-\bibitem{netvlad2016} R. Arandjelovic et al., ``NetVLAD: CNN architecture for weakly supervised place recognition,'' \emph{CVPR}, 2016.
-\bibitem{gibson2018} F. Xia et al., ``Gibson Env: Real-World Perception for Embodied Agents,'' \emph{CVPR}, 2018.
-\bibitem{habitat2019} M. Savva et al., ``Habitat: A Platform for Embodied AI Research,'' \emph{ICCV}, 2019.
-\bibitem{clip2021} A. Radford et al., ``Learning Transferable Visual Models From Natural Language Supervision,'' \emph{ICML}, 2021.
-\bibitem{groundingdino2023} S. Liu et al., ``Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection,'' \emph{ECCV}, 2024.
-\bibitem{topomap2019} N. Savinov et al., ``Semi-Parametric Topological Memory for Navigation,'' \emph{ICLR}, 2018.
-\bibitem{sling2022} L. Wiyatno et al., ``Lifelong Topological Visual Navigation,'' \emph{RA-L}, 2022.
-\bibitem{activesensing2011} F. Bourgault et al., ``Information based adaptive robotic exploration,'' \emph{IROS}, 2002.
-\bibitem{ppo2017} J. Schulman et al., ``Proximal policy optimization algorithms,'' \emph{arXiv:1707.06347}, 2017.
+\bibitem{chaplot2020} Devendra Singh Chaplot, Dhiraj Gandhi, Saurabh Gupta, Abhinav Gupta, and Ruslan Salakhutdinov. Learning to Explore using Active Neural SLAM. \emph{ICLR}, 2020. \url{https://arxiv.org/abs/2004.05155}.
+\bibitem{cao2021tare} Chao Cao, Hongbiao Zhu, Howie Choset, Ji Zhang. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS 2021. \url{https://publications.ri.cmu.edu/storage/publications/2021/06/RSS_2021.pdf}.
+\bibitem{cao2023granularity} Chao Cao, Hongbiao Zhu, Zhongqiang Ren, Howie Choset, Ji Zhang. Representation granularity enables time-efficient autonomous exploration in large, complex worlds. Science Robotics 8(80), eadf0970; 2023-07-19. \url{https://doi.org/10.1126/scirobotics.adf0970}.
+\bibitem{zhou2021fuel} Boyu Zhou, Yichen Zhang, Xinyi Chen, Shaojie Shen. FUEL: Fast UAV Exploration using Incremental Frontier Structure and Hierarchical Planning. IEEE RA-L 6(2), 779-786; ICRA 2021 option. \url{https://repository.hkust.edu.hk/ir/bitstream/1783.1-108720/1/033635_1.pdf}.
+\bibitem{zhou2023racer} Boyu Zhou, Hao Xu, Shaojie Shen. RACER: Rapid Collaborative Exploration with a Decentralized Multi-UAV System. IEEE T-RO 39(3), 1816-1835; preprint 2022. \url{https://arxiv.org/pdf/2209.08533}.
+\bibitem{yang2022far} Fan Yang, Chao Cao, Hongbiao Zhu, Jean Oh, Ji Zhang. FAR Planner: Fast, Attemptable Route Planner using Dynamic Visibility Update. IROS 2022; preprint 2021. \url{https://arxiv.org/html/2110.09460v3}.
+\bibitem{zhang2025falcon} Yichen Zhang, Xinyi Chen, Chen Feng, Boyu Zhou, Shaojie Shen. FALCON: Fast Autonomous Aerial Exploration using Coverage Path Guidance. IEEE T-RO 41, 1365-1385; DOI/acceptance 2024. \url{https://arxiv.org/html/2407.00577v2}.
+\bibitem{papatheodorou2023finding} Sotiris Papatheodorou, Nils Funk, Dimos Tzoumanikas, Christopher Choi, Binbin Xu, Stefan Leutenegger. Finding Things in the Unknown: Semantic Object-Centric Exploration with an MAV. ICRA 2023. \url{https://arxiv.org/html/2302.14569v2}.
+\bibitem{menon2023nbvsc} Rohit Menon, Tobias Zaenker, Nils Dengler, Maren Bennewitz. NBV-SC: Next Best View Planning based on Shape Completion for Fruit Mapping and Reconstruction. 2022 preprint; 2023-03-07 revision; archival venue not independently verified. \url{https://arxiv.org/html/2209.15376v2}.
+\bibitem{tao2024active} Yuezhan Tao, Xu Liu, Igor Spasojevic, Saurav Agarwal, Vijay Kumar. 3D Active Metric-Semantic SLAM. IEEE RA-L 9(3), 2989-2996. \url{https://arxiv.org/html/2309.06950v3}.
+\bibitem{zhan2025panoramic} Xiaoyang Zhan, Shixin Zhou, Qianqian Yang, Yixuan Zhao, Hao Liu, Srinivas Chowdary Ramineni, Kenji Shimada. Semantic Exploration and Dense Mapping of Complex Environments using Ground Robot with Panoramic LiDAR-Camera Fusion. IEEE RA-L; accepted 2025-08-31; v3 2025-09-17. \url{https://arxiv.org/html/2505.22880v3}.
+\bibitem{sportich2025quality} Benjamin Sportich, Kenza Boubakri, Olivier Simonin, Alessandro Renzaglia. Quality-guided UAV Surface Exploration for 3D Reconstruction. 2025 preprint; listed in ICUAS 2026 program TuA3.5, pp.143-150. \url{https://arxiv.org/html/2511.20353v2}.
+\bibitem{mao2026scout} Junyu Mao, Sara Ayoubi, Vishnu D. Sharma, Ilija Hadžić, Matthew Andrews. SCOUT: Semantic scene COverage via Uncertainty-guided Traversal. 2026-06-04 preprint; workshop presentation; not main-conference archival publication. \url{https://arxiv.org/html/2606.06721v1}.
+\bibitem{tatsch2026sge} Christopher Tatsch, Yu Gu. SGE: Semantically-Guided Exploration for Unstructured Environments via Image-Space Waypoint Sampling. 2026-08-29 preprint. \url{https://arxiv.org/html/2608.29315v1}.
+\bibitem{vegesna2026sage} Nitin Vegesna, Avideh Zakhor. Semantic-Aware Guided Drone Exploration for Language-Conditioned 3D Indoor Mapping. 2026-05-22 preprint; CVPR 2026 non-archival 3D-LLM/VLA workshop. \url{https://arxiv.org/html/2605.23160v1}.
+\bibitem{zhu2026bayesiannbv} Jingsen Zhu, Silvia Sellán, Alexander Terenin. A Bayesian Approach for Task-Specific Next-Best-View Selection with Uncertain Geometry. SIGGRAPH 2026; preprint 2026-05-06. \url{https://arxiv.org/html/2605.05095v1}.
+\bibitem{jeong2026objectnbv} Seunghoon Jeong, Eunho Lee, Jeongyun Kim, Ayoung Kim. Informative Object-centric Next Best View for Object-aware 3D Gaussian Splatting in Cluttered Scenes. 2026-02-09 preprint; authors report ICRA 2026 acceptance. \url{https://arxiv.org/html/2602.08266v1}.
 \end{thebibliography}
-
 \end{document}

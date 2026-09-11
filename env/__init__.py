@@ -1,6 +1,3 @@
-import torch
-
-
 def make_vec_envs(args):
     version = int(getattr(args, "habitat_version", 0) or 0)
     if version == 0:
@@ -19,6 +16,8 @@ def make_vec_envs(args):
 class VecPyTorch():
 
     def __init__(self, venv, device):
+        import torch
+        self._torch = torch
         self.venv = venv
         self.num_envs = venv.num_envs
         if hasattr(venv, "observation_space"):
@@ -33,7 +32,7 @@ class VecPyTorch():
 
     def reset(self):
         obs, info = self.venv.reset()
-        obs = torch.from_numpy(obs).float().to(self.device)
+        obs = self._torch.from_numpy(obs).float().to(self.device)
         return obs, info
 
     def step_async(self, actions):
@@ -42,25 +41,25 @@ class VecPyTorch():
 
     def step_wait(self):
         obs, reward, done, info = self.venv.step_wait()
-        obs = torch.from_numpy(obs).float().to(self.device)
-        reward = torch.from_numpy(reward).float()
+        obs = self._torch.from_numpy(obs).float().to(self.device)
+        reward = self._torch.from_numpy(reward).float()
         return obs, reward, done, info
 
     def step(self, actions):
         actions = actions.cpu().numpy()
         obs, reward, done, info = self.venv.step(actions)
-        obs = torch.from_numpy(obs).float().to(self.device)
-        reward = torch.from_numpy(reward).float()
+        obs = self._torch.from_numpy(obs).float().to(self.device)
+        reward = self._torch.from_numpy(reward).float()
         return obs, reward, done, info
 
     def get_rewards(self, inputs):
         reward = self.venv.get_rewards(inputs)
-        reward = torch.from_numpy(reward).float()
+        reward = self._torch.from_numpy(reward).float()
         return reward
 
     def get_short_term_goal(self, inputs):
         stg = self.venv.get_short_term_goal(inputs)
-        stg = torch.from_numpy(stg).float()
+        stg = self._torch.from_numpy(stg).float()
         return stg
 
     def get_reachability_supervision(self, inputs):

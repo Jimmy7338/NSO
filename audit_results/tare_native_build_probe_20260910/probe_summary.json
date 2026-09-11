@@ -1,0 +1,142 @@
+{
+  "scope": "Official pinned TARE build feasibility and native TSP component execution; not full planner/demo/baseline reproduction",
+  "status": "bounded_probe_complete",
+  "source_integrity": [
+    {
+      "id": "tare_official",
+      "repository": "https://github.com/caochao39/tare_planner",
+      "commit": "44500592b86138257273e0cab264e6a847ccefc7",
+      "files_checked": 2846,
+      "mismatches": []
+    },
+    {
+      "id": "cmu_ground_environment",
+      "repository": "https://github.com/HongbiaoZ/autonomous_exploration_development_environment",
+      "commit": "bf0cba71365271ebff09831a05afd78578150300",
+      "files_checked": 124,
+      "mismatches": []
+    }
+  ],
+  "host": {
+    "os": "Ubuntu 24.04.2 LTS",
+    "architecture": "amd64",
+    "compiler": "GNU C++ 13.3.0",
+    "cmake": "cmake version 3.28.3",
+    "docker_client_and_server": "29.1.3",
+    "local_container_count": 0,
+    "local_image_count": 0,
+    "ros1_present": false,
+    "catkin_present": false
+  },
+  "planner_configure": {
+    "executed": true,
+    "success": false,
+    "reason": "catkinConfig.cmake/catkin-config.cmake absent",
+    "log": "planner_configure.log"
+  },
+  "tsp_component": {
+    "source_file": "third_party/official_baselines/tare_official/src/tare_planner/src/tsp_solver/tsp_solver.cpp",
+    "source_modified": false,
+    "header_modified": false,
+    "ortools_bundled_version": "9.8.3296",
+    "build_success": true,
+    "execution_success": true,
+    "fixture_count": 4,
+    "fixtures": [
+      {
+        "fixture": "single_node",
+        "path_length_m": 0,
+        "route": [
+          0
+        ],
+        "dummy": false,
+        "status": "passed"
+      },
+      {
+        "fixture": "two_nodes",
+        "path_length_m": 4,
+        "route": [
+          0,
+          1
+        ],
+        "dummy": false,
+        "status": "passed"
+      },
+      {
+        "fixture": "square_closed_tour",
+        "path_length_m": 4,
+        "route": [
+          0,
+          3,
+          2,
+          1
+        ],
+        "dummy": false,
+        "status": "passed"
+      },
+      {
+        "fixture": "line_open_tour_dummy",
+        "path_length_m": 3,
+        "route": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "dummy": true,
+        "status": "passed"
+      }
+    ],
+    "binary_sha256": "03a1bc89b7214ec3406232ff3496b3463814e85965062e560e02db01cff8dcf7",
+    "integration_scope": "Official TSPSolver only; no ROS node, hierarchy, sensor or navigation execution"
+  },
+  "ros_core_image_metadata": {
+    "tag_inspected": "ros:noetic-ros-core-focal",
+    "platform": "linux/amd64",
+    "manifest_digest": "sha256:4c1435fd85be3edde3820f0d132ab30a6b030209dce4fa3ac428a2aa5a763caf",
+    "compressed_layer_bytes": 409194642,
+    "layer_count": 7,
+    "expanded_size_measured": false,
+    "image_pulled": false
+  },
+  "native_pcl_dependency_estimate": {
+    "scope": "Read-only Ubuntu 24.04 native dependency resolver, not a ROS Noetic/Focal install estimate",
+    "install_recommends": false,
+    "install_suggests": false,
+    "requested": [
+      "libpcl-dev",
+      "libeigen3-dev",
+      "libgoogle-glog-dev"
+    ],
+    "package_count": 283,
+    "download_bytes": 263107400,
+    "additional_installed_bytes": 1181589504
+  },
+  "budget": {
+    "authorized_added_disk_cap_bytes": 1073741824,
+    "full_planner_build_additional_disk_gib_estimate": [
+      3,
+      5
+    ],
+    "full_demo_additional_disk_gib_estimate": [
+      6,
+      10
+    ],
+    "estimates_not_measured_for_focal": true,
+    "reason_not_installing": "No reusable ROS image/dependencies; native PCL stack alone resolves to >1 GiB and complete Noetic/Focal footprint cannot be guaranteed under current cap.",
+    "official_environment_download_approx_mb": 500,
+    "official_environment_models_present": false
+  },
+  "prepared_unexecuted": [
+    "Dockerfile.noetic-planner",
+    "noetic_node_smoke.sh"
+  ],
+  "full_planner_built": false,
+  "official_simulator_built": false,
+  "official_demo_executed": false,
+  "narrow_fov_adaptation_applied": false,
+  "fair_baseline_results_available": false,
+  "system_packages_installed": false,
+  "docker_images_pulled": false,
+  "free_disk_bytes_after": 2354835456
+}

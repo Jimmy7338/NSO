@@ -1,0 +1,756 @@
+{
+  "as_of": "2026-09-10",
+  "scope": "Primary-source review for semantic 2D coverage and 3D reconstruction; not exhaustive systematic review",
+  "report": "docs/research/SEMANTIC_COVERAGE_LITERATURE.md",
+  "bibliography": "docs/research/semantic_coverage_references.bib",
+  "papers": [
+    {
+      "id": "cao2021tare",
+      "source_number": 1,
+      "title": "TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments",
+      "authors": [
+        "Chao Cao",
+        "Hongbiao Zhu",
+        "Howie Choset",
+        "Ji Zhang"
+      ],
+      "year": 2021,
+      "url": "https://publications.ri.cmu.edu/storage/publications/2021/06/RSS_2021.pdf",
+      "alternate_urls": [],
+      "publication_status": "RSS 2021",
+      "primary_source": true,
+      "reading_depth": "methods_theory_experiments",
+      "sections_read": [
+        "hierarchy",
+        "gain deduplication",
+        "Theorem 3",
+        "experiments"
+      ],
+      "core_formula_or_mechanism": "L_hier <= L_opt + 4D_H + 2mD_G",
+      "applicability_assumptions": [
+        "exact route subproblems; no kinodynamics in bound"
+      ],
+      "can_support": [
+        "hierarchical geometric baseline"
+      ],
+      "cannot_support": [
+        "bound for NSO beam search"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/caochao39/tare_planner"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "cao2023granularity",
+      "source_number": 2,
+      "title": "Representation granularity enables time-efficient autonomous exploration in large, complex worlds",
+      "authors": [
+        "Chao Cao",
+        "Hongbiao Zhu",
+        "Zhongqiang Ren",
+        "Howie Choset",
+        "Ji Zhang"
+      ],
+      "year": 2023,
+      "url": "https://doi.org/10.1126/scirobotics.adf0970",
+      "alternate_urls": [
+        "https://biorobotics.ri.cmu.edu/papers/paperUploads/scirobotics.adf0970.pdf",
+        "https://github.com/caochao39/tare_planner"
+      ],
+      "publication_status": "Science Robotics 8(80), eadf0970; 2023-07-19",
+      "primary_source": true,
+      "reading_depth": "metadata_and_official_repository",
+      "sections_read": [
+        "publication metadata",
+        "full-text follow-up timed out"
+      ],
+      "core_formula_or_mechanism": "not independently extracted from 2023 full text",
+      "applicability_assumptions": [
+        "technical account relies on 2021 original"
+      ],
+      "can_support": [
+        "publication and code association"
+      ],
+      "cannot_support": [
+        "claims from unread 2023 sections"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/caochao39/tare_planner"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "zhou2021fuel",
+      "source_number": 3,
+      "title": "FUEL: Fast UAV Exploration using Incremental Frontier Structure and Hierarchical Planning",
+      "authors": [
+        "Boyu Zhou",
+        "Yichen Zhang",
+        "Xinyi Chen",
+        "Shaojie Shen"
+      ],
+      "year": 2021,
+      "url": "https://repository.hkust.edu.hk/ir/bitstream/1783.1-108720/1/033635_1.pdf",
+      "alternate_urls": [],
+      "publication_status": "IEEE RA-L 6(2), 779-786; ICRA 2021 option",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "FIS",
+        "ATSP",
+        "local graph refinement",
+        "trajectories",
+        "benchmark"
+      ],
+      "core_formula_or_mechanism": "translation/yaw time lower bound; hierarchical routing",
+      "applicability_assumptions": [
+        "native UAV motion and depth sensing"
+      ],
+      "can_support": [
+        "strong geometric baseline; official CPU simulator"
+      ],
+      "cannot_support": [
+        "unaltered ground-platform performance"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/HKUST-Aerial-Robotics/FUEL"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "zhou2023racer",
+      "source_number": 5,
+      "title": "RACER: Rapid Collaborative Exploration with a Decentralized Multi-UAV System",
+      "authors": [
+        "Boyu Zhou",
+        "Hao Xu",
+        "Shaojie Shen"
+      ],
+      "year": 2023,
+      "url": "https://arxiv.org/pdf/2209.08533",
+      "alternate_urls": [],
+      "publication_status": "IEEE T-RO 39(3), 1816-1835; preprint 2022",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "hgrid",
+        "pairwise allocation",
+        "CVRP",
+        "single-UAV ablation"
+      ],
+      "core_formula_or_mechanism": "capacity-constrained routing for balanced workload",
+      "applicability_assumptions": [
+        "decentralized multi-UAV task"
+      ],
+      "can_support": [
+        "route guidance and allocation"
+      ],
+      "cannot_support": [
+        "single robot comparison equals collaborative evaluation"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/Robotics-STAR-Lab/RACER"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "yang2022far",
+      "source_number": 7,
+      "title": "FAR Planner: Fast, Attemptable Route Planner using Dynamic Visibility Update",
+      "authors": [
+        "Fan Yang",
+        "Chao Cao",
+        "Hongbiao Zhu",
+        "Jean Oh",
+        "Ji Zhang"
+      ],
+      "year": 2022,
+      "url": "https://arxiv.org/html/2110.09460v3",
+      "alternate_urls": [],
+      "publication_status": "IROS 2022; preprint 2021",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "polygon extraction",
+        "visibility graph",
+        "goal navigation"
+      ],
+      "core_formula_or_mechanism": "shortest route on updated visibility graph",
+      "applicability_assumptions": [
+        "given navigation goal"
+      ],
+      "can_support": [
+        "navigation component"
+      ],
+      "cannot_support": [
+        "standalone exploration objective"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/MichaelFYang/far_planner"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "zhang2025falcon",
+      "source_number": 9,
+      "title": "FALCON: Fast Autonomous Aerial Exploration using Coverage Path Guidance",
+      "authors": [
+        "Yichen Zhang",
+        "Xinyi Chen",
+        "Chen Feng",
+        "Boyu Zhou",
+        "Shaojie Shen"
+      ],
+      "year": 2025,
+      "url": "https://arxiv.org/html/2407.00577v2",
+      "alternate_urls": [
+        "https://doi.org/10.1109/TRO.2024.3522148"
+      ],
+      "publication_status": "IEEE T-RO 41, 1365-1385; DOI/acceptance 2024",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "coverage ATSP",
+        "SOP",
+        "shared six-scene benchmark",
+        "ablation"
+      ],
+      "core_formula_or_mechanism": "global coverage order constrains local frontier SOP",
+      "applicability_assumptions": [
+        "UAV dynamics; shared depth sensor benchmark"
+      ],
+      "can_support": [
+        "strong hierarchical coverage baseline"
+      ],
+      "cannot_support": [
+        "algorithm itself needs GPU because default simulator uses CUDA"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/HKUST-Aerial-Robotics/FALCON"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "papatheodorou2023finding",
+      "source_number": 11,
+      "title": "Finding Things in the Unknown: Semantic Object-Centric Exploration with an MAV",
+      "authors": [
+        "Sotiris Papatheodorou",
+        "Nils Funk",
+        "Dimos Tzoumanikas",
+        "Christopher Choi",
+        "Binbin Xu",
+        "Stefan Leutenegger"
+      ],
+      "year": 2023,
+      "url": "https://arxiv.org/html/2302.14569v2",
+      "alternate_urls": [],
+      "publication_status": "ICRA 2023",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "map",
+        "invalid depth history",
+        "candidates",
+        "utility",
+        "real and simulated tests"
+      ],
+      "core_formula_or_mechanism": "weighted entropy and background/object distance gains divided by time",
+      "applicability_assumptions": [
+        "object detector and distance requirements"
+      ],
+      "can_support": [
+        "direct semantic exploration comparator"
+      ],
+      "cannot_support": [
+        "object preference alone is novel"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/ethz-mrl/semantic-exploration-icra-2023",
+        "completeness": "README retains work-in-progress notice; build unverified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "menon2023nbvsc",
+      "source_number": 13,
+      "title": "NBV-SC: Next Best View Planning based on Shape Completion for Fruit Mapping and Reconstruction",
+      "authors": [
+        "Rohit Menon",
+        "Tobias Zaenker",
+        "Nils Dengler",
+        "Maren Bennewitz"
+      ],
+      "year": 2023,
+      "url": "https://arxiv.org/html/2209.15376v2",
+      "alternate_urls": [],
+      "publication_status": "2022 preprint; 2023-03-07 revision; archival venue not independently verified",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "superellipsoid",
+        "unknown-space filter",
+        "novelty",
+        "utility",
+        "experiments"
+      ],
+      "core_formula_or_mechanism": "predicted missing-surface utility minus travel penalty",
+      "applicability_assumptions": [
+        "fruit shape prior; manipulator observation budget"
+      ],
+      "can_support": [
+        "shape completion and novelty controls are established"
+      ],
+      "cannot_support": [
+        "cabinet shape prior alone is novel"
+      ],
+      "implementation": {
+        "status": "official_complete_repository_not_verified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "tao2024active",
+      "source_number": 14,
+      "title": "3D Active Metric-Semantic SLAM",
+      "authors": [
+        "Yuezhan Tao",
+        "Xu Liu",
+        "Igor Spasojevic",
+        "Saurav Agarwal",
+        "Vijay Kumar"
+      ],
+      "year": 2024,
+      "url": "https://arxiv.org/html/2309.06950v3",
+      "alternate_urls": [],
+      "publication_status": "IEEE RA-L 9(3), 2989-2996",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "semantic factor graph",
+        "correlated orienteering",
+        "virtual loop closure",
+        "real tests"
+      ],
+      "core_formula_or_mechanism": "budgeted correlation-aware utility and uncertainty reduction",
+      "applicability_assumptions": [
+        "pose uncertainty and semantic loop closure"
+      ],
+      "can_support": [
+        "active SLAM evidence requirements"
+      ],
+      "cannot_support": [
+        "perfect pose simulation proves drift reduction"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/KumarRobotics/kr_3d_active_ms_slam"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "zhan2025panoramic",
+      "source_number": 16,
+      "title": "Semantic Exploration and Dense Mapping of Complex Environments using Ground Robot with Panoramic LiDAR-Camera Fusion",
+      "authors": [
+        "Xiaoyang Zhan",
+        "Shixin Zhou",
+        "Qianqian Yang",
+        "Yixuan Zhao",
+        "Hao Liu",
+        "Srinivas Chowdary Ramineni",
+        "Kenji Shimada"
+      ],
+      "year": 2025,
+      "url": "https://arxiv.org/html/2505.22880v3",
+      "alternate_urls": [
+        "https://doi.org/10.1109/LRA.2025.3609216"
+      ],
+      "publication_status": "IEEE RA-L; accepted 2025-08-31; v3 2025-09-17",
+      "primary_source": true,
+      "reading_depth": "methods_experiments_limitations",
+      "sections_read": [
+        "instance map",
+        "sector views",
+        "occlusion",
+        "deduplication",
+        "ATSP",
+        "GT and sensors",
+        "real metrics"
+      ],
+      "core_formula_or_mechanism": "sector completion plus geometric coverage",
+      "applicability_assumptions": [
+        "simulation GT object detections; panoramic cameras and 3D LiDAR"
+      ],
+      "can_support": [
+        "semantic multi-view ground exploration is established"
+      ],
+      "cannot_support": [
+        "sector count equals mesh F1; unmodified narrow RGB-D transfer"
+      ],
+      "implementation": {
+        "status": "official_complete_repository_not_verified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "sportich2025quality",
+      "source_number": 18,
+      "title": "Quality-guided UAV Surface Exploration for 3D Reconstruction",
+      "authors": [
+        "Benjamin Sportich",
+        "Kenza Boubakri",
+        "Olivier Simonin",
+        "Alessandro Renzaglia"
+      ],
+      "year": 2025,
+      "url": "https://arxiv.org/html/2511.20353v2",
+      "alternate_urls": [],
+      "publication_status": "2025 preprint; listed in ICUAS 2026 program TuA3.5, pp.143-150",
+      "primary_source": true,
+      "reading_depth": "methods_experiments",
+      "sections_read": [
+        "quality model",
+        "sampling",
+        "two Gazebo maps",
+        "tradeoffs"
+      ],
+      "core_formula_or_mechanism": "saturated voxel evidence; weight proportional to inverse squared range",
+      "applicability_assumptions": [
+        "specific sensor proxy; 360-degree LiDAR; perfect controller"
+      ],
+      "can_support": [
+        "quality/coverage tradeoff"
+      ],
+      "cannot_support": [
+        "universal ZED noise model; full FUEL comparison"
+      ],
+      "implementation": {
+        "status": "official_complete_repository_not_verified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "mao2026scout",
+      "source_number": 20,
+      "title": "SCOUT: Semantic scene COverage via Uncertainty-guided Traversal",
+      "authors": [
+        "Junyu Mao",
+        "Sara Ayoubi",
+        "Vishnu D. Sharma",
+        "Ilija Hadžić",
+        "Matthew Andrews"
+      ],
+      "year": 2026,
+      "url": "https://arxiv.org/html/2606.06721v1",
+      "alternate_urls": [],
+      "publication_status": "2026-06-04 preprint; workshop presentation; not main-conference archival publication",
+      "primary_source": true,
+      "reading_depth": "methods_experiments_limitations",
+      "sections_read": [
+        "UGT",
+        "entropy",
+        "angular novelty",
+        "two scenes and lawnmower"
+      ],
+      "core_formula_or_mechanism": "Delta H = H(1-exp(-alpha Visibility Novelty))",
+      "applicability_assumptions": [
+        "known 2D map; scene graph labeling"
+      ],
+      "can_support": [
+        "semantic coverage mechanism"
+      ],
+      "cannot_support": [
+        "unknown-map superiority to strong exploration; backside reconstruction"
+      ],
+      "implementation": {
+        "status": "official_complete_repository_not_verified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "tatsch2026sge",
+      "source_number": 21,
+      "title": "SGE: Semantically-Guided Exploration for Unstructured Environments via Image-Space Waypoint Sampling",
+      "authors": [
+        "Christopher Tatsch",
+        "Yu Gu"
+      ],
+      "year": 2026,
+      "url": "https://arxiv.org/html/2608.29315v1",
+      "alternate_urls": [],
+      "publication_status": "2026-08-29 preprint",
+      "primary_source": true,
+      "reading_depth": "methods_experiments_limitations",
+      "sections_read": [
+        "pixel utility",
+        "sampling",
+        "TSP",
+        "taboo/relocation",
+        "TARE comparison",
+        "real tests"
+      ],
+      "core_formula_or_mechanism": "sample pixels by normalized utility; route waypoints",
+      "applicability_assumptions": [
+        "semantic segmentation; perfect-pose simulation"
+      ],
+      "can_support": [
+        "semantic scene diversity with geometric tradeoff"
+      ],
+      "cannot_support": [
+        "uniformly beats TARE coverage/path"
+      ],
+      "implementation": {
+        "status": "official_complete_repository_not_verified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "vegesna2026sage",
+      "source_number": 22,
+      "title": "Semantic-Aware Guided Drone Exploration for Language-Conditioned 3D Indoor Mapping",
+      "authors": [
+        "Nitin Vegesna",
+        "Avideh Zakhor"
+      ],
+      "year": 2026,
+      "url": "https://arxiv.org/html/2605.23160v1",
+      "alternate_urls": [
+        "https://arxiv.org/abs/2605.23160"
+      ],
+      "publication_status": "2026-05-22 preprint; CVPR 2026 non-archival 3D-LLM/VLA workshop",
+      "primary_source": true,
+      "reading_depth": "methods_experiments_limitations",
+      "sections_read": [
+        "TSDF/CLIP",
+        "frontier cache",
+        "object frontiers",
+        "SOP/TSP modulation",
+        "benchmark",
+        "integration limits"
+      ],
+      "core_formula_or_mechanism": "semantic travel cost d_ij_prime = m_j d_ij",
+      "applicability_assumptions": [
+        "language query; CLIP; backbone matching only where supported"
+      ],
+      "can_support": [
+        "bounded semantic modulation; discovery tradeoff"
+      ],
+      "cannot_support": [
+        "bounded costs imply finite-budget coverage guarantee; identical comparison backends"
+      ],
+      "implementation": {
+        "status": "official_complete_repository_not_verified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "zhu2026bayesiannbv",
+      "source_number": 23,
+      "title": "A Bayesian Approach for Task-Specific Next-Best-View Selection with Uncertain Geometry",
+      "authors": [
+        "Jingsen Zhu",
+        "Silvia Sellán",
+        "Alexander Terenin"
+      ],
+      "year": 2026,
+      "url": "https://arxiv.org/html/2605.05095v1",
+      "alternate_urls": [
+        "https://doi.org/10.1145/3799902.3811119"
+      ],
+      "publication_status": "SIGGRAPH 2026; preprint 2026-05-06",
+      "primary_source": true,
+      "reading_depth": "methods_experiments_limitations",
+      "sections_read": [
+        "GP posterior",
+        "future scan Monte Carlo",
+        "task acquisition",
+        "classification/parts/physics",
+        "confidence failures"
+      ],
+      "core_formula_or_mechanism": "expected positive task utility gain under posterior future scans",
+      "applicability_assumptions": [
+        "object-scale posterior; specified task"
+      ],
+      "can_support": [
+        "task-relevant evidence and wrong-confidence issue"
+      ],
+      "cannot_support": [
+        "ready CPU whole-scene ground baseline"
+      ],
+      "implementation": {
+        "status": "official_public_readme_inspected_build_not_attempted",
+        "url": "https://github.com/jingsenzhu/BayesianNBV",
+        "completeness": "Public MIT initial release 2026-08-14; README still lists configs/data/scripts tasks; documented CUDA/PyTorch3D environment; CPU port unverified"
+      },
+      "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "jeong2026objectnbv",
+      "source_number": 25,
+      "title": "Informative Object-centric Next Best View for Object-aware 3D Gaussian Splatting in Cluttered Scenes",
+      "authors": [
+        "Seunghoon Jeong",
+        "Eunho Lee",
+        "Jeongyun Kim",
+        "Ayoung Kim"
+      ],
+      "year": 2026,
+      "url": "https://arxiv.org/html/2602.08266v1",
+      "alternate_urls": [
+        "https://arxiv.org/abs/2602.08266"
+      ],
+      "publication_status": "2026-02-09 preprint; authors report ICRA 2026 acceptance",
+      "primary_source": true,
+      "reading_depth": "methods_experiments_limitations",
+      "sections_read": [
+        "object 3DGS",
+        "block Hessian",
+        "confidence scaling",
+        "datasets",
+        "Table III ablation"
+      ],
+      "core_formula_or_mechanism": "object-aware rendering Hessian; confidence-normalized utility",
+      "applicability_assumptions": [
+        "GPU 3DGS; object supervision; small view budget"
+      ],
+      "can_support": [
+        "object-aware NBV mechanism"
+      ],
+      "cannot_support": [
+        "total gain isolates planning; ready CPU coverage"
+      ],
+      "implementation": {
+        "status": "official_complete_repository_not_verified"
+      },
+      "accessed_at": "2026-09-10"
+    }
+  ],
+  "pinned_baseline_sources": [
+    {
+      "id": "tare_official",
+      "url": "https://github.com/caochao39/tare_planner",
+      "branch": "melodic-noetic",
+      "commit": "44500592b86138257273e0cab264e6a847ccefc7",
+      "commit_date": "2024-06-01T14:13:54Z",
+      "tree_truncated": false,
+      "tree_blob_count": 2851,
+      "inspected_files": [
+        "README.md",
+        "src/tare_planner/package.xml",
+        "src/tare_planner/CMakeLists.txt",
+        "src/tare_planner/launch/explore_garage.launch"
+      ],
+      "native_platform": "ground robot",
+      "documented_environment": "Ubuntu20.04/Noetic or Ubuntu18.04/Melodic",
+      "build_status": "not_attempted",
+      "demo": "roslaunch tare_planner explore_garage.launch; requires CMU simulator",
+      "dependencies": [
+        "ROS/catkin",
+        "PCL",
+        "Eigen3",
+        "glog",
+        "C++17",
+        "bundled OR-Tools"
+      ],
+      "adaptation_boundary": "narrow RGB-D gain, 2D LiDAR input, heading and controller changes must be separately audited"
+    },
+    {
+      "id": "cmu_ground_environment",
+      "url": "https://github.com/HongbiaoZ/autonomous_exploration_development_environment",
+      "branch": "noetic",
+      "commit": "bf0cba71365271ebff09831a05afd78578150300",
+      "commit_date": "2026-02-18T22:47:45Z",
+      "inspected_files": [
+        "src/vehicle_simulator/package.xml",
+        "src/vehicle_simulator/launch/system_garage.launch",
+        "src/vehicle_simulator/mesh/download_environments.sh"
+      ],
+      "official_instructions": "https://www.cmu-exploration.com/",
+      "scene_download": "approximately 500MB per official page; not downloaded",
+      "build_status": "not_attempted",
+      "demo": "roslaunch vehicle_simulator system_garage.launch",
+      "dependencies": [
+        "ROS/catkin",
+        "Gazebo ROS",
+        "PCL ROS",
+        "terrain_analysis",
+        "local_planner",
+        "ps3joy",
+        "libusb"
+      ]
+    },
+    {
+      "id": "fuel_official",
+      "url": "https://github.com/HKUST-Aerial-Robotics/FUEL",
+      "commit": "662dd23c7b52b258d3c4a0155ff6632118e8984f",
+      "commit_date": "2024-11-19T06:06:55Z",
+      "tree_truncated": false,
+      "tree_blob_count": 1538,
+      "inspected_files": [
+        "README.md",
+        "fuel_planner/exploration_manager/package.xml",
+        "uav_simulator/local_sensing/CMakeLists.txt"
+      ],
+      "cpu_configuration": "ENABLE_CUDA=false in pinned CMakeLists.txt",
+      "native_platform": "UAV with 3D motion and trajectory optimization",
+      "dependencies": [
+        "ROS/catkin",
+        "NLopt2.7.1",
+        "Armadillo",
+        "Eigen",
+        "PCL",
+        "OpenCV",
+        "repository LKH solver"
+      ],
+      "build_status": "not_attempted",
+      "demo": [
+        "roslaunch exploration_manager rviz.launch",
+        "roslaunch exploration_manager exploration.launch"
+      ],
+      "adaptation_boundary": "SE(2), candidate heights, ground traversability, time cost, trajectory/control changes yield an explicitly adapted baseline"
+    }
+  ],
+  "local_environment_audit": {
+    "os": "Ubuntu 24.04.2 LTS",
+    "roscore": false,
+    "roslaunch": false,
+    "catkin_make": false,
+    "opt_ros": false,
+    "cmake": true,
+    "cpp_compiler": true,
+    "docker_client": true,
+    "docker_daemon_tested": false,
+    "free_bytes_at_audit": 2351439872,
+    "dpkg_development_packages_present": {
+      "libopencv-dev": "4.6.0+dfsg-13.1ubuntu1"
+    },
+    "dpkg_development_packages_not_found": [
+      "libeigen3-dev",
+      "libpcl-dev",
+      "libgoogle-glog-dev",
+      "libarmadillo-dev",
+      "libnlopt-dev",
+      "libnlopt-cxx-dev",
+      "libusb-dev"
+    ],
+    "limitation": "dpkg absence does not exclude manual installations; no package install or large downloads"
+  },
+  "reading_limitations": [
+    "2023 TARE expansion full-text follow-up failed; use 2021 original for verified theory",
+    "Public code does not establish successful build or full reproducibility",
+    "Preprints and non-archival workshops remain explicitly labeled",
+    "Paper results are not NSO results",
+    "Report bounded theoretical derivations do not guarantee current online heuristic"
+  ],
+  "local_prepared_source_manifest": "docs/research/official_baseline_source_manifest.json",
+  "local_preparation_scope": "Pinned source trees downloaded with file hashes; ROS/catkin build and official demos not executed. External absolute catkin workspace links omitted and recorded."
+}

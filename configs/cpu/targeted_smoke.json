@@ -1,0 +1,32 @@
+{
+  "schema": "targeted_scenes_v1",
+  "purpose": "development wiring smoke, not the scenario evidence suite",
+  "environment": {
+    "resolution_m": 0.25,
+    "robot_radius_m": 0.2,
+    "sensor_range_m": 3.0,
+    "sensor_fov_deg": 90,
+    "max_steps": 80
+  },
+  "max_candidates": 24,
+  "mechanisms": {
+    "semantic_weight": 1.0,
+    "structure_weight": 1.0,
+    "goal_budget": 32,
+    "topology_period": 10,
+    "max_door_width": 7
+  },
+  "maps": [
+    {
+      "family": "office_spine",
+      "size": 192,
+      "seed": 41,
+      "entrance": 0
+    }
+  ],
+  "cases": [
+    "geometry",
+    "semantic_aligned",
+    "semantic_shuffled"
+  ]
+}

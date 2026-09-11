@@ -1,0 +1,1006 @@
+{
+  "scope": "Posthoc geometry/reference sensitivity audit only; no navigation or reconstruction metric reevaluation.",
+  "source_run": "/root/NSO/eval_results/joint_v4_feedback_development_20260910",
+  "source_run_metadata_sha256": "b3c6824d37e869527ecfae50b3c291b05a743d1e5cd20becacdd5eabc8f092c2",
+  "source_archive_sha256": "efec0efa9c1a5cc0a4de1071a41f84762a8af495da3aa8b04b1bda4bf67a22d1",
+  "source_config_sha256": "fd19872cc6c35bdd00fdadf7d872e9ee20059df8f170e9aea077b6f62c6f166b",
+  "source_sha256": {
+    "env/__init__.py": "742fd98c397a6206625b9cde3fedc948e64d7b79e8c9391d827c2f6b80c14c37",
+    "env/virtual3d.py": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+    "env/virtual3d_v2.py": "c990926063c97ae40e28fe4e842d479b6c939dcb9a1b64de8e04f1561f5f1602",
+    "utils/grid_geometry.py": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b",
+    "utils/rgbd_contract.py": "93d647c6dae79748d75f32148adf6aa9479a9f46950129557da99c6b28bb7f87",
+    "utils/reconstruction_metrics.py": "92731c70a02d527812260d4487c817bd3829d9c4a35accd65c1320a62833987c",
+    "env/virtual3d_inspection_v4.py": "047f56e0c62d61a599be3982673d7b00f8c749f3c4a6aeb80541e9f7b33dd13f",
+    "scripts/audit_legacy_surface_reference.py": "b92502e824e4fae8fd7dc73b6493a997b092923602f448bde5c9530b9e045331"
+  },
+  "legacy_dependencies_match_frozen_archive": true,
+  "related_reference_runs": [
+    {
+      "run": "/root/NSO/eval_results/joint_v4_ablation_verified_20260910",
+      "metadata_sha256": "8dd8a26902d67e61ddf25071f43106ad4e63883b647958ef687f22196275d7a8",
+      "scene_count": 8,
+      "references": [
+        {
+          "scene": "rooms_202_aligned_d0.01_p0.0_opaque0",
+          "sha256": "8687532d3bdaaac3158b795762f056bed3e1a1b3b19e49a37ab814075d2c09d0",
+          "all_arrays_equal": true
+        },
+        {
+          "scene": "rooms_203_aligned_d0.01_p0.0_opaque0",
+          "sha256": "fff8493e2981fc0358337fa05903b6a8662bdbcf66e3c3390c6a940bb51d5a0e",
+          "all_arrays_equal": true
+        },
+        {
+          "scene": "warehouse_202_aligned_d0.01_p0.0_opaque0",
+          "sha256": "f895530e46f8b3ece150e32b895853c7ec1a7f826cdf6eba40f4d89144a2541f",
+          "all_arrays_equal": true
+        },
+        {
+          "scene": "warehouse_203_aligned_d0.01_p0.0_opaque0",
+          "sha256": "59473d7f42a4b42078bb85369ac33890fd2ab2700be9babc8e07c8a9803b7b1a",
+          "all_arrays_equal": true
+        },
+        {
+          "scene": "rooms_202_aligned_d0.01_p0.0_opaque1",
+          "sha256": "0853836b389c0b670095a33ac89c551e2bab9fbc8f6ad6a50bcbe689d40abe1e",
+          "all_arrays_equal": true
+        },
+        {
+          "scene": "rooms_203_aligned_d0.01_p0.0_opaque1",
+          "sha256": "cbf6676614df8a5c2c4a42fdcad5ecb284fa6e3e3be4de5e9304cc361b0b7857",
+          "all_arrays_equal": true
+        },
+        {
+          "scene": "warehouse_202_aligned_d0.01_p0.0_opaque1",
+          "sha256": "da73df8f5797cf6f429f5516d1821c32de105b438edab07951037e2891593422",
+          "all_arrays_equal": true
+        },
+        {
+          "scene": "warehouse_203_aligned_d0.01_p0.0_opaque1",
+          "sha256": "a295e2b6846f6dd1f30012d0f7ce7d86f58ba3045aeeb2ce1074ba30159ed6af",
+          "all_arrays_equal": true
+        }
+      ]
+    }
+  ],
+  "reference_sampling_count": 16000,
+  "reference_sampling_seed": 2026,
+  "scene_count": 8,
+  "frozen_results_modified": false,
+  "navigation_episodes_run": 0,
+  "prediction_mesh_metrics_recomputed": false,
+  "scenes": [
+    {
+      "scene": "rooms_202_aligned_d0.01_p0.0_opaque0",
+      "layout": "rooms",
+      "seed": 202,
+      "occluded_objects": false,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": false
+      },
+      "elapsed_s": 1.3929143950808793,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/rooms_202_aligned_d0.01_p0.0_opaque0_reference.npz",
+      "frozen_reference_sha256": "8687532d3bdaaac3158b795762f056bed3e1a1b3b19e49a37ab814075d2c09d0",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 74,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          63,
+          63,
+          55
+        ],
+        "primitive_count": 74,
+        "union_volume_m3": 63.533906021905196,
+        "exterior_surface_area_m2": 835.060975978426,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 888,
+        "union_triangle_count": 144988,
+        "original_sum_triangle_area_m2": 892.5877272230512,
+        "unique_union_exterior_area_m2": 835.060975978426,
+        "removed_area_m2": 57.52675124462519,
+        "removed_fraction_of_original": 0.06444940871369349,
+        "original_overcount_relative_to_union": 0.06888928221944757,
+        "exact_duplicate_triangle_groups": 0,
+        "exact_duplicate_triangle_excess": 0,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 961,
+        "original_exterior_duplicate_sample_count": 195,
+        "estimated_unique_area_from_legacy_samples_m2": 833.5374703939511,
+        "estimated_unique_area_mc_standard_error_m2": 1.7101908151727003,
+        "original_visible_reference_count": 8395,
+        "visible_internal_sample_count": 3,
+        "visible_internal_distance_to_union_m": [
+          0.00018787384033203125,
+          0.000377655029296875,
+          0.00026607513427734375
+        ],
+        "visible_exterior_duplicate_sample_count": 54,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 54
+        },
+        "visible_exterior_duplicate_fraction": 0.006432400238237046,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 8338,
+          "2": 54
+        },
+        "visible_inverse_multiplicity_weight_sum": 8365.0,
+        "visible_redundant_or_internal_weight_fraction": 0.003573555687909513,
+        "original_visible_measure_estimate_m2": 468.32962312734463,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 466.65602113880146,
+        "union_visible_reference_count": 8913,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 465.1811549309819,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8738534842167958,
+          "2": 0.06063132817153067,
+          "3": 0.06551518761167362
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8767483562462642,
+          "2": 0.06084877465630604,
+          "3": 0.062402869097429765
+        },
+        "union_visible_class_shares": {
+          "1": 0.8780433075283294,
+          "2": 0.06036127005497588,
+          "3": 0.06159542241669472
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    },
+    {
+      "scene": "rooms_203_aligned_d0.01_p0.0_opaque0",
+      "layout": "rooms",
+      "seed": 203,
+      "occluded_objects": false,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": false
+      },
+      "elapsed_s": 1.3183699790388346,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/rooms_203_aligned_d0.01_p0.0_opaque0_reference.npz",
+      "frozen_reference_sha256": "fff8493e2981fc0358337fa05903b6a8662bdbcf66e3c3390c6a940bb51d5a0e",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 71,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          65,
+          65,
+          52
+        ],
+        "primitive_count": 71,
+        "union_volume_m3": 64.35407887297265,
+        "exterior_surface_area_m2": 833.7604837488695,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 852,
+        "union_triangle_count": 143620,
+        "original_sum_triangle_area_m2": 892.5865080518467,
+        "unique_union_exterior_area_m2": 833.7604837488695,
+        "removed_area_m2": 58.8260243029772,
+        "removed_fraction_of_original": 0.06590512378611961,
+        "original_overcount_relative_to_union": 0.07055506401367873,
+        "exact_duplicate_triangle_groups": 0,
+        "exact_duplicate_triangle_excess": 0,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 949,
+        "original_exterior_duplicate_sample_count": 184,
+        "estimated_unique_area_from_legacy_samples_m2": 834.5125983717235,
+        "estimated_unique_area_mc_standard_error_m2": 1.6988185611715243,
+        "original_visible_reference_count": 8407,
+        "visible_internal_sample_count": 2,
+        "visible_internal_distance_to_union_m": [
+          0.00018787398585118353,
+          0.00026607513427734375
+        ],
+        "visible_exterior_duplicate_sample_count": 44,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 44
+        },
+        "visible_exterior_duplicate_fraction": 0.005233733793267515,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 8361,
+          "2": 44
+        },
+        "visible_inverse_multiplicity_weight_sum": 8383.0,
+        "visible_redundant_or_internal_weight_fraction": 0.002854763887236822,
+        "original_visible_measure_estimate_m2": 468.99842332449225,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 467.6595435624144,
+        "union_visible_reference_count": 8955,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 466.64532074819545,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8709408825978351,
+          "2": 0.07279647912453907,
+          "3": 0.05626263827762579
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8731957533102708,
+          "2": 0.07300489085053084,
+          "3": 0.05379935583919838
+        },
+        "union_visible_class_shares": {
+          "1": 0.8780569514237856,
+          "2": 0.07035175879396985,
+          "3": 0.05159128978224456
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    },
+    {
+      "scene": "warehouse_202_aligned_d0.01_p0.0_opaque0",
+      "layout": "warehouse",
+      "seed": 202,
+      "occluded_objects": false,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": false
+      },
+      "elapsed_s": 1.2679826100356877,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/warehouse_202_aligned_d0.01_p0.0_opaque0_reference.npz",
+      "frozen_reference_sha256": "f895530e46f8b3ece150e32b895853c7ec1a7f826cdf6eba40f4d89144a2541f",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 70,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          59,
+          59,
+          55
+        ],
+        "primitive_count": 70,
+        "union_volume_m3": 52.39790602190523,
+        "exterior_surface_area_m2": 723.7009759784378,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 840,
+        "union_triangle_count": 114492,
+        "original_sum_triangle_area_m2": 768.1077272230516,
+        "unique_union_exterior_area_m2": 723.7009759784378,
+        "removed_area_m2": 44.406751244613815,
+        "removed_fraction_of_original": 0.05781318123846773,
+        "original_overcount_relative_to_union": 0.0613606347353286,
+        "exact_duplicate_triangle_groups": 0,
+        "exact_duplicate_triangle_excess": 0,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 810,
+        "original_exterior_duplicate_sample_count": 210,
+        "estimated_unique_area_from_legacy_samples_m2": 724.1815665724833,
+        "estimated_unique_area_mc_standard_error_m2": 1.3664845436870032,
+        "original_visible_reference_count": 7567,
+        "visible_internal_sample_count": 2,
+        "visible_internal_distance_to_union_m": [
+          0.000263214111328125,
+          0.00026607513427734375
+        ],
+        "visible_exterior_duplicate_sample_count": 56,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 56
+        },
+        "visible_exterior_duplicate_fraction": 0.0074005550416281225,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 7509,
+          "2": 56
+        },
+        "visible_inverse_multiplicity_weight_sum": 7537.0,
+        "visible_redundant_or_internal_weight_fraction": 0.003964583058015059,
+        "original_visible_measure_estimate_m2": 363.26694824355195,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 361.82674625500874,
+        "union_visible_reference_count": 8047,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 363.9763596061556,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8326945949517642,
+          "2": 0.07968811946610281,
+          "3": 0.08761728558213294
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8358763433726947,
+          "2": 0.0800053071513865,
+          "3": 0.0841183494759188
+        },
+        "union_visible_class_shares": {
+          "1": 0.8460295762395924,
+          "2": 0.07418913880949422,
+          "3": 0.07978128495091338
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    },
+    {
+      "scene": "warehouse_203_aligned_d0.01_p0.0_opaque0",
+      "layout": "warehouse",
+      "seed": 203,
+      "occluded_objects": false,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": false
+      },
+      "elapsed_s": 1.2180336031597108,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/warehouse_203_aligned_d0.01_p0.0_opaque0_reference.npz",
+      "frozen_reference_sha256": "59473d7f42a4b42078bb85369ac33890fd2ab2700be9babc8e07c8a9803b7b1a",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 67,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          61,
+          61,
+          52
+        ],
+        "primitive_count": 67,
+        "union_volume_m3": 53.21807887297269,
+        "exterior_surface_area_m2": 722.4004837488516,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 804,
+        "union_triangle_count": 113828,
+        "original_sum_triangle_area_m2": 768.1065080518472,
+        "unique_union_exterior_area_m2": 722.4004837488516,
+        "removed_area_m2": 45.706024302995615,
+        "removed_fraction_of_original": 0.059504800211783206,
+        "original_overcount_relative_to_union": 0.06326964797394252,
+        "exact_duplicate_triangle_groups": 0,
+        "exact_duplicate_triangle_excess": 0,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 841,
+        "original_exterior_duplicate_sample_count": 203,
+        "estimated_unique_area_from_legacy_samples_m2": 722.860234061918,
+        "estimated_unique_area_mc_standard_error_m2": 1.388283395833834,
+        "original_visible_reference_count": 7549,
+        "visible_internal_sample_count": 1,
+        "visible_internal_distance_to_union_m": [
+          0.00026607513427734375
+        ],
+        "visible_exterior_duplicate_sample_count": 48,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 48
+        },
+        "visible_exterior_duplicate_fraction": 0.006358458073917075,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 7500,
+          "2": 48
+        },
+        "visible_inverse_multiplicity_weight_sum": 7524.0,
+        "visible_redundant_or_internal_weight_fraction": 0.0033116969134985297,
+        "original_visible_measure_estimate_m2": 362.40225183021215,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 361.2020854113811,
+        "union_visible_reference_count": 8114,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 366.3473453211364,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8326930719300569,
+          "2": 0.09219764207179759,
+          "3": 0.07510928599814545
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8353269537480064,
+          "2": 0.09250398724082935,
+          "3": 0.07216905901116427
+        },
+        "union_visible_class_shares": {
+          "1": 0.8471777175252649,
+          "2": 0.09058417549913729,
+          "3": 0.06223810697559773
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    },
+    {
+      "scene": "rooms_202_aligned_d0.01_p0.0_opaque1",
+      "layout": "rooms",
+      "seed": 202,
+      "occluded_objects": true,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": true
+      },
+      "elapsed_s": 1.3774913009256124,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/rooms_202_aligned_d0.01_p0.0_opaque1_reference.npz",
+      "frozen_reference_sha256": "0853836b389c0b670095a33ac89c551e2bab9fbc8f6ad6a50bcbe689d40abe1e",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 82,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          63,
+          63,
+          55
+        ],
+        "primitive_count": 82,
+        "union_volume_m3": 63.97953158181302,
+        "exterior_surface_area_m2": 842.4134166644366,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 984,
+        "union_triangle_count": 150660,
+        "original_sum_triangle_area_m2": 912.628578023847,
+        "unique_union_exterior_area_m2": 842.4134166644366,
+        "removed_area_m2": 70.21516135941044,
+        "removed_fraction_of_original": 0.07693728100368091,
+        "original_overcount_relative_to_union": 0.08335000365667211,
+        "exact_duplicate_triangle_groups": 24,
+        "exact_duplicate_triangle_excess": 24,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 1010,
+        "original_exterior_duplicate_sample_count": 395,
+        "estimated_unique_area_from_legacy_samples_m2": 843.3638715709121,
+        "estimated_unique_area_mc_standard_error_m2": 1.8258126884378845,
+        "original_visible_reference_count": 8459,
+        "visible_internal_sample_count": 1,
+        "visible_internal_distance_to_union_m": [
+          0.00026607513427734375
+        ],
+        "visible_exterior_duplicate_sample_count": 246,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 246
+        },
+        "visible_exterior_duplicate_fraction": 0.029081451708239746,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 8212,
+          "2": 205,
+          "3": 41
+        },
+        "visible_inverse_multiplicity_weight_sum": 8328.166666666668,
+        "visible_redundant_or_internal_weight_fraction": 0.015466761240493176,
+        "original_visible_measure_estimate_m2": 482.4953213439826,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 475.0326814091001,
+        "union_visible_reference_count": 9014,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 474.59465861332694,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8476179217401584,
+          "2": 0.061000118217283364,
+          "3": 0.09138196004255822
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8608137044967878,
+          "2": 0.06195841421681442,
+          "3": 0.07722788128639757
+        },
+        "union_visible_class_shares": {
+          "1": 0.8721988018637675,
+          "2": 0.05924118038606612,
+          "3": 0.0685600177501664
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    },
+    {
+      "scene": "rooms_203_aligned_d0.01_p0.0_opaque1",
+      "layout": "rooms",
+      "seed": 203,
+      "occluded_objects": true,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": true
+      },
+      "elapsed_s": 1.3713454741518945,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/rooms_203_aligned_d0.01_p0.0_opaque1_reference.npz",
+      "frozen_reference_sha256": "cbf6676614df8a5c2c4a42fdcad5ecb284fa6e3e3be4de5e9304cc361b0b7857",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 78,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          65,
+          65,
+          52
+        ],
+        "primitive_count": 78,
+        "union_volume_m3": 64.71968566093878,
+        "exterior_surface_area_m2": 839.6620485568262,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 936,
+        "union_triangle_count": 146564,
+        "original_sum_triangle_area_m2": 908.7811938766151,
+        "unique_union_exterior_area_m2": 839.6620485568262,
+        "removed_area_m2": 69.11914531978891,
+        "removed_fraction_of_original": 0.07605697145310117,
+        "original_overcount_relative_to_union": 0.08231781517169656,
+        "exact_duplicate_triangle_groups": 18,
+        "exact_duplicate_triangle_excess": 18,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 1033,
+        "original_exterior_duplicate_sample_count": 357,
+        "estimated_unique_area_from_legacy_samples_m2": 839.6664907881448,
+        "estimated_unique_area_mc_standard_error_m2": 1.8281760853503672,
+        "original_visible_reference_count": 8396,
+        "visible_internal_sample_count": 1,
+        "visible_internal_distance_to_union_m": [
+          0.00026607513427734375
+        ],
+        "visible_exterior_duplicate_sample_count": 212,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 212
+        },
+        "visible_exterior_duplicate_fraction": 0.0252501191043354,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 8183,
+          "2": 180,
+          "3": 32
+        },
+        "visible_inverse_multiplicity_weight_sum": 8283.666666666666,
+        "visible_redundant_or_internal_weight_fraction": 0.013379387009687216,
+        "original_visible_measure_estimate_m2": 476.8829314867538,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 470.5025301880783,
+        "union_visible_reference_count": 9050,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 474.9338462149549,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8523106241067174,
+          "2": 0.07110528823249167,
+          "3": 0.07658408766079085
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8637479377087441,
+          "2": 0.07206953442517404,
+          "3": 0.06418252786608185
+        },
+        "union_visible_class_shares": {
+          "1": 0.8712707182320442,
+          "2": 0.0630939226519337,
+          "3": 0.0656353591160221
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    },
+    {
+      "scene": "warehouse_202_aligned_d0.01_p0.0_opaque1",
+      "layout": "warehouse",
+      "seed": 202,
+      "occluded_objects": true,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": true
+      },
+      "elapsed_s": 1.2736584949307144,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/warehouse_202_aligned_d0.01_p0.0_opaque1_reference.npz",
+      "frozen_reference_sha256": "da73df8f5797cf6f429f5516d1821c32de105b438edab07951037e2891593422",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 78,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          59,
+          59,
+          55
+        ],
+        "primitive_count": 78,
+        "union_volume_m3": 52.84353158181307,
+        "exterior_surface_area_m2": 731.05341666445,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 936,
+        "union_triangle_count": 120164,
+        "original_sum_triangle_area_m2": 788.1485780238474,
+        "unique_union_exterior_area_m2": 731.05341666445,
+        "removed_area_m2": 57.09516135939748,
+        "removed_fraction_of_original": 0.07244212950628444,
+        "original_overcount_relative_to_union": 0.07809984887274513,
+        "exact_duplicate_triangle_groups": 24,
+        "exact_duplicate_triangle_excess": 24,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 937,
+        "original_exterior_duplicate_sample_count": 433,
+        "estimated_unique_area_from_legacy_samples_m2": 731.0652752842661,
+        "estimated_unique_area_mc_standard_error_m2": 1.5322740364204392,
+        "original_visible_reference_count": 7563,
+        "visible_internal_sample_count": 2,
+        "visible_internal_distance_to_union_m": [
+          0.00026607513427734375,
+          6.313621997833252e-05
+        ],
+        "visible_exterior_duplicate_sample_count": 274,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 274
+        },
+        "visible_exterior_duplicate_fraction": 0.036229009652254396,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 7287,
+          "2": 242,
+          "3": 32
+        },
+        "visible_inverse_multiplicity_weight_sum": 7418.666666666667,
+        "visible_redundant_or_internal_weight_fraction": 0.01908413768786632,
+        "original_visible_measure_estimate_m2": 372.5479809746474,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 365.4382240103906,
+        "union_visible_reference_count": 8087,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 369.5018112853379,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8049715721274626,
+          "2": 0.07523469522676186,
+          "3": 0.11979373264577549
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8203630481667864,
+          "2": 0.07669841840402587,
+          "3": 0.10293853342918763
+        },
+        "union_visible_class_shares": {
+          "1": 0.8321998268826512,
+          "2": 0.07295659700754296,
+          "3": 0.09484357610980586
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    },
+    {
+      "scene": "warehouse_203_aligned_d0.01_p0.0_opaque1",
+      "layout": "warehouse",
+      "seed": 203,
+      "occluded_objects": true,
+      "configuration": {
+        "resolution_m": 0.2,
+        "robot_radius_m": 0.2,
+        "camera_height_m": 0.8,
+        "width_px": 96,
+        "height_px": 72,
+        "fov_deg": 90.0,
+        "max_depth_m": 4.0,
+        "depth_sigma_m": 0.01,
+        "dropout": 0.01,
+        "action_duration_s": 1.0,
+        "voxel_m": 0.03,
+        "max_steps": 280,
+        "laser_height_m": 0.25,
+        "laser_rays": 180,
+        "width_m": 16,
+        "height_m": 12,
+        "truncation_m": 0.12,
+        "pose_noise_m": 0.0,
+        "occluded_objects": true
+      },
+      "elapsed_s": 1.2458684269804507,
+      "frozen_reference_path": "eval_results/joint_v4_feedback_development_20260910/warehouse_203_aligned_d0.01_p0.0_opaque1_reference.npz",
+      "frozen_reference_sha256": "a295e2b6846f6dd1f30012d0f7ce7d86f58ba3045aeeb2ce1074ba30159ed6af",
+      "frozen_geometry_and_reachable_match": true,
+      "frozen_reference_points_and_classes_reproduced_exactly": true,
+      "primitive_recovery": {
+        "all_box_blocks_validated": true,
+        "primitive_count": 74,
+        "maximum_reconstruction_coordinate_error_m": 0.0,
+        "topology": "canonical Open3D closed outward 8-vertex/12-triangle box"
+      },
+      "union_surface": {
+        "method": "exact axis-aligned union boundary on primitive coordinate planes",
+        "coordinate_rounding_m": 1e-09,
+        "coordinate_cell_shape": [
+          61,
+          61,
+          52
+        ],
+        "primitive_count": 74,
+        "union_volume_m3": 53.58368566093881,
+        "exterior_surface_area_m2": 728.3020485568034,
+        "internal_faces_emitted": false,
+        "coplanar_overlap_faces_emitted": false,
+        "surface_classes": "occupied-side physical class; different-class volume overlap rejected"
+      },
+      "geometry": {
+        "original_triangle_count": 888,
+        "union_triangle_count": 116772,
+        "original_sum_triangle_area_m2": 784.3011938766156,
+        "unique_union_exterior_area_m2": 728.3020485568034,
+        "removed_area_m2": 55.999145319812214,
+        "removed_fraction_of_original": 0.07140005109901933,
+        "original_overcount_relative_to_union": 0.07689000110706767,
+        "exact_duplicate_triangle_groups": 18,
+        "exact_duplicate_triangle_excess": 18,
+        "limitation": "Exact full triangles only; partial coplanar overlap is diagnosed by sampled multiplicity."
+      },
+      "sampling": {
+        "candidate_count": 16000,
+        "seed": 2026,
+        "original_internal_sample_count": 935,
+        "original_exterior_duplicate_sample_count": 383,
+        "estimated_unique_area_from_legacy_samples_m2": 728.811884409845,
+        "estimated_unique_area_mc_standard_error_m2": 1.5165266850551185,
+        "original_visible_reference_count": 7576,
+        "visible_internal_sample_count": 2,
+        "visible_internal_distance_to_union_m": [
+          0.00026607513427734375,
+          0.00023031234741210938
+        ],
+        "visible_exterior_duplicate_sample_count": 204,
+        "visible_exterior_duplicate_class_counts": {
+          "3": 204
+        },
+        "visible_exterior_duplicate_fraction": 0.02692713833157339,
+        "visible_exterior_multiplicity_histogram": {
+          "1": 7370,
+          "2": 171,
+          "3": 33
+        },
+        "visible_inverse_multiplicity_weight_sum": 7466.5,
+        "visible_redundant_or_internal_weight_fraction": 0.01445353748680045,
+        "original_visible_measure_estimate_m2": 371.36661530057745,
+        "unique_visible_measure_from_legacy_samples_estimate_m2": 365.9990540049844,
+        "union_visible_reference_count": 8089,
+        "unique_visible_measure_from_new_union_samples_estimate_m2": 368.2022044234989,
+        "original_samples_visibility_change_with_union_ray_truth": 0,
+        "original_visible_class_shares": {
+          "1": 0.8068901795142556,
+          "2": 0.09279303062302006,
+          "3": 0.1003167898627244
+        },
+        "deweighted_original_visible_class_shares": {
+          "1": 0.8185897006629612,
+          "2": 0.09415388736355722,
+          "3": 0.08725641197348155
+        },
+        "union_visible_class_shares": {
+          "1": 0.8276672023735938,
+          "2": 0.09061688713067129,
+          "3": 0.08171591049573494
+        }
+      },
+      "limitations": [
+        "Areas include all exterior surfaces, while metrics use reachable-view visibility filtering.",
+        "Reference diagnostics are finite-sample estimates, not reconstructed-mesh metric changes.",
+        "Multiplicity is physical face coverage, not identical sampled coordinate duplication.",
+        "Unique-reference class shares also include independent Monte Carlo resampling variation."
+      ]
+    }
+  ],
+  "interpretation": "Total triangle area reduction is not F1, recall, precision, or joint-metric bias. Visibility removes most internal surfaces, but exposed coplanar duplicates can retain extra weight. The direction of any method contrast change requires reevaluating identical stored reconstructions."
+}

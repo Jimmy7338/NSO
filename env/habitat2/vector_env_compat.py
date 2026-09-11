@@ -1,6 +1,7 @@
 """将 habitat-lab 0.2.x VectorEnv 适配为 NSO 使用的 H0.1 接口。"""
 from __future__ import annotations
 
+from copy import deepcopy
 from typing import Any, List, Sequence, Tuple, Union
 
 import numpy as np
@@ -32,9 +33,8 @@ def _unwrap_obs_and_info(obs: Any, info: dict) -> Tuple[np.ndarray, dict]:
     if isinstance(obs, tuple) and len(obs) == 2:
         inner_obs, inner_info = obs
         if isinstance(inner_info, dict):
-            merged = dict(info)
-            merged.update(inner_info)
-            info = merged
+            # The observation is from reset; preserve terminal metrics separately.
+            info = dict(inner_info, terminal_info=deepcopy(info))
         obs = inner_obs
     return _normalize_obs(obs), info
 

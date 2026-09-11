@@ -1,4 +1,7 @@
 import time
+import json
+import uuid
+from pathlib import Path
 from collections import deque
 
 import os
@@ -55,9 +58,11 @@ from loop.pose_correction import apply_loop_pose_correction
 from model import ReachabilityHead
 from nso.reachability_uq import ReachabilityHeadUQ, apply_uq_mask, apply_mask_point_estimate
 from nso.components import NSO_Components
+from nso.runtime_integration import NSORuntimeIntegration
 from env.habitat.reachability_utils import (
     default_rpn_in_channels, infer_rpn_in_channels, mask_global_goals)
-from utils.paper_eval import PaperMetricsTracker
+from utils.paper_eval import PaperMetricsTracker, METRICS_SCHEMA_VERSION
+from utils.eval_protocol import freeze_models, model_fingerprints, verify_frozen, code_fingerprint
 
 args = get_args()
 
@@ -68,6 +73,11 @@ _nso_components: NSO_Components = NSO_Components(args)
 def resolve_rpn_in_channels(args) -> int:
     if args.rpn_in_channels and args.rpn_in_channels > 0:
         return int(args.rpn_in_channels)
+    if getattr(args, 'use_rpn_uq', False):
+        # Old point-estimate checkpoints have a different first-layer key.
+        # The UQ manager will explicitly reject incompatible or missing weights.
+        from nso.runtime_integration import infer_uq_channels
+        return infer_uq_channels(args)
     reach_path = args.goal_reachability_model_path
     if reach_path and os.path.isfile(reach_path):
         ch = infer_rpn_in_channels(reach_path)
@@ -207,9 +217,9 @@ def main():
     best_g_reward = -np.inf
 
     if args.eval:
-        traj_lengths = args.max_episode_length // args.num_local_steps
-        explored_area_log = np.zeros((num_scenes, num_episodes, traj_lengths))
-        explored_ratio_log = np.zeros((num_scenes, num_episodes, traj_lengths))
+        traj_lengths = (args.max_episode_length + args.num_local_steps - 1) // args.num_local_steps
+        explored_area_log = np.full((num_scenes, num_episodes, traj_lengths), np.nan)
+        explored_ratio_log = np.full((num_scenes, num_episodes, traj_lengths), np.nan)
 
     g_episode_rewards = deque(maxlen=1000)
     reach_losses = deque(maxlen=1000)
@@ -268,6 +278,8 @@ def main():
         rpn_in_channels=resolve_rpn_in_channels(args),
     )
     nso = _nso_components
+    nso_runtime = NSORuntimeIntegration(nso, num_scenes, (full_w, full_h))
+    logging.info('NSO runtime adapter: %s', nso_runtime.summary())
 
     # Semantic modules (optional)
     semantic_detector = None
@@ -455,8 +467,8 @@ def main():
 
     # slam
     nslam_module = Neural_SLAM_Module(args).to(device)
-    slam_optimizer = get_optimizer(nslam_module.parameters(),
-                                   args.slam_optimizer)
+    slam_optimizer = (get_optimizer(nslam_module.parameters(), args.slam_optimizer)
+                      if args.train_slam and not args.eval else None)
 
     # Global policy
     g_policy = RL_Policy(g_observation_space.shape, g_action_space,
@@ -467,15 +479,15 @@ def main():
     g_agent = algo.PPO(g_policy, args.clip_param, args.ppo_epoch,
                        args.num_mini_batch, args.value_loss_coef,
                        args.entropy_coef, lr=args.global_lr, eps=args.eps,
-                       max_grad_norm=args.max_grad_norm)
+                       max_grad_norm=args.max_grad_norm) if not args.eval else None
 
     # Local policy
     l_policy = Local_IL_Policy(l_observation_space.shape, envs.action_space.n,
                                recurrent=args.use_recurrent_local,
                                hidden_size=l_hidden_size,
                                deterministic=args.use_deterministic_local).to(device)
-    local_optimizer = get_optimizer(l_policy.parameters(),
-                                    args.local_optimizer)
+    local_optimizer = (get_optimizer(l_policy.parameters(), args.local_optimizer)
+                       if args.train_local and not args.eval else None)
 
     # Storage
     g_rollouts = GlobalRolloutStorage(args.num_global_steps,
@@ -507,11 +519,12 @@ def main():
     reachability_head = None
     reachability_optimizer = None
     rpn_in_channels = resolve_rpn_in_channels(args)
-    if args.use_goal_reachability:
+    if args.use_goal_reachability and not nso.use_rpn_uq:
         reachability_head = ReachabilityHead(in_channels=rpn_in_channels).to(device)
-        reachability_optimizer = get_optimizer(
-            reachability_head.parameters(),
-            f'adam,lr={args.goal_reachability_lr}')
+        if args.train_goal_reachability and not args.eval:
+            reachability_optimizer = get_optimizer(
+                reachability_head.parameters(),
+                f'adam,lr={args.goal_reachability_lr}')
         if args.goal_reachability_model_path:
             print("Loading reachability {}".format(args.goal_reachability_model_path))
             state_dict = torch.load(
@@ -529,6 +542,43 @@ def main():
 
     if not args.train_local:
         l_policy.eval()
+
+    eval_models = {'slam': nslam_module, 'global': g_policy,
+                   'local': l_policy, 'reach': reachability_head,
+                   'rpn_uq': nso._rpn_uq}
+    if nso._semantic_ready:
+        eval_models['ov_clip'] = nso._ovsdf._get_clip().model
+        detector = nso._ovsdf._detector
+        if detector._backend == 'groundingdino':
+            eval_models['ov_detector'] = detector._gdino
+        elif detector._backend == 'yolo':
+            eval_models['ov_detector'] = detector._yolo.model
+    if args.eval:
+        if semantic_detector is not None:
+            # Let the detector finish one-time inference setup/fusion before hashing.
+            semantic_detector.detect_batch(obs, conf=args.semantic_conf_thresh)
+            eval_models['semantic'] = semantic_detector.model.model
+        freeze_models(eval_models)
+        eval_before = model_fingerprints(eval_models)
+        run_id = uuid.uuid4().hex
+        eval_output_dir = Path(dump_dir) / 'eval_runs' / run_id
+        eval_output_dir.mkdir(parents=True)
+        eval_metadata = {
+            'metrics_schema_version': METRICS_SCHEMA_VERSION, 'run_id': run_id,
+            'status': 'running', 'eval_frozen_verified': False,
+            'code': code_fingerprint(Path(__file__).resolve().parent),
+            'model_fingerprints_before': eval_before,
+            'config': {k: str(v) if isinstance(v, torch.device) else v
+                       for k, v in vars(args).items()},
+            'coverage_reference': 'aligned_gt_explorable_map',
+            'trajectory_drift_status': 'unavailable_no_paired_trajectories',
+            'nso_runtime': nso_runtime.summary(),
+            'sample_steps': list(range(args.num_local_steps, args.max_episode_length,
+                                       args.num_local_steps)) + [args.max_episode_length],
+        }
+        (eval_output_dir / 'run_metadata.json').write_text(
+            json.dumps(eval_metadata, indent=2), encoding='utf-8')
+        print(f'[评估记录] {eval_output_dir}')
 
     # Predict map from frame 1:
     poses = torch.from_numpy(np.asarray(
@@ -556,6 +606,11 @@ def main():
     global_input[:, 0:4, :, :] = local_map.detach()
     global_input[:, 4:, :, :] = nn.MaxPool2d(args.global_downscaling)(full_map)
 
+    if nso_runtime.enabled:
+        for e in range(num_scenes):
+            nso_runtime.observe(e, 0, local_map[e], lmb[e], planner_pose_inputs[e, :3],
+                rgb_frame=obs[e, :3].permute(1, 2, 0))
+
     g_rollouts.obs[0].copy_(global_input)
     g_rollouts.extras[0].copy_(global_orientation)
 
@@ -572,12 +627,15 @@ def main():
     cpu_actions = nn.Sigmoid()(g_action).cpu().numpy()
     global_goals = [[int(action[0] * local_w), int(action[1] * local_h)]
                     for action in cpu_actions]
+    global_goals = [nso_runtime.choose_goal(e, goal, lmb[e])
+                    for e, goal in enumerate(global_goals)]
     prev_global_goals = list(global_goals)
 
     # Compute planner inputs
     planner_inputs = [{} for e in range(num_scenes)]
     for e, p_input in enumerate(planner_inputs):
         p_input['goal'] = global_goals[e]
+        p_input['new_global_goal'] = True
         p_input['map_pred'] = global_input[e, 0, :, :].detach().cpu().numpy()
         p_input['exp_pred'] = global_input[e, 1, :, :].detach().cpu().numpy()
         p_input['pose_pred'] = planner_pose_inputs[e]
@@ -593,6 +651,10 @@ def main():
                 p_input['semantic_density'] = None
         else:
             p_input['semantic_density'] = None
+
+        ov_density = nso_runtime.semantic_window(e, lmb[e])
+        if ov_density is not None:
+            p_input['semantic_density'] = ov_density
 
     # Output stores local goals as well as the the ground-truth action
     output = envs.get_short_term_goal(planner_inputs)
@@ -650,31 +712,48 @@ def main():
                     infos[e]['loop_detected'] = False
                     infos[e]['loop_match'] = None
 
-            for e in range(num_scenes):
-                paper_metrics[e].update_step(
-                    pose_err=infos[e].get('pose_err'),
-                    sem_reward=infos[e].get('sem_reward'),
-                    unreachable=bool(infos[e].get('path_unreachable', False)),
-                    loop_detected=bool(infos[e].get('loop_detected', False)),
-                )
-                if infos[e].get('exp_ratio') is not None:
-                    paper_metrics[e].update_step(
-                        exp_ratio=infos[e]['exp_ratio'],
-                        exp_reward=infos[e].get('exp_reward'),
-                    )
+            # Auto-reset observations belong to the next episode; metrics do not.
+            step_infos = [info.get('terminal_info', info) for info in infos]
+            if args.eval and any(bool(d) != (step == args.max_episode_length - 1) for d in done):
+                raise RuntimeError('Unexpected episode boundary; evaluation remains incomplete')
+            for e, step_info in enumerate(step_infos):
+                paper_metrics[e].update_step(info=step_info)
+                if args.eval and ((step + 1) % args.num_local_steps == 0
+                                  or step == args.max_episode_length - 1):
+                    explored_area_log[e, ep_num, eval_g_step - 1] = (
+                        step_info.get('explored_area_m2')
+                        if step_info.get('explored_area_m2') is not None else np.nan)
+                    explored_ratio_log[e, ep_num, eval_g_step - 1] = (
+                        step_info.get('coverage_ratio')
+                        if step_info.get('coverage_ratio') is not None else np.nan)
+                if done[e]:
+                    record = paper_metrics[e].snapshot().to_dict()
+                    record.update({
+                        'metrics_schema_version': METRICS_SCHEMA_VERSION,
+                        'run_id': run_id if args.eval else None, 'env_index': e,
+                        'episode_index': ep_num,
+                        'scene_id': step_info.get('scene_id'),
+                        'episode_id': step_info.get('episode_id'),
+                        'env_seed': step_info.get('env_seed'),
+                        'coverage_reference': step_info.get('coverage_reference'),
+                        'status': 'complete',
+                    })
+                    if args.eval:
+                        with (eval_output_dir / 'episodes.jsonl').open('a') as stream:
+                            stream.write(json.dumps(record, allow_nan=False) + '\n')
+                    paper_metrics[e].reset_episode()
 
             l_masks = torch.FloatTensor([0 if x else 1
                                          for x in done]).to(device)
             g_masks *= l_masks
+            for e, scene_done in enumerate(done):
+                if scene_done:
+                    nso_runtime.reset_scene(e)
             # ------------------------------------------------------------------
 
             # ------------------------------------------------------------------
             # Reinitialize variables when episode ends
             if step == args.max_episode_length - 1:  # Last episode step
-                for e in range(num_scenes):
-                    snap = paper_metrics[e].snapshot()
-                    infos[e]['paper_metrics'] = snap.to_dict()
-                    paper_metrics[e].reset_episode()
                 init_map_and_pose()
                 del last_obs
                 last_obs = obs.detach()
@@ -720,6 +799,16 @@ def main():
                                 int(c * 100.0 / args.map_resolution)]
 
                 local_map[e, 2:, loc_r - 2:loc_r + 3, loc_c - 2:loc_c + 3] = 1.
+            if nso_runtime.enabled:
+                for e in range(num_scenes):
+                    nso_diagnostic = nso_runtime.observe(
+                        e, 0 if done[e] else step + 1, local_map[e], lmb[e],
+                        planner_pose_inputs[e, :3], rgb_frame=obs[e, :3].permute(1, 2, 0),
+                        update_semantic=bool(done[e]) or
+                            total_num_steps % max(1, args.semantic_interval) == 0)
+                    if nso_diagnostic is not None and (step + 1) % args.num_local_steps == 0:
+                        logging.info('NSO reward diagnostic scene=%s step=%s %s',
+                                     e, step + 1, nso_diagnostic)
             # ------------------------------------------------------------------
             # Semantic Detection and Map Update (optional, minimal intrusion)
             if args.use_semantic and (total_num_steps % max(1, args.semantic_interval) == 0):
@@ -1127,6 +1216,8 @@ def main():
                             match = loop_detector.detect_loop(desc, pose_np, global_step)
                             if match is not None:
                                 infos[e]['loop_detected'] = True
+                                if not done[e]:
+                                    paper_metrics[e].record_loop()
                                 infos[e]['loop_match'] = {
                                     'matched_step': match.matched_step,
                                     'current_step': match.current_step,
@@ -1204,13 +1295,10 @@ def main():
 
                 # Get exploration reward and metrics
                 g_reward = torch.from_numpy(np.asarray(
-                    [infos[env_idx].get('exp_reward') or 0.0
+                    [step_infos[env_idx].get('exp_reward') or 0.0
                      for env_idx in range(num_scenes)],
                     dtype=np.float32)
                 ).float().to(device)
-
-                if args.eval:
-                    g_reward = g_reward*50.0 # Convert reward to area in m2
 
                 g_process_rewards += g_reward.cpu().numpy()
                 g_total_rewards = g_process_rewards * \
@@ -1221,21 +1309,6 @@ def main():
                 if np.sum(g_total_rewards) != 0:
                     for tr in g_total_rewards:
                         g_episode_rewards.append(tr) if tr != 0 else None
-
-                if args.eval:
-                    exp_ratio = torch.from_numpy(np.asarray(
-                        [float(infos[env_idx].get('exp_ratio') or 0.0)
-                         for env_idx in range(num_scenes)],
-                        dtype=np.float32,
-                    )).float()
-
-                    for e in range(num_scenes):
-                        explored_area_log[e, ep_num, eval_g_step - 1] = \
-                            explored_area_log[e, ep_num, eval_g_step - 2] + \
-                            g_reward[e].cpu().numpy()
-                        explored_ratio_log[e, ep_num, eval_g_step - 1] = \
-                            explored_ratio_log[e, ep_num, eval_g_step - 2] + \
-                            exp_ratio[e].cpu().numpy()
 
                 # Add samples to global policy storage
                 g_rollouts.insert(
@@ -1258,7 +1331,7 @@ def main():
                                  int(action[1] * local_h)]
                                 for action in cpu_actions]
 
-                if reachability_head is not None:
+                if reachability_head is not None and not nso.use_rpn_uq:
                     rpn_in = build_rpn_input(
                         local_map, semantic_map2d, planner_pose_inputs,
                         num_scenes, rpn_in_channels, device)
@@ -1276,6 +1349,9 @@ def main():
                         num_candidates=args.goal_reachability_max_candidates,
                         free_maps=free_maps)
 
+                global_goals = [nso_runtime.choose_goal(e, goal, lmb[e])
+                                for e, goal in enumerate(global_goals)]
+
                 g_reward = 0
                 g_masks = torch.ones(num_scenes).float().to(device)
             # ------------------------------------------------------------------
@@ -1288,6 +1364,7 @@ def main():
                 p_input['exp_pred'] = local_map[e, 1, :, :].cpu().numpy()
                 p_input['pose_pred'] = planner_pose_inputs[e]
                 p_input['goal'] = global_goals[e]
+                p_input['new_global_goal'] = (l_step == args.num_local_steps - 1 or bool(done[e]))
                 # 添加语义密度图（如果启用）- 使用全局地图的对应窗口
                 if args.use_semantic:
                     try:
@@ -1301,22 +1378,20 @@ def main():
                 else:
                     p_input['semantic_density'] = None
 
-            output = envs.get_short_term_goal(planner_inputs)
+                ov_density = nso_runtime.semantic_window(e, lmb[e])
+                if ov_density is not None:
+                    p_input['semantic_density'] = ov_density
 
-            for e in range(num_scenes):
-                if infos[e].get('embodied_goal_success') is not None:
-                    paper_metrics[e].update_step(
-                        embodied_success=infos[e]['embodied_goal_success'],
-                    )
+            output = envs.get_short_term_goal(planner_inputs)
 
             # ------------------------------------------------------------------
 
             ### TRAINING
-            torch.set_grad_enabled(True)
+            torch.set_grad_enabled(not args.eval)
             # ------------------------------------------------------------------
             # Train Reachability Head (RPN, 论文 3.3.3)
             if (reachability_head is not None
-                    and args.train_goal_reachability
+                    and args.train_goal_reachability and not args.eval
                     and l_step == args.num_local_steps - 1):
                 reach_supervision_inputs = []
                 for e, p_input in enumerate(planner_inputs):
@@ -1498,9 +1573,8 @@ def main():
                 if args.paper_mode or args.paper_rewards:
                     pm = paper_metrics[0].snapshot()
                     log += " ".join([
-                        " Paper[cov={:.1f}% drift={:.1f}cm unr={}]".format(
-                            pm.coverage_ratio * 100,
-                            pm.trajectory_drift_rmse_cm,
+                        " Paper[cov={}% drift=NA unr={}]".format(
+                            f"{pm.coverage_ratio * 100:.1f}" if pm.coverage_ratio is not None else "NA",
                             pm.unreachable_goal_count,
                         )
                     ])
@@ -1607,7 +1681,17 @@ def main():
 
     # Print and save model performance numbers during evaluation
     if args.eval:
-        logfile = open("{}/explored_area.txt".format(dump_dir), "w+")
+        try:
+            eval_metadata['model_fingerprints_after'] = verify_frozen(eval_models, eval_before)
+            eval_metadata['eval_frozen_verified'] = True
+            eval_metadata['status'] = 'complete'
+        except RuntimeError:
+            eval_metadata['status'] = 'failed_model_mutation'
+            raise
+        finally:
+            (eval_output_dir / 'run_metadata.json').write_text(
+                json.dumps(eval_metadata, indent=2), encoding='utf-8')
+        logfile = open("{}/explored_area.txt".format(eval_output_dir), "w+")
         for e in range(num_scenes):
             for i in range(explored_area_log[e].shape[0]):
                 logfile.write(str(explored_area_log[e, i]) + "\n")
@@ -1615,7 +1699,7 @@ def main():
 
         logfile.close()
 
-        logfile = open("{}/explored_ratio.txt".format(dump_dir), "w+")
+        logfile = open("{}/explored_ratio.txt".format(eval_output_dir), "w+")
         for e in range(num_scenes):
             for i in range(explored_ratio_log[e].shape[0]):
                 logfile.write(str(explored_ratio_log[e, i]) + "\n")

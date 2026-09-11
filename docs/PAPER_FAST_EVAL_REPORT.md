@@ -1,5 +1,7 @@
 # paper_fast 训练与评估报告
 
+> **2026-09-10 审计更正：** 本文保留为历史报告。实际评估为 4 进程 × 20 回合，期间 RPN 仍在更新；文中的 12,123 m² 不是真实物理面积，4.38% 也不能解释为语义覆盖率。以下旧结论不得直接用作正式论文证据，修正口径见 [资产与评估审计](ASSET_AND_EVALUATION_AUDIT.md)。
+
 > 日期：2026-06-11  
 > 权重：`trained_models/paper_fast/model_best.{global,reach}`  
 > 评估原始数据：`eval_results/paper_fast/`

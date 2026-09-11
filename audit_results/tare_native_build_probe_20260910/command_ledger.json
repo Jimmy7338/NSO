@@ -1,0 +1,112 @@
+{
+  "cwd": "/root/NSO",
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "version"
+      ],
+      "exit_code": 0,
+      "log": "docker_version.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "info"
+      ],
+      "exit_code": 0,
+      "log": "docker_info.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "images",
+        "--format",
+        "{{.Repository}}:{{.Tag}} {{.Size}}"
+      ],
+      "exit_code": 0,
+      "log": "docker_images.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "manifest",
+        "inspect",
+        "--verbose",
+        "ros:noetic-ros-core-focal"
+      ],
+      "exit_code": 0,
+      "log": "ros_core_remote_manifest.json",
+      "downloads": "metadata only; no image layer pull"
+    },
+    {
+      "argv": [
+        "apt-get",
+        "-s",
+        "--no-install-recommends",
+        "install",
+        "catkin",
+        "libroscpp-dev",
+        "libpcl-ros-dev",
+        "libeigen3-dev",
+        "libgoogle-glog-dev",
+        "python3-roslaunch"
+      ],
+      "exit_code": 100,
+      "log": "host_ros_dependency_simulation.log"
+    },
+    {
+      "argv": [
+        "apt-get",
+        "-s",
+        "--no-install-recommends",
+        "install",
+        "libpcl-dev",
+        "libeigen3-dev",
+        "libgoogle-glog-dev"
+      ],
+      "exit_code": 0,
+      "log": "host_pcl_dependency_simulation.log"
+    },
+    {
+      "argv": [
+        "cmake",
+        "-S",
+        "third_party/official_baselines/tare_official/src/tare_planner",
+        "-B",
+        "audit_results/tare_native_build_probe_20260910/planner_configure"
+      ],
+      "exit_code": 1,
+      "log": "planner_configure.log"
+    },
+    {
+      "argv": [
+        "cmake",
+        "-S",
+        "audit_results/tare_native_build_probe_20260910/tsp_component",
+        "-B",
+        "audit_results/tare_native_build_probe_20260910/tsp_build"
+      ],
+      "exit_code": 0,
+      "log": "tsp_configure.log"
+    },
+    {
+      "argv": [
+        "cmake",
+        "--build",
+        "audit_results/tare_native_build_probe_20260910/tsp_build",
+        "--parallel",
+        "1"
+      ],
+      "exit_code": 0,
+      "log": "tsp_build.log"
+    },
+    {
+      "argv": [
+        "audit_results/tare_native_build_probe_20260910/tsp_build/tare_official_tsp_probe"
+      ],
+      "exit_code": 0,
+      "log": "tsp_execution.jsonl"
+    }
+  ]
+}

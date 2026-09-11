@@ -53,7 +53,7 @@ def test_paper_eval():
     from utils.paper_eval import PaperMetricsTracker, aggregate_episode_metrics
 
     tracker = PaperMetricsTracker()
-    tracker.update_step(pose_err=[0.01, 0.02, 0.0], exp_ratio=0.5)
+    tracker.update_step(pose_err=[0.01, 0.02, 0.0], coverage_ratio=0.5)
     snap = tracker.snapshot()
     assert snap.coverage_ratio == 0.5
     agg = aggregate_episode_metrics([snap, snap])

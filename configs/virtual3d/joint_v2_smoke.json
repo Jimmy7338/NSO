@@ -1,0 +1,37 @@
+{
+  "scope": "development smoke; not independent confirmation",
+  "environment": {
+    "width_m": 12,
+    "height_m": 10,
+    "max_steps": 200,
+    "voxel_m": 0.03,
+    "truncation_m": 0.12
+  },
+  "planner": {
+    "quality_weight": 1.0,
+    "semantic_weight": 0.5
+  },
+  "evaluation_interval": 20,
+  "thresholds_m": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "reference_samples": 16000,
+  "save_frames": true,
+  "save_checkpoint_meshes": false,
+  "methods": [
+    "coverage",
+    "legacy_geometry",
+    "legacy_semantic",
+    "geometry_v2",
+    "full_v2",
+    "no_route_v2"
+  ],
+  "scenes": [
+    {
+      "layout": "rooms",
+      "seed": 201
+    }
+  ]
+}

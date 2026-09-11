@@ -1,0 +1,79 @@
+{
+  "scope": "development revision after failed conservative-boundary prototype; same six development scenes, all variants retained",
+  "max_candidates": 24,
+  "environments": {
+    "generic": {
+      "resolution_m": 0.1,
+      "robot_radius_m": 0.1,
+      "sensor_range_m": 1.5,
+      "sensor_fov_deg": 90,
+      "max_steps": 500
+    },
+    "targeted": {
+      "resolution_m": 0.25,
+      "robot_radius_m": 0.2,
+      "sensor_range_m": 3.0,
+      "sensor_fov_deg": 90,
+      "max_steps": 600
+    }
+  },
+  "methods": [
+    "geometry",
+    "combined",
+    "metric_gain",
+    "metric_cost",
+    "projected_single",
+    "projected_bundle",
+    "projected_path"
+  ],
+  "maps": [
+    {
+      "id": "multi_room_128_seed1000_start301",
+      "suite": "generic",
+      "family": "multi_room",
+      "size": 128,
+      "seed": 1000,
+      "start_seed": 301
+    },
+    {
+      "id": "dead_end_128_seed1000_start301",
+      "suite": "generic",
+      "family": "dead_end",
+      "size": 128,
+      "seed": 1000,
+      "start_seed": 301
+    },
+    {
+      "id": "hall_128_seed1000_start301",
+      "suite": "generic",
+      "family": "hall",
+      "size": 128,
+      "seed": 1000,
+      "start_seed": 301
+    },
+    {
+      "id": "office_spine_192_seed51_left",
+      "suite": "targeted",
+      "family": "office_spine",
+      "size": 192,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "id": "warehouse_bays_192_seed51_left",
+      "suite": "targeted",
+      "family": "warehouse_bays",
+      "size": 192,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "id": "gallery_network_192_seed51_left",
+      "suite": "targeted",
+      "family": "gallery_network",
+      "size": 192,
+      "seed": 51,
+      "entrance": 0
+    }
+  ]
+}

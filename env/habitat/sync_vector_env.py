@@ -1,4 +1,5 @@
 # 单进程主线程 VectorEnv：matplotlib Tk 可视化必须在主线程创建窗口
+from copy import deepcopy
 from typing import Any, Callable, List, Sequence, Tuple, Union
 
 import numpy as np
@@ -15,8 +16,7 @@ class SyncVectorEnv:
         env_fn_args: Sequence[Tuple],
         auto_reset_done: bool = True,
     ) -> None:
-        del auto_reset_done  # 与 VectorEnv 一致在 done 时 reset
-        self._auto_reset_done = True
+        self._auto_reset_done = auto_reset_done
         self._envs = [make_env_fn(*args) for args in env_fn_args]
         self._num_envs = len(self._envs)
         self.envs = self._envs
@@ -56,11 +56,9 @@ class SyncVectorEnv:
             infos_list = list(infos)
             for i, done in enumerate(dones):
                 if done:
-                    old_info = infos_list[i]
-                    obs_list[i], infos_list[i] = self._envs[i].reset()
-                    if isinstance(old_info, dict) and 'exp_reward' in old_info:
-                        infos_list[i]['exp_reward'] = old_info['exp_reward']
-                        infos_list[i]['exp_ratio'] = old_info['exp_ratio']
+                    terminal_info = deepcopy(infos_list[i])
+                    obs_list[i], reset_info = self._envs[i].reset()
+                    infos_list[i] = dict(reset_info, terminal_info=terminal_info)
             obs = np.stack(obs_list)
             infos = tuple(infos_list)
         else:
