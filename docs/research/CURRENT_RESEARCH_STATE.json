@@ -1,4 +1,112 @@
 {
+  "research_goal_handoff": {
+    "updated_date": "2026-09-11",
+    "objective": "工业设施自主三维数据采集：覆盖约束下的语义条件观察收益预测与闭环层次规划",
+    "goal_text": "docs/research/GOAL_PROMPT.md",
+    "guiding_document": "docs/research/RESEARCH_GOAL_AND_STORY.md",
+    "status": "stage_0_complete; stage_1_v11_grouped_training_and_independent_numerical_replay_passed; full_closed_loop_development_next",
+    "read_first": true,
+    "historical_fields_warning": "Other versioned metrics and next-step fields below are historical; use the guiding document and this handoff for current priorities, preserving original run facts.",
+    "architecture_fixed": [
+      "ANS global/local hierarchy",
+      "OV-SDF",
+      "STGHP",
+      "RPN-UQ",
+      "IGCR"
+    ],
+    "semantic_core_required": true,
+    "first_actions": [
+      "Read docs/research/V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md and keep configs/virtual3d/semantic_gain_v11_development_protocol.json fixed for the first archived development run.",
+      "Use the frozen all-V9 V11 gain head to restart and complete the full closed-loop development comparison; do not merge the existing partial batch into final statistics.",
+      "Compare learned semantic feedback/no-feedback, equal-capacity geometry, fixed semantics, swapped labels and low-confidence fallback over complete trajectories, then add category/instance/direction residual feedback to IGCR without changing the four-module hierarchy.",
+      "Generate and seal new E confirmation contexts before viewing outcomes; include unknown-start coverage, new layouts/instances, noise, and low-confidence or wrong semantics, with no confirmation-set retraining."
+    ],
+    "known_errata": {
+      "feedback_source": "nso/cpu_four_modules_v10.py",
+      "feedback_location": "Historical V10.3 compute_reward omitted v10_3 from gain.observe; old sources and all 40 affected snapshots are archived.",
+      "feedback_fix_applied": true,
+      "feedback_ablation_interpretation": "V10.3.1 closes 48 predicted/actual outcomes in every branch and leaves zero pending; S/no-feedback still has 8/8 identical trajectories, so the global camera-yield scalar has no decision-level increment for S.",
+      "metric_interpretation": "Inspection joint is new visible 3D surface area times final global F1. It is separate from 2D coverage times F1 and cannot be described as an 18-29 percent precision gain."
+    },
+    "stage_0_result": {
+      "complete": true,
+      "historical_audit": "audit_results/cpu_v10_3_feedback_omission_review_20260911/verification.json",
+      "corrected_run": "eval_results/cpu_semantic_inspection_v10_3_1_feedback_fix_20260911",
+      "independent_replay": "eval_results/cpu_semantic_inspection_v10_3_1_replay_20260911/verification.json",
+      "comparison": "audit_results/cpu_v10_3_feedback_fix_comparison_20260911/verification.json",
+      "mechanism_passed": true,
+      "feedback_efficacy_passed": false,
+      "S_vs_G_inspection_joint_relative": 0.2902060008677071,
+      "S_vs_N_inspection_joint_relative": 0.18070602932686392,
+      "S_vs_no_feedback_relative": 0.0,
+      "S_local_new_surface_recall_05cm": 0.9789596493829296,
+      "next_root_cause": "A global sensor-yield posterior is nearly common across candidates and does not correct category/instance/direction-specific semantic gain."
+    },
+    "network_training_audit": {
+      "document": "docs/research/NETWORK_TRAINING_AUDIT_AND_OPTIMIZATION_PLAN.md",
+      "verification": "audit_results/network_training_state_20260911/verification.json",
+      "v10_neural_training_or_loading": false,
+      "current_large_checkpoints": "Git LFS pointer files, not loadable tensors in this workspace",
+      "cpu_models_previously_fit": [
+        "113-parameter candidate reachability MLP; validation dominated by a simple action-budget rule",
+        "V6/V7 linear-ridge candidate response models; no stable semantic decision increment"
+      ],
+      "semantic_training_wired": false,
+      "deep_ssc_implemented": false,
+      "stage_1_requirement": "Train and ablate a candidate/instance/direction/confidence-conditioned semantic gain head on CPU before neural-stack recovery and module-wise fine-tuning."
+    },
+    "v11_handoff": {
+      "document": "docs/research/V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md",
+      "development_protocol": "configs/virtual3d/semantic_gain_v11_development_protocol.json",
+      "network_skeleton": "nso/semantic_gain_v11.py",
+      "formal_archived_training_complete": true,
+      "training_result": "eval_results/semantic_gain_v11_development_20260911/summary.json",
+      "frozen_model": "eval_results/semantic_gain_v11_development_20260911/frozen_model.json",
+      "independent_numerical_replay": "eval_results/semantic_gain_v11_development_replay_20260911/verification.json",
+      "development_gates_passed": true,
+      "v7_primary_information_value": "zero in 8/8 paired parent contexts; ineligible for proving semantic selection value",
+      "v9_nonzero_information_contexts": 4,
+      "v9_contexts": ["Q0", "Q1", "Q2", "Q3"],
+      "v9_role": "development grouped leave-one-context-out only; already inspected and not independent confirmation",
+      "primary_target": "delta(covered_area_m2 * F1_05cm) / paid_actions",
+      "grouped_development_result": {
+        "fixed_geometry_selected_utility_mean": 0.020655846238980854,
+        "fixed_semantic_selected_utility_mean": 0.02723303856027997,
+        "equal_capacity_geometry_mlp_selected_utility_mean": 0.027936557863115212,
+        "semantic_mlp_selected_utility_mean": 0.03321273541051574,
+        "semantic_mlp_mean_regret": 0.0003201983720087314,
+        "geometry_mlp_mean_regret": 0.005596375919409261,
+        "semantic_swapped_selected_utility_mean": 0.019869659177676417,
+        "independent_numerical_checks": 384,
+        "warning": "archived and numerically reproduced development evidence only; not independent-scene or whole-system efficacy"
+      },
+      "closed_loop": {
+        "smoke_result": "eval_results/semantic_gain_v11_closed_loop_smoke_fixed_20260911/summary.json",
+        "smoke_branches": 3,
+        "full_development_complete": false,
+        "partial_batch_excluded": "eval_results/semantic_gain_v11_closed_loop_development_20260911/partial.json"
+      }
+    },
+    "verification_scope": {
+      "v10_3_original_passed": false,
+      "evidence": "controlled artificial asset development contexts only",
+      "independent_scene_confirmation_complete": false,
+      "external_mainstream_advantage_verified": false,
+      "natural_semantic_advantage_verified": false,
+      "real_robot_effectiveness_verified": false
+    },
+    "stage_boundary": "Current local phase targets CPU research verification and real-robot preparation; on-site robot effectiveness remains a separate pending milestone.",
+    "robot": {
+      "ros": "ROS1",
+      "stereo": "ZED; depth and pose publication confirmed by user",
+      "lidar": "Leishen single-line",
+      "additional_sensors": [
+        "IMU",
+        "GPS"
+      ],
+      "compute_platform": "exact model and GPU/CUDA capabilities unverified"
+    }
+  },
   "scope": "development only; historical V4 uses geometry seeds 202/203, facility mechanism work uses 751/752; no independent confirmation",
   "runs": [
     {
@@ -5371,9 +5479,21 @@
     "S_relative_to_G": 0.2826747176313051,
     "S_relative_to_N": 0.18070602932686392,
     "S_relative_to_wrong_semantic_X": 0.8833672722598114,
-    "S_vs_G_pair_counts": {"wins": 6, "ties": 0, "losses": 2},
-    "S_vs_N_pair_counts": {"wins": 6, "ties": 0, "losses": 2},
-    "S_vs_X_pair_counts": {"wins": 8, "ties": 0, "losses": 0},
+    "S_vs_G_pair_counts": {
+      "wins": 6,
+      "ties": 0,
+      "losses": 2
+    },
+    "S_vs_N_pair_counts": {
+      "wins": 6,
+      "ties": 0,
+      "losses": 2
+    },
+    "S_vs_X_pair_counts": {
+      "wins": 8,
+      "ties": 0,
+      "losses": 0
+    },
     "S_vs_no_feedback": 0.0,
     "IGCR_independent_performance_gain_verified": false,
     "open_vocabulary_or_external_mainstream_baseline_verified": false

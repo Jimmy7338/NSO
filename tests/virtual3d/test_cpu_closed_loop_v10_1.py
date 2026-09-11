@@ -5,6 +5,35 @@ from tests.virtual3d.test_cpu_closed_loop_v10 import fixture, perform
 
 
 class CPUClosedLoopV101Tests(unittest.TestCase):
+    def test_v10_3_closes_each_predicted_gain_with_actual_observation(self):
+        world, components, runtime, _ = fixture(
+            budget=8, max_steps=12, cpu_planner_revision="v10_3",
+            cpu_coverage_slots=4)
+        for expected in range(1, 4):
+            action = runtime.next_local_action(0)
+            self.assertIsNotNone(action)
+            pending = runtime.sensor_episode_summary(0)["modules"]["observed_gain_calibration"]
+            self.assertEqual(pending["pending_action_ids"], [world.step_count + 1])
+            perform(world, runtime, action)
+            gain = runtime.sensor_episode_summary(0)["modules"]["observed_gain_calibration"]
+            self.assertEqual(gain["observed_actions"], expected)
+            self.assertEqual(gain["pending_action_ids"], [])
+        self.assertGreater(sum(gain["alpha"].values()) + sum(gain["beta"].values()), 4)
+
+    def test_v10_3_no_feedback_records_outcome_without_changing_posterior(self):
+        world, components, runtime, _ = fixture(
+            budget=8, max_steps=12, cpu_planner_revision="v10_3",
+            cpu_coverage_slots=4, cpu_disable_feedback=True)
+        action = runtime.next_local_action(0)
+        self.assertIsNotNone(action)
+        perform(world, runtime, action)
+        gain = runtime.sensor_episode_summary(0)["modules"]["observed_gain_calibration"]
+        self.assertEqual(gain["observed_actions"], 1)
+        self.assertEqual(gain["pending_action_ids"], [])
+        self.assertEqual(gain["alpha"], {"radar": 1, "camera": 1})
+        self.assertEqual(gain["beta"], {"radar": 1, "camera": 1})
+        self.assertFalse(gain["events"][0]["feedback_consumed_for_planning"])
+
     def test_real_sensor_episode_translates_replans_and_returns(self):
         world, components, runtime, _ = fixture(
             budget=24, max_steps=30, cpu_planner_revision="v10_1",

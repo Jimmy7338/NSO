@@ -163,7 +163,10 @@ class NSORuntimeIntegration:
             target = self.components.select_topo_target(scene_idx, state["packet"].action_id)
             option = self.components.get_selected_option(scene_idx)
             state["option"] = option
-            state["active_actions"] = [] if option is None else list(option["outbound_actions"])
+            commit_round_trip = (self.components._cpu_backend is not None
+                                 and self.components._cpu_backend.planner_revision == "v11_1")
+            state["active_actions"] = ([] if option is None else list(
+                option["actions"] if commit_round_trip else option["outbound_actions"]))
             state["phase"] = "outbound" if option is not None else "return"
             self.audit.append(dict(event="global_choice", scene_idx=scene_idx,
                 frame_id=state["packet"].frame_id, map_version=state["mapper"].frames,
@@ -348,7 +351,7 @@ class NSORuntimeIntegration:
         if s["active_actions"]:
             s["active_actions"].pop(0)
         arrived = bool(s["option"] is not None and actual == s["option"]["pose"]
-                       and not s["active_actions"] and not packet.collision)
+                       and not packet.collision)
         if arrived:
             s["arrived_count"] += 1
         self.components._cpu_backend.bind_packet(scene_idx, packet, arrived=arrived)

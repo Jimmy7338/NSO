@@ -1,0 +1,298 @@
+{
+  "all_listed_large_checkpoints_are_lfs_pointers": true,
+  "audited_source_sha256": {
+    "arguments.py": "099fc76fac1c482dd576b24e6edf3ebfe1db1d29d8687a0bf9c34f00aefea86b",
+    "eval_results/cpu_rpn_20260910/model.npz": "37280b4c3f39add6e08b08a0e1403ab2dc12aa89ed428aa42d0ea4dba9e83812",
+    "eval_results/cpu_rpn_20260910/training_report.json": "46d51921305bf6af807cf65b882ccf67dc8ed0da881c4d88978c4788a7a2e7b5",
+    "main.py": "b688e895fbde74da11bbb036a5ed456514011fb234bed1139153140c151d2a23",
+    "nso/cpu_four_modules_v10.py": "0ffd922bbc1f8c164d5bd7c8735c4fdde23868ce993e32beb7d7272d9f631c89",
+    "scripts/train_cpu_rpn.py": "9efb22ce81cc3cd9ae26a0d05e92fd153199c0c734e471a5cfec6bccab020b34",
+    "semantic/ssc_completer.py": "31e26045b246c5446df91828abcbdb8a37130f29fcdaf0b48456f1aea78ae3cf"
+  },
+  "checkpoint_files": [
+    {
+      "bytes": 132,
+      "git_lfs_pointer": true,
+      "path": "pretrained_models/model_best.global",
+      "sha256": "4086b7852c908af7c3180a0d424756e523336c6f33b37b2f404b339622c70473"
+    },
+    {
+      "bytes": 133,
+      "git_lfs_pointer": true,
+      "path": "pretrained_models/model_best.local",
+      "sha256": "3d508b01931541c253620b583d7126fcd87cddb2817bda29b380f3f36402c354"
+    },
+    {
+      "bytes": 133,
+      "git_lfs_pointer": true,
+      "path": "pretrained_models/model_best.slam",
+      "sha256": "9ae634a6343a1cf99c02c289623d0cec6493f864e2d917b6463633da7408edc5"
+    },
+    {
+      "bytes": 132,
+      "git_lfs_pointer": true,
+      "path": "trained_models/paper_fast/model_best.global",
+      "sha256": "ae8c51d1b829fdc0612c5ae18bede8619f16e1b7e11f3153c3fe578389b04f14"
+    },
+    {
+      "bytes": 130,
+      "git_lfs_pointer": true,
+      "path": "trained_models/paper_fast/model_best.reach",
+      "sha256": "92773401838015399cd37c9fbeb10747cc0a5ca8135560d64b7119e658b07432"
+    },
+    {
+      "bytes": 133,
+      "git_lfs_pointer": true,
+      "path": "trained_models/stage1_slam_local/model_best.local",
+      "sha256": "8f612f9b7067954e8a5334eb7db15a85f9f61cb22e35a6f2ce4a4713391668e0"
+    },
+    {
+      "bytes": 133,
+      "git_lfs_pointer": true,
+      "path": "trained_models/stage1_slam_local/model_best.slam",
+      "sha256": "ea7ce0f3529fc07168f81d10e3e7627aa3ae6ea926cf7ff21b61b94b92f0f70f"
+    },
+    {
+      "bytes": 133,
+      "git_lfs_pointer": true,
+      "path": "trained_models/stage2_paper_global/model_best.local",
+      "sha256": "b884120b1f92fd1dba6f8b62fb70bdb7d8789c9436aba5cb207303a890415b97"
+    },
+    {
+      "bytes": 133,
+      "git_lfs_pointer": true,
+      "path": "trained_models/stage2_paper_global/model_best.slam",
+      "sha256": "66a8669a3b48c156c3dce71fefd442469e16a1594799490cd8febc4f05fdc6a3"
+    },
+    {
+      "bytes": 132,
+      "git_lfs_pointer": true,
+      "path": "yolov8n.pt",
+      "sha256": "793f0ebc4f64cc2b27b8cea2f9bf537c9247b7f1616abd48f369bccf9c676db5"
+    }
+  ],
+  "cpu_candidate_rpn": {
+    "architecture": "5 observed-path features, 16 tanh units, 1 sigmoid; 113 parameters",
+    "learned_array_shapes": {
+      "b1": [
+        16
+      ],
+      "b2": [
+        1
+      ],
+      "w1": [
+        5,
+        16
+      ],
+      "w2": [
+        16,
+        1
+      ]
+    },
+    "limitations": [
+      "synthetic geometry, perfect odometry",
+      "candidate MLP, not original convolutional RPN or UQ",
+      "controller action cost is highly predictive in deterministic grids"
+    ],
+    "model": "eval_results/cpu_rpn_20260910/model.npz",
+    "parameter_count": 113,
+    "validation": {
+      "accuracy": 0.9932432432432432,
+      "bce": 0.04424509075971498,
+      "brier": 0.004913349194316784,
+      "count": 148,
+      "ece": 0.04110230142879153,
+      "negatives": 7,
+      "positives": 141,
+      "reliability_bins": [
+        {
+          "count": 3,
+          "mean_probability": 0.01707676927885028,
+          "success_fraction": 0.0
+        },
+        {
+          "count": 2,
+          "mean_probability": 0.1821526495192637,
+          "success_fraction": 0.0
+        },
+        {
+          "count": 1,
+          "mean_probability": 0.2348285380258628,
+          "success_fraction": 0.0
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 1,
+          "mean_probability": 0.5231214508677179,
+          "success_fraction": 0.0
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 9,
+          "mean_probability": 0.8727497522188773,
+          "success_fraction": 1.0
+        },
+        {
+          "count": 132,
+          "mean_probability": 0.9714817970783153,
+          "success_fraction": 1.0
+        }
+      ]
+    },
+    "validation_action_budget_rule": {
+      "accuracy": 1.0,
+      "bce": 1.0000000494736472e-07,
+      "brier": 9.999999989970785e-15,
+      "count": 148,
+      "ece": 9.999999994985395e-08,
+      "negatives": 7,
+      "positives": 141,
+      "reliability_bins": [
+        {
+          "count": 7,
+          "mean_probability": 1e-07,
+          "success_fraction": 0.0
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 141,
+          "mean_probability": 0.9999999,
+          "success_fraction": 1.0
+        }
+      ]
+    },
+    "validation_constant_prior": {
+      "accuracy": 0.9527027027027027,
+      "bce": 0.21739285690843266,
+      "brier": 0.04938282327696316,
+      "count": 148,
+      "ece": 0.06574618096357199,
+      "negatives": 7,
+      "positives": 141,
+      "reliability_bins": [
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        },
+        {
+          "count": 148,
+          "mean_probability": 0.8869565217391308,
+          "success_fraction": 0.9527027027027027
+        },
+        {
+          "count": 0,
+          "mean_probability": null,
+          "success_fraction": null
+        }
+      ]
+    }
+  },
+  "interpretation": [
+    "V10.x is a non-neural measured CPU backend and does not exercise the listed checkpoints.",
+    "The semantic-training CLI flag has no corresponding main-loop optimization path.",
+    "The available 113-parameter CPU candidate MLP was trained, but the recorded simple action-budget rule outperformed it on its validation split.",
+    "Checkpoint pointers and historical training notes are not locally loadable trained-model evidence."
+  ],
+  "schema_version": "network_training_state_audit/1",
+  "status": "complete",
+  "training_wiring": {
+    "deep_ssc_has_not_implemented": true,
+    "train_semantic_argument_declared": true,
+    "train_semantic_referenced_in_main": false,
+    "v10_capability_text": true,
+    "v10_imports_torch": false
+  }
+}

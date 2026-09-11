@@ -1,0 +1,31 @@
+{
+  "schema_version": "cpu_four_module_v10_3_1_feedback_fix_protocol/1",
+  "status": "frozen_before_v10_3_1_execution",
+  "architecture": "unchanged ANS global-goal/local-action hierarchy and OV-SDF, STGHP, RPN-UQ, IGCR interfaces",
+  "historical_result_policy": "preserve V10.3 as a direction-support result; use V10.3.1 for the corrected observed-gain feedback rerun",
+  "correction": "consume each paid action's predicted radar/camera yield with the next accepted actual observation for V10.3 and V10.3.1",
+  "online_information_constraint": "planning and feedback use accumulated sensor observations only; simulator truth is evaluator-only",
+  "primary_modes": ["S", "G", "N"],
+  "diagnostics": ["X", "S_no_feedback"],
+  "contexts": ["Q0", "Q1", "Q2", "Q3"],
+  "arrangements": ["shelf_west", "shelf_east"],
+  "shared_prefix_actions": 150,
+  "adaptive_actions": 48,
+  "completion_uncertainty_floor": 0.25,
+  "metrics": {
+    "inspection_joint": "new evaluator-visible surface area in m2 times terminal global F1@5cm; an inspection composite, not 2D coverage or precision gain",
+    "coverage_quality_joint_fraction": "terminal reachable-cell coverage fraction times terminal global F1@5cm",
+    "coverage_quality_joint_area": "terminal reachable covered area in m2 times terminal global F1@5cm",
+    "reconstruction": ["precision@5cm", "recall@5cm", "F1@5cm", "surface error mean/p95"],
+    "new_surface_local_quality": "recall and completeness distance on the fixed reference points newly visible after the shared prefix; no local precision claim",
+    "resources": ["paid actions", "path distance m", "action time s", "collisions", "safe return"]
+  },
+  "mechanism_gates": {
+    "feedback_full": "48 observed actions, zero pending predictions, and updated posterior in every feedback-enabled branch",
+    "feedback_disabled": "48 outcomes recorded, zero pending predictions, and alpha/beta remain at the prior",
+    "architecture": "all four module interfaces called",
+    "safety": "zero collisions, no failed termination, safe return"
+  },
+  "efficacy_gate": "report S against G, N, X, and S_no_feedback without changing the frozen scene set or thresholds; a failed comparison remains a negative result",
+  "scope": "development-domain correction and mechanism evidence; no held-out or universal superiority claim"
+}

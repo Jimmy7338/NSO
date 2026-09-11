@@ -1,0 +1,107 @@
+{
+  "development_only": true,
+  "development_passed": true,
+  "gates": {
+    "all_training_losses_decreased": true,
+    "information_value_nonzero": true,
+    "low_confidence_falls_back_exactly_to_geometry": true,
+    "semantic_changes_at_least_one_action_from_geometry": true,
+    "semantic_mean_regret_below_geometry": true,
+    "semantic_selected_utility_above_fixed_semantic": true,
+    "swapped_labels_worse_than_correct_semantics": true
+  },
+  "information_value_by_context": {
+    "Q0": 0.00406426374492368,
+    "Q1": 0.003081981769309527,
+    "Q2": 0.004420078314496208,
+    "Q3": 0.003621823353332859
+  },
+  "input_histories": 8,
+  "physical_candidate_branches": 44,
+  "schema_version": "semantic_gain_v11_development_result/1",
+  "semantic_choice_changes_from_geometry": 4,
+  "status": "passed",
+  "summaries": {
+    "fixed_geometry_G": {
+      "centered_mae": null,
+      "exact_oracle_choices": 1,
+      "histories": 8,
+      "mean_regret": 0.01287708754354362,
+      "selected_utility_mean": 0.020655846238980854,
+      "spearman_mean": null
+    },
+    "fixed_semantic_S": {
+      "centered_mae": null,
+      "exact_oracle_choices": 1,
+      "histories": 8,
+      "mean_regret": 0.006299895222244506,
+      "selected_utility_mean": 0.02723303856027997,
+      "spearman_mean": null
+    },
+    "fixed_swapped_X": {
+      "centered_mae": null,
+      "exact_oracle_choices": 0,
+      "histories": 8,
+      "mean_regret": 0.01616872822192649,
+      "selected_utility_mean": 0.01736420556059798,
+      "spearman_mean": null
+    },
+    "geometry_mlp": {
+      "centered_mae": 0.006654891716824611,
+      "exact_oracle_choices": 2,
+      "histories": 8,
+      "mean_regret": 0.005596375919409261,
+      "selected_utility_mean": 0.027936557863115212,
+      "spearman_mean": 0.675
+    },
+    "low_confidence_fallback": {
+      "centered_mae": 0.006654891716824611,
+      "exact_oracle_choices": 2,
+      "histories": 8,
+      "mean_regret": 0.005596375919409261,
+      "selected_utility_mean": 0.027936557863115212,
+      "spearman_mean": 0.675
+    },
+    "oracle": {
+      "centered_mae": null,
+      "exact_oracle_choices": 8,
+      "histories": 8,
+      "mean_regret": 0.0,
+      "selected_utility_mean": 0.03353293378252448,
+      "spearman_mean": null
+    },
+    "semantic_mlp": {
+      "centered_mae": 0.005028462083390062,
+      "exact_oracle_choices": 4,
+      "histories": 8,
+      "mean_regret": 0.0003201983720087314,
+      "selected_utility_mean": 0.03321273541051574,
+      "spearman_mean": 0.9071428571428573
+    },
+    "semantic_swapped": {
+      "centered_mae": 0.010877038807166145,
+      "exact_oracle_choices": 0,
+      "histories": 8,
+      "mean_regret": 0.013663274604848058,
+      "selected_utility_mean": 0.019869659177676417,
+      "spearman_mean": 0.2857142857142857
+    }
+  },
+  "uncertainty_calibration": [
+    {
+      "count": 15,
+      "mean_absolute_error": 0.0034159533299121794,
+      "mean_ensemble_std": 1.623183460889976e-05
+    },
+    {
+      "count": 15,
+      "mean_absolute_error": 0.004699576819990777,
+      "mean_ensemble_std": 6.302994708749489e-05
+    },
+    {
+      "count": 14,
+      "mean_absolute_error": 0.006697196216548425,
+      "mean_ensemble_std": 0.0004605661608215666
+    }
+  ]
+}

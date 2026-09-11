@@ -7,6 +7,8 @@ local executor reserves a known-safe route to a fixed anchor including heading.
 """
 from copy import deepcopy
 from time import perf_counter
+import json
+from pathlib import Path
 import numpy as np
 from scipy.ndimage import label
 from env.virtual3d import camera_pose
@@ -17,22 +19,40 @@ from nso.hierarchical_options_v10 import generate_options
 from nso.observed_feedback_v10 import FeedbackLedger
 from nso.observed_gain_calibration_v10_1 import ObservedGainCalibration
 from nso.cpu_sensor_contract_v10 import digest, json_value
+from nso.competition_prior_v8 import score_routes as fixed_rate_score_routes
+from nso.semantic_gain_v11 import (ConditionalGainResidual, FrozenSemanticGainEnsemble,
+                                   candidate_features)
+
+
+_ALLOWED_REVISIONS = frozenset(("v10", "v10_1", "v10_2", "v10_3", "v10_3_1", "v11", "v11_1"))
+_OBSERVED_GAIN_REVISIONS = frozenset(("v10_1", "v10_2", "v10_3", "v10_3_1", "v11", "v11_1"))
+_ACTUAL_ONLY_ATTEMPT_REVISIONS = frozenset(("v10_2", "v10_3", "v10_3_1", "v11", "v11_1"))
+_MEASURED_DIRECTION_REVISIONS = frozenset(("v10_3", "v10_3_1", "v11", "v11_1"))
 
 
 class CPUFourModules:
     def __init__(self, args, num_scenes, shape):
         self.args, self.shape = args, tuple(shape)
         self.planner_revision = str(getattr(args, "cpu_planner_revision", "v10"))
-        if self.planner_revision not in ("v10", "v10_1", "v10_2", "v10_3"):
+        if self.planner_revision not in _ALLOWED_REVISIONS:
             raise ValueError("unknown CPU planner revision")
         self.scenes = [None] * num_scenes
         self.calls = []
+        self.semantic_gain = None
+        if self.planner_revision in ("v11", "v11_1"):
+            path = Path(str(getattr(args, "cpu_semantic_gain_model_path", "")))
+            if not path.is_file():
+                raise ValueError("V11 requires a frozen semantic gain JSON bundle")
+            self.semantic_gain = FrozenSemanticGainEnsemble(json.loads(path.read_text()))
         self.capabilities = {
             "semantic": "measured RGB-D marker support; declared category prior; open vocabulary unavailable",
             "topology": "observed connected-region graph and full pose options; room segmentation unvalidated",
             "reachability_uq": "deterministic observed-map guard; trained/calibrated uncertainty unavailable",
             "igcr": "actual sensor feedback consumed in next option score; quality is an observed proxy",
         }
+        if self.semantic_gain is not None:
+            self.capabilities["topology"] = "observed graph with frozen V11 semantic gain ranking"
+            self.capabilities["igcr"] = "category/instance/direction camera-yield residual; evaluator truth unavailable"
 
     def _record(self, scene_idx, module, method, inputs, outputs, started=None):
         s = self.scenes[scene_idx]
@@ -68,8 +88,11 @@ class CPUFourModules:
             graph_version=0, selected=None, plans=0, feedback={}, graph=None,
             planning_direction_support=None, current_direction_support=None,
             gain=ObservedGainCalibration(mapper.shape, feedback_enabled=gain_feedback_enabled,
-                consume_predicted_attempts=self.planner_revision not in ("v10_2", "v10_3")),
-            gain_feedback=None)
+                consume_predicted_attempts=(
+                    self.planner_revision not in _ACTUAL_ONLY_ATTEMPT_REVISIONS)),
+            gain_feedback=None,
+            conditional_gain=ConditionalGainResidual(feedback_enabled=gain_feedback_enabled),
+            conditional_pending={})
         event = ledger.bootstrap(mapper, frames=[p.frame for p in prefix_packets],
             frame_ids=[p.frame_id for p in prefix_packets], map_version=mapper.frames,
             last_action_id=packet.action_id, paid_actions=paid_prefix_actions)
@@ -120,9 +143,15 @@ class CPUFourModules:
         if s["ledger"].feedback_enabled:
             s["planning_direction_support"] = deepcopy(s["current_direction_support"])
         gain_feedback = (s["gain"].observe(s["mapper"], action_id=p.action_id)
-                         if self.planner_revision in ("v10_1", "v10_2") else None)
+                         if self.planner_revision in _OBSERVED_GAIN_REVISIONS else None)
+        conditional_feedback = None
+        conditional_key = s["conditional_pending"].pop(p.action_id, None)
+        if conditional_key is not None:
+            conditional_feedback = s["conditional_gain"].observe(
+                conditional_key, gain_feedback["camera"], action_id=p.action_id)
         s["gain_feedback"] = gain_feedback
-        event = {**event, "observed_gain_calibration": gain_feedback}
+        event = {**event, "observed_gain_calibration": gain_feedback,
+                 "conditional_gain_residual": conditional_feedback}
         self._record(scene_idx, "IGCR", "compute_reward", dict(packet=p.sha256()), event, started)
         return event["reward"], event["parts"]
 
@@ -180,6 +209,72 @@ class CPUFourModules:
                 incremental_aperture=factors.tolist(), prior_potentials=potentials))
         return scores, audit
 
+    @staticmethod
+    def _v11_key(asset, route, mapper):
+        pose = camera_pose(tuple(route["pose"][:2]), int(route["pose"][2]),
+                           mapper.config, mapper.shape[0])
+        delta = pose[:2, 3] - np.asarray(asset["aabb_center"][:2])
+        sector = int(np.floor((np.arctan2(delta[1], delta[0]) + np.pi)
+                              / (2 * np.pi) * 8)) % 8
+        return ConditionalGainResidual.key(asset, sector)
+
+    def _scores_v11(self, s, routes):
+        """Frozen learned rate scores plus online conditional residual correction."""
+        history = s["ledger"].planning_camera_poses()
+        fixed = fixed_rate_score_routes(s["mapper"], routes, history)
+        assets = measured_assets(s["mapper"])
+        if len(assets) != 2:
+            raise ValueError("V11 development integration requires two measured assets")
+        confidence_scale = float(getattr(self.args, "cpu_semantic_confidence_scale", 1.0))
+        semantic, geometry, swapped, keys = [], [], [], []
+        for route, row in zip(routes, fixed["audit"]):
+            sx, gx, _ = candidate_features(row, route, assets,
+                                            confidence_scale=confidence_scale)
+            xx, swapped_geometry, _ = candidate_features(row, route,
+                [{**asset, "class_vote": -float(asset["class_vote"])} for asset in assets],
+                confidence_scale=confidence_scale)
+            np.testing.assert_array_equal(gx, swapped_geometry)
+            semantic.append(sx); geometry.append(gx); swapped.append(xx)
+            ai = route.get("asset_index")
+            keys.append(None if ai is None else self._v11_key(assets[int(ai)], route, s["mapper"]))
+        semantic, geometry, swapped = map(np.asarray, (semantic, geometry, swapped))
+        predicted = self.semantic_gain.predict(semantic, geometry, swapped)
+        semantic_mean, semantic_std, _ = predicted["semantic"]
+        geometry_mean, geometry_std, _ = predicted["geometry"]
+        swapped_mean, swapped_std, _ = predicted["swapped"]
+        in_distribution = np.asarray([self.semantic_gain.in_distribution(sx, gx)
+                                      for sx, gx in zip(semantic, geometry)], dtype=bool)
+        corrected = geometry_mean.copy()
+        if confidence_scale >= float(getattr(
+                self.args, "cpu_semantic_confidence_threshold", .25)):
+            for i, key in enumerate(keys):
+                if in_distribution[i]:
+                    corrected[i] = (semantic_mean[i] if key is None else geometry_mean[i]
+                        + s["conditional_gain"].semantic_scale(key)
+                        * (semantic_mean[i] - geometry_mean[i]))
+        fixed_scores = {name: list(fixed["scores"][name]) for name in ("N", "G", "O", "S", "X", "M")}
+        fixed_scores.update(L=corrected.tolist(), K=geometry_mean.tolist(),
+                            Y=np.where(in_distribution, swapped_mean, geometry_mean).tolist(),
+                            Q=np.where(in_distribution
+                            & (confidence_scale >= float(getattr(
+                                self.args, "cpu_semantic_confidence_threshold", .25))),
+                            semantic_mean, geometry_mean).tolist())
+        audit = []
+        for i, (route, row) in enumerate(zip(routes, fixed["audit"])):
+            audit.append({**row, "v11_semantic_score": float(semantic_mean[i]),
+                "v11_geometry_score": float(geometry_mean[i]),
+                "v11_corrected_score": float(corrected[i]),
+                "v11_swapped_score": float(swapped_mean[i]),
+                "v11_semantic_std": float(semantic_std[i]),
+                "v11_geometry_std": float(geometry_std[i]),
+                "v11_swapped_std": float(swapped_std[i]),
+                "v11_feedback_key": None if keys[i] is None else list(keys[i]),
+                "v11_feedback_scale": 1. if keys[i] is None else
+                    s["conditional_gain"].semantic_scale(keys[i]),
+                "v11_in_distribution": bool(in_distribution[i]),
+                "v11_confidence_scale": confidence_scale})
+        return fixed_scores, audit
+
     def _scores_v10_1(self, s, routes, attempted):
         """Total committed outbound yield with observation-calibrated support."""
         outbound = [{**r, "states": r["outbound_states"], "cost": r["outbound_cost"]} for r in routes]
@@ -207,7 +302,7 @@ class CPUFourModules:
             common = (radar.sum() * config.resolution_m**2 * posterior["radar"]
                       + camera.sum() * config.resolution_m**2 * posterior["camera"]
                       + quality_total[i])
-            if self.planner_revision == "v10_3":
+            if self.planner_revision in _MEASURED_DIRECTION_REVISIONS:
                 floor = float(getattr(self.args, "cpu_measured_novelty_floor", .25))
                 if not 0 <= floor <= 1:
                     raise ValueError("measured novelty floor must be in [0,1]")
@@ -240,7 +335,7 @@ class CPUFourModules:
                 incremental_aperture=factors.tolist(), prior_potentials=potentials,
                 measured_direction_support=s.get("planning_direction_support"),
                 measured_novelty_floor=float(getattr(self.args, "cpu_measured_novelty_floor", .25))
-                    if self.planner_revision == "v10_3" else None))
+                    if self.planner_revision in _MEASURED_DIRECTION_REVISIONS else None))
         return scores, audit
 
     def select_target(self, scene_idx):
@@ -252,30 +347,40 @@ class CPUFourModules:
         routes, audit = generate_options(s["mapper"], p.position, p.heading,
             s["ledger"].remaining_budget, s["return_anchor"],
             max_candidates=int(getattr(self.args, "cpu_max_candidates", 12)),
-            coverage_strategy="total_diverse" if self.planner_revision in ("v10_1", "v10_2", "v10_3") else "rate_single",
+            coverage_strategy=("total_diverse" if self.planner_revision in _OBSERVED_GAIN_REVISIONS
+                               and self.planner_revision != "v11_1"
+                               else "rate_single"),
             coverage_slots=int(getattr(self.args, "cpu_coverage_slots", 4)),
-            attempted_camera_mask=attempted if self.planner_revision in ("v10_1", "v10_2", "v10_3") else None)
+            attempted_camera_mask=(attempted if self.planner_revision in _OBSERVED_GAIN_REVISIONS
+                                   else None))
         graph = s["graph"]
         routes = [r for r in routes if graph["current_region"] > 0
                   and graph["current_region"] == graph["anchor_region"]
                   == int(graph["regions"][tuple(r["pose"][:2])])]
         mode = getattr(self.args, "cpu_score_mode", "S")
-        if mode not in ("N", "G", "O", "S", "X", "M"):
+        if mode not in ("N", "G", "O", "S", "X", "M", "L", "K", "Y", "Q"):
             raise ValueError("unknown CPU semantic ablation")
-        modern = self.planner_revision in ("v10_1", "v10_2", "v10_3")
-        score_method = self._scores_v10_1 if modern else self._scores
-        scores, rows = (score_method(s, routes, attempted) if routes and modern
-                        else score_method(s, routes) if routes
-                        else ({m: [] for m in ("N","G","O","S","X","M")}, []))
+        modern = self.planner_revision in _OBSERVED_GAIN_REVISIONS
+        if routes and self.planner_revision in ("v11", "v11_1"):
+            scores, rows = self._scores_v11(s, routes)
+        else:
+            score_method = self._scores_v10_1 if modern else self._scores
+            scores, rows = (score_method(s, routes, attempted) if routes and modern
+                            else score_method(s, routes) if routes
+                            else ({m: [] for m in ("N","G","O","S","X","M")}, []))
         index = min(range(len(routes)), key=lambda i: (-scores[mode][i], routes[i]["cost"],
                                                       routes[i]["candidate_id"])) if routes else None
-        s["selected"] = None if index is None or scores[mode][index] <= 0 else deepcopy(routes[index])
+        relative_mode = mode in ("L", "K", "Y", "Q")
+        s["selected"] = None if index is None or (not relative_mode and scores[mode][index] <= 0) else deepcopy(routes[index])
         s["plans"] += 1
         if s["selected"] is not None:
             s["selected"].update(option_id=f'{s["scene_id"]}/{s["episode_id"]}/plan-{s["plans"]}',
                 selection_call_id=len(self.calls) + 1, selected_map_version=s["mapper"].frames,
                 selected_feedback_version=s["feedback"]["feedback_version"],
                 parent_region=graph["current_region"])
+            if self.planner_revision in ("v11", "v11_1"):
+                s["selected"]["v11_feedback_key"] = rows[index]["v11_feedback_key"]
+                s["selected"]["v11_asset_index"] = s["selected"].get("asset_index")
         result = dict(selected=s["selected"], candidates=routes, scores=scores, score_audit=rows,
                       candidate_audit=audit, mode=mode, plan_number=s["plans"],
                       planner_revision=self.planner_revision,
@@ -300,10 +405,29 @@ class CPUFourModules:
                                                s["return_anchor"], budget - 1)
         allowed = check.allowed and returning.available
         gain_prediction = None
-        if allowed and self.planner_revision in ("v10_1", "v10_2", "v10_3"):
+        if allowed and self.planner_revision in _OBSERVED_GAIN_REVISIONS:
             gain_prediction = s["gain"].prepare_action(s["mapper"], position=p.position,
                 heading=p.heading, action=action, action_id=p.action_id + 1,
                 planning_camera_poses=s["ledger"].planning_camera_poses())
+            execution = s.get("execution_option")
+            if (self.planner_revision in ("v11", "v11_1") and execution is not None
+                    and execution.get("v11_asset_index") is not None
+                    and gain_prediction["predicted_camera_cells"] > 0):
+                ai = int(execution["v11_asset_index"])
+                if ai < len(s["assets"]):
+                    next_pose = camera_pose(check.target, heading, s["mapper"].config,
+                                            s["mapper"].shape[0])
+                    support = aperture_support(s["assets"][ai], next_pose,
+                                               s["mapper"].config).mean()
+                    if support > .01:
+                        delta = next_pose[:2, 3] - s["assets"][ai]["aabb_center"][:2]
+                        sector = int(np.floor((np.arctan2(delta[1], delta[0]) + np.pi)
+                                             / (2 * np.pi) * 8)) % 8
+                        key = ConditionalGainResidual.key(s["assets"][ai], sector)
+                        s["conditional_pending"][p.action_id + 1] = key
+                        gain_prediction = {**gain_prediction,
+                            "conditional_gain_key": list(key),
+                            "conditional_aperture_support": float(support)}
         result = dict(allowed=bool(allowed), reason=check.reason if not check.allowed else returning.reason,
             action=action, next_pose=[*check.target, heading], remaining_budget=budget,
             reserved_return_cost=None if returning is None else returning.paid_cost,
@@ -329,4 +453,6 @@ class CPUFourModules:
         return {} if s is None else dict(plans=s["plans"], graph_version=s["graph_version"],
             semantic_version=s["semantic_version"], feedback=s["ledger"].snapshot(),
             observed_gain_calibration=s["gain"].snapshot(), planner_revision=self.planner_revision,
+            conditional_gain_residual=s["conditional_gain"].snapshot(),
+            semantic_gain_model=None if self.semantic_gain is None else self.semantic_gain.metadata,
             return_anchor=s["return_anchor"], retained_hierarchy="region -> pose option -> paid action")

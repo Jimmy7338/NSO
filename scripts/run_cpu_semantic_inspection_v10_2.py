@@ -12,6 +12,7 @@ import sys
 from types import SimpleNamespace
 
 import numpy as np
+import open3d as o3d
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -24,6 +25,7 @@ from scripts.eval_competition_v9_1 import restore_evaluator, snapshot_metrics
 from scripts.run_cpu_semantic_inspection_v10_1 import prefix_packets
 from utils.counterfactual_surface_visibility import reference_visible, surface_increment
 from utils.cpu_protocol import file_hash
+from utils.reconstruction_metrics import ray_scene
 
 
 def write_json(path, value):
@@ -68,8 +70,23 @@ def execute(prepared, context, arrangement, condition, *, revision="v10_2", nove
         actions.append(dict(action=action, position=list(world.position), heading=world.heading,
                             packet_sha256=packet.sha256()))
     summary = runtime.sensor_episode_summary(0)
-    _, after = snapshot_metrics(runtime.states[0]["mapper"], world, evaluator, reference, (.05, .10))
+    final_mesh, after = snapshot_metrics(
+        runtime.states[0]["mapper"], world, evaluator, reference, (.05, .10))
     area = surface_increment(reference["prefix_seen"], future, reference["weights"])
+    new_visible = future & ~reference["prefix_seen"]
+    new_points = evaluator.reference[new_visible]
+    if len(new_points) and len(final_mesh.triangles):
+        local_distance = ray_scene(final_mesh).compute_distance(
+            o3d.core.Tensor(new_points.astype(np.float32)), nthreads=1).numpy()
+        new_quality = dict(reference_samples=int(len(new_points)),
+            recall_05cm=float(np.mean(local_distance <= .05)),
+            recall_10cm=float(np.mean(local_distance <= .10)),
+            completeness_error_mean_m=float(local_distance.mean()),
+            completeness_error_p95_m=float(np.percentile(local_distance, 95)))
+    else:
+        new_quality = dict(reference_samples=int(len(new_points)), recall_05cm=0.,
+            recall_10cm=0., completeness_error_mean_m=None,
+            completeness_error_p95_m=None)
     choices = [c["outputs"]["selected"] for c in components._cpu_backend.calls
                if c["method"] == "select_topo_target"]
     module_set = sorted(set(c["module"] for c in components._cpu_backend.calls))
@@ -81,9 +98,17 @@ def execute(prepared, context, arrangement, condition, *, revision="v10_2", nove
         f1_gain_05cm=after["f1_05cm"] - before["f1_05cm"],
         new_area_times_final_f1_05cm=area * after["f1_05cm"],
         coverage_2d_gain_m2=after["covered_area_m2"] - before["covered_area_m2"],
+        before_metrics=before, after_metrics=after,
+        final_coverage_fraction_times_f1_05cm=after["joint_05cm"],
+        final_covered_area_times_f1_05cm=after["area_times_f1_05cm"],
+        new_visible_surface_quality=new_quality,
         returned_to_anchor=summary["termination"]["returned_to_anchor"],
         failed=summary["termination"]["failed"], collisions=world.collisions,
         forward_actions=sum(a["action"] == "forward" for a in actions),
+        rotation_actions=sum(a["action"] in ("left", "right") for a in actions),
+        path_distance_m=(sum(a["action"] == "forward" for a in actions)
+                         * world.config.resolution_m),
+        action_time_s=len(actions) * world.config.action_duration_s,
         unique_future_positions=len({tuple(a["position"]) for a in actions}),
         planner_revision=summary["modules"]["planner_revision"],
         gain_calibration=summary["modules"]["observed_gain_calibration"],

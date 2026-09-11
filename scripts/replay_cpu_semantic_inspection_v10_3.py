@@ -6,6 +6,7 @@ os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 import argparse, json, sys
 from pathlib import Path
 import numpy as np
+import open3d as o3d
 
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from env.virtual3d_competition_v9 import create_competition_world, collect_competition_prefix
@@ -14,6 +15,7 @@ from nso.observed_runtime_mapper_v10 import ObservedRuntimeMapperV10
 from scripts.eval_competition_v9_1 import restore_evaluator, snapshot_metrics
 from utils.counterfactual_surface_visibility import reference_visible, surface_increment
 from utils.cpu_protocol import file_hash
+from utils.reconstruction_metrics import ray_scene
 from utils.rgbd_contract import RGBDFrame, PlanarScan
 
 
@@ -44,11 +46,38 @@ def replay(prepared,row):
             raise AssertionError("physical action or packet mismatch")
         mapper.update(frame,scan);seen|=reference_visible(evaluator.reference,frame,evaluator.truth,
             frame.world_from_camera,world.config.max_depth_m)
-    _,after=snapshot_metrics(mapper,world,evaluator,ref,(.05,.10));area=surface_increment(ref["prefix_seen"],seen,ref["weights"])
+    final_mesh,after=snapshot_metrics(mapper,world,evaluator,ref,(.05,.10));area=surface_increment(ref["prefix_seen"],seen,ref["weights"])
     np.testing.assert_allclose(area,row["new_unique_surface_area_m2"],rtol=0,atol=1e-12)
     np.testing.assert_allclose(after["f1_05cm"],row["final_f1_05cm"],rtol=0,atol=1e-12)
     np.testing.assert_allclose(after["f1_05cm"]-before["f1_05cm"],row["f1_gain_05cm"],rtol=0,atol=1e-12)
     np.testing.assert_allclose(area*after["f1_05cm"],row["new_area_times_final_f1_05cm"],rtol=0,atol=1e-12)
+    if "after_metrics" in row:
+        for name, expected in row["after_metrics"].items():
+            actual = after[name]
+            if expected is None:
+                if actual is not None: raise AssertionError(f"{name}: expected None")
+            elif isinstance(expected, (int, float)):
+                np.testing.assert_allclose(actual, expected, rtol=0, atol=1e-12)
+        np.testing.assert_allclose(after["joint_05cm"],
+            row["final_coverage_fraction_times_f1_05cm"], rtol=0, atol=1e-12)
+        np.testing.assert_allclose(after["area_times_f1_05cm"],
+            row["final_covered_area_times_f1_05cm"], rtol=0, atol=1e-12)
+        new_visible = seen & ~ref["prefix_seen"]
+        new_points = evaluator.reference[new_visible]
+        distances = ray_scene(final_mesh).compute_distance(
+            o3d.core.Tensor(new_points.astype(np.float32)), nthreads=1).numpy()
+        local = row["new_visible_surface_quality"]
+        if len(new_points) != local["reference_samples"]:
+            raise AssertionError("new-visible reference sample count mismatch")
+        for name, actual in (("recall_05cm", np.mean(distances <= .05)),
+                             ("recall_10cm", np.mean(distances <= .10)),
+                             ("completeness_error_mean_m", distances.mean()),
+                             ("completeness_error_p95_m", np.percentile(distances, 95))):
+            np.testing.assert_allclose(actual, local[name], rtol=0, atol=1e-12)
+        np.testing.assert_allclose(row["path_distance_m"],
+            row["forward_actions"] * world.config.resolution_m, rtol=0, atol=1e-12)
+        np.testing.assert_allclose(row["action_time_s"],
+            len(row["actions"]) * world.config.action_duration_s, rtol=0, atol=1e-12)
     anchor=(*records[-1]["position"],records[-1]["heading"])
     if (*world.position,world.heading)!=anchor or world.collisions:raise AssertionError("unsafe terminal state")
     return {"context":c,"arrangement":a,"condition":row["condition"],"packets_exact":True,
@@ -64,11 +93,11 @@ def main(run,prepared,output):
     for row in rows:
         checks.append(replay(prepared,row));print("replayed",row["condition"],row["context"],row["arrangement"],flush=True)
     output.mkdir(parents=True,exist_ok=False)
-    report={"schema_version":"cpu_semantic_inspection_v10_3_independent_replay/1","status":"passed",
+    report={"schema_version":"cpu_semantic_inspection_v10_3_independent_replay/2","status":"passed",
         "verifier_written_after_execution":True,"planner_or_runtime_called":False,"branches":len(checks),
         "artifact_hashes_verified":len(hashes),"frozen_source_files_verified":len(manifest["source_sha256"]),"checks":checks}
     write(output/"verification.json",report)
-    (output/"REPORT.md").write_text("# V10.3 independent replay\n\nPassed 40/40 compact branches. The post-hoc verifier did not call the planner or runtime. It regenerated the physical prefix and future sensor packets from saved actions, rebuilt every TSDF map, recomputed surface area and F1, and checked collision-free return to the exact prefix anchor.\n")
+    (output/"REPORT.md").write_text(f"# V10.3-family independent replay\n\nPassed {len(checks)}/{len(checks)} compact branches. The post-hoc verifier did not call the planner or runtime. It regenerated the physical prefix and future sensor packets from saved actions, rebuilt every TSDF map, recomputed coverage, global reconstruction, inspection and newly-visible local completeness metrics, and checked collision-free return to the exact prefix anchor.\n")
     print(json.dumps({"status":"passed","branches":len(checks)},indent=2))
 
 

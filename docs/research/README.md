@@ -1,6 +1,8 @@
 # NSO 论文研究材料
 
-当前进展：[V10.3语义覆盖结果、理论与论文边界](V10_3_SEMANTIC_COVERAGE_RESULT_AND_THEORY.md)。保留四模块与ANS层次，40个紧凑闭环分支全部安全；特殊工业资产开发域中，S相对G/N的联合指标均值分别提高28.27%/18.07%，错误语义X在8/8配对历史退化。IGCR关闭消融与完整反馈相同、人工标记、非外部主流实现等限制同步保留。此前[V10冷启动旋转失败](FOUR_MODULE_CPU_CLOSED_LOOP_V10_IMPLEMENTATION.md)与[V9.1有限域F1门槛未过](COMPETITION_V9_1_RESULT_AND_F1_CEILING.md)仍为有效负证据。
+> **后续执行入口（2026-09-11）：** [关键目标导向与论文主线](RESEARCH_GOAL_AND_STORY.md)、[V11 网络训练与数据交接](V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md)、[可复制 Goal 文本](GOAL_PROMPT.md)。V10.3 的反馈版本遗漏、指标解释和局部质量检查已由 [V10.3.1 修订](V10_3_1_FEEDBACK_CORRECTION_AND_METRIC_CONTRACT.md)完成；当前进入可校正语义收益模型的正式训练与复核。以下旧阶段进展不代表整体验收已通过。
+
+当前进展：[V10.3语义覆盖结果、理论与论文边界](V10_3_SEMANTIC_COVERAGE_RESULT_AND_THEORY.md)。保留四模块与ANS层次，修复后40个紧凑闭环分支全部安全；特殊人工资产开发域中，S相对G/N的检查联合指标均值分别提高29.02%/18.07%，错误语义X在8/8配对历史退化。S与关闭反馈仍8/8相同，H3未成立；人工标记、非未知起点、非外部主流实现等限制同步保留。
 
 最新进展：固定双对象 V8.1 的24条路线、752动作全部完成并通过[独立回放](COMPETITION_V8_1_INDEPENDENT_REPLAY_20260911.md)。[原协议结果](../../eval_results/competition_v8_1_analysis_20260911/REPORT.md)显示语义面积率较内部G/O高10.55%，但终点F1低0.00291、8条deep跨对象排他条件全部失败，因此原进阶判定不变。[单项事后目标诊断](../../eval_results/competition_v8_1_objective_diagnosis_20260911/REPORT.md)统一比较总潜在收益后，全部方法选择42动作路线，S新增面积高34.78%、F1高0.00979；它是开发依据，不能计作独立验证。见[预算一致的下一阶段设计](SEMANTIC_BUDGET_ALIGNMENT_V9_DESIGN.md)。
 
@@ -11,6 +13,8 @@
 
 | 材料 | 用途 |
 |---|---|
+| [V11 网络训练与数据交接](V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md) | 说明 V10 未训练原神经栈、V7 主任务信息价值为零、V9 可作开发训练及下一阶段唯一执行顺序 |
+| [网络训练审计与优化路线](NETWORK_TRAINING_AUDIT_AND_OPTIMIZATION_PLAN.md) | 区分 V10 CPU 机制、历史轻量拟合、不可用 LFS 权重，并定义学习型语义收益头与逐模块优化顺序 |
 | [V10四模块实现与失败边界](FOUR_MODULE_CPU_CLOSED_LOOP_V10_IMPLEMENTATION.md) | 真实传感接口、预算和反馈、语义干预、原地旋转问题与下一轮修正 |
 | [综合方案与验证设计](NSO_SEMANTIC_COVERAGE_REDESIGN.md) | 任务定位、根因、四模块改造、实验与实车前置工作 |
 | [原始文献研究](SEMANTIC_COVERAGE_LITERATURE.md) | 16 篇论文的研究内容、最接近前作、限制和官方基线准备 |
