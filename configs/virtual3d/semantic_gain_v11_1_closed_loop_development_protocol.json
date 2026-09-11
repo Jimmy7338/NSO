@@ -1,0 +1,41 @@
+{
+  "schema_version": "semantic_gain_v11_1_closed_loop_development_protocol/1",
+  "status": "frozen_before_first_v11_1_closed_loop_run",
+  "scope": "same V9 development domain used for model fitting; mechanism integration only, not independent confirmation",
+  "architecture": "unchanged ANS global-goal/local-action hierarchy and OV-SDF, STGHP, RPN-UQ, IGCR interfaces",
+  "model_bundle": "eval_results/semantic_gain_v11_integration_bundle_20260911/integration_bundle.json",
+  "contexts": ["Q0", "Q1", "Q2", "Q3"],
+  "arrangements": ["shelf_west", "shelf_east"],
+  "shared_prefix_actions": 150,
+  "adaptive_actions": 48,
+  "max_candidates": 6,
+  "conditions": [
+    "learned_semantic_feedback",
+    "learned_semantic_no_feedback",
+    "learned_geometry",
+    "fixed_semantic",
+    "fixed_geometry",
+    "learned_swapped",
+    "low_confidence_fallback"
+  ],
+  "candidate_contract": "rate_single candidates and complete safe round-trip option execution match the frozen V9 training action unit",
+  "online_feedback": "fractional Beta camera-yield residual indexed by measured category sign, quantized instance center and eight-sector view direction; two observations are required and correction is clipped to plus/minus 25 percent; evaluator truth is unavailable online",
+  "input_guard": "each out-of-range candidate independently falls back to the equal-capacity geometry MLP",
+  "metrics": [
+    "new visible surface area",
+    "primary joint gain = terminal 2D covered area times F1@5cm minus the shared-prefix value",
+    "secondary inspection joint = new visible 3D surface area times terminal global F1@5cm",
+    "precision/recall/F1@5cm and surface error",
+    "new-visible local recall/completeness",
+    "path distance, action time, collision and safe return"
+  ],
+  "development_gates": {
+    "semantic_above_learned_geometry": true,
+    "semantic_above_fixed_semantic": true,
+    "correct_semantics_above_swapped": true,
+    "low_confidence_matches_geometry": true,
+    "feedback_non_degrading": true,
+    "all_safe_and_four_interfaces": true
+  },
+  "failure_policy": "retain every branch and failed gate; do not open independent E confirmation until a new development version passes"
+}

@@ -4,7 +4,7 @@
     "objective": "工业设施自主三维数据采集：覆盖约束下的语义条件观察收益预测与闭环层次规划",
     "goal_text": "docs/research/GOAL_PROMPT.md",
     "guiding_document": "docs/research/RESEARCH_GOAL_AND_STORY.md",
-    "status": "stage_0_complete; stage_1_v11_grouped_training_and_independent_numerical_replay_passed; full_closed_loop_development_next",
+    "status": "stage_1_v11_1_independent_efficacy_and_96_of_96_replay_passed; coverage_stress_40_of_40_replay_passed_without_semantic_increment",
     "read_first": true,
     "historical_fields_warning": "Other versioned metrics and next-step fields below are historical; use the guiding document and this handoff for current priorities, preserving original run facts.",
     "architecture_fixed": [
@@ -17,9 +17,10 @@
     "semantic_core_required": true,
     "first_actions": [
       "Read docs/research/V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md and keep configs/virtual3d/semantic_gain_v11_development_protocol.json fixed for the first archived development run.",
-      "Use the frozen all-V9 V11 gain head to restart and complete the full closed-loop development comparison; do not merge the existing partial batch into final statistics.",
-      "Compare learned semantic feedback/no-feedback, equal-capacity geometry, fixed semantics, swapped labels and low-confidence fallback over complete trajectories, then add category/instance/direction residual feedback to IGCR without changing the four-module hierarchy.",
-      "Generate and seal new E confirmation contexts before viewing outcomes; include unknown-start coverage, new layouts/instances, noise, and low-confidence or wrong semantics, with no confirmation-set retraining."
+      "Treat eval_results/semantic_gain_v11_closed_loop_development_20260911 as a retained failed contract-mismatch run and V11.1 as the passed development replacement.",
+      "Do not tune again on Q0--Q3; use the frozen V11 gain head, rate_single candidate contract, complete safe round-trip options and per-candidate input guard.",
+      "Treat the first E preparation as a retained structural failure and the prospectively sealed F00--F11 set as its replacement; never tune on either viewed set.",
+      "Independently replay the completed 96-branch F00--F07 efficacy result, then run the still-sealed F08--F11 coverage-stress stratum without changing the frozen method."
     ],
     "known_errata": {
       "feedback_source": "nso/cpu_four_modules_v10.py",
@@ -81,16 +82,55 @@
         "warning": "archived and numerically reproduced development evidence only; not independent-scene or whole-system efficacy"
       },
       "closed_loop": {
-        "smoke_result": "eval_results/semantic_gain_v11_closed_loop_smoke_fixed_20260911/summary.json",
-        "smoke_branches": 3,
-        "full_development_complete": false,
-        "partial_batch_excluded": "eval_results/semantic_gain_v11_closed_loop_development_20260911/partial.json"
+        "v11_failed_result": "eval_results/semantic_gain_v11_closed_loop_development_20260911/summary.json",
+        "v11_1_protocol": "configs/virtual3d/semantic_gain_v11_1_closed_loop_development_protocol.json",
+        "v11_1_result": "eval_results/semantic_gain_v11_1_closed_loop_development_20260911/summary.json",
+        "v11_1_independent_physical_replay": "eval_results/semantic_gain_v11_1_closed_loop_replay_20260911/verification.json",
+        "v11_1_paired_analysis": "audit_results/semantic_gain_v11_1_paired_analysis_20260911/analysis.json",
+        "full_development_complete": true,
+        "development_gates_passed": true,
+        "branches": 56,
+        "semantic_vs_equal_capacity_geometry_relative": 0.1955682160537259,
+        "semantic_vs_fixed_semantic_relative": 0.27765451475656266,
+        "correct_semantic_vs_swapped_relative": 0.6394152454089473,
+        "feedback_increment": 0.0,
+        "scope_warning": "Q0--Q3 were viewed during development; these results do not establish independent generalization"
+      },
+      "independent_confirmation": {
+        "first_preparation": "eval_results/semantic_gain_v11_1_confirmation_preparation_20260911/metadata.json",
+        "first_preparation_status": "halted_structural_failure_before_future_actions_or_outcome_viewing",
+        "frozen_protocol": "configs/virtual3d/semantic_gain_v11_1_confirmation2_protocol.json",
+        "preparation": "eval_results/semantic_gain_v11_1_confirmation2_preparation_20260911/metadata.json",
+        "efficacy_result": "eval_results/semantic_gain_v11_1_confirmation2_efficacy_20260911/summary.json",
+        "independent_physical_metric_replay": "eval_results/semantic_gain_v11_1_confirmation2_efficacy_replay_20260911/verification.json",
+        "paired_analysis": "audit_results/semantic_gain_v11_1_confirmation2_analysis_20260911/analysis.json",
+        "efficacy_gates_passed": true,
+        "branches": 96,
+        "independent_contexts": 8,
+        "paired_arrangements": 2,
+        "semantic_vs_equal_capacity_geometry_relative": 0.29133702647082715,
+        "semantic_vs_fixed_semantic_relative": 0.22396120549805693,
+        "correct_semantic_vs_swapped_relative": 0.6575436125648819,
+        "no_pairwise_loss_to_equal_capacity_geometry": true,
+        "low_confidence_matches_geometry": true,
+        "all_safe_and_four_interfaces": true,
+        "physical_metric_replay_status": "passed_96_of_96",
+        "coverage_stress_result": "eval_results/semantic_gain_v11_1_confirmation2_stress_20260911/summary.json",
+        "coverage_stress_independent_replay": "eval_results/semantic_gain_v11_1_confirmation2_stress_replay_20260911/verification.json",
+        "coverage_stress_status": "complete_and_40_of_40_replay_passed_without_semantic_increment",
+        "coverage_stress_branches": 40,
+        "coverage_stress_semantic_vs_equal_capacity_geometry_relative": -0.0004960546987298365,
+        "coverage_stress_semantic_vs_swapped_relative": 0.0,
+        "scope_warning": "Independent artificial two-asset mechanism confirmation only; natural open-vocabulary, large-scale, external-baseline and real-robot claims remain unverified"
       }
     },
     "verification_scope": {
       "v10_3_original_passed": false,
-      "evidence": "controlled artificial asset development contexts only",
-      "independent_scene_confirmation_complete": false,
+      "evidence": "controlled artificial asset development plus prospectively frozen artificial F00--F07 efficacy confirmation",
+      "independent_scene_confirmation_complete": true,
+      "independent_confirmation_physical_replay_complete": true,
+      "coverage_stress_complete": true,
+      "coverage_stress_physical_replay_complete": true,
       "external_mainstream_advantage_verified": false,
       "natural_semantic_advantage_verified": false,
       "real_robot_effectiveness_verified": false
@@ -107,7 +147,7 @@
       "compute_platform": "exact model and GPU/CUDA capabilities unverified"
     }
   },
-  "scope": "development only; historical V4 uses geometry seeds 202/203, facility mechanism work uses 751/752; no independent confirmation",
+  "scope": "development evidence plus independent artificial F00--F07 mechanism efficacy; no natural open-vocabulary, large-scale, external-baseline or real-robot confirmation",
   "runs": [
     {
       "directory": "eval_results/joint_v4_feedback_development_20260910",
@@ -216,7 +256,7 @@
   "coverage_loss_within_two_pp_development": true,
   "object_hypothesis_net_gain_positive_development": false,
   "feedback_rejections_full": 0,
-  "independent_confirmation_run": false,
+  "independent_confirmation_run": true,
   "identical_full_without_feedback_pairs": 8,
   "complete_four_module_system_proven": false,
   "mainstream_baseline_advantage_proven": false,
@@ -226,17 +266,15 @@
   "editable_report": "docs/research/NSO_SEMANTIC_COVERAGE_REDESIGN.docx",
   "bibliography": "docs/research/semantic_coverage_references.bib",
   "manuscript": "Semantic_Enhanced_Active_SLAM_Paper.tex",
-  "scope_warning": "The opt-in CPU V10 backend now calls the original four-module manager and consumes measured feedback. Its cold-start32 trajectory only rotates at one cell; translational exploration and full efficacy remain unproven. The legacy default ANS adapter remains diagnostic, natural open-vocabulary and trained/calibrated UQ unavailable.",
+  "scope_warning": "V11.1 passed independent programmatic efficacy and 96/96 physical-metric replay in artificial two-asset contexts. The 40-branch coverage-stress stratum and 40/40 replay were safe but showed no semantic increment. Natural open-vocabulary, full unknown-start large-scale exploration, trained/calibrated UQ, external baselines and real-robot efficacy remain unverified.",
   "next_required": [
-    "Preserve all historical failed effect gates, including V9.1 preset0.005 F1 amplitude and V10 zero-translation cold start; interface replay success is not navigation success.",
-    "Repair STGHP coverage candidate retention and align it with total committed outbound gain; eliminate recurring attempted-direction visibility proxies using measured IGCR history, without altering four-module interfaces or semantic priors.",
-    "Freeze revised development rules and verify actual forward exploration, guard fallback/return and independent full raw replay before effect comparisons.",
-    "Run fair S/G/O/N, actual-label swap/missing, no-feedback and single-plan ablations over complete paid trajectories; retain all outcomes.",
-    "Complete response/prior mismatch controls, runnable mainstream baselines and non-oracle-pose/ROS1 ZED-lidar replay before whole-system superiority claims."
+    "Preserve the independently replayed F08--F11 no-semantic-increment boundary and diagnose it only in a new development version with a future confirmation set.",
+    "Complete quality-aware NBV, geometric coverage and at least one runnable external public baseline under matched information, budget and reconstruction backend.",
+    "Prepare ROS1 ZED depth/pose, Leishen single-line lidar, IMU and GPS message synchronization and transform checks before rosbag and real-robot closed-loop trials."
   ],
   "independent_seed_reservations": {
     "generic": "301-308 untouched",
-    "facility": "401-412 proposed, not run or frozen"
+    "facility": "401-412 used by structurally failed E preparation; 413-424 frozen as F00-F11, with F00-F07 efficacy viewed and F08-F11 stress pending"
   },
   "source_freeze_failure": {
     "directory": "eval_results/joint_v4_ablation_development_20260910",

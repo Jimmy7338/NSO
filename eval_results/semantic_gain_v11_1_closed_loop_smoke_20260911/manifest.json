@@ -1,0 +1,66 @@
+{
+  "created_utc": "2026-09-11T09:54:24.149421+00:00",
+  "independent_confirmation": false,
+  "protocol": {
+    "adaptive_actions": 48,
+    "architecture": "unchanged ANS global-goal/local-action hierarchy and OV-SDF, STGHP, RPN-UQ, IGCR interfaces",
+    "arrangements": [
+      "shelf_west",
+      "shelf_east"
+    ],
+    "candidate_contract": "rate_single candidates and complete safe round-trip option execution match the frozen V9 training action unit",
+    "conditions": [
+      "learned_semantic_feedback",
+      "learned_semantic_no_feedback",
+      "learned_geometry",
+      "fixed_semantic",
+      "fixed_geometry",
+      "learned_swapped",
+      "low_confidence_fallback"
+    ],
+    "contexts": [
+      "Q0",
+      "Q1",
+      "Q2",
+      "Q3"
+    ],
+    "development_gates": {
+      "all_safe_and_four_interfaces": true,
+      "correct_semantics_above_swapped": true,
+      "feedback_non_degrading": true,
+      "low_confidence_matches_geometry": true,
+      "semantic_above_fixed_semantic": true,
+      "semantic_above_learned_geometry": true
+    },
+    "failure_policy": "retain every branch and failed gate; do not open independent E confirmation until a new development version passes",
+    "input_guard": "each out-of-range candidate independently falls back to the equal-capacity geometry MLP",
+    "max_candidates": 6,
+    "metrics": [
+      "new visible surface area",
+      "primary joint gain = terminal 2D covered area times F1@5cm minus the shared-prefix value",
+      "secondary inspection joint = new visible 3D surface area times terminal global F1@5cm",
+      "precision/recall/F1@5cm and surface error",
+      "new-visible local recall/completeness",
+      "path distance, action time, collision and safe return"
+    ],
+    "model_bundle": "eval_results/semantic_gain_v11_integration_bundle_20260911/integration_bundle.json",
+    "online_feedback": "fractional Beta camera-yield residual indexed by measured category sign, quantized instance center and eight-sector view direction; two observations are required and correction is clipped to plus/minus 25 percent; evaluator truth is unavailable online",
+    "schema_version": "semantic_gain_v11_1_closed_loop_development_protocol/1",
+    "scope": "same V9 development domain used for model fitting; mechanism integration only, not independent confirmation",
+    "shared_prefix_actions": 150,
+    "status": "frozen_before_first_v11_1_closed_loop_run"
+  },
+  "schema_version": "semantic_gain_v11_1_closed_loop/1",
+  "smoke": true,
+  "source_sha256": {
+    "configs/virtual3d/semantic_gain_v11_1_closed_loop_development_protocol.json": "cade8e845eba09be9871b503ceb85be7ab6664d37bd5ebfdce231c70dcbbb547",
+    "eval_results/semantic_gain_v11_integration_bundle_20260911/integration_bundle.json": "16f19824f4011628022bf878e5180d15238221559dcf32533ce738ff2f414a1b",
+    "nso/cpu_four_modules_v10.py": "76f4327fefa8fafd37d7c520cf6e1c92c05f5b9777f9f621605653ad2fb1568b",
+    "nso/hierarchical_options_v10.py": "7244f0044264e84c07ed0155820376e7156d1f8ef15f0c036fbfc480bee5bfb1",
+    "nso/runtime_integration.py": "3a0e5bd587f20a023565b2b773750a3b78bb4bfde03249f2585baad047150b7e",
+    "nso/semantic_gain_v11.py": "e96126fe240e5a1d0c651b27236b5eb70d47a6ded21bbde2be0870f73d48e167",
+    "scripts/run_semantic_gain_v11_1_closed_loop.py": "4fc0f5f1a57e3afe60057e62e2b13dfef9c3bc130ea32e571902270ae43e9333"
+  },
+  "status": "complete",
+  "worlds_constructed_before_source_freeze": 0
+}

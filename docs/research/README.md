@@ -1,6 +1,6 @@
 # NSO 论文研究材料
 
-> **后续执行入口（2026-09-11）：** [关键目标导向与论文主线](RESEARCH_GOAL_AND_STORY.md)、[V11 网络训练与数据交接](V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md)、[可复制 Goal 文本](GOAL_PROMPT.md)。V10.3 的反馈版本遗漏、指标解释和局部质量检查已由 [V10.3.1 修订](V10_3_1_FEEDBACK_CORRECTION_AND_METRIC_CONTRACT.md)完成；当前进入可校正语义收益模型的正式训练与复核。以下旧阶段进展不代表整体验收已通过。
+> **后续执行入口（2026-09-11）：** [对话上下文交接](CONVERSATION_CONTEXT_HANDOFF_20260911.md)、[关键目标导向与论文主线](RESEARCH_GOAL_AND_STORY.md)、[V11.1独立 efficacy 结果](V11_1_INDEPENDENT_CONFIRMATION_EFFICACY_RESULT.md)、[仓库续接说明](REPOSITORY_HANDOFF_20260911.md)。V11.1 已通过冻结人工双设施机制的独立程序化 efficacy 门及96/96物理指标重放；覆盖压力层40条分支及40/40重放安全但没有语义增量。自然语义、外部基线和实车仍待完成。以下旧阶段记录用于追溯，不代表整体验收已通过。
 
 当前进展：[V10.3语义覆盖结果、理论与论文边界](V10_3_SEMANTIC_COVERAGE_RESULT_AND_THEORY.md)。保留四模块与ANS层次，修复后40个紧凑闭环分支全部安全；特殊人工资产开发域中，S相对G/N的检查联合指标均值分别提高29.02%/18.07%，错误语义X在8/8配对历史退化。S与关闭反馈仍8/8相同，H3未成立；人工标记、非未知起点、非外部主流实现等限制同步保留。
 
@@ -13,6 +13,8 @@
 
 | 材料 | 用途 |
 |---|---|
+| [对话上下文交接](CONVERSATION_CONTEXT_HANDOFF_20260911.md) | 汇总用户约束、方案演进、失败记录、当前证据边界及换设备后的续跑顺序 |
+| [V11.1独立 efficacy 结果](V11_1_INDEPENDENT_CONFIRMATION_EFFICACY_RESULT.md) | 记录F00--F07的96分支冻结结果、配对统计、通过门和待验证范围 |
 | [V11 网络训练与数据交接](V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md) | 说明 V10 未训练原神经栈、V7 主任务信息价值为零、V9 可作开发训练及下一阶段唯一执行顺序 |
 | [网络训练审计与优化路线](NETWORK_TRAINING_AUDIT_AND_OPTIMIZATION_PLAN.md) | 区分 V10 CPU 机制、历史轻量拟合、不可用 LFS 权重，并定义学习型语义收益头与逐模块优化顺序 |
 | [V10四模块实现与失败边界](FOUR_MODULE_CPU_CLOSED_LOOP_V10_IMPLEMENTATION.md) | 真实传感接口、预算和反馈、语义干预、原地旋转问题与下一轮修正 |
