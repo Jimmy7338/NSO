@@ -1,0 +1,585 @@
+{
+  "schema": "cpu_candidate_rpn_v1",
+  "task": "observed bounded controller success",
+  "architecture": "5 observed-path features, 16 tanh units, 1 sigmoid; 113 parameters",
+  "training_source": "/root/NSO/eval_results/cpu_mechanism_train_20260910",
+  "seed": 7,
+  "epochs": 120,
+  "validation_map_seeds": [
+    201
+  ],
+  "provenance": [
+    {
+      "episode_key": "multi_room_seed200_start101_gain_semantic_structure",
+      "map_id": "multi_room_seed200",
+      "split": "train",
+      "world_sha256": "75790bff57a56234b4b938ed95f584f0b74500414de2213e38b8120f47fbf8ef",
+      "sha256": "be5f8f676f2ac6bfbb14d2d3382e8e7dc1bb982b5508703407065ac15efb8baa"
+    },
+    {
+      "episode_key": "corridor_seed200_start101_gain_semantic_structure",
+      "map_id": "corridor_seed200",
+      "split": "train",
+      "world_sha256": "49fc66136bfe894d68fd9425b51fccc3047cb7705d57bbd4dc3f414205331791",
+      "sha256": "6fc96ede140be8844dd05fe8d526104589674fdc8e6660087929a5096245b51c"
+    },
+    {
+      "episode_key": "dead_end_seed200_start101_gain_semantic_structure",
+      "map_id": "dead_end_seed200",
+      "split": "train",
+      "world_sha256": "fd2bdb0d0bbc32c164291730641c73e2f3653c916bf9367c23d02d31b87bb205",
+      "sha256": "628a36b83972f9d01b0d679b1f6db36846a0cd06fc8656163d0e0d357e63e14f"
+    },
+    {
+      "episode_key": "loop_seed200_start101_gain_semantic_structure",
+      "map_id": "loop_seed200",
+      "split": "validation",
+      "world_sha256": "3443bcceeef55124e7f2679edded542508cfb98218778064d87dd6cc957a5ae8",
+      "sha256": "2a5de96e767120f2c5d79249af317e11ae60f2df81d208198b10f2ef6695dd9c"
+    },
+    {
+      "episode_key": "hall_seed200_start101_gain_semantic_structure",
+      "map_id": "hall_seed200",
+      "split": "train",
+      "world_sha256": "4d7f554837b7a88187bec306cad551215d98cda1939f449ec5cf046b5512adce",
+      "sha256": "b6d461e4a4c741059cacab1fbac16735609b6b3e1b9d4271661847299714aa47"
+    },
+    {
+      "episode_key": "multi_room_seed201_start101_gain_semantic_structure",
+      "map_id": "multi_room_seed201",
+      "split": "validation",
+      "world_sha256": "6c63287958cc3039bfbd0ad5ed48ba30bc6d89ed23a00b1f7122bd61f6dbfc78",
+      "sha256": "be00400a2f9a8f91a821422eb2059505c9085cf402aac66d71cd054881731c7d"
+    },
+    {
+      "episode_key": "corridor_seed201_start101_gain_semantic_structure",
+      "map_id": "corridor_seed201",
+      "split": "validation",
+      "world_sha256": "8f3f35558fec620259396436e861734b753de9d35c7faca5c58e6448699109e7",
+      "sha256": "cde0a6c98e0c99f11f4a98c2e8b70753fb05b8578b0e39da7193a3e5152e6fd5"
+    },
+    {
+      "episode_key": "dead_end_seed201_start101_gain_semantic_structure",
+      "map_id": "dead_end_seed201",
+      "split": "validation",
+      "world_sha256": "04a268df0bccf7e115745546f77865d54ab38707d6196f7675e0de75056498e0",
+      "sha256": "29e4faea889b88c32691dc818074d93fa8305f223037840c2570fdd436b07124"
+    },
+    {
+      "episode_key": "loop_seed201_start101_gain_semantic_structure",
+      "map_id": "loop_seed201",
+      "split": "validation",
+      "world_sha256": "3443bcceeef55124e7f2679edded542508cfb98218778064d87dd6cc957a5ae8",
+      "sha256": "7749352b756ccb733b4ce5f320be8d48a9145bbd70732748f27d41de9dce5755"
+    },
+    {
+      "episode_key": "hall_seed201_start101_gain_semantic_structure",
+      "map_id": "hall_seed201",
+      "split": "validation",
+      "world_sha256": "6cade6c2e7dbfe25182be03ab53c7497d58adf3588743fa73c39f8ee1281d374",
+      "sha256": "0047b5ab77365a1fa105d8e21c4fb21b6c215de3adaec0019cebe3c8356b04f7"
+    }
+  ],
+  "goal_budget": 32,
+  "model_sha256": "37280b4c3f39add6e08b08a0e1403ab2dc12aa89ed428aa42d0ea4dba9e83812",
+  "source_code": {
+    "git_revision": "10639431441657bb6facd5307c9d0650536313c0",
+    "working_source_sha256": "b5c03f3987039066cb25b1f47253192278d182d35e0cf0ec4d1b06ead8e92b0f"
+  },
+  "script_sha256": "9efb22ce81cc3cd9ae26a0d05e92fd153199c0c734e471a5cfec6bccab020b34",
+  "elapsed_s": 0.0371813140809536,
+  "train_bce_history": [
+    0.6618846457221388,
+    0.6195333048408678,
+    0.5830110800356575,
+    0.55114580551888,
+    0.5229383495445893,
+    0.49771674148286266,
+    0.47503864115165334,
+    0.4543634421029202,
+    0.43538205697998933,
+    0.4177947828719897,
+    0.40153835419838774,
+    0.3863293869556254,
+    0.3721044907330072,
+    0.3588097964258639,
+    0.346311024217341,
+    0.3344894001068644,
+    0.3232789233818974,
+    0.31268065704464343,
+    0.3026666539886239,
+    0.29315602211893144,
+    0.2841569107327259,
+    0.27558135520993815,
+    0.2674371038007365,
+    0.2597244044516549,
+    0.2523948322235626,
+    0.24543292473495926,
+    0.2388027483918409,
+    0.23248792506509328,
+    0.2264759981358919,
+    0.22074623488768116,
+    0.21528227349906315,
+    0.210073293270172,
+    0.2050975957958829,
+    0.20034869655697934,
+    0.19580474251143243,
+    0.1914616129873977,
+    0.18729351418866713,
+    0.18330888580138133,
+    0.17949632172824984,
+    0.17583926661684618,
+    0.1723241659143089,
+    0.1689508029763149,
+    0.16570209614977696,
+    0.16258738074920961,
+    0.15959279979997737,
+    0.15671368780572859,
+    0.15393878654630389,
+    0.15126616603334792,
+    0.14868727114211386,
+    0.14619935856872374,
+    0.14380193698193147,
+    0.14148994483780353,
+    0.13925630334878134,
+    0.13709474537400562,
+    0.13500597593497532,
+    0.13298958451101664,
+    0.1310272576904241,
+    0.12913736533637,
+    0.12730570843214084,
+    0.1255367381346251,
+    0.12382235004446981,
+    0.12215877671527903,
+    0.1205459568467512,
+    0.11898038152038974,
+    0.11745738741285383,
+    0.11598476187597478,
+    0.11455297792855429,
+    0.11316167259170917,
+    0.11180983886506658,
+    0.11049527210948387,
+    0.10920911822811018,
+    0.10796791174082623,
+    0.10675606468507501,
+    0.10557546169121194,
+    0.10442959083314972,
+    0.10331247652523791,
+    0.1022263565865911,
+    0.10116733134846176,
+    0.10013228046517397,
+    0.09912437137517416,
+    0.09814025100559953,
+    0.0971829965226245,
+    0.0962486622408345,
+    0.09533636525021473,
+    0.09444222349655218,
+    0.09357214673256758,
+    0.09272193616413972,
+    0.09189117164777595,
+    0.0910792217539269,
+    0.09028353993552729,
+    0.08950761889265717,
+    0.0887490956197628,
+    0.08800658910845892,
+    0.0872802999714906,
+    0.08656832085164966,
+    0.08587323867845024,
+    0.08519161493068791,
+    0.08452320590530189,
+    0.0838698040478161,
+    0.08322915829998573,
+    0.08260036465530844,
+    0.08198490030861998,
+    0.08138197175931614,
+    0.08079006559952906,
+    0.08020934785645197,
+    0.07963842240835109,
+    0.07907967416248661,
+    0.07853146778106533,
+    0.07799299031883898,
+    0.07746437574140226,
+    0.07694507801097125,
+    0.076435161914592,
+    0.0759350946090331,
+    0.07544229431116907,
+    0.07496020966815367,
+    0.07448611789165109,
+    0.07401920691101128,
+    0.07356030371093092,
+    0.07310887168799457,
+    0.07266459243791856
+  ],
+  "excluded_labels": "unattempted, path-invalidated and episode-censored targets",
+  "limitations": [
+    "synthetic geometry, perfect odometry",
+    "candidate MLP, not original convolutional RPN or UQ",
+    "controller action cost is highly predictive in deterministic grids"
+  ],
+  "train": {
+    "count": 115,
+    "positives": 102,
+    "negatives": 13,
+    "bce": 0.07266459243791856,
+    "brier": 0.015579794998842647,
+    "ece": 0.049186431951985826,
+    "accuracy": 0.9826086956521739,
+    "reliability_bins": [
+      {
+        "count": 7,
+        "mean_probability": 0.030616176434198124,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 3,
+        "mean_probability": 0.15843804768165892,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 1,
+        "mean_probability": 0.37390131908427904,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 4,
+        "mean_probability": 0.7731035860028638,
+        "success_fraction": 0.5
+      },
+      {
+        "count": 9,
+        "mean_probability": 0.8803705112509843,
+        "success_fraction": 1.0
+      },
+      {
+        "count": 91,
+        "mean_probability": 0.9733644919279436,
+        "success_fraction": 1.0
+      }
+    ]
+  },
+  "train_constant_prior": {
+    "count": 115,
+    "positives": 102,
+    "negatives": 13,
+    "bce": 0.35283153182415755,
+    "brier": 0.10026465028355387,
+    "ece": 0.0,
+    "accuracy": 0.8869565217391304,
+    "reliability_bins": [
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 115,
+        "mean_probability": 0.8869565217391304,
+        "success_fraction": 0.8869565217391304
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      }
+    ]
+  },
+  "train_action_budget_rule": {
+    "count": 115,
+    "positives": 102,
+    "negatives": 13,
+    "bce": 1.0000000494736472e-07,
+    "brier": 9.999999990662903e-15,
+    "ece": 9.99999995594267e-08,
+    "accuracy": 1.0,
+    "reliability_bins": [
+      {
+        "count": 13,
+        "mean_probability": 9.999999999999998e-08,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 102,
+        "mean_probability": 0.9999999000000005,
+        "success_fraction": 1.0
+      }
+    ]
+  },
+  "validation": {
+    "count": 148,
+    "positives": 141,
+    "negatives": 7,
+    "bce": 0.04424509075971498,
+    "brier": 0.004913349194316784,
+    "ece": 0.04110230142879153,
+    "accuracy": 0.9932432432432432,
+    "reliability_bins": [
+      {
+        "count": 3,
+        "mean_probability": 0.01707676927885028,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 2,
+        "mean_probability": 0.1821526495192637,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 1,
+        "mean_probability": 0.2348285380258628,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 1,
+        "mean_probability": 0.5231214508677179,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 9,
+        "mean_probability": 0.8727497522188773,
+        "success_fraction": 1.0
+      },
+      {
+        "count": 132,
+        "mean_probability": 0.9714817970783153,
+        "success_fraction": 1.0
+      }
+    ]
+  },
+  "validation_constant_prior": {
+    "count": 148,
+    "positives": 141,
+    "negatives": 7,
+    "bce": 0.21739285690843266,
+    "brier": 0.04938282327696316,
+    "ece": 0.06574618096357199,
+    "accuracy": 0.9527027027027027,
+    "reliability_bins": [
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 148,
+        "mean_probability": 0.8869565217391308,
+        "success_fraction": 0.9527027027027027
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      }
+    ]
+  },
+  "validation_action_budget_rule": {
+    "count": 148,
+    "positives": 141,
+    "negatives": 7,
+    "bce": 1.0000000494736472e-07,
+    "brier": 9.999999989970785e-15,
+    "ece": 9.999999994985395e-08,
+    "accuracy": 1.0,
+    "reliability_bins": [
+      {
+        "count": 7,
+        "mean_probability": 1e-07,
+        "success_fraction": 0.0
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 0,
+        "mean_probability": null,
+        "success_fraction": null
+      },
+      {
+        "count": 141,
+        "mean_probability": 0.9999999,
+        "success_fraction": 1.0
+      }
+    ]
+  }
+}

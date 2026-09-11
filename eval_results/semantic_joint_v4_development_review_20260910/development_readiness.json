@@ -1,0 +1,118 @@
+{
+  "scope": "development only; two independent geometry seed blocks",
+  "runs": [
+    {
+      "directory": "eval_results/joint_v4_feedback_development_20260910",
+      "episodes": 32,
+      "replayed_checkpoints": 467
+    },
+    {
+      "directory": "eval_results/joint_v4_ablation_verified_20260910",
+      "episodes": 40,
+      "replayed_checkpoints": 0
+    }
+  ],
+  "unique_scene_method_pairs": 64,
+  "deterministic_repeat_pairs": 8,
+  "averages": {
+    "coverage": {
+      "coverage_auc": 0.702144443555086,
+      "coverage_2d": 0.9540141836495704,
+      "joint_auc_05cm": 0.47579871216665537,
+      "f1_05cm": 0.8662504938620217,
+      "surface_error_mean_m": 0.0046349496697075665
+    },
+    "full_v2": {
+      "coverage_auc": 0.7069218432225244,
+      "coverage_2d": 0.9176827712280228,
+      "joint_auc_05cm": 0.49407188434339044,
+      "f1_05cm": 0.8589353903478965,
+      "surface_error_mean_m": 0.005031087319366634
+    },
+    "geometry_v4": {
+      "coverage_auc": 0.7073568179043375,
+      "coverage_2d": 0.9424846164546031,
+      "joint_auc_05cm": 0.47812362213079207,
+      "f1_05cm": 0.8527872414369531,
+      "surface_error_mean_m": 0.0048254147986881435
+    },
+    "objectness_v4": {
+      "coverage_auc": 0.7057124726662423,
+      "coverage_2d": 0.9446710851014678,
+      "joint_auc_05cm": 0.4774213482439158,
+      "f1_05cm": 0.8552285623125253,
+      "surface_error_mean_m": 0.004812573839444667
+    },
+    "no_hypotheses_v4": {
+      "coverage_auc": 0.7097998344365767,
+      "coverage_2d": 0.9468670177936525,
+      "joint_auc_05cm": 0.5018222921908053,
+      "f1_05cm": 0.8760945234677175,
+      "surface_error_mean_m": 0.004788948921486735
+    },
+    "no_feedback_v4": {
+      "coverage_auc": 0.7111883599651347,
+      "coverage_2d": 0.9467225848185024,
+      "joint_auc_05cm": 0.49562592165092584,
+      "f1_05cm": 0.865625401808394,
+      "surface_error_mean_m": 0.004830718389712274
+    },
+    "no_guard_v4": {
+      "coverage_auc": 0.7069218432225244,
+      "coverage_2d": 0.9176827712280228,
+      "joint_auc_05cm": 0.49407724632956673,
+      "f1_05cm": 0.8588711425636922,
+      "surface_error_mean_m": 0.005006130086258054
+    },
+    "full_v4": {
+      "coverage_auc": 0.7111883599651347,
+      "coverage_2d": 0.9467225848185024,
+      "joint_auc_05cm": 0.49562592165092584,
+      "f1_05cm": 0.865625401808394,
+      "surface_error_mean_m": 0.004830718389712274
+    }
+  },
+  "contrasts": {
+    "coverage": {
+      "joint_auc_relative": 0.041671423182258804,
+      "coverage_difference_pp": -0.7291598831068002
+    },
+    "full_v2": {
+      "joint_auc_relative": 0.0031453668115535294,
+      "coverage_difference_pp": 2.903981359047958
+    },
+    "geometry_v4": {
+      "joint_auc_relative": 0.03660622213588516,
+      "coverage_difference_pp": 0.4237968363899225
+    },
+    "objectness_v4": {
+      "joint_auc_relative": 0.038131041843795455,
+      "coverage_difference_pp": 0.2051499717034555
+    },
+    "no_hypotheses_v4": {
+      "joint_auc_relative": -0.01234773870412964,
+      "coverage_difference_pp": -0.014443297515009945
+    },
+    "no_feedback_v4": {
+      "joint_auc_relative": 0.0,
+      "coverage_difference_pp": 0.0
+    },
+    "no_guard_v4": {
+      "joint_auc_relative": 0.003134480150349006,
+      "coverage_difference_pp": 2.903981359047958
+    }
+  },
+  "semantic_required": true,
+  "fine_category_increment_positive_development": true,
+  "semantic_increment_positive_development": true,
+  "coverage_loss_within_two_pp_development": true,
+  "object_hypothesis_net_gain_positive_development": false,
+  "feedback_rejections_full": 0,
+  "independent_confirmation_run": false,
+  "identical_full_without_feedback_pairs": 8,
+  "complete_four_module_system_proven": false,
+  "mainstream_baseline_advantage_proven": false,
+  "ready_for_independent_confirmation": false,
+  "reference_definition": "frozen composite-box triangle-area samples with reachable visibility filtering",
+  "unique_physical_exterior_sensitivity_resolved": false
+}

@@ -1,0 +1,17 @@
+{
+  "scope": "Appended after completed V5 shape replay: deterministic coordinate/activation summaries and interpretation; no source model or primary evidence changed.",
+  "diagnosis_metadata_sha256": "7ea96a6001a9e431a70a58a12ea729ab67e4925ebbfeb5cb61f44299f1cf4b20",
+  "comparison_sha256": "30e033560131fd9c309c53d01a3bba67155ad859ddf02197a15e1e2e3a06e525",
+  "appended_files": {
+    "sensor_rule_attribution.json": "0326fd0b0e24e3f781d672a549f41fb86cc187e3974544941daa344fa5f875e3",
+    "SENSOR_RULE_ATTRIBUTION.md": "e28dcff93707577b1698ade3aaea1707d368e3025e96d1a6fdd710d6fb92db01"
+  },
+  "formulas": [
+    "raw_span = measured_high - measured_low",
+    "pre_anchor_support_expansion = support_high - support_low - raw_span",
+    "anchor_error = abs(detected_face_coordinate - matched_GT_bound)",
+    "axis_center_error = abs(model_center_axis - matched_GT_center_axis)"
+  ],
+  "new_navigation": 0,
+  "parameter_candidates_evaluated": 0
+}

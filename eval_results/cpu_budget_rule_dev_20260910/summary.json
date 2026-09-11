@@ -1,0 +1,114 @@
+{
+  "schema": "cpu_grid_v1",
+  "expected_episodes": 12,
+  "completed_episodes": 12,
+  "failed_episodes": 0,
+  "run_complete": true,
+  "statistics_unit": "map; average repeated starts first",
+  "methods": {
+    "gain_budget_rule": {
+      "map_count": 6,
+      "episode_count": 6,
+      "unreached_80_count": 5,
+      "unreached_90_count": 5,
+      "coverage_ratio": {
+        "mean": 0.593312243526697,
+        "std_across_maps": 0.2718520592301601
+      },
+      "coverage_auc": {
+        "mean": 0.38259389877380956,
+        "std_across_maps": 0.12006270631496702
+      },
+      "path_length_m": {
+        "mean": 29.200000000000202,
+        "std_across_maps": 16.484942624508534
+      },
+      "collisions": {
+        "mean": 0.0,
+        "std_across_maps": 0.0
+      },
+      "revisit_ratio": {
+        "mean": 0.0004219409282700422,
+        "std_across_maps": 0.0009434885981011771
+      },
+      "episode_wall_time_s": {
+        "mean": 2.747587994672358,
+        "std_across_maps": 2.244123165463261
+      },
+      "decision_ms_median": {
+        "mean": 5.3177616209723055,
+        "std_across_maps": 7.073114101205717
+      },
+      "decision_ms_p95": {
+        "mean": 33.56209945244092,
+        "std_across_maps": 16.930444643001543
+      }
+    },
+    "gain_semantic_structure_budget_rule": {
+      "map_count": 6,
+      "episode_count": 6,
+      "unreached_80_count": 5,
+      "unreached_90_count": 5,
+      "coverage_ratio": {
+        "mean": 0.48696829479806464,
+        "std_across_maps": 0.27927569011748127
+      },
+      "coverage_auc": {
+        "mean": 0.3272028827333216,
+        "std_across_maps": 0.13245438617646574
+      },
+      "path_length_m": {
+        "mean": 25.90000000000016,
+        "std_across_maps": 16.284757699558764
+      },
+      "collisions": {
+        "mean": 0.0,
+        "std_across_maps": 0.0
+      },
+      "revisit_ratio": {
+        "mean": 0.031265823637147167,
+        "std_across_maps": 0.02657906489494856
+      },
+      "episode_wall_time_s": {
+        "mean": 2.5651007665631673,
+        "std_across_maps": 2.355844030535507
+      },
+      "decision_ms_median": {
+        "mean": 4.327669914346188,
+        "std_across_maps": 6.547517246544766
+      },
+      "decision_ms_p95": {
+        "mean": 28.606987009212986,
+        "std_across_maps": 14.154244295575467
+      }
+    }
+  },
+  "paired_differences": {
+    "coverage_ratio": {
+      "direction": "gain_semantic_structure_budget_rule minus gain_budget_rule",
+      "map_count": 6,
+      "mean": -0.10634394872863234,
+      "by_map": {
+        "corridor_seed31": 0.0,
+        "dead_end_seed31": -0.053896103896103886,
+        "hall_seed31": -0.26067019400352737,
+        "loop_seed31": 0.0,
+        "multi_room_seed31": -0.22965391621129327,
+        "single_room_seed31": -0.09384347826086958
+      }
+    },
+    "coverage_auc": {
+      "direction": "gain_semantic_structure_budget_rule minus gain_budget_rule",
+      "map_count": 6,
+      "mean": -0.05539101604048798,
+      "by_map": {
+        "corridor_seed31": -0.00022500000000003073,
+        "dead_end_seed31": -0.05013961038961029,
+        "hall_seed31": -0.12119922398589056,
+        "loop_seed31": -0.005113888888888973,
+        "multi_room_seed31": -0.1164920947176685,
+        "single_room_seed31": -0.03917627826086956
+      }
+    }
+  }
+}

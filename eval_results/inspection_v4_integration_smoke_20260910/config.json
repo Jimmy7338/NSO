@@ -1,0 +1,52 @@
+{
+  "scope": "integration smoke only: facility RGB-marker sensing, legacy CPU planner, unique exterior evaluation and raw replay; no efficacy or four-module advantage claim",
+  "world_family": "inspection_v4",
+  "environment": {
+    "bays_per_side": 1,
+    "appearance": "marked",
+    "semantic_source": "rgb_marker",
+    "observation_condition": "ambiguous",
+    "semantic_relation": "correlated",
+    "max_steps": 32,
+    "voxel_m": 0.03,
+    "truncation_m": 0.12
+  },
+  "planner": {
+    "quality_weight": 1.0,
+    "semantic_weight": 1.0,
+    "hypothesis_weight": 1.0,
+    "coverage_retention": 0.8,
+    "inspection_fraction": 0.12,
+    "reserve_fraction": 0.2,
+    "minimum_evidence_rate": 0.01
+  },
+  "evaluation_interval": 8,
+  "thresholds_m": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "reference_samples": 4000,
+  "save_frames": true,
+  "save_checkpoint_meshes": false,
+  "methods": [
+    "coverage",
+    "full_v4"
+  ],
+  "full_method": "full_v4",
+  "camera_coverage": true,
+  "object_hypotheses": true,
+  "workers": 2,
+  "scenes": [
+    {
+      "layout": "inspection",
+      "seed": 811,
+      "semantic_condition": "aligned"
+    },
+    {
+      "layout": "inspection",
+      "seed": 811,
+      "semantic_condition": "absent"
+    }
+  ]
+}

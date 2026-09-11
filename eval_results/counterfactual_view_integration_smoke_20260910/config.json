@@ -1,0 +1,38 @@
+{
+  "scope": "counterfactual executor integration smoke only; no mechanism success claim",
+  "environment": {
+    "bays_per_side": 1,
+    "appearance": "marked",
+    "semantic_source": "rgb_marker",
+    "observation_condition": "ambiguous",
+    "semantic_relation": "correlated",
+    "hidden_parts": "shelves",
+    "complex_fraction": 0.5,
+    "width_px": 96,
+    "height_px": 72,
+    "voxel_m": 0.03,
+    "truncation_m": 0.12,
+    "pose_noise_m": 0.0,
+    "dropout": 0.0,
+    "max_steps": 480
+  },
+  "checkpoints": [
+    8
+  ],
+  "branch_actions": 48,
+  "max_candidates": 2,
+  "reference_samples": 4000,
+  "thresholds_m": [
+    0.02,
+    0.05
+  ],
+  "workers": 1,
+  "fixtures": [
+    {
+      "seed": 891,
+      "environment": {
+        "depth_sigma_m": 0.01
+      }
+    }
+  ]
+}

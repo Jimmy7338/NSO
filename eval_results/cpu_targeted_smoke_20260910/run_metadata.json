@@ -1,0 +1,44 @@
+{
+  "schema": "targeted_scenes_v1",
+  "status": "complete",
+  "created_at": "2026-09-10T07:25:40.156711+00:00",
+  "expected_episodes": 3,
+  "config_sha256": "2d7ba416982949a85075235279c87973282ebd2c5d91c72bebc4e89c148c18e2",
+  "files_sha256": {
+    "env/targeted_scenes.py": "96a9b6733d4975a935592fc6916b8920cd45d8eb4027132fef73b17ac51038f5",
+    "env/grid_exploration.py": "50ea90774a24951b54a68a088ec82ed94801be3b05a291005ad4d2d89fc2bb30",
+    "env/grid_semantics.py": "f087634e525b02042f1572694a07e602fa6d1225612a53aaa3c85cb90dedb2d9",
+    "nso/grid_mechanisms.py": "aac855c207fe24a1c9aae0ac240abc947cdc2476c4361fc569d06bda0f96086a",
+    "nso/grid_topology.py": "8e61a9a669470e8637882db9226a856287eb2c84222b65399d5f9556bf3bc762",
+    "nso/frontier_policy.py": "f5b402b678403e82a6b0519c6b34ab4e1e0c0566f14dbfb028154e1dab87a0cf",
+    "utils/grid_geometry.py": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b",
+    "utils/paper_eval.py": "68b9973910cae0ae069c445e972ffd965d396cfb2bc3fa31feb9896a3d098491",
+    "utils/cpu_protocol.py": "11ab8ca96e1b04637c9a749df3d6ad149eb3e3bffca7143254c5a0b881505d21",
+    "scripts/eval_targeted_scenes.py": "afc0e634483cb4c2395c5b819d27be3d41c60f0dea59f17ffe03955f82c8a5c5",
+    "scripts/analyze_targeted_scenes.py": "5f6691f6bda81b637cd1a5055a7e22a673c3fd8c1daca3e754733c6eefbc072f"
+  },
+  "runtime": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "matplotlib": "3.8.4"
+  },
+  "neural_training": false,
+  "policy_changes": false,
+  "primary_metric": "coverage_auc",
+  "primary_contrasts": [
+    "semantic_aligned minus geometry",
+    "combined_aligned minus geometry",
+    "semantic_aligned minus semantic_shuffled",
+    "combined_aligned minus combined_shuffled"
+  ],
+  "scope": "prospectively specified synthetic scenario-adaptation study, after prior negative suite",
+  "limitations": [
+    "category/room-size correlation is deliberately supplied by generator",
+    "one entrance per scene, no claim of real visual recognition or original full neural NSO",
+    "same-family size/seed variants are correlated; uncertainty summaries exploratory"
+  ],
+  "failed_episodes": 0,
+  "frozen_sources_verified": true,
+  "peak_process_rss_mib": 94.4140625
+}

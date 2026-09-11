@@ -1,0 +1,122 @@
+{
+  "schema": "cpu_grid_v1",
+  "expected_episodes": 20,
+  "completed_episodes": 20,
+  "failed_episodes": 0,
+  "run_complete": true,
+  "statistics_unit": "map; average repeated starts first",
+  "methods": {
+    "nearest_frontier": {
+      "map_count": 10,
+      "episode_count": 10,
+      "unreached_80_count": 0,
+      "unreached_90_count": 0,
+      "coverage_ratio": {
+        "mean": 1.0,
+        "std_across_maps": 0.0
+      },
+      "coverage_auc": {
+        "mean": 0.8604743295968923,
+        "std_across_maps": 0.03309402235279097
+      },
+      "path_length_m": {
+        "mean": 22.820000000000086,
+        "std_across_maps": 10.538671643048879
+      },
+      "collisions": {
+        "mean": 0.0,
+        "std_across_maps": 0.0
+      },
+      "revisit_ratio": {
+        "mean": 0.07178199836687679,
+        "std_across_maps": 0.08484815962331603
+      },
+      "episode_wall_time_s": {
+        "mean": 0.7056168009992689,
+        "std_across_maps": 0.45667883034328205
+      },
+      "decision_ms_median": {
+        "mean": 1.1604071129113436,
+        "std_across_maps": 1.554231864979062
+      },
+      "decision_ms_p95": {
+        "mean": 12.228435061406342,
+        "std_across_maps": 5.767207621287928
+      }
+    },
+    "gain_per_cost": {
+      "map_count": 10,
+      "episode_count": 10,
+      "unreached_80_count": 0,
+      "unreached_90_count": 0,
+      "coverage_ratio": {
+        "mean": 1.0,
+        "std_across_maps": 0.0
+      },
+      "coverage_auc": {
+        "mean": 0.8675647152610777,
+        "std_across_maps": 0.02767788683407339
+      },
+      "path_length_m": {
+        "mean": 24.40000000000009,
+        "std_across_maps": 10.580642702596228
+      },
+      "collisions": {
+        "mean": 0.0,
+        "std_across_maps": 0.0
+      },
+      "revisit_ratio": {
+        "mean": 0.15783308785685085,
+        "std_across_maps": 0.1610171893606431
+      },
+      "episode_wall_time_s": {
+        "mean": 0.538639927841723,
+        "std_across_maps": 0.21076425150001576
+      },
+      "decision_ms_median": {
+        "mean": 0.915478786919266,
+        "std_across_maps": 1.483828905215316
+      },
+      "decision_ms_p95": {
+        "mean": 12.016177111072462,
+        "std_across_maps": 5.39918402047621
+      }
+    }
+  },
+  "paired_differences": {
+    "coverage_ratio": {
+      "direction": "gain_per_cost minus nearest_frontier",
+      "map_count": 10,
+      "mean": 0.0,
+      "by_map": {
+        "corridor_seed0": 0.0,
+        "corridor_seed1": 0.0,
+        "dead_end_seed0": 0.0,
+        "dead_end_seed1": 0.0,
+        "hall_seed0": 0.0,
+        "loop_seed0": 0.0,
+        "multi_room_seed0": 0.0,
+        "multi_room_seed1": 0.0,
+        "single_room_seed0": 0.0,
+        "single_room_seed1": 0.0
+      }
+    },
+    "coverage_auc": {
+      "direction": "gain_per_cost minus nearest_frontier",
+      "map_count": 10,
+      "mean": 0.007090385664185417,
+      "by_map": {
+        "corridor_seed0": 0.01340134228187917,
+        "corridor_seed1": 0.01967682119205305,
+        "dead_end_seed0": 0.017628571428571438,
+        "dead_end_seed1": -0.024191176470588327,
+        "hall_seed0": 0.03177258673995198,
+        "loop_seed0": 0.0,
+        "multi_room_seed0": 0.03680773286467498,
+        "multi_room_seed1": 0.01287451669595796,
+        "single_room_seed0": -0.014701382192221057,
+        "single_room_seed1": -0.022365155898425026
+      }
+    }
+  }
+}
