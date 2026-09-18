@@ -1,5 +1,15 @@
 # 固定官方 TARE 的实际构建探测与后续执行方案
 
+> **2026-09-14 当前运行环境：** Docker 镜像和容器均为零，ROS1 运行依赖不在当前主机。下方成功构建与节点启动是留存的历史证据，不代表现成 Noetic 环境仍可启动。见 [当前环境探测](../ROS1_LIVE_PROBE_RUNTIME_STATUS_20260914.md)。
+
+> **2026-09-11 状态更新：** 固定的官方 TARE 完整规划器已在 Ubuntu 20.04 / ROS Noetic / amd64 CPU 容器中以原源码完成 `catkin_make -j1 -l1`，并通过节点存活及 `/registered_scan` 接口注册检查。二进制 SHA-256 为 `59fd9b818f4cc6a2edc3e5bf4a8641e2dad92b19ba1d824f1427624aecfd6f03`。完整记录见 [`audit_results/tare_native_node_attempt_20260911`](../../audit_results/tare_native_node_attempt_20260911)。本次没有传感器输入、导航回合或公平性能比较，因此仍不能声称本项目战胜 TARE。
+
+最新构建先经历了一次可复核失败：分层 Docker 构建在安装依赖后提交约 1.85 GB 层时因磁盘空间不足终止，尚未进入规划器编译。清理失败层后改用一次性容器、只读挂载官方源码并把日志直接写回项目，相同依赖安装成功，完整规划器编译到 100%。首次节点夹具又因在加载 ROS 环境前启用未定义变量检查而在启动前失败；仅修正外围夹具后，节点存活通过，最终版本还确认主要输入输出接口完成注册。官方算法源码未修改。
+
+最终节点实际观察到 `/registered_scan` (`sensor_msgs/PointCloud2`)、`/state_estimation_at_scan` (`nav_msgs/Odometry`)、`/terrain_map`、`/terrain_map_ext`、`/start_exploration` 与边界输入，并发布 `/way_point`、全局/局部/探索路径、运行时间和结束状态。这些接口构成下一阶段共享记录桥接器的冻结契约：NSO 与 TARE 必须使用相同观测、运动执行器、起点和路程/时间预算，再由同一外部 GT 评价器计算二维覆盖、三维 F-score 和联合指标。
+
+以下内容保留 2026-09-10 首次宿主探测的过程和预算，涉及“完整规划器尚未构建”的句子属于当时状态，由以上更新取代。
+
 本轮获得了**官方 TSP 路线求解组件的原生编译和运行证据**，尚未获得完整 TARE 节点、CMU 场景演示或公平基线结果。当前 Docker 服务可用，但无缓存镜像；宿主没有 ROS 1。完整规划器的实际 CMake 配置在缺少 catkin 时失败。考虑本轮新增磁盘最多 1 GiB，没有拉取 ROS 镜像或安装超出预算的依赖。
 
 所有命令、日志、版本、测试程序和摘要保存在 [`audit_results/tare_native_build_probe_20260910`](../../audit_results/tare_native_build_probe_20260910)。主要文件是 `command_ledger.json`、`probe_summary.json`、`planner_configure.log`、`tsp_build.log`、`tsp_execution.jsonl`。

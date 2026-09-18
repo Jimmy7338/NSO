@@ -20,12 +20,14 @@ contract:
   depth_unit: metre
   depth_invalid: 0
   camera_axes: x_right_y_down_z_forward
-  world_axes: x_east_y_north_z_up
+  world_axes: z_up_with_documented_local_yaw_ENU_only_if_georeferencing_verified
   pose: world_from_camera_optical
   optical_frame: VERIFY_ON_ROBOT
   laser_extrinsic: MEASURE_ON_ROBOT
   base_to_camera: MEASURE_ON_ROBOT
   time_sync_max_s: 0.05
+  world_frame_jump_policy: record_map_and_odom_TF_preserve_raw_bag_no_claim_of_loop_closure_refusion
+  planar_scan_motion_compensation: not_implemented_preserve_raw_time_increment_and_scan_time_in_bag
 deployment:
   stage: recorder_and_offline_reconstruction_first
   command_output: disabled

@@ -61,3 +61,4 @@ F08--F11 的共享前缀只有 70 个动作，平均二维覆盖率为 93.60%。
 - 独立重放结果：`eval_results/semantic_gain_v11_1_confirmation2_efficacy_replay_20260911`
 - 覆盖压力结果：`eval_results/semantic_gain_v11_1_confirmation2_stress_20260911`
 - 覆盖压力独立重放：`eval_results/semantic_gain_v11_1_confirmation2_stress_replay_20260911`
+- 论文结果图：`docs/research/figures/v11_1_independent_confirmation.pdf`

@@ -1,0 +1,126 @@
+{
+  "aliases_are_independent_experiments": false,
+  "allowed_modes": [
+    "N"
+  ],
+  "assignments": [
+    "A_complex_B_simple",
+    "A_simple_B_complex"
+  ],
+  "automatic_mode_expansion": false,
+  "budgets": {
+    "D19-P00": 160,
+    "D19-P01": 184
+  },
+  "continuation_mode": "N",
+  "coverage_candidate_slots": 8,
+  "coverage_minimum": 0.8,
+  "coverage_trace_action_stride": 1,
+  "deduplication_metadata_excluded": [
+    "option_id",
+    "selection_call_id",
+    "v22 labels",
+    "candidate diagnostic IDs"
+  ],
+  "deduplication_scope": "Within the same parent and assignment, exact complete physical path and paid costs; no outcome-based deduplication",
+  "default_mode": "N",
+  "eligibility": "coverage >= 0.8, returned_to_anchor, zero collisions, termination.failed == false",
+  "estimated_total_output_mib": 100,
+  "expected_declared_cases": 12,
+  "expected_unique_cases": 10,
+  "expected_unique_cases_per_parent": {
+    "D19-P00": 4,
+    "D19-P01": 6
+  },
+  "first_choice_action_id": 0,
+  "first_choice_rule": "Choose original common coverage candidate via backend; no forced quality route or external install",
+  "first_options": [
+    "N",
+    "A",
+    "B"
+  ],
+  "fixed_semantic_rule": {
+    "aligned": "choose the unique A/B role with negative class_vote (complex prior)",
+    "deployed_online": false,
+    "fitted": false,
+    "flipped": "choose the unique A/B role with positive class_vote",
+    "forbidden_inputs": [
+      "assignment",
+      "hidden geometry",
+      "future observations",
+      "evaluation rewards"
+    ],
+    "input": "actual initial v22_first_choice.observed_targets canonical class_vote",
+    "oracle_is_separate_upper_bound": true
+  },
+  "full_architecture_efficacy_proven": false,
+  "global_reference_count": 12000,
+  "initial_history_actions": 0,
+  "install_v19_declared_first_option": false,
+  "joint_planning_efficacy_proven": false,
+  "minimum_free_space_mib": 48,
+  "mode_scope": {
+    "N": "N throughout after the one declared backend first choice; no G comparison"
+  },
+  "noise_seed": 1901,
+  "old_N_metric_reuse_allowed": false,
+  "outputs": [
+    "raw_packets",
+    "actions",
+    "evaluator_coverage_trace",
+    "final_mesh",
+    "external_and_global_metrics",
+    "compressed_module_calls",
+    "compressed_runtime_audit",
+    "frozen_sources",
+    "fresh_process_replay",
+    "declared_to_unique_alias_map",
+    "initial_selected_physical_path",
+    "observed_category_votes",
+    "initial_option_outcome"
+  ],
+  "parallel_case_workers": 1,
+  "parents": [
+    "D19-P00",
+    "D19-P01"
+  ],
+  "physical_contract": {
+    "max_depth_m": 5.0,
+    "truncation_m": 0.12,
+    "voxel_m": 0.04
+  },
+  "planning_coverage_proxy": {
+    "denominator": "All cells in the fixed public task ROI; no evaluator reachability or geometry",
+    "evaluation_truth_used": false,
+    "kind": "known_cells_over_fixed_public_roi",
+    "numerator": "Observed belief known cells (free or occupied) inside the fixed public task ROI",
+    "scope": "Shared planner reserve heuristic only; the evaluator coverage gate remains unchanged and is checked separately",
+    "target_fraction": 0.8,
+    "target_is_heuristic": true,
+    "true_coverage_guaranteed": false
+  },
+  "primary_reference_seed": 2026,
+  "quality_curve_action_stride": 20,
+  "reference_mode": "Read only existing frozen V19 caches; never copy, regenerate or modify",
+  "reference_sampling_repeats_are_independent_experiments": false,
+  "reference_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "replan_interval_actions": 5,
+  "semantic_information_gain_proven": false,
+  "semantic_information_screen": true,
+  "semantic_information_test": true,
+  "semantic_policy_deployed": false,
+  "sensor_model": "iid_025px",
+  "status": "declared_before_probe_outcomes",
+  "strong_G_comparison_performed": false,
+  "task": "Declared early N/A/B coverage first choice with common N continuation",
+  "task_asset_count": 6,
+  "timing_scope": "CPU simulation/module timing is descriptive only, not a robot-speed comparison",
+  "training_allowed": false,
+  "truth_boundary": "Evaluator truth and true reachable-floor coverage never enter runtime arguments or feedback; planner uses observed known cells over a fixed public ROI",
+  "version": "facility-early-coverage-v22-information-screen-1",
+  "world_scope": "Existing V19 generic stereo surrogate, perfect pose and artificial RGB markers; not ZED calibration"
+}

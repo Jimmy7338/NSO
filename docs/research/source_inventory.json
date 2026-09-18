@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-09-10",
+  "as_of": "2026-09-14",
   "scope": "Primary-source review for semantic 2D coverage and 3D reconstruction; not exhaustive systematic review",
   "report": "docs/research/SEMANTIC_COVERAGE_LITERATURE.md",
   "bibliography": "docs/research/semantic_coverage_references.bib",
@@ -632,6 +632,182 @@
         "status": "official_complete_repository_not_verified"
       },
       "accessed_at": "2026-09-10"
+    },
+    {
+      "id": "chen2025gleam",
+      "title": "GLEAM: Learning Generalizable Exploration Policy for Active Mapping in Complex 3D Indoor Scenes",
+      "year": 2025,
+      "url": "https://arxiv.org/html/2505.20294v1",
+      "alternate_urls": [
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/Chen_GLEAM_Learning_Generalizable_Exploration_Policy_for_Active_Mapping_in_Complex_ICCV_2025_paper.pdf"
+      ],
+      "publication_status": "ICCV 2025; method sections additionally read in arXiv v1",
+      "reading_depth": "targeted_method_sections_and_official_readme",
+      "sections_read": [
+        "4.2 task-state semantic map",
+        "4.3 long-term navigable goal",
+        "official GPU/Isaac Gym setup"
+      ],
+      "can_support": [
+        "long-horizon goal and local path checking as a related design",
+        "task-state semantics differs from object-category semantics"
+      ],
+      "cannot_support": [
+        "NSO object-class gain proved",
+        "CPU reproduction complete"
+      ],
+      "implementation": {
+        "status": "official_readme_inspected_not_executed",
+        "url": "https://github.com/zjwzcx/GLEAM"
+      },
+      "primary_source": true,
+      "accessed_at": "2026-09-14"
+    },
+    {
+      "id": "guedon2023macarons",
+      "title": "MACARONS: Mapping and Coverage Anticipation With RGB Online Self-Supervision",
+      "year": 2023,
+      "url": "https://openaccess.thecvf.com/content/CVPR2023/html/Guedon_MACARONS_Mapping_and_Coverage_Anticipation_With_RGB_Online_Self-Supervision_CVPR_2023_paper.html",
+      "publication_status": "CVPR 2023",
+      "reading_depth": "official_abstract_and_module_initialization_readme",
+      "can_support": [
+        "learned coverage anticipation is relevant to a stronger geometry control"
+      ],
+      "cannot_support": [
+        "full method or numerical results independently audited"
+      ],
+      "implementation": {
+        "status": "official_readme_inspected_not_executed",
+        "url": "https://github.com/Anttwo/MACARONS"
+      },
+      "primary_source": true,
+      "accessed_at": "2026-09-14"
+    },
+    {
+      "id": "chen2024gennbv",
+      "title": "GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2402.16174",
+      "publication_status": "CVPR 2024",
+      "reading_depth": "abstract_task_scope_and_official_readme",
+      "can_support": [
+        "multisource state and free-space viewpoint actions are related work"
+      ],
+      "cannot_support": [
+        "same-budget ground-robot efficacy or full ablation review"
+      ],
+      "implementation": {
+        "status": "official_readme_inspected_not_executed",
+        "url": "https://github.com/zjwzcx/GenNBV"
+      },
+      "primary_source": true,
+      "accessed_at": "2026-09-14"
+    },
+    {
+      "id": "zhang2026pun",
+      "title": "Peering into the Unknown: Active View Selection with Neural Uncertainty Maps for 3D Reconstruction",
+      "authors": [
+        "Zhengquan Zhang",
+        "Feng Xu",
+        "Mengmi Zhang"
+      ],
+      "year": 2026,
+      "url": "https://arxiv.org/html/2506.14856v2",
+      "alternate_urls": [
+        "https://github.com/ZhangLab-DeepNeuroCogLab/PUN/blob/main/README.md"
+      ],
+      "publication_status": "ICLR 2026 acceptance stated by official authors repository; arXiv v2 methods read",
+      "primary_source": true,
+      "reading_depth": "methods_and_experiments",
+      "sections_read": [
+        "3 Method",
+        "4 Experiments",
+        "5.3 Ablations",
+        "Appendix S5"
+      ],
+      "can_support": [
+        "feed-forward view uncertainty prediction",
+        "shared view-pool/backend comparisons",
+        "rendering and geometry metric tradeoffs"
+      ],
+      "cannot_support": [
+        "CPU-only NSO deployment",
+        "industrial robot return-budget gains",
+        "NSO semantic causality"
+      ],
+      "accessed": "2026-09-14",
+      "source_number": 26
+    },
+    {
+      "id": "xu2025area3d",
+      "title": "AREA3D: Active Reconstruction Agent with Unified Feed-Forward 3D Perception and Vision-Language Guidance",
+      "authors": [
+        "Tianling Xu",
+        "Shengzhe Gan",
+        "Leslie Gu",
+        "Yuelei Li",
+        "Fangneng Zhan",
+        "Hanspeter Pfister"
+      ],
+      "year": 2025,
+      "url": "https://arxiv.org/html/2512.05131v1",
+      "alternate_urls": [
+        "https://area3d-page.github.io/"
+      ],
+      "publication_status": "Read 2025 arXiv v1; no assertion of unchanged later versions",
+      "primary_source": true,
+      "reading_depth": "methods_and_ablation",
+      "sections_read": [
+        "3.2 Neural Feed Forward Confidence Modeling",
+        "3.3 Vision Language Model",
+        "3.4 Active Viewpoint Selection",
+        "Table 4"
+      ],
+      "can_support": [
+        "semantic/geometric uncertainty fields",
+        "visibility gating and fixed frustum decay",
+        "metric-specific ablation tradeoffs"
+      ],
+      "cannot_support": [
+        "NSO feedback calibrated to F1",
+        "CPU deployment",
+        "universal improvement of all metrics"
+      ],
+      "accessed": "2026-09-14",
+      "source_number": 27
+    },
+    {
+      "id": "ginting2024seek",
+      "title": "SEEK: Semantic Reasoning for Object Goal Navigation in Real World Inspection Tasks",
+      "year": 2024,
+      "url": "https://www.roboticsproceedings.org/rss20/p024.html",
+      "publication_status": "RSS 2024",
+      "accessed": "2026-09-14",
+      "role": "V18 task formulation background",
+      "local_replication": false,
+      "scope_note": "Task-directed semantic search; not asset reconstruction efficacy."
+    },
+    {
+      "id": "malczyk2025inspection",
+      "title": "Semantically-driven Deep Reinforcement Learning for Inspection Path Planning",
+      "year": 2025,
+      "url": "https://arxiv.org/html/2505.14443v1",
+      "publication_status": "RA-L 2025; examined author arXiv v1",
+      "accessed": "2026-09-14",
+      "role": "V18 task formulation background",
+      "local_replication": false,
+      "scope_note": "Semantic object surface inspection; aerial RL and privileged training reward, not CPU replication."
+    },
+    {
+      "id": "nagami2025vista",
+      "title": "VISTA: Open-Vocabulary, Task-Relevant Robot Exploration with Online Semantic Gaussian Splatting",
+      "year": 2025,
+      "url": "https://arxiv.org/html/2507.01125v1",
+      "publication_status": "arXiv v1 examined",
+      "accessed": "2026-09-14",
+      "role": "V18 task formulation background",
+      "local_replication": false,
+      "scope_note": "Task-aware exploration; separate reconstruction/search evaluation; offboard GPU and same-class instance limitation in examined version."
     }
   ],
   "pinned_baseline_sources": [
@@ -752,5 +928,18 @@
     "Report bounded theoretical derivations do not guarantee current online heuristic"
   ],
   "local_prepared_source_manifest": "docs/research/official_baseline_source_manifest.json",
-  "local_preparation_scope": "Pinned source trees downloaded with file hashes; ROS/catkin build and official demos not executed. External absolute catkin workspace links omitted and recorded."
+  "local_preparation_scope": "Pinned source trees downloaded with file hashes; ROS/catkin build and official demos not executed. External absolute catkin workspace links omitted and recorded.",
+  "latest_incremental_review": "docs/research/V13_LONG_HORIZON_BASELINE_REVIEW_20260914.md",
+  "last_incremental_review_date": "2026-09-14",
+  "feedback_supplement_20260914": {
+    "report": "docs/research/V16_FEEDBACK_METHODS_RESEARCH_SUPPLEMENT_20260914.md",
+    "papers": [
+      "zhang2026pun",
+      "xu2025area3d",
+      "zhu2026bayesiannbv",
+      "guedon2023macarons"
+    ],
+    "bayesiannbv_code_status": "Official repository checked 2026-09-14: GPU PyTorch required in instructions; configuration/data release instructions still incomplete. No CPU reproduction claimed."
+  },
+  "last_updated": "2026-09-14"
 }

@@ -1,0 +1,144 @@
+{
+  "source_status": "complete",
+  "unique_physical_trajectories": [
+    {
+      "physical_case": 0,
+      "hypothesis": 0,
+      "label": "h0: G = class oracle",
+      "comparison_cells": [
+        0,
+        1
+      ],
+      "alias": true,
+      "alias_is_independent_sample": false,
+      "policies": [
+        "G",
+        "class_oracle"
+      ],
+      "stages": {
+        "prefix": {
+          "paid_actions": 18,
+          "C_map": 0.7125850340136054,
+          "f1": 0.4498824534318167,
+          "joint": 0.32057950338083535,
+          "eligible": false
+        },
+        "final": {
+          "paid_actions": 42,
+          "C_map": 0.9574829931972789,
+          "f1": 0.8065942742261392,
+          "joint": 0.7723002999818306,
+          "eligible": true
+        }
+      },
+      "all_saved_replays_passed": true
+    },
+    {
+      "physical_case": 1,
+      "hypothesis": 1,
+      "label": "h1: G",
+      "comparison_cells": [
+        2
+      ],
+      "alias": false,
+      "alias_is_independent_sample": false,
+      "policies": [
+        "G"
+      ],
+      "stages": {
+        "prefix": {
+          "paid_actions": 18,
+          "C_map": 0.7125850340136054,
+          "f1": 0.4510387532659233,
+          "joint": 0.3214034653374521,
+          "eligible": false
+        },
+        "final": {
+          "paid_actions": 42,
+          "C_map": 0.9574829931972789,
+          "f1": 0.7051934781767576,
+          "joint": 0.6752107622678819,
+          "eligible": true
+        }
+      },
+      "all_saved_replays_passed": true
+    },
+    {
+      "physical_case": 2,
+      "hypothesis": 1,
+      "label": "h1: class oracle",
+      "comparison_cells": [
+        3
+      ],
+      "alias": false,
+      "alias_is_independent_sample": false,
+      "policies": [
+        "class_oracle"
+      ],
+      "stages": {
+        "prefix": {
+          "paid_actions": 18,
+          "C_map": 0.7125850340136054,
+          "f1": 0.4510387532659233,
+          "joint": 0.3214034653374521,
+          "eligible": false
+        },
+        "final": {
+          "paid_actions": 42,
+          "C_map": 0.9574829931972789,
+          "f1": 0.8044334604461103,
+          "joint": 0.7702313575359866,
+          "eligible": true
+        }
+      },
+      "all_saved_replays_passed": true
+    }
+  ],
+  "declared_physical_cases": 3,
+  "declared_comparison_cells": 4,
+  "measured_comparison_cells": 4,
+  "uniform_hypothesis_prior": [
+    0.5,
+    0.5
+  ],
+  "threshold_comparison": {
+    "02cm": {
+      "G_mean_joint": 0.6598174482651564,
+      "class_oracle_mean_joint": 0.7010459493723027,
+      "paired_mean_joint_difference": 0.041228501107146265,
+      "paired_joint_differences": [
+        0.0,
+        0.08245700221429253
+      ],
+      "relative_mean_joint_difference": 0.06248470878657038
+    },
+    "05cm": {
+      "G_mean_joint": 0.7237555311248562,
+      "class_oracle_mean_joint": 0.7712658287589086,
+      "paired_mean_joint_difference": 0.047510297634052345,
+      "paired_joint_differences": [
+        0.0,
+        0.09502059526810469
+      ],
+      "relative_mean_joint_difference": 0.06564412372809385
+    },
+    "10cm": {
+      "G_mean_joint": 0.7446239273307962,
+      "class_oracle_mean_joint": 0.7965416512441807,
+      "paired_mean_joint_difference": 0.05191772391338467,
+      "paired_joint_differences": [
+        0.0,
+        0.10383544782676934
+      ],
+      "relative_mean_joint_difference": 0.06972341608668242
+    }
+  },
+  "all_final_eligible": true,
+  "all_replays_passed": true,
+  "full_matrix_collected": true,
+  "source_measured_fixed_route_gate_passed": true,
+  "metric": "C_map times public-ROI external-vertical surface F1",
+  "precision_limitation": "Prediction outside the common padded facility ROI is excluded from precision.",
+  "scope": "P00 fixed offline G and class-oracle routes; exact synthetic poses; not full architecture or autonomous ANS.",
+  "scalar_provenance": "source result.json table[].stages[].measurement and prescribed_paired_comparison only"
+}

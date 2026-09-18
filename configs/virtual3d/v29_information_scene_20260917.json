@@ -1,0 +1,44 @@
+{
+  "version": "v29-analytic-information-scene-r0",
+  "purpose": "One frozen finite geometric information-value model; not a simulator, Q evaluator, or autonomous benchmark",
+  "grid": {"x_min": -5, "x_max": 5, "y_min": 0, "y_max": 7, "spacing_m": 1.0, "robot_radius_m": 0.2},
+  "anchor": [0, 0, 0],
+  "heading_vectors": [[0, 1], [1, 0], [0, -1], [-1, 0]],
+  "actions": ["forward", "left", "right"],
+  "prefix_actions": ["left", "forward", "forward", "forward", "right", "right", "forward", "forward", "forward", "forward", "forward", "forward", "left", "left", "forward", "forward", "forward", "right"],
+  "total_action_budget": 48,
+  "public_hypothesis_prior": [0.5, 0.5],
+  "stations": [{"name": "A", "center_x": -3.0}, {"name": "B", "center_x": 3.0}],
+  "body_relative_bounds": [-1.0, 1.0, 2.0, 5.0, 0.0, 1.6],
+  "complex_attachment_relative_bounds": [-0.6, 0.6, 5.0, 5.7, 0.4, 1.2],
+  "class_independent_wall_bounds": [
+    [-0.4, 0.4, 1.5, 7.6, 0.0, 2.5],
+    [-5.7, -5.5, -0.5, 7.6, 0.0, 2.5],
+    [5.5, 5.7, -0.5, 7.6, 0.0, 2.5],
+    [-5.7, 5.7, 7.5, 7.7, 0.0, 2.5],
+    [-5.7, 5.7, -0.7, -0.5, 0.0, 2.5]
+  ],
+  "geometric_observation": {
+    "camera_height_m": 0.9,
+    "range_m": 4.0,
+    "horizontal_fov_deg": 90.0,
+    "vertical_fov_deg": 90.0,
+    "surface_horizontal_spacing_max_m": 0.5,
+    "surface_vertical_spacing_max_m": 0.5,
+    "ray_epsilon_m": 1e-7,
+    "signature": "Sorted visible physical point coordinates and outward normals only; no role, face id, class, area, or denominator",
+    "finite_model_limit": "Visible vertical-face quadrature points, not depth pixels; exact only within this declared finite position and observation model"
+  },
+  "reward": {
+    "name": "equal_station_macro_fraction_of_potentially_observed_reference_vertical_exterior_area",
+    "area_weighting": "Geometric rectangle quadrature area only; equal station weights 1/2; no class reward weight",
+    "normalization": "Each true station vertical exterior reference area, evaluator-side only; union-interior contacts excluded",
+    "repeat_observation": "Set union, zero additional reward for duplicates",
+    "not_Q_or_accuracy": true
+  },
+  "hypotheses": [["complex", "simple"], ["simple", "complex"]],
+  "controls": ["ordinary_both_simple", "free_early_geometric_revelation", "swapped_class_cue", "independent_uninformative_class_cue"],
+  "solver": {"method": "Exact finite-horizon belief-state dynamic programming over all legal actions with exact return-heading feasibility", "maximum_memo_states": 1500000, "wall_time_limit_seconds": 300},
+  "development_gate": {"minimum_information_gain_absolute": 1e-9, "required_controls_equal_tolerance": 1e-10, "no_budget_or_geometry_search": true},
+  "io": {"output_cap_bytes": 1048576, "disk_reserve_bytes": 67108864}
+}

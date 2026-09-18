@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "evidence_origin": "Transcription of actual terminal unittest run, session81002, initial tool chunk21235c and terminal chunkdc289a; receipt creation did not rerun tests.",
+  "command": "PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv-3d/bin/python -B -m unittest tests.virtual3d.test_information_pixel_v34 -v",
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "exit_code": 0,
+  "reported_unittest_seconds": 0.22,
+  "source_sha256": {
+    "env/information_pixel_v34.py": "b43d53b83f0cc4da3d99906fbc8b12bc18ecc3d9c550f40c45fd2554708629c4",
+    "nso/sensor_contract_v34.py": "ddc64c80467807ac10960dac7ad0b2dabec1abfdaf981f231a59745d8c2405f9",
+    "tests/virtual3d/test_information_pixel_v34.py": "755ea4adca455043cd678b9d85e2687471ca2c7aed12bf7d983f054ac7b3a353"
+  },
+  "scene_config_sha256": "55bc23b57de6e13472970eb1b6670a6e6040db74d3b61e155fe84f9fa08cd7c9",
+  "actual_calls": {
+    "worlds": 3,
+    "packets": 9,
+    "clean_depth_queries": 9,
+    "scan_queries": 9,
+    "step_calls": 2
+  },
+  "per_world": {
+    "v34-unit-a": {
+      "worlds": 1,
+      "packets": 4,
+      "clean_depth_queries": 4,
+      "scan_queries": 4,
+      "step_calls": 0
+    },
+    "v34-unit-b": {
+      "worlds": 1,
+      "packets": 2,
+      "clean_depth_queries": 2,
+      "scan_queries": 2,
+      "step_calls": 0
+    },
+    "v34-unit-rotated": {
+      "worlds": 1,
+      "packets": 3,
+      "clean_depth_queries": 3,
+      "scan_queries": 3,
+      "step_calls": 2
+    }
+  },
+  "world_geometry_modified": false,
+  "formal416queried": false,
+  "mapper_updates": 0,
+  "TSDF_integrations": 0,
+  "Q_evaluations": 0,
+  "main_tasks": 0,
+  "planned_future_formal_queries_not_included": true,
+  "capabilities_not_tested": [
+    "No actual ObservedRuntimeMapperV10 construction or update; structural frame/scan compatibility and new validation only.",
+    "No full416pose information gate or route collection.",
+    "No reconstruction quality or natural semantic network."
+  ]
+}

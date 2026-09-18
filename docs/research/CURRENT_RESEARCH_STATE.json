@@ -1,11 +1,18 @@
 {
   "research_goal_handoff": {
-    "updated_date": "2026-09-11",
-    "objective": "工业设施自主三维数据采集：覆盖约束下的语义条件观察收益预测与闭环层次规划",
+    "updated_date": "2026-09-18",
+    "objective": "Validate semantic-guided multi-workstation exterior-shape and spatial-envelope documentation under 2D coverage, retaining ANS and all four modules.",
     "goal_text": "docs/research/GOAL_PROMPT.md",
-    "guiding_document": "docs/research/RESEARCH_GOAL_AND_STORY.md",
-    "status": "stage_1_v11_1_independent_efficacy_and_96_of_96_replay_passed; coverage_stress_40_of_40_replay_passed_without_semantic_increment",
-    "read_first": true,
+    "guiding_document": "docs/research/V35_ONLINE_SEMANTIC_RESULT_20260918.md",
+    "status": "v35_controlled_online_CPU_development_passed_frozen_confirmation_next",
+    "read_first": [
+      "docs/research/V35_ONLINE_SEMANTIC_RESULT_20260918.md",
+      "docs/research/V35_ONLINE_SEMANTIC_INDEPENDENT_REVIEW_20260918.md",
+      "docs/research/V36_FROZEN_CONFIRMATION_PLAN_20260918.md",
+      "docs/research/V35_ONLINE_DEVELOPMENT_PROTOCOL_20260918.md",
+      "docs/research/CURRENT_RESEARCH_STATE.json",
+      "docs/research/GOAL_PROMPT.md"
+    ],
     "historical_fields_warning": "Other versioned metrics and next-step fields below are historical; use the guiding document and this handoff for current priorities, preserving original run facts.",
     "architecture_fixed": [
       "ANS global/local hierarchy",
@@ -16,18 +23,30 @@
     ],
     "semantic_core_required": true,
     "first_actions": [
-      "Read docs/research/V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md and keep configs/virtual3d/semantic_gain_v11_development_protocol.json fixed for the first archived development run.",
-      "Treat eval_results/semantic_gain_v11_closed_loop_development_20260911 as a retained failed contract-mismatch run and V11.1 as the passed development replacement.",
-      "Do not tune again on Q0--Q3; use the frozen V11 gain head, rate_single candidate contract, complete safe round-trip options and per-candidate input guard.",
-      "Treat the first E preparation as a retained structural failure and the prospectively sealed F00--F11 set as its replacement; never tune on either viewed set.",
-      "Independently replay the completed 96-branch F00--F07 efficacy result, then run the still-sealed F08--F11 coverage-stress stratum without changing the frozen method."
+      "Read the completed V35 online report and independent chain audit:8 primary tasks plus8 fresh online replays passed; mean J5 S-G +6.5644%, S-X +14.7283%, X-Xnf +2.6241%. Actual correction at step28 changes step29 action in both preregistered same-state interventions. This is positive controlled CPU development evidence, not natural semantic or original neural ANS generalization.",
+      "Follow V36_FROZEN_CONFIRMATION_PLAN_20260918.md. Freeze the V35 posterior/planner/controller unchanged, and implement a separate seed-only V36 acquisition adapter. Use noise seed350918, the already frozen P00/P01 public templates, and G/S with the same active geometry capabilities. Complete source, input-isolation and format checks before any new physical task; no quality pre-runs or parameter scans.",
+      "Run at most8 frozen confirmation main tasks: P00/P01 x h0/h1 x G/S, each followed immediately by a fresh-process online replay. Keep42 total/18 prefix actions, C_map80, exact return, zero collisions, common TSDF/ROI and P/R/F1@2/5/10cm. Require positive mean J5 gain for each parent and no per-parent mean sign reversal at2/10cm. P01 was inspected in ideal models; this is held-out-noise/cross-parent physical confirmation, not wholly unseen-layout generalization.",
+      "Main tasks27/36; no active acquisition or replay. At most8 next tasks bring the count to35/36; the final1 is not an automatic retry. Preserve all failures/zeros, including V35 h0 zero S-G and h1 negative feedback at2cm. Stop on qualification/replay failure; no scene, metric, noise or budget retuning on confirmation scores. Decision date2026-09-29 unchanged; natural semantic front-end, mainstream comparison and ROS1 transfer remain separate work."
     ],
     "known_errata": {
       "feedback_source": "nso/cpu_four_modules_v10.py",
       "feedback_location": "Historical V10.3 compute_reward omitted v10_3 from gain.observe; old sources and all 40 affected snapshots are archived.",
       "feedback_fix_applied": true,
       "feedback_ablation_interpretation": "V10.3.1 closes 48 predicted/actual outcomes in every branch and leaves zero pending; S/no-feedback still has 8/8 identical trajectories, so the global camera-yield scalar has no decision-level increment for S.",
-      "metric_interpretation": "Inspection joint is new visible 3D surface area times final global F1. It is separate from 2D coverage times F1 and cannot be described as an 18-29 percent precision gain."
+      "metric_interpretation": "Inspection joint is new visible 3D surface area times final global F1. It is separate from 2D coverage times F1 and cannot be described as an 18-29 percent precision gain.",
+      "v22_static_vs_actual_divergence": "Frozen P00 local diagnosis called action8 an actual divergence; it was initial static path. Formal saved physical commands show A/B action6 in both parents, P01 N/B action10. Preserve original audit; use final V22 analysis/report.",
+      "v28_diagnostic_20260917": {
+        "document": "docs/research/V28_DIAGNOSTIC_INTERPRETATION_REVIEW_20260917.md",
+        "selected_share_is_not_shortlist_share": true,
+        "old_complex_selection_gate_does_not_validate_original_shortlist_gate": true,
+        "Q_decreases_do_not_identify_fusion_root_cause": true,
+        "old_sample_windows_actions": [
+          1,
+          5
+        ],
+        "old_samples_independent": false,
+        "cue_slot_identity_verified_only_for_this_batch": true
+      }
     },
     "stage_0_result": {
       "complete": true,
@@ -47,14 +66,21 @@
       "document": "docs/research/NETWORK_TRAINING_AUDIT_AND_OPTIMIZATION_PLAN.md",
       "verification": "audit_results/network_training_state_20260911/verification.json",
       "v10_neural_training_or_loading": false,
-      "current_large_checkpoints": "Git LFS pointer files, not loadable tensors in this workspace",
+      "current_large_checkpoints": "Worktree files remain Git LFS pointers; 8 cached payloads now SHA-verified, weights-only CPU deserialized, strictly loaded and synthetic-forward checked. This does not establish training provenance or navigation efficacy.",
       "cpu_models_previously_fit": [
         "113-parameter candidate reachability MLP; validation dominated by a simple action-budget rule",
         "V6/V7 linear-ridge candidate response models; no stable semantic decision increment"
       ],
       "semantic_training_wired": false,
       "deep_ssc_implemented": false,
-      "stage_1_requirement": "Train and ablate a candidate/instance/direction/confidence-conditioned semantic gain head on CPU before neural-stack recovery and module-wise fine-tuning."
+      "stage_1_requirement": "Train and ablate a candidate/instance/direction/confidence-conditioned semantic gain head on CPU before neural-stack recovery and module-wise fine-tuning.",
+      "cached_weight_recovery": {
+        "report": "docs/research/ANS_CACHED_WEIGHTS_CPU_RECOVERY_20260914.md",
+        "inventory": "audit_results/model_lfs_cache_20260914/verification.json",
+        "cpu_compatibility": "audit_results/model_lfs_cpu_compatibility_v1_1_20260914/verification.json",
+        "passed": 8,
+        "neural_navigation_efficacy_proven": false
+      }
     },
     "v11_handoff": {
       "document": "docs/research/V11_NETWORK_TRAINING_AND_DATA_ADEQUACY_HANDOFF.md",
@@ -67,7 +93,12 @@
       "development_gates_passed": true,
       "v7_primary_information_value": "zero in 8/8 paired parent contexts; ineligible for proving semantic selection value",
       "v9_nonzero_information_contexts": 4,
-      "v9_contexts": ["Q0", "Q1", "Q2", "Q3"],
+      "v9_contexts": [
+        "Q0",
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
       "v9_role": "development grouped leave-one-context-out only; already inspected and not independent confirmation",
       "primary_target": "delta(covered_area_m2 * F1_05cm) / paid_actions",
       "grouped_development_result": {
@@ -144,7 +175,1622 @@
         "IMU",
         "GPS"
       ],
-      "compute_platform": "exact model and GPU/CUDA capabilities unverified"
+      "compute_platform": "exact model and GPU/CUDA capabilities unverified",
+      "offline_preflight": {
+        "report": "docs/ROS1_SEQUENCE_PREFLIGHT_20260914.md",
+        "audit": "audit_results/ros1_sequence_preflight_20260914/virtual_sequence.json",
+        "virtual_frames_passed": 61,
+        "unit_tests_passed": 5,
+        "robot_interface_ready": false
+      },
+      "source_metadata_recording": {
+        "schema": "ros1_rgbd_recording/2",
+        "source": "scripts/record_ros1_rgbd.py",
+        "tests": "audit_results/ros1_source_metadata_20260914/result.json",
+        "mock_message_tests_passed": 4,
+        "original_integer_timestamps_and_camera_info_and_laser_timing_preserved": true,
+        "source_metadata_offline_cross_validation_complete": true,
+        "live_ros_verified": false,
+        "cross_validation_scope": "recording/2 saved metadata versus saved payload internal consistency only; 13 tests and 5 synthetic records, no live ROS",
+        "cross_validation_report": "docs/ROS1_SOURCE_METADATA_CROSSCHECK_20260914.md",
+        "cross_validation_evidence": "audit_results/ros1_metadata_crosscheck_20260914/manifest.json",
+        "external_calibration_authentication_complete": false
+      },
+      "recording_v3": {
+        "source": "scripts/record_ros1_rgbd_v3.py",
+        "schema": "ros1_rgbd_recording/3",
+        "report": "docs/ROS1_RECORDING_V3_20260914.md",
+        "audit": "scripts/audit_ros1_recording_v3.py",
+        "evidence": "audit_results/ros1_recording_v3_20260914/manifest.json",
+        "tests_passed": 9,
+        "mock_callback_recordings": 1,
+        "raw_depth_and_scan_saved": true,
+        "finite_out_of_range_clipping_removed": true,
+        "binning_roi_and_tf_response_recorded": true,
+        "internal_raw_conversion_and_projection_crosscheck_passed": true,
+        "live_ros_verified": false,
+        "physical_calibration_verified": false,
+        "deskew_implemented": false,
+        "actual_ros_runtime_probe": {
+          "evidence": "audit_results/ros1_live_v3_runtime_probe_20260914/manifest.json",
+          "status": "not_executed_missing_runtime",
+          "live_ros_verified": false,
+          "probe_script": "scripts/ros1_live_recording_v3_probe.py",
+          "cached_ros_images": 0,
+          "cached_ros_containers": 0
+        }
+      }
+    },
+    "current_priority": "Follow V36_FROZEN_CONFIRMATION_PLAN_20260918.md. Freeze the V35 posterior/planner/controller unchanged, and implement a separate seed-only V36 acquisition adapter. Use noise seed350918, the already frozen P00/P01 public templates, and G/S with the same active geometry capabilities. Complete source, input-isolation and format checks before any new physical task; no quality pre-runs or parameter scans.",
+    "latest_live_outcome_observation": {
+      "status": "complete",
+      "active_session_id": null,
+      "completed_preparation_session_id": 70434,
+      "source": "scripts/replay_facility_choice_shape_v25_case00.py",
+      "protocol": "docs/research/V25_CASE00_SAVED_HISTORY_PROTOCOL_20260915.md",
+      "root": "audit_results/facility_choice_v25_case00_shape_20260915",
+      "frozen_sources": 150,
+      "backend_parameter_changes": 0,
+      "planned_saved_packets": 235,
+      "planned_observe_calls": 470,
+      "planned_snapshots": 2,
+      "planned_new_evaluator_calls": 4,
+      "new_physical_actions": 0,
+      "new_sensor_frames": 0,
+      "new_tsdf_fusions": 0,
+      "semantic_efficacy_proven": false,
+      "completed_session_id": 12176,
+      "actual_saved_packets": 235,
+      "actual_observe_calls": 470,
+      "actual_snapshots": 2,
+      "actual_new_evaluator_calls": 4,
+      "elapsed_s": 60.18434477294795,
+      "inferred_enclosures_accepted": 0,
+      "common_geometry_equal_old": true,
+      "quality_improved": false,
+      "completed_outline_Q": 0.4652181282487985,
+      "free_ray_conflict_fractions": [
+        0.008542713567839196,
+        0.0024551927326295114
+      ],
+      "report": "docs/research/V25_CASE00_SAVED_HISTORY_RESULT_20260915.md",
+      "default_backend_integration_authorized": false
+    },
+    "feedback_next_version_constraint": "Read V16_OBSERVED_SURFACE_FEEDBACK_20260914.md. New observation-only 3D feedback observer passed seven tests and 768 recorded sensor updates/44 map-mesh checkpoints. Instance attribution, conditional predictive correction and efficacy remain pending; do not connect to frozen V15 or bypass information gates.",
+    "user_design_principles": "docs/research/ADVANTAGE_SCENARIO_DESIGN_PRINCIPLES_20260914.md",
+    "last_goal_turn_classification": "v35_bounded_online_development_complete_positive_controlled_mechanism_full_graduation_goal_incomplete",
+    "next_steps": [
+      "Follow V36_FROZEN_CONFIRMATION_PLAN_20260918.md. Freeze the V35 posterior/planner/controller unchanged, and implement a separate seed-only V36 acquisition adapter. Use noise seed350918, the already frozen P00/P01 public templates, and G/S with the same active geometry capabilities. Complete source, input-isolation and format checks before any new physical task; no quality pre-runs or parameter scans.",
+      "Run at most8 frozen confirmation main tasks: P00/P01 x h0/h1 x G/S, each followed immediately by a fresh-process online replay. Keep42 total/18 prefix actions, C_map80, exact return, zero collisions, common TSDF/ROI and P/R/F1@2/5/10cm. Require positive mean J5 gain for each parent and no per-parent mean sign reversal at2/10cm. P01 was inspected in ideal models; this is held-out-noise/cross-parent physical confirmation, not wholly unseen-layout generalization.",
+      "Main tasks27/36; no active acquisition or replay. At most8 next tasks bring the count to35/36; the final1 is not an automatic retry. Preserve all failures/zeros, including V35 h0 zero S-G and h1 negative feedback at2cm. Stop on qualification/replay failure; no scene, metric, noise or budget retuning on confirmation scores. Decision date2026-09-29 unchanged; natural semantic front-end, mainstream comparison and ROS1 transfer remain separate work."
+    ],
+    "v26_observed_interface": {
+      "status": "complete_observed_interface_and_saved_packet_check_only",
+      "date": "2026-09-16",
+      "report": "docs/research/V26_OBSERVED_INTERFACE_RESULT_20260916.md",
+      "next_protocol": "docs/research/V26_AUTONOMOUS_COMPARISON_PROTOCOL_20260916.md",
+      "code": [
+        "nso/observed_state_v26.py",
+        "nso/observed_planner_v26.py",
+        "nso/observed_runtime_v26.py"
+      ],
+      "output": "audit_results/observed_decisions_v26_20260916",
+      "unit_tests": {
+        "state": 15,
+        "planner": 8,
+        "runtime": 8,
+        "total": 31,
+        "all_passed": true
+      },
+      "saved_packets": 235,
+      "offline_tsdf_integrations": 235,
+      "snapshots": [
+        0,
+        24,
+        111,
+        234
+      ],
+      "plan_calls": 8,
+      "new_physical_tasks": 0,
+      "new_physical_actions": 0,
+      "new_sensor_packets": 0,
+      "new_Q_evaluations": 0,
+      "total_new_main_attempts_used": 4,
+      "main_attempt_limit": 36,
+      "changed_selected_snapshot": 111,
+      "changed_selected_mechanism": "semantic ranking of an existing coverage candidate",
+      "changed_pool_snapshots": [
+        111,
+        234
+      ],
+      "full_efficacy_proven": false,
+      "semantic_innovation_proven": false,
+      "result_sha256": "ad29eaff282aefec4866c6f7966f443bb8ad0a9e1d30dd669e84af32426b0882",
+      "inventory_sha256": "d064297ca50cecc91c1b6034648d643af4314d2a76bee8f737e622da9cf35943",
+      "old_G_boundary_correction": "V16.3 candidate discovery was geometric; V19/V21 marked_points scoring supplied objectness. Fixed V25 A/B catalog separately used GT service routes."
+    },
+    "v26_autonomous_batch": {
+      "status": "complete_and_analyzed_no_S_net_advantage",
+      "directory": "audit_results/observed_autonomous_v26_20260916",
+      "active_session": null,
+      "active_case": null,
+      "active_replay": false,
+      "cumulative_attempts": 8,
+      "limit": 36,
+      "protocol": "docs/research/V26_AUTONOMOUS_COMPARISON_PROTOCOL_20260916.md",
+      "collector": "scripts/run_observed_autonomous_v26.py",
+      "new_preflight_tests_passed": 18,
+      "main_case0_complete": true,
+      "case0_C": 0.9446698635189967,
+      "case0_Q": 0.38539006588000035,
+      "main_paid_actions": 1588,
+      "raw_packets": 1592,
+      "successful_independent_replays": 4,
+      "successful_replay_paid_actions": 1588,
+      "failed_replay_attempts": 1,
+      "failed_replay_paid_actions": 400,
+      "all_replay_paid_actions": 1988,
+      "total_main_and_replay_paid_actions": 3576,
+      "all_four_eligible": true,
+      "all_four_instance_attribution_supported": true,
+      "all_four_independent_replays_verified": true,
+      "semantic_efficacy_proven": false,
+      "full_architecture_advantage_proven": false,
+      "report": "docs/research/V26_AUTONOMOUS_RESULT_20260916.md",
+      "analysis": "audit_results/observed_autonomous_v26_analysis_20260916",
+      "figure": "audit_results/observed_autonomous_v26_figures_20260916/trajectories_and_coverage.png",
+      "overall": {
+        "all_four_endpoints_available": true,
+        "all_four_qualified_for_comparison": true,
+        "mean_endpoints": {
+          "G": {
+            "C": 0.9441165621541867,
+            "Q": 0.38618487646150507,
+            "J": 0.36460309815099595
+          },
+          "S": {
+            "C": 0.9199557358908153,
+            "Q": 0.3862029208139255,
+            "J": 0.3552697492480102
+          }
+        },
+        "raw_mean_difference": {
+          "delta_C": -0.02416082626337146,
+          "delta_Q": 1.8044352420421017e-05,
+          "delta_J": -0.00933334890298576,
+          "relative_delta_J": -0.025598654949225
+        },
+        "qualified_mean_difference": {
+          "delta_C": -0.02416082626337146,
+          "delta_Q": 1.8044352420421017e-05,
+          "delta_J": -0.00933334890298576,
+          "relative_delta_J": -0.025598654949225
+        },
+        "mission_eligible_count": 4,
+        "replay_verified_count": 4,
+        "new_main_attempts": 4,
+        "total_completed_main_paid_actions": 1588,
+        "total_verified_replay_paid_actions": 1588,
+        "failed_operational_replay_paid_actions": 400,
+        "all_recorded_replay_attempts": 5,
+        "all_recorded_replay_paid_actions": 1988,
+        "completed_main_plus_all_recorded_replay_paid_actions": 3576
+      },
+      "pair_relative_J": [
+        -0.03574408657588684,
+        -0.015483048762430392
+      ],
+      "first_paid_action_divergence": [
+        43,
+        50
+      ],
+      "final_collector_session_exit0": 52625,
+      "analysis_session_exit0": 70577
+    },
+    "v27_feedback_repair": {
+      "status": "analytic_tests_and_matched_fixed_shadow_passed_not_autonomous_efficacy",
+      "report": "docs/research/V27_FEEDBACK_REPAIR_RESULT_20260916.md",
+      "implementation": [
+        "nso/observed_feedback_v27.py",
+        "nso/observed_planner_v27.py",
+        "nso/observed_runtime_v27.py"
+      ],
+      "unit_tests_passed": 8,
+      "serialization_fixture_checks_passed": 6,
+      "shadow_output": "audit_results/observed_feedback_v27_shadow_recovered_20260916",
+      "shadow_old_unavailable": 13,
+      "shadow_new_updated": 13,
+      "shadow_disabled_table_unchanged": true,
+      "shadow_formal_counts": {
+        "saved_packets_loaded": 401,
+        "offline_mapper_updates": 401,
+        "offline_tsdf_integrations_from_existing_packets": 401,
+        "planning_geometry_snapshots": 401,
+        "full_feedback_support_captures": 26,
+        "feedback_transition_calls": 39,
+        "original_sampled_semantic_gate_calls": 39,
+        "new_world_instances": 0,
+        "new_physical_tasks": 0,
+        "new_physical_actions": 0,
+        "new_sensor_packets": 0,
+        "new_planning_calls": 0,
+        "new_local_action_calls": 0,
+        "new_mesh_extractions": 0,
+        "new_quality_evaluations": 0,
+        "autonomous_runtime_executions": 0,
+        "forbidden_calls": 0
+      },
+      "shadow_final_tables": {
+        "old_V26_S": [],
+        "new_V27_S": [
+          {
+            "cue_id": "cue-0000",
+            "sector": 1,
+            "count": 2,
+            "total_measured_proxy": 2.0,
+            "correction_factor": 1.0
+          },
+          {
+            "cue_id": "cue-0000",
+            "sector": 2,
+            "count": 3,
+            "total_measured_proxy": 2.5,
+            "correction_factor": 0.875
+          },
+          {
+            "cue_id": "cue-0000",
+            "sector": 3,
+            "count": 7,
+            "total_measured_proxy": 4.625,
+            "correction_factor": 0.703125
+          },
+          {
+            "cue_id": "cue-0001",
+            "sector": 0,
+            "count": 1,
+            "total_measured_proxy": 1.0,
+            "correction_factor": 1.0
+          }
+        ],
+        "new_V27_S_no_feedback": []
+      },
+      "shadow_successful_session_exit0": 21235,
+      "original_shadow_failed_session_exit1": 73595,
+      "shadow_failed_offline_integrations": 401,
+      "shadow_successful_offline_integrations": 401,
+      "prior_support_diagnosis_offline_integrations": 401,
+      "total_support_and_shadow_offline_integrations": 1203,
+      "new_main_tasks": 0,
+      "new_quality_evaluations": 0,
+      "autonomous_efficacy_verified": false,
+      "result_sha256": "9683adb40e102a65909d47b17547827e1b49e8f6a4ddbe916c914ca834b362a7",
+      "original_V26_sources_unchanged": 170,
+      "independent_verification": "audit_results/observed_feedback_v27_shadow_verification_20260916/result.json",
+      "independent_verification_passed": true,
+      "independent_verification_result_sha256": "f2ec3bba5c393083b34bcbbf32c7049c08d87a09b50021149bc82bff4587052e",
+      "independent_verification_source_input_counts": [
+        38,
+        170,
+        444
+      ]
+    },
+    "v27_autonomous_effect": {
+      "status": "complete_mixed_feedback_effect_full_advantage_not_proven",
+      "report": "docs/research/V27_AUTONOMOUS_EFFECT_RESULT_20260916.md",
+      "acquisition": "audit_results/observed_autonomous_v27_20260916",
+      "analysis": "audit_results/observed_autonomous_v27_analysis_20260916",
+      "protocol": "docs/research/V27_AUTONOMOUS_EFFECT_PROTOCOL_20260916.md",
+      "main_attempts_cumulative": 12,
+      "main_attempt_limit": 36,
+      "all_four_eligible": true,
+      "all_four_successful_replays": true,
+      "new_main_paid_actions": 1596,
+      "successful_replay_paid_actions": 1596,
+      "failed_replay_paid_actions": 400,
+      "all_new_main_and_replay_paid_actions": 3592,
+      "geometry_reference_offline_mapper_integrations": 1588,
+      "feedback_pair_relative_J": [
+        0.0,
+        0.047515731085888024
+      ],
+      "mean_feedback_relative_J": 0.02403984041994902,
+      "feedback_gate_passed": false,
+      "full_S_vs_G_pair_relative_J": [
+        -0.03574408657588684,
+        0.0312969939420723
+      ],
+      "full_S_vs_G_mean_relative_J": -0.002174202109220687,
+      "full_advantage_gate_passed": false,
+      "positive_pair_first_command_divergence": 165,
+      "positive_pair_first_paid_action_divergence": 166,
+      "positive_pair_simple_instance_delta_Q": 0.03510551955919655,
+      "positive_pair_complex_instance_delta_Q": -0.009568983981976753,
+      "stop_current_P00_expansion": true,
+      "next_action": "implement_v28_semantic_reconstruction_debt_saved_history_behavior_gates",
+      "result_sha256": "6242e99ab3946a88d118472dcbf0c9a7682a6100cc6bb17f2849c68ece72851f",
+      "acquisition_result_sha256": "8d3d972f626c1706ca9131d2dc4795989d78f2db7dc28ec07aa556bd162147ed"
+    },
+    "v28_option_feedback_diagnostic": {
+      "status": "complete_proxy_failed_complex_class_unverifiable",
+      "report": "docs/research/V28_OPTION_LEVEL_FEEDBACK_DIAGNOSTIC_RESULT_20260916.md",
+      "design": "docs/research/V28_SEMANTIC_DEBT_OPTION_RESIDUAL_DESIGN_20260916.md",
+      "protocol": "docs/research/V28_OPTION_LEVEL_FEEDBACK_DIAGNOSTIC_PROTOCOL_20260916.md",
+      "recovery": "docs/research/V28_OPTION_DIAGNOSTIC_RECOVERY_20260916.md",
+      "output": "audit_results/v28_option_feedback_diagnostic_r1_20260916",
+      "samples": 24,
+      "class2_samples": 23,
+      "class3_samples": 1,
+      "positive_delta_Q": 11,
+      "negative_delta_Q": 13,
+      "mean_delta_Q05": -0.0008655408539024884,
+      "endpoint_proxy_saturation_rate": 0.5416666666666666,
+      "endpoint_proxy_spearman_Q": -0.04893788153404873,
+      "option_fraction_spearman_Q": -0.14956521739130432,
+      "endpoint_minimum_calibration_gate_passed": false,
+      "complex_class_feedback_verifiable": false,
+      "terminal_geometry_and_metric_match_passed": true,
+      "saved_packets_mapped": 802,
+      "new_main_tasks": 0,
+      "new_autonomous_actions": 0,
+      "planner_calls": 0,
+      "result_sha256": "0b2638a561d9b3f036a9d14ddc04f6548af058dc4327b7cc50e4e3cb5692329a",
+      "inventory_sha256": "04159a131732efc32e4fcc25093e1dcfe1d773a049d9d8214aee3a7313aae162",
+      "failed_predecessor_preserved": "audit_results/v28_option_feedback_diagnostic_20260916",
+      "stghp_class_coverage_audit": "audit_results/v28_stghp_class_coverage_diagnosis_20260916",
+      "stghp_class_coverage_result_sha256": "eb1fcbbad74c031fe4e739e87c8de74c7be029b5d2885653774024aad7e11bd9",
+      "stghp_class_coverage_inventory_sha256": "51a50c2268e263f2795ed42b42515ba9f2eb76b7dc15a4d98576418178076364",
+      "case1_complex_selection_share_after_both_cues": 0.029411764705882353,
+      "case3_complex_selection_share_after_both_cues": 0.0,
+      "complex_selection_share_gate_passed": false,
+      "next_action": "historical_superseded_by_v28_descriptor_r1_preflight",
+      "interpretation_addendum": "docs/research/V28_DIAGNOSTIC_INTERPRETATION_REVIEW_20260917.md"
+    },
+    "v28_descriptor_preflight_20260917": {
+      "status": "complete_bounded_milestone_not_full_goal",
+      "report": "docs/research/V28_DESCRIPTOR_PREFLIGHT_RESULT_20260917.md",
+      "effective_module": "nso/observed_debt_v28_r1.py",
+      "protocol": "docs/research/V28_DESCRIPTOR_PREFLIGHT_R1_PROTOCOL_20260917.md",
+      "output": "audit_results/v28_descriptor_preflight_r1_20260917",
+      "failed_method_predecessor_preserved": "audit_results/v28_descriptor_preflight_20260917",
+      "r0_failure": "patch-to-camera bits queried using cue-to-camera sectors; false novelty",
+      "r1_fix": "candidate-specific visible novel patch count; cue sector indexes prior only",
+      "result_sha256": "0ff1e3f555f949c1c82f2236af8eeb82251196710ef539fa28819ad723e514eb",
+      "inventory_sha256": "ead0a7149784d2dbf819db37bd11400ea5c495462867e98790d6d4982ba67b7f",
+      "independent_review": "audit_results/v28_descriptor_preflight_r1_review_20260917",
+      "review_result_sha256": "52ef864f014105917c82a8e58e6a5502f818bc68ad74da033a84945212c50e61",
+      "unit_tests_passed": 7,
+      "independent_regression_tests_passed": 2,
+      "snapshots": 18,
+      "summaries": [
+        {
+          "all_eligible_cues_retained": true,
+          "all_shortlist_rows": 60,
+          "case_index": 1,
+          "complex_20pct_gate_passed": true,
+          "complex_share_all_shortlist": 0.2,
+          "complex_share_semantic_rows": 0.5454545454545454,
+          "complex_shortlist_rows": 12,
+          "eligible_snapshots": 5,
+          "positive_semantic_shortlist_rows": 22,
+          "ranking_S_vs_O": 7,
+          "ranking_S_vs_X": 7,
+          "reservation_changes_shortlist": 2,
+          "selection_S_vs_O": 2,
+          "selection_S_vs_X": 4,
+          "shortlist_S_vs_O": 1,
+          "snapshots": 9,
+          "ten_consecutive_plan_absence_gate": "not_tested_sparse_snapshots"
+        },
+        {
+          "all_eligible_cues_retained": true,
+          "all_shortlist_rows": 48,
+          "case_index": 3,
+          "complex_20pct_gate_passed": false,
+          "complex_share_all_shortlist": 0.10416666666666667,
+          "complex_share_semantic_rows": 0.3333333333333333,
+          "complex_shortlist_rows": 5,
+          "eligible_snapshots": 4,
+          "positive_semantic_shortlist_rows": 15,
+          "ranking_S_vs_O": 5,
+          "ranking_S_vs_X": 6,
+          "reservation_changes_shortlist": 4,
+          "selection_S_vs_O": 0,
+          "selection_S_vs_X": 1,
+          "shortlist_S_vs_O": 2,
+          "snapshots": 9,
+          "ten_consecutive_plan_absence_gate": "not_tested_sparse_snapshots"
+        }
+      ],
+      "eligible_complex_opportunity_snapshots": 9,
+      "S_complex_selections_in_eligible_snapshots": 0,
+      "case3_raw_complex_capacity_bound": {
+        "numerator": 12,
+        "denominator": 48,
+        "feasible_with_coverage_and_cue_reservation": true,
+        "actual_retained": 5
+      },
+      "O_is_independent_objectness_baseline": false,
+      "L_actual_confidence_intervention": 0.59,
+      "G_L_exact_fallback_passed": true,
+      "r0_mapper_updates": 802,
+      "r1_mapper_updates": 802,
+      "this_stage_mapper_updates": 1604,
+      "this_stage_geometry_plans": 36,
+      "this_stage_rank_calls": 252,
+      "new_worlds": 0,
+      "new_sensor_packets": 0,
+      "new_autonomous_actions": 0,
+      "new_mesh_extractions": 0,
+      "new_Q_evaluations": 0,
+      "main_attempts_used": 12,
+      "semantic_efficacy_proven": false,
+      "full_architecture_advantage_proven": false,
+      "persistent_option_lifecycle_implemented": false,
+      "RPN_Q_calibrated": false,
+      "next_action": "freeze_persistent_option_and_new_scene_information_value_protocol_before_acquisition"
+    },
+    "v29_persistent_option_and_information_20260917": {
+      "report": "docs/research/V29_PERSISTENT_OPTION_AND_INFORMATION_RESULT_20260917.md",
+      "runtime": "nso/observed_runtime_v29.py",
+      "option_module": "nso/persistent_observation_option_v29.py",
+      "contract_output": "audit_results/persistent_option_contract_v29_20260917",
+      "contract_result_sha256": "a177597af2ced47d5ebd713cf6c1fbe618ec482104576b248efe5bca591ee9e3",
+      "contract_inventory_sha256": "843fc16181c4de68715a798acfbc165fe8fc2308ec2e15b879daf5019db9d4aa",
+      "contract_tests_passed": 16,
+      "persistent_option_lifecycle_implemented": true,
+      "multi_waypoint_controller_supported": true,
+      "global_policy_submits_single_target": true,
+      "calibrated_quality_feedback_applied": false,
+      "old_option_audit": "audit_results/option_lifecycle_v29_review_r1_20260917",
+      "old_auditor_failure_preserved": "audit_results/option_lifecycle_v29_20260917",
+      "old_option_counts": {
+        "global_plans": 224,
+        "nonempty_options": 162,
+        "replanned_before_reach": 127,
+        "same_pose_reopened": 56,
+        "reached": 35,
+        "paid_option_actions": 738,
+        "paid_actions_without_option": 62,
+        "reasons_reconstructed_not_original_lifecycle_log": true
+      },
+      "scene_output": "audit_results/v29_scene_information_20260917",
+      "scene_config": "configs/virtual3d/v29_information_scene_20260917.json",
+      "scene_protocol": "docs/research/V29_SCENE_INFORMATION_PROTOCOL_20260917.md",
+      "scene_result_sha256": "7b85fffab13cf9dc6c5198828a033ae274398aedb1fe4353e7c462a0fae379d5",
+      "scene_inventory_sha256": "b7a6a84f547f51c952d7a1497dab23584d1537d6da9b7cb5257fb1f84c70a475",
+      "scene_geometric_gate_passed": true,
+      "finite_nonzero_information_gate_passed": true,
+      "scene_solve_seconds": 2.296803819015622,
+      "scene_memo_states": 192368,
+      "scene_main": {
+        "G_Bayes_optimal": 0.668518518518518,
+        "best_randomized_policy_expected_upper_bound": 0.668518518518518,
+        "correct_class_optimal_by_assignment": [
+          0.6749999999999996,
+          0.6749999999999996
+        ],
+        "correct_class_optimal_mean": 0.6749999999999996,
+        "frozen_total_budget": 48,
+        "oracle_information_value_absolute": 0.0064814814814816435,
+        "oracle_information_value_relative": 0.009695290858726013,
+        "prefix_paid_actions": 18,
+        "prefix_potential_macro": [
+          0.3370370370370372,
+          0.3370370370370372
+        ],
+        "randomized_bound_reason": "A random policy is a mixture of deterministic history policies; expectation is linear",
+        "remaining_actions": 30
+      },
+      "complete_observation_suffix_complex_actions": 30,
+      "complete_observation_suffix_simple_actions": 28,
+      "earliest_geometric_information_suffix_layer": 7,
+      "best_reward_witness_first_information_suffix_action": 11,
+      "reward_scope": "finite potential-visible reference vertical area; not Q/J/reconstruction accuracy",
+      "complex_finite_quadrature_area_m2": 17.28,
+      "complex_continuous_union_area_m2": 17.12,
+      "ordinary_same_structure_separately_solved": true,
+      "early_geometry_and_independent_cue_controls": "algebraic information interventions; not independent measurements",
+      "figure": "docs/research/figures/v29_information_scene_20260917.png",
+      "new_main_tasks": 0,
+      "new_physical_worlds": 0,
+      "new_sensor_packets": 0,
+      "new_mapper_updates": 0,
+      "new_TSDF_integrations": 0,
+      "new_mesh_extractions": 0,
+      "new_Q_evaluations": 0,
+      "main_tasks_used": 12,
+      "semantic_runtime_efficacy_proven": false,
+      "full_architecture_advantage_proven": false,
+      "next_action": "verify_frozen_contact_geometry_and_pixel_observability_then_preregister_RGBD_Q_test"
+    },
+    "v30_pixel_routes_20260917": {
+      "report": "docs/research/V30_PIXEL_ROUTE_RESULT_20260917.md",
+      "protocol": "docs/research/V30_PIXEL_ROUTE_PROTOCOL_20260917.md",
+      "root": "audit_results/v30_pixel_routes_20260917",
+      "result_sha256": "7f05663cd004e142f22f261924a05a159cf11304d20fb303356bf21adc2e3b55",
+      "inventory_sha256": "8052e546fd4d5ef49ae43c4b268f2c77e6f3163c74c19c80789e73d86641ff52",
+      "source_count": 54,
+      "new_main_tasks": 4,
+      "main_tasks_used": 16,
+      "replays_completed": 4,
+      "all_replays_passed": true,
+      "counts_including_replay": {
+        "worlds": 8,
+        "sensor_packets": 392,
+        "paid_actions": 384,
+        "mapper_updates": 392,
+        "mapper_mesh_extractions": 16,
+        "measurement_snapshots": 32,
+        "backend_observe_calls": 1088,
+        "evaluation_stages": 16
+      },
+      "all_main_eligible": false,
+      "eligible_main_tasks": 0,
+      "coverage_values": [
+        0.7668433005299016,
+        0.7857683573050719,
+        0.7857683573050719,
+        0.7668433005299016
+      ],
+      "window_quality_values": [
+        0.5536543984925621,
+        0.6817659405016957,
+        0.662355779635585,
+        0.5635658441883937
+      ],
+      "full_instance_quality_values": [
+        0.5498615663572892,
+        0.6738105278797183,
+        0.6521547885536381,
+        0.5610028782365787
+      ],
+      "fixed_route_selection": {
+        "Q": {
+          "always_A": 0.6080050890640736,
+          "always_B": 0.6226658923450448,
+          "best_fixed": 0.6226658923450448,
+          "uniform_random": 0.6153354907045592,
+          "complex_rule": 0.5586101213404779,
+          "swapped_rule": 0.6720608600686404,
+          "two_option_oracle": 0.6720608600686404,
+          "oracle_relative_to_best_fixed": 0.07932820527163842,
+          "complex_relative_to_best_fixed": -0.10287342183353587,
+          "complex_minus_simple_per_assignment": [
+            -0.12811154200913355,
+            -0.09878993544719128
+          ],
+          "difference_of_differences": -0.22690147745632483,
+          "scope": "posthoc four-cell fixed-route selection table; not autonomous G/S"
+        },
+        "J": {
+          "always_A": 0.4725121896043537,
+          "always_B": 0.48393839757895646,
+          "best_fixed": 0.48393839757895646,
+          "uniform_random": 0.4782252935916551,
+          "complex_rule": 0.42836642915814094,
+          "swapped_rule": 0.5280841580251693,
+          "two_option_oracle": 0.5280841580251693,
+          "oracle_relative_to_best_fixed": 0.09122185936694605,
+          "complex_relative_to_best_fixed": -0.11483273222135415,
+          "complex_minus_simple_per_assignment": [
+            -0.1111439368416311,
+            -0.08829152089242565
+          ],
+          "difference_of_differences": -0.19943545773405674,
+          "scope": "posthoc four-cell fixed-route selection table; not autonomous G/S"
+        }
+      },
+      "observed_class_rules": [
+        {
+          "complex": "A",
+          "swapped": "B"
+        },
+        {
+          "complex": "B",
+          "swapped": "A"
+        }
+      ],
+      "prefix_nonsemantic_equal": true,
+      "first_saved_route_depth_difference_action": 29,
+      "learning_gate_passed": false,
+      "actual_revisits_improve_Q": true,
+      "complex_priority_hypothesis_supported": false,
+      "semantic_runtime_executed": false,
+      "full_architecture_advantage_proven": false,
+      "exact_union_complex_vertical_area_m2": 17.12,
+      "exact_vertical_only_projection_Q": 0.6666666666666666,
+      "figure": "docs/research/figures/v30_pixel_routes_20260917.png",
+      "source_and_case_cap_passed": true,
+      "physical_runs_active": false,
+      "next_action": "freeze_common_outline_representation_applicability_tests_before_new_training_or_acquisition",
+      "independent_review": "docs/research/V30_PIXEL_ROUTE_INDEPENDENT_REVIEW_20260917.md",
+      "independent_review_root": "audit_results/v30_pixel_routes_review_20260917",
+      "independent_review_passed": true,
+      "independent_review_result_sha256": "739653992acd856a99659f4ebe1e6cd007ea7aa87cf4cd68cd551401cf0a8578",
+      "independent_review_inventory_sha256": "79a3392c511769c3ab08a7b42018a7b3aab75666c8dc72fc64c640689ab8ee7a",
+      "first_difference_changed_depth_pixels_per_pair": [
+        202,
+        202
+      ],
+      "next_bounded_plan": "docs/research/V31_NEXT_EXPERIMENT_GATES_20260917.md"
+    },
+    "v31_supported_outline_20260917": {
+      "report": "docs/research/V31_SUPPORTED_OUTLINE_RESULT_20260917.md",
+      "protocol": "docs/research/V31_SUPPORTED_OUTLINE_PROTOCOL_20260917.md",
+      "analytic_root": "audit_results/v31_supported_outline_20260917",
+      "analytic_result_sha256": "cd83472f5e8cf2822100c8db2f6e5d262b59569f35a42bf8e1a9011a9f853832",
+      "analytic_inventory_sha256": "9a7f81806dc85b223aeff56c7979e1bb40732bc700ddee601f6a0b19845f58a7",
+      "analytic_sources": 43,
+      "analytic_gates_passed": 29,
+      "analytic_all_gates_passed": true,
+      "analytic_counts": {
+        "candidate_evaluations": 28,
+        "legacy_evaluations": 26,
+        "expected_invalid_rejections": 2,
+        "worlds": 0,
+        "sensor_packets": 0,
+        "mapper_updates": 0,
+        "TSDF_integrations": 0,
+        "new_main_tasks": 0
+      },
+      "analytic_quality05": {
+        "box_closed": 1.0,
+        "box_vertical": 1.0,
+        "box_retriangulated": 1.0,
+        "box_vertical_retriangulated": 1.0,
+        "box_duplicate": 1.0,
+        "box_vertical_duplicate": 1.0,
+        "box_four_thin_walls": 0.9988900728407725,
+        "l_closed": 1.0,
+        "l_vertical": 1.0,
+        "box_vertical_missing_side": 0.6666666666666666,
+        "box_expanded_030": 0.0,
+        "box_shifted_030": 0.62,
+        "l_notch_filled": 0.8888888888888888,
+        "l_convex_shortcut": 0.9151532327909454,
+        "box_extra_detached_box": 0.9419753086419753,
+        "box_extra_open_strip": 0.9265734265734266,
+        "empty": 0.0,
+        "rotated_closed": 1.0,
+        "rotated_vertical": 1.0,
+        "one_mm_gap": 0.6666666666666666,
+        "both_present": 1.0,
+        "one_instance_missing": 0.5,
+        "all_instances_missing": 0.0,
+        "duplicate_seed": 0.0,
+        "extra_unassigned_instance": 0.6666666666666666,
+        "empty_extra_duplicate_seed": 1.0
+      },
+      "legacy_analytic_quality05": {
+        "box_closed": 1.0,
+        "box_vertical": 0.6666666666666666,
+        "box_retriangulated": 1.0,
+        "box_vertical_retriangulated": 0.6666666666666666,
+        "box_duplicate": 1.0,
+        "box_vertical_duplicate": 0.6666666666666666,
+        "box_four_thin_walls": 0.9988900728407725,
+        "l_closed": 1.0,
+        "l_vertical": 0.6666666666666666,
+        "box_vertical_missing_side": 0.6666666666666666,
+        "box_expanded_030": 0.0,
+        "box_shifted_030": 0.62,
+        "l_notch_filled": 0.8888888888888888,
+        "l_convex_shortcut": 0.9151532327909453,
+        "box_extra_detached_box": 0.9419753086419753,
+        "box_extra_open_strip": 0.9393939393939394,
+        "empty": 0.0,
+        "rotated_closed": 1.0,
+        "rotated_vertical": 0.6666666666666666,
+        "one_mm_gap": 0.6666666666666666,
+        "both_present": 1.0,
+        "one_instance_missing": 0.5,
+        "all_instances_missing": 0.0,
+        "duplicate_seed": 0.0,
+        "extra_unassigned_instance": 1.0,
+        "empty_extra_duplicate_seed": 0.5
+      },
+      "kernel_unit_tests_passed": 6,
+      "fixture_unit_tests_passed": 8,
+      "earlier_kernel_revision_test_executions": 5,
+      "saved_diagnostic_root": "audit_results/v31_saved_outline_diagnostic_20260917",
+      "saved_diagnostic_result_sha256": "c2f7c628dfc08efcb9eea89ea065ba57c27bf4015a9eac76b9bf8455bb8acae4",
+      "saved_diagnostic_inventory_sha256": "feba3b44e9890c77bcf972c9478b51e9d42bbbb2e200c98193aea52656208ba8",
+      "saved_diagnostic_sources": 41,
+      "saved_diagnostic_inputs": 42,
+      "saved_diagnostic_counts": {
+        "candidate_evaluations": 8,
+        "old_quality_evaluations": 0,
+        "mesh_inputs_read": 16,
+        "worlds": 0,
+        "sensor_packets": 0,
+        "mapper_updates": 0,
+        "TSDF_integrations": 0,
+        "mapper_mesh_extractions": 0,
+        "new_main_tasks": 0
+      },
+      "maximum_absolute_change_Q05": 0.000587989439042591,
+      "final_original_full_Q05": [
+        0.5498615663572892,
+        0.6738105278797183,
+        0.6521547885536381,
+        0.5610028782365787
+      ],
+      "final_candidate_Q05": [
+        0.5498498744495897,
+        0.674370951577315,
+        0.6527427779926807,
+        0.5609800481602488
+      ],
+      "final_candidate_eligible": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "physical_qualification_unchanged": true,
+      "posthoc_ineligible_selection": {
+        "02cm": {
+          "outline_macro_quality": {
+            "always_A": 0.3719220537679788,
+            "always_B": 0.40840814496030364,
+            "best_fixed": 0.40840814496030364,
+            "complex_rule": 0.3741130307497449,
+            "swapped_rule": 0.4062171679785376,
+            "oracle": 0.40840814496030364,
+            "complex_relative": -0.08397264999181675,
+            "scope": "ineligible, previously inspected fixed-route development data"
+          },
+          "joint_outline": {
+            "always_A": 0.2888915704289159,
+            "always_B": 0.31718709763407693,
+            "best_fixed": 0.31718709763407693,
+            "complex_rule": 0.28688607127137894,
+            "swapped_rule": 0.31919259679161394,
+            "oracle": 0.31919259679161394,
+            "complex_relative": -0.09553045060380982,
+            "scope": "ineligible, previously inspected fixed-route development data"
+          }
+        },
+        "05cm": {
+          "outline_macro_quality": {
+            "always_A": 0.6012963262211352,
+            "always_B": 0.6176754998687819,
+            "best_fixed": 0.6176754998687819,
+            "complex_rule": 0.5554149613049193,
+            "swapped_rule": 0.6635568647849979,
+            "oracle": 0.6635568647849979,
+            "complex_relative": -0.1007981352297268,
+            "scope": "ineligible, previously inspected fixed-route development data"
+          },
+          "joint_outline": {
+            "always_A": 0.46727665646246663,
+            "always_B": 0.4800415732488966,
+            "best_fixed": 0.4800415732488966,
+            "complex_rule": 0.42591624209075185,
+            "swapped_rule": 0.5214019876206114,
+            "oracle": 0.5214019876206114,
+            "complex_relative": -0.1127513410803721,
+            "scope": "ineligible, previously inspected fixed-route development data"
+          }
+        },
+        "10cm": {
+          "outline_macro_quality": {
+            "always_A": 0.6371283965643015,
+            "always_B": 0.6410403705142319,
+            "best_fixed": 0.6410403705142319,
+            "complex_rule": 0.5749869593687349,
+            "swapped_rule": 0.7031818077097984,
+            "oracle": 0.7031818077097984,
+            "complex_relative": -0.10304095371171407,
+            "scope": "ineligible, previously inspected fixed-route development data"
+          },
+          "joint_outline": {
+            "always_A": 0.4952209669021991,
+            "always_B": 0.4982419447127133,
+            "best_fixed": 0.4982419447127133,
+            "complex_rule": 0.44092489768397314,
+            "swapped_rule": 0.5525380139309393,
+            "oracle": 0.5525380139309393,
+            "complex_relative": -0.11503858243365928,
+            "scope": "ineligible, previously inspected fixed-route development data"
+          }
+        }
+      },
+      "independent_review": "docs/research/V31_SUPPORTED_OUTLINE_INDEPENDENT_REVIEW_20260917.md",
+      "independent_review_root": "audit_results/v31_supported_outline_review_20260917",
+      "independent_review_passed": true,
+      "independent_review_result_sha256": "2417699af80e0f88a71115a27029f68d9befab366fc1b294d523ae79541da432",
+      "independent_review_inventory_sha256": "a246f1fbe1135b0e27f1fb7743db3449da290b4140bbb3a91e023e284ff43677",
+      "figure": "docs/research/figures/v31_supported_outline_20260917.png",
+      "figure_receipt_root": "audit_results/v31_supported_outline_figures_20260917",
+      "figure_result_sha256": "e9773b661e20f4072f0ae406bbd2853ca0a17c02b9221023aa9be2c225f286a1",
+      "figure_inventory_sha256": "6e8f52f12a8d4fc839bf46f0e82a2bcd940e4a2c39eaf325019feb4cc339024c",
+      "new_main_tasks": 0,
+      "main_tasks_used": 16,
+      "main_tasks_cap": 36,
+      "physical_runs_active": false,
+      "observed_geometry_changed": false,
+      "semantic_efficacy_proven": false,
+      "full_architecture_advantage_proven": false,
+      "noise_robustness_proven": false,
+      "candidate_ready_as_training_target": false,
+      "candidate_replaces_legacy_metrics": false,
+      "one_mm_gap_quality05": 0.6666666666666666,
+      "next_action": "bounded_one_working_day_noise_gap_applicability_before_training_or_physical_tasks",
+      "feasibility_deadline": "2026-09-29",
+      "old_sources_and_inputs_unchanged": true,
+      "cleanup_performed": false
+    },
+    "v32_support_band_20260917": {
+      "report": "docs/research/V32_SUPPORT_BAND_RESULT_20260917.md",
+      "protocol": "docs/research/V32_SUPPORT_BAND_PROTOCOL_20260917.md",
+      "next_bounded_plan": "docs/research/V33_DIRECTION_VALUE_SCENE_PLAN_20260917.md",
+      "analytic_root": "audit_results/v32_support_band_20260917",
+      "analytic_result_sha256": "9a532e0283e92e3c933148cc5dd45c00e98f853cf99ab85508e11d9ee6935f35",
+      "analytic_inventory_sha256": "da694937495016aee42323d1ef2a81b1d6a978c3a4cbf5268090dddcbc922252",
+      "analytic_sources": 47,
+      "analytic_gates_passed": 45,
+      "analytic_all_gates_passed": true,
+      "analytic_counts": {
+        "candidate_evaluations": 58,
+        "expected_invalid_rejections": 2,
+        "standalone_legacy_evaluations": 0,
+        "worlds": 0,
+        "sensor_packets": 0,
+        "mapper_updates": 0,
+        "TSDF_integrations": 0,
+        "new_main_tasks": 0
+      },
+      "support_quality05": {
+        "corner_gap_000mm": 1.0,
+        "corner_gap_001mm": 0.999999995897238,
+        "corner_gap_005mm": 0.9999998974309875,
+        "corner_gap_010mm": 0.9999995893981941,
+        "corner_gap_020mm": 0.9999974951251245,
+        "corner_gap_050mm": 0.9999630717703317,
+        "corner_gap_100mm": 0.9994591753669736,
+        "corner_gap_300mm": 0.9927780867100954,
+        "translate_x_001mm": 0.9930566230122332,
+        "translate_x_005mm": 0.9660063597774423,
+        "translate_x_010mm": 0.9337366853926001,
+        "translate_x_020mm": 0.8738614703172504,
+        "translate_x_049mm": 0.7287629340921601,
+        "translate_x_050mm": 0.7243877780926224,
+        "translate_x_051mm": 0.6598148148148147,
+        "rotate_z_0p5deg": 0.9089256941962901,
+        "rotate_z_1deg": 0.8272318747076858,
+        "rotate_z_2deg": 0.6688418220442794,
+        "one_vertical_side_missing": 0.9027636647198826,
+        "neighbors_gap_010mm": 1.0,
+        "neighbors_gap_010mm_wrong_bridge": 0.9976147594398985,
+        "neighbors_gap_050mm": 1.0,
+        "neighbors_gap_050mm_wrong_bridge": 0.9882959770646886,
+        "neighbors_gap_200mm": 1.0,
+        "neighbors_gap_200mm_wrong_bridge": 0.9702175687430972,
+        "concave_l_vertical": 1.0,
+        "independent_face_jitter_001mm": 0.986750460245537,
+        "independent_face_jitter_005mm": 0.935530266247303,
+        "independent_face_jitter_010mm": 0.8752409211487814,
+        "ambiguity_closed_solid_missing_corner": 0.9999995893981941,
+        "ambiguity_true_open_shell_same_observation": 0.9937122322652288,
+        "thin_walls_continuous_002mm": 0.9881116289037807,
+        "thin_walls_001mm_opening": 0.9881766156740631,
+        "anchor_box_closed": 1.0,
+        "anchor_box_vertical": 1.0,
+        "anchor_box_retriangulated": 1.0,
+        "anchor_box_vertical_retriangulated": 1.0,
+        "anchor_box_duplicate": 1.0,
+        "anchor_box_vertical_duplicate": 1.0,
+        "anchor_box_four_thin_walls": 0.9881116289037807,
+        "anchor_l_closed": 0.9999999999999999,
+        "anchor_l_vertical": 1.0,
+        "anchor_box_vertical_missing_side": 0.9027636647198826,
+        "anchor_box_expanded_030": 0.0,
+        "anchor_box_shifted_030": 0.5168272373363695,
+        "anchor_l_notch_filled": 0.8498150579418996,
+        "anchor_l_convex_shortcut": 0.8646000736594283,
+        "anchor_box_extra_detached_box": 0.8943906814212262,
+        "anchor_box_extra_open_strip": 0.8707334842512395,
+        "anchor_empty": 0.0,
+        "anchor_both_present": 1.0,
+        "anchor_one_instance_missing": 0.5,
+        "anchor_all_instances_missing": 0.0,
+        "anchor_duplicate_seed": 0.0,
+        "anchor_extra_unassigned_instance": 0.6666666666666666,
+        "anchor_empty_extra_duplicate_seed": 1.0
+      },
+      "v31_region_quality05": {
+        "corner_gap_000mm": 1.0,
+        "corner_gap_001mm": 0.6666666666666666,
+        "corner_gap_005mm": 0.6666666666666666,
+        "corner_gap_010mm": 0.6666666666666666,
+        "corner_gap_020mm": 0.6666666666666666,
+        "corner_gap_050mm": 0.6666666666666666,
+        "corner_gap_100mm": 0.6666666666666666,
+        "corner_gap_300mm": 0.6666666666666666,
+        "translate_x_001mm": 0.9993336665000833,
+        "translate_x_005mm": 0.9966749792186201,
+        "translate_x_010mm": 0.9933665008291874,
+        "translate_x_020mm": 0.9867986798679867,
+        "translate_x_049mm": 0.9681145274117456,
+        "translate_x_050mm": 0.9674796747967479,
+        "translate_x_051mm": 0.6598148148148147,
+        "rotate_z_0p5deg": 0.9906785548571162,
+        "rotate_z_1deg": 0.9816155564322213,
+        "rotate_z_2deg": 0.8391437635567627,
+        "one_vertical_side_missing": 0.6666666666666666,
+        "neighbors_gap_010mm": 1.0,
+        "neighbors_gap_010mm_wrong_bridge": 0.999760604659685,
+        "neighbors_gap_050mm": 1.0,
+        "neighbors_gap_050mm_wrong_bridge": 0.9988067674256558,
+        "neighbors_gap_200mm": 1.0,
+        "neighbors_gap_200mm_wrong_bridge": 0.9843602739329926,
+        "concave_l_vertical": 1.0,
+        "independent_face_jitter_001mm": 0.6656380596618977,
+        "independent_face_jitter_005mm": 0.6615558295794745,
+        "independent_face_jitter_010mm": 0.6565241958429517,
+        "ambiguity_closed_solid_missing_corner": 0.6666666666666666,
+        "ambiguity_true_open_shell_same_observation": 0.6666666666666666,
+        "thin_walls_continuous_002mm": 0.9988900728407725,
+        "thin_walls_001mm_opening": 0.6666659457388636,
+        "anchor_box_closed": 1.0,
+        "anchor_box_vertical": 1.0,
+        "anchor_box_retriangulated": 1.0,
+        "anchor_box_vertical_retriangulated": 1.0,
+        "anchor_box_duplicate": 1.0,
+        "anchor_box_vertical_duplicate": 1.0,
+        "anchor_box_four_thin_walls": 0.9988900728407725,
+        "anchor_l_closed": 1.0,
+        "anchor_l_vertical": 1.0,
+        "anchor_box_vertical_missing_side": 0.6666666666666666,
+        "anchor_box_expanded_030": 0.0,
+        "anchor_box_shifted_030": 0.62,
+        "anchor_l_notch_filled": 0.8888888888888888,
+        "anchor_l_convex_shortcut": 0.9151532327909454,
+        "anchor_box_extra_detached_box": 0.9419753086419753,
+        "anchor_box_extra_open_strip": 0.9265734265734266,
+        "anchor_empty": 0.0,
+        "anchor_both_present": 1.0,
+        "anchor_one_instance_missing": 0.5,
+        "anchor_all_instances_missing": 0.0,
+        "anchor_duplicate_seed": 0.0,
+        "anchor_extra_unassigned_instance": 0.6666666666666666,
+        "anchor_empty_extra_duplicate_seed": 1.0
+      },
+      "ambiguity_representation_checks": {
+        "prediction_arrays_equal": true,
+        "xy_area_equal": true,
+        "xy_support_equal": true,
+        "xy_band_0.02_equal": true,
+        "xy_band_0.05_equal": true,
+        "xy_band_0.1_equal": true,
+        "xz_area_equal": true,
+        "xz_support_equal": true,
+        "xz_band_0.02_equal": true,
+        "xz_band_0.05_equal": true,
+        "xz_band_0.1_equal": true,
+        "yz_area_equal": true,
+        "yz_support_equal": true,
+        "yz_band_0.02_equal": true,
+        "yz_band_0.05_equal": true,
+        "yz_band_0.1_equal": true
+      },
+      "ambiguity_extra_projection_extractions": 6,
+      "ambiguity_extra_band_constructions": 18,
+      "kernel_unit_tests_passed": 5,
+      "fixture_unit_tests_passed": 9,
+      "preliminary_empty_projection_comparisons": 1,
+      "saved_diagnostic_root": "audit_results/v32_saved_support_band_20260917",
+      "saved_diagnostic_result_sha256": "a8f2f4266be30e1fabdcfeff694ad006ff9daa1a1db2aa735a333553256d01e5",
+      "saved_diagnostic_inventory_sha256": "5cbe1a7f104e1e29f9fb67ce2c62df2e962f036dbacf5a412bae34dabbbc849d",
+      "saved_diagnostic_sources": 42,
+      "saved_diagnostic_inputs": 45,
+      "saved_diagnostic_counts": {
+        "candidate_evaluations": 8,
+        "standalone_legacy_evaluations": 0,
+        "mesh_inputs_read": 16,
+        "worlds": 0,
+        "sensor_packets": 0,
+        "mapper_updates": 0,
+        "TSDF_integrations": 0,
+        "mapper_mesh_extractions": 0,
+        "new_main_tasks": 0
+      },
+      "final_support_Q05": [
+        0.4810925733546107,
+        0.4770147848299381,
+        0.45926171640641306,
+        0.5001355059194995
+      ],
+      "final_v31_region_Q05": [
+        0.5498498744495897,
+        0.674370951577315,
+        0.6527427779926807,
+        0.5609800481602488
+      ],
+      "final_candidate_eligible": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "physical_qualification_unchanged": true,
+      "posthoc_ineligible_selection": {
+        "02cm": {
+          "outline_macro_quality": {
+            "always_A": 0.2325875433849298,
+            "always_B": 0.2559719592332297,
+            "best_fixed": 0.2559719592332297,
+            "complex_rule": 0.2644110086436503,
+            "swapped_rule": 0.22414849397450914,
+            "oracle": 0.2644110086436503,
+            "complex_relative": 0.032968647955424535,
+            "scope": "new support function; ineligible previously seen fixed-route data, not adaptive G/S"
+          },
+          "joint_outline": {
+            "always_A": 0.18037369964117683,
+            "always_B": 0.19851690482631618,
+            "best_fixed": 0.19851690482631618,
+            "complex_rule": 0.20276181056473716,
+            "swapped_rule": 0.17612879390275588,
+            "oracle": 0.20276181056473716,
+            "complex_relative": 0.021383094513461653,
+            "scope": "new support function; ineligible previously seen fixed-route data, not adaptive G/S"
+          }
+        },
+        "05cm": {
+          "outline_macro_quality": {
+            "always_A": 0.4701771448805119,
+            "always_B": 0.4885751453747188,
+            "best_fixed": 0.4885751453747188,
+            "complex_rule": 0.4906140396370551,
+            "swapped_rule": 0.4681382506181756,
+            "oracle": 0.4906140396370551,
+            "complex_relative": 0.00417314364358945,
+            "scope": "new support function; ineligible previously seen fixed-route data, not adaptive G/S"
+          },
+          "joint_outline": {
+            "always_A": 0.3648979706427242,
+            "always_B": 0.37917434297877695,
+            "best_fixed": 0.37917434297877695,
+            "complex_rule": 0.37622408944158725,
+            "swapped_rule": 0.36784822417991386,
+            "oracle": 0.37917434297877695,
+            "complex_relative": -0.007780730927131385,
+            "scope": "new support function; ineligible previously seen fixed-route data, not adaptive G/S"
+          }
+        },
+        "10cm": {
+          "outline_macro_quality": {
+            "always_A": 0.5943557916082542,
+            "always_B": 0.6082008989236128,
+            "best_fixed": 0.6082008989236128,
+            "complex_rule": 0.6058063025367355,
+            "swapped_rule": 0.5967503879951316,
+            "oracle": 0.6082008989236128,
+            "complex_relative": -0.003937179953392489,
+            "scope": "new support function; ineligible previously seen fixed-route data, not adaptive G/S"
+          },
+          "joint_outline": {
+            "always_A": 0.46136152465413294,
+            "always_B": 0.4721045519610522,
+            "best_fixed": 0.4721045519610522,
+            "complex_rule": 0.4645585045190863,
+            "swapped_rule": 0.4689075720960988,
+            "oracle": 0.4721045519610522,
+            "complex_relative": -0.015983848091743136,
+            "scope": "new support function; ineligible previously seen fixed-route data, not adaptive G/S"
+          }
+        }
+      },
+      "primary_threshold_cm": 5,
+      "primary_two_option_oracle_joint_relative_value": 0.0,
+      "independent_review": "docs/research/V32_SUPPORT_BAND_INDEPENDENT_REVIEW_20260917.md",
+      "independent_review_root": "audit_results/v32_support_band_review_20260917",
+      "independent_review_passed": true,
+      "independent_review_result_sha256": "77270ef4f99a0def9892099a1eda2ae1ecc07f0e908e904a6a4fb7dec57fdfd2",
+      "independent_review_inventory_sha256": "711f295e361e6da8847f60df64852f226b0e2e29f9828c339803c5b1d5acabd1",
+      "figure": "docs/research/figures/v32_support_band_20260917.png",
+      "figure_receipt_root": "audit_results/v32_support_band_figures_20260917",
+      "figure_result_sha256": "ad1a1f4423e094975e1fe25e7a44d95481edae7ba61014beb8cc6524379ee54b",
+      "figure_inventory_sha256": "41f7099ca1519cf5e866bebd1d8477836a54b992effde921eaf6a4fa463cb154",
+      "candidate_versions_executed": 1,
+      "candidate_revision_used": false,
+      "projection_score_development_closed": true,
+      "new_main_tasks": 0,
+      "main_tasks_used": 16,
+      "main_tasks_cap": 36,
+      "physical_runs_active": false,
+      "observed_geometry_changed": false,
+      "legacy_region_diagnostic_matches_v31": true,
+      "semantic_efficacy_proven": false,
+      "full_architecture_advantage_proven": false,
+      "candidate_ready_as_sole_training_target": false,
+      "full_3d_accuracy_certified": false,
+      "connectivity_certified": false,
+      "candidate_replaces_legacy_metrics": false,
+      "current_fixed_catalogue_training_stopped": true,
+      "next_scene_executed": false,
+      "next_action": "freeze_bounded_service_direction_information_value_scene_screening_before_new_physical_tasks",
+      "feasibility_deadline": "2026-09-29",
+      "old_sources_and_inputs_unchanged": true,
+      "cleanup_performed": false
+    },
+    "v33_direction_information_20260917": {
+      "report": "docs/research/V33_DIRECTION_INFORMATION_RESULT_20260917.md",
+      "protocol": "docs/research/V33_DIRECTION_INFORMATION_PROTOCOL_20260917.md",
+      "next_plan": "docs/research/V34_MEASUREMENT_GATE_PLAN_20260917.md",
+      "bridge_readiness": "docs/research/V34_SENSOR_BRIDGE_READINESS_20260917.md",
+      "status": "complete",
+      "information_relative": [
+        0.11797979797979838,
+        0.10468319559228674
+      ],
+      "G_optimal": [
+        0.6519396551724151,
+        0.5908203125000011
+      ],
+      "oracle_optimal": [
+        0.7288553639846761,
+        0.6526692708333347
+      ],
+      "all_finite_information_gates_passed": true,
+      "scope": "ideal finite grid, forced18-action prefix then24-action adaptive policy; C_grid times potentially visible area, not measured reconstruction",
+      "r0_defect_correction_used": true,
+      "geometry_revision_limit_exhausted": true,
+      "geometry_models_total": 8,
+      "exact_solver_instances": 4,
+      "memo_states": 30306,
+      "policy_witnesses": 12,
+      "all_witnesses_total_paid_actions": 42,
+      "all_witnesses_coverage_qualified": true,
+      "geometry_first_information_layers": [
+        8,
+        6
+      ],
+      "G_witness_information_layers": [
+        10,
+        6
+      ],
+      "G_actual_postinformation_branching": [
+        true,
+        false
+      ],
+      "abstract_solver_tests_passed": 17,
+      "abstract_exhaustive_value_comparisons": 60,
+      "geometry_assembly_tests_passed": 6,
+      "independent_review_passed": true,
+      "independent_review_did_not_rerun_geometry_or_DP": true,
+      "checker_first_failure_preserved": true,
+      "new_worlds": 0,
+      "new_sensor_packets": 0,
+      "new_mapper_updates": 0,
+      "new_TSDF_integrations": 0,
+      "new_Q_evaluations": 0,
+      "new_main_tasks": 0,
+      "main_tasks_used": 16,
+      "main_tasks_cap": 36,
+      "physical_runs_active": false,
+      "physical_experiment_ready": false,
+      "semantic_efficacy_proven": false,
+      "full_architecture_advantage_proven": false,
+      "actual_C80_verified": false,
+      "precision_thresholds_cm": {
+        "2": null,
+        "5": null,
+        "10": null
+      },
+      "feasibility_deadline": "2026-09-29",
+      "cleanup_performed": false,
+      "old_sources_and_inputs_unchanged": true,
+      "r0": {
+        "root": "audit_results/v33_direction_information_r0_20260917",
+        "result_sha256": "47b21ba99d5253c7c17f30dfcf3b5faf3405bf07e05ad292bd73dbd1e65584e3",
+        "inventory_sha256": "cd8a7405bab30e5caa75660b49eda7c1e5a039268b3c77011931a54314efd6b5",
+        "sources": 14,
+        "status": "geometry_gate_failed",
+        "counts": {
+          "analytic_geometry_models": 4,
+          "exact_solver_instances": 0,
+          "memo_states": 0,
+          "worlds": 0,
+          "sensor_packets": 0,
+          "mapper_updates": 0,
+          "TSDF_integrations": 0,
+          "Q_evaluations": 0,
+          "new_main_tasks": 0
+        }
+      },
+      "r1": {
+        "root": "audit_results/v33_direction_information_r1_20260917",
+        "result_sha256": "1f925ff0d2cfa6b4b715bf61a336331853a1a5da2ac7c679228b2514d0b68c02",
+        "inventory_sha256": "95f318a3dfdc44812fce123d42d02363559437985feb54f48933aa9268eeb946",
+        "sources": 15,
+        "status": "complete",
+        "counts": {
+          "analytic_geometry_models": 4,
+          "exact_solver_instances": 4,
+          "memo_states": 30306,
+          "worlds": 0,
+          "sensor_packets": 0,
+          "mapper_updates": 0,
+          "TSDF_integrations": 0,
+          "Q_evaluations": 0,
+          "new_main_tasks": 0
+        }
+      },
+      "independent_review": {
+        "root": "audit_results/v33_direction_information_review_r1_20260917",
+        "result_sha256": "9d7ba2c22f6dea18a473f68f241ece3f9eafb51fb9ff6cd182e108aadd65885d",
+        "inventory_sha256": "b0c2d477e40758f38820f1eeced5b01b41a84f642116e01db091180b827a07cd"
+      },
+      "figures": {
+        "root": "audit_results/v33_direction_information_figures_20260917",
+        "result_sha256": "1e9f95f23edb9cd7d4a5143c501ef7f39609dcca2f86c5e24c88bb7c5cfe79e9",
+        "inventory_sha256": "3d0b910717fc5fe8896907d78232516f6f8ed391b6600d4e8aa4f5bc2af244ba"
+      },
+      "figure": "docs/research/figures/v33_direction_information_20260917.png"
+    },
+    "v34_pixel_and_fixed_measurement_20260918": {
+      "report": "docs/research/V34_PIXEL_AND_FIXED_MEASUREMENT_RESULT_20260918.md",
+      "next_plan": "docs/research/V35_ONLINE_SEMANTIC_GATE_PLAN_20260918.md",
+      "status": "complete_measured_fixed_route_gate_passed",
+      "pixel_information_root": "audit_results/v34_pixel_information_20260918",
+      "pixel_result_sha256": "129fb6cb09e0222c78478b5fe925333474d6e47e0cefdb03ca73653296308bde",
+      "pixel_worlds": 4,
+      "pixel_packets": 416,
+      "pixel_main_tasks": 0,
+      "pixel_paid_actions": 0,
+      "pixel_DP_instances": 4,
+      "pixel_memo_states": 30306,
+      "pixel_witnesses": 12,
+      "first_geometry_information_actions": [
+        8,
+        6
+      ],
+      "pixel_information_relative": [
+        0.11797979797979838,
+        0.10468319559228674
+      ],
+      "unit_tests": {
+        "sensor": 10,
+        "surface_measurement": 11,
+        "saved_reward_adapter": 3
+      },
+      "sensor_unit_actual_counts": {
+        "worlds": 3,
+        "packets": 9,
+        "clean_depth_queries": 9,
+        "scan_queries": 9,
+        "paid_step_calls": 2,
+        "deliberate_collision_test": 1,
+        "mapper_updates": 0
+      },
+      "batch_root": "audit_results/v34_fixed_measurement_20260918",
+      "result_sha256": "a95cb49901cd71523fde07241648268cd9fca30797781d78b80b6130d4d75e16",
+      "final_seal_sha256": "4fead354291efad4236ddc8ef8ec217971aa4b763651bf53aafe7caf3d7dd28e",
+      "source_count": 61,
+      "main_comparison_cells": 4,
+      "unique_main_trajectories": 3,
+      "prospective_alias": "h0 G and class_oracle have exactly the same frozen route and acquisition",
+      "comparison": {
+        "02cm": {
+          "G_mean_joint": 0.6598174482651564,
+          "class_oracle_mean_joint": 0.7010459493723027,
+          "paired_mean_joint_difference": 0.041228501107146265,
+          "paired_joint_differences": [
+            0.0,
+            0.08245700221429253
+          ],
+          "relative_mean_joint_difference": 0.06248470878657038
+        },
+        "05cm": {
+          "G_mean_joint": 0.7237555311248562,
+          "class_oracle_mean_joint": 0.7712658287589086,
+          "paired_mean_joint_difference": 0.047510297634052345,
+          "paired_joint_differences": [
+            0.0,
+            0.09502059526810469
+          ],
+          "relative_mean_joint_difference": 0.06564412372809385
+        },
+        "10cm": {
+          "G_mean_joint": 0.7446239273307962,
+          "class_oracle_mean_joint": 0.7965416512441807,
+          "paired_mean_joint_difference": 0.05191772391338467,
+          "paired_joint_differences": [
+            0.0,
+            0.10383544782676934
+          ],
+          "relative_mean_joint_difference": 0.06972341608668242
+        }
+      },
+      "actual_final_C_map": 0.9574829931972789,
+      "actual_final_C_grid_measured": 0.9166666666666666,
+      "all_final_eligible": true,
+      "all_replays_passed": true,
+      "measured_fixed_route_gate_passed": true,
+      "main_counts": {
+        "worlds": 3,
+        "sensor_packets": 129,
+        "clean_depth_queries": 129,
+        "scan_queries": 129,
+        "paid_actions": 126,
+        "mapper_updates": 129,
+        "TSDF_integrations": 129,
+        "mapper_mesh_extractions": 6,
+        "evaluation_stages": 6,
+        "learned_reconstruction_calls": 0
+      },
+      "replay_counts": {
+        "worlds": 3,
+        "sensor_packets": 129,
+        "clean_depth_queries": 129,
+        "scan_queries": 129,
+        "paid_actions": 126,
+        "mapper_updates": 129,
+        "TSDF_integrations": 129,
+        "mapper_mesh_extractions": 6,
+        "evaluation_stages": 6,
+        "learned_reconstruction_calls": 0
+      },
+      "prestart_replay_launch_rejections": 1,
+      "prestart_rejection_actual_worlds": 0,
+      "independent_saved_evidence_review": "audit_results/v34_fixed_measurement_review_20260918",
+      "independent_review_passed": true,
+      "independent_review_result_sha256": "4a9606b6b349535ab4451c03ed59f5b79c9be4e8ebfcba571bb5d9c9e04b66dd",
+      "review_performed_new_render_or_fusion": false,
+      "main_tasks_used": 19,
+      "main_tasks_cap": 36,
+      "new_main_tasks": 3,
+      "new_autonomous_tasks": 0,
+      "active_physical_sessions": [],
+      "scope": "One parent, two paired configurations, one fixed noise seed; offline visibility-proxy-optimal witnesses measured with shared noisy TSDF. Class oracle is not an actual-Q global optimum. ROI precision excludes outside-ROI errors; exact synthetic pose; forced18-prefix.",
+      "online_semantic_efficacy_proven": false,
+      "natural_semantic_innovation_proven": false,
+      "full_architecture_advantage_proven": false,
+      "robot_effectiveness_proven": false,
+      "remaining_development_cap": 8,
+      "remaining_confirmation_cap": 8,
+      "feasibility_deadline": "2026-09-29",
+      "cleanup_performed": false,
+      "figures": "docs/research/figures/v34_fixed_measurement_20260918",
+      "handoff_evidence": "audit_results/v34_completion_handoff_20260918",
+      "manuscript_source_updated": true,
+      "manuscript_pdf_compiled": false,
+      "manuscript_compiler_available": false,
+      "confirmation_scope": "At most8 frozen P00/P01 paired G/S with unused noise seeds; layouts already used in ideal design, not unseen-layout confirmation."
+    },
+    "v35_online_semantic_20260918": {
+      "status": "complete_controlled_online_development_gate_passed",
+      "report": "docs/research/V35_ONLINE_SEMANTIC_RESULT_20260918.md",
+      "independent_review": "docs/research/V35_ONLINE_SEMANTIC_INDEPENDENT_REVIEW_20260918.md",
+      "next_plan": "docs/research/V36_FROZEN_CONFIRMATION_PLAN_20260918.md",
+      "batch_root": "audit_results/v35_online_development_20260918",
+      "result_sha256": "23bdcf381ccf5654d1f1bb57d933c882175e4c52af225af92c3287decb2af938",
+      "final_seal_sha256": "309a97a3b7ea11169185e47d1ecbec8ad252795af98daeef84bee37b38b3efa4",
+      "source_count": 86,
+      "implementation_tests": {
+        "posterior": 11,
+        "planner": 11,
+        "four_modules": 11,
+        "planner_exhaustive_subcases": 45
+      },
+      "cached_gate_root": "audit_results/v35_saved_observation_gate_20260918",
+      "cached_gate_result_sha256": "190977a316e8c8165217884ba29af3d635358ee5e0f9e662816e8ddaee94e9a0",
+      "cached_gate_passed": true,
+      "cached_counts": {
+        "controllers": 10,
+        "observations": 382,
+        "nominal_actions_not_physical": 372,
+        "online_planning_calls": 194,
+        "same_state_interventions": 2,
+        "memo_states": 305478,
+        "Worlds": 0,
+        "TSDF": 0,
+        "Q": 0
+      },
+      "cached_review_root": "audit_results/v35_saved_observation_review_20260918",
+      "cached_review_passed": true,
+      "independent_chain_root": "audit_results/v35_semantic_chain_review_20260918",
+      "independent_chain_result_sha256": "971dce028f694bcfc09a5f2e6f351fc3bfc100cf2a3709eb45cb077639196749",
+      "independent_chain_inventory_sha256": "2ee72d295aa44c50329325b722b61283788c6491cb728b2fe95a86a4778d4168",
+      "independent_chain_counts": {
+        "new_worlds": 0,
+        "new_sensor_queries": 0,
+        "new_main_tasks": 0,
+        "new_mapper_or_TSDF_calls": 0,
+        "new_surface_metric_calls": 0,
+        "counterfactual_DP_attempts": 2,
+        "counterfactual_DP_completed": 2,
+        "counterfactual_memo_states": 1264
+      },
+      "complete_development_gate_passed": true,
+      "immutable_batch_overall_gate_is_null_pending_separate_audit": true,
+      "qualification_and_replay_gate_passed": true,
+      "measured_online_semantic_score_gate_passed": true,
+      "measured_feedback_score_gate_passed": true,
+      "new_main_tasks": 8,
+      "independent_online_replays": 8,
+      "main_tasks_total": 27,
+      "main_tasks_cap": 36,
+      "all_tasks_paid_actions": 42,
+      "all_tasks_C_map": 0.9574829931972789,
+      "all_tasks_collisions": 0,
+      "all_tasks_exact_return": true,
+      "comparison": {
+        "02cm": {
+          "mean_joint": {
+            "G": 0.6598174482651564,
+            "S": 0.7010459493723027,
+            "swapped": 0.6226120430100424,
+            "swapped_no_feedback": 0.6201610564020552
+          },
+          "S_vs_G": {
+            "treatment": "S",
+            "baseline": "G",
+            "paired_joint_differences": [
+              0.0,
+              0.08245700221429253
+            ],
+            "paired_mean_joint_difference": 0.041228501107146265,
+            "relative_mean_joint_difference": 0.06248470878657038
+          },
+          "S_vs_swapped": {
+            "treatment": "S",
+            "baseline": "swapped",
+            "paired_joint_differences": [
+              0.07441081051022813,
+              0.08245700221429253
+            ],
+            "paired_mean_joint_difference": 0.07843390636226033,
+            "relative_mean_joint_difference": 0.12597556896437231
+          },
+          "swapped_vs_swapped_no_feedback": {
+            "treatment": "swapped",
+            "baseline": "swapped_no_feedback",
+            "paired_joint_differences": [
+              0.007061330522219356,
+              -0.0021593573062449467
+            ],
+            "paired_mean_joint_difference": 0.0024509866079872045,
+            "relative_mean_joint_difference": 0.003952177555628728
+          }
+        },
+        "05cm": {
+          "mean_joint": {
+            "G": 0.7237555311248562,
+            "S": 0.7712658287589086,
+            "swapped": 0.6722544222751089,
+            "swapped_no_feedback": 0.6550648837621296
+          },
+          "S_vs_G": {
+            "treatment": "S",
+            "baseline": "G",
+            "paired_joint_differences": [
+              0.0,
+              0.09502059526810469
+            ],
+            "paired_mean_joint_difference": 0.047510297634052345,
+            "relative_mean_joint_difference": 0.06564412372809385
+          },
+          "S_vs_swapped": {
+            "treatment": "S",
+            "baseline": "swapped",
+            "paired_joint_differences": [
+              0.10300221769949469,
+              0.09502059526810469
+            ],
+            "paired_mean_joint_difference": 0.09901140648379969,
+            "relative_mean_joint_difference": 0.1472826406239406
+          },
+          "swapped_vs_swapped_no_feedback": {
+            "treatment": "swapped",
+            "baseline": "swapped_no_feedback",
+            "paired_joint_differences": [
+              0.016570961970814868,
+              0.01780811505514368
+            ],
+            "paired_mean_joint_difference": 0.017189538512979274,
+            "relative_mean_joint_difference": 0.02624097083980039
+          }
+        },
+        "10cm": {
+          "mean_joint": {
+            "G": 0.7446239273307962,
+            "S": 0.7965416512441807,
+            "swapped": 0.6878233969458928,
+            "swapped_no_feedback": 0.6737405462635926
+          },
+          "S_vs_G": {
+            "treatment": "S",
+            "baseline": "G",
+            "paired_joint_differences": [
+              0.0,
+              0.10383544782676934
+            ],
+            "paired_mean_joint_difference": 0.05191772391338467,
+            "relative_mean_joint_difference": 0.06972341608668242
+          },
+          "S_vs_swapped": {
+            "treatment": "S",
+            "baseline": "swapped",
+            "paired_joint_differences": [
+              0.1136010607698067,
+              0.10383544782676934
+            ],
+            "paired_mean_joint_difference": 0.10871825429828802,
+            "relative_mean_joint_difference": 0.15806129128643218
+          },
+          "swapped_vs_swapped_no_feedback": {
+            "treatment": "swapped",
+            "baseline": "swapped_no_feedback",
+            "paired_joint_differences": [
+              0.015832255155960873,
+              0.01233344620863952
+            ],
+            "paired_mean_joint_difference": 0.014082850682300196,
+            "relative_mean_joint_difference": 0.0209024835456325
+          }
+        }
+      },
+      "acquisition_counts": {
+        "worlds": 8,
+        "sensor_packets": 344,
+        "clean_depth_queries": 344,
+        "scan_queries": 344,
+        "paid_actions": 336,
+        "mapper_updates": 344,
+        "TSDF_integrations": 344,
+        "mapper_mesh_extractions": 16,
+        "evaluation_stages": 16,
+        "learned_reconstruction_calls": 0,
+        "controllers": 8,
+        "controller_observations": 344,
+        "online_planning_calls": 192,
+        "online_planning_attempts": 192,
+        "online_planner_memo_states": 289732,
+        "IGCR_updates": 344,
+        "new_geometry_pose_updates": 238
+      },
+      "replay_counts": {
+        "worlds": 8,
+        "sensor_packets": 344,
+        "clean_depth_queries": 344,
+        "scan_queries": 344,
+        "paid_actions": 336,
+        "mapper_updates": 344,
+        "TSDF_integrations": 344,
+        "mapper_mesh_extractions": 16,
+        "evaluation_stages": 16,
+        "learned_reconstruction_calls": 0,
+        "controllers": 8,
+        "controller_observations": 344,
+        "online_planning_calls": 192,
+        "online_planning_attempts": 192,
+        "online_planner_memo_states": 289732,
+        "IGCR_updates": 344,
+        "new_geometry_pose_updates": 238
+      },
+      "causal_summary": "h1 first S/G divergence at paid action19 after identical nonsemantic prefix. Both wrong-class histories first corrected true-state probability0.1 to0.9781780512 at paid step28; actual step29 forward. Two preregistered same-state prior-only counterfactuals select left/right, respectively. No new physical counterfactual endpoints.",
+      "retained_boundaries": [
+        "h0 S and G identical actions and scores",
+        "h1 feedback2cm absolute delta -0.0021593573062449467",
+        "one parent, two paired configurations, artificial RGB palette, public templates/safety graph, exact synthetic poses",
+        "18 forced actions, proxy reward distinct from measured TSDF",
+        "ROI-external errors excluded from precision",
+        "pseudo-likelihood and forecast reliability uncalibrated",
+        "feedback endpoint contrast disables both actual and forecast feedback; intervention isolates action, not entire endpoint effect",
+        "not original trained ANS, natural open-vocabulary, unknown-map SLAM, mainstream superiority, independent scene generalization or real robot evidence"
+      ],
+      "controlled_online_CPU_four_module_development_passed": true,
+      "natural_semantic_innovation_proven": false,
+      "original_neural_full_architecture_advantage_proven": false,
+      "overall_graduation_goal_complete": false,
+      "figures_root": "audit_results/v35_online_semantic_figures_20260918",
+      "active_sessions": [],
+      "next_confirmation_seed": 350918,
+      "next_confirmation_maximum_main_tasks": 8
     }
   },
   "scope": "development evidence plus independent artificial F00--F07 mechanism efficacy; no natural open-vocabulary, large-scale, external-baseline or real-robot confirmation",
@@ -262,19 +1908,19 @@
   "mainstream_baseline_advantage_proven": false,
   "ready_for_independent_confirmation": false,
   "architecture_constraint": "ANS two levels plus OV-SDF/STGHP/RPN-UQ/IGCR interfaces preserved",
-  "research_report": "docs/research/NSO_SEMANTIC_COVERAGE_REDESIGN.md",
+  "research_report": "docs/research/V27_AUTONOMOUS_EFFECT_RESULT_20260916.md",
   "editable_report": "docs/research/NSO_SEMANTIC_COVERAGE_REDESIGN.docx",
   "bibliography": "docs/research/semantic_coverage_references.bib",
   "manuscript": "Semantic_Enhanced_Active_SLAM_Paper.tex",
   "scope_warning": "V11.1 passed independent programmatic efficacy and 96/96 physical-metric replay in artificial two-asset contexts. The 40-branch coverage-stress stratum and 40/40 replay were safe but showed no semantic increment. Natural open-vocabulary, full unknown-start large-scale exploration, trained/calibrated UQ, external baselines and real-robot efficacy remain unverified.",
   "next_required": [
-    "Preserve the independently replayed F08--F11 no-semantic-increment boundary and diagnose it only in a new development version with a future confirmation set.",
-    "Complete quality-aware NBV, geometric coverage and at least one runnable external public baseline under matched information, budget and reconstruction backend.",
-    "Prepare ROS1 ZED depth/pose, Leishen single-line lidar, IMU and GPS message synchronization and transform checks before rosbag and real-robot closed-loop trials."
+    "Follow V36_FROZEN_CONFIRMATION_PLAN_20260918.md. Freeze the V35 posterior/planner/controller unchanged, and implement a separate seed-only V36 acquisition adapter. Use noise seed350918, the already frozen P00/P01 public templates, and G/S with the same active geometry capabilities. Complete source, input-isolation and format checks before any new physical task; no quality pre-runs or parameter scans.",
+    "Run at most8 frozen confirmation main tasks: P00/P01 x h0/h1 x G/S, each followed immediately by a fresh-process online replay. Keep42 total/18 prefix actions, C_map80, exact return, zero collisions, common TSDF/ROI and P/R/F1@2/5/10cm. Require positive mean J5 gain for each parent and no per-parent mean sign reversal at2/10cm. P01 was inspected in ideal models; this is held-out-noise/cross-parent physical confirmation, not wholly unseen-layout generalization.",
+    "Main tasks27/36; no active acquisition or replay. At most8 next tasks bring the count to35/36; the final1 is not an automatic retry. Preserve all failures/zeros, including V35 h0 zero S-G and h1 negative feedback at2cm. Stop on qualification/replay failure; no scene, metric, noise or budget retuning on confirmation scores. Decision date2026-09-29 unchanged; natural semantic front-end, mainstream comparison and ROS1 transfer remain separate work."
   ],
   "independent_seed_reservations": {
     "generic": "301-308 untouched",
-    "facility": "401-412 used by structurally failed E preparation; 413-424 frozen as F00-F11, with F00-F07 efficacy viewed and F08-F11 stress pending"
+    "facility": "401-412 used by structurally failed E preparation; 413-424 frozen as F00-F11 and fully evaluated, with no reuse for tuning"
   },
   "source_freeze_failure": {
     "directory": "eval_results/joint_v4_ablation_development_20260910",
@@ -458,9 +2104,85 @@
   },
   "storage_deduplication_audit": "audit_results/completed_sensor_storage_dedup_20260910/README.md",
   "legacy_development_boolean_scope": "Historical positive semantic booleans describe V4 development means only. Original facility step80/160 pools had zero semantic choices; fixed timing audit found 2/64 divergences with local utility, but strong net semantic advantage remains unproven.",
-  "official_build_scope": "Unmodified TARE TSP component compiled and passed 4 fixtures; complete planner CMake failed at missing catkin; no ROS node, official demo or fair baseline executed",
+  "official_build_scope": "Pinned unmodified TARE TSP component passed 4 fixtures; full planner then compiled with catkin in a pinned Noetic CPU container and the original garage launch passed node liveness plus ROS interface registration. No sensor-driven episode, official Gazebo demo or fair performance baseline has been executed.",
+  "official_planner_build_passed": true,
+  "official_planner_node_interface_smoke_passed": true,
   "official_native_demo_passed": false,
   "official_build_report": "docs/research/TARE_NATIVE_BUILD_FEASIBILITY.md",
+  "official_build_evidence": "audit_results/tare_native_node_attempt_20260911/verification.json",
+  "semantic_gain_v12_scale": {
+    "status": "development_world_and_variable_asset_feature_preparation_passed_no_planner_outcomes",
+    "feature_module": "nso/semantic_gain_v12.py",
+    "feature_schema": "semantic_gain_v12_candidate_set_features/1",
+    "feature_dimension": 20,
+    "supported_measured_asset_count": [
+      1,
+      24
+    ],
+    "candidate_capacity_for_12_assets": 29,
+    "protocol": "configs/virtual3d/semantic_gain_v12_scale_development.json",
+    "preparation_manifest": "eval_results/semantic_gain_v12_scale_preparation_20260911/manifest.json",
+    "development_contexts": 6,
+    "assets_per_context": [
+      8,
+      8,
+      10,
+      10,
+      12,
+      12
+    ],
+    "width_range_m": [
+      35.6,
+      73.2
+    ],
+    "semantic_interventions": [
+      "aligned",
+      "shuffled",
+      "absent"
+    ],
+    "physical_input_hash_checks_passed": 18,
+    "candidate_preflight": {
+      "retained_failed_run": "eval_results/semantic_gain_v12_candidate_smoke_20260911",
+      "failure": "21-slot cap derived from 8 truth assets truncated three deep roles after observed geometry produced 11 components",
+      "passed_runs": [
+        "eval_results/semantic_gain_v12_candidate_smoke2_20260911",
+        "eval_results/semantic_gain_v12_candidate_smoke3_20260911"
+      ],
+      "shared_prefix_paid_actions": 370,
+      "remaining_actions": 350,
+      "observed_geometry_components": 11,
+      "marker_supported_assets": 8,
+      "candidate_cap": 53,
+      "candidate_count": 23,
+      "semantic_assets_with_candidates": 8,
+      "omitted_by_cap": 0,
+      "exact_repeat_result_sha256": "3ce7e3a6a3ebb23606549eb2c8bff24a31280cf2b7865bf335b451338ae4c7d7",
+      "planner_outcomes_generated": 0
+    },
+    "planner_outcomes_generated": 0,
+    "strict_branch_development": {
+      "branch_protocol": "configs/virtual3d/semantic_gain_v12_branch_development.json",
+      "deepcopy_invalidation_audit": "audit_results/open3d_tsdf_branch_isolation_20260911/verification.json",
+      "invalidated_sequential_deepcopy_contexts": [
+        "D12-00",
+        "D12-01",
+        "D12-00-anchor-sweep"
+      ],
+      "valid_directory": "eval_results/semantic_gain_v12_fullreplay_branches_D12_00_20260911",
+      "prefix_frames_replayed_per_candidate": 375,
+      "candidates": 23,
+      "safe_candidates": 23,
+      "fallback_safe_returns": 8,
+      "strict_first_five_independent_replay": "audit_results/semantic_gain_v12_strict_branch_repeat_20260911/verification.json",
+      "strict_first_five_exact_replay_passed": true,
+      "fixed_modes_selected_same_candidate": true,
+      "fixed_selected_candidate_true_rank": 8,
+      "complex_vs_simple_entry_relative_mean": 0.40556424957489484,
+      "complex_vs_simple_deep_relative_mean": 0.25346490834721885,
+      "confounded_by_location_and_coverage": true
+    },
+    "claim_boundary": "V12 scale-safe representation, development scene preparation and one strict physical candidate context only; no trained V12 model, closed-loop gain, confirmation or external-baseline advantage yet"
+  },
   "counterfactual_v5_geometry_diagnosis": {
     "directory": "eval_results/counterfactual_object_diagnosis_v5_first_20260910",
     "background_weight_fraction_S_old": 0.4971,
@@ -471,7 +2193,7 @@
     "adopt_as_default": false,
     "scope": "same 17 history-cluster instances and 6 prefixes; posthoc diagnostic using GT excluded from planning"
   },
-  "updated_date": "2026-09-11",
+  "updated_date": "2026-09-18",
   "semantic_local_decision_utility_observed_development": true,
   "semantic_robust_increment_proven": false,
   "counterfactual_timing_audit": {
@@ -733,8 +2455,8 @@
     "original_input_hashes_verified": 1026,
     "independent_confirmation": false
   },
-  "current_storage_note": "224 reproducible derived meshes compacted after full raw-to-NPZ SHA checks; raw/reference/metrics preserved, original strict replays require restore. reserve400MiB.",
-  "next_validation_protocol": "docs/research/FOUR_MODULE_CPU_CLOSED_LOOP_V10_CONTRACT.md",
+  "current_storage_note": "V358 primary+8 replay and derivative evidence completed without cleanup. Reserve64MiB remains mandatory; see graduation_delivery_plan.latest_available_disk_mib_observed. No original evidence was deleted.",
+  "next_validation_protocol": "implementation_gates_before_new_protocol",
   "semantic_response_v7": {
     "document": "docs/research/SEMANTIC_RESPONSE_V7_IMPLEMENTATION_AND_EVIDENCE.md",
     "status": "halted_before_first_calibration",
@@ -814,13 +2536,23 @@
     "all_changed_original_routes_executed": true
   },
   "next_action_sequence": [
-    "Preserve all V8.1/V9/V9.1 failures, complete44 outcomes and the preset0.005 F1 gain threshold; no retrospective pass claim.",
-    "Implement FOUR_MODULE_CPU_CLOSED_LOOP_V10_CONTRACT.md through the existing ANS hierarchy and four interfaces: calibrated RGB-D projection, target heading/budget sidecar, terminal-before-reset feedback and remaining-budget replanning.",
-    "Verify causal module invocation/ablation and full task coverage-quality trajectories with new frozen rules; current finite-pool F1 ceiling cannot be overcome by rescoring the same44 routes.",
-    "Add justified response uncertainty and prior mismatch controls; artificial category markers are not natural/open-vocabulary validation.",
-    "Complete fair runnable mainstream baseline comparisons and non-oracle-pose/ROS1 ZED-lidar replay before whole-system or real-world claims."
+    "Follow V36_FROZEN_CONFIRMATION_PLAN_20260918.md. Freeze the V35 posterior/planner/controller unchanged, and implement a separate seed-only V36 acquisition adapter. Use noise seed350918, the already frozen P00/P01 public templates, and G/S with the same active geometry capabilities. Complete source, input-isolation and format checks before any new physical task; no quality pre-runs or parameter scans.",
+    "Run at most8 frozen confirmation main tasks: P00/P01 x h0/h1 x G/S, each followed immediately by a fresh-process online replay. Keep42 total/18 prefix actions, C_map80, exact return, zero collisions, common TSDF/ROI and P/R/F1@2/5/10cm. Require positive mean J5 gain for each parent and no per-parent mean sign reversal at2/10cm. P01 was inspected in ideal models; this is held-out-noise/cross-parent physical confirmation, not wholly unseen-layout generalization.",
+    "Main tasks27/36; no active acquisition or replay. At most8 next tasks bring the count to35/36; the final1 is not an automatic retry. Preserve all failures/zeros, including V35 h0 zero S-G and h1 negative feedback at2cm. Stop on qualification/replay failure; no scene, metric, noise or budget retuning on confirmation scores. Decision date2026-09-29 unchanged; natural semantic front-end, mainstream comparison and ROS1 transfer remain separate work."
   ],
-  "latest_phase": "V9.1 complete raw replay and independent metrics; semantic gains positive in finite domain but preset F1-vs-N amplitude gate failed at candidate-pool ceiling",
+  "latest_phase": {
+    "name": "v35_online_semantic_development_complete",
+    "status": "complete_bounded_positive_controlled_CPU_milestone_not_full_goal",
+    "active_session": null,
+    "active_case": null,
+    "active_replay": false,
+    "remaining_running_processes": 0,
+    "total_main_attempts": 27,
+    "limit": 36,
+    "controlled_online_CPU_four_module_development_passed": true,
+    "full_architecture_advantage_proven": false,
+    "next_action": "Follow V36_FROZEN_CONFIRMATION_PLAN_20260918.md. Freeze the V35 posterior/planner/controller unchanged, and implement a separate seed-only V36 acquisition adapter. Use noise seed350918, the already frozen P00/P01 public templates, and G/S with the same active geometry capabilities. Complete source, input-isolation and format checks before any new physical task; no quality pre-runs or parameter scans."
+  },
   "competition_v8": {
     "preparation": "eval_results/competition_v8_preparation_20260911",
     "status": "halted_structural_failure",
@@ -5535,5 +7267,2357 @@
     "S_vs_no_feedback": 0.0,
     "IGCR_independent_performance_gain_verified": false,
     "open_vocabulary_or_external_mainstream_baseline_verified": false
-  }
+  },
+  "semantic_gain_v12_reactivation_20260913": {
+    "status": "handoff_document_only_raw_evidence_unavailable",
+    "source": "docs/research/CONVERSATION_PROGRESS_HANDOFF_20260913_V12_TO_V13.md",
+    "availability_confirmed_by_user": "2026-09-14: only the document remains",
+    "reported_branches": 232,
+    "reported_retraining_conclusion": "no semantic decision increment; do not promote",
+    "locally_reproduced": false,
+    "claim_boundary": "reported historical results, not locally audited experiment evidence; distinct from September 11 V12 scale artifacts"
+  },
+  "semantic_gain_v13": {
+    "status": "paired_information_complete_training_screen_failed",
+    "architecture_constraint": "retain ANS global/local and OV-SDF, STGHP, RPN-UQ, IGCR interfaces; internal algorithms may change",
+    "semantic_innovation_required": true,
+    "source": "nso/decision_replay_v13.py",
+    "entrypoint": "scripts/collect_semantic_gain_v13_history.py",
+    "protocol": "configs/virtual3d/semantic_gain_v13_history_smoke.json",
+    "run": "eval_results/semantic_gain_v13_history_smoke_20260914",
+    "experiment_kind": "new local infrastructure evidence, not reproduction of missing V12",
+    "new_training_completed": false,
+    "semantic_advantage_verified": false,
+    "result": {
+      "checkpoints_checked": 4,
+      "collisions": 0,
+      "complete_v13_algorithm": false,
+      "decision_count": 9,
+      "exact_disk_packet_roundtrips": 97,
+      "limitation": "Stored-packet policy-state replay, not independent physical sensor regeneration or efficacy.",
+      "modules_called": [
+        "IGCR",
+        "OV-SDF",
+        "RPN-UQ",
+        "STGHP"
+      ],
+      "paid_actions": 96,
+      "semantic_advantage_verified": false,
+      "status": "passed",
+      "termination": {
+        "current_footprint_known_safe": true,
+        "failed": false,
+        "final_action_id": 96,
+        "final_frame_id": "frame-96",
+        "reason": "budget_exhausted",
+        "returned_to_anchor": true
+      },
+      "translation_actions": 84
+    },
+    "report": "docs/research/V13_ARCHITECTURE_AND_HISTORY_PROTOCOL.md",
+    "validation": {
+      "packet_persistence_tests": 2,
+      "sensor_contract_tests": 7,
+      "runtime_adapter_tests": 11,
+      "frozen_source_hashes_checked": 93,
+      "artifact_hashes_checked": 103,
+      "hash_mismatches": 0
+    },
+    "continuation": {
+      "status": "19_branches_and_19_physical_metric_replays_passed",
+      "source": "nso/continuation_v13.py",
+      "entrypoint": "scripts/collect_semantic_gain_v13_continuations.py",
+      "protocol": "configs/virtual3d/semantic_gain_v13_continuation_smoke.json",
+      "result": {
+        "branches": 19,
+        "budget_violations": 0,
+        "checkpoints": 4,
+        "collisions": 0,
+        "failures": 0,
+        "first_options_completed": 19,
+        "parents": 1,
+        "per_checkpoint": [
+          {
+            "action_id": 0,
+            "candidate_count": 4,
+            "max_joint_gain": 0.795824106154004,
+            "min_joint_gain": 0.7585681641094149
+          },
+          {
+            "action_id": 19,
+            "candidate_count": 9,
+            "max_joint_gain": 0.39504539634235003,
+            "min_joint_gain": 0.34901982795574005
+          },
+          {
+            "action_id": 81,
+            "candidate_count": 5,
+            "max_joint_gain": 0.009211606401121064,
+            "min_joint_gain": 0.005892368236279699
+          },
+          {
+            "action_id": 95,
+            "candidate_count": 1,
+            "max_joint_gain": 0.0,
+            "min_joint_gain": 0.0
+          }
+        ],
+        "returned": 19,
+        "semantic_information_value_tested": false,
+        "status": "complete",
+        "training_allowed": false
+      },
+      "run": "eval_results/semantic_gain_v13_continuations_Q0_east_20260914",
+      "replay": "audit_results/semantic_gain_v13_continuations_Q0_east_replay_20260914",
+      "fixed_score_diagnostic": "audit_results/semantic_gain_v13_fixed_score_diagnostic_20260914/result.json",
+      "research_protocol": "docs/research/V13_CONTINUATION_RESEARCH_PROTOCOL.md",
+      "result_report": "docs/research/V13_FIRST_CONTINUATION_RESULT_20260914.md",
+      "replay_passed": 19,
+      "new_intervention_tests_passed": 4
+    },
+    "multistate": {
+      "status": "complete_61_decisions_exactly_restored",
+      "run": "eval_results/semantic_gain_v13_multistate_development_v13_1_20260914",
+      "protocol": "configs/virtual3d/semantic_gain_v13_multistate_development.json",
+      "parents": [
+        "Q0",
+        "Q1",
+        "Q2",
+        "Q3"
+      ],
+      "group_key": "parent_including_both_arrangements_and_all_states",
+      "training_allowed": false,
+      "invalid_predecessor": "eval_results/semantic_gain_v13_multistate_development_20260914/INVALID_FOR_TRAINING.json",
+      "fix": "positive-budget decisions only; zero-budget closure cannot reuse last_selection",
+      "summary": {
+        "candidates": 291,
+        "decisions": 61,
+        "episodes": 8,
+        "failed_episodes": 0,
+        "parent_groups": 4,
+        "semantic_information_gate_passed": false,
+        "status": "complete",
+        "training_allowed": false
+      },
+      "pairing_audit": "audit_results/semantic_gain_v13_pairing_20260914/result.json",
+      "matched_geometry_conditioned_pairs": 8,
+      "terminal_regression_tests_passed": 1
+    },
+    "paired_information": {
+      "status": "102_outcomes_and_replay_evidence_complete_all_three_information_screens_failed",
+      "protocol": "configs/virtual3d/semantic_gain_v13_paired_information_protocol.json",
+      "pairs": 8,
+      "expected_candidate_outcomes": 102,
+      "potential_reusable_outcomes": 13,
+      "training_allowed": false,
+      "run": "eval_results/semantic_gain_v13_paired_information_resumed_20260914",
+      "collector": "scripts/resume_semantic_gain_v13_paired_information.py",
+      "analyzer": "scripts/analyze_semantic_gain_v13_paired_information.py",
+      "numerical_contract_tests_passed": 5,
+      "interrupted_predecessor": "eval_results/semantic_gain_v13_paired_information_20260914",
+      "interruption_reason": "No space left on device; completed outcomes retained and byte-validated for recovery",
+      "analysis_output": "audit_results/semantic_gain_v13_paired_information_20260914",
+      "posthoc_fixed_prior_output": "audit_results/semantic_gain_v13_fixed_prior_all_pairs_20260914",
+      "result_report": "docs/research/V13_PAIRED_INFORMATION_RESULT_20260914.md",
+      "completed_outcomes": 102,
+      "physical_replay_evidence_passed": 102,
+      "relative_information_value_by_seed": {
+        "2026": 0.0028975879442615167,
+        "2027": 0.0031223103096318723,
+        "2028": 0.0033648204318635503
+      },
+      "frozen_minimum_relative_information_value": 0.005,
+      "development_information_screen_passed": false,
+      "active_process": false
+    },
+    "storage_recovery": {
+      "audit": "audit_results/storage_v13_exact_duplicate_20260914",
+      "exact_duplicate_npz_files_hardlinked": 17007,
+      "hardlink_allocated_bytes_reclaimed": 266215424,
+      "redundant_pointnav_archive_cache_bytes_reclaimed": 403140608,
+      "archive_sha_and_all_75_extracted_members_verified": true,
+      "package_download_cache_cleaned": true,
+      "raw_data_paths_and_content_preserved": true,
+      "model_weights_removed": false,
+      "unrelated_active_builds_untouched": true
+    },
+    "outbound_v13_2": {
+      "status": "complete_physical_replay_passed_information_gate_failed",
+      "source": "nso/continuation_v13_2.py",
+      "protocol": "configs/virtual3d/semantic_gain_v13_2_outbound_information_protocol.json",
+      "test_evidence": "audit_results/semantic_gain_v13_2_intervention_20260914/result.json",
+      "whole_budget_physical_replay_complete": true,
+      "new_future_outcomes": 102,
+      "semantic_efficacy_proven": false,
+      "collector": "scripts/collect_semantic_gain_v13_2_information.py",
+      "executor": "scripts/execute_semantic_gain_v13_2_continuations.py",
+      "replayer": "scripts/replay_semantic_gain_v13_2_continuations.py",
+      "smoke_run": "eval_results/semantic_gain_v13_2_outbound_smoke_20260914",
+      "smoke_summary": {
+        "budget_violations": 0,
+        "candidate_outcomes": 4,
+        "collisions": 0,
+        "failures": 0,
+        "first_options_complete": 4,
+        "first_targets_reached": 4,
+        "newly_executed": 4,
+        "physical_screen_passed": true,
+        "replayed": 4,
+        "returns": 4,
+        "reused": 0,
+        "status": "complete",
+        "training_allowed": false
+      },
+      "paired_run": "eval_results/semantic_gain_v13_2_outbound_paired_20260914",
+      "worker_processes": 2,
+      "whole_budget_smoke_replay_complete": true,
+      "analysis_entrypoint": "scripts/analyze_semantic_gain_v13_2_information.py",
+      "training_isolation_contract": "docs/research/V13_TRAINING_ISOLATION_AND_PLACEBO_CONTRACT.md",
+      "paired_summary": {
+        "budget_violations": 0,
+        "candidate_outcomes": 102,
+        "collisions": 0,
+        "failures": 0,
+        "first_options_complete": 102,
+        "first_targets_reached": 102,
+        "newly_executed": 98,
+        "physical_screen_passed": true,
+        "replayed": 102,
+        "returns": 102,
+        "reused": 4,
+        "status": "complete",
+        "training_allowed": false
+      },
+      "information_analysis": "audit_results/semantic_gain_v13_2_outbound_information_20260914/summary.json",
+      "report": "docs/research/V13_2_OUTBOUND_INFORMATION_RESULT_20260914.md",
+      "commitment_comparison": "audit_results/semantic_gain_v13_2_commitment_comparison_20260914/result.json",
+      "information_gate_passed": false,
+      "relative_information_values": [
+        0.003958746925383156,
+        0.003844841124280672,
+        0.004101869740522818
+      ],
+      "training_allowed": false
+    }
+  },
+  "semantic_opportunities_v14": {
+    "status": "observed_feature_audit_and_cold_start_physical_preflight_complete; recovery_planning_needed",
+    "source": "nso/semantic_opportunities_v14.py",
+    "report": "docs/research/V14_OBSERVED_FEATURE_AND_COLD_START_RESULT_20260914.md",
+    "unit_tests": "audit_results/semantic_opportunities_v14_1_unit_tests_20260914/result.json",
+    "unit_tests_passed": 7,
+    "observed_audit": "audit_results/semantic_opportunities_v14_1_observed_inputs_20260914/summary.json",
+    "feature_replay": "audit_results/semantic_opportunities_v14_1_feature_replay_20260914/result.json",
+    "states": 16,
+    "candidate_descriptors": 102,
+    "feature_dimension": 26,
+    "first_failed_audit": "audit_results/semantic_opportunities_v14_observed_inputs_20260914/manifest.json",
+    "cold_start_protocol": "configs/virtual3d/semantic_v14_cold_start_preflight.json",
+    "cold_start_run": "eval_results/semantic_v14_cold_start_preflight_20260914",
+    "cold_start_paid_actions": 92,
+    "cold_start_total_budget": 192,
+    "cold_start_external_prefix_actions": 0,
+    "cold_start_replay_passed": true,
+    "early_return_diagnosis": "audit_results/semantic_v14_early_return_20260914/result.json",
+    "early_return_trigger_action": 53,
+    "early_return_remaining_budget": 139,
+    "training_completed": false,
+    "semantic_advantage_proven": false,
+    "information_gate_passed": false,
+    "recovery": {
+      "status": "complete_physical_replay_and_development_metric_comparison",
+      "source": "nso/recovery_runtime_v14.py",
+      "protocol": "configs/virtual3d/semantic_v14_recovery_comparison.json",
+      "run": "eval_results/semantic_v14_recovery_preflight_20260914",
+      "metrics": "audit_results/semantic_v14_recovery_comparison_20260914/result.json",
+      "report": "docs/research/V14_RECOVERY_COMPARISON_RESULT_20260914.md",
+      "unit_tests_passed": 5,
+      "physical_actions_replayed": 192,
+      "common_prefix_actions": 53,
+      "global_plans": 10,
+      "outer_decision_snapshots": 9,
+      "internal_recovery_decision_snapshots_pending": 0,
+      "differences": {
+        "coverage_2d": 0.16562743569758379,
+        "f1_05cm": 0.14128892262206666,
+        "joint_05cm": 0.10047792426275082,
+        "new_visible_surface_m2": 83.847110400002,
+        "precision_05cm": -0.0004166666666666208,
+        "recall_05cm": 0.10629812981298128
+      },
+      "common_execution_improvement": true,
+      "semantic_efficacy_proven": false,
+      "old_v13_2_denial_branches": 0
+    },
+    "all_decisions": {
+      "status": "complete_exact_replay",
+      "source": "nso/decision_capture_v14.py",
+      "run": "audit_results/semantic_v14_all_decisions_20260914",
+      "global_decisions": 10,
+      "candidate_descriptors": 64,
+      "internal_recovery_step": 53,
+      "new_candidate_outcomes": 0
+    },
+    "structural_pairing": {
+      "status": "complete_gate_failed",
+      "protocol": "configs/virtual3d/semantic_v14_structural_pairing_pilot.json",
+      "run": "audit_results/semantic_v14_structural_pairing_20260914",
+      "alternative_seeds": [
+        27102,
+        27103,
+        27104
+      ],
+      "eligible_pairs": 0,
+      "parent_groups": 1,
+      "first_raw_mismatch_steps": [
+        14,
+        10,
+        10
+      ],
+      "first_range_difference_m": 2.384185791015625e-07
+    },
+    "canonical_scan_prototype": {
+      "source": "env/canonical_box_scan_v14.py",
+      "unit_tests": "audit_results/semantic_v14_canonical_scan_tests_20260914/result.json",
+      "passed_tests": 4,
+      "fixed_pose_probe": "audit_results/semantic_v14_scan_numerics_20260914/result.json",
+      "new_policy_history_collected": false,
+      "remaining_camera_numerical_difference": true,
+      "no_real_lidar_precision_claim": true
+    },
+    "latest_report": "docs/research/V14_ALL_DECISIONS_AND_PAIRING_RESULT_20260914.md"
+  },
+  "v15_canonical_history_and_observed_information": {
+    "status": "complete_pre_outcome_stage",
+    "report": "docs/research/V15_CANONICAL_HISTORY_AND_OBSERVED_INFORMATION_20260914.md",
+    "histories": "eval_results/semantic_v15_canonical_histories_20260914",
+    "pairing": "audit_results/semantic_v15_canonical_pairing_20260914",
+    "checkpoint_readiness": "audit_results/semantic_v15_checkpoint_readiness_2_20260914",
+    "tests": "audit_results/semantic_v15_sensor_and_information_tests_20260914/result.json",
+    "fresh_executed_actions": 768,
+    "independently_replayed_actions": 768,
+    "global_decisions": 44,
+    "candidate_descriptors": 232,
+    "structure_variants": 4,
+    "development_parent_groups": 1,
+    "collisions": 0,
+    "safe_returns": 4,
+    "strict_geometry_pairs": 7,
+    "changed_observed_semantic_pairs": 3,
+    "neutral_rgb_and_marker_mask_checks_passed": true,
+    "separate_process_restored_checkpoints": 6,
+    "unit_tests_passed": 11,
+    "future_candidate_outcomes": 0,
+    "semantic_efficacy_proven": false,
+    "training_allowed": false,
+    "future_protocol": "configs/virtual3d/semantic_v15_observed_group_outcome_pilot.json",
+    "planned_unique_candidate_intentions": 46,
+    "observed_group_evaluator": "nso/information_value_v15.py",
+    "taxonomy_status": "explicit adapter validated on 334 features; old semantic scoring backend and current frozen G experiment unchanged; runtime integration requires new version",
+    "retained_failed_readiness_attempts": [
+      "audit_results/semantic_v15_checkpoint_readiness_20260914",
+      "audit_results/semantic_v15_checkpoint_readiness_1_20260914"
+    ],
+    "active_processes": []
+  },
+  "v15_outbound_pilot_execution": {
+    "status": "complete_information_gate_failed",
+    "smoke": "eval_results/semantic_v15_outbound_smoke_20260914",
+    "session_id": null,
+    "runtime": "nso/candidate_intervention_v15.py",
+    "runner": "scripts/collect_semantic_v15_outcomes.py",
+    "extension": "scripts/extend_semantic_v15_outcomes.py",
+    "analysis": "scripts/analyze_semantic_v15_outcomes.py",
+    "semantic_efficacy_proven": false,
+    "training_allowed": false,
+    "completed_and_replayed_smoke_branches": 4,
+    "report": "docs/research/V15_OUTBOUND_SMOKE_AND_FULL_PILOT_20260914.md",
+    "smoke_collisions": 0,
+    "smoke_returns": 4,
+    "smoke_target_arrivals": 2,
+    "nominal_action_equivalence_episodes": 2,
+    "nominal_future_packet_equivalence_checks": 332,
+    "full_output": "eval_results/semantic_v15_observed_group_outcomes_20260914",
+    "full_expected_unique_outcomes": 46,
+    "full_expected_new_outcomes": 42,
+    "full_expected_reused_outcomes": 4,
+    "latest_completed_and_replayed_full_outcomes": 25,
+    "latest_completed_returns": 25,
+    "latest_completed_collisions": 0,
+    "completed_session_id": 68829,
+    "full_completed_and_replayed": 46,
+    "full_newly_executed": 42,
+    "full_returns": 46,
+    "full_collisions": 0,
+    "full_failed": 0,
+    "full_budget_violations": 0,
+    "full_first_targets_reached": 38,
+    "full_analysis": "audit_results/semantic_v15_observed_group_information_20260914/result.json",
+    "relative_information_by_reference": {
+      "2026": 1.120451728432915e-16,
+      "2027": 0.0,
+      "2028": 0.0
+    },
+    "information_screen_passed": false,
+    "current_report": "docs/research/V15_OBSERVED_INFORMATION_RESULT_20260914.md"
+  },
+  "ros1_source_metadata_crosscheck_20260914": {
+    "status": "complete",
+    "report": "docs/ROS1_SOURCE_METADATA_CROSSCHECK_20260914.md",
+    "tests_passed": 13,
+    "synthetic_cli_records": 5,
+    "live_robot_records": 0,
+    "robot_interface_ready": false,
+    "source_metadata_internal_crosscheck": true,
+    "physical_tf_or_calibration_verified": false,
+    "remaining_recorder_gaps": [
+      "CameraInfo binning and ROI",
+      "raw scans and invalid finite above-range conversion",
+      "actual TF response provenance",
+      "per-beam motion compensation"
+    ]
+  },
+  "v15_completed_mesh_dedup_20260914": {
+    "evidence": "audit_results/v15_completed_mesh_dedup_20260914/result.json",
+    "replaced_paths": 49,
+    "released_last_link_allocated_bytes": 80429056,
+    "raw_bytes_and_paths_preserved": true
+  },
+  "semantic_taxonomy_v15": {
+    "status": "adapter_validated_not_runtime_integrated",
+    "report": "docs/research/V15_SEMANTIC_TAXONOMY_ADAPTER_20260914.md",
+    "source": "nso/semantic_taxonomy_v15.py",
+    "evidence": "audit_results/semantic_taxonomy_v15_1_20260914/result.json",
+    "tests_passed": 8,
+    "states": 60,
+    "candidate_features": 334,
+    "source_counts": {
+      "competition_v9": {
+        "states": 16,
+        "candidates": 102,
+        "changed_signed_tails": 0
+      },
+      "inspection_v4": {
+        "states": 44,
+        "candidates": 232,
+        "changed_signed_tails": 200
+      }
+    },
+    "geometry_and_common_inputs_exact": true,
+    "training_allowed": false,
+    "semantic_efficacy_proven": false
+  },
+  "semantic_v15_feedback_observability": {
+    "status": "complete",
+    "report": "docs/research/V15_FEEDBACK_OBSERVABILITY_DIAGNOSIS_20260914.md",
+    "evidence": "audit_results/semantic_v15_feedback_observability_20260914/result.json",
+    "existing_paid_actions_audited": 768,
+    "parent_layouts": 1,
+    "zero_camera_trial_actions_with_3d_proxy_change": 164,
+    "new_support_keys_during_zero_camera_trials": 1508,
+    "new_experiments": 0,
+    "runtime_modified": false,
+    "semantic_efficacy_proven": false,
+    "finding": "2D camera-yield calibration can remain unchanged during measured 3D changes; IGCR already logs separate 3D proxies, and conditional feedback is inactive by design in G. Future 3D-conditioned correction remains pending."
+  },
+  "storage_v15_completed_artifact_dedup": {
+    "evidence": "audit_results/v15_completed_artifact_dedup_20260914/result.json",
+    "released_allocated_bytes": 297472000,
+    "replaced_paths": 340,
+    "contents_and_paths_preserved": true,
+    "independent_confirmation_excluded": true,
+    "warning": "Frozen binary evidence shares hardlinks; never modify in place."
+  },
+  "surface_feedback_v16": {
+    "status": "observer_implemented_and_recorded_sensor_replay_passed",
+    "report": "docs/research/V16_OBSERVED_SURFACE_FEEDBACK_20260914.md",
+    "evidence": "audit_results/surface_feedback_v16_replay_20260914/result.json",
+    "tests_passed": 7,
+    "existing_actions_replayed": 768,
+    "map_mesh_checkpoints_exact": 44,
+    "parent_layouts": 1,
+    "runtime_policy_modified": false,
+    "instance_attribution_implemented": false,
+    "semantic_efficacy_proven": false,
+    "new_physical_experiments": 0,
+    "literature_supplement": "docs/research/V16_FEEDBACK_METHODS_RESEARCH_SUPPLEMENT_20260914.md"
+  },
+  "observed_asset_axes_v16": {
+    "status": "independent_correction_validated_not_integrated",
+    "source": "nso/observed_asset_axes_v16.py",
+    "audit": "audit_results/observed_asset_axes_v16_20260914/result.json",
+    "tests_passed": 4,
+    "asset_state_records": 196,
+    "old_normal_axis_angle_above_60": 164,
+    "corrected_max_angle_degrees": 12.371648096895909,
+    "candidates_regenerated": false,
+    "runtime_policy_modified": false,
+    "semantic_efficacy_proven": false,
+    "runtime_integration": "passed on 768 old paid observations / 44 checkpoints; axis_backend_v16_1_preflight_20260914"
+  },
+  "shared_axis_and_staged_candidates_v16_2": {
+    "status": "preflight_passed_actual_approaches_pending",
+    "report": "docs/research/V16_SHARED_AXES_AND_STAGED_APPROACH_20260914.md",
+    "axis_failed_attempt": "audit_results/axis_backend_v16_preflight_20260914",
+    "axis_pass": "audit_results/axis_backend_v16_1_preflight_20260914",
+    "staged_preflight": "audit_results/staged_corner_v16_2_preflight_20260914",
+    "summary": "audit_results/staged_corner_v16_2_summary_20260914",
+    "tests": "audit_results/staged_corner_v16_2_unit_tests_20260914",
+    "tests_passed": 4,
+    "paid_old_observations": 768,
+    "decision_states": 44,
+    "base_candidates_preserved": 180,
+    "new_staged_proposals": 60,
+    "total_candidates": 240,
+    "states_with_staged_proposals": 16,
+    "candidate_pool_controls_passed": true,
+    "new_physical_outcomes": 0,
+    "new_policy_rollout": false,
+    "semantic_efficacy_proven": false,
+    "active_session_id": null,
+    "full_history_storage_bounded_for_real_robot": false,
+    "actual_approach_status": "three declared physical probes and replay complete; see staged_approach_v16_physical_smoke"
+  },
+  "staged_approach_v16_physical_smoke": {
+    "status": "complete_replayed",
+    "report": "docs/research/V16_STAGED_PHYSICAL_SMOKE_AND_PROJECTION_DIAGNOSIS_20260914.md",
+    "root": "eval_results/staged_approach_v16_physical_smoke_20260914",
+    "physical_probes": 3,
+    "independent_replays": 3,
+    "target_reached": 3,
+    "returned": 3,
+    "collisions": 0,
+    "failed": 0,
+    "paid_actions_including_prefix": [
+      78,
+      94,
+      80
+    ],
+    "actual_arrival_face_support": [
+      10,
+      7,
+      16
+    ],
+    "arrival_new_support_keys": [
+      622,
+      796,
+      476
+    ],
+    "arrival_new_direction_bits": [
+      190,
+      410,
+      106
+    ],
+    "arrival_back_candidate_counts": [
+      0,
+      0,
+      0
+    ],
+    "parent_layouts": 1,
+    "full_budget_policy_comparison": false,
+    "semantic_efficacy_proven": false,
+    "active_session_id": null,
+    "runtime_guard_unit_tests_passed": 3
+  },
+  "staged_arrival_projection_v16": {
+    "status": "passed",
+    "root": "audit_results/staged_arrival_projection_v16_20260914",
+    "arrival_states": 3,
+    "observed_asset_state_records": 7,
+    "center_projection_only_rejections": 6,
+    "no_feasible_aperture_poses": 1,
+    "map_mesh_exact": true,
+    "truth_used": false,
+    "new_physical_outcomes": 0,
+    "rear_visibility_verified": false
+  },
+  "feasible_aperture_v16_3": {
+    "status": "seven_second_views_complete_replayed",
+    "report": "docs/research/V16_3_FEASIBLE_VIEWPOINT_AND_SECOND_OBSERVATION_20260914.md",
+    "preflight": "audit_results/feasible_aperture_v16_3_preflight_20260914",
+    "execution": "eval_results/feasible_aperture_v16_3_second_views_20260914",
+    "analysis": "audit_results/feasible_aperture_v16_3_second_view_analysis_20260914",
+    "old_candidates_preserved": 26,
+    "new_candidates": 7,
+    "arrival_states": 3,
+    "physical_probes": 7,
+    "independent_replays": 7,
+    "reached": 7,
+    "returned": 7,
+    "collisions": 0,
+    "denials": 0,
+    "marked_closed_target_support_cases": 4,
+    "unmarked_target_support_zero_cases": 3,
+    "complex_recall_increments_zero": true,
+    "full_budget_policy_comparison": false,
+    "complete_cold_start_policy_executed": false,
+    "semantic_efficacy_proven": false,
+    "training_allowed": false,
+    "active_session_id": null,
+    "parent_layouts": 1
+  },
+  "observed_region_and_visibility_v17": {
+    "status": "complete_standalone_preflights_only",
+    "report": "docs/research/V17_REGION_CORRESPONDENCE_AND_VISIBILITY_20260914.md",
+    "region_audit": "audit_results/observed_region_evidence_v17_20260914",
+    "score_audit": "audit_results/visibility_scores_v17_20260914",
+    "continuation_preflight": "audit_results/observed_continuation_v17_preflight_20260914",
+    "old_physical_probes_audited": 7,
+    "map_mesh_checkpoints": 21,
+    "fully_known_occluded_zero_support_cases": 3,
+    "score_states": 3,
+    "shared_candidates": 33,
+    "changed_aperture_rows": 5,
+    "changed_fixed_policy_choices": 0,
+    "same_region_continuations": 2,
+    "common_geometry_fallbacks": 1,
+    "unit_tests_passed": 9,
+    "new_physical_outcomes": 0,
+    "runtime_policy_integrated": false,
+    "learned_feature_contract_updated": false,
+    "semantic_efficacy_proven": false,
+    "training_allowed": false,
+    "parent_layouts": 1,
+    "active_session_id": null
+  },
+  "v17_integrated_followup": {
+    "runtime_preflight": "audit_results/v17_integrated_runtime_20260914",
+    "paired_preflight": "audit_results/v17_paired_states_20260914",
+    "score_authority": "audit_results/v17_semantic_score_authority_20260914/result.json",
+    "all_complete": true,
+    "automatic_recorded_second_actions": 32,
+    "paired_states": 6,
+    "paired_candidates": 62,
+    "new_contract_tests_passed": 4,
+    "fixed_formula_winner_invariant_under_all_admissible_votes": 6,
+    "new_physical_outcomes": 0,
+    "semantic_efficacy_proven": false
+  },
+  "facility_documentation_v18": {
+    "status": "complete_screen_failed_ceiling_limited",
+    "document": "docs/research/V18_TASK_SCENARIO_AND_EVALUATION_DESIGN_20260914.md",
+    "protocol": "configs/virtual3d/facility_documentation_v18_design.json",
+    "user_authorized_new_task_and_metrics": true,
+    "new_physical_outcomes": 12,
+    "semantic_efficacy_proven": false,
+    "old_task_results_preserved": true,
+    "world": "env/facility_documentation_v18.py",
+    "evaluator": "utils/facility_metrics_v18.py",
+    "runtime": "nso/facility_runtime_v18.py",
+    "collector": "scripts/collect_facility_v18.py",
+    "analysis": "scripts/analyze_facility_v18.py",
+    "failed_geometric_witness": "audit_results/facility_v18_feasibility_20260914",
+    "feasibility": "audit_results/facility_v18_1_feasibility_20260914",
+    "execution": "eval_results/facility_v18_pilot_20260914",
+    "budget_by_parent": {
+      "D18-P00": 188,
+      "D18-P01": 208
+    },
+    "active_session_id": null,
+    "unit_tests_passed": 4,
+    "independent_replays": 12,
+    "analysis_output": "audit_results/facility_v18_information_20260914",
+    "report": "docs/research/V18_FACILITY_PILOT_RESULT_20260914.md",
+    "primary_screen_passed": false,
+    "relative_information_by_parent": {
+      "D18-P00": 0.0016697401136150916,
+      "D18-P01": 0.004106188561711821
+    },
+    "unit_score_relative_ceiling_by_parent": {
+      "D18-P00": 0.043820757375451436,
+      "D18-P01": 0.03810708732194468
+    },
+    "all_returned": true,
+    "all_zero_collisions": true,
+    "all_termination_failed_false": true,
+    "min_coverage": 0.9976053639846744,
+    "safety_denials": {
+      "case_09": 1
+    },
+    "training_allowed": false
+  },
+  "sensor_response_v19": {
+    "status": "complete_saved_depth_replay_passed",
+    "probe": "audit_results/stereo_tsdf_v19_probe_20260914",
+    "replay": "audit_results/stereo_tsdf_v19_replay_20260914/result.json",
+    "report": "docs/research/V19_SENSOR_RESPONSE_AND_ADVANTAGE_SCENARIO_20260914.md",
+    "reconstructions": 60,
+    "exact_metric_and_mesh_replays": 60,
+    "scope": "generic stereo disparity sensitivity bench; planar exterior, perfect pose; not calibrated ZED or navigation",
+    "iid_025px_mean_error_mm": {
+      "far_one": 40.876,
+      "far_fresh_24": 12.683,
+      "near_one": 2.38,
+      "near_fresh_24": 0.467
+    },
+    "fixed_bias_counterexample_preserved": true,
+    "new_scenario_implemented": true,
+    "semantic_efficacy_proven": false
+  },
+  "user_scenario_design_preferences_20260914": {
+    "mechanism_led_advantage_scenarios_authorized": true,
+    "accurate_exterior_should_receive_high_score": true,
+    "prioritize_complex_facilities_and_budget_competition": true,
+    "preserve_verifiable_semantic_innovation": true,
+    "preserve_ANS_hierarchy_and_four_modules": true,
+    "scope": "persistent project preference; new scenario and evaluation may change under versioning, old evidence retained"
+  },
+  "facility_documentation_v19": {
+    "status": "complete_replayed_no_common_feasible_baseline",
+    "world": "env/facility_documentation_v19.py",
+    "evaluator": "utils/facility_metrics_v19.py",
+    "runtime": "nso/facility_runtime_v19.py",
+    "collector": "scripts/collect_facility_v19.py",
+    "protocol": "configs/virtual3d/facility_documentation_v19_design.json",
+    "new_policy_outcomes": 12,
+    "world_tests_passed": 4,
+    "metric_tests_passed": 3,
+    "budget_trials": "audit_results/facility_v19_budget_trial02_20260914",
+    "scope": "Six assets; generic disparity noise; artificial visible category markers; exact pose; common geometry/quality continuation only. All twelve endpoints miss coverage gate; no feasible semantic information estimate.",
+    "feasibility": "audit_results/facility_v19_feasibility_20260914",
+    "execution": "eval_results/facility_v19_pilot_20260914",
+    "fixed_reference_caches": 12,
+    "prepared_cases": 12,
+    "original_first_action_guards_passed": 12,
+    "sufficient_near_visit_budgets": {
+      "D19-P00": 270,
+      "D19-P01": 300
+    },
+    "active_session_id": null,
+    "report": "docs/research/V19_FACILITY_PILOT_RESULT_20260914.md",
+    "independent_physical_replays": 12,
+    "implementation_report": "docs/research/V19_SIX_FACILITY_IMPLEMENTATION_AND_BUDGET_20260914.md",
+    "analysis": "audit_results/facility_v19_information_20260914/result.json",
+    "figures": "audit_results/facility_v19_result_figures_20260914",
+    "eligible_outcomes": 0,
+    "returned_outcomes": 12,
+    "collisions": 0,
+    "runtime_failures": 0,
+    "total_physical_actions": 2064,
+    "coverage_min": 0.5384475879579252,
+    "coverage_max": 0.6867887184562098,
+    "primary_screen_passed": false,
+    "training_allowed": false,
+    "full_architecture_efficacy_proven": false,
+    "primary_budgets": {
+      "D19-P00": 160,
+      "D19-P01": 184
+    },
+    "budget_trials_preserved": [
+      "audit_results/facility_v19_budget_trial01_20260914",
+      "audit_results/facility_v19_budget_trial02_20260914",
+      "audit_results/facility_v19_budget_trial03_20260914"
+    ],
+    "next_design": "docs/research/V19_COVERAGE_BUDGET_POLICY_PROPOSAL_20260914.md",
+    "parent_status": {
+      "D19-P00": "no_common_feasible_baseline",
+      "D19-P01": "no_common_feasible_baseline"
+    },
+    "failure_causes": [
+      "Coverage requirement is checked at endpoint but not reserved during shared global selection.",
+      "Current 2D coverage proxy mixes camera revisit gain and may double-count radar/camera cells.",
+      "Long observation commitments fail to exploit newly observed shortcuts; current coverage candidates can cluster in one branch.",
+      "GT-side coverage witnesses leave only 6/4 actions of margin; online coverage feasibility under primary budget is unproven."
+    ]
+  },
+  "storage_dataset_dedup_v19_20260914": {
+    "status": "complete",
+    "pairs": 75,
+    "released_blocks_bytes": 403243008,
+    "free_before": 17141760,
+    "free_after": 420352000,
+    "unique_data_removed": 0,
+    "paths_removed": 0,
+    "post_sha256_verified": true,
+    "note": "Immutable dataset gzip content shares inodes; both paths remain. Never mutate either alias in place.",
+    "evidence": "audit_results/dataset_exact_dedup_v19_20260914"
+  },
+  "user_advantage_scene_design_20260914": {
+    "authorized": true,
+    "document": "docs/research/ADVANTAGE_SCENARIO_DESIGN_PRINCIPLES_20260914.md",
+    "requirements": [
+      "Accurate complete task exterior receives high score; sealed internal detail is not required.",
+      "Online basic coverage feasible; insufficient time to densely inspect all facilities; categories predict otherwise unobserved external needs.",
+      "High baseline quality can still permit time-to-quality advantages; thresholds must be declared before comparing outcomes.",
+      "Preserve four modules and ANS hierarchy; shared geometric gains do not count as semantic gains."
+    ]
+  },
+  "facility_common_coverage_v20": {
+    "status": "complete_common_N_passed_G_pending",
+    "mode": "N",
+    "root": "eval_results/facility_v20_coverage_probe_20260915",
+    "collector": "scripts/probe_facility_v20.py",
+    "runtime": "nso/facility_runtime_v20.py",
+    "candidates": "nso/facility_candidates_v20.py",
+    "coverage_ledger": "nso/coverage_budget_v20.py",
+    "protocol": "configs/virtual3d/facility_coverage_v20_probe.json",
+    "preflight": "audit_results/facility_v20_runtime_preflight_20260915/result.json",
+    "component_tests_passed": 15,
+    "preflight_paid_observations": 48,
+    "planned_physical_trajectories": 4,
+    "planned_fresh_replays": 4,
+    "active_session_id": null,
+    "source_files_frozen": 112,
+    "budgets": {
+      "D19-P00": 160,
+      "D19-P01": 184
+    },
+    "coverage_threshold": 0.8,
+    "semantic_information_test": false,
+    "training_allowed": false,
+    "full_architecture_efficacy_proven": false,
+    "physical_trajectories": 4,
+    "independent_physical_replays": 4,
+    "total_physical_actions": 688,
+    "total_replay_actions": 688,
+    "eligible_outcomes": 4,
+    "all_returned": true,
+    "collisions": 0,
+    "runtime_failures": 0,
+    "coverage_min": 0.8371418208197315,
+    "coverage_max": 0.8399307273626917,
+    "external_f1_min": 0.4221008791024839,
+    "external_f1_max": 0.48106184434174976,
+    "report": "docs/research/V20_COMMON_COVERAGE_RESULT_20260915.md",
+    "result": "eval_results/facility_v20_coverage_probe_20260915/result.json",
+    "G_physical_outcomes": 0,
+    "semantic_efficacy_proven": false,
+    "case00_coverage_proxy_audit": {
+      "root": "audit_results/v20_case00_coverage_proxy_20260915",
+      "document": "docs/research/V20_CASE00_COVERAGE_PROXY_AUDIT_20260915.md",
+      "saved_packets": 161,
+      "decisions": 8,
+      "original_candidates": 127,
+      "original_budget_admitted": 0,
+      "true_final_coverage": 0.8399307273626917,
+      "S_over_P": 0.7045675413022352,
+      "known_intersect_P_over_P": 0.7764820213799806,
+      "counterfactual_budget_admitted": 8,
+      "counterfactual_quality_roles_budget_admitted": 6,
+      "counterfactual_G_scores_and_actions_executed": false,
+      "P_contains_truth_reachable_set": false,
+      "scope": "One recorded N history; measurement/proxy diagnosis, no new policy efficacy or coverage guarantee."
+    },
+    "analysis": "audit_results/facility_v20_probe_analysis_20260915/result.json",
+    "figures": [
+      "audit_results/facility_v20_probe_analysis_20260915/coverage_progress.png",
+      "audit_results/facility_v20_probe_analysis_20260915/quality_progress.png"
+    ],
+    "analysis_status": "complete_hash_verified",
+    "source_files_verified": 112,
+    "experiment_artifacts_verified": 719,
+    "reference_caches_verified": 12,
+    "analysis_artifacts_verified": 12,
+    "planning_coverage_final": [
+      0.7045675413022352,
+      0.6999514091350826,
+      0.7237006608322915,
+      0.7237006608322915
+    ],
+    "retained_route_plan_shortening_events": 0,
+    "route_refresh_events": 105,
+    "route_cancellations": 4
+  },
+  "storage_environment_exact_dedup_v20_20260915": {
+    "evidence": "audit_results/environment_exact_dedup_v20_20260915/result.json",
+    "files_replaced": 278,
+    "released_allocated_bytes": 225665024,
+    "paths_and_bytes_preserved": true,
+    "warning": "Shared package files must be replaced atomically, never modified in place."
+  },
+  "storage_apt_cache_cleanup_v20_20260915": {
+    "evidence": "audit_results/environment_exact_dedup_v20_20260915/apt_cache_cleanup.json",
+    "released_allocated_bytes": 114454528,
+    "installed_packages_and_apt_lists_preserved": true
+  },
+  "facility_joint_budget_v21": {
+    "status": "complete_G_joint_feasibility_failed_1_of_4_eligible",
+    "protocol": "docs/research/V21_JOINT_BUDGET_PROTOCOL_20260915.md",
+    "config": "configs/virtual3d/facility_joint_budget_v21_probe.json",
+    "runtime": "nso/facility_runtime_v21.py",
+    "ledger": "nso/coverage_budget_v21.py",
+    "collector": "scripts/probe_facility_v21.py",
+    "mode": "G",
+    "planned_physical_trajectories": 4,
+    "planned_independent_replays": 4,
+    "physical_outcomes": 4,
+    "active_session_id": null,
+    "ledger_behavior_tests_passed": 7,
+    "bootstrap_paid_actions": 0,
+    "N_reuse_requires_full_four_history_policy_equivalence": true,
+    "proxy": "fixed_task_roi_known_fraction",
+    "proxy_target": 0.8,
+    "evaluator_coverage_threshold": 0.8,
+    "proxy_is_certified_coverage_bound": false,
+    "parameter_search_planned": false,
+    "semantic_information_test": false,
+    "training_allowed": false,
+    "full_architecture_efficacy_proven": false,
+    "root": "eval_results/facility_v21_joint_probe_20260915",
+    "frozen_source_files": 114,
+    "reference_caches": 12,
+    "component_preflight": "audit_results/facility_v21_component_preflight_20260915/result.json",
+    "static_review_passed": true,
+    "N_equivalence_root": "audit_results/facility_v21_n_equivalence_20260915",
+    "N_equivalence_session_id": null,
+    "N_equivalence_status": "passed",
+    "N_saved_actions_matched": 688,
+    "N_selections_matched": 34,
+    "N_route_refreshes_matched": 105,
+    "N_terminal_meshes_exact": 4,
+    "N_baseline_reused": true,
+    "completed_collector_session_id": 98347,
+    "completed_analysis_session_id": 86448,
+    "independent_physical_replays": 4,
+    "total_physical_actions": 684,
+    "total_replay_actions": 684,
+    "eligible_outcomes": 1,
+    "all_returned": true,
+    "collisions": 0,
+    "terminal_failures": 0,
+    "runtime_safety_denials": 0,
+    "report": "docs/research/V21_JOINT_BUDGET_RESULT_20260915.md",
+    "analysis": "audit_results/facility_v21_joint_analysis_20260915/result.json",
+    "analysis_status": "complete_hash_verified",
+    "analysis_artifacts_verified": 13,
+    "experiment_artifacts_verified": 715,
+    "semantic_efficacy_proven": false,
+    "joint_planning_efficacy_proven": false,
+    "primary_paired_endpoints": [
+      {
+        "G_collisions": 0,
+        "G_coverage_2d": 0.8065314200890649,
+        "G_eligible": true,
+        "G_external_macro_f1": 0.529952899399928,
+        "G_failed": false,
+        "G_joint_external": 0.42742366453334124,
+        "G_minus_N_coverage_2d": -0.03339930727362683,
+        "G_minus_N_external_macro_f1": 0.10785202029744406,
+        "G_minus_N_joint_external": 0.07288816612836035,
+        "G_paid_actions": 160,
+        "G_relative_to_N_coverage_2d": -0.03976435935198812,
+        "G_relative_to_N_external_macro_f1": 0.25551242756653475,
+        "G_relative_to_N_joint_external": 0.20558778022589216,
+        "G_returned": true,
+        "N_collisions": 0,
+        "N_coverage_2d": 0.8399307273626917,
+        "N_eligible": true,
+        "N_external_macro_f1": 0.4221008791024839,
+        "N_failed": false,
+        "N_joint_external": 0.3545354984049809,
+        "N_paid_actions": 160,
+        "N_returned": true,
+        "assignment": "A_complex_B_simple",
+        "both_eligible": true,
+        "index": 0,
+        "parent": "D19-P00",
+        "qualified_improvement_comparison_available": true,
+        "reference_seed": 2026
+      },
+      {
+        "G_collisions": 0,
+        "G_coverage_2d": 0.7855022266204849,
+        "G_eligible": false,
+        "G_external_macro_f1": 0.6198809196139329,
+        "G_failed": false,
+        "G_joint_external": 0.48691784259629806,
+        "G_minus_N_coverage_2d": -0.05319148936170215,
+        "G_minus_N_external_macro_f1": 0.1938326196375656,
+        "G_minus_N_joint_external": 0.12959381070122505,
+        "G_paid_actions": 156,
+        "G_relative_to_N_coverage_2d": -0.0634218289085546,
+        "G_relative_to_N_external_macro_f1": 0.45495456653228616,
+        "G_relative_to_N_joint_external": 0.3626786869439552,
+        "G_returned": true,
+        "N_collisions": 0,
+        "N_coverage_2d": 0.838693715982187,
+        "N_eligible": true,
+        "N_external_macro_f1": 0.4260482999763673,
+        "N_failed": false,
+        "N_joint_external": 0.357324031895073,
+        "N_paid_actions": 160,
+        "N_returned": true,
+        "assignment": "A_simple_B_complex",
+        "both_eligible": false,
+        "index": 1,
+        "parent": "D19-P00",
+        "qualified_improvement_comparison_available": false,
+        "reference_seed": 2026
+      },
+      {
+        "G_collisions": 0,
+        "G_coverage_2d": 0.7981501632208923,
+        "G_eligible": false,
+        "G_external_macro_f1": 0.5418730010555881,
+        "G_failed": false,
+        "G_joint_external": 0.4324960242375124,
+        "G_minus_N_coverage_2d": -0.03899165759883927,
+        "G_minus_N_external_macro_f1": 0.060811156713838355,
+        "G_minus_N_joint_external": 0.02977903593836173,
+        "G_paid_actions": 184,
+        "G_relative_to_N_coverage_2d": -0.04657712305025991,
+        "G_relative_to_N_external_macro_f1": 0.12641026809567063,
+        "G_relative_to_N_joint_external": 0.07394531843350234,
+        "G_returned": true,
+        "N_collisions": 0,
+        "N_coverage_2d": 0.8371418208197315,
+        "N_eligible": true,
+        "N_external_macro_f1": 0.48106184434174976,
+        "N_failed": false,
+        "N_joint_external": 0.40271698829915065,
+        "N_paid_actions": 184,
+        "N_returned": true,
+        "assignment": "A_complex_B_simple",
+        "both_eligible": false,
+        "index": 2,
+        "parent": "D19-P01",
+        "qualified_improvement_comparison_available": false,
+        "reference_seed": 2026
+      },
+      {
+        "G_collisions": 0,
+        "G_coverage_2d": 0.7983315197678637,
+        "G_eligible": false,
+        "G_external_macro_f1": 0.5391347647701697,
+        "G_failed": false,
+        "G_joint_external": 0.4304082761186593,
+        "G_minus_N_coverage_2d": -0.03899165759883927,
+        "G_minus_N_external_macro_f1": 0.05998483891161921,
+        "G_minus_N_joint_external": 0.0292049377637576,
+        "G_paid_actions": 184,
+        "G_relative_to_N_coverage_2d": -0.04656703487112838,
+        "G_relative_to_N_external_macro_f1": 0.1251901245818564,
+        "G_relative_to_N_joint_external": 0.07279335681380376,
+        "G_returned": true,
+        "N_collisions": 0,
+        "N_coverage_2d": 0.8373231773667029,
+        "N_eligible": true,
+        "N_external_macro_f1": 0.47914992585855054,
+        "N_failed": false,
+        "N_joint_external": 0.4012033383549017,
+        "N_paid_actions": 184,
+        "N_returned": true,
+        "assignment": "A_simple_B_complex",
+        "both_eligible": false,
+        "index": 3,
+        "parent": "D19-P01",
+        "qualified_improvement_comparison_available": false,
+        "reference_seed": 2026
+      }
+    ],
+    "behavior_totals": {
+      "quality_intent_paid_actions": 53,
+      "quality_intent_selected_options": 27,
+      "quality_intent_arrived_options": 27,
+      "quality_intent_explicit_cancel_or_denial_options": 0,
+      "coverage_intent_paid_actions": 549,
+      "return_paid_actions": 82,
+      "budget_allowed_candidate_occurrences": 71,
+      "budget_allowed_positive_quality_candidate_occurrences": 67
+    },
+    "individual_option_quality_improvement_attributed": false,
+    "figures": [
+      "audit_results/facility_v21_joint_analysis_20260915/coverage_curves.png",
+      "audit_results/facility_v21_joint_analysis_20260915/exterior_quality_curves.png"
+    ],
+    "scene_visualizations": [
+      "audit_results/facility_v21_scenario_20260915/scenario_topdown.png",
+      "audit_results/facility_v21_scenario_20260915/facility_exteriors.png"
+    ]
+  },
+  "storage_pyc_cleanup_v21_20260915": {
+    "evidence": "audit_results/environment_pyc_cleanup_v21_20260915/result.json",
+    "reproducible_pyc_paths_removed": 11267,
+    "unique_cache_allocated_bytes": 235286528,
+    "source_files_unchanged": true,
+    "runtime_environment": "PYTHONDONTWRITEBYTECODE=1"
+  },
+  "facility_semantic_entry_v21": {
+    "document": "docs/research/V21_SEMANTIC_ENTRY_DIAGNOSIS_20260915.md",
+    "evidence": "audit_results/v21_semantic_entry_20260915",
+    "matched_nonsemantic_history_through_action": 19,
+    "first_depth_difference_action": 20,
+    "first_post_paid_global_selection_action": 28,
+    "warmup5_AB_quality_candidates": 12,
+    "warmup5_AB_budget_allowed": 0,
+    "physical_experiments_started": 0,
+    "semantic_efficacy_proven": false,
+    "scope": "Paired depth/scan/intrinsics/poses, not all RGB or complete learned geometric features. Saved-history diagnosis only."
+  },
+  "facility_coverage_linked_semantic_v22": {
+    "status": "complete_information_gate_failed",
+    "design": "docs/research/V22_COVERAGE_LINKED_SEMANTIC_PLAN_20260915.md",
+    "protocol_frozen": true,
+    "new_physical_trajectories": 10,
+    "learned_head_training_started": false,
+    "semantic_efficacy_proven": false,
+    "first_task": "Completed; do not repeat unchanged matrix. V23 first task is task-aligned outline metric and actual shape observation-demand validation.",
+    "evidence": "audit_results/v22_initial_coverage_opportunity_20260915/result.json",
+    "initial_cases": 4,
+    "initial_pairing_exact": true,
+    "existing_candidates_per_case": 8,
+    "earliest_AB_route_divergence_by_parent": {
+      "D19-P00": 8,
+      "D19-P01": 7
+    },
+    "proposed_AB_existing_candidates": {
+      "D19-P00": {
+        "A": 2,
+        "B": 0,
+        "N": 0
+      },
+      "D19-P01": {
+        "A": 2,
+        "B": 1,
+        "N": 0
+      }
+    },
+    "P00_N_and_B_are_same_option": true,
+    "existing_rear_plane_support_positive_rows": 0,
+    "terminal_turn_first_AB_action_difference": 29,
+    "protocol": "docs/research/V22_EARLY_COVERAGE_PROTOCOL_20260915.md",
+    "config": "configs/virtual3d/facility_early_coverage_v22_probe.json",
+    "runtime": "nso/facility_runtime_v22.py",
+    "collector": "scripts/probe_facility_v22.py",
+    "root": "eval_results/facility_v22_early_coverage_20260915",
+    "active_session_id": null,
+    "completed_preparation_session_id": 9613,
+    "frozen_source_files": 116,
+    "planned_unique_physical_trajectories": 10,
+    "planned_independent_replays": 10,
+    "declared_first_options": 12,
+    "max_physical_actions": 1744,
+    "mode": "N",
+    "continuation": "V21_N_after_declared_initial_coverage_choice",
+    "fixed_semantic_rule": "negative initial canonical vote selects A/B; positive vote is flipped control; counterfactual fixed-rule evaluation, no deployed learned semantic policy",
+    "component_tests_passed": 4,
+    "component_evidence": "audit_results/facility_v22_component_preflight_20260915/result.json",
+    "zero_paid_integration": "audit_results/facility_v22_component_preflight_20260915/bootstrap/result.json",
+    "initial_preparation_passed": true,
+    "preparation_paid_actions": 0,
+    "paired_inputs_candidates_and_opportunity_mapping_exact": true,
+    "completed_unique_physical": 10,
+    "completed_independent_replays": 10,
+    "latest_partial_outcomes": [
+      {
+        "index": 0,
+        "first_option": "N",
+        "paid_actions": 160,
+        "coverage_2d": 0.8399307273626917,
+        "external_macro_f1": 0.4221008791024839,
+        "joint": 0.3545354984049809,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 1,
+        "first_option": "A",
+        "paid_actions": 160,
+        "coverage_2d": 0.8461157842652153,
+        "external_macro_f1": 0.39719579718329556,
+        "joint": 0.3360736334405915,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 2,
+        "first_option": "N",
+        "paid_actions": 160,
+        "coverage_2d": 0.838693715982187,
+        "external_macro_f1": 0.4260482999763673,
+        "joint": 0.357324031895073,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 3,
+        "first_option": "A",
+        "paid_actions": 160,
+        "coverage_2d": 0.84735279564572,
+        "external_macro_f1": 0.39058603487151006,
+        "joint": 0.3309641685885507,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 4,
+        "first_option": "N",
+        "paid_actions": 184,
+        "coverage_2d": 0.8371418208197315,
+        "external_macro_f1": 0.48106184434174976,
+        "joint": 0.40271698829915065,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 5,
+        "first_option": "A",
+        "paid_actions": 184,
+        "coverage_2d": 0.8166485310119695,
+        "external_macro_f1": 0.505541797993589,
+        "joint": 0.41284996669661433,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 6,
+        "first_option": "B",
+        "paid_actions": 184,
+        "coverage_2d": 0.8298875589408777,
+        "external_macro_f1": 0.50106681279084,
+        "joint": 0.41582911413327595,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 7,
+        "first_option": "N",
+        "paid_actions": 184,
+        "coverage_2d": 0.8373231773667029,
+        "external_macro_f1": 0.47914992585855054,
+        "joint": 0.4012033383549017,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 8,
+        "first_option": "A",
+        "paid_actions": 184,
+        "coverage_2d": 0.8164671744649982,
+        "external_macro_f1": 0.5089688896675547,
+        "joint": 0.4155563912374558,
+        "eligible": true,
+        "replay_completed": true
+      },
+      {
+        "index": 9,
+        "first_option": "B",
+        "paid_actions": 184,
+        "coverage_2d": 0.8298875589408777,
+        "external_macro_f1": 0.4941448358187228,
+        "joint": 0.4100846515608407,
+        "eligible": true,
+        "replay_completed": true
+      }
+    ],
+    "analysis_script": "scripts/analyze_facility_v22_information.py",
+    "analysis_preflight": "audit_results/facility_v22_analysis_preflight_20260915/result.json",
+    "completed_execution_session_id": 92952,
+    "completed_analysis_session_id": 86293,
+    "physical_actions": 1744,
+    "replay_actions": 1744,
+    "eligible_unique_count": 10,
+    "formal_analysis": "audit_results/facility_v22_information_analysis_20260915/result.json",
+    "report": "docs/research/V22_EARLY_COVERAGE_RESULT_20260915.md",
+    "sensor_metric_review": "docs/research/V22_SENSOR_METRIC_REVIEW_20260915.md",
+    "all_frozen_sources_and_replays_verified": true,
+    "checks": {
+      "artifacts_verified": 1817,
+      "frozen_source_files_verified": 116,
+      "reference_caches_verified": 12,
+      "source_archive_is_authoritative": true,
+      "source_inventory_sha256": "2d71f293458d3becfce7ec9204f4dabc5fa05a244abe930fd9caac2680e658d8",
+      "source_manifest_sha256": "ec4922e11c50745d5ae386fc6daaaa9e42da4d4d803279c2fcbdfcf66596f0d3",
+      "unique_fresh_process_replays_verified": 10
+    },
+    "development_gates": {
+      "all_four_N_endpoints_eligible": true,
+      "all_four_fixed_S_endpoints_eligible": true,
+      "fixed_S_vs_N_both_parents_qualified_strict_over_five_percent": false,
+      "fixed_S_vs_best_fixed_both_parents_qualified_strict_over_five_percent": false,
+      "fixed_S_vs_flipped_both_parents_qualified_strict_over_five_percent": false,
+      "restricted_oracle_both_parents_strict_over_five_percent": false,
+      "strong_G_or_learned_semantic_efficacy_gate": false,
+      "thresholds_changed_after_outcomes": false
+    },
+    "primary_information_summary": [
+      {
+        "parent": "D19-P00",
+        "fixed_choice": "N",
+        "relative_voi": 0.0,
+        "fixed_complex_vs_N_relative": -0.025934702253136356,
+        "fixed_complex_vs_best_fixed_relative": -0.025934702253136356
+      },
+      {
+        "parent": "D19-P01",
+        "fixed_choice": "A",
+        "relative_voi": 0.0035962392226095282,
+        "fixed_complex_vs_N_relative": 0.023651960241558953,
+        "fixed_complex_vs_best_fixed_relative": -0.006605139644583159
+      }
+    ],
+    "actual_AB_action_divergence": {
+      "D19-P00": 6,
+      "D19-P01": 6
+    },
+    "static_AB_path_divergence": {
+      "D19-P00": 8,
+      "D19-P01": 7
+    },
+    "current_saved_history_revelation": [
+      {
+        "aliases": [
+          "N",
+          "B"
+        ],
+        "canonical_first_option": "N",
+        "censoring": null,
+        "compared_through_action": 20,
+        "fields_different_at_first": [
+          "frame__depth_m"
+        ],
+        "first_command_or_pose_difference": null,
+        "first_nonsemantic_sensor_difference_action": 20,
+        "initial_nonsemantic_identical": true,
+        "interpretation": "A sensor difference after motion divergence is confounded by viewpoint; this is a boundary diagnostic, not semantic gain.",
+        "matched_sensor_prefix_last_action": 19,
+        "old_N_revelation_window_reused": false,
+        "parent": "D19-P00",
+        "shared_motion_through_first_sensor_difference": true,
+        "source_is_current_V22_saved_trajectory": true,
+        "unique_case_indices": [
+          0,
+          2
+        ]
+      },
+      {
+        "aliases": [
+          "A"
+        ],
+        "canonical_first_option": "A",
+        "censoring": null,
+        "compared_through_action": 26,
+        "fields_different_at_first": [
+          "frame__depth_m"
+        ],
+        "first_command_or_pose_difference": null,
+        "first_nonsemantic_sensor_difference_action": 26,
+        "initial_nonsemantic_identical": true,
+        "interpretation": "A sensor difference after motion divergence is confounded by viewpoint; this is a boundary diagnostic, not semantic gain.",
+        "matched_sensor_prefix_last_action": 25,
+        "old_N_revelation_window_reused": false,
+        "parent": "D19-P00",
+        "shared_motion_through_first_sensor_difference": true,
+        "source_is_current_V22_saved_trajectory": true,
+        "unique_case_indices": [
+          1,
+          3
+        ]
+      },
+      {
+        "aliases": [
+          "N"
+        ],
+        "canonical_first_option": "N",
+        "censoring": null,
+        "compared_through_action": 20,
+        "fields_different_at_first": [
+          "frame__depth_m"
+        ],
+        "first_command_or_pose_difference": null,
+        "first_nonsemantic_sensor_difference_action": 20,
+        "initial_nonsemantic_identical": true,
+        "interpretation": "A sensor difference after motion divergence is confounded by viewpoint; this is a boundary diagnostic, not semantic gain.",
+        "matched_sensor_prefix_last_action": 19,
+        "old_N_revelation_window_reused": false,
+        "parent": "D19-P01",
+        "shared_motion_through_first_sensor_difference": true,
+        "source_is_current_V22_saved_trajectory": true,
+        "unique_case_indices": [
+          4,
+          7
+        ]
+      },
+      {
+        "aliases": [
+          "A"
+        ],
+        "canonical_first_option": "A",
+        "censoring": null,
+        "compared_through_action": 23,
+        "fields_different_at_first": [
+          "frame__depth_m"
+        ],
+        "first_command_or_pose_difference": null,
+        "first_nonsemantic_sensor_difference_action": 23,
+        "initial_nonsemantic_identical": true,
+        "interpretation": "A sensor difference after motion divergence is confounded by viewpoint; this is a boundary diagnostic, not semantic gain.",
+        "matched_sensor_prefix_last_action": 22,
+        "old_N_revelation_window_reused": false,
+        "parent": "D19-P01",
+        "shared_motion_through_first_sensor_difference": true,
+        "source_is_current_V22_saved_trajectory": true,
+        "unique_case_indices": [
+          5,
+          8
+        ]
+      },
+      {
+        "aliases": [
+          "B"
+        ],
+        "canonical_first_option": "B",
+        "censoring": null,
+        "compared_through_action": 22,
+        "fields_different_at_first": [
+          "frame__depth_m"
+        ],
+        "first_command_or_pose_difference": null,
+        "first_nonsemantic_sensor_difference_action": 22,
+        "initial_nonsemantic_identical": true,
+        "interpretation": "A sensor difference after motion divergence is confounded by viewpoint; this is a boundary diagnostic, not semantic gain.",
+        "matched_sensor_prefix_last_action": 21,
+        "old_N_revelation_window_reused": false,
+        "parent": "D19-P01",
+        "shared_motion_through_first_sensor_difference": true,
+        "source_is_current_V22_saved_trajectory": true,
+        "unique_case_indices": [
+          6,
+          9
+        ]
+      }
+    ],
+    "latest_outcomes_are_final": true,
+    "reference_sensitivity_voi": [
+      {
+        "parent": "D19-P00",
+        "reference_seed": 2026,
+        "relative_voi": 0.0
+      },
+      {
+        "parent": "D19-P01",
+        "reference_seed": 2026,
+        "relative_voi": 0.0035962392226095282
+      },
+      {
+        "parent": "D19-P00",
+        "reference_seed": 2027,
+        "relative_voi": 0.0
+      },
+      {
+        "parent": "D19-P01",
+        "reference_seed": 2027,
+        "relative_voi": 0.0
+      },
+      {
+        "parent": "D19-P00",
+        "reference_seed": 2028,
+        "relative_voi": 0.0
+      },
+      {
+        "parent": "D19-P01",
+        "reference_seed": 2028,
+        "relative_voi": 0.0
+      }
+    ]
+  },
+  "storage_pyc_cleanup_v22_20260915": {
+    "evidence": "audit_results/environment_pyc_cleanup_v22_20260915/result.json",
+    "regenerable_cache_paths_removed": 1515,
+    "allocated_bytes_released": 37429248,
+    "source_hashes_unchanged": true
+  },
+  "facility_task_scene_reset_v23": {
+    "status": "complete_shape_response_and_root_cause_diagnosed_frozen_engineering_gate_failed",
+    "document": "docs/research/V23_TASK_AND_SCENE_RESET_20260915.md",
+    "goal_text": "docs/research/GOAL_PROMPT.md",
+    "task": "multi-workstation exterior-shape and spatial-envelope documentation with shared paid coarse survey and optional matched side/rear inspection",
+    "new_world_implemented": false,
+    "new_metric_implemented": true,
+    "new_protocol_frozen": true,
+    "new_physical_trajectories": 2,
+    "new_training_started": false,
+    "semantic_efficacy_proven": false,
+    "architecture_unchanged": true,
+    "next_required": [
+      "V23 metric, two physical sequences, two independent replays and formal diagnosis are complete. Do not restart terminal execution61960 or the old matrix. Read the V23 result and V24 plan; preserve all frozen original sources and scores.",
+      "Implement one bounded class-blind observation-only ground/instance separation and supported exterior-shape model in a new version. No GT window, hidden instance IDs, hidden dimensions or reference mesh in the backend. Preserve raw, cleaned observed and inferred provenance; test low attachments, incomplete edges and free-ray contradictions.",
+      "Run one new-version development replay of saved V23 packets only after backend fixtures pass. Original raw data have been viewed during diagnosis and are not independent confirmation. Simple strict 5cm completion is a reported engineering result, not a necessary condition for useful semantic choice or a reason for endless backend tuning.",
+      "Build a new two-object choice task with paid common basic observations, early category cues, matching complete nonsemantic histories/candidates, matched side/rear visit costs and budget competition. Establish online coverage/return plus valid all-visit cost bounds before freezing up to12 canonical physical branches and their replays.",
+      "Use final returned outcomes, identical comparison contracts and a paired feasible pool to distinguish class-conditioned information upper bound from fixed-rule efficacy. Keep both-parent >5% as the development target, and report absolute differences and all failures.",
+      "Then validate six-workstation tasks, same-capacity semantic/geometry learning, strong G, uncertainty/conditional feedback, ANS four-module autonomous loop, unseen layouts/scale, natural frontend, original neural stack and ROS1. Full Goal remains active."
+    ],
+    "single_facility_probe_world_implemented": true,
+    "metric_source": "utils/facility_outline_v23.py",
+    "metric_tests": 14,
+    "metric_test_evidence": "audit_results/facility_outline_v23_preflight_20260915/result.json",
+    "protocol": "docs/research/V23_OUTLINE_AND_SHAPE_PROBE_PROTOCOL_20260915.md",
+    "probe_source": "scripts/probe_facility_shape_v23.py",
+    "world_source": "env/facility_shape_probe_v23.py",
+    "root": "audit_results/facility_shape_v23_probe_20260915",
+    "frozen_source_count": 139,
+    "active_session_id": null,
+    "completed_preparation_session_id": 79558,
+    "initial_preparation_archived": "audit_results/facility_shape_v23_preparation_initial_20260915",
+    "initial_preparation_paid_actions": 0,
+    "planned_physical_tasks": 2,
+    "planned_replays": 2,
+    "paid_actions_per_task": 96,
+    "new_six_workstation_world_implemented": false,
+    "shape_metric_is_not_complete_3d_surface_accuracy": true,
+    "shape_metric_formula": "mean_instances(mean_xy_xz_yz(min(boundary_f1_05cm,projected_region_iou)))",
+    "completed_execution_session_id": 61960,
+    "completed_physical_tasks": 2,
+    "completed_independent_replays": 2,
+    "physical_actions": 192,
+    "replay_actions": 192,
+    "gates": {
+      "simple_coarse_completed": false,
+      "complex_positive_and_larger_increment": true,
+      "all_returned_without_collision": true,
+      "semantic_information_or_efficacy_proven": false
+    },
+    "observation_demand_gate_passed": false,
+    "quality_deltas": {
+      "simple": 0.22443609654629704,
+      "complex": 0.3386131746795552
+    },
+    "first_nonsemantic_difference_action": 37,
+    "coarse_prefix_nonsemantic_identical": true,
+    "analysis_root": "audit_results/facility_shape_v23_analysis_20260915_final",
+    "initial_analysis_root": "audit_results/facility_shape_v23_analysis_20260915",
+    "diagnosis_root": "audit_results/facility_shape_v23_diagnosis_20260915",
+    "result_report": "docs/research/V23_OUTLINE_AND_SHAPE_RESPONSE_RESULT_20260915.md",
+    "diagnosis_report": "docs/research/V23_SHAPE_RESPONSE_DIAGNOSIS_20260915.md",
+    "analysis_completed": true,
+    "artifact_files_verified": 219,
+    "raw_sensor_packets": 194,
+    "saved_stage_meshes": 12,
+    "completed_first_analysis_session_id": 4894,
+    "returned_quality": {
+      "simple": 0.7642243145520978,
+      "complex": 0.8011565724782094
+    },
+    "coarse_quality": {
+      "simple": 0.5842432301279508,
+      "complex": 0.5076887483880006
+    },
+    "extra_quality": {
+      "simple": 0.8086793266742478,
+      "complex": 0.8463019230675558
+    },
+    "extra_stage_is_returned": false,
+    "raw_quality_monotonic": false,
+    "geometry_backend_corrected": false,
+    "root_causes": [
+      "Near-ground TSDF fragments contaminate instance size and extreme outline distances.",
+      "Observed front and side faces form an open L in XY; raw partial TSDF is not a fitted exterior-shape model."
+    ],
+    "strict_simple_completion_is_not_mathematical_requirement_for_semantic_choice": true
+  },
+  "user_advantage_scene_design_20260915": {
+    "source": "User explicitly reiterated scene reverse-design authorization and external-outline correctness preference",
+    "reverse_design_authorized": true,
+    "task_and_metric_redesign_authorized": true,
+    "outline_correctness_should_score_high": true,
+    "semantic_innovation_required": true,
+    "four_modules_and_hierarchy_required": true,
+    "old_results_preserved": true,
+    "interpretation": "Test actual new-measurement and view-dependent gains; do not give scores directly for visit count or category; high baseline quality is valid and may motivate time-to-quality comparison or a different meaningful task.",
+    "authorization_persists": true,
+    "mechanism_based_scenario_design_allowed": true,
+    "correct_task_outline_deserves_high_score": true,
+    "simple_perfect_completion_not_necessary_for_semantic_choice": true,
+    "current_plan": "docs/research/V24_COMMON_SHAPE_AND_PAIRED_CHOICE_PLAN_20260915.md"
+  },
+  "storage_pyc_cleanup_v23_20260915": {
+    "status": "complete",
+    "scope": "/root/NSO/.venv",
+    "source": "Existing source-backed cache files in NSO .venv, not .venv-3d",
+    "removed_files": 4970,
+    "removed_logical_bytes": 102027362,
+    "removed_allocated_bytes": 113328128,
+    "free_before_bytes": 4042752,
+    "free_after_before_audit_bytes": 117010432,
+    "measured_free_delta_bytes": 112967680,
+    "source_hashes_verified_before_and_after": true,
+    "regular_nonsymlink_single_link_only": true,
+    "open_writable_files_excluded": true,
+    "frozen_metadata_checked": 462,
+    "frozen_pyc_references_found": 0,
+    "source_data_model_reference_evidence_files_removed": 0,
+    "skipped": [],
+    "remaining_source_backed_candidates_not_removed": 505,
+    "one_bounded_pass_only": true,
+    "process_observation": [
+      {
+        "pid": 655,
+        "argv0": "/usr/bin/python3",
+        "cwd": "/",
+        "script": null,
+        "dash_B": false
+      },
+      {
+        "pid": 689,
+        "argv0": "/usr/bin/python3",
+        "cwd": "/",
+        "script": null,
+        "dash_B": false
+      },
+      {
+        "pid": 235393,
+        "argv0": "python3",
+        "cwd": "/root/NSO",
+        "script": null,
+        "dash_B": true
+      }
+    ],
+    "continuous_cache_generation_proven": false
+  },
+  "facility_shape_and_choice_v24": {
+    "status": "bounded_v24_stages_complete_no_semantic_efficacy",
+    "plan": "docs/research/V24_COMMON_SHAPE_AND_PAIRED_CHOICE_PLAN_20260915.md",
+    "goal_text": "docs/research/GOAL_PROMPT.md",
+    "architecture_fixed": true,
+    "semantic_core_required": true,
+    "new_backend_implemented": true,
+    "new_world_implemented": true,
+    "new_protocol_frozen": true,
+    "new_physical_trajectories": 4,
+    "new_development_replays": 1,
+    "new_training_started": false,
+    "semantic_efficacy_proven": false,
+    "engineering_gate_policy": "Keep frozen V23 failure. One bounded common geometry iteration then test actual paired choice; do not require every simple object to satisfy strict5cm completion before semantic information can be tested.",
+    "next_required": [
+      "All current sessions are terminal:60431 physical prefixes,93144 N/G readiness,59054 static candidate window,88161 two-instance shape processing and80172 adapter tests exited0. Preserve145/147 frozen source lists and all original results; do not restart or repeat old matrices.",
+      "Diagnose the explicit new enclosure-fit/free-ray disagreement with bounded independent geometric counterexamples before proposing a separate algorithm version:8/8 infer refusals persist despite adequate edge support. No target-Q threshold tuning or invalid-depth-as-free rule. Strict simple completion is not a perpetual gate for semantic choice.",
+      "Use the tested V24 coverage-history adapter only under a new declared real-prefix check; full histories must include all turns/return/zero and negative gains with explicit public intent. Actual rate and G admission remain unknown and may stay0/rejected.",
+      "Redesign the next actual choice around information acquisition and recovery costs. Static N routes reveal geometry after7/8 actions, so allow strong geometry to seek cheap information and reselect. Evaluate that whole-task alternative; if acquisition and switching are cheap, implement a new physical occluded-workcell/side-rear-corridor version with real task value, coverage and reachability.",
+      "Freeze same-budget A/B/common or adaptive geometry choices, common backend and final C/return evaluation only after the information and cost mechanism is credible. Previous service-region BFS is not a lower bound for every possible quality route. Run bounded actual outcomes before same-capacity learning.",
+      "Full scope remains: verifiable semantic innovation, strong geometry comparison, confidence/class swaps and conditional feedback, ANS four-module autonomous closure, multi-workstation/scale/unseen layouts, natural frontend and original neural stack, ROS1 robot migration."
+    ],
+    "backend_source": "nso/observed_shape_v24.py",
+    "backend_tests_passed": 10,
+    "backend_test_evidence": "audit_results/observed_shape_v24_preflight_20260915/run.json",
+    "development_driver": "scripts/replay_observed_shape_v24.py",
+    "development_protocol": "docs/research/V24_SAVED_DEPTH_SHAPE_PROTOCOL_20260915.md",
+    "development_root": "audit_results/observed_shape_v24_development_20260915",
+    "active_development_session_id": null,
+    "completed_preparation_session_id": 73786,
+    "completed_development_session_id": 76930,
+    "completed_verification_session_id": 74396,
+    "independent_development_verifications": 1,
+    "saved_frames_processed": 194,
+    "saved_frames_verified": 194,
+    "static_world_source": "env/facility_choice_v24.py",
+    "static_world_audit": "audit_results/facility_choice_v24_static_backstops_20260915",
+    "actual_prefix_verified": true,
+    "analysis_completed": true,
+    "analysis_root": "audit_results/observed_shape_v24_analysis_20260915",
+    "result_report": "docs/research/V24_SHARED_SHAPE_DEVELOPMENT_RESULT_20260915.md",
+    "inferred_enclosures_accepted": 0,
+    "shape_completion_stages": 0,
+    "stages_evaluated": 6,
+    "coarse_geometry_pair_identical": true,
+    "new_backend_frozen": true,
+    "choice_policy_protocol_frozen": false,
+    "actual_prefix_status": "complete",
+    "current_static_world_version": "two-facility-choice-world-v24-4-high-backstops",
+    "next_world_source": "env/facility_choice_v24_1.py",
+    "primary_quality": {
+      "simple": {
+        "coarse": 0.6126205119214189,
+        "extra": 0.8634344664424719,
+        "returned": 0.8250217073735616
+      },
+      "complex": {
+        "coarse": 0.5311073484319674,
+        "extra": 0.8914693706581517,
+        "returned": 0.8485565399472934
+      }
+    },
+    "counterexample_retained": "Complex coarse maximum dimension error worsens from0.1764457777m to0.5010503833m; no all-dimension improvement claim.",
+    "static_height_revision_source": "env/facility_choice_v24_1.py",
+    "static_height_revision_evidence": "audit_results/facility_choice_v24_1_high_backstops_20260915",
+    "static_height_revision_passed": true,
+    "actual_prefix_root": "audit_results/facility_choice_v24_paid_prefix_20260915",
+    "actual_prefix_protocol": "docs/research/V24_PAID_COMMON_PREFIX_PROTOCOL_20260915.md",
+    "actual_prefix_driver": "scripts/probe_facility_choice_v24_prefix.py",
+    "actual_prefix_active_session_id": null,
+    "actual_prefix_sources_frozen": 145,
+    "actual_prefix_review_passed": true,
+    "actual_prefix_completed_session_id": 60431,
+    "new_physical_actions": 976,
+    "new_sensor_frames": 980,
+    "new_prefix_independent_replays": 4,
+    "new_prefix_replay_actions": 976,
+    "actual_prefix_paid_packets": 980,
+    "actual_prefix_raw_bytes": 20619568,
+    "actual_prefix_nonsemantic_pairing_passed": true,
+    "actual_prefix_two_observed_tracks_all": true,
+    "actual_prefix_all_returned_without_collision": true,
+    "actual_prefix_all_C80": false,
+    "actual_prefix_coverage_by_parent": {
+      "D24-P00": 0.9451219512195121,
+      "D24-P01": 0.7695786717448226
+    },
+    "runtime_readiness_protocol": "docs/research/V24_FOUR_MODULE_READINESS_PROTOCOL_20260915.md",
+    "runtime_readiness_source": "scripts/preflight_facility_runtime_v24.py",
+    "runtime_readiness_status": "complete_not_all_ready",
+    "saved_depth_development_new_tsdf_fusions": 0,
+    "actual_prefix_mapper_updates_main": 980,
+    "actual_prefix_mapper_updates_replay": 980,
+    "mapper_work_scope": "The earlier shape development reused existing TSDF meshes with zero new fusion; the later paid-prefix experiment rebuilt four maps and independently replayed four maps from980+980 saved/actual packets. Do not conflate these stages.",
+    "runtime_readiness_active_session_id": null,
+    "runtime_readiness_root": "audit_results/facility_runtime_v24_readiness_20260915",
+    "runtime_readiness_review_passed": true,
+    "runtime_readiness_completed_session_id": 93144,
+    "runtime_readiness_bootstraps": 8,
+    "runtime_readiness_saved_frames_processed": 1960,
+    "runtime_readiness_passed": false,
+    "runtime_N_ready": 4,
+    "runtime_G_ready": 2,
+    "runtime_readiness_report": "docs/research/V24_FOUR_MODULE_READINESS_RESULT_20260915.md",
+    "runtime_readiness_all_maps_equal": true,
+    "runtime_readiness_all_four_module_calls": true,
+    "runtime_readiness_pair_checks_passed": 8,
+    "runtime_P00_G_first_choice": "old_surface_rotation;2 outbound+2 return=4 hypothetical actions",
+    "runtime_P01_failure": "all22 coverage budgets reject: coverage_rate_unavailable; C_ROI3994/5400,deficit326; full254 actions charged but coverage ledger starts at last frame",
+    "prefix_shape_check_status": "complete",
+    "runtime_v24_history_fix_status": "implemented_9_tests_passed_actual_prefix_not_reprocessed",
+    "actual_prefix_report": "docs/research/V24_PAIRED_PREFIX_RESULT_20260915.md",
+    "candidate_information_window": {
+      "status": "complete_static_diagnostic",
+      "source": "scripts/audit_v24_candidate_information_window.py",
+      "evidence": "audit_results/facility_choice_v24_candidate_window_20260915",
+      "report": "docs/research/V24_CANDIDATE_INFORMATION_WINDOW_20260915.md",
+      "completed_session_id": 59054,
+      "new_physical_actions": 0,
+      "new_sensor_packets": 0,
+      "P00_G_rotation_disclosed": false,
+      "N_first_clean_depth_difference_local_action": {
+        "D24-P00": 7,
+        "D24-P01": 8
+      },
+      "asset_aperture_first_difference_local_action": {
+        "D24-P00": 9,
+        "D24-P01": 14
+      },
+      "warning": "Clean-ray disclosure is not noisy classification efficacy. Do not force long option commitment to manufacture semantic advantage; all methods need common observation-driven re-selection. N warmup can lose the matched history window."
+    },
+    "prefix_shape_check_active_session_id": null,
+    "prefix_shape_check_source": "scripts/replay_facility_choice_shape_v24.py",
+    "prefix_shape_check_protocol": "docs/research/V24_PAIRED_PREFIX_SHAPE_PROTOCOL_20260915.md",
+    "prefix_shape_check_root": "audit_results/facility_choice_v24_shape_prefix_20260915",
+    "prefix_shape_check_sources_frozen": 147,
+    "prefix_shape_check_review_passed": true,
+    "prefix_shape_check_completed_session_id": 88161,
+    "prefix_shape_check_saved_packets": 980,
+    "prefix_shape_check_observe_calls": 1960,
+    "prefix_shape_check_snapshots": 8,
+    "prefix_shape_check_new_sensor_frames": 0,
+    "prefix_shape_check_new_tsdf_fusions": 0,
+    "prefix_shape_check_pairs_passed": true,
+    "prefix_shape_check_seed_and_separation_all_passed": true,
+    "prefix_shape_check_inference_accepted": 0,
+    "prefix_shape_check_inference_attempts": 8,
+    "prefix_shape_check_report": "docs/research/V24_PAIRED_SHAPE_RESULT_20260915.md",
+    "prefix_shape_check_rejection": "enclosure_contradicts_observed_free_rays;58.37%-62.51% candidate-box-hit conflicts; all edge support counts>=46",
+    "prefix_shape_check_completed_Q": [
+      0.4652181282487985,
+      0.46779037911783783,
+      0.46215177319785194,
+      0.4625578816849464
+    ],
+    "runtime_v24_history_fix_source": "nso/facility_runtime_v24.py",
+    "runtime_v24_history_fix_tests": 9,
+    "runtime_v24_history_fix_evidence": "audit_results/facility_runtime_v24_prefix_history_preflight_20260915/result.json",
+    "runtime_v24_history_fix_report": "docs/research/V24_PREFIX_HISTORY_ADAPTER_20260915.md",
+    "runtime_v24_history_fix_completed_test_session_id": 80172,
+    "prefix_shape_check_independent_readonly_verification": "audit_results/facility_choice_v24_shape_verification_20260915/verification.json",
+    "prefix_shape_check_independent_readonly_verification_passed": true,
+    "prefix_shape_check_strict_completed_instances": 0,
+    "prefix_shape_check_verification_scope": "147 sources,1003 original+24 new artifacts,mesh arrays/seed association/separation and metric arithmetic only; no backend rerun or independent new observations",
+    "runtime_v24_history_readiness_status": "complete",
+    "runtime_v24_history_readiness_active_session_id": null,
+    "runtime_v24_history_readiness_source": "scripts/preflight_facility_runtime_v24_history.py",
+    "runtime_v24_history_readiness_protocol": "docs/research/V24_PREFIX_HISTORY_READINESS_PROTOCOL_20260915.md",
+    "runtime_v24_history_readiness_root": "audit_results/facility_runtime_v24_history_readiness_20260915",
+    "runtime_v24_history_readiness_completed_session_id": 94795,
+    "runtime_v24_history_readiness_passed": false,
+    "runtime_v24_history_readiness_N_ready": 4,
+    "runtime_v24_history_readiness_G_ready": 2,
+    "runtime_v24_history_readiness_maps_candidates_scores_equal": true,
+    "runtime_v24_history_readiness_pair_checks_passed": true,
+    "runtime_v24_history_readiness_selected_unchanged_all8": true,
+    "runtime_v24_history_readiness_last_window_paid": 29,
+    "runtime_v24_history_readiness_last_window_net_gain": 0,
+    "runtime_v24_history_readiness_rate": 0,
+    "runtime_v24_history_readiness_report": "docs/research/V24_REAL_PREFIX_HISTORY_READINESS_RESULT_20260915.md",
+    "runtime_v24_history_readiness_saved_frame_integrations": 1960,
+    "runtime_v24_history_readiness_new_physical_actions": 0,
+    "runtime_v24_history_readiness_new_sensor_frames": 0
+  },
+  "next_validation_plan": "docs/research/V36_FROZEN_CONFIRMATION_PLAN_20260918.md",
+  "storage_pyc_cleanup_v24_20260915": {
+    "evidence": "audit_results/environment_cleanup_v24_20260915/result.json",
+    "cache_files_removed": 302,
+    "allocated_bytes_released": 5349376,
+    "source_hashes_preserved": true
+  },
+  "storage_mesh_compaction_v24_20260915": {
+    "evidence": "audit_results/inspection_mechanism_v1_ply_archive_v24_20260915",
+    "readme": "audit_results/inspection_mechanism_v1_ply_archive_v24_20260915/README.md",
+    "original_run": "eval_results/inspection_mechanism_v1_20260910",
+    "derived_ply_archived": 464,
+    "raw_sensor_data_unchanged": true,
+    "lossless_original_bytes_retained": true,
+    "original_inventory_preserved_verified": 3228,
+    "remaining_files_original_paths_and_hashes_verified": 2764,
+    "payload_allocated_bytes_released": 103587840,
+    "original_strict_path_verifier_requires_restore": true,
+    "restore_command": "python3 -B scripts/restore_inspection_meshes_v24.py",
+    "single_file_roundtrip_restore_and_rearchive_verified": true,
+    "full_restore_minimum_free_bytes": 238628864,
+    "archive_inventory_files_verified_by_agent": 475
+  },
+  "last_goal_turn_classification": "v35_bounded_online_development_complete_positive_controlled_mechanism_full_graduation_goal_incomplete",
+  "v25_root_cause_and_redesign": {
+    "status": "saved_case00_and_two_static_rounds_complete_no_new_physical_tasks",
+    "design": "docs/research/V25_ROOT_CAUSE_AND_SCENE_RESET_20260915.md",
+    "enclosure_diagnosis": "audit_results/v24_enclosure_free_ray_diagnosis_20260915",
+    "enclosure_report": "docs/research/V24_ENCLOSURE_FREE_RAY_DIAGNOSIS_20260915.md",
+    "reproduced_instances": 2,
+    "analytic_controls": 11,
+    "analytic_depth_arrays": 176,
+    "enclosure_main_cause": "mixed-range global extreme quantiles expand a measured front plane by about12cm",
+    "cost_evidence": "audit_results/facility_information_recovery_cost_v25_20260915",
+    "cost_report": "docs/research/V25_INFORMATION_RECOVERY_COST_RESULT_20260915.md",
+    "conditional_cost_witnesses": 12,
+    "wrong_branch_extra_actions": [
+      14,
+      22
+    ],
+    "all_cost_witnesses_fit_diagnostic_budget_with5_margin": true,
+    "actual_noisy_classification_or_task_success_tested": false,
+    "new_sensor_packets": 0,
+    "new_motion_actions": 0,
+    "new_tsdf_fusions_for_diagnosis": 0,
+    "new_world_implemented": true,
+    "new_estimator_validated": false,
+    "semantic_efficacy_proven": false,
+    "new_estimator_source": "nso/observed_shape_v25.py",
+    "new_estimator_source_sha256": "cb8685f30f9d5e9da5e5d2eacfdbf1d6d7ce8485a0f4d633e03908f4d5febe71",
+    "new_estimator_evidence": "audit_results/v25_common_shape_bounded_dev_20260915",
+    "new_estimator_final_status": "failed",
+    "new_estimator_positive_fixtures_passed": 3,
+    "new_estimator_positive_fixtures_required": 4,
+    "new_estimator_rounds": 2,
+    "new_estimator_conditions_per_round": 9,
+    "new_estimator_final_completed_session_id": 13024,
+    "new_estimator_integrated_into_default_runtime": false,
+    "new_world_draft": "docs/research/V25_PARTITION_SCENE_DRAFT_UNVERIFIED_20260915.md",
+    "new_world_experiments_started": true,
+    "active_sessions": [],
+    "case00_saved_history_check": {
+      "status": "complete",
+      "active_session_id": null,
+      "completed_preparation_session_id": 70434,
+      "source": "scripts/replay_facility_choice_shape_v25_case00.py",
+      "protocol": "docs/research/V25_CASE00_SAVED_HISTORY_PROTOCOL_20260915.md",
+      "root": "audit_results/facility_choice_v25_case00_shape_20260915",
+      "frozen_sources": 150,
+      "backend_parameter_changes": 0,
+      "planned_saved_packets": 235,
+      "planned_observe_calls": 470,
+      "planned_snapshots": 2,
+      "planned_new_evaluator_calls": 4,
+      "new_physical_actions": 0,
+      "new_sensor_frames": 0,
+      "new_tsdf_fusions": 0,
+      "semantic_efficacy_proven": false,
+      "completed_session_id": 12176,
+      "actual_saved_packets": 235,
+      "actual_observe_calls": 470,
+      "actual_snapshots": 2,
+      "actual_new_evaluator_calls": 4,
+      "elapsed_s": 60.18434477294795,
+      "inferred_enclosures_accepted": 0,
+      "common_geometry_equal_old": true,
+      "quality_improved": false,
+      "completed_outline_Q": 0.4652181282487985,
+      "free_ray_conflict_fractions": [
+        0.008542713567839196,
+        0.0024551927326295114
+      ],
+      "report": "docs/research/V25_CASE00_SAVED_HISTORY_RESULT_20260915.md",
+      "default_backend_integration_authorized": false
+    },
+    "partition_static_check": {
+      "status": "complete_static_only_geometry_gate_failed",
+      "active_session_id": null,
+      "root": "audit_results/facility_choice_v25_static_r0_20260915",
+      "source": "env/facility_choice_v25.py",
+      "driver": "scripts/audit_facility_choice_v25_static.py",
+      "protocol": "docs/research/V25_PARTITION_STATIC_PROTOCOL_20260915.md",
+      "maximum_seconds": 600,
+      "output_cap_bytes": 2097152,
+      "disk_reserve_bytes": 67108864,
+      "new_physical_tasks": 0,
+      "quality_evaluations": 0,
+      "semantic_efficacy_proven": false,
+      "automatic_physical_followup_authorized": false,
+      "completed_session_id": 91760,
+      "elapsed_s": 0.45056886901147664,
+      "finite_static_contract_passed": false,
+      "constructed_worlds_passing": 0,
+      "disconnected_safe_cells_per_case": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "prefix_blocked_pose_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "minimum_asset_partition_gap_m": 0.20000000000000018,
+      "projection_checks_executed": false,
+      "first_information_BFS_executed": false,
+      "repair_count": 0
+    },
+    "partition_static_r0_diagnosis": {
+      "root": "audit_results/facility_choice_v25_r0_occupancy_diagnosis_20260915",
+      "cause": "complex inward attachment, body, inner long panel and front return form isolated3-cell pocket",
+      "new_parameter_variants_tested": 0
+    },
+    "partition_static_r1_check": {
+      "status": "complete_finite_static_gates_passed",
+      "active_session_id": null,
+      "root": "audit_results/facility_choice_v25_static_r1_20260915",
+      "source": "env/facility_choice_v25_r1.py",
+      "driver": "scripts/audit_facility_choice_v25_static_r1.py",
+      "protocol": "docs/research/V25_R1_PARTITION_STATIC_PROTOCOL_20260915.md",
+      "repair_count": 1,
+      "repair_scope": "inner_long x[1.8,2.0]; inner_front_return x[.8,2.0]; all other geometry unchanged",
+      "maximum_seconds": 600,
+      "output_cap_bytes": 2097152,
+      "disk_reserve_bytes": 67108864,
+      "new_physical_tasks": 0,
+      "quality_evaluations": 0,
+      "semantic_efficacy_proven": false,
+      "second_repair_authorized": false,
+      "automatic_physical_followup_authorized": false,
+      "completed_session_id": 28071,
+      "process_id": 281653,
+      "elapsed_s": 31.17431095102802,
+      "finite_static_contract_passed": true,
+      "constructed_worlds_passing": 4,
+      "per_parent_checks_passed": [
+        5,
+        5
+      ],
+      "safe_floor_cells": [
+        2711,
+        3960
+      ],
+      "disconnected_safe_cells_per_case": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paired_clean_prefix_pose_counts": [
+        235,
+        255
+      ],
+      "body_edge_segments_passed": 24,
+      "attachment_visibility_checks_passed": 8,
+      "ideal_depth_first_difference_actions": [
+        20,
+        25
+      ],
+      "certified_no_depth_difference_through_actions": [
+        19,
+        24
+      ],
+      "censored_poses": 0,
+      "differing_pixels_per_first_witness": 5,
+      "actual_scan_or_collision_pairing_verified": false,
+      "actual_noisy_recognition_verified": false,
+      "switch_and_service_cost_validated": false,
+      "task_coverage_or_Q_validated": false,
+      "report": "docs/research/V25_PARTITION_STATIC_RESULT_20260915.md",
+      "root_independent_verification": {
+        "artifact_hashes": 6,
+        "protected_sources": 150,
+        "r1_sources": 3,
+        "all_passed": true
+      }
+    }
+  },
+  "graduation_delivery_plan": {
+    "user_deadline_remaining": "4 months",
+    "exact_submission_date_known": false,
+    "plan": "docs/research/GRADUATION_RECOVERY_PLAN_20260915.md",
+    "planned_first_decision_date": "2026-09-29",
+    "planned_weeks": 16,
+    "first14day_new_physical_task_cap": 36,
+    "positive_result_guaranteed": false,
+    "all_four_modules_and_semantic_requirement_retained": true,
+    "writing_starts_immediately": true,
+    "new_unfrozen_scene_expansion_stopped": true,
+    "active_experiment_sessions": [],
+    "new_physical_task_attempts_in_window": 27,
+    "minimal_task_contract": "docs/research/FACILITY_DOCUMENTATION_MINIMAL_CONTRACT_V25_20260915.md",
+    "related_work_gap_review": "docs/research/SEMANTIC_DOCUMENTATION_RELATED_WORK_GAP_20260915.md",
+    "spp_overlap_review": "docs/research/SEMANTIC_DOCUMENTATION_SPP_OVERLAP_REVIEW_20260915.md",
+    "broad_semantic_prediction_feedback_claim_original": false,
+    "additional_required_baseline": "legal-history/shared-training structure-template predicted visibility with observed correction; mechanism adaptation, not full SPP reproduction",
+    "problem_and_related_work_draft": "docs/thesis/PROBLEM_AND_RELATED_WORK_DRAFT_20260915.md",
+    "latest_available_disk_mib_observed": 174.5234375,
+    "two_week_scope_note": "Runtime collector manifest counts acquired main task directories; all failures count toward36. Independent replays are recorded separately.",
+    "development_paid_action_budgets": {
+      "D25-P00": 400,
+      "D25-P01": 440
+    },
+    "first_actual_batch": {
+      "parent": "D25-P00",
+      "arms": [
+        "A",
+        "B"
+      ],
+      "assignments": [
+        "A_complex_B_simple",
+        "A_simple_B_complex"
+      ],
+      "maximum_main_tasks": 4,
+      "phase": "complete_all_four_primary_and_independent_replays_negative_information_screen",
+      "score": "V24 observed_mesh; raw geometry score auxiliary",
+      "same_route_per_parent_arm_across_assignments": true,
+      "policy_claim": "fixed-option physical information-value data, not autonomous ANS or learned semantic efficacy",
+      "result": "audit_results/facility_choice_v25r1_fixed_analysis_20260915/result.json"
+    },
+    "system_and_experiment_protocol_draft": "docs/thesis/SYSTEM_AND_EXPERIMENT_PROTOCOL_DRAFT_20260915.md",
+    "initial_information_task_attempts_used": 4
+  },
+  "storage_completed_derived_archive_v24b_20260915": {
+    "status": "complete",
+    "evidence": "audit_results/completed_derived_archive_v24b_20260915",
+    "archived_original_paths": 375,
+    "ply_files": 121,
+    "derived_logs": 254,
+    "exact_duplicate_npz_paths_preserved": 11,
+    "source_backed_pyc_removed": 25,
+    "net_allocated_bytes_released": 465080320,
+    "available_bytes_at_seal": 446513152,
+    "restore_all_required_available_bytes": 649949184,
+    "restore_tool": "scripts/restore_completed_derived_v24b.py",
+    "real_restore_roundtrips": 3,
+    "old464_archive_unchanged": true
+  },
+  "v25_runtime_capacity": {
+    "root": "audit_results/v25_runtime_capacity_20260915",
+    "apt_cache_removed_allocated_bytes": 57597952,
+    "archived_system_journal_cleanup": "journal_cleanup.json",
+    "experiment_unique_data_removed": false,
+    "free_bytes_latest": 119152640,
+    "planned_exact_duplicate_mesh_hardlinks": 5,
+    "reason_for_interruption": "root filesystem ENOSPC; recurrent rsyslog failure/journal rotation consumed newly available capacity",
+    "exact_mesh_hardlinks_complete": 5,
+    "exact_duplicate_allocated_bytes_released": 26001408,
+    "linked_pilot_mesh_archive": "audit_results/virtual3d_pilot_linked_mesh_archive_v25_20260915",
+    "archived_inodes": 55,
+    "archived_original_aliases": 133,
+    "archive_net_allocated_bytes_released": 56090624,
+    "restore_tool": "scripts/restore_pilot_linked_meshes_v25.py",
+    "restore_proof": "audit_results/virtual3d_pilot_linked_mesh_restore_proof_v25_20260915",
+    "scope_closed": true
+  },
+  "v25_service_cost": {
+    "status": "complete_static_cost_only",
+    "active_session_id": null,
+    "root": "audit_results/facility_choice_v25_service_cost_20260915",
+    "script": "scripts/audit_facility_choice_v25_service_cost.py",
+    "protocol": "docs/research/V25_SERVICE_COST_PROTOCOL_20260915.md",
+    "budget_by_parent": {
+      "D25-P00": 400,
+      "D25-P01": 440
+    },
+    "cost_contract": "each attachment>=1 unique hit pixel within2m; full legal graph with accumulated observations and exact return",
+    "acquisition_contract": "two_views_each_attachment_16px_2m_separation_0p4m_bearing_15deg",
+    "new_physical_actions": 0,
+    "quality_scores_computed": 0,
+    "second_run_authorized": false,
+    "completed_session_id": 42948,
+    "elapsed_s": 73.06722176400945,
+    "root_verified_artifacts": 5,
+    "root_verified_sources": 155,
+    "route_catalog_paid_totals": {
+      "D25-P00": {
+        "A": 354,
+        "B": 340
+      },
+      "D25-P01": {
+        "A": 384,
+        "B": 370
+      }
+    },
+    "optimistic_near_1px_both_total": {
+      "D25-P00": 404,
+      "D25-P01": 442
+    },
+    "all_listed_1px_conditional_recoveries_budget_fit": true,
+    "actual_multiview_recovery_cost_computed": true,
+    "first_main_task_started": true,
+    "independent_solver_check": "audit_results/facility_choice_v25_service_solver_check_20260915",
+    "independent_solver_conditions_passed": 12,
+    "actual_multiview_recovery_scope": "feasible composed route cost only; no noisy recognition or physical execution"
+  },
+  "v25_p00_paid_tasks": {
+    "root": "audit_results/facility_choice_v25r1_paid_p00_20260915",
+    "script": "scripts/probe_facility_choice_v25r1.py",
+    "protocol": "docs/research/V25_R1_P00_PAID_TASK_PROTOCOL_20260915.md",
+    "analysis_protocol": "docs/research/V25_P00_FIXED_OPTION_ANALYSIS_PROTOCOL_20260915.md",
+    "status": "complete_and_formally_analyzed",
+    "main_attempts_started": 4,
+    "main_tasks_complete": 4,
+    "replays_complete": 4,
+    "frozen_source_count": 158,
+    "semantic_policy_executed": false,
+    "ans_four_module_execution": false,
+    "completed_case_results": [
+      {
+        "index": 0,
+        "assignment": "A_complex_B_simple",
+        "arm": "A",
+        "paid_actions": 354,
+        "C": 0.9151604573957949,
+        "Q": 0.385254274718985,
+        "J": 0.3525694782655115,
+        "eligible": true
+      },
+      {
+        "index": 1,
+        "assignment": "A_complex_B_simple",
+        "arm": "B",
+        "paid_actions": 340,
+        "C": 0.9206934710438952,
+        "Q": 0.41793290694291446,
+        "J": 0.38478809875673714,
+        "eligible": true
+      },
+      {
+        "index": 2,
+        "assignment": "A_simple_B_complex",
+        "arm": "A",
+        "paid_actions": 354,
+        "C": 0.9218000737735154,
+        "Q": 0.3854839424359411,
+        "J": 0.35533912657595607,
+        "eligible": true
+      },
+      {
+        "index": 3,
+        "assignment": "A_simple_B_complex",
+        "arm": "B",
+        "paid_actions": 340,
+        "C": 0.9140538546661748,
+        "Q": 0.45119679496292386,
+        "J": 0.4124181696488843,
+        "eligible": true
+      }
+    ],
+    "figure": "audit_results/facility_choice_v25r1_experiment_figure_20260915/README.md",
+    "viewpoint_design_diagnosis": "audit_results/facility_choice_v25r1_viewpoint_design_diagnosis_20260915/diagnosis.md",
+    "observed_design_asymmetry": "P00 actual B view-pair center lies1.5m west of the A mirror; same16px/angle gates do not ensure mirror-equivalent selection, causal effect awaits4+4",
+    "physical_paid_actions": 1388,
+    "replay_paid_actions": 1388,
+    "saved_raw_packets": 1392,
+    "all_eligible": true,
+    "all_prefix_pairings_passed": true,
+    "observed_class_cues_verified": true,
+    "analysis": "audit_results/facility_choice_v25r1_fixed_analysis_20260915",
+    "best_fixed_arm": "B",
+    "best_fixed_mean_J": 0.3986031342028107,
+    "two_option_oracle_relative_gain": 0.0,
+    "predeclared_complex_rule_relative_gain": -0.040414409379471466,
+    "predeclared_complex_rule_mean_J": 0.3824938239571979,
+    "swapped_rule_mean_J": 0.3700636126663466,
+    "actual_same_arm_nonsemantic_divergence": [
+      {
+        "left": 0,
+        "right": 2,
+        "arm": "A",
+        "complete_action_pose_sequences_identical": true,
+        "left_trajectory_sha256": "6ff3d8b34a3850d9b10682cfcc1e8eb41aec19495cb531acb127e6389d76c827",
+        "right_trajectory_sha256": "6ff3d8b34a3850d9b10682cfcc1e8eb41aec19495cb531acb127e6389d76c827",
+        "left_saved_frames": 355,
+        "right_saved_frames": 355,
+        "prefix_paid_actions": 234,
+        "total_budget": 400,
+        "first_divergence": {
+          "frame_index": 279,
+          "paid_step": 279,
+          "action": "left",
+          "pose": [
+            7,
+            34,
+            3
+          ],
+          "phase": "continuation",
+          "steps_after_prefix": 45,
+          "remaining_budget": 121,
+          "changed_fields": [
+            "depth_m"
+          ],
+          "left_field_hashes": {
+            "depth_m": "c4cad9b289ef423bd8f1c60d9c59bfc6513f27d2d20e7b93c8e1413f5104f5b6"
+          },
+          "right_field_hashes": {
+            "depth_m": "c929bb1a9a379bf1390b1a5ccfdd54c6464765cca34ae68458639eccb71ec22a"
+          }
+        },
+        "first_divergence_by_field": {
+          "angle_increment_rad": null,
+          "angle_min_rad": null,
+          "binary_rgb_marker": null,
+          "camera_timestamp": null,
+          "depth_m": 279,
+          "intrinsic": null,
+          "range_max_m": null,
+          "ranges_m": null,
+          "rgb_without_marker_class": null,
+          "timestamp_s": null,
+          "world_from_camera": null,
+          "world_from_laser": null
+        },
+        "no_nonsemantic_difference_through_end": false,
+        "field_scope": "saved trace.nonsemantic only; class colors and GT coverage excluded",
+        "interpretation": "exact hash difference for one paired noisy sample on this fixed acquisition path; not a learned/executable classifier, clean-ray distance, or adaptive-policy success",
+        "available": true,
+        "last_compared_paid_step": 354
+      },
+      {
+        "left": 1,
+        "right": 3,
+        "arm": "B",
+        "complete_action_pose_sequences_identical": true,
+        "left_trajectory_sha256": "6c5d72b33fff5091a36f699a9901c38912a529e81b330974baba6bee6ea4fea8",
+        "right_trajectory_sha256": "6c5d72b33fff5091a36f699a9901c38912a529e81b330974baba6bee6ea4fea8",
+        "left_saved_frames": 341,
+        "right_saved_frames": 341,
+        "prefix_paid_actions": 234,
+        "total_budget": 400,
+        "first_divergence": {
+          "frame_index": 279,
+          "paid_step": 279,
+          "action": "right",
+          "pose": [
+            7,
+            46,
+            1
+          ],
+          "phase": "continuation",
+          "steps_after_prefix": 45,
+          "remaining_budget": 121,
+          "changed_fields": [
+            "depth_m"
+          ],
+          "left_field_hashes": {
+            "depth_m": "c1ff598acaf87741d12ac4717e659ebce049d43eee7eb3914e273f2974c98b52"
+          },
+          "right_field_hashes": {
+            "depth_m": "23f46c580c1896443ec01e84fc1b630937d8f3c500d797c19f6ba82ff9bbdd43"
+          }
+        },
+        "first_divergence_by_field": {
+          "angle_increment_rad": null,
+          "angle_min_rad": null,
+          "binary_rgb_marker": null,
+          "camera_timestamp": null,
+          "depth_m": 279,
+          "intrinsic": null,
+          "range_max_m": null,
+          "ranges_m": null,
+          "rgb_without_marker_class": 289,
+          "timestamp_s": null,
+          "world_from_camera": null,
+          "world_from_laser": null
+        },
+        "no_nonsemantic_difference_through_end": false,
+        "field_scope": "saved trace.nonsemantic only; class colors and GT coverage excluded",
+        "interpretation": "exact hash difference for one paired noisy sample on this fixed acquisition path; not a learned/executable classifier, clean-ray distance, or adaptive-policy success",
+        "available": true,
+        "last_compared_paid_step": 340
+      }
+    ],
+    "root_verified_artifacts": 1447,
+    "root_verified_analysis_artifacts": 6,
+    "root_verified_sources": 158,
+    "semantic_efficacy_proven": false,
+    "report": "docs/research/V25_R1_PAID_TASK_RESULT_20260915.md"
+  },
+  "v25_multiview_recovery_composition": {
+    "root": "audit_results/facility_choice_v25r1_multiview_recovery_composition_20260915",
+    "script": "scripts/compose_v25r1_multiview_recovery_witness.py",
+    "status": "complete",
+    "route_witnesses": 8,
+    "paid_totals": {
+      "D25-P00": {
+        "A": 398,
+        "B": 384
+      },
+      "D25-P01": {
+        "A": 438,
+        "B": 424
+      }
+    },
+    "all_fit_frozen_budgets": true,
+    "construction": "original prefix + saved ideal probe + reverse path with4 turns + original complete double-view arm suffix",
+    "new_world_actions": 0,
+    "quality_evaluations": 0,
+    "path_searches": 0,
+    "original_cost_run_repeated": false,
+    "read_only_peer_review": "external_metrics passed",
+    "limitations": [
+      "ideal first-difference recognition assumed",
+      "not noisy unknown-map policy",
+      "not optimal route cost",
+      "no same-final-Q guarantee after extra history"
+    ]
+  },
+  "v25_viewpoint_control_next_step": {
+    "document": "docs/research/V25_VIEWPOINT_CONTROL_NEXT_STEP_20260915.md",
+    "status": "static_passed_new_acquisition_deferred_pending_online_candidate_boundary_review",
+    "owner": "v18_report",
+    "original_world_budget_backend_metrics_unchanged": true,
+    "maximum_additional_main_tasks_if_frozen_later": 4,
+    "new_main_tasks_started": 0,
+    "no_new_network_training": true,
+    "scope": "one posthoc development candidate-control correction; both mirrored families and shared4-option pool required",
+    "static_evidence": "audit_results/facility_choice_v25r1_mirrored_options_20260915",
+    "route_catalog": "audit_results/facility_choice_v25r1_mirrored_options_20260915/route_catalog.json",
+    "script": "scripts/audit_facility_choice_v25r1_mirrored_options.py",
+    "static_protocol": "docs/research/V25_R1_MIRRORED_OPTIONS_STATIC_PROTOCOL_20260915.md",
+    "completed_static_session": 70303,
+    "static_route_cases_passed": 4,
+    "world_constructions": 2,
+    "clean_depth_queries": 12,
+    "preflight_new_main_tasks": 0,
+    "new_Q_evaluations": 0,
+    "root_verified_artifacts": 6,
+    "root_verified_inputs": 168,
+    "root_verified_sources": 2,
+    "future_main_quota_start_must_be": 4
+  },
+  "next_steps": [
+    "Follow V36_FROZEN_CONFIRMATION_PLAN_20260918.md. Freeze the V35 posterior/planner/controller unchanged, and implement a separate seed-only V36 acquisition adapter. Use noise seed350918, the already frozen P00/P01 public templates, and G/S with the same active geometry capabilities. Complete source, input-isolation and format checks before any new physical task; no quality pre-runs or parameter scans.",
+    "Run at most8 frozen confirmation main tasks: P00/P01 x h0/h1 x G/S, each followed immediately by a fresh-process online replay. Keep42 total/18 prefix actions, C_map80, exact return, zero collisions, common TSDF/ROI and P/R/F1@2/5/10cm. Require positive mean J5 gain for each parent and no per-parent mean sign reversal at2/10cm. P01 was inspected in ideal models; this is held-out-noise/cross-parent physical confirmation, not wholly unseen-layout generalization.",
+    "Main tasks27/36; no active acquisition or replay. At most8 next tasks bring the count to35/36; the final1 is not an automatic retry. Preserve all failures/zeros, including V35 h0 zero S-G and h1 negative feedback at2cm. Stop on qualification/replay failure; no scene, metric, noise or budget retuning on confirmation scores. Decision date2026-09-29 unchanged; natural semantic front-end, mainstream comparison and ROS1 transfer remain separate work."
+  ],
+  "v25_semantic_candidate_boundary_correction": {
+    "date": "2026-09-16",
+    "document": "docs/research/V25_SEMANTIC_CANDIDATE_BOUNDARY_CORRECTION_20260916.md",
+    "original_fixed_candidate_failure_preserved": true,
+    "original_catalog_is_end_to_end_geometry_baseline": false,
+    "end_to_end_candidates_may_differ_by_method": true,
+    "geometry_allowed_to_discover_revisits": true,
+    "common_pool_scope": "ranking mechanism ablation only",
+    "new_physical_tasks": 0
+  },
+  "controlled_online_CPU_four_module_development_passed": true,
+  "controlled_online_CPU_evidence_scope": "docs/research/V35_ONLINE_SEMANTIC_RESULT_20260918.md"
 }
