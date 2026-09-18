@@ -1,0 +1,422 @@
+{
+  "version": "v36-frozen-confirmation-1",
+  "parents": {
+    "P00": {
+      "parent": "P00",
+      "noise_model": "iid_025px",
+      "noise_seed": 350918,
+      "paired_noise_depends_on": [
+        "parent",
+        "paid_step"
+      ],
+      "noise_independent_of_class": true,
+      "exact_pose": true,
+      "pose_source": "observed camera extrinsic and heading; exact simulation odometry",
+      "mapper": "ObservedRuntimeMapperV10",
+      "voxel_m": 0.04,
+      "truncation_m": 0.12,
+      "camera_euclidean_range_m": 4.0,
+      "tsdf_axial_depth_trunc_m": 4.0,
+      "laser_range_m": 8.0,
+      "public_bounds": [
+        [
+          0.75,
+          1.6,
+          0.0
+        ],
+        [
+          6.25,
+          3.9,
+          1.8
+        ]
+      ],
+      "translation": [
+        3.5,
+        0.5,
+        0.0
+      ],
+      "raster_shape": [
+        25,
+        35
+      ],
+      "raster_resolution_m": 0.2,
+      "budget": 42,
+      "forced_prefix": 18,
+      "common_prefix_actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right"
+      ],
+      "likelihood_config": {
+        "marker_colors": {
+          "2": [
+            40,
+            100,
+            220
+          ],
+          "3": [
+            220,
+            60,
+            40
+          ]
+        },
+        "marker_quorum_pixels": 16,
+        "marker_distinct_xy": 2,
+        "semantic_reliability": 0.9,
+        "stereo_fb_px_m": 57.599999999999994,
+        "stereo_sigma_disparity_px": 0.25,
+        "scan_sigma_m": 0.02,
+        "template_difference_m": 1e-05,
+        "minimum_depth_samples": 8,
+        "minimum_scan_samples": 3,
+        "loss_cap": 12.5,
+        "pose_log_odds_cap": 6.0,
+        "total_geometry_log_odds_cap": 24.0,
+        "forecast_reliability": 0.99,
+        "calibrated_probability": false,
+        "geometry_repetition_policy": "first observation at each exact pose only",
+        "semantic_repetition_policy": "one global prior after two distinct XY; conflicting supported classes clear it",
+        "zero_depth_policy": "ignore absent measured depth; do not infer a surface from a missing return"
+      },
+      "informative_nodes": [
+        9,
+        13,
+        14,
+        17,
+        18,
+        24,
+        25,
+        26,
+        29,
+        30,
+        33,
+        34,
+        42,
+        49,
+        51,
+        58,
+        64,
+        66,
+        67,
+        70,
+        71,
+        74,
+        75,
+        87,
+        90,
+        91,
+        94,
+        95
+      ],
+      "inference_performed": false,
+      "learned_reconstruction": false
+    },
+    "P01": {
+      "parent": "P01",
+      "noise_model": "iid_025px",
+      "noise_seed": 350918,
+      "paired_noise_depends_on": [
+        "parent",
+        "paid_step"
+      ],
+      "noise_independent_of_class": true,
+      "exact_pose": true,
+      "pose_source": "observed camera extrinsic and heading; exact simulation odometry",
+      "mapper": "ObservedRuntimeMapperV10",
+      "voxel_m": 0.04,
+      "truncation_m": 0.12,
+      "camera_euclidean_range_m": 4.0,
+      "tsdf_axial_depth_trunc_m": 4.0,
+      "laser_range_m": 8.0,
+      "public_bounds": [
+        [
+          1.0999999999999996,
+          0.75,
+          0.0
+        ],
+        [
+          4.4,
+          6.25,
+          1.8
+        ]
+      ],
+      "translation": [
+        5.5,
+        3.5,
+        0.0
+      ],
+      "raster_shape": [
+        35,
+        30
+      ],
+      "raster_resolution_m": 0.2,
+      "budget": 42,
+      "forced_prefix": 18,
+      "common_prefix_actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right"
+      ],
+      "likelihood_config": {
+        "marker_colors": {
+          "2": [
+            40,
+            100,
+            220
+          ],
+          "3": [
+            220,
+            60,
+            40
+          ]
+        },
+        "marker_quorum_pixels": 16,
+        "marker_distinct_xy": 2,
+        "semantic_reliability": 0.9,
+        "stereo_fb_px_m": 57.599999999999994,
+        "stereo_sigma_disparity_px": 0.25,
+        "scan_sigma_m": 0.02,
+        "template_difference_m": 1e-05,
+        "minimum_depth_samples": 8,
+        "minimum_scan_samples": 3,
+        "loss_cap": 12.5,
+        "pose_log_odds_cap": 6.0,
+        "total_geometry_log_odds_cap": 24.0,
+        "forecast_reliability": 0.99,
+        "calibrated_probability": false,
+        "geometry_repetition_policy": "first observation at each exact pose only",
+        "semantic_repetition_policy": "one global prior after two distinct XY; conflicting supported classes clear it",
+        "zero_depth_policy": "ignore absent measured depth; do not infer a surface from a missing return"
+      },
+      "informative_nodes": [
+        0,
+        1,
+        4,
+        5,
+        9,
+        12,
+        14,
+        17,
+        21,
+        22,
+        25,
+        26,
+        28,
+        29,
+        32,
+        33,
+        37,
+        38,
+        41,
+        42,
+        44,
+        45,
+        48,
+        49,
+        51,
+        53,
+        54,
+        55,
+        57,
+        58,
+        60,
+        63,
+        64,
+        65,
+        67,
+        69,
+        70,
+        71,
+        74,
+        75
+      ],
+      "inference_performed": false,
+      "learned_reconstruction": false
+    }
+  },
+  "cells": [
+    {
+      "parent": "P00",
+      "hypothesis": 0,
+      "mode": "G",
+      "physical_case": 0,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    },
+    {
+      "parent": "P00",
+      "hypothesis": 0,
+      "mode": "S",
+      "physical_case": 1,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    },
+    {
+      "parent": "P00",
+      "hypothesis": 1,
+      "mode": "G",
+      "physical_case": 2,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    },
+    {
+      "parent": "P00",
+      "hypothesis": 1,
+      "mode": "S",
+      "physical_case": 3,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    },
+    {
+      "parent": "P01",
+      "hypothesis": 0,
+      "mode": "G",
+      "physical_case": 4,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    },
+    {
+      "parent": "P01",
+      "hypothesis": 0,
+      "mode": "S",
+      "physical_case": 5,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    },
+    {
+      "parent": "P01",
+      "hypothesis": 1,
+      "mode": "G",
+      "physical_case": 6,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    },
+    {
+      "parent": "P01",
+      "hypothesis": 1,
+      "mode": "S",
+      "physical_case": 7,
+      "alias": false,
+      "acquisition_independent": true,
+      "independent_scene_sample": false
+    }
+  ],
+  "physical_cases": [
+    {
+      "index": 0,
+      "parent": "P00",
+      "hypothesis": 0,
+      "mode": "G",
+      "episode_id": "v36-confirmation-P00-case00"
+    },
+    {
+      "index": 1,
+      "parent": "P00",
+      "hypothesis": 0,
+      "mode": "S",
+      "episode_id": "v36-confirmation-P00-case01"
+    },
+    {
+      "index": 2,
+      "parent": "P00",
+      "hypothesis": 1,
+      "mode": "G",
+      "episode_id": "v36-confirmation-P00-case02"
+    },
+    {
+      "index": 3,
+      "parent": "P00",
+      "hypothesis": 1,
+      "mode": "S",
+      "episode_id": "v36-confirmation-P00-case03"
+    },
+    {
+      "index": 4,
+      "parent": "P01",
+      "hypothesis": 0,
+      "mode": "G",
+      "episode_id": "v36-confirmation-P01-case04"
+    },
+    {
+      "index": 5,
+      "parent": "P01",
+      "hypothesis": 0,
+      "mode": "S",
+      "episode_id": "v36-confirmation-P01-case05"
+    },
+    {
+      "index": 6,
+      "parent": "P01",
+      "hypothesis": 1,
+      "mode": "G",
+      "episode_id": "v36-confirmation-P01-case06"
+    },
+    {
+      "index": 7,
+      "parent": "P01",
+      "hypothesis": 1,
+      "mode": "S",
+      "episode_id": "v36-confirmation-P01-case07"
+    }
+  ],
+  "historical_main_used": 27,
+  "maximum_new_main_starts": 8,
+  "total_main_limit": 36,
+  "per_case_seconds": 600,
+  "per_case_bytes": 41943040,
+  "shared_bytes": 2097152,
+  "reserve_bytes": 67108864,
+  "main_metric": "C_map times public-ROI external-vertical surface F1@5cm",
+  "secondary_thresholds_cm": [
+    2,
+    10
+  ],
+  "GT_after_both_prediction_snapshots_frozen": true,
+  "stop_after_any_final_ineligible_or_failure": true,
+  "require_previous_case_independent_replay_before_next_main": true,
+  "confirmation_gate": "each parent: mean S-G J5 >0 and mean S-G J2/J10 >=0; all eligibility/replay gates; at least one legal observed semantic action divergence",
+  "control_scope": "unchanged V35 online CPU four-module controller; cross-parent physical and held-out-noise confirmation",
+  "parent_layouts_wholly_unseen": false,
+  "feedback_efficacy_retested": false,
+  "route_aliasing_allowed": false,
+  "offline_policy_or_witness_read": false,
+  "outside_public_roi_geometry_penalized": false,
+  "natural_semantic_network": false
+}
