@@ -1,0 +1,1447 @@
+{
+  "summary": {
+    "input_file": "bus.jpg",
+    "input_sha256": "c02019c4979c191eb739ddd944445ef408dad5679acab6fd520ef9d434bfbc63",
+    "detections": 5,
+    "class_counts": {
+      "person": 4,
+      "bus": 1
+    },
+    "prediction_wall_ms": [
+      95.9583839867264,
+      85.2213860489428,
+      86.93058299832046,
+      86.00236102938652,
+      86.16954809986055
+    ],
+    "median_prediction_wall_ms": 86.16954809986055,
+    "PIL_reference_matches": true,
+    "repeats_identical": true,
+    "independent_samples_added_by_repeats": 0
+  },
+  "repetitions": [
+    {
+      "schema": "semantic_frontend_v37/1",
+      "image": {
+        "encoding": "rgb8",
+        "shape": [
+          1080,
+          810,
+          3
+        ],
+        "sha256": "96f10c6a62e4d0b6a54584734b79ea0ec3a52d82fb4672492a6de4b9701f5e11",
+        "hash_definition": "ASCII rgb8:H:W:3 newline followed by C-order pixels",
+        "channels_changed": false
+      },
+      "source_taxonomy": "coco80",
+      "target_taxonomy": "coco80",
+      "min_score": 0.25,
+      "input_count": 5,
+      "detections": [
+        {
+          "source_index": 0,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            670.4491577148438,
+            380.5578308105469,
+            809.9188232421875,
+            879.6510620117188
+          ],
+          "detector_score": 0.8902071714401245,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 1,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            221.67640686035156,
+            407.419921875,
+            343.78369140625,
+            856.1857299804688
+          ],
+          "detector_score": 0.8832787871360779,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 2,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            50.68149185180664,
+            397.2987060546875,
+            244.3976593017578,
+            905.3758544921875
+          ],
+          "detector_score": 0.8784423470497131,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 3,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "source_class_name": "bus",
+          "target_taxonomy": "coco80",
+          "target_class_id": 5,
+          "target_class_name": "bus",
+          "box_xyxy": [
+            31.488807678222656,
+            230.7434844970703,
+            801.4141845703125,
+            775.7797241210938
+          ],
+          "detector_score": 0.8433689475059509,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 4,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            0.44960689544677734,
+            549.8380737304688,
+            57.76950454711914,
+            868.3001098632812
+          ],
+          "detector_score": 0.4363078474998474,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        }
+      ],
+      "rejected_detections": [],
+      "model_execution_performed": true,
+      "detector_score_is_configuration_probability": false,
+      "image_detection_alignment_verified": true,
+      "adapter_schema": "cpu_semantic_detector_v37/1",
+      "model": {
+        "checkpoint_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+        "format": "pytorch_pt",
+        "source_taxonomy": "coco80"
+      },
+      "runtime": {
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "cv2_num_threads": 1,
+        "thread_scope": "Torch intraop/inter-op limits; not an entire-process thread count",
+        "ultralytics_num_threads_runtime_override": 1,
+        "installed_package_source_modified": false,
+        "device": "cpu",
+        "dtype": "float32",
+        "offline_requested": true,
+        "autoinstall_enabled": false,
+        "remote_sync_enabled": false,
+        "execution_backend": "ultralytics_pinned_cpu",
+        "prediction_wall_seconds": 0.0959583839867264,
+        "prediction_settings": {
+          "conf": 0.25,
+          "iou": 0.7,
+          "imgsz": 640,
+          "device": "cpu",
+          "half": false,
+          "verbose": false,
+          "save": false,
+          "stream": false,
+          "augment": false,
+          "agnostic_nms": false,
+          "max_det": 300,
+          "rect": false
+        }
+      },
+      "pixel_conversion": "caller RGB -> contiguous BGR ndarray -> backend RGB tensor",
+      "input_filename_used_as_feature": false,
+      "detector_score_calibration": "uncalibrated detector score",
+      "upstream_score_suppression_threshold": 0.25,
+      "upstream_suppressed_proposals_available": false,
+      "natural_device_accuracy_measured": false,
+      "planning_gain_measured": false,
+      "configuration_priors": [
+        {
+          "source_index": 0,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8902071714401245,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 1,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8832787871360779,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 2,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8784423470497131,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 3,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "detector_score": 0.8433689475059509,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 4,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.4363078474998474,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        }
+      ]
+    },
+    {
+      "schema": "semantic_frontend_v37/1",
+      "image": {
+        "encoding": "rgb8",
+        "shape": [
+          1080,
+          810,
+          3
+        ],
+        "sha256": "96f10c6a62e4d0b6a54584734b79ea0ec3a52d82fb4672492a6de4b9701f5e11",
+        "hash_definition": "ASCII rgb8:H:W:3 newline followed by C-order pixels",
+        "channels_changed": false
+      },
+      "source_taxonomy": "coco80",
+      "target_taxonomy": "coco80",
+      "min_score": 0.25,
+      "input_count": 5,
+      "detections": [
+        {
+          "source_index": 0,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            670.4491577148438,
+            380.5578308105469,
+            809.9188232421875,
+            879.6510620117188
+          ],
+          "detector_score": 0.8902071714401245,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 1,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            221.67640686035156,
+            407.419921875,
+            343.78369140625,
+            856.1857299804688
+          ],
+          "detector_score": 0.8832787871360779,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 2,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            50.68149185180664,
+            397.2987060546875,
+            244.3976593017578,
+            905.3758544921875
+          ],
+          "detector_score": 0.8784423470497131,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 3,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "source_class_name": "bus",
+          "target_taxonomy": "coco80",
+          "target_class_id": 5,
+          "target_class_name": "bus",
+          "box_xyxy": [
+            31.488807678222656,
+            230.7434844970703,
+            801.4141845703125,
+            775.7797241210938
+          ],
+          "detector_score": 0.8433689475059509,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 4,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            0.44960689544677734,
+            549.8380737304688,
+            57.76950454711914,
+            868.3001098632812
+          ],
+          "detector_score": 0.4363078474998474,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        }
+      ],
+      "rejected_detections": [],
+      "model_execution_performed": true,
+      "detector_score_is_configuration_probability": false,
+      "image_detection_alignment_verified": true,
+      "adapter_schema": "cpu_semantic_detector_v37/1",
+      "model": {
+        "checkpoint_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+        "format": "pytorch_pt",
+        "source_taxonomy": "coco80"
+      },
+      "runtime": {
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "cv2_num_threads": 1,
+        "thread_scope": "Torch intraop/inter-op limits; not an entire-process thread count",
+        "ultralytics_num_threads_runtime_override": 1,
+        "installed_package_source_modified": false,
+        "device": "cpu",
+        "dtype": "float32",
+        "offline_requested": true,
+        "autoinstall_enabled": false,
+        "remote_sync_enabled": false,
+        "execution_backend": "ultralytics_pinned_cpu",
+        "prediction_wall_seconds": 0.0852213860489428,
+        "prediction_settings": {
+          "conf": 0.25,
+          "iou": 0.7,
+          "imgsz": 640,
+          "device": "cpu",
+          "half": false,
+          "verbose": false,
+          "save": false,
+          "stream": false,
+          "augment": false,
+          "agnostic_nms": false,
+          "max_det": 300,
+          "rect": false
+        }
+      },
+      "pixel_conversion": "caller RGB -> contiguous BGR ndarray -> backend RGB tensor",
+      "input_filename_used_as_feature": false,
+      "detector_score_calibration": "uncalibrated detector score",
+      "upstream_score_suppression_threshold": 0.25,
+      "upstream_suppressed_proposals_available": false,
+      "natural_device_accuracy_measured": false,
+      "planning_gain_measured": false,
+      "configuration_priors": [
+        {
+          "source_index": 0,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8902071714401245,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 1,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8832787871360779,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 2,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8784423470497131,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 3,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "detector_score": 0.8433689475059509,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 4,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.4363078474998474,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        }
+      ]
+    },
+    {
+      "schema": "semantic_frontend_v37/1",
+      "image": {
+        "encoding": "rgb8",
+        "shape": [
+          1080,
+          810,
+          3
+        ],
+        "sha256": "96f10c6a62e4d0b6a54584734b79ea0ec3a52d82fb4672492a6de4b9701f5e11",
+        "hash_definition": "ASCII rgb8:H:W:3 newline followed by C-order pixels",
+        "channels_changed": false
+      },
+      "source_taxonomy": "coco80",
+      "target_taxonomy": "coco80",
+      "min_score": 0.25,
+      "input_count": 5,
+      "detections": [
+        {
+          "source_index": 0,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            670.4491577148438,
+            380.5578308105469,
+            809.9188232421875,
+            879.6510620117188
+          ],
+          "detector_score": 0.8902071714401245,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 1,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            221.67640686035156,
+            407.419921875,
+            343.78369140625,
+            856.1857299804688
+          ],
+          "detector_score": 0.8832787871360779,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 2,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            50.68149185180664,
+            397.2987060546875,
+            244.3976593017578,
+            905.3758544921875
+          ],
+          "detector_score": 0.8784423470497131,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 3,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "source_class_name": "bus",
+          "target_taxonomy": "coco80",
+          "target_class_id": 5,
+          "target_class_name": "bus",
+          "box_xyxy": [
+            31.488807678222656,
+            230.7434844970703,
+            801.4141845703125,
+            775.7797241210938
+          ],
+          "detector_score": 0.8433689475059509,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 4,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            0.44960689544677734,
+            549.8380737304688,
+            57.76950454711914,
+            868.3001098632812
+          ],
+          "detector_score": 0.4363078474998474,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        }
+      ],
+      "rejected_detections": [],
+      "model_execution_performed": true,
+      "detector_score_is_configuration_probability": false,
+      "image_detection_alignment_verified": true,
+      "adapter_schema": "cpu_semantic_detector_v37/1",
+      "model": {
+        "checkpoint_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+        "format": "pytorch_pt",
+        "source_taxonomy": "coco80"
+      },
+      "runtime": {
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "cv2_num_threads": 1,
+        "thread_scope": "Torch intraop/inter-op limits; not an entire-process thread count",
+        "ultralytics_num_threads_runtime_override": 1,
+        "installed_package_source_modified": false,
+        "device": "cpu",
+        "dtype": "float32",
+        "offline_requested": true,
+        "autoinstall_enabled": false,
+        "remote_sync_enabled": false,
+        "execution_backend": "ultralytics_pinned_cpu",
+        "prediction_wall_seconds": 0.08693058299832046,
+        "prediction_settings": {
+          "conf": 0.25,
+          "iou": 0.7,
+          "imgsz": 640,
+          "device": "cpu",
+          "half": false,
+          "verbose": false,
+          "save": false,
+          "stream": false,
+          "augment": false,
+          "agnostic_nms": false,
+          "max_det": 300,
+          "rect": false
+        }
+      },
+      "pixel_conversion": "caller RGB -> contiguous BGR ndarray -> backend RGB tensor",
+      "input_filename_used_as_feature": false,
+      "detector_score_calibration": "uncalibrated detector score",
+      "upstream_score_suppression_threshold": 0.25,
+      "upstream_suppressed_proposals_available": false,
+      "natural_device_accuracy_measured": false,
+      "planning_gain_measured": false,
+      "configuration_priors": [
+        {
+          "source_index": 0,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8902071714401245,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 1,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8832787871360779,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 2,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8784423470497131,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 3,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "detector_score": 0.8433689475059509,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 4,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.4363078474998474,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        }
+      ]
+    },
+    {
+      "schema": "semantic_frontend_v37/1",
+      "image": {
+        "encoding": "rgb8",
+        "shape": [
+          1080,
+          810,
+          3
+        ],
+        "sha256": "96f10c6a62e4d0b6a54584734b79ea0ec3a52d82fb4672492a6de4b9701f5e11",
+        "hash_definition": "ASCII rgb8:H:W:3 newline followed by C-order pixels",
+        "channels_changed": false
+      },
+      "source_taxonomy": "coco80",
+      "target_taxonomy": "coco80",
+      "min_score": 0.25,
+      "input_count": 5,
+      "detections": [
+        {
+          "source_index": 0,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            670.4491577148438,
+            380.5578308105469,
+            809.9188232421875,
+            879.6510620117188
+          ],
+          "detector_score": 0.8902071714401245,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 1,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            221.67640686035156,
+            407.419921875,
+            343.78369140625,
+            856.1857299804688
+          ],
+          "detector_score": 0.8832787871360779,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 2,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            50.68149185180664,
+            397.2987060546875,
+            244.3976593017578,
+            905.3758544921875
+          ],
+          "detector_score": 0.8784423470497131,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 3,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "source_class_name": "bus",
+          "target_taxonomy": "coco80",
+          "target_class_id": 5,
+          "target_class_name": "bus",
+          "box_xyxy": [
+            31.488807678222656,
+            230.7434844970703,
+            801.4141845703125,
+            775.7797241210938
+          ],
+          "detector_score": 0.8433689475059509,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 4,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            0.44960689544677734,
+            549.8380737304688,
+            57.76950454711914,
+            868.3001098632812
+          ],
+          "detector_score": 0.4363078474998474,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        }
+      ],
+      "rejected_detections": [],
+      "model_execution_performed": true,
+      "detector_score_is_configuration_probability": false,
+      "image_detection_alignment_verified": true,
+      "adapter_schema": "cpu_semantic_detector_v37/1",
+      "model": {
+        "checkpoint_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+        "format": "pytorch_pt",
+        "source_taxonomy": "coco80"
+      },
+      "runtime": {
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "cv2_num_threads": 1,
+        "thread_scope": "Torch intraop/inter-op limits; not an entire-process thread count",
+        "ultralytics_num_threads_runtime_override": 1,
+        "installed_package_source_modified": false,
+        "device": "cpu",
+        "dtype": "float32",
+        "offline_requested": true,
+        "autoinstall_enabled": false,
+        "remote_sync_enabled": false,
+        "execution_backend": "ultralytics_pinned_cpu",
+        "prediction_wall_seconds": 0.08600236102938652,
+        "prediction_settings": {
+          "conf": 0.25,
+          "iou": 0.7,
+          "imgsz": 640,
+          "device": "cpu",
+          "half": false,
+          "verbose": false,
+          "save": false,
+          "stream": false,
+          "augment": false,
+          "agnostic_nms": false,
+          "max_det": 300,
+          "rect": false
+        }
+      },
+      "pixel_conversion": "caller RGB -> contiguous BGR ndarray -> backend RGB tensor",
+      "input_filename_used_as_feature": false,
+      "detector_score_calibration": "uncalibrated detector score",
+      "upstream_score_suppression_threshold": 0.25,
+      "upstream_suppressed_proposals_available": false,
+      "natural_device_accuracy_measured": false,
+      "planning_gain_measured": false,
+      "configuration_priors": [
+        {
+          "source_index": 0,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8902071714401245,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 1,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8832787871360779,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 2,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8784423470497131,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 3,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "detector_score": 0.8433689475059509,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 4,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.4363078474998474,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        }
+      ]
+    },
+    {
+      "schema": "semantic_frontend_v37/1",
+      "image": {
+        "encoding": "rgb8",
+        "shape": [
+          1080,
+          810,
+          3
+        ],
+        "sha256": "96f10c6a62e4d0b6a54584734b79ea0ec3a52d82fb4672492a6de4b9701f5e11",
+        "hash_definition": "ASCII rgb8:H:W:3 newline followed by C-order pixels",
+        "channels_changed": false
+      },
+      "source_taxonomy": "coco80",
+      "target_taxonomy": "coco80",
+      "min_score": 0.25,
+      "input_count": 5,
+      "detections": [
+        {
+          "source_index": 0,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            670.4491577148438,
+            380.5578308105469,
+            809.9188232421875,
+            879.6510620117188
+          ],
+          "detector_score": 0.8902071714401245,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 1,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            221.67640686035156,
+            407.419921875,
+            343.78369140625,
+            856.1857299804688
+          ],
+          "detector_score": 0.8832787871360779,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 2,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            50.68149185180664,
+            397.2987060546875,
+            244.3976593017578,
+            905.3758544921875
+          ],
+          "detector_score": 0.8784423470497131,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 3,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "source_class_name": "bus",
+          "target_taxonomy": "coco80",
+          "target_class_id": 5,
+          "target_class_name": "bus",
+          "box_xyxy": [
+            31.488807678222656,
+            230.7434844970703,
+            801.4141845703125,
+            775.7797241210938
+          ],
+          "detector_score": 0.8433689475059509,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        },
+        {
+          "source_index": 4,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "source_class_name": "person",
+          "target_taxonomy": "coco80",
+          "target_class_id": 0,
+          "target_class_name": "person",
+          "box_xyxy": [
+            0.44960689544677734,
+            549.8380737304688,
+            57.76950454711914,
+            868.3001098632812
+          ],
+          "detector_score": 0.4363078474998474,
+          "min_detector_score": 0.25,
+          "accepted": true,
+          "rejection_reason": null
+        }
+      ],
+      "rejected_detections": [],
+      "model_execution_performed": true,
+      "detector_score_is_configuration_probability": false,
+      "image_detection_alignment_verified": true,
+      "adapter_schema": "cpu_semantic_detector_v37/1",
+      "model": {
+        "checkpoint_sha256": "f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36",
+        "format": "pytorch_pt",
+        "source_taxonomy": "coco80"
+      },
+      "runtime": {
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "torch_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "cv2_num_threads": 1,
+        "thread_scope": "Torch intraop/inter-op limits; not an entire-process thread count",
+        "ultralytics_num_threads_runtime_override": 1,
+        "installed_package_source_modified": false,
+        "device": "cpu",
+        "dtype": "float32",
+        "offline_requested": true,
+        "autoinstall_enabled": false,
+        "remote_sync_enabled": false,
+        "execution_backend": "ultralytics_pinned_cpu",
+        "prediction_wall_seconds": 0.08616954809986055,
+        "prediction_settings": {
+          "conf": 0.25,
+          "iou": 0.7,
+          "imgsz": 640,
+          "device": "cpu",
+          "half": false,
+          "verbose": false,
+          "save": false,
+          "stream": false,
+          "augment": false,
+          "agnostic_nms": false,
+          "max_det": 300,
+          "rect": false
+        }
+      },
+      "pixel_conversion": "caller RGB -> contiguous BGR ndarray -> backend RGB tensor",
+      "input_filename_used_as_feature": false,
+      "detector_score_calibration": "uncalibrated detector score",
+      "upstream_score_suppression_threshold": 0.25,
+      "upstream_suppressed_proposals_available": false,
+      "natural_device_accuracy_measured": false,
+      "planning_gain_measured": false,
+      "configuration_priors": [
+        {
+          "source_index": 0,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8902071714401245,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 1,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8832787871360779,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 2,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.8784423470497131,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 3,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 5,
+          "detector_score": 0.8433689475059509,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        },
+        {
+          "source_index": 4,
+          "configuration_ids": [
+            "h0",
+            "h1"
+          ],
+          "probabilities": [
+            0.5,
+            0.5
+          ],
+          "reason": "no_prior_registry",
+          "geometry_fallback": true,
+          "source_taxonomy": "coco80",
+          "source_class_id": 0,
+          "detector_score": 0.4363078474998474,
+          "detector_score_used_as_probability": false,
+          "evidence": null,
+          "evidence_scientifically_validated_here": false,
+          "calibrated_probability": false,
+          "repetition_policy": "replace one semantic prior; never accumulate per frame",
+          "model_execution_performed": false
+        }
+      ]
+    }
+  ],
+  "PIL_reference": {
+    "boxes": [
+      [
+        670.4491577148438,
+        380.5578308105469,
+        809.9188232421875,
+        879.6510620117188
+      ],
+      [
+        221.67640686035156,
+        407.419921875,
+        343.78369140625,
+        856.1857299804688
+      ],
+      [
+        50.68149185180664,
+        397.2987060546875,
+        244.3976593017578,
+        905.3758544921875
+      ],
+      [
+        31.488807678222656,
+        230.7434844970703,
+        801.4141845703125,
+        775.7797241210938
+      ],
+      [
+        0.44960689544677734,
+        549.8380737304688,
+        57.76950454711914,
+        868.3001098632812
+      ]
+    ],
+    "scores": [
+      0.8902071714401245,
+      0.8832787871360779,
+      0.8784423470497131,
+      0.8433689475059509,
+      0.4363078474998474
+    ],
+    "classes": [
+      0.0,
+      0.0,
+      0.0,
+      5.0,
+      0.0
+    ]
+  }
+}

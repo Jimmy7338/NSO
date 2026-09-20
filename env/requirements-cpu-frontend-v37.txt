@@ -1,0 +1,11 @@
+# V37 verified inference-only additions to the existing .venv, not a full
+# Ultralytics training/export environment. Reuse CPU torch2.6.0/torchvision0.21.0,
+# NumPy, Pillow, matplotlib, PyYAML, requests and SciPy already present there.
+# Install with --no-deps --no-compile to avoid replacing the CPU Torch stack.
+# Upstream declares opencv-python and polars; this verified path uses headless
+# OpenCV and does not install/use polars table export. It is not a full pip-check
+# claim for every upstream feature. Exact downloaded-wheel SHA256 is archived.
+ultralytics==8.3.200
+opencv-python-headless==4.10.0.84
+psutil==6.1.1
+ultralytics-thop==2.0.17
