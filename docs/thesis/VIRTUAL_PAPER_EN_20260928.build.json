@@ -1,8 +1,8 @@
 {
   "document": "english",
   "source_sha256": {
-    "docs/thesis/VIRTUAL_PAPER_EN_20260928.md": "4074fb2c409ee1e1994e449286ebf1460fb6996675011ba325126c104f3cb4cf",
-    "docs/thesis/figures/scene_details_20260928/scene_overview.pdf": "c4ee183d1451984889eac9c3bfec2d8da881a6b89efd4cd47cc296d7bc8344d2",
+    "docs/thesis/VIRTUAL_PAPER_EN_20260928.md": "ba6bdffd43c7e85e02a8bfbd4f19f24eafe564619de38a474a34d0fb117d1335",
+    "docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf": "8353c9e616e6571fc2c342910005b0e8fc39874bce437c3410981c076784fd8a",
     "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf": "41bc82d15401363d818e6bc9ea06ecffd49ebab3f474f261629f3ad3023e60bf",
     "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf": "0e49468341f724d58d8437cfab736fbdf15cfabf1adb60291a20c3e1fb8d458d",
     "docs/thesis/figures/virtual_method_20260928/publication_main.pdf": "022f3f6134d2494f579f7e40a517676c7d255c12d05e91ed4ac2ab3200e4ea08",
@@ -12,14 +12,16 @@
     "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf": "49af58640707543cef330f5774e3a9592206d7ae0750a25ee635af999ad96bee",
     "docs/thesis/figures/expansion_20260928/budget_effects.pdf": "5e3e192ca3dc3faddc470aa44ec7081aacda88d28130a0886d997f47ff291556",
     "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf": "71e1f7aca712cd82f8d699375a1c51a9b0b984556bb0df771956430a4dbad20b",
-    "scripts/build_writing_deliverables_20260928.py": "d964c32a862d42e66e18e7c5ea6bf44ff7662baae71779f5a7fbf4b4bd6ab396",
+    "docs/thesis/figures/article_reconstruction_20260928/checkpoint_quality_components.pdf": "cec99737c6bad65ef431ed075e2c60a6a33bbf8c2670be8344c38cfce091c585",
+    "docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.pdf": "649be93ce3d01a1cfc3abef5e7dfbe1ece5f9c84e52486cdb93517462362a035",
+    "scripts/build_writing_deliverables_20260928.py": "d7e1b2067a4c10409d86ebfa6a9be6684ff1fb31ce92331a42febf11d1ba209d",
     "scripts/build_virtual_paper_review_20260928.py": "09ac58768fb016c9cd19a13c7cf3cb62e23401da62d98304e1334e79cb36fa6c"
   },
   "figures": [
     {
       "number": 1,
-      "path": "docs/thesis/figures/scene_details_20260928/scene_overview.pdf",
-      "caption": "Offline equipment geometry and saved executed routes for two layouts and both configurations. Hatched regions are front occluders; darker blocks are lateral ribs. G (dashed blue) and S (solid orange) share an 18-action prefix and the start/return anchor. Both h0 pairs coincide, whereas both h1 pairs choose different directions at paid action 19. Turns and retraced segments overlap. P01 is displayed in its declared equipment frame. Ground-truth geometry is explanatory context, not online planner input."
+      "path": "docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf",
+      "caption": "All four V36 confirmation pairs with saved routes and complete primitive-action strips. Panels share a metric scale; P01 is displayed in its declared equipment frame. Grey marks the common 18-action prefix. Open circles denote in-place turn positions; arrows show sampled recorded headings. Open diamonds indicate the first nonzero applied geometric residual, and filled diamonds the shared start/return. Both h0 trajectories coincide; both h1 pairs first diverge at executed action 19. Every action obtains a saved sensor frame; these runs have no extra observe primitive. J5 is copied from sealed endpoints."
     },
     {
       "number": 2,
@@ -65,6 +67,16 @@
       "number": 10,
       "path": "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf",
       "caption": "Geometry perturbations and threshold sensitivity at B=42. The upper panel retains every paired result for the two original layouts and two same-family variants; the lower panel reports signed means at 2, 5, and 10 cm. Open and filled markers denote h0 and h1. Variants do not establish unseen-category generalization."
+    },
+    {
+      "number": 11,
+      "path": "docs/thesis/figures/article_reconstruction_20260928/checkpoint_quality_components.pdf",
+      "caption": "Offline reintegration and measurement of all eight saved V36 trajectories at 18, 24, 30, 36 and 42 paid actions. Columns separate actual planar coverage, 5 cm precision, recall, F1 and joint J5; rows retain all four paired conditions. The action axis is accompanied by actual cumulative translation distances. Markers are measured checkpoints and connecting segments only visual guides. Intermediate stages are not successful terminal episodes. Prefix and final stages are checked against original saved outputs; 40 checkpoints do not constitute additional independent trajectories."
+    },
+    {
+      "number": 12,
+      "path": "docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.pdf",
+      "caption": "Actual reintegrated TSDF meshes at the fixed display checkpoints 18, 30 and 42 for all four G/S pairs. All extracted triangles are rendered; each configuration shares one camera, metric scale, material and lighting across methods and time. The h0/h1 views use predefined rear-left/rear-right cameras. No hole completion, smoothing or template surface is added. F1 and J5 come from the offline measurements; shading is illumination, not error. Both coincident h0 conditions remain visible."
     }
   ],
   "tables": [
@@ -89,8 +101,8 @@
       "data_rows": 4
     }
   ],
-  "pdf_sha256": "05467505a8b24340709d58a55bfd8d36c4866f1e97a79ee321b1dc27832ef6f8",
-  "tex_sha256": "bb2642efc17395f810887fe64fc39ee4ec643327cd0d508cb4a83b2bb409bb0d",
+  "pdf_sha256": "8b72460fb7d031cdf05924ee91ec7a426d72b2cad20b0eac92f145931de0b50f",
+  "tex_sha256": "2d934e23682d5f2c5310a77d03f7cfa617fbdacf101007c6ea5e01a5b2d85aac",
   "command": [
     "/root/NSO/tmp/thesis-tex-runtime_20260928/bin/tectonic",
     "--only-cached",
@@ -107,5 +119,5 @@
   "new_worlds": 0,
   "new_evaluations": 0,
   "status": "review_draft",
-  "pages": 18
+  "pages": 22
 }

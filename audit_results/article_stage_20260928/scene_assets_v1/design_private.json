@@ -1,0 +1,567 @@
+{
+  "schema_version": "article.scene_design.v1",
+  "design_id": "article_industrial_layouts_20260928",
+  "status": "static_design_before_new_policy_results",
+  "condition": "nominal_relationship",
+  "layout_units": 9,
+  "development_layouts": 3,
+  "test_layouts": 6,
+  "selection_rule": "Explicit geometric layouts; validate collision, connected coarse navigation and at least one close frontal marker pose per facility. No policy score, mesh quality, old result ranking or seed search enters selection.",
+  "generalization_scope": "new layouts with the same published four-structure family; not unseen-category generalization",
+  "start_position_world_m": [
+    0.75,
+    0.75,
+    0.9
+  ],
+  "start_yaw_deg": 0.0,
+  "facility_dimensions_m": [
+    1.2,
+    0.8,
+    1.6
+  ],
+  "nominal_probability_by_category": {
+    "cabinet": [
+      0.4,
+      0.3,
+      0.2,
+      0.1
+    ],
+    "rack": [
+      0.15,
+      0.2,
+      0.25,
+      0.4
+    ],
+    "workstation": [
+      0.35,
+      0.3,
+      0.15,
+      0.2
+    ],
+    "machine": [
+      0.2,
+      0.25,
+      0.4,
+      0.15
+    ]
+  },
+  "structure_assignment_rule": "Fixed stratified quantiles 0.25 and 0.75 within each repeated class; not independent random draws and not optimized by method results.",
+  "sensor_noise_rule": "fixed depth_relative_std=0.01; noise seeds supplied by episode runner; two seeds are within-layout repetitions, not two noise levels",
+  "maximum_bundle_bytes": 31457280,
+  "families": {
+    "AISLE": "Opposing or facing equipment aisles: choose travel direction and allocate repeat views across separate installations.",
+    "CELL": "Partially screened workcells: account for detours and loss of visibility between cells.",
+    "LOOP": "A central production island creates two circulation directions and return-cost competition among installations."
+  },
+  "layouts": [
+    {
+      "scene_id": "ART1_AISLE_DEV",
+      "family": "AISLE",
+      "split": "development",
+      "room_size_m": [
+        8,
+        7.5
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.16,
+          2.82,
+          0
+        ],
+        [
+          5.16,
+          2.82,
+          0
+        ],
+        [
+          2.34,
+          4.68,
+          180
+        ],
+        [
+          5.34,
+          4.68,
+          180
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          3.65,
+          3.85,
+          2.9,
+          4.2,
+          0,
+          1.8
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "rack",
+        "cabinet",
+        "rack"
+      ],
+      "structure_quantiles": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_AISLE_T0",
+      "family": "AISLE",
+      "split": "test",
+      "room_size_m": [
+        8,
+        8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.16,
+          2.82,
+          0
+        ],
+        [
+          5.16,
+          3.02,
+          0
+        ],
+        [
+          2.34,
+          5.43,
+          180
+        ],
+        [
+          5.34,
+          5.43,
+          180
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          3.95,
+          4.15,
+          3.7,
+          5.3,
+          0,
+          1.8
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "rack",
+        "cabinet",
+        "rack"
+      ],
+      "structure_quantiles": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_AISLE_T1",
+      "family": "AISLE",
+      "split": "test",
+      "room_size_m": [
+        7.5,
+        8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.32,
+          2.16,
+          90
+        ],
+        [
+          5.32,
+          2.34,
+          270
+        ],
+        [
+          2.32,
+          5.16,
+          90
+        ],
+        [
+          5.32,
+          5.34,
+          270
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          0.12,
+          1.25,
+          3.5,
+          3.7,
+          0,
+          1.8
+        ],
+        [
+          6.35,
+          7.38,
+          4.1,
+          4.3,
+          0,
+          1.8
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "rack",
+        "cabinet",
+        "rack"
+      ],
+      "structure_quantiles": [
+        0.75,
+        0.25,
+        0.25,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_CELL_DEV",
+      "family": "CELL",
+      "split": "development",
+      "room_size_m": [
+        8,
+        8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.16,
+          2.82,
+          0
+        ],
+        [
+          5.16,
+          2.82,
+          0
+        ],
+        [
+          2.16,
+          5.82,
+          0
+        ],
+        [
+          6.16,
+          5.82,
+          0
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          0.12,
+          3.7,
+          3.55,
+          3.75,
+          0,
+          2.0
+        ],
+        [
+          4.5,
+          4.7,
+          5.3,
+          6.0,
+          0,
+          2.0
+        ]
+      ],
+      "true_classes": [
+        "machine",
+        "workstation",
+        "machine",
+        "workstation"
+      ],
+      "structure_quantiles": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_CELL_T0",
+      "family": "CELL",
+      "split": "test",
+      "room_size_m": [
+        8,
+        8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          1.82,
+          2.16,
+          90
+        ],
+        [
+          5.68,
+          2.34,
+          270
+        ],
+        [
+          1.82,
+          5.16,
+          90
+        ],
+        [
+          5.68,
+          5.68,
+          270
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          3.55,
+          3.75,
+          0.12,
+          4.7,
+          0,
+          2.0
+        ],
+        [
+          5.4,
+          7.88,
+          4.45,
+          4.65,
+          0,
+          2.0
+        ]
+      ],
+      "true_classes": [
+        "machine",
+        "workstation",
+        "machine",
+        "workstation"
+      ],
+      "structure_quantiles": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_CELL_T1",
+      "family": "CELL",
+      "split": "test",
+      "room_size_m": [
+        8,
+        8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.16,
+          2.82,
+          0
+        ],
+        [
+          5.16,
+          2.82,
+          0
+        ],
+        [
+          2.16,
+          5.82,
+          0
+        ],
+        [
+          6.34,
+          5.18,
+          180
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          0.12,
+          3.2,
+          3.45,
+          3.65,
+          0,
+          2.0
+        ],
+        [
+          4.45,
+          4.65,
+          5.3,
+          6.1,
+          0,
+          2.0
+        ]
+      ],
+      "true_classes": [
+        "machine",
+        "workstation",
+        "machine",
+        "workstation"
+      ],
+      "structure_quantiles": [
+        0.75,
+        0.25,
+        0.25,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_LOOP_DEV",
+      "family": "LOOP",
+      "split": "development",
+      "room_size_m": [
+        8,
+        8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.16,
+          2.82,
+          0
+        ],
+        [
+          5.93,
+          3.16,
+          90
+        ],
+        [
+          5.34,
+          5.43,
+          180
+        ],
+        [
+          1.82,
+          5.34,
+          270
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          3.4,
+          4.6,
+          3.25,
+          4.75,
+          0,
+          1.5
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "machine",
+        "cabinet",
+        "machine"
+      ],
+      "structure_quantiles": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_LOOP_T0",
+      "family": "LOOP",
+      "split": "test",
+      "room_size_m": [
+        7.5,
+        8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.16,
+          2.82,
+          0
+        ],
+        [
+          5.68,
+          2.16,
+          90
+        ],
+        [
+          4.34,
+          5.43,
+          180
+        ],
+        [
+          1.82,
+          5.34,
+          270
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          2.9,
+          4.3,
+          3.3,
+          4.7,
+          0,
+          1.5
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "machine",
+        "cabinet",
+        "machine"
+      ],
+      "structure_quantiles": [
+        0.25,
+        0.25,
+        0.75,
+        0.75
+      ]
+    },
+    {
+      "scene_id": "ART1_LOOP_T1",
+      "family": "LOOP",
+      "split": "test",
+      "room_size_m": [
+        8,
+        7.5
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.16,
+          2.22,
+          0
+        ],
+        [
+          5.68,
+          3.16,
+          90
+        ],
+        [
+          5.34,
+          5.18,
+          180
+        ],
+        [
+          1.82,
+          4.34,
+          270
+        ]
+      ],
+      "occluder_boxes_m": [
+        [
+          3.1,
+          4.9,
+          2.9,
+          4.1,
+          0,
+          1.5
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "machine",
+        "cabinet",
+        "machine"
+      ],
+      "structure_quantiles": [
+        0.75,
+        0.25,
+        0.25,
+        0.75
+      ]
+    }
+  ]
+}

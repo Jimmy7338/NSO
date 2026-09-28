@@ -44,11 +44,20 @@ C_{\rm map}=\frac{|\{c\in\mathcal R:m_T(c)\ne-1\}|}{|\mathcal R|},
 
 Unknown cells have value −1; cells marked occupied also count as known. Coverage consequently measures observation status rather than occupancy classification accuracy. Surface precision, recall, and their harmonic mean follow the distance-threshold evaluation principle of Tanks and Temples [14]. The common facility region and the product with coverage are task-specific definitions. Surface precision samples the predicted mesh and queries the complete reference surface; recall samples fixed exterior vertical reference surfaces and queries the prediction. Before evaluation, predictions are cropped to the common bounding box of both templates, expanded by 0.20 m, and the known ground is removed. No hole filling or registration is applied. Errors outside this shared region do not enter precision, so the score describes the facility evaluation domain. Thresholds are fixed at 2, 5, and 10 cm, with 5 cm primary. Task validity is reported separately from quality; an empty prediction receives zero quality, and \(F_{1,\tau}=0\) when \(P_\tau+R_\tau=0\).
 
+The intended decision objective is to maximize expected measured documentation quality over policies using only permitted, already acquired information:
+
+\[
+\max_{\pi\in\Pi_{\rm paid}}\mathbb E[J_5(M_T,G^\star)],
+\qquad \sum_{t=0}^{T-1}c(a_t)\le B,\quad s_T=s_0.
+\]
+
+Here \(G^\star\) denotes the evaluator's reference geometry, not an online input. The coverage and collision requirements above further determine task validity. Both G and S may use observed geometric deficiencies, acquire diagnostic measurements, and revisit locations; S additionally conditions decisions on the acquired category cue. Maximizing a template-exposure proxy is an approximation to this objective, and cannot guarantee an increase in measured \(J_5\).
+
 Figure 1 relates the two public configuration hypotheses to occlusion and the saved routes. Both zero-gain configurations are shown alongside the conditions in which category information changes the observation side.
 
-![Two layouts, both configurations, shared prefixes, and saved routes](/root/NSO/docs/thesis/figures/scene_details_20260928/scene_overview.png)
+![Two layouts, both configurations, shared prefixes, and saved routes](/root/NSO/docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.png)
 
-**Figure 1.** Offline equipment geometry and saved executed routes for two layouts and both configurations. Hatched regions are front occluders; darker blocks are lateral ribs. G (dashed blue) and S (solid orange) share an 18-action prefix and the start/return anchor. Both h0 pairs coincide, whereas both h1 pairs choose different directions at paid action 19. Turns and retraced segments overlap. P01 is displayed in its declared equipment frame. Ground-truth geometry is explanatory context, not online planner input. [Vector PDF](/root/NSO/docs/thesis/figures/scene_details_20260928/scene_overview.pdf).
+**Figure 1.** All four V36 confirmation pairs with saved routes and complete primitive-action strips. Panels share a metric scale; P01 is displayed in its declared equipment frame. Grey marks the common 18-action prefix. Open circles denote in-place turn positions; arrows show sampled recorded headings. Open diamonds indicate the first nonzero applied geometric residual, and filled diamonds the shared start/return. Both h0 trajectories coincide; both h1 pairs first diverge at executed action 19. Every action obtains a saved sensor frame; these runs have no extra observe primitive. J5 is copied from sealed endpoints. [Vector PDF](/root/NSO/docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf).
 
 ## 4 Category Priors and Geometric Feedback
 
@@ -90,6 +99,14 @@ At a newly visited pose, \(\delta_t\) is the mean truncated-loss difference \(e_
 
 Residuals are evaluated only where the template predictions differ. Measured zero depth and zero scan range are treated as missing. Depth residuals use the reference disparity domain, \((57.6/z-57.6/\widehat z_h)/0.25\), while scan residuals use \((r-\widehat r_h)/0.02\). A missing template depth return incurs the capped loss. Without a valid modality, no geometric evidence is added. The scan scale of 0.02 m controls evidence weighting and is not an imposed simulator noise level.
 
+An incorrect prior has a finite correction threshold. If \(L^s>0\) favors configuration 0, assigning configuration 1 a support weight of at least \(\eta>1/2\) requires
+
+\[
+L_t^g\le-L^s-\operatorname{logit}(\eta).
+\]
+
+If every eligible counter-observation contributes at most \(-\epsilon<0\), a sufficient count from \(L_0^g\) is \(\max\{0,\lceil(L_0^g+L^s+\operatorname{logit}(\eta))/\epsilon\rceil\}\), provided the cumulative cap permits the threshold. With the present cap this requires \(24\ge L^s+\operatorname{logit}(\eta)\). This is an algebraic statement about the implemented support weights, not a calibrated probability or a guarantee that informative measurements will be obtained. First-pose counting suppresses exact repeats but does not establish independence between nearby views. A measurement can therefore remain useful for depth fusion without qualifying as additional belief evidence.
+
 ### 4.3 Limited Diagnostic Lookahead and Budgeted Execution
 
 The predictive objective is \(\widetilde J_h(M_h)=\widetilde C_h(M_h)\widetilde F_h(M_h)\), using ideal template ground exposure and the fraction of potential exterior vertical surface area. It is distinct from measured \(J_5\). The predicted stopping value is
@@ -124,7 +141,7 @@ Previously measured poses are excluded from diagnostic candidates at the beginni
 
 The measured map and template exposure sets are maintained separately. The map fuses acquired depth, whereas \(M_h\) describes exposure expected if template \(h\) is correct; template surfaces are never inserted into the mesh. The shared 18-action prefix returns to the initial pose while updating beliefs. Only subsequent actions depend on the resulting weights.
 
-Execution must satisfy \(1+d_{\rm return}(s')\le b_t\). Voluntary predicted stopping is recorded separately from termination caused by collision, exhausted budget, or guard rejection. Termination alone does not establish task validity. Algorithm 1 summarizes the complete execution loop.
+Execution must satisfy \(1+d_{\rm return}(s')\le b_t\), with return distance measured to the complete initial pose. On a fixed legal graph with correctly modeled action costs, this preserves \(d_{\rm return}(s_t)\le b_t\) by induction: after an allowed action, the reserved shortest return path costs no more than the remaining budget. The same certificate extends to a macro-action of cost \(c\) ending at \(u\) if \(c+d_{\rm return}(u)\le b_t\); every intermediate prefix retains a return path through the unexecuted suffix. All observation actions must be charged. This establishes existence of an affordable return path under the graph model, not completion of that path after a collision or computational failure. The reported controller executes one atomic action at a time. Voluntary stopping and forced termination are recorded separately, and termination alone does not establish task validity. Algorithm 1 summarizes the complete execution loop.
 
 **Algorithm 1. Receding-horizon planning with budgeted observations.**
 
@@ -158,7 +175,9 @@ Repeat:
 Seal outputs; independently evaluate coverage, surface F1, J5, and validity
 ```
 
-Mode X exchanges the category interpretation. Xnf additionally disables both measured geometric updates and future diagnostic anticipation; X−Xnf therefore evaluates a complete correction policy. Each planning call is capped at 1.5 million cached states and 20 s. The current evidence does not establish large-scale solver performance.
+Mode X exchanges the category interpretation. Xnf additionally disables both measured geometric updates and future diagnostic anticipation; X−Xnf therefore evaluates a complete correction policy. Each planning call is capped at 1.5 million cached states and 20 s. Time is checked every 1024 newly cached states and at selection completion, so the threshold is not a hard real-time bound.
+
+For \(N\) poses, budget \(B\), and exposure bitsets of lengths \(m_0,m_1\), the memoized state count has the conservative bound \(S\le3N(B+1)2^{m_0+m_1}\): one initial weight and at most two post-diagnosis weights are considered within a call. With maximum graph out-degree \(d\), bitset-update cost \(T_m\), and terminal-evaluation cost \(T_z\), planning costs \(O(S(dT_m+T_z))\), in addition to return-distance preprocessing. The exposure dependence is exponential; caching and resource caps do not establish polynomial scaling or global optimality for measured reconstruction quality.
 
 G and the category-conditioned method S share the same predictive belief planner. Both can actively diagnose a configuration and change observation direction; S additionally uses the category prior. They share an Open3D CPU implementation [4] of volumetric range integration [11], with a 4 cm voxel size and 12 cm truncation distance. Only measured depth is fused. Actions, observations, and meshes are saved before endpoint evaluation.
 
@@ -175,6 +194,31 @@ w_{28}=1-\sigma(-6+\log9)=0.978178.
 \]
 
 The forward/left/right continuation values are 0.574541/0.554660/0.555707, so action 29 moves forward. Its return cost is 13 actions with 14 remaining, satisfying \(1+13\le14\). At step 41 only one action remains; the robot is at the start position and turns to restore the starting orientation. Xnf retains weight 0.1 and turns right at action 29. Because Xnf also disables future diagnosis, its endpoint contrast estimates the whole correction policy; Figure 8 shows the associated measured belief timeline. This example uses saved development logs and adds no endpoint samples.
+
+### 4.5 When Can a Category Cue Save Diagnostic Cost?
+
+A simplified decision model clarifies the proposed mechanism. Assume equally likely configurations that the common initial geometry cannot distinguish. Two return-feasible routes yield utility \(U_+\) when matched to the configuration and \(U_-\) otherwise, with \(\Delta=U_+-U_->0\). A category cue available in the shared prefix has symmetric reliability \(\rho\ge1/2\). Both policies can instead acquire a symmetric geometric diagnosis of reliability \(r_d\ge1/2\), conditionally independent of the cue given the configuration. Both routes remain feasible after diagnosis, whose opportunity loss is \(\kappa\ge0\), expressed in utility units. These are analytical assumptions; \(\rho\) and \(r_d\) are not the implementation's fixed prior and forecast settings.
+
+For a current configuration probability \(p\), direct selection is correct with probability \(m=\max(p,1-p)\). Selecting the better route after each possible diagnosis gives
+
+\[
+A(p,r_d)=\max\{pr_d,(1-p)(1-r_d)\}
++\max\{p(1-r_d),(1-p)r_d\}
+=\max\{m,r_d\}.
+\]
+
+The net diagnostic value is therefore \(\Delta\max(0,r_d-m)-\kappa\). Allowing each policy to choose whether to diagnose yields
+
+\[
+V_G^*=U_-+\max\{\Delta/2,r_d\Delta-\kappa\},
+\]
+\[
+V_S^*=U_-+\max\{\rho\Delta,\max(\rho,r_d)\Delta-\kappa\}.
+\]
+
+Thus G benefits from diagnosis when \(\kappa<(r_d-1/2)\Delta\), whereas S requires \(\kappa<(r_d-\rho)_+\Delta\). For illustration only, \(U_-=0.50\), \(U_+=0.90\), \(\rho=0.80\), \(r_d=0.95\), and \(\kappa=0.08\) give \(V_G^*=0.80\) through diagnosis and \(V_S^*=0.82\) through direct category-based selection. With \(\kappa=0.02\), both diagnose and attain 0.86. These values are synthetic calculations, not reconstruction measurements.
+
+The advantage requires an informative cue, consequential route choice, and a cost of resolving ambiguity. It can disappear when geometry already resolves the configuration, routes have equal value, or diagnosis is cheap. If diagnosis removes a route from the feasible set, that set must be re-evaluated rather than applying the closed-form result. The argument uses established belief-based decision principles [12,13]; it neither introduces a new Bayesian rule nor guarantees a TSDF improvement from additional views.
 
 ## 5 Virtual Experiments and Results
 
@@ -286,9 +330,25 @@ The whole correction policy X/Xnf improves mean J5 by 1.7328% and 2.5163% on ori
 
 **Figure 10.** Geometry perturbations and threshold sensitivity at B=42. The upper panel retains every paired result for the two original layouts and two same-family variants; the lower panel reports signed means at 2, 5, and 10 cm. Open and filled markers denote h0 and h1. Variants do not establish unseen-category generalization. [Vector PDF](/root/NSO/docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf).
 
+### 5.6 Executed Costs and Reconstruction Progress
+
+The saved primitive-action strips in Figure 1 distinguish distance from sensing and turning cost. P00/h1 uses 28 m and 14 turns for G versus 26 m and 16 turns for S, with 42 paid actions in each case. P01/h1 uses 28 m and 14 turns for both policies, but their action sequences differ. Every paid primitive obtains RGB-D and a planar scan; these local experiments use no additional observe primitive. The measured category gain therefore does not require a longer route or more sensor frames.
+
+To examine how reconstruction gains develop, we reintegrated all eight original trajectories at 18, 24, 30, 36, and 42 paid actions, retaining their recorded observations, poses, TSDF settings, and surface evaluator. All 16 previously available prefix/endpoint checkpoints reproduce the original geometry and metric values, with zero metric difference. Planar coverage is identical within every pair at all five checkpoints and reaches its endpoint value by action 30. In both h1 conditions, later quality differences are associated with increased surface recall and F1. P00/h1 nevertheless exhibits a joint-score difference of −0.000819 at action 24 before becoming positive at the later checkpoints; both h0 pairs remain tied throughout. These process measurements reuse the original trajectories and add no independent trials. Intermediate scores do not imply successful terminal return.
+
+![Measured coverage and surface-quality components across paid-action checkpoints](/root/NSO/docs/thesis/figures/article_reconstruction_20260928/checkpoint_quality_components.png)
+
+**Figure 11.** Offline reintegration and measurement of all eight saved V36 trajectories at 18, 24, 30, 36 and 42 paid actions. Columns separate actual planar coverage, 5 cm precision, recall, F1 and joint J5; rows retain all four paired conditions. The action axis is accompanied by actual cumulative translation distances. Markers are measured checkpoints and connecting segments only visual guides. Intermediate stages are not successful terminal episodes. Prefix and final stages are checked against original saved outputs; 40 checkpoints do not constitute additional independent trajectories. [Vector PDF](/root/NSO/docs/thesis/figures/article_reconstruction_20260928/checkpoint_quality_components.pdf).
+
+![Actual checkpoint reconstructions for all four paired conditions](/root/NSO/docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.png)
+
+**Figure 12.** Actual reintegrated TSDF meshes at the fixed display checkpoints 18, 30 and 42 for all four G/S pairs. All extracted triangles are rendered; each configuration shares one camera, metric scale, material and lighting across methods and time. The h0/h1 views use predefined rear-left/rear-right cameras. No hole completion, smoothing or template surface is added. F1 and J5 come from the offline measurements; shading is illumination, not error. Both coincident h0 conditions remain visible. [Vector PDF](/root/NSO/docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.pdf).
+
 ## 6 Discussion and Applicability
 
 Category information is useful here because it can select an observation side while geometry remains ambiguous. When both methods choose the same route, the observed gain is zero. In particular, G resolves an equal-valued left/right decision by choosing left, which coincides with S in both original \(h_0\) configurations at budget 42. The extension preserves this budget's gain under new noise and same-family geometry, while a larger budget changes policy ordering. Ambiguity strength and natural category reliability have not been independently manipulated or calibrated. Public templates, synthetic category markers, exact poses, a shared safe graph, and a fixed prefix define the tested operating conditions. Region- and threshold-dependent surface evaluation further limits the conclusions to facility documentation, rather than natural recognition, safe exploration of unknown maps, or reconstruction of an entire environment.
+
+The analytical model identifies conditions for a reduced or absent semantic advantage; it does not predict the observed high-budget sign reversal. Its optimal decisions use a correctly specified utility and observation model, whereas the executed planner uses finite lookahead and uncalibrated exposure proxies. The measured reversal therefore remains an empirical boundary requiring reconstruction-level evidence, not a consequence established by the analytical example.
 
 A later shared-reliability development study provides an additional boundary. Under a different controller and \(J_{\rm nav}\) task, the nominal category–structure condition gives five S/G ties and one loss across six parent layouts, with a relative mean difference of −0.3301%. Under a mismatched relation, all six comparisons between S and the ordinary Bayesian semantic baseline B tie. Thus, implemented observation, belief update, and replanning do not necessarily produce an endpoint improvement. One nominal B control is missing because of interruption, and the full development matrix remains incomplete. These results cannot be pooled with the present \(J_5\) results and do not establish an effective shared-reliability contribution. They reinforce the narrower interpretation: the demonstrated benefit concerns category information in the original controlled setting, rather than a general advantage of increasingly complex semantic mechanisms.
 
@@ -298,7 +358,7 @@ Motivated by active mapping needs in industrial facilities, this study implement
 
 ## Reproducibility and Data
 
-The standalone repository release removes retired training adapters and some historical source archives containing legacy dependencies. Scientific outputs and original hashes are retained, but the cleaned checkout does not contain every historical source closure. Exact historical source reproduction requires the pre-cleanup version; new acquisitions must seal the current source separately, as described in the repository migration note.
+The NSO research repository preserves scientific outputs, original hashes, and restored historical source archives. The separate cleaned SGAM snapshot is a release view rather than a substitute for every historical dependency. Exact reproduction should use the source and input manifests of the relevant batch; a successful source audit does not imply that every legacy runtime dependency is currently installed. New acquisitions seal their own implementation and retain separate records.
 
 The extension preserves the fixed configuration, executed source hashes, and all 128 declared trial records. Its `analysis_review/complete_endpoint_metrics.csv` contains endpoint components and qualification; `complete_paired_metrics.csv` matches layout, configuration, budget, and seed. The batch `source_freeze.json` binds implementation and inputs. Plotting scripts read sealed results, with separate provenance for saved meshes and the laboratory photographs. Historical confirmation, incorrect-category, and external-mechanism batches remain separate. Software versions are given in Section 5.1; the accompanying platform reproduction note and thesis Appendix A provide dependency and verification instructions. Any fresh acquisition must use a separate output rather than overwrite archived evidence.
 
@@ -316,7 +376,7 @@ The extension preserves the fixed configuration, executed source hashes, and all
 10. Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. [Author paper](https://arxiv.org/abs/2207.00254).
 
 11. Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303–312. [Author project and paper](https://graphics.stanford.edu/papers/volrange/).
-12. Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1–2):99–134, 1998. [Author paper](https://www.cassandra.org/arc/papers/aij98.pdf).
+12. Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1–2):99–134, 1998. [Author paper](https://people.csail.mit.edu/lpk/papers/aij98-pomdp.pdf).
 13. Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271–1287, 2014. [doi:10.1177/0278364914533443](https://doi.org/10.1177/0278364914533443).
 14. Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. [Author project and paper](https://www.tanksandtemples.org/).
 
@@ -337,3 +397,4 @@ This section locates existing evidence and is excluded from the typeset scientif
 | Figures 2, 4, 7, and 8: method flow, complete comparisons, and timelines | [Figure manifest](/root/NSO/docs/thesis/figures/virtual_method_20260928/manifest.json) |
 | Fixed parameters, recorded numerical example, and software environment | [Worked example](/root/NSO/docs/thesis/METHOD_WORKED_EXAMPLE_20260928.md), [platform and reproduction](/root/NSO/docs/thesis/PLATFORM_REPRODUCTION_20260928.md) |
 | Verified bibliographic metadata and research positioning | [Related-work note](/root/NSO/docs/thesis/VIRTUAL_PAPER_RELATED_WORK_20260928.md) |
+| Conditional decision analysis, correction threshold, return invariant, and complexity | [Theory supplement](/root/NSO/docs/thesis/ARTICLE_THEORY_SUPPLEMENT_20260928.md), [primary-source and arithmetic checks](/root/NSO/docs/thesis/ARTICLE_THEORY_REFERENCES_20260928.json); analytical values are not experimental samples |

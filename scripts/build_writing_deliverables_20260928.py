@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build graduation drafts or the optional English paper, without experiments."""
+"""Build the English article and accompanying thesis drafts, without experiments."""
 import argparse
 from functools import lru_cache
 import json
@@ -45,7 +45,8 @@ def scientific_body(text):
 def combine_chapters(full=False):
     parts = ['# 毕业论文核心章节：系统方法与仿真实验\n\n'
              '本稿为两章核心正文的合并审阅版，章节编号在最终学校模板中统一调整。'
-             '学校没有硬性发表要求，毕业论文为第一交付；英文文章与实车验证均为可选补充。\n']
+             '学校没有硬性发表要求；当前按文章优先、毕业论文同步扩展推进，'
+             '实车验证作为后续补充。\n']
     figure_offset = table_offset = 0
     sources = {}
     if full:
@@ -215,6 +216,11 @@ def prepare(document):
         body = body.replace('\\[','\\begin{equation}').replace('\\]','\\end{equation}')
     preamble = PREAMBLE.replace('面向预算受限设施建档的类别先验与几何反馈主动观测方法',inline(title))
     preamble = preamble.replace('\\begin{document}',
+                               # Keep nested mathematical indices readable and
+                               # use the already cached 7 pt math font family.
+                               '\\DeclareMathSizes{10.95}{10.95}{8}{7}\n'
+                               '\\clubpenalty=10000\n\\widowpenalty=10000\n'
+                               '\\displaywidowpenalty=10000\n'
                                '\\newlength{\\ReviewTableWidth}\n\\begin{document}')
     if document=='english':
         # Reuse the complete cached font/encoding setup, with English names.

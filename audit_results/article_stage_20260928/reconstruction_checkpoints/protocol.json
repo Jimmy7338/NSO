@@ -1,0 +1,58 @@
+{
+  "schema": "article.saved_reconstruction_checkpoints.protocol.v1",
+  "declared_before_reconstruction": true,
+  "source_batch": "audit_results/v36_online_confirmation_20260918",
+  "cases": [0, 1, 2, 3, 4, 5, 6, 7],
+  "paid_action_checkpoints": [18, 24, 30, 36, 42],
+  "mesh_display_checkpoints": [18, 30, 42],
+  "cohort": "all eight original V36 G/S trajectories; four existing paired conditions",
+  "new_policy_tasks": 0,
+  "new_independent_samples": 0,
+  "new_worlds_allowed": 0,
+  "new_sensor_queries_allowed": 0,
+  "maximum_offline_surface_evaluations": 40,
+  "maximum_mapper_updates": 344,
+  "mapper": "ObservedRuntimeMapperV10",
+  "voxel_m": 0.04,
+  "tsdf_truncation_m": 0.12,
+  "tsdf_axial_depth_max_m": 4.0,
+  "evaluator": "SurfaceMeasurementV34",
+  "reference": "same frozen scene union exterior surfaces; complete vertical recall reference",
+  "coverage": "mean(belief[original_saved_reachable_mask] != -1)",
+  "quality_thresholds_m": [0.02, 0.05, 0.10],
+  "main_display_threshold_m": 0.05,
+  "main_columns": ["C_map", "precision", "recall", "f1", "joint"],
+  "numerical_parity": {
+    "checkpoints_with_existing_results": [18, 42],
+    "occupancy_arrays": "exact equality",
+    "cropped_prediction_canonical_geometry_sha256": "exact equality",
+    "reference_geometry_sha256": "exact equality",
+    "score_absolute_tolerance": 1e-10,
+    "score_relative_tolerance": 0.0,
+    "missing_or_failed_parity": "stop and retain failure; do not relax tolerance or substitute old scores"
+  },
+  "execution": {
+    "threads": 1,
+    "simultaneous_cases": 1,
+    "reconstruct_from_initial_frame_once_per_trajectory": true,
+    "freeze_all_five_case_predictions_before_reference_access": true,
+    "missing_packet_policy": "stop; no interpolation or generated replacement",
+    "intermediate_maps_are_terminal_successes": false,
+    "old_results_modified": false,
+    "old_failures_removed": false
+  },
+  "resources": {
+    "maximum_combined_new_bytes": 262144000,
+    "minimum_free_bytes": 1073741824,
+    "maximum_seconds_per_case": 300
+  },
+  "display": {
+    "all_four_pairs_included": true,
+    "smoothing": false,
+    "completion": false,
+    "quality_interpolation": false,
+    "mesh_decimation": false,
+    "between_checkpoint_segments": "visual guides only; no unmeasured intermediate scores",
+    "paths_changed": false
+  }
+}

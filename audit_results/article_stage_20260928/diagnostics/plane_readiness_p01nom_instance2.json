@@ -1,0 +1,364 @@
+{
+  "accepted_plane_claim": false,
+  "algorithm_python": "def upright_tls(points, orienting_camera):\n    center = points.mean(axis=0)\n    _, axes = np.linalg.eigh(np.cov(points[:, :2], rowvar=False, bias=True))\n    normal = np.r_[axes[:, 0], 0.]\n    if np.dot(normal, orienting_camera-center) < 0:\n        normal *= -1\n    horizontal = np.cross([0., 0., 1.], normal)\n    uv = np.c_[(points-center) @ horizontal, points[:, 2]-center[2]]\n    anchor = center + horizontal*(uv[:, 0].max()+uv[:, 0].min())*.5\n    anchor += np.array([0., 0., 1.])*(uv[:, 1].max()+uv[:, 1].min())*.5\n    return dict(normal=normal.tolist(), yaw_deg=float(np.rad2deg(np.arctan2(normal[1],normal[0]))),\n        anchor_estimate_m=anchor.tolist(), observed_extent_m=np.ptp(uv, axis=0).tolist(),\n        rms_m=float(np.sqrt(np.mean(((points-center) @ normal)**2))))\n",
+  "algorithm_sha256": "4ffba939b781066710fd4482d55a36fc4114620dc10aa6e7b9fa3852a1d85d84",
+  "calibrated_uncertainty": false,
+  "episode_manifest_sha256": "13e181ff4044fc9cdde48c55dbb22c10116b2b3bc3c522a04a0484637bb39d6a",
+  "ground_truth_pose_read": false,
+  "inputs": [
+    {
+      "marker_pixels": [
+        3373,
+        3374,
+        3375,
+        3469,
+        3470,
+        3471,
+        3565,
+        3566,
+        3567,
+        3661,
+        3662,
+        3663
+      ],
+      "measured_marker_points_world_m": [
+        [
+          2.2043787017464656,
+          5.291733980178837,
+          0.9368930622935294
+        ],
+        [
+          2.169062599539759,
+          5.448059558868412,
+          0.9385214537382125
+        ],
+        [
+          2.199712840219341,
+          5.5165779590606725,
+          0.9392351870735485
+        ],
+        [
+          2.20764420181513,
+          5.287190675735477,
+          0.863154263794422
+        ],
+        [
+          2.1269704923033736,
+          5.50837063789368,
+          0.8608503058552739
+        ],
+        [
+          2.1514487241705282,
+          5.587860345840458,
+          0.8600222880641617
+        ],
+        [
+          2.1684163883328456,
+          5.3417685031890905,
+          0.7877572342753411
+        ],
+        [
+          2.1497636238733953,
+          5.475711822509769,
+          0.7835715055465698
+        ],
+        [
+          2.1949413145581906,
+          5.5236251354217565,
+          0.7820742145180702
+        ],
+        [
+          2.1542725712060946,
+          5.361446857452396,
+          0.7119038095076877
+        ],
+        [
+          2.1106929406523727,
+          5.531693696975712,
+          0.7030367866158485
+        ],
+        [
+          2.2401600678761824,
+          5.456840515136722,
+          0.7069353898366291
+        ]
+      ],
+      "paid_step": 54,
+      "path": "audit_results/semantic_development_acquisition_20260923/episodes/core_P01_nom_S_b120_lexicographic/steps/054.json.gz",
+      "sha256": "8b76cfea1febe2927018a28ec6c1e8e1b742fdf8e201d38adad983920ebde598",
+      "world_from_camera": [
+        [
+          1.0,
+          0.0,
+          6.123233995736766e-17,
+          4.750000000000002
+        ],
+        [
+          -6.123233995736766e-17,
+          0.0,
+          1.0,
+          1.7500000000000036
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          0.9
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "marker_pixels": [
+        3371,
+        3372,
+        3467,
+        3468,
+        3563,
+        3564,
+        3659,
+        3660,
+        3755
+      ],
+      "measured_marker_points_world_m": [
+        [
+          2.14410335570574,
+          5.426932573318485,
+          0.9356972143054008
+        ],
+        [
+          2.1394470085700372,
+          5.529761791229252,
+          0.9367683519919712
+        ],
+        [
+          2.202799859146279,
+          5.349742650985721,
+          0.8651068473855652
+        ],
+        [
+          2.164100115497909,
+          5.496428012847904,
+          0.8635788748661675
+        ],
+        [
+          2.1938890889287013,
+          5.361460924148563,
+          0.7949543461203575
+        ],
+        [
+          2.1742521623770417,
+          5.482701301574711,
+          0.7911655843257904
+        ],
+        [
+          2.191875418027244,
+          5.364109039306644,
+          0.7247859875361123
+        ],
+        [
+          2.2389559000730537,
+          5.395214557647709,
+          0.7231659084558486
+        ],
+        [
+          2.130072382589183,
+          5.445384263992313,
+          0.6487740640838939
+        ]
+      ],
+      "paid_step": 55,
+      "path": "audit_results/semantic_development_acquisition_20260923/episodes/core_P01_nom_S_b120_lexicographic/steps/055.json.gz",
+      "sha256": "512ed0733197059324308a703cc0c3bf4589100ca662f174b9355e30fd31625a",
+      "world_from_camera": [
+        [
+          1.0,
+          0.0,
+          6.123233995736766e-17,
+          4.750000000000002
+        ],
+        [
+          -6.123233995736766e-17,
+          0.0,
+          1.0,
+          2.0000000000000036
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          0.9
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "marker_pixels": [
+        3368,
+        3464,
+        3560,
+        3656,
+        3752
+      ],
+      "measured_marker_points_world_m": [
+        [
+          2.190953704218072,
+          5.359727144241337,
+          0.9323929910858472
+        ],
+        [
+          2.137313981850944,
+          5.424909591674808,
+          0.8669280250867206
+        ],
+        [
+          2.18530279149612,
+          5.36659407615662,
+          0.8026064351201058
+        ],
+        [
+          2.1876051823298157,
+          5.363796234130863,
+          0.7378231128056844
+        ],
+        [
+          2.1816601678729075,
+          5.371020555496219,
+          0.6724255844950674
+        ]
+      ],
+      "paid_step": 56,
+      "path": "audit_results/semantic_development_acquisition_20260923/episodes/core_P01_nom_S_b120_lexicographic/steps/056.json.gz",
+      "sha256": "e6599537725edf57fbe4d548bb53b8078460526991a128e8c28c0d6b53185ee9",
+      "world_from_camera": [
+        [
+          1.0,
+          0.0,
+          6.123233995736766e-17,
+          4.750000000000002
+        ],
+        [
+          -6.123233995736766e-17,
+          0.0,
+          1.0,
+          2.2500000000000036
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          0.9
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "instance_id": "instance_0002",
+  "joint": {
+    "anchor_estimate_m": [
+      2.1723887732506904,
+      5.435977618352106,
+      0.7940046255787212
+    ],
+    "normal": [
+      0.9774061585490711,
+      0.2113698210018357,
+      -0.0
+    ],
+    "observed_extent_m": [
+      0.3057544153003776,
+      0.29046112298965454
+    ],
+    "rms_m": 0.0280728165100847,
+    "yaw_deg": 12.202639336385335
+  },
+  "leave_one_paid_view_out": [
+    {
+      "anchor_estimate_m": [
+        2.165568464765394,
+        5.437695615759725,
+        0.7927712080379326
+      ],
+      "excluded_paid_step": 54,
+      "normal": [
+        0.937792224205429,
+        0.34719698187028436,
+        -0.0
+      ],
+      "observed_extent_m": [
+        0.1908164684414796,
+        0.28799428790807724
+      ],
+      "rms_m": 0.02159530721930971,
+      "yaw_deg": 20.3159655311473
+    },
+    {
+      "anchor_estimate_m": [
+        2.1721761562182995,
+        5.436299113579918,
+        0.8058303857843079
+      ],
+      "excluded_paid_step": 55,
+      "normal": [
+        0.9864370206132747,
+        0.16414019728148754,
+        -0.0
+      ],
+      "observed_extent_m": [
+        0.30581563035404546,
+        0.2668096025784811
+      ],
+      "rms_m": 0.028811427251196346,
+      "yaw_deg": 9.447290432389165
+    },
+    {
+      "anchor_estimate_m": [
+        2.1743364096995177,
+        5.436379061098876,
+        0.7940046255787212
+      ],
+      "excluded_paid_step": 56,
+      "normal": [
+        0.9766351052982368,
+        0.21490433010784477,
+        -0.0
+      ],
+      "observed_extent_m": [
+        0.3057212064012672,
+        0.29046112298965454
+      ],
+      "rms_m": 0.030106380538525913,
+      "yaw_deg": 12.409914625101061
+    }
+  ],
+  "limits": [
+    "Unweighted upright TLS is an exploratory identifiability check, not the proposed noise-aware final estimator.",
+    "Observed extents are not a proof of an unoccluded full marker.",
+    "Three paid views do not establish independent or calibrated covariance.",
+    "No change to a controller, geometry likelihood, or forecast was applied."
+  ],
+  "new_exploratory_parameter_estimates": 4,
+  "new_numeric_surface_evaluations": 0,
+  "new_planner_executions": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "numpy_version": "1.26.4",
+  "point_count": 26,
+  "run_id": "core_P01_nom_S_b120_lexicographic",
+  "schema": "article.exploratory_marker_plane_diagnostic.v1"
+}

@@ -4,7 +4,7 @@
 
 NSO研究机器人如何在有限运动预算内选择观察位置，同时兼顾二维区域覆盖与设施三维表面质量。工业设备、工位及物料布置改变后，机器人需要重新获取环境；本项目验证单次任务内环境静止的主动观察与建档，不涉及动态避障。
 
-当前交付以**毕业论文与CPU虚拟实验**为主，保留 OV-SDF、STGHP、RPN-UQ、IGCR 四模块和规划—执行层次。代码、结果、图表和论文来自本项目的持续开发。
+当前交付按**先形成可投稿文章，再扩展毕业论文**推进，CPU虚拟实验为主要证据；两稿同步积累，实车验证后置。保留 OV-SDF、STGHP、RPN-UQ、IGCR 四模块和规划—执行层次。[当前路线](docs/research/ARTICLE_FIRST_ROADMAP_20260928.md)优先补强方法差别、理论解释、场景级对照及真实轨迹展示。
 
 ## 论文与展示
 
@@ -15,7 +15,9 @@ NSO研究机器人如何在有限运动预算内选择观察位置，同时兼�
 | [英文文章](docs/thesis/VIRTUAL_PAPER_EN_20260928.pdf) · [中文文章](docs/thesis/VIRTUAL_PAPER_REVIEW_20260928.pdf) | 同一组证据的文章稿 |
 | [系统架构图](docs/thesis/figures/system_architecture_20260928/system_architecture.pdf) | 小车平台、四模块、实测重建与离线评价 |
 | [场景与三维重建展示](docs/thesis/figures/scene_details_20260928/) | 场景、实际路线、同视角网格与局部细节 |
-| [当前进度](docs/research/CURRENT_RESEARCH_STATE.json) · [接续计划](docs/research/GOAL_PROMPT.md) | 最新结果、证据边界与论文收尾事项 |
+| [重建过程与实际路径](docs/research/ARTICLE_RECONSTRUCTION_CHECKPOINTS_20260928.md) | 40个真实重融合检查点、完整动作成本及同视角网格 |
+| [方法诊断与新场景](docs/research/ARTICLE_METHOD_DIAGNOSIS_20260928.md) | 反馈/候选阻断分析；9个预先设计布局，在线开发进行中 |
+| [当前进度](docs/research/CURRENT_RESEARCH_STATE.json) · [接续计划](docs/research/GOAL_PROMPT.md) | 最新结果、证据边界与文章优先接续事项 |
 
 ![NSO system architecture](docs/thesis/figures/system_architecture_20260928/system_architecture.png)
 
