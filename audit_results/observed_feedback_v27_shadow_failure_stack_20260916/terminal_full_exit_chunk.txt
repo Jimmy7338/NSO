@@ -1,0 +1,54 @@
+{"action": 400, "rows_completed": 13, "offline_mapper_updates": 401}
+Traceback (most recent call last):
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 234, in execute
+    base.write(out,'result.json',result)
+  File "/root/NSO/scripts/audit_v26_feedback_support.py", line 68, in write
+    blob=(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 266, in <module>
+    if __name__=='__main__':main()
+                          ^^^^^^
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 262, in main
+    try:execute(args.output.resolve())
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 244, in execute
+    print(json.dumps(failure),file=sys.stderr,flush=True)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable

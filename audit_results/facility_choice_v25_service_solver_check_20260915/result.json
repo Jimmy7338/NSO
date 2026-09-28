@@ -1,0 +1,1490 @@
+{
+  "status": "passed",
+  "conditions": 12,
+  "passed_conditions": 12,
+  "failures": [],
+  "scope": "Synthetic 2x3/3x3 safe grids only. Forward BFS on position, heading and uncompressed global acquired mask is independent of DUT graph/search. Compare exact unit-action service+exact-heading return costs and paid-arrival mask union. No world/sensor/Q/TSDF construction or run.",
+  "target_file": "scripts/audit_facility_choice_v25_service_cost.py",
+  "target_file_sha256_before": "dc524e7e66a8af57d551939d90d1000b950780a80ed3d64c713ef99daeced22b",
+  "target_file_sha256_after": "dc524e7e66a8af57d551939d90d1000b950780a80ed3d64c713ef99daeced22b",
+  "checked_ast_sha256": {
+    "require": "0f4163611ce0bc40358ee49a9ef0fc10b5a6a2c2f0ec03bd30dfdc6b54a6af7f",
+    "encode": "1b14046836f4b85adabc36d652c03d9ba8a58d2fecdb614757ff7a717e16098a",
+    "decode": "bd25c052d0d7e3d704222f4788d73b0b825c1bfec8ad2cdee5f10c365fb1b48a",
+    "make_graph": "baccb2d4749c3fecfc1beba827e1070781d7113289771932ff1ade2a0e6b7628",
+    "validate_route": "3a80d37ded058ecb232a9c0098bfaf5de339c62e13e0e35aa38dc3b233aacd96",
+    "ServiceReturnSolver": "92b91bd4eef176828ad29afcb4568e62ba0b6b9de98d74561f5abd83f6c20804"
+  },
+  "grid_geometry_sha256": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b",
+  "directions_assignment_ast_sha256": "4ae210e3c399d319b22598b4c59b0005a77477499ec5b99f8852f41a9704148f",
+  "formatting_scope": "Hashes use ast.dump(include_attributes=False): whitespace, comments and line-number changes outside semantic AST do not affect the function-level conclusion. File SHA separately records the concrete reviewed version. Changes to literal values, helpers, globals, algorithms or direction convention require renewed review.",
+  "not_proved": [
+    "Physical world service-mask visibility or no-GT policy input",
+    "Actual reconstruction quality or semantic information advantage",
+    "Uniform-turn physical collision model beyond supplied safe cells",
+    "Global lower bound beyond this specified unit-action graph and required observation-bit contract"
+  ],
+  "elapsed_s": 0.0252683162689209,
+  "cases": [
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 0,
+      "reverse_cost": 0,
+      "forward_witness": {
+        "cost": 0,
+        "states": [
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "actions": [],
+        "final_mask": 1,
+        "forward_visited_states": 1
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "actions": [],
+        "cost": 0,
+        "final_template_service_mask": 1,
+        "reverse_bfs_visited_states": 47
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 1,
+        "first_service_complete_action": 0,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "already_paid_service_home_zero_cost",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "start": [
+        1,
+        0,
+        0
+      ],
+      "anchor": [
+        1,
+        0,
+        0
+      ],
+      "required_mask": 1,
+      "initial_paid_mask": 1,
+      "observations": [
+        {
+          "pose": [
+            1,
+            0,
+            0
+          ],
+          "mask": 1
+        }
+      ],
+      "verified_graph_edges": 62
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 2,
+      "reverse_cost": 2,
+      "forward_witness": {
+        "cost": 2,
+        "states": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            3
+          ]
+        ],
+        "actions": [
+          "left",
+          "left"
+        ],
+        "final_mask": 0,
+        "forward_visited_states": 15
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            3
+          ]
+        ],
+        "actions": [
+          "left",
+          "left"
+        ],
+        "cost": 2,
+        "final_template_service_mask": 0,
+        "reverse_bfs_visited_states": 24
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 0,
+        "first_service_complete_action": 0,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "zero_service_still_requires_heading_return",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "start": [
+        1,
+        0,
+        1
+      ],
+      "anchor": [
+        1,
+        0,
+        3
+      ],
+      "required_mask": 0,
+      "initial_paid_mask": 0,
+      "observations": [],
+      "verified_graph_edges": 62
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 2,
+      "reverse_cost": 2,
+      "forward_witness": {
+        "cost": 2,
+        "states": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "right",
+          "left"
+        ],
+        "final_mask": 1,
+        "forward_visited_states": 6
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "right",
+          "left"
+        ],
+        "cost": 2,
+        "final_template_service_mask": 1,
+        "reverse_bfs_visited_states": 7
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 1,
+        "first_service_complete_action": 1,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "turn_observation_and_return_heading",
+      "safe_grid": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "start": [
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0,
+        0
+      ],
+      "required_mask": 1,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            0,
+            0,
+            1
+          ],
+          "mask": 1
+        }
+      ],
+      "verified_graph_edges": 8
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 8,
+      "reverse_cost": 8,
+      "forward_witness": {
+        "cost": 8,
+        "states": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            0,
+            3
+          ],
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "left",
+          "left"
+        ],
+        "final_mask": 1,
+        "forward_visited_states": 20
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            0,
+            3
+          ],
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "left",
+          "left"
+        ],
+        "cost": 8,
+        "final_template_service_mask": 1,
+        "reverse_bfs_visited_states": 23
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 1,
+        "first_service_complete_action": 2,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "corridor_forward_turns_and_return",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "start": [
+        0,
+        0,
+        1
+      ],
+      "anchor": [
+        0,
+        0,
+        1
+      ],
+      "required_mask": 1,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            0,
+            2,
+            1
+          ],
+          "mask": 1
+        }
+      ],
+      "verified_graph_edges": 28
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 4,
+      "reverse_cost": 4,
+      "forward_witness": {
+        "cost": 4,
+        "states": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ],
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "left",
+          "left",
+          "left",
+          "left"
+        ],
+        "final_mask": 3,
+        "forward_visited_states": 12
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ],
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "left",
+          "left",
+          "left",
+          "left"
+        ],
+        "cost": 4,
+        "final_template_service_mask": 3,
+        "reverse_bfs_visited_states": 12
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 3,
+        "first_service_complete_action": 2,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "two_heading_specific_bits_same_cell",
+      "safe_grid": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "start": [
+        0,
+        0,
+        0
+      ],
+      "anchor": [
+        0,
+        0,
+        0
+      ],
+      "required_mask": 3,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            0,
+            0,
+            2
+          ],
+          "mask": 1
+        },
+        {
+          "pose": [
+            0,
+            0,
+            3
+          ],
+          "mask": 2
+        }
+      ],
+      "verified_graph_edges": 8
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 2,
+      "reverse_cost": 2,
+      "forward_witness": {
+        "cost": 2,
+        "states": [
+          [
+            0,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward"
+        ],
+        "final_mask": 3,
+        "forward_visited_states": 9
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            0,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward"
+        ],
+        "cost": 2,
+        "final_template_service_mask": 3,
+        "reverse_bfs_visited_states": 92
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 3,
+        "first_service_complete_action": 2,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "last_service_bit_on_return_arrival",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "start": [
+        0,
+        2,
+        3
+      ],
+      "anchor": [
+        0,
+        0,
+        3
+      ],
+      "required_mask": 3,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            0,
+            0,
+            3
+          ],
+          "mask": 2
+        },
+        {
+          "pose": [
+            0,
+            1,
+            3
+          ],
+          "mask": 1
+        }
+      ],
+      "verified_graph_edges": 62
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 12,
+      "reverse_cost": 12,
+      "forward_witness": {
+        "cost": 12,
+        "states": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            2,
+            0,
+            3
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right"
+        ],
+        "final_mask": 15,
+        "forward_visited_states": 128
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            2,
+            0,
+            3
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right"
+        ],
+        "cost": 12,
+        "final_template_service_mask": 15,
+        "reverse_bfs_visited_states": 548
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 15,
+        "first_service_complete_action": 5,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "paid_prefix_bits_persist_four_required",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "start": [
+        2,
+        0,
+        0
+      ],
+      "anchor": [
+        2,
+        0,
+        0
+      ],
+      "required_mask": 15,
+      "initial_paid_mask": 3,
+      "observations": [
+        {
+          "pose": [
+            0,
+            0,
+            0
+          ],
+          "mask": 4
+        },
+        {
+          "pose": [
+            0,
+            2,
+            1
+          ],
+          "mask": 8
+        },
+        {
+          "pose": [
+            2,
+            0,
+            0
+          ],
+          "mask": 3
+        }
+      ],
+      "verified_graph_edges": 96
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 8,
+      "reverse_cost": 8,
+      "forward_witness": {
+        "cost": 8,
+        "states": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            1,
+            3
+          ],
+          [
+            1,
+            0,
+            3
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "left",
+          "left"
+        ],
+        "final_mask": 15,
+        "forward_visited_states": 68
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            1,
+            3
+          ],
+          [
+            1,
+            0,
+            3
+          ],
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "left",
+          "left"
+        ],
+        "cost": 8,
+        "final_template_service_mask": 15,
+        "reverse_bfs_visited_states": 92
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 15,
+        "first_service_complete_action": 2,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "sparse_required_bits_and_irrelevant_observations",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "start": [
+        1,
+        0,
+        1
+      ],
+      "anchor": [
+        1,
+        0,
+        1
+      ],
+      "required_mask": 5,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            1,
+            1,
+            1
+          ],
+          "mask": 12
+        },
+        {
+          "pose": [
+            1,
+            2,
+            1
+          ],
+          "mask": 3
+        }
+      ],
+      "verified_graph_edges": 62
+    },
+    {
+      "status": "passed",
+      "reachable": true,
+      "forward_cost": 12,
+      "reverse_cost": 12,
+      "forward_witness": {
+        "cost": 12,
+        "states": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            2,
+            0,
+            3
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right"
+        ],
+        "final_mask": 3,
+        "forward_visited_states": 98
+      },
+      "reverse_witness": {
+        "states": [
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            2,
+            1
+          ],
+          [
+            0,
+            2,
+            2
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            3
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            2,
+            0,
+            3
+          ],
+          [
+            2,
+            0,
+            0
+          ]
+        ],
+        "actions": [
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "right"
+        ],
+        "cost": 12,
+        "final_template_service_mask": 3,
+        "reverse_bfs_visited_states": 124
+      },
+      "independent_route_validation": {
+        "independent_paid_union": 3,
+        "first_service_complete_action": 6,
+        "exact_heading_return": true,
+        "all_actions_legal": true
+      },
+      "name": "blocked_center_detour_no_backward_action",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "start": [
+        2,
+        0,
+        0
+      ],
+      "anchor": [
+        2,
+        0,
+        0
+      ],
+      "required_mask": 3,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            0,
+            2,
+            1
+          ],
+          "mask": 1
+        },
+        {
+          "pose": [
+            0,
+            2,
+            2
+          ],
+          "mask": 2
+        }
+      ],
+      "verified_graph_edges": 80
+    },
+    {
+      "status": "passed",
+      "reachable": false,
+      "forward_cost": null,
+      "reverse_cost": null,
+      "name": "disconnected_required_service_unreachable",
+      "safe_grid": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "start": [
+        2,
+        0,
+        0
+      ],
+      "anchor": [
+        2,
+        0,
+        0
+      ],
+      "required_mask": 1,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            0,
+            2,
+            0
+          ],
+          "mask": 1
+        }
+      ],
+      "verified_graph_edges": 56
+    },
+    {
+      "status": "passed",
+      "reachable": false,
+      "forward_cost": null,
+      "reverse_cost": null,
+      "name": "paid_service_but_return_component_unreachable",
+      "safe_grid": [
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "start": [
+        2,
+        2,
+        0
+      ],
+      "anchor": [
+        2,
+        0,
+        0
+      ],
+      "required_mask": 1,
+      "initial_paid_mask": 1,
+      "observations": [],
+      "verified_graph_edges": 56
+    },
+    {
+      "status": "passed",
+      "both_reject_missing_paid_initial_bit": true,
+      "errors": [
+        "missing already-paid current observation",
+        "Initial mask must include the already-paid current observation"
+      ],
+      "name": "missing_initial_paid_bit_rejected",
+      "safe_grid": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "start": [
+        1,
+        0,
+        0
+      ],
+      "anchor": [
+        1,
+        0,
+        0
+      ],
+      "required_mask": 1,
+      "initial_paid_mask": 0,
+      "observations": [
+        {
+          "pose": [
+            1,
+            0,
+            0
+          ],
+          "mask": 1
+        }
+      ],
+      "verified_graph_edges": 62
+    }
+  ]
+}

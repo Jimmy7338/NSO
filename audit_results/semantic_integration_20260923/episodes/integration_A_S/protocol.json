@@ -1,0 +1,77 @@
+{
+  "expected_batch_peak_bytes": 402653184,
+  "maximum_episode_bytes": 67108864,
+  "maximum_file_bytes": 33554432,
+  "terminal_record_reserve_bytes": 262144,
+  "maximum_elapsed_s": 600.0,
+  "navigation_root": "audit_results/v43_public_navigation_r1_20260921",
+  "asset_root": "audit_results/v40_p1_development_geometry_20260920",
+  "scene_protocol_path": "configs/virtual3d/v40_scene_protocol_20260920.json",
+  "reference_root": "audit_results/v44_evidence_pipeline_20260921/references/DEV_A_00",
+  "reference_manifest_sha256": "96d00c04384aefbecd55a6a81dcdfc16a432fae47e8c2761204388b5a4cd4326",
+  "controller": {
+    "maximum_candidates": 32,
+    "maximum_views_per_instance": 8,
+    "discovery_weight": 1.0,
+    "inspection_weight": 1.0,
+    "discovery_radius_m": 2.0,
+    "no_progress_patience": 12
+  },
+  "mapper": {
+    "resolution_m": 0.1,
+    "voxel_m": 0.04,
+    "sdf_trunc_m": 0.12
+  },
+  "schema": "semantic.experiment.protocol.v1",
+  "phase_id": "semantic_integration_20260923",
+  "scope": "Three full integration/cost trajectories on an already-seen pilot asset; not the six-parent primary comparison and not independent generalization.",
+  "primary_experiment_started": false,
+  "maximum_new_world_slots": 3,
+  "ledger_relative_path": "audit_results/semantic_integration_20260923/start_ledger.json",
+  "output_relative_path": "audit_results/semantic_integration_20260923/episodes",
+  "evaluation": {
+    "max_samples": 1000000,
+    "sample_spacing_m": 0.3,
+    "seed": 4002,
+    "threshold_m": 0.05
+  },
+  "slots": {
+    "integration_A_G": {
+      "asset_id": "DEV_A_00",
+      "method": "G",
+      "noise_seed": 0,
+      "budget": 160,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "integration_A_B": {
+      "asset_id": "DEV_A_00",
+      "method": "bayes_semantic",
+      "noise_seed": 0,
+      "budget": 160,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "integration_A_S": {
+      "asset_id": "DEV_A_00",
+      "method": "shared_semantic",
+      "noise_seed": 0,
+      "budget": 160,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    }
+  },
+  "failure_policy": "Retain every attempted slot and technical failure. No automatic retries or expansion. Source changes after a run require explicit diagnosis; never mix versions into a paired efficacy claim.",
+  "main_matrix_rule": "Freeze the six-parent blocked matrix using measured CPU/storage costs and task geometry, never the direction of these already-seen-asset scores.",
+  "development_gates": {
+    "semantic_relative_J_vs_strong_G_minimum": 0.05,
+    "candidate_relative_J_vs_ordinary_Bayes_on_primary_shift_group_minimum": 0.02,
+    "reliable_group_relative_J_degradation_maximum": 0.01,
+    "mean_coverage_difference_minimum": -0.01,
+    "return_rate_decrease_allowed": false,
+    "positive_parent_count_minimum": 4,
+    "development_parent_count": 6,
+    "maximum_one_parent_share_of_positive_J_differences": 0.5,
+    "requires_frozen_finite_matrix_before_primary_performance": true
+  }
+}

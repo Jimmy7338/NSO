@@ -1,0 +1,60 @@
+{
+  "public_upload_confirmed_by_user": true,
+  "destination": "https://github.com/Jimmy7338/NSO",
+  "review_type": "bounded provenance checks, not a bytewise certification of every binary",
+  "new_eval_audit_paths_in_starting_inventory": 284976,
+  "new_capture_formats_found": [],
+  "checked_chains": {
+    "V2-V4": [
+      "scripts/eval_joint_v2.py",
+      "utils/virtual_scene_factory.py",
+      "env/virtual3d_v2.py",
+      "env/virtual3d.py"
+    ],
+    "V10.1/V13": [
+      "scripts/run_cpu_semantic_inspection_v10_1.py",
+      "scripts/collect_semantic_gain_v13_2_information.py",
+      "env/virtual3d_competition_v9.py"
+    ],
+    "V15": [
+      "scripts/collect_semantic_v15_outcomes.py",
+      "env/canonical_rgbd_v15.py",
+      "env/canonical_box_scan_v14.py"
+    ],
+    "current_acquisition": [
+      "nso/semantic_scene_experiment.py",
+      "env/semantic_scene_sensor.py",
+      "env/development_sensor_v41.py",
+      "nso/semantic_scene_assets.py"
+    ]
+  },
+  "current_protocols": 76,
+  "current_complete_artifact_manifests": 73,
+  "current_complete_manifests_bind_same_synthetic_sensor_sources": true,
+  "ros_examples": "Two manifest-labelled mock/synthetic samples, 1 and 5 frames; live probe not executed.",
+  "existing_natural_photos": "Two previously tracked Ultralytics package examples bus.jpg/zidane.jpg; no new JPG/JPEG capture in the starting untracked experiment inventory.",
+  "engineering_logs": "64 logs in full staged index include tests, simulation, server build/maintenance and TARE smoke records; not all files are synthetic pixels.",
+  "not_decoded_by_provenance_review": [
+    "individual NPZ/mesh/ZIP payloads",
+    "all historical compressed content"
+  ],
+  "small_source_document_config_scan": "148 new/modified non-data files reviewed without common credential/private-key patterns.",
+  "additional_text_scan": {
+    "unique_blobs": 32195,
+    "covered_paths": 40713,
+    "scanned_text_bytes": 5944460251,
+    "gzip_json_blobs": 13596,
+    "gzip_uncompressed_bytes": 5208863137,
+    "hash_mismatches": 0,
+    "over_limit": 0,
+    "read_failures": 0,
+    "true_credential_matches": 0,
+    "candidate_classification": {
+      "four_python_sources": "matrix multiplication @ syntax false positives",
+      "audit_results/v25_runtime_capacity_20260915/journal_cleanup.json": "systemd journal filenames",
+      "audit_results/model_lfs_cache_20260914/torchvision_install.json": "third-party package author contact metadata, not a credential"
+    },
+    "limitations": "Pattern-based checks of selected text/JSON, not a guarantee that every binary is free of sensitive content. Binary provenance was checked separately."
+  },
+  "staged_sha256_receipt_validation_files": 86
+}

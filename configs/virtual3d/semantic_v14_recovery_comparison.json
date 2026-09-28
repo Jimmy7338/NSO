@@ -1,0 +1,21 @@
+{
+  "schema": "semantic_v14_recovery_comparison/1",
+  "history_protocol": "configs/virtual3d/semantic_v14_cold_start_preflight.json",
+  "baseline": "eval_results/semantic_v14_cold_start_preflight_20260914",
+  "intervention": "one fresh global plan after outbound denial with known-safe return reserve; otherwise guarded return",
+  "context": "D12-00",
+  "total_budget": 192,
+  "semantic_score_mode": "G",
+  "candidate_capacity_rule_shared": "4+1+2*observed_instance_count",
+  "reference_sample_count": 16000,
+  "reference_seed": 2026,
+  "prediction_sample_seed": 812,
+  "thresholds_m": [0.05, 0.1],
+  "metrics_every_paid_actions": 16,
+  "primary_metric": "global_coverage_2d * global_F1_at_5cm at the fixed 192-action deadline; early-stop map held constant",
+  "record": ["coverage", "precision", "recall", "F1", "surface_error", "new_visible_area", "path", "paid_actions", "collision", "return", "stop_cause"],
+  "mechanism_acceptance": "same 53-action physical prefix, original denial reproduced, fresh alternative checked, no collision, safe return within 192, exact independent process replay",
+  "semantic_efficacy_test": false,
+  "training_allowed": false,
+  "boundary": "single already-viewed development layout; execution-recovery comparison only, not semantic contribution or independent confirmation"
+}

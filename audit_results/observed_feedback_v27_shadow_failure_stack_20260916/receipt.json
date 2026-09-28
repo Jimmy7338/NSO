@@ -1,0 +1,23 @@
+{
+  "status": "archived_failed_shadow_full_stack_transcription",
+  "session_id": 73595,
+  "process_id": 377855,
+  "exit_code": 1,
+  "exit_chunk_id": "2b3fd6",
+  "source": "Assistant transcription of complete terminal exit chunk including standard-library stack frames; not a machine-produced success receipt",
+  "terminal_sha256": "380c5f99a4a109a694ae4207a629ae445b621de5f482414feb8a60df7938c8b7",
+  "prior_failure_record": "audit_results/observed_feedback_v27_shadow_failure_20260916/failure_record.json",
+  "prior_failure_record_sha256": "b6e51b89d2e4145c7f0bd1f6d3189c7ea4067e59b197208e7dc6b41ba7229ad2",
+  "inferred_field": "rows[i].old_sampled_update.comparable_patches",
+  "inference_basis": [
+    "nso/observed_planner_v26.py:374-379 sums numpy boolean comparisons without int conversion",
+    "scripts/audit_v27_feedback_shadow.py:210 stores raw old update; line234 passes rows to json.dumps via base.write",
+    "scripts/run_observed_autonomous_v26.py:76 uses json_value before original collector persistence; shadow omitted this conversion",
+    "shadow failure.completed_rows reuses same raw rows and json.dumps fails again at line244"
+  ],
+  "inference_not_resampled_or_reexecuted": true,
+  "new_mapper_or_tsdf_runs": 0,
+  "new_physical_actions": 0,
+  "new_Q_evaluations": 0,
+  "original_sources_or_failed_evidence_modified": false
+}

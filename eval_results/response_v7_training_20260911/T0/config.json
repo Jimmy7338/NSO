@@ -1,0 +1,100 @@
+{
+  "schema_version": "response_v7_pipeline/1",
+  "status": "frozen_before_first_candidate_outcomes",
+  "scope": "new paired sensor-response training/calibration, not original 12-candidate protocol or complete ANS efficacy",
+  "context_manifest": "configs/virtual3d/response_v7_contexts.json",
+  "train_contexts": [
+    "T0",
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6",
+    "T7"
+  ],
+  "calibration_contexts": [
+    "C0",
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "held_out_contexts_opened": false,
+  "candidate_limit": 6,
+  "branch_actions": 48,
+  "prefix_actions": 20,
+  "reference_samples": 32000,
+  "thresholds_m": [
+    0.02,
+    0.05
+  ],
+  "feature_contract": {
+    "columns": 12,
+    "common_columns": 4,
+    "object_columns": 4,
+    "conditional_columns": 4,
+    "area_scale_m2": 16.0,
+    "cost_scaling": "each response descriptor divided by paid route length once",
+    "standard_deviation_rescaling": false,
+    "class_source": "signed vote of visible RGB marker 2/3, no old shape probability",
+    "objectness_marked": 1.0,
+    "objectness_unmarked": 0.25,
+    "normal_orientation": "measured mean horizontal normal oriented toward retained real camera with most depth-consistent support; zero support disables three oriented channels",
+    "novelty_reference": "each measured surface point, same origin as its history bits",
+    "support_area": "0.15 m voxel count proxy, not true surface area",
+    "frustum_is_occlusion_certificate": false,
+    "G_capacity": "fixed per-patch squared normalized geometric descriptors, no category"
+  },
+  "fitting": {
+    "alpha_candidates": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "alpha_selection": "leave-one-parent-context-out T only; history mean centered area-rate loss; strongest alpha on ties",
+    "history_centering": true,
+    "loss": "sum of history mean squares plus alpha coefficient squared norm",
+    "max_effective_df": "T parent contexts / 2; checked after alpha selection",
+    "fit_methods": [
+      "G",
+      "O",
+      "S",
+      "N",
+      "G_capacity"
+    ],
+    "primary_target": "area_per_action",
+    "secondary_target": "f1_gain_05cm"
+  },
+  "calibration": {
+    "slope_max": 100.0,
+    "intercept_bounds_m2_per_action": [
+      -16.0,
+      16.0
+    ],
+    "form": "A_hat=L*max(0,a*r_relative+b)",
+    "objective": "C only; history-equal area MAE",
+    "used_for_ranking": false,
+    "bounds_are_physical_guarantees": false
+  },
+  "storage": {
+    "worker_count": 1,
+    "reserve_bytes": 419430400,
+    "raw_observations_retained": true,
+    "mesh_removal_only_after_independent_replay": true,
+    "mesh_fast_inspection_route": 0
+  },
+  "gates": {
+    "preparation": "same paired nonlabel prefix geometry and G/O/N features; actual X/M remaps; 6 candidates and >=2 marked directional roles",
+    "development_thresholds": "docs/research/SEMANTIC_V6_NEXT_VALIDATION_PROTOCOL.md",
+    "old_gates_relaxed": false
+  },
+  "metric_class_names": {
+    "2": "storage_shelves",
+    "3": "ventilation_baffles"
+  },
+  "legacy_evaluator_field_aliases": {
+    "simple_recall": "physical_class_2_storage_recall",
+    "complex_recall": "physical_class_3_ventilation_recall"
+  },
+  "ANS_four_module_integration_complete": false
+}

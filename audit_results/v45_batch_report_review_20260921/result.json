@@ -1,0 +1,38 @@
+{
+  "status": "passed_with_declared_evidence_limits",
+  "scope": "Independent source review and final receipt/hash verification only; no test rerun, simulator, sensor, TSDF or evaluation launched",
+  "created_at_utc": "2026-09-21T09:27:30.989945+00:00",
+  "initial_findings_resolved": [
+    "batch-pinned manifest/verification/evaluation hashes checked with child stdout/receipt and batch source closure",
+    "canonical launch without reservation retained separately; unfinished world state remains null"
+  ],
+  "reviewed_source_sha256": {
+    "nso/batch_report_v45.py": "788e5f8e9ce2a4a524e76c2765a16272c3c59d62738df4f11a7bf183b774e2bc",
+    "scripts/report_development_batch_v45.py": "cd06ecaa353f922ee0424d092b5e3aea1555d8715a9998acb01d85b0c72fc3e6",
+    "tests/test_batch_report_v45.py": "0964ff3b722c7c1cd51b8e23908375ed6161bc809444cb9497727515ec1b9ff6"
+  },
+  "validation_result_path": "audit_results/v45_batch_validation_r1_20260921/result.json",
+  "validation_result_sha256": "e2b4fdb75ec75cb275b46095fd175b3b76c338818fdb9abcc94cb40587bac910",
+  "test_result_sha256": "89845a420ad09fdc368f91c0b3cb27f5247239421ad3def1e6e2ebf1c137ed4f",
+  "contract_tests_reported": 41,
+  "report_tests_reported": 15,
+  "orchestration_tests_reported": 26,
+  "artifact_files_checked": 43,
+  "source_current_and_archive_pairs_checked": 34,
+  "actual_batch": {
+    "planned_slots": 5,
+    "reserved_slots": 0,
+    "recorded_launches": 0,
+    "verified_autonomous_endpoints": 0,
+    "paired_deltas_available": 0
+  },
+  "unresolved_blocking_code_findings": [],
+  "limitations": [
+    "Finite subprocess and parser doubles do not validate physical closed-loop efficacy.",
+    "Report hashes protect the sealed evidence chain against accidental substitution; they are not an authenticity signature against coordinated rewrite of all records.",
+    "Only descriptive development pairs are supported; no independent-test, confidence interval, or semantic superiority claim is added."
+  ],
+  "new_worlds_here": 0,
+  "new_sensor_packets_here": 0,
+  "new_TSDF_integrations_here": 0
+}

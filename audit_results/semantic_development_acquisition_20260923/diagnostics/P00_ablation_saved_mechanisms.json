@@ -1,0 +1,3359 @@
+{
+  "NC_vs_B_source_reasoning": {
+    "NC_other_instance_invariance": "NC replaces every row of each non-target utility matrix with the current posterior-weighted expectation repeated across all structures. Its expectation is then constant over hypothetical branch posteriors, in exact arithmetic.",
+    "bitwise_algebraic_identity_claimed": false,
+    "floating_point_caveat": "The repeated-constant matrix multiplication can round differently from an unflattened fixed posterior expectation. No counterfactual run or universal bitwise equivalence is asserted.",
+    "formal_new_endpoint_evaluation_performed": false,
+    "interpretation": "Both retain the same followup action candidates and their deterministic other-instance utility contributions; only NC admits actual observed peer evidence into current planning beliefs. Thus NC versus B is the declared contrast for current shared reliability belief, while S versus NC tests the cross-instance future component.",
+    "literal_flag_difference": {
+      "B": {
+        "cross_instance_future": true,
+        "share_across_instances": false
+      },
+      "NC": {
+        "cross_instance_future": false,
+        "share_across_instances": true
+      }
+    },
+    "nonsharing_branch_independence": "B posterior for j != diagnosed i depends only on its own fixed initial mixture prior and evidence. observation_branch changes only evidence_i, so posterior_j is unchanged by the hypothetical observation.",
+    "same_literal_flags": false
+  },
+  "activation_findings": [
+    {
+      "condition": "nominal_relationship",
+      "limitation": "The removed actual-feedback/shared-evidence mechanism never changed the planning geometry evidence on this history, so this nominal NF contrast has weak discriminatory power.",
+      "mechanism": "actual feedback / shared reliability",
+      "observed": "All B/S/NC/NF/NP have 34 frontend feedback attempts, 18 informative residuals, and zero applied updates. All 34 refusals coincide with no new support and support length 4096. Shared variants have 88 instance-frames with peers, but no peer-adjusted reliability; rho remains 0.5."
+    },
+    {
+      "condition": "structure_relationship_shift",
+      "limitation": "This condition does activate the feedback/shared-belief distinction; its unchanged executed actions and mesh cannot be explained solely by feedback never running.",
+      "mechanism": "actual feedback / shared reliability",
+      "observed": "All five arms have 16 frontend attempts and 8 applied updates. B/S/NC/NP show two planner geometry-evidence change events and 55 nonzero-evidence instance-frames; NF shows zero for both. S/NC/NP have 41 peer-adjusted instance-frames, first at paid step 66, with maximum rho 0.5281456972891215; B/NF stay at rho 0.5."
+    },
+    {
+      "condition": "both",
+      "limitation": "Future scoring can change without winning the action competition. Positive logged EVI in NP is a diagnostic quantity, not evidence of future value entering its ranking.",
+      "mechanism": "future information planning",
+      "observed": "Nominal has 8 diagnostic options with 3 positive total EVI values; shift has 4 options with 1 positive total EVI. NP disables future_information_used in every option and uses the logged before-observation score. First numeric diagnostic divergence from S is step 44 nominal and 74 shifted. None of the ten trajectories selects diagnose_then_observe."
+    },
+    {
+      "condition": "both",
+      "limitation": "Cross-future enablement does not produce a distinguishable option-value change on these realized P00 histories. This is local observational equality, not a claim that the component is generally unnecessary.",
+      "mechanism": "cross-instance future utility",
+      "observed": "NC disables the cross-future receipt flag for every diagnostic option. S and NC have identical saved numeric diagnostic option lists, planning beliefs (excluding peer metadata), selected options, actions, poses, targets, and endpoint mesh/occupancy arrays on both P00 conditions."
+    },
+    {
+      "condition": "both",
+      "limitation": "All ablation endpoint metrics remain null in this diagnostic pending each target independent replay and proper numeric evaluation/reuse. Saved artifact equality alone does not create a formal score.",
+      "mechanism": "behavior and terminal geometry",
+      "observed": "All 12 ablation-to-S/B comparisons have identical saved action, macro-target, pose sequences and exact mesh/occupancy files and array content. Every task uses 120 paid actions/121 packets and returns without collision."
+    }
+  ],
+  "capability_checks_scope": "Static frozen source definitions plus saved method/configuration hashes and observed receipt invariants. No controller instantiation, replay, or counterfactual evaluation.",
+  "comparisons": [
+    {
+      "ablation_run_id": "ablation_P00_nom_NC_b120_lexicographic",
+      "baseline_run_id": "core_P00_nom_S_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": null,
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_nom_NF_b120_lexicographic",
+      "baseline_run_id": "core_P00_nom_S_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": null,
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_nom_NP_b120_lexicographic",
+      "baseline_run_id": "core_P00_nom_S_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": {
+        "left": [
+          {
+            "after_observation_score": 0.07772336703012545,
+            "before_observation_score": 0.07766356156348753,
+            "evi": 5.980546663791886e-05,
+            "instance_id": "instance_0000",
+            "score": 0.07772336703012545,
+            "target": {
+              "heading": 5,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05623913078735304,
+            "before_observation_score": 0.05623913078735304,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.05623913078735304,
+            "target": {
+              "heading": 3,
+              "node": "n_001_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05544775104012058,
+            "before_observation_score": 0.05163882522575504,
+            "evi": 0.003808925814365538,
+            "instance_id": "instance_0000",
+            "score": 0.05544775104012058,
+            "target": {
+              "heading": 4,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05096671227603869,
+            "before_observation_score": 0.050966712276038696,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.05096671227603869,
+            "target": {
+              "heading": 4,
+              "node": "n_003_005"
+            }
+          }
+        ],
+        "paid_step": 44,
+        "right": [
+          {
+            "after_observation_score": 0.07772336703012545,
+            "before_observation_score": 0.07766356156348753,
+            "evi": 5.980546663791886e-05,
+            "instance_id": "instance_0000",
+            "score": 0.07766356156348753,
+            "target": {
+              "heading": 5,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05623913078735304,
+            "before_observation_score": 0.05623913078735304,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.05623913078735304,
+            "target": {
+              "heading": 3,
+              "node": "n_001_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05544775104012058,
+            "before_observation_score": 0.05163882522575504,
+            "evi": 0.003808925814365538,
+            "instance_id": "instance_0000",
+            "score": 0.05163882522575504,
+            "target": {
+              "heading": 4,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05096671227603869,
+            "before_observation_score": 0.050966712276038696,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.050966712276038696,
+            "target": {
+              "heading": 4,
+              "node": "n_003_005"
+            }
+          }
+        ]
+      },
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_nom_NC_b120_lexicographic",
+      "baseline_run_id": "core_P00_nom_B_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": null,
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_nom_NF_b120_lexicographic",
+      "baseline_run_id": "core_P00_nom_B_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": null,
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_nom_NP_b120_lexicographic",
+      "baseline_run_id": "core_P00_nom_B_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": {
+        "left": [
+          {
+            "after_observation_score": 0.07772336703012545,
+            "before_observation_score": 0.07766356156348753,
+            "evi": 5.980546663791886e-05,
+            "instance_id": "instance_0000",
+            "score": 0.07772336703012545,
+            "target": {
+              "heading": 5,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05623913078735304,
+            "before_observation_score": 0.05623913078735304,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.05623913078735304,
+            "target": {
+              "heading": 3,
+              "node": "n_001_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05544775104012058,
+            "before_observation_score": 0.05163882522575504,
+            "evi": 0.003808925814365538,
+            "instance_id": "instance_0000",
+            "score": 0.05544775104012058,
+            "target": {
+              "heading": 4,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05096671227603869,
+            "before_observation_score": 0.050966712276038696,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.05096671227603869,
+            "target": {
+              "heading": 4,
+              "node": "n_003_005"
+            }
+          }
+        ],
+        "paid_step": 44,
+        "right": [
+          {
+            "after_observation_score": 0.07772336703012545,
+            "before_observation_score": 0.07766356156348753,
+            "evi": 5.980546663791886e-05,
+            "instance_id": "instance_0000",
+            "score": 0.07766356156348753,
+            "target": {
+              "heading": 5,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05623913078735304,
+            "before_observation_score": 0.05623913078735304,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.05623913078735304,
+            "target": {
+              "heading": 3,
+              "node": "n_001_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05544775104012058,
+            "before_observation_score": 0.05163882522575504,
+            "evi": 0.003808925814365538,
+            "instance_id": "instance_0000",
+            "score": 0.05163882522575504,
+            "target": {
+              "heading": 4,
+              "node": "n_002_004"
+            }
+          },
+          {
+            "after_observation_score": 0.05096671227603869,
+            "before_observation_score": 0.050966712276038696,
+            "evi": 0.0,
+            "instance_id": "instance_0000",
+            "score": 0.050966712276038696,
+            "target": {
+              "heading": 4,
+              "node": "n_003_005"
+            }
+          }
+        ]
+      },
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_shift_NC_b120_lexicographic",
+      "baseline_run_id": "core_P00_shift_S_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": null,
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_shift_NF_b120_lexicographic",
+      "baseline_run_id": "core_P00_shift_S_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": {
+        "left": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5244770904054744,
+            "structure_probabilities": [
+              0.32867156356082117,
+              0.2762238545202737,
+              0.22377614547972632,
+              0.17132843643917886
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          }
+        ],
+        "paid_step": 66,
+        "right": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          }
+        ]
+      },
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": {
+        "left": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.032433962218133806,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.0006818181818181821,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ],
+        "paid_step": 74,
+        "right": [
+          {
+            "after_observation_score": 0.03971218138271845,
+            "before_observation_score": 0.03971218138271845,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03971218138271845,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032733724520590896,
+            "before_observation_score": 0.032300939153969394,
+            "evi": 0.000432785366621502,
+            "instance_id": "instance_0002",
+            "score": 0.032733724520590896,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03971218138271845,
+            "before_observation_score": 0.03971218138271845,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03971218138271845,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.000681818181818182,
+            "before_observation_score": 0.000681818181818182,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.000681818181818182,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ]
+      },
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_shift_NP_b120_lexicographic",
+      "baseline_run_id": "core_P00_shift_S_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": null,
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": {
+        "left": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.032433962218133806,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.0006818181818181821,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ],
+        "paid_step": 74,
+        "right": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.038798932578491784,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.0319708560411108,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.038798932578491784,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.0006818181818181821,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ]
+      },
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_shift_NC_b120_lexicographic",
+      "baseline_run_id": "core_P00_shift_B_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": {
+        "left": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          }
+        ],
+        "paid_step": 66,
+        "right": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5244770904054744,
+            "structure_probabilities": [
+              0.32867156356082117,
+              0.2762238545202737,
+              0.22377614547972632,
+              0.17132843643917886
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          }
+        ]
+      },
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": {
+        "left": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.032433962218133806,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.000681818181818182,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ],
+        "paid_step": 74,
+        "right": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.032433962218133806,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.0006818181818181821,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ]
+      },
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_shift_NF_b120_lexicographic",
+      "baseline_run_id": "core_P00_shift_B_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": {
+        "left": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          }
+        ],
+        "paid_step": 66,
+        "right": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          }
+        ]
+      },
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": {
+        "left": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.032433962218133806,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.000681818181818182,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ],
+        "paid_step": 74,
+        "right": [
+          {
+            "after_observation_score": 0.03971218138271845,
+            "before_observation_score": 0.03971218138271845,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03971218138271845,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032733724520590896,
+            "before_observation_score": 0.032300939153969394,
+            "evi": 0.000432785366621502,
+            "instance_id": "instance_0002",
+            "score": 0.032733724520590896,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03971218138271845,
+            "before_observation_score": 0.03971218138271845,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03971218138271845,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.000681818181818182,
+            "before_observation_score": 0.000681818181818182,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.000681818181818182,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ]
+      },
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    },
+    {
+      "ablation_run_id": "ablation_P00_shift_NP_b120_lexicographic",
+      "baseline_run_id": "core_P00_shift_B_b120_lexicographic",
+      "first_different_belief_excluding_peer_metadata": {
+        "left": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          }
+        ],
+        "paid_step": 66,
+        "right": [
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0000",
+            "observed_class": "cabinet",
+            "rho": 0.5244770904054744,
+            "structure_probabilities": [
+              0.32867156356082117,
+              0.2762238545202737,
+              0.22377614547972632,
+              0.17132843643917886
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "instance_id": "instance_0001",
+            "observed_class": null,
+            "rho": null,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "instance_id": "instance_0002",
+            "observed_class": "cabinet",
+            "rho": 0.5,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          }
+        ]
+      },
+      "first_different_macro_target": null,
+      "first_different_next_action": null,
+      "first_different_numeric_diagnostic_options": {
+        "left": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.032433962218133806,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.03879893257849179,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.000681818181818182,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ],
+        "paid_step": 74,
+        "right": [
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.038798932578491784,
+            "target": {
+              "heading": 6,
+              "node": "n_004_003"
+            }
+          },
+          {
+            "after_observation_score": 0.032433962218133806,
+            "before_observation_score": 0.0319708560411108,
+            "evi": 0.0004631061770230052,
+            "instance_id": "instance_0002",
+            "score": 0.0319708560411108,
+            "target": {
+              "heading": 7,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.03879893257849179,
+            "before_observation_score": 0.038798932578491784,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.038798932578491784,
+            "target": {
+              "heading": 6,
+              "node": "n_003_003"
+            }
+          },
+          {
+            "after_observation_score": 0.0006818181818181821,
+            "before_observation_score": 0.0006818181818181821,
+            "evi": 0.0,
+            "instance_id": "instance_0002",
+            "score": 0.0006818181818181821,
+            "target": {
+              "heading": 7,
+              "node": "n_002_003"
+            }
+          }
+        ]
+      },
+      "first_different_selected_option_kind_target_instance": null,
+      "formal_ablation_endpoint_score": null,
+      "identical": {
+        "action_sequence_sha256": true,
+        "macro_target_sequence_sha256": true,
+        "mesh_arrays_sha256": true,
+        "mesh_file_sha256": true,
+        "occupancy_arrays_sha256": true,
+        "occupancy_file_sha256": true,
+        "pose_sequence_sha256": true
+      },
+      "same_complete_nonmethod_slot": true
+    }
+  ],
+  "complete_sealed_ablation_slots": [
+    "ablation_P00_nom_NC_b120_lexicographic",
+    "ablation_P00_nom_NF_b120_lexicographic",
+    "ablation_P00_nom_NP_b120_lexicographic",
+    "ablation_P00_shift_NC_b120_lexicographic",
+    "ablation_P00_shift_NF_b120_lexicographic",
+    "ablation_P00_shift_NP_b120_lexicographic"
+  ],
+  "completed_utc": "2026-09-24T02:31:35.724043+00:00",
+  "counter_definitions": {
+    "cross_future_flag_is_not_measured_cross_instance_gain": true,
+    "first_difference_witnesses": "Exact saved JSON value comparison; a first difference can include floating-point last-bit changes. Positive EVI counts use epsilon.",
+    "frontend_applied_is_not_necessarily_planner_feedback": true,
+    "peer_adjusted_reliability_instance_frame": "Same-class peers present and abs(rho - 0.5) > 1e-12; distinct frames/instances are not independent scene samples.",
+    "positive_evi_epsilon": 1e-12,
+    "posterior_change_epsilon": 1e-12
+  },
+  "created_utc": "2026-09-24T02:28:54.987352+00:00",
+  "definitions": {
+    "B": "Ordinary Bayesian comparator uses own feedback and future diagnosis without actual cross-instance reliability sharing.",
+    "NC": "Retains actual shared reliability and own-instance future update. Flattens other-instance future gain dependence when evaluating a hypothetical diagnosis; it does not disable actual cross-instance sharing.",
+    "NF": "Disables actual geometry evidence in planning structural belief; shared frontend/map/support/safety still update; future diagnosis remains enabled. This is a feedback mismatch ablation.",
+    "NP": "Retains actual shared structural inference, but diagnostic ranking uses before_observation_score. EVI and hypothetical branches can remain in saved logs; their presence does not mean future information was used."
+  },
+  "episodes": {
+    "ablation_P00_nom_NC_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": true,
+      "action_sequence_sha256": "2b19d15b8d88a1b6aa8ce00bb8b8ad76f074342951ac5a5448c753859facdecd",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 8,
+        "diagnostic_options_with_cross_future_enabled": 0,
+        "diagnostic_options_with_future_information_enabled": 8,
+        "diagnostic_options_with_positive_evi": 3,
+        "direct_options_scored": 122,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 0,
+        "global_replans": 34,
+        "instance_frames_with_same_class_peers": 88,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 0,
+        "planner_nonzero_geometry_evidence_instance_frames": 0,
+        "positive_total_evi_options_with_cross_future_enabled": 0,
+        "posterior_changes_between_paid_frames": 16,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 5
+      },
+      "diagnostic_evi_max": 0.00402917913724582,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_nom_NC_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 34,
+        "refused_with_no_new_support": 34,
+        "refused_with_support_at_4096": 34
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 38,
+        "positive_diagnostic_evi_paid_step": 44,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 38
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": null,
+      "frontend_feedback": {
+        "accepted_residuals": 34,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 0,
+        "feedback_attempts": 34,
+        "feedback_refused": 34,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 18,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 34
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": false,
+        "future_information": true,
+        "method": "shared_no_cross_future",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 24,
+      "logged_configuration_sha256": "c0f26dc7405cb6c7cb045ab55901201d8d03a2f2cc979cd84d6ab177ec1e4983",
+      "macro_target_sequence_sha256": "6242734dae2e0ba5167d10a0f7c74e71d5e131f9184d066874e943a962659bbf",
+      "manifest_binding": "complete_queue_slot_finished",
+      "manifest_sha256": "2681705b2aac14dfe8934b7fa8d872cc19dbea0cb4428708aaa0d4f7113d776c",
+      "mesh_arrays_sha256": "a3510eae3987fd80d8e2d3caf472b662077f9cf0e969a48b40f99370b5b8d5a3",
+      "mesh_file_sha256": "28c6cfc8e378082952394997a83a9bb4b6d2f66d5bbc1aca508988505de80f00",
+      "method": "shared_no_cross_future",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "1efb2cc70e648a806aac909d53708d00e1783a571282fb214928a376b3649af7",
+      "occupancy_file_sha256": "434e10518597806feb6c61e6e6a3289fb0cfc7c213a93fbd9af1e8ef5f6cf5ba",
+      "own_numeric_reuse_receipt_exists_at_read": false,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "8a7aef95c46ecff15196c2bb3dbcb64e8b44cd995da2cfd817971983592d229d",
+      "queue_event": {
+        "line_sha256": "2a246acfd288d622f3973b36a0c79683225b1fe1513169aeea3f03212eb2c2ac",
+        "path": "audit_results/semantic_finite_queues_20260924/queue_A/batch_10/events.jsonl",
+        "result": {
+          "artifact_bytes": 28556493,
+          "artifact_manifest_sha256": "2681705b2aac14dfe8934b7fa8d872cc19dbea0cb4428708aaa0d4f7113d776c",
+          "elapsed_s": 163.23327389918268,
+          "executed_paid_actions": 120,
+          "output": "/root/NSO/audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_nom_NC_b120_lexicographic",
+          "primary_experiment_started": true,
+          "run_id": "ablation_P00_nom_NC_b120_lexicographic",
+          "status": "controller_stop",
+          "world_created": true
+        }
+      },
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 76
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 86
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001"
+          ]
+        },
+        "qualified_unique_instance_count": 3,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "ablation_P00_nom_NF_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": true,
+      "action_sequence_sha256": "2b19d15b8d88a1b6aa8ce00bb8b8ad76f074342951ac5a5448c753859facdecd",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 8,
+        "diagnostic_options_with_cross_future_enabled": 8,
+        "diagnostic_options_with_future_information_enabled": 8,
+        "diagnostic_options_with_positive_evi": 3,
+        "direct_options_scored": 122,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 0,
+        "global_replans": 34,
+        "instance_frames_with_same_class_peers": 88,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 0,
+        "planner_nonzero_geometry_evidence_instance_frames": 0,
+        "positive_total_evi_options_with_cross_future_enabled": 3,
+        "posterior_changes_between_paid_frames": 16,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 5
+      },
+      "diagnostic_evi_max": 0.00402917913724582,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_nom_NF_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 34,
+        "refused_with_no_new_support": 34,
+        "refused_with_support_at_4096": 34
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 38,
+        "positive_diagnostic_evi_paid_step": 44,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 38
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": null,
+      "frontend_feedback": {
+        "accepted_residuals": 34,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 0,
+        "feedback_attempts": 34,
+        "feedback_refused": 34,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 18,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 34
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": false,
+        "cross_instance_future": true,
+        "future_information": true,
+        "method": "shared_no_feedback",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 24,
+      "logged_configuration_sha256": "2b2ce46869dd5ae19c53dec8f797332adca5082673ddf5cca5538f7515a22ad4",
+      "macro_target_sequence_sha256": "6242734dae2e0ba5167d10a0f7c74e71d5e131f9184d066874e943a962659bbf",
+      "manifest_binding": "complete_queue_slot_finished",
+      "manifest_sha256": "bf85bbaedc6251e052e9a220da3edd336c27d8a537f907138ea00aa4edfec7ae",
+      "mesh_arrays_sha256": "a3510eae3987fd80d8e2d3caf472b662077f9cf0e969a48b40f99370b5b8d5a3",
+      "mesh_file_sha256": "28c6cfc8e378082952394997a83a9bb4b6d2f66d5bbc1aca508988505de80f00",
+      "method": "shared_no_feedback",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "1efb2cc70e648a806aac909d53708d00e1783a571282fb214928a376b3649af7",
+      "occupancy_file_sha256": "434e10518597806feb6c61e6e6a3289fb0cfc7c213a93fbd9af1e8ef5f6cf5ba",
+      "own_numeric_reuse_receipt_exists_at_read": false,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "8a7aef95c46ecff15196c2bb3dbcb64e8b44cd995da2cfd817971983592d229d",
+      "queue_event": {
+        "line_sha256": "c74600f427f42a3a3e9b8841c1d418ff44620ac46c463bb2e1d7dccbdfeb5bfa",
+        "path": "audit_results/semantic_finite_queues_20260924/queue_A/batch_10/events.jsonl",
+        "result": {
+          "artifact_bytes": 28556134,
+          "artifact_manifest_sha256": "bf85bbaedc6251e052e9a220da3edd336c27d8a537f907138ea00aa4edfec7ae",
+          "elapsed_s": 159.83088493719697,
+          "executed_paid_actions": 120,
+          "output": "/root/NSO/audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_nom_NF_b120_lexicographic",
+          "primary_experiment_started": true,
+          "run_id": "ablation_P00_nom_NF_b120_lexicographic",
+          "status": "controller_stop",
+          "world_created": true
+        }
+      },
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 76
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 86
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001"
+          ]
+        },
+        "qualified_unique_instance_count": 3,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "ablation_P00_nom_NP_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": true,
+      "action_sequence_sha256": "2b19d15b8d88a1b6aa8ce00bb8b8ad76f074342951ac5a5448c753859facdecd",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 8,
+        "diagnostic_options_with_cross_future_enabled": 0,
+        "diagnostic_options_with_future_information_enabled": 0,
+        "diagnostic_options_with_positive_evi": 3,
+        "direct_options_scored": 122,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 0,
+        "global_replans": 34,
+        "instance_frames_with_same_class_peers": 88,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 0,
+        "planner_nonzero_geometry_evidence_instance_frames": 0,
+        "positive_total_evi_options_with_cross_future_enabled": 0,
+        "posterior_changes_between_paid_frames": 16,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 5
+      },
+      "diagnostic_evi_max": 0.00402917913724582,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_nom_NP_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 34,
+        "refused_with_no_new_support": 34,
+        "refused_with_support_at_4096": 34
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 38,
+        "positive_diagnostic_evi_paid_step": 44,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 38
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": null,
+      "frontend_feedback": {
+        "accepted_residuals": 34,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 0,
+        "feedback_attempts": 34,
+        "feedback_refused": 34,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 18,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 34
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": true,
+        "future_information": false,
+        "method": "shared_no_future",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 24,
+      "logged_configuration_sha256": "82301b665c5411008b9b87a87bbd4b3097ac939887302e241d5f3dbc6d70414d",
+      "macro_target_sequence_sha256": "6242734dae2e0ba5167d10a0f7c74e71d5e131f9184d066874e943a962659bbf",
+      "manifest_binding": "complete_queue_slot_finished",
+      "manifest_sha256": "b4f1527357c821f449568e70afac889173c3a13150629e3a4623e249f4bf47d3",
+      "mesh_arrays_sha256": "a3510eae3987fd80d8e2d3caf472b662077f9cf0e969a48b40f99370b5b8d5a3",
+      "mesh_file_sha256": "28c6cfc8e378082952394997a83a9bb4b6d2f66d5bbc1aca508988505de80f00",
+      "method": "shared_no_future",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "1efb2cc70e648a806aac909d53708d00e1783a571282fb214928a376b3649af7",
+      "occupancy_file_sha256": "434e10518597806feb6c61e6e6a3289fb0cfc7c213a93fbd9af1e8ef5f6cf5ba",
+      "own_numeric_reuse_receipt_exists_at_read": false,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "8a7aef95c46ecff15196c2bb3dbcb64e8b44cd995da2cfd817971983592d229d",
+      "queue_event": {
+        "line_sha256": "15449008ffd0d77f41013e3c22b4f61ecacda913650eba1266bf6b75a028af15",
+        "path": "audit_results/semantic_finite_queues_20260924/queue_A/batch_10/events.jsonl",
+        "result": {
+          "artifact_bytes": 28555972,
+          "artifact_manifest_sha256": "b4f1527357c821f449568e70afac889173c3a13150629e3a4623e249f4bf47d3",
+          "elapsed_s": 182.90429930388927,
+          "executed_paid_actions": 120,
+          "output": "/root/NSO/audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_nom_NP_b120_lexicographic",
+          "primary_experiment_started": true,
+          "run_id": "ablation_P00_nom_NP_b120_lexicographic",
+          "status": "controller_stop",
+          "world_created": true
+        }
+      },
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 76
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 86
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001"
+          ]
+        },
+        "qualified_unique_instance_count": 3,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "ablation_P00_shift_NC_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": true,
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_cross_future_enabled": 0,
+        "diagnostic_options_with_future_information_enabled": 4,
+        "diagnostic_options_with_positive_evi": 1,
+        "direct_options_scored": 124,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 8,
+        "global_replans": 18,
+        "instance_frames_with_same_class_peers": 104,
+        "peer_adjusted_reliability_instance_frames": 41,
+        "planner_geometry_evidence_changes": 2,
+        "planner_nonzero_geometry_evidence_instance_frames": 55,
+        "positive_total_evi_options_with_cross_future_enabled": 0,
+        "posterior_changes_between_paid_frames": 30,
+        "rho_changes_between_paid_frames": 5,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 7
+      },
+      "diagnostic_evi_max": 0.0004631061770230052,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_shift_NC_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 8,
+        "refused_with_no_new_support": 8,
+        "refused_with_support_at_4096": 8
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "peer_adjusted_reliability_paid_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": null,
+      "frontend_feedback": {
+        "accepted_residuals": 16,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 8,
+        "feedback_attempts": 16,
+        "feedback_refused": 8,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 9,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 8
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": false,
+        "future_information": true,
+        "method": "shared_no_cross_future",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 16,
+      "logged_configuration_sha256": "c0f26dc7405cb6c7cb045ab55901201d8d03a2f2cc979cd84d6ab177ec1e4983",
+      "macro_target_sequence_sha256": "b5c37f0ac46843ee4b85619fd79c5dfc7dd69906d4f9cffb8c4c3ef15300ebc4",
+      "manifest_binding": "complete_queue_slot_finished",
+      "manifest_sha256": "31f136cd1b17ca5ebe7985cee842cf3b1a0764ed0a4ba9a5ba2b93f75ae0118c",
+      "mesh_arrays_sha256": "48888544dbe5fe153c7ad7ec35f9057a526e4a93c6c1a5f0ff0149bc9e0018eb",
+      "mesh_file_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "method": "shared_no_cross_future",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "c2a37b0f9faa7935dbaa4b947ef35569d52f03221a41624d231f22c4538a8e22",
+      "occupancy_file_sha256": "581b71d4ffe1fff376bb2e9ea9a5e5ee14833f67578ef69ef73fa5c610ccb3b6",
+      "own_numeric_reuse_receipt_exists_at_read": false,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "queue_event": {
+        "line_sha256": "48fdc664fc7b79b30926a096523424ab1bd93825a00d3a2e46aa80d47b804b96",
+        "path": "audit_results/semantic_finite_queues_20260924/queue_B/batch_10/events.jsonl",
+        "result": {
+          "artifact_bytes": 30442113,
+          "artifact_manifest_sha256": "31f136cd1b17ca5ebe7985cee842cf3b1a0764ed0a4ba9a5ba2b93f75ae0118c",
+          "elapsed_s": 242.21450213668868,
+          "executed_paid_actions": 120,
+          "output": "/root/NSO/audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_shift_NC_b120_lexicographic",
+          "primary_experiment_started": true,
+          "run_id": "ablation_P00_shift_NC_b120_lexicographic",
+          "status": "controller_stop",
+          "world_created": true
+        }
+      },
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5281456972891215,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0003",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "ablation_P00_shift_NF_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": true,
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_cross_future_enabled": 4,
+        "diagnostic_options_with_future_information_enabled": 4,
+        "diagnostic_options_with_positive_evi": 1,
+        "direct_options_scored": 124,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 8,
+        "global_replans": 18,
+        "instance_frames_with_same_class_peers": 104,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 0,
+        "planner_nonzero_geometry_evidence_instance_frames": 0,
+        "positive_total_evi_options_with_cross_future_enabled": 1,
+        "posterior_changes_between_paid_frames": 25,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 7
+      },
+      "diagnostic_evi_max": 0.000432785366621502,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_shift_NF_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 8,
+        "refused_with_no_new_support": 8,
+        "refused_with_support_at_4096": 8
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": null,
+      "frontend_feedback": {
+        "accepted_residuals": 16,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 8,
+        "feedback_attempts": 16,
+        "feedback_refused": 8,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 9,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 8
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": false,
+        "cross_instance_future": true,
+        "future_information": true,
+        "method": "shared_no_feedback",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 16,
+      "logged_configuration_sha256": "2b2ce46869dd5ae19c53dec8f797332adca5082673ddf5cca5538f7515a22ad4",
+      "macro_target_sequence_sha256": "b5c37f0ac46843ee4b85619fd79c5dfc7dd69906d4f9cffb8c4c3ef15300ebc4",
+      "manifest_binding": "complete_queue_slot_finished",
+      "manifest_sha256": "48aa59aad92c603518cf3cbd63cb12ce99b7f671255f6fb5e5c323e4d71eeefc",
+      "mesh_arrays_sha256": "48888544dbe5fe153c7ad7ec35f9057a526e4a93c6c1a5f0ff0149bc9e0018eb",
+      "mesh_file_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "method": "shared_no_feedback",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "c2a37b0f9faa7935dbaa4b947ef35569d52f03221a41624d231f22c4538a8e22",
+      "occupancy_file_sha256": "581b71d4ffe1fff376bb2e9ea9a5e5ee14833f67578ef69ef73fa5c610ccb3b6",
+      "own_numeric_reuse_receipt_exists_at_read": false,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "queue_event": {
+        "line_sha256": "423bc3383512d61e5c7a24e24a6176adc9b700accb05ecbed7c20bbe44779173",
+        "path": "audit_results/semantic_finite_queues_20260924/queue_B/batch_10/events.jsonl",
+        "result": {
+          "artifact_bytes": 30431694,
+          "artifact_manifest_sha256": "48aa59aad92c603518cf3cbd63cb12ce99b7f671255f6fb5e5c323e4d71eeefc",
+          "elapsed_s": 180.75170636503026,
+          "executed_paid_actions": 120,
+          "output": "/root/NSO/audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_shift_NF_b120_lexicographic",
+          "primary_experiment_started": true,
+          "run_id": "ablation_P00_shift_NF_b120_lexicographic",
+          "status": "controller_stop",
+          "world_created": true
+        }
+      },
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0003",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "ablation_P00_shift_NP_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": true,
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_cross_future_enabled": 0,
+        "diagnostic_options_with_future_information_enabled": 0,
+        "diagnostic_options_with_positive_evi": 1,
+        "direct_options_scored": 124,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 8,
+        "global_replans": 18,
+        "instance_frames_with_same_class_peers": 104,
+        "peer_adjusted_reliability_instance_frames": 41,
+        "planner_geometry_evidence_changes": 2,
+        "planner_nonzero_geometry_evidence_instance_frames": 55,
+        "positive_total_evi_options_with_cross_future_enabled": 0,
+        "posterior_changes_between_paid_frames": 30,
+        "rho_changes_between_paid_frames": 5,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 7
+      },
+      "diagnostic_evi_max": 0.0004631061770230052,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_shift_NP_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 8,
+        "refused_with_no_new_support": 8,
+        "refused_with_support_at_4096": 8
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "peer_adjusted_reliability_paid_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": null,
+      "frontend_feedback": {
+        "accepted_residuals": 16,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 8,
+        "feedback_attempts": 16,
+        "feedback_refused": 8,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 9,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 8
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": true,
+        "future_information": false,
+        "method": "shared_no_future",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 16,
+      "logged_configuration_sha256": "82301b665c5411008b9b87a87bbd4b3097ac939887302e241d5f3dbc6d70414d",
+      "macro_target_sequence_sha256": "b5c37f0ac46843ee4b85619fd79c5dfc7dd69906d4f9cffb8c4c3ef15300ebc4",
+      "manifest_binding": "complete_queue_slot_finished",
+      "manifest_sha256": "98cf4e2c476cc077c2ec260a051d81b3d77c654cafae9ab713532cd5568fe43d",
+      "mesh_arrays_sha256": "48888544dbe5fe153c7ad7ec35f9057a526e4a93c6c1a5f0ff0149bc9e0018eb",
+      "mesh_file_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "method": "shared_no_future",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "c2a37b0f9faa7935dbaa4b947ef35569d52f03221a41624d231f22c4538a8e22",
+      "occupancy_file_sha256": "581b71d4ffe1fff376bb2e9ea9a5e5ee14833f67578ef69ef73fa5c610ccb3b6",
+      "own_numeric_reuse_receipt_exists_at_read": false,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "queue_event": {
+        "line_sha256": "b987a16bd9bb17c8c55eefde3184c370e6dd90f176dd27f6529f5c0a61a9a17b",
+        "path": "audit_results/semantic_finite_queues_20260924/queue_B/batch_10/events.jsonl",
+        "result": {
+          "artifact_bytes": 30440239,
+          "artifact_manifest_sha256": "98cf4e2c476cc077c2ec260a051d81b3d77c654cafae9ab713532cd5568fe43d",
+          "elapsed_s": 199.69638490490615,
+          "executed_paid_actions": 120,
+          "output": "/root/NSO/audit_results/semantic_development_acquisition_20260923/episodes/ablation_P00_shift_NP_b120_lexicographic",
+          "primary_experiment_started": true,
+          "run_id": "ablation_P00_shift_NP_b120_lexicographic",
+          "status": "controller_stop",
+          "world_created": true
+        }
+      },
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5281456972891215,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0003",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "core_P00_nom_B_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": false,
+      "action_sequence_sha256": "2b19d15b8d88a1b6aa8ce00bb8b8ad76f074342951ac5a5448c753859facdecd",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 8,
+        "diagnostic_options_with_cross_future_enabled": 8,
+        "diagnostic_options_with_future_information_enabled": 8,
+        "diagnostic_options_with_positive_evi": 3,
+        "direct_options_scored": 122,
+        "frames_with_cross_instance_belief_enabled": 0,
+        "frontend_geometry_updates_applied": 0,
+        "global_replans": 34,
+        "instance_frames_with_same_class_peers": 0,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 0,
+        "planner_nonzero_geometry_evidence_instance_frames": 0,
+        "positive_total_evi_options_with_cross_future_enabled": 3,
+        "posterior_changes_between_paid_frames": 16,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 5
+      },
+      "diagnostic_evi_max": 0.00402917913724582,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/core_P00_nom_B_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 34,
+        "refused_with_no_new_support": 34,
+        "refused_with_support_at_4096": 34
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 38,
+        "positive_diagnostic_evi_paid_step": 44,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 38
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": {
+        "C_nav": 0.9559834938101788,
+        "J_nav": 0.6317842952187841,
+        "Q": 0.66087364406339
+      },
+      "frontend_feedback": {
+        "accepted_residuals": 34,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 0,
+        "feedback_attempts": 34,
+        "feedback_refused": 34,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 18,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 34
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": true,
+        "future_information": true,
+        "method": "bayes_semantic",
+        "share_across_instances": false
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 24,
+      "logged_configuration_sha256": "d701aca369973385570cf5575f10f673ae72d42f7482ead2820f9e4a959f41ed",
+      "macro_target_sequence_sha256": "6242734dae2e0ba5167d10a0f7c74e71d5e131f9184d066874e943a962659bbf",
+      "manifest_binding": "reviewed_summary008_baseline",
+      "manifest_sha256": "5e6c781fc6b090625de678e8c7b8d683a690b30317e0f77ff0d41470c87250cc",
+      "mesh_arrays_sha256": "a3510eae3987fd80d8e2d3caf472b662077f9cf0e969a48b40f99370b5b8d5a3",
+      "mesh_file_sha256": "28c6cfc8e378082952394997a83a9bb4b6d2f66d5bbc1aca508988505de80f00",
+      "method": "bayes_semantic",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "1efb2cc70e648a806aac909d53708d00e1783a571282fb214928a376b3649af7",
+      "occupancy_file_sha256": "434e10518597806feb6c61e6e6a3289fb0cfc7c213a93fbd9af1e8ef5f6cf5ba",
+      "own_numeric_reuse_receipt_exists_at_read": true,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "8a7aef95c46ecff15196c2bb3dbcb64e8b44cd995da2cfd817971983592d229d",
+      "queue_event": null,
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 76
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 86
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001"
+          ]
+        },
+        "qualified_unique_instance_count": 3,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "core_P00_nom_S_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": false,
+      "action_sequence_sha256": "2b19d15b8d88a1b6aa8ce00bb8b8ad76f074342951ac5a5448c753859facdecd",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 8,
+        "diagnostic_options_with_cross_future_enabled": 8,
+        "diagnostic_options_with_future_information_enabled": 8,
+        "diagnostic_options_with_positive_evi": 3,
+        "direct_options_scored": 122,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 0,
+        "global_replans": 34,
+        "instance_frames_with_same_class_peers": 88,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 0,
+        "planner_nonzero_geometry_evidence_instance_frames": 0,
+        "positive_total_evi_options_with_cross_future_enabled": 3,
+        "posterior_changes_between_paid_frames": 16,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 5
+      },
+      "diagnostic_evi_max": 0.00402917913724582,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/core_P00_nom_S_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 34,
+        "refused_with_no_new_support": 34,
+        "refused_with_support_at_4096": 34
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 38,
+        "positive_diagnostic_evi_paid_step": 44,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 38
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": {
+        "C_nav": 0.9559834938101788,
+        "J_nav": 0.6317842952187841,
+        "Q": 0.66087364406339
+      },
+      "frontend_feedback": {
+        "accepted_residuals": 34,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 0,
+        "feedback_attempts": 34,
+        "feedback_refused": 34,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 18,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 34
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": true,
+        "future_information": true,
+        "method": "shared_semantic",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 24,
+      "logged_configuration_sha256": "3b3eca90c74f36e62571421d4a675a83d5bf489ac17ece3cb337f22186fda1dd",
+      "macro_target_sequence_sha256": "6242734dae2e0ba5167d10a0f7c74e71d5e131f9184d066874e943a962659bbf",
+      "manifest_binding": "reviewed_summary008_baseline",
+      "manifest_sha256": "a99be883c2960a28d25eeaa7493212dd291d5b76b707746cd72a1e792e492d2c",
+      "mesh_arrays_sha256": "a3510eae3987fd80d8e2d3caf472b662077f9cf0e969a48b40f99370b5b8d5a3",
+      "mesh_file_sha256": "28c6cfc8e378082952394997a83a9bb4b6d2f66d5bbc1aca508988505de80f00",
+      "method": "shared_semantic",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "1efb2cc70e648a806aac909d53708d00e1783a571282fb214928a376b3649af7",
+      "occupancy_file_sha256": "434e10518597806feb6c61e6e6a3289fb0cfc7c213a93fbd9af1e8ef5f6cf5ba",
+      "own_numeric_reuse_receipt_exists_at_read": true,
+      "own_review_file_exists_at_read": false,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "8a7aef95c46ecff15196c2bb3dbcb64e8b44cd995da2cfd817971983592d229d",
+      "queue_event": null,
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 76
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 6,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 86
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001"
+          ]
+        },
+        "qualified_unique_instance_count": 3,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "core_P00_shift_B_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": false,
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_cross_future_enabled": 4,
+        "diagnostic_options_with_future_information_enabled": 4,
+        "diagnostic_options_with_positive_evi": 1,
+        "direct_options_scored": 124,
+        "frames_with_cross_instance_belief_enabled": 0,
+        "frontend_geometry_updates_applied": 8,
+        "global_replans": 18,
+        "instance_frames_with_same_class_peers": 0,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 2,
+        "planner_nonzero_geometry_evidence_instance_frames": 55,
+        "positive_total_evi_options_with_cross_future_enabled": 1,
+        "posterior_changes_between_paid_frames": 27,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 7
+      },
+      "diagnostic_evi_max": 0.0004631061770230052,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/core_P00_shift_B_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 8,
+        "refused_with_no_new_support": 8,
+        "refused_with_support_at_4096": 8
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": {
+        "C_nav": 0.874828060522696,
+        "J_nav": 0.6069153406809421,
+        "Q": 0.6937538564073034
+      },
+      "frontend_feedback": {
+        "accepted_residuals": 16,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 8,
+        "feedback_attempts": 16,
+        "feedback_refused": 8,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 9,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 8
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": true,
+        "future_information": true,
+        "method": "bayes_semantic",
+        "share_across_instances": false
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 16,
+      "logged_configuration_sha256": "d701aca369973385570cf5575f10f673ae72d42f7482ead2820f9e4a959f41ed",
+      "macro_target_sequence_sha256": "b5c37f0ac46843ee4b85619fd79c5dfc7dd69906d4f9cffb8c4c3ef15300ebc4",
+      "manifest_binding": "reviewed_summary008_baseline",
+      "manifest_sha256": "5c382597cb74df0bbed6eadbc33146f5b5b8ae0873ffaa8b4dc1f61351335b8a",
+      "mesh_arrays_sha256": "48888544dbe5fe153c7ad7ec35f9057a526e4a93c6c1a5f0ff0149bc9e0018eb",
+      "mesh_file_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "method": "bayes_semantic",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "c2a37b0f9faa7935dbaa4b947ef35569d52f03221a41624d231f22c4538a8e22",
+      "occupancy_file_sha256": "581b71d4ffe1fff376bb2e9ea9a5e5ee14833f67578ef69ef73fa5c610ccb3b6",
+      "own_numeric_reuse_receipt_exists_at_read": true,
+      "own_review_file_exists_at_read": true,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "queue_event": null,
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0003",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    },
+    "core_P00_shift_S_b120_lexicographic": {
+      "ablation_endpoint_score_not_claimed": false,
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "collisions": 0,
+      "counts": {
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_cross_future_enabled": 4,
+        "diagnostic_options_with_future_information_enabled": 4,
+        "diagnostic_options_with_positive_evi": 1,
+        "direct_options_scored": 124,
+        "frames_with_cross_instance_belief_enabled": 121,
+        "frontend_geometry_updates_applied": 8,
+        "global_replans": 18,
+        "instance_frames_with_same_class_peers": 104,
+        "peer_adjusted_reliability_instance_frames": 41,
+        "planner_geometry_evidence_changes": 2,
+        "planner_nonzero_geometry_evidence_instance_frames": 55,
+        "positive_total_evi_options_with_cross_future_enabled": 1,
+        "posterior_changes_between_paid_frames": 30,
+        "rho_changes_between_paid_frames": 5,
+        "selected_diagnose_then_observe": 0,
+        "selected_diagnostics_with_positive_evi": 0,
+        "selected_direct": 7
+      },
+      "diagnostic_evi_max": 0.0004631061770230052,
+      "episode_root": "audit_results/semantic_development_acquisition_20260923/episodes/core_P00_shift_S_b120_lexicographic",
+      "feedback_refusal_context": {
+        "refused": 8,
+        "refused_with_no_new_support": 8,
+        "refused_with_support_at_4096": 8
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "peer_adjusted_reliability_paid_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "flags_checked_against_saved_methods_and_relevant_receipt_fields": true,
+      "formal_endpoint_metrics_from_existing_summary": {
+        "C_nav": 0.874828060522696,
+        "J_nav": 0.6069153406809421,
+        "Q": 0.6937538564073034
+      },
+      "frontend_feedback": {
+        "accepted_residuals": 16,
+        "feedback_application_unknown": 0,
+        "feedback_applied": 8,
+        "feedback_attempts": 16,
+        "feedback_refused": 8,
+        "informative_residual_does_not_imply_applied_feedback": true,
+        "informative_residuals": 9,
+        "predicted_evi_is_not_actual_feedback": true,
+        "refusal_reason_is_saved_verbatim_not_an_inferred_capacity_cause": true,
+        "refusal_reasons": {
+          "repeated_support_or_feedback_or_history_cap": 8
+        },
+        "scope": "Frontend ledger feedback attempts; applied means the saved applied flag is exactly true.",
+        "source": "saved controller_evidence.geometry_feedback only"
+      },
+      "frozen_source_flags": {
+        "actual_structure_feedback": true,
+        "cross_instance_future": true,
+        "future_information": true,
+        "method": "shared_semantic",
+        "share_across_instances": true
+      },
+      "full_configuration_object_saved_in_steps": false,
+      "initialization_actions": 16,
+      "logged_configuration_sha256": "3b3eca90c74f36e62571421d4a675a83d5bf489ac17ece3cb337f22186fda1dd",
+      "macro_target_sequence_sha256": "b5c37f0ac46843ee4b85619fd79c5dfc7dd69906d4f9cffb8c4c3ef15300ebc4",
+      "manifest_binding": "reviewed_summary008_baseline",
+      "manifest_sha256": "282233d51bf4427b1e8b93078010b6bdc7f6edfbf41aea51622d9ee57bd51090",
+      "mesh_arrays_sha256": "48888544dbe5fe153c7ad7ec35f9057a526e4a93c6c1a5f0ff0149bc9e0018eb",
+      "mesh_file_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "method": "shared_semantic",
+      "new_replay_or_numeric_evaluation": false,
+      "occupancy_arrays_sha256": "c2a37b0f9faa7935dbaa4b947ef35569d52f03221a41624d231f22c4538a8e22",
+      "occupancy_file_sha256": "581b71d4ffe1fff376bb2e9ea9a5e5ee14833f67578ef69ef73fa5c610ccb3b6",
+      "own_numeric_reuse_receipt_exists_at_read": true,
+      "own_review_file_exists_at_read": true,
+      "packets": 121,
+      "paid_actions": 120,
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "queue_event": null,
+      "returned": true,
+      "rho_ranges": [
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0000",
+          "rho_max": 0.5281456972891215,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0001",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "cabinet"
+          ],
+          "observed_instance_id": "instance_0002",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        },
+        {
+          "observed_classes": [
+            "rack"
+          ],
+          "observed_instance_id": "instance_0003",
+          "rho_max": 0.5,
+          "rho_min": 0.5
+        }
+      ],
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      }
+    }
+  },
+  "executed_source_sha256": {
+    "env/__init__.py": "742fd98c397a6206625b9cde3fedc948e64d7b79e8c9391d827c2f6b80c14c37",
+    "env/development_sensor_v41.py": "4e0f746e8ebdf78cacaa0ec082d636ebd59169e085e8dd2a8b4547e3bc1b99c4",
+    "env/habitat/__init__.py": "fa7b556a7f4affb52c24743c35f95023318cea85705694f88e1e3d1f57469a0f",
+    "env/habitat/exploration_env.py": "c4853013fa6663735a1793a4eac88abd2d57b8a523da4db42c8ce2e7afd66ae8",
+    "env/habitat/reachability_utils.py": "b42cb27beefcd1998f4076832f140054355e16df9c675c08339490afd283f994",
+    "env/habitat/sync_vector_env.py": "2e60bbdf92c828b410d8d2122adc307e502950cae89bfca2257d4941403532b7",
+    "env/habitat/utils/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "env/habitat/utils/noisy_actions.py": "96726f37539c6fb50bec5f639c900eb0d67612578350d32e9e4255eec6bea5df",
+    "env/habitat/utils/pose.py": "13d9a7d5af45bb9aaf69f39599dc390718fa3888ee5b9eb0ba9e2e18c8eeec80",
+    "env/habitat/utils/supervision.py": "7226c04d6443e264ff298fbb732a536a2a7aa7432a90021aab58f77778afc450",
+    "env/habitat/utils/visualizations.py": "434855de48786d8858ab938e9fca854f1aaae515bf5741892f63cb5b2672d2d7",
+    "env/habitat2/__init__.py": "e96fd6f65c26d81a5f50c4182e4917aaeee7540187d9a26cd4b585e2266ab7a0",
+    "env/habitat2/_lab.py": "e43ef131314ba6323c8525e00caaaa3e211bca4959555e8038f360c637b3e8b3",
+    "env/habitat2/compat.py": "d87fc5148029b2f7a9ad0c44941c5db4f86bc1fd5ef8d0663b519731ed1d7ce8",
+    "env/habitat2/config_utils.py": "9e07e0c38147016839ee0b51dbefdf69cee6eeb1af8751259615761f813c0dba",
+    "env/habitat2/construct_envs.py": "b3c37a3d5e05fc16c8b1a8a85f445fa911f1ee2eced8f8f280b7fa82ad896f89",
+    "env/habitat2/exploration_env.py": "9cd0d09aaadff3d0fca0416fc01fe3a193eb9092a2d1357829dc08914b8158ea",
+    "env/habitat2/vector_env_compat.py": "72bf46b336fc78e8f08c3facbcd838fa4182a73d51b5a841d5f467307f26e07f",
+    "env/semantic_scene_sensor.py": "78c3aa2082f7871100f45b3f2f5ddbf35659f86a30e13df93e9516c3b6ce56ea",
+    "env/utils/depth_utils.py": "ec5845bdfa9fc32886b770f8e9c02660e1359ba48914f0cf622da95a3fb10c97",
+    "env/utils/fmm_planner.py": "e1a5098cd75995b2074735b2053a7ba2d1a2a62714e2d28f135d196c1b2e8ed3",
+    "env/utils/map_builder.py": "d5156233b312de629090b86bbfb8fa145a956f04c2d40da30ae3ac74f3cd7db1",
+    "env/utils/rotation_utils.py": "ce1fde0a78c543d62fe1f44d76af1c1bbbd7fe3b43242e8750722c1f2bda1298",
+    "nso/__init__.py": "53df856db4ddc95f7d8a5c05a1298aea84298cfa974a0412017e61471feb76dd",
+    "nso/complete_surface_evaluation.py": "7f56ab54eec7197cb09c22e135e70ab655b2ed64f10a4c3381ca0da3ca4ad203",
+    "nso/controller_semantic_mechanism.py": "dcf163dbdce2b97f0ec9dc8a4c60bd34c5d60d0a2eb0cdaa608aa78b251a08f3",
+    "nso/controller_v43.py": "4a0b4e629457026a698265813c794664e27228fa2927f7033b29134d1f7b3b5c",
+    "nso/development_geometry_v40.py": "19ca99fc868df5a473020e03cf1910aaf73968b27cbe046d3b4ba35b59f378b1",
+    "nso/diagnostic_policy_v43.py": "ac8cc9cb0b3040ae871ac399e055ff5e0879a701c9d969e015fa55e46b4196d8",
+    "nso/episode_driver_v43.py": "4343c7089bac6da118a957d7f56f2ec6e30d02dbe29e0d5a490d51736b81f316",
+    "nso/evidence_writer_v44.py": "ea904fdeadf5ded62950838320c78e442b0d30740ad83a097cdd948c0f585ad5",
+    "nso/exact_support_distance.py": "fcf918f4c0dd1c5396c378b91ea4c5ffa23d2be684b1c0c6db0d87ea9414c0d4",
+    "nso/instance_belief_v40.py": "249f9aa6ec14d9aefcf0dbfcc42641d4dd1cd46ae516d4f798e0d2f22063872d",
+    "nso/known_structure_reference.py": "65be266be0dbbf3c5210a5c2a1574e8303fcd5ba3a622c2d603fdd2891ba8e27",
+    "nso/observed_instances_local.py": "9ad388dbe740052fed2c9bcb6f73a4d7a53196599f6684e585bb082c39c1a35c",
+    "nso/observed_instances_v41.py": "21302f95c7cefa8dff5c99611e3b45bc12be5cadc0112797a72244316cd0a967",
+    "nso/observed_mapper_v42.py": "0bd203864e9f734b378540d174384e778bd28714282990769c8e1918b6bc7a32",
+    "nso/observed_residual_v41.py": "63ed625cdcf00712b6ef9b39e4b4cb8ff951edb19f4a0cdb66eec5ff58a44b77",
+    "nso/observed_safety_v43.py": "3744abfeef0e2f65c9ea6957d215b2f82df825813772f5ab2fb220748efcb569",
+    "nso/observed_view_acquisition.py": "0374c1d631d6de136821cffb388c7bc72f3e157ff5beb195b263618029263163",
+    "nso/offline_evaluation_v44.py": "ca8be32c517bd1e3b888022f29246a487ec0f057f6e2ab94f51c1bd001245d3b",
+    "nso/primitive_navigation_v41.py": "ad96062f6344be90ea14e6ae389305f25fe983cc9e25217ea5373594b026bc94",
+    "nso/prototype_observation_channel.py": "3caa38f0f04258cf65cd020b8178aa8879a89261b640b61684a683fdf02a7f3f",
+    "nso/public_navigation_v43.py": "b17e03869da8b35e3f0f92379526773cf6dd070ac03701eee95c6b119efd2663",
+    "nso/saved_replay_v44.py": "d45e2f6d2c4567318b7265e95d014a63776fa6831f9931aedd82b289e37b6d1e",
+    "nso/scene_contract_v40.py": "b17cd88125b61db6c85fe8361589157b0e4b4150b86ecf231edead3004a15e47",
+    "nso/semantic_experiment.py": "61c8ba41eb12aa9039d5111fe99314848300f3e20d993bc091dd89ab668b03b7",
+    "nso/semantic_experiment_replay.py": "f5aae9ff96565a083ed7294f70c2e97ef7b49a3a70843a122092aebb1f94205c",
+    "nso/semantic_reliability.py": "6a773e6f5252d730fb2851fca036fa1af9ccaa54e5632f5c5f3d66a6dfbd2dc2",
+    "nso/semantic_scene_assets.py": "dba28a6fa0715cb19e92160899c5ea2687f95a1a24a9ed1b47dcc1548127275f",
+    "nso/semantic_scene_evaluation.py": "01debf76b589a5a4b271bd53bb92f2c8f884da105728b5175eaed8eb5f26e90b",
+    "nso/semantic_scene_experiment.py": "300db98f1bf8cb3b6d2095c09adb1346fbdbe88be7d2aa276fe57ef851ed9d0e",
+    "nso/semantic_scene_navigation.py": "4159bdf969ae2c8642471f76bc35db8dbaf0ba7683e4cceb547065693ba0fb48",
+    "nso/surface_evaluation_v40.py": "3e492e10e2065196f6d75161d7937efc98b7caea7792564ac47404ee1d73c035",
+    "nso/view_quality_v42.py": "d26e3fc0d25736644b92a7b124f9bbe11bd565960d84b0b5c7dcbc5d93ed6a9e",
+    "scripts/run_semantic_scene_experiment.py": "6a76cd759cecc6035d7d868e9f5345a1577a9c0f06d90999481326f5e9b7b797",
+    "scripts/verify_development_surface_pipeline_v40.py": "7e277c60f1a1163cedf54a160994cbb3d916d5a9e8b45f7e770cdbc2c5f1ee02",
+    "utils/paper_eval.py": "68b9973910cae0ae069c445e972ffd965d396cfb2bc3fa31feb9896a3d098491",
+    "utils/rgbd_contract.py": "93d647c6dae79748d75f32148adf6aa9479a9f46950129557da99c6b28bb7f87"
+  },
+  "executed_sources_count": 59,
+  "formal_ablation_quality_conclusion": null,
+  "goal_ablation_mapping": {
+    "NC_is_not_removal_of_all_new_reliability": true,
+    "actual_feedback": "S versus NF removes observed geometry evidence from planning structural belief while preserving perception, map, safety and hypothetical future diagnosis.",
+    "actual_shared_reliability_belief": "NC versus B compares shared versus nonsharing current structural belief, with other-instance future updates excluded effectively in both. This includes downstream forecasts/decisions induced by the current belief; not a scalar-rho-only intervention.",
+    "cross_instance_future_component": "S versus NC removes only other-instance future utility changes; actual shared reliability belief remains enabled.",
+    "frozen_matrix_or_sources_changed": false,
+    "future_information_planning": "S versus NP changes diagnostic ranking from expected post-observation to pre-observation value; actual belief feedback remains enabled.",
+    "whole_candidate_increment": "S versus B combines current shared belief and its cross-instance future use; it cannot isolate the two components by itself."
+  },
+  "limitations": [
+    "Saved action/mesh equivalence is descriptive and does not replace each ablation own policy/TSDF replay and full numeric input proof.",
+    "No ablation scores imputed from baseline, even for identical saved endpoint arrays.",
+    "Six condition-by-ablation slots cover one parent P00 only; conditions and ablations do not add independent parents.",
+    "A positive total logged EVI is not a measured cross-instance marginal contribution.",
+    "An inactive removed mechanism cannot demonstrate that mechanism is unnecessary in general."
+  ],
+  "method_control_table": [
+    {
+      "actual_cross_instance_reliability_can_use_observed_geometry": false,
+      "actual_structure_feedback": false,
+      "cross_instance_future_can_affect_ranking": false,
+      "cross_instance_future_literal_flag": true,
+      "frontend_geometry_and_mapping_enabled": true,
+      "future_information": false,
+      "method": "fixed_semantic",
+      "share_across_instances": false,
+      "symbol": "F"
+    },
+    {
+      "actual_cross_instance_reliability_can_use_observed_geometry": false,
+      "actual_structure_feedback": true,
+      "cross_instance_future_can_affect_ranking": false,
+      "cross_instance_future_literal_flag": true,
+      "frontend_geometry_and_mapping_enabled": true,
+      "future_information": true,
+      "method": "bayes_semantic",
+      "share_across_instances": false,
+      "symbol": "B"
+    },
+    {
+      "actual_cross_instance_reliability_can_use_observed_geometry": true,
+      "actual_structure_feedback": true,
+      "cross_instance_future_can_affect_ranking": true,
+      "cross_instance_future_literal_flag": true,
+      "frontend_geometry_and_mapping_enabled": true,
+      "future_information": true,
+      "method": "shared_semantic",
+      "share_across_instances": true,
+      "symbol": "S"
+    },
+    {
+      "actual_cross_instance_reliability_can_use_observed_geometry": false,
+      "actual_structure_feedback": false,
+      "cross_instance_future_can_affect_ranking": true,
+      "cross_instance_future_literal_flag": true,
+      "frontend_geometry_and_mapping_enabled": true,
+      "future_information": true,
+      "method": "shared_no_feedback",
+      "share_across_instances": true,
+      "symbol": "NF"
+    },
+    {
+      "actual_cross_instance_reliability_can_use_observed_geometry": true,
+      "actual_structure_feedback": true,
+      "cross_instance_future_can_affect_ranking": false,
+      "cross_instance_future_literal_flag": true,
+      "frontend_geometry_and_mapping_enabled": true,
+      "future_information": false,
+      "method": "shared_no_future",
+      "share_across_instances": true,
+      "symbol": "NP"
+    },
+    {
+      "actual_cross_instance_reliability_can_use_observed_geometry": true,
+      "actual_structure_feedback": true,
+      "cross_instance_future_can_affect_ranking": false,
+      "cross_instance_future_literal_flag": false,
+      "frontend_geometry_and_mapping_enabled": true,
+      "future_information": true,
+      "method": "shared_no_cross_future",
+      "share_across_instances": true,
+      "symbol": "NC"
+    }
+  ],
+  "method_control_table_scope": "Static frozen source flags. F is included for control-definition completeness, not parsed as an additional trajectory in this diagnostic. Effective columns are source-level capabilities, not claims that the mechanism changed any realized decision.",
+  "new_numeric_surface_evaluations": 0,
+  "new_planner_executions": 0,
+  "new_replays": 0,
+  "new_sensor_packets": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "parser_sha256": {
+    "scripts/summarize_semantic_integration.py": "0c209da675d2088699f3da05791e9fba91fb8a56c6ffc3500d6aae2ede909adc",
+    "scripts/summarize_semantic_scene_results.py": "b4115af73fcac0f9528a03fa95e6ae62575f225995ab3e35cf6dd2585c70ec4f"
+  },
+  "protocol_path": "configs/virtual3d/semantic_development_acquisition_20260923.json",
+  "protocol_sha256": "dc8693ecbd9d2b35c0e7f953d12ef309df84e132d2b693a44ad579a5d5af9a1f",
+  "queue_event_file_sha256": {
+    "audit_results/semantic_finite_queues_20260924/queue_A/batch_10/events.jsonl": "0103fe39ffb574fb9d0f03cf021e0321a4141442a67bf792b35a6b85f52033ec",
+    "audit_results/semantic_finite_queues_20260924/queue_B/batch_10/events.jsonl": "762bd6b941d46077ca9d827b13977705c8c212ea0e419038497ddeae6c3a92ef"
+  },
+  "requested_ablation_slots": [
+    "ablation_P00_nom_NC_b120_lexicographic",
+    "ablation_P00_nom_NF_b120_lexicographic",
+    "ablation_P00_nom_NP_b120_lexicographic",
+    "ablation_P00_shift_NC_b120_lexicographic",
+    "ablation_P00_shift_NF_b120_lexicographic",
+    "ablation_P00_shift_NP_b120_lexicographic"
+  ],
+  "reviewed_baseline_summary_path": "audit_results/semantic_development_acquisition_20260923/progress_summary_008.json",
+  "reviewed_baseline_summary_sha256": "e92b1c4f6c62ce68bf97866eec101ed940c288b3c48d7e1e5514f54354da8c84",
+  "runtime_after": {
+    "blocked_before_world_creation": 0,
+    "paid_actions": 0,
+    "rgbd_frames": 0,
+    "scans": 0,
+    "worlds_created": 0
+  },
+  "runtime_before": {
+    "blocked_before_world_creation": 0,
+    "paid_actions": 0,
+    "rgbd_frames": 0,
+    "scans": 0,
+    "worlds_created": 0
+  },
+  "schema": "semantic.P00_ablation_saved_mechanisms.v1",
+  "source_line_anchors": [
+    {
+      "line_end": 149,
+      "line_start": 143,
+      "path": "nso/controller_semantic_mechanism.py",
+      "purpose": "All method-dependent belief/feedback/future/cross-future constructor flags",
+      "sha256": "dcf163dbdce2b97f0ec9dc8a4c60bd34c5d60d0a2eb0cdaa608aa78b251a08f3"
+    },
+    {
+      "line_end": 229,
+      "line_start": 228,
+      "path": "nso/controller_semantic_mechanism.py",
+      "purpose": "NF zeros actual geometry messages only in planning belief",
+      "sha256": "dcf163dbdce2b97f0ec9dc8a4c60bd34c5d60d0a2eb0cdaa608aa78b251a08f3"
+    },
+    {
+      "line_end": 248,
+      "line_start": 240,
+      "path": "nso/controller_semantic_mechanism.py",
+      "purpose": "Planning instances receive shared posterior; NF removes geometry log scores from planning records",
+      "sha256": "dcf163dbdce2b97f0ec9dc8a4c60bd34c5d60d0a2eb0cdaa608aa78b251a08f3"
+    },
+    {
+      "line_end": 106,
+      "line_start": 85,
+      "path": "nso/controller_semantic_mechanism.py",
+      "purpose": "NC freezes non-target future utility using current posterior; NP ranks by pre-observation utility; followup set unchanged",
+      "sha256": "dcf163dbdce2b97f0ec9dc8a4c60bd34c5d60d0a2eb0cdaa608aa78b251a08f3"
+    },
+    {
+      "line_end": 144,
+      "line_start": 124,
+      "path": "nso/semantic_reliability.py",
+      "purpose": "B nonsharing posterior has no peer messages; NC actual posterior includes same-class peer evidence",
+      "sha256": "6a773e6f5252d730fb2851fca036fa1af9ccaa54e5632f5c5f3d66a6dfbd2dc2"
+    },
+    {
+      "line_end": 182,
+      "line_start": 163,
+      "path": "nso/semantic_reliability.py",
+      "purpose": "Hypothetical observation modifies only the target instance evidence",
+      "sha256": "6a773e6f5252d730fb2851fca036fa1af9ccaa54e5632f5c5f3d66a6dfbd2dc2"
+    },
+    {
+      "line_end": 246,
+      "line_start": 224,
+      "path": "nso/semantic_reliability.py",
+      "purpose": "EVI combines each instance expected utility over the same common terminal action set",
+      "sha256": "6a773e6f5252d730fb2851fca036fa1af9ccaa54e5632f5c5f3d66a6dfbd2dc2"
+    },
+    {
+      "line_end": 158,
+      "line_start": 150,
+      "path": "nso/controller_v43.py",
+      "purpose": "Common frontend still computes/applies observed geometry feedback and mapping for NF",
+      "sha256": "4a0b4e629457026a698265813c794664e27228fa2927f7033b29134d1f7b3b5c"
+    }
+  ],
+  "source_or_protocol_changed": false,
+  "unsealed_skipped_slots": []
+}

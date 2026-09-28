@@ -1,0 +1,58 @@
+{
+  "version": "facility-external-v19-pilot-1",
+  "status": "declared_before_policy_outcomes",
+  "task": "coverage-constrained six-facility exterior documentation",
+  "parents": [
+    "D19-P00",
+    "D19-P01"
+  ],
+  "assignments": [
+    "A_complex_B_simple",
+    "A_simple_B_complex"
+  ],
+  "task_asset_count": 6,
+  "sensor_model": "iid_025px",
+  "noise_seed": 1901,
+  "sensitivity_sensor_models": [
+    "ideal",
+    "iid_010px",
+    "bias_025px_iid_025px"
+  ],
+  "sensor_scope": "generic disparity-noise assumptions; exact pose; artificial RGB markers; not calibrated ZED",
+  "shared_first_options": [
+    "continue_coverage",
+    "observe_asset_A",
+    "observe_asset_B"
+  ],
+  "continuation": "FacilityBackendV19 common geometry, direction support and measured precision-response proxy; no class score or fitted head",
+  "primary_metric": "coverage_2d * all-six equal-weight external surface F1 at 0.05m",
+  "thresholds_m": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "coverage_minimum": 0.8,
+  "eligibility": "coverage>=.8, zero collisions, returned_to_anchor, termination.failed==false",
+  "budget_rule": "floor(T_cov + 0.35*(L_all-T_cov)); T_cov<=budget<L_all; actual safe coverage-return witness; valid all-region visit lower bound",
+  "quality_curve_action_stride": 20,
+  "reference_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "primary_reference_seed": 2026,
+  "reference_note": "companion seeds are surface-sampling sensitivity, not independent worlds",
+  "count_per_asset": 3000,
+  "predicted_per_asset": 4000,
+  "reference_stride_cells": 4,
+  "global_reference_count": 12000,
+  "screen_relative_information_minimum_strict": 0.05,
+  "screen_scope": "two-parent observed-category conditional oracle over three options, full common continuation; not learned-policy result",
+  "training_allowed": false,
+  "full_architecture_efficacy_proven": false,
+  "old_evidence_preserved": true,
+  "precision_proxy": "observed quality points, actual paid outbound poses, rectified FOV and known-TSDF occlusion, independent scalar depth variance; no hidden aperture gating",
+  "precision_proxy_max_points_per_observed_asset": 128,
+  "precision_proxy_occlusion_tolerance_m": 0.12,
+  "precision_proxy_variance_floor_std_m": 0.002
+}

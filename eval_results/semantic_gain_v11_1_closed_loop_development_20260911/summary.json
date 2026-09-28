@@ -1,0 +1,179 @@
+{
+  "branches": 56,
+  "by_condition": {
+    "fixed_geometry": {
+      "mean_coverage_times_f1": 42.190505846812925,
+      "mean_f1": 0.9839147659009001,
+      "mean_inspection_joint": 6.14313327099469,
+      "mean_joint_gain": 1.0072933976721297,
+      "mean_path_distance_m": 7.0,
+      "mean_precision": 0.99746875,
+      "mean_recall": 0.9708111051971866
+    },
+    "fixed_semantic": {
+      "mean_coverage_times_f1": 42.28402398879125,
+      "mean_f1": 0.9860880699277619,
+      "mean_inspection_joint": 7.007227147075088,
+      "mean_joint_gain": 1.1008115396504543,
+      "mean_path_distance_m": 6.450000000000001,
+      "mean_precision": 0.9966041666666667,
+      "mean_recall": 0.9759066795067382
+    },
+    "learned_geometry": {
+      "mean_coverage_times_f1": 42.35960440624123,
+      "mean_f1": 0.9877875222432915,
+      "mean_inspection_joint": 6.830015530695427,
+      "mean_joint_gain": 1.1763919571004413,
+      "mean_path_distance_m": 7.200000000000001,
+      "mean_precision": 0.9976041666666666,
+      "mean_recall": 0.9782861512399136
+    },
+    "learned_semantic_feedback": {
+      "mean_coverage_times_f1": 42.589669282671316,
+      "mean_f1": 0.9932000891209906,
+      "mean_inspection_joint": 8.758844886373002,
+      "mean_joint_gain": 1.4064568335305259,
+      "mean_path_distance_m": 7.3500000000000005,
+      "mean_precision": 0.9969479166666667,
+      "mean_recall": 0.989501648316824
+    },
+    "learned_semantic_no_feedback": {
+      "mean_coverage_times_f1": 42.589669282671316,
+      "mean_f1": 0.9932000891209906,
+      "mean_inspection_joint": 8.758844886373002,
+      "mean_joint_gain": 1.4064568335305259,
+      "mean_path_distance_m": 7.3500000000000005,
+      "mean_precision": 0.9969479166666667,
+      "mean_recall": 0.989501648316824
+    },
+    "learned_swapped": {
+      "mean_coverage_times_f1": 42.04111397071637,
+      "mean_f1": 0.9803839499298355,
+      "mean_inspection_joint": 4.613224672539722,
+      "mean_joint_gain": 0.8579015215755721,
+      "mean_path_distance_m": 7.3500000000000005,
+      "mean_precision": 0.99796875,
+      "mean_recall": 0.9634422750718856
+    },
+    "low_confidence_fallback": {
+      "mean_coverage_times_f1": 42.35960440624123,
+      "mean_f1": 0.9877875222432915,
+      "mean_inspection_joint": 6.830015530695427,
+      "mean_joint_gain": 1.1763919571004413,
+      "mean_path_distance_m": 7.200000000000001,
+      "mean_precision": 0.9976041666666666,
+      "mean_recall": 0.9782861512399136
+    }
+  },
+  "comparisons": {
+    "semantic_vs_fixed_geometry": {
+      "differences": [
+        0.8359946861383847,
+        0.18478509173642976,
+        0.9290701883949168,
+        0.15333161982526633,
+        0.05761351281635996,
+        0.29748740296668075,
+        0.3247112033416215,
+        0.41031378164750976
+      ],
+      "losses": 0,
+      "mean_difference": 0.3991634358583962,
+      "ties": 0,
+      "wins": 8
+    },
+    "semantic_vs_fixed_semantic": {
+      "differences": [
+        0.36044452642779845,
+        0.2725248990531952,
+        0.21421787057057884,
+        0.15333161982526633,
+        0.980401295402423,
+        0.05392835811380081,
+        0.0,
+        0.41031378164750976
+      ],
+      "losses": 0,
+      "mean_difference": 0.30564529388007156,
+      "ties": 1,
+      "wins": 7
+    },
+    "semantic_vs_learned_geometry": {
+      "differences": [
+        0.0,
+        0.4861896936796839,
+        0.0,
+        0.18403585438156966,
+        0.0,
+        0.27862744860212274,
+        0.8916660147773001,
+        0.0
+      ],
+      "losses": 0,
+      "mean_difference": 0.23006487643008455,
+      "ties": 4,
+      "wins": 4
+    },
+    "semantic_vs_learned_semantic_no_feedback": {
+      "differences": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "losses": 0,
+      "mean_difference": 0.0,
+      "ties": 8,
+      "wins": 0
+    },
+    "semantic_vs_learned_swapped": {
+      "differences": [
+        0.5641273933673787,
+        0.4861896936796839,
+        0.8271860116938967,
+        0.18403585438156966,
+        0.8335932853172352,
+        0.27862744860212274,
+        0.8916660147773001,
+        0.3230167938204431
+      ],
+      "losses": 0,
+      "mean_difference": 0.5485553119549538,
+      "ties": 0,
+      "wins": 8
+    },
+    "semantic_vs_low_confidence_fallback": {
+      "differences": [
+        0.0,
+        0.4861896936796839,
+        0.0,
+        0.18403585438156966,
+        0.0,
+        0.27862744860212274,
+        0.8916660147773001,
+        0.0
+      ],
+      "losses": 0,
+      "mean_difference": 0.23006487643008455,
+      "ties": 4,
+      "wins": 4
+    }
+  },
+  "development_only": true,
+  "gates": {
+    "all_safe_and_four_interfaces": true,
+    "correct_semantics_above_swapped": true,
+    "feedback_non_degrading": true,
+    "low_confidence_matches_geometry": true,
+    "semantic_above_fixed_semantic": true,
+    "semantic_above_learned_geometry": true
+  },
+  "passed": true,
+  "schema_version": "semantic_gain_v11_1_closed_loop_result/1",
+  "smoke": false,
+  "status": "passed"
+}

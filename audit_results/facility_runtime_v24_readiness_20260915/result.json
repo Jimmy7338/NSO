@@ -1,0 +1,167 @@
+{
+  "status": "complete",
+  "readiness_passed": false,
+  "runtime_bootstraps_attempted": 8,
+  "saved_frames_per_N_or_G": 980,
+  "prefix_physical_actions_reused": 976,
+  "new_physical_actions": 0,
+  "new_sensor_frames": 0,
+  "primitive_actions_authorized": 0,
+  "initial_candidate_decisions_only": true,
+  "semantic_efficacy_proven": false,
+  "task_success_proven": false,
+  "budget_is_formal_task_budget": false,
+  "shared_shape_backend_integrated": false,
+  "pair_checks": [
+    {
+      "kind": "N_G_common_pool",
+      "case_index": 0,
+      "passed": true,
+      "expected_identical_fields": [
+        "candidate_pool",
+        "observed_asset_geometry",
+        "coverage_scores"
+      ]
+    },
+    {
+      "kind": "N_G_common_pool",
+      "case_index": 1,
+      "passed": true,
+      "expected_identical_fields": [
+        "candidate_pool",
+        "observed_asset_geometry",
+        "coverage_scores"
+      ]
+    },
+    {
+      "kind": "N_G_common_pool",
+      "case_index": 2,
+      "passed": true,
+      "expected_identical_fields": [
+        "candidate_pool",
+        "observed_asset_geometry",
+        "coverage_scores"
+      ]
+    },
+    {
+      "kind": "N_G_common_pool",
+      "case_index": 3,
+      "passed": true,
+      "expected_identical_fields": [
+        "candidate_pool",
+        "observed_asset_geometry",
+        "coverage_scores"
+      ]
+    },
+    {
+      "kind": "observed_class_exchange",
+      "parent": "D24-P00",
+      "mode": "N",
+      "source_prefix_pair_passed": true,
+      "geometry_pool_scores_equal": true,
+      "selected_candidate_equal": true,
+      "passed": true
+    },
+    {
+      "kind": "observed_class_exchange",
+      "parent": "D24-P00",
+      "mode": "G",
+      "source_prefix_pair_passed": true,
+      "geometry_pool_scores_equal": true,
+      "selected_candidate_equal": true,
+      "passed": true
+    },
+    {
+      "kind": "observed_class_exchange",
+      "parent": "D24-P01",
+      "mode": "N",
+      "source_prefix_pair_passed": true,
+      "geometry_pool_scores_equal": true,
+      "selected_candidate_equal": true,
+      "passed": true
+    },
+    {
+      "kind": "observed_class_exchange",
+      "parent": "D24-P01",
+      "mode": "G",
+      "source_prefix_pair_passed": true,
+      "geometry_pool_scores_equal": true,
+      "selected_candidate_equal": true,
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "case_index": 0,
+      "parent": "D24-P00",
+      "assignment": "A_complex_B_simple",
+      "mode": "N",
+      "status": "complete",
+      "readiness_passed": true
+    },
+    {
+      "case_index": 0,
+      "parent": "D24-P00",
+      "assignment": "A_complex_B_simple",
+      "mode": "G",
+      "status": "complete",
+      "readiness_passed": true
+    },
+    {
+      "case_index": 1,
+      "parent": "D24-P00",
+      "assignment": "A_simple_B_complex",
+      "mode": "N",
+      "status": "complete",
+      "readiness_passed": true
+    },
+    {
+      "case_index": 1,
+      "parent": "D24-P00",
+      "assignment": "A_simple_B_complex",
+      "mode": "G",
+      "status": "complete",
+      "readiness_passed": true
+    },
+    {
+      "case_index": 2,
+      "parent": "D24-P01",
+      "assignment": "A_complex_B_simple",
+      "mode": "N",
+      "status": "complete",
+      "readiness_passed": true
+    },
+    {
+      "case_index": 2,
+      "parent": "D24-P01",
+      "assignment": "A_complex_B_simple",
+      "mode": "G",
+      "status": "complete",
+      "readiness_passed": false
+    },
+    {
+      "case_index": 3,
+      "parent": "D24-P01",
+      "assignment": "A_simple_B_complex",
+      "mode": "N",
+      "status": "complete",
+      "readiness_passed": true
+    },
+    {
+      "case_index": 3,
+      "parent": "D24-P01",
+      "assignment": "A_simple_B_complex",
+      "mode": "G",
+      "status": "complete",
+      "readiness_passed": false
+    }
+  ],
+  "notes": [
+    "The 387/421 total budgets are static readiness suggestions, not frozen full-task budgets.",
+    "The paid prefix is correctly charged, but the V21 coverage ledger starts at the last prefix frame and does not reconstruct historical coverage-intent rates.",
+    "Four CPU interfaces are checked; this is not learned ANS policy, calibrated RPN uncertainty, natural instance recognition or semantic ranking.",
+    "RPN-UQ is called for a read-only return plan. No local action authorization/execution or new gain calibration occurs.",
+    "V24 observed-shape completion is not invoked by this inherited V21 readiness runtime.",
+    "Observed-safe candidate paths are hypothetical and need live per-action checks; no completed option or quality return is demonstrated."
+  ]
+}

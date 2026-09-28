@@ -1,0 +1,2815 @@
+{
+  "S_completion_event": {
+    "batch_header_sha256": "e8856fa5be88b87bedf807e1b39de3e12bfc920bd12a3fd93959e338aca9e438",
+    "byte_offset": 1618,
+    "complete_line_sha256": "d43a7c872f3fd50a350398fa0c79fce509b73c17e0313d2a53e447aaec18324a",
+    "event_path": "/root/NSO/audit_results/semantic_finite_queues_20260923/continuation_B/batch_01/events.jsonl",
+    "manifest_sha256": "282233d51bf4427b1e8b93078010b6bdc7f6edfbf41aea51622d9ee57bd51090"
+  },
+  "analysis_source_path": "/tmp/nso_P00_shift_mechanism_diagnostic.py",
+  "analysis_source_sha256": "f43b7da3ac86ff6632b7f7bcbbc1e823d192e1ba162bac6c8a43fc43a921f500",
+  "assessment": {
+    "S_B_complete": true,
+    "S_B_observed_actions_differ": false,
+    "causal_attribution_proven": false,
+    "reliability_rho_changed_in_S": true,
+    "rule": "A change in rho or predicted EVI is not a measured benefit; differing S/B actions would require inspecting the matched first-divergence decision, while identical actions show no realized policy increment on this trajectory. No endpoint accuracy is inferred here."
+  },
+  "bounded_wait": {
+    "elapsed_seconds": 53.243645898997784,
+    "failure": null,
+    "maximum_seconds": 480,
+    "original_process_identity": {
+      "boot_id": "ba2accd5-74d9-43b9-8a14-f67f9a84fb8d",
+      "cmdline_sha256": "ce596524f5bee1905ba4c00195e6f9f9059fafeea33175197b5021509dd9c727",
+      "pid": 2026804,
+      "start_ticks": 224342238
+    }
+  },
+  "comparisons": [
+    {
+      "first_executed_action_divergence": null,
+      "first_macro_target_divergence": null,
+      "first_pose_divergence": null,
+      "identical_action_sequences": true,
+      "identical_mesh_bytes": true,
+      "identical_pose_sequences_to_1e_minus_9": true,
+      "left": "G",
+      "right": "B"
+    },
+    {
+      "first_executed_action_divergence": null,
+      "first_macro_target_divergence": null,
+      "first_pose_divergence": null,
+      "identical_action_sequences": true,
+      "identical_mesh_bytes": true,
+      "identical_pose_sequences_to_1e_minus_9": true,
+      "left": "G",
+      "right": "S"
+    },
+    {
+      "first_executed_action_divergence": null,
+      "first_macro_target_divergence": null,
+      "first_pose_divergence": null,
+      "identical_action_sequences": true,
+      "identical_mesh_bytes": true,
+      "identical_pose_sequences_to_1e_minus_9": true,
+      "left": "B",
+      "right": "S"
+    }
+  ],
+  "condition": "structure_relationship_shift",
+  "episodes": {
+    "B": {
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "actions": 120,
+      "collisions": 0,
+      "counts": {
+        "accepted_plane_fits": 1,
+        "accepted_residuals": 16,
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_positive_evi": 1,
+        "frontend_geometry_updates_applied": 8,
+        "informative_residuals": 9,
+        "instance_frames_with_same_class_peers": 0,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 2,
+        "posterior_changes_between_paid_frames": 27,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_direct_with_positive_instance_forecast": 2,
+        "view_forecast_nonfallbacks": 88
+      },
+      "feedback_call_reason_counts": {
+        "applied:paid_novel_support_applied": 8,
+        "refused:repeated_support_or_feedback_or_history_cap": 8
+      },
+      "final_beliefs": {
+        "instance_0000": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": "cabinet",
+          "peer_instance_ids": [],
+          "rho": 0.5,
+          "semantic_conditioning_used": true,
+          "structure_probabilities": [
+            0.325,
+            0.275,
+            0.225,
+            0.175
+          ]
+        },
+        "instance_0001": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": "rack",
+          "peer_instance_ids": [],
+          "rho": 0.5,
+          "semantic_conditioning_used": true,
+          "structure_probabilities": [
+            0.19999999999999996,
+            0.225,
+            0.25,
+            0.325
+          ]
+        },
+        "instance_0002": {
+          "geometry_log_evidence": [
+            -0.4101904138147819,
+            -0.32105430099259646,
+            0.0,
+            -2.5144150683235997
+          ],
+          "observed_class": "cabinet",
+          "peer_instance_ids": [],
+          "rho": 0.5,
+          "semantic_conditioning_used": true,
+          "structure_probabilities": [
+            0.3295891348255981,
+            0.30488323307357185,
+            0.343886776960497,
+            0.021640855140332982
+          ]
+        },
+        "instance_0003": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": null,
+          "peer_instance_ids": [],
+          "rho": null,
+          "semantic_conditioning_used": false,
+          "structure_probabilities": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        }
+      },
+      "first_accepted_plane_by_instance": {
+        "instance_0002": 66
+      },
+      "first_applied_feedback_by_instance": {
+        "instance_0002": 66
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "manifest_sha256": "5c382597cb74df0bbed6eadbc33146f5b5b8ae0873ffaa8b4dc1f61351335b8a",
+      "maximum_predicted_evi": 0.0004631061770230052,
+      "mesh_npz_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "peer_or_rho_change_events": [
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 20
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 22
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 25
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 26
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 29
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 30
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 34
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 36
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 39
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 42
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 53
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 55
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 68
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 69
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.293522577410549,
+              0.2671523780870422,
+              0.3424977655989155,
+              0.09682727890349337
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 70
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.293522577410549,
+              0.2671523780870422,
+              0.3424977655989155,
+              0.09682727890349337
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 71
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0003",
+          "paid_step": 72
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0003",
+          "paid_step": 74
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 76
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 77
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.26865295309953463,
+              0.29369931982082464,
+              0.40488813670850476,
+              0.032759590371136064
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.3295891348255981,
+              0.30488323307357185,
+              0.343886776960497,
+              0.021640855140332982
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 81
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 82
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 83
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 90
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.3295891348255981,
+              0.30488323307357185,
+              0.343886776960497,
+              0.021640855140332982
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.26865295309953463,
+              0.29369931982082464,
+              0.40488813670850476,
+              0.032759590371136064
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 90
+        }
+      ],
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "returned_xy_and_yaw": true,
+      "run_id": "core_P00_shift_B_b120_lexicographic",
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      },
+      "saved_frames": 121,
+      "slot_method": "bayes_semantic",
+      "status": "controller_stop"
+    },
+    "G": {
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "actions": 120,
+      "collisions": 0,
+      "counts": {
+        "accepted_plane_fits": 1,
+        "accepted_residuals": 16,
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_positive_evi": 1,
+        "frontend_geometry_updates_applied": 8,
+        "informative_residuals": 9,
+        "instance_frames_with_same_class_peers": 0,
+        "peer_adjusted_reliability_instance_frames": 0,
+        "planner_geometry_evidence_changes": 2,
+        "posterior_changes_between_paid_frames": 2,
+        "rho_changes_between_paid_frames": 0,
+        "selected_diagnose_then_observe": 0,
+        "selected_direct_with_positive_instance_forecast": 2,
+        "view_forecast_nonfallbacks": 88
+      },
+      "feedback_call_reason_counts": {
+        "applied:paid_novel_support_applied": 8,
+        "refused:repeated_support_or_feedback_or_history_cap": 8
+      },
+      "final_beliefs": {
+        "instance_0000": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": null,
+          "peer_instance_ids": [],
+          "rho": null,
+          "semantic_conditioning_used": false,
+          "structure_probabilities": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        "instance_0001": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": null,
+          "peer_instance_ids": [],
+          "rho": null,
+          "semantic_conditioning_used": false,
+          "structure_probabilities": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        "instance_0002": {
+          "geometry_log_evidence": [
+            -0.4101904138147819,
+            -0.32105430099259646,
+            0.0,
+            -2.5144150683235997
+          ],
+          "observed_class": null,
+          "peer_instance_ids": [],
+          "rho": null,
+          "semantic_conditioning_used": false,
+          "structure_probabilities": [
+            0.26865295309953463,
+            0.29369931982082464,
+            0.40488813670850476,
+            0.032759590371136064
+          ]
+        },
+        "instance_0003": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": null,
+          "peer_instance_ids": [],
+          "rho": null,
+          "semantic_conditioning_used": false,
+          "structure_probabilities": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        }
+      },
+      "first_accepted_plane_by_instance": {
+        "instance_0002": 66
+      },
+      "first_applied_feedback_by_instance": {
+        "instance_0002": 66
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "manifest_sha256": "266443910bf663069997421ceab890bf301058cea4413e675716c50abec79e31",
+      "maximum_predicted_evi": 0.0002929077694904317,
+      "mesh_npz_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "peer_or_rho_change_events": [],
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "returned_xy_and_yaw": true,
+      "run_id": "core_P00_shift_G_b120_lexicographic",
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      },
+      "saved_frames": 121,
+      "slot_method": "G",
+      "status": "controller_stop"
+    },
+    "S": {
+      "action_sequence_sha256": "44389a7e58e426a0fd34c387816e6ac575ec7e97e641303686ec1e68c2bc5b97",
+      "actions": 120,
+      "collisions": 0,
+      "counts": {
+        "accepted_plane_fits": 1,
+        "accepted_residuals": 16,
+        "diagnostic_options_scored": 4,
+        "diagnostic_options_with_positive_evi": 1,
+        "frontend_geometry_updates_applied": 8,
+        "informative_residuals": 9,
+        "instance_frames_with_same_class_peers": 104,
+        "peer_adjusted_reliability_instance_frames": 41,
+        "planner_geometry_evidence_changes": 2,
+        "posterior_changes_between_paid_frames": 30,
+        "rho_changes_between_paid_frames": 5,
+        "selected_diagnose_then_observe": 0,
+        "selected_direct_with_positive_instance_forecast": 2,
+        "view_forecast_nonfallbacks": 88
+      },
+      "feedback_call_reason_counts": {
+        "applied:paid_novel_support_applied": 8,
+        "refused:repeated_support_or_feedback_or_history_cap": 8
+      },
+      "final_beliefs": {
+        "instance_0000": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": "cabinet",
+          "peer_instance_ids": [
+            "instance_0002"
+          ],
+          "rho": 0.5281456972891215,
+          "semantic_conditioning_used": true,
+          "structure_probabilities": [
+            0.3292218545933683,
+            0.2764072848644561,
+            0.22359271513554396,
+            0.17077814540663178
+          ]
+        },
+        "instance_0001": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": "rack",
+          "peer_instance_ids": [],
+          "rho": 0.5,
+          "semantic_conditioning_used": true,
+          "structure_probabilities": [
+            0.19999999999999996,
+            0.225,
+            0.25,
+            0.325
+          ]
+        },
+        "instance_0002": {
+          "geometry_log_evidence": [
+            -0.4101904138147819,
+            -0.32105430099259646,
+            0.0,
+            -2.5144150683235997
+          ],
+          "observed_class": "cabinet",
+          "peer_instance_ids": [
+            "instance_0000"
+          ],
+          "rho": 0.5,
+          "semantic_conditioning_used": true,
+          "structure_probabilities": [
+            0.3295891348255981,
+            0.30488323307357185,
+            0.343886776960497,
+            0.021640855140332982
+          ]
+        },
+        "instance_0003": {
+          "geometry_log_evidence": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "observed_class": null,
+          "peer_instance_ids": [],
+          "rho": null,
+          "semantic_conditioning_used": false,
+          "structure_probabilities": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        }
+      },
+      "first_accepted_plane_by_instance": {
+        "instance_0002": 66
+      },
+      "first_applied_feedback_by_instance": {
+        "instance_0002": 66
+      },
+      "first_events": {
+        "informative_paid_geometry_residual_step": 66,
+        "peer_adjusted_reliability_paid_step": 66,
+        "positive_diagnostic_evi_paid_step": 74,
+        "semantic_conditioning_paid_step": 20,
+        "valid_observed_label_plane_paid_step": 66
+      },
+      "manifest_sha256": "282233d51bf4427b1e8b93078010b6bdc7f6edfbf41aea51622d9ee57bd51090",
+      "maximum_predicted_evi": 0.0004631061770230052,
+      "mesh_npz_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+      "peer_or_rho_change_events": [
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 20
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 22
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 25
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 26
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 29
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 30
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 34
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 36
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 39
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 42
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 53
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0002"
+            ],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 55
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0000"
+            ],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 55
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0002"
+            ],
+            "rho": 0.5244770904054744,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.32867156356082117,
+              0.2762238545202737,
+              0.22377614547972632,
+              0.17132843643917886
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0002"
+            ],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 66
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 68
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 69
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0002"
+            ],
+            "rho": 0.5244770904054744,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.32867156356082117,
+              0.2762238545202737,
+              0.22377614547972632,
+              0.17132843643917886
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 70
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.293522577410549,
+              0.2671523780870422,
+              0.3424977655989155,
+              0.09682727890349337
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0000"
+            ],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 70
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0002"
+            ],
+            "rho": 0.5244770904054744,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.32867156356082117,
+              0.2762238545202737,
+              0.22377614547972632,
+              0.17132843643917886
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 71
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0000"
+            ],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.293522577410549,
+              0.2671523780870422,
+              0.3424977655989155,
+              0.09682727890349337
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 71
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0003",
+          "paid_step": 72
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "instance_id": "instance_0003",
+          "paid_step": 74
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "rack",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.19999999999999996,
+              0.225,
+              0.25,
+              0.325
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0001",
+          "paid_step": 76
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0002"
+            ],
+            "rho": 0.5244770904054744,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.32867156356082117,
+              0.2762238545202737,
+              0.22377614547972632,
+              0.17132843643917886
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 77
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.15431057283480182,
+              -0.24844593382596092,
+              0.0,
+              -1.263336372445505
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0000"
+            ],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.36289944610906655,
+              0.27948156749270364,
+              0.2931579612489962,
+              0.06446102514923371
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 77
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.26865295309953463,
+              0.29369931982082464,
+              0.40488813670850476,
+              0.032759590371136064
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.3295891348255981,
+              0.30488323307357185,
+              0.343886776960497,
+              0.021640855140332982
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 81
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 82
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.325,
+              0.275,
+              0.225,
+              0.175
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 83
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0002"
+            ],
+            "rho": 0.5281456972891215,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.3292218545933683,
+              0.2764072848644561,
+              0.22359271513554396,
+              0.17077814540663178
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "instance_id": "instance_0000",
+          "paid_step": 90
+        },
+        {
+          "after": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": "cabinet",
+            "peer_instance_ids": [
+              "instance_0000"
+            ],
+            "rho": 0.5,
+            "semantic_conditioning_used": true,
+            "structure_probabilities": [
+              0.3295891348255981,
+              0.30488323307357185,
+              0.343886776960497,
+              0.021640855140332982
+            ]
+          },
+          "before": {
+            "geometry_log_evidence": [
+              -0.4101904138147819,
+              -0.32105430099259646,
+              0.0,
+              -2.5144150683235997
+            ],
+            "observed_class": null,
+            "peer_instance_ids": [],
+            "rho": null,
+            "semantic_conditioning_used": false,
+            "structure_probabilities": [
+              0.26865295309953463,
+              0.29369931982082464,
+              0.40488813670850476,
+              0.032759590371136064
+            ]
+          },
+          "instance_id": "instance_0002",
+          "paid_step": 90
+        }
+      ],
+      "pose_sequence_sha256": "13239236b8aa17ec885a33478b58a4f383d14a01cae3190d0ff504371ebf012e",
+      "returned_xy_and_yaw": true,
+      "run_id": "core_P00_shift_S_b120_lexicographic",
+      "same_class_opportunity": {
+        "coexistence_is_ledger_membership_not_same_camera_view": true,
+        "first_coexistence_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 2,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 55
+        },
+        "first_current_view_witness": {
+          "instances": [
+            {
+              "distinct_class_supports": 7,
+              "instance_id": "instance_0000"
+            },
+            {
+              "distinct_class_supports": 5,
+              "instance_id": "instance_0002"
+            }
+          ],
+          "observed_class": "cabinet",
+          "paid_step": 69
+        },
+        "max_same_class_qualified_coexisting_instances": 2,
+        "max_same_class_qualified_current_view_instances": 2,
+        "minimum_distinct_class_supports": 2,
+        "qualification": "Observed class present, association not uncertain, no class conflict, minimum distinct class supports satisfied.",
+        "qualified_instance_ids_ever_by_class": {
+          "cabinet": [
+            "instance_0000",
+            "instance_0002"
+          ],
+          "rack": [
+            "instance_0001",
+            "instance_0003"
+          ]
+        },
+        "qualified_unique_instance_count": 4,
+        "same_class_qualified_coexistence_observed": true,
+        "source": "shared frontend association.instances; not method-filtered planning labels"
+      },
+      "saved_frames": 121,
+      "slot_method": "shared_semantic",
+      "status": "controller_stop"
+    }
+  },
+  "explicit_run_ids": [
+    "core_P00_shift_G_b120_lexicographic",
+    "core_P00_shift_B_b120_lexicographic",
+    "core_P00_shift_S_b120_lexicographic"
+  ],
+  "metrics_not_computed": true,
+  "new_numeric_surface_evaluations": 0,
+  "new_policy_replays": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "phase_id": "semantic_development_acquisition_20260923",
+  "schema": "semantic.shift_mechanism_chain.v1",
+  "scope": "First declared shift-parent descriptive mechanism diagnosis only; not a six-parent conclusion and not semantic causal benefit.",
+  "source_episode_inventory_and_ledger_verified": true
+}

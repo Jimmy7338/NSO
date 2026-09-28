@@ -1,0 +1,652 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[UTF8,fontset=none]{ctex}
+\setCJKmainfont{Noto Serif CJK SC}[BoldFont={Noto Sans CJK SC Bold}]
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+\usepackage{amsmath,amssymb,graphicx,booktabs,array}
+\usepackage{geometry,caption,hyperref,flafter}
+\geometry{left=22mm,right=22mm,top=23mm,bottom=24mm}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,
+ pdftitle={毕业论文核心章节：系统方法与仿真实验},pdfauthor={李兆宇}}
+\captionsetup{font=small,labelfont=bf,labelsep=quad}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.8}
+\linespread{1.13}
+\urlstyle{same}
+\Urlmuskip=0mu plus 2mu
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\title{\textbf{毕业论文核心章节：系统方法与仿真实验}}
+\author{李兆宇}
+\date{2026年9月28日\quad 毕业论文核心章节审阅稿}
+\newlength{\ReviewTableWidth}
+\begin{document}
+\maketitle
+本稿为两章核心正文的合并审阅版，章节编号在最终学校模板中统一调整。学校没有硬性发表要求，毕业论文为第一交付；英文文章与实车验证均为可选补充。
+
+\hypertarget{ux7cfbux7edfux8bbeux8ba1ux4e0eux8bedux4e49ux4e3bux52a8ux89c2ux6d4bux65b9ux6cd5}{%
+\section{系统设计与语义主动观测方法}\label{ux7cfbux7edfux8bbeux8ba1ux4e0eux8bedux4e49ux4e3bux52a8ux89c2ux6d4bux65b9ux6cd5}}
+
+\hypertarget{ux4efbux52a1ux9700ux6c42ux4e0eux95eeux9898ux63cfux8ff0}{%
+\subsection{任务需求与问题描述}\label{ux4efbux52a1ux9700ux6c42ux4e0eux95eeux9898ux63cfux8ff0}}
+
+工业设施的主动建图既需要机器人观察可达区域，也需要获得设施本体的有效表面。布局调整后的建档可在设备静止时进行，但遮挡仍会使设备开口、凹入结构或背面缺少有效测量。仅从通道经过，可能已使二维地图中的相邻区域变为已知，却仍未看清设备的关键表面。运动预算有限时，规划器需要判断下一次移动应继续覆盖区域，还是转向设施的另一侧。本章因此利用可获得的类别知识和几何观测，分配有限的观察机会。
+
+类别信息的作用来自类别与结构之间的关联。例如，不同设施类型可能具有不同的开口或服务侧，类别可以在局部结构尚未被直接观察时，提供接近方向的线索。然而，类别判断或关联知识可能错误；若规划器始终遵循初始先验，错误选向会消耗后续预算。本章采用``类别提出构型倾向、实际几何修正倾向、规划随观测更新''的闭环，使语义信息参与行动选择，同时保留几何独立探查与纠错能力。
+
+本章将任务限定为具有公开设施模型的受控建档。设机器人离散姿态为 \(s_t=(x_t,y_t,\theta_t)\)，设施可能属于构型 \(h\in\{0,1\}\)。机器人预先获得两个候选模板、设施坐标系与共同安全姿态图，但不知道当前实际构型。模板提供可能的结构及其预测观测，不能代替当前场景的实测数据。任务要求在给定动作预算内完成观察并返回起始姿态，最终分别评价区域覆盖和设施表面重建。
+
+\hypertarget{ux5206ux5c42ux51b3ux7b56ux67b6ux6784ux4e0eux56dbux6a21ux5757ux5206ux5de5}{%
+\subsection{分层决策架构与四模块分工}\label{ux5206ux5c42ux51b3ux7b56ux67b6ux6784ux4e0eux56dbux6a21ux5757ux5206ux5de5}}
+
+系统围绕设施观察任务构建决策与执行分工。全局决策侧综合地图状态、设施先验与剩余资源，选择后续观察目标；局部执行侧将目标落实为允许执行的运动，并检查返航条件。观测到达后更新状态，再形成下一轮决策。这一分层组织使观察策略与运动执行具有明确接口，类别结构知识和几何反馈共同作用于下一次观察的选择。
+
+系统通过OV-SDF、STGHP、RPN-UQ、IGCR四个模块接口组织信息与控制流，具体职责见表1。本章采用确定性CPU实现：STGHP直接计算下一姿态子目标，该子目标对应一个原子动作；RPN-UQ执行动作合法性与返航预算检查。OV-SDF和IGCR分别维护类别与几何证据，二者更新后再向STGHP提供共同信念。由此，全局目标选择和局部执行在当前实验中以单步粒度衔接。实验分别考察类别输入与整体纠错政策的作用，四模块的分工用于说明闭环实现。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表1 四模块在系统设计与本章CPU实现中的对应关系。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-4\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.28\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.36\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.36\ReviewTableWidth}@{}}
+\toprule
+模块 & 当前输入 & CPU处理及输出 \\
+\midrule
+OV-SDF & 已执行视角的RGB、位姿及实测地图摘要 & 登记类别支持与观测，输出类别对数先验与状态记录 \\
+STGHP & 共同安全图、双模板曝光、构型权重及剩余预算 & 预算动态规划，输出下一姿态子目标及候选代理值 \\
+RPN-UQ & 候选动作、合法图边及返航距离 & 核验动作与资源，输出允许或拒绝的记录 \\
+IGCR & 首次姿态的有效深度/扫描与双模板预测 & 比较几何残差，输出证据增量与更新后的构型权重 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+CPU路径将研究重点放在类别信息能否改变观察决策，以及错误先验能否被实测纠正。OV-SDF在此没有执行开放词汇网络或神经隐式表面重建；RPN-UQ也没有执行学习式风险预测。地图由共同重建后端维护，四模块负责围绕实测数据进行决策。这种实现划分使核心机制可在无独立显卡条件下运行，同时为后续模块替换保留接口。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/system_architecture_20260928/system_architecture.pdf}
+\captionof{figure}{平台接口、四模块CPU虚拟验证与独立重建评价。OV-SDF和IGCR共同更新构型信念，STGHP选出下一原子动作，经RPN-UQ检查后执行并获取新观测。公开模板支持信念与规划，TSDF仅融合实测深度，真值仅用于输出封存后的评价。小车图基于用户平台照片生成式合成，用于接口说明；传感、地图和网格缩略图为机制示意。}\label{fig:writing-1}
+\end{minipage}
+\end{center}
+
+\hypertarget{ux89c2ux6d4bux63a5ux53e3ux4e0eux5730ux56feux6570ux636eux6d41}{%
+\subsection{观测接口与地图数据流}\label{ux89c2ux6d4bux63a5ux53e3ux4e0eux5730ux56feux6570ux636eux6d41}}
+
+每次执行后，驱动器生成包含RGB-D、扫描、离散位姿、动作及碰撞状态的观测包。控制器先检查步号、动作和位姿是否与前次指令一致，再接收该包。观测包标识不包含实际构型身份，控制器不能访问环境对象、未执行动作的实测结果或终点评价真值。起点帧与后续动作帧分别记录；重复提交同一帧会被拒绝，避免将同一次观测重复计入。
+
+地图融合与规划预测分别维护。真实三维地图由Open3D{[}4{]}的CPU TSDF融合已经取得的深度，语义类别不向网格补入模板表面。规划侧则为每个候选构型维护曝光集合 \(M_{h,t}\)，表示历史姿态在该模板下可能覆盖的地面和外竖面区域。曝光集合只描述预测潜力，不能被解释为已经准确重建的表面。控制器可读取地图摘要，但当前安全姿态图来自共同公开先验，并不根据带噪占据图在线重建。
+
+两类状态的分离使方法能够利用结构先验规划，又使终点质量由实际传感结果决定。即使某个模板预测某处可见，如果执行时获得的深度缺失或不准确，实际TSDF仍可能不完整；评价器会在任务输出保存后反映这一差异。
+
+\hypertarget{ux7c7bux522bux6784ux578bux4fe1ux5ff5ux4e0eux51e0ux4f55ux6b8bux5deeux7ea0ux9519}{%
+\subsection{类别构型信念与几何残差纠错}\label{ux7c7bux522bux6784ux578bux4fe1ux5ff5ux4e0eux51e0ux4f55ux6b8bux5deeux7ea0ux9519}}
+
+规划器用两个构型权重表达当前判断。令 \(L_t^s\) 为类别对数先验，\(L_t^g\) 为累计几何对数证据，构型0的权重定义为
+
+\[
+p_t=\sigma(L_t^g+L_t^s),\qquad
+\sigma(z)=\frac{1}{1+\exp(-z)}.
+\]
+
+本章采用人工RGB颜色表示类别，用于单独检验已获得类别信息的决策价值。类别到结构方向的对应关系为公开知识，颜色本身不直接编码运动指令。同一类别在两个不同平面位置分别得到至少16个精确颜色像素支持、且单帧没有另一标记颜色混入后，设置 \(L_t^s=\pm\log 9\)。这一项相当于固定0.9强度的先验；重复帧不会反复相乘。登记到冲突类别后清零语义先验，以免互相矛盾的语义证据保持高置信判断。该流程是受控类别输入，并非自然设备识别准确率实验。
+
+几何反馈使用实测数据与两个模板的预测差异。仅选取两模板预测不同、且实测有效的位置。对于深度，以参考视差域残差形成截断损失：
+
+\[
+e_h^d=\frac{1}{|\mathcal I|}\sum_{i\in\mathcal I}
+\min\left\{\frac12
+\left(\frac{57.6/z_i-57.6/\widehat z_{h,i}}{0.25}\right)^2,
+12.5\right\}.
+\]
+
+其中 \(z_i\) 为实测深度，\(\widehat z_{h,i}\) 为模板预测，常数57.6来自参考焦距与基线的乘积。实测零深度作为缺失值忽略，模板无返回而实测有效时取损失上限。扫描使用距离残差除以0.02 m，并采用相同截断形式。深度至少有8个有效像素、扫描至少有3束有效数据才启用对应模态；0.02 m是残差尺度，不表示仿真扫描叠加了该幅度随机噪声。
+
+对有效模态的损失差 \(e_1-e_0\) 取平均，得到支持构型0的增量。单姿态增量与累计证据分别限制为
+
+\[
+\delta_t=\operatorname{clip}_{[-6,6]}
+\left(\operatorname{mean}_{m}(e_1^m-e_0^m)\right),
+\qquad
+L_t^g=\operatorname{clip}_{[-24,24]}(L_{t-1}^g+\delta_t).
+\]
+
+没有有效模态时增量为零。每个精确位置与朝向只在首次观测时累计几何证据，避免相关重复帧过度增强判断；重复姿态的新深度仍可用于实际地图融合。几何证据足够强时能够覆盖错误类别先验，使下一轮规划转向更符合实际结构的候选。上述权重来自固定尺度的鲁棒伪似然，未作概率校准，其含义是相对构型支持度。
+
+\hypertarget{ux9884ux7b97ux7ea6ux675fux4e0bux7684ux8bcaux65adux89c4ux5212ux4e0eux8fd4ux822a}{%
+\subsection{预算约束下的诊断规划与返航}\label{ux9884ux7b97ux7ea6ux675fux4e0bux7684ux8bcaux65adux89c4ux5212ux4e0eux8fd4ux822a}}
+
+机器人需要同时考虑``观察后能记录多少表面''和``观察后能否判断设施构型''。前者是直接建档价值，后者可能帮助后续选择方向。规划状态写为
+
+\[
+x_t=(s_t,b_t,M_{0,t},M_{1,t},p_t,\mathcal V_t),
+\qquad b_t=B-t,
+\]
+
+其中 \(\mathcal V_t\) 为已访问姿态集合，\(b_t\) 为剩余动作预算。对每个构型定义终端代理值 \(\widetilde J_h=\widetilde C_h\widetilde F_h\)：\(\widetilde C_h\) 为理想地面曝光比例，\(\widetilde F_h\) 为潜在外竖面曝光面积比例。它们用于行动前比较，不是由当前实测网格计算的覆盖率或表面F1。
+
+若机器人位于起点，且两个模板的理想覆盖分别达到80\%，主动停止的价值为
+
+\[
+Z(x)=p\widetilde J_0(M_0)+(1-p)\widetilde J_1(M_1).
+\]
+
+其余状态的主动停止不可行。每执行候选动作，剩余预算减一，并将下一姿态的模板曝光加入 \(M_h\)。规划采用有限动态规划比较所有合法后续路径，同时检查剩余动作是否足以返航。
+
+为考虑信息作用，每次前瞻最多允许一次未来诊断事件。这一近似保留了信念规划中``观测改变后续行动''的基本关系{[}12{]}，并将求解范围限制在当前有限预算内；信息采集与路径成本的共同考虑也与带预算信息规划相衔接{[}13{]}。诊断节点由两个公开模板互相比对确定：两种模板各自生成的预测观测，必须分别产生达到 \(\pm\log99\) 的有符号证据。已经实测的姿态在本次规划入口被排除。到达未实测诊断节点时，假设正确率为 \(r=0.99\) 的二元信息通道，两个分支的概率和更新权重为
+
+\[
+\lambda_0=pr+(1-p)(1-r),\quad \lambda_1=1-\lambda_0,
+\qquad p^{(0)}=\frac{pr}{\lambda_0},\quad
+p^{(1)}=\frac{p(1-r)}{\lambda_1}.
+\]
+
+诊断后的分支不再预测新的信息事件，而是在相应权重下继续比较建档与返航。记 \(q\in\{0,1\}\) 为是否仍允许诊断，则动态规划可写为
+
+\[
+V_q(x)=\max\{Z(x),\max_a Q_q(x,a)\},\qquad
+Q_q(x,a)=
+\begin{cases}
+\sum_y\lambda_yV_0(x'_{y}),&\text{触发诊断},\\
+V_q(x'),&\text{否则}.
+\end{cases}
+\]
+
+任一诊断分支不可行时，候选动作也被判为不可行。0.99是固定预测假设，预测权重仅用于计算行动价值，不写入实际信念。系统每轮只执行最优首动作，然后读取新实测并重新规划，因此可在执行过程中用真实残差纠正预测。
+
+局部守卫再次验证动作是否为公开图的合法边，并要求
+
+\[
+1+d_{\mathrm{return}}(s')\le b_t,
+\]
+
+其中返航距离包含回到起始位置与朝向所需的动作。碰撞、预算耗尽、计算限制或守卫拒绝均有独立终止记录；程序终止不自动等于任务合格。
+
+\hypertarget{ux6267ux884cux6d41ux7a0bux4e0eux5b9eux73b0ux53c2ux6570}{%
+\subsection{执行流程与实现参数}\label{ux6267ux884cux6d41ux7a0bux4e0eux5b9eux73b0ux53c2ux6570}}
+
+前进1 m和转向90°均消耗一个动作，原确认任务总预算为42。前18步为共同观测前缀，并回到起始姿态；期间积累观测和信念，随后最多24步由当前策略选择。新增预算实验仅改变总预算B，保持18步前缀与控制参数不变。共同前缀使不同策略获得相同的初始非语义经历，便于分析类别带来的行动差异。本章因此验证共同观测后的主动决策过程。
+
+\par\noindent\begin{minipage}{\linewidth}
+\small
+\textbf{算法1 类别先验与几何反馈驱动的主动观测。}
+
+\begin{verbatim}
+输入：共同安全图、两个公开模板、动作预算、共同前缀
+输出：实际动作、观测与信念记录、实测地图、终止原因
+初始化类别和几何证据、模板曝光集合、已访姿态集合
+循环：
+  接收起点帧或上一动作产生的观测包，核验步号与位姿
+  驱动器融合当前实际深度，控制器读取地图摘要
+  OV-SDF 登记类别；IGCR 按首次姿态实测更新几何证据
+  更新两个模板的曝光集合及已访问姿态
+  若发生碰撞或预算耗尽，记录终止原因并结束
+  若共同前缀尚未结束，选择前缀动作
+  否则由 STGHP 计算一次诊断前瞻，选择停止或最优首动作
+  若无可行规划或超过计算限制，记录失败并结束
+  若选择主动停止，保存决策记录并结束
+  RPN-UQ 核验合法图边与执行后的返航预算
+  若守卫拒绝，记录原因并结束；否则执行并读取下一帧
+保存全部输出，由独立评价器计算终点质量与任务资格
+\end{verbatim}
+\end{minipage}
+
+
+虚拟相机分辨率为96×72，焦距48 px，高度0.9 m，量程4 m；扫描高度0.25 m，覆盖360°、180束，量程8 m。位姿在本章受控实验中准确已知，深度采用参考视差域数值噪声。TSDF体素大小为4 cm、截断距离为12 cm。单次规划最多使用150万缓存状态和20 s，同值候选按固定图边顺序及 \(10^{-12}\) 容差选择，以保持结果可重复。
+
+为便于解释和复现，表2汇总影响决策的固定设置。0.9、0.99及残差截断来自本实现预先固定的控制参数，未用当前结果进行概率校准，也没有通过本轮文稿修改重新调参。其功能解释不等于这些取值已经达到最优。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表2 决策参数的作用与设置依据。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-4\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.28\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.36\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.36\ReviewTableWidth}@{}}
+\toprule
+设置 & 固定值 & 实现中的用途与依据 \\
+\midrule
+类别先验强度 & 0.9，即对数先验绝对值\(\log9\) & 给予有限的方向倾向，使较强几何证据仍可纠正；是设计设定，不是识别准确率 \\
+未来诊断可靠度 & 0.99 & 作为非完美二元预测通道；诊断节点要求双向证据达到\(\log99\)，未经传感器概率校准 \\
+类别支持门槛 & 16像素、2个不同XY位置 & 排除孤立颜色点和同位置重复支持，不代表自然分类器的误报率保证 \\
+残差与证据截断 & 损失12.5、单姿态±6、累计±24 & 限制离群残差与重复累积对信念的影响；残差尺度和上限在所有对照间固定 \\
+几何证据累计 & 每个精确姿态仅首次累计 & 减少同姿态相关帧造成的过度强化；TSDF仍融合实际新深度 \\
+预测诊断次数 & 每次前瞻最多1次 & 控制分支数量，执行新观测后重新规划 \\
+缓存与时间上限 & 150万状态、20 s & 单次动态规划缓存重复子问题；上限用于限制计算，超限记录失败 \\
+相等价值处理 & 固定图边顺序、\(10^{-12}\)容差 & 保证同分时选择可复现，不能视为类别推断 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+实验比较设置共同几何方法G、类别方法S、错误类别方法X及关闭纠错政策的Xnf。G与S共享规划器、模板、几何诊断及返航能力，仅S使用类别先验；X交换类别解释。Xnf同时关闭实测几何更新和未来诊断预期，因此X与Xnf的差异对应整体纠错政策，不能直接解释为单个反馈函数的贡献。各模式的具体结果在实验章节报告。
+
+\hypertarget{ux53ccux6784ux578bux5b9eux4f8bux4eceux5148ux9a8cux5230ux5b9eux9645ux52a8ux4f5c}{%
+\subsection{双构型实例：从先验到实际动作}\label{ux53ccux6784ux578bux5b9eux4f8bux4eceux5148ux9a8cux5230ux5b9eux9645ux52a8ux4f5c}}
+
+以开发批次P00的同一设施为例，两个公开模板分别对应服务侧位于局部负向和正向的构型。以下数值均读取保存的控制器日志；这里用真实构型组织说明，在线控制器只持有两个候选模板。令 \(w_t=1-p_t\) 表示构型1权重，从而与前述构型0公式保持一致。
+
+共同前缀执行完毕后，机器人处于起始姿态，剩余24步，尚无能够区分两构型的有效几何证据。表3给出此时为第19个动作记录的候选代理值。这些值已经包含后续观察、一次诊断前瞻及返航，是预测终端价值，不是下一帧的实测F1。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表3 同一布局两构型的第19步决策。候选值来自开发批次保存日志，保留六位小数。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-8\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth}@{}}
+\toprule
+条件 & \(w_{18}\) & 左转代理值 & 右转代理值 & 执行动作 \\
+\midrule
+构型0，G & 0.5 & 0.650944 & 0.650944 & 左转（固定同分顺序） \\
+构型0，S & 0.1 & 0.711865 & 0.668008 & 左转 \\
+构型1，G & 0.5 & 0.650944 & 0.650944 & 左转（固定同分顺序） \\
+构型1，S & 0.9 & 0.668008 & 0.711865 & 右转 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+这解释了为何相同方法会出现``有收益''和``持平''两种条件。在构型0中，几何对照的同分选向已经与类别倾向一致；在构型1中，类别先验改变了候选顺序。类别通过改变构型权重影响预算分配，其作用不是直接给某类表面增加终点评分。两条件应共同报告，才能分清方向选择与普遍增益。
+
+继续考虑构型1的错误类别模式X。共同前缀后 \(L^s=\log9\)，故 \(w_{18}=0.1\)，第19步仍向左。第28步转向后，在姿态 \((-3,4,1)\) 得到1092个有效区分深度像素；扫描没有可用区分束。两个模板的平均截断损失依次为12.205313和0.505694，因此
+
+\[
+\delta_{28}=\operatorname{clip}_{[-6,6]}(0.505694-12.205313)=-6,
+\]
+
+\[
+w_{28}=1-\sigma(-6+\log9)=0.978178.
+\]
+
+记录中的前进、左转和右转代理值分别为0.574541、0.554660和0.555707，因此下一步选择前进。RPN-UQ读取的剩余预算为14步，执行前进后最短返航成本为13步，恰满足 \(1+13\le14\)。到第41步，只剩1步，机器人已到起点位置但朝向尚未恢复；只有左转能通过返航条件，第42步恢复起始姿态。预算约束因此贯穿观察选择与最后的朝向恢复。
+
+对应的Xnf在第28步获得相同残差记录，但不应用几何更新，构型1权重仍为0.1，第29步选择右转。两模式还同时存在未来诊断开关差异，故终点比较解释为整体纠错政策；同状态权重干预另用于核对实测反馈与动作变化的联系。该实例把OV-SDF的先验、IGCR的残差、STGHP的价值比较和RPN-UQ的返航检查串成一次可核对的闭环。
+
+\hypertarget{ux672cux7ae0ux5c0fux7ed3}{%
+\subsection{本章小结}\label{ux672cux7ae0ux5c0fux7ed3}}
+
+本章围绕有限运动预算下的设施建档，给出了四模块协同的CPU主动观测实现。类别先验用于在几何歧义尚未消除时形成观察倾向，实测残差用于纠正构型判断，有限诊断前瞻将信息获取与后续建档联系起来，返航守卫保证动作满足共同预算约束。实际地图始终由取得的深度构建，终点评价与规划代理分开计算。该实现为后续实验分别检验类别信息、纠错政策和观察分配机制提供了统一基础。
+
+\hypertarget{ux4effux771fux5e73ux53f0ux4e0eux5b9eux9a8cux5206ux6790}{%
+\clearpage
+\section{仿真平台与实验分析}\label{ux4effux771fux5e73ux53f0ux4e0eux5b9eux9a8cux5206ux6790}}
+
+本章整合已有在线实验、保存重建和本轮独立扩展，主要性能证据来自CPU虚拟平台；实物平台图片仅用于硬件与接口说明。新增扩展与原有确认、开发实验分开报告。
+
+\hypertarget{ux5b9eux9a8cux76eeux6807ux4e0eux9a8cux8bc1ux601dux8def}{%
+\subsection{实验目标与验证思路}\label{ux5b9eux9a8cux76eeux6807ux4e0eux9a8cux8bc1ux601dux8def}}
+
+设施建档同时关心机器人是否看过可达区域，以及设施表面是否被充分重建。二维地图已有较高覆盖时，设备背面、开口和凹入区域仍可能缺失。因此，``继续扩大覆盖''和``补充有效表面观测''并不总是同一决策。本章围绕预算受限的设施建档，检验类别知识能否帮助机器人提前选择观察方向，并检验错误类别是否能够被实测几何证据纠正。
+
+实验按三个问题组织。首先，在同一主动规划器中只改变类别输入，判断类别知识是否带来额外收益。其次，设置错误类别及关闭纠错的对照，观察错误信念、后续行动和终点质量之间的联系。最后，在共同传感、运动和重建条件下比较不同观察分配机制，说明本方法与巡检需求、视向覆盖等策略的行为差异。前两项分别对应类别信息和纠错政策的作用，第三项用于方法比较，三者的差值不作同一种因果解释。
+
+本章重点验证``信息输入---规划选择---实际观测---重建结果''的闭环。传感包、动作记录、信念和网格均有保存，因此既可比较最终分数，也可定位首次行动分歧。独立在线回放重新生成观测并运行策略，用于核验执行一致性；回放、传感帧及表面采样点均不作为额外独立场景。
+
+\hypertarget{cpuux865aux62dfux5e73ux53f0ux4e0eux95edux73afux6570ux636eux6d41}{%
+\subsection{CPU虚拟平台与闭环数据流}\label{cpuux865aux62dfux5e73ux53f0ux4e0eux95edux73afux6570ux636eux6d41}}
+
+\hypertarget{ux865aux62dfux4f20ux611fux4e0eux516cux5171ux914dux7f6e}{%
+\subsubsection{虚拟传感与公共配置}\label{ux865aux62dfux4f20ux611fux4e0eux516cux5171ux914dux7f6e}}
+
+平台以离散地面姿态描述机器人位置和朝向。机器人执行一个原子动作后，模拟器产生当前RGB-D、单线扫描及准确位姿；控制器不能读取未执行视角的实际观测。RGB中的人工颜色标记提供类别输入，深度和扫描提供实际几何。深度在参考视差域加入固定规则的数值噪声，随机源依赖父布局、动作步和种子，不依赖方法的类别开关。主要设置见表4。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表4 仿真平台与共同实验设置。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-2\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.76\ReviewTableWidth}@{}}
+\toprule
+项目 & 配置及用途 \\
+\midrule
+RGB-D相机 & 96×72像素，焦距48像素，高度0.9 m，欧氏量程4 m \\
+深度噪声 & 参考视差域高斯噪声，标准差0.25像素；不是经过标定的ZED模型 \\
+单线扫描 & 高度0.25 m，360°、180束，量程8 m，无附加随机噪声 \\
+位姿与动作 & 准确模拟位姿；前进1 m、左转或右转90°各计1个动作 \\
+任务预算 & 原确认批共42个动作，前18步为共同前缀；新增预算实验另设30、42、54步 \\
+TSDF融合 & Open3D CPU，体素4 cm，截断距离12 cm \\
+评价设置 & 0.2 m覆盖栅格；表面距离阈值2、5、10 cm，以5 cm为主 \\
+任务资格 & 覆盖率至少80\%，无碰撞，预算内返回起点及起始朝向 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+准确位姿可以减少定位漂移对观察策略比较的干扰，但也限定了实验范围：这里验证的是规划和建档机制，不检验真实SLAM定位误差。动作预算度量运动选择的代价，不能直接换算成真实小车的行驶秒数。
+
+原主实验、纠错实验和外部机制实验的归档环境均为Python 3.12.3、NumPy 1.26.4、SciPy 1.11.4与Open3D 0.19.0，OpenMP、OpenBLAS和MKL线程数固定为1。原清单未记录CPU型号，因此其绝对耗时仅作实现开销说明。当前工作区使用Intel Xeon（SapphireRapids）、4个可见逻辑CPU及Ubuntu 24.04.2；后续新增批次另行保存环境记录，不以当前硬件信息代替历史记录。TSDF遵循距离场融合思路{[}11{]}，表面评价采用距离阈值下精确率与召回率的共同框架{[}14{]}，具体公共评价域及联合指标由本任务定义。
+
+\hypertarget{ux89c2ux6d4bux89c4ux5212ux4e0eux5efaux56feux7684ux8fdeux63a5}{%
+\subsubsection{观测、规划与建图的连接}\label{ux89c2ux6d4bux89c4ux5212ux4e0eux5efaux56feux7684ux8fdeux63a5}}
+
+每次取得传感包后，驱动器先检查动作、步号和位姿，并将实际深度融合一次。二维地图保存已知与未知区域，三维TSDF保存实测表面。与此同时，控制器接收不含真实构型身份的观测和地图摘要，经四个接口更新状态并选择下一动作。
+
+OV-SDF登记观测摘要、类别支持及构型先验；STGHP根据当前信念和剩余预算选择下一姿态子目标；RPN-UQ检查该动作是否属于合法图边，并确保执行后仍有足够动作返航；IGCR利用新姿态的实测几何残差修正构型权重。四个接口共同连接观察规划、执行检查和实测更新，CPU控制器直接选择下一原子动作。本章用共享实现下的类别开关与纠错政策对照解释性能变化。
+
+类别先验在两个不同位置获得足够颜色支持后建立一次，重复观看不持续累乘置信度；出现类别冲突时清除该先验。几何更新只使用两模板预测不同且实测有效的区域，每个精确姿态首次观测才增加信念证据。规划器根据公开模板预测未来观察价值，但只执行当前首动作，再用新实测重新规划。其预测曝光集合与实际地图分别保存，模板不会直接补入TSDF，预测完成度也不冒充最终重建分数。
+
+任务结束后保存动作、信念、地图与网格，再由独立评价器读取参考几何计算结果。这样可以区分``规划器认为值得看''``机器人确实去看了''和``最终重建得到改善''三个层次，避免仅凭规划评分或模块调用认定有效。
+
+\hypertarget{ux5b9eux7269ux5e73ux53f0ux4e0eux89c2ux6d4bux63a5ux53e3}{%
+\subsubsection{实物平台与观测接口}\label{ux5b9eux7269ux5e73ux53f0ux4e0eux89c2ux6d4bux63a5ux53e3}}
+
+实验室现有移动平台如图2所示，配备ZED双目相机、激光雷达及定位传感组件。根据已有平台配置，ROS 1能够提供ZED深度与位姿输出，并接收目标点执行自主导航。系统可将相机、扫描和位姿转为共同观测接口，将规划输出连接到目标点导航；GNSS和IMU为后续定位融合保留输入。图中设备照片用于说明硬件与接口对应关系，本章定量比较全部在虚拟平台完成。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/robot_platform_20260928/robot_platform.pdf}
+\captionof{figure}{实验室移动平台与本方法的接口对应。（a）用户提供的原始照片，数字标注对应双目相机、激光雷达、定位设备与移动底盘；（b）传感输入、观察决策与导航目标的连接示意。软件能力依据现有平台说明，照片不代表已完成实车性能实验。}\label{fig:writing-2}
+\end{minipage}
+\end{center}
+
+\hypertarget{ux573aux666fux8bbeux7f6eux4e0eux5bf9ux7167ux516cux5e73ux6027}{%
+\subsection{场景设置与对照公平性}\label{ux573aux666fux8bbeux7f6eux4e0eux5bf9ux7167ux516cux5e73ux6027}}
+
+实验使用两个已参与设计的父布局P00、P01，每个布局含同一设施的两种候选构型\(h_0,h_1\)。两构型形成观察方向的歧义：在共同早期观测中，几何证据尚不足以明确哪一侧更值得优先访问，而公开类别与结构的关系能够提供方向线索。有限行动预算使错误选向后的探查和改向产生机会成本。场景抽取工业设施中设备目录可用、表面受遮挡和观察方向影响建档结果的任务特征，用于检验类别先验的用途。
+
+四个条件分别作为静态建图任务执行，既有地图不在任务之间传递。它们是工业设施观察问题的受控几何抽象，并非实际车间采样；布局变化用于说明再次建图的应用需求，当前实验不测量变化检测、跨时地图更新或动态避障性能。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/scene_details_20260928/scene_overview.pdf}
+\captionof{figure}{两布局与双构型的场景总览。斜线区为共同前遮挡板，深色块为侧部结构；灰线表示共同18步前缀，蓝虚线G与橙实线S表示后续实际路径，菱形为起终点。两个h0条件路径重合，两个h1条件在第19步选择不同方向。P01按设备坐标系旋转显示，完整几何仅用于离线解释。}\label{fig:writing-3}
+\end{minipage}
+\end{center}
+
+双方共享安全姿态图、设施坐标系、两种完整公开模板及其预测深度、扫描和潜在曝光。真实构型及未来实测不向控制器开放。共同前18步观测后，机器人恢复起始位置和朝向，随后滚动决策。固定前缀使首次自主决策前的信息可比，也意味着本实验不代表从动作0开始的未知环境探索。
+
+内部基准G是共同主动几何规划，S是在同一规划器中加入类别先验。G仍能补看、诊断构型并重新选向；若禁止它补看，就会把主动能力差异误认为语义收益。G/S比较因而检验类别在共同几何能力之上的增量。确认批固定策略，采用预定留出噪声种子，运行两布局、两构型与两方法的8条主任务。两个父布局均已见，留出的是噪声实现，不是完全未见几何。
+
+错误类别开发批另设X和Xnf：X交换类别解释且保留纠错；Xnf进一步同时关闭实测几何更新与未来纠错预期。外部机制比较使用SWAP-I和VISTA-I，分别参考SWAP{[}2{]}的巡检与VISTA{[}3{]}的视向覆盖思想，保持公共输入及重建后端。这些比较与G/S的类别开关实验分开解释。
+
+\hypertarget{ux8bc4ux4ef7ux6307ux6807ux4e0eux9884ux7b97ux7ea6ux675f}{%
+\subsection{评价指标与预算约束}\label{ux8bc4ux4ef7ux6307ux6807ux4e0eux9884ux7b97ux7ea6ux675f}}
+
+设\(\mathcal R\)为公共评价域内从起点可达的安全格，终点地图为\(m_T\)，未知格记为−1。二维覆盖率为
+
+\[
+C_{\rm map}=\frac{|\{c\in\mathcal R:m_T(c)\ne-1\}|}{|\mathcal R|}.
+\]
+
+评价器采用0.2 m机器人半径确定安全格，P00、P01分母分别为588、668。已判占据也属于已知，因此该指标表示覆盖，不等于占据分类正确率。安全格真值集合仅用于终点评价，不构成额外在线输入。
+
+三维表面评价同时计算距离阈值\(\tau\)下的精确率\(P_\tau\)和召回率\(R_\tau\)。前者度量预测表面与参考的接近程度，后者度量参考表面被重建的完整程度。定义
+
+\[
+F_{1,\tau}=\frac{2P_\tau R_\tau}{P_\tau+R_\tau},
+\qquad J_5=C_{\rm map}F_{1,0.05}.
+\]
+
+采用乘积是为了同时约束覆盖和表面质量，但解释结果时仍分开报告两项；乘积提高不意味着两者都提高。主阈值5 cm及辅助阈值2、10 cm在实验前固定，空预测质量记零。预测网格按双模板公共包围盒外扩0.20 m裁剪，去除已知地面，不补洞或配准。精确率使用预测表面到完整参考的距离，召回率使用固定设施外竖面到预测的距离，各采样32768点。公共区域外错误不计入精确率，所以指标反映设施评价域的建档质量，并非全场景三维精度。
+
+任务资格和质量单独判断。覆盖不足、碰撞、超预算或未返航都不能用较高\(J_5\)抵消。均值变化按配对条件等权计算，以两组均值之差除以基准均值，不把重复回放计入分母。
+
+\hypertarget{ux7c7bux522bux4fe1ux606fux7684ux4e3bux5b9eux9a8cux7ed3ux679c}{%
+\subsection{类别信息的主实验结果}\label{ux7c7bux522bux4fe1ux606fux7684ux4e3bux5b9eux9a8cux7ed3ux679c}}
+
+确认实验8条任务均执行42个付费动作、零碰撞并精确返航，独立在线回放全部一致。表5保留全部四个条件，两个\(h_1\)为正增量，两个\(h_0\)持平。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表5 两个已见父布局的全部配对确认结果。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-6\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth}@{}}
+\toprule
+父布局／构型 & G的\(J_5\) & S的\(J_5\) & S−G \\
+\midrule
+P00／\(h_0\) & 0.772200 & 0.772200 & 0 \\
+P00／\(h_1\) & 0.672703 & 0.760456 & +0.087753 \\
+P01／\(h_0\) & 0.727281 & 0.727281 & 0 \\
+P01／\(h_1\) & 0.638118 & 0.723586 & +0.085468 \\
+等权均值 & 0.702576 & 0.745881 & +0.043305（+6.1638\%） \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+两方法平均覆盖均为0.952544，平均表面F1由0.737490提高至0.782951。因此，本组联合收益来自表面质量改善，不能写成覆盖率或定位精度提高6.1638\%。P00、P01的\(h_1\)表面召回分别由0.595795、0.555450提高至0.724945、0.684509，说明有效观察方向对减少表面缺失具有作用。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/virtual_method_20260928/publication_main.pdf}
+\captionof{figure}{全部四个条件的结果。（A）G/S联合指标配对；（B）共同CPU机制比较；（C、D）覆盖与表面F1分量。散点为条件，横线为均值，不表示置信区间；B复用A中的G/S，不增加独立证据。SWAP-I、VISTA-I不是原作者完整系统。}\label{fig:writing-4}
+\end{minipage}
+\end{center}
+
+行动记录进一步解释了增益来源。两个\(h_1\)在共同前缀结束时具有相同非语义历史，S的构型权重为(0.1,0.9)，G为(0.5,0.5)。第19个动作S选择右转，G选择左转，随后取得不同的实测表面。两个\(h_0\)中，G的固定同分选择恰好与S一致，因此轨迹和分数相同。这说明类别的价值是减少方向歧义，而不是观看某类设施就必然获得额外奖励。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf}
+\captionof{figure}{全部四条件的实际终点TSDF公共评价域网格。每对G/S使用同一视角、尺度、材质和光照；h0从左后侧、h1从右后侧显示，标注取自冻结评分。全部保存三角面均参与绘制，无补洞、平滑或真值表面叠加；两个h0配对的网格数组完全相同。虚框对应图6，明暗不表示重建误差。}\label{fig:writing-5}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/scene_details_20260928/mesh_details.pdf}
+\captionof{figure}{图5虚框内的同投影局部放大。所有条件均采用3.40 m×2.55 m投影窗口，窗口位置由侧部结构范围确定。两个h1显示S补充的侧面观测，两个h0提供持平对照。该图直接放大保存网格的显示区域，不引入新的几何或局部质量指标。}\label{fig:writing-6}
+\end{minipage}
+\end{center}
+
+整体图与局部图回答了定量表格以外的问题：增益具体发生在哪些表面。h1中的差别主要位于受遮挡的侧部，和第19步的方向选择相对应；h0没有发生轨迹分歧，网格也相同。局部图用于解释已有全局指标，不能据此另报未经测量的局部精度提升。
+
+\hypertarget{ux9519ux8befux7c7bux522bux7ea0ux9519ux4e0eux9608ux503cux654fux611fux6027}{%
+\subsection{错误类别纠错与阈值敏感性}\label{ux9519ux8befux7c7bux522bux7ea0ux9519ux4e0eux9608ux503cux654fux611fux6027}}
+
+错误类别开发批在P00两构型上比较G、S、X、Xnf，全部任务满足相同预算及返航要求。完整结果见表6，该批噪声与确认批不同，均值不混合。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表6 错误类别开发批的四策略结果。Xnf同时关闭实际纠错与未来纠错预期。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-6\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth}@{}}
+\toprule
+策略 & \(h_0\)的\(J_5\) & \(h_1\)的\(J_5\) & 等权均值 \\
+\midrule
+G：共同主动几何 & 0.772300 & 0.675211 & 0.723756 \\
+S：正确类别与纠错 & 0.772300 & 0.770231 & 0.771266 \\
+X：错误类别与纠错 & 0.669298 & 0.675211 & 0.672254 \\
+Xnf：错误类别、关闭纠错 & 0.652727 & 0.657403 & 0.655065 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+X相对Xnf的平均联合指标提高2.6241\%。两构型的错误先验都在第28步取得有效几何证据后，将真实构型权重由0.1修正至0.978178；下一步X前进，Xnf分别转向。另在首次纠正状态固定姿态、曝光、剩余预算和未来信息设置，仅将权重恢复为错误先验，下一动作随之变化。这支持实测纠错能够影响决策，但该干预未执行新的物理终点，不能把全部质量差归因于某一个动作。表6估计的是整套纠错政策，不是IGCR单一函数的纯消融。
+
+确认批在2、5、10 cm下的相对均值收益依次为5.5040\%、6.1638\%、6.2110\%，两个\(h_0\)均持平、两个\(h_1\)均为正。纠错开发批X/Xnf的对应平均收益为0.3952\%、2.6241\%、2.0902\%，但\(h_1\)在2 cm下的绝对差为−0.0021593573。更严格的表面距离阈值下，额外观测并不保证每个构型的综合表面F1都提高；平均完整度改善与每个阈值、每个构型都改善应作区分。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf}
+\captionof{figure}{P00两构型的完整纠错对照与阈值敏感性。左侧显示四策略终点，右侧显示X相对Xnf在2、5、10 cm下的差值，保留严格阈值的负例。该开发批与图4确认批分别报告；Xnf不属于单一函数消融。}\label{fig:writing-7}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf}
+\captionof{figure}{保存的P00／h1开发轨迹中的信念与行动联系。（a）类别线索在共同前缀内形成，观测18之后选择第19个动作；（b）观测28修正错误先验，随后选择第29个动作。横轴表示已执行动作数，曲线是观测后的构型权重；图示不增加独立终点样本。}\label{fig:writing-8}
+\end{minipage}
+\end{center}
+
+图8与方法章的双构型数值例子相互对应：类别先改变尚有歧义时的方向判断，几何残差再检验该判断是否得到当前测量支持。两种更新通过下一步动作影响后续表面采集，而不是直接向重建模型补入模板几何。
+
+\hypertarget{ux5176ux4ed6ux89c2ux5bdfux673aux5236ux4e0eux8fd0ux884cux6210ux672c}{%
+\subsection{其他观察机制与运行成本}\label{ux5176ux4ed6ux89c2ux5bdfux673aux5236ux4e0eux8fd0ux884cux6210ux672c}}
+
+共同CPU比较共16条主任务，即四种方法各运行四个条件，均满足资格要求。G/S结果与确认批逐条件一致，仍视为同一组证据。表7列出实际表面质量与规划开销。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表7 共同CPU机制比较的四条件均值。时间仅包含每任务规划与账本，不包含传感、TSDF及终点评价。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-8\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth}@{}}
+\toprule
+方法 & 平均覆盖 & F1@5 cm & \(J_5\) & 规划与账本时间（s） \\
+\midrule
+G & 0.952544 & 0.737490 & 0.702576 & 0.067853 \\
+S & 0.952544 & 0.782951 & 0.745881 & 0.123555 \\
+SWAP-I & 0.952544 & 0.600887 & 0.572223 & 1.256934 \\
+VISTA-I & 0.952544 & 0.672911 & 0.640977 & 1.388679 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+在当前任务中，S平均联合指标高于两种机制适配，表明观察分配方式能够影响相同预算下的设施质量。两个外部适配的语义项均在96次自主决策中实际激活；同状态移除语义项后，首动作分别在9次、12次发生改变，因而不是全零语义占位对照。然而，这些排序诊断没有另执行去语义轨迹，且适配同时改变目标函数与规划细节，不能据此声称击败完整SWAP或VISTA系统。
+
+所记录的CPU开销说明有限图上的实现能够运行，不代表大规模环境下的效率结论，也不是机器人端到端响应时间。原生TARE{[}5{]}另完成4条规划器迁移任务，但相机视场转换、路点投影、付费等待及返航受适配器影响，作为工程接入证据单独保存，不纳入表7的公平性能排名。
+
+\hypertarget{ux9884ux7b97ux566aux58f0ux4e0eux540cux65cfux51e0ux4f55ux6269ux5c55}{%
+\subsection{预算、噪声与同族几何扩展}\label{ux9884ux7b97ux566aux58f0ux4e0eux540cux65cfux51e0ux4f55ux6269ux5c55}}
+
+\hypertarget{ux9884ux5148ux56faux5b9aux7684ux6269ux5c55ux8bbeux8ba1}{%
+\subsubsection{预先固定的扩展设计}\label{ux9884ux5148ux56faux5b9aux7684ux6269ux5c55ux8bbeux8ba1}}
+
+为检验原收益对预算和几何设置的依赖，本轮保持原控制器、类别先验、共同18步前缀及评价规则，预先列出128项新任务。原P00/P01、两构型、30/42/54步、两种子和G/S/X/Xnf构成96项；另在42步下对两个结构变体、两构型、两种子及四策略执行32项。种子固定为2026092801、2026092802，原确认结果与新结果分别报告。
+
+两个变体分别改变可见侧部结构：P00将一块肋板沿局部y方向平移0.25 m；P01将三块侧肋的上边界由1.80 m降至1.35 m。每项改变同时作用于该布局的两候选构型，公共模板、实际传感几何和评价参考使用相同变换，安全图与共同前缀保持不变。它们用于检验同一设施族内的结构扰动，不能替代未见自然设备的泛化测试。每几何的两种噪声重复也不增加独立布局数。
+
+128项任务全部按预定条件执行一次，96项完成并合格，32项记录为预算可行性失败，无重试或条件替换。所有合格任务均零碰撞、精确返航；完整状态长表保留全部128项，而质量均值只在整组声明任务均合格时报告。
+
+\hypertarget{ux9884ux7b97ux53efux884cux6027ux4e0eux8054ux5408ux8d28ux91cf}{%
+\subsubsection{预算可行性与联合质量}\label{ux9884ux7b97ux53efux884cux6027ux4e0eux8054ux5408ux8d28ux91cf}}
+
+原两布局的30步条件共32项，控制器均在18步前缀后无法找到同时满足双模板80\%预测覆盖门和精确返航的计划。其观测、部分轨迹及失败原因全部保留，失败时刻的地图由已存19帧另行融合与评价，资格仍为失败。这是当前规划约束下的可行性边界，不表示物理场景在任意算法下都无法完成。表8的成功终点均值不对这组填零，也不把失败部分地图当作完成任务。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表8 新批次预算与几何条件的完整策略均值。括号为全部四策略的合格/声明任务数；每策略在一行内对应8项任务。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-10\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth}@{}}
+\toprule
+条件（合格/声明） & G的J5 & S的J5 & X的J5 & Xnf的J5 & S/G变化 \\
+\midrule
+原布局30步（0/32） & --- & --- & --- & --- & 不可比较 \\
+原布局42步（32/32） & 0.702648 & 0.746567 & 0.652539 & 0.641425 & +6.2505\% \\
+原布局54步（32/32） & 0.926298 & 0.919819 & 0.931050 & 0.908197 & −0.6995\% \\
+两变体42步（32/32） & 0.704562 & 0.734357 & 0.664307 & 0.653192 & +4.2289\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+42步下，G/S的平均覆盖同为0.952544，新噪声重复的平均类别收益为6.2505\%，与原确认批6.1638\%的方向及量级一致。54步下，两者覆盖均达到1.0，G/S的表面召回分别为0.985764和0.983826，精确率分别为0.873764和0.863789，联合指标转为S低0.6995\%。该分解显示负差主要伴随精确率降低；它与``模板曝光代理未完全表达实测TSDF质量''相符，但没有独立证明某种融合误差是唯一原因。
+
+因此，额外预算提高了两种方法的绝对建档质量，却没有保持类别方法的相对优势。54步下X还取得高于G/S的均值，说明当前有限前瞻和曝光代理没有保证正确类别策略在任意预算下都最优。论文支持的结论应是：在当前42步约束下，类别线索帮助提前分配有效观察；预算充裕时，需要进一步改善预测价值与实际表面质量的对应。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/expansion_20260928/budget_effects.pdf}
+\captionof{figure}{原两布局96项扩展任务的预算结果。显示四策略均值、完整配对差与合格/声明任务数；30步的失败部分地图不作为完成性能，均值留空。点为布局、构型和噪声配对，横线为均值，不表示独立场景置信区间。负值与持平条件全部保留。}\label{fig:writing-9}
+\end{minipage}
+\end{center}
+
+\hypertarget{ux51e0ux4f55ux6270ux52a8ux7ea0ux9519ux4e0eux9608ux503c}{%
+\subsubsection{几何扰动、纠错与阈值}\label{ux51e0ux4f55ux6270ux52a8ux7ea0ux9519ux4e0eux9608ux503c}}
+
+原两布局42步下，X相对Xnf的平均增量为1.7328\%；54步下为2.5163\%。这些数值仍对应整体纠错政策。42步时P00的配对均有改善，而P01配对持平，不能把单布局的纠错收益解释为所有设施中的恒定优势。距离阈值和同族变体的完整分组与原始配对同时保存，以检查均值背后是否存在持平及反向条件。
+
+肋板位移和肋板降低两个变体的S/G平均收益分别为5.0337\%和3.3974\%，合并为4.2289\%。每变体均为两项正增量与两项持平，对应h1的两个噪声重复及h0的两个重复；原布局42步也为四胜四平。相比之下，原布局54步为四平四负。正确类别的中预算收益在同族结构变化后保持，但并未变为所有预算、所有构型的普遍增益。
+
+2/5/10 cm下，原布局42步S/G的均值相对差为5.4991\%/6.2505\%/6.3063\%，变体为3.6126\%/4.2289\%/4.3803\%；54步原布局为−1.2217\%/−0.6995\%/−0.2866\%。因此，该预算边界不依赖仅选择5 cm阈值。图10保留42步的全部场景配对及三阈值分组；原始长表另给出精确率、召回率、F1和覆盖分量。
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf}
+\captionof{figure}{42步下原布局和同族结构变体的完整配对差及2/5/10 cm敏感性。类别、整体纠错和错误类别三个对比均按相同场景、构型、种子配对；小点显示重复条件，均值不附独立场景置信区间。两个变体属于已声明设施族内的几何扰动。}\label{fig:writing-10}
+\end{minipage}
+\end{center}
+
+\hypertarget{ux9002ux7528ux8fb9ux754cux4e0eux672cux7ae0ux5c0fux7ed3}{%
+\subsection{适用边界与本章小结}\label{ux9002ux7528ux8fb9ux754cux4e0eux672cux7ae0ux5c0fux7ed3}}
+
+本章的有效条件是：类别与结构关系有用，当前几何仍存在方向歧义，且预算使错误选向产生代价。实验依赖公开双模板、安全图、人工类别、准确位姿和共同前缀，几何范围为两个已见父布局及两个同族变体，不作统计显著性或未知大场景泛化结论。实际价值是用明确的任务条件说明语义如何参与观察分配，而不是把模块名称、接口调用或更复杂结构本身作为有效性证据。
+
+后续共享可靠性分支在另一套\(J_{\rm nav}\)任务与控制器下，正常关系组六父S/G为五平一负，均值相对差−0.3301\%；关系失配组中，S与固定关系可靠度的普通贝叶斯语义策略B在六父上全部持平，完整开发矩阵仍有缺项。这些结果不并入本章\(J_5\)表格，也不支持新增机制已取得性能收益。它们说明当前正结论应限定在已验证的实现与任务条件，四模块的逐项增量及更大场景中的整体优势仍需进一步检验。
+
+本章完成了CPU虚拟传感、四接口决策、实际地图融合和独立终点评价的闭环验证。原完整配对确认支持类别输入带来6.1638\%的平均联合收益，开发对照支持整体纠错政策带来2.6241\%的平均收益。新增128项固定矩阵复现42步下6.2505\%的类别收益，并在两个同族结构变体上取得4.2289\%；同时明确30步的当前规划可行性边界与54步的收益反转。行动、信念和网格使这些结果具有过程解释，可支撑预算受限设施建档方案的受控可行性，真实小车实验可在此基础上作为补充应用展示。
+
+\hypertarget{ux53c2ux8003ux6587ux732e}{%
+\section*{参考文献}\label{ux53c2ux8003ux6587ux732e}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. \href{https://arxiv.org/abs/2004.05155}{作者论文}.
+\item
+  Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \href{https://arxiv.org/abs/2303.07236}{作者论文}.
+\item
+  Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \href{https://doi.org/10.1109/LRA.2026.3653276}{doi:10.1109/LRA.2026.3653276}.
+\item
+  Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \href{https://doi.org/10.48550/arXiv.1801.09847}{doi:10.48550/arXiv.1801.09847}.
+\item
+  Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \href{https://doi.org/10.15607/RSS.2021.XVII.018}{doi:10.15607/RSS.2021.XVII.018}.
+\item
+  Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \href{https://openaccess.thecvf.com/content/CVPR2024/html/Chen_GenNBV_Generalizable_Next-Best-View_Policy_for_Active_3D_Reconstruction_CVPR_2024_paper.html}{CVF正式论文}.
+\item
+  Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \href{https://doi.org/10.1109/TFR.2025.3578402}{doi:10.1109/TFR.2025.3578402}.
+\item
+  Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \href{https://doi.org/10.52202/085713-1113}{doi:10.52202/085713-1113}.
+\item
+  World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White paper, 2025-09-04. \href{https://www.weforum.org/publications/physical-ai-powering-the-new-age-of-industrial-operations/}{官方报告页}.
+\item
+  Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \href{https://arxiv.org/abs/2207.00254}{作者论文与期刊信息}.
+\item
+  Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \href{https://graphics.stanford.edu/papers/volrange/}{作者项目与论文}.
+\item
+  Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \href{https://www.cassandra.org/arc/papers/aij98.pdf}{作者论文}.
+\item
+  Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \href{https://doi.org/10.1177/0278364914533443}{doi:10.1177/0278364914533443}.
+\item
+  Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \href{https://www.tanksandtemples.org/}{作者项目与论文}.
+\end{enumerate}
+\end{document}

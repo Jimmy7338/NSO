@@ -1,0 +1,48 @@
+{
+  "schema_version": "v42.analytic_interface_protocol.v1",
+  "scope": "analytic measured-plane interface checks; no development World or policy rollout",
+  "primary_fixture": "two reprojected observations of one fixed finite plane and physical marker",
+  "observation_steps": [0, 1],
+  "scripted_fixture_motion": "one forward translation of 0.25 m; not an autonomous research trajectory",
+  "geometry_feedback": "identical current-pixel residual for all four ledger modes",
+  "conditions": ["G", "S", "flat", "permuted"],
+  "semantic_prior_source": "configs/virtual3d/v40_scene_protocol_20260920.json: cabinet",
+  "flat_prior": [0.25, 0.25, 0.25, 0.25],
+  "permutation": [3, 2, 1, 0],
+  "public_navigation": {
+    "schema_version": "v41.public_navigation.v1",
+    "source_kind": "provided_navigation_prior",
+    "nodes": {
+      "home": [0.75, 0.75],
+      "advance": [1.0, 0.75],
+      "north": [1.0, 1.25],
+      "south": [1.0, 0.25],
+      "far_north": [0.75, 1.25],
+      "far_south": [0.75, 0.25]
+    },
+    "edges": [
+      ["home", "advance"], ["advance", "north"], ["advance", "south"],
+      ["home", "far_north"], ["home", "far_south"],
+      ["north", "far_north"], ["south", "far_south"]
+    ]
+  },
+  "candidate_states": [
+    {"node": "home", "heading": 0},
+    {"node": "advance", "heading": 0},
+    {"node": "north", "heading": 0},
+    {"node": "north", "heading": 11},
+    {"node": "south", "heading": 0},
+    {"node": "south", "heading": 1},
+    {"node": "far_north", "heading": 11},
+    {"node": "far_south", "heading": 1}
+  ],
+  "router_budget": 32,
+  "routing_prefix_source": "explicit analytic fixture motion; priming utility is synthetic and excluded from forecast checks",
+  "candidate_action_executed": false,
+  "surface_score_is_proxy": true,
+  "outcome_requirement": "shared geometry and flat-prior invariance; record semantic score/action differences without requiring them",
+  "mapper": {"shape": [30, 30], "resolution_m": 0.1, "origin_xy_m": [-0.5, -0.5], "voxel_m": 0.04, "sdf_trunc_m": 0.12},
+  "maximum_output_bytes": 5242880,
+  "actual_development_worlds_authorized": 0,
+  "held_out_scene_assets_authorized": 0
+}

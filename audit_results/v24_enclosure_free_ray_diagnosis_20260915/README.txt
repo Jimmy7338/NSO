@@ -1,0 +1,7 @@
+Read-only diagnostic evidence, sealed after execution. No frozen implementation, input evidence, Q gate or planner was changed. The executed script and exact result are byte-preserved; source_hashes.json records all147 frozen source SHA256 and sealed input roots. The original case trace SHA binds235 packet hashes checked during the run. Analytic definitions were fixed in the executed script; this package does not claim prospective registry.
+
+Actual execution: PYTHONDONTWRITEBYTECODE=1 .venv-3d/bin/python -B /dev/shm/diagnose_v24_free_rays.py ; PTY session31617 exited0. Script deliberately refuses to overwrite /dev/shm/v24_free_ray_result.json. Its paths remain exactly as executed; do not delete an existing result merely to rerun. No rerun is required to verify the hashes.
+
+Scope: one parent/one assignment,235 existing SensorPackets to two backends,2 enclosure calls;11 analytic fixtures/176 analytic depth arrays;0 new world actions,0 new world SensorPackets,0 TSDF fusions,0 Q evaluations. Synthetic known body membership and ground serve controls only. GT body tests use an evaluation-only frame proxy calling the unchanged original ray function, not the live backend fitting path.
+
+This is a RAM-only package until disk space is restored. Intended permanent root: audit_results/v24_enclosure_free_ray_diagnosis_20260915. The intermediate real-data checkpoint remains preserved separately at /dev/shm/v24_free_ray_real_checkpoint.json; it is fully contained in result.json and is not duplicated here.

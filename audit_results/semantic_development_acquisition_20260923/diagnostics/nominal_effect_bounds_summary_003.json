@@ -1,0 +1,171 @@
+{
+  "complete_nominal_pairs": {
+    "S_B_J_relative_difference_of_means": 0.0,
+    "S_G_J_ratio_of_means": 0.9944562424701207,
+    "S_G_J_relative_difference_of_means": -0.005543757529879345,
+    "S_G_J_relative_difference_percent": -0.5543757529879345,
+    "all_S_B_actions_identical": true,
+    "all_S_B_mesh_bytes_identical": true,
+    "equal_parent_weight": true,
+    "interpretation": "The four complete nominal parents show no S over B execution or endpoint increment; S/G mean J is descriptively lower by about 0.5544%. These partial pairs do not decide the six-parent gate.",
+    "mean_differences": {
+      "B-G": {
+        "C_nav": 0.00045196280991732785,
+        "J_nav": -0.0027020635368154577,
+        "Q": -0.003420209490173076
+      },
+      "S-B": {
+        "C_nav": 0.0,
+        "J_nav": 0.0,
+        "Q": 0.0
+      },
+      "S-G": {
+        "C_nav": 0.00045196280991732785,
+        "J_nav": -0.0027020635368154577,
+        "Q": -0.003420209490173076
+      }
+    },
+    "means": {
+      "B": {
+        "C_nav": 0.786852089867343,
+        "J_nav": 0.48470445131381634,
+        "Q": 0.6090158298531917
+      },
+      "G": {
+        "C_nav": 0.7864001270574257,
+        "J_nav": 0.4874065148506318,
+        "Q": 0.6124360393433648
+      },
+      "S": {
+        "C_nav": 0.786852089867343,
+        "J_nav": 0.48470445131381634,
+        "Q": 0.6090158298531917
+      }
+    },
+    "pairs": [
+      {
+        "S_B_first_action_divergence": null,
+        "S_B_identical_action_sequences": true,
+        "S_B_identical_mesh_bytes": true,
+        "S_B_identical_pose_sequences": true,
+        "delta_J_S_minus_B": 0.0,
+        "delta_J_S_minus_G": 0.0,
+        "parent_id": "SEM_P00"
+      },
+      {
+        "S_B_first_action_divergence": null,
+        "S_B_identical_action_sequences": true,
+        "S_B_identical_mesh_bytes": true,
+        "S_B_identical_pose_sequences": true,
+        "delta_J_S_minus_B": 0.0,
+        "delta_J_S_minus_G": 0.0,
+        "parent_id": "SEM_P01"
+      },
+      {
+        "S_B_first_action_divergence": null,
+        "S_B_identical_action_sequences": true,
+        "S_B_identical_mesh_bytes": true,
+        "S_B_identical_pose_sequences": true,
+        "delta_J_S_minus_B": 0.0,
+        "delta_J_S_minus_G": -0.010808254147262053,
+        "parent_id": "SEM_P02"
+      },
+      {
+        "S_B_first_action_divergence": null,
+        "S_B_identical_action_sequences": true,
+        "S_B_identical_mesh_bytes": true,
+        "S_B_identical_pose_sequences": true,
+        "delta_J_S_minus_B": 0.0,
+        "delta_J_S_minus_G": 0.0,
+        "parent_id": "SEM_P04"
+      }
+    ],
+    "parent_count": 4,
+    "parent_ids": [
+      "SEM_P00",
+      "SEM_P01",
+      "SEM_P02",
+      "SEM_P04"
+    ],
+    "required_parent_count": 6
+  },
+  "missing_metrics_imputed": false,
+  "runtime": {
+    "new_numeric_surface_evaluations": 0,
+    "new_planner_executions": 0,
+    "new_saved_policy_replays": 0,
+    "new_tsdf_integrations": 0,
+    "new_worlds": 0
+  },
+  "schema": "semantic.nominal_partial_effect_analysis.v1",
+  "scope": "Descriptive finite development pairs and feasible missing-outcome bounds; no statistical significance or confidence interval.",
+  "shift": {
+    "complete_reviewed_parent_pairs": 0,
+    "interpretation": "No complete shift pairs; no shift effect or adaptive mechanism gain estimated.",
+    "mean_difference": null,
+    "missing_outcomes_imputed": false,
+    "relative_difference_of_means": null
+  },
+  "six_parent_nominal_feasible_bounds": {
+    "G_mean_J_interval": [
+      0.3974368207956511,
+      0.5641034874623178
+    ],
+    "J_ratio_of_means_S_over_G_interval": [
+      0.5728315957228737,
+      1.6517584679119248
+    ],
+    "S_mean_J_interval": [
+      0.3231363008758776,
+      0.6564696342092109
+    ],
+    "assumption": "Each missing J independently ranges over [0,1]; retain every known J including P03 G. Endpoints are hypothetical completions, not scores assigned to missing runs.",
+    "decision": "undetermined: complete six-parent outcomes and other preregistered guards are required; bounds contain both below-threshold and above-threshold completions.",
+    "formula": "Let g=J(P05,G), u=J(P03,S), v=J(P05,S). Delta_mean=(known_S_sum+u+v-known_G_sum-g)/6; relative_difference=(known_S_sum+u+v)/(known_G_sum+g)-1, with g,u,v in [0,1].",
+    "interval_type": "attainable conservative feasible-effect range, not confidence/credible/prediction interval",
+    "known_G_J": {
+      "P00": 0.6317842952187841,
+      "P01": 0.3540301991563484,
+      "P02": 0.5764908135051523,
+      "P03": 0.43499486537137955,
+      "P04": 0.3873207515222425
+    },
+    "known_G_sum_J": 2.3846209247739067,
+    "known_S_J": {
+      "P00": 0.6317842952187841,
+      "P01": 0.3540301991563484,
+      "P02": 0.5656825593578902,
+      "P04": 0.3873207515222425
+    },
+    "known_S_sum_J": 1.9388178052552654,
+    "mean_J_difference_S_minus_G_interval": [
+      -0.24096718658644023,
+      0.25903281341355977
+    ],
+    "missing_observed_values": {
+      "core_P03_nom_S_b120_lexicographic": null,
+      "core_P05_nom_G_b120_lexicographic": null,
+      "core_P05_nom_S_b120_lexicographic": null
+    },
+    "missing_run_ids": [
+      "core_P03_nom_S_b120_lexicographic",
+      "core_P05_nom_G_b120_lexicographic",
+      "core_P05_nom_S_b120_lexicographic"
+    ],
+    "nominal_relative_J_gate_threshold": 0.05,
+    "relative_J_difference_of_means_interval": [
+      -0.4271684042771263,
+      0.6517584679119248
+    ],
+    "relative_J_difference_percent_interval": [
+      -42.71684042771263,
+      65.17584679119248
+    ],
+    "six_parent_gate_failure": null,
+    "six_parent_gate_pass": null,
+    "threshold_inside_feasible_relative_interval": true
+  },
+  "source_summary": "/root/NSO/audit_results/semantic_development_acquisition_20260923/progress_summary_003.json",
+  "source_summary_sha256": "a1d8bdede814feb4f17f51e18d3af61980f15c27162ec7dd81492d0c4c1a788d",
+  "source_summary_unmodified": true
+}

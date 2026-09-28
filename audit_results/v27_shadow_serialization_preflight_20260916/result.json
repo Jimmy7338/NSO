@@ -1,0 +1,57 @@
+{
+  "status": "passed_serialization_preflight_only",
+  "checks": [
+    "nested NumPy scalar/list/array values and field names preserved; int64 remains exact",
+    "original guarded base writer and shadow stdout/failure proxy normalize identically",
+    "standard nested result/failure serialization and original loads preserved",
+    "stdlib json module unmodified; only shadow.json has local proxy",
+    "nonfinite Python/NumPy scalar and array values rejected by both output paths",
+    "wrapper/source/failure provenance pinned; all processing counters remain zero"
+  ],
+  "source_sha256": {
+    "nso/__init__.py": "53df856db4ddc95f7d8a5c05a1298aea84298cfa974a0412017e61471feb76dd",
+    "nso/cpu_sensor_contract_v10.py": "28d0870913d67bd102b83b61025a992cf68c76021c270eabd267fb021f14db02",
+    "nso/observed_planner_v26.py": "365cf6b5d60b47c602151fb5375b051ab7052db0501a746a2c04f470d37ca718",
+    "scripts/audit_v26_feedback_support.py": "8bb7d9b78b72ab1bec6e1ad63615d981b2c28f192002c92741d19cfffd5942a0",
+    "scripts/audit_v27_feedback_shadow.py": "0430504591e7805dfbcabbd29f491c38d9fafda864f8275bcebeaf054c2463db",
+    "scripts/recover_v27_feedback_shadow_serialization.py": "a83ae700eaef040c6be7d1333687511392407e8e49f6ad26541b5c10611646a5",
+    "utils/rgbd_contract.py": "93d647c6dae79748d75f32148adf6aa9479a9f46950129557da99c6b28bb7f87",
+    "docs/research/V27_STABLE_FEEDBACK_DESIGN_20260916.md": "ca0e8ca71cac936e72ea8f32334027f4c1a522418f3d998f9d31eb868c8aa6d3",
+    "nso/observed_feedback_v27.py": "8e028f0232befd32063d772bb562d74402713ff0fe0098201c08cdb14a6196bb",
+    "nso/observed_planner_v27.py": "29119e9759f4f3be70e39954406765cd38df7f8c677101a3eb858bbfe8e71615",
+    "nso/observed_runtime_v27.py": "d4e2fac41c8ae07b598d98ca8256a36630f4dc7bf2a38d409289efbffc014579",
+    "tests/virtual3d/test_observed_feedback_v27.py": "0b3b18cd389c2870303ecec0bcb631260188440386ea4d673de01e2d333a4dd2",
+    "docs/research/V27_SHADOW_SERIALIZATION_RECOVERY_20260916.md": "7f89f2944457f4c24d822d92d150a640b606cffed930c51a92b23d03418cd9cd"
+  },
+  "original_failed_evidence_sha256": {
+    "artifact_hashes.json": "91de924953e0df1a3e6d15e0bbd38a267fd53899ba9a85886a33e7fc87f7d1a0",
+    "manifest.json": "570311e0bae70bd302ec64a58b9365255e3450a4e2d77b552ce006fb59ed6717",
+    "input_sha256.json": "d54bc221b6dbb071906dcdabf1e15b90fd92c34e1509562f67116b97463e8e90"
+  },
+  "original_failure_receipt_inventories": {
+    "audit_results/observed_feedback_v27_shadow_failure_20260916": "58d9e08a575d288b2eeb9ea903b58485199743c6dc560e12284cf79a9b2c7e27",
+    "audit_results/observed_feedback_v27_shadow_failure_stack_20260916": "f6d70bfefa276248bde1eb969b2d01fbf3892c33ed9d0d1d66c274bff6680649"
+  },
+  "original_failure_status": "uncompleted; persisted manifest says running; no result receipt",
+  "original_shadow_bytes_unchanged": true,
+  "processing_counters": {
+    "saved_packets_loaded": 0,
+    "offline_mapper_updates": 0,
+    "offline_tsdf_integrations_from_existing_packets": 0,
+    "planning_geometry_snapshots": 0,
+    "full_feedback_support_captures": 0,
+    "feedback_transition_calls": 0,
+    "original_sampled_semantic_gate_calls": 0,
+    "new_world_instances": 0,
+    "new_physical_tasks": 0,
+    "new_physical_actions": 0,
+    "new_sensor_packets": 0,
+    "new_planning_calls": 0,
+    "new_local_action_calls": 0,
+    "new_mesh_extractions": 0,
+    "new_quality_evaluations": 0,
+    "autonomous_runtime_executions": 0,
+    "forbidden_calls": 0
+  },
+  "recovery_replay_executed": false
+}

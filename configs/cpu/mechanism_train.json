@@ -1,0 +1,73 @@
+{
+  "schema": "cpu_grid_v1",
+  "purpose": "development mechanism integration and controller label collection; not held-out test",
+  "map_size": 128,
+  "door_width": 5,
+  "max_candidates": 24,
+  "environment": {
+    "resolution_m": 0.1,
+    "robot_radius_m": 0.1,
+    "sensor_range_m": 1.5,
+    "sensor_fov_deg": 90,
+    "max_steps": 500
+  },
+  "maps": [
+    {
+      "layout": "multi_room",
+      "seed": 200
+    },
+    {
+      "layout": "corridor",
+      "seed": 200
+    },
+    {
+      "layout": "dead_end",
+      "seed": 200
+    },
+    {
+      "layout": "loop",
+      "seed": 200
+    },
+    {
+      "layout": "hall",
+      "seed": 200
+    },
+    {
+      "layout": "multi_room",
+      "seed": 201
+    },
+    {
+      "layout": "corridor",
+      "seed": 201
+    },
+    {
+      "layout": "dead_end",
+      "seed": 201
+    },
+    {
+      "layout": "loop",
+      "seed": 201
+    },
+    {
+      "layout": "hall",
+      "seed": 201
+    }
+  ],
+  "start_seeds": [
+    101
+  ],
+  "methods": [
+    "gain_semantic_structure"
+  ],
+  "semantics": {
+    "source": "synthetic_visible_salience_v1",
+    "seed_offset": 10000
+  },
+  "mechanisms": {
+    "semantic_weight": 1.0,
+    "structure_weight": 1.0,
+    "goal_budget": 32,
+    "topology_period": 10,
+    "max_door_width": 7
+  }
+}

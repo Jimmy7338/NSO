@@ -1,0 +1,53 @@
+{
+  "status": "passed_bounded_raw_descriptor_review",
+  "histories": 6,
+  "candidate_routes": 88,
+  "old_candidates": 72,
+  "additional_candidates": 16,
+  "label_conditions_remapped": 18,
+  "prefix_frames_with_history_reuse": 646,
+  "prefix_scans_with_history_reuse": 646,
+  "unique_raw_frame_files": 484,
+  "unique_raw_scan_files": 484,
+  "independent_descriptor_scalars": 1024,
+  "independent_feature_scalars": 6336,
+  "max_descriptor_absolute_error": 1.1102230246251565e-16,
+  "max_feature_absolute_error": 1.1102230246251565e-16,
+  "micro_checks": {
+    "cardinal_camera_axes": 4,
+    "angular_sector_centers": 8,
+    "independent_closing_hole_fill": true,
+    "orthonormality_and_handedness": true
+  },
+  "libraries": {
+    "numpy": "1.26.4",
+    "open3d": "0.19.0"
+  },
+  "new_navigation_branches": 0,
+  "GT_or_future_outcomes_read": false,
+  "model_fitting_performed": false,
+  "raw_mapper_independently_implemented": false,
+  "production_response_module_imported": false,
+  "source_archive": "/root/NSO/eval_results/semantic_view_response_v6_candidate_transfer_20260911/sources.zip",
+  "source_archive_sha256": "cec408c43b1eb49d3edf3c4dbe73e0357d920504c3a21ddc3cde75ddd528e15b",
+  "input_files_checked": 1047,
+  "history_reviews": [
+    "main_751_1116de472bbb/history_0080/review.json",
+    "main_751_1116de472bbb/history_0160/review.json",
+    "main_752_1116de472bbb/history_0080/review.json",
+    "main_752_1116de472bbb/history_0160/review.json",
+    "main_752_a5beedada7c6/history_0080/review.json",
+    "main_751_a5beedada7c6/history_0080/review.json"
+  ],
+  "limits": [
+    "The frozen mapper and snapshot verifier are reused, not independently reimplemented; matching their output proves replay consistency only.",
+    "The first four route/quality features reuse archived prefix-only G scores. Their normalization is checked, their raycasting is not independently recomputed here.",
+    "Geometric shape fit errors are archived V3 inputs; label priors and posterior arithmetic are independently recomputed, not the hypothesis likelihood geometry.",
+    "Support counts persistent quality keys, not repeated observations, but is a voxel support proxy, not unique exterior surface area.",
+    "FOV descriptors ignore occlusion, use at most 128 support points, and axial depth rather than Euclidean range.",
+    "History bits refer to camera-to-point azimuth; candidate sectors refer to the cluster median, an approximation quantified in the reports.",
+    "Opposite-face is a mean-normal hemisphere proxy. The mean can cancel; no actual back-face visibility or new reconstruction is implied.",
+    "S-to-M also removes marker objectness weighting and can change columns 4:8; S-to-X changes only conditional columns 8:12.",
+    "All six histories are already viewed development data; passing this implementation review proves no semantic performance advantage or full ANS validation."
+  ]
+}

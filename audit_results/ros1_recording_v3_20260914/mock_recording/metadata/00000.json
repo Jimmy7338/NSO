@@ -1,0 +1,278 @@
+{
+  "schema_version": "ros1_rgbd_source_metadata/2",
+  "headers": {
+    "depth": {
+      "secs": 100,
+      "nsecs": 10000000,
+      "timestamp_ns": 100010000000,
+      "frame_id": "left_optical",
+      "sequence": 1
+    },
+    "rgb": {
+      "secs": 100,
+      "nsecs": 10000000,
+      "timestamp_ns": 100010000000,
+      "frame_id": "left_optical",
+      "sequence": 1
+    },
+    "scan": {
+      "secs": 100,
+      "nsecs": 10000000,
+      "timestamp_ns": 100010000000,
+      "frame_id": "laser",
+      "sequence": 1
+    },
+    "camera_info": {
+      "secs": 100,
+      "nsecs": 10000000,
+      "timestamp_ns": 100010000000,
+      "frame_id": "left_optical",
+      "sequence": 1
+    }
+  },
+  "synchronized_message_span_ns": 0,
+  "depth_relative_offsets_ns": {
+    "depth": 0,
+    "rgb": 0,
+    "scan": 0,
+    "camera_info": 0
+  },
+  "image_encodings": {
+    "depth": "16UC1",
+    "rgb": "rgb8",
+    "semantic": null
+  },
+  "camera_info": {
+    "height": 8,
+    "width": 8,
+    "K": [
+      8.0,
+      0.0,
+      4.0,
+      0.0,
+      8.0,
+      4.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "P": [
+      8.0,
+      0.0,
+      4.0,
+      0.0,
+      0.0,
+      8.0,
+      4.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    "R": [
+      0.0,
+      -1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "D": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "distortion_model": "plumb_bob",
+    "association": "latest received, not timestamp-synchronized",
+    "binning_x": 2,
+    "binning_y": 2,
+    "roi": {
+      "x_offset": 2,
+      "y_offset": 2,
+      "width": 4,
+      "height": 4,
+      "do_rectify": false
+    },
+    "used_intrinsic": [
+      [
+        4.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        4.0,
+        1.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "source_optical_from_rectified": [
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "projection_contract": "registered rectified left image; ROI offset before binning; TF pose composed with R transpose"
+  },
+  "laser": {
+    "time_increment_s": 0.001,
+    "scan_time_s": 0.1,
+    "beam_count": 5,
+    "angle_min_rad": -0.2,
+    "angle_max_rad": 0.2,
+    "angle_increment_rad": 0.1,
+    "range_min_m": 0.2,
+    "range_max_m": 4.0,
+    "motion_compensation_applied": false
+  },
+  "tf_queries": {
+    "target_frame": "map",
+    "camera_source_frame": "left_optical",
+    "camera_stamp_ns": 100010000000,
+    "laser_source_frame": "laser",
+    "laser_stamp_ns": 100010000000
+  },
+  "calibration_correctness_verified": false,
+  "raw_rosbag_still_required": true,
+  "range_conversion": {
+    "positive_inf_policy": "invalid",
+    "invalid_stored_as": 0.0,
+    "finite_above_maximum_clipped": false,
+    "counts": {
+      "valid_finite": 1,
+      "positive_infinity": 1,
+      "negative_infinity": 0,
+      "nan": 1,
+      "finite_below_or_nonpositive": 1,
+      "finite_above_maximum": 1
+    }
+  },
+  "tf_responses": {
+    "camera": {
+      "target_frame": "map",
+      "source_frame": "left_optical",
+      "secs": 100,
+      "nsecs": 10000000,
+      "timestamp_ns": 100010000000,
+      "translation_xyz_m": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "calibration_truth_verified": false
+    },
+    "laser": {
+      "target_frame": "map",
+      "source_frame": "laser",
+      "secs": 100,
+      "nsecs": 10000000,
+      "timestamp_ns": 100010000000,
+      "translation_xyz_m": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "calibration_truth_verified": false
+    }
+  },
+  "raw_array_scope": "cv_bridge passthrough depth and original float32 LaserScan ranges/intensities; original bag still required",
+  "payload_sha256": {
+    "frames/00000.npz": "78df506d523dded59819a616f49ebef5f4e18ced056319b85e3a176d68db2552",
+    "scans/00000.npz": "3d48058624fb64b7e86a000b04b73fd71ec208bedaa06de955b85370ec0bc853",
+    "raw/00000.npz": "80c8b62d9f44f1a195cb3bb86fab0ff6231354f28ccaac1fc25523ed94bc1683"
+  }
+}

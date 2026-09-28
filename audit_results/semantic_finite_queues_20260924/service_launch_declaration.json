@@ -1,0 +1,71 @@
+{
+  "automatic_restart": false,
+  "created_unix_s": 1790214327.1226227,
+  "maximum_service_seconds": 21600,
+  "maximum_simultaneous_worlds": 2,
+  "prerequisites": [
+    "incremental_git_repack_verified_complete",
+    "frozen_source_and_queue_binding_verified",
+    "frozen_storage_guard_passed"
+  ],
+  "prior_interrupted_worlds_excluded": true,
+  "prior_termination_cause": "unknown; temporal SSH session-close correlation does not establish causality",
+  "reboot_enabled": false,
+  "schema": "semantic.finite_service_launch_declaration.v1",
+  "scientific_slots_added": 0,
+  "services": [
+    {
+      "declaration": "audit_results/semantic_finite_queues_20260924/queue_A_declaration.json",
+      "declaration_sha256": "ba40e231ed92357dad1ad50287205ceb4f28993fdd52d7bb6722166031c36f7a",
+      "launch_argv": [
+        "systemd-run",
+        "--no-ask-password",
+        "--unit=nso-semantic-20260924-a",
+        "--remain-after-exit",
+        "--service-type=exec",
+        "--working-directory=/root/NSO",
+        "--property=Restart=no",
+        "--property=RuntimeMaxSec=21600",
+        "--setenv=PYTHONDONTWRITEBYTECODE=1",
+        "--setenv=OMP_NUM_THREADS=1",
+        "--setenv=OPENBLAS_NUM_THREADS=1",
+        "--setenv=MKL_NUM_THREADS=1",
+        "/root/NSO/.venv-3d/bin/python",
+        "-B",
+        "/root/NSO/scripts/run_semantic_finite_queue.py",
+        "--queue",
+        "/root/NSO/audit_results/semantic_finite_queues_20260924/queue_A_declaration.json"
+      ],
+      "queue": "A",
+      "status": "declared_not_started",
+      "unit": "nso-semantic-20260924-a.service"
+    },
+    {
+      "declaration": "audit_results/semantic_finite_queues_20260924/queue_B_declaration.json",
+      "declaration_sha256": "59970006bd960c7e24a571ab534062bec62448c17da8e7234e15a15702b4a74f",
+      "launch_argv": [
+        "systemd-run",
+        "--no-ask-password",
+        "--unit=nso-semantic-20260924-b",
+        "--remain-after-exit",
+        "--service-type=exec",
+        "--working-directory=/root/NSO",
+        "--property=Restart=no",
+        "--property=RuntimeMaxSec=21600",
+        "--setenv=PYTHONDONTWRITEBYTECODE=1",
+        "--setenv=OMP_NUM_THREADS=1",
+        "--setenv=OPENBLAS_NUM_THREADS=1",
+        "--setenv=MKL_NUM_THREADS=1",
+        "/root/NSO/.venv-3d/bin/python",
+        "-B",
+        "/root/NSO/scripts/run_semantic_finite_queue.py",
+        "--queue",
+        "/root/NSO/audit_results/semantic_finite_queues_20260924/queue_B_declaration.json"
+      ],
+      "queue": "B",
+      "status": "declared_not_started",
+      "unit": "nso-semantic-20260924-b.service"
+    }
+  ],
+  "timer_or_recurring_job": false
+}

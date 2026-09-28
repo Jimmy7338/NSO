@@ -1,0 +1,79 @@
+{
+  "date": "2026-09-21",
+  "phase": "V44_saved_evidence_and_offline_evaluation",
+  "status": "static_reference_and_saved_observation_verification_complete_actual_rollouts_waiting_for_storage",
+  "new_contract_tests": {
+    "passed": 37,
+    "saved_replay": 16,
+    "offline_evaluation": 17,
+    "evidence_encoding": 4
+  },
+  "source_files_archived": 33,
+  "old_frozen_manifest_entries_unchanged": 397,
+  "runtime_artifacts": 89,
+  "static_references": [
+    {
+      "asset_id": "DEV_A_00",
+      "target_instances": 4,
+      "observable_samples": 1083,
+      "manifest_sha256": "96d00c04384aefbecd55a6a81dcdfc16a432fae47e8c2761204388b5a4cd4326"
+    },
+    {
+      "asset_id": "DEV_C_00",
+      "target_instances": 4,
+      "observable_samples": 1237,
+      "manifest_sha256": "a4c99ff26ef19fde5be5cd5c67fd00e6ea4152e2acc42e432f0c5e33ade8af4c"
+    }
+  ],
+  "coverage_metric": "C_nav = correctly measured-free cells / fixed conservative start-connected floor domain",
+  "quality_metric": "Q = macro facility observable-surface F1@5cm",
+  "joint_metric": "J_nav = C_nav * Q; report components separately",
+  "saved_replay_scope": "fresh-process fixed initial-packet recomputation; not new-World or counterfactual replay",
+  "main_fixture_TSDF_integrations": 1,
+  "main_saved_recomputation_TSDF_integrations": 1,
+  "actual_development_worlds": 0,
+  "actual_autonomous_trajectories": 0,
+  "physical_actions_executed": 0,
+  "new_start_slots_reserved": 0,
+  "new_world_replay_slots_consumed": 0,
+  "finite_fixture_rejected_by_development_evaluation": true,
+  "semantic_performance_claim_added": false,
+  "full_autonomous_pipeline_validated": false,
+  "compressed_receipt_sample": {
+    "canonical_json_bytes": 1327099,
+    "gzip_bytes": 208637,
+    "reduction_percent": 84.27871620730632
+  },
+  "storage_ready": false,
+  "resource_preflight": {
+    "status": "blocked_before_world_creation",
+    "persistent_output_root": "/root/NSO/audit_results/v44_evidence_pipeline_20260921/not_started/R2_A_diagnostic",
+    "checked_filesystem_path": "/root/NSO/audit_results/v44_evidence_pipeline_20260921",
+    "filesystem_type": "ext4",
+    "non_ram_filesystem": true,
+    "free_bytes": 7931543552,
+    "required_free_bytes": 10737418240,
+    "expected_batch_peak_bytes": 402653184,
+    "passed": false,
+    "reason": "insufficient_persistent_space"
+  },
+  "cpu_environment_available": true,
+  "deleted_unique_evidence": false,
+  "figure_visually_inspected": true,
+  "figure": "docs/thesis/figures/v44_evaluation_reference/evaluation_reference.png",
+  "remote_push_performed": false,
+  "next_tasks": [
+    "Satisfy existing persistent-storage gate before any physical batch.",
+    "Run the same V43 ledger R2_A_diagnostic via the compressed V44 entry point.",
+    "Run DEV_A/C G/S autonomous slots without retry or quota reset.",
+    "Pin each episode manifest, recompute saved observations, and evaluate against these predeclared reference digests.",
+    "Report all failures and both C_nav and Q before interpreting J_nav or semantic efficacy."
+  ],
+  "evidence": {
+    "result": "audit_results/v44_evidence_pipeline_20260921/result.json",
+    "report": "docs/research/V44_EVIDENCE_PIPELINE_RESULT_20260921.md",
+    "thesis_method": "docs/thesis/V44_REPRODUCIBLE_EVALUATION_METHOD_20260921.md",
+    "independent_review": "audit_results/v44_independent_pipeline_review_20260921/result.json"
+  },
+  "independent_review_status": "pass"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "semantic.offline_service_launch.v1",
+  "unit": "nso-semantic-review-ablation-p00-nom-20260924.service",
+  "argv": [
+    "systemd-run",
+    "--no-ask-password",
+    "--unit=nso-semantic-review-ablation-p00-nom-20260924.service",
+    "--remain-after-exit",
+    "--service-type=exec",
+    "--working-directory=/root/NSO",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=3600",
+    "--setenv=PYTHONDONTWRITEBYTECODE=1",
+    "--setenv=OMP_NUM_THREADS=1",
+    "--setenv=OPENBLAS_NUM_THREADS=1",
+    "--setenv=MKL_NUM_THREADS=1",
+    "/root/NSO/.venv-3d/bin/python",
+    "-B",
+    "/root/NSO/scripts/review_semantic_declared_batch.py",
+    "--declaration",
+    "/root/NSO/audit_results/semantic_finite_queues_20260924/offline_ablation_P00_nom/declaration.json",
+    "--audit-dir",
+    "/root/NSO/audit_results/semantic_finite_queues_20260924/offline_ablation_P00_nom/review_batch"
+  ],
+  "declaration_sha256": "fa2d59513061cd7928140336a5b8f0be543ea946b2d75d0c239ca68a11fd2dbf",
+  "created_unix_s": 1790217182.0437734,
+  "automatic_retry": false,
+  "new_worlds": 0
+}

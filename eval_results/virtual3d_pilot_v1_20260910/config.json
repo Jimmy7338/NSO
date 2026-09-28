@@ -1,0 +1,60 @@
+{
+  "environment": {
+    "max_steps": 120
+  },
+  "quality_weight": 1.0,
+  "evaluation_interval": 20,
+  "thresholds_m": [
+    0.05,
+    0.1
+  ],
+  "reference_samples": 16000,
+  "methods": [
+    "coverage",
+    "geometric_quality",
+    "semantic_static",
+    "semantic_quality"
+  ],
+  "scenes": [
+    {
+      "layout": "rooms",
+      "seed": 81,
+      "semantic_condition": "aligned"
+    },
+    {
+      "layout": "rooms",
+      "seed": 81,
+      "semantic_condition": "shuffled"
+    },
+    {
+      "layout": "rooms",
+      "seed": 82,
+      "semantic_condition": "aligned"
+    },
+    {
+      "layout": "rooms",
+      "seed": 82,
+      "semantic_condition": "shuffled"
+    },
+    {
+      "layout": "clutter",
+      "seed": 81,
+      "semantic_condition": "aligned"
+    },
+    {
+      "layout": "clutter",
+      "seed": 81,
+      "semantic_condition": "shuffled"
+    },
+    {
+      "layout": "clutter",
+      "seed": 82,
+      "semantic_condition": "aligned"
+    },
+    {
+      "layout": "clutter",
+      "seed": 82,
+      "semantic_condition": "shuffled"
+    }
+  ]
+}

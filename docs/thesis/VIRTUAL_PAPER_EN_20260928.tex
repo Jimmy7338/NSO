@@ -1,0 +1,490 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[UTF8,fontset=none]{ctex}
+\setCJKmainfont{Noto Serif CJK SC}[BoldFont={Noto Sans CJK SC Bold}]
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+\usepackage{amsmath,amssymb,graphicx,booktabs,array}
+\usepackage{geometry,caption,hyperref,flafter}
+\geometry{left=22mm,right=22mm,top=23mm,bottom=24mm}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,
+ pdftitle={Category Priors and Geometric Feedback for Budget-Constrained Active Observation of Facilities},pdfauthor={Zhaoyu Li}}
+\captionsetup{font=small,labelfont=bf,labelsep=quad}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.8}
+\linespread{1.13}
+\urlstyle{same}
+\Urlmuskip=0mu plus 2mu
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\title{\textbf{Category Priors and Geometric Feedback for Budget-Constrained Active Observation of Facilities}}
+\author{Zhaoyu Li}
+\date{28 September 2026\quad Review draft}
+\newlength{\ReviewTableWidth}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\begin{document}
+\maketitle
+\begin{abstract}
+After changes to an industrial layout, robots need current observations of the surrounding space and equipment. Observing a region, however, does not ensure that its facilities have been adequately reconstructed. For facility documentation under a limited motion budget, this study combines category-conditioned configuration beliefs, predicted observation value, and feedback from measured geometry. A hierarchical decision and local execution architecture connects four module interfaces; the present CPU controller directly selects the next atomic action. Public templates support belief updates and planning, while the reconstructed surface contains only fused measured depth. Virtual validation uses separate static mapping tasks. A paired confirmation experiment uses two previously seen parent layouts, each with two configurations. Relative to an active geometric control with the same planner, category information improves the mean joint documentation score by 6.1638\%, with two wins and two ties across four pairs and identical mean coverage. In a separate development experiment with incorrect category information, the complete correction policy, including measured correction and anticipated future correction, improves the mean joint score by 2.6241\%. A further fixed 128-trial matrix retains 96 qualified completions and 32 low-budget planning failures. Category gains at budget 42 are 6.25\% on original layouts and 4.23\% on same-family variants, while budget 54 produces a −0.70\% difference on original layouts. The results establish a conditional benefit for early observation selection and identify its budget boundary.
+\end{abstract}
+\noindent\textbf{Keywords:} facility documentation; active observation; category priors; geometric feedback; budget-constrained planning
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Embodied robots connect perception, decision making, and physical action. Their applications in manufacturing and logistics are expanding, although scaling industrial deployments remains challenging {[}9{]}. Equipment rearrangement, workstation adjustment, and changes in material placement can make an existing environmental representation unsuitable for a new task. This study considers how a robot can actively acquire current spatial and equipment geometry after such a reconfiguration. The environment remains static during each mapping task; tracking moving obstacles and dynamic obstacle avoidance are outside the task.
+
+Active SLAM uses robot motion selection to improve environmental modeling {[}10{]}. The present study addresses its observation-planning and mapping-quality aspects. Industrial facility documentation requires both spatial coverage and observations of equipment surfaces. A robot may cover an accessible corridor while leaving rear or recessed surfaces poorly reconstructed. Additional observations of open space do not necessarily recover these surfaces. With a narrow-field-of-view depth camera, the direction of approach and the timing of turns determine how much useful surface evidence can be acquired within a limited motion budget.
+
+Category knowledge can provide a directional cue. When equipment categories are associated with service sides or openings, a robot may select a useful observation side before the relevant structure becomes geometrically distinguishable. However, categories can be incorrect, and geometric planners can actively acquire diagnostic observations and change direction. A higher score along a semantically guided trajectory therefore does not, by itself, isolate a semantic effect. This study asks a specific question: with shared templates, a safe pose graph, a planner, and a reconstruction backend, can category information reduce the cost of diagnosing a configuration and subsequently redirecting observation?
+
+SWAP connects semantic inspection to observation requirements {[}2{]}, and VISTA combines task relevance with directional coverage {[}3{]}. For budget-constrained documentation of industrial facilities, this study implements a category-prior--geometric-feedback loop, connects observation decisions to execution checks, and isolates the contribution of category information through a shared active geometric control. The contribution lies in the executable connection between category cues, actions, and reconstructed surfaces; Bayesian updating and information value follow established principles. Controlled virtual validation is the primary evidence, with physical implementation left for supplementary demonstration.
+
+\hypertarget{related-work}{%
+\section{Related Work}\label{related-work}}
+
+Autonomous exploration coordinates environmental representations, target selection, and local motion. A survey of active SLAM connects motion decisions with map estimation and discusses modular and belief-space planning formulations {[}10{]}. Active Neural SLAM is an early example using learned mapping and hierarchical policies {[}1{]}, while TARE coordinates exploration through detailed local and sparse global representations {[}5{]}. The present study uses hierarchical decisions and local execution to allocate facility observations within a common safe graph and action budget. Its internal geometric control can revisit locations, seek configuration-disambiguating evidence, and replan. The controlled variable is the contribution of category information beyond these shared active planning capabilities.
+
+Active reconstruction considers where the next observation should be acquired. GenNBV uses reinforcement learning with geometric, semantic, and action representations to select viewpoints in a five-dimensional free space and studies cross-scene next-best-view behavior {[}6{]}. Facility documentation also involves self-occlusion and insufficient viewing directions. Here, the task is restricted to a finite ambiguity between public configurations, discrete ground motion, and explicit budget constraints. All internal controls use the same Open3D depth-fusion backend {[}4{]}. Templates inform prediction, whereas only executed observations contribute to reconstruction, separating observation allocation from surface completion by prior knowledge.
+
+Semantic inspection connects the choice of targets to observation sufficiency. SWAP combines volumetric exploration, semantic target completion, and surface inspection with resolution and incidence-angle requirements {[}2{]}. Semantics-Aware Predictive Inspection Path Planning (SPP) exploits repeated structure in semantic scene graphs to predict unseen targets in industrial inspection {[}7{]}. Accordingly, the present motivation is more specific than proposing semantic revisiting or structural prediction: when current geometry cannot distinguish observation directions, can category--structure associations reduce the cost of choosing a direction, and can measured geometry correct a misleading association?
+
+Recent semantic active mapping also combines task relevance and observation value. VISTA uses online semantic Gaussian maps for open-vocabulary tasks and scores receding-horizon trajectories using semantic relevance and directional coverage {[}3{]}. ActiveSGM combines semantic and geometric uncertainty to predict the informativeness of candidate observations {[}8{]}. This study instead implements category-conditioned configuration weights and measured-residual feedback on a CPU. Its SWAP-I and VISTA-I comparisons adapt selected planning mechanisms to common candidates and fusion conditions; they are not reproductions of the complete original systems. Paired controls, reconstructed endpoints, and recorded belief--action changes together establish the scope of the resulting application evidence.
+
+\hypertarget{task-and-evaluation}{%
+\section{Task and Evaluation}\label{task-and-evaluation}}
+
+The facility configuration remains fixed within each task, and different configurations define separate mapping tasks. Layout reconfiguration motivates the application; the experiments do not estimate temporal changes or incrementally update a historical map. The discrete robot pose is \(s_t=(x_t,y_t,\theta_t)\), and the facility configuration is \(h\in\{0,1\}\). The robot receives two public templates, a facility coordinate frame, and a common safe pose graph. It does not know the true configuration. Runtime inputs comprise RGB-D, scan, and pose observations already acquired through execution. The category--structure relation is manually specified public knowledge. Evaluation ground truth and actual observations from unexecuted actions are unavailable to the controller.
+
+A forward motion of 1 m or a turn of 90° costs one action. The total budget is B actions: an 18-action shared observation prefix is followed by at most B−18 autonomously selected actions. The original confirmation uses 42 actions; the budget extension uses 30, 42, and 54. A valid task requires at least 80\% coverage, no collision, completion within budget, and return to the initial position and orientation. Thus, the experiment evaluates documentation decisions after shared initial observation rather than unknown-environment exploration from action zero.
+
+The evaluator uses a 0.2 m grid and a 0.2 m robot radius to derive the start-reachable safe-cell set \(\mathcal R\) from scene ground truth. Its size is 588 for P00 and 668 for P01. This set is used only after outputs are sealed and is not an additional ground-truth input to the controller. Coverage and the primary score are
+
+\[
+C_{\rm map}=\frac{|\{c\in\mathcal R:m_T(c)\ne-1\}|}{|\mathcal R|},
+\qquad F_{1,\tau}=\frac{2P_\tau R_\tau}{P_\tau+R_\tau},
+\qquad J_5=C_{\rm map}F_{1,0.05}.
+\]
+
+Unknown cells have value −1; cells marked occupied also count as known. Coverage consequently measures observation status rather than occupancy classification accuracy. Surface precision, recall, and their harmonic mean follow the distance-threshold evaluation principle of Tanks and Temples {[}14{]}. The common facility region and the product with coverage are task-specific definitions. Surface precision samples the predicted mesh and queries the complete reference surface; recall samples fixed exterior vertical reference surfaces and queries the prediction. Before evaluation, predictions are cropped to the common bounding box of both templates, expanded by 0.20 m, and the known ground is removed. No hole filling or registration is applied. Errors outside this shared region do not enter precision, so the score describes the facility evaluation domain. Thresholds are fixed at 2, 5, and 10 cm, with 5 cm primary. Task validity is reported separately from quality; an empty prediction receives zero quality, and \(F_{1,\tau}=0\) when \(P_\tau+R_\tau=0\).
+
+Figure 1 relates the two public configuration hypotheses to occlusion and the saved routes. Both zero-gain configurations are shown alongside the conditions in which category information changes the observation side.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/scene_details_20260928/scene_overview.pdf}
+\captionof{figure}{Offline equipment geometry and saved executed routes for two layouts and both configurations. Hatched regions are front occluders; darker blocks are lateral ribs. G (dashed blue) and S (solid orange) share an 18-action prefix and the start/return anchor. Both h0 pairs coincide, whereas both h1 pairs choose different directions at paid action 19. Turns and retraced segments overlap. P01 is displayed in its declared equipment frame. Ground-truth geometry is explanatory context, not online planner input.}\label{fig:writing-1}
+\end{minipage}
+\end{center}
+
+\hypertarget{category-priors-and-geometric-feedback}{%
+\section{Category Priors and Geometric Feedback}\label{category-priors-and-geometric-feedback}}
+
+\hypertarget{module-interfaces-and-executed-controller}{%
+\subsection{Module Interfaces and Executed Controller}\label{module-interfaces-and-executed-controller}}
+
+The system organizes observation, planning, and feedback through hierarchical decisions and local execution. Table 1 describes the four CPU interfaces. The decision layer selects a pose subgoal from the configuration belief and remaining budget; the execution layer checks action legality and the return budget before new measurements update the state. In the present CPU implementation, each subgoal corresponds to the next atomic action. Controlled category inputs and deterministic execution guards complete the loop. Experiments isolate category information and the complete correction policy, rather than assign an independent performance contribution to each interface.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 1. Responsibilities of the four CPU module interfaces.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-4\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.28\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.36\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.36\ReviewTableWidth}@{}}
+\toprule
+Interface & Inputs & Processing and output \\
+\midrule
+OV-SDF & Executed RGB, pose, and measured-map summary & Register category support; output category log-prior and observation records \\
+STGHP & Common graph, template exposure, configuration weights, remaining budget & Compare feasible continuations; output the next pose and candidate values \\
+RPN-UQ & Selected edge, remaining budget, return distance & Output an execution permission or rejection record \\
+IGCR & Measured depth/scan and public predictions at a new pose & Compare residuals; output a geometric evidence increment and revised weights \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/system_architecture_20260928/system_architecture.pdf}
+\captionof{figure}{Platform interfaces, four-module CPU virtual validation, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The robot is a generative composite based on the user-provided platform photograph for interface illustration; sensor, map, and mesh thumbnails are schematic.}\label{fig:writing-2}
+\end{minipage}
+\end{center}
+
+\hypertarget{measured-belief-state}{%
+\subsection{Measured Belief State}\label{measured-belief-state}}
+
+Inputs comprise the common safe pose graph \(\mathcal G\), initial pose \(s_0\), public templates \(T_0,T_1\), budget \(B\), and shared prefix. Both methods receive template predictions of depth, scans, and potential exposure at each pose. Outputs include executed actions, observation records, and a measured map. Independent endpoint evaluation follows output sealing.
+
+After action \(t\), the planning state is
+
+\[
+x_t=(s_t,b_t,M_{0,t},M_{1,t},p_t,\mathcal V_t),\qquad b_t=B-t,
+\]
+
+where \(M_{h,t}\) is the union of template exposures associated with previously observed poses, and \(\mathcal V_t\) is the visited-pose set. With \(p_t\) denoting the weight assigned to \(h=0\), the belief update is
+
+\[
+L_t^g=\operatorname{clip}_{[-24,24]}(L_{t-1}^g+\delta_t),
+\qquad p_t=\sigma(L_t^g+L_t^s).
+\]
+
+At a newly visited pose, \(\delta_t\) is the mean truncated-loss difference \(e_1-e_0\) over valid depth and scan modalities, clipped to \([-6,6]\). It is zero for repeated poses or disabled feedback. Depth and scan require at least eight valid pixels and three valid beams, respectively. Each loss is half the squared normalized residual, capped at 12.5. Category registration requires at least 16 exact-color pixels at each of two distinct XY positions, with no competing marker color in those frames. Registration sets \(L_t^s=\pm\log9\); repeated frames do not multiply the prior, and conflicting registered categories clear it. The geometric control G always sets \(L_t^s=0\). These fixed-scale pseudo-likelihood weights are not calibrated probabilities.
+
+Residuals are evaluated only where the template predictions differ. Measured zero depth and zero scan range are treated as missing. Depth residuals use the reference disparity domain, \((57.6/z-57.6/\widehat z_h)/0.25\), while scan residuals use \((r-\widehat r_h)/0.02\). A missing template depth return incurs the capped loss. Without a valid modality, no geometric evidence is added. The scan scale of 0.02 m controls evidence weighting and is not an imposed simulator noise level.
+
+\hypertarget{limited-diagnostic-lookahead-and-budgeted-execution}{%
+\subsection{Limited Diagnostic Lookahead and Budgeted Execution}\label{limited-diagnostic-lookahead-and-budgeted-execution}}
+
+The predictive objective is \(\widetilde J_h(M_h)=\widetilde C_h(M_h)\widetilde F_h(M_h)\), using ideal template ground exposure and the fraction of potential exterior vertical surface area. It is distinct from measured \(J_5\). The predicted stopping value is
+
+\[
+Z(s,M,p)=
+\begin{cases}
+p\widetilde J_0(M_0)+(1-p)\widetilde J_1(M_1),
+&s=s_0,\ \min_h\widetilde C_h(M_h)\ge0.8,\\
+-\infty,&\text{otherwise}.
+\end{cases}
+\]
+
+Belief-space decision making connects observations to subsequent actions {[}12{]}, while informative path planning jointly considers information quality and resource budgets {[}13{]}. Here this connection is approximated by one future diagnostic event per planning call. The dynamic-programming state includes \(q\in\{0,1\}\), indicating whether one future diagnostic event remains available in the current lookahead. Action \(a\) moves to \(s'\), updates exposure to \(M'_h=M_h\cup E_h(s')\), and consumes one unit of budget. If \(q=1\) and \(s'\) is an unobserved diagnostic node, the prediction branches using an assumed diagnostic accuracy \(r=0.99\):
+
+\[
+\lambda_0=pr+(1-p)(1-r),\quad \lambda_1=1-\lambda_0,
+\qquad p^{(0)}=\frac{pr}{\lambda_0},\quad
+p^{(1)}=\frac{p(1-r)}{\lambda_1}.
+\]
+
+\[
+Q_q(a)=
+\begin{cases}
+\sum_{y=0}^{1}\lambda_y V_0(s',b-1,M',p^{(y)}),&\text{diagnostic event},\\
+V_q(s',b-1,M',p),&\text{otherwise},
+\end{cases}
+\qquad V_q=\max\{Z,\max_a Q_q(a)\}.
+\]
+
+Previously measured poses are excluded from diagnostic candidates at the beginning of each planning call. Diagnostic nodes are identified by comparing the two public templates: signed evidence under their respective predictions must reach the corresponding \(\pm\log99\) thresholds. No further information event is expanded after the forecast diagnosis. If either diagnostic branch is infeasible, the action is infeasible. A state also has value \(-\infty\) when its return distance exceeds its remaining budget. Only the first selected action is executed before replanning from a new measurement; forecast weights never overwrite the measured belief record.
+
+The measured map and template exposure sets are maintained separately. The map fuses acquired depth, whereas \(M_h\) describes exposure expected if template \(h\) is correct; template surfaces are never inserted into the mesh. The shared 18-action prefix returns to the initial pose while updating beliefs. Only subsequent actions depend on the resulting weights.
+
+Execution must satisfy \(1+d_{\rm return}(s')\le b_t\). Voluntary predicted stopping is recorded separately from termination caused by collision, exhausted budget, or guard rejection. Termination alone does not establish task validity. Algorithm 1 summarizes the complete execution loop.
+
+\par\noindent\begin{minipage}{\linewidth}
+\small
+\textbf{Algorithm 1. Receding-horizon planning with budgeted observations.}
+
+\begin{verbatim}
+Input: common safe graph and two templates, budget B, shared prefix pre,
+       mode G/S/X/Xnf
+Output: executed actions and observations, measured map, stop reason
+Initialize: Lg=Ls=0; M0=M1={}; visited={}; t=0
+Repeat:
+  Read the initial frame or the frame from the latest action
+  Fuse that frame exactly once through the execution driver
+  Form observations without the true configuration identifier
+  Verify action, step index, and pose
+  OV-SDF: register category and map summaries
+  IGCR: update Lg from measurements at a newly visited pose
+  Add the current pose's template exposures to M0 and M1
+  visited <- union(visited, {s})
+  If collision has occurred or t=B:
+    record the forced termination reason and exit
+  If t<18: a <- pre[t]
+  Otherwise:
+    D <- public-template diagnostic nodes minus visited
+    STGHP: solve Vq; use q=0 for Xnf and q=1 otherwise
+    Report infeasibility or resource-limit failure as failure
+    If the stopping value is optimal within 10^(-12):
+      record voluntary stopping and exit
+    a <- first optimal action within tolerance in fixed graph-edge order
+  RPN-UQ: check edge legality and 1+dreturn(s') <= B-t
+  If rejected: record the termination reason and exit
+  Execute a; t <- t+1
+Seal outputs; independently evaluate coverage, surface F1, J5, and validity
+\end{verbatim}
+\end{minipage}
+
+
+Mode X exchanges the category interpretation. Xnf additionally disables both measured geometric updates and future diagnostic anticipation; X−Xnf therefore evaluates a complete correction policy. Each planning call is capped at 1.5 million cached states and 20 s. The current evidence does not establish large-scale solver performance.
+
+G and the category-conditioned method S share the same predictive belief planner. Both can actively diagnose a configuration and change observation direction; S additionally uses the category prior. They share an Open3D CPU implementation {[}4{]} of volumetric range integration {[}11{]}, with a 4 cm voxel size and 12 cm truncation distance. Only measured depth is fused. Actions, observations, and meshes are saved before endpoint evaluation.
+
+\hypertarget{fixed-settings-and-a-recorded-two-configuration-example}{%
+\subsection{Fixed Settings and a Recorded Two-Configuration Example}\label{fixed-settings-and-a-recorded-two-configuration-example}}
+
+The category strength of 0.9 and forecast accuracy of 0.99 are fixed design assumptions, not measured recognition accuracy or calibrated sensor probabilities. The former supplies a finite preference that contrary geometry can overturn; the latter retains a nonperfect future diagnosis. The loss cap of 12.5, per-pose evidence limit of 6, and cumulative limit of 24 bound extreme residual influence. Repeated poses do not accumulate geometric evidence again, although new depth still enters TSDF fusion. A cache reuses dynamic-programming subproblems within each call, with the stated state/time limits; equal-valued actions use the fixed graph-edge order and \(10^{-12}\) tolerance. These choices are shared across controls and are not claimed to be optimal parameter values.
+
+A saved P00 development example makes the connection to action explicit. Let \(w_t=1-p_t\) be the weight of configuration 1. After the shared prefix, G has \(w_{18}=0.5\): the left and right continuation values are both 0.650944, so the fixed tie rule selects left. For configuration 1, S has \(w_{18}=0.9\); the left/right values become 0.668008/0.711865 and action 19 turns right. For configuration 0 the category preference and value ordering reverse, and S turns left, coinciding with G. This explains why both a positive effect and a tie can occur in the same layout. All values are recorded terminal planning proxies, not measured F1 or immediate observation rewards.
+
+With the misleading prior X in configuration 1, \(w_{18}=0.1\). At step 28, 1092 informative depth pixels produce mean clipped losses of 12.205313 and 0.505694 for the two templates. The applied log-evidence is −6, giving
+
+\[
+w_{28}=1-\sigma(-6+\log9)=0.978178.
+\]
+
+The forward/left/right continuation values are 0.574541/0.554660/0.555707, so action 29 moves forward. Its return cost is 13 actions with 14 remaining, satisfying \(1+13\le14\). At step 41 only one action remains; the robot is at the start position and turns to restore the starting orientation. Xnf retains weight 0.1 and turns right at action 29. Because Xnf also disables future diagnosis, its endpoint contrast estimates the whole correction policy; Figure 8 shows the associated measured belief timeline. This example uses saved development logs and adds no endpoint samples.
+
+\hypertarget{virtual-experiments-and-results}{%
+\section{Virtual Experiments and Results}\label{virtual-experiments-and-results}}
+
+\hypertarget{comparisons-and-common-settings}{%
+\subsection{Comparisons and Common Settings}\label{comparisons-and-common-settings}}
+
+The camera produces 96×72 images with a 4 m range. The planar scanner covers 360° with 180 beams and an 8 m range. Simulated poses are exact. Depth includes numerical noise with a standard deviation of 0.25 pixels in the reference disparity domain; scans have no additional random noise. These settings provide a controlled comparison rather than a calibrated model of physical sensors, and do not evaluate SLAM localization accuracy.
+
+The confirmation experiment freezes the controller and uses a preselected held-out noise seed. Two parent layouts previously involved in development each contain two configurations, yielding eight G/S runs and four matched pairs. Facilities remain static within every run. Independent online replays reproduce all results but do not increase the sample count. Three comparisons address different questions: G/S isolates category availability, the incorrect-prior development comparison evaluates the complete correction policy, and the external CPU adapters compare observation-allocation mechanisms with different objectives and planning details.
+
+The archived preparation manifests for development, confirmation, and CPU mechanism comparisons record Python 3.12.3, NumPy 1.26.4, SciPy 1.11.4, and Open3D 0.19.0. OpenMP, OpenBLAS, and MKL thread counts are fixed to one. The historical manifests do not record the CPU model or core count, so the reported timing is restricted to the recorded implementation conditions and is not used for a hardware-normalized comparison.
+
+The available mobile platform in Figure 3 illustrates how the observation and goal interfaces could connect to physical equipment. Its ROS 1 stack, ZED depth/pose output, GNSS/IMU configuration, and goal-based autonomous navigation are supplied by the platform owner. The photograph documents hardware availability; all performance results in this article come from simulation.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/robot_platform_20260928/robot_platform.pdf}
+\captionof{figure}{Available laboratory mobile platform and proposed sensor-to-planner interfaces. Numbers identify the stereo camera, laser scanner, positioning equipment, and mobile base. The interface diagram connects observation goals to ROS 1 navigation; reported performance is measured in simulation.}\label{fig:writing-3}
+\end{minipage}
+\end{center}
+
+\hypertarget{conditional-benefit-of-category-information}{%
+\subsection{Conditional Benefit of Category Information}\label{conditional-benefit-of-category-information}}
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 2. Complete paired confirmation results. Relative change is the difference between means divided by the G mean.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-6\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth}@{}}
+\toprule
+Parent / configuration & G: \(J_5\) & S: \(J_5\) & S−G \\
+\midrule
+P00 / \(h_0\) & 0.772200 & 0.772200 & 0 \\
+P00 / \(h_1\) & 0.672703 & 0.760456 & +0.087753 \\
+P01 / \(h_0\) & 0.727281 & 0.727281 & 0 \\
+P01 / \(h_1\) & 0.638118 & 0.723586 & +0.085468 \\
+Equal-parent mean & 0.702576 & 0.745881 & +0.043305 (+6.1638\%) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+All runs use 42 actions, avoid collisions, and return exactly to the initial pose. Both methods attain mean coverage of 0.952544. Mean surface F1 increases from 0.737490 to 0.782951, so the joint improvement comes from surface quality, without an accompanying coverage or localization improvement. In both \(h_1\) configurations, the methods choose different turns at action 19 after the same nonsemantic history. S raises surface recall from 0.5958 to 0.7249 in P00 and from 0.5555 to 0.6845 in P01. Both \(h_0\) pairs follow identical trajectories and obtain identical scores.
+
+The gain persists descriptively at 2 and 10 cm (Table 3). These are alternative evaluations of the same four conditions, not additional trials. With only two previously seen parent layouts, the results do not establish statistical significance or generalization to unseen geometry.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 3. Distance-threshold sensitivity of saved confirmation results. Each row evaluates the same two parents and four conditions.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-6\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth}@{}}
+\toprule
+Distance threshold & G mean joint score & S mean joint score & Relative mean change \\
+\midrule
+2 cm & 0.641180 & 0.676470 & +5.5040\% \\
+5 cm (primary) & 0.702576 & 0.745881 & +6.1638\% \\
+10 cm & 0.723452 & 0.768385 & +6.2110\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/virtual_method_20260928/publication_main.pdf}
+\captionof{figure}{(A) All G/S pairs across two parent layouts and two configurations, including both ties. (B) Condition-wise comparison of four CPU methods. (C, D) Coverage and surface F1; points denote the four conditions and horizontal caps indicate means, without confidence intervals. G/S in B reuse A and provide no additional independent evidence. SWAP-I and VISTA-I are mechanism adaptations, not complete-system rankings.}\label{fig:writing-4}
+\end{minipage}
+\end{center}
+
+Figures 5 and 6 connect the aggregate surface scores to the saved geometry. All four conditions use a paired display: G and S share camera, scale, and lighting within each condition. The two identical \(h_0\) meshes remain visible as controls. Local magnification explains which side surfaces differ without introducing a selected local quality metric.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf}
+\captionof{figure}{Saved final public-ROI TSDF meshes for all four conditions. Each G/S pair shares the same orthographic camera, scale, neutral material and lighting; all saved triangles are projected. h0 and h1 are viewed from the rear-left and rear-right respectively. F1 and J5 are copied from frozen measurements. Dashed windows identify the subsequent detail views. Both h0 pairs are array-identical. Shading is illumination, not error; no completion, smoothing or ground-truth surface is added.}\label{fig:writing-5}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/scene_details_20260928/mesh_details.pdf}
+\captionof{figure}{Magnified windows of the identical mesh projections. Windows are determined from the declared lateral-rib geometry and use a fixed 3.40 m by 2.55 m projected extent across conditions. These are display crops of saved surfaces, not new reconstructions. The h1 comparisons show the additional observed side surfaces; both h0 pairs retain identical geometry. No local quality score is introduced.}\label{fig:writing-6}
+\end{minipage}
+\end{center}
+
+\hypertarget{correction-of-incorrect-priors}{%
+\subsection{Correction of Incorrect Priors}\label{correction-of-incorrect-priors}}
+
+The incorrect-prior development experiment uses two configurations of one parent layout. X exchanges category interpretations; Xnf further disables measured correction and anticipation of future correction. Mean \(J_5\) increases from 0.655065 for Xnf to 0.672254 for X, a relative improvement of 2.6241\%. This estimates the combined correction policy. Same-state posterior interventions support an effect of measured updates on the next action, but provide no additional counterfactual endpoint trajectories. At the stricter 2 cm threshold, X−Xnf is −0.0021593573 for \(h_1\), demonstrating that correction does not improve every configuration at every threshold.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf}
+\captionof{figure}{Endpoints for four policies in the two P00 development configurations, with X−Xnf differences at 2, 5, and 10 cm. Xnf disables measured correction and anticipated future correction together; it is not a single-posterior-update ablation. This development batch is kept separate from the held-out-noise confirmation in Figure 4.}\label{fig:writing-7}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf}
+\captionof{figure}{Saved P00/\(h_1\) development logs. (a) Category information establishes a prior within the shared prefix; the decision after step 18 selects budgeted action 19. (b) Geometry observed at step 28 corrects the misleading prior and changes the next action. Curves show uncalibrated configuration weights. This mechanism illustration does not increase the number of endpoint samples.}\label{fig:writing-8}
+\end{minipage}
+\end{center}
+
+\hypertarget{external-mechanisms-and-computational-cost}{%
+\subsection{External Mechanisms and Computational Cost}\label{external-mechanisms-and-computational-cost}}
+
+The common CPU environment includes SWAP-I inspection and VISTA-I directional-coverage adaptations. Each completes four valid tasks, with mean \(J_5\) of 0.572223 and 0.640977, respectively, compared with 0.745881 for S. This comparison shows that observation allocation matters in the present setting. Because objectives and planning details also change, the differences cannot be attributed entirely to category information or interpreted as rankings of the original complete systems.
+
+A native TARE node separately completes four migration tasks {[}5{]}. Narrow-field-of-view conversion, waypoint projection, budgeted waiting, and return behavior depend on the adapter, so these runs serve as engineering transfer evidence rather than a matched performance baseline.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 4. Four-condition means for CPU mechanism adaptations. G/S reuse Table 2 trajectories. All methods have mean coverage 0.952544. Runtime covers the planner and observation record only, excluding sensing, TSDF fusion, and endpoint evaluation.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-6\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.25\ReviewTableWidth}@{}}
+\toprule
+Method & Surface F1 at 5 cm & \(J_5\) & Planner and record time per task (s) \\
+\midrule
+G & 0.737490 & 0.702576 & 0.067853 \\
+S & 0.782951 & 0.745881 & 0.123555 \\
+SWAP-I & 0.600887 & 0.572223 & 1.256934 \\
+VISTA-I & 0.672911 & 0.640977 & 1.388679 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+\hypertarget{extended-budget-noise-and-geometry-tests}{%
+\subsection{Extended Budget, Noise, and Geometry Tests}\label{extended-budget-noise-and-geometry-tests}}
+
+A fixed extension contains 128 trials with the same controller, prior settings, 18-action prefix, and evaluation. The original P00/P01 layouts, two configurations, budgets 30/42/54, two seeds, and four policies define 96 trials; two same-family geometry variants at budget 42 define another 32. Seeds are 2026092801 and 2026092802. One P00 rib is shifted by 0.25 m along local y; three P01 ribs have their upper boundary lowered from 1.80 to 1.35 m. Each transformation is applied to both public hypotheses, sensed geometry, and evaluation references, preserving the safe graph and prefix. Variants are not unseen natural equipment, and noise repeats are not independent layouts.
+
+All 128 declared trials were attempted once without replacements or retries. There are 96 qualified completions with no collisions and exact returns, and 32 planning-feasibility failures at budget 30. After the shared prefix, the controller could not find a return plan satisfying its 80\% predicted-coverage gate for both templates. This is a boundary of the current planning constraints, not proof that any algorithm must fail in the physical task. All 19 observed frames and failure records are retained. Offline scores for partial failure maps are reported separately and are not successful endpoints.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 5. Complete J5 means in the new batch. Budget 30 has 0/32 qualified trials; each other row has 32/32, with eight trials per policy. Failed groups remain blank.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-10\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth}@{}}
+\toprule
+Condition / budget & G & S & X & Xnf & S/G change \\
+\midrule
+Original / 30 & --- & --- & --- & --- & Not compared \\
+Original / 42 & 0.702648 & 0.746567 & 0.652539 & 0.641425 & +6.2505\% \\
+Original / 54 & 0.926298 & 0.919819 & 0.931050 & 0.908197 & −0.6995\% \\
+Variants / 42 & 0.704562 & 0.734357 & 0.664307 & 0.653192 & +4.2289\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+At budget 42, S/G has four wins and four ties, giving a 6.2505\% mean improvement at identical mean coverage of 0.952544. At budget 54, it has four ties and four losses, with a −0.6995\% relative mean difference. Coverage reaches 1.0 for both policies; G/S surface recall is 0.985764/0.983826 and precision is 0.873764/0.863789. The negative difference mainly accompanies lower precision, consistent with a remaining gap between template exposure and measured TSDF quality. This decomposition does not isolate a causal fusion-error mechanism. X also exceeds G/S at this budget, so the finite-lookahead exposure objective does not guarantee that a correct prior gives the best measured surface in every regime.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/expansion_20260928/budget_effects.pdf}
+\captionof{figure}{Budget sensitivity on the original layouts: completed endpoint quality, all paired contrasts, and qualification counts. No completed-performance mean is reported at B=30 because no endpoint qualifies. Points represent matched layout, configuration, and noise conditions; short bars denote complete-pair means, not confidence intervals over independent scenes.}\label{fig:writing-9}
+\end{minipage}
+\end{center}
+
+The rib-shift and lower-rib variants yield mean S/G improvements of 5.0337\% and 3.3974\%, respectively, or 4.2289\% together, with four wins and four ties. At 2/5/10 cm, the original-layout improvements at budget 42 are 5.4991\%/6.2505\%/6.3063\%, and variant improvements are 3.6126\%/4.2289\%/4.3803\%. Original-layout differences at budget 54 are −1.2217\%/−0.6995\%/−0.2866\%. Thus, the budget boundary is not a consequence of reporting only the 5 cm threshold.
+
+The whole correction policy X/Xnf improves mean J5 by 1.7328\% and 2.5163\% on original layouts at budgets 42 and 54, and by 1.7016\% on the variants at budget 42. At budget 42, P00 and its variant improve while P01 and its variant tie, showing that correction benefits also depend on the condition. Full per-trial precision, recall, F1, coverage, and qualification remain available with the paired comparisons.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf}
+\captionof{figure}{Geometry perturbations and threshold sensitivity at B=42. The upper panel retains every paired result for the two original layouts and two same-family variants; the lower panel reports signed means at 2, 5, and 10 cm. Open and filled markers denote h0 and h1. Variants do not establish unseen-category generalization.}\label{fig:writing-10}
+\end{minipage}
+\end{center}
+
+\hypertarget{discussion-and-applicability}{%
+\section{Discussion and Applicability}\label{discussion-and-applicability}}
+
+Category information is useful here because it can select an observation side while geometry remains ambiguous. When both methods choose the same route, the observed gain is zero. In particular, G resolves an equal-valued left/right decision by choosing left, which coincides with S in both original \(h_0\) configurations at budget 42. The extension preserves this budget's gain under new noise and same-family geometry, while a larger budget changes policy ordering. Ambiguity strength and natural category reliability have not been independently manipulated or calibrated. Public templates, synthetic category markers, exact poses, a shared safe graph, and a fixed prefix define the tested operating conditions. Region- and threshold-dependent surface evaluation further limits the conclusions to facility documentation, rather than natural recognition, safe exploration of unknown maps, or reconstruction of an entire environment.
+
+A later shared-reliability development study provides an additional boundary. Under a different controller and \(J_{\rm nav}\) task, the nominal category--structure condition gives five S/G ties and one loss across six parent layouts, with a relative mean difference of −0.3301\%. Under a mismatched relation, all six comparisons between S and the ordinary Bayesian semantic baseline B tie. Thus, implemented observation, belief update, and replanning do not necessarily produce an endpoint improvement. One nominal B control is missing because of interruption, and the full development matrix remains incomplete. These results cannot be pooled with the present \(J_5\) results and do not establish an effective shared-reliability contribution. They reinforce the narrower interpretation: the demonstrated benefit concerns category information in the original controlled setting, rather than a general advantage of increasingly complex semantic mechanisms.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+Motivated by active mapping needs in industrial facilities, this study implements category-prior and geometric-feedback active observation under a motion budget. The original confirmation yields a 6.1638\% mean category benefit, and the separate incorrect-prior study supports a 2.6241\% whole-policy correction benefit. A fixed 128-trial extension reproduces a 6.2505\% category improvement at budget 42 and a 4.2289\% improvement on same-family variants, while retaining low-budget infeasibility and a high-budget reversal. The evidence supports a conditional role for public facility knowledge in allocating limited observations. Future work should improve agreement between predicted observation value and measured surface quality before extending map maintenance across tasks and physical deployment.
+
+\hypertarget{reproducibility-and-data}{%
+\section*{Reproducibility and Data}\label{reproducibility-and-data}}
+
+The standalone repository release removes retired training adapters and some historical source archives containing legacy dependencies. Scientific outputs and original hashes are retained, but the cleaned checkout does not contain every historical source closure. Exact historical source reproduction requires the pre-cleanup version; new acquisitions must seal the current source separately, as described in the repository migration note.
+
+The extension preserves the fixed configuration, executed source hashes, and all 128 declared trial records. Its \path{analysis_review/complete_endpoint_metrics.csv} contains endpoint components and qualification; \path{complete_paired_metrics.csv} matches layout, configuration, budget, and seed. The batch \texttt{source\_freeze.json} binds implementation and inputs. Plotting scripts read sealed results, with separate provenance for saved meshes and the laboratory photographs. Historical confirmation, incorrect-category, and external-mechanism batches remain separate. Software versions are given in Section 5.1; the accompanying platform reproduction note and thesis Appendix A provide dependency and verification instructions. Any fresh acquisition must use a separate output rather than overwrite archived evidence.
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. \href{https://arxiv.org/abs/2004.05155}{Author paper}.
+\item
+  Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \href{https://arxiv.org/abs/2303.07236}{Author paper}.
+\item
+  Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \href{https://doi.org/10.1109/LRA.2026.3653276}{doi:10.1109/LRA.2026.3653276}.
+\item
+  Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \href{https://doi.org/10.48550/arXiv.1801.09847}{doi:10.48550/arXiv.1801.09847}.
+\item
+  Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \href{https://doi.org/10.15607/RSS.2021.XVII.018}{doi:10.15607/RSS.2021.XVII.018}.
+\item
+  Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \href{https://openaccess.thecvf.com/content/CVPR2024/html/Chen_GenNBV_Generalizable_Next-Best-View_Policy_for_Active_3D_Reconstruction_CVPR_2024_paper.html}{CVF proceedings}.
+\item
+  Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \href{https://doi.org/10.1109/TFR.2025.3578402}{doi:10.1109/TFR.2025.3578402}.
+\item
+  Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \href{https://doi.org/10.52202/085713-1113}{doi:10.52202/085713-1113}.
+\item
+  World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White paper, 2025-09-04. \href{https://www.weforum.org/publications/physical-ai-powering-the-new-age-of-industrial-operations/}{Official white paper}.
+\item
+  Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \href{https://arxiv.org/abs/2207.00254}{Author paper}.
+\item
+  Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \href{https://graphics.stanford.edu/papers/volrange/}{Author project and paper}.
+\item
+  Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \href{https://www.cassandra.org/arc/papers/aij98.pdf}{Author paper}.
+\item
+  Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \href{https://doi.org/10.1177/0278364914533443}{doi:10.1177/0278364914533443}.
+\item
+  Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \href{https://www.tanksandtemples.org/}{Author project and paper}.
+\end{enumerate}
+\end{document}

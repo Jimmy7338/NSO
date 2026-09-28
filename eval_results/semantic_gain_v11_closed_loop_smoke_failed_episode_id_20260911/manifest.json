@@ -1,0 +1,70 @@
+{
+  "created_utc": "2026-09-11T09:28:01.972914+00:00",
+  "error": {
+    "message": "sensor packet belongs to another scene/episode",
+    "type": "ValueError"
+  },
+  "failure_disposition": "retained; runner corrected to inherit the frozen prefix packet scene_id and episode_id",
+  "independent_confirmation": false,
+  "protocol": {
+    "adaptive_actions": 48,
+    "architecture": "unchanged ANS global-goal/local-action hierarchy and OV-SDF, STGHP, RPN-UQ, IGCR interfaces",
+    "arrangements": [
+      "shelf_west",
+      "shelf_east"
+    ],
+    "conditions": [
+      "learned_semantic_feedback",
+      "learned_semantic_no_feedback",
+      "learned_geometry",
+      "fixed_semantic",
+      "fixed_geometry",
+      "learned_swapped",
+      "low_confidence_fallback"
+    ],
+    "contexts": [
+      "Q0",
+      "Q1",
+      "Q2",
+      "Q3"
+    ],
+    "development_gates": {
+      "all_safe_and_four_interfaces": true,
+      "correct_semantics_above_swapped": true,
+      "feedback_changes_action_and_improves_semantic": true,
+      "low_confidence_matches_geometry": true,
+      "semantic_above_fixed_semantic": true,
+      "semantic_above_learned_geometry": true
+    },
+    "failure_policy": "retain every branch and failed gate; do not open independent E confirmation until a new development version passes",
+    "input_guard": "whole candidate history falls back to equal-capacity geometry MLP outside the packaged training range",
+    "max_candidates": 6,
+    "metrics": [
+      "new visible surface area",
+      "inspection joint = new visible area times terminal global F1@5cm",
+      "terminal 2D covered area times F1@5cm",
+      "precision/recall/F1@5cm and surface error",
+      "new-visible local recall/completeness",
+      "path distance, action time, collision and safe return"
+    ],
+    "model_bundle": "eval_results/semantic_gain_v11_integration_bundle_20260911/integration_bundle.json",
+    "online_feedback": "fractional Beta camera-yield residual indexed by measured category sign, quantized instance center and eight-sector view direction; evaluator truth is unavailable online",
+    "schema_version": "semantic_gain_v11_closed_loop_development_protocol/1",
+    "scope": "same V9 development domain used for model fitting; mechanism integration only, not independent confirmation",
+    "shared_prefix_actions": 150,
+    "status": "frozen_before_first_v11_closed_loop_run"
+  },
+  "schema_version": "semantic_gain_v11_closed_loop/1",
+  "smoke": true,
+  "source_sha256": {
+    "configs/virtual3d/semantic_gain_v11_closed_loop_development_protocol.json": "697b6796d15bcbde96a6c4c94268bf72c2b0efe2f5887bbbf18d6ce6ed985484",
+    "eval_results/semantic_gain_v11_integration_bundle_20260911/integration_bundle.json": "16f19824f4011628022bf878e5180d15238221559dcf32533ce738ff2f414a1b",
+    "nso/cpu_four_modules_v10.py": "914e56d6a5fd097058f135d2ed691beb85e07812149c610f363807a81fe22091",
+    "nso/hierarchical_options_v10.py": "7244f0044264e84c07ed0155820376e7156d1f8ef15f0c036fbfc480bee5bfb1",
+    "nso/runtime_integration.py": "8eb7e93a7c95aa2065284a344427f0b3bb73962e5bd6bf438ccfe5965816441a",
+    "nso/semantic_gain_v11.py": "f0a41fb08d47806e7450dd13b764e63403d00db438ae849d9f8af6645e2f6169",
+    "scripts/run_semantic_gain_v11_closed_loop.py": "f8bf07bdc55d9a7b5226b2ccefba717d2e1843c9a438e6724aa2e8f742378eeb"
+  },
+  "status": "failed",
+  "worlds_constructed_before_source_freeze": 0
+}

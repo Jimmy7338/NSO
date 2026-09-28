@@ -1,0 +1,128 @@
+{
+  "status": "passed_abstract_solver_contract_only",
+  "date": "2026-09-17",
+  "receipt_created_utc": "2026-09-17T11:01:22.569813+00:00",
+  "evidence_origin": "Transcription of the three existing exec_command terminal results; no tests rerun while writing this receipt.",
+  "command": "PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv-3d/bin/python -B -m unittest tests.virtual3d.test_finite_belief_solver_v33 -v",
+  "source_sha256": {
+    "nso/finite_belief_solver_v33.py": "f33804dbf1e0f63aaacf6299359a9df964a4338c0eea6468a6214a358a159261",
+    "tests/virtual3d/test_finite_belief_solver_v33.py": "9915c63f63f7ab9809a6ad492df3941fcce7a0e6d51630e525877b8ea2ccdfbb",
+    "docs/research/V33_FINITE_SOLVER_REVIEW_20260917.md": "ff0b57de29f12d354f2d26822e8c65a664380ad394c6b0fec67085f1234e85d6"
+  },
+  "test_runs": [
+    {
+      "sequence": 1,
+      "tool_chunk_id": "cc719b",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "reported_unittest_seconds": 0.005,
+      "terminal_footer": "Ran 13 tests in 0.005s\n\nOK",
+      "source_snapshot_available": false
+    },
+    {
+      "sequence": 2,
+      "tool_chunk_id": "921c54",
+      "tests": 17,
+      "failures": 1,
+      "errors": 0,
+      "exit_code": 1,
+      "reported_unittest_seconds": 0.007,
+      "failed_test": "test_information_persists_after_return_to_identical_view",
+      "actual_actions": [
+        "A",
+        "home",
+        "B",
+        "home"
+      ],
+      "expected_actions": [
+        "probe",
+        "home",
+        "A",
+        "home"
+      ],
+      "terminal_excerpt": "FAIL: test_information_persists_after_return_to_identical_view (tests.virtual3d.test_finite_belief_solver_v33.FiniteCoverageBeliefV33Tests.test_information_persists_after_return_to_identical_view)\nTraceback (most recent call last):\n  File \"/root/NSO/tests/virtual3d/test_finite_belief_solver_v33.py\", line 237, in test_information_persists_after_return_to_identical_view\n    self.assertEqual(witness['suffix_actions'], ['probe', 'home', arm, 'home'])\nAssertionError: Lists differ: ['A', 'home', 'B', 'home'] != ['probe', 'home', 'A', 'home']\n\nRan 17 tests in 0.007s\n\nFAILED (failures=1)",
+      "classification": "incorrect_abstract_fixture_expectation_not_solver_or_scene_failure",
+      "source_snapshot_available": false
+    },
+    {
+      "sequence": 3,
+      "tool_chunk_id": "e0da91",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "reported_unittest_seconds": 0.006,
+      "terminal_footer": "Ran 17 tests in 0.006s\n\nOK",
+      "tested_solver_sha256": "f33804dbf1e0f63aaacf6299359a9df964a4338c0eea6468a6214a358a159261",
+      "tested_test_sha256": "9915c63f63f7ab9809a6ad492df3941fcce7a0e6d51630e525877b8ea2ccdfbb"
+    }
+  ],
+  "final_tests_passed": 17,
+  "independent_enumeration": {
+    "method": "Complete action/observation histories and all qualified terminal utility vectors, no production Bellman/cache/action methods.",
+    "toy_models": 4,
+    "budgets": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "queries_per_budget": [
+      "unknown_G",
+      "known_h0",
+      "known_h1"
+    ],
+    "value_comparisons": 60,
+    "all_equal": true,
+    "physical_scenarios": false
+  },
+  "fixture_correction": {
+    "changed_file": "tests/virtual3d/test_finite_belief_solver_v33.py",
+    "changed_test": "test_information_persists_after_return_to_identical_view",
+    "before": {
+      "arm_roundtrip_cost": 2,
+      "probe_roundtrip_cost": 2,
+      "total_budget": 4,
+      "both_arms_fit": true
+    },
+    "after": {
+      "arm_roundtrip_cost": 3,
+      "probe_roundtrip_cost": 2,
+      "total_budget": 5,
+      "both_arms_fit": false
+    },
+    "reason": "The original test incorrectly assumed probing was optimal while direct visits to both arms fit and had greater reward; add a return-edge to each abstract arm to isolate information memory.",
+    "solver_modified_to_fix_this_failure": false,
+    "project_scene_or_budget_modified": false,
+    "not_a_physical_failure": true
+  },
+  "scope": {
+    "project_world_constructions": 0,
+    "sensor_calls": 0,
+    "mapper_updates": 0,
+    "tsdf_fusions": 0,
+    "mesh_or_quality_evaluations": 0,
+    "new_physical_main_tasks": 0,
+    "new_formal_v33_scene_solves": 0,
+    "tests_rerun_for_receipt": 0,
+    "actual_semantic_benefit_proven": false,
+    "continuous_G_optimality_proven": false,
+    "physical_coverage_or_precision_proven": false
+  },
+  "accuracy_threshold_sensitivity": {
+    "status": "untested_not_applicable_to_noise_free_visibility_proxy",
+    "quality_02cm": null,
+    "quality_05cm": null,
+    "quality_10cm": null
+  },
+  "remaining_gates": [
+    "Independently verify scene geometry, shared priors/actions and all observable channels.",
+    "Check every prefix observation, cumulative coverage masks and exact return witnesses.",
+    "Require certified feasible policies in both hypotheses and >5% relative information value separately for both parents.",
+    "Do not promote an incumbent/limited solve to a certified G optimum.",
+    "Actual coverage, 3D measurement and precision thresholds remain untested."
+  ]
+}

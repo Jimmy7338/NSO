@@ -1,0 +1,298 @@
+{
+  "scope": "read-only audit; no deletion, installation, download, World creation, or experimental data changes",
+  "date": "2026-09-21",
+  "resource": {
+    "status": "blocked_before_world_creation",
+    "persistent_output_root": "/root/NSO/audit_results/v44_storage_audit_20260921",
+    "checked_filesystem_path": "/root/NSO/audit_results/v44_storage_audit_20260921",
+    "filesystem_type": "ext4",
+    "non_ram_filesystem": true,
+    "free_bytes": 7942967296,
+    "required_free_bytes": 10737418240,
+    "expected_batch_peak_bytes": 402653184,
+    "passed": false,
+    "reason": "insufficient_persistent_space"
+  },
+  "sandbox_visibility_warning": "ordinary sandbox /dev/shm is a different empty mount; host escalated read confirms live dependency target",
+  "dependencies": {
+    "venv_link": "/root/NSO/.venv-3d/lib/python3.12/site-packages",
+    "link_target": "/dev/shm/nso_v39_python_packages",
+    "host_target_exists": true,
+    "versions": {
+      "numpy": "1.26.4",
+      "scipy": "1.11.4",
+      "open3d": "0.19.0",
+      "matplotlib": "3.8.4",
+      "shapely": "2.1.2"
+    },
+    "restore_needed": false,
+    "historical_recovery_inputs": [
+      "requirements-3d-v23.txt",
+      "requirements-3d.txt",
+      "requirements-cpu.txt",
+      "requirements-3d.lock.txt"
+    ],
+    "existing_persistent_cpu_alternative": ".venv-cpu (numpy 1.26.4/scipy 1.11.4/matplotlib 3.8.4; not a full Open3D replacement)",
+    "historical_ram_move_receipt": "audit_results/v39_storage_20260920/python_runtime_to_ram.json",
+    "historical_ram_move_verified_files": 17088,
+    "historical_ram_move_payload_bytes": 756076058,
+    "local_wheels_found_in_project_tmp_rootcache": 0
+  },
+  "candidates": [
+    {
+      "path": "/root/NSO/nso/__pycache__/observed_instances_v41.cpython-312.pyc",
+      "bytes": 28093,
+      "allocated_bytes": 28672,
+      "hard_links": 1,
+      "sha256": "f000b2ab84fc17ed239d648ea9cc4e226fbb48d92c2697deb8ef2c3e058942ca",
+      "reason": "untracked regenerable CPython bytecode; corresponding source exists",
+      "source": "/root/NSO/nso/observed_instances_v41.py",
+      "source_sha256": "21302f95c7cefa8dff5c99611e3b45bc12be5cadc0112797a72244316cd0a967"
+    },
+    {
+      "path": "/root/NSO/scripts/__pycache__/restore_tare_sources_v39.cpython-312.pyc",
+      "bytes": 15472,
+      "allocated_bytes": 16384,
+      "hard_links": 1,
+      "sha256": "74634ca225890e83e3aaac1a08b9ec33b276c8a459a5a8276b16b9aabe917305",
+      "reason": "untracked regenerable CPython bytecode; corresponding source exists",
+      "source": "/root/NSO/scripts/restore_tare_sources_v39.py",
+      "source_sha256": "3348eea129b8786b4c21e0bce061ab051e8def2041d555989d77c360c2fb306c"
+    },
+    {
+      "path": "/tmp/nso-v38-qualitative-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "9941347022af70aab15aec7bc05cc48aadfb71f723fa69c5e3f48fd345e6825f",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso-v40-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "a7541be1950078a5c431b4eef7a2c6d35337c5a7e93e9237a2e923ccf46e8544",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso-v42-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "a31eebfaaf512d1b1f4f729e48ae55a8825aea27293965f915db09f5c0c758de",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso-v43-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "8d6bf6631393b835514330f110313cdd6cc33e5d3d44e2d0e5a2f15fda2c534a",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso_v34_mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "6ee50d55ccef20c65df654060dadd148f19544e8e000cb89cbd0cbb7bf4a5c79",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso_v35_matplotlib/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "4c8f74f649c0ccc3ee180cfdda0e49864ab20fd4d15596e6bff0dfd4ac058a31",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso_v36_matplotlib/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "496e69daaf2d3dce01cd366feffc64b750a33df8bcf8684c501a3b826ec7e2e5",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso_v38_mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "2845fe4384d7be3fc9a234c6328112ce54b9bb368b6a9d6f6f769d512ae4259f",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    },
+    {
+      "path": "/tmp/nso_v39_mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "66d55b2d71bb09ce6b3fb9e1d4a28c21d7747818e238272ae49605a9112dc242",
+      "reason": "NSO-named Matplotlib generated font cache; regenerable; no experimental observations"
+    }
+  ],
+  "candidate_file_count": 11,
+  "candidate_logical_bytes": 397328,
+  "candidate_allocated_single_link_bytes": 413696,
+  "excluded_candidates": [
+    {
+      "path": "/root/NSO/nso/__pycache__/__init__.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/nso/__pycache__/clip_semantic_map.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/nso/__pycache__/components.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/nso/__pycache__/reachability_uq.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/nso/__pycache__/topo_graph.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/__pycache__/__init__.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/__pycache__/__init__.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/__pycache__/__init__.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/__pycache__/exploration_env.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/__pycache__/reachability_utils.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/__pycache__/sync_vector_env.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/utils/__pycache__/__init__.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/utils/__pycache__/noisy_actions.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/utils/__pycache__/pose.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/utils/__pycache__/supervision.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat/utils/__pycache__/visualizations.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/__init__.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/__init__.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/_lab.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/_lab.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/compat.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/config_utils.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/construct_envs.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/construct_envs.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/exploration_env.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/habitat2/__pycache__/vector_env_compat.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/utils/__pycache__/depth_utils.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/utils/__pycache__/depth_utils.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/utils/__pycache__/fmm_planner.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/utils/__pycache__/map_builder.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/utils/__pycache__/rotation_utils.cpython-38.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/env/utils/__pycache__/rotation_utils.cpython-39.pyc",
+      "reason": "tracked file; retain"
+    },
+    {
+      "path": "/root/NSO/tests/cpu/__pycache__/test_virtual3d.cpython-312.pyc",
+      "reason": "source not established; retain"
+    }
+  ],
+  "excluded_scopes": {
+    ".git": "repository history, no pruning authorized by this audit",
+    "eval_results": "original or sealed experiment evidence; not cache",
+    "audit_results": "original audit/evidence/archive material; not cache",
+    "third_party": "baseline source dependencies, not disposable build directories",
+    "/tmp non-NSO trees": "scanner/OTA/field-trace project data outside this task",
+    "/root/.cache": "only small font/other-project state; no large pip wheel cache"
+  },
+  "gate_formula": "max(10 * 1024**3, 2 * expected_batch_peak_bytes + 2 * 1024**3)",
+  "gate_source": {
+    "path": "env/development_sensor_v41.py",
+    "sha256": "4e0f746e8ebdf78cacaa0ec082d636ebd59169e085e8dd2a8b4547e3bc1b99c4",
+    "start_line": 357
+  },
+  "runtime_protocol": {
+    "path": "configs/virtual3d/v43_runtime_protocol_20260921.json",
+    "sha256": "abc91f913953a98fc642c59f2a5f17cc85f377a19fe1aaba25a9ecf6c591ddda"
+  },
+  "shortfall_before_cleanup_bytes": 2794450944,
+  "shortfall_after_candidate_file_blocks_bytes": 2794037248,
+  "candidate_cleanup_sufficient_to_pass_gate": false,
+  "duplicate_audit_path": "audit_results/v44_storage_audit_20260921/duplicate_audit.json",
+  "git_prune_packable_loose_objects": 0,
+  "git_maintenance_performed": false,
+  "verified_large_duplicate_logical_reclaim_upper_bound_bytes": 70277074,
+  "all_same_size_logical_reclaim_upper_bound_bytes": 1534856206
+}

@@ -1,0 +1,49 @@
+{
+  "version": "v19_sensor_probe",
+  "width": 96,
+  "height": 72,
+  "render_fx_px": 48.0,
+  "reference_fx_px": 480.0,
+  "baseline_m": 0.12,
+  "voxel_m": 0.04,
+  "truncation_m": 0.12,
+  "max_depth_m": 5.0,
+  "seeds": [
+    1901,
+    1902,
+    1903
+  ],
+  "ranges_m": [
+    4.0,
+    1.0
+  ],
+  "frames": 24,
+  "models": {
+    "ideal": [
+      0.0,
+      0.0
+    ],
+    "iid_010px": [
+      0.1,
+      0.0
+    ],
+    "iid_025px": [
+      0.25,
+      0.0
+    ],
+    "bias_025px_iid_025px": [
+      0.25,
+      0.25
+    ]
+  },
+  "plans": [
+    "far_one",
+    "far_copied_24",
+    "far_fresh_24",
+    "near_one",
+    "near_fresh_24"
+  ],
+  "predicted_crop_half_width_m": 0.4,
+  "reference_half_width_m": 0.3,
+  "note": "Generic stereo sensitivity assumptions, NOT measured ZED parameters. Reference pixel units use fx=480; output raster uses fx=48. Perfect pose, planar static exterior, no materials/dropout/semantic input. Frame counts exclude travel costs: sensor response only, not policy efficacy."
+}

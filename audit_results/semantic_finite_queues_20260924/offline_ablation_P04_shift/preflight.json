@@ -1,0 +1,338 @@
+{
+  "schema": "semantic.P04_shift_ablation_review_preflight.v1",
+  "created_unix_s": 1790217943.1407328,
+  "status": "prepared_not_started_waiting_explicit_root_signal",
+  "sealed_events": {
+    "ablation_P04_shift_NC_b120_lexicographic": {
+      "event_path": "audit_results/semantic_finite_queues_20260924/queue_B/batch_11/events.jsonl",
+      "byte_offset": 416,
+      "complete_line_bytes": 550,
+      "complete_line_sha256": "340f232035fe021561f66701fc52ea3f921e7de3ced2b78ba0f97adbd7b3be93",
+      "manifest_sha256": "dc9a50c07215a19fdf12c2fe9f604b8a08f295cf1069056d409ed0b3c4fc79c5"
+    },
+    "ablation_P04_shift_NF_b120_lexicographic": {
+      "event_path": "audit_results/semantic_finite_queues_20260924/queue_B/batch_11/events.jsonl",
+      "byte_offset": 1043,
+      "complete_line_bytes": 550,
+      "complete_line_sha256": "be785f2d1bd9f99b86cfdd04a4f0519340641f52a085faf769539de073c440d6",
+      "manifest_sha256": "be46bb4e0756787fdd14cc42e3f1da788662cafcbd994cdb6d5a147164219f13"
+    },
+    "ablation_P04_shift_NP_b120_lexicographic": {
+      "event_path": "audit_results/semantic_finite_queues_20260924/queue_B/batch_11/events.jsonl",
+      "byte_offset": 1670,
+      "complete_line_bytes": 550,
+      "complete_line_sha256": "ce2ce710e69217f701825d88441193e1438a03fc4a0a4933f00031a20479c525",
+      "manifest_sha256": "04318d7421789c4e63f4a3c4ab210e5fe769135fa764632e4e37071e429810d8"
+    }
+  },
+  "source_review": {
+    "run_id": "core_P04_shift_G_b120_lexicographic",
+    "manifest_sha256": "e543971f53c2188a4fcfa6c847418fc8c56585169ac55d6592261a29ef254c3f",
+    "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P04_shift_G_b120_lexicographic.json",
+    "review_sha256": "761e6e8321fe73c8e69a6b355724f02de8874ee2825a8751a68ecc6a65d7c382"
+  },
+  "input_comparisons": {
+    "ablation_P04_shift_NC_b120_lexicographic": {
+      "actual_method": "shared_no_cross_future",
+      "source": {
+        "run_id": "core_P04_shift_G_b120_lexicographic",
+        "manifest_sha256": "e543971f53c2188a4fcfa6c847418fc8c56585169ac55d6592261a29ef254c3f",
+        "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P04_shift_G_b120_lexicographic.json",
+        "review_sha256": "761e6e8321fe73c8e69a6b355724f02de8874ee2825a8751a68ecc6a65d7c382"
+      },
+      "public_equal": {
+        "public_workspace.json": true,
+        "public_spec.json": true,
+        "public_graph.json": true
+      },
+      "mapper_equal": {
+        "shape": true,
+        "resolution_m": true,
+        "origin_xy_m": true,
+        "grid_convention": true,
+        "frames": true,
+        "backend_poisoned": true,
+        "occupancy_sha256": true,
+        "tsdf_integration_count": true,
+        "voxel_m": true,
+        "sdf_trunc_m": true,
+        "near_m": true,
+        "far_m": true,
+        "backend": true
+      },
+      "arrays": {
+        "prediction/mesh.npz": {
+          "source_file_sha256": "30ee6f94b58d0f5e76a15bdc41490fd8e67ebdac30366956e2fcd8a81f0d2eba",
+          "target_file_sha256": "30ee6f94b58d0f5e76a15bdc41490fd8e67ebdac30366956e2fcd8a81f0d2eba",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "vertices": {
+              "dtype": "<f8",
+              "shape": [
+                97726,
+                3
+              ],
+              "array_sha256": "107fc58c150c85d68bb490e7e244051e0994c2e810e6f592723fce81cd27ed28",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "triangles": {
+              "dtype": "<i4",
+              "shape": [
+                184758,
+                3
+              ],
+              "array_sha256": "60805244b1a48b78bfa4e0702a76d10c5c68f8db51c9ddece974f84d38890412",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "vertex_colors": {
+              "dtype": "<f8",
+              "shape": [
+                97726,
+                3
+              ],
+              "array_sha256": "b44c92f9cf7a64c6672c5306e849d50367cb29b9df68035dc40272c34197be03",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        },
+        "prediction/occupancy.npz": {
+          "source_file_sha256": "24cd64991a831946de4598c16259b2c3a94909f669f96f69fa2cd68110153781",
+          "target_file_sha256": "24cd64991a831946de4598c16259b2c3a94909f669f96f69fa2cd68110153781",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "belief": {
+              "dtype": "|i1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "2fda09f0b543940fd8ad245c3bc70f07f3a1ec8cb6b5bff69aa73dec351f7d7f",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "observed": {
+              "dtype": "|b1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "6a67dae66d8882fc3f6ba19e94ba1c732d211255f9f59419876b736074034b57",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        }
+      },
+      "array_difference": null,
+      "selected_mode": "replay_and_reuse",
+      "basis": "complete numerical inputs compared before target replay; no fallback rerun after reuse failure"
+    },
+    "ablation_P04_shift_NF_b120_lexicographic": {
+      "actual_method": "shared_no_feedback",
+      "source": {
+        "run_id": "core_P04_shift_G_b120_lexicographic",
+        "manifest_sha256": "e543971f53c2188a4fcfa6c847418fc8c56585169ac55d6592261a29ef254c3f",
+        "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P04_shift_G_b120_lexicographic.json",
+        "review_sha256": "761e6e8321fe73c8e69a6b355724f02de8874ee2825a8751a68ecc6a65d7c382"
+      },
+      "public_equal": {
+        "public_workspace.json": true,
+        "public_spec.json": true,
+        "public_graph.json": true
+      },
+      "mapper_equal": {
+        "shape": true,
+        "resolution_m": true,
+        "origin_xy_m": true,
+        "grid_convention": true,
+        "frames": true,
+        "backend_poisoned": true,
+        "occupancy_sha256": true,
+        "tsdf_integration_count": true,
+        "voxel_m": true,
+        "sdf_trunc_m": true,
+        "near_m": true,
+        "far_m": true,
+        "backend": true
+      },
+      "arrays": {
+        "prediction/mesh.npz": {
+          "source_file_sha256": "30ee6f94b58d0f5e76a15bdc41490fd8e67ebdac30366956e2fcd8a81f0d2eba",
+          "target_file_sha256": "30ee6f94b58d0f5e76a15bdc41490fd8e67ebdac30366956e2fcd8a81f0d2eba",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "vertices": {
+              "dtype": "<f8",
+              "shape": [
+                97726,
+                3
+              ],
+              "array_sha256": "107fc58c150c85d68bb490e7e244051e0994c2e810e6f592723fce81cd27ed28",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "triangles": {
+              "dtype": "<i4",
+              "shape": [
+                184758,
+                3
+              ],
+              "array_sha256": "60805244b1a48b78bfa4e0702a76d10c5c68f8db51c9ddece974f84d38890412",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "vertex_colors": {
+              "dtype": "<f8",
+              "shape": [
+                97726,
+                3
+              ],
+              "array_sha256": "b44c92f9cf7a64c6672c5306e849d50367cb29b9df68035dc40272c34197be03",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        },
+        "prediction/occupancy.npz": {
+          "source_file_sha256": "24cd64991a831946de4598c16259b2c3a94909f669f96f69fa2cd68110153781",
+          "target_file_sha256": "24cd64991a831946de4598c16259b2c3a94909f669f96f69fa2cd68110153781",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "belief": {
+              "dtype": "|i1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "2fda09f0b543940fd8ad245c3bc70f07f3a1ec8cb6b5bff69aa73dec351f7d7f",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "observed": {
+              "dtype": "|b1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "6a67dae66d8882fc3f6ba19e94ba1c732d211255f9f59419876b736074034b57",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        }
+      },
+      "array_difference": null,
+      "selected_mode": "replay_and_reuse",
+      "basis": "complete numerical inputs compared before target replay; no fallback rerun after reuse failure"
+    },
+    "ablation_P04_shift_NP_b120_lexicographic": {
+      "actual_method": "shared_no_future",
+      "source": {
+        "run_id": "core_P04_shift_G_b120_lexicographic",
+        "manifest_sha256": "e543971f53c2188a4fcfa6c847418fc8c56585169ac55d6592261a29ef254c3f",
+        "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P04_shift_G_b120_lexicographic.json",
+        "review_sha256": "761e6e8321fe73c8e69a6b355724f02de8874ee2825a8751a68ecc6a65d7c382"
+      },
+      "public_equal": {
+        "public_workspace.json": true,
+        "public_spec.json": true,
+        "public_graph.json": true
+      },
+      "mapper_equal": {
+        "shape": true,
+        "resolution_m": true,
+        "origin_xy_m": true,
+        "grid_convention": true,
+        "frames": true,
+        "backend_poisoned": true,
+        "occupancy_sha256": true,
+        "tsdf_integration_count": true,
+        "voxel_m": true,
+        "sdf_trunc_m": true,
+        "near_m": true,
+        "far_m": true,
+        "backend": true
+      },
+      "arrays": {
+        "prediction/mesh.npz": {
+          "source_file_sha256": "30ee6f94b58d0f5e76a15bdc41490fd8e67ebdac30366956e2fcd8a81f0d2eba",
+          "target_file_sha256": "30ee6f94b58d0f5e76a15bdc41490fd8e67ebdac30366956e2fcd8a81f0d2eba",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "vertices": {
+              "dtype": "<f8",
+              "shape": [
+                97726,
+                3
+              ],
+              "array_sha256": "107fc58c150c85d68bb490e7e244051e0994c2e810e6f592723fce81cd27ed28",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "triangles": {
+              "dtype": "<i4",
+              "shape": [
+                184758,
+                3
+              ],
+              "array_sha256": "60805244b1a48b78bfa4e0702a76d10c5c68f8db51c9ddece974f84d38890412",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "vertex_colors": {
+              "dtype": "<f8",
+              "shape": [
+                97726,
+                3
+              ],
+              "array_sha256": "b44c92f9cf7a64c6672c5306e849d50367cb29b9df68035dc40272c34197be03",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        },
+        "prediction/occupancy.npz": {
+          "source_file_sha256": "24cd64991a831946de4598c16259b2c3a94909f669f96f69fa2cd68110153781",
+          "target_file_sha256": "24cd64991a831946de4598c16259b2c3a94909f669f96f69fa2cd68110153781",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "belief": {
+              "dtype": "|i1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "2fda09f0b543940fd8ad245c3bc70f07f3a1ec8cb6b5bff69aa73dec351f7d7f",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "observed": {
+              "dtype": "|b1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "6a67dae66d8882fc3f6ba19e94ba1c732d211255f9f59419876b736074034b57",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        }
+      },
+      "array_difference": null,
+      "selected_mode": "replay_and_reuse",
+      "basis": "complete numerical inputs compared before target replay; no fallback rerun after reuse failure"
+    }
+  },
+  "frozen_source_count": 59,
+  "frozen_sources_match": true,
+  "standard_target_receipts_absent": true,
+  "runtime_before": {
+    "worlds_created": 0,
+    "rgbd_frames": 0,
+    "scans": 0,
+    "paid_actions": 0,
+    "blocked_before_world_creation": 0
+  },
+  "runtime_after": {
+    "worlds_created": 0,
+    "rgbd_frames": 0,
+    "scans": 0,
+    "paid_actions": 0,
+    "blocked_before_world_creation": 0
+  },
+  "new_worlds": 0,
+  "new_reviews_started": 0,
+  "automatic_retry": false,
+  "maximum_parallel_reviews_in_this_task": 1,
+  "free_bytes": 10711490560,
+  "NC_scope": "shared_no_cross_future retains actual shared reliability belief; do not interpret it as removing shared reliability"
+}

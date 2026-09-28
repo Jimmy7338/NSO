@@ -1,0 +1,210 @@
+{
+  "analysis": "Pure Python scalar algebra from saved priors and current paid residual; no controller instantiation, forecast, World, replay or metric evaluation.",
+  "episode": "/root/NSO/audit_results/semantic_development_acquisition_20260923/episodes/core_P00_shift_S_b120_lexicographic",
+  "episode_manifest_sha256": "282233d51bf4427b1e8b93078010b6bdc7f6edfbf41aea51622d9ee57bd51090",
+  "formulas": {
+    "leave_one_out_weight": "w_i(k) proportional to 0.5*product_{j!=i, same observed class} m_j(k). Only peer instance_0002 contributes to instance_0000 at this frame.",
+    "peer_domain_message": "m_j(k)=sum_h q_k(h|cabinet)*exp(L_j(h)); q_0=uniform geometry prior, q_1=cabinet prior.",
+    "residual_log_evidence": "L_j(h)=-(loss_j(h)-min_h loss_j(h))/0.05; first valid feedback, with existing [-6,0]/[-24,0] caps inactive here.",
+    "rho": "rho_i=w_i(1)=m_j(1)/(m_j(0)+m_j(1))",
+    "source_locations": [
+      "nso/semantic_reliability.py:124",
+      "nso/semantic_reliability.py:128",
+      "nso/semantic_reliability.py:134",
+      "nso/semantic_reliability.py:137",
+      "nso/observed_residual_v41.py:281"
+    ],
+    "target_posterior": "p_i(h) proportional to q_i(h)*exp(L_i(h)); L_i is zero here, so its posterior equals the mixed prior.",
+    "target_prior": "q_i(h)=(1-rho_i)*q_0(h)+rho_i*q_1(h)"
+  },
+  "frozen_source_sha256": {
+    "nso/controller_semantic_mechanism.py": "dcf163dbdce2b97f0ec9dc8a4c60bd34c5d60d0a2eb0cdaa608aa78b251a08f3",
+    "nso/observed_instances_v41.py": "21302f95c7cefa8dff5c99611e3b45bc12be5cadc0112797a72244316cd0a967",
+    "nso/observed_residual_v41.py": "63ed625cdcf00712b6ef9b39e4b4cb8ff951edb19f4a0cdb66eec5ff58a44b77",
+    "nso/semantic_reliability.py": "6a773e6f5252d730fb2851fca036fa1af9ccaa54e5632f5c5f3d66a6dfbd2dc2"
+  },
+  "interpretation": {
+    "classification": "Weak local generalized evidence favors the class-prior domain over the uniform-prior domain; the saved rho direction and magnitude agree with the frozen formula.",
+    "leave_one_out_note": "Evidence from instance_0002 changes instance_0000 prior. Instance_0002 itself retains rho=0.5 from its zero-evidence peer and applies its own geometry likelihood once.",
+    "limits": [
+      "No calibrated probability of label correctness or successful shift detection is demonstrated.",
+      "Offline louvered ground truth is contextual attribution only; it never replaces the saved log evidence or planning scores.",
+      "A correct algebraic update does not establish adequacy or calibration of the residual/prototype observation model.",
+      "Only this frame and first peer update were checked; this is not a six-parent validation.",
+      "The previously pinned P00 shift trajectory diagnostic reports identical G/B/S actions and mesh, so this reliability movement did not produce observed policy gain on that trajectory."
+    ],
+    "mathematical_update_error_found": false,
+    "why_gt_mismatch_does_not_force_rho_down": "A lower prior probability for the true louvered structure does not fix the sign of an evidence-weighted sum over all structures. The saved generalized residual is diffuse across three structures, not an oracle structure label.",
+    "why_rho_increased": "The louvered loss is smallest, but planar and recessed retain exp(L)=0.857 and 0.780. Open-frame retains only 0.283. Relative to neutral evidence, suppressing open-frame contributes +0.107594 to m1-m0 because the cabinet prior assigns it only 0.10 versus uniform 0.25; losses on planar/recessed contribute -0.021449 and -0.010999. The net is +0.075145, giving a weak ratio 1.102948 and rho 0.524477."
+  },
+  "new_numeric_surface_evaluations": 0,
+  "new_planner_executions": 0,
+  "new_saved_policy_replays": 0,
+  "new_worlds": 0,
+  "offline_truth_context": {
+    "actual_category": "cabinet",
+    "actual_structure": "louvered",
+    "asset_id": "SEM_P00__structure_relationship_shift",
+    "asset_manifest_sha256": "1566282bc88ef557daa7498c2816e4968c08ae7088bcc6e3d1413b6a96dadfd1",
+    "association_status": "Offline nearest-marker attribution only; both private cabinet instances independently have the same louvered structure.",
+    "nearest_declared_marker_instance_id": 0,
+    "nearest_marker_center_distance_m": 0.04556227524536709,
+    "not_available_to_G_B_S_planning": true,
+    "not_used_in_any_recomputed_score": true,
+    "observed_peer_anchor_m": [
+      2.7549550246731425,
+      2.626532809548019,
+      0.8035055786371231
+    ],
+    "private_file_sha256": {
+      "evaluation_private/instances.json": "281ed0fa6c9426b59a73cc1722956696c611af82c4b4d1764230538f985dfe04",
+      "renderer_private/markers.json": "dd48a88a37a17c9314b67dc62e017991adcf8a8ea8c3ea2d3020cbe099777db0"
+    },
+    "public_prior_probability_of_actual_structure": 0.2,
+    "read_only_after_episode": true,
+    "saved_residual_best_fit_structure": "louvered",
+    "second_nearest_marker_distance_m": 3.1736132982699092,
+    "uniform_prior_probability_of_actual_structure": 0.25
+  },
+  "paid_step": 66,
+  "peer_instance_id": "instance_0002",
+  "per_structure_contributions": [
+    {
+      "class_prior": 0.4,
+      "class_weighted_evidence": 0.3428023267798842,
+      "contribution_relative_to_neutral_evidence": -0.021449127457543436,
+      "contribution_to_m1_minus_m0": 0.1285508725424566,
+      "exp_log_evidence": 0.8570058169497105,
+      "generalized_log_evidence": -0.15431057283480182,
+      "geometry_prior": 0.25,
+      "geometry_weighted_evidence": 0.2142514542374276,
+      "mean_profiled_axial_residual_m": 0.08525673367071611,
+      "structure": "planar"
+    },
+    {
+      "class_prior": 0.29999999999999993,
+      "class_weighted_evidence": 0.23400360958841374,
+      "contribution_relative_to_neutral_evidence": -0.010999398401931024,
+      "contribution_to_m1_minus_m0": 0.03900060159806891,
+      "exp_log_evidence": 0.7800120319613792,
+      "generalized_log_evidence": -0.24844593382596092,
+      "geometry_prior": 0.25,
+      "geometry_weighted_evidence": 0.1950030079903448,
+      "mean_profiled_axial_residual_m": 0.08996350172027406,
+      "structure": "recessed"
+    },
+    {
+      "class_prior": 0.2,
+      "class_weighted_evidence": 0.2,
+      "contribution_relative_to_neutral_evidence": -0.0,
+      "contribution_to_m1_minus_m0": -0.04999999999999999,
+      "exp_log_evidence": 1.0,
+      "generalized_log_evidence": 0.0,
+      "geometry_prior": 0.25,
+      "geometry_weighted_evidence": 0.25,
+      "mean_profiled_axial_residual_m": 0.07754120502897602,
+      "structure": "louvered"
+    },
+    {
+      "class_prior": 0.1,
+      "class_weighted_evidence": 0.028270922799795324,
+      "contribution_relative_to_neutral_evidence": 0.107593615800307,
+      "contribution_to_m1_minus_m0": -0.04240638419969298,
+      "exp_log_evidence": 0.2827092279979532,
+      "generalized_log_evidence": -1.263336372445505,
+      "geometry_prior": 0.25,
+      "geometry_weighted_evidence": 0.0706773069994883,
+      "mean_profiled_axial_residual_m": 0.14070802365125126,
+      "structure": "open_frame"
+    }
+  ],
+  "planner_legal_inputs": {
+    "class_prior": [
+      0.4,
+      0.29999999999999993,
+      0.2,
+      0.1
+    ],
+    "geometry_prior": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "initial_domain_weights": [
+      0.5,
+      0.5
+    ],
+    "observed_class": "cabinet",
+    "peer_cumulative_log_evidence": [
+      -0.15431057283480182,
+      -0.24844593382596092,
+      0.0,
+      -1.263336372445505
+    ],
+    "peer_evidence_was_zero_at_step65": true,
+    "peer_feedback_applied": true,
+    "residual_scale_m": 0.05,
+    "score_is_calibrated": false,
+    "structure_order": [
+      "planar",
+      "recessed",
+      "louvered",
+      "open_frame"
+    ],
+    "target_own_log_evidence": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "recomputed": {
+    "absolute_reproduction_errors": {
+      "log_evidence_from_saved_residual": 0.0,
+      "peer_structure_posterior": 5.551115123125783e-17,
+      "rho": 0.0,
+      "target_active_prior": 5.551115123125783e-17,
+      "target_structure_posterior": 5.551115123125783e-17
+    },
+    "generalized_evidence_ratio_m1_over_m0": 1.1029481016018585,
+    "log_generalized_evidence_ratio": 0.09798668712617731,
+    "m0": 0.7299317692272608,
+    "m1": 0.8050768591680932,
+    "m1_minus_m0": 0.07514508994083247,
+    "peer_own_leave_one_out_rho": 0.5,
+    "peer_structure_posterior": [
+      0.3628994461090665,
+      0.27948156749270364,
+      0.29315796124899623,
+      0.06446102514923369
+    ],
+    "reliability_weights_leave_one_out": [
+      0.4755229095945256,
+      0.5244770904054744
+    ],
+    "rho_after": 0.5244770904054744,
+    "rho_before": 0.5,
+    "rho_change": 0.02447709040547441,
+    "rho_change_percentage_points": 2.447709040547441,
+    "saved_rho_after": 0.5244770904054744,
+    "target_active_prior": [
+      0.32867156356082117,
+      0.27622385452027365,
+      0.2237761454797263,
+      0.17132843643917883
+    ],
+    "target_structure_posterior": [
+      0.32867156356082117,
+      0.27622385452027365,
+      0.2237761454797263,
+      0.17132843643917883
+    ]
+  },
+  "schema": "semantic.peer_reliability_algebra_diagnostic.v1",
+  "source_frame_sha256": {
+    "65": "845713ddf0b557cd749a8a11e56fa4e1ff62901e10e5c13e057dbf78f0fe61bc",
+    "66": "d0fd238b7db7c90e1070ffe2b8094f8509449662f05084f7bbe63fa1f6ec7153"
+  },
+  "target_instance_id": "instance_0000"
+}

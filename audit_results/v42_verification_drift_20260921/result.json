@@ -1,0 +1,32 @@
+{
+  "schema": "v42.post_verification_source_drift.v1",
+  "captured_utc": "2026-09-21T01:43:28.028202+00:00",
+  "primary_result": "audit_results/v42_observed_planning_20260921/result.json",
+  "primary_result_sha256": "3a2bd52096d4b3621dd9a30d400004e9fbc3f524490ec24f2797a6474f3e83b6",
+  "primary_artifacts_overwritten": false,
+  "classification": "primary intact but superseded and not eligible as final current-source seal",
+  "reason": "parallel source cleanup completed after the primary source-unchanged check and before independent audit",
+  "changed_sources": [
+    {
+      "path": "nso/view_quality_v42.py",
+      "primary_sha256": "937ae3075d35315b6ae5cc0274f20d26cfd5c0c20900e41f168a1bd5d257a921",
+      "post_run_sha256": "919638b4ed51beba6e74c37c675200210cb5359008851238d5f4bb7c21fa2f21",
+      "archived_path": "audit_results/v42_verification_drift_20260921/post_run_source_snapshot/nso/view_quality_v42.py",
+      "file_bytes": 21127
+    },
+    {
+      "path": "tests/test_view_quality_v42.py",
+      "primary_sha256": "e4888d01aa0bf8293bdc75fcc81b52e42735428a1abef9ef2acb0dceec2a34bb",
+      "post_run_sha256": "445aefab0b67ae3b85d42d0108c98e5f8596ac7f432a26ab949147d0a50915d5",
+      "archived_path": "audit_results/v42_verification_drift_20260921/post_run_source_snapshot/tests/test_view_quality_v42.py",
+      "file_bytes": 11974
+    }
+  ],
+  "author_explanation": {
+    "module": "configuration receipt adds existing enforced maximum_paid_frames=512 and maximum_candidate_views_per_call=256 limits",
+    "test": "candidate-view helper now builds public T/K directly rather than discarding an analytic RGB-D frame"
+  },
+  "new_method_issue": "same paid camera view can retain positive nominal new-area utility because nominal surfaces differ from measured surfaces; exact-view repeat suppression to be added under declared new-area-only objective",
+  "next_action": "freeze final corrected sources and run new r1 output; preserve primary outputs",
+  "semantic_performance_claim_supported": false
+}

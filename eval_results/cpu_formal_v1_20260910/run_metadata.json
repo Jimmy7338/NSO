@@ -1,0 +1,39 @@
+{
+  "schema": "cpu_grid_v1",
+  "status": "complete",
+  "config_sha256": "655639c9e4e861f78ca7df0c48c622f12f478dcdc8cea5ce4022b743a88bffa0",
+  "created_at": "2026-09-10T07:03:46.453727+00:00",
+  "code": {
+    "git_revision": "10639431441657bb6facd5307c9d0650536313c0",
+    "working_source_sha256": "00acb1af852d1542417b8bd9929ff7775c1fc4484b1dc50a8979adee0e8d4149"
+  },
+  "runner_sha256": "dd3c479f1087eeeb2e70f21d4475323c1b8c11966dfc56ac57ad4bd29688f7a7",
+  "python": "3.12.3",
+  "expected_episodes": 176,
+  "policy_input": "observed occupancy, visibility, odometry and collision only; currently visible synthetic salience (remembered by policy)",
+  "coverage_reference": "start_connected_robot_center_grid",
+  "neural_training": false,
+  "limitations": [
+    "synthetic 2D geometry",
+    "perfect odometry",
+    "synthetic salience only; no RGB-D, open-vocabulary perception, learned SLAM or PPO",
+    "optimistic unknown-space gain heuristic, not measured mutual information"
+  ],
+  "mechanisms": {
+    "semantic_weight": 1.0,
+    "structure_weight": 1.0,
+    "goal_budget": 32,
+    "topology_period": 10,
+    "max_door_width": 7
+  },
+  "rpn": {
+    "sha256": "37280b4c3f39add6e08b08a0e1403ab2dc12aa89ed428aa42d0ea4dba9e83812",
+    "task": "bounded_controller_success",
+    "architecture": "candidate_mlp_5_16_1",
+    "frozen": true
+  },
+  "frozen_protocol_verified_at_start": true,
+  "frozen_protocol_verified_at_end": true,
+  "failed_episodes": 0,
+  "peak_process_rss_mib": 98.8203125
+}

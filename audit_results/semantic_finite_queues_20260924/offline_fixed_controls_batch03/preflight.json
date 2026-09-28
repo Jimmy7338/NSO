@@ -1,0 +1,340 @@
+{
+  "schema": "semantic.fixed_controls_review_preflight.v1",
+  "created_unix_s": 1790216705.2149494,
+  "sealed_events": {
+    "core_P04_nom_F_b120_lexicographic": {
+      "event_path": "audit_results/semantic_finite_queues_20260924/queue_A/batch_06/events.jsonl",
+      "byte_offset": 352,
+      "complete_line_bytes": 529,
+      "complete_line_sha256": "7d1578c84b319ac9856c0a125c3d7f043214c3be3cd1cdf250d3782f40583df7",
+      "manifest_sha256": "a4dafe47f9a7af8a19336532c427fd0c60f6ee617eb9aae1caf73366a64f7fae"
+    },
+    "core_P04_nom_K_b120_lexicographic": {
+      "event_path": "audit_results/semantic_finite_queues_20260924/queue_A/batch_06/events.jsonl",
+      "byte_offset": 951,
+      "complete_line_bytes": 529,
+      "complete_line_sha256": "e069c43c313ee80ef730e6441a8334c460bee201827f0f092d268e566946f2d6",
+      "manifest_sha256": "3e862722f21d555a4996cea0343c536a70b8489895cf33763501bebd117c0a69"
+    },
+    "core_P00_shift_F_b120_lexicographic": {
+      "event_path": "audit_results/semantic_finite_queues_20260924/queue_A/batch_07/events.jsonl",
+      "byte_offset": 358,
+      "complete_line_bytes": 535,
+      "complete_line_sha256": "1c60bae6851ed668845364f5714e674f4ffadd10a390b5fa11e86c35918208a0",
+      "manifest_sha256": "7201b54c0493d33770cea4a9209e9607d44900bb9debf912c2d9d979e02133f1"
+    }
+  },
+  "source_reviews": {
+    "core_P04_nom_G_b120_lexicographic": {
+      "run_id": "core_P04_nom_G_b120_lexicographic",
+      "manifest_sha256": "ada4bce63ea17e27bdc46feb0f80d2b2a4bf3cf464d7903bb1a3032ed44ba492",
+      "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P04_nom_G_b120_lexicographic.json",
+      "review_sha256": "e41ab6599b6cd05caf5a3eba6a58bfb76aecec5ec894caa8e7220a2832e971c8"
+    },
+    "core_P00_shift_G_b120_lexicographic": {
+      "run_id": "core_P00_shift_G_b120_lexicographic",
+      "manifest_sha256": "266443910bf663069997421ceab890bf301058cea4413e675716c50abec79e31",
+      "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P00_shift_G_b120_lexicographic.json",
+      "review_sha256": "b2cf5dc8e678fcaf1e1b2de3af551e92a919befd330b4d7517dda041910c9ba3"
+    }
+  },
+  "input_comparisons": {
+    "core_P04_nom_F_b120_lexicographic": {
+      "source": {
+        "run_id": "core_P04_nom_G_b120_lexicographic",
+        "manifest_sha256": "ada4bce63ea17e27bdc46feb0f80d2b2a4bf3cf464d7903bb1a3032ed44ba492",
+        "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P04_nom_G_b120_lexicographic.json",
+        "review_sha256": "e41ab6599b6cd05caf5a3eba6a58bfb76aecec5ec894caa8e7220a2832e971c8"
+      },
+      "public_equal": {
+        "public_workspace.json": true,
+        "public_spec.json": true,
+        "public_graph.json": true
+      },
+      "mapper_equal": {
+        "shape": true,
+        "resolution_m": true,
+        "origin_xy_m": true,
+        "grid_convention": true,
+        "frames": true,
+        "backend_poisoned": true,
+        "occupancy_sha256": true,
+        "tsdf_integration_count": true,
+        "voxel_m": true,
+        "sdf_trunc_m": true,
+        "near_m": true,
+        "far_m": true,
+        "backend": true
+      },
+      "arrays": {
+        "prediction/mesh.npz": {
+          "source_file_sha256": "17d2fb1ccebe430554ddfb5d4350f074aff6c7563696cb235f113c8c7893d36a",
+          "target_file_sha256": "17d2fb1ccebe430554ddfb5d4350f074aff6c7563696cb235f113c8c7893d36a",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "vertices": {
+              "dtype": "<f8",
+              "shape": [
+                83343,
+                3
+              ],
+              "array_sha256": "4e146ac75edc9e75ab525bb589b8b80e1120f756381b03581e162534d140306b",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "triangles": {
+              "dtype": "<i4",
+              "shape": [
+                158581,
+                3
+              ],
+              "array_sha256": "629923bfad51a5b95bff2777e3a35db0b4bad7423901705110b9dc716dce1f19",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "vertex_colors": {
+              "dtype": "<f8",
+              "shape": [
+                83343,
+                3
+              ],
+              "array_sha256": "c75299749b8d362416c756b8dcbd956e2d47d767aef6afc7b40af94ebc91aab9",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        },
+        "prediction/occupancy.npz": {
+          "source_file_sha256": "fcfd8582fa1054213bc064a6102effc95b3e701d69e91d82ae5a8164877e0bf9",
+          "target_file_sha256": "fcfd8582fa1054213bc064a6102effc95b3e701d69e91d82ae5a8164877e0bf9",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "belief": {
+              "dtype": "|i1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "73674d3d85845bcc1f106b83b3017d677e8a87c5e3adc02999bd03eb978a7e80",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "observed": {
+              "dtype": "|b1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "d9047961353891153edadbbf98ecfc26d6438e052e2881e872e175f641e37ce5",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        }
+      },
+      "array_difference": null,
+      "selected_mode": "replay_and_reuse",
+      "basis": "complete numerical inputs compared before target replay; no fallback rerun after reuse failure"
+    },
+    "core_P04_nom_K_b120_lexicographic": {
+      "source": {
+        "run_id": "core_P04_nom_G_b120_lexicographic",
+        "manifest_sha256": "ada4bce63ea17e27bdc46feb0f80d2b2a4bf3cf464d7903bb1a3032ed44ba492",
+        "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P04_nom_G_b120_lexicographic.json",
+        "review_sha256": "e41ab6599b6cd05caf5a3eba6a58bfb76aecec5ec894caa8e7220a2832e971c8"
+      },
+      "public_equal": {
+        "public_workspace.json": true,
+        "public_spec.json": true,
+        "public_graph.json": true
+      },
+      "mapper_equal": {
+        "shape": true,
+        "resolution_m": true,
+        "origin_xy_m": true,
+        "grid_convention": true,
+        "frames": true,
+        "backend_poisoned": true,
+        "occupancy_sha256": true,
+        "tsdf_integration_count": true,
+        "voxel_m": true,
+        "sdf_trunc_m": true,
+        "near_m": true,
+        "far_m": true,
+        "backend": true
+      },
+      "arrays": {
+        "prediction/mesh.npz": {
+          "source_file_sha256": "17d2fb1ccebe430554ddfb5d4350f074aff6c7563696cb235f113c8c7893d36a",
+          "target_file_sha256": "17d2fb1ccebe430554ddfb5d4350f074aff6c7563696cb235f113c8c7893d36a",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "vertices": {
+              "dtype": "<f8",
+              "shape": [
+                83343,
+                3
+              ],
+              "array_sha256": "4e146ac75edc9e75ab525bb589b8b80e1120f756381b03581e162534d140306b",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "triangles": {
+              "dtype": "<i4",
+              "shape": [
+                158581,
+                3
+              ],
+              "array_sha256": "629923bfad51a5b95bff2777e3a35db0b4bad7423901705110b9dc716dce1f19",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "vertex_colors": {
+              "dtype": "<f8",
+              "shape": [
+                83343,
+                3
+              ],
+              "array_sha256": "c75299749b8d362416c756b8dcbd956e2d47d767aef6afc7b40af94ebc91aab9",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        },
+        "prediction/occupancy.npz": {
+          "source_file_sha256": "fcfd8582fa1054213bc064a6102effc95b3e701d69e91d82ae5a8164877e0bf9",
+          "target_file_sha256": "fcfd8582fa1054213bc064a6102effc95b3e701d69e91d82ae5a8164877e0bf9",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "belief": {
+              "dtype": "|i1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "73674d3d85845bcc1f106b83b3017d677e8a87c5e3adc02999bd03eb978a7e80",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "observed": {
+              "dtype": "|b1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "d9047961353891153edadbbf98ecfc26d6438e052e2881e872e175f641e37ce5",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        }
+      },
+      "array_difference": null,
+      "selected_mode": "replay_and_reuse",
+      "basis": "complete numerical inputs compared before target replay; no fallback rerun after reuse failure"
+    },
+    "core_P00_shift_F_b120_lexicographic": {
+      "source": {
+        "run_id": "core_P00_shift_G_b120_lexicographic",
+        "manifest_sha256": "266443910bf663069997421ceab890bf301058cea4413e675716c50abec79e31",
+        "review_path": "audit_results/semantic_development_acquisition_20260923/reviews/core_P00_shift_G_b120_lexicographic.json",
+        "review_sha256": "b2cf5dc8e678fcaf1e1b2de3af551e92a919befd330b4d7517dda041910c9ba3"
+      },
+      "public_equal": {
+        "public_workspace.json": true,
+        "public_spec.json": true,
+        "public_graph.json": true
+      },
+      "mapper_equal": {
+        "shape": true,
+        "resolution_m": true,
+        "origin_xy_m": true,
+        "grid_convention": true,
+        "frames": true,
+        "backend_poisoned": true,
+        "occupancy_sha256": true,
+        "tsdf_integration_count": true,
+        "voxel_m": true,
+        "sdf_trunc_m": true,
+        "near_m": true,
+        "far_m": true,
+        "backend": true
+      },
+      "arrays": {
+        "prediction/mesh.npz": {
+          "source_file_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+          "target_file_sha256": "5c6613ac2073fc6efd57ccaeeb3931d78f3edbe5a19954f771b7904dd4174a1a",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "vertices": {
+              "dtype": "<f8",
+              "shape": [
+                103943,
+                3
+              ],
+              "array_sha256": "711faf1a4af8c1b9cf7009d71d013baddb7e79fe09e6b20029b84ac4f7b80c62",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "triangles": {
+              "dtype": "<i4",
+              "shape": [
+                196635,
+                3
+              ],
+              "array_sha256": "552d339cd0cd26af25c71f4696cbf45750ac0009346eabaf9be6f38de1393068",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "vertex_colors": {
+              "dtype": "<f8",
+              "shape": [
+                103943,
+                3
+              ],
+              "array_sha256": "b0baa047b772dd8376dd1516102129757700aea1ed8f3f5d0e8186a9505e197b",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        },
+        "prediction/occupancy.npz": {
+          "source_file_sha256": "581b71d4ffe1fff376bb2e9ea9a5e5ee14833f67578ef69ef73fa5c610ccb3b6",
+          "target_file_sha256": "581b71d4ffe1fff376bb2e9ea9a5e5ee14833f67578ef69ef73fa5c610ccb3b6",
+          "zip_bytes_identical": true,
+          "arrays": {
+            "belief": {
+              "dtype": "|i1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "2298cf3ebf490068f741c48dffbd0740342de1ed719cae4a5a9a19b74eabea0f",
+              "values_dtype_shape_and_bits_identical": true
+            },
+            "observed": {
+              "dtype": "|b1",
+              "shape": [
+                80,
+                100
+              ],
+              "array_sha256": "021affdf1bf174ef2127fa02d1469e77cb534d8a14ce1d1718ad8846f46c4d26",
+              "values_dtype_shape_and_bits_identical": true
+            }
+          }
+        }
+      },
+      "array_difference": null,
+      "selected_mode": "replay_and_reuse",
+      "basis": "complete numerical inputs compared before target replay; no fallback rerun after reuse failure"
+    }
+  },
+  "frozen_source_count": 59,
+  "frozen_sources_match": true,
+  "standard_target_receipts_absent": true,
+  "runtime_before": {
+    "worlds_created": 0,
+    "rgbd_frames": 0,
+    "scans": 0,
+    "paid_actions": 0,
+    "blocked_before_world_creation": 0
+  },
+  "runtime_after": {
+    "worlds_created": 0,
+    "rgbd_frames": 0,
+    "scans": 0,
+    "paid_actions": 0,
+    "blocked_before_world_creation": 0
+  },
+  "new_worlds": 0,
+  "automatic_retry": false,
+  "maximum_parallel_reviews_in_this_task": 1,
+  "maximum_combined_review_concurrency": 2
+}

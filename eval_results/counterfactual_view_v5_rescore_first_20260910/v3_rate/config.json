@@ -1,0 +1,58 @@
+{
+  "scope": "in-sample V5 model rescore of fixed executed routes; no new navigation or independent evidence",
+  "environment": {
+    "bays_per_side": 1,
+    "appearance": "marked",
+    "semantic_source": "rgb_marker",
+    "observation_condition": "ambiguous",
+    "semantic_relation": "correlated",
+    "hidden_parts": "shelves",
+    "complex_fraction": 0.5,
+    "width_px": 96,
+    "height_px": 72,
+    "voxel_m": 0.03,
+    "truncation_m": 0.12,
+    "pose_noise_m": 0.0,
+    "dropout": 0.0,
+    "max_steps": 480
+  },
+  "checkpoints": [
+    80,
+    160
+  ],
+  "branch_actions": 48,
+  "max_candidates": 12,
+  "reference_samples": 32000,
+  "thresholds_m": [
+    0.02,
+    0.05
+  ],
+  "workers": 2,
+  "fixtures": [
+    {
+      "seed": 751,
+      "environment": {
+        "depth_sigma_m": 0.01
+      }
+    },
+    {
+      "seed": 752,
+      "environment": {
+        "depth_sigma_m": 0.01
+      }
+    },
+    {
+      "seed": 751,
+      "environment": {
+        "depth_sigma_m": 0.03
+      }
+    },
+    {
+      "seed": 752,
+      "environment": {
+        "depth_sigma_m": 0.03
+      }
+    }
+  ],
+  "model_scoring_variant": "v3_rate"
+}

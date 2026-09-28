@@ -1,0 +1,31 @@
+{
+  "status": "passed_independent_T0_feature_math_review",
+  "context_id": "T0",
+  "histories": 2,
+  "candidate_routes": 12,
+  "prefix_frames": 42,
+  "prefix_scans": 42,
+  "label_remaps": 6,
+  "feature_scalars_compared": 1008,
+  "max_feature_absolute_error": 2.6469779601696886e-23,
+  "new_physical_routes": 0,
+  "future_frames_read": false,
+  "outcomes_read": false,
+  "GT_reference_read": false,
+  "raw_mapper_independently_implemented": false,
+  "high_level_V7_feature_functions_called": false,
+  "frozen_low_level_descriptor_black_box_tests": true,
+  "all_label_and_pair_invariants_passed": true,
+  "common_route_features_independently_recomputed": true,
+  "retained_measured_mesh_raycast_backend_reused": "Open3D",
+  "source_archive_sha256": "ebe125cbdd26090bfd6cdfaddc007e3f8f0d46c87645a9422da5f1393b027774",
+  "input_files_checked": 96,
+  "limits": [
+    "The TSDF/quality mapper is reused from frozen sources; this is not independent SLAM.",
+    "Common quality occlusion uses Open3D ray intersections on the reconstructed prefix mesh, never GT.",
+    "Grid beam discretization and descriptor formulas are independently reimplemented, but reproduce the same declared approximations.",
+    "Measured support and candidate frustum are not unique new exterior area or hidden visibility certificates.",
+    "Zero-depth behavior is tested synthetically; both actual T0 patches have positive depth support.",
+    "Only T0 is audited, not all T/C contexts; no fitting, response outcome or semantic efficacy is evaluated."
+  ]
+}

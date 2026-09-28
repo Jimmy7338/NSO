@@ -1,0 +1,39 @@
+{
+  "declaration": "audit_results/semantic_finite_queues_20260924/queue_B_declaration.json",
+  "declaration_sha256": "59970006bd960c7e24a571ab534062bec62448c17da8e7234e15a15702b4a74f",
+  "launch_argv": [
+    "systemd-run",
+    "--no-ask-password",
+    "--unit=nso-semantic-20260924-b",
+    "--remain-after-exit",
+    "--service-type=exec",
+    "--working-directory=/root/NSO",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=21600",
+    "--setenv=PYTHONDONTWRITEBYTECODE=1",
+    "--setenv=OMP_NUM_THREADS=1",
+    "--setenv=OPENBLAS_NUM_THREADS=1",
+    "--setenv=MKL_NUM_THREADS=1",
+    "/root/NSO/.venv-3d/bin/python",
+    "-B",
+    "/root/NSO/scripts/run_semantic_finite_queue.py",
+    "--queue",
+    "/root/NSO/audit_results/semantic_finite_queues_20260924/queue_B_declaration.json"
+  ],
+  "launch_exit_code": 0,
+  "live_process": {
+    "boot_id": "ba2accd5-74d9-43b9-8a14-f67f9a84fb8d",
+    "cgroup": "0::/system.slice/nso-semantic-20260924-b.service\n",
+    "cmdline_sha256": "0515d1a4954f6190f8194d59783aaf48fafc13fece562888fb5478ef6fee8e24",
+    "pid": 2250786,
+    "start_ticks": 230958413
+  },
+  "observed_unix_s": 1790214639.6407962,
+  "queue": "B",
+  "status": "running",
+  "stderr": "Running as unit: nso-semantic-20260924-b.service; invocation ID: 58e4832b344a4dbdbe7e281294f99a0d\n",
+  "stdout": "",
+  "systemctl_exit_code": 0,
+  "systemctl_output": "Restart=no\nRuntimeMaxUSec=6h\nMainPID=2250786\nResult=success\nNRestarts=0\nExecMainStartTimestampMonotonic=2309584140134\nExecMainPID=2250786\nExecMainCode=0\nExecMainStatus=0\nControlGroup=/system.slice/nso-semantic-20260924-b.service\nId=nso-semantic-20260924-b.service\nActiveState=active\nSubState=running\n",
+  "unit": "nso-semantic-20260924-b.service"
+}

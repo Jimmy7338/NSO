@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-20",
+  "purpose": "restore the pinned full official TARE ROS1 node and test saved paid sensor geometry transport; no efficacy inference",
+  "source_commit": "44500592b86138257273e0cab264e6a847ccefc7",
+  "source_repository": "https://github.com/caochao39/tare_planner",
+  "runtime_directory": "/dev/shm/nso_v39_tare",
+  "host_packages_installed": false,
+  "containers_or_images_created": false,
+  "native_source_modified": false,
+  "native_recompiled": false,
+  "node_sha256": "59fd9b818f4cc6a2edc3e5bf4a8641e2dad92b19ba1d824f1427624aecfd6f03",
+  "packages_extracted": 57,
+  "compressed_package_bytes": 29738296,
+  "declared_installed_bytes": 185470976,
+  "task_non_symlink_file_bytes": 255476045,
+  "limits": {
+    "task_tmpfs_bytes": 1610612736,
+    "minimum_tmpfs_free_bytes": 536870912,
+    "minimum_MemAvailable_bytes": 2147483648,
+    "minimum_persistent_free_bytes": 67108864
+  },
+  "source_files": [
+    {
+      "path": "scripts/tare_ros_bridge_v39.py",
+      "bytes": 19214,
+      "sha256": "7b0ff56613efd3f1b2bee9385c9e90d3fa7d2ef7543d98ad881057f449908e51"
+    },
+    {
+      "path": "third_party/official_baselines/tare_official/src/tare_planner/config/garage.yaml",
+      "bytes": 4042,
+      "sha256": "664d236e625a6381e2bb1d3c313c964f15ce3e0e8c12eec7c96574e541d851ff"
+    },
+    {
+      "path": "third_party/official_baselines/tare_official/src/tare_planner/include/lidar_model/lidar_model.h",
+      "bytes": 8438,
+      "sha256": "95e03c90ad14ab3004b75eb2459431d072d394f6f6553706101f18377a455c3e"
+    },
+    {
+      "path": "third_party/official_baselines/tare_official/src/tare_planner/src/viewpoint_manager/viewpoint_manager.cpp",
+      "bytes": 53521,
+      "sha256": "65c656049f47d58b3bd87d7098b4a1dad0b782496072d7dd4de1d4e3273386a8"
+    },
+    {
+      "path": "third_party/official_baselines/tare_official/src/tare_planner/src/sensor_coverage_planner/sensor_coverage_planner_ground.cpp",
+      "bytes": 53540,
+      "sha256": "62499c094e545837c1ff652c91e31a256ef7b898488e8177066f0804c990bc53"
+    },
+    {
+      "path": "audit_results/tare_native_node_attempt_20260911/tare_planner_node",
+      "bytes": 1133016,
+      "sha256": "59fd9b818f4cc6a2edc3e5bf4a8641e2dad92b19ba1d824f1427624aecfd6f03"
+    },
+    {
+      "path": "audit_results/tare_native_node_attempt_20260911/verification.json",
+      "bytes": 3098,
+      "sha256": "1c4caabbb82626b3e2fea1aa092ad2e2ee8c36c350f74c9d41753fac6c1023c1"
+    }
+  ],
+  "verification": {
+    "native_ldd_all_dependencies_resolved": true,
+    "python38_noetic_imports_passed": true,
+    "zero_sensor_complete_node_smoke_exit_code": 0,
+    "original_saved_five_exit_code": 0,
+    "original_saved_five_startup_race_detected": true,
+    "initialized_saved_five_exit_code": 0,
+    "initialized_saved_five_exploration_finished": false,
+    "camera_fov_adapted": false,
+    "actual_closed_loop_episode_completed": false,
+    "comparison_outcome_claimed": false
+  },
+  "native_planning_cadence_nonempty_scans": 5,
+  "native_fov_degrees": [
+    360,
+    24
+  ],
+  "terrain_adaptation": "measured RGB-D and planar hit XYZ plus intensity abs(z-public_flat_ground_z); no synthesized terrain or unobserved surfaces",
+  "new_worlds": 0,
+  "new_sensor_renders": 0,
+  "new_TSDF": 0,
+  "new_Q": 0,
+  "honest_boundaries": [
+    "Sensor-free smoke alone proves no exploration performance.",
+    "Saved five-frame transport tests do not compare policies.",
+    "Original startup race report preserved; timer handshake fixed before formal protocol.",
+    "The native coverage model remains 360-degree lidar and is not a ZED camera model.",
+    "The old full .a/.o objects are absent; retained TSP-only objects cannot reconstruct the full planner."
+  ]
+}

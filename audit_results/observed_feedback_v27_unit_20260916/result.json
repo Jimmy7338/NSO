@@ -1,0 +1,71 @@
+{
+  "status": "passed_analytic_unit_contracts_only",
+  "version": "V27-A_support_only_last_step",
+  "test_file": "tests/virtual3d/test_observed_feedback_v27.py",
+  "tests_in_final_run": 8,
+  "attempts": [
+    {
+      "attempt": 1,
+      "command": [
+        "/root/NSO/.venv-3d/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.virtual3d.test_observed_feedback_v27",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.0747771970927715,
+      "new_sources_unchanged": true,
+      "frozen_v26_sources_verified_after": true
+    },
+    {
+      "attempt": 2,
+      "command": [
+        "/root/NSO/.venv-3d/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.virtual3d.test_observed_feedback_v27",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.995054184924811,
+      "new_sources_unchanged": true,
+      "frozen_v26_sources_verified_after": true
+    }
+  ],
+  "failed_attempts": 0,
+  "second_attempt_reason": "Additional explicit regression assertions; no source implementation change",
+  "new_source_sha256": {
+    "nso/observed_feedback_v27.py": "8e028f0232befd32063d772bb562d74402713ff0fe0098201c08cdb14a6196bb",
+    "nso/observed_planner_v27.py": "29119e9759f4f3be70e39954406765cd38df7f8c677101a3eb858bbfe8e71615",
+    "nso/observed_runtime_v27.py": "d4e2fac41c8ae07b598d98ca8256a36630f4dc7bf2a38d409289efbffc014579",
+    "tests/virtual3d/test_observed_feedback_v27.py": "0b3b18cd389c2870303ecec0bcb631260188440386ea4d673de01e2d333a4dd2"
+  },
+  "frozen_v26_source_count": 170,
+  "all_frozen_v26_source_hashes_unchanged": true,
+  "contracts_passed": [
+    "Stable full local support despite remote growth or disjoint planning samples; class swap does not change geometry support",
+    "New keys excluded; fewer than4 remains unavailable; valid measured zero and no-feedback table distinguished",
+    "After-point radius with old cue, strict1cm distance, direction/range union once",
+    "Paid action/identity order, arrival before replanning, cancellation no reward, collision no calibration, duplicate rejection",
+    "256 planning and semantic visibility unchanged; original G/S plans equal before feedback; G rejects cues"
+  ],
+  "not_validated": [
+    "401 real saved-packet shadow replay",
+    "Autonomous G/S/no-feedback world trajectories",
+    "Final C/Q/J or semantic efficacy",
+    "Runtime memory/latency on full experimental map",
+    "Natural semantics or trained network innovation"
+  ],
+  "test_inputs": "handwritten geometry and legal packets; non-fusing mocked mapper; real planner calls on analytic maps only",
+  "new_world_instances": 0,
+  "saved_experiment_packets_processed": 0,
+  "new_physical_actions": 0,
+  "tsdf_integrations": 0,
+  "mesh_extractions": 0,
+  "quality_evaluations": 0,
+  "frozen_v26_algorithm_modified": false,
+  "explicit_ablation_detail": "Only S writes the directional feedback table; other modes log disabled. V26 also ignored the factor outside S but could still populate its unused table."
+}

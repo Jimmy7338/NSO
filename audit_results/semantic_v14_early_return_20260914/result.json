@@ -1,0 +1,75 @@
+{
+  "diagnostic_source_sha256": "549aee86b9227b1f3089985b85f063559bc65b511c21034795f049a39b99051b",
+  "events": [
+    {
+      "action_id": 0,
+      "action_returned": "forward",
+      "denied_checks": [],
+      "phase_after": "outbound",
+      "phase_before": "planning",
+      "remaining_budget": 192
+    },
+    {
+      "action_id": 53,
+      "action_returned": "right",
+      "denied_checks": [
+        {
+          "action": "forward",
+          "allowed": false,
+          "calibrated_uncertainty": null,
+          "learned_probability": null,
+          "next_pose": [
+            18,
+            18,
+            0
+          ],
+          "observed_gain_prediction": null,
+          "reason": "next_footprint_not_known_safe",
+          "remaining_budget": 139,
+          "reserved_return_cost": null
+        }
+      ],
+      "phase_after": "return",
+      "phase_before": "outbound",
+      "remaining_budget": 139
+    }
+  ],
+  "history_summary": {
+    "candidate_counts": [
+      8,
+      11
+    ],
+    "candidates_omitted_by_cap": 0,
+    "collisions": 0,
+    "decisions": 2,
+    "external_prefix_actions": 0,
+    "final_state_sha256": "dfeb7d40dfa8bbef742e6614d0d02deb07f51276b7e6edcbfec1ee1e1da6a0cb",
+    "model_trained": false,
+    "module_names": [
+      "IGCR",
+      "OV-SDF",
+      "RPN-UQ",
+      "STGHP"
+    ],
+    "observed_instance_counts": [
+      2,
+      4
+    ],
+    "paid_actions": 92,
+    "returned_to_initial_pose": true,
+    "semantic_efficacy_proven": false,
+    "termination": {
+      "current_footprint_known_safe": true,
+      "failed": false,
+      "final_action_id": 92,
+      "final_frame_id": "frame-92",
+      "reason": "no_positive_option_at_anchor",
+      "returned_to_anchor": true
+    },
+    "within_budget": true
+  },
+  "observation_only_wrapper": true,
+  "source_inventory_sha256": "46309ebf7133cc18b22edb47727b8b4567704876bc966b3262825652c30de901",
+  "status": "passed_exact_replay",
+  "trajectory_changed": false
+}

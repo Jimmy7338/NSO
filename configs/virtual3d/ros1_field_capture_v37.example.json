@@ -1,0 +1,75 @@
+{
+  "schema_version": "ros1_field_capture/v37",
+  "status": "example_unverified_not_a_recorder_input",
+  "hardware_known_from_user": {
+    "middleware": "ROS1",
+    "camera": "ZED_model_unconfirmed",
+    "planar_lidar": "Leishen_model_unconfirmed",
+    "imu_present": true,
+    "gps_present": true,
+    "zed_depth_and_pose_publishing": true
+  },
+  "recorder_private_parameters": {
+    "output": "/ABSOLUTE/NEW_RECORDING_DIRECTORY",
+    "world_frame": "VERIFY_WORLD_FRAME",
+    "camera_optical_frame": "VERIFY_LEFT_OPTICAL_FRAME",
+    "depth_topic": "/zed/zed_node/depth/depth_registered",
+    "rgb_topic": "/zed/zed_node/left/image_rect_color",
+    "camera_info_topic": "/zed/zed_node/depth/camera_info",
+    "scan_topic": "/scan",
+    "semantic_topic": "",
+    "max_depth_m": 4.0,
+    "sync_slop_s": 0.05,
+    "positive_inf_policy": "invalid",
+    "min_interval_s": 0.2
+  },
+  "raw_bag": {
+    "output": "/ABSOLUTE/NEW_RAW_BAG_PREFIX",
+    "auxiliary_topics": {
+      "pose": "/VERIFY_POSE_TOPIC",
+      "imu": "/VERIFY_IMU_TOPIC",
+      "gps": "/VERIFY_GPS_TOPIC",
+      "tf": "/tf",
+      "tf_static": "/tf_static"
+    },
+    "include_recorder_image_and_scan_topics": true,
+    "include_camera_info": true,
+    "split_size_mib": 1024
+  },
+  "capture_policy": {
+    "publishes_motion": false,
+    "phase": "stationary_capture_only",
+    "raw_bag_required": true,
+    "gps_used_for_localization": false,
+    "depth_encodings_to_verify": {
+      "16UC1": "uint16_axial_millimetres",
+      "32FC1": "float32_axial_metres"
+    },
+    "camera_info_association": "latest_received_not_timestamp_synchronized",
+    "lidar_motion_compensation": "not_implemented",
+    "semantic_images": "disabled_until_a_separately_verified_frontend_exists"
+  },
+  "verification": {
+    "actual_topics_and_message_types": false,
+    "world_and_optical_frames": false,
+    "raw_bag_pose_imu_gps_topics": false,
+    "registered_rectified_rgb_depth": false,
+    "depth_encoding_units_and_axial_convention": false,
+    "camera_info_projection_roi_binning_and_R": false,
+    "tf_at_sensor_timestamps_and_extrinsics": false,
+    "laser_range_limits_and_invalid_policy": false,
+    "source_clock_and_sync_tolerance": false,
+    "fresh_absolute_output_paths_and_free_space": false
+  },
+  "verification_evidence": {},
+  "annotations": {
+    "group_key": "physical_device_instance_id",
+    "target_classes_minimum": 2,
+    "target_instances_per_class_minimum": 5,
+    "target_distinct_views_per_instance_minimum": 2,
+    "split_before_frontend_tuning": true,
+    "same_device_across_dates_and_bags_kept_in_one_split": true,
+    "include_counterexamples_and_unknown_instances": true,
+    "physical_structure_side_is_annotation_not_runtime_input": true
+  }
+}

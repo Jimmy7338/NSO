@@ -1,0 +1,115 @@
+{
+  "status": "pass",
+  "scope": "independent read-only SHA/array/source/count audit; no freeze, raycast, sensor, World, controller or TSDF execution",
+  "pipeline_root": "audit_results/v44_evidence_pipeline_20260921",
+  "pipeline_result_sha256": "6ca912c2854473851c8e48bcf935a2bd285402311636a143710c385d3cc0c004",
+  "pipeline_inventory_sha256": "77368cc42424d7ad7cbd505c0c2a5e2570dace1032afb401e168042cbff9a828",
+  "artifact_entries_verified": 89,
+  "current_and_archived_source_entries_verified": 33,
+  "old_seals": [
+    {
+      "manifest": "audit_results/v40_p0_20260920/manifest.json",
+      "entries": 75,
+      "sha256": "4a02bcfbf927f2f0660e075d486abc3c21e7d4120a69b2cb3c2825f7464ba091"
+    },
+    {
+      "manifest": "audit_results/v40_p1_static_release_20260920/manifest.json",
+      "entries": 70,
+      "sha256": "7457d81ea42dd61ac6b952472f9d63fc3bc2d62844171b1c1950c67391b5a56d"
+    },
+    {
+      "manifest": "audit_results/v41_interface_release_20260920/manifest.json",
+      "entries": 26,
+      "sha256": "39af1de95e170f4999052daf3740a8ed4886644de92fa2e596f2e7e76ee18b01"
+    },
+    {
+      "manifest": "audit_results/v42_interface_release_20260921/manifest.json",
+      "entries": 98,
+      "sha256": "0575260ccdfb63dc3c180418fa48389a171491776857cbf550a089cd024f2da7"
+    },
+    {
+      "manifest": "audit_results/v43_interface_release_20260921/manifest.json",
+      "entries": 128,
+      "sha256": "e59716e836102b12d75ff426fe771e1f198dc02fa4b9154dac9138f870ae8924"
+    }
+  ],
+  "old_seal_entries_verified": 397,
+  "references": [
+    {
+      "asset_id": "DEV_A_00",
+      "target_instances": 4,
+      "target_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "coverage_cells": 5924,
+      "coverage_area_m2": 59.24000000000001,
+      "observable_surface_samples": 1083,
+      "observable_area_m2_estimate": 35.900939507737405,
+      "candidate_views": 104,
+      "reference_fingerprint": "237fb650381821e3725eb4c30587cf21409f3acca2cd5e388fde694010404d37",
+      "manifest_sha256": "96d00c04384aefbecd55a6a81dcdfc16a432fae47e8c2761204388b5a4cd4326",
+      "input_hashes_match_original_seals": true,
+      "domain_mask_interior_obstacle_exclusion_connectivity_checked": true,
+      "regenerated_reference": false
+    },
+    {
+      "asset_id": "DEV_C_00",
+      "target_instances": 4,
+      "target_ids": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "coverage_cells": 6602,
+      "coverage_area_m2": 66.02000000000001,
+      "observable_surface_samples": 1237,
+      "observable_area_m2_estimate": 32.468620037162744,
+      "candidate_views": 116,
+      "reference_fingerprint": "b9db2da3255ab5018863a08645a3efcde46825106c1f4ea57385b3bcf16e978a",
+      "manifest_sha256": "a4c99ff26ef19fde5be5cd5c67fd00e6ea4152e2acc42e432f0c5e33ade8af4c",
+      "input_hashes_match_original_seals": true,
+      "domain_mask_interior_obstacle_exclusion_connectivity_checked": true,
+      "regenerated_reference": false
+    }
+  ],
+  "recorded_tests_passed": 37,
+  "finite_episode": {
+    "archive_source_entries_checked": 21,
+    "manifest_entries_checked": 35,
+    "saved_frames": 1,
+    "recorded_main_tsdf_integrations": 1,
+    "recorded_fresh_process_recomputation_tsdf_integrations": 1,
+    "physical_actions": 0,
+    "actual_development": false,
+    "fresh_process_stdout_matches_saved_receipt": true
+  },
+  "fixture_development_evaluation_rejected": true,
+  "canonical_start_ledger_absent": true,
+  "persistent_preflight": {
+    "status": "blocked_before_world_creation",
+    "persistent_output_root": "/root/NSO/audit_results/v44_evidence_pipeline_20260921/not_started/R2_A_diagnostic",
+    "checked_filesystem_path": "/root/NSO/audit_results/v44_evidence_pipeline_20260921",
+    "filesystem_type": "ext4",
+    "non_ram_filesystem": true,
+    "free_bytes": 7931543552,
+    "required_free_bytes": 10737418240,
+    "expected_batch_peak_bytes": 402653184,
+    "passed": false,
+    "reason": "insufficient_persistent_space"
+  },
+  "pipeline_total_bytes": 1131821,
+  "this_review_new_worlds": 0,
+  "this_review_new_sensor_packets": 0,
+  "this_review_new_tsdf_integrations": 0,
+  "semantic_performance_claim_added": false,
+  "limitations": [
+    "Surface denominator is fixed sparse V40 observable-area quadrature, not all physical surfaces.",
+    "Coverage denominator is conservative navigable center-cell area quadrature, not exact free-floor area.",
+    "The singleton initial-grant fixture tests serialization/recomputation; no autonomous study trajectory has run.",
+    "Recorded unit test fixture integrations are distinct from the two main/recomputation integrations."
+  ]
+}

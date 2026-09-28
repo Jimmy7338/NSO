@@ -1,0 +1,331 @@
+{
+  "status": "complete_static_only",
+  "world_version": "two-facility-physical-partitions-v25-r0",
+  "parents": [
+    {
+      "parent": "D25-P00",
+      "status": "geometry_failed",
+      "finite_static_contract_passed": false
+    },
+    {
+      "parent": "D25-P01",
+      "status": "geometry_failed",
+      "finite_static_contract_passed": false
+    }
+  ],
+  "cases": [
+    {
+      "status": "geometry_failed",
+      "parent": "D25-P00",
+      "assignment": "A_complex_B_simple",
+      "error": "StaticGeometryErrorV25(\"V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3200000000000003}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 2728, 'reachable_safe_floor_cells': 2725, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\")",
+      "audit": {
+        "world_version": "two-facility-physical-partitions-v25-r0",
+        "partition_count": 10,
+        "minimum_partition_asset_distance_m": 0.20000000000000018,
+        "minimum_required_distance_m": 0.2,
+        "reference_08m_voxel_26_neighbor_diagonal_m": 0.13856406460551018,
+        "partition_spacing": [
+          {
+            "asset_id": 0,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.3200000000000003
+          },
+          {
+            "asset_id": 0,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.5999999999999996
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          }
+        ],
+        "spacing_passed": true,
+        "anchor_safe": true,
+        "safe_floor_cells": 2728,
+        "reachable_safe_floor_cells": 2725,
+        "disconnected_safe_floor_cells": 3,
+        "blocked_proposed_prefix_action_indices": [],
+        "sensor_body_marker_and_task_bounds_unchanged": true,
+        "actual_noisy_instance_component_separation_verified": false,
+        "online_coverage_or_shape_quality_verified": false
+      },
+      "traceback": "Traceback (most recent call last):\n  File \"/root/NSO/scripts/audit_facility_choice_v25_static.py\", line 340, in execute\n    world=StaticWorld(parent,assignment)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/NSO/env/facility_choice_v25.py\", line 145, in __init__\n    raise StaticGeometryErrorV25(self.static_geometry_audit)\nenv.facility_choice_v25.StaticGeometryErrorV25: V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3200000000000003}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 2728, 'reachable_safe_floor_cells': 2725, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\n"
+    },
+    {
+      "status": "geometry_failed",
+      "parent": "D25-P00",
+      "assignment": "A_simple_B_complex",
+      "error": "StaticGeometryErrorV25(\"V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3200000000000003}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 2728, 'reachable_safe_floor_cells': 2725, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\")",
+      "audit": {
+        "world_version": "two-facility-physical-partitions-v25-r0",
+        "partition_count": 10,
+        "minimum_partition_asset_distance_m": 0.20000000000000018,
+        "minimum_required_distance_m": 0.2,
+        "reference_08m_voxel_26_neighbor_diagonal_m": 0.13856406460551018,
+        "partition_spacing": [
+          {
+            "asset_id": 0,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.5999999999999996
+          },
+          {
+            "asset_id": 0,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.3200000000000003
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          }
+        ],
+        "spacing_passed": true,
+        "anchor_safe": true,
+        "safe_floor_cells": 2728,
+        "reachable_safe_floor_cells": 2725,
+        "disconnected_safe_floor_cells": 3,
+        "blocked_proposed_prefix_action_indices": [],
+        "sensor_body_marker_and_task_bounds_unchanged": true,
+        "actual_noisy_instance_component_separation_verified": false,
+        "online_coverage_or_shape_quality_verified": false
+      },
+      "traceback": "Traceback (most recent call last):\n  File \"/root/NSO/scripts/audit_facility_choice_v25_static.py\", line 340, in execute\n    world=StaticWorld(parent,assignment)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/NSO/env/facility_choice_v25.py\", line 145, in __init__\n    raise StaticGeometryErrorV25(self.static_geometry_audit)\nenv.facility_choice_v25.StaticGeometryErrorV25: V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3200000000000003}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 2728, 'reachable_safe_floor_cells': 2725, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\n"
+    },
+    {
+      "status": "geometry_failed",
+      "parent": "D25-P01",
+      "assignment": "A_complex_B_simple",
+      "error": "StaticGeometryErrorV25(\"V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3199999999999994}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 3977, 'reachable_safe_floor_cells': 3974, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\")",
+      "audit": {
+        "world_version": "two-facility-physical-partitions-v25-r0",
+        "partition_count": 10,
+        "minimum_partition_asset_distance_m": 0.20000000000000018,
+        "minimum_required_distance_m": 0.2,
+        "reference_08m_voxel_26_neighbor_diagonal_m": 0.13856406460551018,
+        "partition_spacing": [
+          {
+            "asset_id": 0,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.3199999999999994
+          },
+          {
+            "asset_id": 0,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.5999999999999996
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          }
+        ],
+        "spacing_passed": true,
+        "anchor_safe": true,
+        "safe_floor_cells": 3977,
+        "reachable_safe_floor_cells": 3974,
+        "disconnected_safe_floor_cells": 3,
+        "blocked_proposed_prefix_action_indices": [],
+        "sensor_body_marker_and_task_bounds_unchanged": true,
+        "actual_noisy_instance_component_separation_verified": false,
+        "online_coverage_or_shape_quality_verified": false
+      },
+      "traceback": "Traceback (most recent call last):\n  File \"/root/NSO/scripts/audit_facility_choice_v25_static.py\", line 340, in execute\n    world=StaticWorld(parent,assignment)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/NSO/env/facility_choice_v25.py\", line 145, in __init__\n    raise StaticGeometryErrorV25(self.static_geometry_audit)\nenv.facility_choice_v25.StaticGeometryErrorV25: V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3199999999999994}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 3977, 'reachable_safe_floor_cells': 3974, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\n"
+    },
+    {
+      "status": "geometry_failed",
+      "parent": "D25-P01",
+      "assignment": "A_simple_B_complex",
+      "error": "StaticGeometryErrorV25(\"V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3200000000000003}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 3977, 'reachable_safe_floor_cells': 3974, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\")",
+      "audit": {
+        "world_version": "two-facility-physical-partitions-v25-r0",
+        "partition_count": 10,
+        "minimum_partition_asset_distance_m": 0.20000000000000018,
+        "minimum_required_distance_m": 0.2,
+        "reference_08m_voxel_26_neighbor_diagonal_m": 0.13856406460551018,
+        "partition_spacing": [
+          {
+            "asset_id": 0,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.5999999999999996
+          },
+          {
+            "asset_id": 0,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 0,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 0,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_long",
+            "minimum_asset_distance_m": 0.3200000000000003
+          },
+          {
+            "asset_id": 1,
+            "role": "inner_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_long",
+            "minimum_asset_distance_m": 0.4472135954999583
+          },
+          {
+            "asset_id": 1,
+            "role": "outer_front_return",
+            "minimum_asset_distance_m": 0.20000000000000018
+          },
+          {
+            "asset_id": 1,
+            "role": "rear_offset_screen",
+            "minimum_asset_distance_m": 0.20000000000000018
+          }
+        ],
+        "spacing_passed": true,
+        "anchor_safe": true,
+        "safe_floor_cells": 3977,
+        "reachable_safe_floor_cells": 3974,
+        "disconnected_safe_floor_cells": 3,
+        "blocked_proposed_prefix_action_indices": [],
+        "sensor_body_marker_and_task_bounds_unchanged": true,
+        "actual_noisy_instance_component_separation_verified": false,
+        "online_coverage_or_shape_quality_verified": false
+      },
+      "traceback": "Traceback (most recent call last):\n  File \"/root/NSO/scripts/audit_facility_choice_v25_static.py\", line 340, in execute\n    world=StaticWorld(parent,assignment)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/NSO/env/facility_choice_v25.py\", line 145, in __init__\n    raise StaticGeometryErrorV25(self.static_geometry_audit)\nenv.facility_choice_v25.StaticGeometryErrorV25: V25 first-design physical safety/spacing failed: {'world_version': 'two-facility-physical-partitions-v25-r0', 'partition_count': 10, 'minimum_partition_asset_distance_m': 0.20000000000000018, 'minimum_required_distance_m': 0.2, 'reference_08m_voxel_26_neighbor_diagonal_m': 0.13856406460551018, 'partition_spacing': [{'asset_id': 0, 'role': 'inner_long', 'minimum_asset_distance_m': 0.5999999999999996}, {'asset_id': 0, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 0, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 0, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'inner_long', 'minimum_asset_distance_m': 0.3200000000000003}, {'asset_id': 1, 'role': 'inner_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'outer_long', 'minimum_asset_distance_m': 0.4472135954999583}, {'asset_id': 1, 'role': 'outer_front_return', 'minimum_asset_distance_m': 0.20000000000000018}, {'asset_id': 1, 'role': 'rear_offset_screen', 'minimum_asset_distance_m': 0.20000000000000018}], 'spacing_passed': True, 'anchor_safe': True, 'safe_floor_cells': 3977, 'reachable_safe_floor_cells': 3974, 'disconnected_safe_floor_cells': 3, 'blocked_proposed_prefix_action_indices': [], 'sensor_body_marker_and_task_bounds_unchanged': True, 'actual_noisy_instance_component_separation_verified': False, 'online_coverage_or_shape_quality_verified': False}\n"
+    }
+  ],
+  "finite_static_contract_passed": false,
+  "new_physical_actions": 0,
+  "new_sensor_packets": 0,
+  "new_tsdf_fusions": 0,
+  "quality_scores_computed": 0,
+  "GT_information_graphs_are_evaluator_only": true,
+  "old_service_success_claims_reused": false,
+  "original_P01_coverage_failure_preserved": true,
+  "actual_common_coverage_verified": false,
+  "noisy_instance_separation_verified": false,
+  "semantic_efficacy_proven": false,
+  "automatic_followup_trajectories_authorized": false,
+  "repair_count": 0
+}

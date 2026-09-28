@@ -1,0 +1,38 @@
+{
+  "experiments_or_quality_outcomes_used_to_tune_tests": false,
+  "final_verification": "run.json and unittest_output.txt contain the real final execution and before/after source hashes",
+  "provenance": "Manual factual extraction from existing tool results, not reconstructed historical stdout. Historical backend source hashes were not captured and are not guessed.",
+  "runs": [
+    {
+      "backend_source_sha256": null,
+      "exit_code": 0,
+      "result": "8 passed",
+      "test_count": 8,
+      "tool_session_id": 99190
+    },
+    {
+      "actual_ground_offset": -0.6500000141190506,
+      "backend_source_sha256": null,
+      "cause": "Maximum plane population selected the elevated wide platform despite 1390 observed floor pixels.",
+      "correction": "Root chose the lowest measured median gravity-height plane among sufficiently supported hypotheses, before SVD refinement.",
+      "exit_code": 1,
+      "expected_ground_offset": 0.0,
+      "failed_test": "test_large_platform_cannot_replace_a_supported_lower_ground_plane",
+      "test_count": 9,
+      "tolerance_m": 0.025,
+      "tool_session_id": 97089
+    },
+    {
+      "actual_max_vertex_support_distance_m": 2.750489012119854,
+      "backend_source_sha256": null,
+      "cause": "Centroid-only support admitted an oversized unsupported triangle.",
+      "correction": "Root additionally required all vertices within .10 m of measured instance support and all edges no longer than .25 m; raw mesh remains unchanged.",
+      "exit_code": 1,
+      "failed_test": "test_raw_triangle_centroid_cannot_certify_unsupported_vertices",
+      "passed_previous_ground_counterexample": true,
+      "required_max_vertex_support_distance_m": 0.15,
+      "test_count": 10,
+      "tool_session_id": 7553
+    }
+  ]
+}

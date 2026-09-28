@@ -1,0 +1,35 @@
+--- scripts/replay_counterfactual_views.py
++++ scripts/replay_candidate_augmentation_v6.py
+@@ -1,5 +1,8 @@
+ #!/usr/bin/env python3
+-"""Independently replay a sealed development counterfactual run.
++"""Independently replay a sealed candidate augmentation supplement.
++
++Derived verbatim from replay_counterfactual_views.py except for checking offset
++IDs against the preserved original candidate manifest and disjoint endpoints.
+ 
+ Only verification.json is written to the run. All simulator, mapper, evaluator
+ and visibility dependencies are loaded from its verified sources.zip in spawned
+@@ -428,7 +431,21 @@
+         c0 = occupancy_coverage(initial, world.reachable)
+         before = evaluator.evaluate(initial.mesh(), c0, config['thresholds_m'])
+         routes = read_json(history / 'candidates.json')
+-        compare([r['candidate_id'] for r in routes], list(range(len(routes))), 'candidate identifiers')
++        augmentation = config['candidate_augmentation']
++        original = Path(augmentation['original_run'])
++        original_manifest = read_json(original / 'artifact_hashes.json')
++        original_path = original / folder.name / history.name / 'candidates.json'
++        require(file_hash(original_path) == original_manifest[str(original_path.relative_to(original))],
++                'original candidates changed')
++        original_routes = read_json(original_path)
++        original_ids = [r['candidate_id'] for r in original_routes]
++        compare(original_ids, list(range(len(original_routes))), 'original candidate identifiers')
++        offset = max(original_ids, default=-1) + 1
++        compare([r['candidate_id'] for r in routes], list(range(offset, offset + len(routes))),
++                'augmentation candidate identifiers')
++        require(len(routes) <= augmentation['max_extra'], 'augmentation exceeds fixed extra budget')
++        require(not ({tuple(r['pose']) for r in routes} & {tuple(r['pose']) for r in original_routes}),
++                'augmentation duplicates an original endpoint')
+         require(len(routes) <= config['max_candidates'], 'candidate pool exceeds budget')
+         require(len({tuple(r['pose']) for r in routes}) == len(routes), 'duplicate endpoint candidate')
+         safe = ~inflated_obstacles(initial.belief != 0, c.robot_radius_m / c.resolution_m)

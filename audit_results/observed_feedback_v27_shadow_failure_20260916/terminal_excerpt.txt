@@ -1,0 +1,25 @@
+V27_SINGLE_SHADOW_PID 377855 free_bytes 123527168
+{"action": 0, "rows_completed": 0, "offline_mapper_updates": 1}
+{"action": 50, "rows_completed": 1, "offline_mapper_updates": 51}
+{"action": 100, "rows_completed": 1, "offline_mapper_updates": 101}
+{"action": 150, "rows_completed": 2, "offline_mapper_updates": 151}
+{"action": 200, "rows_completed": 2, "offline_mapper_updates": 201}
+{"action": 250, "rows_completed": 2, "offline_mapper_updates": 251}
+{"action": 300, "rows_completed": 6, "offline_mapper_updates": 301}
+{"action": 350, "rows_completed": 10, "offline_mapper_updates": 351}
+{"action": 400, "rows_completed": 13, "offline_mapper_updates": 401}
+Traceback (most recent call last):
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 234, in execute
+    base.write(out,'result.json',result)
+  File "/root/NSO/scripts/audit_v26_feedback_support.py", line 68, in write
+    blob=(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode()
+TypeError: Object of type int64 is not JSON serializable
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 266, in <module>
+    if __name__=='__main__':main()
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 262, in main
+    try:execute(args.output.resolve())
+  File "/root/NSO/scripts/audit_v27_feedback_shadow.py", line 244, in execute
+    print(json.dumps(failure),file=sys.stderr,flush=True)
+TypeError: Object of type int64 is not JSON serializable

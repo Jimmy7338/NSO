@@ -1,0 +1,351 @@
+{
+  "branch_identity": "same 40 branches: 4 contexts x 2 left/right arrangements x 5 conditions",
+  "by_condition": {
+    "G": {
+      "branches": 8,
+      "changed_trajectories": 1,
+      "corrected_mean_coverage_2d": 1.0,
+      "corrected_mean_f1_05cm": 0.9908860649026702,
+      "corrected_mean_inspection_joint": 7.037373043725989,
+      "corrected_mean_local_new_surface_recall_05cm": 0.9784915566518384,
+      "corrected_mean_precision_05cm": 0.9974791666666666,
+      "corrected_mean_recall_05cm": 0.9844733978893438,
+      "corrected_minus_historical_mean": -0.04132025750877544,
+      "historical_mean_inspection_joint": 7.078693301234765,
+      "identical_trajectories": 7
+    },
+    "N": {
+      "branches": 8,
+      "changed_trajectories": 0,
+      "corrected_mean_coverage_2d": 1.0,
+      "corrected_mean_f1_05cm": 0.9924856175266406,
+      "corrected_mean_inspection_joint": 7.690026734712573,
+      "corrected_mean_local_new_surface_recall_05cm": 0.967221685567526,
+      "corrected_mean_precision_05cm": 0.99703125,
+      "corrected_mean_recall_05cm": 0.9880355409852797,
+      "corrected_minus_historical_mean": 0.0,
+      "historical_mean_inspection_joint": 7.690026734712573,
+      "identical_trajectories": 8
+    },
+    "S": {
+      "branches": 8,
+      "changed_trajectories": 0,
+      "corrected_mean_coverage_2d": 1.0,
+      "corrected_mean_f1_05cm": 0.9949636780113521,
+      "corrected_mean_inspection_joint": 9.07966093135991,
+      "corrected_mean_local_new_surface_recall_05cm": 0.9789596493829296,
+      "corrected_mean_precision_05cm": 0.9976979166666666,
+      "corrected_mean_recall_05cm": 0.9922649540570352,
+      "corrected_minus_historical_mean": 0.0,
+      "historical_mean_inspection_joint": 9.07966093135991,
+      "identical_trajectories": 8
+    },
+    "S_no_feedback": {
+      "branches": 8,
+      "changed_trajectories": 0,
+      "corrected_mean_coverage_2d": 1.0,
+      "corrected_mean_f1_05cm": 0.9949636780113521,
+      "corrected_mean_inspection_joint": 9.07966093135991,
+      "corrected_mean_local_new_surface_recall_05cm": 0.9789596493829296,
+      "corrected_mean_precision_05cm": 0.9976979166666666,
+      "corrected_mean_recall_05cm": 0.9922649540570352,
+      "corrected_minus_historical_mean": 0.0,
+      "historical_mean_inspection_joint": 9.07966093135991,
+      "identical_trajectories": 8
+    },
+    "X": {
+      "branches": 8,
+      "changed_trajectories": 0,
+      "corrected_mean_coverage_2d": 1.0,
+      "corrected_mean_f1_05cm": 0.9808213603704847,
+      "corrected_mean_inspection_joint": 4.820972024466276,
+      "corrected_mean_local_new_surface_recall_05cm": 0.9797552416172788,
+      "corrected_mean_precision_05cm": 0.9976354166666668,
+      "corrected_mean_recall_05cm": 0.9645964949051961,
+      "corrected_minus_historical_mean": 0.0,
+      "historical_mean_inspection_joint": 4.820972024466276,
+      "identical_trajectories": 8
+    }
+  },
+  "conclusions": [
+    "The implementation defect is fixed: predictions and actual outcomes close in all 40 branches.",
+    "S and S_no_feedback remain identical in all eight paired histories despite different posteriors; the scalar observed camera-yield posterior has no decision-level increment for S on this pool.",
+    "The corrected S inspection joint exceeds G, N and X descriptively on this development pool, but this is not a 2D coverage or precision-gain percentage.",
+    "Local newly-visible recall shows that the main S advantage is additional discovered surface, not a large local reconstruction-accuracy improvement."
+  ],
+  "corrected_S_vs_baselines": {
+    "S_vs_G": {
+      "differences": [
+        3.361178172332158,
+        0.03931387082031801,
+        0.002160963663895288,
+        3.4834547717022617,
+        4.588998872979747,
+        0.06317388068541163,
+        5.009053015652943,
+        -0.20903044676535032
+      ],
+      "losses": 1,
+      "mean_difference": 2.0422878876339228,
+      "relative_mean_difference": 0.2902060008677071,
+      "ties": 0,
+      "wins": 7
+    },
+    "S_vs_N": {
+      "differences": [
+        0.387190992640738,
+        2.3421051923732783,
+        0.002160963663895288,
+        3.4834547717022617,
+        1.6407366535045664,
+        -0.21167845464317558,
+        3.682133900702489,
+        -0.20903044676535032
+      ],
+      "losses": 2,
+      "mean_difference": 1.3896341966473378,
+      "relative_mean_difference": 0.18070602932686392,
+      "ties": 0,
+      "wins": 6
+    },
+    "S_vs_S_no_feedback": {
+      "differences": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "losses": 0,
+      "mean_difference": 0.0,
+      "relative_mean_difference": 0.0,
+      "ties": 8,
+      "wins": 0
+    },
+    "S_vs_X": {
+      "differences": [
+        3.967239784600716,
+        3.5606274569968783,
+        4.428611707360403,
+        3.622044010378123,
+        4.4006296936665965,
+        4.119796768331898,
+        5.645913924842287,
+        4.324647908972178
+      ],
+      "losses": 0,
+      "mean_difference": 4.258688906893635,
+      "relative_mean_difference": 0.8833672722598114,
+      "ties": 0,
+      "wins": 8
+    }
+  },
+  "corrected_S_vs_no_feedback": [
+    {
+      "arrangement": "shelf_west",
+      "context": "Q0",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.25,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    },
+    {
+      "arrangement": "shelf_east",
+      "context": "Q0",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.28125,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    },
+    {
+      "arrangement": "shelf_west",
+      "context": "Q1",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.24324324324324326,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    },
+    {
+      "arrangement": "shelf_east",
+      "context": "Q1",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.2,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    },
+    {
+      "arrangement": "shelf_west",
+      "context": "Q2",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.3,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    },
+    {
+      "arrangement": "shelf_east",
+      "context": "Q2",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.3103448275862069,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    },
+    {
+      "arrangement": "shelf_west",
+      "context": "Q3",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.24050632911392406,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    },
+    {
+      "arrangement": "shelf_east",
+      "context": "Q3",
+      "disabled_posterior": {
+        "camera": 0.5,
+        "radar": 0.5
+      },
+      "full_posterior": {
+        "camera": 0.21782178217821782,
+        "radar": 0.5
+      },
+      "inspection_joint_difference": 0.0,
+      "trajectory_exact": true
+    }
+  ],
+  "corrected_efficacy_gates": {
+    "S_mean_exceeds_G_N_X": true,
+    "S_mean_exceeds_no_feedback": false
+  },
+  "corrected_mechanism_gates": {
+    "all_four_interfaces": true,
+    "all_safe": true,
+    "feedback_disabled_recorded_and_frozen": true,
+    "feedback_full_closed": true
+  },
+  "historical_S_vs_baselines": {
+    "S_vs_G": {
+      "differences": [
+        0.03931387082031801,
+        3.361178172332158,
+        3.4834547717022617,
+        0.002160963663895288,
+        -0.26738817938479187,
+        4.588998872979747,
+        -0.20903044676535032,
+        5.009053015652943
+      ],
+      "losses": 2,
+      "mean_difference": 2.000967630125148,
+      "relative_mean_difference": 0.2826747176313051,
+      "ties": 0,
+      "wins": 6
+    },
+    "S_vs_N": {
+      "differences": [
+        2.3421051923732783,
+        0.387190992640738,
+        3.4834547717022617,
+        0.002160963663895288,
+        -0.21167845464317558,
+        1.6407366535045664,
+        -0.20903044676535032,
+        3.682133900702489
+      ],
+      "losses": 2,
+      "mean_difference": 1.3896341966473378,
+      "relative_mean_difference": 0.18070602932686392,
+      "ties": 0,
+      "wins": 6
+    },
+    "S_vs_S_no_feedback": {
+      "differences": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "losses": 0,
+      "mean_difference": 0.0,
+      "relative_mean_difference": 0.0,
+      "ties": 8,
+      "wins": 0
+    },
+    "S_vs_X": {
+      "differences": [
+        3.5606274569968783,
+        3.967239784600716,
+        3.622044010378123,
+        4.428611707360403,
+        4.119796768331898,
+        4.4006296936665965,
+        4.324647908972178,
+        5.645913924842287
+      ],
+      "losses": 0,
+      "mean_difference": 4.258688906893635,
+      "relative_mean_difference": 0.8833672722598114,
+      "ties": 0,
+      "wins": 8
+    }
+  },
+  "historical_defect": {
+    "branches_with_48_pending_predictions": 40,
+    "branches_with_zero_observed_actions": 40
+  },
+  "independent_replay": {
+    "branches": 40,
+    "planner_or_runtime_called": false,
+    "status": "passed"
+  },
+  "schema_version": "cpu_v10_3_feedback_fix_comparison/1",
+  "status": "complete"
+}

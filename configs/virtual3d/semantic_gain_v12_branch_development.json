@@ -1,0 +1,23 @@
+{
+  "schema_version": "semantic_gain_v12_branch_development/1",
+  "status": "development_protocol_frozen_before_anchor_sweep_branch_collection",
+  "parent_scene_protocol": "configs/virtual3d/semantic_gain_v12_scale_development.json",
+  "shared_prefix": "visit every declared front inspection pose in geometric order, end at the corridor midpoint anchor, then execute one paid 360-degree in-place camera sweep",
+  "anchor_sweep_actions": ["right", "right", "right", "right"],
+  "candidate_cap": 53,
+  "candidate_cap_basis": "four coverage slots + one rotation + entry/deep for the declared maximum of 24 measured components",
+  "reference_surface_samples": 8000,
+  "reference_seed": 12026,
+  "thresholds_m": [0.05, 0.1],
+  "branch_execution": "execute the sealed round trip while each successor retains a latest-map return; switch to the current shortest safe return if the original route is denied",
+  "training_target": "(terminal covered_2d_area_m2 * terminal global_3d_f1_at_5cm - shared-prefix value) / actual paid branch actions",
+  "failure_policy": "retain all denied routes, fallback returns, collisions and metric results; a safe fallback return is valid executed-option evidence but must be flagged as not completing the original route",
+  "pilot_exclusion": [
+    "eval_results/semantic_gain_v12_branch_smoke_20260911",
+    "eval_results/semantic_gain_v12_branch_smoke2_20260911",
+    "eval_results/semantic_gain_v12_branches_D12_00_20260911",
+    "eval_results/semantic_gain_v12_branches_D12_01_20260911"
+  ],
+  "pilot_exclusion_reason": "created before the shared anchor sweep; retain for diagnosis but do not mix with the revised training histories",
+  "claim_boundary": "development branch collection only; no closed-loop or confirmation claim"
+}

@@ -1,0 +1,87 @@
+{
+  "filesystem": {
+    "command": [
+      "df",
+      "-B1",
+      "/root/NSO",
+      "/dev/shm",
+      "/run",
+      "/boot"
+    ],
+    "returncode": 0,
+    "stdout": "Filesystem        1B-blocks         Used  Available Use% Mounted on\n/dev/vda1      102888095744 102295572480  575746048 100% /\ntmpfs            4163018752   1840451584 2322567168  45% /dev/shm\ntmpfs             832606208      1110016  831496192   1% /run\n/dev/vda16        923156480    122159104  736354304  15% /boot\n",
+    "stderr": ""
+  },
+  "memory": {
+    "command": [
+      "free",
+      "-b"
+    ],
+    "returncode": 0,
+    "stdout": "               total        used        free      shared  buff/cache   available\nMem:      8326041600  2633551872  2755162112  1056890880  4320530432  5692489728\nSwap:    17179865088  1723224064 15456641024\n",
+    "stderr": ""
+  },
+  "docker_version": {
+    "command": [
+      "docker",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "Docker version 29.1.3, build 29.1.3-0ubuntu3~24.04.2\n",
+    "stderr": ""
+  },
+  "docker_images": {
+    "command": [
+      "docker",
+      "images",
+      "--format",
+      "{{json .}}"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "docker_containers": {
+    "command": [
+      "docker",
+      "ps",
+      "-a",
+      "--format",
+      "{{json .}}"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "docker_volumes": {
+    "command": [
+      "docker",
+      "volume",
+      "ls",
+      "--format",
+      "{{json .}}"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "docker_usage": {
+    "command": [
+      "docker",
+      "system",
+      "df"
+    ],
+    "returncode": 0,
+    "stdout": "TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE\nImages          0         0         0B        0B\nContainers      0         0         0B        0B\nLocal Volumes   0         0         0B        0B\nBuild Cache     0         0         0B        0B\n",
+    "stderr": ""
+  },
+  "compiler": {
+    "command": [
+      "g++",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": ""
+  }
+}

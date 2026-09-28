@@ -1,0 +1,141 @@
+{
+  "schema": "targeted_scenes_summary_v1",
+  "episodes": 3,
+  "maps": 1,
+  "scope": "prospectively specified synthetic scenario-adaptation study, after prior negative suite",
+  "audit": {
+    "episodes_reconstructed": 3,
+    "matched_geometry_start": true,
+    "semantic_visibility": true
+  },
+  "primary_metric": "coverage_auc",
+  "means": {
+    "geometry": {
+      "coverage_auc": 0.0364518907934264,
+      "coverage_ratio": 0.050097190316310304,
+      "explored_area_m2": 35.4375,
+      "productive_area_coverage": 0.0,
+      "productive_landmarks_seen": 0.0,
+      "revisit_ratio": 0.0,
+      "collisions": 0.0,
+      "episode_wall_time_s": 0.2170427900273353
+    },
+    "semantic_aligned": {
+      "coverage_auc": 0.0396089194203923,
+      "coverage_ratio": 0.07315780173175472,
+      "explored_area_m2": 51.75,
+      "productive_area_coverage": 0.052517203911626224,
+      "productive_landmarks_seen": 0.0,
+      "revisit_ratio": 0.0,
+      "collisions": 0.0,
+      "episode_wall_time_s": 0.2204066759441048
+    },
+    "semantic_shuffled": {
+      "coverage_auc": 0.0364518907934264,
+      "coverage_ratio": 0.050097190316310304,
+      "explored_area_m2": 35.4375,
+      "productive_area_coverage": 0.0,
+      "productive_landmarks_seen": 0.0,
+      "revisit_ratio": 0.0,
+      "collisions": 0.0,
+      "episode_wall_time_s": 0.20983845693990588
+    }
+  },
+  "by_family_size": {
+    "office_spine_192": {
+      "geometry": {
+        "coverage_auc": 0.0364518907934264,
+        "coverage_ratio": 0.050097190316310304,
+        "explored_area_m2": 35.4375,
+        "productive_area_coverage": 0.0,
+        "productive_landmarks_seen": 0.0,
+        "revisit_ratio": 0.0,
+        "collisions": 0.0,
+        "episode_wall_time_s": 0.2170427900273353
+      },
+      "semantic_aligned": {
+        "coverage_auc": 0.0396089194203923,
+        "coverage_ratio": 0.07315780173175472,
+        "explored_area_m2": 51.75,
+        "productive_area_coverage": 0.052517203911626224,
+        "productive_landmarks_seen": 0.0,
+        "revisit_ratio": 0.0,
+        "collisions": 0.0,
+        "episode_wall_time_s": 0.2204066759441048
+      },
+      "semantic_shuffled": {
+        "coverage_auc": 0.0364518907934264,
+        "coverage_ratio": 0.050097190316310304,
+        "explored_area_m2": 35.4375,
+        "productive_area_coverage": 0.0,
+        "productive_landmarks_seen": 0.0,
+        "revisit_ratio": 0.0,
+        "collisions": 0.0,
+        "episode_wall_time_s": 0.20983845693990588
+      }
+    }
+  },
+  "contrasts": {
+    "semantic_aligned minus geometry": {
+      "coverage_auc": {
+        "mean": 0.003157028626965895,
+        "ci95": [
+          0.003157028626965895,
+          0.003157028626965895
+        ]
+      },
+      "coverage_ratio": {
+        "mean": 0.023060611415444417,
+        "ci95": [
+          0.023060611415444417,
+          0.023060611415444417
+        ]
+      },
+      "productive_area_coverage": {
+        "mean": 0.052517203911626224,
+        "ci95": [
+          0.052517203911626224,
+          0.052517203911626224
+        ]
+      },
+      "auc_wins_ties_losses": [
+        1,
+        0,
+        0
+      ]
+    },
+    "semantic_aligned minus semantic_shuffled": {
+      "coverage_auc": {
+        "mean": 0.003157028626965895,
+        "ci95": [
+          0.003157028626965895,
+          0.003157028626965895
+        ]
+      },
+      "coverage_ratio": {
+        "mean": 0.023060611415444417,
+        "ci95": [
+          0.023060611415444417,
+          0.023060611415444417
+        ]
+      },
+      "productive_area_coverage": {
+        "mean": 0.052517203911626224,
+        "ci95": [
+          0.052517203911626224,
+          0.052517203911626224
+        ]
+      },
+      "auc_wins_ties_losses": [
+        1,
+        0,
+        0
+      ]
+    }
+  },
+  "limitations": [
+    "category/room-size correlation is deliberately supplied by generator",
+    "one entrance per scene, no claim of real visual recognition or original full neural NSO",
+    "same-family size/seed variants are correlated; uncertainty summaries exploratory"
+  ]
+}

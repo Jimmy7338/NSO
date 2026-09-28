@@ -1,0 +1,31 @@
+{
+  "schema": "semantic.constructor_correction.v1",
+  "reason": "The pinned private asset loader returns markers as a list; the sensor indexed that list as a wrapped JSON object. Correct only this payload boundary.",
+  "original_protocol_path": "configs/virtual3d/semantic_development_20260923.json",
+  "original_protocol_sha256": "41e60a2c73adfac5769626e63218a3102c30a779ea2c8dff6b44cda8a623ef64",
+  "original_ledger_path": "audit_results/semantic_development_20260923/start_ledger.json",
+  "original_ledger_sha256": "b9dcb56b96dfee9b2488a58668e51bded5e9143977db8574647177b4628ecae9",
+  "failed_attempt_path": "audit_results/semantic_development_20260923/episodes/core_P00_nom_G_b120_lexicographic/attempt_failure.json",
+  "failed_attempt_sha256": "3227db0c42e52bf6e357909d86dc4bd63f3690b54804e54c0a7890c46c48c2a1",
+  "observed_worlds_before_correction": 0,
+  "observed_paid_actions_before_correction": 0,
+  "performance_results_before_correction": 0,
+  "changed_execution_files": [
+    "env/semantic_scene_sensor.py"
+  ],
+  "before_sha256": {
+    "env/semantic_scene_sensor.py": "467ccb18daa0f02c93137bfcbd64c60b8bf137bc358c4104d4470b23e1cb032a"
+  },
+  "after_sha256": {
+    "env/semantic_scene_sensor.py": "78c3aa2082f7871100f45b3f2f5ddbf35659f86a30e13df93e9516c3b6ce56ea"
+  },
+  "planner_scene_sensor_physics_metric_budget_and_slot_matrix_unchanged": true,
+  "positive_test": "Six sensor boundary checks including pinned actual-asset marker payload; no World constructor or packet capture.",
+  "no_automatic_retry": true,
+  "explicit_diagnosed_correction_count": 1,
+  "previous_unstarted_slots_retired": 95,
+  "total_attempt_ceiling_including_failure": 97,
+  "total_primary_world_ceiling": 96,
+  "method_candidate_revision_count": 0,
+  "scope": "one diagnosed sensor-construction correction; no method/scene optimization or outcome-based slot expansion"
+}

@@ -1,0 +1,118 @@
+{
+  "version": "v38-saved-qualitative-1",
+  "created_date": "2026-09-20",
+  "figure_width_inches": 7.05,
+  "figure_height_inches": 4.45,
+  "raster_dpi": 300,
+  "font_family": "Liberation Sans",
+  "font_path": "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+  "camera_shared": {
+    "elevation_degrees": 24,
+    "azimuth_degrees": 55,
+    "roll_degrees": 0,
+    "projection": "orthographic"
+  },
+  "display": {
+    "G": {
+      "triangles_displayed": 42748,
+      "saved_metrics_copied": {
+        "precision": 0.855987548828125,
+        "recall": 0.595794677734375,
+        "f1": 0.7025748303948325,
+        "joint": 0.6727034515515148
+      },
+      "mesh_display_transform": "subtract the common public [3.5, 0.5, 0] translation; no alignment",
+      "normals_used_for_display_shading_only": true
+    },
+    "S": {
+      "triangles_displayed": 45270,
+      "saved_metrics_copied": {
+        "precision": 0.878143310546875,
+        "recall": 0.724945068359375,
+        "f1": 0.7942240373897208,
+        "joint": 0.7604560085891374
+      },
+      "mesh_display_transform": "subtract the common public [3.5, 0.5, 0] translation; no alignment",
+      "normals_used_for_display_shading_only": true
+    }
+  },
+  "sources": {
+    "audit_results/v36_online_confirmation_20260918/config.json": {
+      "sha256": "a6249b7075ab1602f4d110dd966b6e9d2ce5c61f71cb028739b8567fcd095224",
+      "bytes": 9691
+    },
+    "configs/virtual3d/v33_direction_scene_r1_20260917.json": {
+      "sha256": "55bc23b57de6e13472970eb1b6670a6e6040db74d3b61e155fe84f9fa08cd7c9",
+      "bytes": 13999
+    },
+    "audit_results/v36_online_confirmation_20260918/case02/trace.json": {
+      "sha256": "3d64a93f63127c0f1ef59bc24880e06d4158ee978057358a849aa63a1d7342ab",
+      "bytes": 82401
+    },
+    "audit_results/v36_online_confirmation_20260918/case02/result.json": {
+      "sha256": "82de06d161e81abfd5d4b202df8773e19ed6fcef387eefd74f503fe0077f776b",
+      "bytes": 8465
+    },
+    "audit_results/v36_online_confirmation_20260918/case02/final_crop.json": {
+      "sha256": "d1eec2abdef5b9b325385df267dcd5a1b7db5fca8d2af9adec70d66becda103a",
+      "bytes": 1558
+    },
+    "audit_results/v36_online_confirmation_20260918/case02/final_extracted.npz": {
+      "sha256": "1536b9f2aeee7cdc95ee0ab6b743fdce9ae5cb4e10dfaf5d66a94b73bcfd757c",
+      "bytes": 631999
+    },
+    "audit_results/v36_online_confirmation_20260918/case03/trace.json": {
+      "sha256": "631fc3f05b8ef42f6f9bb9c282bfeb7e33dd7703122e330a7addae6b74d6b166",
+      "bytes": 82416
+    },
+    "audit_results/v36_online_confirmation_20260918/case03/result.json": {
+      "sha256": "b5999313c10eed27b640010be4a17ba13bd94f94fa647987f9172f37e325910d",
+      "bytes": 8548
+    },
+    "audit_results/v36_online_confirmation_20260918/case03/final_crop.json": {
+      "sha256": "749514ecb173e032102c33d2802a6b414b2ad2101dfd5036086e173d1fbe09cd",
+      "bytes": 1557
+    },
+    "audit_results/v36_online_confirmation_20260918/case03/final_extracted.npz": {
+      "sha256": "a4acf116d2d0788eb68566a06a2f7d787f16e477e664a217839e5a22aacf597a",
+      "bytes": 705052
+    },
+    "scripts/build_thesis_qualitative_v38.py": {
+      "sha256": "e58dc8aff6632cabd63c10372d0a10ae11749d9cc7b4b03bdbcc8ce7b0072228",
+      "bytes": 11160
+    }
+  },
+  "outputs": {
+    "docs/thesis/figures/v38_qualitative/v38_saved_paths_and_tsdf.pdf": {
+      "sha256": "f4948f6418a2cbb4607a3b2ba0fe2c1763c5ee5f9006fc44407e393d37585c5b",
+      "bytes": 137186
+    },
+    "docs/thesis/figures/v38_qualitative/v38_saved_paths_and_tsdf.svg": {
+      "sha256": "edb8116bc26406d123a7133829637c7f22bbb96b2f380444de7b850860c47693",
+      "bytes": 258771
+    },
+    "docs/thesis/figures/v38_qualitative/v38_saved_paths_and_tsdf.png": {
+      "sha256": "0827e8b1f15d6997fecb69247035bd2f9f4d2a72b4733a65084da760ac373cb5",
+      "bytes": 349828
+    },
+    "docs/thesis/figures/v38_qualitative/trajectories.csv": {
+      "sha256": "14bd3b4f24a7883f39f91e9fa367d57f68cdcb23a35b0d61b7f4c5db3676c378",
+      "bytes": 7939
+    }
+  },
+  "caption_zh": "P00/h1 保存数据的定性展示。(a) 灰色设施几何为离线真值示意，虚框为双方共同公共 ROI；路径来自真实保存的动作位姿，粗浅灰线为共同18动作前缀，灰虚线G与蓝实线S为之后的实际路径（往返重叠段及原地转向不分开绘制）。橙色点表示人工RGB类别提示所在前表面；类别—观察侧关联是双方声明的公共先验。(b,c) 同一正交视角的实际终点TSDF公共ROI网格，显示全部保存三角形，不补洞、不重建、不加真值表面。颜色仅区别方法，明暗仅表示展示光照，不表示误差。保存评分直接抄录；两方法覆盖均563/588，均42动作返航。本例为h1正增量示例，h0零增量另在定量图完整报告。",
+  "scope": {
+    "offline_ground_truth_scene_context": true,
+    "source_mesh_modified": false,
+    "all_saved_triangles_rendered": true,
+    "same_mesh_camera_and_limits": true,
+    "mesh_decimation": false,
+    "new_worlds": 0,
+    "new_sensor_packets": 0,
+    "new_planner_calls": 0,
+    "new_TSDF_integrations": 0,
+    "new_quality_evaluations": 0,
+    "new_counterfactual_outcomes": 0,
+    "ROI_outside_errors_excluded_from_saved_precision": true
+  }
+}

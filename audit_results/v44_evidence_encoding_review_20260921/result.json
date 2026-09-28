@@ -1,0 +1,90 @@
+{
+  "scope": "static fixed V43 receipt encoding; no sensor, mapper, controller, World or study evaluation",
+  "status": "pass",
+  "source_sha256": {
+    "nso/evidence_writer_v44.py": "ea904fdeadf5ded62950838320c78e442b0d30740ad83a097cdd948c0f585ad5",
+    "scripts/run_development_v44.py": "8e613670fedfefe3f32ea3236f60f3393c11ea57bf891c047e6c5fa7e694b392",
+    "tests/test_evidence_writer_v44.py": "a519de0981633d9e60902b9dae840f26446088643a58ac130566b3ea2b46ebcd",
+    "nso/episode_driver_v43.py": "4343c7089bac6da118a957d7f56f2ec6e30d02dbe29e0d5a490d51736b81f316",
+    "configs/virtual3d/v43_runtime_protocol_20260921.json": "abc91f913953a98fc642c59f2a5f17cc85f377a19fe1aaba25a9ecf6c591ddda",
+    "env/development_sensor_v41.py": "4e0f746e8ebdf78cacaa0ec082d636ebd59169e085e8dd2a8b4547e3bc1b99c4",
+    "docs/research/V44_EVIDENCE_ENCODING_CONTRACT_20260921.md": "25ee80d006a46798a7e89c59483f88438366abaa2b9acb777f6eff10776aa99c"
+  },
+  "source_unchanged": true,
+  "unit_test_exit_code": 0,
+  "measurements": [
+    {
+      "input": "audit_results/v43_runtime_pipeline_20260921/G_step_000.json",
+      "input_sha256": "39f45a633bed10cf6f8d5e118ffd2e5c82d349bfac5621eeb633c6d19b73e081",
+      "canonical_bytes": 243079,
+      "stored_bytes": 38750,
+      "ratio": 0.15941319488725889,
+      "canonical_sha256": "b884cc65f5c41ab08a1c5124482d8d810a2d3bb9430dcc2f29ec0389a8e3ef8e",
+      "compressed_sha256": "35e9b89fd7485f46f0d51937d57a2647a5e40be6fbdc91b33e3b19489586e1e2",
+      "lossless": true
+    },
+    {
+      "input": "audit_results/v43_runtime_pipeline_20260921/G_step_001.json",
+      "input_sha256": "063adc2ae08764708b624d40ce0dcfd5a60dd765ba96ceff886ae3c984268701",
+      "canonical_bytes": 420446,
+      "stored_bytes": 65555,
+      "ratio": 0.15591776351778824,
+      "canonical_sha256": "1fec3404f82422e3173530fd4ba00162f04aa2f88e6cfbdad8b014739f5c4a1b",
+      "compressed_sha256": "7bbd105620395f10b69399dce33c2587d226eac7eb8df3f352e58582fd62eb0a",
+      "lossless": true
+    },
+    {
+      "input": "audit_results/v43_runtime_pipeline_20260921/S_step_000.json",
+      "input_sha256": "9d090a68dd0139285bc41ff72f63fe5531523431910195bbfe0f4878c5875b21",
+      "canonical_bytes": 243079,
+      "stored_bytes": 38749,
+      "ratio": 0.15940908099835857,
+      "canonical_sha256": "af0afc668134d2634d16dc0c4b9e642b9edb7d8fe29a4a04a53b51ec38f46cca",
+      "compressed_sha256": "644cce91e6b2fafb0e3932162f8996b8bae6c210d9bcfd6a231ff2a5860e799d",
+      "lossless": true
+    },
+    {
+      "input": "audit_results/v43_runtime_pipeline_20260921/S_step_001.json",
+      "input_sha256": "ed3434b92a4745353c97d47bfec98889df94f9d43d1cca880f5e8eeda2b37044",
+      "canonical_bytes": 420495,
+      "stored_bytes": 65583,
+      "ratio": 0.15596618271323084,
+      "canonical_sha256": "0bdc06103724367cbcb7b5ea95861be3ac1005b9a209a2022b503baa7df04fd5",
+      "compressed_sha256": "b636c0f6c79ba12069baa777568b75eccdd050aeb0da2440561df0bda4354717",
+      "lossless": true
+    }
+  ],
+  "total_canonical_bytes": 1327099,
+  "total_stored_bytes": 208637,
+  "same_v43_protocol_limits": {
+    "episode_bytes": 67108864,
+    "file_bytes": 33554432,
+    "terminal_reserve_bytes": 262144,
+    "start_slots": 5,
+    "required_free_floor_bytes": 10737418240
+  },
+  "runtime_counts": {
+    "worlds_created": 0,
+    "sensor_frames": 0,
+    "controller_decisions": 0,
+    "map_integrations": 0
+  },
+  "static_review": {
+    "original_file_limit_applied_before_compression": true,
+    "stored_total_limit_inherited": true,
+    "terminal_reserve_cannot_be_used_for_steps": true,
+    "exclusive_create_and_path_guard_inherited": true,
+    "manifest_binds_stored_compressed_bytes": true,
+    "same_v43_persistent_space_gate": true,
+    "same_v43_global_start_ledger": true,
+    "secondary_close_failure_preserves_primary_error_and_finalizes_ledger": true
+  },
+  "resolved_findings": [
+    {
+      "id": "V44-CLOSE-FAILURE",
+      "resolution": "caught close exception and retained primary failure; extracted final handler tested with finite doubles"
+    }
+  ],
+  "failure_handler_probe": "extracted exception-handler only; actual entry point and gate not called",
+  "claim_limit": "canonical JSON to gzip measurements only; not pretty-JSON savings, new planning or semantic performance results"
+}

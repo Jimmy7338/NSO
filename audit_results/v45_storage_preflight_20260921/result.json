@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "scope": "read-only limited storage preflight; no cleanup, installation, dependency restore, World or rollout",
+  "created_at_utc": "2026-09-21T09:14:11.910580+00:00",
+  "previous_audit": {
+    "path": "audit_results/v44_storage_audit_20260921/result.json",
+    "sha256": "0cb06e23df113a082f18f2e7e8c4a20e5632fa095925462eddd82c7545a03dae",
+    "free_bytes": 7942967296
+  },
+  "resource": {
+    "status": "blocked_before_world_creation",
+    "persistent_output_root": "/root/NSO/audit_results/v45_storage_preflight_20260921",
+    "checked_filesystem_path": "/root/NSO",
+    "filesystem_type": "ext4",
+    "non_ram_filesystem": true,
+    "free_bytes": 1058942976,
+    "required_free_bytes": 10737418240,
+    "expected_batch_peak_bytes": 402653184,
+    "passed": false,
+    "reason": "insufficient_persistent_space"
+  },
+  "free_space_decrease_since_v44_snapshot_bytes": 6884024320,
+  "NSO_directory_allocated_bytes": {
+    "/root/NSO/loop": 69632,
+    "/root/NSO/audit_results": 1004335104,
+    "/root/NSO/configs": 557056,
+    "/root/NSO/noise_models": 28672,
+    "/root/NSO/trained_models": 45056,
+    "/root/NSO/eval_results": 4837523456,
+    "/root/NSO/tests": 1257472,
+    "/root/NSO/data": 404668416,
+    "/root/NSO/.venv-cpu": 272048128,
+    "/root/NSO/utils": 217088,
+    "/root/NSO/third_party": 317501440,
+    "/root/NSO/.venv-3d": 10346496,
+    "/root/NSO/env": 729088,
+    "/root/NSO/.git": 5385768960,
+    "/root/NSO/habitat-sim": 4096,
+    "/root/NSO/model": 73728,
+    "/root/NSO/docs": 32960512,
+    "/root/NSO/tmp": 5455872,
+    "/root/NSO/habitat-api": 4096,
+    "/root/NSO/pretrained_models": 16384,
+    "/root/NSO/__pycache__": 110592,
+    "/root/NSO/nso": 1794048,
+    "/root/NSO/.venv": 210243584,
+    "/root/NSO/scripts": 5795840,
+    "/root/NSO/semantic": 172032,
+    "/root/NSO/algo": 32768,
+    "/root/NSO": 12508639232
+  },
+  "external_directory_aggregate_observation": {
+    "path": "/tmp/vs2000-three-baselines",
+    "scope": "metadata aggregate only; belongs to another project; not a cleanup candidate",
+    "allocated_bytes": 6816849920,
+    "total_files": 27812,
+    "files_modified_since_v44_audit": 11019,
+    "allocated_bytes_of_files_modified_since_v44_audit": 4725805056,
+    "logical_bytes_of_files_modified_since_v44_audit": 4699544142,
+    "interpretation": "Other-project writes are visible after the previous audit. Modified-file current size is not a growth measurement; there is no old per-directory snapshot, so the full free-space decrease cannot be attributed exactly."
+  },
+  "dependencies": {
+    "venv_link": "/root/NSO/.venv-3d/lib/python3.12/site-packages",
+    "host_target": "/dev/shm/nso_v39_python_packages",
+    "host_target_exists": true,
+    "host_target_allocated_bytes": 798879744,
+    "restore_needed": false,
+    "sandbox_visibility_warning": "ordinary sandbox has an empty private /dev/shm; host read-only check confirms original target exists; versions not reimported in this limited preflight"
+  },
+  "candidates": [
+    {
+      "path": "/root/NSO/nso/__pycache__/observed_instances_v41.cpython-312.pyc",
+      "bytes": 28093,
+      "allocated_bytes": 28672,
+      "hard_links": 1,
+      "sha256": "f000b2ab84fc17ed239d648ea9cc4e226fbb48d92c2697deb8ef2c3e058942ca",
+      "reason": "untracked regenerable bytecode with source present"
+    },
+    {
+      "path": "/root/NSO/scripts/__pycache__/restore_tare_sources_v39.cpython-312.pyc",
+      "bytes": 15472,
+      "allocated_bytes": 16384,
+      "hard_links": 1,
+      "sha256": "74634ca225890e83e3aaac1a08b9ec33b276c8a459a5a8276b16b9aabe917305",
+      "reason": "untracked regenerable bytecode with source present"
+    },
+    {
+      "path": "/tmp/nso-v38-qualitative-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "9941347022af70aab15aec7bc05cc48aadfb71f723fa69c5e3f48fd345e6825f",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso-v40-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "a7541be1950078a5c431b4eef7a2c6d35337c5a7e93e9237a2e923ccf46e8544",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso-v42-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "a31eebfaaf512d1b1f4f729e48ae55a8825aea27293965f915db09f5c0c758de",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso-v43-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "8d6bf6631393b835514330f110313cdd6cc33e5d3d44e2d0e5a2f15fda2c534a",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso-v44-mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "3629043286ed55a64b5bdbf2dafb51ba2014e0a37fbd23acfa961deb5167ded3",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso_v34_mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "6ee50d55ccef20c65df654060dadd148f19544e8e000cb89cbd0cbb7bf4a5c79",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso_v35_matplotlib/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "4c8f74f649c0ccc3ee180cfdda0e49864ab20fd4d15596e6bff0dfd4ac058a31",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso_v36_matplotlib/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "496e69daaf2d3dce01cd366feffc64b750a33df8bcf8684c501a3b826ec7e2e5",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso_v38_mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "2845fe4384d7be3fc9a234c6328112ce54b9bb368b6a9d6f6f769d512ae4259f",
+      "reason": "NSO named generated matplotlib font cache"
+    },
+    {
+      "path": "/tmp/nso_v39_mpl/fontlist-v330.json",
+      "bytes": 39307,
+      "allocated_bytes": 40960,
+      "hard_links": 1,
+      "sha256": "66d55b2d71bb09ce6b3fb9e1d4a28c21d7747818e238272ae49605a9112dc242",
+      "reason": "NSO named generated matplotlib font cache"
+    }
+  ],
+  "candidate_allocated_single_link_bytes": 454656,
+  "deleted_files": 0,
+  "freed_bytes_by_this_audit": 0,
+  "large_reclaimable_task_cache_found": false,
+  "excluded_scopes": {
+    ".git": "history; no maintenance or pruning performed",
+    "eval_results/audit_results": "original or sealed evidence; previous dedup audit retained, no full-content hashing repeated",
+    "third_party/data/venvs": "active dependencies or research assets, not disposable cache",
+    "other projects under /tmp and /root": "outside NSO scope; retained"
+  },
+  "runtime_counts": {
+    "world_created": 0,
+    "rollouts": 0,
+    "paid_actions": 0
+  },
+  "next_step": "Keep existing 10 GiB gate; continue independent offline development, or use a user-provided persistent volume meeting the gate.",
+  "shortfall_bytes": 9678475264,
+  "candidate_cleanup_sufficient_to_pass_gate": false
+}

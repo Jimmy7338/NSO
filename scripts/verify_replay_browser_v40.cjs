@@ -1,0 +1,122 @@
+#!/usr/bin/env node
+// Exercise the saved-evidence viewer in a real browser; no planner is executed.
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const assert = require('node:assert/strict');
+const {pathToFileURL} = require('node:url');
+const root = path.resolve(__dirname, '..');
+const html = path.join(root, 'docs/thesis/demos/v40_replay/index.html');
+const output = path.resolve(process.argv[2] || path.join(root, 'audit_results/v40_replay_browser_20260920'));
+const playwright = require(process.env.V40_PLAYWRIGHT_MODULE || '/dev/shm/nso_v40_browser/node_modules/playwright');
+const sha = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+fs.mkdirSync(output, {recursive: false});
+
+(async () => {
+  const errors = [], network = [], checks = [];
+  const initialSha = sha(html);
+  const browser = await playwright.chromium.launch({headless: true, args: ['--no-sandbox', '--disable-gpu']});
+  let failed;
+  try {
+    const page = await browser.newPage({viewport: {width: 1440, height: 1100}, deviceScaleFactor: 1});
+    page.on('pageerror', error => errors.push(String(error)));
+    page.on('console', message => {if (message.type() === 'error') errors.push(message.text());});
+    await page.route(/^https?:\/\//, route => {network.push(route.request().url()); return route.abort();});
+    await page.goto(pathToFileURL(html).href);
+    await page.waitForFunction(() => Boolean(window.NSO_REPLAY));
+    const state = () => page.evaluate(() => window.NSO_REPLAY.getState());
+    const seek = async step => {await page.evaluate(t => window.NSO_REPLAY.seek(t), step); assert.equal((await state()).step, step);};
+    const meshes = () => page.locator('#meshbox-G img, #meshbox-S img');
+    const meshSources = () => meshes().evaluateAll(elements => elements.map(element => element.src));
+    const readyImages = async () => {
+      await page.waitForFunction(() => [...document.images].every(image => image.complete && image.naturalWidth > 0));
+    };
+    const screenshot = async name => {
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(100);
+      await page.screenshot({path: path.join(output, name), fullPage: true});
+    };
+    assert.equal((await state()).condition, 'h1');
+    assert.equal((await state()).step, 18);
+    assert.equal(await page.locator('#evaluation').isChecked(), false);
+    assert.equal(await page.locator('#score-G').innerText(), '');
+    checks.push('initial state and offline scores opt-in');
+    await seek(0);
+    await page.locator('#evaluation').check();
+    assert.equal(await meshes().count(), 0);
+    assert.equal(await page.locator('#score-G').innerText(), '');
+    await seek(17);
+    assert.equal(await meshes().count(), 0);
+    checks.push('no future mesh or evaluation before first checkpoint');
+    await seek(18);
+    await readyImages();
+    assert.equal(await meshes().count(), 2);
+    assert.match(await page.locator('#score-G').innerText(), /t=18/);
+    const prefix = await meshSources();
+    await seek(19);
+    assert.deepEqual(await meshSources(), prefix);
+    assert.match(await page.locator('#meshstate-G').innerText(), /t=18/);
+    await seek(41);
+    assert.deepEqual(await meshSources(), prefix);
+    checks.push('intermediate steps retain explicitly dated saved prefix');
+    await seek(42);
+    await readyImages();
+    assert.notDeepEqual(await meshSources(), prefix);
+    assert.match(await page.locator('#score-G').innerText(), /t=42/);
+    assert.match(await page.locator('#next-S').innerText(), /已返航/);
+    await screenshot('desktop_final.png');
+    checks.push('final checkpoint and endpoint evaluation revealed at step 42');
+    const cameras = await page.locator('.method.G [data-camera]').evaluateAll(elements => elements.map(e => e.dataset.camera));
+    const beforeCamera = await meshSources();
+    await page.locator(`.method.G [data-camera="${cameras[1]}"]`).click();
+    assert.equal((await state()).camera, cameras[1]);
+    assert.equal(await page.locator(`[data-camera="${cameras[1]}"].selected`).count(), 2);
+    assert.notDeepEqual(await meshSources(), beforeCamera);
+    checks.push('camera change synchronizes both methods');
+    await page.locator('#condition').selectOption('h0');
+    assert.equal((await state()).condition, 'h0');
+    assert.equal(await page.locator('#divergence').isDisabled(), true);
+    await seek(42);
+    assert.equal(await page.locator('#score-G').innerText(), await page.locator('#score-S').innerText());
+    checks.push('zero-gain comparison present with identical saved scores');
+    await page.locator('#condition').selectOption('h1');
+    await page.locator('#divergence').click();
+    assert.notEqual(await page.locator('#next-G').innerText(), await page.locator('#next-S').innerText());
+    await page.locator('#evaluation').uncheck();
+    await readyImages();
+    await screenshot('desktop_decision.png');
+    checks.push('critical-event jump exposes recorded action divergence');
+    await page.locator('#start').click();
+    await page.locator('#speed').selectOption('4');
+    await page.locator('#play').click();
+    await page.waitForFunction(() => window.NSO_REPLAY.getState().step >= 2);
+    await page.locator('#play').click();
+    assert.equal((await state()).playing, false);
+    const stoppedStep = (await state()).step;
+    await page.waitForTimeout(350);
+    assert.equal((await state()).step, stoppedStep);
+    checks.push('playback advances and pause holds recorded action time');
+    await page.setViewportSize({width: 390, height: 844});
+    await seek(18);
+    await readyImages();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+    assert.equal(overflow, false, 'mobile horizontal overflow');
+    await screenshot('mobile.png');
+    checks.push('mobile viewport without horizontal overflow');
+    assert.equal(sha(html), initialSha);
+    assert.deepEqual(errors, []);
+    assert.deepEqual(network, []);
+    checks.push('no external network requests, browser errors, or artifact mutation');
+  } catch (error) {failed = String(error.stack || error);}
+  const result = {status: failed ? 'failed' : 'passed', browser: await browser.version(),
+    html_sha256: initialSha, checks, checks_passed: checks.length, browser_errors: errors,
+    external_requests: network, failure: failed || null, new_trajectories: 0,
+    scope: 'UI behavior and source display only; not a scientific efficacy experiment'};
+  await browser.close();
+  fs.writeFileSync(path.join(output, 'result.json'), JSON.stringify(result, null, 2) + '\n');
+  const manifest = Object.fromEntries(fs.readdirSync(output).map(name => [name, sha(path.join(output, name))]));
+  manifest['verifier_source'] = sha(__filename);
+  fs.writeFileSync(path.join(output, 'artifact_sha256.json'), JSON.stringify(manifest, null, 2) + '\n');
+  console.log(JSON.stringify(result, null, 2));
+  if (failed) process.exitCode = 1;
+})().catch(error => {console.error(error); process.exitCode = 1;});

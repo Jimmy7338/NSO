@@ -1,0 +1,105 @@
+{
+  "aggregate": {
+    "branches": 40,
+    "branches_with_48_pending_predictions": 40,
+    "branches_with_zero_observed_actions": 40
+  },
+  "all_historical_source_hashes_match_before_fix": true,
+  "code_finding": {
+    "observe_revision_condition": [
+      "v10_1",
+      "v10_2"
+    ],
+    "omitted_revision": "v10_3",
+    "prepare_action_revision_condition": [
+      "v10_1",
+      "v10_2",
+      "v10_3"
+    ]
+  },
+  "created_utc": "2026-09-11T08:35:36.864748+00:00",
+  "historical_run": "eval_results/cpu_semantic_inspection_v10_3_development_20260911",
+  "historical_source_hashes_match_before_fix": {
+    "configs/virtual3d/cpu_four_module_v10_3_development_protocol.json": true,
+    "nso/cpu_four_modules_v10.py": true,
+    "nso/hierarchical_options_v10.py": true,
+    "nso/observed_gain_calibration_v10_1.py": true,
+    "nso/runtime_integration.py": true,
+    "scripts/run_cpu_semantic_inspection_v10_2.py": true,
+    "scripts/run_cpu_semantic_inspection_v10_3.py": true
+  },
+  "interpretation": "V10.3 direction-support feedback ran, but predicted-vs-observed sensor-yield calibration did not close. Historical S versus S_no_feedback equality cannot establish IGCR gain-calibration efficacy or neutrality.",
+  "old_source_snapshot_sha256": {
+    "old_sources/configs/virtual3d/cpu_four_module_v10_3_development_protocol.json": "6d1e3c0e0a038f0c0e879cd1f1e3b7ac8804365d1ee3fb07a77e3097c30c4be9",
+    "old_sources/nso/cpu_four_modules_v10.py": "0e49785f141147c620e055e9c543743d9e13d2014fc2205aec5d77586ede966f",
+    "old_sources/nso/hierarchical_options_v10.py": "7244f0044264e84c07ed0155820376e7156d1f8ef15f0c036fbfc480bee5bfb1",
+    "old_sources/nso/observed_gain_calibration_v10_1.py": "d366a532c1b2ba4ca5e30414ceebe44ab401dbbf7bc85fceeef8e52a17b95aef",
+    "old_sources/nso/runtime_integration.py": "8eb7e93a7c95aa2065284a344427f0b3bb73962e5bd6bf438ccfe5965816441a",
+    "old_sources/scripts/run_cpu_semantic_inspection_v10_2.py": "175dddaba7edaa000bcb8326214f86de6b15428822e50053260848f1798380ce",
+    "old_sources/scripts/run_cpu_semantic_inspection_v10_3.py": "78fa601ea0b6638eb1319b00c200928a97138e1f8fed6a26e197ffe7a76c6719"
+  },
+  "result_finding": {
+    "G": {
+      "branches": 8,
+      "observed_actions": [
+        0
+      ],
+      "pending_action_counts": [
+        48
+      ],
+      "posterior_means": [
+        "{\"camera\": 0.5, \"radar\": 0.5}"
+      ]
+    },
+    "N": {
+      "branches": 8,
+      "observed_actions": [
+        0
+      ],
+      "pending_action_counts": [
+        48
+      ],
+      "posterior_means": [
+        "{\"camera\": 0.5, \"radar\": 0.5}"
+      ]
+    },
+    "S": {
+      "branches": 8,
+      "observed_actions": [
+        0
+      ],
+      "pending_action_counts": [
+        48
+      ],
+      "posterior_means": [
+        "{\"camera\": 0.5, \"radar\": 0.5}"
+      ]
+    },
+    "S_no_feedback": {
+      "branches": 8,
+      "observed_actions": [
+        0
+      ],
+      "pending_action_counts": [
+        48
+      ],
+      "posterior_means": [
+        "{\"camera\": 0.5, \"radar\": 0.5}"
+      ]
+    },
+    "X": {
+      "branches": 8,
+      "observed_actions": [
+        0
+      ],
+      "pending_action_counts": [
+        48
+      ],
+      "posterior_means": [
+        "{\"camera\": 0.5, \"radar\": 0.5}"
+      ]
+    }
+  },
+  "schema_version": "cpu_v10_3_feedback_omission_review/1",
+  "status": "confirmed"
+}

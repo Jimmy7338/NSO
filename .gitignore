@@ -1,0 +1,77 @@
+# =============================================================================
+# Python / 构建 / IDE（标准忽略）
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+.venv-cpu/
+.venv-3d/
+.venv-local/
+third_party/official_baselines/
+venv/
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
+.vscode/
+.idea/
+.cursor/
+.cursorrules
+.cursorignore
+.cursorindexingignore
+*.swp
+*.swo
+*~
+*.DS_Store
+
+# =============================================================================
+# 运行中间产物（不上传）
+# =============================================================================
+# smoke / 临时实验目录
+tmp/
+comparison_results/
+image/
+
+# Empty runtime locks are recreated by experiment runners, not backup evidence.
+/audit_results/.observed_autonomous_v26.lock
+/audit_results/.observed_autonomous_v27.lock
+/audit_results/mechanism_development_20260923/start_ledger.json.lock
+/audit_results/semantic_experiment_registry.lock
+
+# 训练与评估过程日志
+*.log
+!eval_results/**/*.log
+!audit_results/**/*.log
+*.out
+*.err
+
+# 可视化中间帧、轨迹图（--print_images / dump 输出）
+**/dump/**/images/
+**/dump/**/episodes/
+**/dump/**/tensorboard/
+
+# episode 内周期 checkpoint、评估曲线（非最终 model_best）
+**/dump/**/periodic_*
+**/dump/**/explored_area.txt
+**/dump/**/explored_ratio.txt
+
+# 默认云盘训练输出目录（若在项目内克隆了一份）
+nso_runs/
+
+# 未归档的 torch 权重碎片（显式保留 yolov8n.pt，见下方 ! 规则）
+*.pt
+!yolov8n.pt
+
+# =============================================================================
+# 需要纳入版本库（请勿忽略）
+# -----------------------------------------------------------------------------
+# *.pdf                  论文与数据协议文档
+# yolov8n.pt             可选外部语义接口验证权重
+# audit_results/         实验原始数据、结果与历史校验记录
+# eval_results/          历史CPU实验结果
+# =============================================================================

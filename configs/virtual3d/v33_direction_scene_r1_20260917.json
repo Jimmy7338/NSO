@@ -1,0 +1,727 @@
+{
+  "version": "v33-direction-service-scene-r1",
+  "purpose": "one finite analytic directional-information family; not measured SLAM or 3D quality",
+  "actions": [
+    "forward",
+    "left",
+    "right"
+  ],
+  "heading_vectors": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      0,
+      -1
+    ],
+    [
+      -1,
+      0
+    ]
+  ],
+  "graph_contract": {
+    "domain": "all safe integer centres in each full declared local rectangle, then rotated",
+    "forward_translation_m": 1.0,
+    "turn_degrees": 90.0,
+    "paid_per_primitive": 1,
+    "exact_return_pose_required": true,
+    "allow_tangent_footprints": true,
+    "swept_safety_epsilon": 1e-07,
+    "no_ring_only_action_restriction": true,
+    "continuous_free_space_optimum_not_claimed": true
+  },
+  "geometric_observation": {
+    "camera_height_m": 0.9,
+    "range_m": 4.0,
+    "width": 96,
+    "height": 72,
+    "fx": 48.0,
+    "fy": 48.0,
+    "horizontal_fov_deg": 90.0,
+    "vertical_fov_deg": 73.73979529168804,
+    "ray_epsilon_m": 1e-07,
+    "surface_horizontal_spacing_max_m": 0.5,
+    "surface_vertical_spacing_max_m": 0.5,
+    "common_split_planes_across_hypotheses_required": true,
+    "finite_visible_surface_proxy_not_depth_accuracy": true
+  },
+  "radar_observation": {
+    "height_m": 0.25,
+    "range_m": 8.0,
+    "horizontal_fov_deg": 360.0,
+    "rays": 180,
+    "independent_of_camera_range": true,
+    "include_in_geometric_signature": true
+  },
+  "coverage_contract": {
+    "denominator": "all declared reachable safe integer ground centres; none selected by benefit",
+    "line_of_sight_height_m": 0.25,
+    "visibility_range_m": 8.0,
+    "field_of_view_degrees": 360.0,
+    "include_visible_ground_in_geometric_signature": true,
+    "target_fraction": 0.8,
+    "finite_ground_proxy_not_measured_2d_coverage": true
+  },
+  "signature_contract": {
+    "visible_geometry": "physical coordinates, normal and ideal depth only",
+    "include_radar_and_ground": true,
+    "forbidden_fields": [
+      "asset_id",
+      "owner",
+      "class",
+      "hidden_patch_id",
+      "reference_area"
+    ]
+  },
+  "public_configuration_model": {
+    "type_A": {
+      "service_side_local_u": -1
+    },
+    "type_B": {
+      "service_side_local_u": 1
+    },
+    "direction_is_not_in_observed_cue": true,
+    "equipment_frame_is_common_public_information": true,
+    "natural_semantic_network_or_learned_mapping_claimed": false
+  },
+  "hypothesis_prior": [
+    0.5,
+    0.5
+  ],
+  "reward_contract": {
+    "main": "C_grid times equal-asset visible vertical exterior area fraction, conditional on C_grid>=0.80 and return",
+    "owner_is_reference_bookkeeping_only": true,
+    "category_weighting": false,
+    "repeated_observations_use_set_union": true,
+    "all_external_vertical_faces_in_denominator": true,
+    "neither_surface_precision_nor_3d_Q": true
+  },
+  "solver_limit": {
+    "wall_seconds": 300,
+    "maximum_memo_states": 1500000
+  },
+  "geometry_freeze_scope": "one defect-grounded r1 after retained r0 observability failure; no further correction or reward/budget sweep",
+  "parents": [
+    {
+      "id": "P00",
+      "local_grid": {
+        "x_min": -3,
+        "x_max": 3,
+        "y_min": 0,
+        "y_max": 4,
+        "spacing_m": 1.0
+      },
+      "nav_cells": [
+        [
+          -3,
+          0
+        ],
+        [
+          -3,
+          1
+        ],
+        [
+          -3,
+          2
+        ],
+        [
+          -3,
+          3
+        ],
+        [
+          -3,
+          4
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          -2,
+          2
+        ],
+        [
+          -2,
+          3
+        ],
+        [
+          -2,
+          4
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          4
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "robot_radius_m": 0.2,
+      "anchor": [
+        0,
+        0,
+        0
+      ],
+      "prefix_actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right"
+      ],
+      "total_action_budget": 42,
+      "prefix_paid_actions": 18,
+      "remaining_action_budget": 24,
+      "device_frame": {
+        "origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quarter_turns_ccw": 0,
+        "local_u": "front-view horizontal axis; positive toward the viewer right",
+        "local_v": "front-to-rear equipment axis"
+      },
+      "geometry_facts": {
+        "body_end_local_y": 3.4,
+        "ribs_local_y": [
+          [
+            1.5,
+            1.8
+          ],
+          [
+            2.3,
+            2.5
+          ],
+          [
+            3.0,
+            3.2
+          ]
+        ],
+        "all_front_guard_surface_in_asset_denominator": true
+      },
+      "background_boxes": [],
+      "hypotheses": [
+        {
+          "id": 0,
+          "semantic_cue": {
+            "type": "type_A"
+          },
+          "assets": [
+            {
+              "id": 0,
+              "boxes": [
+                [
+                  -2.75,
+                  2.75,
+                  1.1,
+                  1.5,
+                  0.0,
+                  1.8
+                ],
+                [
+                  -1.8,
+                  1.8,
+                  1.4,
+                  3.4,
+                  0.0,
+                  0.4
+                ],
+                [
+                  -0.6,
+                  0.6,
+                  1.4,
+                  3.4,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -1.8,
+                  -0.6,
+                  1.5,
+                  1.8,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -1.8,
+                  -0.6,
+                  2.3,
+                  2.5,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -1.8,
+                  -0.6,
+                  3.0,
+                  3.2,
+                  0.4,
+                  1.8
+                ]
+              ],
+              "front_seed_xyz": [
+                0.0,
+                1.1,
+                0.9
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "semantic_cue": {
+            "type": "type_B"
+          },
+          "assets": [
+            {
+              "id": 0,
+              "boxes": [
+                [
+                  -2.75,
+                  2.75,
+                  1.1,
+                  1.5,
+                  0.0,
+                  1.8
+                ],
+                [
+                  -1.8,
+                  1.8,
+                  1.4,
+                  3.4,
+                  0.0,
+                  0.4
+                ],
+                [
+                  -0.6,
+                  0.6,
+                  1.4,
+                  3.4,
+                  0.4,
+                  1.8
+                ],
+                [
+                  0.6,
+                  1.8,
+                  1.5,
+                  1.8,
+                  0.4,
+                  1.8
+                ],
+                [
+                  0.6,
+                  1.8,
+                  2.3,
+                  2.5,
+                  0.4,
+                  1.8
+                ],
+                [
+                  0.6,
+                  1.8,
+                  3.0,
+                  3.2,
+                  0.4,
+                  1.8
+                ]
+              ],
+              "front_seed_xyz": [
+                0.0,
+                1.1,
+                0.9
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P01",
+      "local_grid": {
+        "x_min": -3,
+        "x_max": 3,
+        "y_min": 0,
+        "y_max": 5,
+        "spacing_m": 1.0
+      },
+      "nav_cells": [
+        [
+          -5,
+          -3
+        ],
+        [
+          -5,
+          -2
+        ],
+        [
+          -5,
+          -1
+        ],
+        [
+          -5,
+          0
+        ],
+        [
+          -5,
+          1
+        ],
+        [
+          -5,
+          2
+        ],
+        [
+          -5,
+          3
+        ],
+        [
+          -4,
+          -3
+        ],
+        [
+          -4,
+          -2
+        ],
+        [
+          -4,
+          2
+        ],
+        [
+          -4,
+          3
+        ],
+        [
+          -3,
+          -3
+        ],
+        [
+          -3,
+          -2
+        ],
+        [
+          -3,
+          2
+        ],
+        [
+          -3,
+          3
+        ],
+        [
+          -2,
+          -3
+        ],
+        [
+          -2,
+          -2
+        ],
+        [
+          -2,
+          2
+        ],
+        [
+          -2,
+          3
+        ],
+        [
+          -1,
+          -3
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          0,
+          -3
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "robot_radius_m": 0.2,
+      "anchor": [
+        0,
+        0,
+        3
+      ],
+      "prefix_actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right"
+      ],
+      "total_action_budget": 42,
+      "prefix_paid_actions": 18,
+      "remaining_action_budget": 24,
+      "device_frame": {
+        "origin_xyz": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "quarter_turns_ccw": 1,
+        "local_u": "front-view horizontal axis; positive toward the viewer right",
+        "local_v": "front-to-rear equipment axis"
+      },
+      "geometry_facts": {
+        "body_end_local_y": 4.4,
+        "ribs_local_y": [
+          [
+            1.5,
+            1.8
+          ],
+          [
+            2.8,
+            3.0
+          ],
+          [
+            4.0,
+            4.2
+          ]
+        ],
+        "all_front_guard_surface_in_asset_denominator": true
+      },
+      "background_boxes": [],
+      "hypotheses": [
+        {
+          "id": 0,
+          "semantic_cue": {
+            "type": "type_A"
+          },
+          "assets": [
+            {
+              "id": 0,
+              "boxes": [
+                [
+                  -1.5,
+                  -1.1,
+                  -2.75,
+                  2.75,
+                  0.0,
+                  1.8
+                ],
+                [
+                  -4.4,
+                  -1.4,
+                  -1.8,
+                  1.8,
+                  0.0,
+                  0.4
+                ],
+                [
+                  -4.4,
+                  -1.4,
+                  -0.6,
+                  0.6,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -1.8,
+                  -1.5,
+                  -1.8,
+                  -0.6,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -3.0,
+                  -2.8,
+                  -1.8,
+                  -0.6,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -4.2,
+                  -4.0,
+                  -1.8,
+                  -0.6,
+                  0.4,
+                  1.8
+                ]
+              ],
+              "front_seed_xyz": [
+                -1.1,
+                0.0,
+                0.9
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "semantic_cue": {
+            "type": "type_B"
+          },
+          "assets": [
+            {
+              "id": 0,
+              "boxes": [
+                [
+                  -1.5,
+                  -1.1,
+                  -2.75,
+                  2.75,
+                  0.0,
+                  1.8
+                ],
+                [
+                  -4.4,
+                  -1.4,
+                  -1.8,
+                  1.8,
+                  0.0,
+                  0.4
+                ],
+                [
+                  -4.4,
+                  -1.4,
+                  -0.6,
+                  0.6,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -1.8,
+                  -1.5,
+                  0.6,
+                  1.8,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -3.0,
+                  -2.8,
+                  0.6,
+                  1.8,
+                  0.4,
+                  1.8
+                ],
+                [
+                  -4.2,
+                  -4.0,
+                  0.6,
+                  1.8,
+                  0.4,
+                  1.8
+                ]
+              ],
+              "front_seed_xyz": [
+                -1.1,
+                0.0,
+                0.9
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

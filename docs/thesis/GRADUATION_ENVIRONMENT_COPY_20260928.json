@@ -1,0 +1,65 @@
+{
+  "recorded_at_utc": "2026-09-28T03:16:28.155275+00:00",
+  "purpose": "Make existing host tmpfs TeX and preview dependencies visible to the main agent sandbox through persistent workspace copies.",
+  "operations": "Copied only; no source deletion, symlink replacement, package download, or scientific-code changes.",
+  "tex": {
+    "source": "/dev/shm/nso_v39_tex_runtime",
+    "destination": "/root/NSO/tmp/thesis-tex-runtime_20260928",
+    "directories": [
+      "bin",
+      "cache",
+      "config"
+    ],
+    "verified_files": 361,
+    "verified_bytes": 71356019,
+    "verification": "Every copied file had matching relative path, byte length, and SHA256 immediately after copy.",
+    "all_sha256_match_at_copy": true,
+    "compiler_version": "Tectonic 0.17.0",
+    "compiler_sha256": "a98aa59ad5c1df39a6c9e56cbfc5088f2b11d6c179c0130b97998e4bd46a46da",
+    "bundle_url": "https://relay.fullyjustified.net/default_bundle_v33.tar",
+    "bundle_id": "6ffe055852f8faf66c0acbe1a7fb27f87b869a90bad1204f3bf4d9683f597c7c",
+    "note": "The cache copy is now a working compiler cache and may change during subsequent builds; matching refers to completed copy verification."
+  },
+  "python_preview": {
+    "source": "/dev/shm/nso_v39_python_packages",
+    "destination": "/root/NSO/tmp/thesis-python_20260928/site-packages",
+    "directories": [
+      "pypdfium2",
+      "pypdfium2_raw",
+      "pypdfium2-4.30.0.dist-info",
+      "PIL",
+      "pillow.libs",
+      "pillow-12.3.0.dist-info"
+    ],
+    "verified_files": 235,
+    "verified_bytes": 26560054,
+    "verification": "Every copied file had matching relative path, byte length, and SHA256 immediately after copy.",
+    "all_sha256_match_at_copy": true,
+    "smoke_check": {
+      "interpreter": ".venv-3d/bin/python -S",
+      "PYTHONPATH": "/root/NSO/tmp/thesis-python_20260928/site-packages",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "pdf": "/root/NSO/docs/thesis/GRADUATION_CORE_20260928.pdf",
+      "pages": 12,
+      "first_page_render_pixels": [
+        298,
+        421
+      ],
+      "render_mode": "RGB",
+      "render_written_to_disk": false,
+      "imported_both_modules_from_copied_directory": true
+    }
+  },
+  "total_copied_files": 596,
+  "total_copied_bytes": 97916073,
+  "original_tex_symlink": "/root/NSO/tmp/v38-tex -> /dev/shm/nso_v39_tex_runtime (unchanged)",
+  "supplemental_typesetting_dependency_20260928": {
+    "file": "cmsy7.pfb",
+    "reason": "new mathematical subscripts in the expanded manuscript",
+    "source": "existing configured Tectonic default_bundle_v33.tar",
+    "bytes": 32716,
+    "sha256": "583b65bd1857bffc2ab184fcb4aad4e70e12eb05c9ca9f1c58c9a00a86c8bccf",
+    "scientific_environment_changed": false,
+    "normal_subsequent_builds": "only-cached"
+  }
+}

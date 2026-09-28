@@ -1,0 +1,17 @@
+{
+  "schema_version": "cpu_four_module_v10_2_development_protocol/1",
+  "status": "frozen_after_v10_1_feedback_ablation_before_v10_2_trajectory_execution",
+  "scope": "development repair of the IGCR observation-consumption rule",
+  "architecture": "unchanged ANS hierarchy and OV-SDF, STGHP, RPN-UQ, IGCR interfaces",
+  "single_change_from_v10_1": "consume actual mapper.camera_seen cells, but do not blacklist unrealized cells merely because they fell inside an earlier predicted camera footprint",
+  "rationale": "camera_seen already removes realized observations; predicted-but-occluded cells can remain observable from another pose, so consuming both double-counts an attempt as evidence",
+  "contexts": ["Q0", "Q1", "Q2", "Q3"],
+  "arrangements": ["shelf_west", "shelf_east"],
+  "primary_modes": ["S", "G", "N"],
+  "diagnostics": ["wrong_semantic_X", "no_IGCR_feedback"],
+  "prefix_paid_actions": 150,
+  "adaptive_paid_actions": 48,
+  "main_metric": "new unique surface area times final F1@5cm",
+  "success_gate": "safe S mean exceeds G, N, wrong-semantic X, and no-feedback S; all paired contexts reported",
+  "interpretation": "development-domain evidence, not held-out generalization or comparison with a separately implemented mainstream system"
+}

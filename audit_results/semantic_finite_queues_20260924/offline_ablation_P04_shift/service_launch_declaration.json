@@ -1,0 +1,31 @@
+{
+  "schema": "semantic.offline_service_launch_declaration.v1",
+  "status": "declared_not_started",
+  "unit": "nso-semantic-review-ablation-p04-shift-20260924.service",
+  "argv": [
+    "systemd-run",
+    "--no-ask-password",
+    "--unit=nso-semantic-review-ablation-p04-shift-20260924.service",
+    "--remain-after-exit",
+    "--service-type=exec",
+    "--working-directory=/root/NSO",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=3600",
+    "--setenv=PYTHONDONTWRITEBYTECODE=1",
+    "--setenv=OMP_NUM_THREADS=1",
+    "--setenv=OPENBLAS_NUM_THREADS=1",
+    "--setenv=MKL_NUM_THREADS=1",
+    "/root/NSO/.venv-3d/bin/python",
+    "-B",
+    "/root/NSO/scripts/review_semantic_declared_batch.py",
+    "--declaration",
+    "/root/NSO/audit_results/semantic_finite_queues_20260924/offline_ablation_P04_shift/declaration.json",
+    "--audit-dir",
+    "/root/NSO/audit_results/semantic_finite_queues_20260924/offline_ablation_P04_shift/review_batch"
+  ],
+  "declaration_sha256": "5f1b0c448e9ef75a7067ff23d8bb1b9ad794388f433c2691319df3a2d43ab62a",
+  "created_unix_s": 1790217943.1412458,
+  "automatic_retry": false,
+  "new_worlds": 0,
+  "start_requirement": "Explicit root start signal after summary009 completion; do not start merely because declaration exists."
+}

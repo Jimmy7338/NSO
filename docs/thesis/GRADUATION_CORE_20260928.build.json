@@ -1,0 +1,126 @@
+{
+  "document": "graduation",
+  "source_sha256": {
+    "docs/thesis/GRADUATION_METHOD_CHAPTER_20260928.md": "d7e4db750ba703eee276849acce9bc5e00c67df84b806d2cf59259817a61a155",
+    "docs/thesis/GRADUATION_SIMULATION_CHAPTER_20260928.md": "4b97acc2015b4ec2bad314ac258dacdd31cc2b1aa2ac4133b0afc4f2f187f52b",
+    "docs/thesis/GRADUATION_CORE_REFERENCES_20260928.md": "53fc7d7592ce465266d97207cdbe920f467068e23c50bdec81f904ab9eb163d0",
+    "docs/thesis/GRADUATION_CORE_20260928.md": "2d2c28c108faeeebb8b569af9f69bc8a16c784265c5b043bafbad1fe1d2256b4",
+    "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf": "41bc82d15401363d818e6bc9ea06ecffd49ebab3f474f261629f3ad3023e60bf",
+    "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf": "0e49468341f724d58d8437cfab736fbdf15cfabf1adb60291a20c3e1fb8d458d",
+    "docs/thesis/figures/scene_details_20260928/scene_overview.pdf": "c4ee183d1451984889eac9c3bfec2d8da881a6b89efd4cd47cc296d7bc8344d2",
+    "docs/thesis/figures/virtual_method_20260928/publication_main.pdf": "022f3f6134d2494f579f7e40a517676c7d255c12d05e91ed4ac2ab3200e4ea08",
+    "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf": "18503c27cc94d9b467a3dd51a4d330bb36faa6908632bb40a96ce2956576e66e",
+    "docs/thesis/figures/scene_details_20260928/mesh_details.pdf": "d8e6691e745900117e4caaf0544b3b4ff724122168683a24137b8c0f24ca0fe8",
+    "docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf": "a4882cf7df9ae4701bed5f58a6cd224204112296d7bf1645ee0d5b8045d6360a",
+    "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf": "49af58640707543cef330f5774e3a9592206d7ae0750a25ee635af999ad96bee",
+    "docs/thesis/figures/expansion_20260928/budget_effects.pdf": "5e3e192ca3dc3faddc470aa44ec7081aacda88d28130a0886d997f47ff291556",
+    "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf": "71e1f7aca712cd82f8d699375a1c51a9b0b984556bb0df771956430a4dbad20b",
+    "scripts/build_writing_deliverables_20260928.py": "d964c32a862d42e66e18e7c5ea6bf44ff7662baae71779f5a7fbf4b4bd6ab396",
+    "scripts/build_virtual_paper_review_20260928.py": "09ac58768fb016c9cd19a13c7cf3cb62e23401da62d98304e1334e79cb36fa6c"
+  },
+  "figures": [
+    {
+      "number": 1,
+      "path": "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf",
+      "caption": "平台接口、四模块CPU虚拟验证与独立重建评价。OV-SDF和IGCR共同更新构型信念，STGHP选出下一原子动作，经RPN-UQ检查后执行并获取新观测。公开模板支持信念与规划，TSDF仅融合实测深度，真值仅用于输出封存后的评价。小车图基于用户平台照片生成式合成，用于接口说明；传感、地图和网格缩略图为机制示意。"
+    },
+    {
+      "number": 2,
+      "path": "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf",
+      "caption": "实验室移动平台与本方法的接口对应。（a）用户提供的原始照片，数字标注对应双目相机、激光雷达、定位设备与移动底盘；（b）传感输入、观察决策与导航目标的连接示意。软件能力依据现有平台说明，照片不代表已完成实车性能实验。"
+    },
+    {
+      "number": 3,
+      "path": "docs/thesis/figures/scene_details_20260928/scene_overview.pdf",
+      "caption": "两布局与双构型的场景总览。斜线区为共同前遮挡板，深色块为侧部结构；灰线表示共同18步前缀，蓝虚线G与橙实线S表示后续实际路径，菱形为起终点。两个h0条件路径重合，两个h1条件在第19步选择不同方向。P01按设备坐标系旋转显示，完整几何仅用于离线解释。"
+    },
+    {
+      "number": 4,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_main.pdf",
+      "caption": "全部四个条件的结果。（A）G/S联合指标配对；（B）共同CPU机制比较；（C、D）覆盖与表面F1分量。散点为条件，横线为均值，不表示置信区间；B复用A中的G/S，不增加独立证据。SWAP-I、VISTA-I不是原作者完整系统。"
+    },
+    {
+      "number": 5,
+      "path": "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf",
+      "caption": "全部四条件的实际终点TSDF公共评价域网格。每对G/S使用同一视角、尺度、材质和光照；h0从左后侧、h1从右后侧显示，标注取自冻结评分。全部保存三角面均参与绘制，无补洞、平滑或真值表面叠加；两个h0配对的网格数组完全相同。虚框对应图6，明暗不表示重建误差。"
+    },
+    {
+      "number": 6,
+      "path": "docs/thesis/figures/scene_details_20260928/mesh_details.pdf",
+      "caption": "图5虚框内的同投影局部放大。所有条件均采用3.40 m×2.55 m投影窗口，窗口位置由侧部结构范围确定。两个h1显示S补充的侧面观测，两个h0提供持平对照。该图直接放大保存网格的显示区域，不引入新的几何或局部质量指标。"
+    },
+    {
+      "number": 7,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf",
+      "caption": "P00两构型的完整纠错对照与阈值敏感性。左侧显示四策略终点，右侧显示X相对Xnf在2、5、10 cm下的差值，保留严格阈值的负例。该开发批与图4确认批分别报告；Xnf不属于单一函数消融。"
+    },
+    {
+      "number": 8,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf",
+      "caption": "保存的P00／h1开发轨迹中的信念与行动联系。（a）类别线索在共同前缀内形成，观测18之后选择第19个动作；（b）观测28修正错误先验，随后选择第29个动作。横轴表示已执行动作数，曲线是观测后的构型权重；图示不增加独立终点样本。"
+    },
+    {
+      "number": 9,
+      "path": "docs/thesis/figures/expansion_20260928/budget_effects.pdf",
+      "caption": "原两布局96项扩展任务的预算结果。显示四策略均值、完整配对差与合格/声明任务数；30步的失败部分地图不作为完成性能，均值留空。点为布局、构型和噪声配对，横线为均值，不表示独立场景置信区间。负值与持平条件全部保留。"
+    },
+    {
+      "number": 10,
+      "path": "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf",
+      "caption": "42步下原布局和同族结构变体的完整配对差及2/5/10 cm敏感性。类别、整体纠错和错误类别三个对比均按相同场景、构型、种子配对；小点显示重复条件，均值不附独立场景置信区间。两个变体属于已声明设施族内的几何扰动。"
+    }
+  ],
+  "tables": [
+    {
+      "columns": 3,
+      "data_rows": 4
+    },
+    {
+      "columns": 3,
+      "data_rows": 8
+    },
+    {
+      "columns": 5,
+      "data_rows": 4
+    },
+    {
+      "columns": 2,
+      "data_rows": 8
+    },
+    {
+      "columns": 4,
+      "data_rows": 5
+    },
+    {
+      "columns": 4,
+      "data_rows": 4
+    },
+    {
+      "columns": 5,
+      "data_rows": 4
+    },
+    {
+      "columns": 6,
+      "data_rows": 4
+    }
+  ],
+  "pdf_sha256": "347960898a73fd0bc659eed0a4f62e0628f36e7fc46d4265d803f17beff0092e",
+  "tex_sha256": "d977ecdb11f7f34b4fca2f26adc0cf122e2d2124a6e6d6c16ec1a02746647b9d",
+  "command": [
+    "/root/NSO/tmp/thesis-tex-runtime_20260928/bin/tectonic",
+    "--only-cached",
+    "--keep-logs",
+    "-Z",
+    "search-path=/root/NSO",
+    "--outdir",
+    "/root/NSO/tmp/writing-graduation_20260928",
+    "/root/NSO/tmp/writing-graduation_20260928/GRADUATION_CORE_20260928.tex"
+  ],
+  "compiler_sha256": "a98aa59ad5c1df39a6c9e56cbfc5088f2b11d6c179c0130b97998e4bd46a46da",
+  "downloads_allowed": false,
+  "typesetting_diagnostics": [],
+  "new_worlds": 0,
+  "new_evaluations": 0,
+  "status": "review_draft",
+  "pages": 20
+}

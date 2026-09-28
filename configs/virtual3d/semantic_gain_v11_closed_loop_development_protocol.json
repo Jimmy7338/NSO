@@ -1,0 +1,40 @@
+{
+  "schema_version": "semantic_gain_v11_closed_loop_development_protocol/1",
+  "status": "frozen_before_first_v11_closed_loop_run",
+  "scope": "same V9 development domain used for model fitting; mechanism integration only, not independent confirmation",
+  "architecture": "unchanged ANS global-goal/local-action hierarchy and OV-SDF, STGHP, RPN-UQ, IGCR interfaces",
+  "model_bundle": "eval_results/semantic_gain_v11_integration_bundle_20260911/integration_bundle.json",
+  "contexts": ["Q0", "Q1", "Q2", "Q3"],
+  "arrangements": ["shelf_west", "shelf_east"],
+  "shared_prefix_actions": 150,
+  "adaptive_actions": 48,
+  "max_candidates": 6,
+  "conditions": [
+    "learned_semantic_feedback",
+    "learned_semantic_no_feedback",
+    "learned_geometry",
+    "fixed_semantic",
+    "fixed_geometry",
+    "learned_swapped",
+    "low_confidence_fallback"
+  ],
+  "online_feedback": "fractional Beta camera-yield residual indexed by measured category sign, quantized instance center and eight-sector view direction; evaluator truth is unavailable online",
+  "input_guard": "whole candidate history falls back to equal-capacity geometry MLP outside the packaged training range",
+  "metrics": [
+    "new visible surface area",
+    "inspection joint = new visible area times terminal global F1@5cm",
+    "terminal 2D covered area times F1@5cm",
+    "precision/recall/F1@5cm and surface error",
+    "new-visible local recall/completeness",
+    "path distance, action time, collision and safe return"
+  ],
+  "development_gates": {
+    "semantic_above_learned_geometry": true,
+    "semantic_above_fixed_semantic": true,
+    "correct_semantics_above_swapped": true,
+    "low_confidence_matches_geometry": true,
+    "feedback_changes_action_and_improves_semantic": true,
+    "all_safe_and_four_interfaces": true
+  },
+  "failure_policy": "retain every branch and failed gate; do not open independent E confirmation until a new development version passes"
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "cpu_grid_v1",
+  "purpose": "prospectively frozen synthetic CPU comparison; unseen geometry modulo rotations/reflections",
+  "map_size": 128,
+  "door_width": 5,
+  "max_candidates": 24,
+  "environment": {
+    "resolution_m": 0.1,
+    "robot_radius_m": 0.1,
+    "sensor_range_m": 1.5,
+    "sensor_fov_deg": 90,
+    "max_steps": 500
+  },
+  "maps": [
+    {
+      "layout": "single_room",
+      "seed": 1000
+    },
+    {
+      "layout": "single_room",
+      "seed": 1001
+    },
+    {
+      "layout": "multi_room",
+      "seed": 1000
+    },
+    {
+      "layout": "multi_room",
+      "seed": 1001
+    },
+    {
+      "layout": "corridor",
+      "seed": 1000
+    },
+    {
+      "layout": "corridor",
+      "seed": 1001
+    },
+    {
+      "layout": "dead_end",
+      "seed": 1000
+    },
+    {
+      "layout": "dead_end",
+      "seed": 1001
+    },
+    {
+      "layout": "loop",
+      "seed": 1001
+    },
+    {
+      "layout": "hall",
+      "seed": 1000
+    },
+    {
+      "layout": "hall",
+      "seed": 1001
+    }
+  ],
+  "start_seeds": [
+    301,
+    302
+  ],
+  "methods": [
+    "nearest_frontier",
+    "gain_per_cost",
+    "gain_control",
+    "gain_semantic",
+    "gain_structure",
+    "gain_semantic_structure",
+    "gain_semantic_structure_rpn",
+    "gain_semantic_structure_budget_soft"
+  ],
+  "semantics": {
+    "source": "synthetic_visible_salience_v1",
+    "seed_offset": 10000
+  },
+  "mechanisms": {
+    "semantic_weight": 1.0,
+    "structure_weight": 1.0,
+    "goal_budget": 32,
+    "topology_period": 10,
+    "max_door_width": 7
+  },
+  "rpn_checkpoint": "eval_results/cpu_rpn_20260910/model.npz",
+  "frozen_protocol": "configs/cpu/formal_protocol_v1.json"
+}

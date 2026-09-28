@@ -1,0 +1,76 @@
+{
+  "archived_original_source_sha256": "4f06b053737dd0945f64f123c548955b5ccbd59d37e208088cc936bbf048d68a",
+  "combined_process_peak_rss_kib": 160936,
+  "environment": {
+    "numpy": "1.26.4",
+    "platform": "Linux-6.8.0-63-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "scipy": "1.11.4"
+  },
+  "evaluation_truth_read": false,
+  "failed_attempt_retained": "exact_acceleration_validation/result.json",
+  "final_default_frontend_sha256": "9ad388dbe740052fed2c9bcb6f73a4d7a53196599f6684e585bb082c39c1a35c",
+  "final_source_sha256": {
+    "nso/exact_support_distance.py": "fcf918f4c0dd1c5396c378b91ea4c5ffa23d2be684b1c0c6db0d87ea9414c0d4",
+    "nso/observed_instances_local.py": "9ad388dbe740052fed2c9bcb6f73a4d7a53196599f6684e585bb082c39c1a35c",
+    "scripts/diagnose_forecast_reference_alias.py": "6d9801b001b369abdf7d9435586320de22a70d28c836db9882f39caf043d4ca2",
+    "scripts/verify_local_exact_acceleration.py": "76818601d16f9934cecf769038acb9028d6f4ca00c781437f344845326c00d65",
+    "tests/test_exact_acceleration_verifier.py": "1d950386956bc000357113afd069b6eea00503fa0a9504bcf537fad1c4ae0c3e",
+    "tests/test_exact_support_distance.py": "69f9ba859a67e43c55bf271a002c5e498c5c944ba02708c5dab44f1f3dc55a69",
+    "tests/test_observed_instances_local.py": "48d55467720a0759e912ee963756d2b280e7da788aa69f3a9e84f8c68cea8083"
+  },
+  "final_support_point_counts": {
+    "instance_0000": 4096,
+    "instance_0001": 4096,
+    "instance_0002": 4096
+  },
+  "limits": [
+    "This is exact fixed-history implementation equivalence, not a new trajectory or scientific efficacy result.",
+    "Speedup measures paired frontend observe calls only; downstream computation was shared after exact input equality.",
+    "Default activation reuses the exact True path already exercised in all 149 comparisons."
+  ],
+  "new_actions": 0,
+  "observe_wall_speedup": 24.911386909554583,
+  "only_post_validation_source_change": "constructor exact_distance_acceleration default False -> True; exact tested True execution branch unchanged",
+  "post_adoption_tests": {
+    "common_frontend_tests": 9,
+    "exact_distance_boundary_tests": 7,
+    "status": "passed",
+    "strict_verifier_tests": 4,
+    "total": 20
+  },
+  "post_validation_byte_difference_verified": true,
+  "proof_path": "audit_results/mechanism_development_20260923/diagnostics/exact_acceleration_validation_reference_fixed/result.json",
+  "proof_sha256": "182f4083370719018ab1c0b0a018e31843045f3a0a8bfba1e4d47091068a29ac",
+  "reference_alias_diagnosis": "forecast_reference_alias_diagnosis.json",
+  "schema": "exact_acceleration.default_adoption.v1",
+  "tested_opt_in_frontend_sha256": "a02a22a061486cf7db5096f8f2d8c54ce282cc971b85fc60c6dbcad5685a6fa0",
+  "timings": {
+    "fast_feedback_cpu_s": 0.07962493199986942,
+    "fast_feedback_wall_s": 0.07950670411810279,
+    "fast_observe_cpu_s": 27.296118539000148,
+    "fast_observe_wall_s": 10.051416996400803,
+    "shared_predictor_cpu_s": 0.88464544100003,
+    "shared_predictor_wall_s": 0.31169772427529097,
+    "shared_residual_cpu_s": 6.889951558000073,
+    "shared_residual_wall_s": 3.8906281874515116,
+    "slow_feedback_cpu_s": 0.0940896169999541,
+    "slow_feedback_wall_s": 0.09397359006106853,
+    "slow_observe_cpu_s": 273.374551119,
+    "slow_observe_wall_s": 250.3947377866134
+  },
+  "total_accepted_associations": 52,
+  "tsdf_integrations": 0,
+  "validation_scope": {
+    "complete_associations": true,
+    "geometry_feedback": true,
+    "historical_forecast_metadata_alias": "only later source_frames trimmed in comparator; original geometry digest verified; old artifacts unchanged",
+    "paid_packets": 149,
+    "raw_pixel_masks": true,
+    "residual_and_predictor_after_identical_inputs": "shared deterministic computation also checked against historical replay",
+    "whole_support_snapshots": true
+  },
+  "verified_total_elapsed_s": 293.06933886371553,
+  "verified_total_process_cpu_s": 347.873096731,
+  "world_calls": 0
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "tests": 4,
+  "command": ".venv-3d/bin/python -m unittest discover -s tests/virtual3d -p test_staged_corner_v16.py -v",
+  "source_sha256": {
+    "nso/staged_corner_views_v16.py": "546d7893091cffe2b739979d5f43081f448349185a54cd7ca81132477ce1c226",
+    "nso/axis_history_view_v16.py": "5afe7abdda0d008c9bd80b1da2ff3e4aa42efd878eb73e34d763e125c19115df",
+    "tests/virtual3d/test_staged_corner_v16.py": "6051e5976a1abb7024b99b9813537dfdd4773c739d3514709b3581e728c660a1"
+  },
+  "historical_preflight_source": "audit_results/staged_corner_v16_2_preflight_20260914/sources.zip",
+  "preflight_runtime_sources_unchanged": true,
+  "post_preflight_changed_source": [
+    "tests/virtual3d/test_staged_corner_v16.py"
+  ],
+  "initial_test_failure": "Diagonal supercover into an occupied endpoint row hits an adjacent obstacle first; test incorrectly expected visibility.",
+  "correction": "Endpoint visibility case now uses a straight ray; unknown/occupied intervening barrier and opposite-heading rejection unchanged.",
+  "production_code_changed_for_test": false
+}

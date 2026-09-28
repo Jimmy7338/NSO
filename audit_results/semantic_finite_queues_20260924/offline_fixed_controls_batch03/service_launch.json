@@ -1,0 +1,29 @@
+{
+  "schema": "semantic.offline_service_launch.v1",
+  "unit": "nso-semantic-review-fixed03-20260924.service",
+  "argv": [
+    "systemd-run",
+    "--no-ask-password",
+    "--unit=nso-semantic-review-fixed03-20260924.service",
+    "--remain-after-exit",
+    "--service-type=exec",
+    "--working-directory=/root/NSO",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=3600",
+    "--setenv=PYTHONDONTWRITEBYTECODE=1",
+    "--setenv=OMP_NUM_THREADS=1",
+    "--setenv=OPENBLAS_NUM_THREADS=1",
+    "--setenv=MKL_NUM_THREADS=1",
+    "/root/NSO/.venv-3d/bin/python",
+    "-B",
+    "/root/NSO/scripts/review_semantic_declared_batch.py",
+    "--declaration",
+    "/root/NSO/audit_results/semantic_finite_queues_20260924/offline_fixed_controls_batch03/declaration.json",
+    "--audit-dir",
+    "/root/NSO/audit_results/semantic_finite_queues_20260924/offline_fixed_controls_batch03/review_batch"
+  ],
+  "declaration_sha256": "9c07a469f8fde3ee9d4e4bd2f4576714c43bebdcc0b1e043be077c9b5f6cd29a",
+  "created_unix_s": 1790216735.5748465,
+  "automatic_retry": false,
+  "new_worlds": 0
+}

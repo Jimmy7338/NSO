@@ -1,0 +1,914 @@
+{
+  "version": "v34-fixed-measurement-1",
+  "acquisition": {
+    "parent": "P00",
+    "noise_model": "iid_025px",
+    "noise_seed": 1901,
+    "paired_noise_depends_on": [
+      "parent",
+      "paid_step"
+    ],
+    "noise_independent_of_class": true,
+    "exact_pose": true,
+    "pose_source": "simulator-exact-discrete-pose",
+    "mapper": "ObservedRuntimeMapperV10",
+    "voxel_m": 0.04,
+    "truncation_m": 0.12,
+    "camera_euclidean_range_m": 4.0,
+    "tsdf_axial_depth_trunc_m": 4.0,
+    "laser_range_m": 8.0,
+    "public_bounds": [
+      [
+        0.75,
+        1.6,
+        0.0
+      ],
+      [
+        6.25,
+        3.9,
+        1.8
+      ]
+    ],
+    "translation": [
+      3.5,
+      0.5,
+      0.0
+    ],
+    "raster_shape": [
+      25,
+      35
+    ],
+    "raster_resolution_m": 0.2,
+    "budget": 42,
+    "forced_prefix": 18,
+    "inference_performed": false,
+    "learned_reconstruction": false
+  },
+  "cells": [
+    {
+      "cell_index": 0,
+      "hypothesis": 0,
+      "policy": "G",
+      "physical_case": 0,
+      "alias": false,
+      "independent_sample": true,
+      "witness_sha256": "d058c7fb292ec08f7c9a7cf1a23fb15a9f0eb18655d6c78794f5a508e33b4ad5",
+      "route_origin": "offline finite pixel-model witness"
+    },
+    {
+      "cell_index": 1,
+      "hypothesis": 0,
+      "policy": "class_oracle",
+      "physical_case": 0,
+      "alias": true,
+      "independent_sample": false,
+      "witness_sha256": "38d88e4a91d23a1295b52aae3475b580f8e14dc994a647d62db8334625ae157a",
+      "route_origin": "offline finite pixel-model witness"
+    },
+    {
+      "cell_index": 2,
+      "hypothesis": 1,
+      "policy": "G",
+      "physical_case": 1,
+      "alias": false,
+      "independent_sample": true,
+      "witness_sha256": "b1b015869a76455481e61646aaa4d516dff04c5a2706eb84700aa668fbed2a29",
+      "route_origin": "offline finite pixel-model witness"
+    },
+    {
+      "cell_index": 3,
+      "hypothesis": 1,
+      "policy": "class_oracle",
+      "physical_case": 2,
+      "alias": false,
+      "independent_sample": true,
+      "witness_sha256": "3816a270b127eb3774959593a96473d71f6ff91651c0ee343027140403ae4878",
+      "route_origin": "offline finite pixel-model witness"
+    }
+  ],
+  "physical_cases": [
+    {
+      "index": 0,
+      "parent": "P00",
+      "hypothesis": 0,
+      "episode_id": "v34-fixed-P00-case00",
+      "actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "left",
+        "right",
+        "forward",
+        "left",
+        "right",
+        "forward",
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "left"
+      ],
+      "poses": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          -1,
+          0,
+          3
+        ],
+        [
+          -2,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          0
+        ],
+        [
+          -3,
+          0,
+          1
+        ],
+        [
+          -2,
+          0,
+          1
+        ],
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          3
+        ],
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          -1,
+          0,
+          3
+        ],
+        [
+          -2,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          0
+        ],
+        [
+          -3,
+          1,
+          0
+        ],
+        [
+          -3,
+          2,
+          0
+        ],
+        [
+          -3,
+          3,
+          0
+        ],
+        [
+          -3,
+          4,
+          0
+        ],
+        [
+          -3,
+          4,
+          1
+        ],
+        [
+          -3,
+          4,
+          2
+        ],
+        [
+          -3,
+          3,
+          2
+        ],
+        [
+          -3,
+          3,
+          1
+        ],
+        [
+          -3,
+          3,
+          2
+        ],
+        [
+          -3,
+          2,
+          2
+        ],
+        [
+          -3,
+          2,
+          1
+        ],
+        [
+          -3,
+          2,
+          2
+        ],
+        [
+          -3,
+          1,
+          2
+        ],
+        [
+          -3,
+          0,
+          2
+        ],
+        [
+          -3,
+          0,
+          1
+        ],
+        [
+          -2,
+          0,
+          1
+        ],
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "acquisition_identity_sha256": "200514a223e03167853231077d08c41b185b46f0fb401f610b4726003c0c19c7"
+    },
+    {
+      "index": 1,
+      "parent": "P00",
+      "hypothesis": 1,
+      "episode_id": "v34-fixed-P00-case01",
+      "actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "left"
+      ],
+      "poses": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          -1,
+          0,
+          3
+        ],
+        [
+          -2,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          0
+        ],
+        [
+          -3,
+          0,
+          1
+        ],
+        [
+          -2,
+          0,
+          1
+        ],
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          3
+        ],
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          -1,
+          0,
+          3
+        ],
+        [
+          -2,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          0
+        ],
+        [
+          -3,
+          1,
+          0
+        ],
+        [
+          -3,
+          2,
+          0
+        ],
+        [
+          -3,
+          3,
+          0
+        ],
+        [
+          -3,
+          4,
+          0
+        ],
+        [
+          -3,
+          4,
+          1
+        ],
+        [
+          -2,
+          4,
+          1
+        ],
+        [
+          -2,
+          4,
+          0
+        ],
+        [
+          -2,
+          4,
+          3
+        ],
+        [
+          -3,
+          4,
+          3
+        ],
+        [
+          -3,
+          4,
+          2
+        ],
+        [
+          -3,
+          3,
+          2
+        ],
+        [
+          -3,
+          2,
+          2
+        ],
+        [
+          -3,
+          1,
+          2
+        ],
+        [
+          -3,
+          0,
+          2
+        ],
+        [
+          -3,
+          0,
+          1
+        ],
+        [
+          -2,
+          0,
+          1
+        ],
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "acquisition_identity_sha256": "7c74828c5488b48ede12d1a93b6a0f9950f020ae33f8f788af3ba9e9b929a228"
+    },
+    {
+      "index": 2,
+      "parent": "P00",
+      "hypothesis": 1,
+      "episode_id": "v34-fixed-P00-case02",
+      "actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "right",
+        "left",
+        "forward",
+        "right",
+        "left",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "right"
+      ],
+      "poses": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          -1,
+          0,
+          3
+        ],
+        [
+          -2,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          0
+        ],
+        [
+          -3,
+          0,
+          1
+        ],
+        [
+          -2,
+          0,
+          1
+        ],
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          3
+        ],
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          3,
+          2,
+          0
+        ],
+        [
+          3,
+          3,
+          0
+        ],
+        [
+          3,
+          4,
+          0
+        ],
+        [
+          3,
+          4,
+          3
+        ],
+        [
+          3,
+          4,
+          2
+        ],
+        [
+          3,
+          3,
+          2
+        ],
+        [
+          3,
+          3,
+          3
+        ],
+        [
+          3,
+          3,
+          2
+        ],
+        [
+          3,
+          2,
+          2
+        ],
+        [
+          3,
+          2,
+          3
+        ],
+        [
+          3,
+          2,
+          2
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          3,
+          0,
+          2
+        ],
+        [
+          3,
+          0,
+          3
+        ],
+        [
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "acquisition_identity_sha256": "99065741511c5fd0be93973de1faa93c975d665d1314f3b1028619568a0bcad5"
+    }
+  ],
+  "source_policy_sha256": "6c5f93dbcd65e12819af539e11436880c7740299775827db618629b36925c64b",
+  "historical_main_used": 16,
+  "maximum_new_main_starts": 4,
+  "total_main_limit": 36,
+  "per_case_seconds": 600,
+  "per_case_bytes": 41943040,
+  "shared_bytes": 2097152,
+  "reserve_bytes": 67108864,
+  "main_metric": "C_map times public-ROI external-vertical surface F1@5cm",
+  "secondary_thresholds_cm": [
+    2,
+    10
+  ],
+  "GT_after_both_prediction_snapshots_frozen": true,
+  "stop_after_any_final_ineligible_or_failure": true,
+  "require_previous_case_independent_replay_before_next_main": true,
+  "fixed_route_scope": "offline witnesses; not adaptive measured G, ANS or full architecture",
+  "outside_public_roi_geometry_penalized": false,
+  "natural_semantic_network": false
+}

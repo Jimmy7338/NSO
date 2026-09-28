@@ -1,0 +1,122 @@
+{
+  "schema": "v45.development_batch_report.v1",
+  "status": "reported",
+  "planned_slots": 5,
+  "reserved_slots": 0,
+  "recorded_launches": 0,
+  "batch_sources_verified": false,
+  "batch_source_error": null,
+  "diagnostic_slots": 1,
+  "autonomous_slots": 4,
+  "rows": [
+    {
+      "run_id": "R2_A_diagnostic",
+      "asset_id": "DEV_A_00",
+      "mode": "diagnostic",
+      "noise_seed": 0,
+      "state": "not_started",
+      "reserved": false,
+      "launch_recorded": false,
+      "world_created": false,
+      "episode_status": null,
+      "endpoint": null,
+      "orchestration_status": "not_reported"
+    },
+    {
+      "run_id": "R3_A_G",
+      "asset_id": "DEV_A_00",
+      "mode": "G",
+      "noise_seed": 0,
+      "state": "not_started",
+      "reserved": false,
+      "launch_recorded": false,
+      "world_created": false,
+      "episode_status": null,
+      "endpoint": null,
+      "orchestration_status": "not_reported"
+    },
+    {
+      "run_id": "R3_A_S",
+      "asset_id": "DEV_A_00",
+      "mode": "S",
+      "noise_seed": 0,
+      "state": "not_started",
+      "reserved": false,
+      "launch_recorded": false,
+      "world_created": false,
+      "episode_status": null,
+      "endpoint": null,
+      "orchestration_status": "not_reported"
+    },
+    {
+      "run_id": "R4_C_G",
+      "asset_id": "DEV_C_00",
+      "mode": "G",
+      "noise_seed": 0,
+      "state": "not_started",
+      "reserved": false,
+      "launch_recorded": false,
+      "world_created": false,
+      "episode_status": null,
+      "endpoint": null,
+      "orchestration_status": "not_reported"
+    },
+    {
+      "run_id": "R4_C_S",
+      "asset_id": "DEV_C_00",
+      "mode": "S",
+      "noise_seed": 0,
+      "state": "not_started",
+      "reserved": false,
+      "launch_recorded": false,
+      "world_created": false,
+      "episode_status": null,
+      "endpoint": null,
+      "orchestration_status": "not_reported"
+    }
+  ],
+  "counts": {
+    "not_started": 5,
+    "launch_without_reservation_no_retry": 0,
+    "unfinished_reservation_no_retry": 0,
+    "terminal_without_verified_endpoint": 0,
+    "verified_endpoint": 0,
+    "integrity_error": 0
+  },
+  "paired_deltas": [
+    {
+      "asset_id": "DEV_A_00",
+      "G_run_id": "R3_A_G",
+      "S_run_id": "R3_A_S",
+      "G_status": "not_started",
+      "S_status": "not_started",
+      "delta_S_minus_G": null,
+      "both_task_successful": false,
+      "independent_test_parent": false,
+      "comparison_status": "not_available_without_two_verified_endpoints"
+    },
+    {
+      "asset_id": "DEV_C_00",
+      "G_run_id": "R4_C_G",
+      "S_run_id": "R4_C_S",
+      "G_status": "not_started",
+      "S_status": "not_started",
+      "delta_S_minus_G": null,
+      "both_task_successful": false,
+      "independent_test_parent": false,
+      "comparison_status": "not_available_without_two_verified_endpoints"
+    }
+  ],
+  "verified_autonomous_endpoints": 0,
+  "inference": "descriptive development pairs only; no confidence interval, p-value, or independent-test claim",
+  "missing_scores_imputed": false,
+  "failures_excluded_from_rows": false,
+  "semantic_superiority_claim_added": false,
+  "input_sha256": {
+    "/root/NSO/audit_results/v45_batch_validation_r1_20260921/batch_preflight.json": "185d7c96fca79e8d4584b91daa8111ce22051af260a6ebf25764e94d4df84354",
+    "/root/NSO/configs/virtual3d/v43_runtime_protocol_20260921.json": "abc91f913953a98fc642c59f2a5f17cc85f377a19fe1aaba25a9ecf6c591ddda"
+  },
+  "actual_worlds_created_here": 0,
+  "sensor_queries_here": 0,
+  "tsdf_integrations_here": 0
+}

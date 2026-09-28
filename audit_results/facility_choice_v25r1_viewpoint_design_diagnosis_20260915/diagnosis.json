@@ -1,0 +1,211 @@
+{
+  "status": "complete_read_only_viewpoint_design_diagnosis",
+  "parent": "D25-P00",
+  "source_sha256": {
+    "audit_results/facility_choice_v25_service_cost_20260915/result.json": "6c5e1029e9ba9746be46c10f51c19a91b15985dcb95433506e34fc3e29e691fe",
+    "audit_results/facility_choice_v25_service_cost_20260915/manifest.json": "0fbb550993440c90011a4561fc3abd8ee943308eec4968d5fe3ea3d768338c9f",
+    "audit_results/facility_choice_v25_service_cost_20260915/artifact_hashes.json": "c981b3f92ba57dd8e4f44d4018bce4f3ccc508694e56fbbab8efa61596ce3fb0",
+    "audit_results/facility_choice_v25_static_r1_20260915/result.json": "7a4acce52e8a5294a8e7d89122d04ef5b8fec5b01d59b1d4aa3d665c1f7019c8",
+    "audit_results/facility_choice_v25_static_r1_20260915/manifest.json": "3f9394de7c77adab8733d8cd9ee88ac54cd63a9e3d02513f9c2aa416d403cf13",
+    "audit_results/facility_choice_v25_static_r1_20260915/artifact_hashes.json": "c8db1435b6cf895ef9d44170215c5af856aff9195c44b3c7555f8cd3657c435d"
+  },
+  "input_fields": [
+    "service cost parents[parent=D25-P00].route_catalog.{A,B}.shared_body_center_xy_m",
+    "...selected_view_states",
+    "...selected_pair",
+    "...planned_leg_costs",
+    "...paid_total",
+    "...pair_selection",
+    "static cases[parent=D25-P00].original_sensor_config"
+  ],
+  "world_dimensions_m": [
+    16.0,
+    10.0
+  ],
+  "resolution_m": 0.2,
+  "world_instances": 0,
+  "physical_actions": 0,
+  "sensor_calls": 0,
+  "tsdf_fusions": 0,
+  "new_route_searches": 0,
+  "new_cost_computations": 0,
+  "new_quality_evaluations": 0,
+  "physical_case_results_read": 0,
+  "coordinate_convention": "x=(col+.5)*resolution; y=height-(row+.5)*resolution; headings 0 north,1 east,2 south,3 west",
+  "angular_convention": "atan2(dy,dx) degrees from +x; off-axis wrap(view_to_center azimuth - (-90)) in [-180,180)",
+  "arms": {
+    "A": {
+      "body_center_xy_m": [
+        4.6,
+        6.0
+      ],
+      "views": [
+        {
+          "view_index": 1,
+          "state": [
+            7,
+            21,
+            2
+          ],
+          "xy_m": [
+            4.3,
+            8.5
+          ],
+          "offset_from_body_center_xy_m": [
+            -0.2999999999999998,
+            2.5
+          ],
+          "horizontal_center_distance_m": 2.5179356624028344,
+          "camera_heading": "south (-y); heading index 2",
+          "optical_azimuth_deg_from_positive_x": -90,
+          "center_to_view_bearing_deg": 96.84277341263095,
+          "view_to_center_bearing_deg": -83.15722658736907,
+          "signed_center_off_optical_axis_deg": 6.842773412630947,
+          "optical_axial_distance_to_body_center_m": 2.5
+        },
+        {
+          "view_index": 2,
+          "state": [
+            7,
+            25,
+            2
+          ],
+          "xy_m": [
+            5.1000000000000005,
+            8.5
+          ],
+          "offset_from_body_center_xy_m": [
+            0.5000000000000009,
+            2.5
+          ],
+          "horizontal_center_distance_m": 2.5495097567963927,
+          "camera_heading": "south (-y); heading index 2",
+          "optical_azimuth_deg_from_positive_x": -90,
+          "center_to_view_bearing_deg": 78.69006752597977,
+          "view_to_center_bearing_deg": -101.30993247402023,
+          "signed_center_off_optical_axis_deg": -11.30993247402023,
+          "optical_axial_distance_to_body_center_m": 2.5
+        }
+      ],
+      "center_bearing_span_deg": 18.152705886651177,
+      "optical_heading_span_deg": 0.0,
+      "position_separation_m": 0.8000000000000007,
+      "paid_total": 354,
+      "supplemental_paid_actions": 120,
+      "remaining_declared_budget": 46,
+      "planned_leg_costs": [
+        59,
+        6,
+        55
+      ],
+      "pair_selection": "first lexicographic (row,col,heading) pair meeting all fixed conditions",
+      "pair_changed_for_budget_or_Q": false
+    },
+    "B": {
+      "body_center_xy_m": [
+        11.6,
+        6.0
+      ],
+      "views": [
+        {
+          "view_index": 1,
+          "state": [
+            7,
+            47,
+            2
+          ],
+          "xy_m": [
+            9.5,
+            8.5
+          ],
+          "offset_from_body_center_xy_m": [
+            -2.0999999999999996,
+            2.5
+          ],
+          "horizontal_center_distance_m": 3.2649655434629015,
+          "camera_heading": "south (-y); heading index 2",
+          "optical_azimuth_deg_from_positive_x": -90,
+          "center_to_view_bearing_deg": 130.0302592718897,
+          "view_to_center_bearing_deg": -49.96974072811031,
+          "signed_center_off_optical_axis_deg": 40.03025927188969,
+          "optical_axial_distance_to_body_center_m": 2.5
+        },
+        {
+          "view_index": 2,
+          "state": [
+            7,
+            52,
+            2
+          ],
+          "xy_m": [
+            10.5,
+            8.5
+          ],
+          "offset_from_body_center_xy_m": [
+            -1.0999999999999996,
+            2.5
+          ],
+          "horizontal_center_distance_m": 2.7313000567495322,
+          "camera_heading": "south (-y); heading index 2",
+          "optical_azimuth_deg_from_positive_x": -90,
+          "center_to_view_bearing_deg": 113.74949449286676,
+          "view_to_center_bearing_deg": -66.25050550713325,
+          "signed_center_off_optical_axis_deg": 23.749494492866745,
+          "optical_axial_distance_to_body_center_m": 2.5
+        }
+      ],
+      "center_bearing_span_deg": 16.280764779022945,
+      "optical_heading_span_deg": 0.0,
+      "position_separation_m": 1.0,
+      "paid_total": 340,
+      "supplemental_paid_actions": 106,
+      "remaining_declared_budget": 60,
+      "planned_leg_costs": [
+        47,
+        7,
+        52
+      ],
+      "pair_selection": "first lexicographic (row,col,heading) pair meeting all fixed conditions",
+      "pair_changed_for_budget_or_Q": false
+    }
+  },
+  "mirror_test": {
+    "axis_x_m": 8.1,
+    "reflected_A_view_set_xy_m": [
+      [
+        11.099999999999998,
+        8.5
+      ],
+      [
+        11.899999999999999,
+        8.5
+      ]
+    ],
+    "actual_B_view_set_xy_m": [
+      [
+        9.5,
+        8.5
+      ],
+      [
+        10.5,
+        8.5
+      ]
+    ],
+    "same_unordered_positions": false,
+    "sorted_minimum_squared_error_correspondence_distances_m": [
+      1.5999999999999979,
+      1.3999999999999986
+    ],
+    "correspondence_rms_m": 1.503329637837289,
+    "point_set_hausdorff_m": 1.5999999999999979,
+    "B_midpoint_minus_reflected_A_midpoint_xy_m": [
+      -1.4999999999999982,
+      0.0
+    ],
+    "reflected_optical_heading_matches": true,
+    "reflection_scope": "Reflection defined by the two body centers, not a proof that the entire world is reflection symmetric"
+  },
+  "interpretation": "View geometry is asymmetric; no causal claim about spatial versus category contributions or final quality.",
+  "no_frozen_inputs_modified": true,
+  "diagnosis_markdown_sha256": "3c69e36037e9b4f03dd65117f8a5512329036aa7fb092f5ab83d9c9ba8eab19b"
+}

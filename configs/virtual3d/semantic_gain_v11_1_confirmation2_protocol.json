@@ -1,0 +1,28 @@
+{
+  "schema_version": "semantic_gain_v11_1_confirmation2_protocol/1",
+  "status": "sealed_before_world_construction_or_outcome_viewing",
+  "model_bundle": "eval_results/semantic_gain_v11_integration_bundle_20260911/integration_bundle.json",
+  "contexts_manifest": "configs/virtual3d/semantic_gain_v11_1_confirmation2_contexts.json",
+  "architecture": "ANS global/local hierarchy with OV-SDF, STGHP, RPN-UQ and IGCR interfaces",
+  "no_confirmation_retraining": true,
+  "adaptive_actions": 48,
+  "efficacy_contexts": ["F00","F01","F02","F03","F04","F05","F06","F07"],
+  "coverage_stress_contexts": ["F08","F09","F10","F11"],
+  "arrangements": ["shelf_west","shelf_east"],
+  "efficacy_conditions": ["learned_semantic_feedback","learned_geometry","fixed_semantic","fixed_geometry","learned_swapped","low_confidence_fallback"],
+  "stress_conditions": ["learned_semantic_feedback","learned_geometry","fixed_semantic","learned_swapped","low_confidence_fallback"],
+  "primary_metric": "delta(covered_2d_area_m2 * global_3d_f1_at_5cm) from the shared prefix",
+  "secondary_metrics": ["2D coverage","3D precision/recall/F1 at 5cm","surface error","new visible surface area and local recall","distance","time","collision","safe return","planning time"],
+  "primary_efficacy_gates": {
+    "semantic_mean_above_equal_capacity_geometry": true,
+    "semantic_mean_above_fixed_semantic": true,
+    "correct_semantics_mean_above_swapped": true,
+    "semantic_has_no_pairwise_loss_to_equal_capacity_geometry": true,
+    "low_confidence_matches_geometry": true,
+    "all_safe_and_four_interfaces": true
+  },
+  "statistical_rule": "report paired differences, wins/ties/losses, exact one-sided sign test and 95 percent context bootstrap; no threshold is changed after results",
+  "stress_rule": "report all outcomes and fallback rates separately; stress results cannot be used to replace a failed efficacy gate",
+  "failure_policy": "retain every failure; do not tune on F00-F11; a new method version requires a new future confirmation set",
+  "scope": "independent programmatic confirmation of the artificial two-asset mechanism; not natural open-vocabulary, large-scale, mainstream-baseline or real-robot confirmation"
+}

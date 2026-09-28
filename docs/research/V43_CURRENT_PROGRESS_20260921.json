@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-21",
+  "phase": "V43_composed_CPU_interfaces_and_gated_development_driver",
+  "status": "interface_verification_complete_actual_development_waiting_for_persistent_storage",
+  "four_module_interfaces": [
+    "OV-SDF",
+    "STGHP",
+    "RPN-UQ",
+    "IGCR"
+  ],
+  "hierarchy": "ANS global target and local primitive execution",
+  "four_module_cpu_controller_composed": true,
+  "shared_public_navigation_parents": 6,
+  "shared_public_navigation_coarse_nodes": 516,
+  "shared_public_navigation_continuous_edges": 826,
+  "navigation_information_condition": "provided coarse navigation prior shared by all methods",
+  "observed_occupancy_safety_implemented": true,
+  "development_driver_implemented": true,
+  "contract_tests": {
+    "passed": 56,
+    "navigation": 14,
+    "observed_safety": 17,
+    "controller": 12,
+    "driver": 13
+  },
+  "verified_current_and_archived_source_files": 26,
+  "verified_runtime_artifacts": 40,
+  "old_frozen_manifest_entries_unchanged": 269,
+  "independent_review_status": "passed",
+  "main_analytic_predeclared_packets": 2,
+  "main_analytic_TSDF_integrations": 2,
+  "forecast_selected_actions_physically_executed": 0,
+  "actual_development_worlds": 0,
+  "actual_development_sensor_trajectories": 0,
+  "actual_development_planner_rollouts": 0,
+  "actual_start_slots_reserved": 0,
+  "full_autonomous_development_rollout_validated": false,
+  "semantic_performance_claim_added": false,
+  "default_uncertainty_penalty": 0,
+  "uncertainty_planning_benefit_claim_supported": false,
+  "figure_visually_inspected": true,
+  "figure": "docs/thesis/figures/v43_public_navigation/public_navigation.png",
+  "resource_preflight": {
+    "status": "blocked_before_world_creation",
+    "persistent_output_root": "/root/NSO/audit_results/v43_runtime_pipeline_20260921/not_started_episodes/R3_A_G",
+    "checked_filesystem_path": "/root/NSO/audit_results/v43_runtime_pipeline_20260921",
+    "filesystem_type": "ext4",
+    "non_ram_filesystem": true,
+    "free_bytes": 458559488,
+    "required_free_bytes": 10737418240,
+    "expected_batch_peak_bytes": 402653184,
+    "passed": false,
+    "reason": "insufficient_persistent_space"
+  },
+  "storage_ready": false,
+  "remote_push_performed": false,
+  "next_tasks": [
+    "Obtain persistent storage satisfying the frozen resource gate.",
+    "Run R2_A_diagnostic with 14 paid primitives and record every outcome.",
+    "Run the four predeclared DEV_A/DEV_C G/S autonomous integration slots.",
+    "Connect independent policy replay and offline quality/coverage evaluation.",
+    "Review development evidence before freezing a formal multi-scene baseline matrix."
+  ],
+  "evidence": {
+    "runtime_result": "audit_results/v43_runtime_pipeline_20260921/result.json",
+    "independent_review": "audit_results/v43_independent_review_20260921/result.json",
+    "report": "docs/research/V43_RUNTIME_PIPELINE_RESULT_20260921.md",
+    "thesis_method": "docs/thesis/V43_RUNTIME_AND_NAVIGATION_METHOD_20260921.md"
+  }
+}

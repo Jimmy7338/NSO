@@ -1,0 +1,18 @@
+{
+  "schema_version": "cpu_four_module_v10_3_development_protocol/1",
+  "status": "frozen_after_feedback-channel-isolation_before_v10_3_execution",
+  "architecture": "unchanged ANS hierarchy and OV-SDF, STGHP, RPN-UQ, IGCR interfaces",
+  "root_cause": "V10.2 performance is exactly controlled by pose-inferred semantic aperture consumption; the camera-yield posterior has no observed selection effect",
+  "single_change": "replace pose-inferred consumed semantic aperture with eight-sector support measured from accumulated surface observation bits",
+  "completion_uncertainty_floor": 0.25,
+  "floor_interpretation": "retain 25 percent residual completion value because measured points cannot certify absence of hidden rear surface",
+  "primary_modes": ["S", "G", "N"],
+  "diagnostics": ["X", "S_no_feedback"],
+  "contexts": ["Q0", "Q1", "Q2", "Q3"],
+  "arrangements": ["shelf_west", "shelf_east"],
+  "shared_prefix_actions": 150,
+  "adaptive_actions": 48,
+  "metric": "new unique surface area times final F1@5cm",
+  "gate": "safe S mean exceeds G, N, X and S_no_feedback",
+  "scope": "development-domain mechanism evidence; no held-out or universal superiority claim"
+}

@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "saved_evidence_verified": true,
+  "source_result_sha256": "190977a316e8c8165217884ba29af3d635358ee5e0f9e662816e8ddaee94e9a0",
+  "source_inventory_sha256": "7647048419a25aa8cf86f99bcdc932547f4a56e7d300d13dc6074c09c7a7071e",
+  "verified_full_traces": 8,
+  "verified_saved_observations": 344,
+  "verified_public_forecasts": 96,
+  "verified_posterior_interventions": 2,
+  "verified_no_class_receipts": 2,
+  "gate_count_reconciliation": {
+    "controllers": 10,
+    "cached_observations": 382,
+    "nominal_actions": 372,
+    "online_planning_calls": 194,
+    "online_planning_attempts": 194,
+    "correction_intervention_selects": 2,
+    "correction_intervention_attempts": 2,
+    "memo_states": 305478,
+    "new_worlds": 0,
+    "renderer_queries": 0,
+    "sensor_packets": 0,
+    "mapper_updates": 0,
+    "TSDF_integrations": 0,
+    "Q_evaluations": 0,
+    "new_main_tasks": 0
+  },
+  "main_tasks_used": 19,
+  "reviewer_execution": {
+    "controller_calls": 0,
+    "planner_calls": 0,
+    "DP_states": 0,
+    "World": 0,
+    "sensor_queries": 0,
+    "mapper": 0,
+    "TSDF": 0,
+    "Q": 0,
+    "new_main_tasks": 0
+  },
+  "limitations": [
+    "Planner branch values were not recomputed; saved candidate argmax, soft-information eligibility and independent toy-test source binding were checked.",
+    "Two erased-prefix controls save summary receipts, not complete per-step traces; 38 reads and 2 memo counts are reconciled by frozen source and deterministic input equivalence to G.",
+    "Static source isolation and saved module timing support the interface contract; this is not an adversarial sandbox proof.",
+    "Cached clean observations are not new physical or measured online efficacy evidence."
+  ]
+}

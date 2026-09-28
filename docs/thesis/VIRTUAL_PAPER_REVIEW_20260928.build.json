@@ -1,0 +1,87 @@
+{
+  "source_sha256": {
+    "docs/thesis/VIRTUAL_PAPER_DRAFT_20260928.md": "66160620a4138c0e6012d9d455a83749737ce2cd13964eb544f02115ae08584a",
+    "docs/thesis/figures/scene_details_20260928/scene_overview.pdf": "c4ee183d1451984889eac9c3bfec2d8da881a6b89efd4cd47cc296d7bc8344d2",
+    "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf": "41bc82d15401363d818e6bc9ea06ecffd49ebab3f474f261629f3ad3023e60bf",
+    "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf": "0e49468341f724d58d8437cfab736fbdf15cfabf1adb60291a20c3e1fb8d458d",
+    "docs/thesis/figures/virtual_method_20260928/publication_main.pdf": "022f3f6134d2494f579f7e40a517676c7d255c12d05e91ed4ac2ab3200e4ea08",
+    "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf": "18503c27cc94d9b467a3dd51a4d330bb36faa6908632bb40a96ce2956576e66e",
+    "docs/thesis/figures/scene_details_20260928/mesh_details.pdf": "d8e6691e745900117e4caaf0544b3b4ff724122168683a24137b8c0f24ca0fe8",
+    "docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf": "a4882cf7df9ae4701bed5f58a6cd224204112296d7bf1645ee0d5b8045d6360a",
+    "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf": "49af58640707543cef330f5774e3a9592206d7ae0750a25ee635af999ad96bee",
+    "docs/thesis/figures/expansion_20260928/budget_effects.pdf": "5e3e192ca3dc3faddc470aa44ec7081aacda88d28130a0886d997f47ff291556",
+    "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf": "71e1f7aca712cd82f8d699375a1c51a9b0b984556bb0df771956430a4dbad20b",
+    "scripts/build_virtual_paper_review_20260928.py": "09ac58768fb016c9cd19a13c7cf3cb62e23401da62d98304e1334e79cb36fa6c"
+  },
+  "figures": [
+    {
+      "number": 1,
+      "path": "docs/thesis/figures/scene_details_20260928/scene_overview.pdf",
+      "caption": "两种设施布局及其双构型的离线几何示意与真实执行路径。P00和P01分别为短体与长体布局，h0/h1的侧部结构及人工RGB类别提示对应不同。斜线区域为共同前遮挡板，深色矩形为侧部结构。浅灰粗线表示共同18动作前缀，蓝虚线G与橙实线S为之后保存的实际轨迹；黑色菱形为共同起终点，箭头标示候选方向和真实行进方向，原地转向及重复经过路段叠加绘制。两个h0条件动作与最终评分一致，两个h1条件在第19个付费动作选择不同方向。P01仅按已声明设备坐标系旋转显示；完整设施几何仅用于本图离线解释，不作为运行时已知真值输入。每条轨迹均42动作返航。"
+    },
+    {
+      "number": 2,
+      "path": "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf",
+      "caption": "平台接口、四模块CPU虚拟验证与独立重建评价。OV-SDF和IGCR共同更新构型信念，STGHP选出下一原子动作，经RPN-UQ检查后执行并获取新观测。公开模板支持信念与规划，TSDF仅融合实测深度，真值仅用于输出封存后的评价。小车图基于用户平台照片生成式合成，用于接口说明；传感、地图和网格缩略图为机制示意。[PDF](/root/NSO/docs/thesis/figures/system_architecture_20260928/system_architecture.pdf)。"
+    },
+    {
+      "number": 3,
+      "path": "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf",
+      "caption": "实验室移动平台与拟连接的传感—规划接口。编号对应双目相机、激光雷达、定位设备与移动底盘；接口示意面向ROS 1目标点导航，本文性能比较在虚拟环境中完成。"
+    },
+    {
+      "number": 4,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_main.pdf",
+      "caption": "（A）两父布局、两构型的全部G/S配对，保留两个零差；（B）四种CPU方法的逐条件比较；（C、D）覆盖与表面F1分量，散点表示四个条件，柱顶横线表示均值，未绘制置信区间。B中的G/S复用A，不增加独立证据；SWAP-I/VISTA-I为机制适配，不代表原作者完整系统排名。纠错与严格阈值结果在下文另列。"
+    },
+    {
+      "number": 5,
+      "path": "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf",
+      "caption": "四个条件的保存终点TSDF公共ROI网格。每对G/S采用完全相同的正交视角、尺度、材质与光照，并绘制全部保存三角面片；h0从左后侧、h1从右后侧观察，视角在每对方法之间保持不变。标注的F1和J5直接取自冻结评分，不重新测量。虚框对应下一图的同投影局部窗口。h1两对显示侧部观测引起的重建差别；h0两对网格逐数组完全一致。该图不进行补洞、平滑或真值表面叠加，明暗不表示重建误差。"
+    },
+    {
+      "number": 6,
+      "path": "docs/thesis/figures/scene_details_20260928/mesh_details.pdf",
+      "caption": "前图虚框的同投影放大，放大窗口由已声明的侧部结构范围确定，所有条件均使用3.40m×2.55m的投影窗口。显示仍来自同一批保存网格，不重新裁剪重建表面或生成几何。h1的G侧部网格仍较稀疏，S通过侧向观测呈现更多可见表面；两个h0条件提供持平对照。局部观察仅用于解释全局冻结评分，不额外定义或报告局部质量指标。"
+    },
+    {
+      "number": 7,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf",
+      "caption": "开发批次P00两构型的四策略终点，以及X相对Xnf在2、5、10 cm阈值下的差值。Xnf同时关闭实际纠错和未来纠错预期，不能解释为仅删除某一次后验更新。该批次不与图4的留出噪声确认混池。"
+    },
+    {
+      "number": 8,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf",
+      "caption": "开发批次P00／\\(h_1\\)的保存日志。（a）类别条件在共同前缀内形成先验，第18步末决策对应第19个付费动作；（b）错误先验在第28步取得几何证据后被纠正，下一动作随之变化。曲线表示构型权重，未作概率校准；本图是机制示例，不增加独立终点样本。"
+    },
+    {
+      "number": 9,
+      "path": "docs/thesis/figures/expansion_20260928/budget_effects.pdf",
+      "caption": "原两布局96项扩展任务的预算结果。显示四策略均值、完整配对差与合格/声明任务数；30步的失败部分地图不作为完成性能，均值留空。点为布局、构型和噪声配对，横线为均值，不表示独立场景置信区间。负值与持平条件全部保留。"
+    },
+    {
+      "number": 10,
+      "path": "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf",
+      "caption": "42步下原布局和同族结构变体的完整配对差及2/5/10 cm敏感性。类别、整体纠错和错误类别三个对比均按相同场景、构型、种子配对；小点显示重复条件，均值不附独立场景置信区间。两个变体属于已声明设施族内的几何扰动。"
+    }
+  ],
+  "pdf_sha256": "d8065b5e362810cbf451ccf4cbc355f4e8d87365ce06e5feb30f6233d22322cc",
+  "tex_sha256": "15388c5d677a74e14e7fbb8424a0426b4f2533962fe9b2c6510148ba6eecbc9f",
+  "command": [
+    "/root/NSO/tmp/thesis-tex-runtime_20260928/bin/tectonic",
+    "--only-cached",
+    "--keep-logs",
+    "-Z",
+    "search-path=/root/NSO",
+    "--outdir",
+    "/root/NSO/tmp/virtual-paper-review_20260928",
+    "/root/NSO/tmp/virtual-paper-review_20260928/VIRTUAL_PAPER_REVIEW_20260928.tex"
+  ],
+  "exit_code": 0,
+  "downloads_allowed": false,
+  "typesetting_diagnostics": [],
+  "new_worlds": 0,
+  "new_evaluations": 0,
+  "manuscript_status": "review_draft",
+  "pages": 17
+}

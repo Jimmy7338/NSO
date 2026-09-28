@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-20",
+  "status": "p0_interfaces_and_saved_replay_complete",
+  "entrypoint": "docs/thesis/V40_TOP_TIER_PAPER_PLAN_20260920.md",
+  "supporting_documents": [
+    "docs/research/V40_LITERATURE_AND_BASELINE_PLAN_20260920.md",
+    "docs/research/V40_EXPERIMENT_AND_IMPLEMENTATION_PLAN_20260920.md",
+    "docs/thesis/V40_FIGURE_AND_DEMO_STORYBOARD_20260920.md"
+  ],
+  "constraints": {
+    "preserve_ANS_hierarchy": true,
+    "preserve_four_module_interfaces": true,
+    "retain_testable_semantic_contribution": true,
+    "field_deployment_in_scope": false,
+    "GPU_required_for_core": false,
+    "V39_artifacts_unchanged": true,
+    "resume_app_goal": false
+  },
+  "current_turn_execution": {
+    "new_main_trajectories": 0,
+    "new_training_runs": 0,
+    "field_tests": 0,
+    "new_simulations": 0,
+    "saved_packet_compatibility_reads": 172,
+    "ledger_observe_calls": 344,
+    "scene_parent_reservations": 42,
+    "materialized_scene_geometries": 0,
+    "saved_runs_in_replay": 4,
+    "new_TSDF_integrations": 0,
+    "new_quality_evaluations": 0,
+    "multi_facility_efficacy_proven": false
+  },
+  "proposed_allocation": {
+    "pilot_max": 48,
+    "main_full": {
+      "parent_scenes": 24,
+      "methods": 8,
+      "sensor_seeds": 2,
+      "trajectories": 384
+    },
+    "main_core": {
+      "parent_scenes": 24,
+      "methods": 4,
+      "sensor_seeds": 2,
+      "trajectories": 192
+    },
+    "boundary": {
+      "parent_scenes": 12,
+      "methods": 3,
+      "sensor_seeds": 2,
+      "trajectories": 72
+    },
+    "additional_ablations": {
+      "reused_parent_scenes": 8,
+      "new_policies": 4,
+      "sensor_seeds": 2,
+      "trajectories": 64
+    },
+    "native_transfer_max": 48,
+    "full_cpu_main_total": 520,
+    "core_cpu_main_total": 328,
+    "full_including_pilot_and_native_max": 616,
+    "replays_counted_separately": true,
+    "counts_include_failed_starts": true,
+    "activation": "staged_after_development_resource_and_integrity_gates"
+  },
+  "next_step": "P1: implement development multi-facility geometry, evaluator, and paid-observation planner integration; run pilot only after persistent storage and integrity gates",
+  "submission_status": "no_submission_requested",
+  "remote_push": "not_attempted_this_execution; earlier destination-specific approval remains unresolved",
+  "execution_report": "docs/research/V40_P0_IMPLEMENTATION_RESULT_20260920.md",
+  "p0_implementation": {
+    "instance_interface": "nso/instance_belief_v40.py",
+    "scene_contract": "nso/scene_contract_v40.py",
+    "replay": "docs/thesis/demos/v40_replay/index.html",
+    "verification_receipt": "audit_results/v40_p0_20260920/result.json",
+    "private_test_seeds": "retained locally; Git ignored; no private seed read during review"
+  }
+}

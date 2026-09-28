@@ -1,0 +1,1021 @@
+{
+  "asset_id": "SEM_P00__uninformative_relationship",
+  "asset_manifest_sha256": "1566282bc88ef557daa7498c2816e4968c08ae7088bcc6e3d1413b6a96dadfd1",
+  "condition": "uninformative_relationship",
+  "coverage": {
+    "approximation": "cell-center area quadrature on inflated facility AABBs and background boxes; not exact free-floor polygons or a sensor visibility union",
+    "definition": "start-connected conservative traversable robot-center cells; all fixed task instances excluded as obstacles",
+    "denominator_area_m2": 58.16000000000001,
+    "denominator_cells": 5816,
+    "denominator_mask_sha256": "09462979af5c99c7b087b779aeec42d52d1612d1b36e8fb0405a10e692152cf0",
+    "disconnected_free_cells": 0,
+    "grid_convention": "row increases with world y; column increases with world x; origin is lower-left boundary",
+    "observable_definition": "each free domain center is reachable in the static conservative 4-neighbor grid; sensor coverage still requires saved measured-free belief",
+    "origin_xy_m": [
+      0.0,
+      0.0
+    ],
+    "resolution_m": 0.1,
+    "robot_radius_m": 0.2,
+    "schema": "v44.conservative_navigable_floor.v1",
+    "shape": [
+      80,
+      100
+    ],
+    "uses_detected_instances": false,
+    "uses_planner_trajectory": false
+  },
+  "development_only": true,
+  "evaluation_parameters": {
+    "max_samples": 50000,
+    "sample_spacing_m": 0.3,
+    "seed": 4002,
+    "threshold_m": 0.05
+  },
+  "formal_performance_evidence": false,
+  "limitation": "Inherited finite area quadrature, sparse 1.5 m visibility lattice and conservative AABB C_nav; this is not a sensor episode or formal benchmark result.",
+  "new_sensor_packets": 0,
+  "new_trajectories": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "old_v40_v44_math_unchanged": true,
+  "parent_id": "SEM_P00",
+  "predeclaration_requirement": "Pin this manifest before corresponding policy episodes.",
+  "prediction_selection_or_trajectory_used": false,
+  "primary_matrix_started": false,
+  "public_workspace": {
+    "bounds_xy_m": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        10.0,
+        8.0
+      ]
+    ],
+    "instance_truth_included": false,
+    "marker_palette": {
+      "cabinet": [
+        40,
+        100,
+        220
+      ],
+      "machine": [
+        210,
+        160,
+        40
+      ],
+      "rack": [
+        220,
+        60,
+        40
+      ],
+      "workstation": [
+        40,
+        190,
+        90
+      ]
+    },
+    "navigation_graph_status": "pending",
+    "room_inner_bounds_xy_m": [
+      [
+        0.12,
+        0.12
+      ],
+      [
+        9.88,
+        7.88
+      ]
+    ],
+    "schema_version": "v40.development_workspace.v1",
+    "source": "declared_task_workspace_not_facility_roi",
+    "start_position_world_m": [
+      0.75,
+      0.75,
+      0.9
+    ],
+    "start_yaw_deg": 0.0
+  },
+  "reference_sampling": {
+    "candidate_lattice_spacing_m": 1.5,
+    "max_samples": 50000,
+    "sample_spacing_m": 0.3,
+    "seed": 4001,
+    "yaw_degrees": [
+      0,
+      90,
+      180,
+      270
+    ]
+  },
+  "schema": "semantic_scene.offline_reference.v1",
+  "source_sha256": {
+    "nso/offline_evaluation_v44.py": "ca8be32c517bd1e3b888022f29246a487ec0f057f6e2ab94f51c1bd001245d3b",
+    "nso/semantic_scene_assets.py": "dba28a6fa0715cb19e92160899c5ea2687f95a1a24a9ed1b47dcc1548127275f",
+    "nso/semantic_scene_evaluation.py": "54cba39e191d2d36720bb57a3b800389cc9dceb8f29dadf69fafc5fae0a5830d",
+    "nso/surface_evaluation_v40.py": "3e492e10e2065196f6d75161d7937efc98b7caea7792564ac47404ee1d73c035",
+    "scripts/verify_development_surface_pipeline_v40.py": "7e277c60f1a1163cedf54a160994cbb3d916d5a9e8b45f7e770cdbc2c5f1ee02"
+  },
+  "surface": {
+    "approximation": "deterministic finite triangle-area quadrature; visibility boundary is not exact polygon clipping",
+    "arrays": {
+      "area_weights": "b7d4293bbc46bd65280f27502096076e56b593f0e29267adb17c33bcde2636f7",
+      "point_instance_id": "a888e755c1da5e2e814e12b0ed53dbebb84eae887c2d343c8f80e7e10e1a47da",
+      "points": "877437ed8207f60718285ca111c42fe13c52129fa34ef1fe7f112a9dc2930936",
+      "triangle_instance_id": "dbb75ca14d5f437f2349966e0802f6d35770ca719143394ffabc74576c95fa76",
+      "triangle_normals": "697d0eb4481b86cb212efce2fad9a00d5c938c9933a4637066e1e8f9da7da688",
+      "triangles": "34084573b17fce1a8a9ef83d200945de0f6dd65bfbcd35c4799416d1884fedda",
+      "vertices": "cdc05c6200f9a9d562d70561b3162ad887fb16efe43a1e407f17c7e88f8f610b"
+    },
+    "candidate_views": [
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_000_yaw_000",
+        "width": 96,
+        "world_from_camera": "c784723470e32beba7e9447a978e5d3832d769afa802a980b8a6c22bf6135c3d"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_000_yaw_090",
+        "width": 96,
+        "world_from_camera": "01701a525f5357c6f621210079ba5e83cfc4207f4a2a328cd74d8a98320205ca"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_000_yaw_180",
+        "width": 96,
+        "world_from_camera": "1ba3e4c6f44562ed1c05db43371436637a40a1a08cf0ebab89f1689b825d0bc6"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_000_yaw_270",
+        "width": 96,
+        "world_from_camera": "f4f389de6cd4292697f591594bc9706f1a60981b96a8e55e0d9020a966579ae7"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_001_yaw_000",
+        "width": 96,
+        "world_from_camera": "3bcccc520499b0d63d401c9090248fcb034e96cb30a6f19d05ed727403657b64"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_001_yaw_090",
+        "width": 96,
+        "world_from_camera": "519bd08890ac64095dca9aca9859f7851fd42503773bc8a97ab91cb019222d7b"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_001_yaw_180",
+        "width": 96,
+        "world_from_camera": "37ec93bdf9ce31e7813cbe9c7eb92544e9e10df4a629944771389dba6e0c4fc2"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_001_yaw_270",
+        "width": 96,
+        "world_from_camera": "f198cc7f4e4529fbe48fb3127f83b053de46d9be7025f8c8db89acc4a201e25f"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_002_yaw_000",
+        "width": 96,
+        "world_from_camera": "b2351f68bbeb5b96c6baa8f788f729cce4861028ca24c2fe9a974a40670b6380"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_002_yaw_090",
+        "width": 96,
+        "world_from_camera": "502913e274c0605ac64ab1a393e3e35e55b92a2af5ae7316cfb2b9a279b5c965"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_002_yaw_180",
+        "width": 96,
+        "world_from_camera": "9e0e0744971f5201e73355869bd9bc06fe46393ecfeabaf678f6d361d534e681"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_002_yaw_270",
+        "width": 96,
+        "world_from_camera": "d4ae5ef7ffbd9572ae6886a34ea54a2677d0eba40a52407659726614197d13cc"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_003_yaw_000",
+        "width": 96,
+        "world_from_camera": "0e50878cf6a7d727e6ba82cf1378456557f11f260a9b8186a11ef004a273939d"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_003_yaw_090",
+        "width": 96,
+        "world_from_camera": "8a2af8e9bbea8c6493acaa8231b9866d0c8d7021ec0b30c13281fab4012c6205"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_003_yaw_180",
+        "width": 96,
+        "world_from_camera": "be6fdc9bc9a4a77b831cb2d94999e29822627a99e42fd0c96ca65199c10f3cbd"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_003_yaw_270",
+        "width": 96,
+        "world_from_camera": "71f9624ed1965e23196b24df210ae7fec8002d92740b5f376e93eba59154b679"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_004_yaw_000",
+        "width": 96,
+        "world_from_camera": "bd591debe4e647676e3fd650ec617f3ae81e4096bdf29285bc31156dd2041875"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_004_yaw_090",
+        "width": 96,
+        "world_from_camera": "090a4a802ac9b3830c58960a4279d1fc0343324d4f85cdfdc2ac13899c47545e"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_004_yaw_180",
+        "width": 96,
+        "world_from_camera": "e2a3281a5640c85968d114ba59b76438c46b9352c582ce2287d9780027dcf37c"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_004_yaw_270",
+        "width": 96,
+        "world_from_camera": "d6852d33565cd68f72c74354b74de48147be64e3041404a411df096816f38aba"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_005_yaw_000",
+        "width": 96,
+        "world_from_camera": "0163499451a91d8e2c070c06061231189d339a5892fe020496e74a7610d3d8d9"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_005_yaw_090",
+        "width": 96,
+        "world_from_camera": "3d22cdb009f6fbfc7a639dbb96644b3ab14a3c6f23aa1f09f2ccb985116555c5"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_005_yaw_180",
+        "width": 96,
+        "world_from_camera": "5cce5ed78522415fbc958c0c9516aabc1becd0506137fec558bc4ce3519818c4"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_005_yaw_270",
+        "width": 96,
+        "world_from_camera": "805b6e0f6ad980637de3cbe392dbee65a6da0fa69844460bdb2c6bae058f4180"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_006_yaw_000",
+        "width": 96,
+        "world_from_camera": "e959d8378f5099ca7d6156f5f2299b1f37f1f3a6d404be1a91faf06bcf8775dc"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_006_yaw_090",
+        "width": 96,
+        "world_from_camera": "98743893ce94169d91c99d559dcac852c28a27896d1eeee2cd850fd67d5f821f"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_006_yaw_180",
+        "width": 96,
+        "world_from_camera": "659a44040c2083f87c5aa451e93a1496059a69bbb6213d2713995288c48216a7"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_006_yaw_270",
+        "width": 96,
+        "world_from_camera": "aab4320fcd373c294620fbafbdb9b418034067df86866057286032f9109cafad"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_007_yaw_000",
+        "width": 96,
+        "world_from_camera": "a104dd7d9b44bfb52195618a3bf86887864fe4f550a25abb4443525d86268a63"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_007_yaw_090",
+        "width": 96,
+        "world_from_camera": "89e0508dd66925f36d016f77ee0ad3c58bf06e2fc4589b9075b7a4966171d642"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_007_yaw_180",
+        "width": 96,
+        "world_from_camera": "23592cd9979a6054f3a49027d2e202da0627f53c85822f9d5369782eef84b2fb"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_007_yaw_270",
+        "width": 96,
+        "world_from_camera": "f10788328d18fb792a127c6d473161cbcf2b3fc953fc159eaf3916b9880f5685"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_008_yaw_000",
+        "width": 96,
+        "world_from_camera": "5d4981e17caf74e51da93370b5a7f08b8a6b36a71a8dfd108fc2e0ab86052ac2"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_008_yaw_090",
+        "width": 96,
+        "world_from_camera": "117ee14cf58c971a875ebbad8b6a73f097bc9a9fe8bab4ec10ba1f506b581018"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_008_yaw_180",
+        "width": 96,
+        "world_from_camera": "3a48f40d8c746412eb4575c236c131ce21d0bb9d780466d67600a7d6e19ae53e"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_008_yaw_270",
+        "width": 96,
+        "world_from_camera": "ba923d277e27b8cd1c4f177677fc5fa334847fbaa6c381284a48dafaceb18f70"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_009_yaw_000",
+        "width": 96,
+        "world_from_camera": "0941772aa7b6c770d36624513aead5bdf82672d1ce86ea5dd66769c17e70c18d"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_009_yaw_090",
+        "width": 96,
+        "world_from_camera": "2392e863e254f025ba81a31978c4f801fc988a8fae5d2791af7d5009e1eca058"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_009_yaw_180",
+        "width": 96,
+        "world_from_camera": "d70f21d0d18c416af9dba1a5a2bc43bae9f897483cbc420816f497796d50562b"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_009_yaw_270",
+        "width": 96,
+        "world_from_camera": "50f676f48e22616e83eae035b0308d2bd4077afe8008dc0c8e018df6514745b7"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_010_yaw_000",
+        "width": 96,
+        "world_from_camera": "ec610e48b366c3cde7e1684cf20574ff14fab53616dd10740fe43eb18273af07"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_010_yaw_090",
+        "width": 96,
+        "world_from_camera": "c5e1343dcaab4a51ec56007527c3451a08ab00f29d34d014b2e0eabf49c5ae78"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_010_yaw_180",
+        "width": 96,
+        "world_from_camera": "7400857da47b20a7be2cae53652347563d98fc79a42218043f9807fe58355fe3"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_010_yaw_270",
+        "width": 96,
+        "world_from_camera": "46280e82236350840ee100ed6ae4ff718b28327f607b6cebf8c771dce86c75ae"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_011_yaw_000",
+        "width": 96,
+        "world_from_camera": "86fef6f17677fc00cdf0eff43734043a4e9bb64bfd1af5dc9a4992ca5f8c6d6a"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_011_yaw_090",
+        "width": 96,
+        "world_from_camera": "faf4c31429d51b9457d0a241f1156d364f9be69926892341c7d5dc58ef213c54"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_011_yaw_180",
+        "width": 96,
+        "world_from_camera": "c821fd76fd56c2e1eda8aa5dd4f8fda1245d73b36eeb3f817b16671b65370c75"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_011_yaw_270",
+        "width": 96,
+        "world_from_camera": "258d84e207a60040160cc6dd421606cd8bf090139114b0c3aa8dc9ca365c56c3"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_012_yaw_000",
+        "width": 96,
+        "world_from_camera": "ee4138820d649b2777596c41c98d5d3030ecd5979239a532bebe1162a07e2b53"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_012_yaw_090",
+        "width": 96,
+        "world_from_camera": "b3cfab54c2134e3d350ddff846960f91daaef3484e8d921fa02a19e69ef67d20"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_012_yaw_180",
+        "width": 96,
+        "world_from_camera": "bad7046835dff738f0061448f6c9bcfd9a569db7f7f166fc847f1f9cba03a22a"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_012_yaw_270",
+        "width": 96,
+        "world_from_camera": "011f21d70bca56887d2bd59634e6acd6aa62c64976f6c9076d638ad66c07cca4"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_013_yaw_000",
+        "width": 96,
+        "world_from_camera": "d3b02e34e686f06a6c10b0f8897c863ae63ab270c976cb74fa11801594605255"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_013_yaw_090",
+        "width": 96,
+        "world_from_camera": "699e1b86ee4c58adb79c578d6e8d473ccd73475493e922e9e4f0a1189c0fafcf"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_013_yaw_180",
+        "width": 96,
+        "world_from_camera": "db553b374fe16b364570e0afb32debd53ff12391abf46972197b9f491c90fe36"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_013_yaw_270",
+        "width": 96,
+        "world_from_camera": "adae0eb2bd6b0c4d0aba0a89b36b985421dfee452f90e623cd4d9cc6b301e789"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_014_yaw_000",
+        "width": 96,
+        "world_from_camera": "7f69e2d317361223ef5aa93b2ac394cdd7f3cd223c5d807a715fe788fc25489b"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_014_yaw_090",
+        "width": 96,
+        "world_from_camera": "cea8589b5cbe2a9576590f5f4cf14e8ae3ddb81cb1dd2ac75245f076085a3c40"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_014_yaw_180",
+        "width": 96,
+        "world_from_camera": "da1b1454e686e0e1e1cd7a000e6be4294b13c9edebd068affcc36d922fd920bd"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_014_yaw_270",
+        "width": 96,
+        "world_from_camera": "c2c375d3da56f2940bc6f177a6dddbf3601a1afb6bc4ae4314c7198f111a6f78"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_015_yaw_000",
+        "width": 96,
+        "world_from_camera": "bc148d9c9759f6a3f02610a698e3e4067bb6db56ce434eb78b1c963cfcc34fd4"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_015_yaw_090",
+        "width": 96,
+        "world_from_camera": "5a979a454e037f5b8dbcf65fb748c9bca1b4875e16caff1a5f5606fb378258d3"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_015_yaw_180",
+        "width": 96,
+        "world_from_camera": "9aa5c34392cf0ede033c075053e8c448921e9f235e64d25b4d3af4e3b173cc81"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_015_yaw_270",
+        "width": 96,
+        "world_from_camera": "7757df56dff326be306fd9fe201bebef663d8a0e2357e28950f26df458980466"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_016_yaw_000",
+        "width": 96,
+        "world_from_camera": "cc0be705658f8234ec130ca975cd85f1a01cd9ba7f2342bb8d765576ed8c9b76"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_016_yaw_090",
+        "width": 96,
+        "world_from_camera": "20a89ef62e0b6f699ed8204808bba85cfebad49f50f12ce57e13671efba6f7d8"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_016_yaw_180",
+        "width": 96,
+        "world_from_camera": "d459f3b6fdddbd99dace887e2c30e9b52525c70fdba51fcdccc0304a174616b5"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_016_yaw_270",
+        "width": 96,
+        "world_from_camera": "5bce6c966f146b713face0a8d976a2dfd907caa46f0cd465227b7b588964cbb7"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_017_yaw_000",
+        "width": 96,
+        "world_from_camera": "7ccc3bbb374e8504a7f247ad0e37442df67b990ebfaead20d17af2c422be8757"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_017_yaw_090",
+        "width": 96,
+        "world_from_camera": "4e348b060ba096755f84c4213aac3523705b99eadc30aadf9cc7895379a4a651"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_017_yaw_180",
+        "width": 96,
+        "world_from_camera": "6cdea200d78f68d4ac4b0c0df87dd5490ecccd06946b9fde4c93370b87f85504"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_017_yaw_270",
+        "width": 96,
+        "world_from_camera": "ea9b0245ded22139bafadb71b7fe89161d5b1ea0d4789964fbb795e2403283e1"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_018_yaw_000",
+        "width": 96,
+        "world_from_camera": "485bb4dad29e9945c4a24d44f2243d61da7ff1b2d75c866520fdb93fe58ba1e7"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_018_yaw_090",
+        "width": 96,
+        "world_from_camera": "4f08d33536fa0218e29f17df655c838bacc62ad7b96847fd57bf4a05e9fe4c24"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_018_yaw_180",
+        "width": 96,
+        "world_from_camera": "97b7a0f02b77c55359d8f80dcc00e68badff3d27f2b2fa9c3e49259b3eeae688"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_018_yaw_270",
+        "width": 96,
+        "world_from_camera": "239adca503f1a0a8e7852d5d37712247e5fe99b8e18a352f3659b3da2bbf6715"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_019_yaw_000",
+        "width": 96,
+        "world_from_camera": "8ce138b743c5ac051dd2e1704154515e5841684f6176aa01aafd2f249fc32a44"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_019_yaw_090",
+        "width": 96,
+        "world_from_camera": "656d59dc2c4958c50d200c2d1023b3689fa625cd22eff2cb2f1dd1d151dc27cc"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_019_yaw_180",
+        "width": 96,
+        "world_from_camera": "d892be00ae41657c12ea7ad9d7573472e7e2c7538f409ac22911af0b5274ba6d"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_019_yaw_270",
+        "width": 96,
+        "world_from_camera": "e41aa195df48202e3f9e6581cbd957ba2f5b5c65145984b961cb178c9d53834c"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_020_yaw_000",
+        "width": 96,
+        "world_from_camera": "f1cba5d7e79f5c7c2d6e69875f071bbc30a4afd2a7a55bcf9edbeeb7159612ad"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_020_yaw_090",
+        "width": 96,
+        "world_from_camera": "ad9a9a1750e83ce84343a4c6e731c6947f7aab1948873c1280731cbdfbe846ae"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_020_yaw_180",
+        "width": 96,
+        "world_from_camera": "068821181f70122a2975d419cc24e34bb477871004dc5650e6986b486b47f9ae"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_020_yaw_270",
+        "width": 96,
+        "world_from_camera": "6e4d81fa32c8d0f92b0dfa22563cd3b710541fd039036008207c79402fcafc95"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_021_yaw_000",
+        "width": 96,
+        "world_from_camera": "d85761f9eb8093a9db31afa311b6abb52deceec490dc64d0e6db1f78bf2441dc"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_021_yaw_090",
+        "width": 96,
+        "world_from_camera": "869e2978afdb940b1c959b9599a8abb1f9713f6839c5976d50d34816efef619a"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_021_yaw_180",
+        "width": 96,
+        "world_from_camera": "3951969eeeeb0af571c21e90d27c7eec884b8079ef5414c5d94dfa478c83f8e2"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_021_yaw_270",
+        "width": 96,
+        "world_from_camera": "01a24a642bec87b2aec727f92475394325edc29268ae9c4b3822d9c0d4e0ab55"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_022_yaw_000",
+        "width": 96,
+        "world_from_camera": "f91b66bce76712501f296d5df0fab67d9ac867735acfee5831bda913e020e167"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_022_yaw_090",
+        "width": 96,
+        "world_from_camera": "e869a39ff6e495b501e5e6e5cf2b109ad157cbe22fc00d49d1b0efecee3741eb"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_022_yaw_180",
+        "width": 96,
+        "world_from_camera": "36c6e936b5051b70df821af3ff92775a06b7fe92b771a26b652bec8f19487c75"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_022_yaw_270",
+        "width": 96,
+        "world_from_camera": "159fac7c1e7335ae60a89786e9e2f81b475f1495d5056872240912362937c25d"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_023_yaw_000",
+        "width": 96,
+        "world_from_camera": "eb4519e0144a0904541ae8fc282b945adba08fc201ee4add4b5c60aafbe5fef9"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_023_yaw_090",
+        "width": 96,
+        "world_from_camera": "919f97e71e613001f0f86ab608388d2808f7544b7fac964eb1d84f7f98d4ca24"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_023_yaw_180",
+        "width": 96,
+        "world_from_camera": "e6bd2cb562c34ef77cb89bc0c59171beb0443e316227657eba8ee470dd47cfb8"
+      },
+      {
+        "far_m": 4.0,
+        "height": 72,
+        "intrinsic": "d2c8076f8d6754b28f44680054d0c909f23e8c21c651a4c43ed12ffafafd2cbf",
+        "near_m": 0.1,
+        "view_id": "grid_023_yaw_270",
+        "width": 96,
+        "world_from_camera": "e5f1885eaec837cee8bc9a9f132fb55b137ca25a16160708e697c6e70a942de8"
+      }
+    ],
+    "contract": "v40.observable-surface-static-1",
+    "depth_convention": "optical axial z; near_m and far_m both clip camera z, not radial distance",
+    "fingerprint": "f566e92753e78ba0668f5f5b509ea62dfb3129e75da418fc97181b1202c07793",
+    "full_target_sample_count": 936,
+    "observable_area_m2_estimate": 32.6601,
+    "observable_sample_count": 708,
+    "reachability": "declared by upstream candidate generator; not inferred from a route",
+    "route_independent": true,
+    "sample_spacing_m": 0.3,
+    "seed": 4001,
+    "target_instances": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "visibility": "outward-facing, within declared camera frustum and axial depth limits, with no intervening scene triangle"
+  },
+  "target_instance_inventory": [
+    0,
+    1,
+    2,
+    3
+  ]
+}

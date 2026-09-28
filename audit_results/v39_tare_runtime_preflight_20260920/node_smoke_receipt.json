@@ -1,0 +1,575 @@
+{
+  "status": "ready",
+  "node_name": "/sensor_coverage_planner/tare_planner_node",
+  "node_pid": 1299569,
+  "node_sha256": "59fd9b818f4cc6a2edc3e5bf4a8641e2dad92b19ba1d824f1427624aecfd6f03",
+  "parameters_sha256": "a15003c8e5fc2b1a50d68ea3491bff0362b62577997e22dbbeaa724aa2a9cf69",
+  "parameters": {
+    "sub_start_exploration_topic_": "/start_exploration",
+    "sub_terrain_map_topic_": "/terrain_map",
+    "sub_terrain_map_ext_topic_": "/terrain_map_ext",
+    "sub_state_estimation_topic_": "/state_estimation_at_scan",
+    "sub_registered_scan_topic_": "/registered_scan",
+    "sub_coverage_boundary_topic_": "/sensor_coverage_planner/coverage_boundary",
+    "sub_viewpoint_boundary_topic_": "/navigation_boundary",
+    "sub_nogo_boundary_topic_": "/sensor_coverage_planner/nogo_boundary",
+    "sub_joystick_topic_": "/joy",
+    "sub_reset_waypoint_topic_": "/reset_waypoint",
+    "pub_exploration_finish_topic_": "exploration_finish",
+    "pub_runtime_breakdown_topic_": "runtime_breakdown",
+    "pub_runtime_topic_": "/runtime",
+    "pub_waypoint_topic_": "/way_point",
+    "pub_momentum_activation_count_topic_": "momentum_activation_count",
+    "kAutoStart": true,
+    "kRushHome": true,
+    "kUseTerrainHeight": true,
+    "kCheckTerrainCollision": true,
+    "kExtendWayPoint": true,
+    "kUseLineOfSightLookAheadPoint": true,
+    "kNoExplorationReturnHome": true,
+    "kExtendWayPointDistanceBig": 8.0,
+    "kExtendWayPointDistanceSmall": 4.5,
+    "kKeyposeCloudDwzFilterLeafSize": 0.2,
+    "kRushHomeDist": 10,
+    "kAtHomeDistThreshold": 0.5,
+    "kTerrainCollisionThreshold": 0.5,
+    "kLookAheadDistance": 8,
+    "kUseMomentum": false,
+    "kDirectionChangeCounterThr": 6,
+    "kDirectionNoChangeCounterThr": 5,
+    "kResetWaypointJoystickAxesID": 2,
+    "kUseFrontier": true,
+    "kFrontierClusterTolerance": 1.0,
+    "kFrontierClusterMinSize": 30,
+    "kUseCoverageBoundaryOnFrontier": false,
+    "kUseCoverageBoundaryOnObjectSurface": false,
+    "rolling_occupancy_grid/resolution_x": 0.3,
+    "rolling_occupancy_grid/resolution_y": 0.3,
+    "rolling_occupancy_grid/resolution_z": 0.3,
+    "kSurfaceCloudDwzLeafSize": 0.5,
+    "kCollisionCloudDwzLeafSize": 0.2,
+    "kKeyposeCloudStackNum": 5,
+    "kPointCloudRowNum": 50,
+    "kPointCloudColNum": 50,
+    "kPointCloudLevelNum": 30,
+    "kMaxCellPointNum": 100000,
+    "kPointCloudCellSize": 18,
+    "kPointCloudCellHeight": 1.8,
+    "kPointCloudManagerNeighborCellNum": 5,
+    "kCoverCloudZSqueezeRatio": 2.0,
+    "keypose_graph/kAddNodeMinDist": 1.0,
+    "keypose_graph/kAddNonKeyposeNodeMinDist": 0.5,
+    "keypose_graph/kAddEdgeConnectDistThr": 3.0,
+    "keypose_graph/kAddEdgeToLastKeyposeDistThr": 3.0,
+    "keypose_graph/kAddEdgeVerticalThreshold": 1.0,
+    "keypose_graph/kAddEdgeCollisionCheckResolution": 0.4,
+    "keypose_graph/kAddEdgeCollisionCheckRadius": 0.4,
+    "keypose_graph/kAddEdgeCollisionCheckPointNumThr": 1,
+    "viewpoint_manager/number_x": 40,
+    "viewpoint_manager/number_y": 40,
+    "viewpoint_manager/number_z": 1,
+    "viewpoint_manager/resolution_x": 1.2,
+    "viewpoint_manager/resolution_y": 1.2,
+    "viewpoint_manager/resolution_z": 0.0,
+    "kConnectivityHeightDiffThr": 0.25,
+    "kGreedyViewPointSampleRange": 3,
+    "kLocalPathOptimizationItrMax": 10,
+    "kViewPointCollisionMargin": 0.7,
+    "kViewPointCollisionMarginZPlus": 0.5,
+    "kViewPointCollisionMarginZMinus": 0.5,
+    "kCollisionGridZScale": 1.0,
+    "kCollisionGridResolutionX": 0.2,
+    "kCollisionGridResolutionY": 0.2,
+    "kCollisionGridResolutionZ": 0.0,
+    "kCollisionPointThr": 1,
+    "kLineOfSightStopAtNearestObstacle": true,
+    "kViewPointHeightFromTerrain": 0.75,
+    "kViewPointHeightFromTerrainChangeThreshold": 0.6,
+    "kCheckDynamicObstacleCollision": false,
+    "kCollisionFrameCountMax": 3,
+    "kSensorRange": 12.0,
+    "kNeighborRange": 3.0,
+    "kCoverageOcclusionThr": 0.3,
+    "kCoverageDilationRadius": 1.0,
+    "kGridWorldXNum": 121,
+    "kGridWorldYNum": 121,
+    "kGridWorldZNum": 121,
+    "kGridWorldCellHeight": 3.0,
+    "kGridWorldNearbyGridNum": 5,
+    "kMinAddPointNumSmall": 40,
+    "kMinAddPointNumBig": 60,
+    "kMinAddFrontierPointNum": 15,
+    "kCellExploringToCoveredThr": 1,
+    "kCellCoveredToExploringThr": 10,
+    "kCellExploringToAlmostCoveredThr": 10,
+    "kCellAlmostCoveredToExploringThr": 20,
+    "kCellUnknownToExploringThr": 1,
+    "kExploringSubspaceMarkerColorGradientAlpha": true,
+    "kExploringSubspaceMarkerColorMaxAlpha": 0.8,
+    "kExploringSubspaceMarkerColorR": 0.0,
+    "kExploringSubspaceMarkerColorG": 1.0,
+    "kExploringSubspaceMarkerColorB": 0.0,
+    "kExploringSubspaceMarkerColorA": 1.0,
+    "kLocalPlanningHorizonMarkerColorR": 0.0,
+    "kLocalPlanningHorizonMarkerColorG": 1.0,
+    "kLocalPlanningHorizonMarkerColorB": 0.0,
+    "kLocalPlanningHorizonMarkerColorA": 1.0,
+    "kLocalPlanningHorizonMarkerWidth": 0.3,
+    "kLocalPlanningHorizonHeight": 3.0
+  },
+  "master_uri": "http://127.0.0.1:11339",
+  "minimum_available_ram_bytes": 4782370816,
+  "sensor_inputs_published": 0,
+  "native_scan_messages_per_keypose": 5,
+  "native_visibility_degrees": [
+    360,
+    24
+  ],
+  "camera_visibility_model_adapted": false,
+  "registered_system_state": [
+    [
+      [
+        "/rosout",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/keypose_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/registered_scan_stack",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/registered_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/terrain_cloud_large",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/terrain_collision_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/terrain_ext_collision_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/viewpoint_vis_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/grid_world_vis_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/bspline_path_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/selected_viewpoint_vis_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/exploring_cell_vis_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/collision_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/lookahead_point_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/keypose_graph_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/viewpoint_in_collision_cloud_",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/pointcloud_manager_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/reordered_global_subspace_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/stacked_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/stacked_vertical_surface_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/coverage_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/diff_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/terrain_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/planner_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/squeezed_planner_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/uncovered_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/uncovered_frontier_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/frontier_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/filtered_frontier_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/occupied_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/free_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/unknown_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/rolling_occupancy_grid_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/rolling_frontier_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/rolling_filtered_frontier_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/rolled_in_occupancy_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/rolled_out_occupancy_cloud",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/pointcloud_manager_occupancy_cloud_",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_visualizer/marker",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_visualizer/local_path",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_visualizer/exploring_subspaces",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_visualizer/local_planning_horizon",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_visualizer/uncovered_surface_points",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_visualizer/viewpoint_candidates",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_visualizer/viewpoints",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/keypose_graph_node_marker",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/keypose_graph_edge_marker",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/nogo_boundary_marker",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/grid_world_marker",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/global_path_full",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/global_path",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/old_global_path",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/to_nearest_global_subspace_path",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/local_path",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/exploration_path",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/way_point",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/exploration_finish",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/runtime_breakdown",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/runtime",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/momentum_activation_count",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/pointcloud_manager_neighbor_cells_origin",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ]
+    ],
+    [
+      [
+        "/start_exploration",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/registered_scan",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/terrain_map",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/terrain_map_ext",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/state_estimation_at_scan",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/coverage_boundary",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/navigation_boundary",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/nogo_boundary",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/joy",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/reset_waypoint",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ]
+    ],
+    [
+      [
+        "/sensor_coverage_planner/tare_planner_node/get_loggers",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ],
+      [
+        "/sensor_coverage_planner/tare_planner_node/set_logger_level",
+        [
+          "/sensor_coverage_planner/tare_planner_node"
+        ]
+      ]
+    ]
+  ]
+}

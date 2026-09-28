@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 468, in main
+    run(args.output, args.case, args.command == 'replay')
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 378, in run
+    write(folder, folder/'verification.json', dict(status='passed', independent_process=True,
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 111, in write
+    save_bytes(folder, path, payload, receipt)
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 100, in save_bytes
+    reserve(folder, len(payload), receipt)
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 96, in reserve
+    raise OSError('64 MiB real free-space reserve would be crossed')
+OSError: 64 MiB real free-space reserve would be crossed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 475, in <module>
+    main()
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 470, in main
+    failure(args.output, error)
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 442, in failure
+    write(folder, folder/('replay_failure.json' if PROGRESS['replay'] else 'failure.json'), receipt, True)
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 111, in write
+    save_bytes(folder, path, payload, receipt)
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 100, in save_bytes
+    reserve(folder, len(payload), receipt)
+  File "/root/NSO/scripts/run_observed_autonomous_v26.py", line 96, in reserve
+    raise OSError('64 MiB real free-space reserve would be crossed')
+OSError: 64 MiB real free-space reserve would be crossed

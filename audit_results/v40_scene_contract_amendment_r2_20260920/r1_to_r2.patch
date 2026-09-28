@@ -1,0 +1,72 @@
+--- r1/nso/scene_contract_v40.py
++++ r2/nso/scene_contract_v40.py
+@@ -209,12 +209,20 @@
+         if type(row) is not list or len(row) != len(support):
+             _fail("prior." + category, "wrong structure probability count")
+         for index, probability in enumerate(row):
+-            _number(probability, "prior." + category, minimum=MIN_STRUCTURE_PROBABILITY)
++            _number(probability, "prior." + category, strictly_positive=True)
+             if probability > 1:
+                 _fail("prior." + category, "probability exceeds one")
+             support[index] += int(probability > 0)
+         if not math.isclose(sum(row), 1.0, rel_tol=0, abs_tol=1e-9) or sum(p > 0 for p in row) < 2:
+             _fail("prior." + category, "each category must support multiple structures and sum to one")
++        # Match the instance ledger's normalization order before checking its
++        # support floor. A row within the sum tolerance may still shrink a raw
++        # probability at 1e-9 below that floor when normalized.
++        scale = max(row)
++        scaled = [probability / scale for probability in row]
++        total = sum(scaled)
++        if any(probability / total < MIN_STRUCTURE_PROBABILITY for probability in scaled):
++            _fail("prior." + category, "normalized probabilities must each be >= 1e-9")
+     if min(support) < 2:
+         _fail("prior", "each abstract structure must be supported by multiple categories")
+ 
+--- r1/tests/test_scene_contract_v40.py
++++ r2/tests/test_scene_contract_v40.py
+@@ -258,6 +258,28 @@
+         self.scene["public"]["structure_prior"]["probability_by_category"]["cabinet"] = [1e-9, 0.3, 0.3, 0.4-1e-9]
+         validate_scene_spec(self.scene)
+ 
++    def test_cross_module_floor_after_normalization_at_sum_tolerance(self):
++        from nso.instance_belief_v40 import InstanceBeliefV40
++
++        for first, accepted in ((1e-9, False), (1.000000001e-9, True)):
++            scene = deepcopy(self.scene)
++            prior = scene["public"]["structure_prior"]
++            prior["probability_by_category"]["cabinet"] = [first, .3, .3, .3999999995]
++            palette = {category: (16 + index * 32, 17, 23)
++                       for index, category in enumerate(prior["categories"])}
++            arguments = dict(palette=palette, structure_names=prior["abstract_structures"],
++                             class_structure_prior=prior["probability_by_category"])
++            with self.subTest(first=first, accepted=accepted):
++                if accepted:
++                    validate_scene_spec(scene)
++                    ledger = InstanceBeliefV40(**arguments)
++                    self.assertGreaterEqual(float(ledger.class_priors["cabinet"].min()), 1e-9)
++                else:
++                    with self.assertRaisesRegex(SceneContractError, "normalized probabilities"):
++                        validate_scene_spec(scene)
++                    with self.assertRaisesRegex(ValueError, "near-zero probability"):
++                        InstanceBeliefV40(**arguments)
++
+     def test_pending_navigation_cannot_forward_any_materialized_asset(self):
+         for reference in ("private/gt.json", "public/graph.json", "arbitrary.json"):
+             altered = deepcopy(self.scene)
+--- r1/docs/research/V40_SCENE_SPLIT_SPEC_20260920.md
++++ r2/docs/research/V40_SCENE_SPLIT_SPEC_20260920.md
+@@ -17,7 +17,7 @@
+ 
+ 开发、主测试、边界测试按 `layout / prototype / mesh` lineage 隔离。父清单中的 lineage 是将来生成时必须遵守的独立来源预留名：不是实际网格哈希，也不能证明已经完成内容去重。未来正式准入还需要真实资产内容、原始来源、父子变换链及去重审计；同源资产改名无法建立独立性。抽象结构词汇可以跨 split 共享，具体几何 prototype 和网格不可以跨 split 复用。
+ 
+-场景筛选只能使用预先任务/几何可行性约束，不可读取 S/G 胜负或质量分数。类别与隐藏结构分别建模；同一类别必须支持多个结构，一个结构也必须属于多个类别。P0 与实例信念账本采用同一支持域：每个类别—结构概率均须 **≥1e-9**，不得写 0 或接近 0 的排除概率；现有配置最小值为 0.1，准备器写出的六个开发骨架满足此约束。这里验证的是先验配置，不是尚未实现的几何生成器。识别噪声与真实类别—结构关系偏移是不同因素，不能合成一个“语义失效”开关后混淆归因。
++场景筛选只能使用预先任务/几何可行性约束，不可读取 S/G 胜负或质量分数。类别与隐藏结构分别建模；同一类别必须支持多个结构，一个结构也必须属于多个类别。P0 与实例信念账本采用同一支持域：每行先按最大值缩放并归一化，每个类别—结构概率均须 **在归一化后 ≥1e-9**，不得写 0 或接近 0 的排除概率；现有配置最小值为 0.1，准备器写出的六个开发骨架满足此约束。行和允许的 1e-9 数值容差不能用于绕过归一化后的支持下限。这里验证的是先验配置，不是尚未实现的几何生成器。识别噪声与真实类别—结构关系偏移是不同因素，不能合成一个“语义失效”开关后混淆归因。
+ 
+ ## 2. 规范、API 与输入权限
+ 
+@@ -113,3 +113,5 @@
+ ## 7. r1 合同修正与原封存保留
+ 
+ 交叉审查后的 r1 修正统一了 ≥1e-9 支持域、pending 导航引用和协议参数绑定，增加显式边界预算声明校验。原 `audit_results/v40_scene_contract_20260920/` 的 17 个文件与 private seed 不作改写，不重新生成 seed。新源版本与旧公共数据复核单独记录于 `audit_results/v40_scene_contract_amendment_r1_20260920/`；新源 SHA 与旧 manifest 记录的源 SHA 分列，不能声称修改后的源码仍是原封存源码。公共复核不打开私有 escrow，原 seed 的内容哈希不重新计算。
++
++r2 进一步把支持下限检查放在归一化之后，补入 `[1e-9, .3, .3, .3999999995]` 的跨模块反例及相邻合法例。跨模块 fixture 只构造现有 NumPy 实例账本，不创建观测或 World。r1 目录原样保留，r2 源版本、差异和验证记录另存于 `audit_results/v40_scene_contract_amendment_r2_20260920/`；不生成新测试 seed。

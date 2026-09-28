@@ -1,0 +1,231 @@
+{
+  "status": "read_only_r0_occupancy_diagnosis_complete",
+  "scope": "Unchanged r0 occupied cells reconstructed from literal V24 layout/body/attachment boxes plus declared r0 panels, using original grid rasterization and footprint inflation; no V25 constructor bypass, no rays, no new parameters.",
+  "evidence_origin": "Selected fields transcribed from the actual completed tool output; no full stdout capture was saved.",
+  "diagnostic_execution": {
+    "unified_exec_chunk_id": "4f36cd",
+    "session_id": null,
+    "exit_code": 0,
+    "wall_time_seconds": 3.286867633,
+    "sensor_calls": 0,
+    "world_constructors": 0,
+    "alternative_geometries_tested": 0
+  },
+  "static_r0_execution": {
+    "session_id": 91760,
+    "process_id": 274737,
+    "exit_code": 0,
+    "elapsed_s": 0.45056886901147664
+  },
+  "original_resolution_m": 0.2,
+  "original_robot_radius_m": 0.2,
+  "cases": [
+    {
+      "parent": "D25-P00",
+      "assignment": "A_complex_B_simple",
+      "complex_asset": "A",
+      "safe_floor_cells": 2728,
+      "reachable_safe_floor_cells": 2725,
+      "disconnected_safe_floor_cells": 3,
+      "isolated_grid_cells": [
+        [
+          19,
+          28
+        ],
+        [
+          20,
+          28
+        ],
+        [
+          21,
+          28
+        ]
+      ],
+      "isolated_centers_xy_m": [
+        [
+          5.7,
+          6.1
+        ],
+        [
+          5.7,
+          5.9
+        ],
+        [
+          5.7,
+          5.7
+        ]
+      ],
+      "enclosing_roles": {
+        "north": "inward_attachment",
+        "south": "inner_front_return",
+        "west": "body",
+        "east": "inner_long"
+      },
+      "simple_asset_has_disconnected_cells": false
+    },
+    {
+      "parent": "D25-P00",
+      "assignment": "A_simple_B_complex",
+      "complex_asset": "B",
+      "safe_floor_cells": 2728,
+      "reachable_safe_floor_cells": 2725,
+      "disconnected_safe_floor_cells": 3,
+      "isolated_grid_cells": [
+        [
+          19,
+          52
+        ],
+        [
+          20,
+          52
+        ],
+        [
+          21,
+          52
+        ]
+      ],
+      "isolated_centers_xy_m": [
+        [
+          10.5,
+          6.1
+        ],
+        [
+          10.5,
+          5.9
+        ],
+        [
+          10.5,
+          5.7
+        ]
+      ],
+      "enclosing_roles": {
+        "north": "inward_attachment",
+        "south": "inner_front_return",
+        "west": "inner_long",
+        "east": "body"
+      },
+      "simple_asset_has_disconnected_cells": false
+    },
+    {
+      "parent": "D25-P01",
+      "assignment": "A_complex_B_simple",
+      "complex_asset": "A",
+      "safe_floor_cells": 3977,
+      "reachable_safe_floor_cells": 3974,
+      "disconnected_safe_floor_cells": 3,
+      "isolated_grid_cells": [
+        [
+          28,
+          29
+        ],
+        [
+          29,
+          29
+        ],
+        [
+          30,
+          29
+        ]
+      ],
+      "isolated_centers_xy_m": [
+        [
+          5.9,
+          6.3
+        ],
+        [
+          5.9,
+          6.1
+        ],
+        [
+          5.9,
+          5.9
+        ]
+      ],
+      "enclosing_roles": {
+        "north": "inward_attachment",
+        "south": "inner_front_return",
+        "west": "body",
+        "east": "inner_long"
+      },
+      "simple_asset_has_disconnected_cells": false
+    },
+    {
+      "parent": "D25-P01",
+      "assignment": "A_simple_B_complex",
+      "complex_asset": "B",
+      "safe_floor_cells": 3977,
+      "reachable_safe_floor_cells": 3974,
+      "disconnected_safe_floor_cells": 3,
+      "isolated_grid_cells": [
+        [
+          28,
+          61
+        ],
+        [
+          29,
+          61
+        ],
+        [
+          30,
+          61
+        ]
+      ],
+      "isolated_centers_xy_m": [
+        [
+          12.3,
+          6.3
+        ],
+        [
+          12.3,
+          6.1
+        ],
+        [
+          12.3,
+          5.9
+        ]
+      ],
+      "enclosing_roles": {
+        "north": "inward_attachment",
+        "south": "inner_front_return",
+        "west": "inner_long",
+        "east": "body"
+      },
+      "simple_asset_has_disconnected_cells": false
+    }
+  ],
+  "counts_exactly_match_frozen_r0_result": true,
+  "root_cause": "Only complex-side inward attachment closes the northern outlet of the body/inner_long side gap; the front return closes the southern outlet. The three safe centres form a north-south cul-de-sac isolated by the unchanged conservative footprint inflation.",
+  "repair_proposal": {
+    "status": "authorized_design_only_not_run",
+    "repair_count": 1,
+    "inner_long_old_local_x": [
+      1.4,
+      1.6
+    ],
+    "inner_long_new_local_x": [
+      1.8,
+      2.0
+    ],
+    "inner_front_return_old_local_x": [
+      0.8,
+      1.6
+    ],
+    "inner_front_return_new_local_x": [
+      0.8,
+      2.0
+    ],
+    "intended_attachment_to_long_wall_gap_old_m": 0.32,
+    "intended_attachment_to_long_wall_gap_new_m": 0.72,
+    "minimum_physical_asset_gap_requirement_m": 0.2,
+    "changes_are_class_independent_and_mirrored": true,
+    "all_other_geometry_sensor_actions_unchanged": true,
+    "connectivity_visibility_or_information_success_not_assumed": true
+  },
+  "protected_r0_source_sha256": {
+    "env/facility_choice_v25.py": "94e4af5215a1abb218e990bfac774b88adefd4241ab6b509be6cd995a7b098c4",
+    "scripts/audit_facility_choice_v25_static.py": "693d3d3e859935b9f501a7ea59a137f735b50e798896a631eb049f6bca6b1d10",
+    "docs/research/V25_PARTITION_STATIC_PROTOCOL_20260915.md": "3c0df58e6c054becc6f263d54a7d97d64275a850039fbd373f4df2293a53c5be"
+  },
+  "frozen_r0_result_sha256": "19b0f2189d404b89e98fe4b3b6eda6ad80d4767aecfad44188ff4180064550cc",
+  "frozen_r0_artifact_inventory_sha256": "7b858ecc285af765719884cf392f24c8b94b971ff256d4b70a1336ab0230343a"
+}

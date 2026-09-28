@@ -1,0 +1,31 @@
+{
+  "schema": "cpu_grid_v1",
+  "status": "complete",
+  "config_sha256": "4d0371e8c313c5bca2d5c0b9537ed0b82180667c8b902816a48b524ed69a013e",
+  "created_at": "2026-09-10T07:02:34.197417+00:00",
+  "code": {
+    "git_revision": "10639431441657bb6facd5307c9d0650536313c0",
+    "working_source_sha256": "1debcce3de5b48561ca2ae317a3150a750d4bc0b8c2a455e8a8db522cd2299c7"
+  },
+  "runner_sha256": "a38c762a267274d52396c174189da1886c9a65b203fd74fbe12d8465247a9a00",
+  "python": "3.12.3",
+  "expected_episodes": 6,
+  "policy_input": "observed occupancy, visibility, odometry and collision only; currently visible synthetic salience (remembered by policy)",
+  "coverage_reference": "start_connected_robot_center_grid",
+  "neural_training": false,
+  "limitations": [
+    "synthetic 2D geometry",
+    "perfect odometry",
+    "synthetic salience only; no RGB-D, open-vocabulary perception, learned SLAM or PPO",
+    "optimistic unknown-space gain heuristic, not measured mutual information"
+  ],
+  "mechanisms": {
+    "semantic_weight": 1.0,
+    "structure_weight": 1.0,
+    "goal_budget": 32,
+    "topology_period": 10,
+    "max_door_width": 7
+  },
+  "failed_episodes": 0,
+  "peak_process_rss_mib": 98.6875
+}

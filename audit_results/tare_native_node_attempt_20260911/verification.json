@@ -1,0 +1,85 @@
+{
+  "date": "2026-09-11",
+  "scope": "Official TARE planner native ROS 1 build and sensor-free node/interface liveness only",
+  "source": {
+    "repository": "https://github.com/caochao39/tare_planner",
+    "commit": "44500592b86138257273e0cab264e6a847ccefc7",
+    "integrity_record": "../tare_native_build_probe_20260910/source_integrity.json",
+    "official_algorithm_modified": false
+  },
+  "environment": {
+    "platform": "linux/amd64",
+    "base_image_digest": "sha256:4c1435fd85be3edde3820f0d132ab30a6b030209dce4fa3ac428a2aa5a763caf",
+    "ros_distribution": "Noetic",
+    "ubuntu_release": "20.04",
+    "build_parallelism": 1,
+    "persistent_image_created": false
+  },
+  "attempts": [
+    {
+      "id": "layered_docker_build",
+      "result": "failed",
+      "failure_stage": "commit of dependency-installation layer",
+      "failure": "no space left on device",
+      "planner_compilation_reached": false
+    },
+    {
+      "id": "bind_mounted_ephemeral_container",
+      "result": "passed",
+      "catkin_make_exit_code": 0,
+      "planner_binary_sha256": "59fd9b818f4cc6a2edc3e5bf4a8641e2dad92b19ba1d824f1427624aecfd6f03",
+      "build_log": "dependency_and_build.log"
+    }
+  ],
+  "smoke_tests": [
+    {
+      "id": "initial_fixture",
+      "result": "failed_before_launch",
+      "cause": "set -u enabled before sourcing ROS setup; ROS_MASTER_URI was unset",
+      "log": "node_smoke_initial_failure.log"
+    },
+    {
+      "id": "liveness_only",
+      "result": "passed",
+      "exit_code": 0,
+      "limitation": "interface registration was not yet required by this fixture",
+      "log": "node_smoke_liveness_only.log"
+    },
+    {
+      "id": "liveness_and_interface_registration",
+      "result": "passed",
+      "exit_code": 0,
+      "required_subscription": "/registered_scan",
+      "log": "node_smoke.log"
+    }
+  ],
+  "observed_inputs": {
+    "/registered_scan": "sensor_msgs/PointCloud2",
+    "/state_estimation_at_scan": "nav_msgs/Odometry",
+    "/terrain_map": "sensor_msgs/PointCloud2",
+    "/terrain_map_ext": "sensor_msgs/PointCloud2",
+    "/start_exploration": "std_msgs/Bool",
+    "/navigation_boundary": "geometry_msgs/PolygonStamped"
+  },
+  "observed_primary_outputs": {
+    "/way_point": "geometry_msgs/PointStamped",
+    "/sensor_coverage_planner/global_path": "nav_msgs/Path",
+    "/sensor_coverage_planner/local_path": "nav_msgs/Path",
+    "/sensor_coverage_planner/exploration_path": "nav_msgs/Path",
+    "/runtime": "std_msgs/Float32",
+    "/sensor_coverage_planner/exploration_finish": "std_msgs/Bool"
+  },
+  "claim_boundary": {
+    "proven": [
+      "The pinned unmodified official planner compiles in the pinned CPU ROS 1 environment",
+      "The original garage launch starts the planner node without RViz or sensor input",
+      "The planner registers its principal ROS inputs and outputs"
+    ],
+    "not_proven": [
+      "A navigation or exploration episode completes",
+      "The planner works with the ZED plus single-line lidar sensor stack",
+      "TARE is fairly compared with NSO under a shared budget",
+      "NSO outperforms TARE"
+    ]
+  }
+}

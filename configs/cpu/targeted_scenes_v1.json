@@ -1,0 +1,102 @@
+{
+  "schema": "targeted_scenes_v1",
+  "purpose": "prospective matched scene-adaptation test; no policy changes or scene selection by outcomes",
+  "environment": {
+    "resolution_m": 0.25,
+    "robot_radius_m": 0.2,
+    "sensor_range_m": 3.0,
+    "sensor_fov_deg": 90,
+    "max_steps": 600
+  },
+  "max_candidates": 24,
+  "mechanisms": {
+    "semantic_weight": 1.0,
+    "structure_weight": 1.0,
+    "goal_budget": 32,
+    "topology_period": 10,
+    "max_door_width": 7
+  },
+  "maps": [
+    {
+      "family": "office_spine",
+      "size": 192,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "family": "office_spine",
+      "size": 192,
+      "seed": 52,
+      "entrance": 1
+    },
+    {
+      "family": "office_spine",
+      "size": 256,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "family": "office_spine",
+      "size": 256,
+      "seed": 52,
+      "entrance": 1
+    },
+    {
+      "family": "warehouse_bays",
+      "size": 192,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "family": "warehouse_bays",
+      "size": 192,
+      "seed": 52,
+      "entrance": 1
+    },
+    {
+      "family": "warehouse_bays",
+      "size": 256,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "family": "warehouse_bays",
+      "size": 256,
+      "seed": 52,
+      "entrance": 1
+    },
+    {
+      "family": "gallery_network",
+      "size": 192,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "family": "gallery_network",
+      "size": 192,
+      "seed": 52,
+      "entrance": 1
+    },
+    {
+      "family": "gallery_network",
+      "size": 256,
+      "seed": 51,
+      "entrance": 0
+    },
+    {
+      "family": "gallery_network",
+      "size": 256,
+      "seed": 52,
+      "entrance": 1
+    }
+  ],
+  "cases": [
+    "geometry",
+    "semantic_aligned",
+    "semantic_shuffled",
+    "semantic_constant",
+    "semantic_noisy",
+    "combined_aligned",
+    "combined_shuffled"
+  ]
+}

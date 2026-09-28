@@ -1,0 +1,27 @@
+{
+  "schema": "cpu_grid_v1",
+  "purpose": "smoke check",
+  "map_size": 64,
+  "door_width": 5,
+  "max_candidates": 24,
+  "environment": {
+    "resolution_m": 0.1,
+    "robot_radius_m": 0.1,
+    "sensor_range_m": 1.5,
+    "sensor_fov_deg": 90,
+    "max_steps": 50
+  },
+  "maps": [
+    {
+      "layout": "multi_room",
+      "seed": 0
+    }
+  ],
+  "start_seeds": [
+    101
+  ],
+  "methods": [
+    "nearest_frontier",
+    "gain_per_cost"
+  ]
+}

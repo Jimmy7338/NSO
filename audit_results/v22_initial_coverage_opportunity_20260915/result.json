@@ -1,0 +1,569 @@
+{
+  "candidate_selection_uses_future_return": false,
+  "class_votes_flip_while_geometry_opportunities_remain_identical": true,
+  "future_case_result_opened": false,
+  "initial_packet_and_candidate_pairing_exact": true,
+  "physical_trajectories": 0,
+  "scope": {
+    "cases": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "existing_coverage_candidates": "all eight recorded shared coverage candidates per initial scene",
+    "heading_diagnostic": "all other 3 cardinal headings at each same endpoint; preserve original outbound prefix, pay shortest turns, reserve current observed-map return",
+    "input_actions": [
+      0
+    ],
+    "limitations": "Observed-mesh non-occlusion and no-hit rays do not certify real future visibility or full surface F1. Same endpoint turns do not prove semantic causal gain.",
+    "no_new_score_weights": true,
+    "no_training": true,
+    "observed_instances": "left/right marked clusters only",
+    "opportunity_metrics": [
+      "observed-point projected acquisition and scalar-depth precision proxy",
+      "known-mesh-masked hypothetical rear-plane support",
+      "observed distance/azimuth",
+      "positive unique unknown-cell union",
+      "full paid route and return"
+    ],
+    "physical_trajectory_count": 0,
+    "status": "declared_before_diagnostic"
+  },
+  "semantic_gain_proven": false,
+  "status": "complete",
+  "summary": [
+    {
+      "candidate_count": 8,
+      "case": {
+        "assignment": "A_complex_B_simple",
+        "budget": 160,
+        "index": 0,
+        "parent": "D19-P00"
+      },
+      "existing": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.6119978953394799,
+            "outbound_cost": 27,
+            "predicted_point_acquisitions": 555,
+            "return_cost": 29,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 1,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 71,
+            "outbound_cost": 4,
+            "return_cost": 8,
+            "roundtrip_cost": 12,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 0,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.5998976001758491,
+            "outbound_cost": 28,
+            "predicted_point_acquisitions": 474,
+            "return_cost": 30,
+            "roundtrip_cost": 58
+          },
+          "best_rear_plane": {
+            "candidate_id": 1,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 71,
+            "outbound_cost": 4,
+            "return_cost": 8,
+            "roundtrip_cost": 12,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        }
+      },
+      "observed_A_B": [
+        {
+          "center": [
+            6.711336243525147,
+            5.410134017467499,
+            0.7544295031577349
+          ],
+          "class_vote": -1.0,
+          "index": 0,
+          "marked_points": 3,
+          "role": "A"
+        },
+        {
+          "center": [
+            11.330223485703268,
+            5.39165277481079,
+            0.759132498006026
+          ],
+          "class_vote": 1.0,
+          "index": 2,
+          "marked_points": 3,
+          "role": "B"
+        }
+      ],
+      "paid_terminal_turns": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 1,
+            "observed_precision_proxy_change": 0.6119978953394799,
+            "outbound_cost": 28,
+            "predicted_point_acquisitions": 555,
+            "return_cost": 28,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 3,
+            "endpoint_hypothetical_rear_plane_support": 0.7514739435479428,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.7514739435479428,
+            "original_unique_predicted_unknown_cells": 1209,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 2
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 0,
+            "endpoint_heading": 1,
+            "observed_precision_proxy_change": 0.6000500959458067,
+            "outbound_cost": 29,
+            "predicted_point_acquisitions": 499,
+            "return_cost": 29,
+            "roundtrip_cost": 58
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 1,
+            "endpoint_hypothetical_rear_plane_support": 0.860347927208197,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.860347927208197,
+            "original_unique_predicted_unknown_cells": 1209,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 1
+        }
+      }
+    },
+    {
+      "candidate_count": 8,
+      "case": {
+        "assignment": "A_simple_B_complex",
+        "budget": 160,
+        "index": 1,
+        "parent": "D19-P00"
+      },
+      "existing": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.6119978953394799,
+            "outbound_cost": 27,
+            "predicted_point_acquisitions": 555,
+            "return_cost": 29,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 1,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 71,
+            "outbound_cost": 4,
+            "return_cost": 8,
+            "roundtrip_cost": 12,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 0,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.5998976001758491,
+            "outbound_cost": 28,
+            "predicted_point_acquisitions": 474,
+            "return_cost": 30,
+            "roundtrip_cost": 58
+          },
+          "best_rear_plane": {
+            "candidate_id": 1,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 71,
+            "outbound_cost": 4,
+            "return_cost": 8,
+            "roundtrip_cost": 12,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        }
+      },
+      "observed_A_B": [
+        {
+          "center": [
+            6.711336243525147,
+            5.410134017467499,
+            0.7544295031577349
+          ],
+          "class_vote": 1.0,
+          "index": 0,
+          "marked_points": 3,
+          "role": "A"
+        },
+        {
+          "center": [
+            11.330223485703268,
+            5.39165277481079,
+            0.759132498006026
+          ],
+          "class_vote": -1.0,
+          "index": 2,
+          "marked_points": 3,
+          "role": "B"
+        }
+      ],
+      "paid_terminal_turns": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 1,
+            "observed_precision_proxy_change": 0.6119978953394799,
+            "outbound_cost": 28,
+            "predicted_point_acquisitions": 555,
+            "return_cost": 28,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 3,
+            "endpoint_hypothetical_rear_plane_support": 0.7514739435479428,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.7514739435479428,
+            "original_unique_predicted_unknown_cells": 1209,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 2
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 0,
+            "endpoint_heading": 1,
+            "observed_precision_proxy_change": 0.6000500959458067,
+            "outbound_cost": 29,
+            "predicted_point_acquisitions": 499,
+            "return_cost": 29,
+            "roundtrip_cost": 58
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 1,
+            "endpoint_hypothetical_rear_plane_support": 0.860347927208197,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.860347927208197,
+            "original_unique_predicted_unknown_cells": 1209,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 1
+        }
+      }
+    },
+    {
+      "candidate_count": 8,
+      "case": {
+        "assignment": "A_complex_B_simple",
+        "budget": 184,
+        "index": 2,
+        "parent": "D19-P01"
+      },
+      "existing": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.648273146166733,
+            "outbound_cost": 27,
+            "predicted_point_acquisitions": 457,
+            "return_cost": 29,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 3,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 57,
+            "outbound_cost": 3,
+            "return_cost": 7,
+            "roundtrip_cost": 10,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 1,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.6000433477270593,
+            "outbound_cost": 29,
+            "predicted_point_acquisitions": 506,
+            "return_cost": 31,
+            "roundtrip_cost": 60
+          },
+          "best_rear_plane": {
+            "candidate_id": 3,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 57,
+            "outbound_cost": 3,
+            "return_cost": 7,
+            "roundtrip_cost": 10,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        }
+      },
+      "observed_A_B": [
+        {
+          "center": [
+            7.202759646127623,
+            5.813072872161865,
+            0.7642106442401807
+          ],
+          "class_vote": -1.0,
+          "index": 0,
+          "marked_points": 2,
+          "role": "A"
+        },
+        {
+          "center": [
+            12.31210649125278,
+            5.8097457647323605,
+            0.7542937616507213
+          ],
+          "class_vote": 1.0,
+          "index": 2,
+          "marked_points": 3,
+          "role": "B"
+        }
+      ],
+      "paid_terminal_turns": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 3,
+            "observed_precision_proxy_change": 0.6483212130097259,
+            "outbound_cost": 28,
+            "predicted_point_acquisitions": 467,
+            "return_cost": 28,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 3,
+            "endpoint_hypothetical_rear_plane_support": 0.6896006341006529,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.6896006341006529,
+            "original_unique_predicted_unknown_cells": 1213,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 4
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 1,
+            "endpoint_heading": 1,
+            "observed_precision_proxy_change": 0.6001106039774516,
+            "outbound_cost": 30,
+            "predicted_point_acquisitions": 535,
+            "return_cost": 30,
+            "roundtrip_cost": 60
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 1,
+            "endpoint_hypothetical_rear_plane_support": 0.7976890066737374,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.7976890066737374,
+            "original_unique_predicted_unknown_cells": 1213,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 2
+        }
+      }
+    },
+    {
+      "candidate_count": 8,
+      "case": {
+        "assignment": "A_simple_B_complex",
+        "budget": 184,
+        "index": 3,
+        "parent": "D19-P01"
+      },
+      "existing": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.648273146166733,
+            "outbound_cost": 27,
+            "predicted_point_acquisitions": 457,
+            "return_cost": 29,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 3,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 57,
+            "outbound_cost": 3,
+            "return_cost": 7,
+            "roundtrip_cost": 10,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 1,
+            "endpoint_heading": 0,
+            "observed_precision_proxy_change": 0.6000433477270593,
+            "outbound_cost": 29,
+            "predicted_point_acquisitions": 506,
+            "return_cost": 31,
+            "roundtrip_cost": 60
+          },
+          "best_rear_plane": {
+            "candidate_id": 3,
+            "endpoint_heading": 0,
+            "endpoint_hypothetical_rear_plane_support": 0.0,
+            "first_positive_rear_plane_action": null,
+            "maximum_hypothetical_rear_plane_support": 0.0,
+            "original_unique_predicted_unknown_cells": 57,
+            "outbound_cost": 3,
+            "return_cost": 7,
+            "roundtrip_cost": 10,
+            "terminal_turns_added": 0
+          },
+          "positive_rear_plane_rows": 0
+        }
+      },
+      "observed_A_B": [
+        {
+          "center": [
+            7.202759646127623,
+            5.813072872161865,
+            0.7642106442401807
+          ],
+          "class_vote": 1.0,
+          "index": 0,
+          "marked_points": 2,
+          "role": "A"
+        },
+        {
+          "center": [
+            12.31210649125278,
+            5.8097457647323605,
+            0.7542937616507213
+          ],
+          "class_vote": -1.0,
+          "index": 2,
+          "marked_points": 3,
+          "role": "B"
+        }
+      ],
+      "paid_terminal_turns": {
+        "A": {
+          "best_observed_precision": {
+            "candidate_id": 2,
+            "endpoint_heading": 3,
+            "observed_precision_proxy_change": 0.6483212130097259,
+            "outbound_cost": 28,
+            "predicted_point_acquisitions": 467,
+            "return_cost": 28,
+            "roundtrip_cost": 56
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 3,
+            "endpoint_hypothetical_rear_plane_support": 0.6896006341006529,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.6896006341006529,
+            "original_unique_predicted_unknown_cells": 1213,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 4
+        },
+        "B": {
+          "best_observed_precision": {
+            "candidate_id": 1,
+            "endpoint_heading": 1,
+            "observed_precision_proxy_change": 0.6001106039774516,
+            "outbound_cost": 30,
+            "predicted_point_acquisitions": 535,
+            "return_cost": 30,
+            "roundtrip_cost": 60
+          },
+          "best_rear_plane": {
+            "candidate_id": 0,
+            "endpoint_heading": 1,
+            "endpoint_hypothetical_rear_plane_support": 0.7976890066737374,
+            "first_positive_rear_plane_action": 29,
+            "maximum_hypothetical_rear_plane_support": 0.7976890066737374,
+            "original_unique_predicted_unknown_cells": 1213,
+            "outbound_cost": 29,
+            "return_cost": 29,
+            "roundtrip_cost": 58,
+            "terminal_turns_added": 1
+          },
+          "positive_rear_plane_rows": 2
+        }
+      }
+    }
+  ]
+}

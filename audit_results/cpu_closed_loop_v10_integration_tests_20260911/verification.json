@@ -1,0 +1,73 @@
+{
+  "schema": "cpu_four_interface_integration_tests_v10/1",
+  "created_utc": "2026-09-11T05:56:31.881986+00:00",
+  "status": "passed",
+  "scope": "Measured CPU lifecycle and existing default/PPO compatibility; no efficacy conclusion",
+  "checks": [
+    {
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv-3d/bin/python -m unittest tests.virtual3d.test_cpu_closed_loop_v10 -v",
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "elapsed_test_s": 2.718,
+      "environment": "existing .venv-3d; no torch installation or path injection"
+    },
+    {
+      "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m unittest tests.cpu.test_nso_runtime_integration -v",
+      "tests": 11,
+      "passed": 11,
+      "failed": 0,
+      "elapsed_test_s": 0.079,
+      "environment": "existing .venv with CPU torch"
+    }
+  ],
+  "real_renderer_fixture": {
+    "world": "VirtualWorld",
+    "config": "VirtualConfigV2",
+    "layout": "rooms",
+    "seed": 21,
+    "width_px": 32,
+    "height_px": 24,
+    "depth_sigma_m": 0.0,
+    "dropout": 0.0,
+    "total_budget": 24,
+    "scripted_prefix_actions": 0,
+    "goal": "second global choice, actual paid action, full-heading home return and truthful observation lifecycle"
+  },
+  "verified": [
+    "real public four-module manager interface calls",
+    "fresh semantic/map/feedback consumed by second global selection with reduced budget",
+    "fixed full-pose return reserve for every authorized action",
+    "option identifier from global selection through local authorization to paid feedback",
+    "actual paid frame count, pose count, and ledger accounting",
+    "duplicate frame leaves TSDF voxels, quality evidence, map count, ledger and call log unchanged",
+    "cross scene/episode, conflicting duplicate and unpaid packet rejected before fusion",
+    "pending action blocks replan/close/reset",
+    "terminal frame fused before feedback and closure",
+    "same anchor cell with wrong heading is failed return",
+    "active episode cannot reset; completed episode retained and next episode starts clean",
+    "invalid zero budget, inconsistent prefix pose/action and missing charged prefix rejected before mapper creation",
+    "explicit 5cm current-cell lidar conflict at anchor closes failed with zero paid actions",
+    "feedback ablation keeps real observations and cost while freezing history consumed by next plan",
+    "learned probability and calibrated uncertainty remain unavailable",
+    "CPU opt-in rejects PPO training and silently disabled interfaces",
+    "existing default-disabled adapter and PPO goal behavior pass legacy tests"
+  ],
+  "limitations": [
+    "Sensor packets still carry exact discrete simulator pose and artificial marker categories; not ROS hardware validation or open-vocabulary evidence.",
+    "No GT surface/F1 evaluation or reserved scenario access was performed for these tests.",
+    "Passing integration does not establish semantic gain, whole-exploration effectiveness, learned UQ calibration, or full thesis advantage.",
+    "An initial development smoke showed repeated routes and 18 no-progress observations within 24 paid actions; stop/marginal-gain behavior remains unresolved and was not tuned with held-out outcomes."
+  ],
+  "source_sha256": {
+    "tests/virtual3d/test_cpu_closed_loop_v10.py": "6a9b0c44874cffd64a17aa392bdf033b132100eb67f63afcd6fe694c82781c0a",
+    "tests/cpu/test_nso_runtime_integration.py": "d777f6110c487c9d2e79be0ce568075cf051ebd2693938f76257af48e49c771e",
+    "nso/components.py": "8b6a57b72d06f452ab69334ab41c7cf5816381147baa21618e8b2b84871052d0",
+    "nso/runtime_integration.py": "8eb7e93a7c95aa2065284a344427f0b3bb73962e5bd6bf438ccfe5965816441a",
+    "nso/cpu_four_modules_v10.py": "91e7b167a5ff63a486030707eff88104123ec56aa82d3858a484a8a02bf655bc",
+    "nso/cpu_sensor_contract_v10.py": "28d0870913d67bd102b83b61025a992cf68c76021c270eabd267fb021f14db02",
+    "nso/hierarchical_options_v10.py": "b46b274c775aa8a1e606a269ce3feab40184a0e6cd2694e78331ff01307d2083",
+    "nso/observed_feedback_v10.py": "0ec4cd572a08d5543013561f46aebd0afca1ccb6be9c38aaf53928c5058f4b59",
+    "nso/observed_runtime_mapper_v10.py": "c27a977a1b7ae417748a786a118287b282771b630ac88b56c0de7e11f5b00a3b"
+  }
+}

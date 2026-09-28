@@ -1,0 +1,17 @@
+{
+  "scene_overview": {
+    "caption_zh": "两种设施布局及其双构型的离线几何示意与真实执行路径。P00和P01分别为短体与长体布局，h0/h1的侧部结构及人工RGB类别提示对应不同。斜线区域为共同前遮挡板，深色矩形为侧部结构。浅灰粗线表示共同18动作前缀，蓝虚线G与橙实线S为之后保存的实际轨迹；黑色菱形为共同起终点，箭头标示候选方向和真实行进方向，原地转向及重复经过路段叠加绘制。两个h0条件动作与最终评分一致，两个h1条件在第19个付费动作选择不同方向。P01仅按已声明设备坐标系旋转显示；完整设施几何仅用于本图离线解释，不作为运行时已知真值输入。每条轨迹均42动作返航。",
+    "caption_en": "Offline equipment geometry and saved executed routes for two layouts and both configurations. Hatched regions are front occluders; darker blocks are lateral ribs. G (dashed blue) and S (solid orange) share an 18-action prefix and the start/return anchor. Both h0 pairs coincide, whereas both h1 pairs choose different directions at paid action 19. Turns and retraced segments overlap. P01 is displayed in its declared equipment frame. Ground-truth geometry is explanatory context, not online planner input.",
+    "suggested_position": "实验设置之后、定量主结果之前；用于贯穿双构型方法例子。"
+  },
+  "mesh_comparison": {
+    "caption_zh": "四个条件的保存终点TSDF公共ROI网格。每对G/S采用完全相同的正交视角、尺度、材质与光照，并绘制全部保存三角面片；h0从左后侧、h1从右后侧观察，视角在每对方法之间保持不变。标注的F1和J5直接取自冻结评分，不重新测量。虚框对应下一图的同投影局部窗口。h1两对显示侧部观测引起的重建差别；h0两对网格逐数组完全一致。该图不进行补洞、平滑或真值表面叠加，明暗不表示重建误差。",
+    "caption_en": "Saved final public-ROI TSDF meshes for all four conditions. Each G/S pair shares the same orthographic camera, scale, neutral material and lighting; all saved triangles are projected. h0 and h1 are viewed from the rear-left and rear-right respectively. F1 and J5 are copied from frozen measurements. Dashed windows identify the subsequent detail views. Both h0 pairs are array-identical. Shading is illumination, not error; no completion, smoothing or ground-truth surface is added.",
+    "suggested_position": "主结果和机制时间线之后的三维重建定性分析。"
+  },
+  "mesh_details": {
+    "caption_zh": "前图虚框的同投影放大，放大窗口由已声明的侧部结构范围确定，所有条件均使用3.40m×2.55m的投影窗口。显示仍来自同一批保存网格，不重新裁剪重建表面或生成几何。h1的G侧部网格仍较稀疏，S通过侧向观测呈现更多可见表面；两个h0条件提供持平对照。局部观察仅用于解释全局冻结评分，不额外定义或报告局部质量指标。",
+    "caption_en": "Magnified windows of the identical mesh projections. Windows are determined from the declared lateral-rib geometry and use a fixed 3.40 m by 2.55 m projected extent across conditions. These are display crops of saved surfaces, not new reconstructions. The h1 comparisons show the additional observed side surfaces; both h0 pairs retain identical geometry. No local quality score is introduced.",
+    "suggested_position": "紧接整体网格图，或双栏文章的补充材料。"
+  }
+}

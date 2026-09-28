@@ -1,0 +1,34 @@
+{
+  "schema_version": "open3d_tsdf_branch_isolation_verification/1",
+  "status": "deepcopy_branch_collection_invalidated",
+  "scope": "D12-00 candidate ids 0 through 4",
+  "small_one_frame_probe": {
+    "directory": "audit_results/open3d_tsdf_deepcopy_alias_20260911",
+    "alias_observed": false,
+    "sufficient_to_certify_large_prefix_clone": false
+  },
+  "independent_repeat_control": {
+    "directory": "eval_results/semantic_gain_v12_repeat_fusion_diagnostic_20260911",
+    "second_sweep_joint_gain_total": -0.011413297053778138,
+    "second_sweep_joint_gain_per_action": -0.0028533242634445344
+  },
+  "sequential_deepcopy_candidate_4": {
+    "directory": "eval_results/semantic_gain_v12_sweep_branches_D12_00_20260911",
+    "joint_gain_total": 5.368117107547292,
+    "joint_gain_per_action": 1.342029276886823
+  },
+  "full_prefix_replay_candidate_4": {
+    "directory": "eval_results/semantic_gain_v12_branch_fullreplay5_20260911",
+    "joint_gain_total": -0.011413297053778138,
+    "joint_gain_per_action": -0.0028533242634445344
+  },
+  "candidate_0_exact_between_collectors": true,
+  "candidates_1_to_3_differ_between_collectors": true,
+  "conclusion": "Python deepcopy is not accepted as branch isolation for the large Open3D prefix state. Every valid candidate branch must construct a fresh mapper and replay all prefix sensor frames.",
+  "invalidated_directories": [
+    "eval_results/semantic_gain_v12_branch_smoke2_20260911",
+    "eval_results/semantic_gain_v12_branches_D12_00_20260911",
+    "eval_results/semantic_gain_v12_branches_D12_01_20260911",
+    "eval_results/semantic_gain_v12_sweep_branches_D12_00_20260911"
+  ]
+}

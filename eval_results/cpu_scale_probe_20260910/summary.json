@@ -1,0 +1,106 @@
+{
+  "schema": "cpu_grid_v1",
+  "expected_episodes": 4,
+  "completed_episodes": 4,
+  "failed_episodes": 0,
+  "run_complete": true,
+  "statistics_unit": "map; average repeated starts first",
+  "methods": {
+    "nearest_frontier": {
+      "map_count": 2,
+      "episode_count": 2,
+      "unreached_80_count": 2,
+      "unreached_90_count": 2,
+      "coverage_ratio": {
+        "mean": 0.5128389279208951,
+        "std_across_maps": 0.1150975800156128
+      },
+      "coverage_auc": {
+        "mean": 0.3151136745019805,
+        "std_across_maps": 0.05813218087720817
+      },
+      "path_length_m": {
+        "mean": 39.30000000000029,
+        "std_across_maps": 0.10000000000000142
+      },
+      "collisions": {
+        "mean": 0.0,
+        "std_across_maps": 0.0
+      },
+      "revisit_ratio": {
+        "mean": 0.050761421319796954,
+        "std_across_maps": 0.050761421319796954
+      },
+      "episode_wall_time_s": {
+        "mean": 2.9912710685748607,
+        "std_across_maps": 0.020797990495339036
+      },
+      "decision_ms_median": {
+        "mean": 0.6107702502049506,
+        "std_across_maps": 0.06466422928497195
+      },
+      "decision_ms_p95": {
+        "mean": 38.665838795714066,
+        "std_across_maps": 8.44202620210125
+      }
+    },
+    "gain_per_cost": {
+      "map_count": 2,
+      "episode_count": 2,
+      "unreached_80_count": 2,
+      "unreached_90_count": 2,
+      "coverage_ratio": {
+        "mean": 0.714872640009252,
+        "std_across_maps": 0.00877034724029263
+      },
+      "coverage_auc": {
+        "mean": 0.3978772533032643,
+        "std_across_maps": 0.010330295197617606
+      },
+      "path_length_m": {
+        "mean": 42.500000000000334,
+        "std_across_maps": 0.0
+      },
+      "collisions": {
+        "mean": 0.0,
+        "std_across_maps": 0.0
+      },
+      "revisit_ratio": {
+        "mean": 0.001176470588235294,
+        "std_across_maps": 0.001176470588235294
+      },
+      "episode_wall_time_s": {
+        "mean": 2.796960572130047,
+        "std_across_maps": 0.12621684896294028
+      },
+      "decision_ms_median": {
+        "mean": 0.5555635434575379,
+        "std_across_maps": 0.009116425644606352
+      },
+      "decision_ms_p95": {
+        "mean": 43.82869877736083,
+        "std_across_maps": 1.5960994351189655
+      }
+    }
+  },
+  "paired_differences": {
+    "coverage_ratio": {
+      "direction": "gain_per_cost minus nearest_frontier",
+      "map_count": 2,
+      "mean": 0.20203371208835694,
+      "by_map": {
+        "hall_seed17": 0.07816578483245151,
+        "multi_room_seed17": 0.32590163934426236
+      }
+    },
+    "coverage_auc": {
+      "direction": "gain_per_cost minus nearest_frontier",
+      "map_count": 2,
+      "mean": 0.08276357880128374,
+      "by_map": {
+        "hall_seed17": 0.03496169312169317,
+        "multi_room_seed17": 0.1305654644808743
+      }
+    }
+  }
+}

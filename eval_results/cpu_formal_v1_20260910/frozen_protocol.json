@@ -1,0 +1,536 @@
+{
+  "schema": "frozen_cpu_protocol_v1",
+  "created_at": "2026-09-10T07:03:45.921000+00:00",
+  "runtime": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "matplotlib": "3.8.4"
+  },
+  "config_sha256": "655639c9e4e861f78ca7df0c48c622f12f478dcdc8cea5ce4022b743a88bffa0",
+  "files_sha256": {
+    "env/__init__.py": "742fd98c397a6206625b9cde3fedc948e64d7b79e8c9391d827c2f6b80c14c37",
+    "env/grid_exploration.py": "50ea90774a24951b54a68a088ec82ed94801be3b05a291005ad4d2d89fc2bb30",
+    "env/grid_layouts.py": "5f8c1da114558e30a524cb7902633d1c4b6011d9da6a6a3aa25e9951c76a9c8f",
+    "env/grid_semantics.py": "f087634e525b02042f1572694a07e602fa6d1225612a53aaa3c85cb90dedb2d9",
+    "env/habitat/__init__.py": "fa7b556a7f4affb52c24743c35f95023318cea85705694f88e1e3d1f57469a0f",
+    "env/habitat/exploration_env.py": "c4853013fa6663735a1793a4eac88abd2d57b8a523da4db42c8ce2e7afd66ae8",
+    "env/habitat/reachability_utils.py": "b42cb27beefcd1998f4076832f140054355e16df9c675c08339490afd283f994",
+    "env/habitat/sync_vector_env.py": "2e60bbdf92c828b410d8d2122adc307e502950cae89bfca2257d4941403532b7",
+    "env/habitat/utils/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "env/habitat/utils/exploration_completion_viz.py": "d9869276b47b5fa53e04ea1d32f6368a204f10c5bcbd39ebbea7d58dd6a14465",
+    "env/habitat/utils/noisy_actions.py": "96726f37539c6fb50bec5f639c900eb0d67612578350d32e9e4255eec6bea5df",
+    "env/habitat/utils/pose.py": "13d9a7d5af45bb9aaf69f39599dc390718fa3888ee5b9eb0ba9e2e18c8eeec80",
+    "env/habitat/utils/supervision.py": "7226c04d6443e264ff298fbb732a536a2a7aa7432a90021aab58f77778afc450",
+    "env/habitat/utils/visualizations.py": "434855de48786d8858ab938e9fca854f1aaae515bf5741892f63cb5b2672d2d7",
+    "env/habitat2/__init__.py": "e96fd6f65c26d81a5f50c4182e4917aaeee7540187d9a26cd4b585e2266ab7a0",
+    "env/habitat2/_lab.py": "e43ef131314ba6323c8525e00caaaa3e211bca4959555e8038f360c637b3e8b3",
+    "env/habitat2/compat.py": "d87fc5148029b2f7a9ad0c44941c5db4f86bc1fd5ef8d0663b519731ed1d7ce8",
+    "env/habitat2/config_utils.py": "9e07e0c38147016839ee0b51dbefdf69cee6eeb1af8751259615761f813c0dba",
+    "env/habitat2/construct_envs.py": "b3c37a3d5e05fc16c8b1a8a85f445fa911f1ee2eced8f8f280b7fa82ad896f89",
+    "env/habitat2/exploration_env.py": "9cd0d09aaadff3d0fca0416fc01fe3a193eb9092a2d1357829dc08914b8158ea",
+    "env/habitat2/vector_env_compat.py": "72bf46b336fc78e8f08c3facbcd838fa4182a73d51b5a841d5f467307f26e07f",
+    "env/utils/depth_utils.py": "ec5845bdfa9fc32886b770f8e9c02660e1359ba48914f0cf622da95a3fb10c97",
+    "env/utils/fmm_planner.py": "e1a5098cd75995b2074735b2053a7ba2d1a2a62714e2d28f135d196c1b2e8ed3",
+    "env/utils/map_builder.py": "d5156233b312de629090b86bbfb8fa145a956f04c2d40da30ae3ac74f3cd7db1",
+    "env/utils/rotation_utils.py": "ce1fde0a78c543d62fe1f44d76af1c1bbbd7fe3b43242e8750722c1f2bda1298",
+    "eval_results/cpu_rpn_20260910/model.npz": "37280b4c3f39add6e08b08a0e1403ab2dc12aa89ed428aa42d0ea4dba9e83812",
+    "nso/__init__.py": "53df856db4ddc95f7d8a5c05a1298aea84298cfa974a0412017e61471feb76dd",
+    "nso/clip_semantic_map.py": "a67ffb22e244aeea027dce62a60d74458c1f6e56fcda5dbca985d86c152193bf",
+    "nso/components.py": "16f56d4be9eee07c0996ea40f1dc9d9d1eec24d72e2b4effcd1691b07915a858",
+    "nso/cpu_reachability.py": "6980850dc6ea7db1f8efdda570385a29d81c6deb0466a1a1fd701edfc0ad2ef6",
+    "nso/frontier_policy.py": "f5b402b678403e82a6b0519c6b34ab4e1e0c0566f14dbfb028154e1dab87a0cf",
+    "nso/grid_mechanisms.py": "aac855c207fe24a1c9aae0ac240abc947cdc2476c4361fc569d06bda0f96086a",
+    "nso/grid_topology.py": "8e61a9a669470e8637882db9226a856287eb2c84222b65399d5f9556bf3bc762",
+    "nso/reachability_uq.py": "a849c2659d9a0e8b11d6760829ed1d5c8eb6315b8fdf10be8cf346a42ea7b728",
+    "nso/topo_graph.py": "2bc64fb72bed753dc3571385613fa692e53db0f14c502d9c6fbaa107c887db4a",
+    "requirements-cpu.lock.txt": "c41d5fec3f4742eeb86e793cad3b21aa48c5def85823bccfef75e9ac38fb42fb",
+    "scripts/analyze_cpu_formal.py": "d2075112f3bead749d696c207de97a0bea46f254a574a6a1695a8ea8358fe141",
+    "scripts/analyze_cpu_mechanisms.py": "3e195594e2dba55a4ffb3f0d214764030cf69f575fb86f859786abb7e7a7a784",
+    "scripts/analyze_cpu_results.py": "83d3b5f0aab6b6ecb19a779c65926e85cd3cad08df7cc633439f70fa70a11e13",
+    "scripts/eval_cpu.py": "dd3c479f1087eeeb2e70f21d4475323c1b8c11966dfc56ac57ad4bd29688f7a7",
+    "scripts/freeze_cpu_protocol.py": "bac3177d3a42515c13b0dff18388e53a1ea9bdb352b970b5eba98df9e0d518a8",
+    "utils/cpu_protocol.py": "11ab8ca96e1b04637c9a749df3d6ad149eb3e3bffca7143254c5a0b881505d21",
+    "utils/distributions.py": "46d492513b760e696cc38d8e6d3488a84ccfa24c30a4154b243792f8eb156cb3",
+    "utils/eval_protocol.py": "0bdb2540e0dd1cb81a78c9e6ee1ba1f4e608b607229f970220d5b5545514bbe0",
+    "utils/grid_geometry.py": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b",
+    "utils/model.py": "a5bdedbc8cfd894bc0e0b70989f73ba33d4b1e4c9371f0a6061cbc57919259bb",
+    "utils/optimization.py": "208675a9cdd1dd39037702511815aed726acdb9447fc6e0294fc11f219676751",
+    "utils/paper_eval.py": "68b9973910cae0ae069c445e972ffd965d396cfb2bc3fa31feb9896a3d098491",
+    "utils/reward.py": "d74b1cbfedb28042a2ac62e8abba5ece2e5abd8cf4c75891bd0484ecb353c627",
+    "utils/storage.py": "fa628c0828d96c6cbb0219b81da298995ae07729f5ab5d5c735d0590eb6ba7c8"
+  },
+  "maps": {
+    "single_room_seed1000": "00be9455026af70d5dd3d04caeee6364ebb942d3f30171a88cc4596da607b970",
+    "single_room_seed1001": "11de13077e552abb370d760a08e221d36ba79d8ee07177d99b5c84a1236bb408",
+    "multi_room_seed1000": "0256698295cf45bf45a41dd29d60933ab1acce3c6215336fd613868da260f0c0",
+    "multi_room_seed1001": "3e69f213e1c239594dfadd174442071f0e9db07fa5050beb415b87b518fef64a",
+    "corridor_seed1000": "216492189ded8f5709a03fdb048c78e413590eb71026ba82006bc669d2af6a04",
+    "corridor_seed1001": "03c77ba3ff1ac06c2edba638a3113930931d01e9fe030a081726bfb30a7bdd6a",
+    "dead_end_seed1000": "135088619d2d2df5bb6dc233e3e21a4c372e50f1ffd3fc30f132566d9a5d74c2",
+    "dead_end_seed1001": "1011c592ae8f4968fe16d414462e61e00ad4cd1c15e974565e4bb2dbf9e528eb",
+    "loop_seed1001": "8502bce17b97524ae355cb176eac0447ad17ba055770e43a0b32a6076d57678b",
+    "hall_seed1000": "1878ba585df505261886f613312c86301ea355c906c3003213df5173004c4b6e",
+    "hall_seed1001": "7b15f4420317da20c66bd0c349c63925d37eb510a693555ac445b7c4206984fd"
+  },
+  "excluded_geometry_hashes": [
+    "01ba3b1c10583f13cffea05fd3ef03b5df120f2ae42357100899e027b20c94e8",
+    "02cca58c8130142ccb29ae6e1025178c034f5924e1a4911023fe756c76f93f61",
+    "0643a37fcf7b10cf6882fc0f55fc8304a491b0e56dcfa768f6c65bf0ee96006c",
+    "07102d3936776d5a90c7ad4eea7f991a243ab05c8a4155b6567c9aae6b474acc",
+    "09d4819ab980098b85a2eba50224fd957048c12b33dd8a2778aff9dd8bb0d20f",
+    "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085",
+    "0bc1f68e0bbadf468bfcbb99ad33f9fb8d48261d5e18cd0a3c89f5f7e627a1ae",
+    "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70",
+    "0e93c3206ddf6d26b038f64f0e93ed75bd29f4f4bed01c1f5762156dd7ace9af",
+    "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9",
+    "10dd8041f41f5e266b8043f59c76465a4bb53b0f54dad8af73df7229ae8eb7c2",
+    "14ae91f8953cafcfebe6d2c388b1f3183e46e84f1149bb0cbe427d51c23fd704",
+    "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe",
+    "1fc4dc905d26744590bfbc4819a23d69d94a7d7d19c4ae245aafd00f39879c76",
+    "29841fee4f9eb84ff082c9bfa864a4cea7db1a3d145a2ef7dc7591d2dfa25f43",
+    "2a18be73380625b63cddcb10124528a4a34795d662b7e24ccff8b3429501a080",
+    "2ce724f591365dabf6ab082b32f15e570af227b9c96825799e76d426aba399a0",
+    "2d702dc685da31cc79fba7a496cc0c2c13d5ab900f2c084985b4d871a0e3b261",
+    "3a5ed975fc4f191fd56fa6163e0a8fe0d7cceb253af655e97e1d6d7988eb217b",
+    "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99",
+    "4ca5a00114a07f49377e1a6076a3703dca867f72e995989daaf979f0198fe9a8",
+    "4efacb73165a034dc402bf924245fd7a4587ee0893f76aee340f2f03f4ed017f",
+    "4f8232ad53b3adce75516784ce4f3eb28dafaa444365c2a1319ac292fdf8d589",
+    "54219e6fc247bb80b04b56fc6b82bfe2f633f325f1aadf691b7d5272b2b37d21",
+    "62821a5d432894aaa2b0fff8d4d79b6e4becd18202276a5011c8d158576a2fc0",
+    "82891631ca31421964f894acb5cee24287a934418b5699b75040c37dfe0f6310",
+    "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+  ],
+  "exclusion_sources": [
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/corridor_seed31_start101_gain_budget_rule/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/corridor_seed31_start101_gain_semantic_structure_budget_rule/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/dead_end_seed31_start101_gain_budget_rule/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/dead_end_seed31_start101_gain_semantic_structure_budget_rule/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/hall_seed31_start101_gain_budget_rule/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/hall_seed31_start101_gain_semantic_structure_budget_rule/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/loop_seed31_start101_gain_budget_rule/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/loop_seed31_start101_gain_semantic_structure_budget_rule/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/multi_room_seed31_start101_gain_budget_rule/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/multi_room_seed31_start101_gain_semantic_structure_budget_rule/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/single_room_seed31_start101_gain_budget_rule/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_budget_rule_dev_20260910/single_room_seed31_start101_gain_semantic_structure_budget_rule/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_budget_soft_dev_20260910/corridor_seed31_start101_gain_semantic_structure_budget_soft/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_budget_soft_dev_20260910/dead_end_seed31_start101_gain_semantic_structure_budget_soft/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_budget_soft_dev_20260910/hall_seed31_start101_gain_semantic_structure_budget_soft/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_budget_soft_dev_20260910/loop_seed31_start101_gain_semantic_structure_budget_soft/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_budget_soft_dev_20260910/multi_room_seed31_start101_gain_semantic_structure_budget_soft/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_budget_soft_dev_20260910/single_room_seed31_start101_gain_semantic_structure_budget_soft/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/corridor_seed31_start101_gain_control/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/corridor_seed31_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/corridor_seed31_start101_gain_semantic/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/corridor_seed31_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/corridor_seed31_start101_gain_semantic_structure_rpn/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/corridor_seed31_start101_gain_structure/observations.npz",
+      "geometry_hash": "3baa537ad39758f900f794008159a54cbc707d40aba342671f8f51e7305e9a99"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/dead_end_seed31_start101_gain_control/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/dead_end_seed31_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/dead_end_seed31_start101_gain_semantic/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/dead_end_seed31_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/dead_end_seed31_start101_gain_semantic_structure_rpn/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/dead_end_seed31_start101_gain_structure/observations.npz",
+      "geometry_hash": "0b4b39ce82c75e33d7fec54c00bb30c21542157bf410fca6a40d22eb7f586085"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/hall_seed31_start101_gain_control/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/hall_seed31_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/hall_seed31_start101_gain_semantic/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/hall_seed31_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/hall_seed31_start101_gain_semantic_structure_rpn/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/hall_seed31_start101_gain_structure/observations.npz",
+      "geometry_hash": "0e3baec56bc38ecbf76d660db1cd14113b54ce4e66571978fcc24c450f700a70"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/loop_seed31_start101_gain_control/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/loop_seed31_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/loop_seed31_start101_gain_semantic/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/loop_seed31_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/loop_seed31_start101_gain_semantic_structure_rpn/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/loop_seed31_start101_gain_structure/observations.npz",
+      "geometry_hash": "d1c8df658d7fb4da5364e84098e331ff520fdc09d4ad91a7e30488ea745e44b7"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/multi_room_seed31_start101_gain_control/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/multi_room_seed31_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/multi_room_seed31_start101_gain_semantic/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/multi_room_seed31_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/multi_room_seed31_start101_gain_semantic_structure_rpn/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/multi_room_seed31_start101_gain_structure/observations.npz",
+      "geometry_hash": "0f63b8b31bb22d6a438e07d9e59a4f29ff2164f35a3aa31ec1e6fef481d58cc9"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/single_room_seed31_start101_gain_control/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/single_room_seed31_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/single_room_seed31_start101_gain_semantic/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/single_room_seed31_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/single_room_seed31_start101_gain_semantic_structure_rpn/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_ablation_20260910/single_room_seed31_start101_gain_structure/observations.npz",
+      "geometry_hash": "15b87c724ed423bad4cf1364b7e5fdcd0842777560b9fe4b9c2cec648da4f6fe"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/corridor_seed200_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "4efacb73165a034dc402bf924245fd7a4587ee0893f76aee340f2f03f4ed017f"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/corridor_seed201_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "02cca58c8130142ccb29ae6e1025178c034f5924e1a4911023fe756c76f93f61"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/dead_end_seed200_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "01ba3b1c10583f13cffea05fd3ef03b5df120f2ae42357100899e027b20c94e8"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/dead_end_seed201_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "14ae91f8953cafcfebe6d2c388b1f3183e46e84f1149bb0cbe427d51c23fd704"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/hall_seed200_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "54219e6fc247bb80b04b56fc6b82bfe2f633f325f1aadf691b7d5272b2b37d21"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/hall_seed201_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "2ce724f591365dabf6ab082b32f15e570af227b9c96825799e76d426aba399a0"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/loop_seed200_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "4ca5a00114a07f49377e1a6076a3703dca867f72e995989daaf979f0198fe9a8"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/loop_seed201_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "4ca5a00114a07f49377e1a6076a3703dca867f72e995989daaf979f0198fe9a8"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/multi_room_seed200_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "4f8232ad53b3adce75516784ce4f3eb28dafaa444365c2a1319ac292fdf8d589"
+    },
+    {
+      "path": "eval_results/cpu_mechanism_train_20260910/multi_room_seed201_start101_gain_semantic_structure/observations.npz",
+      "geometry_hash": "29841fee4f9eb84ff082c9bfa864a4cea7db1a3d145a2ef7dc7591d2dfa25f43"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/corridor_seed0_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "2a18be73380625b63cddcb10124528a4a34795d662b7e24ccff8b3429501a080"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/corridor_seed0_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "2a18be73380625b63cddcb10124528a4a34795d662b7e24ccff8b3429501a080"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/corridor_seed1_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "09d4819ab980098b85a2eba50224fd957048c12b33dd8a2778aff9dd8bb0d20f"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/corridor_seed1_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "09d4819ab980098b85a2eba50224fd957048c12b33dd8a2778aff9dd8bb0d20f"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/dead_end_seed0_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "0643a37fcf7b10cf6882fc0f55fc8304a491b0e56dcfa768f6c65bf0ee96006c"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/dead_end_seed0_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "0643a37fcf7b10cf6882fc0f55fc8304a491b0e56dcfa768f6c65bf0ee96006c"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/dead_end_seed1_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "3a5ed975fc4f191fd56fa6163e0a8fe0d7cceb253af655e97e1d6d7988eb217b"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/dead_end_seed1_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "3a5ed975fc4f191fd56fa6163e0a8fe0d7cceb253af655e97e1d6d7988eb217b"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/hall_seed0_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "0bc1f68e0bbadf468bfcbb99ad33f9fb8d48261d5e18cd0a3c89f5f7e627a1ae"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/hall_seed0_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "0bc1f68e0bbadf468bfcbb99ad33f9fb8d48261d5e18cd0a3c89f5f7e627a1ae"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/loop_seed0_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "82891631ca31421964f894acb5cee24287a934418b5699b75040c37dfe0f6310"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/loop_seed0_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "82891631ca31421964f894acb5cee24287a934418b5699b75040c37dfe0f6310"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/multi_room_seed0_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "62821a5d432894aaa2b0fff8d4d79b6e4becd18202276a5011c8d158576a2fc0"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/multi_room_seed0_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "62821a5d432894aaa2b0fff8d4d79b6e4becd18202276a5011c8d158576a2fc0"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/multi_room_seed1_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "10dd8041f41f5e266b8043f59c76465a4bb53b0f54dad8af73df7229ae8eb7c2"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/multi_room_seed1_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "10dd8041f41f5e266b8043f59c76465a4bb53b0f54dad8af73df7229ae8eb7c2"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/single_room_seed0_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "2d702dc685da31cc79fba7a496cc0c2c13d5ab900f2c084985b4d871a0e3b261"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/single_room_seed0_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "2d702dc685da31cc79fba7a496cc0c2c13d5ab900f2c084985b4d871a0e3b261"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/single_room_seed1_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "0e93c3206ddf6d26b038f64f0e93ed75bd29f4f4bed01c1f5762156dd7ace9af"
+    },
+    {
+      "path": "eval_results/cpu_pilot_20260910/single_room_seed1_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "0e93c3206ddf6d26b038f64f0e93ed75bd29f4f4bed01c1f5762156dd7ace9af"
+    },
+    {
+      "path": "eval_results/cpu_scale_probe_20260910/hall_seed17_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "07102d3936776d5a90c7ad4eea7f991a243ab05c8a4155b6567c9aae6b474acc"
+    },
+    {
+      "path": "eval_results/cpu_scale_probe_20260910/hall_seed17_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "07102d3936776d5a90c7ad4eea7f991a243ab05c8a4155b6567c9aae6b474acc"
+    },
+    {
+      "path": "eval_results/cpu_scale_probe_20260910/multi_room_seed17_start101_gain_per_cost/observations.npz",
+      "geometry_hash": "1fc4dc905d26744590bfbc4819a23d69d94a7d7d19c4ae245aafd00f39879c76"
+    },
+    {
+      "path": "eval_results/cpu_scale_probe_20260910/multi_room_seed17_start101_nearest_frontier/observations.npz",
+      "geometry_hash": "1fc4dc905d26744590bfbc4819a23d69d94a7d7d19c4ae245aafd00f39879c76"
+    }
+  ],
+  "selection": [
+    {
+      "layout": "single_room",
+      "seeds": [
+        1000,
+        1001
+      ],
+      "requested_maps": 2,
+      "selected_maps": 2
+    },
+    {
+      "layout": "multi_room",
+      "seeds": [
+        1000,
+        1001
+      ],
+      "requested_maps": 2,
+      "selected_maps": 2
+    },
+    {
+      "layout": "corridor",
+      "seeds": [
+        1000,
+        1001
+      ],
+      "requested_maps": 2,
+      "selected_maps": 2
+    },
+    {
+      "layout": "dead_end",
+      "seeds": [
+        1000,
+        1001
+      ],
+      "requested_maps": 2,
+      "selected_maps": 2
+    },
+    {
+      "layout": "loop",
+      "seeds": [
+        1001
+      ],
+      "requested_maps": 2,
+      "selected_maps": 1
+    },
+    {
+      "layout": "hall",
+      "seeds": [
+        1000,
+        1001
+      ],
+      "requested_maps": 2,
+      "selected_maps": 2
+    }
+  ],
+  "selection_rule": "first up to two unused D4-canonical geometries per layout in seed range [1000,1100); no outcome-based selection",
+  "expected_episodes": 176,
+  "primary_metric": "coverage_auc",
+  "primary_contrast": [
+    "gain_control",
+    "gain_semantic_structure"
+  ],
+  "secondary_metrics": [
+    "coverage_ratio",
+    "revisit_ratio",
+    "path_length_m",
+    "collisions"
+  ],
+  "statistics": "average starts within each map, then equal map weights; 10000 paired map bootstrap resamples, seed 20260910, percentile 95% intervals",
+  "limitations": [
+    "same procedural layout families; unique geometry does not imply independent real scenes",
+    "one unused loop geometry; unequal layout representation",
+    "secondary comparisons exploratory without multiplicity correction",
+    "synthetic salience has no task value calibration; area coverage remains primary",
+    "perfect odometry, no RGB-D or learned SLAM"
+  ],
+  "change_policy": "retain all outcomes; changes require new version and new held-out geometry, never silently replace this protocol"
+}
