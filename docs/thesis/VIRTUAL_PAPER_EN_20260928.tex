@@ -38,7 +38,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-After changes to an industrial layout, robots need current observations of the surrounding space and equipment. Observing a region, however, does not ensure that its facilities have been adequately reconstructed. For facility documentation under a limited motion budget, this study combines category-conditioned configuration beliefs, predicted observation value, and feedback from measured geometry. A hierarchical decision and local execution architecture connects four module interfaces; the present CPU controller directly selects the next atomic action. Public templates support belief updates and planning, while the reconstructed surface contains only fused measured depth. Virtual validation uses separate static mapping tasks. A paired confirmation experiment uses two previously seen parent layouts, each with two configurations. Relative to an active geometric control with the same planner, category information improves the mean joint documentation score by 6.1638\%, with two wins and two ties across four pairs and identical mean coverage. In a separate development experiment with incorrect category information, the complete correction policy, including measured correction and anticipated future correction, improves the mean joint score by 2.6241\%. A further fixed 128-trial matrix retains 96 qualified completions and 32 low-budget planning failures. Category gains at budget 42 are 6.25\% on original layouts and 4.23\% on same-family variants, while budget 54 produces a −0.70\% difference on original layouts. The results establish a conditional benefit for early observation selection and identify its budget boundary.
+After changes to an industrial layout, robots need current observations of the surrounding space and equipment. Observing a region, however, does not ensure that its facilities have been adequately reconstructed. For facility documentation under a limited motion budget, this study combines category-conditioned configuration beliefs, predicted observation value, and feedback from measured geometry. A hierarchical decision and local execution architecture connects four module interfaces, with atomic decisions in the local implementation and observation macros in the separate multi-facility extension. Public templates support belief updates and planning, while the reconstructed surface contains only fused measured depth. Virtual validation uses separate static mapping tasks. A paired confirmation experiment uses two previously seen parent layouts, each with two configurations. Relative to an active geometric control with the same planner, category information improves the mean joint documentation score by 6.1638\%, with two wins and two ties across four pairs and identical mean coverage. In a separate development experiment with incorrect category information, the complete correction policy, including measured correction and anticipated future correction, improves the mean joint score by 2.6241\%. A further fixed 128-trial matrix retains 96 qualified completions and 32 low-budget planning failures. Category gains at budget 42 are 6.25\% on original layouts and 4.23\% on same-family variants, while budget 54 produces a −0.70\% difference on original layouts. A separate four-facility study comprises three controller versions and 36 attempts; shared-reliability and fixed category-prior outcomes tie in each of the three layouts for every version. The local results support a conditional benefit for early observation selection; they do not establish an additional benefit from cross-instance sharing.
 \end{abstract}
 \noindent\textbf{Keywords:} facility documentation; active observation; category priors; geometric feedback; budget-constrained planning
 
@@ -106,7 +106,7 @@ Figure 1 relates the two public configuration hypotheses to occlusion and the sa
 \hypertarget{module-interfaces-and-executed-controller}{%
 \subsection{Module Interfaces and Executed Controller}\label{module-interfaces-and-executed-controller}}
 
-The system organizes observation, planning, and feedback through hierarchical decisions and local execution. Table 1 describes the four CPU interfaces. The decision layer selects a pose subgoal from the configuration belief and remaining budget; the execution layer checks action legality and the return budget before new measurements update the state. In the present CPU implementation, each subgoal corresponds to the next atomic action. Controlled category inputs and deterministic execution guards complete the loop. Experiments isolate category information and the complete correction policy, rather than assign an independent performance contribution to each interface.
+The system organizes observation, planning, and feedback through hierarchical decisions and local execution. Table 1 describes the four CPU interfaces. The decision layer selects a pose subgoal from the configuration belief and remaining budget; the execution layer checks action legality and the return budget before new measurements update the state. In the local binary implementation, each subgoal corresponds to the next atomic action; Section 4.6 defines a separate scene-level extension. Controlled category inputs and deterministic execution guards complete the loop. Experiments isolate category information and the complete correction policy, rather than assign an independent performance contribution to each interface.
 
 \par\noindent\begin{minipage}{\linewidth}
 \textbf{Table 1. Responsibilities of the four CPU module interfaces.}
@@ -133,7 +133,7 @@ IGCR & Measured depth/scan and public predictions at a new pose & Compare residu
 \begin{minipage}{\linewidth}
 \centering
 \includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/system_architecture_20260928/system_architecture.pdf}
-\captionof{figure}{Platform interfaces, four-module CPU virtual validation, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The robot is a generative composite based on the user-provided platform photograph for interface illustration; sensor, map, and mesh thumbnails are schematic.}\label{fig:writing-2}
+\captionof{figure}{Platform interfaces, the local binary implementation of the four-module CPU loop, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The robot is a generative composite based on the user-provided platform photograph for interface illustration; sensor, map, and mesh thumbnails are schematic.}\label{fig:writing-2}
 \end{minipage}
 \end{center}
 
@@ -264,7 +264,7 @@ The forward/left/right continuation values are 0.574541/0.554660/0.555707, so ac
 \hypertarget{when-can-a-category-cue-save-diagnostic-cost}{%
 \subsection{When Can a Category Cue Save Diagnostic Cost?}\label{when-can-a-category-cue-save-diagnostic-cost}}
 
-A simplified decision model clarifies the proposed mechanism. Assume equally likely configurations that the common initial geometry cannot distinguish. Two return-feasible routes yield utility \(U_+\) when matched to the configuration and \(U_-\) otherwise, with \(\Delta=U_+-U_->0\). A category cue available in the shared prefix has symmetric reliability \(\rho\ge1/2\). Both policies can instead acquire a symmetric geometric diagnosis of reliability \(r_d\ge1/2\), conditionally independent of the cue given the configuration. Both routes remain feasible after diagnosis, whose opportunity loss is \(\kappa\ge0\), expressed in utility units. These are analytical assumptions; \(\rho\) and \(r_d\) are not the implementation's fixed prior and forecast settings.
+A simplified decision model clarifies the proposed mechanism. Assume equally likely configurations that the common initial geometry cannot distinguish. Two return-feasible routes yield utility \(U_+\) when matched to the configuration and \(U_-\) otherwise, with \(\Delta=U_+-U_->0\). A category cue available in the shared prefix has symmetric reliability \(r_c\ge1/2\). Both policies can instead acquire a symmetric geometric diagnosis of reliability \(r_d\ge1/2\), conditionally independent of the cue given the configuration. Both routes remain feasible after diagnosis, whose opportunity loss is \(\kappa\ge0\), expressed in utility units. These are analytical assumptions; \(r_c\) and \(r_d\) are not the implementation's fixed prior and forecast settings.
 
 For a current configuration probability \(p\), direct selection is correct with probability \(m=\max(p,1-p)\). Selecting the better route after each possible diagnosis gives
 
@@ -279,12 +279,40 @@ The net diagnostic value is therefore \(\Delta\max(0,r_d-m)-\kappa\). Allowing e
 \[
 V_G^*=U_-+\max\{\Delta/2,r_d\Delta-\kappa\},
 \] \[
-V_S^*=U_-+\max\{\rho\Delta,\max(\rho,r_d)\Delta-\kappa\}.
+V_S^*=U_-+\max\{r_c\Delta,\max(r_c,r_d)\Delta-\kappa\}.
 \]
 
-Thus G benefits from diagnosis when \(\kappa<(r_d-1/2)\Delta\), whereas S requires \(\kappa<(r_d-\rho)_+\Delta\). For illustration only, \(U_-=0.50\), \(U_+=0.90\), \(\rho=0.80\), \(r_d=0.95\), and \(\kappa=0.08\) give \(V_G^*=0.80\) through diagnosis and \(V_S^*=0.82\) through direct category-based selection. With \(\kappa=0.02\), both diagnose and attain 0.86. These values are synthetic calculations, not reconstruction measurements.
+Thus G benefits from diagnosis when \(\kappa<(r_d-1/2)\Delta\), whereas S requires \(\kappa<(r_d-r_c)_+\Delta\). For illustration only, \(U_-=0.50\), \(U_+=0.90\), \(r_c=0.80\), \(r_d=0.95\), and \(\kappa=0.08\) give \(V_G^*=0.80\) through diagnosis and \(V_S^*=0.82\) through direct category-based selection. With \(\kappa=0.02\), both diagnose and attain 0.86. These values are synthetic calculations, not reconstruction measurements.
 
 The advantage requires an informative cue, consequential route choice, and a cost of resolving ambiguity. It can disappear when geometry already resolves the configuration, routes have equal value, or diagnosis is cheap. If diagnosis removes a route from the feasible set, that set must be re-evaluated rather than applying the closed-form result. The argument uses established belief-based decision principles {[}12,13{]}; it neither introduces a new Bayesian rule nor guarantees a TSDF improvement from additional views.
+
+\hypertarget{independent-scene-level-extension}{%
+\subsection{Independent Scene-Level Extension}\label{independent-scene-level-extension}}
+
+A separate implementation extends local binary observation to four facilities in two repeated categories, each with planar, recessed, louvered, or open-frame structure. Policy labels are specific to each implementation: local S enables category conditioning, whereas scene-level B already includes that information and scene-level S additionally shares class-model evidence. Their effect sizes are not pooled. Instances and label planes arise from measured support; true facility poses and structures remain private. OV-SDF maintains associations and structure beliefs, IGCR supplies bounded depth evidence, STGHP selects observation macros, and RPN-UQ checks primitive execution and full-pose return. The supplied navigation graph, exact poses, synthetic labels, and nominal structure family remain controlled assumptions. TSDF fuses measured depth only. Within each scene family, development and reserved test layouts share the fixed category--configuration composition; the reserved layouts can test spatial transfer, not a new semantic-relation distribution.
+
+For instance \(i\), cumulative geometric evidence \(L_i\) combines with a mixture of uniform and category priors:
+
+\[
+b_i(h)\propto[(1-\rho_i)q_0(h)+\rho_iq_1(h\mid c_i)]e^{L_i(h)}.
+\]
+
+G uses the uniform prior; B fixes \(\rho_i=1/2\); S updates the model weight from qualified same-category peers. Leave-one-out sharing applies own-instance evidence once and replaces cumulative peer messages. Category qualification requires two eligible frames, each containing at least four matching marker pixels, without conflict or association ambiguity. All methods retain measured geometry and the same acquisition rules. G, B, and S can purchase a diagnostic view; NBV uses G's belief with myopic direct-view scoring. Thus S/B tests sharing, B/G tests category conditioning, and G/NBV tests diagnostic lookahead.
+
+At most 32 poses are compared, using expected nominal unseen area and an unknown-space proxy divided by arrival, observation, and return costs. Diagnostic alternatives consider one paid view and one subsequent common pose; instance utilities are summed before selecting that pose. Only the first macro is committed. Translation by 0.25 m, rotation by 30°, and explicit observation each cost one action and acquire a frame. One initial frame is free; geometry-only initialization consumes at most \(\lfloor B/5\rfloor\) actions. This replaces the old fixed prefix and binary dynamic program. Equations A1--A6 in the \href{/root/NSO/docs/thesis/ARTICLE_SUPPLEMENTARY_METHODS_20260928.pdf}{Supplementary Methods} specify belief transfer, macro utility, and limitations.
+
+The extension evaluates measured-free coverage \(C_{\rm nav}\) on a fixed start-connected robot-center grid and \(Q=\tfrac14\sum_iF_{1,i}\) over all four facilities, including undiscovered ones. The joint score is \(J_{\rm nav}=C_{\rm nav}Q\). Complete predicted meshes are evaluated against fixed observable references at 5 cm, without prediction-ROI cropping or semantic weighting. These definitions differ from Section 3; the scores are not pooled.
+
+The sharing model has a bounded effect. With one eligible peer and equal initial model weights, its evidence ratio satisfies \(r\in[\min_h q_1(h)/q_0(h),\max_h q_1(h)/q_0(h)]\), and \(\rho=r/(1+r)\). This bounds the transferred prior; an instance's own evidence can still concentrate its posterior. For fixed own evidence, each instance's contribution to a candidate-pair contrast is a linear-fractional function of \(\rho_i\) with a positive denominator, whose extrema occur at the interval endpoints. Summing per-instance extrema gives a conservative bound on a possible ranking change. This bound concerns a fixed direct-view candidate pool. It does not bound diagnostic replanning, future candidate generation, or measured reconstruction quality.
+
+Two common-component revisions are evaluated separately. The first removes a verified measured floor band from instance-association candidates, while retaining full depth for occupancy and TSDF. The second discounts nominal surface opportunities already exposed at the same optical center. For nominal point \(x\), candidate visibility \(V_a(x)\), distance \(d(x,\mathcal P_t)\) from measured support, and accepted historical visibility masks \(V_j(x)\), its eligible area is
+
+\[
+A_t(a)=\sum_x a_x V_a(x)\,\mathbf 1[d(x,\mathcal P_t)>0.08\,\mathrm m]\,
+\mathbf 1[x\notin\bigcup_{j\in\mathcal H_t(a)}V_j].
+\]
+
+Here \(\mathcal H_t(a)\) contains only already acquired frames with matching optical center, intrinsics, and image shape. The common initial frame is included; other history is paid acquisition. New viewing directions can retain unexposed nominal area, and observations from other optical centers are not excluded by this rule. Exclusion prevents repeatedly rewarding the same attempted opportunity under differently scaled templates; it neither certifies that depth was obtained nor adds any surface to the reconstruction. Consequently, recovery from missing depth and benefits from repeated measurement are not modeled by this discount. The original, ground-aware, and exposure-discounted controllers remain separate versions with complete outcomes.
 
 \hypertarget{virtual-experiments-and-results}{%
 \section{Virtual Experiments and Results}\label{virtual-experiments-and-results}}
@@ -505,19 +533,172 @@ To examine how reconstruction gains develop, we reintegrated all eight original 
 \end{minipage}
 \end{center}
 
+\hypertarget{scene-level-development-and-information-timing}{%
+\subsection{Scene-Level Development and Information Timing}\label{scene-level-development-and-information-timing}}
+
+The complete development design comprises AISLE, CELL, and LOOP layouts, four methods, one common seed, and a 160-action budget: 12 attempted episodes. Eleven complete the original execution-and-evaluation pipeline. CELL/G completes collision-free motion and full-pose return but its evaluator rejects one finite triangle of area \(4.24\times10^{-13}\,\mathrm{m}^2\). This remains an original evaluation failure, not a navigation failure or a zero-quality result.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 6. Original scene-level development endpoints. Entries are \(Q/J_{\rm nav}\); a dash denotes unavailable original evaluation. Each entry is one episode.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-8\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth}@{}}
+\toprule
+Layout & NBV & G & B & S \\
+\midrule
+AISLE & 0.857/0.857 & 0.857/0.857 & 0.857/0.857 & 0.857/0.857 \\
+CELL & 0.736/0.690 & ---/--- & 0.819/0.767 & 0.819/0.767 \\
+LOOP & 0.649/0.621 & 0.649/0.621 & 0.649/0.621 & 0.649/0.621 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+A common numerical supplement applies the same face-area threshold, \(5\times10^{-13}\,\mathrm{m}^2\), to all 12 predictions. Eleven unchanged-input evaluations are verified and reused; only CELL/G requires a new derived surface measurement, with \(C_{\rm nav}=0.936450\), \(Q=0.817264\), and \(J_{\rm nav}=0.765328\). No new route or TSDF is generated. B/S exceed this G score by only 0.001193, approximately 0.156\%; S and B tie in all three layouts. The supplement preserves original failure status and does not establish a sharing benefit.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_routes_01.pdf}
+\captionof{figure}{All 12 declared slots at a common scale. Circles mark turns, squares paid observations, and arrows saved headings. The CELL/G blank denotes original evaluation failure despite a completed saved route. Background geometry is for offline explanation.}\label{fig:writing-13}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_quality_and_cost.pdf}
+\captionof{figure}{Original qualified endpoints and recorded costs; crosses denote unavailable entries, not zeros. Planning times exclude offline evaluation and reflect concurrent workload. This development comparison does not estimate performance on unseen layouts.}\label{fig:writing-14}
+\end{minipage}
+\end{center}
+
+AISLE's four methods have identical executed actions, poses, and mesh arrays: 24 m, 54 turns, 10 explicit observations, and 161 frames each. The first informative same-category peer appears at action 136, after return begins at action 126. Inspection identified depth support connected through the floor, delaying reliable instance association. A common geometric revision excludes a measured floor band only from association candidates, using current depth and calibrated mounting height. Support, height, and noise checks control acceptance; rejected frames retain the original input. All methods receive the same rule, and full depth remains available to occupancy and TSDF. This assumes a static horizontal floor and known camera geometry.
+
+Replaying the same 161 saved frames reproduces the original evidence exactly. With the revision, first applied feedback moves from action 85 to 8, and first informative peer/S--B posterior difference from 136 to 82. Uncertain instance-frame records decrease from 278 to 3. However, applied feedback decreases from 21 to 18, and the second cabinet's first own feedback shifts from 85 to 87. These results establish earlier information availability in a fixed-path replay, not improved association accuracy against ground truth, a changed route, or higher reconstruction quality. The common-frontend closed-loop comparison is reported separately in Section 5.8; the fixed-path replay itself establishes no new planning benefit.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/article_scene_meshes_20260928/aisle_gbs_v2/aisle_gt_g_s_preview.pdf}
+\captionof{figure}{Ground truth and saved G/S meshes share view and scale; all 205,566 predicted triangles are rendered with overlaid XY routes. Colors encode height and lighting, not error. G/S geometry is identical. GT includes unobservable surfaces beyond the fixed scoring reference.}\label{fig:writing-15}
+\end{minipage}
+\end{center}
+
+Near-complete AISLE navigable coverage (0.999289) coexists with macro F1 0.857363 and second-facility recall 0.557492. Figure 15 connects route coverage to incomplete equipment surfaces without depicting an absent G/S advantage. Together, these results distinguish the local category benefit from the additional scene-level requirements of stable association and timely, actionable information.
+
+\hypertarget{closed-loop-association-ablation}{%
+\subsection{Closed-Loop Association Ablation}\label{closed-loop-association-ablation}}
+
+A further 12 episodes apply the measured-ground association rule to every method on the same three development layouts, budget, and noise realization. All complete collision-free motion, full-pose return, and the common numerical evaluation. Table 7 compares the original predictions under that same evaluator with the new closed-loop predictions. This is a common frontend ablation; no historical route is regenerated with a different controller.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 7. Joint score before and after the common association correction. Each cell is original → ground-aware; † denotes the separately derived score after an original evaluation failure.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-8\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth}@{}}
+\toprule
+Layout & NBV & G & B & S \\
+\midrule
+AISLE & 0.857 →\allowbreak{} 0.653 & 0.857 →\allowbreak{} 0.653 & 0.857 →\allowbreak{} 0.653 & 0.857 →\allowbreak{} 0.653 \\
+CELL & 0.690 →\allowbreak{} 0.465 & 0.765† →\allowbreak{} 0.534 & 0.767 →\allowbreak{} 0.531 & 0.767 →\allowbreak{} 0.531 \\
+LOOP & 0.621 →\allowbreak{} 0.730 & 0.621 →\allowbreak{} 0.730 & 0.621 →\allowbreak{} 0.730 & 0.621 →\allowbreak{} 0.730 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+The correction improves LOOP's joint score by 0.109889 but lowers it in AISLE and CELL. Earlier usable information therefore does not guarantee a better observation policy. AISLE's route first changes at action 6: translation decreases from 24 to 22 m, while turns increase from 54 to 56 and explicit observations from 10 to 16. Coverage and macro F1 both decrease. In LOOP, translation remains 20 m, but changed observation allocation improves both quantities. The full paired coverage/F1/product figure and per-instance records accompany the data.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/article_ground_20260928/fixed_g_print_v1/ground_fixed_g_routes.pdf}
+\captionof{figure}{Fixed geometric method G in all three development layouts, comparing the common association component at one metric scale. Dashed and solid lines are actual original and ground-aware trajectories; circles mark turns, squares extra paid observations, and arrows recorded headings. CELL retains its original evaluation failure and separately derived score. The full four-method grid is available with the data. Equipment outlines provide offline context.}\label{fig:writing-16}
+\end{minipage}
+\end{center}
+
+Within each version, S and B execute identical actions and obtain identical quality in all three layouts. Under the correction, their posteriors differ in 23 instance--step records in CELL and 93 in LOOP, but no compared candidate score or executed action changes. A separate analysis of 138 category-conditioned direct-view pools from the original study and the first AISLE correction pair also excludes a ranking change over the one-peer reliability range, even with relaxed peer availability. These dependent decision records are mechanism diagnostics, not additional independent trials; they do not cover diagnostic alternatives or future candidate pools.
+
+Saved AISLE decisions reveal another limitation: nominal scales displaced from measured supports can retain positive unseen-area rewards inside previously acquired view cones. A subsequent, separately frozen version tests common same-center exposure deduplication. It excludes previously attempted nominal exposure from predicted new-area eligibility while leaving measured supports and TSDF unchanged. Repeated-view precision benefits and missing-depth recovery remain unmodeled. The original scene-level, ground-aware, and exposure-deduplicated versions have separate configurations and results; Table 7 contains only the first two.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/article_ground_meshes_20260928_v2/ground_frontend_meshes_G.pdf}
+\captionof{figure}{Fixed geometric method G, all three development layouts, and the two association versions. Reference geometry and complete saved meshes share an orthographic camera, world scale, and height coloring. All 1,055,521 stored triangles across nine panels are retained. Color is not reconstruction error. CELL's original failed evaluation and its separately derived score remain distinguished. Full-frame fusion can reconstruct surfaces of instances not registered by the semantic frontend.}\label{fig:writing-17}
+\end{minipage}
+\end{center}
+
+\hypertarget{exposure-discounting-and-executed-mechanisms}{%
+\subsection{Exposure Discounting and Executed Mechanisms}\label{exposure-discounting-and-executed-mechanisms}}
+
+The final 12-episode ablation retains the measured-ground frontend and discounts previously exposed nominal opportunities at the same optical center. All three development layouts and all four methods complete collision-free full-pose return under the same budget and seed. Table 8 retains every method and layout; the original, ground-aware, and exposure-discounted batches together contain 36 attempts, not 36 independent scenes. The original CELL/G evaluation failure remains recorded separately from its derived common numerical score.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 8. Joint score with ground-aware association, before → after exposure discounting. Each value is one reviewed endpoint; all 12 new episodes qualify.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-8\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.2\ReviewTableWidth}@{}}
+\toprule
+Layout & NBV & G & B & S \\
+\midrule
+AISLE & 0.653 →\allowbreak{} 0.783 & 0.653 →\allowbreak{} 0.783 & 0.653 →\allowbreak{} 0.734 & 0.653 →\allowbreak{} 0.734 \\
+CELL & 0.465 →\allowbreak{} 0.515 & 0.534 →\allowbreak{} 0.787 & 0.531 →\allowbreak{} 0.787 & 0.531 →\allowbreak{} 0.787 \\
+LOOP & 0.730 →\allowbreak{} 0.736 & 0.730 →\allowbreak{} 0.736 & 0.730 →\allowbreak{} 0.690 & 0.730 →\allowbreak{} 0.690 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+Exposure discounting improves AISLE and CELL scores for every method. In LOOP, G/NBV improve slightly while B/S decrease by 0.040235. It therefore addresses a repeated-opportunity problem without providing a general reconstruction guarantee. Moreover, all AISLE scores remain below the original version's 0.856753. The component revisions cannot be presented as a sequence of uniformly improving systems.
+
+Two saved causal sequences distinguish semantic influence from predicted information value. In AISLE, B and G receive identical sensor arrays through frame 31 and apply the same geometric evidence. At decision 27, the category prior changes the selected direct-view target. The first actual divergence is an opposite turn at paid action 32; the selected target observations complete at actions 41 for B and 44 for G. Both pass budget and execution checks, yet B's final joint score is lower by 0.048716. The cue demonstrably affects executed decisions in this case without improving quality.
+
+In CELL, G and NBV have identical observations through frame 19 and identical scores for all 32 direct candidates at decision 17. G additionally considers seven diagnostic options. Its selected diagnostic score is 0.082740, including an anticipated information increment of 0.006106, above the best direct score of 0.078458. At action 20, G observes while NBV turns; their selected macros finish at actions 20 and 29. However, G's diagnostic frame applies no new geometric feedback, leaves its uniform structure posterior unchanged, and adds no known planar cells. Its final score exceeds NBV by 0.271044 after the complete subsequent trajectories. This is a diagnostic-planning component case, not evidence that the anticipated information was obtained or that this single frame caused the entire endpoint improvement.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/article_exposure_20260928/complete12/exposure_paired_quality.pdf}
+\captionof{figure}{Coverage, full four-instance macro F1, and their product for every ground-aware and exposure-discounted pair. Markers denote actual terminal measurements from three development layouts; neither methods nor frames add independent layout replicates. Both revisions retain full-depth fusion and the same evaluation. The complete route grid accompanies the data.}\label{fig:writing-18}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/article_mechanism_cases_20260928_final/mechanism_cases.pdf}
+\captionof{figure}{Two development examples at the same metric scale, retaining complete executed paths and return. D denotes target selection, F the first actual action difference, and O completion of a paid target view. AISLE compares category-conditioned B with geometric G; CELL compares geometric lookahead G with direct NBV. Arrows show saved camera headings. The signed endpoint differences include all later actions; they are not per-view effects. CELL's diagnostic frame does not provide fresh feedback. Neither panel tests the S/B sharing increment.}\label{fig:writing-19}
+\end{minipage}
+\end{center}
+
+The three exposure-discounted S/B pairs also have identical complete 161-frame actual sensor sequences and actions. In CELL, the first posterior difference occurs at step 73 and the first candidate-score difference at step 100, without changing execution. In LOOP, posteriors differ from step 65 but candidate scores remain unchanged; AISLE has neither difference. Thus none of the nine S/B pairs across the three versions supplies an executed sharing effect. The predeclared requirement for at least one such causal action difference is not met, so the reserved 48-run unseen-layout matrix is not executed. Unstarted layouts are not failures or zero-quality measurements.
+
 \hypertarget{discussion-and-applicability}{%
 \section{Discussion and Applicability}\label{discussion-and-applicability}}
 
-Category information is useful here because it can select an observation side while geometry remains ambiguous. When both methods choose the same route, the observed gain is zero. In particular, G resolves an equal-valued left/right decision by choosing left, which coincides with S in both original \(h_0\) configurations at budget 42. The extension preserves this budget's gain under new noise and same-family geometry, while a larger budget changes policy ordering. Ambiguity strength and natural category reliability have not been independently manipulated or calibrated. Public templates, synthetic category markers, exact poses, a shared safe graph, and a fixed prefix define the tested operating conditions. Region- and threshold-dependent surface evaluation further limits the conclusions to facility documentation, rather than natural recognition, safe exploration of unknown maps, or reconstruction of an entire environment.
+Category information is useful here because it can select an observation side while geometry remains ambiguous. When both methods choose the same route, the observed gain is zero. In particular, G resolves an equal-valued left/right decision by choosing left, which coincides with S in both original \(h_0\) configurations at budget 42. The extension preserves this budget's gain under new noise and same-family geometry, while a larger budget changes policy ordering. Ambiguity strength and natural category reliability have not been independently manipulated or calibrated. Public templates, synthetic category markers, exact poses, a shared safe graph, and a fixed prefix define these local experiments. Their region- and threshold-dependent surface evaluation limits the conclusions to local facility documentation. The separate full-mesh extension in Section 5.7 retains the navigation and perception assumptions and does not establish a shared-semantic performance advantage.
 
 The analytical model identifies conditions for a reduced or absent semantic advantage; it does not predict the observed high-budget sign reversal. Its optimal decisions use a correctly specified utility and observation model, whereas the executed planner uses finite lookahead and uncalibrated exposure proxies. The measured reversal therefore remains an empirical boundary requiring reconstruction-level evidence, not a consequence established by the analytical example.
 
-A later shared-reliability development study provides an additional boundary. Under a different controller and \(J_{\rm nav}\) task, the nominal category--structure condition gives five S/G ties and one loss across six parent layouts, with a relative mean difference of −0.3301\%. Under a mismatched relation, all six comparisons between S and the ordinary Bayesian semantic baseline B tie. Thus, implemented observation, belief update, and replanning do not necessarily produce an endpoint improvement. One nominal B control is missing because of interruption, and the full development matrix remains incomplete. These results cannot be pooled with the present \(J_5\) results and do not establish an effective shared-reliability contribution. They reinforce the narrower interpretation: the demonstrated benefit concerns category information in the original controlled setting, rather than a general advantage of increasingly complex semantic mechanisms.
+An earlier six-parent shared-reliability development study, distinct from the new three-layout extension in Section 5.7, provides an additional boundary. Under a different controller and \(J_{\rm nav}\) task, the nominal category--structure condition gives five S/G ties and one loss across six parent layouts, with a relative mean difference of −0.3301\%. Under a mismatched relation, all six comparisons between S and the ordinary Bayesian semantic baseline B tie. Thus, implemented observation, belief update, and replanning do not necessarily produce an endpoint improvement. One nominal B control is missing because of interruption, and the full development matrix remains incomplete. These results cannot be pooled with the present \(J_5\) results and do not establish an effective shared-reliability contribution. They reinforce the narrower interpretation: the demonstrated benefit concerns category information in the original controlled setting, rather than a general advantage of increasingly complex semantic mechanisms.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-Motivated by active mapping needs in industrial facilities, this study implements category-prior and geometric-feedback active observation under a motion budget. The original confirmation yields a 6.1638\% mean category benefit, and the separate incorrect-prior study supports a 2.6241\% whole-policy correction benefit. A fixed 128-trial extension reproduces a 6.2505\% category improvement at budget 42 and a 4.2289\% improvement on same-family variants, while retaining low-budget infeasibility and a high-budget reversal. The evidence supports a conditional role for public facility knowledge in allocating limited observations. Future work should improve agreement between predicted observation value and measured surface quality before extending map maintenance across tasks and physical deployment.
+Motivated by active mapping needs in industrial facilities, this study implements category-prior and geometric-feedback active observation under a motion budget. The original confirmation yields a 6.1638\% mean category benefit, and the separate incorrect-prior study supports a 2.6241\% whole-policy correction benefit. A fixed 128-trial extension reproduces a 6.2505\% category improvement at budget 42 and a 4.2289\% improvement on same-family variants, while retaining low-budget infeasibility and a high-budget reversal. The evidence supports a conditional role for public facility knowledge in allocating limited observations. Across three scene-level versions, S/B quality ties persist on all three development layouts. The exposure-discounted version further demonstrates that a category cue can change an executed target yet reduce final quality. The executable multi-instance extension has therefore not established a shared-reliability benefit. Future work should improve agreement between predicted observation value and measured surface quality before extending map maintenance across tasks and physical deployment.
 
 \hypertarget{reproducibility-and-data}{%
 \section*{Reproducibility and Data}\label{reproducibility-and-data}}

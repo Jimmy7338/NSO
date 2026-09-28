@@ -38,6 +38,21 @@ def inline(text):
     return converted[len(marker):]
 
 
+def table_inline(text):
+    """Allow narrow cells to wrap paths and before/after value pairs."""
+    converted = inline(text)
+
+    def path(match):
+        value = match[1].replace(r'\_', '_')
+        if '/' in value and '\\' not in value:
+            return r'\path{' + value + '}'
+        return match[0]
+
+    # Even a short directory name can exceed a quarter-width table column.
+    converted = re.sub(r'\\texttt\{([^{}\n]+)\}', path, converted)
+    return converted.replace('→', '→' + r'\allowbreak{}')
+
+
 def scientific_body(text):
     return re.split(r'\n## (?:仓库来源对应表|Repository provenance)', text, maxsplit=1)[0]
 
@@ -93,8 +108,10 @@ def prepare(document):
         source, sources = combine_chapters(full=document=='thesis')
         stem = 'GRADUATION_THESIS_20260928' if document=='thesis' else 'GRADUATION_CORE_20260928'
     else:
-        source = DOCS/'VIRTUAL_PAPER_EN_20260928.md'
-        sources, stem = {}, 'VIRTUAL_PAPER_EN_20260928'
+        stem = ('ARTICLE_SUBMISSION_EN_20260928' if document == 'article'
+                else 'VIRTUAL_PAPER_EN_20260928')
+        source = DOCS/(stem+'.md')
+        sources = {}
     sources[str(source.relative_to(ROOT))] = digest(source)
     content = scientific_body(source.read_text())
     title = re.search(r'^# (.+)$', content, flags=re.M).group(1)
@@ -115,7 +132,7 @@ def prepare(document):
             content = content[:match.start()]+content[match.end():]
         abstract_tex += ('{\\small\\linespread{.96}\\selectfont\\setlength{\\parskip}{0pt}\\tableofcontents}\n\\clearpage\n'
                          '\\pagenumbering{arabic}\n')
-    if document == 'english':
+    if document in ('english', 'article'):
         match = re.search(r'^## Abstract\n(.*?)\n(?=## )', content, flags=re.S | re.M)
         if not match:
             raise ValueError('Expected an English Abstract section')
@@ -171,7 +188,7 @@ def prepare(document):
                  +str(2*(columns-1))+'\\tabcolsep\\relax}',
                  '\\begin{tabular}{'+specs+'}','\\toprule']
         for index,row in enumerate(rows):
-            lines.append(' & '.join(inline(c) for c in row)+r' \\')
+            lines.append(' & '.join(table_inline(c) for c in row)+r' \\')
             if index==0:lines.append('\\midrule')
         lines += ['\\bottomrule','\\end{tabular}','\\end{center}']
         return '\n```{=latex}\n'+'\n'.join(lines)+'\n```\n'
@@ -189,6 +206,16 @@ def prepare(document):
                   r'(\\begin\{verbatim\}.*?\\end\{verbatim\})',
                   lambda m:'\\par\\noindent\\begin{minipage}{\\linewidth}\n\\small\n'
                   +m[1]+m[2]+'\n\\end{minipage}\n',body,flags=re.S)
+    # Keep short, executable shell examples together across page boundaries.
+    def command_block(match):
+        code = match[1]
+        if len(code.splitlines()) <= 12 and re.search(r'^python3 -B ', code, re.M):
+            return ('\\par\\medskip\\noindent\\begin{minipage}{\\linewidth}\n'
+                    + match[0] + '\n\\end{minipage}\\par\\medskip\n')
+        return match[0]
+
+    body = re.sub(r'\\begin\{verbatim\}\n(.*?)\\end\{verbatim\}',
+                  command_block, body, flags=re.S)
     for heading in ('References','参考文献','Reproducibility and Data','复现与数据说明'):
         body = body.replace('\\section{'+heading+'}','\\section*{'+heading+'}')
     if document=='graduation':
@@ -222,7 +249,7 @@ def prepare(document):
                                '\\clubpenalty=10000\n\\widowpenalty=10000\n'
                                '\\displaywidowpenalty=10000\n'
                                '\\newlength{\\ReviewTableWidth}\n\\begin{document}')
-    if document=='english':
+    if document in ('english', 'article'):
         # Reuse the complete cached font/encoding setup, with English names.
         # This also keeps mixed Unicode symbols readable without new bundles.
         preamble = preamble.replace('\\begin{document}',
@@ -255,7 +282,7 @@ def prepare(document):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('document',choices=['graduation','thesis','english'])
+    parser.add_argument('document',choices=['graduation','thesis','english','article'])
     parser.add_argument('--render',action='store_true')
     parser.add_argument('--export',action='store_true')
     args=parser.parse_args()

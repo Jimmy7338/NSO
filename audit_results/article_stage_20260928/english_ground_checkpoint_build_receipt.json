@@ -1,0 +1,161 @@
+{
+  "document": "english",
+  "source_sha256": {
+    "docs/thesis/VIRTUAL_PAPER_EN_20260928.md": "2aaf4fb02b3c4e6a43717fa94104643f2f8204b8eef48f77863702384299c82d",
+    "docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf": "8353c9e616e6571fc2c342910005b0e8fc39874bce437c3410981c076784fd8a",
+    "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf": "41bc82d15401363d818e6bc9ea06ecffd49ebab3f474f261629f3ad3023e60bf",
+    "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf": "0e49468341f724d58d8437cfab736fbdf15cfabf1adb60291a20c3e1fb8d458d",
+    "docs/thesis/figures/virtual_method_20260928/publication_main.pdf": "022f3f6134d2494f579f7e40a517676c7d255c12d05e91ed4ac2ab3200e4ea08",
+    "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf": "18503c27cc94d9b467a3dd51a4d330bb36faa6908632bb40a96ce2956576e66e",
+    "docs/thesis/figures/scene_details_20260928/mesh_details.pdf": "d8e6691e745900117e4caaf0544b3b4ff724122168683a24137b8c0f24ca0fe8",
+    "docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf": "a4882cf7df9ae4701bed5f58a6cd224204112296d7bf1645ee0d5b8045d6360a",
+    "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf": "49af58640707543cef330f5774e3a9592206d7ae0750a25ee635af999ad96bee",
+    "docs/thesis/figures/expansion_20260928/budget_effects.pdf": "5e3e192ca3dc3faddc470aa44ec7081aacda88d28130a0886d997f47ff291556",
+    "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf": "71e1f7aca712cd82f8d699375a1c51a9b0b984556bb0df771956430a4dbad20b",
+    "docs/thesis/figures/article_reconstruction_20260928/checkpoint_quality_components.pdf": "cec99737c6bad65ef431ed075e2c60a6a33bbf8c2670be8344c38cfce091c585",
+    "docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.pdf": "649be93ce3d01a1cfc3abef5e7dfbe1ece5f9c84e52486cdb93517462362a035",
+    "docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_routes_01.pdf": "310ebd94e07169a166364fa7f43c5212b5a6f28fa1801928dd2c15efe0a042a5",
+    "docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_quality_and_cost.pdf": "853542baa927ea4e434d09d6e5089c291bbbbec6acf59fe6cb3f98794d68942e",
+    "docs/thesis/figures/article_scene_meshes_20260928/aisle_gbs_v2/aisle_gt_g_s_preview.pdf": "b5715b4ef8860d9b778c09c2f57373acea0b9655b7169c07b0114431dcf6e561",
+    "docs/thesis/figures/article_ground_20260928/complete12_turnmarkers/ground_paired_routes.pdf": "47779c411c4c680d5b47212f283cc4a7c8332710fb9f8d560cc6f31ca2fc7379",
+    "docs/thesis/figures/article_ground_meshes_20260928_v2/ground_frontend_meshes_G.pdf": "8f1597f50ba17891cab8c4885b25066ff9bf54ba176b722b463f3323002090ba",
+    "scripts/build_writing_deliverables_20260928.py": "d7e1b2067a4c10409d86ebfa6a9be6684ff1fb31ce92331a42febf11d1ba209d",
+    "scripts/build_virtual_paper_review_20260928.py": "09ac58768fb016c9cd19a13c7cf3cb62e23401da62d98304e1334e79cb36fa6c"
+  },
+  "figures": [
+    {
+      "number": 1,
+      "path": "docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf",
+      "caption": "All four V36 confirmation pairs with saved routes and complete primitive-action strips. Panels share a metric scale; P01 is displayed in its declared equipment frame. Grey marks the common 18-action prefix. Open circles denote in-place turn positions; arrows show sampled recorded headings. Open diamonds indicate the first nonzero applied geometric residual, and filled diamonds the shared start/return. Both h0 trajectories coincide; both h1 pairs first diverge at executed action 19. Every action obtains a saved sensor frame; these runs have no extra observe primitive. J5 is copied from sealed endpoints."
+    },
+    {
+      "number": 2,
+      "path": "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf",
+      "caption": "Platform interfaces, the local binary implementation of the four-module CPU loop, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The robot is a generative composite based on the user-provided platform photograph for interface illustration; sensor, map, and mesh thumbnails are schematic."
+    },
+    {
+      "number": 3,
+      "path": "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf",
+      "caption": "Available laboratory mobile platform and proposed sensor-to-planner interfaces. Numbers identify the stereo camera, laser scanner, positioning equipment, and mobile base. The interface diagram connects observation goals to ROS 1 navigation; reported performance is measured in simulation."
+    },
+    {
+      "number": 4,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_main.pdf",
+      "caption": "(A) All G/S pairs across two parent layouts and two configurations, including both ties. (B) Condition-wise comparison of four CPU methods. (C, D) Coverage and surface F1; points denote the four conditions and horizontal caps indicate means, without confidence intervals. G/S in B reuse A and provide no additional independent evidence. SWAP-I and VISTA-I are mechanism adaptations, not complete-system rankings."
+    },
+    {
+      "number": 5,
+      "path": "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf",
+      "caption": "Saved final public-ROI TSDF meshes for all four conditions. Each G/S pair shares the same orthographic camera, scale, neutral material and lighting; all saved triangles are projected. h0 and h1 are viewed from the rear-left and rear-right respectively. F1 and J5 are copied from frozen measurements. Dashed windows identify the subsequent detail views. Both h0 pairs are array-identical. Shading is illumination, not error; no completion, smoothing or ground-truth surface is added."
+    },
+    {
+      "number": 6,
+      "path": "docs/thesis/figures/scene_details_20260928/mesh_details.pdf",
+      "caption": "Magnified windows of the identical mesh projections. Windows are determined from the declared lateral-rib geometry and use a fixed 3.40 m by 2.55 m projected extent across conditions. These are display crops of saved surfaces, not new reconstructions. The h1 comparisons show the additional observed side surfaces; both h0 pairs retain identical geometry. No local quality score is introduced."
+    },
+    {
+      "number": 7,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_ablation.pdf",
+      "caption": "Endpoints for four policies in the two P00 development configurations, with X−Xnf differences at 2, 5, and 10 cm. Xnf disables measured correction and anticipated future correction together; it is not a single-posterior-update ablation. This development batch is kept separate from the held-out-noise confirmation in Figure 4."
+    },
+    {
+      "number": 8,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf",
+      "caption": "Saved P00/\\(h_1\\) development logs. (a) Category information establishes a prior within the shared prefix; the decision after step 18 selects budgeted action 19. (b) Geometry observed at step 28 corrects the misleading prior and changes the next action. Curves show uncalibrated configuration weights. This mechanism illustration does not increase the number of endpoint samples."
+    },
+    {
+      "number": 9,
+      "path": "docs/thesis/figures/expansion_20260928/budget_effects.pdf",
+      "caption": "Budget sensitivity on the original layouts: completed endpoint quality, all paired contrasts, and qualification counts. No completed-performance mean is reported at B=30 because no endpoint qualifies. Points represent matched layout, configuration, and noise conditions; short bars denote complete-pair means, not confidence intervals over independent scenes."
+    },
+    {
+      "number": 10,
+      "path": "docs/thesis/figures/expansion_20260928/scene_and_threshold_effects.pdf",
+      "caption": "Geometry perturbations and threshold sensitivity at B=42. The upper panel retains every paired result for the two original layouts and two same-family variants; the lower panel reports signed means at 2, 5, and 10 cm. Open and filled markers denote h0 and h1. Variants do not establish unseen-category generalization."
+    },
+    {
+      "number": 11,
+      "path": "docs/thesis/figures/article_reconstruction_20260928/checkpoint_quality_components.pdf",
+      "caption": "Offline reintegration and measurement of all eight saved V36 trajectories at 18, 24, 30, 36 and 42 paid actions. Columns separate actual planar coverage, 5 cm precision, recall, F1 and joint J5; rows retain all four paired conditions. The action axis is accompanied by actual cumulative translation distances. Markers are measured checkpoints and connecting segments only visual guides. Intermediate stages are not successful terminal episodes. Prefix and final stages are checked against original saved outputs; 40 checkpoints do not constitute additional independent trajectories."
+    },
+    {
+      "number": 12,
+      "path": "docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.pdf",
+      "caption": "Actual reintegrated TSDF meshes at the fixed display checkpoints 18, 30 and 42 for all four G/S pairs. All extracted triangles are rendered; each configuration shares one camera, metric scale, material and lighting across methods and time. The h0/h1 views use predefined rear-left/rear-right cameras. No hole completion, smoothing or template surface is added. F1 and J5 come from the offline measurements; shading is illumination, not error. Both coincident h0 conditions remain visible."
+    },
+    {
+      "number": 13,
+      "path": "docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_routes_01.pdf",
+      "caption": "All 12 declared slots at a common scale. Circles mark turns, squares paid observations, and arrows saved headings. The CELL/G blank denotes original evaluation failure despite a completed saved route. Background geometry is for offline explanation."
+    },
+    {
+      "number": 14,
+      "path": "docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_quality_and_cost.pdf",
+      "caption": "Original qualified endpoints and recorded costs; crosses denote unavailable entries, not zeros. Planning times exclude offline evaluation and reflect concurrent workload. This development comparison does not estimate performance on unseen layouts."
+    },
+    {
+      "number": 15,
+      "path": "docs/thesis/figures/article_scene_meshes_20260928/aisle_gbs_v2/aisle_gt_g_s_preview.pdf",
+      "caption": "Ground truth and saved G/S meshes share view and scale; all 205,566 predicted triangles are rendered with overlaid XY routes. Colors encode height and lighting, not error. G/S geometry is identical. GT includes unobservable surfaces beyond the fixed scoring reference."
+    },
+    {
+      "number": 16,
+      "path": "docs/thesis/figures/article_ground_20260928/complete12_turnmarkers/ground_paired_routes.pdf",
+      "caption": "All 12 association pairs at a common metric scale. Grey dashed and colored paths are saved original and ground-aware trajectories; squares indicate extra paid observations and arrows recorded headings. The original CELL/G motion is shown with its separately derived score. Geometry provides offline context."
+    },
+    {
+      "number": 17,
+      "path": "docs/thesis/figures/article_ground_meshes_20260928_v2/ground_frontend_meshes_G.pdf",
+      "caption": "Fixed geometric method G, all three development layouts, and the two association versions. Reference geometry and complete saved meshes share an orthographic camera, world scale, and height coloring. All 1,055,521 stored triangles across nine panels are retained. Color is not reconstruction error. CELL's original failed evaluation and its separately derived score remain distinguished. Full-frame fusion can reconstruct surfaces of instances not registered by the semantic frontend."
+    }
+  ],
+  "tables": [
+    {
+      "columns": 3,
+      "data_rows": 4
+    },
+    {
+      "columns": 4,
+      "data_rows": 5
+    },
+    {
+      "columns": 4,
+      "data_rows": 3
+    },
+    {
+      "columns": 4,
+      "data_rows": 4
+    },
+    {
+      "columns": 6,
+      "data_rows": 4
+    },
+    {
+      "columns": 5,
+      "data_rows": 3
+    },
+    {
+      "columns": 5,
+      "data_rows": 3
+    }
+  ],
+  "pdf_sha256": "eafa55b936f8699b83c0f81b3ef56affe93b5a6c6e58c3fa0e29db02b77d805a",
+  "tex_sha256": "7ad5f504b57c324763fe67fd99d3daf4d55a7898c992682576d7de7fe90491fb",
+  "command": [
+    "/root/NSO/tmp/thesis-tex-runtime_20260928/bin/tectonic",
+    "--only-cached",
+    "--keep-logs",
+    "-Z",
+    "search-path=/root/NSO",
+    "--outdir",
+    "/root/NSO/tmp/writing-english_20260928",
+    "/root/NSO/tmp/writing-english_20260928/VIRTUAL_PAPER_EN_20260928.tex"
+  ],
+  "compiler_sha256": "a98aa59ad5c1df39a6c9e56cbfc5088f2b11d6c179c0130b97998e4bd46a46da",
+  "downloads_allowed": false,
+  "typesetting_diagnostics": [],
+  "new_worlds": 0,
+  "new_evaluations": 0,
+  "status": "review_draft",
+  "pages": 28
+}

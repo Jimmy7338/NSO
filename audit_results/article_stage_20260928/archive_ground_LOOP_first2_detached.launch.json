@@ -1,0 +1,7 @@
+{
+  "pid": 3240058,
+  "started_unix_s": 1790601573.3024666,
+  "script": "from pathlib import Path\nimport json\nfrom scripts.archive_article_episode_20260928 import pack\nbase=Path('audit_results/article_stage_20260928')\nfor method in ['B','G']:\n run='ground_LOOP_'+method+'_b160_n92801'\n result=pack(base/'ground_ablation_v2/episodes'/run,base/'episode_reviews_ground_v2'/run,base/'episode_archives_ground_v2'/(run+'.tar.xz'))\n print(json.dumps(result),flush=True)\n",
+  "new_worlds": 0,
+  "original_episodes_modified": false
+}

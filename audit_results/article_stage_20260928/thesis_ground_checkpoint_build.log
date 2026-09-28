@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/root/NSO/scripts/build_writing_deliverables_20260928.py", line 303, in <module>
+    main()
+  File "/root/NSO/scripts/build_writing_deliverables_20260928.py", line 263, in main
+    stem,source,tex,sources,figures,tables=prepare(args.document)
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NSO/scripts/build_writing_deliverables_20260928.py", line 179, in prepare
+    content = re.sub(r'^\|[^\n]+\|\n\|[ :|\-]+\|\n(?:^\|[^\n]+\|(?:\n|$))+',
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/re/__init__.py", line 186, in sub
+    return _compile(pattern, flags).sub(repl, string, count)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NSO/scripts/build_writing_deliverables_20260928.py", line 165, in table
+    weights = {2:[.24,.76],3:[.28,.36,.36],4:[.25,.25,.25,.25],
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 12

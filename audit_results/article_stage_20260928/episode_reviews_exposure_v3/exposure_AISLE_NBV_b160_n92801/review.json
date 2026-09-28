@@ -1,0 +1,192 @@
+{
+  "all_checks_passed": true,
+  "baseline_source_archive_sha256": "0f774ec8863ba6fcd50323cd2db7f6cc845f735decc24841f417f480c944cdb2",
+  "checks": 958,
+  "compatible_reader_checks": 6275,
+  "cumulative_registry": {
+    "counts": {
+      "ablation": 18,
+      "development": 12
+    },
+    "path": "audit_results/article_stage_20260928/execution_registry.json",
+    "phase_caps": {
+      "ablation": 24,
+      "development": 12,
+      "main": 96
+    },
+    "sha256": "d7ef7f0d001b02585dd67ec4b21c0e4a00378d94bd776519c83e43c1d1e691f1",
+    "total_reserved_attempts": 30
+  },
+  "elapsed_s": 15.517285619862378,
+  "exposure_audit": {
+    "all_candidates": 528,
+    "all_candidates_geometrically_recomputed": false,
+    "first_geometry_replan": 27,
+    "independent_geometry_candidates": 15,
+    "paid_support_plane_frames": 160,
+    "scope": "all selected-target instance candidates, plus all candidates at first replan with any nonfallback forecast; all other candidates receive full provenance and receipt-arithmetic checks"
+  },
+  "failures": [],
+  "ground_reason_counts": {
+    "ground_height_inconsistent_with_public_mount": 5,
+    "insufficient_ground_spatial_extent": 16,
+    "insufficient_near_ground_support": 10,
+    "measured_ground_band_excluded_from_association_only": 127,
+    "measured_ground_residual_exceeds_noise_contract": 2
+  },
+  "input_manifest_sha256": "7170d387e1588b6e3e22fed02706f56cab1261b4d43db3a77601bd6149a655b7",
+  "mesh_preprocessing": {
+    "adapted_triangles_array_sha256": "77c974a37dc5270d826794b71e2b5446e081d0455561a7cee458d825d1863381",
+    "adapted_vertices_array_sha256": "7470b4f0fb53085f44f46b7d084f901e44889dee25322ed1f83e906209c5a231",
+    "raw_faces": 172286,
+    "raw_vertices": 91734,
+    "removed_faces": 0,
+    "removed_original_face_indices": [],
+    "removed_total_area_m2": 0.0,
+    "retained_faces": 172286
+  },
+  "method": "NBV",
+  "metric_settings": {
+    "max_samples": 1000000,
+    "sample_spacing_m": 0.3,
+    "seed": 4002,
+    "threshold_m": 0.05
+  },
+  "metric_version": "article.common_numeric_face_evaluation.v1",
+  "metrics": {
+    "C_nav": 0.9838824365963499,
+    "J_nav": 0.7829383004387598,
+    "Q": 0.7957640784271567,
+    "canonical_prediction_triangles": 172286,
+    "contract": "v40.observable-surface-static-1",
+    "correct_background_area_m2": 93.40289822054925,
+    "correct_target_out_of_reference_area_m2": 1.1643356030879777,
+    "depth_convention": "optical axial z; near_m and far_m both clip camera z, not radial distance",
+    "duplicate_prediction_area_removed_m2": 0.0,
+    "duplicate_prediction_triangles_removed": 0,
+    "extra_false_positive_area_m2": 0.9917785833872763,
+    "extra_false_positive_assignment": "nearest GT task instance, without a distance cutoff; prediction owner labels not accepted",
+    "full_mesh_global_precision": 0.9913313451904583,
+    "macro_completeness": 0.7024263839812072,
+    "macro_f1": 0.7957640784271567,
+    "macro_precision": 0.9447383990805425,
+    "no_prediction_roi_cropping": true,
+    "no_semantic_weighting": true,
+    "observable_target_true_positive_area_m2": 18.850732262426774,
+    "per_instance": [
+      {
+        "allocated_false_positive_area_m2": 0.07076578153269433,
+        "completeness": 0.8650224494886504,
+        "f1": 0.9220441406273056,
+        "instance_id": 0,
+        "precision": 0.9871140253516992,
+        "predicted_scored_area_m2": 5.491690265122943,
+        "predicted_true_positive_area_m2": 5.420924483590249,
+        "recall": 0.8650224494886504,
+        "reference_area_m2_estimate": 6.4144000000000005,
+        "reference_samples": 100
+      },
+      {
+        "allocated_false_positive_area_m2": 0.3743060298566134,
+        "completeness": 0.42514728805051394,
+        "f1": 0.5793171300614104,
+        "instance_id": 1,
+        "precision": 0.9089136766415853,
+        "predicted_scored_area_m2": 4.109354907034283,
+        "predicted_true_positive_area_m2": 3.73504887717767,
+        "recall": 0.42514728805051394,
+        "reference_area_m2_estimate": 10.093599999999995,
+        "reference_samples": 258
+      },
+      {
+        "allocated_false_positive_area_m2": 0.2930933300959532,
+        "completeness": 0.7588616674559181,
+        "f1": 0.8464963051014122,
+        "instance_id": 2,
+        "precision": 0.9570139000003594,
+        "predicted_scored_area_m2": 6.818328019950711,
+        "predicted_true_positive_area_m2": 6.5252346898547575,
+        "recall": 0.7588616674559181,
+        "reference_area_m2_estimate": 9.573066666666673,
+        "reference_samples": 583
+      },
+      {
+        "allocated_false_positive_area_m2": 0.2536134419020154,
+        "completeness": 0.7606741309297466,
+        "f1": 0.8351987379184984,
+        "instance_id": 3,
+        "precision": 0.9259119943285258,
+        "predicted_scored_area_m2": 3.4231376537061124,
+        "predicted_true_positive_area_m2": 3.169524211804097,
+        "recall": 0.7606741309297466,
+        "reference_area_m2_estimate": 5.680400000000002,
+        "reference_samples": 352
+      }
+    ],
+    "precision_domain": "nearest GT target projection must be observable; correct background/out-of-reference area reported separately",
+    "prediction_empty": false,
+    "prediction_sample_spacing_m": 0.3,
+    "prediction_samples": 172286,
+    "prediction_seed": 4002,
+    "reachability_certified_by_this_evaluator": false,
+    "recall_domain": "fixed observable reference samples for every task instance; nearest complete prediction triangle",
+    "reference_fingerprint": "fc24045b56cf07d5dc2169c917247c3cad4adc0b564f7dc67d12d087c749b44c",
+    "reference_samples": 1293,
+    "route_used_to_select_reference": false,
+    "static_geometry_only": true,
+    "submitted_prediction_area_m2": 114.40974466945129,
+    "submitted_prediction_triangles": 172286,
+    "threshold_m": 0.05,
+    "total_prediction_area_m2": 114.40974466945129,
+    "visibility_boundary_approximation": "deterministic finite triangle-area quadrature; visibility boundary is not exact polygon clipping"
+  },
+  "new_policy_runs": 0,
+  "new_sensor_queries": 0,
+  "new_surface_evaluations": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "online_status": "controller_stop",
+  "paired_baseline": {
+    "baseline_failure_retained": false,
+    "configuration_provenance": {
+      "controller_final_sha256": "a5477fb873f1c8ea6d425f6b141c48602938b4c5624a9bbc00d828870376174d",
+      "kind": "original_complete_artifact_seal",
+      "manifest_sha256": "f6f7e92a7949d78e4db261e8af26643d737d43bc171db55c6a4ac57c1e34687e"
+    },
+    "online_status": "controller_stop",
+    "protocol": {
+      "path": "configs/virtual3d/article_ground_ablation_v2_20260928.json",
+      "sha256": "6621c39667e15a91f010d52c81f5a357049a447b6379246d07141953f631338a"
+    },
+    "quality_comparison_requires_common_derived_evaluation": true,
+    "run_id": "ground_AISLE_NBV_b160_n92801"
+  },
+  "phase": "ablation",
+  "physics_metrics": {
+    "action_counts": {
+      "forward": 88,
+      "observe": 13,
+      "turn_left": 35,
+      "turn_right": 23
+    },
+    "budget": 160,
+    "collisions": 0,
+    "paid_actions": 159,
+    "returned_xy_and_yaw": true,
+    "rgbd_frames": 160,
+    "translation_m": 22.0
+  },
+  "protocol_sha256": "c78d7eaa0e3784f8402541809c8edd346d654fc0adc683a1c5e1ea57720f6fb7",
+  "qualified": true,
+  "reviewer_source_sha256": {
+    "scripts/review_article_episode_20260928.py": "ff4f9356d9aa75804e1dfdbc79fe44f5fd0d396f9e3c875c33f57410caf68280",
+    "scripts/review_article_exposure_episode_20260928.py": "fd77ee1a8d5bd2ac67d278bf96bc6911168093096c45068886a11cd56fa1dc75",
+    "scripts/review_article_ground_episode_20260928.py": "33ffb9d36fe9a6f34d19aa2cec023e48fe0c3b5cbdc08ca9dad4221ab0344321"
+  },
+  "run_id": "exposure_AISLE_NBV_b160_n92801",
+  "scene_id": "ART1_AISLE_DEV",
+  "schema": "article.saved_episode_review.exposure_v3",
+  "scope": "All saved physics/ground/camera/source/area-arithmetic receipts; explicitly sampled independent exposure geometry; no new quality measurement",
+  "source_archive_sha256": "fabeb1aaaab5bb1b9ce67db0441f884c8ec6969de4283f3ddbcb33861fe6e423",
+  "status": "reviewed"
+}

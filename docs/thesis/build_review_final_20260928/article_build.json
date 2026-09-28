@@ -1,0 +1,99 @@
+{
+  "document": "article",
+  "source_sha256": {
+    "docs/thesis/ARTICLE_SUBMISSION_EN_20260928.md": "daccbec8605b51d72bc1f897793ab2418f539452de4f860c8495d9487f66d242",
+    "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf": "41bc82d15401363d818e6bc9ea06ecffd49ebab3f474f261629f3ad3023e60bf",
+    "docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf": "8353c9e616e6571fc2c342910005b0e8fc39874bce437c3410981c076784fd8a",
+    "docs/thesis/figures/virtual_method_20260928/publication_main.pdf": "022f3f6134d2494f579f7e40a517676c7d255c12d05e91ed4ac2ab3200e4ea08",
+    "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf": "18503c27cc94d9b467a3dd51a4d330bb36faa6908632bb40a96ce2956576e66e",
+    "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf": "49af58640707543cef330f5774e3a9592206d7ae0750a25ee635af999ad96bee",
+    "docs/thesis/figures/article_reconstruction_submission_20260928_final/checkpoint_quality_submission.pdf": "e2030aefe95fa56308f920800c3f262e2b609db6564fbe4762dc9d735a5688d8",
+    "docs/thesis/figures/expansion_20260928/budget_effects.pdf": "5e3e192ca3dc3faddc470aa44ec7081aacda88d28130a0886d997f47ff291556",
+    "docs/thesis/figures/article_mechanism_cases_20260928_final/mechanism_cases.pdf": "2d382c7501a65f77a39f6f8526b9cf1f22dad02ef20595e3e3cb2b00248b1a31",
+    "scripts/build_writing_deliverables_20260928.py": "69930f5b0563aa96df71e11e78069137dca6fe3f0b198dd32d9f5d2fc2beb09e",
+    "scripts/build_virtual_paper_review_20260928.py": "09ac58768fb016c9cd19a13c7cf3cb62e23401da62d98304e1334e79cb36fa6c"
+  },
+  "figures": [
+    {
+      "number": 1,
+      "path": "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf",
+      "caption": "CPU observation and execution architecture. Category and geometric evidence update the belief used for planning; acquired depth separately enters TSDF fusion. The robot is a generative composite based on the supplied laboratory photograph, and map thumbnails are schematic. Performance results are exclusively simulated."
+    },
+    {
+      "number": 2,
+      "path": "docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf",
+      "caption": "Both configurations of P00 and P01, with common 18-action prefixes, saved paths, and complete action strips. Panels share metric scale. Circles denote turns, arrows recorded headings, and open diamonds first applied geometric feedback. The two h0 routes coincide; both h1 pairs diverge at action 19."
+    },
+    {
+      "number": 3,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_main.pdf",
+      "caption": "Complete paired outcomes, including both ties, and the coverage/F1 decomposition. Points represent conditions; horizontal caps indicate means rather than confidence intervals. G/S trajectories reused in the external-mechanism panel are not additional evidence."
+    },
+    {
+      "number": 4,
+      "path": "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf",
+      "caption": "Saved TSDF meshes in the common evaluation region. Each pair shares camera, scale, material, and lighting; all stored triangles are rendered. Both h0 pairs remain identical. Shading represents illumination, not error. Dashed windows correspond to [matched detail views](/root/NSO/docs/thesis/figures/scene_details_20260928/mesh_details.pdf); no smoothing, template completion, or local quality score is introduced."
+    },
+    {
+      "number": 5,
+      "path": "docs/thesis/figures/virtual_method_20260928/publication_timeline.pdf",
+      "caption": "Acquired category support changes action 19; contrary measured geometry at step 28 changes action 29. Curves are uncalibrated configuration weights from P00/h1 development logs. The timeline explains the decisions without adding counterfactual endpoint trials."
+    },
+    {
+      "number": 6,
+      "path": "docs/thesis/figures/article_reconstruction_submission_20260928_final/checkpoint_quality_submission.pdf",
+      "caption": "Coverage, 5 cm surface F1, and joint quality for all four paired conditions at all five measured checkpoints. Markers are actual measurements; connecting lines are visual guides. Both h0 ties and the early P00/h1 negative difference remain visible, with common 0–1 axes. Forty checkpoints reuse eight trajectories and add no independent runs. [Complete precision/recall figure](/root/NSO/docs/thesis/figures/article_reconstruction_20260928/checkpoint_quality_components.pdf) and [actual stage meshes](/root/NSO/docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.pdf) accompany the data."
+    },
+    {
+      "number": 7,
+      "path": "docs/thesis/figures/expansion_20260928/budget_effects.pdf",
+      "caption": "Original-layout budget sensitivity. All matched contrasts and qualification counts are retained; budget 30 has no qualified endpoint mean. Short bars indicate complete-pair means rather than confidence intervals across independent scenes."
+    },
+    {
+      "number": 8,
+      "path": "docs/thesis/figures/article_mechanism_cases_20260928_final/mechanism_cases.pdf",
+      "caption": "Two post hoc development mechanisms at a common metric scale, including complete returns. AISLE B/G select different targets at step 27 and first execute different actions at 32; \\(J(B)-J(G)=-0.048716\\). CELL G/NBV select different options at 17 and diverge at 20; \\(J(G)-J(NBV)=+0.271044\\), without fresh feedback at G's diagnostic completion. D/F/O/H mark decision, first action divergence, observation completion, and home. Geometry is offline context. Later routes also differ, so endpoint contrasts are not isolated first-view effects."
+    }
+  ],
+  "tables": [
+    {
+      "columns": 3,
+      "data_rows": 4
+    },
+    {
+      "columns": 4,
+      "data_rows": 5
+    },
+    {
+      "columns": 4,
+      "data_rows": 4
+    },
+    {
+      "columns": 6,
+      "data_rows": 4
+    },
+    {
+      "columns": 6,
+      "data_rows": 9
+    }
+  ],
+  "pdf_sha256": "c88a5f3d5dd89215180bb90c4e3ac2b44a77787aff4fc763d9f224b6081a3b2c",
+  "tex_sha256": "c62f24a1ab6d33bc1886c937f879a3e0e2be2201a6f818b558aa9089daa85e73",
+  "command": [
+    "/root/NSO/tmp/thesis-tex-runtime_20260928/bin/tectonic",
+    "--only-cached",
+    "--keep-logs",
+    "-Z",
+    "search-path=/root/NSO",
+    "--outdir",
+    "/root/NSO/tmp/writing-article_20260928",
+    "/root/NSO/tmp/writing-article_20260928/ARTICLE_SUBMISSION_EN_20260928.tex"
+  ],
+  "compiler_sha256": "a98aa59ad5c1df39a6c9e56cbfc5088f2b11d6c179c0130b97998e4bd46a46da",
+  "downloads_allowed": false,
+  "typesetting_diagnostics": [],
+  "new_worlds": 0,
+  "new_evaluations": 0,
+  "status": "review_draft",
+  "pages": 17
+}

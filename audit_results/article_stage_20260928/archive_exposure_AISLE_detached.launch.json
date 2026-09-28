@@ -1,0 +1,7 @@
+{
+  "pid": 3250284,
+  "started_unix_s": 1790603070.1494744,
+  "script": "from pathlib import Path\nimport json\nfrom scripts.archive_article_episode_20260928 import pack\nbase=Path('audit_results/article_stage_20260928')\nfor method in ['B','G','NBV','S']:\n run='exposure_AISLE_'+method+'_b160_n92801'\n result=pack(base/'exposure_ablation_v3/episodes'/run,base/'episode_reviews_exposure_v3'/run,base/'episode_archives_exposure_v3'/(run+'.tar.xz'))\n print(json.dumps(result),flush=True)\n",
+  "new_worlds": 0,
+  "original_episodes_modified": false
+}
