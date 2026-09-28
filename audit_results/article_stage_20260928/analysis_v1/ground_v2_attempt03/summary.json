@@ -1,0 +1,142 @@
+{
+  "frames_per_stage": 161,
+  "input_sha256": {
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/control/evidence.json.gz": "d8353a9ad93d57d9248bd8358d6cb0ec29ef302add99b5174c76d8879830fe6c",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/control/manifest.json": "43d444935c11c5601a41973122ebfadaaef8139ff69b4e58fb69b11af5a8a9d2",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/control/observed_anchor_matches.json.gz": "36982a2a585acf2a49897ef18fe8a180f015dfa4da2cec9dd7db6bf89619c782",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/control/started.json": "006d44e0a77ad704e6a1d06230607849ba043fd52c9c193f52a39a8aae829123",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/control/summary.json": "01e1d95e230db185a0c1a48dcb16727a5d9efae1a7ef5ab317065891b3d2f8f2",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/control/support_coordinate_correspondence.json.gz": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/new_ground/evidence.json.gz": "bf2b6a243a8df489b15822681fb4aac8f4e776b43030622b6c1453b4e5ab6482",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/new_ground/ground_masks.npz": "a2a8f42b9684cb76ca113271f32958a7241bbb59c0d824cb82aca94c8c7b0dca",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/new_ground/manifest.json": "3cca0893aed3dcb549b34588e3be3ae533593a1d98cbd5d557002a2523d15425",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/new_ground/observed_anchor_matches.json.gz": "36982a2a585acf2a49897ef18fe8a180f015dfa4da2cec9dd7db6bf89619c782",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/new_ground/started.json": "bada823b95a9b70f746828617160c96630347b092ccb14ed3350925c05640b41",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/new_ground/summary.json": "034a6fe04c28c9734e5a7e43470706393861ba61cc234a21837d6c1b54743ede",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/new_ground/support_coordinate_correspondence.json.gz": "2ca4529576310b626c1bd48352d283b521d029d54f195d8416536872d826e4c6",
+    "audit_results/article_stage_20260928/ground_association_replay_v2_attempt03/predeclaration.json": "551f23b6cc4202d5392252c8a1e15b0314de65e2c893d5ececf77cd9728f2f20"
+  },
+  "interpretation": "Conditional association and belief mechanism along one original paid path; no action rescore, new World, trajectory, TSDF integration, or quality claim.",
+  "original_return_boundary_paid_step": 126,
+  "raw_packets_identical": true,
+  "rows": {
+    "frames": 322,
+    "instances": 926,
+    "qualification_events": 59
+  },
+  "schema": "article.ground_replay.comparison.v2",
+  "scope": "Only observed marker anchors establish identity correspondence. Fields ending before_current_feedback are association snapshots; beliefs are after current feedback.",
+  "source_sha256": {
+    "scripts/summarize_article_ground_replay_20260928.py": "33cdf6e73875684680fb873118c37c65506a67727083cb2af865704b4edf00e7"
+  },
+  "stages": {
+    "control": {
+      "association_rejection_reasons": {
+        "ambiguous_geometric_association": 2,
+        "insufficient_bounded_support": 5,
+        "insufficient_overlap_fraction": 13,
+        "multiple_components_claim_instance": 42,
+        "overlapping_local_support_proposals": 66,
+        "oversize_depth_component": 11,
+        "oversize_without_local_geometric_support": 58,
+        "unregistered_without_marker": 189
+      },
+      "counters": {
+        "S_B_changed_instance_frames": 38,
+        "applied_feedback": 21,
+        "applied_feedback_before_v1_return": 15,
+        "class_conflict_instance_frames": 0,
+        "uncertain_instance_frames": 278,
+        "unmatched_or_ambiguous_instance_frames": 0
+      },
+      "first_steps": {
+        "S_B_structure_posterior_difference": 136,
+        "applied_feedback": 85,
+        "informative_same_class_peer": 136,
+        "qualified_same_class_peer": 136,
+        "reliable_plane": 11
+      },
+      "ground_reasons": {
+        "original_no_ground_revision": 161
+      },
+      "per_instance_first_steps": {
+        "instance_0000": {
+          "first_observed": 0,
+          "first_qualified_class": 1
+        },
+        "instance_0001": {
+          "first_feedback": 136,
+          "first_observed": 6,
+          "first_qualified_class": 7,
+          "first_reliable_plane": 11
+        },
+        "instance_0002": {
+          "first_feedback": 85,
+          "first_observed": 81,
+          "first_qualified_class": 84,
+          "first_reliable_plane": 85
+        },
+        "instance_0003": {
+          "first_observed": 94,
+          "first_qualified_class": 96
+        }
+      }
+    },
+    "new_ground": {
+      "association_rejection_reasons": {
+        "insufficient_overlap_fraction": 7,
+        "multiple_components_claim_instance": 4,
+        "oversize_without_local_geometric_support": 60,
+        "unregistered_without_marker": 337
+      },
+      "counters": {
+        "S_B_changed_instance_frames": 151,
+        "S_B_changed_instance_frames_before_v1_return": 81,
+        "applied_feedback": 18,
+        "applied_feedback_before_v1_return": 15,
+        "class_conflict_instance_frames": 0,
+        "excluded_association_pixels": 175206,
+        "ground_accepted_frames": 134,
+        "uncertain_instance_frames": 3,
+        "unmatched_or_ambiguous_instance_frames": 0,
+        "valid_depth_pixels": 933010
+      },
+      "first_steps": {
+        "S_B_structure_posterior_difference": 82,
+        "applied_feedback": 8,
+        "informative_same_class_peer": 82,
+        "qualified_same_class_peer": 82,
+        "reliable_plane": 8
+      },
+      "ground_reasons": {
+        "ground_height_inconsistent_with_public_mount": 4,
+        "insufficient_ground_spatial_extent": 13,
+        "insufficient_near_ground_support": 8,
+        "measured_ground_band_excluded_from_association_only": 134,
+        "measured_ground_residual_exceeds_noise_contract": 2
+      },
+      "per_instance_first_steps": {
+        "instance_0000": {
+          "first_observed": 0,
+          "first_qualified_class": 1
+        },
+        "instance_0001": {
+          "first_feedback": 8,
+          "first_observed": 6,
+          "first_qualified_class": 7,
+          "first_reliable_plane": 8
+        },
+        "instance_0002": {
+          "first_feedback": 87,
+          "first_observed": 81,
+          "first_qualified_class": 82,
+          "first_reliable_plane": 85
+        },
+        "instance_0003": {
+          "first_observed": 94,
+          "first_qualified_class": 102
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "counters": {
+    "new_policy_runs": 0,
+    "new_quality_evaluations": 0,
+    "new_sensor_queries": 0,
+    "new_tsdf_integrations": 0,
+    "new_worlds": 0
+  },
+  "created_utc": "2026-09-28T12:00:43.010898+00:00",
+  "findings_count": 0,
+  "independent_reviewed_episodes": 5,
+  "limitations": [
+    "Development and main are separate; development results are engineering observations, not independent confirmation.",
+    "Only reviewed, SHA-bound sealed records provide metrics. Missing/unstarted/running slots have blank metrics, never zero scores.",
+    "Unqualified reviewed episodes remain visible but are excluded from qualified performance deltas.",
+    "Mechanism comparisons use a common actual observation/action prefix; score differences alone do not establish improved reconstruction.",
+    "Zero forecast diagnoses concern stored supplied candidates, not all possible views.",
+    "Cross-run observation equality uses all saved sensor arrays except run-namespaced frame_id; original receipt hashes remain recorded.",
+    "Elapsed/planning times are recorded wall times and can be affected by simultaneous jobs; no isolated runtime benchmark is claimed.",
+    "All metric values are copied from completed independent reviews; no new mesh evaluation occurs.",
+    "Positive gains are not a reporting or qualification filter. Every supplied frozen slot and failure is retained.",
+    "Ledgers are captured once; later completions belong in a new snapshot."
+  ],
+  "metric_definitions": {
+    "F1": "mean of per-device F1, not harmonic mean of macro P and R",
+    "J_nav": "C_nav * F1",
+    "P": "unweighted macro precision over four fixed devices",
+    "R": "unweighted macro recall/completeness over four fixed devices",
+    "observation_frames": "initial frame plus every paid action; explicit observes reported separately"
+  },
+  "phases": {
+    "development": {
+      "qualified_pairs": 6,
+      "source_protocols": [
+        {
+          "path": "configs/virtual3d/article_development_v1_20260928.json",
+          "sha256": "2bfac2bb22995b9b90cdb870f214f6d584439db5d126c02480d806e82cebb4a9",
+          "slots": 12
+        }
+      ],
+      "status_counts": {
+        "reviewed_qualified": 5,
+        "running_reserved": 2,
+        "unstarted": 5
+      }
+    },
+    "main": {
+      "qualified_pairs": 0,
+      "status": "no_frozen_protocol_supplied",
+      "status_counts": {}
+    }
+  },
+  "protocol_count": 1,
+  "qualified_pair_count": 6,
+  "read_scope": "All review files and used sealed result/step/RGB-D/scan artifacts rehashed; binary predictions rely on the independent review seal.",
+  "schema": "article.comparison_snapshot.v1"
+}

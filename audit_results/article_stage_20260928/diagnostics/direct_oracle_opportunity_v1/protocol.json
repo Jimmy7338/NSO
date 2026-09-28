@@ -1,0 +1,123 @@
+{
+  "declared_utc": "2026-09-28T12:08:45.344679+00:00",
+  "discovery_limit": "Per-replan occupancy/discovery not independently saved; remainder consistency is not an independent replay of discovery geometry",
+  "fixed_inputs": "Saved direct candidate poses, costs, per-instance area vectors, posterior marginals, and discovery remainder",
+  "intervention": "One observed instance at a time: replace its posterior with each of four one-hot vectors; other marginals and discovery unchanged",
+  "ledger_snapshot_sha256": "f0ffcbe1ed6549ce05ee18c4fb653c84d318355be5dbd8f37143a2362d42cdc5",
+  "missing_record_rule": "Mark replan unavailable; do not fill missing allocated forecasts or infer hidden structures",
+  "new_policy_runs": 0,
+  "new_sensor_queries": 0,
+  "new_surface_evaluations": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "outputs": [
+    "per-instance four-hypothesis top1 changes and ranks",
+    "positive/structure-dependent/all-zero forecasts",
+    "individual structure-only area and area/cost argmax",
+    "actual selection kind and before/after first saved return directive"
+  ],
+  "reconstruction": "Verify forecast expected area and posterior, direct expected_gain/cost; infer and hold nonnegative discovery remainder; check visited XY zero, same-XY invariance and occupancy cell-area multiple",
+  "schema": "article.saved_direct_oracle_protocol.v1",
+  "scope": "Optimistic instantaneous posterior intervention in recorded direct candidate pools only; no joint-instance oracle, diagnostic reranking, future route, actual true structure, quality estimate or new experiment",
+  "score": "s_a + inspection_weight*(A_ai[h] - dot(A_ai,p_i))/cost_a",
+  "script_sha256": "ad16259fe11b22c4188f3f3dedbff46077acb705929d1ca28ec3c5d9db8b72a8",
+  "selected_runs": [
+    {
+      "episode": "audit_results/article_stage_20260928/development_v1/episodes/dev_AISLE_G_b160_n92801",
+      "review": "audit_results/article_stage_20260928/episode_reviews_v1/dev_AISLE_G_b160_n92801",
+      "review_manifest_sha256": "280f18c5a14dd71ffb908dcded1ff4fa4dca39fe1b340ce5494fb82cfba37420",
+      "run_id": "dev_AISLE_G_b160_n92801",
+      "terminal_entry": {
+        "artifact_bytes": 44288657,
+        "artifact_manifest_sha256": "b3b1b8c60ed03db0e1a3706abadce1cba62c01b6a2cd8326cd62c4c92ba1f8e4",
+        "elapsed_s": 211.16011927695945,
+        "executed_paid_actions": 160,
+        "finished_unix_s": 1790594860.815625,
+        "qualified": true,
+        "result_sha256": "ef6c47df36e23b4962f149861dbaddf0de0943d6c98f45ee14fb9746af9a50d7",
+        "run_id": "dev_AISLE_G_b160_n92801",
+        "started_unix_s": 1790594438.1929505,
+        "status": "controller_stop",
+        "world_created": true
+      }
+    },
+    {
+      "episode": "audit_results/article_stage_20260928/development_v1/episodes/dev_AISLE_B_b160_n92801",
+      "review": "audit_results/article_stage_20260928/episode_reviews_v1/dev_AISLE_B_b160_n92801",
+      "review_manifest_sha256": "4d823bcc526e5c28e65c5ffba17c4ef7dbc3685aff3406879fc1dd069cf67902",
+      "run_id": "dev_AISLE_B_b160_n92801",
+      "terminal_entry": {
+        "artifact_bytes": 44300692,
+        "artifact_manifest_sha256": "0ed0eafb2db0cc1649eecfdf1b444d905e84cb30876acc4340293ae4e03aecf1",
+        "elapsed_s": 254.6788658569567,
+        "executed_paid_actions": 160,
+        "finished_unix_s": 1790595423.5815294,
+        "qualified": true,
+        "result_sha256": "069213738a57abd42c0200ffffc0b50de3c2b648db59eec64db301108f99c92a",
+        "run_id": "dev_AISLE_B_b160_n92801",
+        "started_unix_s": 1790594927.7691057,
+        "status": "controller_stop",
+        "world_created": true
+      }
+    },
+    {
+      "episode": "audit_results/article_stage_20260928/development_v1/episodes/dev_AISLE_S_b160_n92801",
+      "review": "audit_results/article_stage_20260928/episode_reviews_v1/dev_AISLE_S_b160_n92801",
+      "review_manifest_sha256": "50ddf56446364fff5575bd2269ff8286b4c2b44539247b7a3b9244950b9404cf",
+      "run_id": "dev_AISLE_S_b160_n92801",
+      "terminal_entry": {
+        "artifact_bytes": 44301475,
+        "artifact_manifest_sha256": "50557c568539d3e4470627046476729a5d943655f6217c3d94fabc0984706f15",
+        "elapsed_s": 261.40180196613073,
+        "executed_paid_actions": 160,
+        "finished_unix_s": 1790595432.4935892,
+        "qualified": true,
+        "result_sha256": "08dcd112e9e23f82f1c04895ba81585f077a794657b376215157288b8c8afbf8",
+        "run_id": "dev_AISLE_S_b160_n92801",
+        "started_unix_s": 1790594927.743514,
+        "status": "controller_stop",
+        "world_created": true
+      }
+    },
+    {
+      "episode": "audit_results/article_stage_20260928/development_v1/episodes/dev_AISLE_NBV_b160_n92801",
+      "review": "audit_results/article_stage_20260928/episode_reviews_v1/dev_AISLE_NBV_b160_n92801",
+      "review_manifest_sha256": "7ad5ce9d0878fe46a395e858f2008fb13daeaf77c208c6db90ccfb24792032f2",
+      "run_id": "dev_AISLE_NBV_b160_n92801",
+      "terminal_entry": {
+        "artifact_bytes": 44288410,
+        "artifact_manifest_sha256": "158a6b60f2cbc558b07f8716b0c763ad8019094a17e85de3a7a279485faa61c9",
+        "elapsed_s": 237.1166829932481,
+        "executed_paid_actions": 160,
+        "finished_unix_s": 1790596643.037387,
+        "qualified": true,
+        "result_sha256": "67f078f431814201b6c7dfa75999a1707f791d8c5b8d8eb370f6a3327e9ddf60",
+        "run_id": "dev_AISLE_NBV_b160_n92801",
+        "started_unix_s": 1790596142.5538871,
+        "status": "controller_stop",
+        "world_created": true
+      }
+    },
+    {
+      "episode": "audit_results/article_stage_20260928/development_v1/episodes/dev_CELL_B_b160_n92801",
+      "review": "audit_results/article_stage_20260928/episode_reviews_v1/dev_CELL_B_b160_n92801",
+      "review_manifest_sha256": "9810d5353429ecd2fdac490c1bec32a3ad387cace136508f1bc86c46ebb7d9d2",
+      "run_id": "dev_CELL_B_b160_n92801",
+      "terminal_entry": {
+        "artifact_bytes": 43888095,
+        "artifact_manifest_sha256": "87a85df4c7d236fe830e577bbb4cae7b4d95353d9bbe09971a63d93757409baa",
+        "elapsed_s": 265.65187149401754,
+        "executed_paid_actions": 158,
+        "finished_unix_s": 1790596676.1748586,
+        "qualified": true,
+        "result_sha256": "d7ef3bbcc41a8f27b5f947fe34b272c1fafcd092ea3590a8ea804223b4714c74",
+        "run_id": "dev_CELL_B_b160_n92801",
+        "started_unix_s": 1790596142.6061609,
+        "status": "controller_stop",
+        "world_created": true
+      }
+    }
+  ],
+  "tie_rule": "Maximum score per unique executable target, lexicographic among score >= maximum-1e-12; no target if maximum <= 0",
+  "zero_missing_rule": "Zero only when a complete per-instance allocation explicitly excludes the candidate; allocated missing forecast is unavailable"
+}
