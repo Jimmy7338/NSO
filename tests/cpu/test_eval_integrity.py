@@ -1,15 +1,19 @@
 """CPU regression checks; no Habitat, scene assets, or downloaded model weights."""
+import ast
+from copy import deepcopy
 import importlib.util
 import json
 from pathlib import Path
 import sys
 import tempfile
-from types import SimpleNamespace
+from types import SimpleNamespace, ModuleType
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 import torch
 
+from arguments import get_args
 from utils.eval_protocol import (TRAIN_FLAGS, enforce_eval_mode, freeze_models,
                                  model_fingerprints, verify_frozen)
 from utils.paper_eval import (coverage_metrics, GoalMetrics, PaperMetricsTracker,
@@ -45,6 +49,30 @@ class MetricsTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             coverage_metrics(reference, np.zeros((2, 2)), 5)
 
+    def test_reward_cannot_change_metrics(self):
+        # Execute the actual environment reward implementation with only its
+        # required fields; this isolates it from Habitat rendering imports.
+        tree = ast.parse((ROOT / 'env/habitat/exploration_env.py').read_text())
+        cls = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == 'Exploration_Env')
+        method = next(n for n in cls.body if isinstance(n, ast.FunctionDef) and n.name == 'get_global_reward')
+        namespace = {'coverage_metrics': coverage_metrics}
+        exec(compile(ast.Module(body=[method], type_ignores=[]), '<env reward>', 'exec'), namespace)
+        args = SimpleNamespace(map_resolution=5, semantic_reward_coeff=1, structural_reward_coeff=1,
+                               frontier_reward_coeff=1, use_semantic=True, paper_rewards=1,
+                               intrinsic_reward_coeff=.05)
+        obj = SimpleNamespace(args=args, explored_map=np.ones((10, 10)),
+                              explorable_map=np.ones((10, 10)), prev_explored_area=0,
+                              semantic_bonus_acc=100, structural_bonus_acc=200,
+                              frontier_bonus_acc=300, timestep=1, _last_intrinsic_val=0)
+        total, delta, _, area_reward = namespace['get_global_reward'](obj)
+        self.assertAlmostEqual(total, 600.005)
+        self.assertAlmostEqual(area_reward, .005)
+        self.assertEqual(delta, 1)
+        physical = coverage_metrics(obj.explored_map, obj.explorable_map, 5)
+        tracker = PaperMetricsTracker()
+        tracker.update_step(info=dict(physical, exp_reward=total, exp_ratio=delta))
+        self.assertAlmostEqual(tracker.snapshot().explored_area_m2, .25)
+        self.assertEqual(namespace['get_global_reward'](obj)[1], 0)
 
     def test_count_once_and_keep_zero_and_missing(self):
         t = PaperMetricsTracker()
@@ -104,6 +132,16 @@ class FreezeTests(unittest.TestCase):
         self.assertIs(enforce_eval_mode(args), args)
         self.assertEqual({name: getattr(args, name) for name in TRAIN_FLAGS}, flags)
 
+    def test_eval_overrides_presets_and_explicit_train_flags(self):
+        for extra in ([], ['--paper_mode'], ['--paper_mode', '--train_global', '1', '--train_semantic']):
+            with patch.object(sys, 'argv', ['main.py', '--no_cuda', '--eval', '1'] + extra):
+                args = get_args()
+            self.assertTrue(all(not getattr(args, flag) for flag in TRAIN_FLAGS))
+        with patch.object(sys, 'argv', ['main.py', '--no_cuda', '--paper_mode']):
+            args = get_args()
+        self.assertTrue(args.train_goal_reachability)
+        self.assertTrue(args.train_global)
+
     def test_parameters_buffers_frozen_and_mutation_detected(self):
         model = torch.nn.Sequential(torch.nn.Linear(4, 4), torch.nn.BatchNorm1d(4))
         models = {'test': model}
@@ -127,6 +165,86 @@ class FreezeTests(unittest.TestCase):
         self.assertTrue(torch.isfinite(mu).all())
         self.assertGreater(var.max().item(), 0)
         self.assertEqual(before, verify_frozen({'rpn': model}, before))
+
+
+class AutoResetTests(unittest.TestCase):
+    def test_habitat2_terminal_info_survives_reset(self):
+        module = load_file('test_h2_compat', 'env/habitat2/vector_env_compat.py')
+        terminal = {'episode_id': 'old', 'coverage_ratio': .9, 'exp_reward': 777}
+        reset = {'episode_id': 'new', 'coverage_ratio': .1, 'exp_reward': None}
+        obs, _, done, info = module._split_step_result(((np.zeros((3, 2, 2)), reset), 0, True, terminal))
+        self.assertTrue(done)
+        self.assertEqual(info['episode_id'], 'new')
+        self.assertEqual(info['terminal_info']['coverage_ratio'], .9)
+        terminal['coverage_ratio'] = 0
+        self.assertEqual(info['terminal_info']['coverage_ratio'], .9)
+
+    def test_sync_reset_preserves_terminal_and_respects_no_autoreset(self):
+        stub = ModuleType('habitat.core.env'); stub.Env = stub.RLEnv = object
+        with patch.dict(sys.modules, {'habitat.core.env': stub}):
+            module = load_file('test_sync', 'env/habitat/sync_vector_env.py')
+        class FakeEnv:
+            observation_space = action_space = None
+            def __init__(self):
+                self.info = {}; self.resets = 0
+            def reset(self):
+                self.resets += 1
+                self.info.clear(); self.info.update(coverage_ratio=0, episode_id=f'ep{self.resets}')
+                return np.zeros((2, 2)), self.info
+            def step(self, action):
+                self.info.update(coverage_ratio=1, explored_area_m2=.25)
+                return np.ones((2, 2)), 99, True, self.info
+        for autoreset in (True, False):
+            vec = module.SyncVectorEnv(lambda: FakeEnv(), [()], auto_reset_done=autoreset)
+            vec.reset()
+            _, _, _, infos = vec.step([0])
+            terminal = infos[0].get('terminal_info', infos[0])
+            self.assertEqual(terminal['coverage_ratio'], 1)
+            self.assertEqual(terminal['episode_id'], 'ep1')
+            self.assertEqual(vec.envs[0].resets, 2 if autoreset else 1)
+            vec.close()
+
+
+class MainRecordingTests(unittest.TestCase):
+    def test_actual_main_recording_final_step_and_autoreset(self):
+        # Run the real recording block with terminal/reset packets, without
+        # importing main.py's rendering and model dependencies.
+        tree = ast.parse((ROOT / 'main.py').read_text())
+        main = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'main')
+        step_loop = next(n for n in ast.walk(main) if isinstance(n, ast.For)
+                         and isinstance(n.target, ast.Name) and n.target.id == 'step')
+        def assigns(node, name):
+            return isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == name for t in node.targets)
+        start = next(i for i, n in enumerate(step_loop.body) if assigns(n, 'step_infos'))
+        end = next(i for i, n in enumerate(step_loop.body) if assigns(n, 'l_masks'))
+        block = compile(ast.Module(body=step_loop.body[start:end], type_ignores=[]), '<main recorder>', 'exec')
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            args = SimpleNamespace(eval=True, num_local_steps=2, max_episode_length=3)
+            arrays = np.full((1, 2, 2), np.nan)
+            ns = {'np': np, 'json': json, 'args': args, 'run_id': 'run',
+                  'eval_output_dir': folder, 'METRICS_SCHEMA_VERSION': 2,
+                  'paper_metrics': [PaperMetricsTracker()],
+                  'explored_area_log': arrays.copy(), 'explored_ratio_log': arrays.copy()}
+            for episode in range(2):
+                for step in range(3):
+                    terminal = step == 2
+                    packet = {'coverage_ratio': (step + 1) / 10, 'explored_area_m2': step + 1,
+                              'episode_id': str(episode), 'scene_id': 'scene',
+                              'exp_reward': 10000, 'pose_err': [0, 0, 0]}
+                    info = {'coverage_ratio': 0, 'episode_id': 'next', 'terminal_info': packet} if terminal else packet
+                    ns.update(step=step, ep_num=episode, eval_g_step=step // 2 + 1,
+                              infos=[info], done=[terminal])
+                    exec(block, ns)
+            records = [json.loads(line) for line in (folder / 'episodes.jsonl').read_text().splitlines()]
+            self.assertEqual([r['episode_id'] for r in records], ['0', '1'])
+            self.assertEqual([r['step_count'] for r in records], [3, 3])
+            self.assertEqual([r['explored_area_m2'] for r in records], [3, 3])
+            np.testing.assert_allclose(ns['explored_ratio_log'][0], [[.2, .3], [.2, .3]])
+            self.assertEqual(ns['paper_metrics'][0].snapshot().step_count, 0)
+            ns.update(step=0, done=[True])
+            with self.assertRaises(RuntimeError):
+                exec(block, ns)
 
 
 class AuditTests(unittest.TestCase):

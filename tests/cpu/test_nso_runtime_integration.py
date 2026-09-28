@@ -1,4 +1,5 @@
 """NSO runtime contracts using real components, without simulator downloads."""
+import ast
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -138,6 +139,16 @@ class RuntimeTests(unittest.TestCase):
         components,runtime=make(arguments(use_topo_graph=True,eval=False,train_global=True))
         with patch.object(components,'select_topo_target',side_effect=AssertionError('PPO action changed')):
             self.assertEqual(runtime.choose_goal(0,[8,9],[0,25,0,35]),[8,9])
+
+    def test_main_contains_initial_periodic_reset_and_reward_adapter_calls(self):
+        # Structural check complements real interface tests; not Habitat proof.
+        tree=ast.parse(Path('main.py').read_text())
+        calls=[node.func.attr for node in ast.walk(tree)
+            if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute)
+            and isinstance(node.func.value,ast.Name) and node.func.value.id=='nso_runtime']
+        self.assertEqual(calls.count('observe'),2)
+        self.assertEqual(calls.count('choose_goal'),2)
+        self.assertEqual(calls.count('reset_scene'),1)
 
 
 if __name__=='__main__':unittest.main()

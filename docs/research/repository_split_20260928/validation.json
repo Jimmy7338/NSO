@@ -1,0 +1,142 @@
+{
+  "status": "passed",
+  "tests": [
+    {
+      "suite": "cpu",
+      "expected": 70,
+      "count": 70,
+      "exit_code": 0,
+      "seconds": 8.347556439694017,
+      "command": [
+        "/root/NSO/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/cpu",
+        "-v"
+      ],
+      "log": "restored_cpu.log",
+      "log_sha256": "66261d11a75241d6082d6bc695104030caa49b0054f88fec37ca0605fb0a529f"
+    },
+    {
+      "suite": "virtual3d",
+      "expected": 8,
+      "count": 8,
+      "exit_code": 0,
+      "seconds": 4.753874201793224,
+      "command": [
+        "/root/NSO/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/virtual3d",
+        "-p",
+        "test_virtual3d.py",
+        "-v"
+      ],
+      "log": "restored_virtual3d.log",
+      "log_sha256": "2b99c44ed94d59b363e5554d31e7b57fa0dfc6f0ed666831da74dc2f57ca97f7"
+    },
+    {
+      "suite": "semantic",
+      "expected": 119,
+      "count": 119,
+      "exit_code": 0,
+      "seconds": 7.119970762170851,
+      "command": [
+        "/root/NSO/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_semantic*.py",
+        "-v"
+      ],
+      "log": "restored_semantic.log",
+      "log_sha256": "fd685b69f11955e477fae3c88f2d23e505345c2b8cf834bb09bb561f750daa25"
+    },
+    {
+      "suite": "four_modules",
+      "expected": 11,
+      "count": 11,
+      "exit_code": 0,
+      "seconds": 0.11791319400072098,
+      "command": [
+        "/root/NSO/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/virtual3d",
+        "-p",
+        "test_cpu_four_modules_v35.py",
+        "-v"
+      ],
+      "log": "restored_four_modules.log",
+      "log_sha256": "6a4bd6c0089ea06512d780751a5f31e10dbdc94dd85018dc4b1ee81c347be430"
+    },
+    {
+      "suite": "semantic_frontend",
+      "expected": 10,
+      "count": 10,
+      "exit_code": 0,
+      "seconds": 0.10968300607055426,
+      "command": [
+        "/root/NSO/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/virtual3d",
+        "-p",
+        "test_semantic_frontend_v37.py",
+        "-v"
+      ],
+      "log": "restored_semantic_frontend.log",
+      "log_sha256": "cf3522e6ad6e61229d312123d521cc6a60f99d243263eaf660a0ab96d8af6061"
+    }
+  ],
+  "new_scientific_acquisition": false,
+  "restored_legacy_test_checks": 6,
+  "strict_batch_source_check": {
+    "status": "passed",
+    "current_sources": 43,
+    "protected_sources": 59,
+    "inputs": 6,
+    "declared_cases": 128
+  },
+  "papers": [
+    {
+      "document": "GRADUATION_THESIS_20260928",
+      "source_figure_pdf_tex_hashes": "matched",
+      "bound_sources": 21
+    },
+    {
+      "document": "GRADUATION_CORE_20260928",
+      "source_figure_pdf_tex_hashes": "matched",
+      "bound_sources": 16
+    },
+    {
+      "document": "VIRTUAL_PAPER_EN_20260928",
+      "source_figure_pdf_tex_hashes": "matched",
+      "bound_sources": 13
+    },
+    {
+      "document": "VIRTUAL_PAPER_REVIEW_20260928",
+      "source_figure_pdf_tex_hashes": "matched",
+      "bound_sources": 12
+    }
+  ],
+  "scientific_summary_unchanged": true,
+  "total_tests": 218,
+  "completed_at": "2026-09-28T10:17:42.913445+00:00"
+}
