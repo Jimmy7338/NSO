@@ -63,7 +63,7 @@ Figure 1 relates the two public configuration hypotheses to occlusion and the sa
 
 ### 4.1 Module Interfaces and Executed Controller
 
-The system organizes observation, planning, and feedback through hierarchical decisions and local execution. Table 1 describes the four CPU interfaces. The decision layer selects a pose subgoal from the configuration belief and remaining budget; the execution layer checks action legality and the return budget before new measurements update the state. In the present CPU implementation, each subgoal corresponds to the next atomic action. Controlled category inputs and deterministic execution guards complete the loop. Experiments isolate category information and the complete correction policy, rather than assign an independent performance contribution to each interface.
+The system organizes observation, planning, and feedback through hierarchical decisions and local execution. Table 1 describes the four CPU interfaces. The decision layer selects a pose subgoal from the configuration belief and remaining budget; the execution layer checks action legality and the return budget before new measurements update the state. In the local binary implementation, each subgoal corresponds to the next atomic action; Section 4.6 defines a separate scene-level extension. Controlled category inputs and deterministic execution guards complete the loop. Experiments isolate category information and the complete correction policy, rather than assign an independent performance contribution to each interface.
 
 **Table 1. Responsibilities of the four CPU module interfaces.**
 
@@ -220,6 +220,22 @@ Thus G benefits from diagnosis when \(\kappa<(r_d-1/2)\Delta\), whereas S requir
 
 The advantage requires an informative cue, consequential route choice, and a cost of resolving ambiguity. It can disappear when geometry already resolves the configuration, routes have equal value, or diagnosis is cheap. If diagnosis removes a route from the feasible set, that set must be re-evaluated rather than applying the closed-form result. The argument uses established belief-based decision principles [12,13]; it neither introduces a new Bayesian rule nor guarantees a TSDF improvement from additional views.
 
+### 4.6 Independent Scene-Level Extension
+
+A separate implementation extends local binary observation to four facilities in two repeated categories, each with planar, recessed, louvered, or open-frame structure. Instances and label planes arise from measured support; true facility poses and structures remain private. OV-SDF maintains associations and structure beliefs, IGCR supplies bounded depth evidence, STGHP selects observation macros, and RPN-UQ checks primitive execution and full-pose return. The supplied navigation graph, exact poses, synthetic labels, and nominal structure family remain controlled assumptions. TSDF fuses measured depth only.
+
+For instance \(i\), cumulative geometric evidence \(L_i\) combines with a mixture of uniform and category priors:
+
+\[
+b_i(h)\propto[(1-\rho_i)q_0(h)+\rho_iq_1(h\mid c_i)]e^{L_i(h)}.
+\]
+
+G uses the uniform prior; B fixes \(\rho_i=1/2\); S updates the model weight from qualified same-category peers. Leave-one-out sharing applies own-instance evidence once and replaces cumulative peer messages. Category qualification requires two eligible frames, each containing at least four matching marker pixels, without conflict or association ambiguity. All methods retain measured geometry and the same acquisition rules. G, B, and S can purchase a diagnostic view; NBV uses G's belief with myopic direct-view scoring. Thus S/B tests sharing, B/G tests category conditioning, and G/NBV tests diagnostic lookahead.
+
+At most 32 poses are compared, using expected nominal unseen area and an unknown-space proxy divided by arrival, observation, and return costs. Diagnostic alternatives consider one paid view and one subsequent common pose; instance utilities are summed before selecting that pose. Only the first macro is committed. Translation by 0.25 m, rotation by 30°, and explicit observation each cost one action and acquire a frame. One initial frame is free; geometry-only initialization consumes at most \(\lfloor B/5\rfloor\) actions. This replaces the old fixed prefix and binary dynamic program. Equations A1–A6 in the [multi-instance appendix](/root/NSO/docs/thesis/ARTICLE_MULTI_INSTANCE_METHOD_APPENDIX_20260928.md) specify belief transfer, macro utility, and limitations.
+
+The extension evaluates measured-free coverage \(C_{\rm nav}\) on a fixed start-connected robot-center grid and \(Q=\tfrac14\sum_iF_{1,i}\) over all four facilities, including undiscovered ones. The joint score is \(J_{\rm nav}=C_{\rm nav}Q\). Complete predicted meshes are evaluated against fixed observable references at 5 cm, without prediction-ROI cropping or semantic weighting. These definitions differ from Section 3; the scores are not pooled.
+
 ## 5 Virtual Experiments and Results
 
 ### 5.1 Comparisons and Common Settings
@@ -344,13 +360,45 @@ To examine how reconstruction gains develop, we reintegrated all eight original 
 
 **Figure 12.** Actual reintegrated TSDF meshes at the fixed display checkpoints 18, 30 and 42 for all four G/S pairs. All extracted triangles are rendered; each configuration shares one camera, metric scale, material and lighting across methods and time. The h0/h1 views use predefined rear-left/rear-right cameras. No hole completion, smoothing or template surface is added. F1 and J5 come from the offline measurements; shading is illumination, not error. Both coincident h0 conditions remain visible. [Vector PDF](/root/NSO/docs/thesis/figures/article_reconstruction_20260928/checkpoint_actual_meshes.pdf).
 
+### 5.7 Scene-Level Development and Information Timing
+
+The complete development design comprises AISLE, CELL, and LOOP layouts, four methods, one common seed, and a 160-action budget: 12 attempted episodes. Eleven complete the original execution-and-evaluation pipeline. CELL/G completes collision-free motion and full-pose return but its evaluator rejects one finite triangle of area \(4.24\times10^{-13}\,\mathrm{m}^2\). This remains an original evaluation failure, not a navigation failure or a zero-quality result.
+
+**Table 6. Original scene-level development endpoints. Entries are \(Q/J_{\rm nav}\); a dash denotes unavailable original evaluation. Each entry is one episode.**
+
+| Layout | NBV | G | B | S |
+|---|---:|---:|---:|---:|
+| AISLE | 0.857363/0.856753 | 0.857363/0.856753 | 0.857363/0.856753 | 0.857363/0.856753 |
+| CELL | 0.736336/0.689542 | —/— | 0.818539/0.766521 | 0.818539/0.766521 |
+| LOOP | 0.648956/0.620599 | 0.648956/0.620599 | 0.648956/0.620599 | 0.648956/0.620599 |
+
+A common numerical supplement applies the same face-area threshold, \(5\times10^{-13}\,\mathrm{m}^2\), to all 12 predictions. Eleven unchanged-input evaluations are verified and reused; only CELL/G requires a new derived surface measurement, with \(C_{\rm nav}=0.936450\), \(Q=0.817264\), and \(J_{\rm nav}=0.765328\). No new route or TSDF is generated. B/S exceed this G score by only 0.001193, approximately 0.156%; S and B tie in all three layouts. The supplement preserves original failure status and does not establish a sharing benefit.
+
+![Complete scene-level development routes](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_routes_01.png)
+
+**Figure 13.** All 12 declared slots at a common scale. Circles mark turns, squares paid observations, and arrows saved headings. The CELL/G blank denotes original evaluation failure despite a completed saved route. Background geometry is for offline explanation. [PDF](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_routes_01.pdf).
+
+![Original scene-level endpoints and costs](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_quality_and_cost.png)
+
+**Figure 14.** Original qualified endpoints and recorded costs; crosses denote unavailable entries, not zeros. Planning times exclude offline evaluation and reflect concurrent workload. This development comparison does not estimate performance on unseen layouts. [PDF](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_quality_and_cost.pdf).
+
+AISLE's four methods have identical executed actions, poses, and mesh arrays: 24 m, 54 turns, 10 explicit observations, and 161 frames each. The first informative same-category peer appears at action 136, after return begins at action 126. Inspection identified depth support connected through the floor, delaying reliable instance association. A common geometric revision excludes a measured floor band only from association candidates, using current depth and calibrated mounting height. Support, height, and noise checks control acceptance; rejected frames retain the original input. All methods receive the same rule, and full depth remains available to occupancy and TSDF. This assumes a static horizontal floor and known camera geometry.
+
+Replaying the same 161 saved frames reproduces the original evidence exactly. With the revision, first applied feedback moves from action 85 to 8, and first informative peer/S–B posterior difference from 136 to 82. Uncertain instance-frame records decrease from 278 to 3. However, applied feedback decreases from 21 to 18, and the second cabinet's first own feedback shifts from 85 to 87. These results establish earlier information availability in a fixed-path replay, not improved association accuracy against ground truth, a changed route, or higher reconstruction quality. A common-frontend closed-loop comparison is required before attributing any new planning benefit; the proposed 48-run main matrix remains conditional future work.
+
+![Actual AISLE ground truth and G/S meshes](/root/NSO/docs/thesis/figures/article_scene_meshes_20260928/aisle_gbs_v2/aisle_gt_g_s_preview.png)
+
+**Figure 15.** Ground truth and saved G/S meshes share view and scale; all 205,566 predicted triangles are rendered with overlaid XY routes. Colors encode height and lighting, not error. G/S geometry is identical. GT includes unobservable surfaces beyond the fixed scoring reference. [PDF](/root/NSO/docs/thesis/figures/article_scene_meshes_20260928/aisle_gbs_v2/aisle_gt_g_s_preview.pdf).
+
+Near-complete AISLE navigable coverage (0.999289) coexists with macro F1 0.857363 and second-facility recall 0.557492. Figure 15 connects route coverage to incomplete equipment surfaces without depicting an absent G/S advantage. Together, these results distinguish the local category benefit from the additional scene-level requirements of stable association and timely, actionable information.
+
 ## 6 Discussion and Applicability
 
-Category information is useful here because it can select an observation side while geometry remains ambiguous. When both methods choose the same route, the observed gain is zero. In particular, G resolves an equal-valued left/right decision by choosing left, which coincides with S in both original \(h_0\) configurations at budget 42. The extension preserves this budget's gain under new noise and same-family geometry, while a larger budget changes policy ordering. Ambiguity strength and natural category reliability have not been independently manipulated or calibrated. Public templates, synthetic category markers, exact poses, a shared safe graph, and a fixed prefix define the tested operating conditions. Region- and threshold-dependent surface evaluation further limits the conclusions to facility documentation, rather than natural recognition, safe exploration of unknown maps, or reconstruction of an entire environment.
+Category information is useful here because it can select an observation side while geometry remains ambiguous. When both methods choose the same route, the observed gain is zero. In particular, G resolves an equal-valued left/right decision by choosing left, which coincides with S in both original \(h_0\) configurations at budget 42. The extension preserves this budget's gain under new noise and same-family geometry, while a larger budget changes policy ordering. Ambiguity strength and natural category reliability have not been independently manipulated or calibrated. Public templates, synthetic category markers, exact poses, a shared safe graph, and a fixed prefix define these local experiments. Their region- and threshold-dependent surface evaluation limits the conclusions to local facility documentation. The separate full-mesh extension in Section 5.7 retains the navigation and perception assumptions and does not establish a shared-semantic performance advantage.
 
 The analytical model identifies conditions for a reduced or absent semantic advantage; it does not predict the observed high-budget sign reversal. Its optimal decisions use a correctly specified utility and observation model, whereas the executed planner uses finite lookahead and uncalibrated exposure proxies. The measured reversal therefore remains an empirical boundary requiring reconstruction-level evidence, not a consequence established by the analytical example.
 
-A later shared-reliability development study provides an additional boundary. Under a different controller and \(J_{\rm nav}\) task, the nominal category–structure condition gives five S/G ties and one loss across six parent layouts, with a relative mean difference of −0.3301%. Under a mismatched relation, all six comparisons between S and the ordinary Bayesian semantic baseline B tie. Thus, implemented observation, belief update, and replanning do not necessarily produce an endpoint improvement. One nominal B control is missing because of interruption, and the full development matrix remains incomplete. These results cannot be pooled with the present \(J_5\) results and do not establish an effective shared-reliability contribution. They reinforce the narrower interpretation: the demonstrated benefit concerns category information in the original controlled setting, rather than a general advantage of increasingly complex semantic mechanisms.
+An earlier six-parent shared-reliability development study, distinct from the new three-layout extension in Section 5.7, provides an additional boundary. Under a different controller and \(J_{\rm nav}\) task, the nominal category–structure condition gives five S/G ties and one loss across six parent layouts, with a relative mean difference of −0.3301%. Under a mismatched relation, all six comparisons between S and the ordinary Bayesian semantic baseline B tie. Thus, implemented observation, belief update, and replanning do not necessarily produce an endpoint improvement. One nominal B control is missing because of interruption, and the full development matrix remains incomplete. These results cannot be pooled with the present \(J_5\) results and do not establish an effective shared-reliability contribution. They reinforce the narrower interpretation: the demonstrated benefit concerns category information in the original controlled setting, rather than a general advantage of increasingly complex semantic mechanisms.
 
 ## 7 Conclusion
 
@@ -398,3 +446,5 @@ This section locates existing evidence and is excluded from the typeset scientif
 | Fixed parameters, recorded numerical example, and software environment | [Worked example](/root/NSO/docs/thesis/METHOD_WORKED_EXAMPLE_20260928.md), [platform and reproduction](/root/NSO/docs/thesis/PLATFORM_REPRODUCTION_20260928.md) |
 | Verified bibliographic metadata and research positioning | [Related-work note](/root/NSO/docs/thesis/VIRTUAL_PAPER_RELATED_WORK_20260928.md) |
 | Conditional decision analysis, correction threshold, return invariant, and complexity | [Theory supplement](/root/NSO/docs/thesis/ARTICLE_THEORY_SUPPLEMENT_20260928.md), [primary-source and arithmetic checks](/root/NSO/docs/thesis/ARTICLE_THEORY_REFERENCES_20260928.json); analytical values are not experimental samples |
+| Scene-level method, complete 12-run development, and common numerical supplement | [Method appendix](/root/NSO/docs/thesis/ARTICLE_MULTI_INSTANCE_METHOD_APPENDIX_20260928.md), [Original endpoints](/root/NSO/audit_results/article_stage_20260928/analysis_v1/development12_terminal_20260928/slots.csv), [Supplement design](/root/NSO/docs/research/ARTICLE_COMMON_NUMERIC_EVALUATION_DESIGN_20260928.md), [CELL/G derived result](/root/NSO/audit_results/article_stage_20260928/common_evaluation_v1/dev_CELL_G_b160_n92801/measurement/result.json) |
+| Figures 13–15 and fixed-path frontend diagnosis | [Complete development figures](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/manifest.json), [Actual scene mesh figures](/root/NSO/docs/thesis/figures/article_scene_meshes_20260928/aisle_gbs_v2/manifest.json), [Replay analysis](/root/NSO/audit_results/article_stage_20260928/analysis_v1/ground_v2_attempt03/summary.json) |
