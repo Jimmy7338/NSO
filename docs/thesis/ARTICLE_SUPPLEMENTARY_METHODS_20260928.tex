@@ -1,0 +1,211 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[UTF8,fontset=none]{ctex}
+\setCJKmainfont{Noto Serif CJK SC}[BoldFont={Noto Sans CJK SC Bold}]
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+\usepackage{amsmath,amssymb,graphicx,booktabs,array}
+\usepackage{geometry,caption,hyperref,flafter}
+\geometry{left=22mm,right=22mm,top=23mm,bottom=24mm}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,
+ pdftitle={Supplementary Methods: Observed Multi-Instance Planning},pdfauthor={Zhaoyu Li}}
+\captionsetup{font=small,labelfont=bf,labelsep=quad}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.8}
+\linespread{1.13}
+\urlstyle{same}
+\Urlmuskip=0mu plus 2mu
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\title{\textbf{Supplementary Methods: Observed Multi-Instance Planning}}
+\author{Zhaoyu Li}
+\date{28 September 2026\quad ArticleV1 supplementary methods}
+\DeclareMathSizes{10.95}{10.95}{8}{7}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\newlength{\SupplementTableWidth}
+\renewcommand{\tablename}{Table}
+\begin{document}
+\maketitle
+
+Prepared 28 September 2026. Frozen ArticleV1 method description; no new experimental result.
+
+\hypertarget{a.-scope-and-module-responsibilities}{%
+\section*{A. Scope and module responsibilities}\label{a.-scope-and-module-responsibilities}}
+
+ArticleV1 studies documentation after industrial layout changes, with facilities static during each mission. Four facilities form two category pairs. Each has one of four structures, \(h\in\{\text{planar},\text{recessed},\text{louvered},\text{open-frame}\}\): \(H=4\) hypotheses and \(N=4\) evaluation targets. Online identities arise from observations; the controller does not receive their true poses or structures. Scene families comprise aisle, work-cell and loop layouts, separated into development and test layouts.
+
+Inputs comprise a conservative navigation graph, RGB-D/planar scans, exact simulated poses, category--structure priors and nominal templates. Graph envelopes are category/structure independent. This is active documentation with a supplied navigation prior. Synthetic colored labels isolate category-conditioned decisions; natural recognition, localization uncertainty and moving-obstacle avoidance are outside scope.
+
+\par\noindent\begin{minipage}{\linewidth}
+\small\textbf{Table S1. Roles of the four CPU interfaces.}\par\medskip
+\centering
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.13}
+\setlength{\SupplementTableWidth}{\dimexpr\linewidth-2\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.18\SupplementTableWidth} >{\raggedright\arraybackslash}p{0.82\SupplementTableWidth}@{}}
+\toprule
+Interface & Executed ArticleV1 role \\
+\midrule
+OV-SDF & Associate measured instance support; qualify observed categories; maintain four-structure marginals and optional shared category reliability. \\
+STGHP & Forecast nominal unseen surfaces, compare direct and one-diagnostic macro routes, and select one executable target pose. \\
+RPN-UQ & Validate paid primitive execution, observed collision constraints and complete-pose return cost; reject uncertain geometry prerequisites. \\
+IGCR & Derive bounded structure evidence from current measured depth and update the observed-instance ledger. \\
+\bottomrule
+\end{tabular}
+\end{minipage}\par\medskip
+
+These CPU interfaces evaluate no learned uncertainty network. An independent marginal-variance penalty is disabled because shared reliability induces dependence. Open3D TSDF and occupancy consume measured packets only; templates never fill unobserved reconstructed surfaces.
+
+\par\noindent\begin{minipage}{\linewidth}
+\small\textbf{Table S2. Distinction between the earlier local method and ArticleV1.}\par\medskip
+\centering
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.13}
+\setlength{\SupplementTableWidth}{\dimexpr\linewidth-4\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.2\SupplementTableWidth} >{\raggedright\arraybackslash}p{0.38\SupplementTableWidth} >{\raggedright\arraybackslash}p{0.42\SupplementTableWidth}@{}}
+\toprule
+Aspect & Earlier local V35 evidence & ArticleV1 described here \\
+\midrule
+Latent state & One binary configuration hypothesis & Four structure hypotheses per observed instance; optional same-class coupling \\
+Geometric frame & Supplied facility frame and two templates & Measured label-plane estimates and common nominal shape family \\
+Planning & Budget dynamic programming over exposure states; next atomic subgoal & Finite candidate macros; direct gain/cost versus one diagnostic and one final view \\
+Common acquisition & Prescribed 18-action prefix & One common initial frame; bounded observation-driven initialization \\
+Motion accounting & 1 m translation / 90° turn primitives & 0.25 m translation / 30° turn; each primitive and explicit observation costs one \\
+Evaluation & Historical local coverage and saved public-ROI surface contract & Correct measured-free navigable coverage and all-four-instance macro surface F1, without prediction ROI cropping \\
+\bottomrule
+\end{tabular}
+\end{minipage}\par\medskip
+
+The binary posterior, fixed 0.99 diagnostic channel, exposure-state recursion and 80\% template-coverage stopping gate from V35 do not define ArticleV1. Its old measurements remain a separate evidence set.
+
+\hypertarget{b.-observation-qualified-structure-belief}{%
+\section*{B. Observation-qualified structure belief}\label{b.-observation-qualified-structure-belief}}
+
+Depth components and accumulated measured support determine association; category values do not select the associated region. A new instance requires visible marker support. A category is qualified only after at least four corresponding marker pixels in each of two eligible support frames, with no conflicting category and no current association ambiguity. Otherwise its category is withheld. Geometry-only controls retain the same marker geometry and association frontend.
+
+Let \(L_i(h)\) be instance \(i\)'s cumulative generalized depth evidence, \(q_0(h)=1/4\), and \(q_1(h\mid c)\) the declared category prior. The two reliability models have initial weights \(w_0(k)=1/2\). For qualified same-class peers,
+
+\[
+m_j(k)=\sum_h q_k(h\mid c_i)e^{L_j(h)},\qquad
+w_{-i}(k)=\frac{w_0(k)\prod_{j\ne i:c_j=c_i}m_j(k)}
+{\sum_{\ell=0}^{1}w_0(\ell)\prod_{j\ne i:c_j=c_i}m_j(\ell)}.
+\tag{A1}
+\]
+
+\[
+\rho_i=w_{-i}(1),\qquad
+b_i(h)=\frac{[(1-\rho_i)q_0(h)+\rho_iq_1(h\mid c_i)]e^{L_i(h)}}
+{\sum_g[(1-\rho_i)q_0(g)+\rho_iq_1(g\mid c_i)]e^{L_i(g)}}.
+\tag{A2}
+\]
+
+Cumulative messages replace previous messages; leave-one-out transfer applies own-instance evidence once. Without a qualified category, both models equal \(q_0\). This is standard hierarchical generalized Bayes; \(\rho_i\) is an uncalibrated model weight, not recognition accuracy.
+
+\par\noindent\begin{minipage}{\linewidth}
+\small\textbf{Table S3. Information and planning access of the four methods.}\par\medskip
+\centering
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.13}
+\setlength{\SupplementTableWidth}{\dimexpr\linewidth-6\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.1\SupplementTableWidth} >{\raggedright\arraybackslash}p{0.4\SupplementTableWidth} >{\raggedright\arraybackslash}p{0.23\SupplementTableWidth} >{\raggedright\arraybackslash}p{0.27\SupplementTableWidth}@{}}
+\toprule
+Policy & Category-conditioned belief & Cross-instance transfer & Paid diagnostic lookahead \\
+\midrule
+NBV & No; geometry prior and measured feedback & No & No; direct nominal-area/cost only \\
+G & No; geometry prior and measured feedback & No & Yes \\
+B & Fixed mixture \((q_0+q_1)/2\), with own measured feedback & No & Yes \\
+S & Equations (A1)--(A2) & Qualified same-class peers & Yes \\
+\bottomrule
+\end{tabular}
+\end{minipage}\par\medskip
+
+B updates from its own geometry. NBV is a mechanism comparator, not an external planner reproduction. All policies share repairs and acquisition limits. Ablations separately suppress measured belief feedback, anticipated information, or future changes to non-diagnosed instances; raw-depth fusion remains active.
+
+With correct one-to-one association, each class offers only one peer. Its model-evidence ratio satisfies \(r\in[\min_h(q_1/q_0),\max_h(q_1/q_0)]\), and \(\rho=r/(1+r)\). Consequently, the S--B active-prior total variation is \(|\rho-1/2|\operatorname{TV}(q_1,q_0)\). For the declared cabinet prior \((0.4,0.3,0.2,0.1)\), this is at most \(0.0428572\). This bounds the transferred prior, not the posterior after own-instance evidence; it explains why weak priors can yield small or unchanged decisions.
+
+\hypertarget{c.-bounded-evidence-and-measured-plane-recovery}{%
+\section*{C. Bounded evidence and measured plane recovery}\label{c.-bounded-evidence-and-measured-plane-recovery}}
+
+IGCR profiles scale, anchor and yaw nuisance candidates for each structure and scores truncated axial-depth residuals on current associated pixels. The best residual loss \(\ell_i(h)\) gives \(s_i(h)=-(\ell_i(h)-\min_g\ell_i(g))/0.05\), with loss truncation at 0.25 m. Each applied increment is shifted to maximum zero and capped below at −6; accumulated evidence is again shifted and capped below at −24. Invalid or absent depths supply no empty-space evidence.
+
+The association cache retains 4096 support points. Full-cache rescue requires a unique nonduplicate packet, four novel voxels and 5\% novel points, fewer than 32 successful feedback frames, and separation from every applied view by 0.25 m or 30°. Rescued scores must be informative; repeat feedback is excluded. These rules limit correlated reinforcement without establishing independence.
+
+Successful single-frame fits remain valid. Otherwise an upright 0.32 × 0.30 m label is estimated from at least three paid views and 24 measured points, retaining eight views/1024 points per instance. Axial-noise weighted least squares fits yaw and offset with \(\sigma_z=\max(0.001,0.01z)\). Views require 0.15 m translation or 8° rotation from each retained view. Conditioning, noise, front-facing and public-size consistency are checked. Anchor ambiguity includes pixel footprints, linearized three-sigma perturbations and leave-one-view sensitivity, retaining 6 cm anchor and 12° yaw limits. Conflicts beyond 15 cm or 20° invalidate the plane. These are diagnostic envelopes, not calibrated guarantees; they affect planning and residual alignment, never TSDF input.
+
+\hypertarget{d.-finite-paid-macro-selection}{%
+\section*{D. Finite paid-macro selection}\label{d.-finite-paid-macro-selection}}
+
+There are at most 32 candidate poses and eight forecasts per observed instance. Let \(A_{ih}(v)\) be new nominal exterior area at \(v\), averaged over scales 0.85, 1 and 1.15, using measured anchors, template self-visibility and accumulated support. Previously paid identical cameras and missing reliable planes yield zero surface forecasts. External occlusion, repeated-view precision improvement and pose-error distributions are unmodeled.
+
+Let \(D(v)\) denote weighted unknown-cell area in a 2 m planar disk, set to zero at a previously visited XY node. With the declared unit area weights,
+
+\[
+g(v;b)=D(v)+\sum_{i\in\mathcal I_t}\sum_h b_i(h)A_{ih}(v),\qquad
+U_{\rm dir}(v)=\frac{g(v;b)}{d(s,v)+1+d(v,s_{\rm home})}.
+\tag{A3}
+\]
+
+Only affordable full-return routes enter the comparison. Here \(d\) counts graph primitives including heading changes, and each explicit observation contributes one additional action. Both quantities in the numerator are planning proxies; neither is measured coverage or F1.
+
+For a diagnostic pose \(v\) on observed instance \(i\), a four-outcome prototype channel \(K_i(y\mid h,v)\) compares public nominal depth predictions. It does not render the actual future scene. Let \(b^{i,v,y}\) be the hypothetical branch from adding \(\log K_i(y\mid h,v)\) to the target's evidence and recomputing all applicable marginals. Then
+
+\[
+p(y\mid i,v)=\sum_h b_i(h)K_i(y\mid h,v),\qquad
+c(v,u)=d(s,v)+1+d(v,u)+1+d(u,s_{\rm home}),
+\tag{A4}
+\]
+
+\[
+U_{\rm diag}(i,v)=\sum_y p(y\mid i,v)
+\max\!\left\{0,\max_{u\ne v:\,c(v,u)\le b_t}
+\frac{g(u;b^{i,v,y})}{c(v,u)}\right\}.
+\tag{A5}
+\]
+
+Zero represents return without another view. Instance utilities are summed before maximizing over the shared final pose. First-view gain is omitted to avoid unknown cross-view overlap; movement-frame gains are also unpredicted, although real measurements are fused. This is expected final-view utility per complete cost, not EVI alone or an optimal POMDP solution. Each executable target retains its maximum score, with lexicographic ties. Only the first macro is committed; its paid observation triggers replanning from actual data.
+
+\hypertarget{e.-initialization-execution-and-evaluation}{%
+\section*{E. Initialization, execution and evaluation}\label{e.-initialization-execution-and-evaluation}}
+
+All policies share geometry-only plane initialization: prioritize eligible instances with the fewest attempts, then smallest full-route cost; allow two distinct targets per instance and at most \(\lfloor B/5\rfloor\) executed initialization actions. Commitment consumes an attempt; executed actions are never refunded. Reliable-plane acquisition, ambiguity, conflict or loss of feasibility cancels the initialization macro. Safety and return feasibility are rechecked using current observations. The fixed-graph invariant \(d(s,s_{\rm home})\le b_t\) supports return feasibility, conditional on truthful graph edges and successful execution; it is not a guarantee under arbitrary new obstacles. A no-progress watchdog can latch return.
+
+\par\noindent\begin{minipage}{\linewidth}
+\small
+\begin{verbatim}
+Read public graph, shape family and frozen per-policy configuration.
+Acquire the one common initial frame (action cost zero).
+Repeat:
+    Save and integrate the current measured packet exactly once.
+    Validate the executed primitive and associate measured instances.
+    Estimate/check label planes; apply only eligible depth residuals.
+    Update view support, safety and cumulative instance belief messages.
+    Complete or cancel the current macro when its execution rules require it.
+    If no macro is active and return is not latched:
+        choose shared initialization if eligible;
+        otherwise compare affordable direct and diagnostic targets.
+    Guard and execute one paid primitive, or stop/block.
+Until termination or the declared action, time or storage limit.
+Save the measured map; evaluate using the fixed private reference.
+\end{verbatim}
+\end{minipage}\par
+
+Every translation, turn and explicit observation costs one and obtains a saved sensor frame. Reference geometry is fixed before execution. The navigable denominator \(\mathcal D\) is the start-connected 0.1 m grid of conservative robot centers, using a 0.2 m footprint radius. Only cells measured free contribute:
+
+\[
+C_{\rm nav}=\frac{|\{x\in\mathcal D:M_T(x)=\text{free}\}|}{|\mathcal D|},\quad
+Q=\frac14\sum_{i=1}^{4}\frac{2P_iR_i}{P_i+R_i},\quad
+J_{\rm nav}=C_{\rm nav}Q.
+\tag{A6}
+\]
+
+Zero denominators in individual F1 terms give zero. Recall uses each facility's fixed observable reference area; undiscovered facilities remain in the denominator. Prediction areas are evaluated on the entire mesh: observable target matches contribute true positives; false area is allocated to the nearest facility without a distance cutoff. Correct background and correct non-reference target surfaces are reported separately. The tolerance is 5 cm; reference and prediction area sampling use 0.3 m spacing with fixed seeds 4001 and 4002. Qualification requires controller stop, no collision, exact XY-and-yaw return, and one saved/fused frame per acquisition; there is no all-facilities-seen gate. Coverage, macro quality, per-instance terms and failures should accompany the product. These contracts permit conditional comparison within the declared facility family; they do not themselves establish semantic superiority or broad generalization.
+\end{document}

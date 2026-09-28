@@ -280,13 +280,13 @@ Q=\frac14\sum_{i=1}^{4}F_{1,i},\qquad J_{\rm nav}=C_{\rm nav}Q.
 | LOOP | B | 0.956304 | 0.910251 | 0.565148 | 0.648956 | 0.620599 | 160 | 20.0 | 62 | 18 | 合格 |
 | LOOP | S | 0.956304 | 0.910251 | 0.565148 | 0.648956 | 0.620599 | 160 | 20.0 | 62 | 18 | 合格 |
 
-![完整12条声明条件的同尺度实际路径](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_routes_01.png)
+![完整12条声明条件的同尺度实际路径](/root/NSO/docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_routes_01.png)
 
-**图13** 三种开发布局与四方法的全部声明条件，统一米制尺度。圆环表示原地转向位置，方形表示额外付费观察，箭头按固定步间隔显示保存朝向；设备真值轮廓仅用于离线解释。CELL/G面板留空表示原评价失败，该条实际保存路径已经完成无碰撞返航，不能从空白推断没有行驶。[矢量PDF](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_routes_01.pdf)。
+**图13** 三种开发布局与四方法的全部声明条件，统一米制尺度。圆环表示原地转向位置，方形表示额外付费观察，箭头按固定步间隔显示保存朝向；设备真值轮廓仅用于离线解释。CELL/G面板留空表示原评价失败，该条实际保存路径已经完成无碰撞返航，不能从空白推断没有行驶。[矢量PDF](/root/NSO/docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_routes_01.pdf)。
 
-![原流程覆盖质量与成本分量](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_quality_and_cost.png)
+![原流程覆盖质量与成本分量](/root/NSO/docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_quality_and_cost.png)
 
-**图14** 原流程合格终点的覆盖、全实例宏平均F1、联合分数及实际成本。每根柱对应一条任务，无推断性误差条；叉号表示该快照未纳入的原评价失败项，不表示零质量或零路程。规划耗时排除离线表面评价，受到当时并发负载影响，不据此进行严格硬件归一化速度排名。[矢量PDF](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/online_quality_and_cost.pdf)。
+**图14** 原流程合格终点的覆盖、全实例宏平均F1、联合分数及实际成本。每根柱对应一条任务，无推断性误差条；叉号表示该快照未纳入的原评价失败项，不表示零质量或零路程。规划耗时排除离线表面评价，受到当时并发负载影响，不据此进行严格硬件归一化速度排名。[矢量PDF](/root/NSO/docs/thesis/figures/article_online_20260928/development12_turnmarkers/online_quality_and_cost.pdf)。
 
 AISLE的G、B、S、NBV动作、完整姿态序列及网格顶点和三角面数组完全相同：均平移24 m、转向54次、额外观察10次，160个付费动作取得161帧。LOOP四方法质量同样持平，均平移20 m。CELL的B与S均使用158动作、22 m，最终保留2动作返航余量，其余合格任务使用160动作。三种布局中S/B全部持平，不能据此宣称共享机制取得场景级优势；CELL的B/S高于NBV也混合了类别条件与诊断规划差异，不能直接解释为单一语义效应。
 
@@ -322,9 +322,39 @@ AISLE中首个有信息的合格同类实例到第136步才进入共享，而原
 
 图15说明，可导航区域覆盖0.999289不等于所有设备表面完整。四设施宏平均F1为0.857363，逐设施召回分别为1.000000、0.557492、0.887814、0.831784，其中第二个设施仍有明显缺失。GT图中不可观测顶面等也会形成视觉缺口，但不属于本次固定可观测参考，不能按图中全部缺口直接反推召回。该展示把实际路径、遮挡与最终网格联系起来，同时保留G/S完全相同这一结果。
 
+### 10.6 地面关联修正的完整闭环对照
+
+在相同三类开发布局、160动作预算及92801噪声实现下，另外执行12条共同地面关联修正任务。四方法使用相同前端，12条均无碰撞、恢复起点位置及朝向，并完成统一数值评价。原版本与修正版的全部24条记录均保留；原CELL/G的评价失败仍不改写为原流程成功。
+
+**表8 共同关联修正前后的联合指标。** 单元格为原版本→地面修正版；†为原评价失败后的共同派生测量。
+
+| 布局 | NBV | G | B | S |
+|---|---:|---:|---:|---:|
+| AISLE | 0.856753→0.652828 | 0.856753→0.652828 | 0.856753→0.652828 | 0.856753→0.652828 |
+| CELL | 0.689542→0.465491 | 0.765328†→0.533627 | 0.766521→0.531167 | 0.766521→0.531167 |
+| LOOP | 0.620599→0.730488 | 0.620599→0.730488 | 0.620599→0.730488 | 0.620599→0.730488 |
+
+修正版在LOOP提高联合指标0.109889，约17.71%，而在AISLE和CELL下降。AISLE的首次实际动作分歧发生在第6步：修正版走22 m、转向56次、额外观察16次，原版为24 m、54次、10次；修正版覆盖与F1均下降。LOOP两版平移长度同为20 m，观察与转向分配改变后，两项指标反而提高。因此，实例资格改善、路径更短和建图更好是三个不同命题，不能用其中一个替代另一个。
+
+![三布局共同关联修正的全部实际配对路径](/root/NSO/docs/thesis/figures/article_ground_20260928/complete12_turnmarkers/ground_paired_routes.png)
+
+**图16** 全部12组闭环配对路径。灰虚线为原对象关联，彩实线为共同地面关联修正；两者均融合完整实测深度。全部布局按统一米制尺度显示，起终点、保存朝向及显式观察位置来自实际日志。CELL/G原运动完成，标注†的质量来自单独共同补测。[PDF](/root/NSO/docs/thesis/figures/article_ground_20260928/complete12_turnmarkers/ground_paired_routes.pdf)。
+
+![关联修正前后的覆盖、表面质量及乘积](/root/NSO/docs/thesis/figures/article_ground_20260928/complete12_turnmarkers/ground_paired_quality.png)
+
+**图17** 统一指标下的覆盖、全部四实例宏平均F1及联合分数。空心为原版本，实心为共同地面修正版。每点一条任务，三布局为描述性比较单元，不以方法数或帧数增加独立样本数。原CELL/G评价失败与其派生测量同时注明。[PDF](/root/NSO/docs/thesis/figures/article_ground_20260928/complete12_turnmarkers/ground_paired_quality.pdf)。
+
+两版各自的三个S/B配对均具有完全相同的实际动作和端点质量。地面修正版在CELL有23个实例—步记录的S/B后验不同，在LOOP有93个，但对应候选分数和行动均未改变。原开发及首批AISLE修正数据上的138个含类别直接候选池，在当前单同伴可达范围及乐观同伴资格下，也未能跨越直接目标排序边界。这是固定候选与自身证据下的解析机制检查，不覆盖诊断分支、新候选及未来轨迹，也不能把138个池当成独立实验。
+
+AISLE重复补看记录还表明，多尺度名义模板可能在已有视锥中持续领取新增面积：实际支持覆盖中心尺度后，缩放模板仍可能离支持点较远。方法章第8.5节的历史曝光去重因此另设版本检验；它排除曾尝试的名义机会，不把排除项写成已重建表面。该版本不追溯替换表8数据，实际闭环结果须另列。地面前端、曝光代理与共享可靠性的作用应分开解释。
+
+![三布局固定G方法的前端修正前后实际网格](/root/NSO/docs/thesis/figures/article_ground_meshes_20260928_v2/ground_frontend_meshes_G.png)
+
+**图18** 固定几何方法G的三类场景、参考几何及两版完整TSDF。九幅共享正交相机、米制尺度及高度配色，保留全部1,055,521个原始三角面，无补洞、平滑、抽稀或选择性区域裁剪；颜色不表示误差。CELL原G保留原评价失败身份，图中指标来自单独共同补测。整帧融合可以重建尚未被语义前端登记的实例表面，所以登记数量不能替代实际几何完整性。[PDF](/root/NSO/docs/thesis/figures/article_ground_meshes_20260928_v2/ground_frontend_meshes_G.pdf)。
+
 ## 11 本章小结
 
-本章完成了CPU虚拟传感、四接口决策、实际地图融合和独立终点评价的闭环验证。原完整配对确认支持类别输入带来6.1638%的平均联合收益，开发对照支持整体纠错政策带来2.6241%的平均收益。40个旧轨迹检查点进一步表明，在相同覆盖下，差异主要经由表面召回与F1形成，且短时负差和两个持平构型均保留。新增128项固定矩阵复现42步下6.2505%的类别收益，并在两个同族结构变体上取得4.2289%；同时明确30步的当前规划可行性边界与54步的收益反转。行动、信念和网格使这些结果具有过程解释，可支撑预算受限设施建档方案的受控可行性，真实小车实验可在此基础上作为补充应用展示。独立场景级扩展进一步完成三个开发布局的12条任务，其中原流程11条合格、1条评价失败；共同数值补测得到全部质量记录，但S/B仍在三个布局持平。固定路径分析定位了关联与信息到达过晚的问题，尚不能把前端时序改善写成新的规划收益。因而现有正结论仍来自受控局部实验，场景级共享效果与主矩阵需要后续独立闭环证据。
+本章完成了CPU虚拟传感、四接口决策、实际地图融合和独立终点评价的闭环验证。原完整配对确认支持类别输入带来6.1638%的平均联合收益，开发对照支持整体纠错政策带来2.6241%的平均收益。40个旧轨迹检查点进一步表明，在相同覆盖下，差异主要经由表面召回与F1形成，且短时负差和两个持平构型均保留。新增128项固定矩阵复现42步下6.2505%的类别收益，并在两个同族结构变体上取得4.2289%；同时明确30步的当前规划可行性边界与54步的收益反转。行动、信念和网格使这些结果具有过程解释，可支撑预算受限设施建档方案的受控可行性，真实小车实验可在此基础上作为补充应用展示。独立场景级扩展进一步完成三个开发布局的12条任务，其中原流程11条合格、1条评价失败；共同数值补测得到全部质量记录，但S/B仍在三个布局持平。固定路径分析定位了关联与信息到达问题；进一步12条共同前端闭环消融在环路提高质量、在另两类场景下降，且三组S/B仍持平。保存候选的可达可靠性分析说明，共享强度与观察代理也可能限制作用。因此，局部类别作用、场景级共同工程改进和新增共享贡献必须分开陈述，主矩阵不能以这些开发记录代替。
 
 ## 仓库来源对应表
 
@@ -345,6 +375,6 @@ AISLE中首个有信息的合格同类实例到第136步才进入共享，而原
 | 实物平台照片与接口示意 | [照片来源记录](/root/NSO/docs/thesis/figures/robot_platform_20260928/manifest.json) |
 | 环境与复核入口 | [平台复现说明](/root/NSO/docs/thesis/PLATFORM_REPRODUCTION_20260928.md) |
 | 128项预算、噪声与结构扰动 | [扩展结果](/root/NSO/docs/research/THESIS_EXPANSION_RESULT_20260928.md)、[完整长表](/root/NSO/audit_results/thesis_expansion_20260928/analysis_review/complete_endpoint_metrics.csv) |
-| 多实例方法、全部12条开发及真实轨迹 | [方法附录](/root/NSO/docs/thesis/ARTICLE_MULTI_INSTANCE_METHOD_APPENDIX_20260928.md)、[完整原流程表](/root/NSO/audit_results/article_stage_20260928/analysis_v1/development12_terminal_20260928/slots.csv)、[图13—14来源](/root/NSO/docs/thesis/figures/article_online_20260928/development12_terminal/manifest.json) |
+| 多实例方法、全部12条开发及真实轨迹 | [方法附录](/root/NSO/docs/thesis/ARTICLE_MULTI_INSTANCE_METHOD_APPENDIX_20260928.md)、[完整原流程表](/root/NSO/audit_results/article_stage_20260928/analysis_v1/development12_terminal_20260928/slots.csv)、[图13—14来源](/root/NSO/docs/thesis/figures/article_online_20260928/development12_turnmarkers/manifest.json) |
 | 全部共同补测及原失败区别 | [固定补测设计](/root/NSO/docs/research/ARTICLE_COMMON_NUMERIC_EVALUATION_DESIGN_20260928.md)、[CELL/G派生结果](/root/NSO/audit_results/article_stage_20260928/common_evaluation_v1/dev_CELL_G_b160_n92801/measurement/result.json) |
 | 固定路径关联修正与实际三维展示 | [回放分析](/root/NSO/audit_results/article_stage_20260928/analysis_v1/ground_v2_attempt03/summary.json)、[图15来源](/root/NSO/docs/thesis/figures/article_scene_meshes_20260928/aisle_gbs_v2/manifest.json) |

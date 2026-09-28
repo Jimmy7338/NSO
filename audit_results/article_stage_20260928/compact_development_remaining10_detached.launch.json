@@ -1,0 +1,8 @@
+{
+  "pid": 3248359,
+  "started_unix_s": 1790602693.1807938,
+  "script": "from pathlib import Path\nimport json\nfrom scripts.compact_article_episode_20260928 import apply_compaction\nb=Path('audit_results/article_stage_20260928');recovery=json.loads((b/'development_compaction_admin_resume.json').read_text())\nfor row in recovery['resume_only_untouched_plans']:\n result=apply_compaction(row['plan'],b/'compaction_receipts_v1/development_complete_cohort'/row['run_id'],row['plan_sha256'])\n print(json.dumps(result),flush=True)\n",
+  "new_worlds": 0,
+  "only_preapproved_raw_copies_removed": true,
+  "byte_exact_archives_preserved": true
+}

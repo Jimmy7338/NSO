@@ -1,0 +1,182 @@
+{
+  "all_checks_passed": true,
+  "baseline_source_archive_sha256": "75bab4f25e1aa3bd87da7ed0b6c913c97f8a4882a316e2b26a0644fd47e2001a",
+  "checks": 609,
+  "compatible_reader_checks": 6878,
+  "cumulative_registry": {
+    "counts": {
+      "ablation": 10,
+      "development": 12
+    },
+    "path": "audit_results/article_stage_20260928/execution_registry.json",
+    "phase_caps": {
+      "ablation": 24,
+      "development": 12,
+      "main": 96
+    },
+    "sha256": "c873dfb092d2d97bdb8f19ac354204a9e30473a3d516b7c9a70c9014526e9280",
+    "total_reserved_attempts": 22
+  },
+  "failures": [],
+  "ground_reason_counts": {
+    "ground_height_inconsistent_with_public_mount": 4,
+    "insufficient_ground_spatial_extent": 8,
+    "insufficient_near_ground_support": 7,
+    "measured_ground_band_excluded_from_association_only": 138,
+    "measured_ground_residual_exceeds_noise_contract": 4
+  },
+  "input_manifest_sha256": "898fa2edaeb2e6e0e8d33244decec61559b1b368405d683090c32beb7b807d33",
+  "mesh_preprocessing": {
+    "adapted_triangles_array_sha256": "387f93b6bfb7d26c0a477f348eb821f3e5352d0185a2bd5f54d240b0efe8bdf2",
+    "adapted_vertices_array_sha256": "131f851c5f01cde4a58cc5cf94042fbb247e335370cc7a251e2528af58538370",
+    "raw_faces": 137315,
+    "raw_vertices": 71878,
+    "removed_faces": 0,
+    "removed_original_face_indices": [],
+    "removed_total_area_m2": 0.0,
+    "retained_faces": 137315
+  },
+  "method": "NBV",
+  "metric_settings": {
+    "max_samples": 1000000,
+    "sample_spacing_m": 0.3,
+    "seed": 4002,
+    "threshold_m": 0.05
+  },
+  "metric_version": "article.common_numeric_face_evaluation.v1",
+  "metrics": {
+    "C_nav": 0.7957330912392192,
+    "J_nav": 0.46549144557277833,
+    "Q": 0.584984400796823,
+    "canonical_prediction_triangles": 137315,
+    "contract": "v40.observable-surface-static-1",
+    "correct_background_area_m2": 82.08204249889586,
+    "correct_target_out_of_reference_area_m2": 0.9952500906454789,
+    "depth_convention": "optical axial z; near_m and far_m both clip camera z, not radial distance",
+    "duplicate_prediction_area_removed_m2": 0.0,
+    "duplicate_prediction_triangles_removed": 0,
+    "extra_false_positive_area_m2": 0.5867802843592205,
+    "extra_false_positive_assignment": "nearest GT task instance, without a distance cutoff; prediction owner labels not accepted",
+    "full_mesh_global_precision": 0.9940812593317869,
+    "macro_completeness": 0.48833887438919726,
+    "macro_f1": 0.584984400796823,
+    "macro_precision": 0.971428737872625,
+    "no_prediction_roi_cropping": true,
+    "no_semantic_weighting": true,
+    "observable_target_true_positive_area_m2": 15.475307824185148,
+    "per_instance": [
+      {
+        "allocated_false_positive_area_m2": 0.28217945309326553,
+        "completeness": 0.7002457002457002,
+        "f1": 0.8098352955402734,
+        "instance_id": 0,
+        "precision": 0.9600911238464302,
+        "predicted_scored_area_m2": 7.070593819967171,
+        "predicted_true_positive_area_m2": 6.788414366873906,
+        "recall": 0.7002457002457002,
+        "reference_area_m2_estimate": 10.0936,
+        "reference_samples": 258
+      },
+      {
+        "allocated_false_positive_area_m2": 0.19122802601735261,
+        "completeness": 0.5404246694936393,
+        "f1": 0.688057439415789,
+        "instance_id": 1,
+        "precision": 0.9466672166472228,
+        "predicted_scored_area_m2": 3.5855624626310574,
+        "predicted_true_positive_area_m2": 3.394334436613705,
+        "recall": 0.5404246694936393,
+        "reference_area_m2_estimate": 6.414399999999998,
+        "reference_samples": 100
+      },
+      {
+        "allocated_false_positive_area_m2": 0.0,
+        "completeness": 0.01322748872236168,
+        "f1": 0.0261096128353979,
+        "instance_id": 2,
+        "precision": 1.0,
+        "predicted_scored_area_m2": 0.018358311451151216,
+        "predicted_true_positive_area_m2": 0.018358311451151216,
+        "recall": 0.01322748872236168,
+        "reference_area_m2_estimate": 7.197133333333339,
+        "reference_samples": 508
+      },
+      {
+        "allocated_false_positive_area_m2": 0.11337280524860224,
+        "completeness": 0.699457639095088,
+        "f1": 0.8159352553958316,
+        "instance_id": 3,
+        "precision": 0.978956610996847,
+        "predicted_scored_area_m2": 5.387573514494986,
+        "predicted_true_positive_area_m2": 5.274200709246384,
+        "recall": 0.699457639095088,
+        "reference_area_m2_estimate": 8.868633333333333,
+        "reference_samples": 484
+      }
+    ],
+    "precision_domain": "nearest GT target projection must be observable; correct background/out-of-reference area reported separately",
+    "prediction_empty": false,
+    "prediction_sample_spacing_m": 0.3,
+    "prediction_samples": 137315,
+    "prediction_seed": 4002,
+    "reachability_certified_by_this_evaluator": false,
+    "recall_domain": "fixed observable reference samples for every task instance; nearest complete prediction triangle",
+    "reference_fingerprint": "95dfb51c9dc102ba7f1f050607c18c01234f5d65d5d0ec302e0568923b82e091",
+    "reference_samples": 1350,
+    "route_used_to_select_reference": false,
+    "static_geometry_only": true,
+    "submitted_prediction_area_m2": 99.13938069808572,
+    "submitted_prediction_triangles": 137315,
+    "threshold_m": 0.05,
+    "total_prediction_area_m2": 99.13938069808572,
+    "visibility_boundary_approximation": "deterministic finite triangle-area quadrature; visibility boundary is not exact polygon clipping"
+  },
+  "new_policy_runs": 0,
+  "new_sensor_queries": 0,
+  "new_surface_evaluations": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "online_status": "controller_stop",
+  "paired_baseline": {
+    "baseline_failure_retained": false,
+    "configuration_provenance": {
+      "controller_final_sha256": "bd4d2c0d0f43aaaafbe285d9d79ce95a5b68d36c25ccc8dcfb4c0bce50d0f146",
+      "kind": "original_complete_artifact_seal",
+      "manifest_sha256": "d974c8c1ce902ae939054c577d2036f1440b3b01d2371ba55dfe1a218e9b15e0"
+    },
+    "online_status": "controller_stop",
+    "protocol": {
+      "path": "configs/virtual3d/article_development_v1_20260928.json",
+      "sha256": "2bfac2bb22995b9b90cdb870f214f6d584439db5d126c02480d806e82cebb4a9"
+    },
+    "quality_comparison_requires_common_derived_evaluation": true,
+    "run_id": "dev_CELL_NBV_b160_n92801"
+  },
+  "phase": "ablation",
+  "physics_metrics": {
+    "action_counts": {
+      "forward": 80,
+      "observe": 16,
+      "turn_left": 38,
+      "turn_right": 26
+    },
+    "budget": 160,
+    "collisions": 0,
+    "paid_actions": 160,
+    "returned_xy_and_yaw": true,
+    "rgbd_frames": 161,
+    "translation_m": 20.0
+  },
+  "protocol_sha256": "6621c39667e15a91f010d52c81f5a357049a447b6379246d07141953f631338a",
+  "qualified": true,
+  "reviewer_source_sha256": {
+    "scripts/review_article_episode_20260928.py": "ff4f9356d9aa75804e1dfdbc79fe44f5fd0d396f9e3c875c33f57410caf68280",
+    "scripts/review_article_ground_episode_20260928.py": "33ffb9d36fe9a6f34d19aa2cec023e48fe0c3b5cbdc08ca9dad4221ab0344321"
+  },
+  "run_id": "ground_CELL_NBV_b160_n92801",
+  "scene_id": "ART1_CELL_DEV",
+  "schema": "article.saved_episode_review.ground_v2",
+  "scope": "Saved receipt/physics compatibility plus independent ground/paired-protocol/derived-mesh checks; no new quality measurement",
+  "source_archive_sha256": "0f774ec8863ba6fcd50323cd2db7f6cc845f735decc24841f417f480c944cdb2",
+  "status": "reviewed"
+}

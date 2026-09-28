@@ -1,0 +1,8 @@
+{
+  "pid": 3246615,
+  "started_unix_s": 1790602498.3564672,
+  "script": "from pathlib import Path\nimport json\nfrom scripts.compact_article_episode_20260928 import apply_compaction\nb=Path('audit_results/article_stage_20260928');approval=json.loads((b/'development_compaction_approval_20260928.json').read_text())\nfor row in approval['records']:\n result=apply_compaction(row['plan'],b/'compaction_receipts_v1/development_complete_cohort'/row['run_id'],row['plan_sha256'])\n print(json.dumps(dict(run_id=row['run_id'],**result)),flush=True)\n",
+  "new_worlds": 0,
+  "only_preapproved_raw_copies_removed": true,
+  "byte_exact_archives_preserved": true
+}

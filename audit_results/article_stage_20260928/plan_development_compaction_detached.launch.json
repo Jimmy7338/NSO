@@ -1,0 +1,7 @@
+{
+  "pid": 3243279,
+  "started_unix_s": 1790602007.0337963,
+  "script": "from pathlib import Path\nimport json\nfrom scripts.compact_article_episode_20260928 import plan_compaction\nb=Path('audit_results/article_stage_20260928');entries=json.loads((b/'development_v1/start_ledger.json').read_text())['entries']\nfor entry in entries:\n if entry['status']!='controller_stop':continue\n run=entry['run_id'];suffix='_resumed' if run=='dev_LOOP_S_b160_n92801' else ''\n result=plan_compaction(b/'development_v1/episodes'/run,b/'episode_reviews_v1'/run,b/'episode_archives_v1'/(run+suffix+'.tar.xz'),b/'compaction_plans_v1/development_complete_cohort'/run)\n print(json.dumps(dict(run_id=run,**result)),flush=True)\n",
+  "new_worlds": 0,
+  "original_episodes_modified": false
+}

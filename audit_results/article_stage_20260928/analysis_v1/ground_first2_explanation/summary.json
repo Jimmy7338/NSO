@@ -1,0 +1,873 @@
+{
+  "first_action_witnesses": {
+    "ground_AISLE_B_b160_n92801__vs__dev_AISLE_B_b160_n92801": {
+      "decision_paid_step": 5,
+      "executed_action_paid_step": 6,
+      "left_next_action": "observe",
+      "right_next_action": "left",
+      "same_physical_observation": true
+    },
+    "ground_AISLE_G_b160_n92801__vs__dev_AISLE_G_b160_n92801": {
+      "decision_paid_step": 5,
+      "executed_action_paid_step": 6,
+      "left_next_action": "observe",
+      "right_next_action": "left",
+      "same_physical_observation": true
+    }
+  },
+  "limits": "First completed B/G only. Recorded utility decomposition, not new candidate scoring. After executed-action step6, trajectories differ and only descriptive downstream mechanisms are claimed. No S result or generalization conclusion.",
+  "new_quality_evaluations": 0,
+  "new_tsdf_integrations": 0,
+  "new_worlds": 0,
+  "runs": {
+    "dev_AISLE_B_b160_n92801": {
+      "actual_actions": {
+        "forward": 96,
+        "observe": 10,
+        "turn_left": 27,
+        "turn_right": 27
+      },
+      "arm": "GroundOff",
+      "elapsed_s": 254.6788658569567,
+      "initialization_actions_spent": 5,
+      "method": "B",
+      "metric_version": "article.common_numeric_face_evaluation.v1",
+      "metrics": {
+        "C_nav": 0.9992889310263096,
+        "F1": 0.8573627321588744,
+        "J_nav": 0.8567530881208377,
+        "P": 0.9219296742556982,
+        "R": 0.8192724375246199
+      },
+      "observed_instance_count": 4,
+      "observed_instances": [
+        {
+          "anchor_world_m": [
+            4.577318549156189,
+            2.3845839637021222,
+            0.820008645703395
+          ],
+          "first_applied_feedback": null,
+          "first_reliable_plane": null,
+          "first_steps": {
+            "first_observed_step": 0,
+            "first_qualified_class_step": 1
+          },
+          "instance_id": "instance_0000",
+          "observed_class": "rack"
+        },
+        {
+          "anchor_world_m": [
+            1.730038935196384,
+            2.397947769515545,
+            0.7988637688259282
+          ],
+          "first_applied_feedback": 136,
+          "first_reliable_plane": 11,
+          "first_steps": {
+            "first_observed_step": 6,
+            "first_qualified_class_step": 7
+          },
+          "instance_id": "instance_0001",
+          "observed_class": "cabinet"
+        },
+        {
+          "anchor_world_m": [
+            2.7587637901306157,
+            5.100687608122833,
+            0.7953768859306971
+          ],
+          "first_applied_feedback": 85,
+          "first_reliable_plane": 85,
+          "first_steps": {
+            "first_observed_step": 81,
+            "first_qualified_class_step": 84
+          },
+          "instance_id": "instance_0002",
+          "observed_class": "cabinet"
+        },
+        {
+          "anchor_world_m": [
+            5.818012237548828,
+            5.0933100779851355,
+            0.7963040336966515
+          ],
+          "first_applied_feedback": null,
+          "first_reliable_plane": null,
+          "first_steps": {
+            "first_observed_step": 94,
+            "first_qualified_class_step": 96
+          },
+          "instance_id": "instance_0003",
+          "observed_class": "rack"
+        }
+      ],
+      "original_qualified": true,
+      "original_status": "controller_stop",
+      "path_length_m": 24.0,
+      "per_instance_metrics": [
+        {
+          "allocated_false_positive_area_m2": 0.018809302962157975,
+          "completeness": 1.0,
+          "f1": 0.9985487181891591,
+          "instance_id": 0,
+          "precision": 0.9971016427115322,
+          "predicted_scored_area_m2": 6.489642611350032,
+          "predicted_true_positive_area_m2": 6.470833308387874,
+          "recall": 1.0,
+          "reference_area_m2_estimate": 6.4144000000000005,
+          "reference_samples": 100
+        },
+        {
+          "allocated_false_positive_area_m2": 0.29029421819883194,
+          "completeness": 0.5574918760402633,
+          "f1": 0.70184306900094,
+          "instance_id": 1,
+          "precision": 0.9470667626015812,
+          "predicted_scored_area_m2": 5.484157638306537,
+          "predicted_true_positive_area_m2": 5.193863420107705,
+          "recall": 0.5574918760402633,
+          "reference_area_m2_estimate": 10.093599999999995,
+          "reference_samples": 258
+        },
+        {
+          "allocated_false_positive_area_m2": 0.27661774153317986,
+          "completeness": 0.8878137274018774,
+          "f1": 0.9249671078571404,
+          "instance_id": 2,
+          "precision": 0.9653659050858743,
+          "predicted_scored_area_m2": 7.986862143187094,
+          "predicted_true_positive_area_m2": 7.710244401653914,
+          "recall": 0.8878137274018774,
+          "reference_area_m2_estimate": 9.573066666666673,
+          "reference_samples": 583
+        },
+        {
+          "allocated_false_positive_area_m2": 1.1618244714531119,
+          "completeness": 0.8317841466563387,
+          "f1": 0.804092033588258,
+          "instance_id": 3,
+          "precision": 0.7781843866238047,
+          "predicted_scored_area_m2": 5.237793921578817,
+          "predicted_true_positive_area_m2": 4.075969450125704,
+          "recall": 0.8317841466563387,
+          "reference_area_m2_estimate": 5.680400000000002,
+          "reference_samples": 352
+        }
+      ],
+      "return_first_decision_step": 126,
+      "selected_pure_inspection_goals": [
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 2.353261367317919,
+              "instance_id": "instance_0002",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 2.3532613673179195,
+          "paid_step": 86,
+          "view_id": "n_001_005:10"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.5582519980303534,
+              "instance_id": "instance_0002",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.5582519980303534,
+          "paid_step": 110,
+          "view_id": "n_002_005:6"
+        }
+      ],
+      "timings_s": {
+        "acquisition_s": 150.6516341897659,
+        "evidence_s": 37.074104653671384,
+        "final_mesh_s": 0.3398682386614382,
+        "mapping_s": 8.190558819565922,
+        "persistence_s": 3.0307951318100095,
+        "planning_s": 46.85568279447034
+      },
+      "xy_bounds_m": [
+        [
+          0.7499999999999982,
+          3.7500000000000018
+        ],
+        [
+          0.7499999999999947,
+          5.750000000000005
+        ]
+      ]
+    },
+    "dev_AISLE_G_b160_n92801": {
+      "actual_actions": {
+        "forward": 96,
+        "observe": 10,
+        "turn_left": 27,
+        "turn_right": 27
+      },
+      "arm": "GroundOff",
+      "elapsed_s": 211.16011927695945,
+      "initialization_actions_spent": 5,
+      "method": "G",
+      "metric_version": "article.common_numeric_face_evaluation.v1",
+      "metrics": {
+        "C_nav": 0.9992889310263096,
+        "F1": 0.8573627321588744,
+        "J_nav": 0.8567530881208377,
+        "P": 0.9219296742556982,
+        "R": 0.8192724375246199
+      },
+      "observed_instance_count": 4,
+      "observed_instances": [
+        {
+          "anchor_world_m": [
+            4.577318549156189,
+            2.3845839637021222,
+            0.820008645703395
+          ],
+          "first_applied_feedback": null,
+          "first_reliable_plane": null,
+          "first_steps": {
+            "first_observed_step": 0
+          },
+          "instance_id": "instance_0000",
+          "observed_class": "rack"
+        },
+        {
+          "anchor_world_m": [
+            1.730038935196384,
+            2.397947769515545,
+            0.7988637688259282
+          ],
+          "first_applied_feedback": 136,
+          "first_reliable_plane": 11,
+          "first_steps": {
+            "first_observed_step": 6
+          },
+          "instance_id": "instance_0001",
+          "observed_class": "cabinet"
+        },
+        {
+          "anchor_world_m": [
+            2.7587637901306157,
+            5.100687608122833,
+            0.7953768859306971
+          ],
+          "first_applied_feedback": 85,
+          "first_reliable_plane": 85,
+          "first_steps": {
+            "first_observed_step": 81
+          },
+          "instance_id": "instance_0002",
+          "observed_class": "cabinet"
+        },
+        {
+          "anchor_world_m": [
+            5.818012237548828,
+            5.0933100779851355,
+            0.7963040336966515
+          ],
+          "first_applied_feedback": null,
+          "first_reliable_plane": null,
+          "first_steps": {
+            "first_observed_step": 94
+          },
+          "instance_id": "instance_0003",
+          "observed_class": "rack"
+        }
+      ],
+      "original_qualified": true,
+      "original_status": "controller_stop",
+      "path_length_m": 24.0,
+      "per_instance_metrics": [
+        {
+          "allocated_false_positive_area_m2": 0.018809302962157975,
+          "completeness": 1.0,
+          "f1": 0.9985487181891591,
+          "instance_id": 0,
+          "precision": 0.9971016427115322,
+          "predicted_scored_area_m2": 6.489642611350032,
+          "predicted_true_positive_area_m2": 6.470833308387874,
+          "recall": 1.0,
+          "reference_area_m2_estimate": 6.4144000000000005,
+          "reference_samples": 100
+        },
+        {
+          "allocated_false_positive_area_m2": 0.29029421819883194,
+          "completeness": 0.5574918760402633,
+          "f1": 0.70184306900094,
+          "instance_id": 1,
+          "precision": 0.9470667626015812,
+          "predicted_scored_area_m2": 5.484157638306537,
+          "predicted_true_positive_area_m2": 5.193863420107705,
+          "recall": 0.5574918760402633,
+          "reference_area_m2_estimate": 10.093599999999995,
+          "reference_samples": 258
+        },
+        {
+          "allocated_false_positive_area_m2": 0.27661774153317986,
+          "completeness": 0.8878137274018774,
+          "f1": 0.9249671078571404,
+          "instance_id": 2,
+          "precision": 0.9653659050858743,
+          "predicted_scored_area_m2": 7.986862143187094,
+          "predicted_true_positive_area_m2": 7.710244401653914,
+          "recall": 0.8878137274018774,
+          "reference_area_m2_estimate": 9.573066666666673,
+          "reference_samples": 583
+        },
+        {
+          "allocated_false_positive_area_m2": 1.1618244714531119,
+          "completeness": 0.8317841466563387,
+          "f1": 0.804092033588258,
+          "instance_id": 3,
+          "precision": 0.7781843866238047,
+          "predicted_scored_area_m2": 5.237793921578817,
+          "predicted_true_positive_area_m2": 4.075969450125704,
+          "recall": 0.8317841466563387,
+          "reference_area_m2_estimate": 5.680400000000002,
+          "reference_samples": 352
+        }
+      ],
+      "return_first_decision_step": 126,
+      "selected_pure_inspection_goals": [
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 2.362007965025238,
+              "instance_id": "instance_0002",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 2.3620079650252377,
+          "paid_step": 86,
+          "view_id": "n_001_005:10"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.5597843379868509,
+              "instance_id": "instance_0002",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.559784337986851,
+          "paid_step": 110,
+          "view_id": "n_002_005:6"
+        }
+      ],
+      "timings_s": {
+        "acquisition_s": 124.5756276184693,
+        "evidence_s": 30.43073151167482,
+        "final_mesh_s": 0.33963425271213055,
+        "mapping_s": 6.320189987774938,
+        "persistence_s": 2.985480660572648,
+        "planning_s": 38.82764171482995
+      },
+      "xy_bounds_m": [
+        [
+          0.7499999999999982,
+          3.7500000000000018
+        ],
+        [
+          0.7499999999999947,
+          5.750000000000005
+        ]
+      ]
+    },
+    "ground_AISLE_B_b160_n92801": {
+      "actual_actions": {
+        "forward": 88,
+        "observe": 16,
+        "turn_left": 34,
+        "turn_right": 22
+      },
+      "arm": "GroundOn",
+      "elapsed_s": 307.0240034610033,
+      "initialization_actions_spent": 13,
+      "method": "B",
+      "metric_version": "article.common_numeric_face_evaluation.v1",
+      "metrics": {
+        "C_nav": 0.944536620052145,
+        "F1": 0.6911626410782391,
+        "J_nav": 0.6528284249103538,
+        "P": 0.9370764443605132,
+        "R": 0.5711172628398056
+      },
+      "observed_instance_count": 2,
+      "observed_instances": [
+        {
+          "anchor_world_m": [
+            4.577318549156189,
+            2.3845839637021222,
+            0.820008645703395
+          ],
+          "first_applied_feedback": null,
+          "first_reliable_plane": null,
+          "first_steps": {
+            "first_observed_step": 0,
+            "first_qualified_class_step": 1
+          },
+          "instance_id": "instance_0000",
+          "observed_class": "rack"
+        },
+        {
+          "anchor_world_m": [
+            1.7519301710029445,
+            2.397072494029999,
+            0.7963893676797549
+          ],
+          "first_applied_feedback": 17,
+          "first_reliable_plane": 17,
+          "first_steps": {
+            "first_observed_step": 15,
+            "first_qualified_class_step": 16
+          },
+          "instance_id": "instance_0001",
+          "observed_class": "cabinet"
+        }
+      ],
+      "original_qualified": true,
+      "original_status": "controller_stop",
+      "path_length_m": 22.0,
+      "per_instance_metrics": [
+        {
+          "allocated_false_positive_area_m2": 0.06603035930446333,
+          "completeness": 0.8650224494886504,
+          "f1": 0.9224554193231642,
+          "instance_id": 0,
+          "precision": 0.988057257393616,
+          "predicted_scored_area_m2": 5.528910860824089,
+          "predicted_true_positive_area_m2": 5.462880501519626,
+          "recall": 0.8650224494886504,
+          "reference_area_m2_estimate": 6.4144000000000005,
+          "reference_samples": 100
+        },
+        {
+          "allocated_false_positive_area_m2": 0.44728815355020557,
+          "completeness": 0.42514728805051394,
+          "f1": 0.5760160941183617,
+          "instance_id": 1,
+          "precision": 0.8928577937198431,
+          "predicted_scored_area_m2": 4.174714793352588,
+          "predicted_true_positive_area_m2": 3.727426639802382,
+          "recall": 0.42514728805051394,
+          "reference_area_m2_estimate": 10.093599999999995,
+          "reference_samples": 258
+        },
+        {
+          "allocated_false_positive_area_m2": 0.05155812208870451,
+          "completeness": 0.36226635839438426,
+          "f1": 0.5297500045580831,
+          "instance_id": 2,
+          "precision": 0.9852548145206095,
+          "predicted_scored_area_m2": 3.4966072255088005,
+          "predicted_true_positive_area_m2": 3.445049103420096,
+          "recall": 0.36226635839438426,
+          "reference_area_m2_estimate": 9.573066666666673,
+          "reference_samples": 583
+        },
+        {
+          "allocated_false_positive_area_m2": 0.338858875400314,
+          "completeness": 0.632032955425674,
+          "f1": 0.736429046313347,
+          "instance_id": 3,
+          "precision": 0.882135911807984,
+          "predicted_scored_area_m2": 2.874996791628921,
+          "predicted_true_positive_area_m2": 2.536137916228607,
+          "recall": 0.632032955425674,
+          "reference_area_m2_estimate": 5.680400000000002,
+          "reference_samples": 352
+        }
+      ],
+      "return_first_decision_step": 137,
+      "selected_pure_inspection_goals": [
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.6175165672560965,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.6175165672560965,
+          "paid_step": 27,
+          "view_id": "home:2"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.8934103535210631,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.893410353521063,
+          "paid_step": 60,
+          "view_id": "n_000_003:11"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.3492221333845391,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.3492221333845391,
+          "paid_step": 100,
+          "view_id": "n_000_004:11"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.3282321705639148,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.3282321705639148,
+          "paid_step": 103,
+          "view_id": "n_000_004:10"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.7630957110286136,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.7630957110286136,
+          "paid_step": 105,
+          "view_id": "n_000_004:9"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.7846168624294213,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.7846168624294213,
+          "paid_step": 107,
+          "view_id": "n_000_003:10"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.9535183487771022,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.9535183487771023,
+          "paid_step": 113,
+          "view_id": "n_002_003:8"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.7221465676409159,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.7221465676409159,
+          "paid_step": 128,
+          "view_id": "n_002_003:7"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.012474806503569318,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.01247480650356932,
+          "paid_step": 130,
+          "view_id": "n_001_003:7"
+        }
+      ],
+      "timings_s": {
+        "acquisition_s": 194.89421859337017,
+        "evidence_s": 57.9858741867356,
+        "final_mesh_s": 0.28566481126472354,
+        "mapping_s": 11.766140271443874,
+        "persistence_s": 5.558436549268663,
+        "planning_s": 26.86664307070896
+      },
+      "xy_bounds_m": [
+        [
+          0.7499999999999973,
+          2.7500000000000093
+        ],
+        [
+          0.75,
+          4.750000000000007
+        ]
+      ]
+    },
+    "ground_AISLE_G_b160_n92801": {
+      "actual_actions": {
+        "forward": 88,
+        "observe": 16,
+        "turn_left": 34,
+        "turn_right": 22
+      },
+      "arm": "GroundOn",
+      "elapsed_s": 284.8708011857234,
+      "initialization_actions_spent": 13,
+      "method": "G",
+      "metric_version": "article.common_numeric_face_evaluation.v1",
+      "metrics": {
+        "C_nav": 0.944536620052145,
+        "F1": 0.6911626410782391,
+        "J_nav": 0.6528284249103538,
+        "P": 0.9370764443605132,
+        "R": 0.5711172628398056
+      },
+      "observed_instance_count": 2,
+      "observed_instances": [
+        {
+          "anchor_world_m": [
+            4.577318549156189,
+            2.3845839637021222,
+            0.820008645703395
+          ],
+          "first_applied_feedback": null,
+          "first_reliable_plane": null,
+          "first_steps": {
+            "first_observed_step": 0
+          },
+          "instance_id": "instance_0000",
+          "observed_class": "rack"
+        },
+        {
+          "anchor_world_m": [
+            1.7519301710029445,
+            2.397072494029999,
+            0.7963893676797549
+          ],
+          "first_applied_feedback": 17,
+          "first_reliable_plane": 17,
+          "first_steps": {
+            "first_observed_step": 15
+          },
+          "instance_id": "instance_0001",
+          "observed_class": "cabinet"
+        }
+      ],
+      "original_qualified": true,
+      "original_status": "controller_stop",
+      "path_length_m": 22.0,
+      "per_instance_metrics": [
+        {
+          "allocated_false_positive_area_m2": 0.06603035930446333,
+          "completeness": 0.8650224494886504,
+          "f1": 0.9224554193231642,
+          "instance_id": 0,
+          "precision": 0.988057257393616,
+          "predicted_scored_area_m2": 5.528910860824089,
+          "predicted_true_positive_area_m2": 5.462880501519626,
+          "recall": 0.8650224494886504,
+          "reference_area_m2_estimate": 6.4144000000000005,
+          "reference_samples": 100
+        },
+        {
+          "allocated_false_positive_area_m2": 0.44728815355020557,
+          "completeness": 0.42514728805051394,
+          "f1": 0.5760160941183617,
+          "instance_id": 1,
+          "precision": 0.8928577937198431,
+          "predicted_scored_area_m2": 4.174714793352588,
+          "predicted_true_positive_area_m2": 3.727426639802382,
+          "recall": 0.42514728805051394,
+          "reference_area_m2_estimate": 10.093599999999995,
+          "reference_samples": 258
+        },
+        {
+          "allocated_false_positive_area_m2": 0.05155812208870451,
+          "completeness": 0.36226635839438426,
+          "f1": 0.5297500045580831,
+          "instance_id": 2,
+          "precision": 0.9852548145206095,
+          "predicted_scored_area_m2": 3.4966072255088005,
+          "predicted_true_positive_area_m2": 3.445049103420096,
+          "recall": 0.36226635839438426,
+          "reference_area_m2_estimate": 9.573066666666673,
+          "reference_samples": 583
+        },
+        {
+          "allocated_false_positive_area_m2": 0.338858875400314,
+          "completeness": 0.632032955425674,
+          "f1": 0.736429046313347,
+          "instance_id": 3,
+          "precision": 0.882135911807984,
+          "predicted_scored_area_m2": 2.874996791628921,
+          "predicted_true_positive_area_m2": 2.536137916228607,
+          "recall": 0.632032955425674,
+          "reference_area_m2_estimate": 5.680400000000002,
+          "reference_samples": 352
+        }
+      ],
+      "return_first_decision_step": 137,
+      "selected_pure_inspection_goals": [
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.7147036121007933,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.714703612100793,
+          "paid_step": 27,
+          "view_id": "home:2"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.8934802944102118,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.893480294410212,
+          "paid_step": 60,
+          "view_id": "n_000_003:11"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.34922674452852,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.3492267445285198,
+          "paid_step": 100,
+          "view_id": "n_000_004:11"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 1.3282451248816367,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 1.3282451248816367,
+          "paid_step": 103,
+          "view_id": "n_000_004:10"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.7631084153089425,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.7631084153089425,
+          "paid_step": 105,
+          "view_id": "n_000_004:9"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.7846060317109607,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.7846060317109607,
+          "paid_step": 107,
+          "view_id": "n_000_003:10"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.9535014646011329,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.9535014646011329,
+          "paid_step": 113,
+          "view_id": "n_002_003:8"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.7221364109144932,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.7221364109144931,
+          "paid_step": 128,
+          "view_id": "n_002_003:7"
+        },
+        {
+          "contributors": [
+            {
+              "fallback_reason": null,
+              "inspection_gain": 0.012472630554740955,
+              "instance_id": "instance_0001",
+              "repeated_view_excluded": false
+            }
+          ],
+          "expected_gain": 0.012472630554740953,
+          "paid_step": 130,
+          "view_id": "n_001_003:7"
+        }
+      ],
+      "timings_s": {
+        "acquisition_s": 179.6333989794366,
+        "evidence_s": 53.36332977935672,
+        "final_mesh_s": 0.38699698774144053,
+        "mapping_s": 11.028887163847685,
+        "persistence_s": 5.947336616925895,
+        "planning_s": 24.86939376872033
+      },
+      "xy_bounds_m": [
+        [
+          0.7499999999999973,
+          2.7500000000000093
+        ],
+        [
+          0.75,
+          4.750000000000007
+        ]
+      ]
+    }
+  },
+  "schema": "article.ground_first_two_explanation.v1"
+}
