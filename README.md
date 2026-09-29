@@ -1,5 +1,7 @@
 # NSO：面向工业设施的语义主动三维建图
 
+> **当前成果与换设备入口（2026-09-29）：** [最新 main（22 页）](docs/thesis/submission_20260929_revised/main.pdf) · [主文源稿与材料包](docs/thesis/CURRENT_MAIN.md) · [换设备交接](docs/research/DEVICE_MIGRATION_HANDOFF_20260929.md)。最新实验、论文和代码继续在本 NSO 仓库维护。
+
 > **仓库用途更新（2026-09-28）：** 清理后的独立项目已完整复制至 [SGAM 仓库](https://github.com/Jimmy7338/Semantic-Geometric-Active-Mapping)。本 NSO 仓库同时保存当前实现与恢复后的历史源码、依赖和实验资料，用于追溯与复现。恢复范围、旧环境缺件及两个仓库的区别见[迁移与恢复说明](docs/research/REPOSITORY_SPLIT_AND_RECOVERY_20260928.md)。
 
 NSO研究机器人如何在有限运动预算内选择观察位置，同时兼顾二维区域覆盖与设施三维表面质量。工业设备、工位及物料布置改变后，机器人需要重新获取环境；本项目验证单次任务内环境静止的主动观察与建档，不涉及动态避障。
@@ -11,7 +13,7 @@ NSO研究机器人如何在有限运动预算内选择观察位置，同时兼�
 | 材料 | 内容 |
 |---|---|
 | [毕业论文全文](docs/thesis/GRADUATION_THESIS_20260928.pdf) · [可编辑章节索引](docs/thesis/GRADUATION_DELIVERY_GUIDE_20260928.md) | 五章正文、中英文摘要、实验分析与复现附录 |
-| [JIRS格式主文](docs/thesis/submission_20260929/main.pdf) · [完整投稿材料ZIP](docs/thesis/submission_20260929.zip) | 20页、8图6表；作者信息和声明待签署，尚未投稿 |
+| [JIRS格式主文](docs/thesis/submission_20260929_revised/main.pdf) · [完整投稿材料ZIP](docs/thesis/submission_20260929_revised.zip) | 修订版22页、8图5表，补完整方法与算法；作者信息和声明待签署，尚未投稿 |
 | [答辩PPT](docs/thesis/defense_20260929/semantic_geometric_mapping_defense.pptx) · [PDF](docs/thesis/defense_20260929/semantic_geometric_mapping_defense.pdf) | 19页、讲稿与18项问答 |
 | [离线交互回放](docs/thesis/demos/v40_replay/index.html) · [复现索引](docs/research/FINAL_METHOD_REPRODUCTION_INDEX_20260929.md) | 实际保存轨迹与重建；无需GPU |
 | [完整英文证据稿](docs/thesis/VIRTUAL_PAPER_EN_20260928.pdf) | 36页、22图9表；包含全部扩展、消融与新布局 |
