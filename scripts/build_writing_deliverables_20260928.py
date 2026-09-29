@@ -25,7 +25,7 @@ THESIS_CHAPTERS = [DOCS/'GRADUATION_INTRODUCTION_20260928.md',
 THESIS_REFERENCES = DOCS/'GRADUATION_REFERENCES_20260928.md'
 ABSTRACTS = DOCS/'GRADUATION_ABSTRACTS_20260928.md'
 APPENDIX = DOCS/'GRADUATION_REPRODUCTION_APPENDIX_20260928.md'
-THESIS_TITLE = '面向预算受限设施建档的类别先验与几何反馈主动观测方法'
+THESIS_TITLE = '面向工业设施场景的语义—几何协同主动三维建图方法研究'
 
 
 @lru_cache(maxsize=512)
@@ -257,11 +257,12 @@ def prepare(document):
             '\\renewcommand{\\figurename}{Figure}\n'
             '\\renewcommand{\\tablename}{Table}\n\\begin{document}')
         preamble = preamble.replace('李兆宇','Zhaoyu Li').replace(
-            '2026年9月28日\\quad 虚拟实验论文审阅稿','28 September 2026\\quad Review draft')
+            '2026年9月28日\\quad 虚拟实验论文审阅稿','29 September 2026\\quad Review draft')
     elif document=='graduation':
         preamble = preamble.replace('虚拟实验论文审阅稿','毕业论文核心章节审阅稿')
     else:
         preamble = preamble.replace('虚拟实验论文审阅稿','毕业论文初稿（通用审阅版）')
+        preamble = preamble.replace('2026年9月28日','2026年9月29日')
         preamble = preamble.replace('\\begin{document}',
             '\\makeatletter\n'
             '\\def\\@seccntformat#1{\\ifcsname fmt@#1\\endcsname'
@@ -272,7 +273,11 @@ def prepare(document):
         preamble = preamble.replace('\\maketitle',
             '\\hypersetup{pageanchor=false}\n\\begin{titlepage}\n\\maketitle\\thispagestyle{empty}\n'
             '\\vfill\\begin{center}基于CPU虚拟实验的设施主动观测与建档\\\\[1em]\n'
-            '五章正文及中英文摘要\\\\[1em]供导师审阅与后续学校模板整理'
+            '学校：\\underline{\\hspace{55mm}}\\\\[1em]\n'
+            '学位：\\underline{\\hspace{55mm}}\\\\[1em]\n'
+            '专业：\\underline{\\hspace{55mm}}\\\\[1em]\n'
+            '指导教师：\\underline{\\hspace{48mm}}\\\\[2em]\n'
+            '通用学位论文格式；个人与学校信息按作者要求留空'
             '\\end{center}\n\\end{titlepage}\n\\pagenumbering{Roman}\n'
             '\\hypersetup{pageanchor=true}')
     for path in (Path(__file__),ROOT/'scripts/build_virtual_paper_review_20260928.py'):

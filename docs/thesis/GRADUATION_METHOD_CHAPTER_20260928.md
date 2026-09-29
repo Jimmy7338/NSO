@@ -39,9 +39,9 @@
 
 CPU路径将研究重点放在类别信息能否改变观察决策，以及错误先验能否被实测纠正。OV-SDF在此没有执行开放词汇网络或神经隐式表面重建；RPN-UQ也没有执行学习式风险预测。地图由共同重建后端维护，四模块负责围绕实测数据进行决策。这种实现划分使核心机制可在无独立显卡条件下运行，同时为后续模块替换保留接口。
 
-![四模块、实际重建与独立评价的信息流](/root/NSO/docs/thesis/figures/system_architecture_20260928/system_architecture.png)
+![四模块、实际重建与独立评价的信息流](/root/NSO/docs/thesis/figures/final_architecture_20260929/final_architecture.png)
 
-**图1** 平台接口、四模块CPU虚拟验证与独立重建评价。OV-SDF和IGCR共同更新构型信念，STGHP选出下一原子动作，经RPN-UQ检查后执行并获取新观测。公开模板支持信念与规划，TSDF仅融合实测深度，真值仅用于输出封存后的评价。小车图基于用户平台照片生成式合成，用于接口说明；传感、地图和网格缩略图为机制示意。[PDF](/root/NSO/docs/thesis/figures/system_architecture_20260928/system_architecture.pdf)。
+**图1** 平台接口、四模块CPU虚拟验证与独立重建评价。OV-SDF和IGCR共同更新构型信念，STGHP选出下一原子动作，经RPN-UQ检查后执行并获取新观测。公开模板支持信念与规划，TSDF仅融合实测深度，真值仅用于输出封存后的评价。小车为未经内容修改的用户供图，用于后续ROS 1接口说明；流程框线由程序绘制为矢量图，性能结论来自CPU仿真。[PDF](/root/NSO/docs/thesis/figures/final_architecture_20260929/final_architecture.pdf)。
 
 ## 3 观测接口与地图数据流
 
@@ -362,7 +362,7 @@ r=\frac{\sum_hq_1(h)\ell_h}{\sum_hq_0(h)\ell_h},\qquad
 - 类别登记、几何残差与诊断节点：[observation_belief_v35.py](/root/NSO/nso/observation_belief_v35.py)。
 - 有限动态规划与返航约束：[online_planner_v35.py](/root/NSO/nso/online_planner_v35.py)。
 - 公式、参数及测量范围：[V38_IMPLEMENTED_METHODS_20260920.md](/root/NSO/docs/thesis/V38_IMPLEMENTED_METHODS_20260920.md)、[VIRTUAL_PAPER_ALGORITHM_20260928.md](/root/NSO/docs/thesis/VIRTUAL_PAPER_ALGORITHM_20260928.md)。
-- 图1源文件：[system_architecture.pdf](/root/NSO/docs/thesis/figures/system_architecture_20260928/system_architecture.pdf)。
+- 图1源文件：[system_architecture.pdf](/root/NSO/docs/thesis/figures/final_architecture_20260929/final_architecture.pdf)。
 
 - 双构型数值例子与原始日志定位：[METHOD_WORKED_EXAMPLE_20260928.md](/root/NSO/docs/thesis/METHOD_WORKED_EXAMPLE_20260928.md)。
 - 运行环境、固定版本及复核入口：[PLATFORM_REPRODUCTION_20260928.md](/root/NSO/docs/thesis/PLATFORM_REPRODUCTION_20260928.md)。

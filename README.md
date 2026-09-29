@@ -4,24 +4,26 @@
 
 NSO研究机器人如何在有限运动预算内选择观察位置，同时兼顾二维区域覆盖与设施三维表面质量。工业设备、工位及物料布置改变后，机器人需要重新获取环境；本项目验证单次任务内环境静止的主动观察与建档，不涉及动态避障。
 
-当前交付按**先形成可投稿文章，再扩展毕业论文**推进，CPU虚拟实验为主要证据；两稿同步积累，实车验证后置。保留 OV-SDF、STGHP、RPN-UQ、IGCR 四模块和规划—执行层次。[当前路线](docs/research/ARTICLE_FIRST_ROADMAP_20260928.md)优先补强方法差别、理论解释、场景级对照及真实轨迹展示。
+本轮按[固定最终目标](docs/research/FINAL_PAPER_THESIS_TARGETS_20260929.md)收尾，CPU虚拟实验为主要证据，保留 OV-SDF、STGHP、RPN-UQ、IGCR 四接口和规划—执行层次。最后八次新布局验证已完成，不再自动扩增实验。[最终交付入口](docs/research/FINAL_DELIVERY_20260929.md)集中提供期刊格式包、毕业论文、答辩与复现材料。正式投稿与学校评阅是后续外部流程。
 
 ## 论文与展示
 
 | 材料 | 内容 |
 |---|---|
 | [毕业论文全文](docs/thesis/GRADUATION_THESIS_20260928.pdf) · [可编辑章节索引](docs/thesis/GRADUATION_DELIVERY_GUIDE_20260928.md) | 五章正文、中英文摘要、实验分析与复现附录 |
-| [方法与实验核心稿](docs/thesis/GRADUATION_CORE_20260928.pdf) | 独立两章审阅版 |
-| [英文文章](docs/thesis/VIRTUAL_PAPER_EN_20260928.pdf) · [中文文章](docs/thesis/VIRTUAL_PAPER_REVIEW_20260928.pdf) | 同一组证据的文章稿 |
-| [系统架构图](docs/thesis/figures/system_architecture_20260928/system_architecture.pdf) | 小车平台、四模块、实测重建与离线评价 |
+| [JIRS格式主文](docs/thesis/submission_20260929/main.pdf) · [完整投稿材料ZIP](docs/thesis/submission_20260929.zip) | 20页、8图6表；作者信息和声明待签署，尚未投稿 |
+| [答辩PPT](docs/thesis/defense_20260929/semantic_geometric_mapping_defense.pptx) · [PDF](docs/thesis/defense_20260929/semantic_geometric_mapping_defense.pdf) | 19页、讲稿与18项问答 |
+| [离线交互回放](docs/thesis/demos/v40_replay/index.html) · [复现索引](docs/research/FINAL_METHOD_REPRODUCTION_INDEX_20260929.md) | 实际保存轨迹与重建；无需GPU |
+| [完整英文证据稿](docs/thesis/VIRTUAL_PAPER_EN_20260928.pdf) | 36页、22图9表；包含全部扩展、消融与新布局 |
+| [系统架构图](docs/thesis/figures/final_architecture_20260929/final_architecture.pdf) | 小车平台、四模块、实测重建与离线评价 |
 | [场景与三维重建展示](docs/thesis/figures/scene_details_20260928/) | 场景、实际路线、同视角网格与局部细节 |
 | [重建过程与实际路径](docs/research/ARTICLE_RECONSTRUCTION_CHECKPOINTS_20260928.md) | 40个真实重融合检查点、完整动作成本及同视角网格 |
-| [方法诊断与新场景](docs/research/ARTICLE_METHOD_DIAGNOSIS_20260928.md) | 反馈/候选阻断分析；9个预先设计布局，在线开发进行中 |
+| [最后布局验证](docs/research/FINAL_VALIDATION_INDEPENDENT_REVIEW_20260929.md) | 2个新背景布局、8次任务；1胜3平、均值+2.9818%，全部报告 |
 | [当前进度](docs/research/CURRENT_RESEARCH_STATE.json) · [接续计划](docs/research/GOAL_PROMPT.md) | 最新结果、证据边界与文章优先接续事项 |
 
-![NSO system architecture](docs/thesis/figures/system_architecture_20260928/system_architecture.png)
+![NSO system architecture](docs/thesis/figures/final_architecture_20260929/final_architecture.png)
 
-架构图中的小车由用户提供的照片生成式合成，传感与地图缩略图为机制示意；实际实验结果使用独立保存的路线与网格图。
+架构图使用未经生成式修改的用户小车图与程序绘制的矢量框图；实际实验结果来自保存的观测、路线与网格。照片说明可用平台，不代表实车性能实验。
 
 ## 四模块与实现
 
@@ -37,10 +39,12 @@ NSO研究机器人如何在有限运动预算内选择观察位置，同时兼�
 ## 已保存的实验
 
 - **主确认：** 两布局、每布局两构型，四组G/S配对为两胜两平，平均联合指标相对提高6.1638%，收益来自表面F1改善，平均覆盖相同。
+- **冻结策略新布局：** 8/8合格，四配对一胜三平，平均联合指标+2.9818%；相同设施族与公开模板，只改变预登记背景通行结构。
 - **错误先验与纠错：** 整体纠错政策的开发批联合指标提高2.6241%；严格2 cm阈值下保留负例。
 - **独立扩展：** 128项全部保留，96项合格完成，32项为低预算规划不可行。42步原布局与同族变体的平均类别收益为6.2505%和4.2289%；54步原布局为−0.6995%。见[完整结果](docs/research/THESIS_EXPANSION_RESULT_20260928.md)。
 - **其他机制：** [SWAP-I/VISTA-I共同CPU比较](docs/research/V39_EXTERNAL_CPU_RESULTS_20260920.md)与[TARE核心迁移](docs/research/V39_TARE_TRANSFER_RESULT_20260920.md)分别说明机制和工程接口，非原作者完整系统的统一排名。
-- **后续开发：** [六父场景开发与消融](docs/research/SEMANTIC_DEVELOPMENT_RESULT_BRIEF_20260923.md)未达到其预定收益门，保留原始记录，与论文主确认分开报告。
+- **三布局场景扩展：** 3版本×12条共36次尝试；35次原流程合格，1次原评价失败保留派生补测。9组共享S/B均持平，48条保留主矩阵未执行。
+- **较早开发：** [六父场景开发与消融](docs/research/SEMANTIC_DEVELOPMENT_RESULT_BRIEF_20260923.md)未达到其预定收益门，保留原始记录，与论文主确认分开报告。
 
 这些结果支持公开设施模板、共同导航图、受控类别输入及准确位姿条件下的机制价值；噪声重复和同族变体不视为新增独立父布局。
 

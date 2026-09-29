@@ -1,0 +1,23 @@
+\begin{table}[!htbp]
+\caption{All 36 scene-level joint scores under a common numerical evaluator. Pipeline success preserves each version's original status}\label{tab:5}
+\small\setlength{\tabcolsep}{3pt}
+\setlength{\JournalTableWidth}{\dimexpr\linewidth-10\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.26\JournalTableWidth} >{\raggedright\arraybackslash}p{0.148\JournalTableWidth} >{\raggedright\arraybackslash}p{0.148\JournalTableWidth} >{\raggedright\arraybackslash}p{0.148\JournalTableWidth} >{\raggedright\arraybackslash}p{0.148\JournalTableWidth} >{\raggedright\arraybackslash}p{0.148\JournalTableWidth}@{}}
+\toprule
+Version/layout & NBV & G & B & S & Pipeline success \\
+\midrule
+Original/AISLE & 0.856753 & 0.856753 & 0.856753 & 0.856753 & 4/4 \\
+Original/CELL & 0.689542 & 0.765328\textsuperscript{a} & 0.766521 & 0.766521 & 3/4 \\
+Original/LOOP & 0.620599 & 0.620599 & 0.620599 & 0.620599 & 4/4 \\
+Ground/AISLE & 0.652828 & 0.652828 & 0.652828 & 0.652828 & 4/4 \\
+Ground/CELL & 0.465491 & 0.533627 & 0.531167 & 0.531167 & 4/4 \\
+Ground/LOOP & 0.730488 & 0.730488 & 0.730488 & 0.730488 & 4/4 \\
+Exposure/AISLE & 0.782938 & 0.782938 & 0.734222 & 0.734222 & 4/4 \\
+Exposure/CELL & 0.515457 & 0.786500 & 0.786500 & 0.786500 & 4/4 \\
+Exposure/LOOP & 0.736447 & 0.736447 & 0.690253 & 0.690253 & 4/4 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]\footnotesize
+\item[a] Original CELL/G completes motion and return but its evaluator rejects a finite triangle of area \(4.24\times10^{-13}\,\mathrm m^2\). The displayed score is a separately derived measurement under the common \(5\times10^{-13}\,\mathrm m^2\) face threshold. It does not replace the original failure status.
+\end{tablenotes}
+\end{table}

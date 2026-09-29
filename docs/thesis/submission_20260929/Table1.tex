@@ -1,0 +1,15 @@
+\begin{table}[!htbp]
+\caption{Four CPU interfaces and their executed roles}\label{tab:1}
+\small\setlength{\tabcolsep}{3pt}
+\setlength{\JournalTableWidth}{\dimexpr\linewidth-4\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\JournalTableWidth} >{\raggedright\arraybackslash}p{0.32\JournalTableWidth} >{\raggedright\arraybackslash}p{0.52\JournalTableWidth}@{}}
+\toprule
+Interface & Input & Output and role \\
+\midrule
+OV-SDF & Acquired RGB, pose, measured-map summary & Register category support and configuration prior \\
+STGHP & Graph, exposure sets, beliefs, remaining budget & Compare feasible continuations and select a subgoal \\
+RPN-UQ & Proposed edge, budget, return distance & Permit or reject the executable action \\
+IGCR & Acquired depth/scan and public predictions & Bound geometric evidence and revise belief \\
+\bottomrule
+\end{tabular}
+\end{table}

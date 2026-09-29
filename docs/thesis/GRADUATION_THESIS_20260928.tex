@@ -10,7 +10,7 @@
 \usepackage{geometry,caption,hyperref,flafter}
 \geometry{left=22mm,right=22mm,top=23mm,bottom=24mm}
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,
- pdftitle={面向预算受限设施建档的类别先验与几何反馈主动观测方法},pdfauthor={李兆宇}}
+ pdftitle={面向工业设施场景的语义---几何协同主动三维建图方法研究},pdfauthor={李兆宇}}
 \captionsetup{font=small,labelfont=bf,labelsep=quad}
 \setlength{\parskip}{3pt}
 \setlength{\emergencystretch}{3em}
@@ -24,9 +24,9 @@
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \providecommand{\passthrough}[1]{#1}
 \providecommand{\pandocbounded}[1]{#1}
-\title{\textbf{面向预算受限设施建档的类别先验与几何反馈主动观测方法}}
+\title{\textbf{面向工业设施场景的语义---几何协同主动三维建图方法研究}}
 \author{李兆宇}
-\date{2026年9月28日\quad 毕业论文初稿（通用审阅版）}
+\date{2026年9月29日\quad 毕业论文初稿（通用审阅版）}
 \DeclareMathSizes{10.95}{10.95}{8}{7}
 \clubpenalty=10000
 \widowpenalty=10000
@@ -43,7 +43,11 @@
 \begin{titlepage}
 \maketitle\thispagestyle{empty}
 \vfill\begin{center}基于CPU虚拟实验的设施主动观测与建档\\[1em]
-五章正文及中英文摘要\\[1em]供导师审阅与后续学校模板整理\end{center}
+学校：\underline{\hspace{55mm}}\\[1em]
+学位：\underline{\hspace{55mm}}\\[1em]
+专业：\underline{\hspace{55mm}}\\[1em]
+指导教师：\underline{\hspace{48mm}}\\[2em]
+通用学位论文格式；个人与学校信息按作者要求留空\end{center}
 \end{titlepage}
 \pagenumbering{Roman}
 \hypersetup{pageanchor=true}
@@ -53,7 +57,7 @@
 
 本文通过OV-SDF、STGHP、RPN-UQ、IGCR四个接口连接观测、构型信念、诊断规划和返航检查，构建无独立显卡条件下的分层决策与执行框架。局部双构型实现选择下一原子动作，多实例扩展选择付费观察宏动作并逐步执行。公开模板只用于预测，实际三维地图仅融合已经取得的深度；规划代理与终点评价分别计算。
 
-局部配对确认在两个已见父布局、每布局两种构型上取得两胜两平，相对共同主动几何对照，覆盖率与设施表面F1@5 cm乘积的平均值提高6.16\%，平均覆盖率相同。错误类别实验中，包含实测更新与未来纠错预期的整体政策提高平均联合指标2.62\%。另一个固定128项扩展保留96项合格结果与32项低预算规划失败；42步原布局及同族变体的类别收益分别为6.25\%和4.23\%，54步原布局则为−0.70\%。
+局部配对确认在两个已见父布局、每布局两种构型上取得两胜两平，相对共同主动几何对照，覆盖率与设施表面F1@5 cm乘积的平均值提高6.16\%，平均覆盖率相同。错误类别实验中，包含实测更新与未来纠错预期的整体政策提高平均联合指标2.62\%。另在两种预先冻结的新背景布局中执行八次任务，四组配对一胜三平，平均联合指标提高2.98\%；该结果检验同设施族的背景布局变化。另一个固定128项扩展保留96项合格结果与32项低预算规划失败；42步原布局及同族变体的类别收益分别为6.25\%和4.23\%，54步原布局则为−0.70\%。
 
 独立场景级研究在三个开发布局上完成原开发、共同地面关联消融及历史曝光消融各12次，共36次尝试。原流程的一项评价失败与共同数值补测分别保留，其余35项合格。共同组件的效果随布局和方法改变，三个版本中的共享可靠性S与固定类别先验B均无行动或质量差异。动作级复核另表明，类别可以改变所选目标却降低端点质量，几何诊断规划可以改变路径却未在该诊断帧获得预期信息。结果支持局部类别利用与纠错的条件作用，未建立额外共享收益。本研究验证受控输入与准确位姿下的主动观测和实测建档流程，不宣称SLAM定位精度提升或普遍的跨实例语义优势。
 
@@ -65,7 +69,7 @@ Changes to industrial equipment and workstation layouts create a need to reacqui
 
 A CPU framework connects observations, configuration beliefs, diagnostic planning, and return checks through four module interfaces. The local binary implementation selects atomic actions; a separate multi-instance extension selects paid observation macros for primitive execution. Public templates support prediction, while three-dimensional maps contain only fused acquired depth. Planning proxies remain separate from measured endpoint quality.
 
-Local confirmation uses two previously seen layouts with two configurations each. Compared with a shared active geometric control, category conditioning achieves two wins and two ties, improving the mean coverage--surface-F1 product by 6.16\% at identical mean coverage. A complete correction policy improves the mean joint score by 2.62\% under incorrect category inputs. A fixed 128-trial extension retains 96 qualified completions and 32 low-budget planning failures. At budget 42, category gains are 6.25\% on original layouts and 4.23\% on same-family variants; the original-layout difference becomes −0.70\% at budget 54.
+Local confirmation uses two previously seen layouts with two configurations each. Compared with a shared active geometric control, category conditioning achieves two wins and two ties, improving the mean coverage--surface-F1 product by 6.16\% at identical mean coverage. A complete correction policy improves the mean joint score by 2.62\% under incorrect category inputs. Eight further tasks in two preregistered background layouts give one win and three ties, with a 2.98\% mean joint gain under the frozen policy and the same facility family. A fixed 128-trial extension retains 96 qualified completions and 32 low-budget planning failures. At budget 42, category gains are 6.25\% on original layouts and 4.23\% on same-family variants; the original-layout difference becomes −0.70\% at budget 54.
 
 A separate scene-level study completes 36 attempts across three development layouts and three controller versions: original, ground-aware, and exposure-discounted. One original evaluation failure and its numerical supplement remain distinguished; the other 35 attempts qualify. Component effects depend on layout and policy, while shared reliability S and fixed category prior B have identical actions and quality within every version. Saved decision sequences further show that an active category cue can lower quality, and diagnostic planning can change a path without obtaining the anticipated feedback at the diagnostic frame. The evidence supports conditional local category and correction benefits, but no additional sharing benefit. The thesis validates controlled observation and reconstruction with exact poses, not improved SLAM localization accuracy.
 
@@ -158,6 +162,8 @@ VISTA使用在线语义高斯地图支持开放词汇任务，并结合语义相
 
 \hypertarget{ux7814ux7a76ux5185ux5bb9ux4e0eux4e3bux8981ux5de5ux4f5c}{%
 \subsection{研究内容与主要工作}\label{ux7814ux7a76ux5185ux5bb9ux4e0eux4e3bux8981ux5de5ux4f5c}}
+
+本文围绕三个方面形成研究贡献。第一，构建类别条件的预算受限主动观测方法，将构型先验、诊断前瞻、返航检查与实测表面融合连接为可执行闭环，并以保留相同主动几何能力的对照检验类别信息的增量。第二，分析类别置信、诊断代价和观察方向效用的关系，以保存决策与同状态后验干预说明提前选向和几何纠错的机制。第三，结合配对路径、实际TSDF网格、固定重建时点及预算/几何扩展，建立从观察选择到实际表面质量的证据。贡献对应于设施任务中的方法组合、机制解释和条件性验证，不将标准贝叶斯更新或四接口名称本身作为新算法发现。
 
 本文首先面向工业设施的主动建图需求，构建预算受限建档的任务与实现框架。系统通过OV-SDF、STGHP、RPN-UQ、IGCR四个接口，将观测登记、目标选择、执行检查和几何反馈连接起来，形成决策与执行职责明确的分层结构。局部CPU实现选择下一原子动作；独立多实例实现选择付费观察宏动作，由局部执行器逐步完成。实际地图均由共同深度融合后端维护，形成可运行的传感、决策、执行和评价闭环。
 
@@ -367,8 +373,8 @@ CPU路径将研究重点放在类别信息能否改变观察决策，以及错�
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/system_architecture_20260928/system_architecture.pdf}
-\caption{平台接口、四模块CPU虚拟验证与独立重建评价。OV-SDF和IGCR共同更新构型信念，STGHP选出下一原子动作，经RPN-UQ检查后执行并获取新观测。公开模板支持信念与规划，TSDF仅融合实测深度，真值仅用于输出封存后的评价。小车图基于用户平台照片生成式合成，用于接口说明；传感、地图和网格缩略图为机制示意。}\label{fig:writing-1}
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_architecture_20260929/final_architecture.pdf}
+\caption{平台接口、四模块CPU虚拟验证与独立重建评价。OV-SDF和IGCR共同更新构型信念，STGHP选出下一原子动作，经RPN-UQ检查后执行并获取新观测。公开模板支持信念与规划，TSDF仅融合实测深度，真值仅用于输出封存后的评价。小车为未经内容修改的用户供图，用于后续ROS 1接口说明；流程框线由程序绘制为矢量图，性能结论来自CPU仿真。}\label{fig:writing-1}
 \end{figure}
 
 \hypertarget{ux89c2ux6d4bux63a5ux53e3ux4e0eux5730ux56feux6570ux636eux6d41}{%
@@ -1309,10 +1315,61 @@ CELL的G/NBV则检验未来诊断分支。两者前20帧实测输入相同；第
 
 根据执行前声明的启动条件，至少需要一个S/B在共同实际输入前缀中的共享信息---可执行目标---实际动作分歧链，才开启六个保留布局的48条主比较。当前三个版本、九个S/B配对均无实际动作分歧，该必要条件没有满足，故本轮不执行主矩阵，不再追加第四轮开发。保留布局结果属于未执行，不能列为失败、零分或已完成测试。这一停止决策不否定原局部类别增益，但限定了当前场景级共享机制的结论。
 
+\hypertarget{ux51bbux7ed3ux7b56ux7565ux7684ux65b0ux589eux80ccux666fux5e03ux5c40ux9a8cux8bc1}{%
+\subsection{冻结策略的新增背景布局验证}\label{ux51bbux7ed3ux7b56ux7565ux7684ux65b0ux589eux80ccux666fux5e03ux5c40ux9a8cux8bc1}}
+
+为检验局部类别选向是否依赖原有通行结构，最后一轮在查看结果前固定两种新背景布局。侧通道立柱占据一个右侧导航中心；后侧隔离台截断直接沿后方通过的路径。两者沿用P00设施族、公开双模板和原确认噪声种子350918，不改变控制器、类别映射、相机模型、TSDF、设施评价域、共同18动作前缀与42动作预算。各布局保留全部合法安全格点，共23个位置、92个朝向姿态。每布局两构型与G/S形成八次任务、四组配对；新增独立单位是两个背景布局，不是八个场景或新的设备类别。
+
+所有任务均完成42动作、43帧采集，无碰撞并恢复起始位置和朝向。表16保留全部结果：平均覆盖相同，为0.934732；G/S平均精确率为0.864441/0.870224，召回率为0.672455/0.704742，F1为0.754450/0.777445，联合指标为0.705188/0.726215。联合指标相对提高2.9818\%，四组为一胜三平；2和10 cm阈值下相对均值差分别为2.8176\%和3.1200\%。样本量仅为两个新背景布局，故采用描述性配对报告，不将构型和方法当作独立布局重复。
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{表16 两个新背景布局中的全部配对结果；八任务均合格。}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-10\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth}@{}}
+\toprule
+布局／构型 & 共同覆盖 & G F1 & S F1 & G联合指标 & S联合指标 \\
+\midrule
+侧柱／h0 & 0.954145 & 0.806490 & 0.806490 & 0.769508 & 0.769508 \\
+侧柱／h1 & 0.955908 & 0.702575 & 0.702575 & 0.671597 & 0.671597 \\
+后隔台／h0 & 0.914439 & 0.806490 & 0.806490 & 0.737485 & 0.737485 \\
+后隔台／h1 & 0.914439 & 0.702246 & 0.794224 & 0.642160 & 0.726269 \\
+平均 & 0.934732 & 0.754450 & 0.777445 & 0.705188 & 0.726215 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_validation_20260929/transfer_paths.pdf}
+\caption{全部四组G/S实际路径，采用共同米制尺度。灰色为共同付费前缀，阴影为新增背景，箭头为保存朝向，星形为起终点。三组路径完全重合，后隔台h1在第19动作分歧。背景真值只用于离线图示。}\label{fig:writing-23}
+\end{figure}
+
+侧柱布局的持平并非右边不能去：第18步左右候选均满足返航约束。类别先验改变了候选评分，却未改变共同选左的排序；h0和h1后续分别有24次和16次同输入规划评分改变，实际动作始终相同。后隔台h1中，G的左右评分在冻结的数值容差内相同，按既定顺序选左；S的左右评分约为0.612602和0.642068，转而选右。此时两者非语义观测前缀完全相同、几何对数优势均为0，构型权重分别为G的0.5/0.5和S的0.1/0.9。第19个真实动作因此发生分歧，终点在相同覆盖下提高表面召回和F1。归因对象是整条类别条件路线，不能据此为其中某一帧单独分配端点收益。
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_validation_20260929/transfer_meshes.pdf}
+\caption{全部八次新增任务的实际TSDF设施网格。各配对共用相机、尺度和光照，所有保存三角面参与绘制，无平滑、补洞或模板补全。原设施评价裁剪保持不变，新增背景在该域之外；明暗不表示误差。}\label{fig:writing-24}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_validation_20260929/transfer_quality.pdf}
+\caption{四个配对条件的覆盖、表面F1及联合指标。C/P分别表示侧柱和后隔台布局。全部持平与正差均保留，纵轴统一为0---1；不附加跨独立布局的显著性结论。}\label{fig:writing-25}
+\end{figure}
+
+G/S平均平移距离27.0/26.5 m，转向15.0/15.5次。Intel Xeon（Sapphire Rapids）四逻辑CPU主机上，单线程规划累计壁钟均值约0.0474/0.0484 s，包含传感、融合及评价的完整单任务耗时约5.0---5.8 s。时间只描述当前CPU环境，不作为跨硬件速度排名。独立审阅核对全部344帧、实际深度及扫描残差、先验与后验、选择的动作、返航、源代码摘要与评分算术。八次执行均成功，未使用额外八次预留；至此停止新增科研任务。
+
 \hypertarget{ux672cux7ae0ux5c0fux7ed3-2}{%
 \subsection{本章小结}\label{ux672cux7ae0ux5c0fux7ed3-2}}
 
-本章完成了CPU虚拟传感、四接口决策、实际地图融合和独立终点评价的闭环验证。原完整配对确认支持类别输入带来6.1638\%的平均联合收益，开发对照支持整体纠错政策带来2.6241\%的平均收益。40个旧轨迹检查点进一步表明，在相同覆盖下，差异主要经由表面召回与F1形成，且短时负差和两个持平构型均保留。新增128项固定矩阵复现42步下6.2505\%的类别收益，并在两个同族结构变体上取得4.2289\%；同时明确30步的当前规划可行性边界与54步的收益反转。行动、信念和网格使这些结果具有过程解释，可支撑预算受限设施建档方案的受控可行性，真实小车实验可在此基础上作为补充应用展示。独立场景级扩展进一步完成三个开发布局的12条任务，其中原流程11条合格、1条评价失败；共同数值补测得到全部质量记录，但S/B仍在三个布局持平。固定路径分析定位了关联与信息到达问题；进一步12条共同前端闭环消融在环路提高质量、在另两类场景下降，且三组S/B仍持平。保存候选的可达可靠性分析说明，共享强度与观察代理也可能限制作用。最后12条曝光消融进一步改善巷道和工位的部分路线，但保留环路中的类别负例；三个版本九组S/B均无执行差异。主比较的机制前提未满足，因此本轮36次尝试结束后不再扩大在线矩阵。局部类别作用、场景级共同工程改进和新增共享贡献分别陈述，主矩阵不能以这些开发记录代替。
+本章完成了CPU虚拟传感、四接口决策、实际地图融合和独立终点评价的闭环验证。最后冻结策略在两个新背景布局中取得一胜三平、2.9818\%的平均联合收益。原完整配对确认支持类别输入带来6.1638\%的平均联合收益，开发对照支持整体纠错政策带来2.6241\%的平均收益。40个旧轨迹检查点进一步表明，在相同覆盖下，差异主要经由表面召回与F1形成，且短时负差和两个持平构型均保留。新增128项固定矩阵复现42步下6.2505\%的类别收益，并在两个同族结构变体上取得4.2289\%；同时明确30步的当前规划可行性边界与54步的收益反转。行动、信念和网格使这些结果具有过程解释，可支撑预算受限设施建档方案的受控可行性，真实小车实验可在此基础上作为补充应用展示。独立场景级扩展进一步完成三个开发布局的12条任务，其中原流程11条合格、1条评价失败；共同数值补测得到全部质量记录，但S/B仍在三个布局持平。固定路径分析定位了关联与信息到达问题；进一步12条共同前端闭环消融在环路提高质量、在另两类场景下降，且三组S/B仍持平。保存候选的可达可靠性分析说明，共享强度与观察代理也可能限制作用。最后12条曝光消融进一步改善巷道和工位的部分路线，但保留环路中的类别负例；三个版本九组S/B均无执行差异。主比较的机制前提未满足，因此本轮36次尝试结束后不再扩大在线矩阵。局部类别作用、场景级共同工程改进和新增共享贡献分别陈述，主矩阵不能以这些开发记录代替。
 
 \hypertarget{ux603bux7ed3ux4e0eux5c55ux671b}{%
 \clearpage
@@ -1332,7 +1389,9 @@ CELL的G/NBV则检验未来诊断分支。两者前20帧实测输入相同；第
 
 局部确认实验在两个已见父布局的四个构型条件上比较类别方法S与共同主动几何方法G。两者共享规划器、模板、诊断能力及重建后端，差别是是否使用类别先验。全部任务在预算内完成，零碰撞并返回起始姿态；四组配对为两胜两平，平均联合指标提高6.1638\%。平均覆盖率相同，表面F1由约0.737提高至0.783，说明收益来自更有效的表面观测，而不是定位精度或覆盖率同步提高。
 
-行动记录显示，在两个正收益条件中，类别方法在相同非语义经历后提前选择了不同的观察方向；持平条件中，两种方法选择相同路线。这表明语义的作用取决于信息是否改变有用决策，并非观察带有类别的设施就必然获得收益。不同距离阈值的结果进一步支持所观察到的条件增量。
+最后冻结策略的补证在两种未参与调参的背景布局上完成八次任务，全部合格。四组配对为一胜三平，平均覆盖相同、联合指标提高2.9818\%。侧柱布局中类别改变评分但不改变实际路线，后侧隔离台的h1中类别改变第19个动作并改善表面恢复。该补证不改变设备族或原噪声种子，支持有限背景布局变化下的条件作用。
+
+行动记录显示，在原确认的两个正收益条件中，类别方法在相同非语义经历后提前选择了不同的观察方向；持平条件中，两种方法选择相同路线。这表明语义的作用取决于信息是否改变有用决策，并非观察带有类别的设施就必然获得收益。不同距离阈值的结果进一步支持所观察到的条件增量。
 
 错误类别开发实验中，保留实测纠错及未来纠错预期的整体政策，相对同时关闭二者的策略提高平均联合指标2.62\%。信念时间线和同状态干预表明，几何证据能够影响后续动作，但严格阈值仍出现负例。共同CPU机制比较还展示了本方法与SWAP-I、VISTA-I在观察分配及表面质量上的差异；由于适配改变了目标和规划细节，这些结果用于说明机制差别，不代表原作者完整系统的性能排名。
 
@@ -1347,7 +1406,7 @@ CELL的G/NBV则检验未来诊断分支。两者前20帧实测输入相同；第
 \hypertarget{ux5c40ux9650ux6027ux4e0eux9002ux7528ux8303ux56f4}{%
 \subsection{局限性与适用范围}\label{ux5c40ux9650ux6027ux4e0eux9002ux7528ux8303ux56f4}}
 
-局部正结论建立在公开双模板、安全姿态图、人工类别、准确位姿和共同观测前缀之上，场景范围为两个已见父布局及其同族结构变体。多实例扩展另采用三个开发布局、公开名义结构族与共同付费初始化，保留安全图、人工标签和准确位姿条件；类别先验是设计权重，并非实测识别准确率。两类实验验证受控设施建档的决策价值与运行条件，尚不能推出自然设备识别能力、未知地图安全探索或未见大场景泛化。四个接口的逐项独立收益尚未全部验证。布局变化是应用背景，现有结果来自独立静态任务，不包含跨时变化检测、地图融合、SLAM定位精度提升或动态避障实验。
+局部正结论建立在公开双模板、安全姿态图、人工类别、准确位姿和共同观测前缀之上，场景范围为两个已见父布局、同族结构变体，以及两个预先冻结的新增背景布局。多实例扩展另采用三个开发布局、公开名义结构族与共同付费初始化，保留安全图、人工标签和准确位姿条件；类别先验是设计权重，并非实测识别准确率。两类实验验证受控设施建档的决策价值与运行条件，尚不能推出自然设备识别能力、未知地图安全探索或未见大场景泛化。四个接口的逐项独立收益尚未全部验证。布局变化是应用背景，现有结果来自独立静态任务，不包含跨时变化检测、地图融合、SLAM定位精度提升或动态避障实验。
 
 局部评价对设施附近的共同ROI评分，覆盖已知不等于占据分类正确；场景级评价使用完整预测网格、固定可观测参考和全部四设施的F1宏平均，未发现设施不从分母移除。两套覆盖、表面和动作定义不同，不能合并均值。更早的六父共享可靠性分支也保留五平一负及关系失配持平的结果，它与本轮原开发、Ground和Exposure各12次分开报告。现有正结论限于得到支持的局部实现条件，完整共享机制的优势仍未确立。
 
@@ -1473,6 +1532,15 @@ python3 -B scripts/build_writing_deliverables_20260928.py \
 
 构建记录绑定源文件与PDF/TeX的SHA256；排版不运行科学实验。当前为通用审阅稿，提交前须适配学校的封面、声明和引用格式。
 
+\hypertarget{a.5-ux6700ux7ec8ux9a8cux8bc1ux79bbux7ebfux6f14ux793aux4e0eux590dux73b0ux5165ux53e3}{%
+\subsection*{A.5 最终验证、离线演示与复现入口}\label{a.5-ux6700ux7ec8ux9a8cux8bc1ux79bbux7ebfux6f14ux793aux4e0eux590dux73b0ux5165ux53e3}}
+
+最终八次任务位于\path{audit_results/final_local_layout_validation_20260929/}，包括预登记协议、45文件源码包、准备封存、全部传感包与网格、配对汇总。独立复核位于\path{audit_results/final_delivery_20260929/validation_review.json}；原8条任务和结果全部保留，不与既有128项扩展混算。59份旧保护源码的摘要未改变。
+
+代表路线采用预登记列表中的case0，即侧柱h0/G。对43帧已保存数据进行控制器及TSDF重放，动作、状态地图、前缀与终点的原始及评价域网格均精确一致；该过程不创建新世界、不查询新传感，也不重新计算质量指标。核验记录见\texttt{saved\_replay\_case0/}。交互演示\path{docs/thesis/demos/v40_replay/index.html}可离线打开，展示真实保存路径、已观测帧、信念和重建端点；浏览器十项检查均通过。播放与中间视图不能当作新采集或插值得到的三维性能。
+
+最终统一索引\path{docs/research/FINAL_METHOD_REPRODUCTION_INDEX_20260929.md}给出公式、代码、数据、主表图及命令对应，包含2---3分钟演示顺序。所有重绘和文稿构建均不新增科研样本。学校、学位与专业资料按用户要求留空，当前通用封面预留替换位置，学校专属格式仍由实际模板确定。
+
 \hypertarget{ux53c2ux8003ux6587ux732e}{%
 \clearpage
 \section*{参考文献}
@@ -1483,33 +1551,33 @@ python3 -B scripts/build_writing_deliverables_20260928.py \
 \def\labelenumi{[\arabic{enumi}]}
 \tightlist
 \item
-  Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. \href{https://arxiv.org/abs/2004.05155}{作者论文}.
+  Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. Author manuscript: \url{https://doi.org/10.48550/arXiv.2004.05155}.
 \item
-  Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \href{https://arxiv.org/abs/2303.07236}{作者论文}.
+  Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \url{https://doi.org/10.1109/ICRA48891.2023.10160469}.
 \item
-  Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \href{https://doi.org/10.1109/LRA.2026.3653276}{doi:10.1109/LRA.2026.3653276}.
+  Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \url{https://doi.org/10.1109/LRA.2026.3653276}.
 \item
-  Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \href{https://doi.org/10.48550/arXiv.1801.09847}{doi:10.48550/arXiv.1801.09847}.
+  Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \url{https://doi.org/10.48550/arXiv.1801.09847}.
 \item
-  Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \href{https://doi.org/10.15607/RSS.2021.XVII.018}{doi:10.15607/RSS.2021.XVII.018}.
+  Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \url{https://doi.org/10.15607/RSS.2021.XVII.018}.
 \item
-  Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \href{https://openaccess.thecvf.com/content/CVPR2024/html/Chen_GenNBV_Generalizable_Next-Best-View_Policy_for_Active_3D_Reconstruction_CVPR_2024_paper.html}{CVF正式论文}.
+  Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \url{https://doi.org/10.1109/CVPR52733.2024.01555}.
 \item
-  Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \href{https://doi.org/10.1109/TFR.2025.3578402}{doi:10.1109/TFR.2025.3578402}.
+  Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \url{https://doi.org/10.1109/TFR.2025.3578402}.
 \item
-  Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \href{https://doi.org/10.52202/085713-1113}{doi:10.52202/085713-1113}.
+  Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \url{https://doi.org/10.52202/085713-1113}.
 \item
   World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White paper, 2025-09-04. \href{https://www.weforum.org/publications/physical-ai-powering-the-new-age-of-industrial-operations/}{官方报告页}.
 \item
-  Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \href{https://arxiv.org/abs/2207.00254}{作者论文与期刊信息}.
+  Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \url{https://doi.org/10.1109/TRO.2023.3248510}.
 \item
-  Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \href{https://graphics.stanford.edu/papers/volrange/}{作者项目与论文}.
+  Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \url{https://doi.org/10.1145/237170.237269}.
 \item
-  Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \href{https://www.cassandra.org/arc/papers/aij98.pdf}{作者论文}.
+  Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \url{https://doi.org/10.1016/S0004-3702(98)00023-X}.
 \item
-  Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \href{https://doi.org/10.1177/0278364914533443}{doi:10.1177/0278364914533443}.
+  Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \url{https://doi.org/10.1177/0278364914533443}.
 \item
-  Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \href{https://www.tanksandtemples.org/}{作者项目与论文}.
+  Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \url{https://doi.org/10.1145/3072959.3073599}.
 \end{enumerate}
 \endgroup
 

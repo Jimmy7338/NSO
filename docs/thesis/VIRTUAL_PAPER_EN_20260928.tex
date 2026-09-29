@@ -26,7 +26,7 @@
 \providecommand{\pandocbounded}[1]{#1}
 \title{\textbf{Category Priors and Geometric Feedback for Budget-Constrained Active Observation of Facilities}}
 \author{Zhaoyu Li}
-\date{28 September 2026\quad Review draft}
+\date{29 September 2026\quad Review draft}
 \DeclareMathSizes{10.95}{10.95}{8}{7}
 \clubpenalty=10000
 \widowpenalty=10000
@@ -38,7 +38,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-After changes to an industrial layout, robots need current observations of the surrounding space and equipment. Observing a region, however, does not ensure that its facilities have been adequately reconstructed. For facility documentation under a limited motion budget, this study combines category-conditioned configuration beliefs, predicted observation value, and feedback from measured geometry. A hierarchical decision and local execution architecture connects four module interfaces, with atomic decisions in the local implementation and observation macros in the separate multi-facility extension. Public templates support belief updates and planning, while the reconstructed surface contains only fused measured depth. Virtual validation uses separate static mapping tasks. A paired confirmation experiment uses two previously seen parent layouts, each with two configurations. Relative to an active geometric control with the same planner, category information improves the mean joint documentation score by 6.1638\%, with two wins and two ties across four pairs and identical mean coverage. In a separate development experiment with incorrect category information, the complete correction policy, including measured correction and anticipated future correction, improves the mean joint score by 2.6241\%. A further fixed 128-trial matrix retains 96 qualified completions and 32 low-budget planning failures. Category gains at budget 42 are 6.25\% on original layouts and 4.23\% on same-family variants, while budget 54 produces a −0.70\% difference on original layouts. A separate four-facility study comprises three controller versions and 36 attempts; shared-reliability and fixed category-prior outcomes tie in each of the three layouts for every version. The local results support a conditional benefit for early observation selection; they do not establish an additional benefit from cross-instance sharing.
+Industrial robots need current environmental representations after equipment rearrangement, but spatial coverage alone does not ensure adequate surface reconstruction. This study investigates category information for selecting observation directions before geometry resolves a facility configuration. A processor-based implementation connects category-conditioned beliefs, diagnostic lookahead, execution checks, and measured feedback. Public templates predict opportunities; only acquired depth contributes to reconstruction. In a confirmation using two previously seen layouts and two configurations each, category information improves the mean product of coverage and surface F1 score by 6.1638\%, with two wins, two ties, and identical mean coverage. A frozen-policy validation in two additional background layouts yields one win and three ties, improving the mean joint score by 2.9818\% across four paired conditions. An incorrect-prior comparison supports a 2.6241\% improvement from the complete correction policy. A fixed 128-trial extension yields 96 qualified completions and 32 low-budget planning failures. At the intermediate budget, category gains are 6.2505\% on original layouts and 4.2289\% on same-family variants; at the larger budget, the original-layout difference reverses to −0.6995\%. Forty reconstruction checkpoints connect these outcomes to measured surface recovery. A separate 36-run multi-facility study gives identical actions and quality for shared versus fixed category priors in all nine version-specific pairs. The evidence supports conditional benefits from early category cues, without establishing additional sharing or localization-accuracy gains.
 \end{abstract}
 \noindent\textbf{Keywords:} facility documentation; active observation; category priors; geometric feedback; budget-constrained planning
 
@@ -132,8 +132,8 @@ IGCR & Measured depth/scan and public predictions at a new pose & Compare residu
 \begin{center}
 \begin{minipage}{\linewidth}
 \centering
-\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/system_architecture_20260928/system_architecture.pdf}
-\captionof{figure}{Platform interfaces, the local binary implementation of the four-module CPU loop, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The robot is a generative composite based on the user-provided platform photograph for interface illustration; sensor, map, and mesh thumbnails are schematic.}\label{fig:writing-2}
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_architecture_20260929/final_architecture.pdf}
+\captionof{figure}{Platform interfaces, the local binary implementation of the four-module CPU loop, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The unchanged user-supplied robot image illustrates prospective ROS 1 interfaces, while the vector diagram describes the executed CPU loop. All performance results use simulation.}\label{fig:writing-2}
 \end{minipage}
 \end{center}
 
@@ -686,6 +686,63 @@ In CELL, G and NBV have identical observations through frame 19 and identical sc
 
 The three exposure-discounted S/B pairs also have identical complete 161-frame actual sensor sequences and actions. In CELL, the first posterior difference occurs at step 73 and the first candidate-score difference at step 100, without changing execution. In LOOP, posteriors differ from step 65 but candidate scores remain unchanged; AISLE has neither difference. Thus none of the nine S/B pairs across the three versions supplies an executed sharing effect. The predeclared requirement for at least one such causal action difference is not met, so the reserved 48-run unseen-layout matrix is not executed. Unstarted layouts are not failures or zero-quality measurements.
 
+\hypertarget{frozen-policy-validation-in-new-background-layouts}{%
+\subsection{Frozen-policy validation in new background layouts}\label{frozen-policy-validation-in-new-background-layouts}}
+
+A final protocol fixes two additional layouts before observing results: a side column removes one right-aisle navigation center, while a rear partition interrupts direct rear passage. Both retain the P00 facility family and public templates. The controller, category mapping, sensor noise rule, fusion, evaluation region, 18-action common prefix, and 42-action budget remain unchanged. All legal safe-grid centers are retained; each new layout has 23 centers and 92 oriented poses. The noise seed is the original confirmation seed, so this test adds two background-layout units, not new noise replicates or unseen facility categories. Each layout uses both configurations and G/S, giving eight tasks and four pairs.
+
+All eight tasks complete 42 paid actions and 43 acquired frames, avoid collision, and return to the full initial pose. Table 9 reports every paired endpoint. Mean coverage is identical at 0.934732; mean precision increases from 0.864441 to 0.870224, recall from 0.672455 to 0.704742, and surface F1 from 0.754450 to 0.777445. Mean joint quality increases from 0.705188 to 0.726215, or \textbf{2.9818\%}, with one win and three ties. Relative differences at 2 and 10 cm are 2.8176\% and 3.1200\%. These are descriptive paired results from two new layouts; configurations do not increase the number of independent layout units.
+
+\par\noindent\begin{minipage}{\linewidth}
+\textbf{Table 9. All frozen-policy layout pairs at 5 cm. Coverage is equal within each pair; qualification is 8/8.}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\ReviewTableWidth}{\dimexpr\linewidth-10\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.17\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth} >{\raggedright\arraybackslash}p{0.16\ReviewTableWidth}@{}}
+\toprule
+Layout / config. & Coverage & G F1 & S F1 & G joint & S joint \\
+\midrule
+Side column / h0 & 0.954145 & 0.806490 & 0.806490 & 0.769508 & 0.769508 \\
+Side column / h1 & 0.955908 & 0.702575 & 0.702575 & 0.671597 & 0.671597 \\
+Rear partition / h0 & 0.914439 & 0.806490 & 0.806490 & 0.737485 & 0.737485 \\
+Rear partition / h1 & 0.914439 & 0.702246 & 0.794224 & 0.642160 & 0.726269 \\
+Mean & 0.934732 & 0.754450 & 0.777445 & 0.705188 & 0.726215 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{minipage}
+
+
+Figure 20 shows all saved paths. In the side-column layout, both initial observation directions satisfy the return constraint. Category information changes candidate values but does not change their ordering: both methods choose left and remain identical in actual actions. In the rear-partition h1 condition, G's initial left/right values tie within the frozen numerical tolerance; its original ordering selects left, whereas S selects right. Their nonsemantic histories and geometric log odds are identical at step 18; category weights alone differ. The first executed divergence is action 19, followed by greater recovered surface recall at unchanged coverage. This supports the complete category-conditioned route's effect, not a separate quality gain attributable to a single frame.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_validation_20260929/transfer_paths.pdf}
+\captionof{figure}{Complete paths of all four new background-layout pairs, with recorded headings and a common metric scale. Gray marks the shared paid prefix; hatched regions show added background structures outside the unchanged facility evaluation region. Geometry supplies offline context. Three pairs coincide, while rear-partition h1 diverges at action 19. The companion evidence includes all eight actual endpoint meshes and quality components.}\label{fig:writing-20}
+\end{minipage}
+\end{center}
+
+G/S mean travel is 27.0/26.5 m, with 15.0/15.5 turns. Single-thread planning wall time averages 0.0474/0.0484 s per task on an Intel Xeon processor (Sapphire Rapids); complete task times, including sensing, fusion and evaluation, range from 5.0 to 5.8 s. Timing is descriptive for this four-logical-CPU host, not a real-time or cross-hardware benchmark. Independent review checks all 344 saved frames, priors, measured residuals, selected actions, return constraints, source hashes and endpoint arithmetic. No parameters are retuned after these results, and no reserved additional tasks are used.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_validation_20260929/transfer_meshes.pdf}
+\captionof{figure}{Actual endpoint facility meshes of all eight frozen-policy tasks. Each pair uses the same projection and scale; all stored triangles are rendered without completion or smoothing. Shading is illumination, not error. The facility crop is unchanged, and the new background structures lie outside it.}\label{fig:writing-21}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=.72\textheight,keepaspectratio]{docs/thesis/figures/final_validation_20260929/transfer_quality.pdf}
+\captionof{figure}{Coverage, surface F1 at 5 cm and joint quality for all four paired conditions. C/P denote column/partition; paired coverage remains equal. The three ties and one positive condition are retained on common 0--1 axes, without treating methods or configurations as independent layout replicates.}\label{fig:writing-22}
+\end{minipage}
+\end{center}
+
 \hypertarget{discussion-and-applicability}{%
 \section{Discussion and Applicability}\label{discussion-and-applicability}}
 
@@ -698,7 +755,7 @@ An earlier six-parent shared-reliability development study, distinct from the ne
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-Motivated by active mapping needs in industrial facilities, this study implements category-prior and geometric-feedback active observation under a motion budget. The original confirmation yields a 6.1638\% mean category benefit, and the separate incorrect-prior study supports a 2.6241\% whole-policy correction benefit. A fixed 128-trial extension reproduces a 6.2505\% category improvement at budget 42 and a 4.2289\% improvement on same-family variants, while retaining low-budget infeasibility and a high-budget reversal. The evidence supports a conditional role for public facility knowledge in allocating limited observations. Across three scene-level versions, S/B quality ties persist on all three development layouts. The exposure-discounted version further demonstrates that a category cue can change an executed target yet reduce final quality. The executable multi-instance extension has therefore not established a shared-reliability benefit. Future work should improve agreement between predicted observation value and measured surface quality before extending map maintenance across tasks and physical deployment.
+Motivated by active mapping needs in industrial facilities, this study implements category-prior and geometric-feedback active observation under a motion budget. The original confirmation yields a 6.1638\% mean category benefit, and the separate incorrect-prior study supports a 2.6241\% whole-policy correction benefit. A fixed 128-trial extension reproduces a 6.2505\% category improvement at budget 42 and a 4.2289\% improvement on same-family variants, while retaining low-budget infeasibility and a high-budget reversal. The final eight-task frozen-policy validation adds two background layouts, with one win and three ties and a 2.9818\% mean joint gain. The evidence supports a conditional role for public facility knowledge in allocating limited observations. Across three scene-level versions, S/B quality ties persist on all three development layouts. The exposure-discounted version further demonstrates that a category cue can change an executed target yet reduce final quality. The executable multi-instance extension has therefore not established a shared-reliability benefit. Future work should improve agreement between predicted observation value and measured surface quality before extending map maintenance across tasks and physical deployment.
 
 \hypertarget{reproducibility-and-data}{%
 \section*{Reproducibility and Data}\label{reproducibility-and-data}}
@@ -713,32 +770,32 @@ The extension preserves the fixed configuration, executed source hashes, and all
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. \href{https://arxiv.org/abs/2004.05155}{Author paper}.
+  Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. Author manuscript: \url{https://doi.org/10.48550/arXiv.2004.05155}.
 \item
-  Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \href{https://arxiv.org/abs/2303.07236}{Author paper}.
+  Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \url{https://doi.org/10.1109/ICRA48891.2023.10160469}.
 \item
-  Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \href{https://doi.org/10.1109/LRA.2026.3653276}{doi:10.1109/LRA.2026.3653276}.
+  Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \url{https://doi.org/10.1109/LRA.2026.3653276}.
 \item
-  Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \href{https://doi.org/10.48550/arXiv.1801.09847}{doi:10.48550/arXiv.1801.09847}.
+  Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \url{https://doi.org/10.48550/arXiv.1801.09847}.
 \item
-  Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \href{https://doi.org/10.15607/RSS.2021.XVII.018}{doi:10.15607/RSS.2021.XVII.018}.
+  Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \url{https://doi.org/10.15607/RSS.2021.XVII.018}.
 \item
-  Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \href{https://openaccess.thecvf.com/content/CVPR2024/html/Chen_GenNBV_Generalizable_Next-Best-View_Policy_for_Active_3D_Reconstruction_CVPR_2024_paper.html}{CVF proceedings}.
+  Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \url{https://doi.org/10.1109/CVPR52733.2024.01555}.
 \item
-  Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \href{https://doi.org/10.1109/TFR.2025.3578402}{doi:10.1109/TFR.2025.3578402}.
+  Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \url{https://doi.org/10.1109/TFR.2025.3578402}.
 \item
-  Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \href{https://doi.org/10.52202/085713-1113}{doi:10.52202/085713-1113}.
+  Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \url{https://doi.org/10.52202/085713-1113}.
 \item
   World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White paper, 2025-09-04. \href{https://www.weforum.org/publications/physical-ai-powering-the-new-age-of-industrial-operations/}{Official white paper}.
 \item
-  Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \href{https://arxiv.org/abs/2207.00254}{Author paper}.
+  Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \url{https://doi.org/10.1109/TRO.2023.3248510}.
 \item
-  Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \href{https://graphics.stanford.edu/papers/volrange/}{Author project and paper}.
+  Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \url{https://doi.org/10.1145/237170.237269}.
 \item
-  Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \href{https://people.csail.mit.edu/lpk/papers/aij98-pomdp.pdf}{Author paper}.
+  Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \url{https://doi.org/10.1016/S0004-3702(98)00023-X}.
 \item
-  Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \href{https://doi.org/10.1177/0278364914533443}{doi:10.1177/0278364914533443}.
+  Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \url{https://doi.org/10.1177/0278364914533443}.
 \item
-  Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \href{https://www.tanksandtemples.org/}{Author project and paper}.
+  Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \url{https://doi.org/10.1145/3072959.3073599}.
 \end{enumerate}
 \end{document}

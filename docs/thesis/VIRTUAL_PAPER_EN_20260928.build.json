@@ -1,9 +1,9 @@
 {
   "document": "english",
   "source_sha256": {
-    "docs/thesis/VIRTUAL_PAPER_EN_20260928.md": "01546c0f617170be53da0b13114016259dd1a392e6bb2e268548549d3ad7a2f6",
+    "docs/thesis/VIRTUAL_PAPER_EN_20260928.md": "f76aae1655c485b481283446361c3001d0ed674ca28a685599992521bb9a97b9",
     "docs/thesis/figures/article_trajectories_20260928/local_paired_trajectories.pdf": "8353c9e616e6571fc2c342910005b0e8fc39874bce437c3410981c076784fd8a",
-    "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf": "41bc82d15401363d818e6bc9ea06ecffd49ebab3f474f261629f3ad3023e60bf",
+    "docs/thesis/figures/final_architecture_20260929/final_architecture.pdf": "86deeba53308ede2ed97643739b04827fd517e5ba347b2c98bfb3949cf9c0f1b",
     "docs/thesis/figures/robot_platform_20260928/robot_platform.pdf": "0e49468341f724d58d8437cfab736fbdf15cfabf1adb60291a20c3e1fb8d458d",
     "docs/thesis/figures/virtual_method_20260928/publication_main.pdf": "022f3f6134d2494f579f7e40a517676c7d255c12d05e91ed4ac2ab3200e4ea08",
     "docs/thesis/figures/scene_details_20260928/mesh_comparison.pdf": "18503c27cc94d9b467a3dd51a4d330bb36faa6908632bb40a96ce2956576e66e",
@@ -21,7 +21,10 @@
     "docs/thesis/figures/article_ground_meshes_20260928_v2/ground_frontend_meshes_G.pdf": "8f1597f50ba17891cab8c4885b25066ff9bf54ba176b722b463f3323002090ba",
     "docs/thesis/figures/article_exposure_20260928/complete12/exposure_paired_quality.pdf": "7f746ad4c587130a3656bd3ddc178819bbd2977422c311da899fb5e68cbdf723",
     "docs/thesis/figures/article_mechanism_cases_20260928_final/mechanism_cases.pdf": "2d382c7501a65f77a39f6f8526b9cf1f22dad02ef20595e3e3cb2b00248b1a31",
-    "scripts/build_writing_deliverables_20260928.py": "69930f5b0563aa96df71e11e78069137dca6fe3f0b198dd32d9f5d2fc2beb09e",
+    "docs/thesis/figures/final_validation_20260929/transfer_paths.pdf": "d97365617b20effe6e157f703a33368e5aa9b4c7eff2c2b9c94ceea9a0469ab6",
+    "docs/thesis/figures/final_validation_20260929/transfer_meshes.pdf": "cc8defc5bbc5a2982cc01b274bc3ee8abdbf5bfdfa68dfc724e9d074c87359eb",
+    "docs/thesis/figures/final_validation_20260929/transfer_quality.pdf": "5fb17de86b6e304e4e8b31d7a8511289169644f937330f47bb3d55838be50b2a",
+    "scripts/build_writing_deliverables_20260928.py": "c56757438e61ef8dadaea8bc31e4328a61e2d36b82ef9c971cd4ee85bf97a467",
     "scripts/build_virtual_paper_review_20260928.py": "09ac58768fb016c9cd19a13c7cf3cb62e23401da62d98304e1334e79cb36fa6c"
   },
   "figures": [
@@ -32,8 +35,8 @@
     },
     {
       "number": 2,
-      "path": "docs/thesis/figures/system_architecture_20260928/system_architecture.pdf",
-      "caption": "Platform interfaces, the local binary implementation of the four-module CPU loop, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The robot is a generative composite based on the user-provided platform photograph for interface illustration; sensor, map, and mesh thumbnails are schematic."
+      "path": "docs/thesis/figures/final_architecture_20260929/final_architecture.pdf",
+      "caption": "Platform interfaces, the local binary implementation of the four-module CPU loop, and separate mapping and evaluation. OV-SDF and IGCR jointly update configuration belief; STGHP selects the next atomic action for RPN-UQ to check before execution and new observation. Public templates support belief and planning, while TSDF fuses measured depth and ground truth enters only evaluation of sealed outputs. The unchanged user-supplied robot image illustrates prospective ROS 1 interfaces, while the vector diagram describes the executed CPU loop. All performance results use simulation."
     },
     {
       "number": 3,
@@ -119,6 +122,21 @@
       "number": 19,
       "path": "docs/thesis/figures/article_mechanism_cases_20260928_final/mechanism_cases.pdf",
       "caption": "Two development examples at the same metric scale, retaining complete executed paths and return. D denotes target selection, F the first actual action difference, and O completion of a paid target view. AISLE compares category-conditioned B with geometric G; CELL compares geometric lookahead G with direct NBV. Arrows show saved camera headings. The signed endpoint differences include all later actions; they are not per-view effects. CELL's diagnostic frame does not provide fresh feedback. Neither panel tests the S/B sharing increment."
+    },
+    {
+      "number": 20,
+      "path": "docs/thesis/figures/final_validation_20260929/transfer_paths.pdf",
+      "caption": "Complete paths of all four new background-layout pairs, with recorded headings and a common metric scale. Gray marks the shared paid prefix; hatched regions show added background structures outside the unchanged facility evaluation region. Geometry supplies offline context. Three pairs coincide, while rear-partition h1 diverges at action 19. The companion evidence includes all eight actual endpoint meshes and quality components."
+    },
+    {
+      "number": 21,
+      "path": "docs/thesis/figures/final_validation_20260929/transfer_meshes.pdf",
+      "caption": "Actual endpoint facility meshes of all eight frozen-policy tasks. Each pair uses the same projection and scale; all stored triangles are rendered without completion or smoothing. Shading is illumination, not error. The facility crop is unchanged, and the new background structures lie outside it."
+    },
+    {
+      "number": 22,
+      "path": "docs/thesis/figures/final_validation_20260929/transfer_quality.pdf",
+      "caption": "Coverage, surface F1 at 5 cm and joint quality for all four paired conditions. C/P denote column/partition; paired coverage remains equal. The three ties and one positive condition are retained on common 0–1 axes, without treating methods or configurations as independent layout replicates."
     }
   ],
   "tables": [
@@ -153,10 +171,14 @@
     {
       "columns": 5,
       "data_rows": 3
+    },
+    {
+      "columns": 6,
+      "data_rows": 5
     }
   ],
-  "pdf_sha256": "0da4a5681b4356d188ed23225bf1e68d1bd96073c7e68ec1d28b62e7fade82b3",
-  "tex_sha256": "e76400502facdfa987fbf6ee56611a9531997035c4ae691a6cfada6199a6cb8e",
+  "pdf_sha256": "4855dbef7cf8bdbbbbe5a301d42f1ba438614eb00548f5792d7955144b39f795",
+  "tex_sha256": "106f2e06156119f05586243458f92d746cdf23d329e21aaf8787ed13d823e8c7",
   "command": [
     "/root/NSO/tmp/thesis-tex-runtime_20260928/bin/tectonic",
     "--only-cached",
@@ -173,5 +195,5 @@
   "new_worlds": 0,
   "new_evaluations": 0,
   "status": "review_draft",
-  "pages": 32
+  "pages": 36
 }

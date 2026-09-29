@@ -1,0 +1,748 @@
+{
+  "schema": "final.method_reproduction_index.v1",
+  "created_date": "2026-09-29",
+  "scope": "Final bounded documentation and saved-evidence verification; no new scientific execution.",
+  "method_map": [
+    {
+      "id": "measured_observation",
+      "formula": "o_t=(RGB_t,D_t,ranges_t,T_t,map_hash_t), immutable arrays",
+      "symbols": [
+        "nso/cpu_four_modules_v35.py::ObservationV35.__post_init__",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.accept"
+      ],
+      "interfaces": [
+        "OV-SDF",
+        "IGCR",
+        "STGHP"
+      ],
+      "sections": [
+        "Article 4.1; Table 1 / Figure 1",
+        "Thesis method 2–3"
+      ],
+      "evidence": [
+        "saved_replay_case0 exact per-frame/controller checks",
+        "new8 independent review, all 344 frames"
+      ]
+    },
+    {
+      "id": "semantic_belief",
+      "formula": "L_s in {0,+log(9),-log(9)}; p(h0)=sigmoid(L_s+L_g)",
+      "symbols": [
+        "nso/observation_belief_v35.py::_rgb_class",
+        "nso/observation_belief_v35.py::ObservationBeliefV35.update",
+        "nso/observation_belief_v35.py::ObservationBeliefV35.probabilities",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.update_semantic"
+      ],
+      "interfaces": [
+        "OV-SDF"
+      ],
+      "sections": [
+        "Article 4.2 / 5.2 / 5.7",
+        "Thesis method 4 / 7"
+      ],
+      "evidence": [
+        "Table 2 / Figures 2–3",
+        "new8 rear-partition h1: common prefix, decision18/action19"
+      ],
+      "limits": "controlled visible RGB cue, not learned open-world recognition; weights not calibrated probabilities"
+    },
+    {
+      "id": "residual_correction",
+      "formula": "rho(r)=min(r*r/2,12.5); per-pose log-likelihood evidence clipped to ±6; accumulated L_g clipped to ±24",
+      "symbols": [
+        "nso/observation_belief_v35.py::_geometry_score",
+        "nso/observation_belief_v35.py::PublicTemplatesV35.geometry_evidence",
+        "nso/observation_belief_v35.py::ObservationBeliefV35.update",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.update_semantic"
+      ],
+      "interfaces": [
+        "IGCR"
+      ],
+      "sections": [
+        "Article 4.2 / 5.3",
+        "Thesis method 4 / simulation 6"
+      ],
+      "evidence": [
+        "Figure 5; V35 original wrong-prior trace",
+        "new8 first measured geometry feedback step28"
+      ],
+      "limits": "X/Xnf changes both actual feedback and forecast diagnosis, not a pure isolated network ablation"
+    },
+    {
+      "id": "public_potential",
+      "formula": "U(p,M)=sum_h p_h U_h(M_h); masks accumulate by bitwise union; U_h is public coverage × visible-surface potential",
+      "symbols": [
+        "nso/pixel_information_v34.py::SavedPotentialModelV34._terminal",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.update_topo",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.compute_reward",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.select_target"
+      ],
+      "interfaces": [
+        "STGHP"
+      ],
+      "sections": [
+        "Article 4.3",
+        "Thesis method 5"
+      ],
+      "evidence": [
+        "new8 candidate scores in independent review; three changed-score yet same-action pairs"
+      ],
+      "limits": "nominal forecast potential is not measured TSDF quality or actual information gain"
+    },
+    {
+      "id": "diagnostic_lookahead",
+      "formula": "lambda_0=p*r+(1-p)*(1-r); posterior branches p*r/lambda_0 and p*(1-r)/(1-lambda_0), r=.99; one future information event per lookahead",
+      "symbols": [
+        "nso/online_planner_v35.py::ForecastBeliefPlannerV35.select"
+      ],
+      "interfaces": [
+        "STGHP",
+        "IGCR"
+      ],
+      "sections": [
+        "Article 4.3–4.4",
+        "Thesis method 5 / 5.1"
+      ],
+      "evidence": [
+        "old V35 G and S share diagnosis capability",
+        "all four new-layout G/S pairs retained"
+      ],
+      "limits": "recursive stop/quiet/continuation/value are local functions of select; analytic Delta=max(0,r_d-max(p,1-p))-kappa is explanatory, not a separate implemented operator"
+    },
+    {
+      "id": "return_guard",
+      "formula": "1+d_return(v_next)<=remaining_budget; terminal at exact initial pose; frozen both-template coverage feasibility",
+      "symbols": [
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35._return_distances",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.assess_action",
+        "nso/cpu_four_modules_v35.py::CPUFourModuleControllerV35.next_action",
+        "nso/online_planner_v35.py::ForecastBeliefPlannerV35.select"
+      ],
+      "interfaces": [
+        "RPN-UQ"
+      ],
+      "sections": [
+        "Article 4.3 / 5.1",
+        "Thesis method 5.2"
+      ],
+      "evidence": [
+        "new8 42 paid actions/exact return/no collisions",
+        "128: all 32 infeasible B30 attempts preserved"
+      ],
+      "limits": "known safe graph and exact simulated poses; no general SLAM or dynamic-obstacle guarantee"
+    },
+    {
+      "id": "measured_fusion",
+      "formula": "one saved paid RGBD observation -> one TSDF update; voxel .04m, truncation .12m; no template completion",
+      "symbols": [
+        "nso/observed_runtime_mapper_v10.py::ObservedRuntimeMapperV10.update",
+        "nso/mapping3d.py::SensorMapper.update",
+        "nso/mapping3d.py::SensorMapper.mesh",
+        "nso/surface_measurement_v34.py::extract_observed_asset_mesh"
+      ],
+      "interfaces": [
+        "OV-SDF measured-map input; separate shared backend"
+      ],
+      "sections": [
+        "Article 4.3 / Figure 4",
+        "Thesis method 3 / simulation 5.2"
+      ],
+      "evidence": [
+        "Figure 4; Figure 6; new8 actual meshes",
+        "case0 exact raw/ROI prefix and final meshes"
+      ]
+    },
+    {
+      "id": "offline_quality",
+      "formula": "F_tau=2*P_tau*R_tau/(P_tau+R_tau); J_tau=C_map*F_tau; main tau=.05m",
+      "symbols": [
+        "nso/surface_measurement_v34.py::SurfaceMeasurementV34.evaluate",
+        "scripts/run_final_local_layout_validation_20260929.py::run_case"
+      ],
+      "interfaces": [
+        "offline evaluator; no controller interface receives GT scores"
+      ],
+      "sections": [
+        "Article 3 / Tables 2–4 / 6",
+        "Thesis simulation 4 / 11"
+      ],
+      "evidence": [
+        "8 confirmation + 128 extension + 40 existing checkpoints + final new8"
+      ],
+      "limits": "local ROI metric, exact pose and provided navigation; J_nav from scene36 has separate whole-mesh/macro-averaged definition"
+    }
+  ],
+  "four_interfaces": [
+    {
+      "name": "OV-SDF",
+      "input": "validated current paid RGB/depth/ranges/pose and map digest",
+      "output": "category support and belief receipt",
+      "implemented_by": "CPUFourModuleControllerV35.update_semantic",
+      "not_claimed": "independently validated learned open-vocabulary network"
+    },
+    {
+      "name": "STGHP",
+      "input": "belief, accumulated public-template masks, common safe graph, remaining budget",
+      "output": "candidate values and selected next atomic observation action",
+      "implemented_by": "update_topo / compute_reward / select_target",
+      "not_claimed": "full learned global policy"
+    },
+    {
+      "name": "RPN-UQ",
+      "input": "selected action, graph return distance, remaining budget",
+      "output": "legal budget-feasible action or stop",
+      "implemented_by": "assess_action / next_action",
+      "not_claimed": "calibrated collision uncertainty model"
+    },
+    {
+      "name": "IGCR",
+      "input": "acquired geometric residuals at distinct paid poses",
+      "output": "bounded geometric log odds and next-step replanning evidence",
+      "implemented_by": "update_semantic -> ObservationBeliefV35.update",
+      "not_claimed": "separate independently trained network"
+    }
+  ],
+  "cohorts": {
+    "confirmation8": {
+      "root": "audit_results/v36_online_confirmation_20260918",
+      "summary": "audit_results/v36_online_confirmation_review_20260918/result.json",
+      "table": "docs/thesis/figures/virtual_paper_20260928/v36_measurements.csv",
+      "scope": "8 saved G/S routes, four pairs from two base layouts; 2 wins + 2 ties",
+      "paper": "Table 2, Figures 2–4, Section 5.2"
+    },
+    "external_cpu": {
+      "root": "audit_results/v39_external_cpu_20260920",
+      "summary": "audit_results/v39_external_cpu_20260920/result.json",
+      "table": "docs/thesis/figures/virtual_paper_20260928/v39_method_means.csv",
+      "scope": "G/S records reused; SWAP-I/VISTA-I are common CPU mechanisms, not full original systems",
+      "paper": "Table 3, Section 5.4"
+    },
+    "expansion128": {
+      "root": "audit_results/thesis_expansion_20260928",
+      "summary": "audit_results/thesis_expansion_20260928/analysis_review/summary.json",
+      "table": "audit_results/thesis_expansion_20260928/analysis_review/complete_endpoint_metrics.csv",
+      "paired_table": "audit_results/thesis_expansion_20260928/analysis_review/complete_paired_metrics.csv",
+      "group_table": "audit_results/thesis_expansion_20260928/analysis_review/stratified_metrics.csv",
+      "scope": "128 declared; 96 qualified and 32 B30 failures; two noise seeds are within-layout repeats",
+      "paper": "Table 4, Figure 7, Section 5.5"
+    },
+    "scene36": {
+      "root": "audit_results/article_stage_20260928",
+      "summary": "audit_results/article_stage_20260928/analysis_v1/article36_final_summary_v1/summary.json",
+      "table": "audit_results/article_stage_20260928/analysis_v1/article36_final_summary_v1/rows36.csv",
+      "manifest": "audit_results/article_stage_20260928/analysis_v1/article36_final_summary_v1/manifest.json",
+      "scope": "12 Original + 12 Ground + 12 Exposure; one original pipeline failure retains separately derived quality; J_nav is not local J5",
+      "paper": "Table 5, Section 5.6; thesis simulation Section 10",
+      "archive_roots": [
+        "episode_archives_v1",
+        "episode_archives_ground_v2",
+        "episode_archives_exposure_v3"
+      ],
+      "gate_report": "docs/research/ARTICLE_FINAL_MAIN_GATE_VERDICT_20260928.md",
+      "unexecuted_main_tasks": 48
+    },
+    "checkpoints40": {
+      "root": "audit_results/article_stage_20260928/reconstruction_checkpoints",
+      "summary": "audit_results/article_stage_20260928/reconstruction_checkpoints/result.json",
+      "table": "audit_results/article_stage_20260928/reconstruction_checkpoints/checkpoint_metrics.csv",
+      "scope": "eight old V36 routes × five measured checkpoints 18/24/30/36/42; zero new independent samples; 16 existing endpoint/prefix parities exact",
+      "paper": "Figure 6 and full P/R/mesh supplement, Section 5.3"
+    },
+    "new_layout8": {
+      "root": "audit_results/final_local_layout_validation_20260929",
+      "summary": "audit_results/final_local_layout_validation_20260929/analysis/summary.json",
+      "table": "audit_results/final_local_layout_validation_20260929/analysis/episode_metrics.csv",
+      "paired_table": "audit_results/final_local_layout_validation_20260929/analysis/paired_metrics.json",
+      "scope": "two fixed new background layouts, same public equipment family; eight qualified tasks/four pairs; 1 win, 3 ties; eight unused reserved tasks",
+      "paper": "Table 6, Figure 8, Section 5.7; thesis simulation Section 11",
+      "independent_review": "audit_results/final_delivery_20260929/validation_review.json"
+    }
+  },
+  "figures": [
+    {
+      "id": "figure1",
+      "manifest": "docs/thesis/figures/final_architecture_20260929/manifest.json",
+      "script": "scripts/plot_final_architecture_20260929.py",
+      "outputs": "final_architecture.pdf",
+      "command": ".venv/bin/python -B scripts/plot_final_architecture_20260929.py --output tmp/reproduction_20260929/architecture",
+      "scope": "vector drawing and unchanged user photograph; no scientific data",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "figure2",
+      "manifest": "docs/thesis/figures/article_trajectories_20260928/manifest.json",
+      "script": "scripts/plot_article_trajectories_20260928.py",
+      "outputs": "local_paired_trajectories.pdf",
+      "command": ".venv/bin/python -B - <<'PY'\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, 'scripts')\nimport plot_article_trajectories_20260928 as p\np.OUT=Path('tmp/reproduction_20260929/trajectories').resolve()\nassert not p.OUT.exists(), 'Choose a new output directory'\np.main()\nPY",
+      "scope": "saved V36 routes; full generator also renders earlier six-parent logs",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "figures3_5",
+      "manifest": "docs/thesis/figures/virtual_method_20260928/manifest.json",
+      "script": "scripts/plot_virtual_paper_method_20260928.py",
+      "outputs": "publication_main.pdf; publication_timeline.pdf",
+      "command": ".venv/bin/python -B scripts/plot_virtual_paper_method_20260928.py --output tmp/reproduction_20260929/method",
+      "scope": "saved presentation CSVs; all four conditions retained",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "figure4",
+      "manifest": "docs/thesis/figures/scene_details_20260928/provenance.json",
+      "script": "scripts/plot_thesis_scene_details_20260928.py",
+      "outputs": "mesh_comparison.pdf",
+      "command": ".venv/bin/python -B - <<'PY'\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, 'scripts')\nimport plot_thesis_scene_details_20260928 as p\np.OUT=Path('tmp/reproduction_20260929/meshes').resolve()\nassert not p.OUT.exists(), 'Choose a new output directory'\np.main()\nPY",
+      "scope": "saved original meshes and geometry; no fusion or evaluator",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "figure6",
+      "manifest": "docs/thesis/figures/article_reconstruction_submission_20260928_final/manifest.json",
+      "script": "scripts/plot_article_submission_checkpoints_20260928.py",
+      "outputs": "checkpoint_quality_submission.pdf",
+      "command": ".venv/bin/python -B scripts/plot_article_submission_checkpoints_20260928.py --output tmp/reproduction_20260929/checkpoint_submission",
+      "scope": "40 saved checkpoint rows, 120 plotted C/F1/J values; no new checkpoint measurement",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "figure7",
+      "manifest": "docs/thesis/figures/expansion_20260928/provenance.json",
+      "script": "scripts/plot_thesis_expansion_20260928.py",
+      "outputs": "budget_effects.pdf",
+      "command": ".venv/bin/python -B - <<'PY'\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, 'scripts')\nimport plot_thesis_expansion_20260928 as p\np.OUT=Path('tmp/reproduction_20260929/expansion').resolve()\nassert not p.OUT.exists(), 'Choose a new output directory'\np.main()\nPY",
+      "scope": "complete 128-row endpoint table including 32 failures",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "figure8",
+      "manifest": "docs/thesis/figures/final_validation_20260929/manifest.json",
+      "script": "scripts/plot_final_validation_20260929.py",
+      "outputs": "transfer_paths.pdf",
+      "command": ".venv/bin/python -B - <<'PY'\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, 'scripts')\nimport plot_final_validation_20260929 as p\np.OUT=Path('tmp/reproduction_20260929/new8').resolve()\nassert not p.OUT.exists(), 'Choose a new output directory'\np.main()\nPY",
+      "scope": "all eight saved new-layout paths and meshes; also produces transfer_quality/transfer_meshes",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "supplement_mechanisms",
+      "manifest": "docs/thesis/figures/article_mechanism_cases_20260928_final/manifest.json",
+      "script": "scripts/plot_article_mechanism_cases_20260928.py",
+      "outputs": "mechanism_cases.pdf",
+      "command": ".venv/bin/python -B scripts/plot_article_mechanism_cases_20260928.py --output tmp/reproduction_20260929/mechanisms",
+      "scope": "whole AISLE and CELL saved paths; opposite signed outcomes retained",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "supplement_checkpoints",
+      "manifest": "docs/thesis/figures/article_reconstruction_20260928/manifest.json",
+      "script": "scripts/plot_article_reconstruction_20260928.py",
+      "outputs": "checkpoint_quality_components.pdf; checkpoint_actual_meshes.pdf",
+      "command": ".venv/bin/python -B - <<'PY'\nimport sys\nfrom pathlib import Path\nsys.path.insert(0, 'scripts')\nimport plot_article_reconstruction_20260928 as p\np.renderer.FIGURES=Path('tmp/reproduction_20260929/checkpoint_full').resolve()\nassert not p.renderer.FIGURES.exists()\np.renderer.save_figure=p.publication_save\np.renderer.plot()\nPY",
+      "scope": "only renderer.plot(), never checkpoint run/reconstruction",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "supplement_exposure",
+      "manifest": "docs/thesis/figures/article_exposure_20260928/complete12/manifest.json",
+      "script": "scripts/plot_article_exposure_comparisons_20260928.py",
+      "outputs": "exposure_paired_quality.pdf; exposure_paired_routes.pdf",
+      "command": ".venv/bin/python -B scripts/plot_article_exposure_comparisons_20260928.py --analysis audit_results/article_stage_20260928/analysis_v1/exposure12_complete --output tmp/reproduction_20260929/exposure --render",
+      "scope": "complete paired saved analysis; no quality evaluation",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    },
+    {
+      "id": "supplement_ground",
+      "manifest": "docs/thesis/figures/article_ground_20260928/fixed_g_print_v1/manifest.json",
+      "script": "scripts/plot_article_ground_g_strip_20260928.py",
+      "outputs": "ground_fixed_g_routes.pdf",
+      "command": ".venv/bin/python -B scripts/plot_article_ground_g_strip_20260928.py --analysis audit_results/article_stage_20260928/analysis_v1/ground12_complete --output tmp/reproduction_20260929/ground",
+      "scope": "fixed G, all three DEV layouts and actual saved paths",
+      "command_validation": "CLI/source inspected; not rerun during this index check; requires original saved inputs or byte-exact archive materialization"
+    }
+  ],
+  "manuscript_paths": [
+    "docs/thesis/ARTICLE_SUBMISSION_EN_20260928.md",
+    "docs/thesis/GRADUATION_METHOD_CHAPTER_20260928.md",
+    "docs/thesis/GRADUATION_SIMULATION_CHAPTER_20260928.md",
+    "docs/thesis/GRADUATION_REPRODUCTION_APPENDIX_20260928.md"
+  ],
+  "manuscript_hash_policy": "chapter paths/section titles only; root is completing typesetting; their exported build manifests bind final PDF bytes",
+  "runtime": {
+    "actual_source": "audit_results/final_local_layout_validation_20260929/cases/L02_side_column_h0_b42_n350918_G/started.json",
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "open3d": "0.19.0",
+    "cpu": "Intel Xeon Processor (SapphireRapids)",
+    "logical_cpus": 4,
+    "affinity_cpus": 4,
+    "blas_threads": 1,
+    "simultaneous_online_cases": 1,
+    "gpu_used": false,
+    "dependency_files": [
+      "requirements-cpu.txt",
+      "requirements-3d.txt",
+      "requirements-cpu.lock.txt",
+      "requirements-3d.lock.txt"
+    ],
+    "scientific_python": ".venv-3d/bin/python",
+    "plotting_python": ".venv/bin/python",
+    "numeric_note": "Exact saved replay was verified in original .venv-3d numerical backend; arbitrary BLAS/NumPy replacements do not imply bitwise parity."
+  },
+  "verification": {
+    "source_freeze": "audit_results/final_local_layout_validation_20260929/source_freeze.json",
+    "output_manifests": [
+      "docs/thesis/figures/final_architecture_20260929/manifest.json",
+      "docs/thesis/figures/article_trajectories_20260928/manifest.json",
+      "docs/thesis/figures/virtual_method_20260928/manifest.json",
+      "docs/thesis/figures/scene_details_20260928/provenance.json",
+      "docs/thesis/figures/article_reconstruction_submission_20260928_final/manifest.json",
+      "docs/thesis/figures/expansion_20260928/provenance.json",
+      "docs/thesis/figures/final_validation_20260929/manifest.json",
+      "docs/thesis/figures/article_mechanism_cases_20260928_final/manifest.json",
+      "docs/thesis/figures/article_reconstruction_20260928/manifest.json",
+      "docs/thesis/figures/article_exposure_20260928/complete12/manifest.json",
+      "docs/thesis/figures/article_ground_20260928/fixed_g_print_v1/manifest.json",
+      "docs/thesis/demos/v40_replay/manifest.json",
+      "audit_results/final_delivery_20260929/saved_replay_case0/manifest.json",
+      "audit_results/article_stage_20260928/analysis_v1/article36_final_summary_v1/manifest.json"
+    ],
+    "pinned_files": {
+      "audit_results/article_stage_20260928/analysis_v1/article36_final_summary_v1/manifest.json": {
+        "sha256": "468f707670baa3711f24f9d80dba254d0ed2076837d9196241e85fddbaf676fa",
+        "bytes": 189161
+      },
+      "audit_results/article_stage_20260928/analysis_v1/article36_final_summary_v1/rows36.csv": {
+        "sha256": "d782a16952134362f54b46979771310078e712df564bc061879152b7722bab34",
+        "bytes": 31954
+      },
+      "audit_results/article_stage_20260928/analysis_v1/article36_final_summary_v1/summary.json": {
+        "sha256": "dc9fc1c034ab8219a08360cd607059992dead8918e2a8bf27f706d5062594f67",
+        "bytes": 1434
+      },
+      "audit_results/article_stage_20260928/reconstruction_checkpoints/checkpoint_metrics.csv": {
+        "sha256": "c3e90cdb68191a113a5981c1acdf1e3538cadcdba2fda318c8f6616f9124356f",
+        "bytes": 14095
+      },
+      "audit_results/article_stage_20260928/reconstruction_checkpoints/freeze.json": {
+        "sha256": "821b1ecd895e0909e9108a415e88faa76e8ae2df87ed32860aa36bf4843b9025",
+        "bytes": 103282
+      },
+      "audit_results/article_stage_20260928/reconstruction_checkpoints/protocol.json": {
+        "sha256": "264694aad9cec7033a5a5c0d04234bf8b1c4d9a533e07caa88c778ddcc8e23dc",
+        "bytes": 2336
+      },
+      "audit_results/article_stage_20260928/reconstruction_checkpoints/result.json": {
+        "sha256": "f07e269932ac97b489290f8d22f2931c06e1cff90517e0a3bd012aaa0cbb3e86",
+        "bytes": 120334
+      },
+      "audit_results/article_stage_20260928/reconstruction_checkpoints/seal.json": {
+        "sha256": "e963b8bbf2587cee6bba3a60975c8dee9182ffe309f357f5ac06c231774bbe6c",
+        "bytes": 19205
+      },
+      "audit_results/final_delivery_20260929/replay_browser/artifact_sha256.json": {
+        "sha256": "1d4534ef23417cd4352439367e401031da1a1cda989205a6baffe97f120342c3",
+        "bytes": 446
+      },
+      "audit_results/final_delivery_20260929/replay_browser/result.json": {
+        "sha256": "eae25593e05644cf48e670140932b12e1f7e483856a88e4602d47f16f0f3267c",
+        "bytes": 962
+      },
+      "audit_results/final_delivery_20260929/saved_replay_case0/manifest.json": {
+        "sha256": "33cb1c3c54d2beff781cbab1b49d6270273356f323a968c79f39e47a44621fc1",
+        "bytes": 575
+      },
+      "audit_results/final_delivery_20260929/validation_review.json": {
+        "sha256": "b8de4a0a5b0ad7ff463bd6d3506463760673f0b8f4abb0b85c4792d10f0c1b8c",
+        "bytes": 42975
+      },
+      "audit_results/final_local_layout_validation_20260929/analysis/episode_metrics.csv": {
+        "sha256": "6aae7384f2ca27272722417e87e20905991fd50bbebb5300d04d67a062ebad3d",
+        "bytes": 4027
+      },
+      "audit_results/final_local_layout_validation_20260929/analysis/manifest.json": {
+        "sha256": "c1e4a9a1ce6cdc18155416c8643353368317a3388c3e59f34c16c367375baf88",
+        "bytes": 1289
+      },
+      "audit_results/final_local_layout_validation_20260929/analysis/paired_metrics.json": {
+        "sha256": "ee84d33395033f32d72f7ae985a046577c83db30fc2318652986fff2efce1060",
+        "bytes": 1397
+      },
+      "audit_results/final_local_layout_validation_20260929/analysis/summary.json": {
+        "sha256": "f30a45a174eff24c6f8b8c7a8b96bfc9c10efe48ab7d6cbe33568e3b0ff58d2a",
+        "bytes": 2129
+      },
+      "audit_results/final_local_layout_validation_20260929/cases/L02_side_column_h0_b42_n350918_G/started.json": {
+        "sha256": "a9172e3105da28adb1c2899e0610709bc8b4bdeb421a76f977e6f9bbe718388c",
+        "bytes": 924
+      },
+      "audit_results/final_local_layout_validation_20260929/protocol.json": {
+        "sha256": "73bb0f435f46107ace39c06217153caf71ad53e9a300fc5ecba72e9c5dce9883",
+        "bytes": 3748
+      },
+      "audit_results/final_local_layout_validation_20260929/source_freeze.json": {
+        "sha256": "d30419b8f6162b95a57df7446697787f37facda9217bc78e25fa09c3fe0aa8bc",
+        "bytes": 10724
+      },
+      "audit_results/thesis_expansion_20260928/analysis_review/complete_endpoint_metrics.csv": {
+        "sha256": "82e5243e8fdbd2997626ccac76840377d459a70a9b5739a3f265cad7aac7d95d",
+        "bytes": 47831
+      },
+      "audit_results/thesis_expansion_20260928/analysis_review/complete_paired_metrics.csv": {
+        "sha256": "014b6738772d7978c06f4260dca4d79df752715520aef37e785068d48a9df176",
+        "bytes": 15820
+      },
+      "audit_results/thesis_expansion_20260928/analysis_review/stratified_metrics.csv": {
+        "sha256": "d5138619a46859b3d91164d51cbf2c26143a8dc27e80d2b1d7f6a2992d7c93d9",
+        "bytes": 17828
+      },
+      "audit_results/thesis_expansion_20260928/analysis_review/summary.json": {
+        "sha256": "00801412e6a8f7f2ce9d3ac772949050e66b07ec71756ca3d616fb9daaffafe2",
+        "bytes": 5817
+      },
+      "audit_results/v36_online_confirmation_review_20260918/result.json": {
+        "sha256": "629f1c5b9628a69c3a6cd706b85153d6bce3a1a76beb1f06a06fd06e4dcba59a",
+        "bytes": 46456
+      },
+      "audit_results/v39_external_cpu_20260920/result.json": {
+        "sha256": "935f9e04dd1928ee24eb8393521c4609b75b0e0a9c4c816687dd92c46dc653d4",
+        "bytes": 13152
+      },
+      "docs/research/ARTICLE_FINAL_MAIN_GATE_VERDICT_20260928.md": {
+        "sha256": "30b97877e578255b41186c3824370ffc20d794112b73e382f0c3432e4be87661",
+        "bytes": 5128
+      },
+      "docs/research/FINAL_VALIDATION_INDEPENDENT_REVIEW_20260929.md": {
+        "sha256": "f031aaead9e1e9cfbdd9221f2e137cc3f5723edca3074228a5f4bf859e952cc9",
+        "bytes": 7737
+      },
+      "docs/thesis/demos/v40_replay/manifest.json": {
+        "sha256": "01074c30e45e374e7a75826464f885372a0ac5dd1e8727fe2feff9529c97f7cc",
+        "bytes": 34570
+      },
+      "docs/thesis/figures/article_exposure_20260928/complete12/manifest.json": {
+        "sha256": "289cb29aba8e50d6d8b1df731ac99f6266b0031e391299f0b3d8f12867973594",
+        "bytes": 19824
+      },
+      "docs/thesis/figures/article_ground_20260928/fixed_g_print_v1/manifest.json": {
+        "sha256": "54ce4f6701785d5456b6ddda7a8194b17fdaec93ef3e025922f503821b483e36",
+        "bytes": 19811
+      },
+      "docs/thesis/figures/article_mechanism_cases_20260928_final/manifest.json": {
+        "sha256": "86deb101519a8d19d51f3e006394782968ea2ae1bea14b67b29dd221e864f11e",
+        "bytes": 162509
+      },
+      "docs/thesis/figures/article_reconstruction_20260928/manifest.json": {
+        "sha256": "88c164e8458081933014b953196d650dbcb947a19531edf3611c59320d61668d",
+        "bytes": 2329
+      },
+      "docs/thesis/figures/article_reconstruction_submission_20260928_final/manifest.json": {
+        "sha256": "c63aa1a8f926bf56ad9cc1ee559adfb5c28c54bf6f7307c1b999ecf8115ef650",
+        "bytes": 11780
+      },
+      "docs/thesis/figures/article_trajectories_20260928/manifest.json": {
+        "sha256": "e8bd6871d0688482b24fd5c7ab7f82964f82dae7f819948131d59f114cc2821e",
+        "bytes": 655149
+      },
+      "docs/thesis/figures/expansion_20260928/provenance.json": {
+        "sha256": "80ef70dff55cc14451198c50db96fa8c7c33a5c25e5c5a2c304edebeceaf3051",
+        "bytes": 4107
+      },
+      "docs/thesis/figures/final_architecture_20260929/manifest.json": {
+        "sha256": "77a16d2a6c073608584a477b5db120f50be580f622b4f1e9defa85469025f0e1",
+        "bytes": 2534
+      },
+      "docs/thesis/figures/final_validation_20260929/manifest.json": {
+        "sha256": "365efd5daf660bf814d7e4152304c0ac4385bb82125ba34bc20afdbd475e5e51",
+        "bytes": 8444
+      },
+      "docs/thesis/figures/scene_details_20260928/provenance.json": {
+        "sha256": "d8d8bb6e670e558dee92672a5e198b10fb761dd6fb5fdce1af22788f1cedcba5",
+        "bytes": 17767
+      },
+      "docs/thesis/figures/virtual_method_20260928/manifest.json": {
+        "sha256": "958b0093d85b2fac4076c45166934b7a4aff7aa208c6877a6e1d4ee202617b25",
+        "bytes": 6178
+      },
+      "docs/thesis/figures/virtual_paper_20260928/manifest.json": {
+        "sha256": "0cd5df6edc19703b90530e7da9d6693c691c284f135c8175813c0594a95bd478",
+        "bytes": 8058
+      },
+      "docs/thesis/figures/virtual_paper_20260928/paired_effects.csv": {
+        "sha256": "3ca2b505eb3a420aa561edd36fcb1da6fd8b0fc8b650cd2e5011bd78c468cceb",
+        "bytes": 345
+      },
+      "docs/thesis/figures/virtual_paper_20260928/v36_measurements.csv": {
+        "sha256": "fd4adeac3f134c395f43feef7185dfba857618b3250e433506026742b72bc95e",
+        "bytes": 2545
+      },
+      "docs/thesis/figures/virtual_paper_20260928/v39_measurements.csv": {
+        "sha256": "ab7a5f2f613b9504b1a2d5f0e42e2d76e90dfcd2ff6a0b30f9fbaa09f1077e1a",
+        "bytes": 8171
+      },
+      "docs/thesis/figures/virtual_paper_20260928/v39_method_means.csv": {
+        "sha256": "eb14f313c86606328abcec805e886f2b7f77acf04e1351ed09963d53e253da9e",
+        "bytes": 889
+      },
+      "requirements-3d.lock.txt": {
+        "sha256": "7b8817ceaf3ef95a2d80e6496d830f3089bd57527d025a3066634911633bdb61",
+        "bytes": 1411
+      },
+      "requirements-3d.txt": {
+        "sha256": "3826070719b7323c984d30094b7ec82a43f544c3385382e7e7d38a95743446f9",
+        "bytes": 125
+      },
+      "requirements-cpu.lock.txt": {
+        "sha256": "c41d5fec3f4742eeb86e793cad3b21aa48c5def85823bccfef75e9ac38fb42fb",
+        "bytes": 203
+      },
+      "requirements-cpu.txt": {
+        "sha256": "521954605f5ead77fdbeedcf85b095ea0cdbefe2953e6c79a7691a14445284ff",
+        "bytes": 183
+      },
+      "scripts/plot_article_exposure_comparisons_20260928.py": {
+        "sha256": "604187658866cb0574cd21c9a57c2e3690f674672f3afbbc78d745a1873b7d50",
+        "bytes": 15135
+      },
+      "scripts/plot_article_ground_g_strip_20260928.py": {
+        "sha256": "91789e27a6ff0b1c4d857fc1fe469b66958e01ecb60f4ac88ff3dbef47df9e7d",
+        "bytes": 11504
+      },
+      "scripts/plot_article_mechanism_cases_20260928.py": {
+        "sha256": "85be57615f28ea357fe5f9b2aed35deb44d60dcde2e80fd9323a0f8e9dccd2a8",
+        "bytes": 14166
+      },
+      "scripts/plot_article_reconstruction_20260928.py": {
+        "sha256": "8809341c9980a848db86835009a75692f661ebe5b702d95741f791d72eb94fb2",
+        "bytes": 1862
+      },
+      "scripts/plot_article_submission_checkpoints_20260928.py": {
+        "sha256": "b788bc2bc5ea2e8fb278cf89c38509b13f864c4c6adf9aba68b2c23f79eb89d5",
+        "bytes": 10879
+      },
+      "scripts/plot_article_trajectories_20260928.py": {
+        "sha256": "142b8461a6fc70ade0512f9bc73e04d1520cbff487b8920cbc03f00cee3c5c1b",
+        "bytes": 31147
+      },
+      "scripts/plot_final_architecture_20260929.py": {
+        "sha256": "c1e87505b9eb1585a9c6539fd0e2d971fed6933081c08908c77ce8e78496d39c",
+        "bytes": 14949
+      },
+      "scripts/plot_final_validation_20260929.py": {
+        "sha256": "70523feb09fd905192d2afe7c538d1d8660b7580d200944b7d9b8875db62b121",
+        "bytes": 9367
+      },
+      "scripts/plot_thesis_expansion_20260928.py": {
+        "sha256": "80593556d852862c62498a10243c98e72876fa465fe62bb7b5783904e5e2ab6d",
+        "bytes": 21653
+      },
+      "scripts/plot_thesis_scene_details_20260928.py": {
+        "sha256": "320a12929c9d84032f677545f63881db60036ae0f961cf494d3ca9aa33416610",
+        "bytes": 22266
+      },
+      "scripts/plot_virtual_paper_method_20260928.py": {
+        "sha256": "4fa4a4ed3a6df4cd61b67a012175e4dfbbceb8f1116ef37ff9ec9d896d803f94",
+        "bytes": 28518
+      },
+      "scripts/replay_final_local_saved_case_20260929.py": {
+        "sha256": "7cd68ff69452e57386b04c51bc841b3ad5d42d6765a71d216f796c540deb72fa",
+        "bytes": 12000
+      },
+      "scripts/review_final_local_validation_20260929.py": {
+        "sha256": "69715a9671c01b02d2bded3a4f67096df0ba5bb3af798798a84737f159e01173",
+        "bytes": 21248
+      },
+      "scripts/verify_final_reproduction_index_20260929.py": {
+        "sha256": "2ec0a88acc5da918a7e98685b177261355a5e7c8f4c4663ad2f47b4be517a175",
+        "bytes": 8631
+      },
+      "scripts/verify_replay_browser_v40.cjs": {
+        "sha256": "cd3dbd6fbcb79e4f1d5c174d964dc05e12884fd9e94f746e882de5c5d0686ebc",
+        "bytes": 7053
+      }
+    },
+    "scope_exclusions": [
+      "no raw-frame rescanning",
+      "no archive decompression/roundtrip",
+      "no World/sensor/planner/TSDF/evaluation calls",
+      "no browser relaunch",
+      "no reexecution of passed case0 replay",
+      "not a whole-repository integrity claim"
+    ]
+  },
+  "saved_replay": {
+    "directory": "audit_results/final_delivery_20260929/saved_replay_case0",
+    "status": "passed",
+    "frames": 43,
+    "actions": 42,
+    "elapsed_seconds": 7.044079513754696,
+    "new_online_tasks": 0,
+    "optional_command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv-3d/bin/python -B scripts/replay_final_local_saved_case_20260929.py --output tmp/reproduction_20260929/case0_replay",
+    "command_scope": "Optional future packet reintegration/controller reproduction; not part of lightweight check; no World or quality evaluation"
+  },
+  "browser_demo": {
+    "html": "docs/thesis/demos/v40_replay/index.html",
+    "browser_result": "audit_results/final_delivery_20260929/replay_browser/result.json",
+    "checks_passed": 10,
+    "condition_scope": "P00 h0/h1, G/S saved external-CPU cohort; not final new8",
+    "external_requests": 0,
+    "guide_seconds": [
+      {
+        "start": 0,
+        "end": 20,
+        "action": "Open local HTML; explain paid RGBD and observed-only TSDF."
+      },
+      {
+        "start": 20,
+        "end": 60,
+        "action": "Select h1; inspect shared prefix and critical divergence decision18/action19."
+      },
+      {
+        "start": 60,
+        "end": 95,
+        "action": "Play, pause, slide to42; enable offline endpoint scores and compare matched mesh views."
+      },
+      {
+        "start": 95,
+        "end": 120,
+        "action": "Select h0; show equal route/quality control."
+      },
+      {
+        "start": 120,
+        "end": 150,
+        "action": "Show final new8 transfer_paths/transfer_quality plus case0 exact replay PASS receipt."
+      }
+    ],
+    "intermediate_mesh_warning": "steps19–41 intentionally show dated step18 mesh; no interpolated/future mesh"
+  },
+  "offline_command_policy": "All figure commands write new tmp paths and only plot saved measurements. They were source/CLI-inspected, not rerun here. Do not call scientific runners or checkpoint run for publication redraw. Restored raw inputs, if required, must be byte-exact and separately located; no synthesis.",
+  "manuscript_commands": [
+    "python3 -B scripts/build_writing_deliverables_20260928.py article --render --export",
+    "python3 -B scripts/build_writing_deliverables_20260928.py thesis --render --export"
+  ],
+  "last_lightweight_check": {
+    "schema": "final.reproduction_index_check.v1",
+    "status": "passed",
+    "verifier_source_sha256": "2ec0a88acc5da918a7e98685b177261355a5e7c8f4c4663ad2f47b4be517a175",
+    "checks_passed": 542,
+    "checks_total": 542,
+    "failures": [],
+    "unique_files_hashed": 279,
+    "file_bytes_hashed": 34407743,
+    "listed_bundle_outputs_checked": 114,
+    "execution_source_count": 45,
+    "protected_historical_source_count": 59,
+    "elapsed_seconds": 0.08180109923705459,
+    "scope": "Explicit metadata/output pins and recorded PASS receipts; no raw-frame rescanning, quality remeasurement, archive roundtrip or replay.",
+    "new_worlds": 0,
+    "new_sensor_queries": 0,
+    "new_policy_runs": 0,
+    "new_tsdf_integrations": 0,
+    "new_surface_evaluations": 0,
+    "browser_launches": 0
+  },
+  "verifier_negative_fixtures": {
+    "altered_file_sha_rejected": true,
+    "unknown_method_symbol_rejected": true,
+    "scientific_files_mutated": false
+  }
+}
