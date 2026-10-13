@@ -1,0 +1,159 @@
+NSO 实机交接｜2026-10-13（北京时间）
+====================================
+
+先读这页，再看 handoff/20261013/SNAPSHOT_STATUS.json 和证据索引。
+本文是交接时的事实快照，不是运动授权，也不是设备实时状态。
+
+1. 用户现在真正要什么
+--------------------
+用户最优先希望：尽快让 NSO 程序在现场小车上实现肉眼可见的受监督控制，并采集真实环境数据。
+用户因本轮效率低，要求停止当前推进，交接给新窗口，并将最新成果更新到 GitHub。
+不要先花很长时间重做完整科学标定、另搭整套控制框架或重复已通过的离线实验。
+先完成短程控制演示，再继续相机观测—NSO决策—移动—停车—新观测的闭环。
+
+当前电源线连接中：使用同一个已标记的地面原点，始终限制在原点前后各0.5米内。
+不得因为进程重启、会话更换或失败重试，就把当前位置重新当原点。
+当前受限演示目标上限±0.20米，指令0.03m/s；硬反馈线速上限0.05m/s。
+未开放转弯、自由导航、自动回退。下一次实际移动仍需当时现场可接管及范围确认。
+不要复用旧回复的时间戳，也不要在新窗口自动恢复旧运动命令。
+
+2. 连接与目录
+--------------
+仓库：https://github.com/Jimmy7338/NSO ，分支 main。
+本机工作区：C:\Users\31212\Documents\Codex\2026-10-07\https-github-com-jimmy7338-nso-https
+实际 Git 仓库：工作区\outputs\NSO
+机器人：ouc@192.168.31.216，SSH默认22端口。
+图片里的4000端口是NX远程桌面，不是SSH。
+口令不写入公开交接或仓库；连接脚本从 NSO_ROBOT_SSH_PASSWORD 读取。
+work/robot_ssh.py --user ouc；固定主机指纹在work/robot_known_hosts。
+Windows辅助Python：C:/Python314/python.exe；本地科学环境：work/nso-cpu-env/Scripts/python.exe。
+机器人Python：/usr/bin/python3 -s -B；ROS Noetic；Scout Mini，非全向，can0。
+机器人项目根：/home/ouc/nso_robot。
+最后见到的boot：c208fc3c-6dcc-40e1-bfaf-2f0c0db3f082。
+用户ROS master：11311，rosmaster PID33418/start_ticks6946987；另有11523离线实验master，不要动。
+以上PID/boot必须重新只读核对，不能按交接内容直接发信号或启动动作。
+
+3. 已真正打通的控制原理与历史结果
+--------------------------------
+用户原流程：roscore；roslaunch scout_bringup scout_robot_base.launch；
+roslaunch scout_bringup scout_teleop_keyboard.launch。
+键盘和NSO执行器都通过 geometry_msgs/Twist → /cmd_vel → scout_base_node →
+SDK SetMotionCommand → CAN 控制底盘，不需要在中控直接运行Codex。
+2026-10-09已实测可见20cm/50cm直行；控制链路并非从未打通。
+入口与历史证据说明：robot/SCOUT_CONTROL.txt、robot/scout_session.py、robot/scout_ros_control.py。
+历史成功不构成当前带电源线场地的50cm运动授权。
+
+4. 本次2026-10-13的实际结果：20cm目标未完成，已经停稳
+-------------------------------------------------
+会话：control_20261013_r3；现场明确确认同原点及±0.5m边界后，只提交一次+0.20m目标。
+程序确实启动原生驱动并发送33帧非零CAN指令，全部为(0.03,0,0,0)。
+约0.64秒后触发保护；用户回复：“已停稳，未看清移动”。不要写成20cm成功。
+CAN净位移约0.00102004m，累计绝对路径0.00441994m；不是独立尺量真值。
+触发样本0x221 payload=0009ffec00000000，SDK原协议解码为：
+线速度0.009m/s、角速度-0.020rad/s、横向/转向字段0。
+触发的是旧程序把后三字段统一按0.015比较的“非直行”判据，不是线速超过0.05。
+SDK parser字段/大小端/单位已独立核验，没有发现解码错误。
+整个尝试线速度范围[-0.009,0.024]m/s；累计净yaw约4.54e-7rad，绝对yaw行程约0.0044012rad。
+触发源时间到第一帧零速32.457ms；停车请求到零速15.122ms。
+独立重解全部22770条原始CAN记录；停车前缀和驱动退出后至少1s静止检查通过。
+驱动正常退出returncode0，控制常驻程序退出2并closed_locked；没有待执行回退命令。
+随后接收式20秒检查：1000条速度反馈全为零、TX仍171、原点登记哈希未变。
+
+原始证据（工作区相对路径；归档保留同样目录结构）：
+outputs/robot-deployment/goal-20261011-real-r0/attended-control-20261013-r3-raw/
+outputs/robot-deployment/goal-20261011-real-r0/attended-control-20261013-r3-independent-audit/result.json
+outputs/robot-deployment/goal-20261011-real-r0/attended-stationary-20261013-r4-raw/
+独立审计脚本：work/audit_attended_r3_actual_local_r0.py。
+
+5. 原点锁：必须保留、不能删除后重新开始
+------------------------------------
+机器人原点文件：/home/ouc/.nso/scout-tether-origin-v1.json
+旧文件SHA256：9215883a5533b09bbe08349518adab1e71cf25c2e3dd2bd3b7dd5e0ac40ba1ac
+状态closed_locked、motion_authorized=false、resume_or_reanchor_allowed=false。
+其session_id=control_20261013_r3、仅有一个失败attempt、真实原点仍是用户标记的旧地面位置。
+原文件及输入配置已用SFTP按字节保存，供下一窗口独立审查：
+outputs/robot-deployment/goal-20261011-real-r0/attended-origin-original-bytes-20261013-r3/
+不要从SSH终端显示的JSON重新编码生成原文件：终端编码可能损坏中文。
+旧input-config.json SHA=6ff5001756d5eb0f198235285566c6821fa4f7511699cafe0101cc14e4b3e441；
+旧reports/config.json是canonical副本，SHA=9c13b41184af148840134b389bae911d6ef0e84582e6a4dd0a463585a1c1cfd8。
+二者内容等价但字节不同；恢复的config pin必须指向旧staging输入原件。
+
+6. 部署完成的版本
+----------------
+robot/scout_tether_attended_control_v1.py：机器人已部署，17项本地及ARM测试通过。
+SHA=21ff15153e242d27e0076d31f2b891f6d18dc4ee6597a26939068009a0c87c9a。
+机器人目录：/home/ouc/nso_robot/staging/scout-attended-control-20261013-r1。
+这是上面失败尝试用的版本，不能删除原点锁后重跑。
+
+原生限时驱动已在ARM编译、测试：
+/home/ouc/nso_robot/staging/scout-tether-driver-overlay-20261013-r0/devel/lib/
+nso_scout_tether_driver_v1/nso_scout_tether_base_node_v1
+SHA=e035d8a1c65544cac3b27024768776654098da8db1a228125319d6f3a8de0bdb。
+SDK SHA=6d989e815080503efd6e1904a2bae6fd436273d4d5a7f5626deb6d172c9109fc。
+只有原生定时线程发送CAN；100ms输入有效期、20ms发送周期、40ms发送间隔保护。
+相同实际二进制的无CAN测试：前进/后退断输入后约100.4ms归零，不重新接受迟到输入。
+这些测试不是实机断网停车的证明；现场接管仍必需。
+
+7. 最新修正v2：交接时尚未在中控部署或做运动测试
+----------------------------------------------
+新文件：robot/scout_tether_attended_control_v2.py。最终测试/审查状态见SNAPSHOT_STATUS.json。
+交接冻结为INCOMPLETE草稿，入口DRAFT_RECOVERY_EXECUTION_DISABLED=True，明确拒绝执行。
+Python3.8语法/import和只读真实证据回放通过；无v2专用单测、无ARM测试、无完整独立审查。
+预定修正：角速度独立按rad/s处理；瞬时上限0.05rad/s，累计有符号yaw绝对值≤0.01rad，
+累计绝对yaw行程≤0.10rad。保留直行命令、线速度/距离/累计时间/断令停车限制。
+依据：旧目视20cm成功试验存在0.02rad/s瞬时反馈、绝对角行程约0.033rad，净偏转很小。
+不能把“绝对yaw行程”和“净yaw偏差”混为一谈，也不能把新判据回填为旧试验成功。
+
+新恢复只针对这一次已独立证明停稳、且仅角速度单帧判据失败的旧r3：
+保留旧registry原字节和失败history；明确新增版本化恢复记录，不能默默解除原锁。
+拟继承旧路径/时间/yaw额度；原timer少计末周期，按raw暴露约0.662323s保守继承的修正尚未实现。
+CAN观测跨进程存在空白，不能伪称连续；须由现场确认未再移动/搬动/使用其他控制器，
+并据旧地面标记报告当前车体中心相对旧原点的区间（此恢复拟限±5cm），朝向保持。
+这些现场事实尚未取得，不得在程序输入中伪造true或坐标区间。
+只读prepare、恢复确认、单次目标分别执行；恢复确认本身不发运动。
+后退需要上一段已目视移动和停稳，且再次明确授权；不自动倒车。
+
+预备脚本（未执行的草稿，必须完成审查后再用）：
+work/build_attended_control_deployment_20261013_r4.py
+work/start_attended_control_recovery_20261013_r4.py
+work/confirm_and_forward_attended_20261013_r4.py
+预定新stage/report以20261013-r4结尾；不要假定已经存在或已通过ARM测试。
+旧r2确认写死且过期，r3确认已经使用，均不能重放。
+
+8. 相机与NSO：已完成和未完成
+--------------------------
+2026-10-13成功纯相机采集：21.25s，4组原始严格同stamp RGB/depth/CameraInfo，约30MB。
+没有激光输入，没有运动指令，采集自有进程已清理。
+本机NSO ObservedMapperV42.update(scan=None)实际消费第一帧：
+1280×720、有效正深度84.3238%、0.1–4m范围653964点、一次更新约0.562s、13692顶点/18049面。
+证据：outputs/robot-deployment/goal-20261011-real-r0/onsite-camera-20261013-r0-raw/
+与 onsite-camera-20261013-r0-nso/NSO-onsite-camera.html、result.json。
+这不是持续相机定位、真实选点导航或NSO实机质量收益验收。
+前后独立快照r4a/r4b入口见最新状态文件；交接时未启动或采集。
+
+仍缺：稳定连续WORLD姿态、完整30s训练+120s留出标定、同一连续观测会话A/B、
+相机到车体当前安装外参、NSO决策执行后真实付费观测/返回成本/恢复闭环。
+用户明确只用相机，不融合雷达；相机安装可能倾斜，暂无现场尺寸，不能编造外参。
+旧r5科学/工程失败账本needs_reconciliation；不能用静态成功或本地回放覆盖旧失败。
+
+9. 新窗口最短接续顺序
+--------------------
+A. 先读本页、SNAPSHOT_STATUS.json与原始独立审计；不要重新推理已证实的CAN解码问题。
+B. 只读连接核对boot、CAN TX、现有控制源、原点文件SHA、当前静止状态。
+C. 完成v2草稿剩余独立审查和针对性测试；尤其原文件pin、失效锁、继承预算、观测空白处理。
+   若采用更简单实现，也必须保留同原点和真实停车保护，不要另起不受限实验。
+D. 测试过的确切源码再部署到全新stage，先只读prepare；先把提交助手准备好。
+E. 程序就绪后一次性询问当前相对旧原点位置/未搬动/线缆/可接管，确认后立即提交。
+   不要在拿到短时现场确认后再花几分钟写代码，导致反复过期再问。
+F. 一次可见的受限直行→反馈停车→用户目视记录→相机环境记录，先交付控制演示。
+G. 再讨论同一原点内回程以及NSO连续观测决策闭环，保留每次真实失败/耗时。
+
+10. 同步与恢复说明
+-----------------
+本次新增robot代码、录制器修正、本地实验代码一并纳入仓库。
+handoff/20261013包含可直接读取的关键结论、原始证据索引和完整外部成果归档清单。
+大体积原始传感器记录采用Git LFS分片归档，避免普通Git单文件上限；恢复工具按清单校验。
+工作区中的第三方运行环境、依赖下载缓存不当作项目成果重复上传；原工作区继续保留。
+归档原相对目录以work/、outputs/开头，可恢复到新工作区；源码仓库本身不用从归档恢复。
+最终远程提交与归档是否全部同步，以交接后的最终消息及同步回执为准。
+get_goal最近返回null，当前不存在工具记录中的活动goal；不要把旧JSON里的active当实时goal。
