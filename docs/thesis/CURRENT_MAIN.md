@@ -5,12 +5,14 @@
 - [小论文 PDF（31页）](submission_20261104_two_room/main.pdf)
 - [小论文可编辑主文](ARTICLE_SUBMISSION_EN_SKILL_REVISED_20261029.md)
 - [LaTeX源码](submission_20261104_two_room/main.tex)与[验证记录](submission_20261104_two_room/validation.json)
-- [毕设全文阅读稿（76页）](graduation_integrated_20261104_two_room/thesis.pdf)
+- [毕设全文阅读稿（77页）](graduation_integrated_20261104_two_room/thesis.pdf)
 - [毕设可编辑全文](graduation_integrated_20261104_two_room/thesis.md)与[构建验证](graduation_integrated_20261104_two_room/validation.json)
 - [投稿准备状态与材料](journal_submission_materials_20261104/readiness.md)
 - [成果草稿 PR](https://github.com/Jimmy7338/NSO/pull/1)
 
 保留原24条相关Q0矩阵，另列双房间G/S两条案例和随后一次固定几何对象权重为2的事后控制。它们不是27个独立场景。双房间案例在覆盖86.61%时，类别条件化先验改变了目标排序；动作直到第31步才分歧。新增几何加权控制完整复现S的96步记录和13次规划目标，因此该例不能隔离类别信息的特有收益。原结果、反事实评分与事后控制全部保留。
+
+168个已记录状态中，86个为S实访、82个为G实访上的S反事实；后验选取的west/96第41动作状态在99.728%覆盖时不能由任何非负统一几何权重复现S目标。三条件各一次续接显示表面、覆盖、路程和F1结果混合，不能据此声称早期覆盖或实车语义优势。详见[复现索引](submission_20261104_two_room/paid41_reproduction.md)。
 
 frontier四个拒绝点的回放显示：剩余预算恰等于最短完整返航成本，当时观测图上没有可负担且有正预测未知收益的视点；这没有证明所有外部探索策略等价或普遍公平。原矩阵中frontier与联合策略的覆盖和表面观察取舍继续报告。
 

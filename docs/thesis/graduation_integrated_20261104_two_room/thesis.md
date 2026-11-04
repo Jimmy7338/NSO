@@ -674,6 +674,10 @@ U_S(r)=U_{\rm common}(r)+\sum_i f_i(r)[m_i s_i+(1-m_i)g_i].
 
 对四个frontier拒绝点的回放与原记录packet一致；剩余预算与完整最短返航代价分别为25/25、20/20、25/25和43/43。在相同已观测安全朝向图上枚举预算可负担的非零出发姿态，并按原baseline的4 m、90°、仅依赖belief的未知增益代理计算，四处正增益目标均为零；可行的原地转向可能是最短返航的一部分。这不能排除未来观测带来的收益，也不证明所有frontier或ROS实现的公平性，适配器契约差异仍然存在。
 
+对168个已记录规划状态作事后标量等价审计，其中86个是S轨迹实访状态，82个是G实访状态上的S评分反事实。在一个状态——部署策略west/96的S轨迹第3次规划、已付费41动作——对于保存的候选集，任何非负统一几何先验权重均不能复现S所选目标；此时覆盖已达99.728%，不属于早期覆盖。该状态由审计后选择。
+
+从完全相同的41动作S前缀出发，S、G和G×2分别续接一次并均完成返航；S完整复现原归档，G与G×2逐步一致。相对于G/G×2，S在切换后新增的参考可见表面多0.099926 m²，新增已观测面积少0.04 m²，路程少0.8 m，终点F1@5 cm低0.001203。这是后验选状态的晚期单例干预，终点结果混合，不能证明普遍或实车语义收益；双房间G×2完整复现S的负归因结果单独保留。这些续接不增加原24条矩阵样本数。
+
 ### 6 双房间受控机制诊断
 
 另行构造一个Q0 shelf-west派生的双房间受控场景，沿用设备、传感配置、噪声种子和合成RGB标记语义，增加带1.6 m门洞的隔墙。最初门洞位置在几何预检中受阻，观察任何策略轨迹之前已调整；模拟器和评价器使用参考几何，策略仅接收虚拟RGB-D、扫描和准确模拟里程计。这两条轨迹与前述24条Q0矩阵分开报告，但同源相关，不是独立自然场景或实车证据。
@@ -1186,7 +1190,7 @@ G/S平均平移距离27.0/26.5 m，转向15.0/15.5次。Intel Xeon（Sapphire Ra
 
 ## 附录A 复现与材料索引
 
-未知探索材料：原版代码 `../../../nso/cpu_four_modules_v10.py`；部署策略 `/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py`；原版、部署策略及覆盖消融矩阵分别位于 `/home/ouc/nso_robot/analyses/reproduction_20261104/fresh_matrix/`、`deployed_policy_matrix/`、`coverage_ablation_matrix/`；实车完整轮次审计 `/home/ouc/nso_robot/analyses/resume_20261104/episode_audit.json`，续行与轮廓审计位于 `/home/ouc/nso_robot/analyses/continuation_20261104/`。frontier协议、四条结果及覆盖进程见 `/home/ouc/nso_robot/analyses/frontier_baseline_20261104/matrix/{protocol.json,comparison.md,progress_metrics.csv,semantic_timing.json}`。双房间两条轨迹及预检与机制审计独立保存在 `/home/ouc/nso_robot/analyses/frontier_semantic_publication_stage/experiments/unknown_exploration_20261104/two_room_diagnostic/`；事后G×2控制见 `/home/ouc/nso_robot/analyses/geometric_weight_control_20261104/comparison.json`；frontier公平性回放见 `/home/ouc/nso_robot/analyses/frontier_fairness_20261104/audit.json`，均不增加24条矩阵样本。详细证据对应见同目录 `integration_and_evidence.md`。这些路径为本机索引，迁移时需随数据调整。
+未知探索材料：原版代码 `../../../nso/cpu_four_modules_v10.py`；部署策略 `/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py`；原版、部署策略及覆盖消融矩阵分别位于 `/home/ouc/nso_robot/analyses/reproduction_20261104/fresh_matrix/`、`deployed_policy_matrix/`、`coverage_ablation_matrix/`；实车完整轮次审计 `/home/ouc/nso_robot/analyses/resume_20261104/episode_audit.json`，续行与轮廓审计位于 `/home/ouc/nso_robot/analyses/continuation_20261104/`。frontier协议、四条结果及覆盖进程见 `/home/ouc/nso_robot/analyses/frontier_baseline_20261104/matrix/{protocol.json,comparison.md,progress_metrics.csv,semantic_timing.json}`。双房间两条轨迹及预检与机制审计独立保存在 `/home/ouc/nso_robot/analyses/frontier_semantic_publication_stage/experiments/unknown_exploration_20261104/two_room_diagnostic/`；事后G×2控制见 `/home/ouc/nso_robot/analyses/geometric_weight_control_20261104/comparison.json`；frontier公平性回放见 `/home/ouc/nso_robot/analyses/frontier_fairness_20261104/audit.json`，均不增加24条矩阵样本。168状态标量审计见 `/home/ouc/nso_robot/analyses/scalar_equivalence_20261104/audit.json`；paid-41三条件干预的冻结协议、资产审计及轨迹见 `/home/ouc/nso_robot/analyses/semantic_state_intervention_20261104/`，仓库相对位置为 `experiments/unknown_exploration_20261104/scalar_equivalence/` 与 `experiments/unknown_exploration_20261104/semantic_state_intervention/`；约束区间详见本文稿包目录的 `paid41_reproduction.md`。详细证据对应见同目录 `integration_and_evidence.md`。这些路径为本机索引，迁移时需随数据调整。
 
 
 ### A.1 固定实现与观测数据

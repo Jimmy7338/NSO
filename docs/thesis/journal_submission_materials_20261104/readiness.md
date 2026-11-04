@@ -13,3 +13,5 @@ The previously considered Robotics and Autonomous Systems alternative has not re
 Remaining author inputs are names and order, affiliations, corresponding contact, funding, competing interests, contributions, permissions and final submission approval. Existing drafts deliberately leave these fields empty. This is distinct from scientific gaps: the matched real-robot semantic comparison, broad generalization and independently referenced physical reconstruction accuracy remain unvalidated and must not be claimed through administrative completion.
 
 The [cover letter](cover_letter_draft.md) has been updated to the current title and evidence boundaries. It has not been sent. Neither a submission nor payment has been made.
+
+The paid-41 matched continuation is a post-hoc late-state simulation with mixed outcomes. It does not establish early coverage, general semantic benefit or physical accuracy; its audit and three continuation records are indexed in the current manuscript.
