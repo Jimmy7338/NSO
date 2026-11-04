@@ -1,0 +1,63 @@
+{
+  "observed_utc": "2026-11-04T10:25:54.146743+00:00",
+  "scope": "read-only filesystem, no ROS or hardware; no rebuild",
+  "source_root": "/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-src",
+  "source_files_sha256": {
+    "CHANGELOG.rst": "c8baf3c8f91baad95eaef7f8ac1edffa259741eea05de6d0b45a512554139961",
+    "CMakeLists.txt": "65981857001d44cc45f2ff6e8c52220a03f4caf583deaacbf84505954001059b",
+    "doc/architecture.dia": "9945e1aaaa4fb1fe09c045747bdee65d1b64b181fcf6f239d73019fdf4e7ecac",
+    "doc/screenshot.png": "ea811f155e84488a2d2bf56e727ee6c571211068f0cdf61ad6347846ffe02176",
+    "doc/wiki_doc.txt": "17ca5ca54e0f508536f54404dd14477ec2dda0cf1cbed5eb2d4e86fc553b842c",
+    "include/explore/costmap_client.h": "371b9686469842cddcac8662d5fab840941ff21202142e43e180d584f258a8f1",
+    "include/explore/costmap_tools.h": "7c771a8713616e2fdf2f5e7cbd6005d7d6640797818ef9c72816048096d26daa",
+    "include/explore/explore.h": "5e845e9dbd18bfb2681ae955546e424e25bb84e00a87afa6c0a8544249d08a5e",
+    "include/explore/frontier_search.h": "a318a4c9fe0a88b49ebd38fc4225c69562efd2d61022950e5857d86f29143540",
+    "launch/explore.launch": "1748b664fb59a7aabd513444c8e45761330af56ebb12eec3ed25f56bdf90ff5b",
+    "launch/explore_costmap.launch": "9e96f512fbe05fc3305f571a0f02447925a870cc7a723412891c158279d8a26c",
+    "package.xml": "017317731eef52fdf5000fa3d21a3f40aecdaa31a1bc1f2421b47fab599f3b9c",
+    "src/costmap_client.cpp": "6b9bfdc25de85a94a85bd8bb81a2df597a29dd38763010a5681620adddadba7d",
+    "src/explore.cpp": "2a680bba5bb1551b35a4d88f90e91f071f94dcf54c99889121bd303c8cd5caf1",
+    "src/frontier_search.cpp": "59742f80c12fc349a132a7dab0baac02c206b839db3f89c83152a81f8e8058e2"
+  },
+  "package_version": "explore_lite 2.1.4",
+  "receipt": {
+    "path": "/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-build-result.json",
+    "sha256": "21dad17b082f6dc0b1c2008ac07717b9ed5530361017dd89fd88d75350887bc2",
+    "build_steps_exit_codes": [
+      0,
+      0
+    ],
+    "recorded_binary_sha256": "6dffe929b4f653c38cfaa23c5ab2225576620375872e702107cea154beb44494",
+    "recorded_patch_sha256": "2a680bba5bb1551b35a4d88f90e91f071f94dcf54c99889121bd303c8cd5caf1",
+    "recorded_original_explore_cpp_sha256": "f7ad4eb0cdf31af651dd67fb140699eeeccd58676299c7726eacca0d7d66a6c4",
+    "recorded_original_explore_h_sha256": "5e845e9dbd18bfb2681ae955546e424e25bb84e00a87afa6c0a8544249d08a5e"
+  },
+  "binary": {
+    "path": "/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-build/devel/lib/explore_lite/explore",
+    "sha256": "6dffe929b4f653c38cfaa23c5ab2225576620375872e702107cea154beb44494",
+    "matches_receipt": true,
+    "architecture": "aarch64 ELF dynamically linked",
+    "parameter_string_found": true
+  },
+  "source_evidence": {
+    "explore_cpp_sha256": "2a680bba5bb1551b35a4d88f90e91f071f94dcf54c99889121bd303c8cd5caf1",
+    "matches_recorded_patch": true,
+    "explore_h_matches_recorded_original": true,
+    "cmake_home_directory": "/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-src",
+    "cxx_compiler": "/usr/bin/c++"
+  },
+  "patch": {
+    "parameter": "goal_update_min_distance",
+    "default_m": 0.01,
+    "condition": "threshold > 0.01 m and goal PENDING or ACTIVE",
+    "behavior": "keeps submitted goal anchor when new frontier centroid is within threshold; default follows original 1 cm comparison",
+    "disclosure": "modified explore_lite; record effective parameter and do not call pristine upstream"
+  },
+  "confidence": "Receipt records successful compilation and matching binary hash, matching patch/source hash and CMake source path; binary parameter string corroborates patch presence. The receipt does not bind every source/dependency hash to the build, so exact complete source-to-binary identity is not cryptographically proven.",
+  "license": {
+    "package_xml": "BSD",
+    "source_notice": "BSD 3-clause text in explore.cpp and other source headers; retain applicable notices, conditions and disclaimers in source and binary distributions; no endorsement",
+    "limitation": "No standalone LICENSE found in source tree; preserve actual file-level notices and inspect dependencies before distributing compiled binary."
+  },
+  "minimal_rebuild": "In an isolated build directory, freeze full source tree hashes and patch/parameter, capture compiler, ROS/catkin/dependency versions and exact build commands; configure against this source and build without starting ROS nodes; record resulting binary hash and compare. Rebuild is not guaranteed byte-identical across toolchains; execute only after test scope authorizes."
+}

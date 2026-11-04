@@ -223,6 +223,15 @@ def pose_evidence(transform, wall, receipt, target_frame='map'):
                 translation=[t.x,t.y,t.z],quaternion=[q.x,q.y,q.z,q.w])
 
 
+def arrival_recording_frame(mode, execution_frame, goal_frame):
+    """Native exploration follows its costmap frame; NSO keeps its declared frame.
+
+    This selects the TF used for arrival records only, not an execution target
+    or a motion-admission condition. Unsupported frames remain unverified.
+    """
+    return goal_frame if mode == 'visual' else execution_frame
+
+
 def arrival_evidence(goal, terminal, before, after, can_start, can_end, expected_frame='map'):
     """Verify the ROS result against fresh pose and chassis feedback, including turns."""
     evidence=dict(goal=goal,terminal=terminal,before=before,after=after,can_start=can_start,can_end=can_end,
@@ -589,8 +598,10 @@ def main(argv=None):
     navigation_execution_frame=('odom' if args.mode=='navigation' else
         reference_task['calibration'].get('ROS_execution_frame','map')
         if args.mode in ('nso','joint') else 'map')
-    def capture_navigation_pose():
-        return capture_odom_pose() if navigation_execution_frame=='odom' else capture_pose()
+    def capture_navigation_pose(frame):
+        if frame == 'odom':return capture_odom_pose()
+        if frame == 'map':return capture_pose()
+        raise ValueError('unsupported_arrival_recording_frame:'+str(frame))
     def can_snapshot():
         with lock:
             return dict(distance_m=hardware.can_distance,absolute_yaw_rad=hardware.can_absolute_yaw,
@@ -633,9 +644,11 @@ def main(argv=None):
                yaw=math.atan2(2*(q.w*q.z+q.x*q.y),1-2*(q.y*q.y+q.z*q.z)),
                frame=m.goal.target_pose.header.frame_id,stamp=m.header.stamp.to_sec(),
                receipt_monotonic=time.monotonic())
-        try:before=capture_navigation_pose();error=None
+        recording_frame=arrival_recording_frame(args.mode,navigation_execution_frame,r['frame'])
+        try:before=capture_navigation_pose(recording_frame);error=None
         except Exception as exc:before=None;error=str(exc)
-        initial=dict(goal=r,before=before,can_start=can_snapshot(),pose_error=error)
+        initial=dict(goal=r,before=before,can_start=can_snapshot(),pose_error=error,
+                     recording_frame=recording_frame)
         with lock:
             state['goals'].append(r)
             if r['id'] not in state['goal_starts']:state['goal_starts'][r['id']]=initial
@@ -643,17 +656,20 @@ def main(argv=None):
     def goal_result(m):
         r=dict(event='goal_result',id=m.status.goal_id.id,status=m.status.status,text=m.status.text,
                receipt_monotonic=time.monotonic())
-        try:after=capture_navigation_pose();error=None
+        with lock:
+            initial=state['goal_starts'].get(r['id'],{})
+        recording_frame=initial.get('recording_frame',navigation_execution_frame)
+        try:after=capture_navigation_pose(recording_frame);error=None
         except Exception as exc:after=None;error=str(exc)
         final_can=can_snapshot()
         with lock:
             state['results'].append(r)
             if r['id'] in state['terminal_goals']:return
             state['terminal_goals'].add(r['id'])
-            initial=state['goal_starts'].get(r['id'],{})
             evidence=arrival_evidence(initial.get('goal'),r,initial.get('before'),after,
-                                      initial.get('can_start'),final_can,expected_frame=navigation_execution_frame)
-            evidence.update(before_pose_error=initial.get('pose_error'),after_pose_error=error)
+                                      initial.get('can_start'),final_can,expected_frame=recording_frame)
+            evidence.update(before_pose_error=initial.get('pose_error'),after_pose_error=error,
+                            recording_frame=recording_frame)
             state['arrival_records'].append(evidence)
             if evidence['verified']:result['successful_arrivals'].append(evidence)
         journal.add(r)

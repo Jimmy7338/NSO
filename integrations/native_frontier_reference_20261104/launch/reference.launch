@@ -1,0 +1,40 @@
+<launch>
+  <arg name="enable_exploration" default="false" />
+  <arg name="enable_recorder" default="$(arg enable_exploration)" />
+  <arg name="session_id" default="" />
+  <arg name="navigation_namespace" default="nso_visual" />
+  <arg name="native_binary" default="/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-build/devel/lib/explore_lite/explore" />
+  <arg name="costmap_topic" default="/$(arg navigation_namespace)/move_base/global_costmap/costmap" />
+  <arg name="costmap_updates_topic" default="/$(arg navigation_namespace)/move_base/global_costmap/costmap_updates" />
+  <arg name="action_namespace" default="/$(arg navigation_namespace)/move_base" />
+  <arg name="base_frame" default="base_link" />
+  <arg name="event_log" default="/tmp/native_frontier_reference_events.jsonl" />
+  <arg name="protection_topic" default="" />
+  <group if="$(arg enable_exploration)">
+    <group ns="$(arg navigation_namespace)">
+      <node pkg="native_frontier_reference" type="native_launcher.py" args="&quot;$(arg native_binary)&quot;" name="explore" output="screen" respawn="false">
+        <remap from="move_base" to="$(arg action_namespace)" />
+        <param name="robot_base_frame" value="$(arg base_frame)" />
+        <param name="costmap_topic" value="$(arg costmap_topic)" />
+        <param name="costmap_updates_topic" value="$(arg costmap_updates_topic)" />
+        <param name="visualize" value="true" />
+        <param name="planner_frequency" value="0.2" />
+        <param name="progress_timeout" value="45.0" />
+        <param name="potential_scale" value="4.0" />
+        <param name="orientation_scale" value="1.5" />
+        <param name="gain_scale" value="1.0" />
+        <param name="transform_tolerance" value="0.50" />
+        <param name="min_frontier_size" value="0.4" />
+        <param name="goal_update_min_distance" value="0.25" />
+      </node>
+    </group>
+  </group>
+  <group if="$(arg enable_recorder)">
+    <node pkg="native_frontier_reference" type="event_recorder.py" name="native_frontier_event_recorder" output="screen" respawn="false">
+      <param name="action_namespace" value="$(arg action_namespace)" />
+      <param name="session_id" value="$(arg session_id)" />
+      <param name="event_log" value="$(arg event_log)" />
+      <param name="protection_topic" value="$(arg protection_topic)" />
+    </node>
+  </group>
+</launch>
