@@ -1,0 +1,48 @@
+{
+  "result": "success",
+  "scope": "isolated local compilation only; executable not run; no ROS launched; no hardware operation",
+  "architecture": "aarch64",
+  "os": "Linux-5.10.192-tegra-aarch64-with-glibc2.29",
+  "cmake": "cmake version 3.30.1",
+  "cmake_path": "/home/ouc/.local/bin/cmake",
+  "compiler": "g++ (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
+  "packages": [
+    "libasio-dev\t1:1.12.2-1",
+    "ros-noetic-catkin\t0.8.12-1focal.20250426.001916",
+    "ros-noetic-geometry-msgs\t1.13.2-1focal.20250426.025510",
+    "ros-noetic-roscpp\t1.17.4-1focal.20250519.224856",
+    "ros-noetic-std-msgs\t0.5.14-1focal.20250426.023608"
+  ],
+  "sdk_project_version": "0.8.0",
+  "sdk_cmake_flags": [
+    "CMAKE_BUILD_TYPE=Release",
+    "BUILD_TESTING=OFF",
+    "BUILD_SHARED_LIBS=OFF"
+  ],
+  "node_cmake_flags": [
+    "CMAKE_BUILD_TYPE=Release",
+    "PYTHON_EXECUTABLE=/usr/bin/python3",
+    "CMAKE_PREFIX_PATH=/opt/ros/noetic",
+    "NSO_UGV_SDK_INCLUDE_DIR=<stage>/hardware_sources/ugv_sdk/include",
+    "NSO_UGV_SDK_LIBRARY=<output>/sdk-build/lib/libugv_sdk.a"
+  ],
+  "artifacts": {
+    "sdk-build/lib/libugv_sdk.a": {
+      "sha256": "02957241d637616f643142d0f79fa5f85eb46019c106da36269f2a299c6868f6",
+      "bytes": 1294724
+    },
+    "node-build/devel/lib/nso_scout_radius_driver_v1/nso_scout_attended_node": {
+      "sha256": "fca4e8640eabb416fce35bab3c757b0a7f681f6a3c32710726c803d42deef61f",
+      "bytes": 385480
+    }
+  },
+  "source_manifest": "source_sha256.json",
+  "source_manifest_sha256": "40979539a518d381f63fa622f9994c9b02c73c8c24d8559b919b071d8360892b",
+  "dynamic_dependencies": "ldd.txt",
+  "dynamic_section": "dynamic_section.txt",
+  "source_or_recipe_changes": "none; added isolated build.sh only",
+  "limitations": [
+    "Local build does not establish clean-machine deployment, original binary equivalence, hardware compatibility, safety, or operation.",
+    "Only SDK library and native node targets compiled; tests and other ROS packages not built or run."
+  ]
+}
