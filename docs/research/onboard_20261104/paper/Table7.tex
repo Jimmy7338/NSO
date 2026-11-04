@@ -1,5 +1,5 @@
 \begin{table}[!htbp]
-\caption{Recorded robot execution by implementation stage; these are separate sessions, not matched performance trials}\label{tab:7}
+\caption{Recorded robot execution by implementation stage; sessions include a dependent continuation, not matched performance trials}\label{tab:7}
 \small\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{3pt}
 \setlength{\JournalTableWidth}{\dimexpr\linewidth-6\tabcolsep\relax}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\JournalTableWidth} >{\raggedright\arraybackslash}p{0.24\JournalTableWidth} >{\raggedright\arraybackslash}p{0.24\JournalTableWidth} >{\raggedright\arraybackslash}p{0.3\JournalTableWidth}@{}}
@@ -12,6 +12,7 @@ Full structural stack, second session & 0 feasible candidates / 0 issued goals a
 Three-frame recorded-image diagnostic, 29 October & No physical motion trial & 3 detector calls, 3 TSDF integrations, 8 forecasts; one person association & Perception/planning modules execute on real data, but no qualified semantic activation or continuous deployment is established \\
 Standard ROS viewpoint diagnostic, 3 November & Return goal failed after 0.261 m of CAN-estimated travel; zero feedback confirmed after shutdown & Local controller reported invalid control & A separately commanded setup movement, not an NSO policy action; failure and incomplete return are retained \\
 Joint exploration integration, 4 November & 40 verified ROS arrivals and 40 paid actions; returned to the starting grid state; 6.835 m CAN-estimated travel; 527.663 s & 41 accepted observations including the initial frame; 12 planning events & One partially known physical scene; feasibility evidence for a declared deployment variant, with a native driver fault recorded near the end \\
+History-initialized continuation, 4 November & 7 paid actions and 7 verified arrivals of a new 40-action budget; 1.119 m CAN-estimated travel; 114.512 s; no return & Prior 41 observations reused; observed-area proxy increased 4.72 m$^2$; one planning event & Dependent continuation stopped when the current circular footprint was not known safe; not an independent repeat \\
 \bottomrule
 \end{tabular}
 \end{table}
