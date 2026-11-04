@@ -1,13 +1,28 @@
 #!/usr/bin/env python3
 """Own-process-only offline fixture for native explore and passive observer."""
-import json, os, pathlib, signal, socket, subprocess, sys, tempfile, time, uuid
-P=pathlib.Path(__file__).resolve().parent; root=P.parent; out=P/'runs'/time.strftime('%Y%m%d_%H%M%S');out.mkdir(parents=True,exist_ok=False)
+import argparse, hashlib, json, os, pathlib, shlex, signal, socket, subprocess, sys, tempfile, time, uuid
+P=pathlib.Path(__file__).resolve().parent; root=P.parent
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--ros-setup', required=True, type=pathlib.Path)
+parser.add_argument('--overlay-setup', type=pathlib.Path)
+parser.add_argument('--native-binary', required=True, type=pathlib.Path)
+args_cli=parser.parse_args()
+ros_setup=args_cli.ros_setup.resolve(); overlay_setup=args_cli.overlay_setup.resolve() if args_cli.overlay_setup else None; native_binary=args_cli.native_binary.resolve()
+for path in (ros_setup, overlay_setup, native_binary):
+ if path is not None and not path.is_file(): parser.error(f'file not found: {path}')
+if not os.access(native_binary, os.X_OK): parser.error(f'native binary is not executable: {native_binary}')
+sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
+source_files=[root/'package.xml',root/'CMakeLists.txt',root/'launch/reference.launch',root/'scripts/native_launcher.py',root/'scripts/event_recorder.py',P/'run_isolated.py',P/'fixture.py',P/'cancel_owner.py']
+source_hashes={str(path.relative_to(root)):sha(path) for path in source_files}
+out=P/'runs'/time.strftime('%Y%m%d_%H%M%S');out.mkdir(parents=True,exist_ok=False)
 with socket.socket() as sock:
  sock.bind(('127.0.0.1',0)); port=sock.getsockname()[1]
 assert port not in (11311,11382)
 env=os.environ.copy();env.update(ROS_MASTER_URI=f'http://127.0.0.1:{port}',ROS_HOSTNAME='127.0.0.1',ROS_IP='127.0.0.1',ROS_HOME=str(out/'ros_home'),FIXTURE_LOG=str(out/'fixture.jsonl'))
-setup='source /opt/ros/noetic/setup.bash && source /home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-build/devel/setup.bash && export ROS_PACKAGE_PATH="/home/ouc/nso_robot/integrations:$ROS_PACKAGE_PATH" && '
-owned=[]; files=[];receipt={'port':port,'uri':env['ROS_MASTER_URI'],'ros_home':env['ROS_HOME'],'checks':{},'fixture_only':True,'errors':[]}
+setup='source '+shlex.quote(str(ros_setup))+' && '
+if overlay_setup: setup+='source '+shlex.quote(str(overlay_setup))+' && '
+setup+='export ROS_PACKAGE_PATH='+shlex.quote(str(root.parent))+':${ROS_PACKAGE_PATH:-} && '
+owned=[]; files=[];receipt={'port':port,'uri':env['ROS_MASTER_URI'],'ros_home':env['ROS_HOME'],'checks':{},'fixture_only':True,'errors':[],'inputs':{'ros_setup':str(ros_setup),'ros_setup_sha256':sha(ros_setup),'overlay_setup':None if overlay_setup is None else str(overlay_setup),'overlay_setup_sha256':None if overlay_setup is None else sha(overlay_setup),'native_binary':str(native_binary),'native_binary_sha256':sha(native_binary),'package_root':str(root),'package_source_sha256':source_hashes}}
 def start(name,cmd):
  f=open(out/(name+'.log'),'w');files.append(f);p=subprocess.Popen(['bash','-c',setup+'exec '+cmd],env=env,stdout=f,stderr=subprocess.STDOUT,start_new_session=True);owned.append((name,p));return p
 def run(cmd,timeout=10):
@@ -29,15 +44,15 @@ def stop(p):
 try:
  master=start('roscore',f'roscore -p {port}')
  if not waitfor(lambda:run('rosparam list',3)[0]==0,15):raise RuntimeError('isolated master did not start')
- fixture=start('fixture',f'/usr/bin/python3 {P}/fixture.py')
+ fixture=start('fixture',shlex.quote(sys.executable)+' '+shlex.quote(str(P/'fixture.py')))
  if not waitfor(lambda:any(x['event']=='ready' for x in rows(out/'fixture.jsonl')),15):raise RuntimeError('fixture did not start')
- args=f'{root}/launch/reference.launch navigation_namespace:=fixture_nav costmap_topic:=/fixture/costmap costmap_updates_topic:=/fixture/costmap_updates action_namespace:=/fixture/move_base base_frame:=fixture_base event_log:={out}/observer.jsonl protection_topic:=/fixture/protection'
+ args=' '.join(shlex.quote(x) for x in [str(root/'launch/reference.launch'),'navigation_namespace:=fixture_nav','costmap_topic:=/fixture/costmap','costmap_updates_topic:=/fixture/costmap_updates','action_namespace:=/fixture/move_base','base_frame:=fixture_base','event_log:='+str(out/'observer.jsonl'),'protection_topic:=/fixture/protection','native_binary:='+str(native_binary)])
  default=start('default',f'roslaunch {args}');time.sleep(4)
  r,nodes=run('rosnode list');(out/'default_nodes.txt').write_text(nodes)
  receipt['checks']['disabled_no_goals']=not any(x['event']=='goal' for x in rows(out/'fixture.jsonl'))
  receipt['checks']['disabled_no_explore_node']='/fixture_nav/explore' not in nodes
  stop(default)
- recorder_args=args.replace(str(out/'observer.jsonl'),str(out/'recorder_only.jsonl'))
+ recorder_args=args.replace(shlex.quote('event_log:='+str(out/'observer.jsonl')),shlex.quote('event_log:='+str(out/'recorder_only.jsonl')))
  only=start('recorder_only',f'roslaunch {recorder_args} enable_exploration:=false enable_recorder:=true')
  receipt['checks']['recorder_only_started']=waitfor(lambda:any(x['event']=='recorder_start' for x in rows(out/'recorder_only.jsonl')),12)
  r,only_nodes=run('rosnode list');receipt['checks']['recorder_only_no_explore']='/fixture_nav/explore' not in only_nodes
@@ -60,7 +75,7 @@ try:
  # Relaunch the same native algorithm to obtain a separate deliberately held goal.
  run('rosnode kill /fixture_nav/explore',8);time.sleep(1);stop(launch)
  receipt['checks']['native_process_shutdown']= '/fixture_nav/explore' not in run('rosnode list')[1]
- cancel_args=args.replace(str(out/'observer.jsonl'),str(out/'cancel_observer.jsonl'))
+ cancel_args=args.replace(shlex.quote('event_log:='+str(out/'observer.jsonl')),shlex.quote('event_log:='+str(out/'cancel_observer.jsonl')))
  launch2=start('enabled_cancel',f'roslaunch {cancel_args} enable_exploration:=true session_id:=fixture_explicit')
  receipt['checks']['held_goal_accepted']=waitfor(lambda:len([x for x in rows(out/'fixture.jsonl') if x['event']=='goal'])>=3,20)
  run('rosnode kill /fixture_nav/explore',8);time.sleep(2)
@@ -68,7 +83,7 @@ try:
  receipt['unsupported_auto_cancel']=not any(x['event']=='cancel' for x in prior) and not any(x['event']=='preempted' and x.get('index',0)>=3 for x in before)
  receipt['checks']['native_exit_observed_without_auto_cancel']=receipt['unsupported_auto_cancel']
  # Fixture-only explicit cancellation tests the action server and observer separately.
- run(f'/usr/bin/python3 {P}/cancel_owner.py',10)
+ run(shlex.quote(sys.executable)+' '+shlex.quote(str(P/'cancel_owner.py')),10)
  receipt['checks']['explicit_cancel_preempts']=waitfor(lambda:any(x['event']=='preempted' and x.get('index',0)>=3 for x in rows(out/'fixture.jsonl')),8)
  time.sleep(.5);stop(launch2)
  ev=rows(out/'observer.jsonl')+rows(out/'cancel_observer.jsonl');fx=rows(out/'fixture.jsonl');receipt['fixture_events']=fx;receipt['observer_events']=ev

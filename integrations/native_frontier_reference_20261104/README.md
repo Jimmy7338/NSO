@@ -40,3 +40,17 @@ roslaunch native_frontier_reference reference.launch enable_exploration:=false e
 The mission starts and stops exploration, velocity adapter and navigation execution; this reference package does not add a second chassis owner. Its standalone `enable_exploration:=true` path exists for isolated integration testing and starts autonomous goal publication, but is not a complete physical mission entry. No return-budget adapter is included; any such adapter is a separate disclosed intervention.
 
 **Goal cleanup:** Stopping or killing the standalone native explore node does not guarantee that an active move_base goal is canceled or preempted. Physical runs must use the existing mission owner, whose cleanup publishes stop and calls `cancel_all_goals`; the raw diagnostic launch does not own that cleanup.
+
+
+## Isolated fixture reproduction
+
+The fixture requires a working ROS Noetic environment and a separately supplied, compatible native explore executable. It starts its own local ROS master and fake action server; it does not require the physical robot. For example:
+
+```bash
+/usr/bin/python3 tests/run_isolated.py \
+  --ros-setup /opt/ros/noetic/setup.bash \
+  --overlay-setup /path/to/optional/overlay/devel/setup.bash \
+  --native-binary /absolute/path/to/explore
+```
+
+Omit `--overlay-setup` when it is unnecessary. The package root is discovered from the script location; paths containing spaces are supported. Each receipt records the setup paths and hashes, binary hash, package source hashes, isolated port and results. The original runner used for the previously published 25-check receipt is retained as `tests/run_isolated_historical_cc8.py`. The parameterized runner also passed 25 checks from a copied path containing spaces on the same machine, as recorded in `tests/runs/20261104_184551/receipt.json`. Neither result establishes a clean-machine build, dependency portability, physical operation, or a production mission test.

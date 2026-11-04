@@ -15,3 +15,5 @@ Remaining author inputs are names and order, affiliations, corresponding contact
 The [cover letter](cover_letter_draft.md) has been updated to the current title and evidence boundaries. It has not been sent. Neither a submission nor payment has been made.
 
 The paid-41 matched continuation is a post-hoc late-state simulation with mixed outcomes. It does not establish early coverage, general semantic benefit or physical accuracy; its audit and three continuation records are indexed in the current manuscript.
+
+Before submission, verify the authorship and version of Online Resources 4 and 5 against the confirmed main-manuscript author list: both existing PDFs show Zhaoyu Li on their first page and in PDF Author metadata. Preserve the historical files until the authors confirm the appropriate submission materials.
