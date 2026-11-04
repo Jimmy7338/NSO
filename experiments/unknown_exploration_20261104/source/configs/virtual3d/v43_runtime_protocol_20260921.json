@@ -1,0 +1,40 @@
+{
+  "schema": "v43.development_runtime_protocol.v1",
+  "scope": "development-only integration; no held-out assets or efficacy claims from smoke checks",
+  "persistent_free_gate": "max(10 GiB, 2 * expected_batch_peak_bytes + 2 GiB)",
+  "expected_batch_peak_bytes": 402653184,
+  "maximum_episode_bytes": 67108864,
+  "maximum_file_bytes": 33554432,
+  "terminal_record_reserve_bytes": 262144,
+  "maximum_elapsed_s": 600.0,
+  "maximum_new_world_slots": 5,
+  "maximum_replays_authorized_here": 0,
+  "ledger_relative_path": "audit_results/v43_development_batch_20260921/start_ledger.json",
+  "navigation_root": "audit_results/v43_public_navigation_r1_20260921",
+  "asset_root": "audit_results/v40_p1_development_geometry_20260920",
+  "scene_protocol_path": "configs/virtual3d/v40_scene_protocol_20260920.json",
+  "slots": {
+    "R2_A_diagnostic": {"asset_id": "DEV_A_00", "mode": "diagnostic", "noise_seed": 0},
+    "R3_A_G": {"asset_id": "DEV_A_00", "mode": "G", "noise_seed": 0},
+    "R3_A_S": {"asset_id": "DEV_A_00", "mode": "S", "noise_seed": 0},
+    "R4_C_G": {"asset_id": "DEV_C_00", "mode": "G", "noise_seed": 0},
+    "R4_C_S": {"asset_id": "DEV_C_00", "mode": "S", "noise_seed": 0}
+  },
+  "diagnostic_actions": ["forward", "left", "left", "left", "left", "left", "left", "forward", "left", "left", "left", "left", "left", "left"],
+  "diagnostic_scope": "14 paid primitives for 0.25 m out-and-back with full yaw return; no autonomous-planning claim",
+  "R3_scope_amendment": "existing DEV_A has four facilities; first autonomous integration is therefore DEV_A, not a claimed single-facility study",
+  "controller": {
+    "maximum_candidates": 32,
+    "maximum_views_per_instance": 8,
+    "discovery_weight": 1.0,
+    "inspection_weight": 1.0,
+    "discovery_radius_m": 2.0,
+    "no_progress_patience": 12
+  },
+  "mapper": {"resolution_m": 0.1, "voxel_m": 0.04, "sdf_trunc_m": 0.12},
+  "geometry_pose_model": "exact simulated odometry",
+  "unknown_map_navigation": "explicit provided coarse-navigation prior, blocked only by common observed constraints",
+  "evaluation": "save complete prediction first; separate frozen offline evaluator; no online access to GT scores",
+  "failure_policy": "retain every reservation, packet, attempted action and error; no automatic retry or quota reset",
+  "runtime_entrypoint": "scripts/run_development_v43.py"
+}

@@ -1,0 +1,96 @@
+{
+  "scope": "development V4 coverage/return guards; same existing 202/203 scenes; no independent or official-baseline claim",
+  "environment": {
+    "width_m": 16,
+    "height_m": 12,
+    "max_steps": 280,
+    "voxel_m": 0.03,
+    "truncation_m": 0.12
+  },
+  "planner": {
+    "quality_weight": 1.0,
+    "semantic_weight": 1.0,
+    "hypothesis_weight": 1.0,
+    "coverage_retention": 0.8,
+    "inspection_fraction": 0.12,
+    "reserve_fraction": 0.2,
+    "minimum_evidence_rate": 0.01
+  },
+  "evaluation_interval": 20,
+  "thresholds_m": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "reference_samples": 16000,
+  "save_frames": true,
+  "save_checkpoint_meshes": false,
+  "methods": [
+    "coverage",
+    "full_v2",
+    "geometry_v4",
+    "full_v4"
+  ],
+  "scenes": [
+    {
+      "layout": "rooms",
+      "seed": 202,
+      "environment": {
+        "occluded_objects": false
+      }
+    },
+    {
+      "layout": "rooms",
+      "seed": 203,
+      "environment": {
+        "occluded_objects": false
+      }
+    },
+    {
+      "layout": "warehouse",
+      "seed": 202,
+      "environment": {
+        "occluded_objects": false
+      }
+    },
+    {
+      "layout": "warehouse",
+      "seed": 203,
+      "environment": {
+        "occluded_objects": false
+      }
+    },
+    {
+      "layout": "rooms",
+      "seed": 202,
+      "environment": {
+        "occluded_objects": true
+      }
+    },
+    {
+      "layout": "rooms",
+      "seed": 203,
+      "environment": {
+        "occluded_objects": true
+      }
+    },
+    {
+      "layout": "warehouse",
+      "seed": 202,
+      "environment": {
+        "occluded_objects": true
+      }
+    },
+    {
+      "layout": "warehouse",
+      "seed": 203,
+      "environment": {
+        "occluded_objects": true
+      }
+    }
+  ],
+  "workers": 4,
+  "camera_coverage": true,
+  "object_hypotheses": true,
+  "full_method": "full_v4"
+}

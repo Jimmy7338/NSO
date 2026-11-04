@@ -1,0 +1,86 @@
+{
+  "schema_version": "v40.scene_protocol.v1",
+  "protocol_id": "v40_scene_p0_20260920",
+  "families": {
+    "A": {"label": "cabinet_rooms", "test_split": "main_test", "test_parents": 6, "development_parents": 1},
+    "B": {"label": "shelves", "test_split": "main_test", "test_parents": 6, "development_parents": 1},
+    "C": {"label": "mixed_facilities", "test_split": "main_test", "test_parents": 6, "development_parents": 1},
+    "D": {"label": "geometry_sufficient_neutral", "test_split": "main_test", "test_parents": 6, "development_parents": 1},
+    "E": {"label": "coverage_pressure", "test_split": "boundary_test", "test_parents": 6, "development_parents": 1},
+    "F": {"label": "prior_or_recognition_mismatch", "test_split": "boundary_test", "test_parents": 6, "development_parents": 1}
+  },
+  "independence": {
+    "unit": "base_parent_scene",
+    "isolation_axes": ["layout", "prototype", "mesh"],
+    "nonindependent_variants": ["rotation", "reflection", "sensor_noise", "structural_condition"],
+    "cross_split_lineage_overlap_allowed": false
+  },
+  "generation_policy": {
+    "selection_uses_method_results": false,
+    "category_is_hidden_structure_code": false,
+    "geometry_generation_in_p0": false,
+    "geometry_calibration_split": "development",
+    "recognition_noise_separate_from_structure_shift": true
+  },
+  "commitment": {
+    "algorithm": "sha256",
+    "domain": "NSO_V40_SCENE_SEED_V1",
+    "seed_bits": 256,
+    "private_escrow": true
+  },
+  "public_defaults": {
+    "schema_version": "v40.public_planner_spec.v1",
+    "task": {
+      "start_action": 0,
+      "forced_prefix_actions": [],
+      "max_actions": 160,
+      "return_required": true,
+      "budget_basis": "fixed_public_task_scale",
+      "budget_tier": "standard"
+    },
+    "navigation": {
+      "mode": "provided_coarse_topology",
+      "shared_with_all_methods": true,
+      "hidden_surface_geometry_allowed": false,
+      "resolution_m": 1.0,
+      "status": "pending",
+      "graph_asset": {"status": "pending", "relative_path": null, "sha256": null}
+    },
+    "sensor": {
+      "model": "rgbd_and_planar_lidar",
+      "width": 96,
+      "height": 72,
+      "intrinsic": [[48.0, 0.0, 47.5], [0.0, 48.0, 35.5], [0.0, 0.0, 1.0]],
+      "depth_min_m": 0.1,
+      "depth_max_m": 4.0,
+      "lidar_max_range_m": 8.0,
+      "depth_noise_relative_std": 0.01
+    },
+    "motion": {"translation_step_m": 0.25, "rotation_step_deg": 30.0, "camera_height_m": 0.9},
+    "pose_model": {"kind": "exact", "translation_std_m": 0.0, "yaw_std_deg": 0.0, "correlation": "per_trajectory"},
+    "structure_prior": {
+      "categories": ["cabinet", "rack", "workstation", "machine"],
+      "abstract_structures": ["planar", "recessed", "louvered", "open_frame"],
+      "probability_by_category": {
+        "cabinet": [0.4, 0.3, 0.2, 0.1],
+        "rack": [0.15, 0.2, 0.25, 0.4],
+        "workstation": [0.35, 0.3, 0.15, 0.2],
+        "machine": [0.2, 0.25, 0.4, 0.15]
+      },
+      "source_split": "development",
+      "calibration_status": "uncalibrated_design_prior",
+      "training_manifest": {"status": "pending", "relative_path": null, "sha256": null}
+    }
+  },
+  "evaluation_definition": {
+    "target_set": "all_task_instances_accessible_external_surfaces",
+    "include_horizontal": true,
+    "include_vertical": true,
+    "exclude_closed_internal": true,
+    "route_independent": true,
+    "undetected_instances_in_denominator": true,
+    "primary_surface_aggregation": "instance_macro_f1",
+    "threshold_m": 0.05
+  },
+  "max_output_bytes": 5242880
+}

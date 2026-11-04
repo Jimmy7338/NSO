@@ -1,0 +1,5446 @@
+{
+  "schema_version": "semantic_scene_matrix_draft.v1",
+  "status": "unfrozen",
+  "date": "2026-09-23",
+  "old_v40_assets_or_protocol_modified": false,
+  "primary_matrix_started": false,
+  "worlds_created": 0,
+  "meshes_created": 0,
+  "scope": "Six explicitly distinct development layout topologies; shared procedural facility bank, not six independent prototype families or natural scenes.",
+  "independence": {
+    "unit": "parent layout",
+    "parents": 6,
+    "nonindependent_variants": [
+      "structure",
+      "recognition",
+      "budget",
+      "noise",
+      "tie rule",
+      "single-instance boundary",
+      "uninformative boundary"
+    ],
+    "layout_parent_is_rotation_or_reflection": false,
+    "prototype_family_independence": false,
+    "selection_uses_method_results": false,
+    "evaluation_scores_read_for_design": false
+  },
+  "shared_geometry": {
+    "wall_thickness_m": 0.12,
+    "wall_height_m": 2.4,
+    "start_position_world_m": [
+      0.75,
+      0.75,
+      0.9
+    ],
+    "start_yaw_deg": 0,
+    "robot_radius_m": 0.2,
+    "navigation_spacing_m": 1.0,
+    "maximum_coarse_nodes": 256,
+    "translation_step_m": 0.25,
+    "rotation_step_deg": 30,
+    "maximum_candidates": 32,
+    "collision_envelope": "Union of all four possible structure boxes at the same declared pose/dimensions, including the common label plate. Same navigation for every paired hidden-structure condition.",
+    "marker_geometry": "Reuse existing attached common plate; structure never changes marker shape. Visible color comes from observed category only.",
+    "minimum_same_class_instances_per_main_parent": 2
+  },
+  "semantic_generation": {
+    "structure_order": [
+      "planar",
+      "recessed",
+      "louvered",
+      "open_frame"
+    ],
+    "public_nominal_probability_by_category": {
+      "cabinet": [
+        0.4,
+        0.3,
+        0.2,
+        0.1
+      ],
+      "rack": [
+        0.15,
+        0.2,
+        0.25,
+        0.4
+      ],
+      "workstation": [
+        0.35,
+        0.3,
+        0.15,
+        0.2
+      ],
+      "machine": [
+        0.2,
+        0.25,
+        0.4,
+        0.15
+      ]
+    },
+    "prior_status": "Reuse V40 declared uncalibrated prior without fitting or strengthening using this matrix",
+    "class_assignment": "Explicit balanced class pairs fixed independently of structure draws; neither dimensions nor occlusion encode class.",
+    "structure_assignment": "Separate fixed stratified uniforms transformed through class-conditional categorical distribution; many-to-many stochastic task model, not deterministic class-to-structure code.",
+    "sampling_note": "Four quantiles with cyclic parent permutations are a balanced finite development design, not independent random samples.",
+    "structure_shift_permutation": {
+      "planar": "louvered",
+      "recessed": "open_frame",
+      "louvered": "planar",
+      "open_frame": "recessed"
+    },
+    "persistent_wrong_label_permutation": {
+      "cabinet": "rack",
+      "rack": "workstation",
+      "workstation": "machine",
+      "machine": "cabinet"
+    },
+    "recognition_error_persists_for_entire_instance": true,
+    "uninformative_relationship": "Within each parent, each true/visible category receives exactly the same two-structure multiset; paired structures rotate by parent index. Category marginally does not distinguish structure in this finite parent; controller is not told the assignment rule."
+  },
+  "parents": [
+    {
+      "parent_id": "SEM_P00",
+      "layout_lineage": "new_explicit_two_rooms_single_door",
+      "topology": "two_rooms_single_door",
+      "room_size_m": [
+        10,
+        8
+      ],
+      "facility_dimensions_m": [
+        1.2,
+        0.8,
+        1.6
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.3,
+          2.2,
+          180
+        ],
+        [
+          2.3,
+          6.1,
+          0
+        ],
+        [
+          7.4,
+          2.2,
+          180
+        ],
+        [
+          7.4,
+          6.1,
+          0
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "cabinet",
+        "rack",
+        "rack"
+      ],
+      "occluder_boxes_m": [
+        [
+          4.9,
+          5.1,
+          0.12,
+          3.2,
+          0,
+          2.4
+        ],
+        [
+          4.9,
+          5.1,
+          4.8,
+          7.88,
+          0,
+          2.4
+        ]
+      ],
+      "task_reason": "Two rooms share one doorway crossing; paired batches occupy different rooms.",
+      "spatial_jitter_m": 0,
+      "dimension_jitter_fraction": 0,
+      "structure_uniforms": [
+        0.125,
+        0.375,
+        0.625,
+        0.875
+      ],
+      "fixed_assignments": {
+        "nominal_relationship": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "true_structures": [
+            "planar",
+            "planar",
+            "open_frame",
+            "open_frame"
+          ]
+        },
+        "structure_relationship_shift": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "true_structures": [
+            "louvered",
+            "louvered",
+            "recessed",
+            "recessed"
+          ]
+        },
+        "persistent_recognition_error": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "rack",
+            "rack",
+            "workstation",
+            "workstation"
+          ],
+          "true_structures": [
+            "planar",
+            "planar",
+            "open_frame",
+            "open_frame"
+          ]
+        },
+        "uninformative_relationship": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "true_structures": [
+            "planar",
+            "recessed",
+            "planar",
+            "recessed"
+          ],
+          "same_structure_multiset_for_each_class": [
+            "planar",
+            "recessed"
+          ]
+        }
+      },
+      "static_navigation_check": {
+        "status": "pure_geometry_screen",
+        "worlds_created": 0,
+        "meshes_created": 0,
+        "quality_evaluations": 0,
+        "declared_lattice_nodes": 63,
+        "safe_lattice_nodes": 45,
+        "reachable_nodes": 45,
+        "all_safe_nodes_connected": true,
+        "expanded_primitive_nodes": 207,
+        "per_facility": [
+          {
+            "instance_slot": 0,
+            "front_coarse_positions": 8,
+            "minimum_individual_view_return_actions": 37,
+            "witnesses": [
+              {
+                "node": "n_000_003",
+                "heading": 11,
+                "range_to_marker_m": 2.2624,
+                "view_return_actions": 37
+              },
+              {
+                "node": "n_001_003",
+                "heading": 10,
+                "range_to_marker_m": 1.4827,
+                "view_return_actions": 51
+              }
+            ]
+          },
+          {
+            "instance_slot": 1,
+            "front_coarse_positions": 7,
+            "minimum_individual_view_return_actions": 37,
+            "witnesses": [
+              {
+                "node": "n_000_003",
+                "heading": 2,
+                "range_to_marker_m": 2.2415,
+                "view_return_actions": 37
+              },
+              {
+                "node": "n_000_004",
+                "heading": 1,
+                "range_to_marker_m": 1.4712,
+                "view_return_actions": 45
+              }
+            ]
+          },
+          {
+            "instance_slot": 2,
+            "front_coarse_positions": 7,
+            "minimum_individual_view_return_actions": 83,
+            "witnesses": [
+              {
+                "node": "n_005_003",
+                "heading": 11,
+                "range_to_marker_m": 2.3496,
+                "view_return_actions": 83
+              },
+              {
+                "node": "n_006_003",
+                "heading": 10,
+                "range_to_marker_m": 1.5494,
+                "view_return_actions": 91
+              }
+            ]
+          },
+          {
+            "instance_slot": 3,
+            "front_coarse_positions": 7,
+            "minimum_individual_view_return_actions": 83,
+            "witnesses": [
+              {
+                "node": "n_005_003",
+                "heading": 2,
+                "range_to_marker_m": 2.294,
+                "view_return_actions": 83
+              },
+              {
+                "node": "n_006_003",
+                "heading": 3,
+                "range_to_marker_m": 1.9449,
+                "view_return_actions": 91
+              }
+            ]
+          }
+        ],
+        "same_class_pair_tours": [
+          {
+            "true_class": "cabinet",
+            "instance_slots": [
+              0,
+              1
+            ],
+            "minimum_two_site_view_return_actions": 38,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 39,
+              "return_actions": 17,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 2
+                  },
+                  "movement_actions": 16,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 0
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_000_003",
+                  "heading": 2
+                },
+                {
+                  "node": "n_000_003",
+                  "heading": 11
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 70,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 73,
+              "return_actions": 23,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 2
+                  },
+                  "movement_actions": 16,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 0
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_001_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_001_003",
+                    "heading": 10
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 4
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_004",
+                    "heading": 1
+                  },
+                  "movement_actions": 7,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_000_003",
+                  "heading": 2
+                },
+                {
+                  "node": "n_000_003",
+                  "heading": 11
+                },
+                {
+                  "node": "n_001_003",
+                  "heading": 10
+                },
+                {
+                  "node": "n_000_004",
+                  "heading": 1
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          },
+          {
+            "true_class": "rack",
+            "instance_slots": [
+              2,
+              3
+            ],
+            "minimum_two_site_view_return_actions": 86,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 88,
+              "return_actions": 42,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 1
+                  },
+                  "movement_actions": 17,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_003",
+                    "heading": 0
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 13,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 2
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_005_003",
+                  "heading": 11
+                },
+                {
+                  "node": "n_005_003",
+                  "heading": 2
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 104,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 108,
+              "return_actions": 45,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 1
+                  },
+                  "movement_actions": 17,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_003",
+                    "heading": 0
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 2
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 10
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 1
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 3
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_005_003",
+                  "heading": 2
+                },
+                {
+                  "node": "n_005_003",
+                  "heading": 11
+                },
+                {
+                  "node": "n_006_003",
+                  "heading": 10
+                },
+                {
+                  "node": "n_006_003",
+                  "heading": 3
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          }
+        ],
+        "two_frontal_coarse_positions_per_facility": true,
+        "all_individual_costs_within_160": true,
+        "at_least_one_candidate_limited_four_view_pair_within_160": true,
+        "all_candidate_limited_two_site_pairs_within_160": true,
+        "all_candidate_limited_pair_witnesses_within_160": true,
+        "actual_label_pixels_and_RGBD_qualification_verified": false
+      }
+    },
+    {
+      "parent_id": "SEM_P01",
+      "layout_lineage": "new_explicit_alternating_wall_switchback",
+      "topology": "alternating_wall_switchback",
+      "room_size_m": [
+        8,
+        7.5
+      ],
+      "facility_dimensions_m": [
+        1,
+        0.7,
+        1.4
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.1,
+          1.8,
+          0
+        ],
+        [
+          5.9,
+          1.8,
+          0
+        ],
+        [
+          1.8,
+          5.8,
+          90
+        ],
+        [
+          6,
+          5.8,
+          270
+        ]
+      ],
+      "true_classes": [
+        "machine",
+        "workstation",
+        "machine",
+        "workstation"
+      ],
+      "occluder_boxes_m": [
+        [
+          0.12,
+          3.8,
+          2.5,
+          2.7,
+          0,
+          1.8
+        ],
+        [
+          3,
+          7.88,
+          4.4,
+          4.6,
+          0,
+          1.8
+        ]
+      ],
+      "task_reason": "Alternating openings create paid detours between same-class peers and occlude cross-room depth.",
+      "spatial_jitter_m": 0,
+      "dimension_jitter_fraction": 0,
+      "structure_uniforms": [
+        0.875,
+        0.125,
+        0.375,
+        0.625
+      ],
+      "fixed_assignments": {
+        "nominal_relationship": {
+          "true_classes": [
+            "machine",
+            "workstation",
+            "machine",
+            "workstation"
+          ],
+          "observed_classes": [
+            "machine",
+            "workstation",
+            "machine",
+            "workstation"
+          ],
+          "true_structures": [
+            "open_frame",
+            "planar",
+            "recessed",
+            "recessed"
+          ]
+        },
+        "structure_relationship_shift": {
+          "true_classes": [
+            "machine",
+            "workstation",
+            "machine",
+            "workstation"
+          ],
+          "observed_classes": [
+            "machine",
+            "workstation",
+            "machine",
+            "workstation"
+          ],
+          "true_structures": [
+            "recessed",
+            "louvered",
+            "open_frame",
+            "open_frame"
+          ]
+        },
+        "persistent_recognition_error": {
+          "true_classes": [
+            "machine",
+            "workstation",
+            "machine",
+            "workstation"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "machine",
+            "cabinet",
+            "machine"
+          ],
+          "true_structures": [
+            "open_frame",
+            "planar",
+            "recessed",
+            "recessed"
+          ]
+        },
+        "uninformative_relationship": {
+          "true_classes": [
+            "machine",
+            "workstation",
+            "machine",
+            "workstation"
+          ],
+          "observed_classes": [
+            "machine",
+            "workstation",
+            "machine",
+            "workstation"
+          ],
+          "true_structures": [
+            "recessed",
+            "recessed",
+            "louvered",
+            "louvered"
+          ],
+          "same_structure_multiset_for_each_class": [
+            "recessed",
+            "louvered"
+          ]
+        }
+      },
+      "static_navigation_check": {
+        "status": "pure_geometry_screen",
+        "worlds_created": 0,
+        "meshes_created": 0,
+        "quality_evaluations": 0,
+        "declared_lattice_nodes": 49,
+        "safe_lattice_nodes": 36,
+        "reachable_nodes": 36,
+        "all_safe_nodes_connected": true,
+        "expanded_primitive_nodes": 168,
+        "per_facility": [
+          {
+            "instance_slot": 0,
+            "front_coarse_positions": 3,
+            "minimum_individual_view_return_actions": 3,
+            "witnesses": [
+              {
+                "node": "home",
+                "heading": 1,
+                "range_to_marker_m": 1.2426,
+                "view_return_actions": 3
+              },
+              {
+                "node": "n_001_000",
+                "heading": 3,
+                "range_to_marker_m": 0.6812,
+                "view_return_actions": 21
+              }
+            ]
+          },
+          {
+            "instance_slot": 1,
+            "front_coarse_positions": 3,
+            "minimum_individual_view_return_actions": 45,
+            "witnesses": [
+              {
+                "node": "n_004_000",
+                "heading": 1,
+                "range_to_marker_m": 1.0807,
+                "view_return_actions": 45
+              },
+              {
+                "node": "n_005_000",
+                "heading": 3,
+                "range_to_marker_m": 0.6986,
+                "view_return_actions": 53
+              }
+            ]
+          },
+          {
+            "instance_slot": 2,
+            "front_coarse_positions": 5,
+            "minimum_individual_view_return_actions": 111,
+            "witnesses": [
+              {
+                "node": "n_002_004",
+                "heading": 4,
+                "range_to_marker_m": 0.9402,
+                "view_return_actions": 111
+              },
+              {
+                "node": "n_002_005",
+                "heading": 7,
+                "range_to_marker_m": 0.6356,
+                "view_return_actions": 119
+              }
+            ]
+          },
+          {
+            "instance_slot": 3,
+            "front_coarse_positions": 4,
+            "minimum_individual_view_return_actions": 133,
+            "witnesses": [
+              {
+                "node": "n_003_005",
+                "heading": 0,
+                "range_to_marker_m": 1.9142,
+                "view_return_actions": 133
+              },
+              {
+                "node": "n_003_006",
+                "heading": 11,
+                "range_to_marker_m": 1.986,
+                "view_return_actions": 141
+              }
+            ]
+          }
+        ],
+        "same_class_pair_tours": [
+          {
+            "true_class": "machine",
+            "instance_slots": [
+              0,
+              2
+            ],
+            "minimum_two_site_view_return_actions": 112,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 120,
+              "return_actions": 1,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 18,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 6
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_004",
+                    "heading": 4
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_003",
+                    "heading": 10
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_001",
+                    "heading": 9
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_000",
+                    "heading": 6
+                  },
+                  "movement_actions": 15,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 4
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 1
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_002_004",
+                  "heading": 4
+                },
+                {
+                  "node": "home",
+                  "heading": 1
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 130,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 141,
+              "return_actions": 1,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_001_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_001_000",
+                    "heading": 3
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 17,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 6
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_004",
+                    "heading": 4
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 6
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 7
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_003",
+                    "heading": 10
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_001",
+                    "heading": 9
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_000",
+                    "heading": 6
+                  },
+                  "movement_actions": 15,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 4
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 1
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_001_000",
+                  "heading": 3
+                },
+                {
+                  "node": "n_002_004",
+                  "heading": 4
+                },
+                {
+                  "node": "n_002_005",
+                  "heading": 7
+                },
+                {
+                  "node": "home",
+                  "heading": 1
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          },
+          {
+            "true_class": "workstation",
+            "instance_slots": [
+              1,
+              3
+            ],
+            "minimum_two_site_view_return_actions": 134,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 137,
+              "return_actions": 72,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 1
+                  },
+                  "movement_actions": 17,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 6
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_004",
+                    "heading": 3
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_005",
+                    "heading": 0
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_004_000",
+                  "heading": 1
+                },
+                {
+                  "node": "n_003_005",
+                  "heading": 0
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 164,
+            "candidate_limited_four_view_witness": {
+              "feasible": false,
+              "paid_actions": 173,
+              "return_actions": 29,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 1
+                  },
+                  "movement_actions": 17,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 6
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_004",
+                    "heading": 3
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_005",
+                    "heading": 0
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 1
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 11
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 7
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_003",
+                    "heading": 10
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_001",
+                    "heading": 9
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 13,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_000",
+                    "heading": 3
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_004_000",
+                  "heading": 1
+                },
+                {
+                  "node": "n_003_005",
+                  "heading": 0
+                },
+                {
+                  "node": "n_003_006",
+                  "heading": 11
+                },
+                {
+                  "node": "n_005_000",
+                  "heading": 3
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          }
+        ],
+        "two_frontal_coarse_positions_per_facility": true,
+        "all_individual_costs_within_160": true,
+        "at_least_one_candidate_limited_four_view_pair_within_160": true,
+        "all_candidate_limited_two_site_pairs_within_160": true,
+        "all_candidate_limited_pair_witnesses_within_160": false,
+        "actual_label_pixels_and_RGBD_qualification_verified": false
+      }
+    },
+    {
+      "parent_id": "SEM_P02",
+      "layout_lineage": "new_explicit_central_island_two_routes",
+      "topology": "central_island_two_routes",
+      "room_size_m": [
+        8,
+        8
+      ],
+      "facility_dimensions_m": [
+        1.2,
+        0.85,
+        1.7
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          1.6,
+          2,
+          90
+        ],
+        [
+          6.4,
+          6,
+          270
+        ],
+        [
+          1.6,
+          6,
+          90
+        ],
+        [
+          6.4,
+          2,
+          270
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "cabinet",
+        "rack",
+        "rack"
+      ],
+      "occluder_boxes_m": [
+        [
+          3.1,
+          4.9,
+          2.3,
+          5.7,
+          0,
+          1.5
+        ]
+      ],
+      "task_reason": "An opaque island offers two circulation routes; same-class peers lie on opposite sides.",
+      "spatial_jitter_m": 0,
+      "dimension_jitter_fraction": 0,
+      "structure_uniforms": [
+        0.625,
+        0.875,
+        0.125,
+        0.375
+      ],
+      "fixed_assignments": {
+        "nominal_relationship": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "true_structures": [
+            "recessed",
+            "louvered",
+            "planar",
+            "louvered"
+          ]
+        },
+        "structure_relationship_shift": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "true_structures": [
+            "open_frame",
+            "planar",
+            "louvered",
+            "planar"
+          ]
+        },
+        "persistent_recognition_error": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "rack",
+            "rack",
+            "workstation",
+            "workstation"
+          ],
+          "true_structures": [
+            "recessed",
+            "louvered",
+            "planar",
+            "louvered"
+          ]
+        },
+        "uninformative_relationship": {
+          "true_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "cabinet",
+            "rack",
+            "rack"
+          ],
+          "true_structures": [
+            "louvered",
+            "open_frame",
+            "louvered",
+            "open_frame"
+          ],
+          "same_structure_multiset_for_each_class": [
+            "louvered",
+            "open_frame"
+          ]
+        }
+      },
+      "static_navigation_check": {
+        "status": "pure_geometry_screen",
+        "worlds_created": 0,
+        "meshes_created": 0,
+        "quality_evaluations": 0,
+        "declared_lattice_nodes": 49,
+        "safe_lattice_nodes": 33,
+        "reachable_nodes": 33,
+        "all_safe_nodes_connected": true,
+        "expanded_primitive_nodes": 153,
+        "per_facility": [
+          {
+            "instance_slot": 0,
+            "front_coarse_positions": 5,
+            "minimum_individual_view_return_actions": 29,
+            "witnesses": [
+              {
+                "node": "n_002_000",
+                "heading": 4,
+                "range_to_marker_m": 1.0966,
+                "view_return_actions": 29
+              },
+              {
+                "node": "n_003_000",
+                "heading": 5,
+                "range_to_marker_m": 1.9007,
+                "view_return_actions": 37
+              }
+            ]
+          },
+          {
+            "instance_slot": 1,
+            "front_coarse_positions": 2,
+            "minimum_individual_view_return_actions": 97,
+            "witnesses": [
+              {
+                "node": "n_003_006",
+                "heading": 0,
+                "range_to_marker_m": 2.2311,
+                "view_return_actions": 97
+              },
+              {
+                "node": "n_004_006",
+                "heading": 11,
+                "range_to_marker_m": 1.252,
+                "view_return_actions": 105
+              }
+            ]
+          },
+          {
+            "instance_slot": 2,
+            "front_coarse_positions": 4,
+            "minimum_individual_view_return_actions": 61,
+            "witnesses": [
+              {
+                "node": "n_002_004",
+                "heading": 4,
+                "range_to_marker_m": 1.0966,
+                "view_return_actions": 61
+              },
+              {
+                "node": "n_002_005",
+                "heading": 6,
+                "range_to_marker_m": 0.7229,
+                "view_return_actions": 75
+              }
+            ]
+          },
+          {
+            "instance_slot": 3,
+            "front_coarse_positions": 3,
+            "minimum_individual_view_return_actions": 45,
+            "witnesses": [
+              {
+                "node": "n_004_000",
+                "heading": 2,
+                "range_to_marker_m": 2.0512,
+                "view_return_actions": 45
+              },
+              {
+                "node": "n_003_001",
+                "heading": 1,
+                "range_to_marker_m": 2.3017,
+                "view_return_actions": 51
+              }
+            ]
+          }
+        ],
+        "same_class_pair_tours": [
+          {
+            "true_class": "cabinet",
+            "instance_slots": [
+              0,
+              1
+            ],
+            "minimum_two_site_view_return_actions": 100,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 103,
+              "return_actions": 54,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_002_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_000",
+                    "heading": 4
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 3
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 0
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_002_000",
+                  "heading": 4
+                },
+                {
+                  "node": "n_003_006",
+                  "heading": 0
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 116,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 121,
+              "return_actions": 19,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_002_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_000",
+                    "heading": 4
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 3
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 0
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_006",
+                    "heading": 11
+                  },
+                  "movement_actions": 5,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 9
+                  },
+                  "movement_actions": 20,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_000",
+                    "heading": 7
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 5
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_002_000",
+                  "heading": 4
+                },
+                {
+                  "node": "n_003_006",
+                  "heading": 0
+                },
+                {
+                  "node": "n_004_006",
+                  "heading": 11
+                },
+                {
+                  "node": "n_003_000",
+                  "heading": 5
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          },
+          {
+            "true_class": "rack",
+            "instance_slots": [
+              2,
+              3
+            ],
+            "minimum_two_site_view_return_actions": 80,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 82,
+              "return_actions": 32,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_001",
+                    "heading": 1
+                  },
+                  "movement_actions": 7,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 16,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_004",
+                    "heading": 4
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_003_001",
+                  "heading": 1
+                },
+                {
+                  "node": "n_002_004",
+                  "heading": 4
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 110,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 115,
+              "return_actions": 26,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_002_001",
+                    "heading": 3
+                  },
+                  "movement_actions": 15,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_004",
+                    "heading": 4
+                  },
+                  "movement_actions": 13,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 6
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_002",
+                    "heading": 9
+                  },
+                  "movement_actions": 15,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_001",
+                    "heading": 1
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 10
+                  },
+                  "movement_actions": 13,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 1
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_002_004",
+                  "heading": 4
+                },
+                {
+                  "node": "n_002_005",
+                  "heading": 6
+                },
+                {
+                  "node": "n_003_001",
+                  "heading": 1
+                },
+                {
+                  "node": "n_004_000",
+                  "heading": 2
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          }
+        ],
+        "two_frontal_coarse_positions_per_facility": true,
+        "all_individual_costs_within_160": true,
+        "at_least_one_candidate_limited_four_view_pair_within_160": true,
+        "all_candidate_limited_two_site_pairs_within_160": true,
+        "all_candidate_limited_pair_witnesses_within_160": true,
+        "actual_label_pixels_and_RGBD_qualification_verified": false
+      }
+    },
+    {
+      "parent_id": "SEM_P03",
+      "layout_lineage": "new_explicit_two_dead_end_branches_shared_foyer",
+      "topology": "two_dead_end_branches_shared_foyer",
+      "room_size_m": [
+        9,
+        9
+      ],
+      "facility_dimensions_m": [
+        1,
+        0.75,
+        1.5
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2,
+          5,
+          90
+        ],
+        [
+          2,
+          7.5,
+          90
+        ],
+        [
+          7,
+          5,
+          270
+        ],
+        [
+          7,
+          7.5,
+          270
+        ]
+      ],
+      "true_classes": [
+        "machine",
+        "machine",
+        "workstation",
+        "workstation"
+      ],
+      "occluder_boxes_m": [
+        [
+          0.12,
+          3,
+          3.2,
+          3.4,
+          0,
+          2.4
+        ],
+        [
+          6.2,
+          8.88,
+          3.2,
+          3.4,
+          0,
+          2.4
+        ],
+        [
+          4.4,
+          4.6,
+          3.4,
+          8.88,
+          0,
+          2.4
+        ]
+      ],
+      "task_reason": "Two dead ends connect only through the foyer; each branch holds repeated-class equipment.",
+      "spatial_jitter_m": 0,
+      "dimension_jitter_fraction": 0,
+      "structure_uniforms": [
+        0.375,
+        0.625,
+        0.875,
+        0.125
+      ],
+      "fixed_assignments": {
+        "nominal_relationship": {
+          "true_classes": [
+            "machine",
+            "machine",
+            "workstation",
+            "workstation"
+          ],
+          "observed_classes": [
+            "machine",
+            "machine",
+            "workstation",
+            "workstation"
+          ],
+          "true_structures": [
+            "recessed",
+            "louvered",
+            "open_frame",
+            "planar"
+          ]
+        },
+        "structure_relationship_shift": {
+          "true_classes": [
+            "machine",
+            "machine",
+            "workstation",
+            "workstation"
+          ],
+          "observed_classes": [
+            "machine",
+            "machine",
+            "workstation",
+            "workstation"
+          ],
+          "true_structures": [
+            "open_frame",
+            "planar",
+            "recessed",
+            "louvered"
+          ]
+        },
+        "persistent_recognition_error": {
+          "true_classes": [
+            "machine",
+            "machine",
+            "workstation",
+            "workstation"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "cabinet",
+            "machine",
+            "machine"
+          ],
+          "true_structures": [
+            "recessed",
+            "louvered",
+            "open_frame",
+            "planar"
+          ]
+        },
+        "uninformative_relationship": {
+          "true_classes": [
+            "machine",
+            "machine",
+            "workstation",
+            "workstation"
+          ],
+          "observed_classes": [
+            "machine",
+            "machine",
+            "workstation",
+            "workstation"
+          ],
+          "true_structures": [
+            "open_frame",
+            "planar",
+            "open_frame",
+            "planar"
+          ],
+          "same_structure_multiset_for_each_class": [
+            "open_frame",
+            "planar"
+          ]
+        }
+      },
+      "static_navigation_check": {
+        "status": "pure_geometry_screen",
+        "worlds_created": 0,
+        "meshes_created": 0,
+        "quality_evaluations": 0,
+        "declared_lattice_nodes": 64,
+        "safe_lattice_nodes": 55,
+        "reachable_nodes": 55,
+        "all_safe_nodes_connected": true,
+        "expanded_primitive_nodes": 289,
+        "per_facility": [
+          {
+            "instance_slot": 0,
+            "front_coarse_positions": 5,
+            "minimum_individual_view_return_actions": 53,
+            "witnesses": [
+              {
+                "node": "n_003_002",
+                "heading": 4,
+                "range_to_marker_m": 2.3664,
+                "view_return_actions": 53
+              },
+              {
+                "node": "n_003_003",
+                "heading": 5,
+                "range_to_marker_m": 1.6491,
+                "view_return_actions": 67
+              }
+            ]
+          },
+          {
+            "instance_slot": 1,
+            "front_coarse_positions": 5,
+            "minimum_individual_view_return_actions": 83,
+            "witnesses": [
+              {
+                "node": "n_003_005",
+                "heading": 4,
+                "range_to_marker_m": 1.9773,
+                "view_return_actions": 83
+              },
+              {
+                "node": "n_003_006",
+                "heading": 5,
+                "range_to_marker_m": 1.4246,
+                "view_return_actions": 91
+              }
+            ]
+          },
+          {
+            "instance_slot": 2,
+            "front_coarse_positions": 4,
+            "minimum_individual_view_return_actions": 83,
+            "witnesses": [
+              {
+                "node": "n_005_003",
+                "heading": 2,
+                "range_to_marker_m": 1.7789,
+                "view_return_actions": 83
+              },
+              {
+                "node": "n_005_004",
+                "heading": 1,
+                "range_to_marker_m": 1.0221,
+                "view_return_actions": 91
+              }
+            ]
+          },
+          {
+            "instance_slot": 3,
+            "front_coarse_positions": 2,
+            "minimum_individual_view_return_actions": 107,
+            "witnesses": [
+              {
+                "node": "n_005_006",
+                "heading": 2,
+                "range_to_marker_m": 1.3618,
+                "view_return_actions": 107
+              },
+              {
+                "node": "n_005_007",
+                "heading": 0,
+                "range_to_marker_m": 0.8571,
+                "view_return_actions": 115
+              }
+            ]
+          }
+        ],
+        "same_class_pair_tours": [
+          {
+            "true_class": "machine",
+            "instance_slots": [
+              0,
+              1
+            ],
+            "minimum_two_site_view_return_actions": 84,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 88,
+              "return_actions": 43,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_004",
+                    "heading": 3
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_005",
+                    "heading": 4
+                  },
+                  "movement_actions": 5,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_005",
+                    "heading": 6
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_005",
+                    "heading": 7
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_003_005",
+                  "heading": 4
+                },
+                {
+                  "node": "n_003_005",
+                  "heading": 7
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 102,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 105,
+              "return_actions": 49,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_002",
+                    "heading": 4
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 5
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_005",
+                    "heading": 4
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 5
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_003_002",
+                  "heading": 4
+                },
+                {
+                  "node": "n_003_003",
+                  "heading": 5
+                },
+                {
+                  "node": "n_003_005",
+                  "heading": 4
+                },
+                {
+                  "node": "n_003_006",
+                  "heading": 5
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          },
+          {
+            "true_class": "workstation",
+            "instance_slots": [
+              2,
+              3
+            ],
+            "minimum_two_site_view_return_actions": 108,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 113,
+              "return_actions": 54,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 0
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_004",
+                    "heading": 3
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_006",
+                    "heading": 2
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_006",
+                    "heading": 0
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_006",
+                    "heading": 10
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_005_006",
+                  "heading": 2
+                },
+                {
+                  "node": "n_005_006",
+                  "heading": 10
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 126,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 130,
+              "return_actions": 60,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 0
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 2
+                  },
+                  "movement_actions": 5,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_004",
+                    "heading": 1
+                  },
+                  "movement_actions": 7,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_006",
+                    "heading": 2
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_007",
+                    "heading": 1
+                  },
+                  "movement_actions": 7,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_007",
+                    "heading": 0
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_005_003",
+                  "heading": 2
+                },
+                {
+                  "node": "n_005_004",
+                  "heading": 1
+                },
+                {
+                  "node": "n_005_006",
+                  "heading": 2
+                },
+                {
+                  "node": "n_005_007",
+                  "heading": 0
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          }
+        ],
+        "two_frontal_coarse_positions_per_facility": true,
+        "all_individual_costs_within_160": true,
+        "at_least_one_candidate_limited_four_view_pair_within_160": true,
+        "all_candidate_limited_two_site_pairs_within_160": true,
+        "all_candidate_limited_pair_witnesses_within_160": true,
+        "actual_label_pixels_and_RGBD_qualification_verified": false
+      }
+    },
+    {
+      "parent_id": "SEM_P04",
+      "layout_lineage": "new_explicit_parallel_aisles_with_two_end_bypass_and_anchored_baffle",
+      "topology": "parallel_aisles_with_two_end_bypass_and_anchored_baffle",
+      "room_size_m": [
+        10,
+        8
+      ],
+      "facility_dimensions_m": [
+        1.35,
+        0.75,
+        1.8
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          1.8,
+          3,
+          90
+        ],
+        [
+          1.8,
+          5.8,
+          90
+        ],
+        [
+          4.8,
+          3.1,
+          270
+        ],
+        [
+          7.7,
+          6.2,
+          270
+        ]
+      ],
+      "true_classes": [
+        "rack",
+        "machine",
+        "rack",
+        "machine"
+      ],
+      "occluder_boxes_m": [
+        [
+          3.1,
+          3.3,
+          2,
+          6.1,
+          0,
+          1.6
+        ],
+        [
+          6.3,
+          6.5,
+          0.12,
+          5.9,
+          0,
+          1.6
+        ]
+      ],
+      "task_reason": "One freestanding aisle divider has both end bypasses, while the second divider is boundary-anchored. This creates a circulation choice rather than another purely serial switchback.",
+      "spatial_jitter_m": 0,
+      "dimension_jitter_fraction": 0,
+      "structure_uniforms": [
+        0.125,
+        0.375,
+        0.625,
+        0.875
+      ],
+      "fixed_assignments": {
+        "nominal_relationship": {
+          "true_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "observed_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "true_structures": [
+            "planar",
+            "recessed",
+            "open_frame",
+            "open_frame"
+          ]
+        },
+        "structure_relationship_shift": {
+          "true_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "observed_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "true_structures": [
+            "louvered",
+            "open_frame",
+            "recessed",
+            "recessed"
+          ]
+        },
+        "persistent_recognition_error": {
+          "true_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "observed_classes": [
+            "workstation",
+            "cabinet",
+            "workstation",
+            "cabinet"
+          ],
+          "true_structures": [
+            "planar",
+            "recessed",
+            "open_frame",
+            "open_frame"
+          ]
+        },
+        "uninformative_relationship": {
+          "true_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "observed_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "true_structures": [
+            "planar",
+            "planar",
+            "recessed",
+            "recessed"
+          ],
+          "same_structure_multiset_for_each_class": [
+            "planar",
+            "recessed"
+          ]
+        }
+      },
+      "static_navigation_check": {
+        "status": "pure_geometry_screen",
+        "worlds_created": 0,
+        "meshes_created": 0,
+        "quality_evaluations": 0,
+        "declared_lattice_nodes": 63,
+        "safe_lattice_nodes": 56,
+        "reachable_nodes": 56,
+        "all_safe_nodes_connected": true,
+        "expanded_primitive_nodes": 284,
+        "per_facility": [
+          {
+            "instance_slot": 0,
+            "front_coarse_positions": 4,
+            "minimum_individual_view_return_actions": 37,
+            "witnesses": [
+              {
+                "node": "n_002_001",
+                "heading": 4,
+                "range_to_marker_m": 0.9451,
+                "view_return_actions": 37
+              },
+              {
+                "node": "n_003_000",
+                "heading": 4,
+                "range_to_marker_m": 2.3523,
+                "view_return_actions": 37
+              }
+            ]
+          },
+          {
+            "instance_slot": 1,
+            "front_coarse_positions": 3,
+            "minimum_individual_view_return_actions": 61,
+            "witnesses": [
+              {
+                "node": "n_002_004",
+                "heading": 4,
+                "range_to_marker_m": 0.792,
+                "view_return_actions": 61
+              },
+              {
+                "node": "n_002_005",
+                "heading": 7,
+                "range_to_marker_m": 0.7052,
+                "view_return_actions": 75
+              }
+            ]
+          },
+          {
+            "instance_slot": 2,
+            "front_coarse_positions": 3,
+            "minimum_individual_view_return_actions": 59,
+            "witnesses": [
+              {
+                "node": "n_003_002",
+                "heading": 2,
+                "range_to_marker_m": 1.0612,
+                "view_return_actions": 59
+              },
+              {
+                "node": "n_003_003",
+                "heading": 0,
+                "range_to_marker_m": 0.6755,
+                "view_return_actions": 67
+              }
+            ]
+          },
+          {
+            "instance_slot": 3,
+            "front_coarse_positions": 4,
+            "minimum_individual_view_return_actions": 99,
+            "witnesses": [
+              {
+                "node": "n_005_005",
+                "heading": 1,
+                "range_to_marker_m": 1.8145,
+                "view_return_actions": 99
+              },
+              {
+                "node": "n_005_006",
+                "heading": 0,
+                "range_to_marker_m": 1.5564,
+                "view_return_actions": 107
+              }
+            ]
+          }
+        ],
+        "same_class_pair_tours": [
+          {
+            "true_class": "machine",
+            "instance_slots": [
+              1,
+              3
+            ],
+            "minimum_two_site_view_return_actions": 108,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 112,
+              "return_actions": 43,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 0
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 3
+                  },
+                  "movement_actions": 13,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_005",
+                    "heading": 1
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_006",
+                    "heading": 6
+                  },
+                  "movement_actions": 13,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 7
+                  },
+                  "movement_actions": 5,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_005_005",
+                  "heading": 1
+                },
+                {
+                  "node": "n_003_006",
+                  "heading": 7
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 128,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 134,
+              "return_actions": 53,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_002_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_004",
+                    "heading": 4
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 6
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_005",
+                    "heading": 7
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_006",
+                    "heading": 0
+                  },
+                  "movement_actions": 15,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_006",
+                    "heading": 0
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_005",
+                    "heading": 10
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_005",
+                    "heading": 1
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_002_004",
+                  "heading": 4
+                },
+                {
+                  "node": "n_002_005",
+                  "heading": 7
+                },
+                {
+                  "node": "n_005_006",
+                  "heading": 0
+                },
+                {
+                  "node": "n_005_005",
+                  "heading": 1
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          },
+          {
+            "true_class": "rack",
+            "instance_slots": [
+              0,
+              2
+            ],
+            "minimum_two_site_view_return_actions": 62,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 63,
+              "return_actions": 34,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 4
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_002",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_003_000",
+                  "heading": 4
+                },
+                {
+                  "node": "n_003_002",
+                  "heading": 2
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 78,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 81,
+              "return_actions": 20,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 14,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_000",
+                    "heading": 4
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_002",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 1
+                  },
+                  "movement_actions": 7,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_003",
+                    "heading": 0
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_003_001",
+                    "heading": 7
+                  },
+                  "movement_actions": 13,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_001",
+                    "heading": 4
+                  },
+                  "movement_actions": 7,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_003_000",
+                  "heading": 4
+                },
+                {
+                  "node": "n_003_002",
+                  "heading": 2
+                },
+                {
+                  "node": "n_003_003",
+                  "heading": 0
+                },
+                {
+                  "node": "n_002_001",
+                  "heading": 4
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          }
+        ],
+        "two_frontal_coarse_positions_per_facility": true,
+        "all_individual_costs_within_160": true,
+        "at_least_one_candidate_limited_four_view_pair_within_160": true,
+        "all_candidate_limited_two_site_pairs_within_160": true,
+        "all_candidate_limited_pair_witnesses_within_160": true,
+        "actual_label_pixels_and_RGBD_qualification_verified": false
+      }
+    },
+    {
+      "parent_id": "SEM_P05",
+      "layout_lineage": "new_explicit_open_staggered_gallery",
+      "topology": "open_staggered_gallery",
+      "room_size_m": [
+        9,
+        7
+      ],
+      "facility_dimensions_m": [
+        1.15,
+        0.85,
+        1.55
+      ],
+      "facility_xy_yaw_deg": [
+        [
+          2.4,
+          2.1,
+          0
+        ],
+        [
+          5.1,
+          2.6,
+          90
+        ],
+        [
+          7.1,
+          4.9,
+          180
+        ],
+        [
+          2.7,
+          5.3,
+          270
+        ]
+      ],
+      "true_classes": [
+        "cabinet",
+        "workstation",
+        "cabinet",
+        "workstation"
+      ],
+      "occluder_boxes_m": [],
+      "task_reason": "Open circulation provides a low-detour boundary; equipment self-occlusion and mutual occlusion remain.",
+      "spatial_jitter_m": 0,
+      "dimension_jitter_fraction": 0,
+      "structure_uniforms": [
+        0.875,
+        0.125,
+        0.375,
+        0.625
+      ],
+      "fixed_assignments": {
+        "nominal_relationship": {
+          "true_classes": [
+            "cabinet",
+            "workstation",
+            "cabinet",
+            "workstation"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "workstation",
+            "cabinet",
+            "workstation"
+          ],
+          "true_structures": [
+            "louvered",
+            "planar",
+            "planar",
+            "recessed"
+          ]
+        },
+        "structure_relationship_shift": {
+          "true_classes": [
+            "cabinet",
+            "workstation",
+            "cabinet",
+            "workstation"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "workstation",
+            "cabinet",
+            "workstation"
+          ],
+          "true_structures": [
+            "planar",
+            "louvered",
+            "louvered",
+            "open_frame"
+          ]
+        },
+        "persistent_recognition_error": {
+          "true_classes": [
+            "cabinet",
+            "workstation",
+            "cabinet",
+            "workstation"
+          ],
+          "observed_classes": [
+            "rack",
+            "machine",
+            "rack",
+            "machine"
+          ],
+          "true_structures": [
+            "louvered",
+            "planar",
+            "planar",
+            "recessed"
+          ]
+        },
+        "uninformative_relationship": {
+          "true_classes": [
+            "cabinet",
+            "workstation",
+            "cabinet",
+            "workstation"
+          ],
+          "observed_classes": [
+            "cabinet",
+            "workstation",
+            "cabinet",
+            "workstation"
+          ],
+          "true_structures": [
+            "recessed",
+            "recessed",
+            "louvered",
+            "louvered"
+          ],
+          "same_structure_multiset_for_each_class": [
+            "recessed",
+            "louvered"
+          ]
+        }
+      },
+      "static_navigation_check": {
+        "status": "pure_geometry_screen",
+        "worlds_created": 0,
+        "meshes_created": 0,
+        "quality_evaluations": 0,
+        "declared_lattice_nodes": 48,
+        "safe_lattice_nodes": 41,
+        "reachable_nodes": 41,
+        "all_safe_nodes_connected": true,
+        "expanded_primitive_nodes": 218,
+        "per_facility": [
+          {
+            "instance_slot": 0,
+            "front_coarse_positions": 4,
+            "minimum_individual_view_return_actions": 3,
+            "witnesses": [
+              {
+                "node": "home",
+                "heading": 1,
+                "range_to_marker_m": 1.5554,
+                "view_return_actions": 3
+              },
+              {
+                "node": "n_001_000",
+                "heading": 2,
+                "range_to_marker_m": 0.943,
+                "view_return_actions": 21
+              }
+            ]
+          },
+          {
+            "instance_slot": 1,
+            "front_coarse_positions": 6,
+            "minimum_individual_view_return_actions": 61,
+            "witnesses": [
+              {
+                "node": "n_006_000",
+                "heading": 4,
+                "range_to_marker_m": 1.8969,
+                "view_return_actions": 61
+              },
+              {
+                "node": "n_006_001",
+                "heading": 5,
+                "range_to_marker_m": 1.2916,
+                "view_return_actions": 75
+              }
+            ]
+          },
+          {
+            "instance_slot": 2,
+            "front_coarse_positions": 2,
+            "minimum_individual_view_return_actions": 113,
+            "witnesses": [
+              {
+                "node": "n_006_005",
+                "heading": 11,
+                "range_to_marker_m": 0.8392,
+                "view_return_actions": 113
+              },
+              {
+                "node": "n_007_005",
+                "heading": 8,
+                "range_to_marker_m": 0.484,
+                "view_return_actions": 121
+              }
+            ]
+          },
+          {
+            "instance_slot": 3,
+            "front_coarse_positions": 5,
+            "minimum_individual_view_return_actions": 37,
+            "witnesses": [
+              {
+                "node": "n_000_003",
+                "heading": 2,
+                "range_to_marker_m": 2.4514,
+                "view_return_actions": 37
+              },
+              {
+                "node": "n_000_004",
+                "heading": 1,
+                "range_to_marker_m": 1.7718,
+                "view_return_actions": 45
+              }
+            ]
+          }
+        ],
+        "same_class_pair_tours": [
+          {
+            "true_class": "cabinet",
+            "instance_slots": [
+              0,
+              2
+            ],
+            "minimum_two_site_view_return_actions": 114,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 123,
+              "return_actions": 1,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 0
+                  },
+                  "movement_actions": 16,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_001",
+                    "heading": 3
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 3
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_005",
+                    "heading": 1
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_005",
+                    "heading": 11
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 9
+                  },
+                  "movement_actions": 20,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_001",
+                    "heading": 9
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 6
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_001_000",
+                    "heading": 6
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 1
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_006_005",
+                  "heading": 11
+                },
+                {
+                  "node": "home",
+                  "heading": 1
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 130,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 140,
+              "return_actions": 1,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_001_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 20,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_002",
+                    "heading": 3
+                  },
+                  "movement_actions": 9,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_004",
+                    "heading": 3
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_005",
+                    "heading": 11
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_007_005",
+                    "heading": 11
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_007_005",
+                    "heading": 9
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_007_005",
+                    "heading": 8
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 9
+                  },
+                  "movement_actions": 21,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_001",
+                    "heading": 9
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 6
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_001_000",
+                    "heading": 6
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "home",
+                    "heading": 1
+                  },
+                  "movement_actions": 3,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_001_000",
+                  "heading": 2
+                },
+                {
+                  "node": "n_006_005",
+                  "heading": 11
+                },
+                {
+                  "node": "n_007_005",
+                  "heading": 8
+                },
+                {
+                  "node": "home",
+                  "heading": 1
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          },
+          {
+            "true_class": "workstation",
+            "instance_slots": [
+              1,
+              3
+            ],
+            "minimum_two_site_view_return_actions": 92,
+            "candidate_limited_two_site_witness": {
+              "feasible": true,
+              "paid_actions": 96,
+              "return_actions": 44,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 2
+                  },
+                  "movement_actions": 16,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_003",
+                    "heading": 0
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_005_003",
+                    "heading": 0
+                  },
+                  "movement_actions": 12,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 11
+                  },
+                  "movement_actions": 5,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 9
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 8
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_000_003",
+                  "heading": 2
+                },
+                {
+                  "node": "n_006_003",
+                  "heading": 8
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            },
+            "two_positions_per_instance_nominal_cost": 110,
+            "candidate_limited_four_view_witness": {
+              "feasible": true,
+              "paid_actions": 117,
+              "return_actions": 23,
+              "macros": [
+                {
+                  "target": {
+                    "node": "n_004_000",
+                    "heading": 0
+                  },
+                  "movement_actions": 16,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_000",
+                    "heading": 2
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_000",
+                    "heading": 4
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_001",
+                    "heading": 4
+                  },
+                  "movement_actions": 6,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_001",
+                    "heading": 5
+                  },
+                  "movement_actions": 1,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_006_003",
+                    "heading": 4
+                  },
+                  "movement_actions": 11,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_004_003",
+                    "heading": 6
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_002_003",
+                    "heading": 6
+                  },
+                  "movement_actions": 8,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 4
+                  },
+                  "movement_actions": 10,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_003",
+                    "heading": 2
+                  },
+                  "movement_actions": 2,
+                  "extra_observe_actions": 1
+                },
+                {
+                  "target": {
+                    "node": "n_000_004",
+                    "heading": 1
+                  },
+                  "movement_actions": 7,
+                  "extra_observe_actions": 1
+                }
+              ],
+              "target_poses": [
+                {
+                  "node": "n_006_000",
+                  "heading": 4
+                },
+                {
+                  "node": "n_006_001",
+                  "heading": 5
+                },
+                {
+                  "node": "n_000_003",
+                  "heading": 2
+                },
+                {
+                  "node": "n_000_004",
+                  "heading": 1
+                }
+              ],
+              "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+            }
+          }
+        ],
+        "two_frontal_coarse_positions_per_facility": true,
+        "all_individual_costs_within_160": true,
+        "at_least_one_candidate_limited_four_view_pair_within_160": true,
+        "all_candidate_limited_two_site_pairs_within_160": true,
+        "all_candidate_limited_pair_witnesses_within_160": true,
+        "actual_label_pixels_and_RGBD_qualification_verified": false
+      }
+    }
+  ],
+  "budgets": {
+    "proposed_paid_actions": [
+      80,
+      120,
+      160
+    ],
+    "core_paid_actions": 120,
+    "task": "return to original position AND heading",
+    "count_extra_observe": true,
+    "movement_frames_already_observed": true,
+    "full_coverage_at_each_budget_guaranteed": false,
+    "freeze_condition": "At 160, every facility has an individual paid front-view-and-return route and each same-class pair has a two-site paid tour. Verify before matrix freeze; select on geometric feasibility only."
+  },
+  "block_design": {
+    "status": "proposal_only_not_scheduled",
+    "core": {
+      "parents": "all six",
+      "conditions": [
+        "nominal_relationship",
+        "structure_relationship_shift"
+      ],
+      "budget": 120,
+      "methods": [
+        "G",
+        "fixed_semantic",
+        "bayes_semantic",
+        "shared_semantic",
+        "known_structure_reference"
+      ],
+      "trajectories": 60
+    },
+    "recognition": {
+      "parents": [
+        "SEM_P00",
+        "SEM_P04"
+      ],
+      "conditions": [
+        "persistent_recognition_error"
+      ],
+      "budget": 120,
+      "methods": [
+        "G",
+        "fixed_semantic",
+        "bayes_semantic",
+        "shared_semantic",
+        "known_structure_reference"
+      ],
+      "trajectories": 10
+    },
+    "budget": {
+      "parents": [
+        "SEM_P01",
+        "SEM_P05"
+      ],
+      "conditions": [
+        "nominal_relationship",
+        "structure_relationship_shift"
+      ],
+      "budgets": [
+        80,
+        160
+      ],
+      "methods": [
+        "G",
+        "bayes_semantic",
+        "shared_semantic"
+      ],
+      "trajectories": 24
+    },
+    "tie": {
+      "parents": [
+        "SEM_P02",
+        "SEM_P03"
+      ],
+      "conditions": [
+        "nominal_relationship",
+        "structure_relationship_shift"
+      ],
+      "budget": 120,
+      "rules": [
+        "reverse",
+        "seeded_random"
+      ],
+      "seed": 731,
+      "methods": [
+        "G",
+        "bayes_semantic",
+        "shared_semantic"
+      ],
+      "trajectories": 24
+    },
+    "ablations": {
+      "parents": [
+        "SEM_P00",
+        "SEM_P04"
+      ],
+      "conditions": [
+        "nominal_relationship",
+        "structure_relationship_shift"
+      ],
+      "budget": 120,
+      "methods": [
+        "shared_no_feedback",
+        "shared_no_future",
+        "shared_no_cross_future"
+      ],
+      "trajectories": 12
+    },
+    "known_uninformative": {
+      "parents": [
+        "SEM_P01",
+        "SEM_P05"
+      ],
+      "geometry": "nominal_relationship unchanged",
+      "public_prior": "all categories = geometry prior [0.25,0.25,0.25,0.25]",
+      "budget": 120,
+      "methods": [
+        "G",
+        "bayes_semantic",
+        "shared_semantic"
+      ],
+      "trajectories": 6
+    },
+    "single_instance": {
+      "parents": [
+        "SEM_P05"
+      ],
+      "variant": "Keep slot 0 and room/background; remove slots 1..3 and rebuild shared navigation",
+      "conditions": [
+        "nominal_relationship",
+        "structure_relationship_shift"
+      ],
+      "budget": 120,
+      "methods": [
+        "G",
+        "fixed_semantic",
+        "bayes_semantic",
+        "shared_semantic",
+        "known_structure_reference"
+      ],
+      "trajectories": 10
+    },
+    "total_proposed_trajectories": 164,
+    "depth_noise_relative_std": 0.01,
+    "depth_noise_seed": 230923,
+    "default_tie_rule": "lexicographic",
+    "no_automatic_factorial_expansion": true,
+    "uninformative_relationship": {
+      "parents": "all six",
+      "conditions": [
+        "uninformative_relationship"
+      ],
+      "budget": 120,
+      "methods": [
+        "G",
+        "bayes_semantic",
+        "shared_semantic"
+      ],
+      "trajectories": 18,
+      "prior": "unchanged original nominal table",
+      "design": "Each parent gives both categories the same fixed two-structure multiset; rotate adjacent structure pair over six parents. Finite stratified balance, not IID or a claim of independence of every conditional history."
+    }
+  },
+  "pre_world_requirements": [
+    "Closed nonoverlapping mesh bodies within walls; paired structure variants share conservative navigation envelopes.",
+    "No policy endpoint or quality used to select parents. Static infeasibility and resulting parameter corrections retained in this draft.",
+    "At least two candidate-compatible front positions per equipment marker; actual paid RGB-D qualification is still unverified.",
+    "Static pair-tour and 32-candidate-route accessibility are necessary conditions only, not a guarantee that any method chooses them.",
+    "Same fixed evaluation denominators and all failure records; no dropped undiscovered facilities.",
+    "No-feedback means no actual structure-belief correction; mapping, measured support and safety still update while prospective correction remains in planning."
+  ],
+  "minimal_new_entry_points": [
+    {
+      "new_file": "nso/semantic_scene_assets.py",
+      "reuse": [
+        "structure_boxes",
+        "union_box_mesh",
+        "DevelopmentGeometryV40",
+        "mesh_audit",
+        "mesh_npz_bytes"
+      ],
+      "change": "Parameter-driven builder separates true class, actual structure and visible label. Old build_development_geometry locks DEV_A..F, so do not spoof old IDs."
+    },
+    {
+      "new_file": "scripts/build_semantic_scene_assets.py",
+      "change": "Exclusive-create small new asset root with private meshes/markers/evaluation metadata and public workspace/spec. No World or policy calls."
+    },
+    {
+      "new_file": "nso/semantic_scene_navigation.py",
+      "reuse": [
+        "compile_blueprint_graph_v43",
+        "PublicPrimitiveGraphV41"
+      ],
+      "change": "Reuse pure compiler; add new strict bundle schema/loader binding new manifests. Old loaders/sidecars reject new IDs and require old protocol SHA."
+    },
+    {
+      "new_file": "env/semantic_scene_sensor.py",
+      "reuse": [
+        "render_rgbd",
+        "render_planar_scan",
+        "paid_motion_transition",
+        "storage_report_v41",
+        "SensorStepV41"
+      ],
+      "change": "New resource-gated adapter validates new asset IDs, same sensor/primitive contract. Old DevelopmentSensorV41 constructor rejects new IDs; never alias them as frozen DEV parents."
+    },
+    {
+      "new_file": "scripts/run_semantic_scene_matrix.py",
+      "change": "New finite ledger and source closure; use shared current controllers and existing paid loop for <=160 actions; old ledgers unchanged."
+    }
+  ],
+  "known_structure_reference": {
+    "implementation": "nso/known_structure_reference.py",
+    "extra_information": "Exact h only for already observed and uniquely matched instances.",
+    "trusted_broker": "PaidInstanceStructureMatcher privately compares observed marker anchor with true centers within .35 m. Only structure index / unresolved leaves matcher; no position correction or undiscovered-instance list.",
+    "unresolved": "Association uncertain, multiple nearby markers or duplicated identity -> geometry fallback; report reference completeness.",
+    "planner": "Uses common observed support, candidate set, per-h area vectors, exact one-hot weights, route costs and safety.",
+    "optimal_reconstruction_upper_bound": false,
+    "code_review": "No direct pose/mesh/future sensor disclosure found. Current controller owns matcher privately; trusted adapter boundary must be respected, not advertised as process-level isolation.",
+    "required_integration": "New runner binds private matcher assets by the same manifest hashes; record per-step disclosures with current observation/source hashes."
+  },
+  "draft_revision_notes": [
+    "Initial pure navigation screen rejected SEM_P01 bottom/front geometry as lacking two frontal coarse viewpoints; before any sensor/quality run, moved bottom devices y=1.4 to 1.8 and changed top orientations from 0 to 90/270. Geometry-only feasibility correction, not a policy result.",
+    "Pure navigation screen found SEM_P01 top aisle disconnected after 0.2m inflation on 1m lattice: raise room depth 7.0 to 7.5 to admit y=6.75 bypass row. Found SEM_P03 right doorway lost between x=4.75 vertical-wall and x=5.75 horizontal-wall inflation: move right header start x=5.8 to 6.2. No sensor/policy/quality was executed; failed coarse counts retained in initial_navigation_screen.",
+    "Pure 32-candidate macro route screen retained failure: SEM_P01 far objects needed 205 actions individually and same-class four-view tours 246/236; SEM_P04 one four-view pair needed 181. Shorten SEM_P01 lower baffle x-end 4.8 to 3.8 and move top-left device x=2.2 to 1.8 to clear the x=2.75 access column. Move SEM_P04 right device [8.1,5.1] to [7.7,6.2] closer to the aisle opening. No policy/sensor/quality run was used.",
+    "Topology-only review found the first SEM_P04 divider top end at y=6.9 has no coarse bypass despite physical clearance, making its discrete topology too similar to SEM_P01. Shorten it to y=6.1 to admit y=6.75 bypass; distinguish a freestanding divider plus anchored divider from two alternating boundary walls. No observed performance informed this change.",
+    "Added pre-result actual uninformative category/structure relationship block: 6 parents x G/B/S at 120 = 18 trajectories, original public prior unchanged. Known-uniform-prior sanity block retained separately. Proposed total 164; resources determine final freeze, no main matrix started."
+  ],
+  "initial_navigation_screen": {
+    "SEM_P00": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 63,
+      "safe_lattice_nodes": 45,
+      "reachable_nodes": 45,
+      "all_safe_nodes_connected": true,
+      "expanded_primitive_nodes": 207,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 8,
+          "minimum_individual_view_return_actions": 37,
+          "witnesses": [
+            {
+              "node": "n_000_003",
+              "heading": 11,
+              "range_to_marker_m": 2.2624,
+              "view_return_actions": 37
+            },
+            {
+              "node": "n_001_003",
+              "heading": 10,
+              "range_to_marker_m": 1.4827,
+              "view_return_actions": 51
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 7,
+          "minimum_individual_view_return_actions": 37,
+          "witnesses": [
+            {
+              "node": "n_000_003",
+              "heading": 2,
+              "range_to_marker_m": 2.2415,
+              "view_return_actions": 37
+            },
+            {
+              "node": "n_000_004",
+              "heading": 1,
+              "range_to_marker_m": 1.4712,
+              "view_return_actions": 45
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 7,
+          "minimum_individual_view_return_actions": 83,
+          "witnesses": [
+            {
+              "node": "n_005_003",
+              "heading": 11,
+              "range_to_marker_m": 2.3496,
+              "view_return_actions": 83
+            },
+            {
+              "node": "n_006_003",
+              "heading": 10,
+              "range_to_marker_m": 1.5494,
+              "view_return_actions": 91
+            }
+          ]
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 7,
+          "minimum_individual_view_return_actions": 83,
+          "witnesses": [
+            {
+              "node": "n_005_003",
+              "heading": 2,
+              "range_to_marker_m": 2.294,
+              "view_return_actions": 83
+            },
+            {
+              "node": "n_006_003",
+              "heading": 3,
+              "range_to_marker_m": 1.9449,
+              "view_return_actions": 91
+            }
+          ]
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "cabinet",
+          "instance_slots": [
+            0,
+            1
+          ],
+          "minimum_two_site_view_return_actions": 38,
+          "first": {
+            "node": "n_000_003",
+            "heading": 2
+          },
+          "second": {
+            "node": "n_000_003",
+            "heading": 11
+          },
+          "within_160": true
+        },
+        {
+          "true_class": "rack",
+          "instance_slots": [
+            2,
+            3
+          ],
+          "minimum_two_site_view_return_actions": 86,
+          "first": {
+            "node": "n_005_003",
+            "heading": 11
+          },
+          "second": {
+            "node": "n_005_003",
+            "heading": 2
+          },
+          "within_160": true
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": true,
+      "all_individual_costs_within_160": true,
+      "all_pair_tours_within_160": true,
+      "candidate_pool_path_execution": "pending; route existence does not prove 32-candidate controller selects the route",
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    },
+    "SEM_P01": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 42,
+      "safe_lattice_nodes": 27,
+      "reachable_nodes": 24,
+      "all_safe_nodes_connected": false,
+      "expanded_primitive_nodes": 105,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 4,
+          "minimum_individual_view_return_actions": 3,
+          "witnesses": [
+            {
+              "node": "home",
+              "heading": 1,
+              "range_to_marker_m": 1.2426,
+              "view_return_actions": 3
+            },
+            {
+              "node": "n_001_000",
+              "heading": 3,
+              "range_to_marker_m": 0.6812,
+              "view_return_actions": 21
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 4,
+          "minimum_individual_view_return_actions": 37,
+          "witnesses": [
+            {
+              "node": "n_003_000",
+              "heading": 1,
+              "range_to_marker_m": 1.9616,
+              "view_return_actions": 37
+            },
+            {
+              "node": "n_004_000",
+              "heading": 1,
+              "range_to_marker_m": 1.0807,
+              "view_return_actions": 45
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 0,
+          "minimum_individual_view_return_actions": null,
+          "witnesses": []
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 0,
+          "minimum_individual_view_return_actions": null,
+          "witnesses": []
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "machine",
+          "instance_slots": [
+            0,
+            2
+          ],
+          "minimum_two_site_view_return_actions": null,
+          "first": null,
+          "second": null,
+          "within_160": false
+        },
+        {
+          "true_class": "workstation",
+          "instance_slots": [
+            1,
+            3
+          ],
+          "minimum_two_site_view_return_actions": null,
+          "first": null,
+          "second": null,
+          "within_160": false
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": false,
+      "all_individual_costs_within_160": false,
+      "all_pair_tours_within_160": false,
+      "candidate_pool_path_execution": "pending; route existence does not prove 32-candidate controller selects the route",
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    },
+    "SEM_P02": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 49,
+      "safe_lattice_nodes": 33,
+      "reachable_nodes": 33,
+      "all_safe_nodes_connected": true,
+      "expanded_primitive_nodes": 153,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 6,
+          "minimum_individual_view_return_actions": 29,
+          "witnesses": [
+            {
+              "node": "n_002_000",
+              "heading": 4,
+              "range_to_marker_m": 1.0966,
+              "view_return_actions": 29
+            },
+            {
+              "node": "n_003_000",
+              "heading": 5,
+              "range_to_marker_m": 1.9007,
+              "view_return_actions": 37
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 2,
+          "minimum_individual_view_return_actions": 97,
+          "witnesses": [
+            {
+              "node": "n_003_006",
+              "heading": 0,
+              "range_to_marker_m": 2.2311,
+              "view_return_actions": 97
+            },
+            {
+              "node": "n_004_006",
+              "heading": 11,
+              "range_to_marker_m": 1.252,
+              "view_return_actions": 105
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 5,
+          "minimum_individual_view_return_actions": 53,
+          "witnesses": [
+            {
+              "node": "n_002_003",
+              "heading": 4,
+              "range_to_marker_m": 1.9704,
+              "view_return_actions": 53
+            },
+            {
+              "node": "n_002_004",
+              "heading": 4,
+              "range_to_marker_m": 1.0966,
+              "view_return_actions": 61
+            }
+          ]
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 3,
+          "minimum_individual_view_return_actions": 45,
+          "witnesses": [
+            {
+              "node": "n_004_000",
+              "heading": 2,
+              "range_to_marker_m": 2.0512,
+              "view_return_actions": 45
+            },
+            {
+              "node": "n_003_001",
+              "heading": 1,
+              "range_to_marker_m": 2.3017,
+              "view_return_actions": 51
+            }
+          ]
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "cabinet",
+          "instance_slots": [
+            0,
+            1
+          ],
+          "minimum_two_site_view_return_actions": 98,
+          "first": {
+            "node": "n_003_006",
+            "heading": 0
+          },
+          "second": {
+            "node": "n_002_003",
+            "heading": 8
+          },
+          "within_160": true
+        },
+        {
+          "true_class": "rack",
+          "instance_slots": [
+            2,
+            3
+          ],
+          "minimum_two_site_view_return_actions": 72,
+          "first": {
+            "node": "n_003_001",
+            "heading": 1
+          },
+          "second": {
+            "node": "n_002_003",
+            "heading": 4
+          },
+          "within_160": true
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": true,
+      "all_individual_costs_within_160": true,
+      "all_pair_tours_within_160": true,
+      "candidate_pool_path_execution": "pending; route existence does not prove 32-candidate controller selects the route",
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    },
+    "SEM_P03": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 64,
+      "safe_lattice_nodes": 55,
+      "reachable_nodes": 42,
+      "all_safe_nodes_connected": false,
+      "expanded_primitive_nodes": 228,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 8,
+          "minimum_individual_view_return_actions": 53,
+          "witnesses": [
+            {
+              "node": "n_003_002",
+              "heading": 4,
+              "range_to_marker_m": 2.3664,
+              "view_return_actions": 53
+            },
+            {
+              "node": "n_003_003",
+              "heading": 5,
+              "range_to_marker_m": 1.6491,
+              "view_return_actions": 67
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 7,
+          "minimum_individual_view_return_actions": 83,
+          "witnesses": [
+            {
+              "node": "n_003_005",
+              "heading": 4,
+              "range_to_marker_m": 1.9773,
+              "view_return_actions": 83
+            },
+            {
+              "node": "n_002_004",
+              "heading": 3,
+              "range_to_marker_m": 2.4657,
+              "view_return_actions": 89
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 0,
+          "minimum_individual_view_return_actions": null,
+          "witnesses": []
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 0,
+          "minimum_individual_view_return_actions": null,
+          "witnesses": []
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "machine",
+          "instance_slots": [
+            0,
+            1
+          ],
+          "minimum_two_site_view_return_actions": 84,
+          "first": {
+            "node": "n_003_005",
+            "heading": 4
+          },
+          "second": {
+            "node": "n_003_005",
+            "heading": 7
+          },
+          "within_160": true
+        },
+        {
+          "true_class": "workstation",
+          "instance_slots": [
+            2,
+            3
+          ],
+          "minimum_two_site_view_return_actions": null,
+          "first": null,
+          "second": null,
+          "within_160": false
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": false,
+      "all_individual_costs_within_160": false,
+      "all_pair_tours_within_160": false,
+      "candidate_pool_path_execution": "pending; route existence does not prove 32-candidate controller selects the route",
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    },
+    "SEM_P04": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 63,
+      "safe_lattice_nodes": 56,
+      "reachable_nodes": 56,
+      "all_safe_nodes_connected": true,
+      "expanded_primitive_nodes": 278,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 6,
+          "minimum_individual_view_return_actions": 29,
+          "witnesses": [
+            {
+              "node": "n_002_000",
+              "heading": 4,
+              "range_to_marker_m": 1.8502,
+              "view_return_actions": 29
+            },
+            {
+              "node": "n_002_001",
+              "heading": 4,
+              "range_to_marker_m": 0.9451,
+              "view_return_actions": 37
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 4,
+          "minimum_individual_view_return_actions": 59,
+          "witnesses": [
+            {
+              "node": "n_002_003",
+              "heading": 4,
+              "range_to_marker_m": 1.6605,
+              "view_return_actions": 59
+            },
+            {
+              "node": "n_002_004",
+              "heading": 4,
+              "range_to_marker_m": 0.792,
+              "view_return_actions": 61
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 5,
+          "minimum_individual_view_return_actions": 47,
+          "witnesses": [
+            {
+              "node": "n_003_001",
+              "heading": 2,
+              "range_to_marker_m": 1.9484,
+              "view_return_actions": 47
+            },
+            {
+              "node": "n_003_002",
+              "heading": 2,
+              "range_to_marker_m": 1.0612,
+              "view_return_actions": 59
+            }
+          ]
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 5,
+          "minimum_individual_view_return_actions": 107,
+          "witnesses": [
+            {
+              "node": "n_005_006",
+              "heading": 11,
+              "range_to_marker_m": 2.2758,
+              "view_return_actions": 107
+            },
+            {
+              "node": "n_006_006",
+              "heading": 10,
+              "range_to_marker_m": 1.5064,
+              "view_return_actions": 121
+            }
+          ]
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "machine",
+          "instance_slots": [
+            1,
+            3
+          ],
+          "minimum_two_site_view_return_actions": 136,
+          "first": {
+            "node": "n_002_003",
+            "heading": 4
+          },
+          "second": {
+            "node": "n_005_006",
+            "heading": 11
+          },
+          "within_160": true
+        },
+        {
+          "true_class": "rack",
+          "instance_slots": [
+            0,
+            2
+          ],
+          "minimum_two_site_view_return_actions": 50,
+          "first": {
+            "node": "n_003_000",
+            "heading": 4
+          },
+          "second": {
+            "node": "n_003_001",
+            "heading": 2
+          },
+          "within_160": true
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": true,
+      "all_individual_costs_within_160": true,
+      "all_pair_tours_within_160": true,
+      "candidate_pool_path_execution": "pending; route existence does not prove 32-candidate controller selects the route",
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    },
+    "SEM_P05": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 48,
+      "safe_lattice_nodes": 41,
+      "reachable_nodes": 41,
+      "all_safe_nodes_connected": true,
+      "expanded_primitive_nodes": 218,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 4,
+          "minimum_individual_view_return_actions": 3,
+          "witnesses": [
+            {
+              "node": "home",
+              "heading": 1,
+              "range_to_marker_m": 1.5554,
+              "view_return_actions": 3
+            },
+            {
+              "node": "n_001_000",
+              "heading": 2,
+              "range_to_marker_m": 0.943,
+              "view_return_actions": 21
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 6,
+          "minimum_individual_view_return_actions": 61,
+          "witnesses": [
+            {
+              "node": "n_006_000",
+              "heading": 4,
+              "range_to_marker_m": 1.8969,
+              "view_return_actions": 61
+            },
+            {
+              "node": "n_006_001",
+              "heading": 5,
+              "range_to_marker_m": 1.2916,
+              "view_return_actions": 75
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 3,
+          "minimum_individual_view_return_actions": 99,
+          "witnesses": [
+            {
+              "node": "n_005_005",
+              "heading": 0,
+              "range_to_marker_m": 1.7816,
+              "view_return_actions": 99
+            },
+            {
+              "node": "n_006_005",
+              "heading": 11,
+              "range_to_marker_m": 0.8392,
+              "view_return_actions": 113
+            }
+          ]
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 6,
+          "minimum_individual_view_return_actions": 37,
+          "witnesses": [
+            {
+              "node": "n_000_003",
+              "heading": 2,
+              "range_to_marker_m": 2.4514,
+              "view_return_actions": 37
+            },
+            {
+              "node": "n_000_004",
+              "heading": 1,
+              "range_to_marker_m": 1.7718,
+              "view_return_actions": 45
+            }
+          ]
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "cabinet",
+          "instance_slots": [
+            0,
+            2
+          ],
+          "minimum_two_site_view_return_actions": 100,
+          "first": {
+            "node": "n_005_005",
+            "heading": 0
+          },
+          "second": {
+            "node": "home",
+            "heading": 1
+          },
+          "within_160": true
+        },
+        {
+          "true_class": "workstation",
+          "instance_slots": [
+            1,
+            3
+          ],
+          "minimum_two_site_view_return_actions": 92,
+          "first": {
+            "node": "n_000_003",
+            "heading": 2
+          },
+          "second": {
+            "node": "n_006_003",
+            "heading": 8
+          },
+          "within_160": true
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": true,
+      "all_individual_costs_within_160": true,
+      "all_pair_tours_within_160": true,
+      "candidate_pool_path_execution": "pending; route existence does not prove 32-candidate controller selects the route",
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    }
+  },
+  "budget_screen_before_correction": {
+    "SEM_P01": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 49,
+      "safe_lattice_nodes": 34,
+      "reachable_nodes": 34,
+      "all_safe_nodes_connected": true,
+      "expanded_primitive_nodes": 148,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 3,
+          "minimum_individual_view_return_actions": 3,
+          "witnesses": [
+            {
+              "node": "home",
+              "heading": 1,
+              "range_to_marker_m": 1.2426,
+              "view_return_actions": 3
+            },
+            {
+              "node": "n_001_000",
+              "heading": 3,
+              "range_to_marker_m": 0.6812,
+              "view_return_actions": 21
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 3,
+          "minimum_individual_view_return_actions": 45,
+          "witnesses": [
+            {
+              "node": "n_004_000",
+              "heading": 1,
+              "range_to_marker_m": 1.0807,
+              "view_return_actions": 45
+            },
+            {
+              "node": "n_005_000",
+              "heading": 3,
+              "range_to_marker_m": 0.6986,
+              "view_return_actions": 53
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 3,
+          "minimum_individual_view_return_actions": 205,
+          "witnesses": [
+            {
+              "node": "n_003_006",
+              "heading": 8,
+              "range_to_marker_m": 1.7263,
+              "view_return_actions": 205
+            },
+            {
+              "node": "n_003_005",
+              "heading": 6,
+              "range_to_marker_m": 1.2083,
+              "view_return_actions": 219
+            }
+          ]
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 4,
+          "minimum_individual_view_return_actions": 205,
+          "witnesses": [
+            {
+              "node": "n_003_006",
+              "heading": 11,
+              "range_to_marker_m": 1.986,
+              "view_return_actions": 205
+            },
+            {
+              "node": "n_004_006",
+              "heading": 11,
+              "range_to_marker_m": 1.0881,
+              "view_return_actions": 213
+            }
+          ]
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "machine",
+          "instance_slots": [
+            0,
+            2
+          ],
+          "minimum_two_site_view_return_actions": 206,
+          "two_positions_per_instance_nominal_cost": 230,
+          "candidate_limited_four_view_witness": {
+            "feasible": false,
+            "paid_actions": 246,
+            "return_actions": 1,
+            "macros": [
+              {
+                "target": {
+                  "node": "n_001_000",
+                  "heading": 2
+                },
+                "movement_actions": 6,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_001_000",
+                  "heading": 3
+                },
+                "movement_actions": 1,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_005_000",
+                  "heading": 0
+                },
+                "movement_actions": 19,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_006_002",
+                  "heading": 3
+                },
+                "movement_actions": 15,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_003",
+                  "heading": 6
+                },
+                "movement_actions": 19,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_000_003",
+                  "heading": 4
+                },
+                "movement_actions": 14,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_000_006",
+                  "heading": 1
+                },
+                "movement_actions": 15,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_006",
+                  "heading": 11
+                },
+                "movement_actions": 14,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_006",
+                  "heading": 9
+                },
+                "movement_actions": 2,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_006",
+                  "heading": 8
+                },
+                "movement_actions": 1,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_005",
+                  "heading": 7
+                },
+                "movement_actions": 7,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_005",
+                  "heading": 6
+                },
+                "movement_actions": 1,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_000_006",
+                  "heading": 7
+                },
+                "movement_actions": 23,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_001_003",
+                  "heading": 0
+                },
+                "movement_actions": 21,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_004_003",
+                  "heading": 0
+                },
+                "movement_actions": 12,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_006_002",
+                  "heading": 9
+                },
+                "movement_actions": 15,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_004_000",
+                  "heading": 6
+                },
+                "movement_actions": 19,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_001_000",
+                  "heading": 6
+                },
+                "movement_actions": 12,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "home",
+                  "heading": 4
+                },
+                "movement_actions": 6,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "home",
+                  "heading": 1
+                },
+                "movement_actions": 3,
+                "extra_observe_actions": 1
+              }
+            ],
+            "target_poses": [
+              {
+                "node": "n_001_000",
+                "heading": 3
+              },
+              {
+                "node": "n_003_006",
+                "heading": 8
+              },
+              {
+                "node": "n_003_005",
+                "heading": 6
+              },
+              {
+                "node": "home",
+                "heading": 1
+              }
+            ],
+            "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+          }
+        },
+        {
+          "true_class": "workstation",
+          "instance_slots": [
+            1,
+            3
+          ],
+          "minimum_two_site_view_return_actions": 208,
+          "two_positions_per_instance_nominal_cost": 226,
+          "candidate_limited_four_view_witness": {
+            "feasible": false,
+            "paid_actions": 236,
+            "return_actions": 29,
+            "macros": [
+              {
+                "target": {
+                  "node": "n_004_000",
+                  "heading": 1
+                },
+                "movement_actions": 17,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_006_001",
+                  "heading": 3
+                },
+                "movement_actions": 16,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_004_003",
+                  "heading": 6
+                },
+                "movement_actions": 19,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_000_003",
+                  "heading": 4
+                },
+                "movement_actions": 18,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_000_006",
+                  "heading": 1
+                },
+                "movement_actions": 15,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_006",
+                  "heading": 11
+                },
+                "movement_actions": 14,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_004_006",
+                  "heading": 11
+                },
+                "movement_actions": 6,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_006",
+                  "heading": 6
+                },
+                "movement_actions": 13,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_000_005",
+                  "heading": 9
+                },
+                "movement_actions": 15,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_001_003",
+                  "heading": 0
+                },
+                "movement_actions": 15,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_004_003",
+                  "heading": 0
+                },
+                "movement_actions": 12,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_006_002",
+                  "heading": 9
+                },
+                "movement_actions": 15,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_005_000",
+                  "heading": 4
+                },
+                "movement_actions": 17,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_005_000",
+                  "heading": 3
+                },
+                "movement_actions": 1,
+                "extra_observe_actions": 1
+              }
+            ],
+            "target_poses": [
+              {
+                "node": "n_004_000",
+                "heading": 1
+              },
+              {
+                "node": "n_003_006",
+                "heading": 11
+              },
+              {
+                "node": "n_004_006",
+                "heading": 11
+              },
+              {
+                "node": "n_005_000",
+                "heading": 3
+              }
+            ],
+            "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+          }
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": true,
+      "all_individual_costs_within_160": false,
+      "all_candidate_limited_pair_witnesses_within_160": false,
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    },
+    "SEM_P04": {
+      "status": "pure_geometry_screen",
+      "worlds_created": 0,
+      "meshes_created": 0,
+      "quality_evaluations": 0,
+      "declared_lattice_nodes": 63,
+      "safe_lattice_nodes": 56,
+      "reachable_nodes": 56,
+      "all_safe_nodes_connected": true,
+      "expanded_primitive_nodes": 278,
+      "per_facility": [
+        {
+          "instance_slot": 0,
+          "front_coarse_positions": 4,
+          "minimum_individual_view_return_actions": 37,
+          "witnesses": [
+            {
+              "node": "n_002_001",
+              "heading": 4,
+              "range_to_marker_m": 0.9451,
+              "view_return_actions": 37
+            },
+            {
+              "node": "n_003_000",
+              "heading": 4,
+              "range_to_marker_m": 2.3523,
+              "view_return_actions": 37
+            }
+          ]
+        },
+        {
+          "instance_slot": 1,
+          "front_coarse_positions": 2,
+          "minimum_individual_view_return_actions": 61,
+          "witnesses": [
+            {
+              "node": "n_002_004",
+              "heading": 4,
+              "range_to_marker_m": 0.792,
+              "view_return_actions": 61
+            },
+            {
+              "node": "n_002_005",
+              "heading": 7,
+              "range_to_marker_m": 0.7052,
+              "view_return_actions": 75
+            }
+          ]
+        },
+        {
+          "instance_slot": 2,
+          "front_coarse_positions": 3,
+          "minimum_individual_view_return_actions": 59,
+          "witnesses": [
+            {
+              "node": "n_003_002",
+              "heading": 2,
+              "range_to_marker_m": 1.0612,
+              "view_return_actions": 59
+            },
+            {
+              "node": "n_003_003",
+              "heading": 0,
+              "range_to_marker_m": 0.6755,
+              "view_return_actions": 67
+            }
+          ]
+        },
+        {
+          "instance_slot": 3,
+          "front_coarse_positions": 5,
+          "minimum_individual_view_return_actions": 107,
+          "witnesses": [
+            {
+              "node": "n_005_006",
+              "heading": 11,
+              "range_to_marker_m": 2.2758,
+              "view_return_actions": 107
+            },
+            {
+              "node": "n_006_006",
+              "heading": 10,
+              "range_to_marker_m": 1.5064,
+              "view_return_actions": 121
+            }
+          ]
+        }
+      ],
+      "same_class_pair_tours": [
+        {
+          "true_class": "machine",
+          "instance_slots": [
+            1,
+            3
+          ],
+          "minimum_two_site_view_return_actions": 138,
+          "two_positions_per_instance_nominal_cost": 172,
+          "candidate_limited_four_view_witness": {
+            "feasible": false,
+            "paid_actions": 181,
+            "return_actions": 64,
+            "macros": [
+              {
+                "target": {
+                  "node": "n_002_000",
+                  "heading": 2
+                },
+                "movement_actions": 10,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_002",
+                  "heading": 3
+                },
+                "movement_actions": 9,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_004",
+                  "heading": 4
+                },
+                "movement_actions": 9,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_005",
+                  "heading": 4
+                },
+                "movement_actions": 6,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_005",
+                  "heading": 6
+                },
+                "movement_actions": 2,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_005",
+                  "heading": 7
+                },
+                "movement_actions": 1,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_002",
+                  "heading": 9
+                },
+                "movement_actions": 14,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_001",
+                  "heading": 2
+                },
+                "movement_actions": 13,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_003",
+                  "heading": 3
+                },
+                "movement_actions": 9,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_006",
+                  "heading": 1
+                },
+                "movement_actions": 14,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_005_006",
+                  "heading": 11
+                },
+                "movement_actions": 10,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_006_006",
+                  "heading": 11
+                },
+                "movement_actions": 6,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_006_006",
+                  "heading": 10
+                },
+                "movement_actions": 1,
+                "extra_observe_actions": 1
+              }
+            ],
+            "target_poses": [
+              {
+                "node": "n_002_004",
+                "heading": 4
+              },
+              {
+                "node": "n_002_005",
+                "heading": 7
+              },
+              {
+                "node": "n_005_006",
+                "heading": 11
+              },
+              {
+                "node": "n_006_006",
+                "heading": 10
+              }
+            ],
+            "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+          }
+        },
+        {
+          "true_class": "rack",
+          "instance_slots": [
+            0,
+            2
+          ],
+          "minimum_two_site_view_return_actions": 62,
+          "two_positions_per_instance_nominal_cost": 78,
+          "candidate_limited_four_view_witness": {
+            "feasible": true,
+            "paid_actions": 81,
+            "return_actions": 20,
+            "macros": [
+              {
+                "target": {
+                  "node": "n_003_000",
+                  "heading": 2
+                },
+                "movement_actions": 14,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_000",
+                  "heading": 4
+                },
+                "movement_actions": 2,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_002",
+                  "heading": 2
+                },
+                "movement_actions": 10,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_003",
+                  "heading": 1
+                },
+                "movement_actions": 7,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_003",
+                  "heading": 0
+                },
+                "movement_actions": 1,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_003_001",
+                  "heading": 7
+                },
+                "movement_actions": 13,
+                "extra_observe_actions": 1
+              },
+              {
+                "target": {
+                  "node": "n_002_001",
+                  "heading": 4
+                },
+                "movement_actions": 7,
+                "extra_observe_actions": 1
+              }
+            ],
+            "target_poses": [
+              {
+                "node": "n_003_000",
+                "heading": 4
+              },
+              {
+                "node": "n_003_002",
+                "heading": 2
+              },
+              {
+                "node": "n_003_003",
+                "heading": 0
+              },
+              {
+                "node": "n_002_001",
+                "heading": 4
+              }
+            ],
+            "note": "Offline existential route chosen with private draft endpoints; no policy score/sensor/quality and no endpoint locations disclosed to runtime."
+          }
+        }
+      ],
+      "two_frontal_coarse_positions_per_facility": true,
+      "all_individual_costs_within_160": true,
+      "all_candidate_limited_pair_witnesses_within_160": false,
+      "actual_label_pixels_and_RGBD_qualification_verified": false
+    }
+  },
+  "static_check_method": {
+    "geometry": "Union of structure_boxes alternatives at fixed dimensions; pairwise 3D AABB separation and conservative public compile_blueprint_graph_v43. No triangle asset or raycast.",
+    "front_pose": "Original coarse positions, label distance [0.45,2.5]m, normal projection >=0.3m and cosine >=0.4; background/other-device XY line segment unoccluded; nearest 30deg camera heading.",
+    "pair_route": "All single-view pairs/orders searched for minimum primitive tour; four-view witness uses first two individually cheapest front poses per instance and the best of their 24 orders, so it is not a global minimum over all four-view choices.",
+    "candidate_constraint": "For each target leg call select_candidate_states_v43(limit=32) with every previously traversed paid camera state excluded. Pick farthest-progress candidate on a shortest path, count each route action plus extra observe, finish with exact-home return. Exists offline; no runtime planner chooses with private targets.",
+    "positive_requirement": "Each parent has at least one same-class two-instance/two-front-position-per-instance candidate-limited tour <=160. All facilities individually reachable, and report other pair failures without selection."
+  }
+}
