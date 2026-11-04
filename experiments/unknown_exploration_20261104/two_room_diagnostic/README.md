@@ -6,6 +6,8 @@ Both runs crossed the doorway at action 19, returned to the anchor after 96 acti
 
 The first planning-goal divergence occurred at the second planning event (19 paid actions, 86.6071% coverage), while the first executed action/pose divergence occurred at action 31 (98.3135% coverage). The initial packet, first 19 action packets, full planning input and nine candidates matched. G strictly preferred candidate 3 [3,9,2] to candidate 7 by 0.044313; S strictly preferred candidate 7 [5,11,2] by 0.290468. Synthetic marker prior terms reversed their ranking, so this is not tie-breaking. This simulator mechanism is not autonomous visual recognition or evidence of physical robot benefit. See `frozen_execution/mechanism_audit.md`.
 
+A retrospective algebraic check on this one recorded decision also shows that uniformly scaling G object-prior terms by λ > 1.0897387733 selects the same candidate 7. This fitted scaling was not a predeclared baseline and does not establish the same trajectory or surface gain; the recorded S/G prior ratios are not constant. See `frozen_execution/lambda_audit.json`.
+
 Run from an empty output directory using `NSO_OUTPUT_ROOT=/absolute/empty/output python runner.py`. This uses the sibling `../source` and `../evidence` already provided by the parent experiment package. Python dependencies are listed in the parent package. Repetition verifies reproduction and is not a new independent experiment. `preflight.py` writes `preflight_recomputed.json` so the original frozen preflight is preserved. Original pre-execution narrative is retained below for provenance.
 
 ---
