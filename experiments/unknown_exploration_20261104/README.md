@@ -32,7 +32,7 @@ Validation in the originating environment: packaged `NSO_ONE=1 python matrix.py`
 
 ## Coverage ablation and archived prefix
 
-`coverage_ablation_runner.py` evaluates four C-mode branches of exploration_joint_v1; C ranks the existing candidate set by grid-cell area × (predicted radar cells × radar feedback posterior + predicted camera cells × camera feedback posterior). The radar/camera proxies may overlap. C omits the quality and semantic/geometry prior terms; it is a within-policy scoring ablation, not an independent frontier baseline. It retains candidate generation, safety and return contracts. The C scorer was added to the snapshot after the earlier G/S matrices were run; historical hashes in their protocols preserve that version boundary.
+`coverage_ablation_runner.py` evaluates four C-mode branches of exploration_joint_v1; C ranks the existing candidate set by grid-cell area × (predicted radar cells × radar feedback posterior + predicted camera cells × camera feedback posterior). The radar/camera proxies may overlap. C omits the quality and semantic/geometry prior terms; it is a within-policy scoring ablation, not an independent frontier baseline. It retains candidate generation, safety and return contracts. The C experiment was added after the G/S matrices; both use the identical policy-source hash recorded in their protocols.
 
 ```bash
 # C full matrix; use an empty output root

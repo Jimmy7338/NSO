@@ -1,0 +1,66 @@
+{
+  "status": "compiled_and_visually_checked_pending_publication",
+  "output_pdf": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_20261104_joint_exploration/main.pdf",
+  "pdf_sha256": "4b0e18fa74c61255c053fc7a1a4dd626f5c58472d7b82f48bebde6b0ea592403",
+  "pages": 28,
+  "manuscript_source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_20261104_joint_exploration/manuscript_source.md",
+  "manuscript_sha256": "1b1dadad2e2ada0c2011459fb9e4bf86162593b859fce097d6f44294e8b65f6e",
+  "build": "Two local pdflatex runs with -no-shell-escape; no overfull boxes, undefined references or compiler warnings in final log.",
+  "visual_review": "Rendered pages 23 and 24 checked; Table 8 retains all 20 rows, both charts resized for final single-column width and checked after recompilation.",
+  "skills": [
+    "research-paper-writing",
+    "awesome-ai-research-writing",
+    "ml-paper-writing",
+    "humanizer"
+  ],
+  "outline": [
+    "Distinguish exploration policy family from controlled two-template study",
+    "Specify partial initial information, pairing and metric units",
+    "Report all 20 trajectories with actual costs",
+    "Trace changed semantic ranking and budget-dependent outcome",
+    "Retain null/negative results and physical-validation gap"
+  ],
+  "claim_evidence": [
+    {
+      "claim": "Six G/S pairs tie; original west96 is adverse and variant west96 positive for S",
+      "evidence": [
+        "fresh_matrix/results.json",
+        "deployed_policy_matrix/results.json",
+        "comparison_artifacts/action_comparison.json"
+      ],
+      "status": "supported within fixed deterministic conditions"
+    },
+    {
+      "claim": "C is only a same-generator coverage-scoring ablation; east96 stops at 94",
+      "evidence": [
+        "coverage_ablation_matrix/protocol.json",
+        "coverage_ablation_matrix/results.json"
+      ],
+      "status": "supported, not an external frontier baseline"
+    },
+    {
+      "claim": "Natural semantic robot benefit and independent reconstruction accuracy",
+      "evidence": [],
+      "status": "unverified; explicitly not claimed"
+    }
+  ],
+  "self_review": {
+    "contribution": "Adds a bounded exploration diagnostic; does not treat the deployment policy as the original two-template mechanism.",
+    "writing": "One claim per paragraph; measured quantities, proxy scores and simulation reference metrics separated.",
+    "experimental_strength": "All 20 runs retained, including ties and negative results; two arrangements of one Q0 context, no invented uncertainty.",
+    "evaluation_completeness": "External exploration baselines, independent scenes and matched natural-semantic robot trials remain missing.",
+    "method_design": "Existing declared variant and C ablation identified; no robot policy or hardware protection changed."
+  },
+  "input_sha256": {
+    "fresh_matrix/protocol.json": "ac98038dba9a5e62835847941449462cce378dd85109a81f318da51313704409",
+    "fresh_matrix/results.json": "70ef8457e2b4de4c1812df12eafb365df3051934ca6980caae6c15bfa6c688df",
+    "deployed_policy_matrix/protocol.json": "a38c845d9ef3f533f78bff180accc782cb6553b89f03c4af9fe3618b4d7d6f4a",
+    "deployed_policy_matrix/results.json": "8645debd0bb8de55526c342edfd646f3db437b9840c9994943da4b2c58df24ae",
+    "coverage_ablation_matrix/protocol.json": "b5b599a7a396d7243a4aaf83e3693eb1ac9228d9eee597ab49b06b5abc5d38f8",
+    "coverage_ablation_matrix/results.json": "14dcab7c055f37d0591e7b32e6a72d806396a5a8032a91e6ec3c5feef67915e7",
+    "comparison_artifacts/generate.py": "b16fe7103d088ef36c5e2cd27f04e7be5fd2be2eb4d688887a28e7588a0e2d26"
+  },
+  "previous_pdf_sha256": "191c1cb48b8ca46f18016294e9eca14201c4a80d725a9f12d924e9d3ae76708f",
+  "independent_review_pending": false,
+  "independent_review": "All 20 table rows and narrative claims checked against frozen results. Figure 10 caption corrected: only coverage, surface and F1 reverse sign; both path differences are negative."
+}
