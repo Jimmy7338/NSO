@@ -198,8 +198,10 @@ def run_joint(ctx):
             raise RuntimeError('external_execution_duration_complete')
 
     def call(method, params):
+        rpc_started = time.monotonic()
         response = worker.call(method, params, heartbeat)
-        record('NSO_joint_rpc', method=method, params=params, response=response)
+        rpc_elapsed_s = time.monotonic() - rpc_started
+        record('NSO_joint_rpc', method=method, params=params, response=response, rpc_elapsed_s=rpc_elapsed_s)
         if 'summary' in response:
             ctx['result']['joint_summary'] = response['summary']
         return response
@@ -222,7 +224,7 @@ def run_joint(ctx):
         after = ctx['capture_odom_pose']()
         response = call('observe', dict(path=str(path), action_id=action_id, action=action))
         record('NSO_joint_observation_accepted', action_id=action_id, action=action,
-               path=str(path), actual_odom_before=before, actual_odom_after=after,
+               capture_timings=dict(ctx.get('capture_timings', {})), path=str(path), actual_odom_before=before, actual_odom_after=after,
                processing_pose_polls_are_diagnostic=True,
                exposure_pose_source='joint_NPZ_actual_historical_base_TF_validated_by_worker',
                state=response['state'])

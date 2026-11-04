@@ -158,9 +158,10 @@ class JointObservationCollector:
 
     def close(self):self.subscriber.unregister()
 
-    def capture(self,output_directory,observation_path,heartbeat=lambda:None,*,source_role='current_observation'):
+    def capture(self,output_directory,observation_path,heartbeat=lambda:None,*,source_role='current_observation',timings=None):
         import rospy
-        deadline=time.monotonic()+5.
+        capture_started=time.monotonic()
+        deadline=capture_started+5.
         while True:
             heartbeat()
             with self.lock:row=self.latest
@@ -179,11 +180,15 @@ class JointObservationCollector:
         map_from_odom=_transform(map_odom.transform)
         planning_from_odom=np.asarray(self.joint_grid['planning_from_odom'],dtype=float)
         planning_from_grid=planning_from_odom@np.linalg.inv(map_from_odom)@arrays['map_from_grid']
+        resample_started=time.monotonic()
         belief=conservative_belief(arrays['occupancy'],float(arrays['resolution_m']),
             planning_from_grid,self.joint_grid['shape'],self.joint_grid['resolution_m'])
+        if timings is not None:timings['joint_map_resample_s']=time.monotonic()-resample_started
+        read_started=time.monotonic()
         raw_path=Path(observation_path).resolve();source_bytes=raw_path.read_bytes()
         with np.load(io.BytesIO(source_bytes),allow_pickle=False) as data:
             source={name:data[name].copy() for name in data.files}
+        if timings is not None:timings['joint_source_npz_read_s']=time.monotonic()-read_started
         receipt=json.loads(str(source['receipt_json']))
         historical=receipt['historical_tf'];base=np.asarray(historical['odom_from_base']['matrix'])
         base_pose=np.array([base[0,3],base[1,3],np.arctan2(base[1,0],base[0,0])])
@@ -218,9 +223,11 @@ class JointObservationCollector:
             geometry_world_frame='odom',semantic_labels_invented=False,truth_map_used=False,
             surface_coverage_not_available_from_occupancy_alone=True)
         serialized=io.BytesIO();message.serialize(serialized)
+        map_save_started=time.monotonic()
         np.savez_compressed(map_path,**arrays,
             map_received_ros_serialized=np.frombuffer(serialized.getvalue(),dtype=np.uint8),
             map_from_odom=map_from_odom,receipt_json=json.dumps(metadata,sort_keys=True,allow_nan=False))
+        if timings is not None:timings['joint_map_npz_compress_write_s']=time.monotonic()-map_save_started
         metadata.update(raw_map_path=str(map_path.resolve()),
                         raw_map_sha256=hashlib.sha256(map_path.read_bytes()).hexdigest())
         source.update(canonical_sensor_arrays(source,receipt,pixel_stride=self.pixel_stride,
@@ -231,5 +238,9 @@ class JointObservationCollector:
             if key in source:source['source_reference_'+key]=source.pop(key)
         source.update(base_odom_pose=base_pose,joint_belief_grid=belief,
             joint_metadata_json=json.dumps(metadata,sort_keys=True,allow_nan=False))
+        joint_save_started=time.monotonic()
         np.savez_compressed(path,**source)
+        if timings is not None:
+            timings['joint_input_npz_compress_write_s']=time.monotonic()-joint_save_started
+            timings['joint_capture_total_s']=time.monotonic()-capture_started
         return str(path.resolve())

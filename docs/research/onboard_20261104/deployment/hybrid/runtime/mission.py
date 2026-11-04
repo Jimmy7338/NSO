@@ -877,9 +877,11 @@ def main(argv=None):
                 with lock:
                     return dict(feedback=can_snapshot(),can_status=hardware.can_status,
                         can_velocity=hardware.can_velocity,zero_since=hardware.can_zero_since)
+            joint_capture_timings={}
             def capture_joint_observation(calibration,action_id,pose,action):
-                path=collector.capture_live_joint(output/'observed',heartbeat,motion_snapshot)
-                return joint_collector.capture(output/'joint_inputs',path,heartbeat)
+                joint_capture_timings.clear()
+                path=collector.capture_live_joint(output/'observed',heartbeat,motion_snapshot,timings=joint_capture_timings)
+                return joint_collector.capture(output/'joint_inputs',path,heartbeat,timings=joint_capture_timings)
             correction_scope=None
             if args.nso_correction_reverse:
                 from correction_reverse_scope import correction_reverse_scope
@@ -904,6 +906,7 @@ def main(argv=None):
                     client=client,tfbuf=tfbuf,capture_pose=capture_pose,capture_odom_pose=capture_odom_pose,
                     execution_frame=navigation_execution_frame,
                     can_snapshot=can_snapshot,check=check,progress=progress,capture_observation=capture_joint_observation,
+                    capture_timings=joint_capture_timings,
                     run_start=run_start,duration=args.duration,
                     correction_reverse_scope=correction_scope,
                     xy_tolerance_m=rospy.get_param('/nso_visual/move_base/DWAPlannerROS/xy_goal_tolerance'),

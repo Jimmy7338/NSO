@@ -155,12 +155,12 @@ class ReferenceObservationCollector:
     def close(self):
         for sub in self.filters+[self.scan_sub]:sub.unregister()
 
-    def capture_live_joint(self,output_directory,heartbeat,motion_snapshot,calibration=None):
+    def capture_live_joint(self,output_directory,heartbeat,motion_snapshot,calibration=None,*,timings=None):
         return self.capture(output_directory,calibration,heartbeat,None,
-                            scope='live_joint_observation',motion_snapshot=motion_snapshot)
+                            scope='live_joint_observation',motion_snapshot=motion_snapshot,timings=timings)
 
     def capture(self,output_directory,calibration,heartbeat,stopped_check,scope='paid_stopped_observation',
-                *,motion_snapshot=None):
+                *,motion_snapshot=None,timings=None):
         import rospy
         if scope not in ('paid_stopped_observation','diagnostic_not_paid','live_joint_observation'):
             raise ValueError('explicit observation scope required')
@@ -216,6 +216,7 @@ class ReferenceObservationCollector:
                     'map_from_base':('map','base_link',depth.header.stamp),
                     'odom_from_laser':('odom',scan.header.frame_id,scan.header.stamp),
                     'base_from_laser':('base_link',scan.header.frame_id,scan.header.stamp)}
+                tf_started=time.monotonic()
                 transforms={};tf_receipts={}
                 for name,(target,source,stamp) in queries.items():
                     heartbeat()
@@ -226,6 +227,9 @@ class ReferenceObservationCollector:
                         query_stamp_ns=stamp.to_nsec(),response_header=_header(tf),
                         matrix=matrix(tf.transform).tolist(),
                         timestamp_semantics='actual historical TF response; static-only chains may have zero stamp')
+                if timings is not None:
+                    timings['reference_wait_and_validate_s']=tf_started-started
+                    timings['reference_historical_tf_s']=time.monotonic()-tf_started
                 raw=dict(rgb_raw=rgb_array(rgb),depth_m=source_depth_metres(depth),
                     intrinsic=np.asarray(info.K).reshape(3,3),
                     world_from_camera=matrix(transforms['world_from_camera'].transform),
@@ -285,9 +289,13 @@ class ReferenceObservationCollector:
             receipt.update(stopped_before=initial_stop,stopped_after=final_stop)
         serialized={name+'_received_ros_serialized':_serialized(m) for name,m in messages.items()}
         encoded_receipt=json.dumps(receipt,sort_keys=True,allow_nan=False)
+        save_started=time.monotonic()
         np.savez_compressed(path,**raw,**samples,**serialized,frame_id=str(stamp_ns),
             capture_scope=scope,calibration_sha256='' if calibration is None else calibration_sha256(calibration),
             receipt_json=encoded_receipt,source_receipt_json=encoded_receipt,
             calibration_json=json.dumps(calibration,sort_keys=True,allow_nan=False))
+        if timings is not None:
+            timings['reference_npz_compress_write_s']=time.monotonic()-save_started
+            timings['reference_capture_total_s']=time.monotonic()-started
         self.last_stamp_ns=stamp_ns
         return str(path)
