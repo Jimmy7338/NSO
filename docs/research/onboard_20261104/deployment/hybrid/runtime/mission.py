@@ -869,7 +869,8 @@ def main(argv=None):
             from joint_observation import JointObservationCollector
             from reference_observation import ReferenceObservationCollector
             collector=ReferenceObservationCollector(tfbuf)
-            joint_collector=JointObservationCollector(tfbuf,reference_task['grid'])
+            joint_collector=JointObservationCollector(tfbuf,reference_task['grid'],
+                apply_approved_self_mask=reference_task['calibration'].get('apply_approved_self_mask',True))
             def heartbeat():
                 check(True)
                 if time.monotonic()-run_start>=args.duration:raise RuntimeError('execution_duration_complete')

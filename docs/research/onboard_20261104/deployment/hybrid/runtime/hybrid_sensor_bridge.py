@@ -127,6 +127,19 @@ class LidarSource:
             return False
 
 
+
+def selected_self_mask(args):
+    # Validate the approved historical asset even when explicitly bypassing it.
+    mask, receipt = load_approved_mask(args.mask, args.mask_provenance)
+    if args.no_self_mask:
+        receipt = dict(receipt, applied=False,
+                       profile='unmasked_after_camera_relocation_v1',
+                       reason='User relocated the camera; the original IMU no longer occludes the view.')
+        mask = None
+    else:
+        receipt = dict(receipt, applied=True)
+    return mask, receipt
+
 def run(args):
     require(os.environ.get('ROS_MASTER_URI') == MASTER, 'use_master_11382')
     import rospy, rosgraph, message_filters
@@ -138,7 +151,7 @@ def run(args):
     publishers, _, _ = rosgraph.Master('/nso_hybrid_preflight').getSystemState()
     for topic, callers in publishers:
         require(topic not in owned or not callers, 'output_topic_already_owned:'+topic)
-    mask, mask_receipt = load_approved_mask(args.mask, args.mask_provenance)
+    mask, mask_receipt = selected_self_mask(args)
     sources = LidarSource(args.localization_source)
     # Actual partial RGB-D is an observation, including a frame with no finite
     # returns. LiDAR supplies navigation geometry; do not add a depth-count
@@ -247,9 +260,11 @@ def main(argv=None):
     parser.add_argument('--localization-source',choices=LOCALIZATION_SOURCES,default=DEFAULT_LOCALIZATION_SOURCE)
     parser.add_argument('--mask',default=str(ASSETS/'fixed-imu-mask.npy'))
     parser.add_argument('--mask-provenance',default=str(ASSETS/'fixed-imu-mask-provenance.json'))
+    parser.add_argument('--no-self-mask',action='store_true',
+                        help='explicitly bypass the old IMU mask after camera relocation')
     args=parser.parse_args(argv)
     if args.run: return run(args)
-    _,receipt=load_approved_mask(args.mask,args.mask_provenance)
+    _,receipt=selected_self_mask(args)
     print(json.dumps(dict(status='validated_not_started',no_actuator=True,ROS_started=False,
         master=MASTER,navigation_source='lidar_rgbd',localization_source=args.localization_source,
         localization_tf_owner=localization_profile(args.localization_source)['tf_owner'],

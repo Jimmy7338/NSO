@@ -48,9 +48,10 @@ def freshness(stamp, now, limit):
 
 
 class Display:
-    def __init__(self, output, historical_seeds=False):
+    def __init__(self, output, historical_seeds=False, no_self_mask=False):
         self.output=output;output.mkdir(parents=True,exist_ok=True)
         self.historical_seeds=historical_seeds
+        self.no_self_mask=no_self_mask
         self.lock=threading.RLock();self.stop=threading.Event()
         self.camera_jpeg=self.map_png=None;self.latest_frame=None
         self.last_camera=0.;self.last_source_ns=-1;self.errors=deque(maxlen=4)
@@ -111,8 +112,10 @@ class Display:
         import rospy
         directory=self.output/'reconstruction';directory.mkdir(exist_ok=True)
         log=(directory/'worker.log').open('ab')
-        process=subprocess.Popen([str(SCIENCE),'-s','-B',str(WORK/'runtime/reconstruction_worker.py'),
-            '--output-directory',str(directory),'--approved-self-mask'],stdin=subprocess.PIPE,
+        command=[str(SCIENCE),'-s','-B',str(WORK/'runtime/reconstruction_worker.py'),
+                 '--output-directory',str(directory)]
+        if not self.no_self_mask:command.append('--approved-self-mask')
+        process=subprocess.Popen(command,stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,stderr=log,text=True,bufsize=1,env=bounded_environment())
         self.reconstruction_process=process
         def integrate(path):
@@ -190,13 +193,15 @@ def main():
     parser.add_argument('--output',default=str(ROOT/'experiments/live_dashboard_20261029'))
     parser.add_argument('--historical-seeds',action='store_true',
                         help='explicitly load 20261029 observations; only valid with that original odom session')
+    parser.add_argument('--no-self-mask',action='store_true',
+                        help='omit the old IMU mask after camera relocation')
     args=parser.parse_args()
     import rospy,tf2_ros,message_filters
     from sensor_msgs.msg import Image as ROSImage,CameraInfo
     from nav_msgs.msg import OccupancyGrid
     from std_msgs.msg import String
     rospy.init_node('nso_live_dashboard',disable_signals=True)
-    display=Display(Path(args.output),args.historical_seeds);display.tfbuf=tf2_ros.Buffer(cache_time=rospy.Duration(30.))
+    display=Display(Path(args.output),args.historical_seeds,args.no_self_mask);display.tfbuf=tf2_ros.Buffer(cache_time=rospy.Duration(30.))
     listener=tf2_ros.TransformListener(display.tfbuf)
     subscribers=[rospy.Subscriber('/zed2i/zed_node/left/image_rect_color',ROSImage,display.camera,queue_size=1,buff_size=8000000),
         rospy.Subscriber('/nso_visual/map',OccupancyGrid,display.map,queue_size=1),
