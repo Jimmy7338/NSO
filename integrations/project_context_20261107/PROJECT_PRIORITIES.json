@@ -1,6 +1,6 @@
 {
   "schema": "nso.project_priorities.v1",
-  "updated_unix_s": 1794057329.956835,
+  "updated_unix_s": 1794060243.0100465,
   "updated_local_date": "2026-11-07",
   "source": "Direct user instructions in current conversation",
   "primary_objectives": [
@@ -24,8 +24,9 @@
     "revision_validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_20261104_two_room/validation.json",
     "historical_reproduction_index_checks_passed": 542,
     "latest_continuation_evidence_updated": true,
-    "pdf_sha256": "e2b6092226d0d3bc4c70f2b0d5b07069a077570ed9f2fff51fe2f698902fdc67",
-    "manuscript_sha256": "96456833ce99b3209b72acb4bdaa1f99a4412e6cad28f0cf3c484c2951630b6b"
+    "pdf_sha256": "3e17c113e3555776397b6c578b2a65ec8d2502a2a4c0506915e5ecb6dccf1bab",
+    "manuscript_sha256": "9cd6851c3c55b2aa0b0ea437fa4dbf8bbf103ff0393b998594f75d6af9fbf35c",
+    "latest_real_episode_revision": "/home/ouc/nso_robot/analyses/manuscript_real_episode_20261107/validation.json"
   },
   "robot_subgoal": {
     "goal_retained": true,
@@ -102,7 +103,7 @@
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/github_alignment.json",
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/reference_restore_manifest.json"
   ],
-  "next_concrete_task": "Resume a short explicitly labeled original exploration_joint_v1 NSO episode using the current healthy original default-keyframe matcher + CAN control input + recorded fixed SE2 coordinate alignment, retaining original score/candidates/circular model/return contract and hardware/ROS guards. Use bounded fault scan/CAN data only where needed. In parallel investigate whether within-scan motion distortion or actual lidar-driver timestamp/range consistency explains ref096-to099 mismatch: iteration50 and original constant-current-CAN initial guess both failed; zero-keyframe B retired for drift. Inspect genuine acquisition timing/protocol; do not invent per-ray times from LaserScan.time_increment=0 or add output clipping/guess search. Reproduce with actual evidence before a further sensor adaptation.",
+  "next_concrete_task": "Make the current41-frame canonical package support an actual offline S policy replay without detector or ROS, and compare its12 new choices with the original log. Use identical frozen measured states for G/S score/selection checks, keeping original circular model, candidate/scoring/return contract. Current G/S ties do not justify a redundant physical pair. Determine where original reachable candidate views obtain nonzero category support in the current measured scene before choosing the next informative experiment; a higher budget or different real start must be declared. Prepare matched initial map/observation history for actual joint/coverage comparisons; do not reuse legacy RF2O reset scripts or treat retained-map G-after-S as matched. Preserve staged lidar fix and current healthy map/TSDF epoch.",
   "source_authority": "Actual original Windows selected research files, received or verified against controller references, now independently materialized in the restored research workspace; GitHub is historical context",
   "local_migration": {
     "root": "/home/ouc/nso_robot/migrations/windows_local_20261029",
@@ -129,7 +130,7 @@
     "path": "/home/ouc/.codex/skills/research-paper-writing/SKILL.md",
     "repository": "https://github.com/Master-cai/Research-Paper-Writing-Skills",
     "commit": "77e7c2c1ba06f7d71844873147665437a03aac1b",
-    "last_applied": "2026-10-29",
+    "last_applied": "2026-11-07",
     "review": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/research/skill_review_20261029/FINAL_REVIEW.json",
     "required_for_all_future_paper_updates": true,
     "user_instruction_date": "2026-10-29",
@@ -137,7 +138,7 @@
     "scope": "All future manuscript revisions, figures/tables, claim-evidence checks, and pre-submission review"
   },
   "next_physical_experiment_recommendation": {
-    "status": "CSM_closed_loop_verified_semantic_input_audit_next",
+    "status": "S40_closed_loop_completed_matched_comparison_preparation",
     "purpose": "Evaluate unknown coverage and measured-surface joint exploration with matched physical comparison after the completed deployment feasibility cycle",
     "navigation": "Fresh CSM raw-pose odometry + gmapping and standard ROS navigation; no active autonomous experiment",
     "preconditions": [
@@ -149,10 +150,10 @@
     "timebox": "Proposed two working days for the initial physical integration case; preserve simulation ablation and thesis progress",
     "attempt_index": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/ATTEMPTS.json",
     "active_workspace": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029",
-    "current_state": "No active mission after two CAN-control probes (05/06), both stopped on raw CSM odometry jump. CAN control input remains explicit diagnostic profile; raw CSM/mapping unchanged; no NSO run under this profile yet.",
+    "current_state": "Completed S40 under original default-keyframe CSM + explicit CAN controller velocity + fixed SE2 coordinate alignment: 40 paid/40 verified ROS arrivals, 41 observations, original anchor return, CAN zero on cleanup. One integration episode; not a matched comparison or independent accuracy validation.",
     "category_prior_source": "Declared YOLOE real_scene_structural_v1; cabinet/display counter -> closed-enclosure hypothesis, original class semantics not claimed",
     "manual_reposition_confirmed": true,
-    "next_step": "Reproduce raw CSM pose jump using the captured 150-scan/pose ring and keyframe-history counterfactual. Fresh-initialized same-scan replay did not reproduce the live jump; do not treat that as fixed. Preserve CAN execution trial source and unchanged raw pose/TF/jump guard; avoid another identical physical probe without evidence-driven change. Resume NSO unknown exploration after short execution is reliable.",
+    "next_step": "Make the current41-frame canonical package support an actual offline S policy replay without detector or ROS, and compare its12 new choices with the original log. Use identical frozen measured states for G/S score/selection checks, keeping original circular model, candidate/scoring/return contract. Current G/S ties do not justify a redundant physical pair. Determine where original reachable candidate views obtain nonzero category support in the current measured scene before choosing the next informative experiment; a higher budget or different real start must be declared. Prepare matched initial map/observation history for actual joint/coverage comparisons; do not reuse legacy RF2O reset scripts or treat retained-map G-after-S as matched. Preserve staged lidar fix and current healthy map/TSDF epoch.",
     "route_diagnosis": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/ROUTE_REJECTION_AND_METHOD_ALIGNMENT_20261029.txt",
     "historical_method_variant": "onboard_adaptation_four_structure_greedy",
     "historical_policy_mode": "G",
@@ -161,14 +162,14 @@
     "latest_historical_config": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/pilot_config_after_manual_reposition.json",
     "latest_historical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261029/desk_pilot_04",
     "historical_path_diagnostics_validation": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/preflight/candidate_path_diagnostics_validation_20261029.json",
-    "latest_physical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02",
-    "latest_progress": "Nov07 relocated camera S40 trial interrupted: paid2 turns/3 observations,first forward uncompleted;4ROS goals incl same-endpoint correction/3arrivals,1.609mCAN,221s,stop confirmed after43.3mm/100ms odometry jump.",
+    "latest_physical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
+    "latest_progress": "40 paid (36 forward,4 turns),7.3935058m CAN/542.443944s; internal observed area72.08→128.28m²; fixed-old-surface quality0.21376008→0.19910668. All12 new planning states G/S tied: first2 multi-candidate, remaining10 single-candidate. Negative and earlier interrupted trials preserved.",
     "completed_cycle": {
-      "paid_actions": 24,
-      "accepted_observations": 25,
+      "paid_actions": 40,
+      "accepted_observations": 41,
       "return_completed": true,
-      "duration_s": 352.7717298400239,
-      "CAN_distance_m": 4.552874849677072,
+      "duration_s": 542.4439440459973,
+      "CAN_distance_m": 7.393505834221814,
       "method_equivalence": false,
       "efficiency_benefit_validated": false
     },
@@ -190,7 +191,7 @@
       "path": "/home/ouc/.codex/skills/research-paper-writing/SKILL.md",
       "repository": "https://github.com/Master-cai/Research-Paper-Writing-Skills",
       "commit": "77e7c2c1ba06f7d71844873147665437a03aac1b",
-      "last_applied": "2026-10-29",
+      "last_applied": "2026-11-07",
       "review": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/research/skill_review_20261029/FINAL_REVIEW.json",
       "required_for_all_future_paper_updates": true,
       "user_instruction_date": "2026-10-29",
@@ -210,7 +211,8 @@
       "user_instruction": "把这个skills也安装上作为后续创作和优化论文的skill，然后继续任务。",
       "local_adapter": true,
       "automatic_when_relevant": true,
-      "allow_implicit_invocation": true
+      "allow_implicit_invocation": true,
+      "last_applied": "2026-11-07"
     },
     {
       "name": "ml-paper-writing",
@@ -223,7 +225,8 @@
       "user_instruction": "把这个skills也安装上作为后续创作和优化论文的skill，然后继续任务。",
       "local_adapter": false,
       "automatic_when_relevant": true,
-      "allow_implicit_invocation": true
+      "allow_implicit_invocation": true,
+      "last_applied": "2026-11-07"
     },
     {
       "name": "humanizer",
@@ -236,7 +239,8 @@
       "user_instruction": "把这个skills也安装上作为后续创作和优化论文的skill，然后继续任务。",
       "local_adapter": false,
       "automatic_when_relevant": true,
-      "allow_implicit_invocation": true
+      "allow_implicit_invocation": true,
+      "last_applied": "2026-11-07"
     },
     {
       "name": "docx",
@@ -366,7 +370,7 @@
     "last_health_check": "/home/ouc/nso_robot/analyses/instance_support_20261103/localization_restart/verified_state.json"
   },
   "session_pause": {
-    "status": "resumed_authorized_experiment_finished_stopped",
+    "status": "authorized_episode_completed_stopped",
     "request": "我要休息了，明天继续",
     "client_date": "2026-10-31",
     "user_requested_pause": false,
@@ -375,11 +379,11 @@
     "resume_requires_direct_user_instruction": false,
     "actuator_senders_present": false,
     "current_CAN_zero_confirmed": true,
-    "current_motion_context": "Stopped after 7 verified continuation actions; current footprint conflicts with one newly observed depth sample; object identity awaits onsite clarification. No autonomous motion sender remains.",
+    "current_motion_context": "Completed S40 under original default-keyframe CSM + explicit CAN controller velocity + fixed SE2 coordinate alignment: 40 paid/40 verified ROS arrivals, 41 observations, original anchor return, CAN zero on cleanup. One integration episode; not a matched comparison or independent accuracy validation.",
     "manual_return_is_not_experiment_data": true,
-    "last_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261104/history_S40_01",
+    "last_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
     "next_resume": "Fresh actual pose and source health after direct resume; no prior pending replay. Preserve original circular model. Rebaseline only read-only bridge if manual motion latched pose-jump and sources are stationary; verify frame continuity before measured history; power reset invalidates assumed historical registration.",
-    "latest_CAN_context": "Nov04 history_S40_01 result.json confirms zero after cleanup; not independent physical observation",
+    "latest_CAN_context": "Current S40 original result confirms zero before/after cleanup; no independent physical stop observation.",
     "latest_feedback_path": "/home/ouc/nso_robot/handoff/20261031/latest_rest_feedback.json",
     "resume_source": "Direct user2026-11-03 continuation and explicit lidar restart",
     "resume_local_date": "2026-11-03"
@@ -389,24 +393,24 @@
     "original_policy_source": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/SOURCE_MANIFEST.json",
     "entry": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/run_hybrid.sh",
     "mode": "nso",
-    "last_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02",
-    "last_actions": 2,
-    "last_CAN_distance_m": 1.6092814626693759,
-    "last_stop_reason": "chassis_before_stop:odometry_jump",
+    "last_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
+    "last_actions": 40,
+    "last_CAN_distance_m": 7.393505834221814,
+    "last_stop_reason": "budget_exhausted",
     "last_stop_was_failed_method_termination": false,
     "semantic_labels_available": true,
     "learned_models_validated": false,
     "required_fresh_initialization_after_return": true,
-    "current_state": "Last NSO integration accepted2 paidturn actions/3 observations, then first forward failed with raw CSM jump. Subsequent standard-ROS probes07/08 arrived but are not NSO actions. Robot currently stopped; original default-keyframe CSM plus explicit CAN input/fixed SE2 coordinate alignment active; zero-keyframe candidate retired for relative drift. See localization_runtime_current and next_concrete_task.",
+    "current_state": "Completed S40 under original default-keyframe CSM + explicit CAN controller velocity + fixed SE2 coordinate alignment: 40 paid/40 verified ROS arrivals, 41 observations, original anchor return, CAN zero on cleanup. One integration episode; not a matched comparison or independent accuracy validation.",
     "reference_files_verified_unchanged": 38,
     "ROS_xy_goal_latch": true,
     "ROS_planner_frequency_hz": 0.0,
     "SDK_depth_mode": "NEURAL",
     "sparse_actual_RGBD_allowed": true,
     "policy_modified": true,
-    "last_return_completed": false,
+    "last_return_completed": true,
     "post_cleanup_CAN_zero_confirmed": true,
-    "last_stop_was_execution_interruption": true,
+    "last_stop_was_execution_interruption": false,
     "original_macro_goal_reached": false,
     "original_early_return_diagnosis": "/home/ouc/nso_robot/reports/nso-hybrid-20261030/joint_unknown_05/early_return_diagnosis.json",
     "objective_alignment_diagnosis": "/home/ouc/nso_robot/reports/nso-hybrid-20261030/joint_unknown_05/objective_alignment_diagnosis.json",
@@ -420,7 +424,7 @@
     "SDK_depth_confidence": 80,
     "SDK_depth_texture_confidence": 100,
     "latest_no_motion_capture": "/home/ouc/nso_robot/analyses/instance_support_20261103/fresh_scene/source.json",
-    "last_verified_navigation_goals": 7,
+    "last_verified_navigation_goals": 40,
     "last_executed_goal_observation_unfused": false,
     "policy_variant": "exploration_joint_v1",
     "execution_profile": {
@@ -435,13 +439,13 @@
       "control_odometry_topic": "/nso_csm/control_odom",
       "Navfn_default_goal_tolerance_m": 0.0
     },
-    "latest_progress": "Nov04 history S40 continuation: 7 actions/7 arrivals,1.11935m/114.51s,internal observed-area gain4.72m²,no return; same-candidate S/G tie. Previous complete S40 retained separately.",
+    "latest_progress": "40 paid (36 forward,4 turns),7.3935058m CAN/542.443944s; internal observed area72.08→128.28m²; fixed-old-surface quality0.21376008→0.19910668. All12 new planning states G/S tied: first2 multi-candidate, remaining10 single-candidate. Negative and earlier interrupted trials preserved.",
     "next_run_initialization": "Fresh actual live0/anchor in current continuous CSM frame. Never import old RF2O history or replay old pending. Calibration localization_source must be lidar_csm. Current data stack explicitly assembled; do not start RF2O as a fallback.",
     "ROS_xy_goal_latch_parameter": true,
-    "last_worker_accepted_action": 7,
-    "last_supervisor_logged_accepted_action": 7,
+    "last_worker_accepted_action": 40,
+    "last_supervisor_logged_accepted_action": 40,
     "late_worker_observation_audit": "/home/ouc/nso_robot/analyses/resume_20261102/run04_control_case_boundary.json",
-    "current_attempt": "history_S40_01 (failed, stopped)",
+    "current_attempt": "exploration_resume_S40_01 (completed, stopped)",
     "current_budget": 40,
     "current_external_duration_s": 600,
     "old_origin_reused": false,
@@ -452,12 +456,12 @@
       "coverage candidate shortlist uses historical spatial bins",
       "invalidated outbound macro replans on latest measured map before return"
     ],
-    "latest_complete_cycle_audit": "/home/ouc/nso_robot/analyses/resume_20261104/episode_audit.json",
+    "latest_complete_cycle_audit": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/completed_readonly_summary.json",
     "sensor_input_calibration_evidence": "/home/ouc/nso_robot/analyses/exploration_20261031/native_depth_calibration_02/result.json",
-    "fixed_body_mask_pixels": 46499,
+    "fixed_body_mask_pixels": 0,
     "semantic_score_participation_observed": true,
     "semantic_changed_actual_top1_vs_G": false,
-    "last_elapsed_run_s": 114.51203898200038,
+    "last_elapsed_run_s": 542.4439440459973,
     "actuator_senders_present": false,
     "latest_semantic_root_cause": "/home/ouc/nso_robot/analyses/semantic_gain_20261031/SUMMARY.json",
     "paired_protocol": "/home/ouc/nso_robot/analyses/semantic_pair_20261031/manifest.json",
@@ -468,7 +472,7 @@
     "sensor_range_physical_full_cycle_verified": true,
     "latest_sensor_contract_progress": "/home/ouc/nso_robot/analyses/sensor_contract_20261031/PROGRESS.json",
     "latest_central_semantic_progress": "/home/ouc/nso_robot/analyses/semantic_central_20261031/PROGRESS.json",
-    "last_successful_complete_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261104/default_S40_02",
+    "last_successful_complete_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
     "site_fact_pending": null,
     "site_fact_resolved": "right side clear; no filter enabled",
     "joint_turn_execution_profile": "measured_in_place_turn_v1",
@@ -488,10 +492,10 @@
     "shared_observed_prefix_deployed": true,
     "latest_large_scene_progress": "/home/ouc/nso_robot/analyses/large_exhibit_20261031/PROGRESS.json",
     "current_scene_reposition_pending": false,
-    "latest_motion_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261104/history_S40_01",
+    "latest_motion_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
     "latest_current_no_motion_capture": "/home/ouc/nso_robot/analyses/continuation_20261104/pre_execution/source.json",
     "previous_trial_boundary_audit": "/home/ouc/nso_robot/analyses/resume_20261102/last_episode_boundary.json",
-    "last_stop_category": "current_footprint_not_known_safe",
+    "last_stop_category": "normal_method_budget_exhaustion_returned_to_anchor",
     "current_day_boundary_counts": {
       "worker_accepted_paid": [
         15,
@@ -540,8 +544,8 @@
     "localization_tf_owner": "/nso_csm_odometry_bridge",
     "raw_odometry_topic": "/nso_csm/odom",
     "controller_odometry_topic": "/nso_csm/control_odom",
-    "controller_velocity_model": "nonholonomic vy=0 only for DWA; raw SE2-derived vx/vy/w retained",
-    "current_initialization_scope": "Nov04 continuous CSM epoch;49 accepted frames available across initial and failed continuation. New experiment requires current-state/anchor review; never reuse old live0 or pending actions.",
+    "controller_velocity_model": "Explicit original kernel-timestamped CAN vx/w input for DWA, vy=0; raw SE2-derived twist retained in raw odometry and pose uses fixed SE2 coordinate continuity.",
+    "current_initialization_scope": "Nov07 uninterrupted original matcher/map epoch with explicit fixed coordinate continuity after diagnostic B. This episode used fresh actual live0 and no previous joint/semantic ledger, while ROS navigation map retained earlier observations. Subsequent matched trials need identical frozen starting information; never reuse pending actions or assume previous frames survive a source reset.",
     "Navfn_default_goal_tolerance_m": 0.0,
     "CSM_sensor_range_full_cycle_verified": true,
     "current_day_completed_CSM_cycles": [
@@ -879,7 +883,7 @@
   "latest_view_diagnostic": "/home/ouc/nso_robot/analyses/view_validation_20261103/result.json",
   "current_episode": null,
   "latest_source_startup_script": "/home/ouc/nso_robot/analyses/resume_20261104/start_verified_stack.py",
-  "latest_complete_episode": "/home/ouc/nso_robot/analyses/resume_20261104/episode_audit.json",
+  "latest_complete_episode": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/completed_readonly_summary.json",
   "latest_semantic_continuity_analysis": "/home/ouc/nso_robot/analyses/adjacent_instances_20261104/default_S40_02.json",
   "latest_semantic_eligibility_analysis": "/home/ouc/nso_robot/analyses/resume_20261104/asset_counterfactual/instance_counterfactual.json",
   "latest_semantic_repair_analysis": {
@@ -955,21 +959,22 @@
     "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/unknown_exploration_revision_20261104/chapter.pdf",
     "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/unknown_exploration_revision_20261104/chapter.md",
     "pages": 6,
-    "status": "historical6pagechapter_retained; integrated6chapter74pageworkingthesis now exists",
+    "status": "Historical standalone PDF retained without rebuild; updated chapter.md feeds current integrated78page thesis. Use graduation_thesis_integrated.path for latest results.",
     "pdf_sha256": "78e83a51ae478062d034ddab15390388c98d7ad3af4bb0672b9a0e6fbaf098fe"
   },
   "graduation_thesis_integrated": {
     "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261104_two_room/thesis.pdf",
     "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261104_two_room/thesis.md",
-    "pages": 77,
+    "pages": 78,
     "chapters": 6,
     "status": "complete_body_reading_draft_not_school_template_or_author_approved_submission",
-    "pdf_sha256": "e332334f1aac12fe343e5a9397a72badde7b5c469e89bc509152eb39c2e97ca3",
-    "source_sha256": "abe5f9e21e659d0f62a2ca99b395a3ab0e44dfa80ef8435d3ed74017cac47ee0",
+    "pdf_sha256": "e6adf88cd834d495c0e3ba7ff3e42166ae4ac33b828f756c979791b12a2ad2ab",
+    "source_sha256": "8b0e0ab56d408331a9dfdfe10e38e741dc8218a30d7b015999e63c50deaf155e",
     "validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261104_two_room/validation.json",
     "local_math_formulas": 181,
     "math_render_failures": 0,
-    "rebuild_from_external_working_directory": true
+    "rebuild_from_external_working_directory": true,
+    "latest_real_episode_revision": "/home/ouc/nso_robot/analyses/manuscript_real_episode_20261107/validation.json"
   },
   "latest_semantic_reachability_layers": {
     "directory": "/home/ouc/nso_robot/analyses/semantic_reach_20261104",
@@ -1001,7 +1006,7 @@
     }
   },
   "unpublished_latest_small_artifacts": [],
-  "last_goal_turn_classification": "meaningful_progress_goal_incomplete",
+  "last_goal_turn_classification": "completed_current_profile_S40_and_updated_evidence_manuscripts_goal_still_active",
   "frontier_rejection_fairness_audit": {
     "path": "/home/ouc/nso_robot/analyses/frontier_fairness_20261104/audit.json",
     "replay": "All four saved prefixes reproduced packet hashes and states",
@@ -1380,27 +1385,51 @@
     "latest_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02"
   },
   "latest_physical_integration": {
-    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02",
-    "evidence_scope": "uncalibrated relocated-camera integration trial; not method effectiveness or accuracy",
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
+    "audit": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/completed_readonly_summary.json",
+    "evidence_scope": "One completed physical unknown-coverage/measured-surface integration loop; not a method-comparison, efficiency, accuracy or semantic-benefit validation. Old-surface proxy decrease is retained. No observer-side live changes or motion.",
     "policy_variant": "exploration_joint_v1",
     "budget": 40,
-    "paid_actions": 2,
-    "accepted_observations": 3,
-    "ROS_goals": 4,
-    "ROS_verified_arrivals": 3,
-    "endpoint_retry_included": true,
-    "first_forward_completed": false,
-    "elapsed_s": 221.13859167898772,
-    "CAN_distance_m": 1.6092814626693759,
-    "CAN_absolute_yaw_rad": 18.744757800698306,
-    "status": "execution_interrupted",
-    "reason": "chassis_before_stop:odometry_jump",
+    "paid_actions": 40,
+    "accepted_observations": 41,
+    "ROS_goals": 40,
+    "ROS_verified_arrivals": 40,
+    "endpoint_retry_included": false,
+    "first_forward_completed": true,
+    "elapsed_s": 542.4439440459973,
+    "CAN_distance_m": 7.393505834221814,
+    "CAN_absolute_yaw_rad": 16.426855961561174,
+    "status": "nso_joint_core_stopped",
+    "reason": "budget_exhausted",
+    "execution_interrupted": false,
     "stop_confirmed": true,
-    "return_completed": false,
+    "return_completed": true,
+    "physical_stop_independently_observed": false,
     "semantic_frontend_executed": true,
+    "semantic_supported_observations": 29,
+    "same_state_G_S_tied_planning_states": 12,
+    "semantic_benefit_validated": false,
     "mask_applied": false,
     "extrinsics_updated": false,
-    "initial_startup_failure_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_01/startup_failure.json"
+    "observed_coverage_proxy": {
+      "initial_m2": 72.08000000000001,
+      "final_m2": 128.28000000000003,
+      "increase_m2": 56.20000000000002,
+      "independent_coverage_truth": false,
+      "initial_navigation_map_was_retained_existing_observations": true
+    },
+    "old_surface_quality_proxy": {
+      "initial": 0.21376008051653103,
+      "final": 0.19910668419652838,
+      "delta": -0.014653396320002648,
+      "fixed_old_support_count": 312,
+      "paid_measurement_support_count": 4189,
+      "is_GT_accuracy_or_F1": false
+    },
+    "pose_and_control_profile": "original_default_keyframes_CAN_control_fixed_SE2_coordinate_alignment",
+    "matched_method_comparison": false,
+    "multi_candidate_planning_states": 2,
+    "single_candidate_planning_states": 10
   },
   "dashboard_clock_fix": {
     "path": "/home/ouc/nso_robot/analyses/dashboard_clock_fix_20261107",
@@ -1415,20 +1444,19 @@
   "continuous_goal_revision": {
     "path": "/home/ouc/nso_robot/CONTINUOUS_GOAL.txt",
     "updated_local_date": "2026-11-07",
-    "sha256": "65b71f2647324ca124aed979d1fbca11fab3c5f89cb1b79e660b03339ab0d329",
+    "sha256": "9996c2c4c3775a5e3e54f04d0b98434caab7847e35b873e39fe9c53bc7e6c668",
     "user_requested": true,
     "priority_order": [
-      "reproduce_DWA_invalid_velocity_window_and_diagnose_CAN_receive_only_failure",
-      "minimal_execution_repair_then_short_offset_goal_validation",
-      "restore_repeatable_unknown_coverage_closed_loop",
-      "matched_coverage_mapping_and_semantic_comparisons",
+      "complete_canonical_input_policy_replay",
+      "informative_frozen_state_and_matched_physical_comparisons",
+      "semantic_candidate_support_under_unchanged_policy",
       "submission_manuscript_and_thesis",
-      "compact_GitHub_sync"
+      "compact_evidence_GitHub_sync"
     ],
     "app_goal_objective_updated": false,
     "app_goal_observed_status": "active",
     "activation_source": "Existing user-activated goal retained; latest request updates local execution objective and factual baseline.",
-    "updated_unix_s": 1794054517.7403605,
+    "updated_unix_s": 1794060243.010041,
     "app_goal_local_revision_pending": true,
     "app_goal_update_limitation": "Current goal tool permits status changes only; active objective body was not rewritten. Local execution goal and project index updated at user request; existing app goal remains active."
   },
@@ -1647,11 +1675,11 @@
     }
   },
   "last_goal_turn_progress": {
-    "task": "Live 2D pose/trajectory and semantic overlays verified; exact CSM fault reproduced; two bounded standard ROS arrivals; zero-keyframe candidate tested and retired; current map/TSDF preserved",
+    "task": "Completed S40, independently verified41-frame derived input package and12 planning states, updated31page manuscript and78page thesis with real measured figure",
     "goal_complete": false,
     "consecutive_external_blocked_turns": 0,
     "robot_stopped": true,
-    "next_task": "Resume a short explicitly labeled original exploration_joint_v1 NSO episode using the current healthy original default-keyframe matcher + CAN control input + recorded fixed SE2 coordinate alignment, retaining original score/candidates/circular model/return contract and hardware/ROS guards. Use bounded fault scan/CAN data only where needed. In parallel investigate whether within-scan motion distortion or actual lidar-driver timestamp/range consistency explains ref096-to099 mismatch: iteration50 and original constant-current-CAN initial guess both failed; zero-keyframe B retired for drift. Inspect genuine acquisition timing/protocol; do not invent per-ray times from LaserScan.time_increment=0 or add output clipping/guess search. Reproduce with actual evidence before a further sensor adaptation."
+    "next_task": "Make the current41-frame canonical package support an actual offline S policy replay without detector or ROS, and compare its12 new choices with the original log. Use identical frozen measured states for G/S score/selection checks, keeping original circular model, candidate/scoring/return contract. Current G/S ties do not justify a redundant physical pair. Determine where original reachable candidate views obtain nonzero category support in the current measured scene before choosing the next informative experiment; a higher budget or different real start must be declared. Prepare matched initial map/observation history for actual joint/coverage comparisons; do not reuse legacy RF2O reset scripts or treat retained-map G-after-S as matched. Preserve staged lidar fix and current healthy map/TSDF epoch."
   },
   "live_dashboard_current": {
     "url": "http://127.0.0.1:8766/",
@@ -1713,5 +1741,63 @@
     "source_stamps_preserved": true,
     "physical_accuracy_verified": false,
     "restart_note": "During this existing map/TSDF epoch use the recorded bridge argv/alignment if restarting the bridge; default launch arguments omit the explicit CAN source and fixed coordinate alignment. Do not silently reuse this alignment in a fresh matcher/map epoch."
+  },
+  "prior_physical_integrations": [
+    {
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02",
+      "evidence_scope": "uncalibrated relocated-camera integration trial; not method effectiveness or accuracy",
+      "policy_variant": "exploration_joint_v1",
+      "budget": 40,
+      "paid_actions": 2,
+      "accepted_observations": 3,
+      "ROS_goals": 4,
+      "ROS_verified_arrivals": 3,
+      "endpoint_retry_included": true,
+      "first_forward_completed": false,
+      "elapsed_s": 221.13859167898772,
+      "CAN_distance_m": 1.6092814626693759,
+      "CAN_absolute_yaw_rad": 18.744757800698306,
+      "status": "execution_interrupted",
+      "reason": "chassis_before_stop:odometry_jump",
+      "stop_confirmed": true,
+      "return_completed": false,
+      "semantic_frontend_executed": true,
+      "mask_applied": false,
+      "extrinsics_updated": false,
+      "initial_startup_failure_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_01/startup_failure.json"
+    }
+  ],
+  "lidar_sweep_snapshot_candidate": {
+    "directory": "/home/ouc/nso_robot/analyses/forward_controller_20261107/lidar_sweep_snapshot_candidate",
+    "status": "staged_compiled_not_deployed",
+    "scope": "Immutable completed-sweep cloud/time snapshot plus publication FIFO and lifetime; no per-ray timing/deskew/filter change",
+    "06_fault_causality_proven": false,
+    "live_driver_unchanged": true,
+    "restart_note": "Node and library must be rebuilt together; do not restart required live lidar launch in retained mapping epoch without preserving state."
+  },
+  "latest_semantic_decision_audit": {
+    "decisions": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01/joint/decisions.jsonl",
+    "selection_audit": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/selection_audit.json",
+    "aperture_audit": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/semantic_aperture_audit.json",
+    "original_function_check": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/original_function_check.py",
+    "root_verification": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/root_verification.json",
+    "new_planning_states": 12,
+    "multi_candidate_states": 2,
+    "single_candidate_states": 10,
+    "G_S_all_logged_scores_equal": true,
+    "marked_groups_zero_aperture_scope": "First two multi-candidate states only; unmarked groups can have nonzero support",
+    "selected_pose_effect_observed": false,
+    "original_function_scalar_crosscheck": "439 state/asset combinations and33 candidate/asset factors match; no planning/detection run",
+    "next_comparison_constraint": "Do not treat later G with retained live map as paired with prior S. Historical RF2O map reset and hard-coded replay scripts cannot be directly reused for current CSM epoch."
+  },
+  "latest_compact_current_episode": {
+    "directory": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication",
+    "input_observations": 41,
+    "full_policy_replay_verified": false,
+    "detector_replay_verified": false,
+    "raw_original_bytes_retained_local": 424835303,
+    "derived_array_integrity_verified": true,
+    "new_plans": 12,
+    "independent_root_review": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/root_verification.json"
   }
 }
