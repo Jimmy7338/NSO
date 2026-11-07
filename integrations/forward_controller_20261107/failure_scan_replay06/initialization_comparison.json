@@ -1,0 +1,49 @@
+{
+  "scope": "Only initialization history changes: full150scan vs last100scan vs actual adjacent98/99; sensor fields and matcher parameters unchanged; same installed matcher; independent fresh processes",
+  "cases": [
+    {
+      "label": "original_rate_false",
+      "input_count": 150,
+      "output_count": 150,
+      "max_step_m": 0.02219072180931063,
+      "guard_exceeds": 0,
+      "fault_pair": {
+        "source_stamp_ns": 1794053131681172132,
+        "step_m": 0.01017331793529189,
+        "dt_s": 0.1001091,
+        "dyaw_rad": 0.03582306339624797,
+        "guard_exceeds": false
+      }
+    },
+    {
+      "label": "history_start050",
+      "input_count": 100,
+      "output_count": 100,
+      "max_step_m": 0.022190721809310605,
+      "guard_exceeds": 0,
+      "fault_pair": {
+        "source_stamp_ns": 1794053131681172132,
+        "step_m": 0.010173317935291906,
+        "dt_s": 0.1001091,
+        "dyaw_rad": 0.035823063396247634,
+        "guard_exceeds": false
+      }
+    },
+    {
+      "label": "fault_pair098_099",
+      "input_count": 2,
+      "output_count": 2,
+      "max_step_m": 0.010173317935291828,
+      "guard_exceeds": 0,
+      "fault_pair": {
+        "source_stamp_ns": 1794053131681172132,
+        "step_m": 0.010173317935291828,
+        "dt_s": 0.1001091,
+        "dyaw_rad": 0.0358230633962478,
+        "guard_exceeds": false
+      }
+    }
+  ],
+  "live_fault_step_m": 0.05010596647245115,
+  "original_keyframe_state_captured": false
+}

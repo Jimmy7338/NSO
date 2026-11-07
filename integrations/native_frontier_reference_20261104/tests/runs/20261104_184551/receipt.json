@@ -1,0 +1,529 @@
+{
+  "port": 36893,
+  "uri": "http://127.0.0.1:36893",
+  "ros_home": "/tmp/nso portable fixture/native_frontier_reference_20261104/tests/runs/20261104_184551/ros_home",
+  "checks": {
+    "disabled_no_goals": true,
+    "disabled_no_explore_node": true,
+    "recorder_only_started": true,
+    "recorder_only_no_explore": true,
+    "recorder_only_protection": true,
+    "recorder_only_stop": true,
+    "empty_session_generates_uuid": true,
+    "native_explore_node": true,
+    "no_cmd_vel_topic": true,
+    "no_hardware_nodes": true,
+    "success_and_abort": true,
+    "native_process_shutdown": true,
+    "held_goal_accepted": true,
+    "native_exit_observed_without_auto_cancel": true,
+    "explicit_cancel_preempts": true,
+    "goal_callerid_and_session": true,
+    "status_transitions_deduplicated": true,
+    "observer_explicit_owner_cancel": true,
+    "observer_preempt_result": true,
+    "observer_goal": true,
+    "observer_success": true,
+    "observer_abort": true,
+    "observer_cancel": true,
+    "observer_protection": true,
+    "observer_stop": true
+  },
+  "fixture_only": true,
+  "errors": [],
+  "inputs": {
+    "ros_setup": "/opt/ros/noetic/setup.bash",
+    "ros_setup_sha256": "42e35f97c20127488ca0b80af92e9711e37a5cadcd381e5a8b7968dba58864a9",
+    "overlay_setup": "/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-build/devel/setup.bash",
+    "overlay_setup_sha256": "42e35f97c20127488ca0b80af92e9711e37a5cadcd381e5a8b7968dba58864a9",
+    "native_binary": "/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-build/devel/lib/explore_lite/explore",
+    "native_binary_sha256": "6dffe929b4f653c38cfaa23c5ab2225576620375872e702107cea154beb44494",
+    "package_root": "/tmp/nso portable fixture/native_frontier_reference_20261104",
+    "package_source_sha256": {
+      "package.xml": "8f111790141c3e806101ee27261822e7e06eb12962be1b645e26f488baf2830d",
+      "CMakeLists.txt": "3fd96ad6ff36755bd37a897502ac7770b89e584ece02006d56b9e812284410b6",
+      "launch/reference.launch": "16e7072cb1771a06ab2f04a84eba5b68e77c9f956c09d86f2854cc820e90a500",
+      "scripts/native_launcher.py": "e0134cf7d97169d84925831a1fa7be138a532a1f8eb48c9df64e8cddcd1028bf",
+      "scripts/event_recorder.py": "124a87d2a4ff37c0a79d714e23791638f4973b55dbf6c69a6e26299bf5f8b661",
+      "tests/run_isolated.py": "3c2c41ed82284911fe33df7df8e39f24a9df49c638863f1d4aa1b5e739f84455",
+      "tests/fixture.py": "6b4fd43c81a057749a7558254d687d6b98db5a1e33f33c25bb38c5a831e64052",
+      "tests/cancel_owner.py": "80c0fd458185b75bbc5d9dc7e6f87d9f42c573d26a6dd6a2cba9aa6fcfdf97ea"
+    }
+  },
+  "unsupported_auto_cancel": true,
+  "fixture_events": [
+    {
+      "event": "ready",
+      "wall_time": 1793789154.2488258
+    },
+    {
+      "event": "goal",
+      "wall_time": 1793789174.6544335,
+      "index": 1,
+      "x": 0.012812559423036874,
+      "y": 0.0003125592367723584,
+      "frame": "fixture_map"
+    },
+    {
+      "event": "succeeded",
+      "wall_time": 1793789175.7570112,
+      "index": 1
+    },
+    {
+      "event": "goal",
+      "wall_time": 1793789175.7630765,
+      "index": 2,
+      "x": -0.24970582681981957,
+      "y": 0.012058882963131456,
+      "frame": "fixture_map"
+    },
+    {
+      "event": "aborted",
+      "wall_time": 1793789176.4641159,
+      "index": 2
+    },
+    {
+      "event": "goal",
+      "wall_time": 1793789191.0489998,
+      "index": 3,
+      "x": -0.24970582681981957,
+      "y": 0.012058882963131456,
+      "frame": "fixture_map"
+    },
+    {
+      "event": "preempted",
+      "wall_time": 1793789194.7593105,
+      "index": 3
+    }
+  ],
+  "observer_events": [
+    {
+      "event": "recorder_start",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789169.4967854,
+      "ros_time": {
+        "secs": 1793789169,
+        "nsecs": 496795892
+      },
+      "action_namespace": "/fixture/move_base",
+      "protection_topic": "/fixture/protection",
+      "provenance": "passive; observed action namespace may include non-explore clients"
+    },
+    {
+      "event": "goal",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789174.6538231,
+      "ros_time": {
+        "secs": 1793789174,
+        "nsecs": 653832912
+      },
+      "callerid": "/fixture_nav/explore",
+      "goal_id": "/fixture_nav/explore-1-1793789174.653346574",
+      "goal_stamp": {
+        "secs": 1793789174,
+        "nsecs": 653346574
+      },
+      "frame_id": "fixture_map",
+      "pose_stamp": {
+        "secs": 1793789174,
+        "nsecs": 653281293
+      },
+      "position": {
+        "x": 0.012812559423036874,
+        "y": 0.0003125592367723584,
+        "z": 0.0
+      },
+      "orientation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    },
+    {
+      "event": "status_transition",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789174.6544695,
+      "ros_time": {
+        "secs": 1793789174,
+        "nsecs": 654473304
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-1-1793789174.653346574",
+      "goal_stamp": {
+        "secs": 1793789174,
+        "nsecs": 653346574
+      },
+      "previous_status": null,
+      "status": 1,
+      "text": "This goal has been accepted by the simple action server",
+      "header_stamp": {
+        "secs": 1793789174,
+        "nsecs": 654087305
+      }
+    },
+    {
+      "event": "result",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789175.7568905,
+      "ros_time": {
+        "secs": 1793789175,
+        "nsecs": 756900787
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-1-1793789174.653346574",
+      "goal_stamp": {
+        "secs": 1793789174,
+        "nsecs": 653346574
+      },
+      "status": 3,
+      "text": "",
+      "header_stamp": {
+        "secs": 1793789175,
+        "nsecs": 756350517
+      }
+    },
+    {
+      "event": "status_transition",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789175.7572412,
+      "ros_time": {
+        "secs": 1793789175,
+        "nsecs": 757245540
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-1-1793789174.653346574",
+      "goal_stamp": {
+        "secs": 1793789174,
+        "nsecs": 653346574
+      },
+      "previous_status": 1,
+      "status": 3,
+      "text": "",
+      "header_stamp": {
+        "secs": 1793789175,
+        "nsecs": 756643772
+      }
+    },
+    {
+      "event": "goal",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789175.7623816,
+      "ros_time": {
+        "secs": 1793789175,
+        "nsecs": 762388229
+      },
+      "callerid": "/fixture_nav/explore",
+      "goal_id": "/fixture_nav/explore-2-1793789175.762029567",
+      "goal_stamp": {
+        "secs": 1793789175,
+        "nsecs": 762029567
+      },
+      "frame_id": "fixture_map",
+      "pose_stamp": {
+        "secs": 1793789175,
+        "nsecs": 761865436
+      },
+      "position": {
+        "x": -0.24970582681981957,
+        "y": 0.012058882963131456,
+        "z": 0.0
+      },
+      "orientation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    },
+    {
+      "event": "status_transition",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789175.7631445,
+      "ros_time": {
+        "secs": 1793789175,
+        "nsecs": 763149738
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-2-1793789175.762029567",
+      "goal_stamp": {
+        "secs": 1793789175,
+        "nsecs": 762029567
+      },
+      "previous_status": null,
+      "status": 1,
+      "text": "This goal has been accepted by the simple action server",
+      "header_stamp": {
+        "secs": 1793789175,
+        "nsecs": 762732505
+      }
+    },
+    {
+      "event": "status_transition",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789176.4642546,
+      "ros_time": {
+        "secs": 1793789176,
+        "nsecs": 464265108
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-2-1793789175.762029567",
+      "goal_stamp": {
+        "secs": 1793789175,
+        "nsecs": 762029567
+      },
+      "previous_status": 1,
+      "status": 4,
+      "text": "synthetic abort",
+      "header_stamp": {
+        "secs": 1793789176,
+        "nsecs": 463802337
+      }
+    },
+    {
+      "event": "result",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789176.4644887,
+      "ros_time": {
+        "secs": 1793789176,
+        "nsecs": 464490890
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-2-1793789175.762029567",
+      "goal_stamp": {
+        "secs": 1793789175,
+        "nsecs": 762029567
+      },
+      "status": 4,
+      "text": "synthetic abort",
+      "header_stamp": {
+        "secs": 1793789176,
+        "nsecs": 463524103
+      }
+    },
+    {
+      "event": "cancel",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789176.4675343,
+      "ros_time": {
+        "secs": 1793789176,
+        "nsecs": 467540264
+      },
+      "callerid": "/fixture_nav/explore",
+      "goal_id": "",
+      "goal_stamp": {
+        "secs": 0,
+        "nsecs": 0
+      }
+    },
+    {
+      "event": "protection_event",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789177.1912546,
+      "ros_time": {
+        "secs": 1793789177,
+        "nsecs": 191262245
+      },
+      "callerid": "/rostopic_168066_1793789177030",
+      "topic": "/fixture/protection",
+      "message": "synthetic-protection-test",
+      "provenance": "explicit configured String topic; content not interpreted"
+    },
+    {
+      "event": "recorder_stop",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789182.7100604,
+      "ros_time": {
+        "secs": 1793789182,
+        "nsecs": 710070848
+      }
+    },
+    {
+      "event": "recorder_start",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789186.0338724,
+      "ros_time": {
+        "secs": 1793789186,
+        "nsecs": 33883333
+      },
+      "action_namespace": "/fixture/move_base",
+      "protection_topic": "/fixture/protection",
+      "provenance": "passive; observed action namespace may include non-explore clients"
+    },
+    {
+      "event": "goal",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789191.047436,
+      "ros_time": {
+        "secs": 1793789191,
+        "nsecs": 47447204
+      },
+      "callerid": "/fixture_nav/explore",
+      "goal_id": "/fixture_nav/explore-1-1793789191.46781723",
+      "goal_stamp": {
+        "secs": 1793789191,
+        "nsecs": 46781723
+      },
+      "frame_id": "fixture_map",
+      "pose_stamp": {
+        "secs": 1793789191,
+        "nsecs": 46693818
+      },
+      "position": {
+        "x": -0.24970582681981957,
+        "y": 0.012058882963131456,
+        "z": 0.0
+      },
+      "orientation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      }
+    },
+    {
+      "event": "status_transition",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789191.0482996,
+      "ros_time": {
+        "secs": 1793789191,
+        "nsecs": 48304557
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-1-1793789191.46781723",
+      "goal_stamp": {
+        "secs": 1793789191,
+        "nsecs": 46781723
+      },
+      "previous_status": null,
+      "status": 1,
+      "text": "This goal has been accepted by the simple action server",
+      "header_stamp": {
+        "secs": 1793789191,
+        "nsecs": 47834873
+      }
+    },
+    {
+      "event": "cancel",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789194.7381246,
+      "ros_time": {
+        "secs": 1793789194,
+        "nsecs": 738135576
+      },
+      "callerid": "/fixture_supervisor",
+      "goal_id": "",
+      "goal_stamp": {
+        "secs": 0,
+        "nsecs": 0
+      }
+    },
+    {
+      "event": "status_transition",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789194.738626,
+      "ros_time": {
+        "secs": 1793789194,
+        "nsecs": 738629817
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-1-1793789191.46781723",
+      "goal_stamp": {
+        "secs": 1793789191,
+        "nsecs": 46781723
+      },
+      "previous_status": 1,
+      "status": 6,
+      "text": "This goal has been accepted by the simple action server",
+      "header_stamp": {
+        "secs": 1793789194,
+        "nsecs": 738247871
+      }
+    },
+    {
+      "event": "result",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789194.759397,
+      "ros_time": {
+        "secs": 1793789194,
+        "nsecs": 759407281
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-1-1793789191.46781723",
+      "goal_stamp": {
+        "secs": 1793789191,
+        "nsecs": 46781723
+      },
+      "status": 2,
+      "text": "",
+      "header_stamp": {
+        "secs": 1793789194,
+        "nsecs": 758621454
+      }
+    },
+    {
+      "event": "status_transition",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789194.759693,
+      "ros_time": {
+        "secs": 1793789194,
+        "nsecs": 759696483
+      },
+      "callerid": "/fixture",
+      "goal_id": "/fixture_nav/explore-1-1793789191.46781723",
+      "goal_stamp": {
+        "secs": 1793789191,
+        "nsecs": 46781723
+      },
+      "previous_status": 6,
+      "status": 2,
+      "text": "",
+      "header_stamp": {
+        "secs": 1793789194,
+        "nsecs": 758847713
+      }
+    },
+    {
+      "event": "recorder_stop",
+      "session_id": "fixture_explicit",
+      "wall_time_unix_s": 1793789197.0398538,
+      "ros_time": {
+        "secs": 1793789197,
+        "nsecs": 39862871
+      }
+    }
+  ],
+  "owned_processes": [
+    {
+      "name": "roscore",
+      "pid": 167312,
+      "exit_code": 0
+    },
+    {
+      "name": "fixture",
+      "pid": 167482,
+      "exit_code": 0
+    },
+    {
+      "name": "default",
+      "pid": 167531,
+      "exit_code": 0
+    },
+    {
+      "name": "recorder_only",
+      "pid": 167686,
+      "exit_code": 0
+    },
+    {
+      "name": "enabled",
+      "pid": 167866,
+      "exit_code": 0
+    },
+    {
+      "name": "enabled_cancel",
+      "pid": 168210,
+      "exit_code": 0
+    }
+  ],
+  "all_checks_pass": true
+}

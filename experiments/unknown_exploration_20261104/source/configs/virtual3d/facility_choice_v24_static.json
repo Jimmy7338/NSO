@@ -1,0 +1,39 @@
+{
+  "version": "two-facility-choice-static-v24-3",
+  "parents": [
+    "D24-P00",
+    "D24-P01"
+  ],
+  "assignments": [
+    "A_complex_B_simple",
+    "A_simple_B_complex"
+  ],
+  "sensor_model": "iid_025px",
+  "noise_seed": 1901,
+  "camera_and_lidar_max_range_m": 5.0,
+  "voxel_m": 0.04,
+  "truncation_m": 0.12,
+  "required_service_bits": {
+    "A": 3,
+    "B": 12,
+    "both": 15
+  },
+  "primitive_actions": [
+    "forward",
+    "left",
+    "right"
+  ],
+  "translation_m": 0.2,
+  "turn_degrees": 90,
+  "service_observation_cost": "Every arrival/turn emits its ordinary paid frame; no free observations or dwell",
+  "lateral_views": "A right and B left; physical mirror about the decision corridor",
+  "graph": "all physically safe discrete poses, exact unit-cost orientation-state BFS with service bitmask",
+  "budget_recommendation": "prefix_cost + ceil((max_single_tour_cost + min_both_tour_cost - 1)/2), conditional on fixed prefix",
+  "qualification_coverage_requirement": 0.8,
+  "online_coverage_verified": false,
+  "prefix_full_sensor_history_pairing_verified": false,
+  "quality_evaluated": false,
+  "new_physical_trajectory_authorized_by_this_config": false,
+  "physical_background": "Mirrored L-shaped work-station backstops at rear +3.2 m and inward +2.9 m; unchanged 5 m range",
+  "prefix_approach": "Outer offset 0.9 m before near-front central translation; no sensor suppression"
+}

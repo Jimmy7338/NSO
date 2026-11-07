@@ -1,0 +1,117 @@
+{
+  "schema": "nso.stationary_keyframe_check.v1",
+  "master": "http://127.0.0.1:11402",
+  "source": "60 real stationary scans, original staticTF, same installed matcher, use_tf=false, original10Hz timing; fresh independent master/node per profile",
+  "profiles": [
+    {
+      "profile": "default",
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false,
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295
+      },
+      "input_count": 60,
+      "output_count": 60,
+      "all_sources_consumed": true,
+      "input_sha256": "743acb80b08d0997ef7e5f6737ec7ee5bb468b2fa58f37172e5523a940ff5431",
+      "first_pose_xyyaw": [
+        -1.0356299151581538e-15,
+        -1.734723475976807e-18,
+        1.9780564451922275e-16
+      ],
+      "last_pose_xyyaw": [
+        1.909565560853123e-05,
+        -0.00026684895618393073,
+        -0.0010514590870077738
+      ],
+      "first_to_last_xy_m": 0.00026753132429607496,
+      "first_to_last_yaw_rad": -0.0010514590870079716,
+      "maximum_xy_step_m": 0.00121373041911523,
+      "xy_span_m": [
+        0.0013985379553349449,
+        0.0014075485909356427
+      ],
+      "yaw_span_rad": 0.0020500115148333114,
+      "xy_std_m": [
+        0.0003403588372620024,
+        0.0003237912671445348
+      ],
+      "latency_seconds": {
+        "min": 0.004467632999876514,
+        "median": 0.0066017350036418065,
+        "max": 0.014946573006454855
+      },
+      "scan_matching_error_warnings": 0,
+      "TF_lookup_warnings": 0
+    },
+    {
+      "profile": "every_frame",
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false,
+        "kf_dist_linear": 0.0,
+        "kf_dist_angular": 0.0
+      },
+      "input_count": 60,
+      "output_count": 60,
+      "all_sources_consumed": true,
+      "input_sha256": "743acb80b08d0997ef7e5f6737ec7ee5bb468b2fa58f37172e5523a940ff5431",
+      "first_pose_xyyaw": [
+        -1.0356299151581538e-15,
+        -1.734723475976807e-18,
+        1.9780564451922275e-16
+      ],
+      "last_pose_xyyaw": [
+        0.0019612355078099035,
+        0.0008466380873144724,
+        0.0007554587861417371
+      ],
+      "first_to_last_xy_m": 0.0021361743299623146,
+      "first_to_last_yaw_rad": 0.0007554587861415393,
+      "maximum_xy_step_m": 0.0015459989808985623,
+      "xy_span_m": [
+        0.003700581061234655,
+        0.0026800136127721453
+      ],
+      "yaw_span_rad": 0.004182495221964268,
+      "xy_std_m": [
+        0.0010930186095126208,
+        0.0005512699847623707
+      ],
+      "latency_seconds": {
+        "min": 0.004506258002948016,
+        "median": 0.006548917503096163,
+        "max": 0.01609801800805144
+      },
+      "scan_matching_error_warnings": 0,
+      "TF_lookup_warnings": 0
+    }
+  ],
+  "interpretation": "Every-frame profile increases stationary accumulated drift/noise on this frozen6s sample; millimeter-scale, not catastrophic, but candidate has measurable downside.",
+  "limits": [
+    "One stationary capture/new initialization per profile, not independent repeated trials",
+    "No external ground truth; stationary assumption comes from original capture context",
+    "Short6second sample cannot establish long-run drift or moving reconstruction accuracy",
+    "Changing reference strategy is a named sensor/localization adaptation, not original method equivalence",
+    "No live processes restarted, source stamps shifted only in isolated replay with original mapping retained; no guard or motion policy changed"
+  ]
+}

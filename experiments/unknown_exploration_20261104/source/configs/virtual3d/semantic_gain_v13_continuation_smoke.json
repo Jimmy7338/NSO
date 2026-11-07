@@ -1,0 +1,17 @@
+{
+  "schema_version": "semantic_gain_v13_continuation/1",
+  "history": "eval_results/semantic_gain_v13_history_smoke_20260914",
+  "checkpoint_selection": "all_frozen_checkpoints",
+  "candidate_selection": "all_frozen_candidates_including_zero_semantic_opportunity",
+  "first_option_execution": "complete_roundtrip_then_common_geometry_continuation",
+  "continuation": "unchanged_history_geometry_policy_with_live_feedback",
+  "total_budget": 96,
+  "reference_sample_count": 16000,
+  "reference_seed": 2026,
+  "thresholds_m": [0.05, 0.1],
+  "primary_label": "delta(coverage_2d_fraction * global_f1_at_5cm)",
+  "secondary_label": "delta(covered_area_m2 * global_f1_at_5cm)",
+  "failure_policy": "retain raw metrics; mark unsafe branches ineligible; no model promotion from this smoke",
+  "training_allowed": false,
+  "independent_confirmation": false
+}

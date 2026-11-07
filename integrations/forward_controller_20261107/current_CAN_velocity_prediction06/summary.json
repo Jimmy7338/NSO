@@ -1,0 +1,82 @@
+{
+  "schema": "nso.current_CAN_constant_prediction_summary.v1",
+  "observed_input": {
+    "kernel_stamp_ns": 1794053131663426162,
+    "raw_frame_hex": "21020000080000000004012400000000",
+    "vx": 0.004,
+    "w": 0.292,
+    "age_at_scan_ns": 17745970,
+    "age_at_original_selection_ns": 29766303,
+    "receipt_age_at_selection_ns": 29663070,
+    "original_source_ttl_ns": 150000000
+  },
+  "model": "Exact installed getPrediction use_vel=true: dt*latest_vx,dt*latest_vy,dt*latest_w; current observed CAN sample held constant across this one step by explicit hypothesis. Not ZOH sequence integration, not actual measured interval motion.",
+  "increment": [
+    0.00040043640000000003,
+    0,
+    0.0292318572
+  ],
+  "angular_increment_deg": 1.6748620448891078,
+  "results": [
+    {
+      "profile": "identity_increment",
+      "first_guess": [
+        0.010185340688086832,
+        -0.004402547859409271,
+        0.054821639273336456
+      ],
+      "valid": true,
+      "error": 64.7565731504332,
+      "nvalid": 1652,
+      "iterations": 11,
+      "icp_microseconds": 8804,
+      "result_pose": [
+        0.5308784908706593,
+        0.6844681534492013,
+        2.2790793425373477
+      ],
+      "planar_jump_m": 0.050105966472451156,
+      "corr_valid_count": 1652,
+      "corr_mean_nearest_distance_sq": 0.002247318833332549,
+      "corr_max_nearest_distance_sq": 0.012580646505157278,
+      "corr_index_hash": "16217298093389754664",
+      "exceeds_unchanged_distance_bound": true
+    },
+    {
+      "profile": "observed_current_velocity",
+      "first_guess": [
+        0.010505423133846494,
+        -0.004708468705286138,
+        0.0840534964733364
+      ],
+      "valid": true,
+      "error": 64.71475160090182,
+      "nvalid": 1651,
+      "iterations": 11,
+      "icp_microseconds": 8427,
+      "result_pose": [
+        0.5308558409691178,
+        0.6844756880957035,
+        2.279097374380779
+      ],
+      "planar_jump_m": 0.05010466442216603,
+      "corr_valid_count": 1651,
+      "corr_mean_nearest_distance_sq": 0.0022477903779042534,
+      "corr_max_nearest_distance_sq": 0.012522307291016811,
+      "corr_index_hash": "10873858562974407879",
+      "exceeds_unchanged_distance_bound": true
+    }
+  ],
+  "unchanged_distance_bound_m": 0.04002182,
+  "conclusion": "Observed1.67486degree original-model angular prediction does not avoid this local matching result; both remain~50.105mm above unchanged40.022mm jump bound.",
+  "fixed_state_and_all_other_parameters_verified": true,
+  "limitations": [
+    "One exact frozen fault fixture, not recursive or live outcome",
+    "Current-scan observed velocity assumed constant over previous100.1091ms; not measured interval motion, not ZOH sequence integration and not full50Hz integration",
+    "Final correspondence count/hash changes slightly; smaller raw total error over different counts is not independent accuracy",
+    "Both report11iterations at unchangedmax10; this test does not combine prediction with iteration-budget change",
+    "No invented velocities,weights,range clipping,threshold relaxation,output filtering or live process changes"
+  ],
+  "master": "11403, closed",
+  "finished_no_extensions": true
+}

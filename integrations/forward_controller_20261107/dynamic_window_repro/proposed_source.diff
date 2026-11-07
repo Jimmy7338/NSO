@@ -1,0 +1,28 @@
+--- a/base_local_planner/src/simple_trajectory_generator.cpp
++++ b/base_local_planner/src/simple_trajectory_generator.cpp
+@@ -187,6 +187,25 @@
+   traj.cost_   = -1.0; // placed here in case we return early
+   //trajectory might be reused so we'll make sure to reset it
+   traj.resetPoints();
++  // Reject invalid intersections/targets; never clamp or replace measured vel.
++  const double bound_eps = 1e-7;
++  if (!pos.allFinite() || !vel.allFinite() || !sample_target_vel.allFinite()) return false;
++  Eigen::Vector3f lower(limits_->min_vel_x, limits_->min_vel_y, -limits_->max_vel_theta);
++  Eigen::Vector3f upper(limits_->max_vel_x, limits_->max_vel_y, limits_->max_vel_theta);
++  if (use_dwa_) {
++    if (!std::isfinite(sim_period_) || sim_period_ <= 0) return false;
++    const Eigen::Vector3f delta = limits_->getAccLimits() * sim_period_;
++    if (!delta.allFinite() || (delta.array() < 0).any()) return false;
++    lower = lower.cwiseMax(vel - delta);
++    upper = upper.cwiseMin(vel + delta);
++  }
++  if (!lower.allFinite() || !upper.allFinite()) return false;
++  for (int axis = 0; axis < 3; ++axis) {
++    if (lower[axis] > upper[axis] + bound_eps ||
++        sample_target_vel[axis] < lower[axis] - bound_eps ||
++        sample_target_vel[axis] > upper[axis] + bound_eps) return false;
++  }
++
+ 
+   // make sure that the robot would at least be moving with one of
+   // the required minimum velocities for translation and rotation (if set)

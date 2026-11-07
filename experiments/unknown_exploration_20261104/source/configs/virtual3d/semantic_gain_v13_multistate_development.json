@@ -1,0 +1,41 @@
+{
+  "schema_version": "semantic_gain_v13_multistate_development/1.1",
+  "role": "development_only_no_independent_confirmation",
+  "parents": [
+    "Q0",
+    "Q1",
+    "Q2",
+    "Q3"
+  ],
+  "arrangements": [
+    "shelf_east",
+    "shelf_west"
+  ],
+  "group_key": "parent_including_both_physical_arrangements_and_all_decisions",
+  "total_budget": 96,
+  "history_policy": "v10_3_1_geometry_G_with_live_feedback",
+  "sampling": "every_positive_budget_natural_decision_including_empty_pools; terminal_recorded_separately",
+  "budget_phase_edges": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "candidate_generation": "geometry_only_total_diverse",
+  "candidate_cap": 12,
+  "coverage_slots": 4,
+  "external_prefix_actions": 0,
+  "training_allowed": false,
+  "normalization_fit_allowed": false,
+  "information_value_gate": "not_evaluable_until_shared_candidate_outcomes_and_geometry_conditioning_are_audited",
+  "frozen_confirmation_parents_excluded": "F00-F11",
+  "prior_exposure": "Q0-Q3 are existing development parents; Q0/east subset already inspected; this is not prospective confirmation",
+  "architecture": [
+    "ANS global/local",
+    "OV-SDF",
+    "STGHP",
+    "RPN-UQ",
+    "IGCR"
+  ]
+}
