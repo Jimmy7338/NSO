@@ -2,6 +2,7 @@
 (() => {
   const $ = id => document.getElementById(id);
   let state = {}, mapImage = null, mapKey = '', lastSeen = 0;
+  let stateReceivedAt = null, stateRequestSeconds = 0;
   const view = {x:0,y:0,scale:30,ready:false};
   const mapCanvas = $('map'), ctx = mapCanvas.getContext('2d');
   const cloudCanvas = $('cloud');
@@ -29,7 +30,17 @@
     view.x=m.origin[0]+m.width*m.resolution/2;view.y=m.origin[1]+m.height*m.resolution/2;
     view.scale=Math.min(w/(m.width*m.resolution),h/(m.height*m.resolution))*.91;view.ready=true;drawMap();
   }
-  const isFresh = (name, limit) => { const f=state.freshness&&state.freshness[name],item=state[name],stamp=item&&Number(item.stamp),age=Date.now()/1000-stamp; return !!(f&&f.fresh&&Number.isFinite(stamp)&&stamp>0&&age>=0&&age<=limit); };
+  const isFresh = (name, limit) => {
+    const f=state.freshness&&state.freshness[name],item=state[name];
+    const stamp=item&&item.stamp,serverNow=state.stamp;
+    const elapsed=stateReceivedAt===null?NaN:(performance.now()-stateReceivedAt)/1000;
+    // Source age and timestamps share the backend clock. Charge the full request
+    // time conservatively, then age the snapshot using the browser's monotonic clock.
+    return !!(f&&f.fresh===true&&Number.isFinite(f.age_s)&&f.age_s>=0&&
+      Number.isFinite(stamp)&&stamp>0&&Number.isFinite(serverNow)&&stamp<=serverNow&&
+      Number.isFinite(stateRequestSeconds)&&stateRequestSeconds>=0&&
+      Number.isFinite(elapsed)&&elapsed>=0&&f.age_s+stateRequestSeconds+elapsed<=limit);
+  };
   function mapRobotFit(){
     const m=state.map,p=state.pose;if(!m||!p||!isFresh('pose',3)||m.frame!==p.frame){mapFit();return;}
     const {w,h}=sizeCanvas(mapCanvas);view.x=p.x;view.y=p.y;
@@ -118,7 +129,8 @@
   let stateBusy=false;
   async function updateState(){
     if(stateBusy)return;stateBusy=true;
-    try{const next=await fetchJSON('/api/state');state=next;lastSeen=Date.now();$('connection').textContent=isFresh('pose',3)?'已连接 · '+((next.robot&&next.robot.status)||'等待状态'):'定位未更新，地图/重建保留最近结果';$('connection-dot').classList.add('online');$('updated').textContent='更新 '+new Date().toLocaleTimeString('zh-CN',{hour12:false});
+    const requestStarted=performance.now();
+    try{const next=await fetchJSON('/api/state');stateReceivedAt=performance.now();stateRequestSeconds=(stateReceivedAt-requestStarted)/1000;state=next;lastSeen=stateReceivedAt;$('connection').textContent=isFresh('pose',3)?'已连接 · '+((next.robot&&next.robot.status)||'等待状态'):'定位未更新，地图/重建保留最近结果';$('connection-dot').classList.add('online');$('updated').textContent='更新 '+new Date().toLocaleTimeString('zh-CN',{hour12:false});
       const m=next.map;if(m&&m.width&&m.height){$('map-meta').textContent=`${m.width} × ${m.height} · ${(m.resolution*100).toFixed(1)} 厘米/格 · ${m.frame||'—'} · ${formatTime(m.stamp)}${isFresh('map',10)?'':' · 最近结果'}`;const key=m.frame;if(key!==mapKey){mapKey=key;view.ready=false;}if(!view.ready)mapRobotFit();}
       const c=next.camera;if(c&&c.width)$('camera-meta').textContent=`${c.width} × ${c.height} · ${formatTime(c.stamp)}${isFresh('camera',3)?'':' · 最近画面'}`;
       const r=next.reconstruction;if(r){const total=Number(r.reconstructed_point_count||r.point_count||0).toLocaleString('zh-CN'),count=Number(r.point_count||0),shown=(cloud2d?Math.ceil(count/Math.max(1,Math.ceil(count/10000))):count).toLocaleString('zh-CN');$('cloud-meta').textContent=`重建 ${total} 点 · ${cloud2d?'兼容显示':'显示'} ${shown} 点 · ${r.integrated_frames||r.frames||0} 帧 · ${r.frame||'—'}`;$('cloud-status').textContent=r.voxel_m>0?`融合体素尺寸 ${(r.voxel_m*1000).toFixed(0)} 毫米 · ${formatTime(r.stamp)}${isFresh('reconstruction',10)?'':' · 最近结果'}`:'等待重建更新';}
@@ -143,5 +155,6 @@
   }
   new ResizeObserver(()=>{drawMap();drawCloud();}).observe(document.querySelector('main'));
   updateState();updateCamera();updateMap();updateCloud();
+  setInterval(drawMap,250);
   setInterval(updateState,1000);setInterval(updateCamera,500);setInterval(updateMap,1000);setInterval(updateCloud,2000);
 })();
