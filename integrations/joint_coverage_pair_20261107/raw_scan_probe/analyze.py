@@ -47,8 +47,8 @@ def udp_payload(packet):
     return payload
 
 class Oracle:
-    def __init__(self):
-        self.lib=ctypes.CDLL(str(P/'vendor_oracle.so'))
+    def __init__(self, library_path=None):
+        self.lib=ctypes.CDLL(str(Path(library_path).resolve() if library_path is not None else P/'vendor_oracle.so'))
         ip=ctypes.POINTER(ctypes.c_int);fp=ctypes.POINTER(ctypes.c_float)
         self.lib.decode.argtypes=[ctypes.POINTER(ctypes.c_ubyte),ip,fp,fp];self.lib.decode.restype=ctypes.c_int
         self.lib.rebin.argtypes=[ip,fp,fp,ctypes.c_int,fp,fp,fp];self.lib.rebin.restype=ctypes.c_int
@@ -82,11 +82,11 @@ def sweeps(rows,oracle):
         if wraps>1:multiwrap.append(index)
     return groups,{'packet_decode_errors':errors,'multiwrap_packet_indices':multiwrap,'boundary_partial_sweeps_discarded':True}
 
-def analyze(directory):
+def analyze(directory, library_path=None, output_path=None):
     directory=Path(directory);rows,pcap=read_pcap(directory/'lidar.pcap')
     if not rows:raise ValueError('empty PCAP: no acquisition evidence')
     if (rows[-1]['kernel_stamp_ns']-rows[0]['kernel_stamp_ns'])>8000000000:raise ValueError('PCAP span exceeds 8 seconds')
-    oracle=Oracle();groups,quality=sweeps(rows,oracle)
+    oracle=Oracle(library_path);groups,quality=sweeps(rows,oracle)
     ros=json.loads((directory/'ros_window.json').read_text());scans=ros['scans'];clouds=ros['clouds'];npz=np.load(directory/'scans.npz',allow_pickle=False)
     if len(scans)>90 or len(clouds)>90 or len(ros['times'])>90:raise ValueError('ROS bound exceeded')
     output=[];paired_scans=set();paired_clouds=set()
@@ -104,7 +104,19 @@ def analyze(directory):
     stamp_regressions={kind:[i for i in range(1,len(ros[kind])) if ros[kind][i]['stamp_ns']<ros[kind][i-1]['stamp_ns']] for kind in ['scans','clouds']}
     time_associations=[{'scan_index':i,'time_topic_indices_within_1us_float_representation':[j for j,t in enumerate(ros['times']) if abs(t['source_time_s']-s['stamp_ns']/1e9)<=1e-6]} for i,s in enumerate(scans)]
     receipt={'schema':'nso.passive_raw_scan_comparison.v1','data_kind':ros.get('data_kind','unspecified'),'pcap':pcap,'complete_raw_sweeps':output,'quality':quality,'ROS_counts':{k:len(ros[k]) for k in ['scans','clouds','times']},'source_stamp_regressions':stamp_regressions,'time_topic_associations':time_associations,'matched_scan_indices':sorted(paired_scans),'matched_cloud_indices':sorted(paired_clouds),'unmatched_scan_indices':[i for i in range(len(scans)) if i not in paired_scans],'limits':['Only this finite window; nonrecurrence excludes no failure hypothesis','Raw-packet echo presence and sweep/header mispairing can coexist','Full-geometry match can be ambiguous if consecutive sweeps repeat','Host PCAP kernel timestamps retained; driver poll-time/interpolated scan stamp is not assumed equal','Float64 time_topic comparison permits 1us representation difference only; not beam-time accuracy','No per-beam acquisition time or deskew invented; no physical identity/noise classification','Boundary partial sweeps, packet loss and unsupported input are disclosed rather than treated as driver faults']}
-    (directory/'comparison.json').write_text(json.dumps(receipt,indent=2,allow_nan=False)+'\n');return receipt
+    payload=json.dumps(receipt,indent=2,allow_nan=False)+'\n'
+    if output_path is None:
+        (directory/'comparison.json').write_text(payload)
+    else:
+        # Explicit offline outputs cannot overwrite retained measurements/results.
+        with Path(output_path).open('x') as target:
+            target.write(payload)
+    return receipt
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('directory',type=Path);a=p.parse_args();r=analyze(a.directory);print(json.dumps({'packets':r['pcap']['packets'],'complete_sweeps':len(r['complete_raw_sweeps']),'matched_scans':len(r['matched_scan_indices'])}))
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('directory',type=Path)
+    p.add_argument('--oracle',type=Path,help='Explicit offline library built from the preserved C++ snapshot')
+    p.add_argument('--output',type=Path,help='New JSON result path; refuses to overwrite an existing file')
+    a=p.parse_args();r=analyze(a.directory,library_path=a.oracle,output_path=a.output)
+    print(json.dumps({'packets':r['pcap']['packets'],'complete_sweeps':len(r['complete_raw_sweeps']),'matched_scans':len(r['matched_scan_indices'])}))

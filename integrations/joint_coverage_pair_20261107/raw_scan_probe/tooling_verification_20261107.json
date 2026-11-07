@@ -1,0 +1,44 @@
+{
+  "schema": "nso.raw_scan_tooling_verification.v1",
+  "status": "prepared_and_synthetic_verified_no_new_field_capture",
+  "unit_test_methods_passed": 6,
+  "synthetic_fixture": {
+    "explicitly_not_measured": true,
+    "PCAP_packets": 18,
+    "complete_raw_sweeps": 2,
+    "exact_geometry_scans_matched": [
+      0,
+      1
+    ],
+    "deliberately_altered_scan_unmatched": [
+      2
+    ],
+    "native_cloud_hash_matches": [
+      0,
+      1
+    ]
+  },
+  "checks": [
+    "Vendor source/header hashes pinned",
+    "Native decoder skips metadata slot15; independent expected point values checked",
+    "Original native2000-bin nearest-range rebin known-bin test",
+    "Nanosecond Ethernet PCAP parser and truncated-file refusal",
+    "ROS/kernel receipt overlap and source-authority negative checks",
+    "Fixed nonpromiscuous eth0/srcIP/dstport/count/time argv and mocked owned-child cleanup"
+  ],
+  "limitations": [
+    "Privileged tcpdump path not executed; local user authorization remains missing",
+    "Synthetic data are not evidence about S32 return or driver-race causality"
+  ],
+  "file_sha256": {
+    "capture.py": "7d68ea83e14b5a080db9951d30db4397596676530a9ecabb811327c9617a4fb7",
+    "analyze.py": "84aeef7a87b886c2933e24ce334f6a9d651d1bf4446d6c53355dd1addd516263",
+    "build_oracle.py": "9ce4443e4262b2f70d781c3b533dd2de906f06ed828d19799e51103d9237c647",
+    "vendor_oracle.cpp": "8c7527ec18e418590e1653d4385ebec900d6e18ee25756916d2e1370cc84090c",
+    "vendor_oracle.so": "e3e517d88c2687bd581cfb73b731c3d755c3a8b7e6f4e473f962d401e86db692",
+    "test_probe.py": "636c582d5144c3c222e9fea01a03b62c735153957ea29176a22409b7677ebb6c",
+    "README.md": "c01472217a8e5bd48fe21b8f2b21492fa8a915a3d257a4fdb51faa4e542620f4",
+    "oracle_build.json": "2d3d68caba29d62f687159913533b1bd2e6f4c81129871a9ddc692edeeb6ad85",
+    "permission_receipt.json": "61cc86259d1d821ff7bc9f71590371c9afffa8fe0609995eae1204e8cf6a4571"
+  }
+}

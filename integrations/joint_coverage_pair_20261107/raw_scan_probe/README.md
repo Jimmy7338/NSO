@@ -78,3 +78,35 @@ sample and one deliberately altered synthetic ROS scan. It validates the PCAP
 parser, actual vendor1.7 bodies, analytically known rebin/minimum behavior,
 window/source validation, negative mismatch/truncation and mocked cleanup. It
 does not validate privileged execution or explain the original physical event.
+
+## Relocatable offline snapshot replay
+
+The offline decoder can now be built from the preserved, hash-pinned
+`vendor_oracle.cpp`, without `/home/ouc`, the vendor checkout, ROS, network access
+or capture privileges. This verifies the saved snapshot; it does not re-verify
+a live installed driver. The original `build_oracle.py` and capture preflight
+still verify the actual robot vendor tree for a future field capture.
+
+From this directory in the published repository, with Python3, NumPy and a local
+C++11 compiler, choose a **new** build/output directory:
+
+```bash
+python3 build_snapshot.py --output /tmp/nso-offline-decoder
+python3 analyze.py synthetic_fixture \
+  --oracle /tmp/nso-offline-decoder/vendor_oracle.so \
+  --output /tmp/nso-offline-decoder/comparison.json
+```
+
+For an already acquired window, replace `synthetic_fixture` with its directory.
+Existing explicit output files and build directories are refused. The default
+`analyze.py WINDOW` API remains compatible with the local capture entry; use
+`--output` to protect a previously recorded comparison. No compiler or package
+is downloaded automatically, and built binaries are not published.
+
+`portable_verification.json` records one relocated-path check on this same host,
+with spaces in paths and PYTHONPATH cleared. The18-packet synthetic comparison
+matches the preserved result exactly, including the deliberately mismatched scan.
+Tampered C++ source, reused build directory and existing result path were rejected;
+the fixture was unchanged. The original6 synthetic unit tests also passed after
+the compatible API addition. This is not a second-machine/platform validation
+or real sensor evidence.
