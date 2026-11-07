@@ -1,0 +1,375 @@
+{
+  "probe": "control_can_offset_05",
+  "scope": "single CAN control-velocity adaptation integration trial; unmatched to probes03/04, no efficacy or NSO policy conclusion",
+  "summary": {
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_control_can_offset_05",
+    "status": "execution_interrupted",
+    "reason": "chassis_before_stop:odometry_jump",
+    "goals": 1,
+    "verified_arrivals": 0,
+    "distance_m": 0.17852642965316762,
+    "elapsed_s": 8.214390680994256,
+    "stopped": true,
+    "execution_interrupted": true
+  },
+  "observation_coverage": {
+    "telemetry_latest_sample_rows": 144,
+    "unique_provenance_stamps": 136,
+    "unique_goal_to_fault_provenance_stamps": 47,
+    "rows_missing_provenance": 0,
+    "recorded_pair_validity_failures": 0,
+    "recorded_reader_errors": [],
+    "dropped_counter_range": [
+      0,
+      0
+    ],
+    "maximum_recorded_source_stamp_gap_s": 0.200467824,
+    "asynchronous_rows_with_same_raw_control_provenance_stamp": 143,
+    "aligned_pose_mismatch_rows": 0,
+    "aligned_control_twist_mismatch_rows": 0
+  },
+  "pairing_age_ms": {
+    "entire_telemetry": {
+      "scan_minus_can_ns": {
+        "n": 136,
+        "min": 0.158119,
+        "median": 18.059452999999998,
+        "p95": 19.53998275,
+        "max": 19.931031
+      },
+      "current_minus_can_ns": {
+        "n": 136,
+        "min": 7.769766,
+        "median": 33.9155265,
+        "p95": 45.33175475,
+        "max": 47.71458
+      },
+      "receipt_age_ns": {
+        "n": 136,
+        "min": 7.699652,
+        "median": 33.4581425,
+        "p95": 45.2419455,
+        "max": 47.61141
+      }
+    },
+    "goal_until_fault": {
+      "scan_minus_can_ns": {
+        "n": 47,
+        "min": 16.72023,
+        "median": 17.914362,
+        "p95": 19.341292,
+        "max": 19.525286
+      },
+      "current_minus_can_ns": {
+        "n": 47,
+        "min": 25.467893,
+        "median": 34.829142,
+        "p95": 45.29944359999999,
+        "max": 46.559712
+      },
+      "receipt_age_ns": {
+        "n": 47,
+        "min": 25.397748,
+        "median": 34.712884,
+        "p95": 45.22608829999999,
+        "max": 46.476158
+      }
+    }
+  },
+  "active_velocity_ranges": {
+    "raw_csm_twist": {
+      "vx": {
+        "n": 47,
+        "min": -0.25294801408157114,
+        "median": 0.030949689028747823,
+        "p95": 0.11573453998379093,
+        "max": 0.5026730597398461
+      },
+      "vy": {
+        "n": 47,
+        "min": -0.2749812866623558,
+        "median": -0.006314104862156497,
+        "p95": 0.040556913257027406,
+        "max": 0.2049859327172916
+      },
+      "w": {
+        "n": 47,
+        "min": -0.008289607116831488,
+        "median": 0.1026182778256496,
+        "p95": 0.368836024342802,
+        "max": 0.413642466085762
+      }
+    },
+    "control_twist": {
+      "vx": {
+        "n": 47,
+        "min": 0.0,
+        "median": 0.038,
+        "p95": 0.048,
+        "max": 0.062
+      },
+      "vy": {
+        "n": 47,
+        "min": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "w": {
+        "n": 47,
+        "min": 0.0,
+        "median": 0.12,
+        "p95": 0.30899999999999994,
+        "max": 0.342
+      }
+    }
+  },
+  "dynamic_window_audit": {
+    "sim_period_s": 0.1,
+    "assumption": "controller_frequency=10Hz; configured acceleration bounds; source-sample counterfactual, not synchronized internal DWA state",
+    "sources": {
+      "raw_csm_twist": {
+        "n": 47,
+        "vx_inverted": 9,
+        "w_inverted": 2,
+        "any_inverted": 10,
+        "inverted_stamps_ns": [
+          1794053004585969448,
+          1794053004686001539,
+          1794053004786420345,
+          1794053004886884212,
+          1794053005186990976,
+          1794053005387449265,
+          1794053005587917089,
+          1794053005688443184,
+          1794053006288211823,
+          1794053006388639450
+        ]
+      },
+      "control_twist": {
+        "n": 47,
+        "vx_inverted": 0,
+        "w_inverted": 0,
+        "any_inverted": 0,
+        "inverted_stamps_ns": []
+      }
+    },
+    "note": "min>max means physically feasible interval is empty. Existing VelocityIterator still enumerates reversed ranges, so this is not a claim that actual DWA generated zero candidates. CAN windows are the adapted inputs; raw CSM windows are counterfactual."
+  },
+  "commands": {
+    "unique_latest_state_command_records": 49,
+    "reasons": {
+      "current_proposal": 49
+    },
+    "bound_violations_tolerance_1e_8": 0,
+    "v_range": {
+      "n": 49,
+      "min": 0.0,
+      "median": 0.041777778416872025,
+      "p95": 0.05000000074505806,
+      "max": 0.05000000074505806
+    },
+    "w_range": {
+      "n": 49,
+      "min": 0.0,
+      "median": 0.1899999976158142,
+      "p95": 0.3,
+      "max": 0.3
+    },
+    "max_recorded_command_time_gap_s": 0.10146145400358364,
+    "journal_logged_proposals": 8,
+    "journal_saturated_proposals": 0,
+    "journal_raw_physical_bound_violations": 0,
+    "rejected_proposals": [
+      {
+        "receipt_monotonic": 122548.225137109,
+        "v": 0.028666667640209198,
+        "w": 0.2907368540763855,
+        "accepted": false,
+        "saturated": false,
+        "fault": "odometry_jump"
+      },
+      {
+        "receipt_monotonic": 122548.315275489,
+        "v": 0.0,
+        "w": 0.0,
+        "accepted": false,
+        "saturated": false,
+        "fault": "odometry_jump"
+      }
+    ],
+    "navigation_warning_or_error_records_in_goal_to_fault": []
+  },
+  "first_fault": {
+    "event": "first_fault_evidence",
+    "reason": "odometry_jump",
+    "evidence": {
+      "previous": {
+        "stamp": 1794053006.2882118,
+        "receipt": 122548.107091242,
+        "x": 0.5336394328561421,
+        "y": 0.4569244803577245,
+        "yaw": 1.473953079432906,
+        "v": -0.25294801408157114,
+        "w": 0.3629519238034316
+      },
+      "new": {
+        "stamp": 1794053006.3886395,
+        "receipt": 122548.214178393,
+        "x": 0.5653927480745355,
+        "y": 0.5049102264361587,
+        "yaw": 1.499626437071044,
+        "v": 0.5026730597398461,
+        "w": 0.2556403890548746
+      },
+      "source_dt_s": 0.10042762756347656,
+      "planar_distance_m": 0.057540462755026736,
+      "absolute_yaw_delta_rad": 0.025673357638137828,
+      "existing_distance_bound_m": 0.040085525512695314,
+      "existing_angle_bound_rad": 0.10025657653808594,
+      "previous_source": "pending-or-admitted source used by unchanged guard",
+      "source_stamp_semantics": "original incoming source seconds; not renewed"
+    },
+    "receipt_monotonic": 122548.214178393,
+    "receipt_unix_s": 1794053006.4085498,
+    "new_source_stamp_ns": 1794053006388639450,
+    "caller": "/nso_visual_sensor_bridge",
+    "frame": "odom",
+    "child_frame": "base_link"
+  },
+  "fault_pairs": {
+    "previous": {
+      "csm_source_stamp_ns": 1794053006288211823,
+      "can_pair": {
+        "current_minus_can_ns": 29400953,
+        "kernel_stamp_ns": 1794053006269116287,
+        "raw_frame_hex": "2102000008000000003a015600000000",
+        "receipt_age_ns": 29080276,
+        "receipt_monotonic_ns": 122548075070724,
+        "scan_minus_can_ns": 19095536,
+        "scan_stamp_ns": 1794053006288211823,
+        "selected_monotonic_ns": 122548104151000,
+        "selected_wall_ns": 1794053006298517240,
+        "vx": 0.058,
+        "w": 0.342
+      },
+      "raw_csm_twist": {
+        "vx": -0.25294801408157114,
+        "vy": 0.2049859327172916,
+        "w": 0.3629519238034316
+      },
+      "control_twist": {
+        "vx": 0.058,
+        "vy": 0.0,
+        "w": 0.342
+      },
+      "raw_window": {
+        "vx": [
+          0.0,
+          -0.22794801408157114
+        ],
+        "w": [
+          0.2829519238034316,
+          0.3
+        ],
+        "vx_inverted": true,
+        "w_inverted": false
+      },
+      "control_window": {
+        "vx": [
+          0.033,
+          0.05
+        ],
+        "w": [
+          0.262,
+          0.3
+        ],
+        "vx_inverted": false,
+        "w_inverted": false
+      }
+    },
+    "new": {
+      "csm_source_stamp_ns": 1794053006388639450,
+      "can_pair": {
+        "current_minus_can_ns": 37725736,
+        "kernel_stamp_ns": 1794053006369114164,
+        "raw_frame_hex": "2102000008000000002b012400000000",
+        "receipt_age_ns": 37480420,
+        "receipt_monotonic_ns": 122548174993080,
+        "scan_minus_can_ns": 19525286,
+        "scan_stamp_ns": 1794053006388639450,
+        "selected_monotonic_ns": 122548212473500,
+        "selected_wall_ns": 1794053006406839900,
+        "vx": 0.043,
+        "w": 0.292
+      },
+      "raw_csm_twist": {
+        "vx": 0.5026730597398461,
+        "vy": -0.2749812866623558,
+        "w": 0.2556403890548746
+      },
+      "control_twist": {
+        "vx": 0.043,
+        "vy": 0.0,
+        "w": 0.292
+      },
+      "raw_window": {
+        "vx": [
+          0.4776730597398461,
+          0.05
+        ],
+        "w": [
+          0.17564038905487456,
+          0.3
+        ],
+        "vx_inverted": true,
+        "w_inverted": false
+      },
+      "control_window": {
+        "vx": [
+          0.017999999999999995,
+          0.05
+        ],
+        "w": [
+          0.21199999999999997,
+          0.3
+        ],
+        "vx_inverted": false,
+        "w_inverted": false
+      }
+    }
+  },
+  "key_events": {
+    "goal_source_stamp_s": 1794053001.408386,
+    "goal_receipt_monotonic": 122543.214951111,
+    "fault_source_stamp_ns": 1794053006388639450,
+    "fault_receipt_monotonic": 122548.214178393,
+    "fault_receipt_unix_s": 1794053006.4085498,
+    "guard_zero_source_stamp_ns": 1794053006426637411,
+    "guard_zero_monotonic": 122548.232259887,
+    "guard_zero_latency_from_fault_ms": 18.081493995850906,
+    "goal_to_fault_s": 4.999227281994536,
+    "goal_terminal": {
+      "event": "goal_result",
+      "id": "/nso_onboard_supervisor-1-1794053001.408",
+      "status": 2,
+      "text": "",
+      "receipt_monotonic": 122548.315637607
+    }
+  },
+  "raw_vs_chassis_integrals": {
+    "raw_accepted_odom_distance_m": 0.4091288147465513,
+    "chassis_can_distance_m": 0.17852642965316762,
+    "raw_accepted_absolute_yaw_rad": 0.8817468217723068,
+    "chassis_can_absolute_yaw_rad": 0.8669607206583023
+  },
+  "recommendation": "May retain the explicitly labeled CAN adaptation epoch for localization diagnosis; no evidence here requires disabling a healthy measured-input adapter. Do not promote it to the default NSO method or claim efficacy. Prioritize offline raw-pose replay rather than another same-type motion trial. CAN-source-loss stop behavior remains code-reviewed, not validated by these healthy-source trials.",
+  "conclusion": "Recorded CAN control pairing operated within its unchanged TTL without missing provenance, reader faults or inverted control windows. The unchanged raw CSM position jump tripped the original guard and prevented arrival. This supports input-adapter operation, not accuracy or efficacy improvement.",
+  "limits": [
+    "Telemetry polls latest asynchronous samples and omits some intermediate publications; absence of missing samples cannot prove complete full-rate delivery.",
+    "Adapter journal is periodic/event sampled; latest actuator command snapshots supplement it but are not all controller cycles.",
+    "Recorded pose equality concerns raw/control messages; provenance raw_pose_stamp_tf_unchanged is a producer assertion, not an independent TF ground truth.",
+    "Measured CAN velocities may exceed configured command caps; that is not a command/proposal bound violation.",
+    "Probes03/04 have different trajectories and start conditions; no matched-method comparison."
+  ]
+}

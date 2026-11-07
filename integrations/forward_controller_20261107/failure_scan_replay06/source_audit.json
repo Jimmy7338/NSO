@@ -1,0 +1,40 @@
+{
+  "schema": "nso.csm_source_audit.v1",
+  "installed_package": "ros-noetic-laser-scan-matcher 0.4.0-1focal.20250521.032611",
+  "release_source_url": "https://raw.githubusercontent.com/ros-gbp/scan_tools-release/release/noetic/laser_scan_matcher/0.4.0-1/src/laser_scan_matcher.cpp",
+  "source_binary_equivalence": "Release source version matches installed package; exact binary/source build equivalence not independently reproduced",
+  "facts": [
+    {
+      "source": "csm_release_0_4_0.cpp:169",
+      "fact": "Default keyframe distance .10m or10deg; keyframe update keeps latest global pose rather than resetting it"
+    },
+    {
+      "source": "csm_release_0_4_0.cpp:791",
+      "fact": "With use_tf/imu/odom/vel allfalse prediction is identity increment from last pose, not zero absolute pose; first guess remains last pose relative to current reference keyframe"
+    },
+    {
+      "source": "csm_release_0_4_0.cpp:498",
+      "fact": "Any ICP output.valid updates and publishes global pose; no adjacent-pose velocity/jump admission bound in matcher"
+    },
+    {
+      "source": "csm_release_0_4_0.cpp:710",
+      "fact": "LaserScan conversion uses range/angle fields only; no per-beam temporal deskew"
+    },
+    {
+      "source": "lslidar_x10_driver.cpp:240,454",
+      "fact": "Driver emits zero time_increment, configured end-of-sweep timestamp; recorded scan_time also0"
+    },
+    {
+      "source": "lslidar_x10_driver.cpp:454-460",
+      "fact": "point_cloud_time is assigned before taking pointcloud_lock and swapping backup buffer; theoretical old-buffer/new-stamp race exists but recorded stamps are regular and no causal evidence currently"
+    }
+  ],
+  "next_minimum_capture": [
+    "For faithful runtime-state replay retain actual reference/keyframe scan plus source stamp, last/keyframe base poses, first_guess and ICP valid/error/nvalid for the fault. This requires explicit instrumented matcher or a capture spanning initialization with known state; a finite pre-fault ring alone cannot guarantee last keyframe inclusion.",
+    "Do not guess per-beam times from time_increment0; packet/point times would be needed before any deskew adaptation.",
+    "Continue unchanged rawscan/reference inputs; current stable8m-tail distribution does not justify range clipping as first intervention."
+  ],
+  "replay_result": "No new-initialization replay reproduced live5cm jump, including raw98/99 pair; original state remains unknown",
+  "guard_threshold_changed": false,
+  "live_runtime_changed": false
+}

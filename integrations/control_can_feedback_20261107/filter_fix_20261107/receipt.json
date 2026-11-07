@@ -1,0 +1,68 @@
+{
+  "status": "candidate_fix_completed_root_subsequently_deployed",
+  "root_cause": "Incorrect candidate SocketCAN data filter mask 0xe00007ff included CAN_ERR_FLAG and routed filter to Linux error filter list. Same-time c00007ff listener received 100 normal 0x221 frames versus zero for e00007ff. Not ARM64 kernel timestamp failure.",
+  "filter_diagnostic": "filter_diagnostic.json",
+  "candidate_filter_mask": "0xc00007ff",
+  "live_validation": {
+    "csm_frames": 60,
+    "matched_frames": 60,
+    "source_health_reason": null,
+    "source_receipt": {
+      "can_interface": "can0",
+      "can_id": "0x221",
+      "data_filter_mask": "0xc00007ff",
+      "timestamp_socket_option": 35,
+      "source_timestamp_semantics": "original SocketCAN SO_TIMESTAMPNS kernel realtime nanoseconds",
+      "source_ttl_ns": 150000000,
+      "received_frames": 300,
+      "accepted_frames": 300,
+      "dropped_frames": 0,
+      "reader_error": null,
+      "started_monotonic_ns": 122424610907154,
+      "realtime_monotonic_offset_ns": 1793930458194370240
+    },
+    "age_ranges_ms": {
+      "scan_minus_can_ns": [
+        1.465587,
+        7.685132
+      ],
+      "current_minus_can_ns": [
+        12.934046,
+        34.96076
+      ],
+      "receipt_age_ns": [
+        12.788892,
+        34.813557
+      ]
+    },
+    "all_selected_can_not_after_scan": true
+  },
+  "offline_tests": {
+    "count": 26,
+    "exit_code": 0,
+    "log": "tests.log"
+  },
+  "provenance_topic": "/nso_csm/control_velocity_provenance",
+  "provenance_type": "std_msgs/String",
+  "profile_parameter": "/nso_csm_odometry_bridge/control_velocity_source",
+  "startup_fix": "Fixed reader-start +150ms grace before first successful control pairing, including cached post-scan CAN samples; no outputs during grace; no grace reentry",
+  "sha256": {
+    "runtime/can_control_feedback.py": "3a7c81b58a7e19f9a27fef00ffa0c09f69c7037cec93720f59e8090fa0ff2166",
+    "runtime/csm_odometry_bridge.py": "fcdb4b2c0f3d442ebd5bcde1d872c92996daafad761df3cfd1bcfd210f97b745",
+    "tests/test_can_control_feedback.py": "e0cb47a684d795f077db4160eab131e0e61aa275649426ec285a16d13c6e1618",
+    "tests/test_csm_odometry_bridge.py": "35da5ada78762452d50b831b5e06f519067b5cb78db82297078b47d52ff852f1"
+  },
+  "live_bridge_sha256": "fcdb4b2c0f3d442ebd5bcde1d872c92996daafad761df3cfd1bcfd210f97b745",
+  "launch_use_tf_false_preserved": true,
+  "live_parameters_written": false,
+  "live_bridge_modified": false,
+  "live_processes_restarted": false,
+  "motion_commands_sent": false,
+  "github_writes": false,
+  "deployment_owner": "root",
+  "root_reported_deployment_pid": 1022864,
+  "source_agent_deployed": false,
+  "source_agent_stage_edits_stopped": true,
+  "live_bridge_sha256_at_prior_read_only_validation": "af811c8dc43a928e5c0e976e51e19c3feb0b3aaef6f0ef5b78994c0fb0b812b4",
+  "live_bridge_hash_changed_by_root_after_validation": true
+}

@@ -9,7 +9,7 @@ import subprocess
 import time
 
 from runtime_environment import bounded_environment
-from localization_profiles import DEFAULT_LOCALIZATION_SOURCE, localization_profile
+from localization_profiles import DEFAULT_LOCALIZATION_SOURCE, localization_profile, control_velocity_receipt
 
 WORK=Path(__file__).resolve().parents[1]
 MASTER='http://127.0.0.1:11382'
@@ -118,9 +118,11 @@ def main(argv=None):
         sampled_unix_s=time.time(),no_actuator_started=True,new_processes=[name for name,_ in children],
         localization_source=profile['name'],velocity_source=profile['velocity_source'],
         odom_source_topic=profile['odom_topic'],odom_expected_publisher=profile['expected_publisher'],
-        control_odom_topic=profile['control_odom_topic'],control_velocity_model=profile['control_velocity_model'],
+        control_odom_topic=profile['control_odom_topic'],
         tf_ownership=dict(odom_to_base=profile['tf_owner'].lstrip('/'),map_to_odom='slam_gmapping',bridge_dynamic_tf=False),
         physical_extrinsic_calibration_verified=False)
+    receipt.update(control_velocity_receipt(profile, rospy.get_param(
+        '/nso_csm_odometry_bridge/control_velocity_source', None)))
     (target/'ready.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt))
 

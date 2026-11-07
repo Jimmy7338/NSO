@@ -545,6 +545,10 @@ def main(argv=None):
     save(output/'runtime_parameters.json',dict(captured_unix_s=time.time(),
         navigation_source='lidar_rgbd',experiment_config_sha256=experiment_sha,
         localization_source=localization_source,
+        control_velocity_source=(rospy.get_param('/nso_csm_odometry_bridge/control_velocity_source','csm_se2')
+                                 if localization_source=='lidar_csm' else 'RF2O_original_twist'),
+        control_velocity_parameters=(rospy.get_param('/nso_csm_odometry_bridge',{})
+                                     if localization_source=='lidar_csm' else {}),
         localization_parameters=rospy.get_param('/nso_csm',{}) if localization_source=='lidar_csm' else rospy.get_param('/rf2o_laser_odometry',{}),
         camera_depth=rospy.get_param('/zed2i/zed_node/depth',{}),
         camera_depth_confidence=rospy.get_param('/zed2i/zed_node/depth_confidence',None),

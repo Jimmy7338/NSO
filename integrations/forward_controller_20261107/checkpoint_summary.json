@@ -1,0 +1,58 @@
+{
+  "schema": "nso.control_diagnosis.20261107.v1",
+  "trials": [
+    {
+      "name": "short_forward_02",
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_short_forward_02",
+      "status": "standard_navigation_setup_goal_reached",
+      "reason": null,
+      "CAN_distance_m": 0.12225480008125307,
+      "CAN_absolute_yaw_rad": 0.09321213960647581,
+      "elapsed_s": 5.791003928999999,
+      "stopped": true,
+      "min_logged_position_error_m": 0.0739681148318228,
+      "samples_in_8cm": 5,
+      "DWA_xy_goal_tolerance_m": 0.08,
+      "DWA_forward_point_distance_m": 0.325,
+      "NSO_action": false
+    },
+    {
+      "name": "offset_forward_03",
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_offset_forward_03",
+      "status": "execution_interrupted",
+      "reason": "chassis_before_stop:odometry_jump",
+      "CAN_distance_m": 0.4218455952405933,
+      "CAN_absolute_yaw_rad": 3.1429766272306456,
+      "elapsed_s": 45.454999434994534,
+      "stopped": true,
+      "min_logged_position_error_m": 0.09268500287125724,
+      "samples_in_8cm": 0,
+      "DWA_xy_goal_tolerance_m": 0.08,
+      "DWA_forward_point_distance_m": 0.325,
+      "NSO_action": false
+    },
+    {
+      "name": "offset_fp0_04",
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_offset_fp0_04",
+      "status": "execution_interrupted",
+      "reason": "RuntimeError: setup_navigation_duration_complete",
+      "CAN_distance_m": 0.35125918054580657,
+      "CAN_absolute_yaw_rad": 2.9544481436014154,
+      "elapsed_s": 48.33774911100045,
+      "stopped": true,
+      "min_logged_position_error_m": 0.09145728962807777,
+      "samples_in_8cm": 0,
+      "DWA_xy_goal_tolerance_m": 0.08,
+      "DWA_forward_point_distance_m": 0.0,
+      "NSO_action": false
+    }
+  ],
+  "scoped_CSМ_fix": "Explicit use_tf=false removes circular prediction wait; same-input stationary isolated replay validates delay and drop reduction, not moving localization accuracy.",
+  "limits": [
+    "Standard ROS control diagnostics, not NSO trials or matched method efficacy comparisons",
+    "Offset cases reproduce start-to-goal geometry at different actual poses and scene observations",
+    "Single-frame DWA reconstruction uses inverse-quantized occupancy costs and fresh oscillation state; it does not establish the full physical loop cause"
+  ],
+  "CAN_candidate_state": "24 mock checks passed, not deployed; exact prior runtime restored with8 original bridge tests. Candidate preserved under analyses/control_can_candidate_20261107/staged_runtime_and_tests.",
+  "next_task": "Analyze temporal sign changes and control-twist errors; static CAN substitution did not change sampled instantaneous choice but does not test temporal stability. Choose one evidence-driven control adaptation or captured-sequence replay; avoid further blind parameter sweeps. Preserve original NSO score/targets, collision checking and raw-pose jump protection."
+}

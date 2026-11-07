@@ -1,0 +1,43 @@
+{
+  "live_tf_audit": "live_tf_setup_audit.json",
+  "transform_exact_equal": true,
+  "recorded_qx_qy_all_zero": true,
+  "repeated_cases": [
+    {
+      "label": "audit_full150",
+      "input_count": 150,
+      "output_count": 150,
+      "params_before": {},
+      "kf_params_present": false,
+      "max_step_m": 0.02219072180931063,
+      "fault_pair_step_m": 0.01017331793529189
+    },
+    {
+      "label": "audit_start050",
+      "input_count": 100,
+      "output_count": 100,
+      "params_before": {},
+      "kf_params_present": false,
+      "max_step_m": 0.022190721809310605,
+      "fault_pair_step_m": 0.010173317935291906
+    },
+    {
+      "label": "audit_pair098099",
+      "input_count": 2,
+      "output_count": 2,
+      "params_before": {},
+      "kf_params_present": false,
+      "max_step_m": 0.010173317935291828,
+      "fault_pair_step_m": 0.010173317935291828
+    }
+  ],
+  "inferred_keyframe_switch_indices_using_release_defaults": [
+    78,
+    86,
+    92,
+    98
+  ],
+  "inference_not_internal_logged_state": true,
+  "explanation": "Full replay inferred keyframe switches at98 immediately before fault99, explaining why pair98/99 and full history match. This is inferred from replay output and known default thresholds, not observed live matcher state.",
+  "original_runtime_keyframe_state_missing": true
+}
