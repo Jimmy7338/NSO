@@ -3,7 +3,7 @@ DEFAULT_LOCALIZATION_SOURCE = 'lidar_rf2o'
 LOCALIZATION_SOURCES = ('lidar_rf2o', 'lidar_csm')
 
 
-def control_velocity_receipt(profile, reported_source=None):
+def control_velocity_receipt(profile, reported_source=None, pose_source=None):
     """Describe the active control input; this metadata does not admit motion."""
     if profile['name'] != 'lidar_csm':
         return dict(control_velocity_source=profile['velocity_source'],
@@ -11,8 +11,14 @@ def control_velocity_receipt(profile, reported_source=None):
     source = reported_source if reported_source is not None else 'csm_se2'
     models = dict(csm_se2=profile['control_velocity_model'],
                   can_feedback='CAN_measured_vx_w_paired_at_or_before_scan_raw_CSM_pose_and_TF_retained')
-    return dict(control_velocity_source=source,
-                control_velocity_model=models.get(source, 'unrecognized_reported_control_source'))
+    result = dict(control_velocity_source=source,
+                  control_velocity_model=models.get(source, 'unrecognized_reported_control_source'))
+    if pose_source:
+        result['pose_source'] = pose_source
+        if pose_source.get('fixed_coordinate_transform_applied'):
+            result['control_velocity_model'] = ('CAN_measured_vx_w_paired_at_or_before_scan_fixed_SE2_aligned_CSM_pose'
+                if source == 'can_feedback' else 'CSM_SE2_body_twist_fixed_coordinate_alignment')
+    return result
 
 
 def localization_profile(name=DEFAULT_LOCALIZATION_SOURCE):

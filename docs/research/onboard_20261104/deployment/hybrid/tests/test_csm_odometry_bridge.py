@@ -294,7 +294,10 @@ class BridgeTest(unittest.TestCase):
                 patch.object(rospy, 'set_param') as profile:
             self.assertEqual(bridge.main(), 0)
         spin.assert_called_once()
-        profile.assert_called_once_with('~control_velocity_source','csm_se2')
+        self.assertEqual(profile.call_count, 2)
+        profile.assert_any_call('~control_velocity_source','csm_se2')
+        profile.assert_any_call('~pose_source',bridge.pose_source_parameters(
+            '/nso_csm/pose_stamped',bridge.EXPECTED_CALLER,bridge.SOURCE_FRAME,None))
 
     def test_main_opt_in_watchdog_failure_exits_nonzero_and_closes_source(self):
         from unittest.mock import Mock
@@ -313,7 +316,10 @@ class BridgeTest(unittest.TestCase):
         module.CanVelocityFeedback.assert_called_once_with('can0')
         source.start.assert_called_once(); source.close.assert_called_once()
         stop.assert_called_once_with('CAN velocity source expired')
-        profile.assert_called_once_with('~control_velocity_source','can_feedback')
+        self.assertEqual(profile.call_count, 2)
+        profile.assert_any_call('~control_velocity_source','can_feedback')
+        profile.assert_any_call('~pose_source',bridge.pose_source_parameters(
+            '/nso_csm/pose_stamped',bridge.EXPECTED_CALLER,bridge.SOURCE_FRAME,None))
 
 
 if __name__ == '__main__': unittest.main()

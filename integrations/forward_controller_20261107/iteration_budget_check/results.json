@@ -1,0 +1,1027 @@
+{
+  "schema": "nso.CSM_iteration_budget_check.v1",
+  "master": "http://127.0.0.1:11403",
+  "fixed_state": "actual ref096/pose096,actual prev098/pose098,target099 exact original scan/first_guess",
+  "recursive_state": "actual ref096/pose096 seed then own ICP outputs only through104, native default keyframe policy; no clipping even when guard would stop",
+  "results": [
+    {
+      "case": "fixed",
+      "limit": 10,
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false,
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295,
+        "max_iterations": 10
+      },
+      "results": [
+        {
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131581063032,
+          "target_stamp_ns": 1794053131681172132,
+          "actual_keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "actual_previous_pose": [
+            0.5124816006909186,
+            0.6378616913666428,
+            2.244938895863188
+          ],
+          "first_guess": [
+            0.010185340688086832,
+            -0.004402547859409271,
+            0.054821639273336456
+          ],
+          "max_iterations": 10,
+          "icp_microseconds": 7638,
+          "valid": true,
+          "error": 64.7565731504332,
+          "nvalid": 1652,
+          "iterations": 11,
+          "laser_offset": [
+            0.03736444356359098,
+            -0.0468200034921946,
+            0.08896208594749586
+          ],
+          "result_pose": [
+            0.5308784908706593,
+            0.6844681534492013,
+            2.2790793425373477
+          ],
+          "actual_target_pose": [
+            0.5308784908706593,
+            0.6844681534492013,
+            2.2790793425373472
+          ],
+          "planar_jump_m": 0.050105966472451156,
+          "actual_target_xy_error_m": 0,
+          "actual_target_yaw_error_rad": 4.440892098500626e-16,
+          "would_switch_keyframe": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": true
+        }
+      ]
+    },
+    {
+      "case": "recursive",
+      "limit": 10,
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false,
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295,
+        "max_iterations": 10
+      },
+      "results": [
+        {
+          "mode": "A",
+          "scan_index": 97,
+          "scan_stamp_ns": 1794053131481208563,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131381242990,
+          "previous_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            1.734723475976807e-18,
+            -1.3010426069826053e-18,
+            0
+          ],
+          "valid": true,
+          "icp_microseconds": 7479.231,
+          "x": [
+            0.003074493356508851,
+            -0.0013297211741126018,
+            0.0245314717265329
+          ],
+          "error": 7.061337171430493,
+          "nvalid": 1431,
+          "iterations": 11,
+          "result_pose": [
+            0.5144355297732022,
+            0.630408000268484,
+            2.2146487283163845
+          ],
+          "planar_jump_m": 0.0033298697247523996,
+          "yaw_jump_rad": 0.024531471726532583,
+          "existing_distance_bound_m": 0.039993114600000004,
+          "existing_angle_bound_rad": 0.0999793438,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": true
+        },
+        {
+          "mode": "A",
+          "scan_index": 98,
+          "scan_stamp_ns": 1794053131581063032,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131481208563,
+          "previous_pose": [
+            0.5144355297732022,
+            0.630408000268484,
+            2.2146487283163845
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.0030744933565088513,
+            -0.0013297211741126547,
+            0.024531471726532878
+          ],
+          "valid": true,
+          "icp_microseconds": 5999.756,
+          "x": [
+            0.010185340688086813,
+            -0.004402547859409238,
+            0.05482163927333642
+          ],
+          "error": 6.611126318688707,
+          "nvalid": 1307,
+          "iterations": 11,
+          "result_pose": [
+            0.5124816006909186,
+            0.6378616913666428,
+            2.244938895863188
+          ],
+          "planar_jump_m": 0.007705540204642756,
+          "yaw_jump_rad": 0.03029016754680347,
+          "existing_distance_bound_m": 0.039970893800000004,
+          "existing_angle_bound_rad": 0.0999126814,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": true
+        },
+        {
+          "mode": "A",
+          "scan_index": 99,
+          "scan_stamp_ns": 1794053131681172132,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131581063032,
+          "previous_pose": [
+            0.5124816006909186,
+            0.6378616913666428,
+            2.244938895863188
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.010185340688086833,
+            -0.004402547859409271,
+            0.054821639273336414
+          ],
+          "valid": true,
+          "icp_microseconds": 7130.659,
+          "x": [
+            0.03736444356359098,
+            -0.0468200034921946,
+            0.08896208594749584
+          ],
+          "error": 64.7565731504332,
+          "nvalid": 1652,
+          "iterations": 11,
+          "result_pose": [
+            0.5308784908706593,
+            0.6844681534492013,
+            2.2790793425373477
+          ],
+          "planar_jump_m": 0.050105966472451156,
+          "yaw_jump_rad": 0.03414044667415971,
+          "existing_distance_bound_m": 0.04002182,
+          "existing_angle_bound_rad": 0.10006546000000001,
+          "exceeds_existing_jump_bound": true,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": true
+        },
+        {
+          "mode": "A",
+          "scan_index": 100,
+          "scan_stamp_ns": 1794053131781299591,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131681172132,
+          "previous_pose": [
+            0.5308784908706593,
+            0.6844681534492013,
+            2.2790793425373477
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.03736444356359097,
+            -0.046820003492194576,
+            0.08896208594749581
+          ],
+          "valid": true,
+          "icp_microseconds": 5698.325,
+          "x": [
+            0.01410130566312204,
+            -0.008466754850511416,
+            0.11878582159256239
+          ],
+          "error": 8.651822776652232,
+          "nvalid": 1499,
+          "iterations": 11,
+          "result_pose": [
+            0.5128373101893018,
+            0.6431233838158537,
+            2.3089030781824142
+          ],
+          "planar_jump_m": 0.04510957965235293,
+          "yaw_jump_rad": 0.02982373564506657,
+          "existing_distance_bound_m": 0.0400254918,
+          "existing_angle_bound_rad": 0.1000764754,
+          "exceeds_existing_jump_bound": true,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": true
+        },
+        {
+          "mode": "A",
+          "scan_index": 101,
+          "scan_stamp_ns": 1794053131882175207,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131781299591,
+          "previous_pose": [
+            0.5128373101893018,
+            0.6431233838158537,
+            2.3089030781824142
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.014101305663121943,
+            -0.008466754850511468,
+            0.11878582159256228
+          ],
+          "valid": true,
+          "icp_microseconds": 6131.863,
+          "x": [
+            0.05057149296672675,
+            -0.012596527460771247,
+            0.12795547539736973
+          ],
+          "error": 36.135096207901846,
+          "nvalid": 1534,
+          "iterations": 11,
+          "result_pose": [
+            0.49493376493615615,
+            0.6751727556153189,
+            2.3180727319872214
+          ],
+          "planar_jump_m": 0.03671102239616583,
+          "yaw_jump_rad": 0.009169653804807165,
+          "existing_distance_bound_m": 0.0401751232,
+          "existing_angle_bound_rad": 0.1005253696,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": true
+        },
+        {
+          "mode": "A",
+          "scan_index": 102,
+          "scan_stamp_ns": 1794053131982556105,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131882175207,
+          "previous_pose": [
+            0.49493376493615615,
+            0.6751727556153189,
+            2.3180727319872214
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.050571492966726715,
+            -0.012596527460771265,
+            0.12795547539736973
+          ],
+          "valid": true,
+          "icp_microseconds": 5668.627,
+          "x": [
+            0.023593187474527464,
+            -0.0005590269110300762,
+            0.13015244925647892
+          ],
+          "error": 11.150278411916835,
+          "nvalid": 1321,
+          "iterations": 11,
+          "result_pose": [
+            0.5007694438232554,
+            0.6462066883801814,
+            2.3202697058463304
+          ],
+          "planar_jump_m": 0.02954806591206677,
+          "yaw_jump_rad": 0.002196973859108997,
+          "existing_distance_bound_m": 0.040076179600000005,
+          "existing_angle_bound_rad": 0.1002285388,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": true
+        },
+        {
+          "mode": "A",
+          "scan_index": 103,
+          "scan_stamp_ns": 1794053132082068205,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131982556105,
+          "previous_pose": [
+            0.5007694438232554,
+            0.6462066883801814,
+            2.3202697058463304
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.02359318747452745,
+            -0.0005590269110299999,
+            0.1301524492564789
+          ],
+          "valid": true,
+          "icp_microseconds": 5034.947,
+          "x": [
+            0.021618125451697036,
+            0.0007177117259176179,
+            0.12734635979060308
+          ],
+          "error": 12.25594510060784,
+          "nvalid": 1371,
+          "iterations": 9,
+          "result_pose": [
+            0.5009056251591362,
+            0.6438711222501322,
+            2.3174636163804547
+          ],
+          "planar_jump_m": 0.0023395329670844634,
+          "yaw_jump_rad": 0.002806089465875683,
+          "existing_distance_bound_m": 0.03990242,
+          "existing_angle_bound_rad": 0.09970726,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 104,
+          "scan_stamp_ns": 1794053132181501627,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053132082068205,
+          "previous_pose": [
+            0.5009056251591362,
+            0.6438711222501322,
+            2.3174636163804547
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.021618125451697036,
+            0.0007177117259176435,
+            0.12734635979060305
+          ],
+          "valid": true,
+          "icp_microseconds": 4468.151,
+          "x": [
+            0.021317894716715666,
+            0.00031176384170336505,
+            0.12666754069799852
+          ],
+          "error": 11.029911785646478,
+          "nvalid": 1353,
+          "iterations": 8,
+          "result_pose": [
+            0.5014175514039885,
+            0.6438656234751687,
+            2.31678479728785
+          ],
+          "planar_jump_m": 0.0005119557761122312,
+          "yaw_jump_rad": 0.0006788190926045878,
+          "existing_distance_bound_m": 0.039886684400000004,
+          "existing_angle_bound_rad": 0.0996600532,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 10,
+          "at_or_above_iteration_budget": false
+        }
+      ]
+    },
+    {
+      "case": "fixed",
+      "limit": 50,
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false,
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295,
+        "max_iterations": 50
+      },
+      "results": [
+        {
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131581063032,
+          "target_stamp_ns": 1794053131681172132,
+          "actual_keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "actual_previous_pose": [
+            0.5124816006909186,
+            0.6378616913666428,
+            2.244938895863188
+          ],
+          "first_guess": [
+            0.010185340688086832,
+            -0.004402547859409271,
+            0.054821639273336456
+          ],
+          "max_iterations": 50,
+          "icp_microseconds": 15502,
+          "valid": true,
+          "error": 64.7047526524854,
+          "nvalid": 1651,
+          "iterations": 19,
+          "laser_offset": [
+            0.03740943783951935,
+            -0.04685444275628779,
+            0.08896554271424266
+          ],
+          "result_pose": [
+            0.5308803786956054,
+            0.6845247669031113,
+            2.2790827993040943
+          ],
+          "actual_target_pose": [
+            0.5308784908706593,
+            0.6844681534492013,
+            2.2790793425373472
+          ],
+          "planar_jump_m": 0.05015932266875127,
+          "actual_target_xy_error_m": 5.664492074882911e-05,
+          "actual_target_yaw_error_rad": 3.456766747067519e-06,
+          "would_switch_keyframe": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        }
+      ]
+    },
+    {
+      "case": "recursive",
+      "limit": 50,
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false,
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295,
+        "max_iterations": 50
+      },
+      "results": [
+        {
+          "mode": "A",
+          "scan_index": 97,
+          "scan_stamp_ns": 1794053131481208563,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131381242990,
+          "previous_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            1.734723475976807e-18,
+            -1.3010426069826053e-18,
+            0
+          ],
+          "valid": true,
+          "icp_microseconds": 9232.997,
+          "x": [
+            0.003074493356508851,
+            -0.0013297211741126018,
+            0.0245314717265329
+          ],
+          "error": 7.061338448431324,
+          "nvalid": 1431,
+          "iterations": 12,
+          "result_pose": [
+            0.5144355297732022,
+            0.630408000268484,
+            2.2146487283163845
+          ],
+          "planar_jump_m": 0.0033298697247523996,
+          "yaw_jump_rad": 0.024531471726532583,
+          "existing_distance_bound_m": 0.039993114600000004,
+          "existing_angle_bound_rad": 0.0999793438,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 98,
+          "scan_stamp_ns": 1794053131581063032,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131481208563,
+          "previous_pose": [
+            0.5144355297732022,
+            0.630408000268484,
+            2.2146487283163845
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.0030744933565088513,
+            -0.0013297211741126547,
+            0.024531471726532878
+          ],
+          "valid": true,
+          "icp_microseconds": 7730.129,
+          "x": [
+            0.010217534203365736,
+            -0.004393086763071473,
+            0.054809080912487755
+          ],
+          "error": 6.607358888235021,
+          "nvalid": 1308,
+          "iterations": 13,
+          "result_pose": [
+            0.5124553443700957,
+            0.6378824655643787,
+            2.2449263375023394
+          ],
+          "planar_jump_m": 0.007732319554325863,
+          "yaw_jump_rad": 0.0302776091859549,
+          "existing_distance_bound_m": 0.039970893800000004,
+          "existing_angle_bound_rad": 0.0999126814,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 99,
+          "scan_stamp_ns": 1794053131681172132,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131581063032,
+          "previous_pose": [
+            0.5124553443700957,
+            0.6378824655643787,
+            2.2449263375023394
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.01021753420336577,
+            -0.004393086763071428,
+            0.05480908091248778
+          ],
+          "valid": true,
+          "icp_microseconds": 13164.978,
+          "x": [
+            0.03738827100039429,
+            -0.04685099965759166,
+            0.08897859017885662
+          ],
+          "error": 64.694723883374,
+          "nvalid": 1651,
+          "iterations": 21,
+          "result_pose": [
+            0.5308897233415129,
+            0.6845054739786314,
+            2.2790958467687084
+          ],
+          "planar_jump_m": 0.05013512981590162,
+          "yaw_jump_rad": 0.03416950926636897,
+          "existing_distance_bound_m": 0.04002182,
+          "existing_angle_bound_rad": 0.10006546000000001,
+          "exceeds_existing_jump_bound": true,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 100,
+          "scan_stamp_ns": 1794053131781299591,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131681172132,
+          "previous_pose": [
+            0.5308897233415129,
+            0.6845054739786314,
+            2.2790958467687084
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.03738827100039423,
+            -0.046850999657591694,
+            0.08897859017885665
+          ],
+          "valid": true,
+          "icp_microseconds": 8379.555,
+          "x": [
+            0.014023956329969316,
+            -0.008419145477817929,
+            0.11878046377779049
+          ],
+          "error": 8.63958259444194,
+          "nvalid": 1498,
+          "iterations": 15,
+          "result_pose": [
+            0.5128434993087357,
+            0.6430327897401418,
+            2.3088977203676424
+          ],
+          "planar_jump_m": 0.045228859589720435,
+          "yaw_jump_rad": 0.029801873598934048,
+          "existing_distance_bound_m": 0.0400254918,
+          "existing_angle_bound_rad": 0.1000764754,
+          "exceeds_existing_jump_bound": true,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 101,
+          "scan_stamp_ns": 1794053131882175207,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131781299591,
+          "previous_pose": [
+            0.5128434993087357,
+            0.6430327897401418,
+            2.3088977203676424
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.014023956329969278,
+            -0.008419145477818038,
+            0.11878046377779054
+          ],
+          "valid": true,
+          "icp_microseconds": 12829.785,
+          "x": [
+            0.051159557152011474,
+            -0.012152466338269864,
+            0.12819146534215173
+          ],
+          "error": 36.00562985012305,
+          "nvalid": 1528,
+          "iterations": 22,
+          "result_pose": [
+            0.4942283517297554,
+            0.675392671973479,
+            2.3183087219320035
+          ],
+          "planar_jump_m": 0.037332100095529994,
+          "yaw_jump_rad": 0.009411001564361143,
+          "existing_distance_bound_m": 0.0401751232,
+          "existing_angle_bound_rad": 0.1005253696,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 102,
+          "scan_stamp_ns": 1794053131982556105,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131882175207,
+          "previous_pose": [
+            0.4942283517297554,
+            0.675392671973479,
+            2.3183087219320035
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.05115955715201141,
+            -0.01215246633826984,
+            0.1281914653421518
+          ],
+          "valid": true,
+          "icp_microseconds": 8754.175,
+          "x": [
+            0.02362576845032261,
+            -0.0006022880929790749,
+            0.1301438844217066
+          ],
+          "error": 11.135403010490558,
+          "nvalid": 1318,
+          "iterations": 16,
+          "result_pose": [
+            0.5007858469377655,
+            0.6462583727741461,
+            2.3202611410115583
+          ],
+          "planar_jump_m": 0.029863156786236165,
+          "yaw_jump_rad": 0.0019524190795547902,
+          "existing_distance_bound_m": 0.040076179600000005,
+          "existing_angle_bound_rad": 0.1002285388,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 103,
+          "scan_stamp_ns": 1794053132082068205,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053131982556105,
+          "previous_pose": [
+            0.5007858469377655,
+            0.6462583727741461,
+            2.3202611410115583
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.02362576845032263,
+            -0.0006022880929790466,
+            0.1301438844217066
+          ],
+          "valid": true,
+          "icp_microseconds": 4510.683,
+          "x": [
+            0.021618125451697036,
+            0.0007177117259176179,
+            0.12734635979060308
+          ],
+          "error": 12.25594510060784,
+          "nvalid": 1371,
+          "iterations": 8,
+          "result_pose": [
+            0.5009056251591362,
+            0.6438711222501322,
+            2.3174636163804547
+          ],
+          "planar_jump_m": 0.002390253519340435,
+          "yaw_jump_rad": 0.0027975246311036095,
+          "existing_distance_bound_m": 0.03990242,
+          "existing_angle_bound_rad": 0.09970726,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        },
+        {
+          "mode": "A",
+          "scan_index": 104,
+          "scan_stamp_ns": 1794053132181501627,
+          "reference_index": 96,
+          "reference_stamp_ns": 1794053131381242990,
+          "previous_stamp_ns": 1794053132082068205,
+          "previous_pose": [
+            0.5009056251591362,
+            0.6438711222501322,
+            2.3174636163804547
+          ],
+          "keyframe_pose": [
+            0.5154059410269083,
+            0.6272226691424465,
+            2.190117256589852
+          ],
+          "motion_increment": [
+            0,
+            0,
+            0
+          ],
+          "first_guess": [
+            0.021618125451697036,
+            0.0007177117259176435,
+            0.12734635979060305
+          ],
+          "valid": true,
+          "icp_microseconds": 4492.313,
+          "x": [
+            0.021317894716715666,
+            0.00031176384170336505,
+            0.12666754069799852
+          ],
+          "error": 11.029911785646478,
+          "nvalid": 1353,
+          "iterations": 8,
+          "result_pose": [
+            0.5014175514039885,
+            0.6438656234751687,
+            2.31678479728785
+          ],
+          "planar_jump_m": 0.0005119557761122312,
+          "yaw_jump_rad": 0.0006788190926045878,
+          "existing_distance_bound_m": 0.039886684400000004,
+          "existing_angle_bound_rad": 0.0996600532,
+          "exceeds_existing_jump_bound": false,
+          "original_switch_decision": false,
+          "reference_replaced": false,
+          "configured_max_iterations": 50,
+          "at_or_above_iteration_budget": false
+        }
+      ]
+    }
+  ],
+  "input_npz_sha256": "a56157a692e7c4fd23f7cdf302ed36229d43399a30b8341383232cd5f1d48caa",
+  "live_modified": false,
+  "accuracy_limit": "Residual/convergence and consistency are not independent pose accuracy; no external truth."
+}

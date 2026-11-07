@@ -40,13 +40,17 @@ lock=threading.RLock()
 latest={}
 scan_ring=deque(maxlen=150)
 pose_ring=deque(maxlen=150)
+candidate_pose_ring=deque(maxlen=150)
+raw_odom_ring=deque(maxlen=150)
 goal_started=None
 def receive(name,msg):
     global goal_started
     with lock:
         latest[name]=(time.monotonic(),msg)
-        if args.capture_scan_ring and name in ('scan','csm_pose'):
-            (scan_ring if name=='scan' else pose_ring).append((time.time_ns(),msg))
+        if args.capture_scan_ring:
+            ring={'scan':scan_ring,'csm_pose':pose_ring,
+                  'candidate_pose':candidate_pose_ring,'raw_odom':raw_odom_ring}.get(name)
+            if ring is not None: ring.append((time.time_ns(),msg))
         if name=='goal' and goal_started is None:goal_started=time.monotonic()
 
 specs={
@@ -62,6 +66,8 @@ specs={
 }
 if args.capture_scan_ring:
     specs.update(scan=('/scan',LaserScan),csm_pose=('/nso_csm/pose_stamped',PoseStamped))
+    if rospy.has_param('/nso_csm_zero_keyframe/matcher'):
+        specs['candidate_pose']=('/nso_csm_zero_keyframe/pose_stamped',PoseStamped)
 subs=[rospy.Subscriber(topic,kind,lambda m,n=name:receive(n,m),queue_size=1)
       for name,(topic,kind) in specs.items()]
 client=Client('/nso_visual/move_base/DWAPlannerROS',timeout=5)
@@ -94,6 +100,7 @@ try:
     (OUT/'configuration.json').write_text(json.dumps(dict(initial=initial,target=target,old_DWA=old,requested_DWA=requested,applied_DWA=applied,
       control_velocity_parameters=rospy.get_param('/nso_csm_odometry_bridge',{}),
       matcher_parameters=rospy.get_param('/nso_csm',{}),
+      shadow_matcher_parameters=rospy.get_param('/nso_csm_zero_keyframe',{}),
       scope='CSM use_tf=false; explicit requested_DWA changes are temporary execution diagnostics, restored afterwards; no NSO policy modification or credit; no reverse; optional trajectory cloud recorded only if already published',
       snapshots_scope='latest asynchronously received messages with individual timestamps; not claimed perfectly synchronized'),indent=2))
     log=(OUT/'mission.log').open('xb')
@@ -134,7 +141,8 @@ finally:
     (OUT/'snapshots.json').write_text(json.dumps(snapshots,indent=2))
     if args.capture_scan_ring:
         packed={};meta=[]
-        with lock:rings=[('scan',list(scan_ring)),('csm_pose',list(pose_ring))]
+        with lock:rings=[('scan',list(scan_ring)),('csm_pose',list(pose_ring)),
+                         ('candidate_pose',list(candidate_pose_ring)),('raw_odom',list(raw_odom_ring))]
         for kind,rows in rings:
             for index,(received,msg) in enumerate(rows):
                 key='%s_%03d'%(kind,index);buf=io.BytesIO();msg.serialize(buf)
@@ -144,7 +152,7 @@ finally:
                                  caller=getattr(msg,'_connection_header',{}).get('callerid')))
         np.savez_compressed(OUT/'failure_scan_ring.npz',**packed)
         (OUT/'failure_scan_ring.json').write_text(json.dumps(dict(messages=meta,
-            scope='Bounded last150 source messages per topic for this specific odometry-jump diagnosis; not a complete matcher-state replay'),indent=2))
+            scope='Bounded last150 source messages per topic for this specific odometry-jump diagnosis; active odometry, original matcher and optional candidate are separately labeled; not a complete matcher-state replay'),indent=2))
     if can_capture is not None:
         can_capture.save_and_close(OUT/'failure_can_ring.json')
     (OUT/'restoration.json').write_text(json.dumps(dict(requested=restore,actual=client.get_configuration(timeout=3)),indent=2))

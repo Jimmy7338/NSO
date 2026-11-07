@@ -122,7 +122,8 @@ def main(argv=None):
         tf_ownership=dict(odom_to_base=profile['tf_owner'].lstrip('/'),map_to_odom='slam_gmapping',bridge_dynamic_tf=False),
         physical_extrinsic_calibration_verified=False)
     receipt.update(control_velocity_receipt(profile, rospy.get_param(
-        '/nso_csm_odometry_bridge/control_velocity_source', None)))
+        '/nso_csm_odometry_bridge/control_velocity_source', None), rospy.get_param(
+        '/nso_csm_odometry_bridge/pose_source', {}) if profile['name']=='lidar_csm' else None))
     (target/'ready.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt))
 

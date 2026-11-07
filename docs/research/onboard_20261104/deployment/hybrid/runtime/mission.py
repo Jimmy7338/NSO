@@ -550,6 +550,7 @@ def main(argv=None):
         control_velocity_parameters=(rospy.get_param('/nso_csm_odometry_bridge',{})
                                      if localization_source=='lidar_csm' else {}),
         localization_parameters=rospy.get_param('/nso_csm',{}) if localization_source=='lidar_csm' else rospy.get_param('/rf2o_laser_odometry',{}),
+        shadow_matcher_parameters=rospy.get_param('/nso_csm_zero_keyframe',{}) if localization_source=='lidar_csm' else {},
         camera_depth=rospy.get_param('/zed2i/zed_node/depth',{}),
         camera_depth_confidence=rospy.get_param('/zed2i/zed_node/depth_confidence',None),
         camera_texture_confidence=rospy.get_param('/zed2i/zed_node/depth_texture_conf',None),
