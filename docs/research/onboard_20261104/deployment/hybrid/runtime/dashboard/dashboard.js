@@ -7,6 +7,16 @@
     semanticURL.search = ''; semanticURL.hash = '';
     $('semantic-dashboard-link').href = semanticURL.href;
     $('entry-notice').hidden = false;
+    // Old bookmarks use the live overlay when available; keep a base-view fallback.
+    if (new URLSearchParams(location.search).get('basic') !== '1') {
+      const probe = new Image();
+      const automaticURL = new URL(semanticURL);
+      automaticURL.searchParams.set('entry', 'legacy');
+      const timer = setTimeout(() => { probe.onload = null; probe.onerror = null; }, 2500);
+      probe.onload = () => { clearTimeout(timer); location.replace(automaticURL.href); };
+      probe.onerror = () => { clearTimeout(timer); };
+      probe.src = new URL('/api/map.png?t=' + Date.now(), semanticURL).href;
+    }
   }
   let state = {}, mapImage = null, mapKey = '', lastSeen = 0;
   let stateReceivedAt = null, stateRequestSeconds = 0;
@@ -53,7 +63,7 @@
   }
   function mapTrackFit(){
     const m=state.map,p=state.pose,trajectory=state.trajectory;
-    if(!m||!p||!isFresh('pose',3)||p.frame!==m.frame||!Array.isArray(trajectory)){mapRobotFit();return;}
+    if(!m||!p||p.frame!==m.frame||!Array.isArray(trajectory)){mapRobotFit();return;}
     const pts=trajectory.filter(q=>Array.isArray(q)&&Number.isFinite(q[0])&&Number.isFinite(q[1]));
     if(Number.isFinite(p.x)&&Number.isFinite(p.y))pts.push([p.x,p.y]);if(!pts.length){mapRobotFit();return;}
     const xs=pts.map(q=>q[0]),ys=pts.map(q=>q[1]),loX=Math.min(...xs),hiX=Math.max(...xs),loY=Math.min(...ys),hiY=Math.max(...ys),{w,h}=sizeCanvas(mapCanvas);
@@ -62,15 +72,16 @@
   const semanticColors=['#ef9f53','#5b8ff9','#b37feb','#e66e91','#56a7a0','#d5b74d'];
   function semanticColor(o){const text=String(o.label||o.label_zh||'unknown');let hash=0;for(const c of text)hash=(hash*31+c.codePointAt(0))>>>0;return semanticColors[hash%semanticColors.length];}
   function semanticAge(stamp){const elapsed=stateReceivedAt===null?NaN:(performance.now()-stateReceivedAt)/1000;return Number.isFinite(stamp)&&stamp>0&&Number.isFinite(state.stamp)&&stamp<=state.stamp&&Number.isFinite(elapsed)&&elapsed>=0?state.stamp-stamp+stateRequestSeconds+elapsed:Infinity;}
+  function semanticCurrent(o){return !!(state.semantics&&state.semantics.status==='ok'&&isFresh('semantics',10)&&semanticAge(Number(o.last_seen_stamp||state.semantics.stamp))<=10);}
   function drawMap(){
     const {w,h,dpr}=sizeCanvas(mapCanvas);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
     const m=state.map;if(!m||!view.ready||!mapImage)return;
-    const poseFresh=isFresh('pose',3),sameFrame=poseFresh&&state.pose&&state.pose.frame===m.frame;
-    if(mapMode==='follow'&&sameFrame){
+    const poseFresh=isFresh('pose',3),sameFrame=state.pose&&state.pose.frame===m.frame&&[state.pose.x,state.pose.y,state.pose.yaw].every(Number.isFinite);
+    if(mapMode==='follow'&&sameFrame&&poseFresh){
       view.x=state.pose.x;view.y=state.pose.y;
       const sem=state.semantics;
       if(m.frame==='map'&&sem&&sem.frame==='map'&&Array.isArray(sem.objects)){
-        const visible=sem.objects.filter(o=>Number.isFinite(o.x)&&Number.isFinite(o.y)&&semanticAge(Number(o.last_seen_stamp||sem.stamp))<=30);
+        const visible=sem.objects.filter(o=>Number.isFinite(o.x)&&Number.isFinite(o.y)&&semanticCurrent(o));
         if(visible.length){
           const trail=Array.isArray(state.trajectory)?state.trajectory.filter(p=>Array.isArray(p)&&Number.isFinite(p[0])&&Number.isFinite(p[1])):[];
           const points=visible.map(o=>[o.x,o.y]).concat(trail);let extentX=2,extentY=2;
@@ -86,12 +97,12 @@
     ctx.imageSmoothingEnabled=false;ctx.drawImage(mapImage,left,top,m.width*m.resolution*view.scale,m.height*m.resolution*view.scale);
     if(sameFrame&&Array.isArray(state.trajectory)&&state.trajectory.length){
       const pts=state.trajectory.filter(p=>Array.isArray(p)&&Number.isFinite(p[0])&&Number.isFinite(p[1]));
-      if(pts.length){ctx.beginPath();pts.forEach((p,i)=>{const [x,y]=point(p[0],p[1]);if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);});ctx.lineJoin='round';ctx.lineCap='round';ctx.strokeStyle='#153a3c';ctx.lineWidth=7;ctx.stroke();ctx.strokeStyle='#48e5c5';ctx.lineWidth=3;ctx.stroke();
+      if(pts.length){ctx.save();if(!poseFresh){ctx.globalAlpha=.65;ctx.setLineDash([6,4]);}ctx.beginPath();pts.forEach((p,i)=>{const [x,y]=point(p[0],p[1]);if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);});ctx.lineJoin='round';ctx.lineCap='round';ctx.strokeStyle='#153a3c';ctx.lineWidth=7;ctx.stroke();ctx.strokeStyle='#48e5c5';ctx.lineWidth=3;ctx.stroke();ctx.restore();
         for(const [p,color,r] of [[pts[0],'#fff',4],[pts[pts.length-1],'#48e5c5',4]]){const [x,y]=point(p[0],p[1]);ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();ctx.strokeStyle='#173333';ctx.lineWidth=2;ctx.stroke();}}
     }
     const sem=state.semantics,enabled=$('semantic-toggle').checked,boxes=[];
     if(enabled&&sem&&m.frame==='map'&&sem.frame==='map'&&Array.isArray(sem.objects)){
-      for(const o of sem.objects){if(!Number.isFinite(o.x)||!Number.isFinite(o.y))continue;const age=semanticAge(Number(o.last_seen_stamp||sem.stamp)),historical=age>30,color=semanticColor(o),[x,y]=point(o.x,o.y);ctx.save();ctx.globalAlpha=historical?.42:1;
+      for(const o of sem.objects){if(!Number.isFinite(o.x)||!Number.isFinite(o.y))continue;const historical=!semanticCurrent(o),color=semanticColor(o),[x,y]=point(o.x,o.y);ctx.save();ctx.globalAlpha=historical?.42:1;if(historical)ctx.setLineDash([4,4]);
         const poly=Array.isArray(o.polygon)?o.polygon.filter(q=>Array.isArray(q)&&Number.isFinite(q[0])&&Number.isFinite(q[1])):[];
         if(poly.length>=3){ctx.beginPath();poly.forEach((q,i)=>{const [px,py]=point(q[0],q[1]);if(i)ctx.lineTo(px,py);else ctx.moveTo(px,py);});ctx.closePath();ctx.fillStyle=color;ctx.globalAlpha=historical?.09:.14;ctx.fill();ctx.globalAlpha=historical?.42:1;ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();}
         ctx.beginPath();ctx.arc(x,y,4,0,2*Math.PI);ctx.fillStyle=color;ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
@@ -99,12 +110,15 @@
         for(const [dx,dy] of [[8,-27],[8,8],[-tw-8,-27],[-tw-8,8],[8,-50]]){const bx=x+dx,by=y+dy;if(bx<0||by<0||bx+tw>w||by+th>h||boxes.some(b=>bx<b.x+b.w&&bx+tw>b.x&&by<b.y+b.h&&by+th>b.y))continue;boxes.push({x:bx,y:by,w:tw,h:th});ctx.fillStyle='#17212be8';ctx.fillRect(bx,by,tw,th);ctx.fillStyle=color;ctx.fillText(label,bx+6,by+14);break;}ctx.restore();
       }
     }
-    if(sameFrame){const p=state.pose,[x,y]=point(p.x,p.y);ctx.save();ctx.translate(x,y);ctx.rotate(-p.yaw);ctx.beginPath();ctx.moveTo(9,0);ctx.lineTo(-6,-5);ctx.lineTo(-4,0);ctx.lineTo(-6,5);ctx.closePath();ctx.fillStyle='#08a98d';ctx.strokeStyle='#e5fff8';ctx.lineWidth=1.5;ctx.fill();ctx.stroke();ctx.restore();}
+    if(sameFrame){const p=state.pose,[x,y]=point(p.x,p.y);ctx.save();ctx.translate(x,y);ctx.rotate(-p.yaw);ctx.beginPath();ctx.moveTo(9,0);ctx.lineTo(-6,-5);ctx.lineTo(-4,0);ctx.lineTo(-6,5);ctx.closePath();ctx.fillStyle='#08a98d';ctx.strokeStyle=poseFresh?'#e5fff8':'#e6ac66';ctx.lineWidth=1.5;if(poseFresh)ctx.fill();else ctx.setLineDash([3,2]);ctx.stroke();ctx.restore();if(!poseFresh){ctx.fillStyle='#e6ac66';ctx.font='11px sans-serif';ctx.fillText('上次位置',x+12,y+4);}}
     const ideal=90/view.scale,base=Math.pow(10,Math.floor(Math.log10(ideal))),unit=[1,2,5,10].map(v=>v*base).find(v=>v>=ideal)||10*base,length=unit*view.scale;
     ctx.strokeStyle='#263e4b';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(14,h-22);ctx.lineTo(14+length,h-22);ctx.stroke();ctx.fillStyle='#263e4b';ctx.font='11px sans-serif';ctx.fillText(unit<1?Math.round(unit*100)+' cm':unit+' m',14,h-28);ctx.fillText('N ↑',12,21);
-    const robot=state.robot||{},status=robot.status||'等待控制状态';$('pose-status').textContent=(poseFresh?'定位 '+formatTime(state.pose.stamp):'定位未更新')+' · '+status;
-    let msg='等待语义数据';if(!enabled)msg='语义图层已关闭';else if(sem){if(m.frame!=='map'||sem.frame!=='map')msg='语义与地图坐标系不同';else if(!Array.isArray(sem.objects)||!sem.objects.length)msg='暂无语义观测';else msg=(semanticAge(Number(sem.stamp))>30?'历史观测 · ':'')+'位置近似 · 外参待校准';} $('semantic-status').textContent=msg;
-    if(!poseFresh){ctx.fillStyle='#d28b49';ctx.fillText('定位未更新，地图/重建保留最近结果',12,h-5);}else if(state.pose&&!sameFrame){ctx.fillStyle='#d28b49';ctx.fillText('位置与地图坐标系不同，暂不叠加',12,h-5);}
+    const robot=state.robot||{},status=robot.status||'等待控制状态',p=state.pose,trackCount=Array.isArray(state.trajectory)?state.trajectory.length:0;
+    $('pose-status').textContent=(poseFresh?'定位 '+formatTime(p.stamp):'定位未更新 · 保留历史轨迹')+' · '+status;
+    $('pose-status').dataset.fresh=String(poseFresh);
+    $('track-meta').textContent=(sameFrame?`X ${p.x.toFixed(2)} m · Y ${p.y.toFixed(2)} m · 朝向 ${(p.yaw*180/Math.PI).toFixed(0)}° · `:'')+`轨迹 ${trackCount} 点`;
+    let msg='等待语义数据';if(!enabled)msg='语义图层已关闭';else if(sem){if(m.frame!=='map'||sem.frame!=='map')msg='语义与地图坐标系不同';else if(!Array.isArray(sem.objects)||!sem.objects.length)msg='暂无语义观测';else {const current=sem.objects.filter(semanticCurrent).length;msg=`YOLOE · ${current} 个近期观测`+(current<sem.objects.length?` / ${sem.objects.length-current} 个历史观测`:'')+' · '+formatTime(sem.stamp)+' · 可见表面投影，外参待校准';}} $('semantic-status').textContent=msg;
+    if(!poseFresh){ctx.fillStyle='#d28b49';ctx.fillText('定位未更新 · 虚线为历史轨迹',12,h-5);}else if(state.pose&&!sameFrame){ctx.fillStyle='#d28b49';ctx.fillText('位置与地图坐标系不同，暂不叠加',12,h-5);}
   }
   let mapDrag=null;
   mapCanvas.addEventListener('pointerdown',e=>{setMode('manual');mapDrag={x:e.clientX,y:e.clientY,vx:view.x,vy:view.y};mapCanvas.setPointerCapture(e.pointerId);});
@@ -175,7 +189,14 @@
       const c=next.camera;if(c&&c.width)$('camera-meta').textContent=`${c.width} × ${c.height} · ${formatTime(c.stamp)}${isFresh('camera',3)?'':' · 最近画面'}`;
       const r=next.reconstruction;if(r){const total=Number(r.reconstructed_point_count||r.point_count||0).toLocaleString('zh-CN'),count=Number(r.point_count||0),shown=(cloud2d?Math.ceil(count/Math.max(1,Math.ceil(count/10000))):count).toLocaleString('zh-CN');$('cloud-meta').textContent=`重建 ${total} 点 · ${cloud2d?'兼容显示':'显示'} ${shown} 点 · ${r.integrated_frames||r.frames||0} 帧 · ${r.frame||'—'}`;$('cloud-status').textContent=r.voxel_m>0?`融合体素尺寸 ${(r.voxel_m*1000).toFixed(0)} 毫米 · ${formatTime(r.stamp)}${isFresh('reconstruction',10)?'':' · 最近结果'}`:'等待重建更新';}
       drawMap();
-    }catch(error){$('connection').textContent=lastSeen?'连接中断 · 保留最近画面':'等待后端连接';$('connection-dot').classList.remove('online');if(state.freshness&&state.freshness.pose)state.freshness.pose.fresh=false;drawMap();}finally{stateBusy=false;}
+    }catch(error){
+      // A proxy image can still work during a TF outage. Fail back without a loop
+      // if the automatically selected overlay cannot supply its first state.
+      if(!lastSeen&&location.port==='8766'&&new URLSearchParams(location.search).get('entry')==='legacy'){
+        const fallback=new URL(location.href);fallback.port='8765';fallback.search='?basic=1';location.replace(fallback.href);
+      }
+      $('connection').textContent=lastSeen?'连接中断 · 保留最近画面':'等待后端连接';$('connection-dot').classList.remove('online');if(state.freshness&&state.freshness.pose)state.freshness.pose.fresh=false;drawMap();
+    }finally{stateBusy=false;}
   }
   let cameraBusy=false,mapBusy=false,cloudBusy=false,cloudStamp=null;
   function updateCamera(){if(cameraBusy)return;cameraBusy=true;const image=new Image();image.onload=()=>{$('camera').src=image.src;$('camera').hidden=false;$('camera-empty').hidden=true;cameraBusy=false;};image.onerror=()=>{cameraBusy=false;};image.src='/api/camera.jpg?t='+Date.now();}
@@ -196,5 +217,5 @@
   new ResizeObserver(()=>{drawMap();drawCloud();}).observe(document.querySelector('main'));
   updateState();updateCamera();updateMap();updateCloud();
   setInterval(drawMap,250);
-  setInterval(updateState,1000);setInterval(updateCamera,500);setInterval(updateMap,1000);setInterval(updateCloud,2000);
+  setInterval(updateState,500);setInterval(updateCamera,500);setInterval(updateMap,1000);setInterval(updateCloud,2000);
 })();
