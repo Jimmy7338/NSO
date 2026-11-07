@@ -1,6 +1,13 @@
 'use strict';
 (() => {
   const $ = id => document.getElementById(id);
+  if (location.port === '8765') {
+    const semanticURL = new URL(location.href);
+    semanticURL.port = '8766'; semanticURL.pathname = '/';
+    semanticURL.search = ''; semanticURL.hash = '';
+    $('semantic-dashboard-link').href = semanticURL.href;
+    $('entry-notice').hidden = false;
+  }
   let state = {}, mapImage = null, mapKey = '', lastSeen = 0;
   let stateReceivedAt = null, stateRequestSeconds = 0;
   const view = {x:0,y:0,scale:30,ready:false};
