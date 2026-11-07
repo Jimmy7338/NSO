@@ -28,7 +28,7 @@
 \date{Research revision -- 4 November 2026}
 \maketitle
 \begin{abstract}
-Recovering occluded facility surfaces under a fixed observation budget requires choosing where to look before geometry fully resolves the object's configuration. An early category cue can guide that choice, but a misleading cue can also waste the remaining budget. We study a correctable category-conditioned policy that combines bounded geometric evidence, diagnostic lookahead, and return-feasible planning. Its central principle is to use category information to rank sensing actions while restricting surface reconstruction to acquired depth. A matched geometry-only control retains the same planner, diagnostic opportunities, graph, and fusion backend. Controlled RGB-D simulations use two public configuration templates, exact poses, and synthetic category cues. Across four reference configuration pairs, the policy yields two improvements and two ties, increasing mean coverage--surface quality by 6.16\% at unchanged planar coverage. Two changed-background layouts yield one improvement and three ties, with a 2.98\% mean gain. A 128-attempt extension exposes 32 low-budget planning failures and a 0.70\% larger-budget reversal. Recorded decisions show that the cue matters when it changes a consequential route ranking; stronger category support alone need not improve reconstruction. A separately declared joint-exploration deployment variant with a natural semantic frontend completes a bounded physical sensing–navigation–return loop. Matched semantic benefit, comparative coverage efficiency and real reconstruction accuracy remain unverified. These results characterize the conditions and limits of category-informed observation allocation.
+Recovering occluded facility surfaces under a fixed observation budget requires choosing where to look before geometry fully resolves the object's configuration. An early category cue can guide that choice, but a misleading cue can also waste the remaining budget. We study a correctable category-conditioned policy that combines bounded geometric evidence, diagnostic lookahead, and return-feasible planning. Its central principle is to use category information to rank sensing actions while restricting surface reconstruction to acquired depth. A matched geometry-only control retains the same planner, diagnostic opportunities, graph, and fusion backend. Controlled RGB-D simulations use two public configuration templates, exact poses, and synthetic category cues. Across four reference configuration pairs, the policy yields two improvements and two ties, increasing mean coverage--surface quality by 6.16\% at unchanged planar coverage. Two changed-background layouts yield one improvement and three ties, with a 2.98\% mean gain. A 128-attempt extension exposes 32 low-budget planning failures and a 0.70\% larger-budget reversal. Recorded decisions show that the cue matters when it changes a consequential route ranking; stronger category support alone need not improve reconstruction. A declared joint-exploration deployment variant with a natural semantic frontend records completed physical return loops; in one fresh-map C/S pilot, C returns after 40 actions while S fails its original footprint check after 32. Matched semantic benefit, comparative coverage efficiency and real reconstruction accuracy remain unverified. These results characterize the conditions and limits of category-informed observation allocation.
 \end{abstract}
 \noindent\textbf{Keywords:} active observation, facility documentation, category priors, geometric feedback, budget-constrained reconstruction
 
@@ -45,7 +45,7 @@ We study a category-conditioned observation policy that connects configuration b
 
 This formulation makes the value of a category cue testable against an active geometric alternative. Both policies retain the same graph, templates, diagnostic opportunities, action budget, and reconstruction backend; only the category support differs. A two-configuration analysis relates the value of immediate route selection to the cost and reliability of geometric diagnosis. Recorded beliefs and actions then connect that decision-level account to measured endpoint quality, separating a changed internal score from an actual change in observation allocation.
 
-Controlled simulations yield two improvements and two ties across four reference configuration pairs, increasing mean joint coverage--surface quality by 6.16\% at unchanged coverage. Two additional background layouts yield one improvement and three ties, with a 2.98\% mean gain. The 128-attempt budget/geometry extension also retains 32 planning failures and a 0.70\% larger-budget reversal. These outcomes bound the mechanism's benefit. A separately declared joint-exploration deployment variant with a natural semantic frontend completes a bounded physical sensing–navigation–return loop. Matched semantic benefit, comparative coverage efficiency and real reconstruction accuracy remain unverified, and the deployment is not equivalent to the controlled V35 policy.
+Controlled simulations yield two improvements and two ties across four reference configuration pairs, increasing mean joint coverage--surface quality by 6.16\% at unchanged coverage. Two additional background layouts yield one improvement and three ties, with a 2.98\% mean gain. The 128-attempt budget/geometry extension also retains 32 planning failures and a 0.70\% larger-budget reversal. These outcomes bound the mechanism's benefit. A declared joint-exploration deployment variant with a natural semantic frontend records completed physical return loops; in one fresh-map C/S pilot, C returns after 40 actions while S fails its original footprint check after 32. Matched semantic benefit, comparative coverage efficiency and real reconstruction accuracy remain unverified, and the deployment is not equivalent to the controlled V35 policy.
 
 The contributions are:
 
@@ -540,7 +540,36 @@ The deployed exploration variant uses the V10.3.1 decision framework with revise
 
 An offline analysis of the 41 accepted frames from 4 November found measured-voxel overlap in 28 of 40 adjacent frame pairs and none in the other 12. These are repeated observations within one episode, and the predicted masks and voxel overlap do not establish object identity or recognition accuracy. The 3 November viewpoint diagnostic also retained a failed return after 0.261 m: a standard ROS setup goal was rejected after local-control failure. It was separately commanded and is not credited as an NSO action. Together with the earlier failed sessions, this result shows why a completed later episode should not be read as universal deployment reliability.
 
-A physical comparison still requires matched semantic and geometry-only runs under the same scene, initial information, sensor rules, protection settings, and time budget. It should retain all failures and distinguish measured new coverage and travel cost from surface accuracy against an independent reference. The present physical evidence supports bounded closed-loop integration, not semantic efficacy, reconstruction accuracy, or superiority over standard ROS exploration.
+A matched semantic-versus-geometry comparison still requires the same initial information, sensor rules, protection settings, and time budget; the fresh-map C/S pilot below does not supply that comparison. It should retain all failures and distinguish measured new coverage and travel cost from surface accuracy against an independent reference. The present physical evidence supports bounded closed-loop integration, not semantic efficacy, reconstruction accuracy, or superiority over standard ROS exploration.
+
+\subsection{Fresh-map ordered C/S physical pilot}
+
+A subsequent pilot executed coverage-only C followed by joint S in the same physical scene. Each arm used a fresh, separately supervised stock gmapping instance and a new policy session, with the same 40-action budget, 600 s limit, circular footprint, candidates, return rule, sensing configuration and execution protection. Only score mode differed within the policy configuration; C retained the same candidate generator and sensor modalities. CSM odometry and the display TSDF remained continuous. The actual bootstraps differed by 0.0701 m and 0.0672 rad, and their initial navigation-known masks differed in 205 cells (8.20 m$^2$) on the common 0.2 m planning grid. This is an approximate starting-condition comparison, not identical-input pairing.
+
+\begin{table}[!htbp]
+\caption{One ordered physical C/S pilot with fresh navigation maps; failures remain included}\label{tab:physical-pair}
+\small\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.18\linewidth}p{.12\linewidth}p{.18\linewidth}p{.17\linewidth}p{.23\linewidth}@{}}
+\toprule
+Arm and termination & Paid / obs. & CAN / time & Internal area (m$^2$) & Own-support old-quality \\
+\midrule
+C: budget exhausted, returned & 40 / 41 & 6.741 m / 558.214 s & 66.40 $\to$ 123.44 & 0.249536 $\to$ 0.190989 (270 points) \\
+S: method failure, no return & 32 / 33 & 5.233 m / 451.992 s & 65.32 $\to$ 122.00 & 0.234949 $\to$ 0.299275 (290 points) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{PhysicalPair_C_S_20261107.pdf}
+\caption{Actual RGB-D-time aligned-odometry base poses, connected only for visualization, and the internal observed-area proxy over paid actions. Open circles mark bootstrap poses and crosses mark the last observations. S stops at action 32; no unobserved continuation is plotted. One ordered pair in one scene supplies no independent ground truth or between-run error bars}\label{fig:physical-pair}
+\end{figure}
+
+C completed its budget and returned to the discrete anchor. S stopped after its 32nd accepted action when the existing circular-footprint check reported \texttt{current\_footprint\_not\_known\_safe}; it did not return. This was an original method check, not a newly introduced policy gate. CAN feedback was zero after both runs. Unequal completed actions, the failed S return, and different initial information prevent an efficiency ranking or a causal policy-benefit claim. Quality is reported separately on each arm's own fixed bootstrap support, whose identities differ; the C decrease and S increase are not a matched reconstruction-accuracy comparison. This C/S objective ablation does not isolate a semantic S/G effect.
+
+At paid action 12, both runs replanned after the original next-footprint check; at each run's own state, C and S selected the same candidate, while the maps differed across runs. At S action 31, frozen-state C had no positive candidate whereas G and S selected the same positive candidate. These recorded counterfactuals are not additional physical trials, and G/S ties do not establish a semantic decision effect.
+
+A mapper-only replay of the retained S observations reproduced the final belief: a measured 0.504 m laser return inserted a nearby occupied cell before depth fusion, while the input navigation grid alone still passed the footprint check. This identifies the recorded fusion source, not the physical object or a verified noise or localization cause.
 
 \subsection{Policy-level unknown-exploration diagnostic}\label{unknown-exploration-diagnostic}
 
@@ -569,7 +598,7 @@ trajectory is deterministic; no between-run confidence interval is
 estimated.
 
 
-Table 8 reports all 20 trajectories. All return to the anchor without a
+Table 9 reports all 20 trajectories. All return to the anchor without a
 simulated collision; C in the east/96 condition stops after 94 actions
 because no positive option remains at the anchor, while the other runs
 exhaust their budgets. Newly visible surface is evaluated against the
@@ -601,7 +630,7 @@ differ at action 31. Switching the category-dependent score at this
 shared state changes the selected goal. The eventual quality difference
 also includes later observations and replanning: G leads in newly
 visible surface at action 60, whereas S leads at actions 80 and 96
-(Figure 11). A selected-goal change therefore does not by itself predict
+(Figure 12). A selected-goal change therefore does not by itself predict
 the sign of the terminal result.
 
 
@@ -614,7 +643,7 @@ cell. These observations provide a bounded example of surface gains at
 nearly unchanged terminal coverage, but do not show a general
 improvement in unknown-space exploration efficiency. The matrix was
 fixed for development on one Q0 context, with synthetic sensing and
-category information. Matched natural-semantic effects, comparative physical execution,
+category information. Matched natural-semantic effects, repeated physical coverage comparisons,
 independent environments and comparison against standard exploration
 methods remain separate validation tasks.
 
@@ -682,7 +711,7 @@ The S--G difference in simulator truth-visible surface appears late in
 coverage. At the 96-action limit, frontier reaches 95\% coverage after
 20 actions and 99\% after 32; joint G, S and C reach these thresholds
 after 24 and 29 actions. At the 48-action limit the joint policies never
-reach 95\%, whereas frontier does after 20 actions (Figure 12). In
+reach 95\%, whereas frontier does after 20 actions (Figure 13). In
 west/96, the only joint-policy condition with different G/S outcomes,
 both have identical first-hit times for 90\%, 95\% and 99\% coverage:
 18, 24 and 29 actions. Their newly visible surface first differs at
@@ -699,7 +728,7 @@ and surface histories.
 Lines follow the recorded steps without smoothing; horizontal guides
 mark 90\%, 95\% and 99\%. The initial packet is action zero. East/96 C
 ends at its recorded action 94. Original G is shown as a policy-family
-reference; original S remains reported in Table 8. These are
+reference; original S remains reported in Table 9. These are
 deterministic, related conditions without independent-scene uncertainty
 estimates.}\label{fig:12}
 \end{figure}
@@ -760,7 +789,7 @@ The local method uses public configuration templates, a supplied safe graph, exa
 
 The multi-instance results in Section 5.7 use observation macros and a different joint metric, so they are evaluated separately from the local directional study. Thirty-five of 36 attempts complete the original evaluation pipeline; the remaining attempt completes navigation but needs a separately reported numerical evaluation correction. The nine shared/fixed-prior ties, the adverse ExposureV3 category comparisons, and an earlier six-parent sharing study provide no evidence of a cross-instance sharing gain. Full version-specific records remain in the companion evidence manuscript.
 
-Section 6 reports actual ROS 1 deployment observations. The comparative reconstruction-quality results remain simulated, while the physical records include one completed joint-exploration integration episode and leave semantic transfer unverified. Industrial relevance currently concerns observation after workspace reconfiguration with a static environment during acquisition. Continuous map maintenance and dynamic obstacle avoidance are outside this evaluation.
+Section 6 reports actual ROS 1 deployment observations. The comparative reconstruction-quality results remain simulated, while the physical records include completed joint-exploration episodes and an ordered fresh-map C/S pilot with a failed S return; semantic transfer remains unverified. Industrial relevance currently concerns observation after workspace reconfiguration with a static environment during acquisition. Continuous map maintenance and dynamic obstacle avoidance are outside this evaluation.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}

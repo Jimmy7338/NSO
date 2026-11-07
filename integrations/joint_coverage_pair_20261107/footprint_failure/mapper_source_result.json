@@ -1,0 +1,92 @@
+{
+  "schema": "nso.mapper_only_footprint_source.v1",
+  "scope": "Original33 canonical measured frames; native mapper.update only, no policy/runtime/scorer/inference/ROS",
+  "source": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/publication/S",
+  "frames": 33,
+  "matched_belief_sha256": {
+    "31": "9c189bdaed600110b57ab19d74bcf316b6c7dfce21f24608417e329145ae3567",
+    "32": "6fe5e81db30afe0cbe1d28fe34f023cee2ca88dde63815f3f3803d1fba37a146"
+  },
+  "expected_belief_sha256": {
+    "31": "9c189bdaed600110b57ab19d74bcf316b6c7dfce21f24608417e329145ae3567",
+    "32": "6fe5e81db30afe0cbe1d28fe34f023cee2ca88dde63815f3f3803d1fba37a146"
+  },
+  "center": [
+    195,
+    201
+  ],
+  "robot_radius_m": 0.7212185868375829,
+  "resolution_m": 0.2,
+  "original_cell_center_blocking_threshold_m": 0.8626399430748924,
+  "safe_by_action": {
+    "30": true,
+    "31": true,
+    "32": false
+  },
+  "frame32_stage_sha256": {
+    "after_scan_before_depth": "10f4405a7495f9b70c0c7279d397dfaa46bfdf1a4f48a41bbd4fc8f937cc0802",
+    "after_depth_before_origin_free": "e2c866d47b9ce0bbfc7f3cfc6b27bdd5f78130093e40a245c3164cbbbf7e9211",
+    "after_sensor_origin_free": "e2c866d47b9ce0bbfc7f3cfc6b27bdd5f78130093e40a245c3164cbbbf7e9211",
+    "after_observed_mapper_before_nav": "e2c866d47b9ce0bbfc7f3cfc6b27bdd5f78130093e40a245c3164cbbbf7e9211",
+    "after_nav_union": "6fe5e81db30afe0cbe1d28fe34f023cee2ca88dde63815f3f3803d1fba37a146"
+  },
+  "nearby_nonfree_blocking_cells": [
+    {
+      "cell": [
+        195,
+        199
+      ],
+      "center_distance_m": 0.4,
+      "values": {
+        "30": 0,
+        "31": 0,
+        "32": 1
+      },
+      "stages32": {
+        "after_scan_before_depth": 1,
+        "after_depth_before_origin_free": 1,
+        "after_sensor_origin_free": 1,
+        "after_observed_mapper_before_nav": 1,
+        "after_nav_union": 1
+      },
+      "nav32": 0,
+      "frame32_depth_obstacle_points_count": 0,
+      "depth_obstacle_points_sample_planning": [],
+      "depth_obstacle_labels_sample": [],
+      "frame32_laser_hit_count": 1,
+      "laser_hits_sample": [
+        {
+          "index": 396,
+          "range_m": 0.5040000081062317,
+          "planning_point": [
+            39.80678056069091,
+            40.99123484072908,
+            0.6840000000000005
+          ]
+        }
+      ]
+    }
+  ],
+  "frame32_observed_current_cell_conflict": {
+    "map_version": 33,
+    "timestamp_s": 1794064587.762003,
+    "current_cell": [
+      196,
+      201
+    ],
+    "conflict": false,
+    "reasons": []
+  },
+  "nav32_center_safe": true,
+  "native_source_sha256": {
+    "nso_bridge/joint_vendor/nso/mapping3d.py": "275144d68c1bc6e8876ac622629f19916d09ca07651681dd8cf2b11dbe64b38f",
+    "nso_bridge/joint_vendor/nso/observed_runtime_mapper_v10.py": "c27a977a1b7ae417748a786a118287b282771b630ac88b56c0de7e11f5b00a3b",
+    "nso_bridge/nso_bridge/joint_engine.py": "12a6dab0c7400d323048143bd6261225bae86c41f623e0077feeb7f3c1d82bd7"
+  },
+  "elapsed_s": 11.417807444988284,
+  "limits": [
+    "Attribution is to actual native grid insertion, not a verified physical object identity or calibrated reconstruction accuracy.",
+    "Camera retained extrinsics remain unverified; no source filtered or runtime corrected.",
+    "Occupied cells persist under native fusion; input navigation map safety alone does not imply fused belief safety."
+  ]
+}
