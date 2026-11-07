@@ -1,0 +1,77 @@
+{
+  "schema": "nso.dashboard.bridge_recovery.v1",
+  "verified_unix_s": 1794070284.2741983,
+  "issue": "2D pose and trajectory stopped updating; current semantic projections empty.",
+  "cause": "The CSM odometry/TF bridge exited after its CAN velocity watchdog expired; the original lidar and matcher remained running and publishing. The cause of the earlier CAN freshness lapse is not established by this check.",
+  "old_bridge_exit_log": "[ERROR] [1794068804.883405]: CSM control CAN source failed: CAN velocity source expired",
+  "before_pose_age_s": 1376.1161665916443,
+  "source_readonly_check": {
+    "scan_messages_in_4s": 40,
+    "scan_beams": 2000,
+    "matcher_stamp_observed": 1794070124.2290967,
+    "matcher_caller": "/nso_csm/matcher",
+    "CAN_0x221_messages_in_3s": 150,
+    "CAN_0x221_last_payload_hex": "0000000000000000"
+  },
+  "recovery": "Restarted only bridge with identical explicit CAN feedback source and recorded fixed SE2 alignment in the same uninterrupted matcher/map epoch.",
+  "restart_receipt": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/restart_receipt.json",
+  "latest_pose": {
+    "x": -0.4226181736525896,
+    "y": 1.588252275025133,
+    "yaw": -0.5444679674001723,
+    "frame": "map",
+    "stamp": 1794070284.1863284
+  },
+  "latest_freshness": {
+    "camera": {
+      "fresh": true,
+      "age_s": 0.44701075553894043
+    },
+    "pose": {
+      "fresh": true,
+      "age_s": 0.07434630393981934
+    },
+    "map": {
+      "fresh": true,
+      "age_s": 6.456736087799072
+    },
+    "reconstruction": {
+      "fresh": true,
+      "age_s": 7.047249794006348
+    },
+    "semantics": {
+      "fresh": true,
+      "age_s": 7.047249794006348
+    }
+  },
+  "trajectory_points": 1492,
+  "semantic_objects": [
+    {
+      "label": "closed equipment cabinet",
+      "label_zh": "封闭设备柜",
+      "confidence": 0.4520714581012726,
+      "x": 2.4515475561325655,
+      "y": -0.5584069051319952,
+      "last_seen_stamp": 1794070277.213425
+    },
+    {
+      "label": "closed equipment cabinet",
+      "label_zh": "封闭设备柜",
+      "confidence": 0.3750307261943817,
+      "x": 4.813959628176313,
+      "y": 1.3817317034375196,
+      "last_seen_stamp": 1794070277.213425
+    }
+  ],
+  "semantic_status": "ok",
+  "integrated_frames": 4202,
+  "browser_verification": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/semantic_status_browser.json",
+  "display_fix": "Semantic stale/error/waiting status now distinguished from a successful frame containing no projectable objects.",
+  "dashboard_js_sha256": "12ddc9ad62cf2e09be68ea323cf0a24fcb2d931803b74dc0c562cefe40777f33",
+  "motion_commands_issued": false,
+  "policy_changed": false,
+  "camera_extrinsics_changed": false,
+  "source_stamps_thresholds_unchanged": true,
+  "historical_map_trajectory_TSDF_preserved": true,
+  "capture_needed_to_explain_previous_lidar_single_ray_unchanged": true
+}

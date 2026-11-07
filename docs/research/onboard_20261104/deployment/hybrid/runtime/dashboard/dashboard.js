@@ -117,7 +117,19 @@
     $('pose-status').textContent=(poseFresh?'定位 '+formatTime(p.stamp):'定位未更新 · 保留历史轨迹')+' · '+status;
     $('pose-status').dataset.fresh=String(poseFresh);
     $('track-meta').textContent=(sameFrame?`X ${p.x.toFixed(2)} m · Y ${p.y.toFixed(2)} m · 朝向 ${(p.yaw*180/Math.PI).toFixed(0)}° · `:'')+`轨迹 ${trackCount} 点`;
-    let msg='等待语义数据';if(!enabled)msg='语义图层已关闭';else if(sem){if(m.frame!=='map'||sem.frame!=='map')msg='语义与地图坐标系不同';else if(!Array.isArray(sem.objects)||!sem.objects.length)msg='暂无语义观测';else {const current=sem.objects.filter(semanticCurrent).length;msg=`YOLOE · ${current} 个近期观测`+(current<sem.objects.length?` / ${sem.objects.length-current} 个历史观测`:'')+' · '+formatTime(sem.stamp)+' · 可见表面投影，外参待校准';}} $('semantic-status').textContent=msg;
+    let msg='等待语义数据';
+    if(!enabled)msg='语义图层已关闭';
+    else if(sem){
+      const age=semanticAge(Number(sem.stamp)),ageText=Number.isFinite(age)?` · ${Math.floor(age)} 秒前`:'';
+      if(sem.status==='stale')msg='语义源已过期'+ageText+' · 等待新的 RGB-D 数据';
+      else if(sem.status==='error')msg='语义检测出错'+ageText;
+      else if(sem.status==='unavailable')msg='语义数据暂不可用';
+      else if(sem.status&&sem.status.startsWith('waiting'))msg='等待语义数据与坐标变换';
+      else if(m.frame!=='map'||sem.frame!=='map')msg='语义与地图坐标系不同';
+      else if(!Array.isArray(sem.objects)||!sem.objects.length)msg=sem.status==='ok'?(isFresh('semantics',10)?'YOLOE · 本帧未检测到可投影语义目标':'语义观测已过期'+ageText):'等待语义数据';
+      else {const current=sem.objects.filter(semanticCurrent).length;msg=`YOLOE · ${current} 个近期观测`+(current<sem.objects.length?` / ${sem.objects.length-current} 个历史观测`:'')+' · '+formatTime(sem.stamp)+' · 可见表面投影，外参待校准';}
+    }
+    $('semantic-status').textContent=msg;
     if(!poseFresh){ctx.fillStyle='#d28b49';ctx.fillText('定位未更新 · 虚线为历史轨迹',12,h-5);}else if(state.pose&&!sameFrame){ctx.fillStyle='#d28b49';ctx.fillText('位置与地图坐标系不同，暂不叠加',12,h-5);}
   }
   let mapDrag=null;
