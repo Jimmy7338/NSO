@@ -45,6 +45,52 @@
       "DWA_xy_goal_tolerance_m": 0.08,
       "DWA_forward_point_distance_m": 0.0,
       "NSO_action": false
+    },
+    {
+      "name": "control_can_offset_05",
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_control_can_offset_05",
+      "status": "execution_interrupted",
+      "reason": "chassis_before_stop:odometry_jump",
+      "CAN_distance_m": 0.17852642965316762,
+      "CAN_absolute_yaw_rad": 0.8669607206583023,
+      "elapsed_s": 8.214390680994256,
+      "stopped": true,
+      "DWA_xy_goal_tolerance_m": 0.08,
+      "DWA_forward_point_distance_m": 0.325,
+      "NSO_action": false,
+      "control_velocity_source": "can_feedback",
+      "analysis": "/home/ouc/nso_robot/analyses/forward_controller_20261107/control_can_offset_05/analysis.json"
+    },
+    {
+      "name": "control_can_offset_06",
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_control_can_offset_06",
+      "status": "execution_interrupted",
+      "reason": "chassis_before_stop:odometry_jump",
+      "CAN_distance_m": 0.18494379711151127,
+      "CAN_absolute_yaw_rad": 0.7864631310701371,
+      "elapsed_s": 9.668819589991472,
+      "stopped": true,
+      "DWA_xy_goal_tolerance_m": 0.08,
+      "DWA_forward_point_distance_m": 0.325,
+      "NSO_action": false,
+      "control_velocity_source": "can_feedback",
+      "analysis": "/home/ouc/nso_robot/analyses/forward_controller_20261107/control_can_offset_06/analysis.json"
+    },
+    {
+      "name": "control_can_offset_07",
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_control_can_offset_07",
+      "status": "standard_navigation_setup_goal_reached",
+      "reason": null,
+      "CAN_distance_m": 0.19496359515190145,
+      "CAN_absolute_yaw_rad": 1.971796158194542,
+      "elapsed_s": 14.165176100999815,
+      "stopped": true,
+      "DWA_xy_goal_tolerance_m": 0.08,
+      "NSO_action": false,
+      "control_velocity_source": "can_feedback",
+      "analysis": "/home/ouc/nso_robot/analyses/forward_controller_20261107/control_can_offset_07/analysis.json",
+      "terminal_error_m": 0.03410483909960034,
+      "scope": "Unchanged control/localization configuration, different start; data collection and one arrival, not repaired intermittent CSM or matched efficacy evidence"
     }
   ],
   "scoped_CSМ_fix": "Explicit use_tf=false removes circular prediction wait; same-input stationary isolated replay validates delay and drop reduction, not moving localization accuracy.",
@@ -53,6 +99,18 @@
     "Offset cases reproduce start-to-goal geometry at different actual poses and scene observations",
     "Single-frame DWA reconstruction uses inverse-quantized occupancy costs and fresh oscillation state; it does not establish the full physical loop cause"
   ],
-  "CAN_candidate_state": "24 mock checks passed, not deployed; exact prior runtime restored with8 original bridge tests. Candidate preserved under analyses/control_can_candidate_20261107/staged_runtime_and_tests.",
-  "next_task": "Analyze temporal sign changes and control-twist errors; static CAN substitution did not change sampled instantaneous choice but does not test temporal stability. Choose one evidence-driven control adaptation or captured-sequence replay; avoid further blind parameter sweeps. Preserve original NSO score/targets, collision checking and raw-pose jump protection."
+  "CAN_candidate_state": "Explicit CAN control-velocity profile deployed; default CLI remains CSM. Probes05/06 stopped on original raw-pose jump,07 arrived under unchanged settings at a different start. All three are standard-ROS integration diagnostics, not NSO efficacy trials.",
+  "next_task": "Compare original keyframe, adjacent-reference, and valid timestamp-aligned CAN initial-guess profiles on frozen06/07 scans, using recursive estimates as well as the exact06 fault state. Keep sparse06 source gaps explicit. Select the smallest supported sensor/execution repair; preserve map/TSDF coordinate continuity, original NSO policy and jump guard. One unchanged-config07 arrival does not fix intermittent CSM.",
+  "exact_CSM_fault_fixture": {
+    "path": "/home/ouc/nso_robot/analyses/forward_controller_20261107/instrumented_csm_candidate/state_fixture_results.json",
+    "reference_scan_index": 96,
+    "target_scan_index": 99,
+    "reproduced_jump_m": 0.050105966472451156,
+    "live_target_xy_error_m": 0.0,
+    "adjacent_reference_jump_m": 0.010173317935291852,
+    "deployed": false,
+    "scope": "Exact native-solver reproduction from captured scans and reconstructed bounded actual state; reference sensitivity established, repair/general accuracy not established"
+  },
+  "CSM_correspondence_audit": "/home/ouc/nso_robot/analyses/forward_controller_20261107/correspondence_audit/summary.json",
+  "full_rate_CAN_capture07": "/home/ouc/nso_robot/analyses/forward_controller_20261107/can_source_audit07/summary.json"
 }

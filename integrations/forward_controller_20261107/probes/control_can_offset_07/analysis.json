@@ -1,0 +1,53 @@
+{
+  "probe": "control_can_offset_07",
+  "scope": "Standard ROS diagnostic, unchanged CAN control profile; different actual start from05/06, not a matched repair test or NSO credited action.",
+  "summary": {
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/controller_control_can_offset_07",
+    "status": "standard_navigation_setup_goal_reached",
+    "reason": null,
+    "goals": 1,
+    "verified_arrivals": 1,
+    "distance_m": 0.19496359515190145,
+    "elapsed_s": 14.165176100999815,
+    "stopped": true,
+    "execution_interrupted": false
+  },
+  "actual_CAN_distance_m": 0.19496359515190145,
+  "actual_CAN_absolute_yaw_rad": 1.971796158194542,
+  "DWA_xy_tolerance_m": 0.08,
+  "supervisor_verification_xy_tolerance_m": 0.15,
+  "terminal_error_m": 0.03410483909960034,
+  "terminal_yaw_error_rad": 0.05255609546248685,
+  "terminal_within_DWA_xy_tolerance": true,
+  "goal_to_terminal_s": 11.503380288995686,
+  "unique_provenance_pairs": 198,
+  "active_provenance_pairs": 109,
+  "pair_validity_failures": 0,
+  "input_window_audit": {
+    "raw_csm_twist": 14,
+    "control_twist": 0
+  },
+  "window_audit_scope": "Sampled input feasibility at0.1s; raw CSM is a counterfactual input, not the actual DWA sampled state.",
+  "command_records": 112,
+  "command_bound_violations": 0,
+  "scan_ring_pose_count": 150,
+  "maximum_recorded_pose_step": {
+    "stamp_ns": 1794055378914421558,
+    "dt_s": 0.099471092,
+    "distance_m": 0.013771954393337458,
+    "original_guard_bound_m": 0.0398942184
+  },
+  "original_jump_bound_violations": 0,
+  "adapter_final_reason": "native_driver_fault:8",
+  "adapter_finish_after_arrival_s": 1.2796248030062998,
+  "native_fault8_meaning": "external_guard; recorded after goal completion, during stop cleanup. Not a chassis error code.",
+  "stop_verified_before_close": true,
+  "stop_verified_after_close": true,
+  "physical_stop_independently_observed": false,
+  "CAN_capture_audit": "../can_source_audit07/summary.json",
+  "limits": [
+    "One arrival under unchanged configuration does not fix the reproduced intermittent CSM registration jump.",
+    "Controller/supervisor use CSM for arrival evidence; no independent physical position accuracy was measured.",
+    "Full-rate bounded CAN capture is available, but telemetry remains sampled asynchronous latest-state observations."
+  ]
+}
