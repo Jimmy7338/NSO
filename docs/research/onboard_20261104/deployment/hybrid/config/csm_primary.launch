@@ -1,4 +1,6 @@
 <launch>
+  <!-- Declare the producer started here for mission/data-stack startup. -->
+  <param name="/nso_visual/localization_source" value="lidar_csm" />
   <group ns="nso_csm">
     <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" name="matcher" output="screen" required="true">
       <remap from="scan" to="/scan" />
