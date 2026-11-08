@@ -1,0 +1,136 @@
+{
+  "schema": "nso.semantic_score_theory_audit.v1",
+  "status": "completed_arithmetic_and_source_audit_only",
+  "main_system": "v10_3_1/exploration_joint_v1 joint unknown coverage and measured-surface observation; V35 excluded",
+  "notation": {
+    "a": "coverage_radar+coverage_camera+measured_quality, same for G/S/X",
+    "F": "candidate-by-asset nonnegative outbound aperture/direction-novelty factors",
+    "g_i": "w_i*h_i+3*w_i*d_i",
+    "s_i": "g_i-3*m_i*v_i*w_i*d_i",
+    "x_i": "g_i+3*m_i*v_i*w_i*d_i",
+    "U_G": "a+F*g",
+    "U_S": "a+F*s",
+    "U_X": "a+F*x",
+    "W_lambda": "a+lambda*F*g, one fixed lambda>=0; common quality must not be scaled",
+    "identity": "U_S+U_X=2*U_G; U_S-U_G=-3*F*(m*v*w*d)",
+    "C": "coverage only; removes measured quality AND object prior, so C/S is not pure semantic ablation"
+  },
+  "source_refs": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py",
+      "lines": [
+        278,
+        337
+      ],
+      "meaning": "outbound quality/common, generic/semantic/swapped potentials and v10_3_1 direction factors"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py",
+      "lines": [
+        58,
+        67
+      ],
+      "meaning": "candidate assets discard labels for geometric selection"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py",
+      "lines": [
+        249,
+        278
+      ],
+      "meaning": "native wanted heading, positive aperture, entry/deep, .35 projection and used-state/cap restrictions"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py",
+      "lines": [
+        366,
+        380
+      ],
+      "meaning": "C coverage-only score"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py",
+      "lines": [
+        389,
+        416
+      ],
+      "meaning": "same generation before mode, region filter, lexicographic tie and positive-score selection"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/response_features_v7.py",
+      "lines": [
+        55,
+        104
+      ],
+      "meaning": "geometry connected components/support/extent acceptance before class2/3 votes"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/competition_candidates_v8_1.py",
+      "lines": [
+        47,
+        66
+      ],
+      "meaning": "hypothetical far-plane FOV/range support, not occlusion certificate"
+    }
+  ],
+  "equivalence_tests": [
+    {
+      "level": "pointwise score identity at one state",
+      "condition": "exists lambda>=0 such that F*(s-lambda*g)=0",
+      "sufficient": "All contributing assets have same ratio s_i/g_i, or candidate support has only one effective nonnegative asset direction. One active asset is a simple sufficient case.",
+      "warning": "A heterogeneous class set is not necessary: same class with different d/h, or marked/unmarked support, can give different ratios. Different classes alone are not sufficient."
+    },
+    {
+      "level": "full ranking",
+      "condition": "For each semantic-ordered candidate pair, impose the corresponding sign/tie inequalities on (a_j-a_k)+lambda*(b_j-b_k), b=F*g. Include deterministic cost/candidate-ID ordering.",
+      "warning": "Nonproportional semantic/generic score vectors do not guarantee a ranking change; common terms can dominate."
+    },
+    {
+      "level": "actual selected positive option",
+      "condition": "For S winner j, intersect lambda>=0, a_j+lambda*b_j>0, and a_j-a_k+lambda*(b_j-b_k)>=0 for all k. Use strict >0 when competitor wins cost/ID ties. If S selects none, require every a_k+lambda*b_k<=0.",
+      "criterion": "Empty interval is necessary and sufficient for inability to reproduce that S selected-option decision with this nonnegative uniform generic family. It does not compare every possible geometry-only method."
+    },
+    {
+      "level": "single global weight over multiple states",
+      "condition": "Intersection of all per-state intervals I_t; empty intersection rules out one constant weight across those recorded states.",
+      "warning": "Each state can admit its own weight while their common interval is empty. A nonempty saved-state intersection is not an independently executed weighted rollout or held-out performance result."
+    }
+  ],
+  "identifiability_conditions": [
+    "At least one nonzero contributing factor on marked support with m*v*w*d!=0; otherwise S=G=X exactly.",
+    "To escape uniform scaling within one state, candidate paths must expose distinguishable effective support mixtures and effective semantic/generic ratios; effective rank1 support always admits score scaling.",
+    "Heterogeneous ratios and support mixtures enable, but do not ensure, a selected-option witness. The exact upper-envelope/interval test must fail for a genuine witness.",
+    "Different directions matter only through actual surviving assets and outbound support factors. New heading/candidate/extent/grouping changes alter the method and cannot be introduced as implementation detail.",
+    "A coefficient-level witness is not proof the native generator can realize those candidates, nor that an unknown-coverage metric improves."
+  ],
+  "existing_evidence": {
+    "west41": {
+      "source": "/home/ouc/nso_robot/analyses/semantic_state_intervention_20261104/root_verification.json",
+      "scope": "posthoc one state of deployedQ0 west96, paid41, coverage99.728%",
+      "proved": "Candidate6 selected by S cannot be selected by any lambda>=0 uniform generic score in that saved7candidate set; two marked assets have votes-1/+1 and different candidate support mixtures.",
+      "interval_bounds": {
+        "lower": 0.40211861613681604,
+        "upper": -1.974407228130204
+      },
+      "not_proved": "Prospective early unknown-coverage gain, all possible geometry baselines, natural recognition, independent scenes or physical efficacy.",
+      "continuation": "S+0.099926m2surface, -.04m2coverage, -.001203F1; G/G2 identical, mixed endpoints"
+    },
+    "Q1": {
+      "source": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/semantic/comparison.json",
+      "scope": "one fixed synthetic parent952, west96, G/S/X; 25 correlated planning states",
+      "proved": "Positive S terminal surface/F1 and slight coverage difference vs G=X, matched first19action planning state; X/G full steps identical.",
+      "not_proved": "No within-state scalar-infeasibility witness; all actualS decisions share lambda>=6.0379685851 interval; no category-specific advantage over uniform weight established.",
+      "timing": "Planning divergence paid19 at88.476%known, actual action33; no early-coverage efficiency claim"
+    },
+    "two_room": "PosthocGweight2 full96steps matchS; genericweight explanation remains, not a category-specific result"
+  },
+  "verification": "arithmetic_verification.json; native algebra witness plus savedQ1 midpoint score check only",
+  "no_policy_or_manuscript_changes": true,
+  "no_ROS_or_simulation_runs": true,
+  "source_sha256": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py": "adc651625adcb456562f0907e8fd5b1aa94c9536f8eb856ce193b12af3f1de2c",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py": "76f4327fefa8fafd37d7c520cf6e1c92c05f5b9777f9f621605653ad2fb1568b",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/response_features_v7.py": "3317f74c906b62434de3b7b46051e8edbdd4d7214eb88d0eb0580d31a2129a91",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/competition_candidates_v8_1.py": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab"
+  }
+}

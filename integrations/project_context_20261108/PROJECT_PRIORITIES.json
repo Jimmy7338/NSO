@@ -1,18 +1,21 @@
 {
   "schema": "nso.project_priorities.v1",
-  "updated_unix_s": 1794127655.4225361,
+  "updated_unix_s": 1794129943.4848444,
   "updated_local_date": "2026-11-08",
   "source": "Direct user instructions in current conversation",
   "primary_objectives": [
-    "Submit a focused small paper as soon as practical",
-    "Complete the main graduation-thesis work within about one month before internship"
+    "Deliver a small paper supported by a completed, reproducible experimental study and adequate theory; speed does not replace scientific completion.",
+    "Complete the graduation thesis on unknown-environment coverage and joint measured-surface mapping, with demonstrated semantic role and honest applicability limits."
   ],
   "user_constraints": {
     "horizon": "about one month",
     "journal_requirement": "No mandatory level; Q4 can be acceptable; early submission preferred",
     "publication_for_graduation_mandatory": false,
     "real_robot_experiments_mandatory": false,
-    "acceptance_date_not_under_our_control": true
+    "acceptance_date_not_under_our_control": true,
+    "latest_completion_requirement": "2026-11-08: 我需要的是实验完全成功后的，理论和实验依据足够充分后的论文",
+    "working_draft_is_not_completed_paper": true,
+    "real_robot_experiments_mandatory_context": "No formal school requirement was reported; user project objective nevertheless requires successful physical NSO deployment and sufficient real-world evidence."
   },
   "research_identity": "Joint unknown-space exploration and measured-surface observation; explicitly revised exploration_joint_v1 on v10_3_1, natural semantic frontend connected; comparative efficiency and semantic effect unvalidated",
   "paper_baseline": {
@@ -33,45 +36,31 @@
     "goal_retained": true,
     "purpose": "Supporting method/engineering evidence for paper and thesis",
     "existing_complete_deployment_criteria_retained": true,
-    "proposed_timebox_work_days": 2,
     "pure_visual_SLAM_not_a_submission_prerequisite": true,
-    "do_not_claim_new_method_effect_from_software_or_movement_alone": true
+    "do_not_claim_new_method_effect_from_software_or_movement_alone": true,
+    "historical_proposed_timebox_work_days": 2,
+    "timebox_does_not_override_user_completion_requirement": true
   },
   "proposed_schedule": [
     {
-      "week": 1,
-      "dates": "2026-10-29 to 2026-11-04",
+      "phase": 1,
       "deliverables": [
-        "Restore and verify paper/thesis/figures/tables/reproduction index by manifest",
-        "Freeze current method and all paired/negative results",
-        "Choose a journal and backup by fit, current quartile interpretation and cost"
+        "Resolve measured floor/frame inconsistency with disclosed sensor calibration and held-out checks; retain original research thresholds and guards.",
+        "Repeat complete real unknown-exploration/mapping/return episodes with frozen configuration and preserve every outcome."
       ]
     },
     {
-      "week": 2,
-      "dates": "2026-11-05 to 2026-11-11",
+      "phase": 2,
       "deliverables": [
-        "Tighten claims and method-evidence traceability",
-        "Prepare editable submission package and declarations for author review",
-        "Target first submission after author confirmation"
+        "Run predefined matched C/G/S and semantic/geometry-weight controls; evaluate unknown coverage efficiency first, surface observations separately.",
+        "Audit natural detection and measured semantic support separately from controlled-label mechanism evidence; evaluate reconstruction against independent reference when claiming accuracy."
       ]
     },
     {
-      "week": 3,
-      "dates": "2026-11-12 to 2026-11-18",
+      "phase": 3,
       "deliverables": [
-        "Complete thesis main body from existing frozen results",
-        "Integrate bounded real-robot case only if achieved within timebox",
-        "Apply school formatting when supplied"
-      ]
-    },
-    {
-      "week": 4,
-      "dates": "2026-11-19 to 2026-11-25",
-      "deliverables": [
-        "Address supervisor and submission feedback",
-        "Finish defense/reproduction/transfer materials",
-        "Synchronize reviewed deliverables to GitHub"
+        "Assess whether actual results support the central contribution; if not, diagnose and explicitly propose a method revision instead of strengthening prose.",
+        "Finalize small paper and thesis only after scientific evidence review, with professional measured figures, reproducibility and all important limitations."
       ]
     }
   ],
@@ -104,7 +93,7 @@
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/github_alignment.json",
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/reference_restore_manifest.json"
   ],
-  "next_concrete_task": "按用户最新指示试用已恢复的旧相机外参；新2D/3D会话已运行，未自动再跑。保留Q1正/负边界与C/S失败；小论文18+3页和毕设82页已完成本轮正文修订，作者等信息按用户要求留空。下一次实跑前应核验地面参考与实际深度投影，不能沿用今天新标定的初始化脚本/旧坐标或擅自删点提高阈值。",
+  "next_concrete_task": "Ground-reference input repair: verify prospective frozen depth-plane profile against held-out visible floor and obstacles; retain original .15m threshold, original circle and all raw measurements. Separately trace the large class-bearing connected groups: the frozen floor candidate does NOT make them eligible, so prepare a named instance/geometry association proposal and surface its method/candidate effects before any deployment. Do not widen extent or force semantic scores. Papers remain working drafts until successful repeated closed-loop and sufficient matched study evidence.",
   "source_authority": "Actual original Windows selected research files, received or verified against controller references, now independently materialized in the restored research workspace; GitHub is historical context",
   "local_migration": {
     "root": "/home/ouc/nso_robot/migrations/windows_local_20261029",
@@ -139,7 +128,7 @@
     "scope": "All future manuscript revisions, figures/tables, claim-evidence checks, and pre-submission review"
   },
   "next_physical_experiment_recommendation": {
-    "status": "ordered_C_S_pilot_recorded_S_failure_source_isolated",
+    "status": "legacy_mount_S22_failed_anchor_disconnected_stopped",
     "purpose": "Evaluate unknown coverage and measured-surface joint exploration with matched physical comparison after the completed deployment feasibility cycle",
     "navigation": "Original CSM+gmapping new legacy-camera epoch; /nso_visual/map, no autonomous mission.",
     "preconditions": [
@@ -148,13 +137,13 @@
     ],
     "comparison_after_pilot": "Freeze sensor and ROS execution configuration; compare unknown exploration at matched initial information and return contract, rather than V35 object-template task",
     "evidence_boundary": "A single-scene feasibility case, not generalization or complete deployment; no reconstruction accuracy claims without independent reference",
-    "timebox": "Proposed two working days for the initial physical integration case; preserve simulation ablation and thesis progress",
+    "timebox": "Historical two-day integration proposal superseded as a completion criterion by latest user evidence-first requirement; keep short informative execution cycles.",
     "attempt_index": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/ATTEMPTS.json",
     "active_workspace": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029",
-    "current_state": "实车C24正常终止返航、S13原anchor_footprint检查失败并零速停止；用户要求回退旧相机外参，新建图/展示会话已恢复，无自主程序。",
+    "current_state": "旧配置22动作后原返航图断连，未返航；清理后独立CAN61条全零，state0/mode1/error0。地面候选仍未部署。",
     "category_prior_source": "Declared YOLOE real_scene_structural_v1; cabinet/display counter -> closed-enclosure hypothesis, original class semantics not claimed",
     "manual_reposition_confirmed": true,
-    "next_step": "First verify legacy-mount mapping after user-requested rollback. New motion requires actual fresh initialization in this epoch; known floor-reference inconsistency remains, no policy/point filtering or threshold relaxation authorized or applied.",
+    "next_step": "Ground-reference input repair: verify prospective frozen depth-plane profile against held-out visible floor and obstacles; retain original .15m threshold, original circle and all raw measurements. Separately trace the large class-bearing connected groups: the frozen floor candidate does NOT make them eligible, so prepare a named instance/geometry association proposal and surface its method/candidate effects before any deployment. Do not widen extent or force semantic scores. Papers remain working drafts until successful repeated closed-loop and sufficient matched study evidence.",
     "route_diagnosis": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/ROUTE_REJECTION_AND_METHOD_ALIGNMENT_20261029.txt",
     "historical_method_variant": "onboard_adaptation_four_structure_greedy",
     "historical_policy_mode": "G",
@@ -163,8 +152,8 @@
     "latest_historical_config": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/pilot_config_after_manual_reposition.json",
     "latest_historical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261029/desk_pilot_04",
     "historical_path_diagnostics_validation": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/preflight/candidate_path_diagnostics_validation_20261029.json",
-    "latest_physical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_S",
-    "latest_progress": "C40/40 return,6.741m558.214s; S32/32 arrivals,5.233m451.992s, original current-footprint failure/no return. One sequential same-scene pilot with distinct measured initial inputs. Strict cached-semantic replays C41/S33 matched; no G/S choice benefit.",
+    "latest_physical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01",
+    "latest_progress": "Legacy S22/23obs/22arrivals,3.601879m299.374s,no return; all3logged plans G=S; no causal improvement established.",
     "completed_cycle": {
       "paid_actions": 40,
       "accepted_observations": 41,
@@ -975,14 +964,16 @@
     "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/thesis.md",
     "pages": 82,
     "chapters": 6,
-    "status": "complete_revised_body_reading_draft_not_school_submission",
+    "status": "working_draft_scientific_evidence_incomplete",
     "pdf_sha256": "ef5f083e32a8da24ac5f0a00b3ccd90cd2a35b04ea2c2d05a11383f9a9dce622",
     "source_sha256": "b442e6b722945806e63493cb9f275838e4d590c1d26eebc5fb0e5a61b8b5b366",
     "validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/revision_validation.json",
     "local_math_formulas": 181,
     "math_render_failures": 0,
     "rebuild_from_external_working_directory": true,
-    "latest_real_episode_revision": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/physical_pair_revision_manifest.json"
+    "latest_real_episode_revision": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/physical_pair_revision_manifest.json",
+    "scientifically_complete": false,
+    "draft_build_complete": true
   },
   "latest_semantic_reachability_layers": {
     "directory": "/home/ouc/nso_robot/analyses/semantic_reach_20261104",
@@ -1505,20 +1496,21 @@
   },
   "continuous_goal_revision": {
     "path": "/home/ouc/nso_robot/CONTINUOUS_GOAL.txt",
-    "updated_local_date": "2026-11-07",
-    "sha256": "bb60270d35ec20c1d9eaf2ab6dce2c9fee9db2ce89f099a49daeb18caa26d176",
+    "updated_local_date": "2026-11-08",
+    "sha256": "99e817f00f6e8fea1ff2a05c3dbf26d1e8d7158c9802ff69af928f0b05da1af3",
     "user_requested": true,
     "priority_order": [
-      "design_informative_matched_comparison_from_completed_frozen_diagnostics",
-      "submission_manuscript_and_thesis",
-      "compact_evidence_GitHub_sync"
+      "sensor_input_consistency_and_repeated_complete_physical_exploration",
+      "theory_and_fair_mechanism_performance_comparisons",
+      "evidence_supported_manuscript_finalization",
+      "compact_verified_github_sync"
     ],
     "app_goal_objective_updated": false,
     "app_goal_observed_status": "active",
     "activation_source": "Existing user-activated goal retained; latest request updates local execution objective and factual baseline.",
-    "updated_unix_s": 1794062531.4617047,
+    "updated_unix_s": 1794129860.5053058,
     "app_goal_local_revision_pending": true,
-    "app_goal_update_limitation": "Current goal tool permits status changes only; active objective body was not rewritten. Local execution goal and project index updated at user request; existing app goal remains active."
+    "app_goal_update_limitation": "User restored application goal to active during 2026-11-08 evidence-first correction; verified with get_goal. Tools still cannot replace objective text; local goal contains current completion criteria."
   },
   "latest_controller_diagnosis": {
     "summary": "/home/ouc/nso_robot/analyses/forward_controller_20261107/checkpoint_summary.json",
@@ -1736,14 +1728,15 @@
   },
   "last_goal_turn_progress": {
     "classification": "progress",
-    "task": "Fixed Q1 G/S/X comparison, complete realC/S outcomes and depth-source fault attribution, revised small paper/thesis, explicit user-requested legacy mount rollback.",
+    "task": "Evidence-first scientific completion criteria; ten fixed Q2 controls completed with mixed/negative primary results; legacy S22 real failure and sensor/semantic group sources identified; no paper finalization.",
     "goal_complete": false,
     "consecutive_no_progress_turns": 0,
     "robot_motion_issued": true,
-    "motion_complete_and_zero": true,
     "autonomous_mission_currently_active": false,
-    "evidence": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108",
-    "publication_pending": true
+    "evidence": "/home/ouc/nso_robot/analyses/evidence_first_20261108",
+    "publication_pending": true,
+    "manuscripts_status": "working_drafts_scientific_evidence_incomplete",
+    "motion_complete_and_zero": true
   },
   "live_dashboard_current": {
     "url": "http://127.0.0.1:8766/",
@@ -2128,18 +2121,17 @@
     }
   },
   "post_publication_local_checkpoint": {
-    "updated_unix_s": 1794123821.6689136,
-    "published_head": "95f92e53c46fae04e1db84c6c46db6f261f3ee5b",
-    "publication_receipt": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/publication_receipt.json",
-    "scope": "Confirmed mount calibration and new data session; 16 files readback-verified; draft PR1 remains unmerged.",
-    "previous_head": "79d05f5e357fa89cc8af65500e4ff417e3db0f2b"
+    "checked_unix_s": 1794128053.9138796,
+    "head": "329cfc74b151992d92d4555c67317aca5d8abd81",
+    "receipt": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/publication_receipt.json",
+    "scope": "Local publication bookkeeping only;remote126-file scientific/configuration/manuscript snapshot verified. This receipt pointer is written after commit to avoid self-reference."
   },
   "focused_submission_candidate": {
     "directory": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108",
     "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.pdf",
     "editable_source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.tex",
     "pages": 18,
-    "status": "completed_anonymous_manuscript_revision_not_submitted",
+    "status": "working_draft_scientific_evidence_incomplete",
     "pdf_sha256": "b8ca039b770d3abb1621377cae111a2d51ea6c6c7ffa280042c94d5539e279e2",
     "full32page_evidence_manuscript_retained": true,
     "thesis79page_body_retained": true,
@@ -2148,11 +2140,13 @@
     "validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/validation.json",
     "author_details_pending": false,
     "venue_decided": false,
-    "publication_receipt": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/focused_publication_receipt.json",
-    "published_head": "0a0d948d0e0f5f90819fbeefabe734ef034c2ee6",
+    "publication_receipt": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/publication_receipt.json",
+    "published_head": "329cfc74b151992d92d4555c67317aca5d8abd81",
     "supplement_pages": 3,
     "author_fields_intentionally_blank_by_user": true,
-    "publication_pending": true
+    "publication_pending": false,
+    "scientifically_complete": false,
+    "draft_build_complete": true
   },
   "semantic_candidate_proposal": {
     "path": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/SEMANTIC_CANDIDATE_PROPOSAL.json",
@@ -2280,7 +2274,7 @@
     "physical_status": "C24_original_normal_stop_returned_S13_anchor_footprint_failure_no_return_both_CAN_zero",
     "semantic_directory": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/semantic",
     "manuscript_directory": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108",
-    "goal": "Fixed disclosed comparison, preserve failures, complete concise anonymous submission candidate; no undisclosed policy changes.",
+    "goal": "Complete sufficient theoretical and experimental evidence before manuscript finalization; preserve existing pilots and negative results.",
     "prearm_duration_rejection": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/startup_rejection.json",
     "physical_C_command_dir": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/run_C02",
     "semantic_comparison": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/semantic/comparison.json",
@@ -2291,17 +2285,24 @@
     "failure_source": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/S_anchor_failure/result.json",
     "floor_diagnostic": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/S_anchor_failure/ground_three_frame_conclusion.json",
     "semantic_status": "Q1 nativeG/S/X one fixed synthetic parent completed;S endpoint gains but common generic weight explanation remains",
-    "manuscript_complete": true,
+    "manuscript_complete": false,
     "author_metadata_left_blank_at_user_request": true,
     "independent_physical_scenes": 1,
     "ordered_pairs_this_round": 1,
-    "semantic_effect_in_physical_trials": false
+    "semantic_effect_in_physical_trials": false,
+    "publication_head": "329cfc74b151992d92d4555c67317aca5d8abd81",
+    "publication_receipt": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/publication_receipt.json",
+    "draft_revision_and_build_complete": true,
+    "study_complete": false
   },
   "primary_manuscript": {
     "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.pdf",
     "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.tex",
     "supplement": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/supplement.pdf",
-    "role": "Current focused anonymous small-paper manuscript; distinct from original v10 unknown-space thesis/deployment policy"
+    "role": "Current focused anonymous small-paper manuscript; distinct from original v10 unknown-space thesis/deployment policy",
+    "status": "working_draft_scientific_evidence_incomplete",
+    "scientifically_complete": false,
+    "draft_build_complete": true
   },
   "latest_camera_rollback": {
     "schema": "nso.user_requested_legacy_camera_mapping.v1",
@@ -2334,5 +2335,172 @@
     "three_frame_ground_diagnostic": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/S_anchor_failure/ground_three_frame_conclusion.json",
     "next_capture_must_match_current_legacy_TF": true,
     "updated_unix_s": 1794127655.4202747
+  },
+  "historical_schedule_before_evidence_first": [
+    {
+      "week": 1,
+      "dates": "2026-10-29 to 2026-11-04",
+      "deliverables": [
+        "Restore and verify paper/thesis/figures/tables/reproduction index by manifest",
+        "Freeze current method and all paired/negative results",
+        "Choose a journal and backup by fit, current quartile interpretation and cost"
+      ]
+    },
+    {
+      "week": 2,
+      "dates": "2026-11-05 to 2026-11-11",
+      "deliverables": [
+        "Tighten claims and method-evidence traceability",
+        "Prepare editable submission package and declarations for author review",
+        "Target first submission after author confirmation"
+      ]
+    },
+    {
+      "week": 3,
+      "dates": "2026-11-12 to 2026-11-18",
+      "deliverables": [
+        "Complete thesis main body from existing frozen results",
+        "Integrate bounded real-robot case only if achieved within timebox",
+        "Apply school formatting when supplied"
+      ]
+    },
+    {
+      "week": 4,
+      "dates": "2026-11-19 to 2026-11-25",
+      "deliverables": [
+        "Address supervisor and submission feedback",
+        "Finish defense/reproduction/transfer materials",
+        "Synchronize reviewed deliverables to GitHub"
+      ]
+    }
+  ],
+  "evidence_completion_contract": {
+    "source": "Direct user correction 2026-11-08",
+    "scientifically_complete": false,
+    "runtime_gate_or_policy_change": false,
+    "scope": "Study/manuscript acceptance criteria only; no new robot candidate or motion restrictions.",
+    "requirements": [
+      {
+        "id": "physical_loop",
+        "status": "incomplete",
+        "criterion": "Repeated full unknown-exploration, measured mapping and anchor-return runs under a frozen disclosed implementation; preserve all failures, interventions, starts and durations."
+      },
+      {
+        "id": "theory",
+        "status": "partial",
+        "criterion": "Trace equations to executed implementation, explain semantic effect and degeneracies, distinguish algebraic possibility from coverage benefit; no unsupported optimality claim."
+      },
+      {
+        "id": "causal_comparison",
+        "status": "incomplete",
+        "criterion": "Predetermined matched C/G/S and swapped-prior / fixed generic-weight controls with common evaluation references; C/G tests combined surface terms, G/S tests semantic scoring. Independent scenarios and related repeats counted separately."
+      },
+      {
+        "id": "unknown_coverage",
+        "status": "incomplete",
+        "criterion": "Coverage-versus-cost curves and completion/return outcomes; late surface benefit alone does not establish unknown-coverage efficiency."
+      },
+      {
+        "id": "semantic_frontend",
+        "status": "incomplete",
+        "criterion": "Separate natural detection quality, projection/group retention, candidate score changes and executed task benefit; controlled input disclosed."
+      },
+      {
+        "id": "reconstruction",
+        "status": "incomplete",
+        "criterion": "Use independent reference for claimed metric accuracy or completeness; appearance and fitted-plane residual are insufficient."
+      },
+      {
+        "id": "final_manuscript",
+        "status": "working_draft",
+        "criterion": "Finalize only after claims are supported by completed study; preserve nulls/failures and scope limitations. No requirement or promise that every comparison wins."
+      }
+    ],
+    "immediate_sensor_audit": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/interface_audit.md",
+    "theory_audit": "/home/ouc/nso_robot/analyses/evidence_first_20261108/theory/theory_audit.json",
+    "proposed_fixed_comparison_not_executed": "/home/ouc/nso_robot/analyses/evidence_first_20261108/theory/controlled_plan.json",
+    "manuscript_polishing_priority": "Evidence and working method first; avoid repeated draft compilation without new evidence.",
+    "current_motion": "Legacy S22 episode ended in original map disconnection; no autonomous mission, independent61CAN velocity samples allzero; original legacy mount/floor retained.",
+    "passive_capture": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/current_capture/receipt.json",
+    "floor_candidate_not_deployed": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/frozen_profile.json",
+    "floor_mapper_counterfactual": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/mapper_counterfactual.json",
+    "floor_counterfactual_conclusion": "Old TF alone makes historical0..13 anchor test safe, as does oldTF+candidateZ; cannot attribute this to floor correction or infer physical safety.",
+    "legacy_trial": "/home/ouc/nso_robot/analyses/evidence_first_20261108/legacy_trial/protocol.json"
+  },
+  "evidence_first_20261108": {
+    "user_completion_requirement": "Experiments and theory sufficiently established before paper finalization; current PDFs are working drafts.",
+    "status": "research_incomplete_progress_with_additional_negative_and_mechanism_evidence",
+    "study_complete": false,
+    "theory_Q2": {
+      "comparison": "/home/ouc/nso_robot/analyses/evidence_first_20261108/theory/Q2_execution/comparison.json",
+      "conclusion": "/home/ouc/nso_robot/analyses/evidence_first_20261108/theory/Q2_execution/conclusion.json",
+      "trials": 10,
+      "independent_parent_worlds": 1,
+      "related_arrangements": 2,
+      "all_full_anchor_return": true,
+      "simulated_collisions": 0,
+      "primary_unknown_coverage_efficiency_gain_supported": false,
+      "actual_S_scalar_nonequivalence_witness": {
+        "paid_actions": 21,
+        "known_fraction_percent": 91.138,
+        "selected_candidate": 7,
+        "scope": "same-state selection cannot be reproduced by any nonnegative global geometry weight; not performance benefit"
+      },
+      "surface_outcome": "S vs G improves surface/F1 west; equal east; swapped prior can outperform S east. Preserve all conditions."
+    },
+    "legacy_real_episode": {
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01",
+      "summary": "/home/ouc/nso_robot/analyses/evidence_first_20261108/legacy_trial/terminal_summary.json",
+      "paid_actions": 22,
+      "observations": 23,
+      "verified_arrivals": 22,
+      "CAN_distance_m": 3.601879209280007,
+      "elapsed_s": 299.3742963020013,
+      "failure": "anchor_disconnected_in_latest_map",
+      "returned": false,
+      "CAN_zero_after_close": true,
+      "independent_stop_sample": "/home/ouc/nso_robot/analyses/evidence_first_20261108/legacy_trial/post_stop_can.json",
+      "independent_zero_velocity_samples": 61,
+      "all_independent_velocity_samples_exact_zero": true,
+      "observed_area_proxy_initial_m2": 71.96,
+      "observed_area_proxy_final_m2": 106.2,
+      "fixed_old_surface_quality_proxy_delta": -0.0005908147186325236,
+      "G_S_equal_all_logged_candidate_scores": true,
+      "candidate_floor_reference_deployed": false
+    },
+    "sensor_diagnosis": {
+      "summary": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/legacy_disconnect_brief.json",
+      "source_details": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/legacy_mapper_sources.json",
+      "same_epoch_profile_frozen_before_trial": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/frozen_profile.json",
+      "candidate_base_relative_floor_m": -0.12447258789516671,
+      "actual_floor_reference_m": -0.233,
+      "late_new_occupied_cells": 51,
+      "all_late_cells_have_depth_support": true,
+      "late_cells_same_frame_scan_hit_or_nav_occupied_support": 0,
+      "counterfactual_preserves_connectivity": true,
+      "counterfactual_not_deployed": true,
+      "scope": "New depth-supported occupancy coincides with disconnection; samples visually on floor/wall-floor boundary; no claim of a minimal graph cut or independent full accuracy. Profile is depth-based internal consistency, not external metrology."
+    },
+    "semantic_group_diagnosis": {
+      "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/legacy_trial/semantic_group_audit.json",
+      "paid22_class3_quality_points": 437,
+      "containing_group_points": 2591,
+      "containing_group_XY_span_m": [
+        7.30015,
+        3.51368
+      ],
+      "horizontal_extent_cap_m": 3.0,
+      "reason": "All class3 support lies in original geometric group exceeding existing extent cap; qualified groups have no labels. Do not widen cap or change grouping silently.",
+      "floor_counterfactual": "/home/ouc/nso_robot/analyses/evidence_first_20261108/legacy_trial/semantic_group_floor_counterfactual.json",
+      "floor_candidate_resolves_extent_rejection": false,
+      "candidate_paid22_class3_quality_points": 356,
+      "candidate_paid22_group_XY_span_m": [
+        7.30015,
+        3.587
+      ]
+    },
+    "no_policy_source_change": true,
+    "no_manuscript_revision_this_turn": true,
+    "next": "Ground-reference input repair: verify prospective frozen depth-plane profile against held-out visible floor and obstacles; retain original .15m threshold, original circle and all raw measurements. Separately trace the large class-bearing connected groups: the frozen floor candidate does NOT make them eligible, so prepare a named instance/geometry association proposal and surface its method/candidate effects before any deployment. Do not widen extent or force semantic scores. Papers remain working drafts until successful repeated closed-loop and sufficient matched study evidence."
   }
 }
