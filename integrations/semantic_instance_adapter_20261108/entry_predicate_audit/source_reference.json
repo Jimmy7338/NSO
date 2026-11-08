@@ -1,0 +1,103 @@
+{
+  "schema": "nso.entry_predicate_source_reference.v1",
+  "status": "read_only_provenance_no_method_change",
+  "files": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/hierarchical_options_v10.py",
+      "sha256": "7244f0044264e84c07ed0155820376e7156d1f8ef15f0c036fbfc480bee5bfb1",
+      "lines": [
+        24,
+        25,
+        232,
+        249,
+        252,
+        255,
+        266,
+        267
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py",
+      "sha256": "76f4327fefa8fafd37d7c520cf6e1c92c05f5b9777f9f621605653ad2fb1568b",
+      "lines": [
+        18,
+        36,
+        347,
+        350
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py",
+      "sha256": "adc651625adcb456562f0907e8fd5b1aa94c9536f8eb856ce193b12af3f1de2c",
+      "lines": [
+        25,
+        26,
+        236,
+        253,
+        256,
+        259,
+        270,
+        271,
+        304
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/competition_candidates_v8_1.py",
+      "sha256": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab",
+      "lines": [
+        18,
+        25,
+        31,
+        47,
+        50,
+        60
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/measured_extent_adapter.py",
+      "sha256": "f839b03d74c3810c2ff30bcc6e63a6e1f1cf6038a476a4a23b96157a4b2429de",
+      "lines": [
+        7,
+        8,
+        20
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/env/virtual3d.py",
+      "sha256": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+      "lines": [
+        17,
+        18,
+        46
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/utils/grid_geometry.py",
+      "sha256": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b",
+      "lines": [
+        11,
+        22
+      ]
+    }
+  ],
+  "restored_original": "hierarchical_options_v10.py contains entry offsets .4/.8m, projection max .35m, unused/wanted heading, back depth >.15m, positive native aperture. cpu_four_modules_v10 imports and invokes that generator for observed-gain revisions including v10_3_1. Original scope here means restored v10_3_1, not the distinct V35 controlled-template study.",
+  "joint_adapter": "exploration_joint_v1 cites the exact original generator SHA and retains these entry predicates/limits in its own separately implemented generator; it also changes coverage candidate generation, so it is a named method variant, not original equivalence.",
+  "aperture": "competition_candidates_v8_1 uses backside plus 5x5 far-plane range/FOV; no occlusion ray cast.",
+  "parameters": {
+    "restored_sim_default_radius_m": 0.2,
+    "restored_sim_grid_resolution_m": 0.2,
+    "source": "VirtualConfig defaults; Q1 uses this inherited config unless overridden",
+    "physical_circle_radius_m": 0.7212185868375829,
+    "physical_grid_resolution_m": 0.2,
+    "physical_config_path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/depth_ground_S40_20261108_01/joint_configuration.json",
+    "physical_config_sha256": "40e0a7c31695ae0fa99149d02809f706d1b9db8b082fbf995d8e1a67a1fe6be8",
+    "physical_measured_extent_profile": "measured_extent_3m_v1",
+    "physical_sensor_range_profile": "sensor_range_matched_v1",
+    "distinction": "physical radius is explicit robot integration geometry; 3m measured extent and range profiles are separately declared adapters. Neither explains .35m as a physical-only rule."
+  },
+  "limits": [
+    "Comparison is source provenance, not proof of algorithmic equivalence across implementations.",
+    "A proposal to relax .35m or alter heading/FOV eligibility changes research decision rules and must be explicitly named, assessed and reported.",
+    "No threshold modified or new experiment run."
+  ]
+}

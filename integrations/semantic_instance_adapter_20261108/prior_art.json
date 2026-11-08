@@ -1,0 +1,57 @@
+{
+  "schema": "nso.semantic_instance_adapter.prior_art.v1",
+  "review_date": "2026-11-08",
+  "status": "proposed_interface_only_not_deployed",
+  "proposed_profile": "measured_instance_association_v1",
+  "scope": "Existing YOLOE 2D instance masks -> measured depth points/voxels -> cross-frame association -> NSO assets; literature review only.",
+  "references": [
+    {
+      "id": "MaskFusion2018",
+      "title": "MaskFusion: Real-Time Recognition, Tracking and Reconstruction of Multiple Moving Objects",
+      "year": 2018,
+      "authors": "Martin Rünz; Maud Buffier; Lourdes Agapito",
+      "venue": "ISMAR 2018",
+      "url": "https://arxiv.org/abs/1804.09194",
+      "doi": "10.48550/arXiv.1804.09194",
+      "doi_kind": "arXiv preprint DOI",
+      "verified_support": "RGB-D SLAM uses image instance masks for labeled object-level reconstruction and tracking; establishes mask-to-object-map precedent."
+    },
+    {
+      "id": "PanopticFusion2019",
+      "title": "PanopticFusion: Online Volumetric Semantic Mapping at the Level of Stuff and Things",
+      "year": 2019,
+      "authors": "Gaku Narita; Takashi Seno; Tomoya Ishikawa; Yohsuke Kaji",
+      "venue": "IROS 2019",
+      "url": "https://arxiv.org/abs/1903.01177",
+      "doi": "10.48550/arXiv.1903.01177",
+      "doi_kind": "arXiv preprint DOI",
+      "verified_support": "Integrates predicted 2D panoptic labels with measured depth in a spatially hashed volume; consults current 3D map to reconcile instance IDs varying between frames. Closest direct interface precedent."
+    },
+    {
+      "id": "ConceptFusion2023",
+      "title": "ConceptFusion: Open-set multimodal 3D mapping",
+      "year": 2023,
+      "authors_short": "Krishna Murthy Jatavallabhula et al.",
+      "venue": "Robotics: Science and Systems XIX",
+      "url": "https://www.roboticsproceedings.org/rss19/p066.html",
+      "doi": "10.15607/RSS.2023.XIX.066",
+      "doi_kind": "conference paper DOI",
+      "verified_support": "Fuses pixel-aligned open-set foundation-model features into 3D maps using SLAM and multiview fusion; supports open-set mapping precedent, not a guarantee of persistent instance identity."
+    }
+  ],
+  "assessment": {
+    "established_route": true,
+    "claim": "Mask/depth projection, instance association and semantic 3D fusion are established perception/mapping routes, not a new NSO theory. The proposed adapter is not claimed to reproduce these complete systems.",
+    "unproven": "These papers do not establish YOLOE accuracy in this room, this adapter association quality, NSO semantic benefit, unknown-space coverage efficiency or reconstruction accuracy."
+  },
+  "boundaries_engineering_inferences_not_paper_quotes": [
+    "Frame-local instance IDs require association; occlusion, mask split/merge and similar nearby instances can switch, duplicate or merge identities. Same class is not same physical instance.",
+    "Depth validity, intrinsics, extrinsics, synchronization and pose drift affect projected support and cross-frame matching; association can accumulate geometrically coherent errors.",
+    "Open-set labels and similarity/detection scores are predictions, not ground truth or calibrated probabilities. They do not establish object closedness or hidden internal structure; independent annotation is needed for accuracy claims.",
+    "Measured mask-supported voxels represent visible observed surfaces; they do not justify unobserved object completion or a true full-object extent.",
+    "Changing instance grouping/support can change NSO asset geometry, aperture, ordering/cap and resulting candidates or decisions even if native scoring code is unchanged. Declare and evaluate this sensor-input adaptation explicitly.",
+    "Evaluate perception/association, downstream decision effects, unknown coverage efficiency and reconstruction accuracy separately; unknown coverage remains primary."
+  ],
+  "verification": "Titles, years, venues and stated support checked against author-submitted arXiv abstracts and official RSS abstract/BibTeX. DOI types are distinguished; no secondary-source claims used.",
+  "operations": "No model training, code/policy/manuscript edits, experiments or robot/service operations."
+}

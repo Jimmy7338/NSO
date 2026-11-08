@@ -1,0 +1,10 @@
+{
+ "status":"frozen_before_residual_computation",
+ "frames":[0,18,22],
+ "depth_roi_preview_xyxy":{"0":[280,260,550,310],"18":[710,235,920,305],"22":[720,235,900,305]},
+ "visible_white_face_polygon_preview_xy":{"0":[[240,252],[570,252],[570,318],[240,318]],"18":[[650,205],[950,155],[950,405],[650,335]],"22":[[675,225],[930,185],[930,425],[675,350]]},
+ "preview_size":[960,540],"raw_size":[1280,720],"stride":4,
+ "method":"Fit depth ROI by total least squares, all finite positive depth samples, no residual rejection. Use each modality historical odom TF at its own source timestamp. Project ALL finite actual laser returns through inverse camera TF/K; select only by RGB-only visible-face polygon AND ROI horizontal extent. No nearest-plane residual gating, ICP or transform fitting. Report signed plane residual for selected returns, with pixels/indices; potential wrong-object/occlusion returns remain visible and are not certified correspondences.",
+ "angle_domain":"Freeze by RGB geometric projection predicate rather than choosing numeric angles after observing error; report resulting original scan indices and angles.",
+ "limits":"Polygon is coarse RGB review, not annotated ground truth. Whiteface upper boundary may be below laser plane, causing no overlap. No independent physical accuracy truth. No counterfactual TF necessary for baseline test."
+}
