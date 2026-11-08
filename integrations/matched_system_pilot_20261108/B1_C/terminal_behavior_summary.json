@@ -1,0 +1,366 @@
+{
+  "status": "B1_C_failed_preserved_remaining_five_slots_unexecuted",
+  "terminal": {
+    "status": "execution_interrupted",
+    "reason": "chassis_before_stop:native_driver_fault:5",
+    "method_failed": null,
+    "execution_interrupted": true,
+    "core_termination": null
+  },
+  "accounting": {
+    "accepted_observations": 25,
+    "native_paid_from_last_accepted_observe": 24,
+    "native_arrived_count": 1,
+    "native_paid_action_counts": {
+      "forward": 21,
+      "left": 1,
+      "right": 2
+    },
+    "ROS_verified_arrival_records": 24,
+    "ROS_successful_arrivals_list_count": 24,
+    "ROS_goals": 25,
+    "supervisor_joint_action_records": 24,
+    "final_receipt_worker_paid": 24,
+    "final_receipt_supervisor_paid": 24,
+    "receipt_error": null,
+    "worker_minus_supervisor": 0
+  },
+  "physical": {
+    "CAN_distance_m": 4.368680383443829,
+    "CAN_absolute_yaw_rad": 8.943275210738186,
+    "elapsed_run_s": 315.27713609000057,
+    "feedback_accounting_complete": true,
+    "zero_before": true,
+    "zero_after": true,
+    "adapter_reason": "native_driver_fault:5",
+    "physical_stop_independently_observed": false
+  },
+  "return_audit": {
+    "declared_anchor": [
+      200,
+      200,
+      0
+    ],
+    "last_accepted_state": {
+      "action_id": 24,
+      "step": 24,
+      "pose": [
+        196,
+        191,
+        1
+      ],
+      "actual_base_pose_planning": [
+        38.252314967057764,
+        40.72160426426121,
+        -0.0786456014916892
+      ],
+      "frame_id": "1794139571855427822"
+    },
+    "exact_discrete_pose_equals_anchor": false,
+    "recorded_returned_to_anchor": null
+  },
+  "fixed_support_quality": {
+    "initial_fixed_support": 408,
+    "initial_support_sha256": "109bbd86dbe2dc71f679726f23f59a4a509acc686a307995e2e95c70c9a50905",
+    "final_fixed_support": 408,
+    "final_support_sha256": "109bbd86dbe2dc71f679726f23f59a4a509acc686a307995e2e95c70c9a50905",
+    "initial_Q": 0.17860320456636666,
+    "final_Q": 0.20251047476039746,
+    "recorded_delta": 0.0239072701940308,
+    "arithmetic_delta": 0.0239072701940308,
+    "support_identity_equal": true
+  },
+  "saved_laser_coverage": {
+    "profile": "saved_laser_coverage_v1",
+    "initial_observed_union_m2": 66.56000000000002,
+    "final_observed_union_m2": 104.68000000000002,
+    "new_observed_vs_firstscan_m2": 38.120000000000005,
+    "last_accepted_paid": 24,
+    "accepted_scans": 25,
+    "last_scan_CAN_bracket": {
+      "asof_distance_m": 4.173555517554282,
+      "asof_source_age_s": 0.412934344,
+      "next_distance_m": 4.1750560686588285,
+      "next_source_lead_s": 0.08722028,
+      "bracket_accounting_complete": true,
+      "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+    }
+  },
+  "global_behavior": [
+    {
+      "plan_number": 1,
+      "paid_prefix": 0,
+      "actual_C_selected": 1,
+      "shadow_modes": {
+        "C": {
+          "rank": [
+            1,
+            0,
+            2,
+            3,
+            4
+          ],
+          "scores": [
+            17.000000000000004,
+            17.660000000000004,
+            16.940000000000005,
+            16.160000000000004,
+            0.0
+          ],
+          "admissible_top1": 1,
+          "top1_margin": 0.6600000000000001
+        },
+        "G": {
+          "rank": [
+            2,
+            3,
+            1,
+            0,
+            4
+          ],
+          "scores": [
+            17.289275890667625,
+            19.440492740746997,
+            21.1858206924053,
+            20.178261399830433,
+            0.058545243294660224
+          ],
+          "admissible_top1": 2,
+          "top1_margin": 1.007559292574868
+        },
+        "S": {
+          "rank": [
+            2,
+            1,
+            3,
+            0,
+            4
+          ],
+          "scores": [
+            17.289275890667625,
+            19.440492740746997,
+            20.067736634225533,
+            19.046818469812738,
+            0.058545243294660224
+          ],
+          "admissible_top1": 2,
+          "top1_margin": 0.6272438934785356
+        },
+        "X": {
+          "rank": [
+            2,
+            3,
+            1,
+            0,
+            4
+          ],
+          "scores": [
+            17.289275890667625,
+            19.440492740746997,
+            22.303904750585065,
+            21.30970432984813,
+            0.058545243294660224
+          ],
+          "admissible_top1": 2,
+          "top1_margin": 0.9942004207369344
+        }
+      },
+      "active_apertures": [
+        {
+          "candidate_id": 2,
+          "factors": [
+            0.0,
+            0.0,
+            0.8534282187322549,
+            0.0,
+            0.0
+          ],
+          "prior_G": 1.8880280956915376,
+          "prior_S": 0.7699440375117707,
+          "prior_X": 3.0061121538713045
+        },
+        {
+          "candidate_id": 3,
+          "factors": [
+            0.0,
+            0.0,
+            0.8636249817694428,
+            0.0,
+            0.0
+          ],
+          "prior_G": 1.910586261307291,
+          "prior_S": 0.7791433312895949,
+          "prior_X": 3.0420291913249873
+        }
+      ],
+      "G_S_same_top1": true,
+      "G_S_same_full_rank": false,
+      "uniform_S_to_G_prior_ratio": 0.40780327330338767,
+      "ratio_spread": 0.0
+    },
+    {
+      "plan_number": 2,
+      "paid_prefix": 19,
+      "actual_C_selected": 0,
+      "shadow_modes": {
+        "C": {
+          "rank": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "scores": [
+            0.21333333333333337,
+            0.21333333333333337,
+            0.21333333333333337,
+            0.21333333333333337
+          ],
+          "admissible_top1": 0,
+          "top1_margin": 0.0
+        },
+        "G": {
+          "rank": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "scores": [
+            0.4518476781758222,
+            0.5109528009945771,
+            1.1465969916969714,
+            1.1635324187014002
+          ],
+          "admissible_top1": 3,
+          "top1_margin": 0.01693542700442885
+        },
+        "S": {
+          "rank": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "scores": [
+            0.4518476781758222,
+            0.5109528009945771,
+            1.1465969916969714,
+            1.1635324187014002
+          ],
+          "admissible_top1": 3,
+          "top1_margin": 0.01693542700442885
+        },
+        "X": {
+          "rank": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "scores": [
+            0.4518476781758222,
+            0.5109528009945771,
+            1.1465969916969714,
+            1.1635324187014002
+          ],
+          "admissible_top1": 3,
+          "top1_margin": 0.01693542700442885
+        }
+      },
+      "active_apertures": [],
+      "G_S_same_top1": true,
+      "G_S_same_full_rank": true,
+      "uniform_S_to_G_prior_ratio": null,
+      "ratio_spread": null
+    },
+    {
+      "plan_number": 3,
+      "paid_prefix": 20,
+      "actual_C_selected": null,
+      "shadow_modes": {
+        "C": {
+          "rank": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "admissible_top1": null,
+          "top1_margin": 0.0
+        },
+        "G": {
+          "rank": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "scores": [
+            0.10565081176798166,
+            0.261222536659822,
+            0.7588925161895407,
+            0.8871761554101777
+          ],
+          "admissible_top1": 3,
+          "top1_margin": 0.128283639220637
+        },
+        "S": {
+          "rank": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "scores": [
+            0.10565081176798166,
+            0.261222536659822,
+            0.7588925161895407,
+            0.8871761554101777
+          ],
+          "admissible_top1": 3,
+          "top1_margin": 0.128283639220637
+        },
+        "X": {
+          "rank": [
+            3,
+            2,
+            1,
+            0
+          ],
+          "scores": [
+            0.10565081176798166,
+            0.261222536659822,
+            0.7588925161895407,
+            0.8871761554101777
+          ],
+          "admissible_top1": 3,
+          "top1_margin": 0.128283639220637
+        }
+      },
+      "active_apertures": [],
+      "G_S_same_top1": true,
+      "G_S_same_full_rank": true,
+      "uniform_S_to_G_prior_ratio": null,
+      "ratio_spread": null
+    }
+  ],
+  "conclusions": [
+    "B1_C remains a failed incomplete arm, not replaced:25th goal interrupted;24 accepted paid actions/24 ROS verified arrivals/25 observations. Final accepted pose is not anchor and no completed return is certified.",
+    "First global state has nonzero category-conditioned terms and changes lower-order ranking: G/X[2,3,1,0,4] versus S[2,1,3,0,4], all choose2. Actual C chooses1. This is not a semantic top1 difference.",
+    "Later two global states have zero aperture and identical G/S/X scores/rankings. Third actual C selection is null because all candidate C scores are0; subsequent authorized action follows native behavior, not a fabricated chosen macro.",
+    "C trajectory saved-laser coverage increases38.12m\u00b2 and fixed-supportQ increases.0239073. These single failed-arm proxy changes do not establish C/G/S efficiency, semantic benefit or independent accuracy.",
+    "All remaining five planned slots unexecuted at this audit; no cross-arm comparison or missing-arm imputation."
+  ],
+  "source_sha256": {
+    "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_C/episode_reduction.json": "e08bb4cefb310657a92bbbb5c0e517dbfa2f952431fcb4cd7ef802eeb3185ad6",
+    "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_C/laser_coverage.json": "3ffbd63f710a43fdaea10d0c14a606e2881f7fdb0ddf8c3f61a1c142992e9bf1",
+    "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/protocol.json": "f63df4d6a7e50ef87c416501afcb50799e4039ba3b44914418eb4eb3379664a8"
+  }
+}
