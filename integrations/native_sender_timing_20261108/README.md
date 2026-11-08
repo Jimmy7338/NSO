@@ -1,0 +1,7 @@
+# Isolated native sender timing candidate
+
+The v2 candidate adds bounded, post-cleanup timing observation to the native sender. Original 40 ms sender gap, 100 ms input TTL, 1 ms lock wait and velocity bounds remain in place. It is not deployed to a mission and does not establish the cause or repair of the earlier physical sender fault. Measurements add overhead; a permanently blocked SDK call cannot yield a completed cycle.
+
+Capture-mode ROS validation (`execute=false`) induced a 117.383 ms sender gap and fault 5; the bad-output case exited cleanly. A separate 90.04 s SDK zero-only validation recorded 4,631 zero CAN velocity samples, no pre-shutdown fault and last-ring maximum normal native gap 24.5368 ms; fault 9 occurred in normal shutdown. This is not loaded-motion validation. The v1 helper failure reflects buffered readiness output, not a native failure.
+
+Build in an isolated ROS Noetic environment using `cmake -S candidate_v2 -B build -Dcatkin_DIR=/opt/ros/noetic/share/catkin/cmake -DPYTHON_EXECUTABLE=/usr/bin/python3 -DNSO_UGV_SDK_INCLUDE_DIR=<ugv_sdk/include> -DNSO_UGV_SDK_LIBRARY=<libugv_sdk.so> -DCMAKE_PREFIX_PATH=/opt/ros/noetic`, then `cmake --build build -j2 && ctest --test-dir build --output-on-failure`. Binary hashes depend on toolchain and build paths. Original hashes and candidate binary hash are in validation_v2.json and validation records. Helpers operate ROS/SDK and must not be run as ordinary offline tests.
