@@ -1,0 +1,9 @@
+{
+ "scope":"Offline fixed Nov06 camera mount counterfactual on old-mount raw captures; no deployment, angle optimization, policy or sensor changes.",
+ "training":"existing stationary pretrial frame 0 only; fixed visually reviewed ROI [360,480,1100,710], stride4, seed0, RANSAC120, tolerance.01m, SVD refinement; same historical protocol",
+ "stationary_heldout":"two existing pretrial captures, fixed same ROI; same position, not independent pose or physical truth",
+ "moving_heldout":"legacy actual episode frames 0,18,22 and previously RGB-selected ground/cabinet ROI in validation/protocol.json; selected independently of map connectivity",
+ "comparison":"legacy actual base-camera TF versus fixed Nov06 base-camera TF from confirmed calibrated backup and TF receipt. Both projected from same raw depth/K and frame historical odom-base, no new TF calibration; fit once per fixed mount using same training pixels.",
+ "fixed_band_m":[0.15,1.2],"frame_convention":"floor height evaluated at training base XY and expressed relative to base; historical odom epochs differ, constant base-relative reference is assumed and disclosed",
+ "limitations":"Visual ROI identity, scalar flat-floor approximation, cross-epoch transfer, no independent ground-truth measurement, no safety or physical success claim."
+}

@@ -1,0 +1,157 @@
+{
+  "schema": "nso.nov06_full02_counterfactual.summary.v1",
+  "scope": "20 actual full02 observations; fixed predeclared three conditions, mapper only, no policy or live changes",
+  "baseline_logged_belief_hash_checks": {
+    "0": "298e07e2a9c13cf217e400d6c7397b8643a0d24e001b565b744bad2e7367a988",
+    "18": "d5999409145be5d94d77d801011aef90e284a1aa216d46c57450dfbcf7fb6d33",
+    "19": "192beed1502a341255dc79c16da9e98709da16c520909f422ea98fd5c94aae46"
+  },
+  "paid19": {
+    "baseline_topology": {
+      "anchor_safe": true,
+      "current_safe": false,
+      "connected": false,
+      "anchor_component_cells": 421
+    },
+    "nov06_same_floor_topology": {
+      "anchor_safe": true,
+      "current_safe": true,
+      "connected": true,
+      "anchor_component_cells": 484
+    },
+    "nov06_refit_floor_topology": {
+      "anchor_safe": true,
+      "current_safe": true,
+      "connected": true,
+      "anchor_component_cells": 477
+    },
+    "nov06_same_floor_transitions": {
+      "-1_to_-1": 157495,
+      "-1_to_0": 0,
+      "-1_to_1": 16,
+      "0_to_-1": 0,
+      "0_to_0": 1830,
+      "0_to_1": 40,
+      "1_to_-1": 11,
+      "1_to_0": 60,
+      "1_to_1": 548
+    },
+    "nov06_same_vs_refit_transitions": {
+      "-1_to_-1": 157501,
+      "-1_to_0": 0,
+      "-1_to_1": 5,
+      "0_to_-1": 0,
+      "0_to_0": 1873,
+      "0_to_1": 17,
+      "1_to_-1": 0,
+      "1_to_0": 0,
+      "1_to_1": 604
+    }
+  },
+  "cabinet_roi": {
+    "valid": 2394,
+    "conditions": {
+      "actual_oldTF_oldground": {
+        "median_xyz_m": [
+          39.01560605072059,
+          38.275695143506596,
+          0.4028641026567585
+        ],
+        "height_p05_p50_p95_m": [
+          0.25507333573284025,
+          0.4028641026567585,
+          0.5467803234950946
+        ],
+        "band_count": 2394,
+        "xy_median_shift_from_actual_m": 0.0
+      },
+      "nov06_oldground": {
+        "median_xyz_m": [
+          39.16761987712493,
+          38.31353363132894,
+          0.4292239942875369
+        ],
+        "height_p05_p50_p95_m": [
+          0.2852448111939154,
+          0.4292239942875369,
+          0.576667095933191
+        ],
+        "band_count": 2394,
+        "xy_median_shift_from_actual_m": 0.15701683581603962
+      },
+      "nov06_refitground": {
+        "median_xyz_m": [
+          39.16761987712493,
+          38.31353363132894,
+          0.43943980507022296
+        ],
+        "height_p05_p50_p95_m": [
+          0.2954606219766015,
+          0.43943980507022296,
+          0.5868829067158771
+        ],
+        "band_count": 2394,
+        "xy_median_shift_from_actual_m": 0.15701683581603962
+      }
+    }
+  },
+  "floor_roi": {
+    "valid": 2625,
+    "conditions": {
+      "actual_oldTF_oldground": {
+        "median_xyz_m": [
+          38.89362694072022,
+          39.376334374974775,
+          -0.0033921111492671574
+        ],
+        "height_p05_p50_p95_m": [
+          -0.004821614852301509,
+          -0.0033921111492671574,
+          0.0009530269003283182
+        ],
+        "band_count": 0,
+        "xy_median_shift_from_actual_m": 0.0
+      },
+      "nov06_oldground": {
+        "median_xyz_m": [
+          39.01546136699024,
+          39.40708554119344,
+          0.01411980702469609
+        ],
+        "height_p05_p50_p95_m": [
+          0.009143025156683976,
+          0.01411980702469609,
+          0.0219910402818651
+        ],
+        "band_count": 0,
+        "xy_median_shift_from_actual_m": 0.12602527736281824
+      },
+      "nov06_refitground": {
+        "median_xyz_m": [
+          39.01546136699024,
+          39.40708554119344,
+          0.024335617807382193
+        ],
+        "height_p05_p50_p95_m": [
+          0.01935883593937008,
+          0.024335617807382193,
+          0.032206851064551206
+        ],
+        "band_count": 0,
+        "xy_median_shift_from_actual_m": 0.12602527736281824
+      }
+    }
+  },
+  "limits": [
+    "Fixed Nov06 projection on old-mount observed data is a counterfactual, not an actual Nov06 sensor trial.",
+    "Retaining samples in height band does not prove map occupancy, object safety or sensor calibration truth.",
+    "Finite ROI and one episode; no changed candidate/scorer rollout."
+  ],
+  "source_sha256": {
+    "replay.py": "5215b5361f51c62901422da4347784f2bf2e4851d1e43b81913b5a39a8b5bff7",
+    "result.json": "dc8be741980da13842187a30d89be5a80e076e8aa2f18e4e662bbd0409307b10",
+    "cabinet_roi_protocol.json": "1956d48d4801fd25a4e7553fa4530581a5f1d2a4d8dbb5a8cdd9f4fe5d598fbb",
+    "cabinet_roi.py": "937eb56abcd0bcc82d613a251a4882806787f8f38d19029fec6532c57177dc11",
+    "cabinet_roi_result.json": "b055937ef861eccae7a73d61deb974cce2bec9c65a2fd28ee800f280d2a031a3"
+  }
+}

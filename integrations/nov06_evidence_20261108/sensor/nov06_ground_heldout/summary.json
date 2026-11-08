@@ -1,0 +1,132 @@
+{
+  "training": {
+    "legacy": {
+      "base_relative_floor_m": -0.1244725878951668,
+      "slope_deg": 0.7501046269169075,
+      "normal_odom": [
+        -0.001756869193092193,
+        -0.012972999942351258,
+        0.9999143036696364
+      ]
+    },
+    "nov06": {
+      "base_relative_floor_m": -0.13468839867785282,
+      "slope_deg": 1.7159373502925712,
+      "normal_odom": [
+        -0.028232906490780696,
+        -0.009978120079537838,
+        0.9995515695104287
+      ]
+    }
+  },
+  "mount_composition_max_abs_error": 1.1102230246251565e-16,
+  "heldout": [
+    {
+      "frame": "stationary_1",
+      "legacy_floor_median_m": 0.0013959003612479814,
+      "nov06_floor_median_m": 0.03299426985754825,
+      "legacy_cabinet": null,
+      "nov06_cabinet": null
+    },
+    {
+      "frame": "stationary_2",
+      "legacy_floor_median_m": 0.00047796372670111387,
+      "nov06_floor_median_m": 0.03266185041970551,
+      "legacy_cabinet": null,
+      "nov06_cabinet": null
+    },
+    {
+      "frame": "paid_0",
+      "legacy_floor_median_m": 0.002178669108353626,
+      "nov06_floor_median_m": 0.033590001702437866,
+      "legacy_cabinet": {
+        "valid": 1530,
+        "scalar_ground_height_median_m": 0.3411694207303289,
+        "scalar_ground_height_p05_p95_m": [
+          0.18599989058640087,
+          0.5022408802449186
+        ],
+        "original_band_count": 1530
+      },
+      "nov06_cabinet": {
+        "valid": 1530,
+        "scalar_ground_height_median_m": 0.4169241270151831,
+        "scalar_ground_height_p05_p95_m": [
+          0.2568244589941019,
+          0.5729463000784343
+        ],
+        "original_band_count": 1530
+      }
+    },
+    {
+      "frame": "paid_18",
+      "legacy_floor_median_m": 0.003566634571630367,
+      "nov06_floor_median_m": 0.03319608426915324,
+      "legacy_cabinet": {
+        "valid": 1680,
+        "scalar_ground_height_median_m": 0.432815393039455,
+        "scalar_ground_height_p05_p95_m": [
+          0.35004981586941697,
+          0.5180847878063745
+        ],
+        "original_band_count": 1680
+      },
+      "nov06_cabinet": {
+        "valid": 1680,
+        "scalar_ground_height_median_m": 0.46890272396079047,
+        "scalar_ground_height_p05_p95_m": [
+          0.38684265637260046,
+          0.5565493036883468
+        ],
+        "original_band_count": 1680
+      }
+    },
+    {
+      "frame": "paid_22",
+      "legacy_floor_median_m": 0.004451637333791003,
+      "nov06_floor_median_m": 0.035649642375257584,
+      "legacy_cabinet": {
+        "valid": 1440,
+        "scalar_ground_height_median_m": 0.4347724967749247,
+        "scalar_ground_height_p05_p95_m": [
+          0.32431432530953624,
+          0.5482072267178845
+        ],
+        "original_band_count": 1440
+      },
+      "nov06_cabinet": {
+        "valid": 1440,
+        "scalar_ground_height_median_m": 0.48135294209983714,
+        "scalar_ground_height_p05_p95_m": [
+          0.37130506240300115,
+          0.5976539134958168
+        ],
+        "original_band_count": 1440
+      }
+    }
+  ],
+  "forecast_heights": {
+    "legacy": {
+      "camera_optical_origin_height_m": 0.4274725878951668,
+      "laser_origin_height_m": 0.5754725878951668
+    },
+    "nov06": {
+      "camera_optical_origin_height_m": 0.4327160250215281,
+      "laser_origin_height_m": 0.5856883986778528
+    }
+  },
+  "explanation": "Nov06 plane is tilted ~1.716 degrees vs legacy .750; a scalar at training base does not remove plane slope across ROI. Frozen-plane residuals are small in both mounts because rigid reprojection preserves camera-depth consistency, not because calibration is independently verified.",
+  "limits": [
+    "Heldout stationary frames share one pose; moving frames one trajectory and one scene.",
+    "Nov06 images are reprojected under fixed backup TF; no physical truth or independent depth/extrinsic measurement.",
+    "Visible white-face ROIs are sampled, not complete obstacle-preservation or safety proof.",
+    "No threshold, filter, scoring, TF or live change."
+  ],
+  "source_sha256": {
+    "protocol.json": "70fd762dde547e6e8e64bfa552e9d9f29a3a5baa53c07c513c341d43bf965117",
+    "fit.py": "33259484b1e0a5de4bec65742ee094032efd5991a496efd338b36d414769097a",
+    "evaluate.py": "7c4aa82727dde502daf5f031c0191dc6819f36d657ec3b85d12d343aed097111",
+    "frozen_profiles.json": "1667d5e3a106ae8f4ae6ceafdea49fffc6b7697ad14b622a0e9040098a58880f",
+    "result.json": "2954d171531027e6a322b370e721d5578db4457323595821f7eb08556cfde3f2"
+  }
+}
