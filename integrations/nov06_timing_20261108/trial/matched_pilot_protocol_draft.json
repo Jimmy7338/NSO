@@ -1,0 +1,103 @@
+{
+  "schema": "nso.matched_physical_pilot_protocol_draft.v1",
+  "status": "draft_not_yet_frozen_or_executed",
+  "created_unix_s": 1794136491.706365,
+  "scope": "Descriptive within-scene C/G/S pilot after stable complete operation; no statistical superiority or study-completion claim.",
+  "design": {
+    "scenes": 1,
+    "blocks": 2,
+    "episodes_per_arm_per_block": 1,
+    "planned_episodes": 6,
+    "arms": {
+      "C": "Existing coverage-only score",
+      "G": "Existing coverage plus measured-surface/generic geometry score",
+      "S": "Existing geometry score plus declared category prior"
+    },
+    "contrasts": {
+      "C_vs_G": "Increment from existing measured-surface/generic geometry terms",
+      "G_vs_S": "Category-conditioned scoring contrast with shared frozen perception/candidate pipeline",
+      "C_vs_S": "Combined package contrast; not semantic-only attribution"
+    },
+    "proposed_order_fixed_in_this_draft": [
+      [
+        "C",
+        "G",
+        "S"
+      ],
+      [
+        "S",
+        "G",
+        "C"
+      ]
+    ],
+    "order_rule": "Reverse the complete order in block2; each pairwise preceding/following relation is reversed. Freeze before outcomes; do not choose the order after observing results.",
+    "balance_limit": "Two blocks cannot balance all three absolute positions. G remains middle in this proposed sequence; descriptive pilot only, not a fully position-balanced design.",
+    "experimental_units": "One scene, two related blocks and six episodes; frames, actions and checkpoints are not independent scene samples."
+  },
+  "common_contract": {
+    "policy": "Freeze one disclosed implementation/source/configuration manifest for all arms before execution; score mode is the intended arm difference.",
+    "budget_paid_actions_per_arm": 40,
+    "external_duration_limit_s_per_arm": 600,
+    "radius_m": 0.7212185868375829,
+    "decision_rules": "Retain original declared circle, candidates, scoring terms/weights, stopping rules and return contract; any newly approved variant must be named and common to all arms, not silently substituted.",
+    "protection": "Same ROS collision avoidance and hardware stop protection; record interventions separately.",
+    "sensor_inputs": "Same frozen Nov06 mount TF, declared floor reference, sensor settings, semantic prompts/model and navigation configuration; exact source receipts to be bound before freeze."
+  },
+  "initialization": {
+    "physical_start": "Predefine common physical start and heading and use the same placement/capture procedure for every arm.",
+    "pose_tolerance": {
+      "status": "to_be_documented_before_freeze",
+      "purpose": "Experimental placement/reporting convention only; no new online planner or motion gate. Record actual XY/yaw errors and retain existing native anchor legality checks."
+    },
+    "research_state": "Fresh mapper, paid-action ledger and semantic/quality history for each episode; no preceding-arm evidence leakage.",
+    "navigation_state": "Fresh independent experiment gmapping/costmaps under identical initialization procedure; do not require bitwise-identical particles, SLAM internals or maps.",
+    "coordinate_frame": "Common fixed planning transform/ROI registration; grid-from alone establishes coordinates, not identical initial belief.",
+    "capture": "Same predeclared no-motion first-capture procedure; preserve each actual initial packet and source stamps.",
+    "record_initial": [
+      "Actual base XY/yaw and deviation",
+      "Map/localization epoch and source/configuration hashes",
+      "Known/free/occupied counts and area",
+      "Initial known-mask XOR on common grid",
+      "Quality support count/hash and label support",
+      "Initial perception/candidate diagnostics"
+    ],
+    "strict_information_control": "Reserve exact same packet/map/support comparisons for offline mechanism replay; this does not block physical pilot execution."
+  },
+  "evaluation": {
+    "common_ROI": {
+      "status": "source_not_selected",
+      "source": null,
+      "requirement": "Choose and freeze a common physical region/registration and evaluator before execution; do not crop by final outcomes."
+    },
+    "primary_descriptive_outputs": [
+      "Completion/return/failure/interruption and reasons",
+      "Actual paid actions, verified arrivals, elapsed time and original CAN travel",
+      "Observed coverage proxy versus paid actions and CAN cost on common ROI",
+      "Initial-to-final observed-area changes with initial-mask differences disclosed"
+    ],
+    "surface_outputs": "Per-arm bootstrap-fixed support changes are internal diagnostics; unequal supports are not a matched reconstruction-quality reference.",
+    "semantic_mechanism": "Audit same-state G/S scores, candidate ranking, incremental aperture and prior factors; a positive detector label alone is not semantic task benefit.",
+    "independent_reconstruction_reference": {
+      "status": "missing",
+      "accuracy_claim_allowed": false
+    },
+    "failures": "Retain all starts and failures. Report unequal completed exposure; shorter failed runs are not efficiency wins. No result-dependent reruns, exclusions or budget changes.",
+    "inference_limit": "Descriptive within-scene system performance and preliminary repeatability only. No sufficient statistical superiority, cross-scene generalization or independent reconstruction accuracy."
+  },
+  "before_freeze": [
+    "Complete stable operation and timing/cleanup validation under a fixed implementation",
+    "Select common ROI source and evaluator",
+    "Document physical placement convention and bind sensor/configuration/source receipts",
+    "Verify C/G/S preparation interface: engine score modes support C/G/S, historical prepare_capture.py arm parser accepts C/S only; review any preparation-only extension before freeze",
+    "Freeze protocol/order and failure/interruption accounting before the first pilot motion"
+  ],
+  "authorization": {
+    "this_file_only": true,
+    "protocol_frozen": false,
+    "pilot_executed": false,
+    "robot_or_ROS_operations_performed": false,
+    "production_modified": false,
+    "manuscript_modified": false,
+    "publication_requested": false
+  }
+}

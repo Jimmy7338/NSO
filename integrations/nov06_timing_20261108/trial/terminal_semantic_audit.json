@@ -1,0 +1,1428 @@
+{
+  "schema": "nso.nov06_timing.terminal_semantic_audit.v1",
+  "source_sha256": {
+    "result.json": "cb3a906c747a56abff4acbf321b591d7ff09482a83fc5a80a5d61dab4768860a",
+    "summary.json": "d034e957aa7cd78e6aed1cececc5ccffd077560f525309ce45d97e985cef12be",
+    "joint/decisions.jsonl": "a36844bd071edc7cd9d17c565794980111f923e36f39b6b553c52152ce4c0cb8",
+    "events.jsonl": "8b0f841b4f62331d3989df82a7ce685f6e131432dde9a60bcae075b4353f81d7"
+  },
+  "terminal": {
+    "status": "nso_joint_core_stopped",
+    "reason": "budget_exhausted",
+    "method_failed": false,
+    "worker_paid_actions": 40,
+    "worker_accepted_observations": 41,
+    "verified_arrivals": 40,
+    "action_counts": {
+      "right": 4,
+      "forward": 32,
+      "left": 4
+    },
+    "return_anchor_grid_with_heading": [
+      200,
+      200,
+      0
+    ],
+    "worker_final_grid_with_heading": [
+      200,
+      200,
+      0
+    ],
+    "returned_discrete_anchor_with_heading": true,
+    "initial_anchor_odom_pose": [
+      -0.35025676198723227,
+      -1.2325527687040367,
+      1.3266339446287447
+    ],
+    "last_arrival_odom_pose": [
+      -0.3556628012034252,
+      -1.2964898472175133,
+      1.3029146503123459
+    ],
+    "last_arrival_stamp_s": 1794136837.6146262,
+    "last_arrival_error_vs_anchor_xy_m": 0.06416521852877521,
+    "last_arrival_error_vs_anchor_yaw_rad": 0.023719294316398853,
+    "last_goal_target_error_m": 0.06416521852877691,
+    "last_goal_target_yaw_error_rad": 0.023719294316398853,
+    "CAN_distance_m": 6.42550345265864,
+    "elapsed_s": 562.9087632309966,
+    "feedback_zero_after_close": true,
+    "adapter_shutdown_reason": "native_driver_fault:8",
+    "scope": "Last arrival odom error is not independent external localization truth."
+  },
+  "observed_proxy": {
+    "initial_area_m2": 82.04000000000002,
+    "final_area_m2": 128.08,
+    "initial_fixed_old_quality": 0.1422424695046084,
+    "final_fixed_old_quality": 0.12970779899548845,
+    "fixed_old_support_count": 235,
+    "scope": "Within-run fixed support proxies; not ground-truth reconstruction accuracy."
+  },
+  "global_plans": [
+    {
+      "paid_actions_before": 0,
+      "rpc_id": 3,
+      "candidate_count": 5,
+      "actual_S_selected": 0,
+      "actual_next_action": "right",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            213,
+            204,
+            1
+          ],
+          "cost": 40
+        },
+        {
+          "candidate_id": 1,
+          "group": "coverage_total_1",
+          "pose": [
+            209,
+            202,
+            1
+          ],
+          "cost": 28
+        },
+        {
+          "candidate_id": 2,
+          "group": "coverage_total_2",
+          "pose": [
+            210,
+            199,
+            1
+          ],
+          "cost": 26
+        },
+        {
+          "candidate_id": 3,
+          "group": "coverage_total_3",
+          "pose": [
+            209,
+            199,
+            1
+          ],
+          "cost": 24
+        },
+        {
+          "candidate_id": 4,
+          "group": "old_surface_rotation",
+          "pose": [
+            200,
+            200,
+            3
+          ],
+          "cost": 2
+        }
+      ],
+      "scores": {
+        "C": [
+          28.720000000000006,
+          19.900000000000002,
+          16.720000000000002,
+          14.840000000000003,
+          0.08000000000000002
+        ],
+        "G": [
+          28.778829433316062,
+          19.921958993603848,
+          16.866316756492353,
+          14.98631675649235,
+          0.10195899360384075
+        ],
+        "S": [
+          28.778829433316062,
+          19.921958993603848,
+          16.866316756492353,
+          14.98631675649235,
+          0.10195899360384075
+        ],
+        "X": [
+          28.778829433316062,
+          19.921958993603848,
+          16.866316756492353,
+          14.98631675649235,
+          0.10195899360384075
+        ]
+      },
+      "S_minus_G": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "choices": {
+        "C": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            204,
+            1
+          ],
+          "first_action": "right",
+          "score": 28.720000000000006
+        },
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            204,
+            1
+          ],
+          "first_action": "right",
+          "score": 28.778829433316062
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            204,
+            1
+          ],
+          "first_action": "right",
+          "score": 28.778829433316062
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            204,
+            1
+          ],
+          "first_action": "right",
+          "score": 28.778829433316062
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 15,
+      "rpc_id": 33,
+      "candidate_count": 5,
+      "actual_S_selected": 0,
+      "actual_next_action": "left",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            213,
+            203,
+            1
+          ],
+          "cost": 25
+        },
+        {
+          "candidate_id": 1,
+          "group": "coverage_total_1",
+          "pose": [
+            200,
+            204,
+            1
+          ],
+          "cost": 25
+        },
+        {
+          "candidate_id": 2,
+          "group": "coverage_total_2",
+          "pose": [
+            199,
+            203,
+            1
+          ],
+          "cost": 25
+        },
+        {
+          "candidate_id": 3,
+          "group": "coverage_total_3",
+          "pose": [
+            210,
+            199,
+            3
+          ],
+          "cost": 21
+        },
+        {
+          "candidate_id": 4,
+          "group": "old_surface_rotation",
+          "pose": [
+            212,
+            201,
+            1
+          ],
+          "cost": 17
+        }
+      ],
+      "scores": {
+        "C": [
+          2.4221428571428576,
+          0.20714285714285718,
+          0.10357142857142859,
+          0.03452380952380953,
+          0.0
+        ],
+        "G": [
+          4.32629398940448,
+          1.5156566086650534,
+          1.5017926789838518,
+          1.9153019565658498,
+          0.8661274940405796
+        ],
+        "S": [
+          4.32629398940448,
+          1.5156566086650534,
+          1.5017926789838518,
+          1.9153019565658498,
+          0.8661274940405796
+        ],
+        "X": [
+          4.32629398940448,
+          1.5156566086650534,
+          1.5017926789838518,
+          1.9153019565658498,
+          0.8661274940405796
+        ]
+      },
+      "S_minus_G": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "choices": {
+        "C": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            203,
+            1
+          ],
+          "first_action": "left",
+          "score": 2.4221428571428576
+        },
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            203,
+            1
+          ],
+          "first_action": "left",
+          "score": 4.32629398940448
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            203,
+            1
+          ],
+          "first_action": "left",
+          "score": 4.32629398940448
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            213,
+            203,
+            1
+          ],
+          "first_action": "left",
+          "score": 4.32629398940448
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 21,
+      "rpc_id": 45,
+      "candidate_count": 2,
+      "actual_S_selected": 1,
+      "actual_next_action": "left",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            213,
+            203,
+            0
+          ],
+          "cost": 19
+        },
+        {
+          "candidate_id": 1,
+          "group": "coverage_total_1",
+          "pose": [
+            209,
+            200,
+            0
+          ],
+          "cost": 19
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0,
+          0.0
+        ],
+        "G": [
+          0.1370849480342269,
+          1.2379449410945789
+        ],
+        "S": [
+          0.1370849480342269,
+          1.2379449410945789
+        ],
+        "X": [
+          0.1370849480342269,
+          1.2379449410945789
+        ]
+      },
+      "S_minus_G": [
+        0.0,
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 1,
+          "pose": [
+            209,
+            200,
+            0
+          ],
+          "first_action": "left",
+          "score": 1.2379449410945789
+        },
+        "S": {
+          "candidate_id": 1,
+          "pose": [
+            209,
+            200,
+            0
+          ],
+          "first_action": "left",
+          "score": 1.2379449410945789
+        },
+        "X": {
+          "candidate_id": 1,
+          "pose": [
+            209,
+            200,
+            0
+          ],
+          "first_action": "left",
+          "score": 1.2379449410945789
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 31,
+      "rpc_id": 65,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            208,
+            200,
+            0
+          ],
+          "cost": 9
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.00030436598924954043
+        ],
+        "S": [
+          0.00030436598924954043
+        ],
+        "X": [
+          0.00030436598924954043
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            208,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.00030436598924954043
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            208,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.00030436598924954043
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            208,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.00030436598924954043
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 32,
+      "rpc_id": 67,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            207,
+            200,
+            0
+          ],
+          "cost": 8
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.06104494777311193
+        ],
+        "S": [
+          0.06104494777311193
+        ],
+        "X": [
+          0.06104494777311193
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            207,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.06104494777311193
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            207,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.06104494777311193
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            207,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.06104494777311193
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 33,
+      "rpc_id": 69,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            206,
+            200,
+            0
+          ],
+          "cost": 7
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.05344587862604434
+        ],
+        "S": [
+          0.05344587862604434
+        ],
+        "X": [
+          0.05344587862604434
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            206,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.05344587862604434
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            206,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.05344587862604434
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            206,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.05344587862604434
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 34,
+      "rpc_id": 71,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            205,
+            200,
+            0
+          ],
+          "cost": 6
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.053829261076911473
+        ],
+        "S": [
+          0.053829261076911473
+        ],
+        "X": [
+          0.053829261076911473
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            205,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.053829261076911473
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            205,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.053829261076911473
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            205,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.053829261076911473
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 35,
+      "rpc_id": 73,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            204,
+            200,
+            0
+          ],
+          "cost": 5
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.047372015151373556
+        ],
+        "S": [
+          0.047372015151373556
+        ],
+        "X": [
+          0.047372015151373556
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            204,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.047372015151373556
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            204,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.047372015151373556
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            204,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.047372015151373556
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 36,
+      "rpc_id": 75,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            203,
+            200,
+            0
+          ],
+          "cost": 4
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.03961256180587821
+        ],
+        "S": [
+          0.03961256180587821
+        ],
+        "X": [
+          0.03961256180587821
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            203,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.03961256180587821
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            203,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.03961256180587821
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            203,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.03961256180587821
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 37,
+      "rpc_id": 77,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            202,
+            200,
+            0
+          ],
+          "cost": 3
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.09020206353653559
+        ],
+        "S": [
+          0.09020206353653559
+        ],
+        "X": [
+          0.09020206353653559
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            202,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.09020206353653559
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            202,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.09020206353653559
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            202,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.09020206353653559
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 38,
+      "rpc_id": 79,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            201,
+            200,
+            0
+          ],
+          "cost": 2
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.16473817893632187
+        ],
+        "S": [
+          0.16473817893632187
+        ],
+        "X": [
+          0.16473817893632187
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            201,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.16473817893632187
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            201,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.16473817893632187
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            201,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.16473817893632187
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 39,
+      "rpc_id": 81,
+      "candidate_count": 1,
+      "actual_S_selected": 0,
+      "actual_next_action": "forward",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            200,
+            200,
+            0
+          ],
+          "cost": 1
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0
+        ],
+        "G": [
+          0.07991220860705248
+        ],
+        "S": [
+          0.07991220860705248
+        ],
+        "X": [
+          0.07991220860705248
+        ]
+      },
+      "S_minus_G": [
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            200,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.07991220860705248
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            200,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.07991220860705248
+        },
+        "X": {
+          "candidate_id": 0,
+          "pose": [
+            200,
+            200,
+            0
+          ],
+          "first_action": "forward",
+          "score": 0.07991220860705248
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    }
+  ],
+  "interpretation": "Actual S executed; C/G/X are same-state shadow scores, not separate physical runs. Same-state choice difference does not establish a trajectory or coverage benefit.",
+  "limits": [
+    "Sensor mount and ground reference were declared adaptations; nominal forecasts remain unchanged.",
+    "No independent position or reconstruction ground truth.",
+    "Model labels are not ground truth; aperture is not an occlusion certificate."
+  ]
+}

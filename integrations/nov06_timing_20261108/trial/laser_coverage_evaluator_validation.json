@@ -1,0 +1,98 @@
+{
+  "schema": "nso.laser_coverage_evaluator_validation.v1",
+  "status": "passed_fixed_development_sequence_not_efficacy",
+  "checks": [
+    {
+      "name": "90deg_laser_TF_maps_local_x_north_and_original_index1_west",
+      "passed": true
+    },
+    {
+      "name": "grid_row_reversal_and_metric_boundary_index",
+      "passed": true
+    },
+    {
+      "name": "invalid_rays_do_not_create_free_space",
+      "passed": true
+    },
+    {
+      "name": "native_1mm_max_boundary_and_exact8_free_only",
+      "passed": true
+    },
+    {
+      "name": "finite_beyond8_endpoint_clipped_geometrically",
+      "passed": true
+    },
+    {
+      "name": "analytic_axis_8m_ray_has_41_cells_and_free_endpoint",
+      "passed": true
+    },
+    {
+      "name": "ROI_clips_metrics_and_counts_outside_instead_of_hiding",
+      "passed": true
+    },
+    {
+      "name": "out_of_ROI_origin_recorded_not_a_runtime_gate",
+      "passed": true
+    },
+    {
+      "name": "all_accepted_saved_scans_bound_and_failed_short_episodes_allowed",
+      "passed": true
+    },
+    {
+      "name": "cumulative_observed_and_free_evidence_unions_monotone",
+      "passed": true
+    },
+    {
+      "name": "all_saved_scan_costs_have_complete_CAN_brackets",
+      "passed": true
+    },
+    {
+      "name": "actual_source_TF_origin_not_camera_or_ideal_anchor",
+      "passed": true
+    },
+    {
+      "name": "CAN_cost_keeps_measurement_brackets_without_interpolation",
+      "passed": true
+    },
+    {
+      "name": "reject_depth_scan_provenance",
+      "passed": true
+    },
+    {
+      "name": "reject_TF_from_different_source_stamp",
+      "passed": true
+    }
+  ],
+  "evaluator_sha256": "ec3ea38dba594cb8693078aac0568b27642dcee527a1e0be517659419c87db08",
+  "result_content_sha256": "15477a5b056aea356846451cea7b6b835fa229a8f86dfd1b50723a5cbd29c397",
+  "development_sequence": {
+    "accepted_scans": 41,
+    "last_paid_action": 40
+  },
+  "reused_source": {
+    "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/utils/grid_geometry.py",
+    "sha256": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b"
+  },
+  "grid_convention_reference": {
+    "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d.py",
+    "sha256": "275144d68c1bc6e8876ac622629f19916d09ca07651681dd8cf2b11dbe64b38f",
+    "lines": [
+      19,
+      20,
+      21,
+      34,
+      35,
+      36,
+      37,
+      38
+    ]
+  },
+  "frozen_for_future_pilot": true,
+  "freeze_scope": "Code and fixed ROI/raster/range conventions only. Future experiment protocol, common frame/epoch and all per-arm configuration receipts still require pre-execution freeze.",
+  "limitations": [
+    "Geometry tests and provenance checks do not validate physical calibration or coverage accuracy.",
+    "No continuous lidar sequence is archived; this common evaluator uses selected saved scans only.",
+    "Phase wall timing/SLAM truth is not evaluated here."
+  ],
+  "saved_result_sha256": "79eb9c3fffc63b91009d7b08f1ca97f41e4121159db2c77a32314b9e8aca62a7"
+}
