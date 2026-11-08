@@ -1,0 +1,27 @@
+% Single insertion point for new physical evidence. Replace only from verified terminal records.
+\subsection{Calibrated 24-action integration run}
+
+After revising the camera extrinsics, a later S24 integration episode completed 24 paid actions, 24 verified arrivals and 25 observations, returning to its discrete anchor over 3.591 m of CAN-estimated travel and 368.847 s. This episode used a different sensor calibration and map state from the earlier C/S pilot and is not a matched continuation or policy comparison. All six newly recorded planning states gave equal G/S candidate scores and zero incremental aperture contribution, so they show no semantic selection effect.
+
+After the run, the operator reported that localization had drifted during the preceding manual relocation to the test area. The drift onset was not established, so the map at S24 initialization may already have been affected. Discrete-anchor acceptance and measured travel therefore support bounded execution integration, not independent localization accuracy, comparative exploration efficiency or reconstruction accuracy. The internal area proxy (180.12 to 256.60 m$^2$) is not treated as verified newly discovered physical area. A subsequent mapping reset starts a new epoch; its observations cannot be pooled with this episode as a shared initial map.
+
+\subsection{Calibrated fresh-map C/S comparison}
+
+A new ordered C/S pilot used independently restarted stock gmapping maps and fresh acquired initial packets in the reset localization epoch. Both arms retained the same 40-action allowance, 600 s external limit, circular footprint, candidate generator, return rules, sensor configuration and ROS/hardware protection. The score mode was the policy difference; this remains a coverage-only versus joint-objective comparison, not a semantic-only ablation. The planning transform was identical and anchored at the actual C start. Initial odometry differed by 0.06695 m and $-0.06259$ rad, while the initial navigation-known masks differed in 430 cells (17.20 m$^2$) on the common grid. Similar initial area therefore does not imply identical initial information.
+
+\begin{table}[!htbp]
+\caption{One further ordered C/S pilot after calibration and map reset. Both arms have a 40-action/600 s allowance; actual exposure and return differ. Internal quality uses a separate fixed bootstrap support in each arm.}\label{tab:physical-pair-calibrated}
+\small\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.18\linewidth}p{.12\linewidth}p{.18\linewidth}p{.17\linewidth}p{.23\linewidth}@{}}
+\toprule
+Arm and termination & Paid / obs. & CAN / time & Internal area (m$^2$) & Own-support old-quality \\
+\midrule
+C: no positive option at anchor, returned & 24 / 25 & 3.738 m /\newline 342.345 s & 65.24 $\to$ 98.52 & 0.165048 $\to$ 0.277736 (479 points) \\
+S: anchor-footprint failure, no return & 13 / 14 & 1.857 m /\newline 184.862 s & 65.32 $\to$ 88.88 & 0.193484 $\to$ 0.180111 (437 points) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+C completed 24 verified arrivals and stopped normally under the original rule that stops when no positive option remains at the anchor. S completed 13 verified arrivals, then failed the original check requiring the anchor footprint to remain known safe without returning. Neither endpoint was an external timeout or interruption, and both recorded zero CAN feedback after closing. At S action 10, the original next-footprint rejection triggered replanning; C and S would select different candidates at that saved state, while G and S were tied. Across both episodes, all five candidate-bearing planning states gave equal G/S scores; the terminal S state had no candidates. These are within-state diagnostics, not separately executed alternatives.
+
+The shorter failed S route supplies no efficiency benefit. Unequal completed exposure, different initial measurements and distinct fixed surface supports prevent a matched endpoint-quality or causal policy ranking. This is one ordered pair in one physical scene, with no independent localization, map or surface-accuracy reference. No return override or replacement policy was introduced after the anchor check failed.

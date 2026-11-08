@@ -1,0 +1,703 @@
+{
+  "schema": "nso.rapid.Q1.semantic_comparison.v1",
+  "status": "completed",
+  "protocol_sha256": "dcb8093d9e0f948bf9bb2f45d091f9c78ddd58414c89bc090a1bf70617796fe5",
+  "initial_packet_equal": true,
+  "endpoints": [
+    {
+      "mode": "G",
+      "steps": 96,
+      "collisions": 0,
+      "full_anchor_return": true,
+      "termination": {
+        "current_footprint_known_safe": true,
+        "failed": false,
+        "final_action_id": 96,
+        "final_frame_id": "frame-96",
+        "reason": "budget_exhausted",
+        "returned_to_anchor": true
+      },
+      "initial_coverage": 0.6310408921933085,
+      "final_coverage": 0.991635687732342,
+      "coverage_gain_m2": 15.520000000000003,
+      "new_reference_visible_surface_m2": 107.23330155000042,
+      "final_F1_5cm": 0.9294640543325501,
+      "final_F1_10cm": 0.9446700158282294
+    },
+    {
+      "mode": "S",
+      "steps": 96,
+      "collisions": 0,
+      "full_anchor_return": true,
+      "termination": {
+        "current_footprint_known_safe": true,
+        "failed": false,
+        "final_action_id": 96,
+        "final_frame_id": "frame-96",
+        "reason": "budget_exhausted",
+        "returned_to_anchor": true
+      },
+      "initial_coverage": 0.6310408921933085,
+      "final_coverage": 0.9962825278810409,
+      "coverage_gain_m2": 15.720000000000006,
+      "new_reference_visible_surface_m2": 118.95238275000047,
+      "final_F1_5cm": 0.9780223563732611,
+      "final_F1_10cm": 0.9871536607113371
+    },
+    {
+      "mode": "X",
+      "steps": 96,
+      "collisions": 0,
+      "full_anchor_return": true,
+      "termination": {
+        "current_footprint_known_safe": true,
+        "failed": false,
+        "final_action_id": 96,
+        "final_frame_id": "frame-96",
+        "reason": "budget_exhausted",
+        "returned_to_anchor": true
+      },
+      "initial_coverage": 0.6310408921933085,
+      "final_coverage": 0.991635687732342,
+      "coverage_gain_m2": 15.520000000000003,
+      "new_reference_visible_surface_m2": 107.23330155000042,
+      "final_F1_5cm": 0.9294640543325501,
+      "final_F1_10cm": 0.9446700158282294
+    }
+  ],
+  "deltas": {
+    "S_minus_G": {
+      "new_reference_visible_surface_m2": 11.719081200000048,
+      "coverage_m2": 0.20000000000000284,
+      "F1_5cm": 0.04855830204071099
+    },
+    "S_minus_X": {
+      "new_reference_visible_surface_m2": 11.719081200000048,
+      "coverage_m2": 0.20000000000000284,
+      "F1_5cm": 0.04855830204071099
+    }
+  },
+  "trajectory_divergence": {
+    "S_vs_G": {
+      "first_different_action": 33,
+      "all_steps_exact": false,
+      "shared_action_prefix": 32
+    },
+    "S_vs_X": {
+      "first_different_action": 33,
+      "all_steps_exact": false,
+      "shared_action_prefix": 32
+    }
+  },
+  "same_state_counts": {
+    "total": 25,
+    "S_vs_G_different_top1": 3,
+    "S_vs_X_different_top1": 3,
+    "S_top1_not_reproducible_by_any_nonnegative_generic_weight": 0
+  },
+  "state_audits": [
+    {
+      "trajectory_mode": "G",
+      "planning_call": 1,
+      "paid_actions": 0,
+      "candidate_count": 4,
+      "same_state_top1": {
+        "G": 1,
+        "S": 1,
+        "X": 1
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.6310408921933085
+    },
+    {
+      "trajectory_mode": "G",
+      "planning_call": 2,
+      "paid_actions": 19,
+      "candidate_count": 8,
+      "same_state_top1": {
+        "G": 7,
+        "S": 5,
+        "X": 7
+      },
+      "G_S_scores_equal": false,
+      "S_X_scores_equal": false,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "4168222968352668/690335318840653",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": 0.5916106120170668,
+      "max_prior_score_fit_residual": 4.511643224877231,
+      "coverage_before": 0.8847583643122676
+    },
+    {
+      "trajectory_mode": "G",
+      "planning_call": 3,
+      "paid_actions": 44,
+      "candidate_count": 7,
+      "same_state_top1": {
+        "G": 2,
+        "S": 2,
+        "X": 2
+      },
+      "G_S_scores_equal": false,
+      "S_X_scores_equal": false,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": 1.0399479500899715,
+      "max_prior_score_fit_residual": 2.854492600369497,
+      "coverage_before": 0.9897769516728625
+    },
+    {
+      "trajectory_mode": "G",
+      "planning_call": 4,
+      "paid_actions": 69,
+      "candidate_count": 5,
+      "same_state_top1": {
+        "G": 2,
+        "S": 2,
+        "X": 2
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.9897769516728625
+    },
+    {
+      "trajectory_mode": "G",
+      "planning_call": 5,
+      "paid_actions": 79,
+      "candidate_count": 4,
+      "same_state_top1": {
+        "G": 3,
+        "S": 3,
+        "X": 3
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.9897769516728625
+    },
+    {
+      "trajectory_mode": "G",
+      "planning_call": 6,
+      "paid_actions": 95,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.991635687732342
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 1,
+      "paid_actions": 0,
+      "candidate_count": 4,
+      "same_state_top1": {
+        "G": 1,
+        "S": 1,
+        "X": 1
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.6310408921933085
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 2,
+      "paid_actions": 19,
+      "candidate_count": 8,
+      "same_state_top1": {
+        "G": 7,
+        "S": 5,
+        "X": 7
+      },
+      "G_S_scores_equal": false,
+      "S_X_scores_equal": false,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "4168222968352668/690335318840653",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": 0.5916106120170668,
+      "max_prior_score_fit_residual": 4.511643224877231,
+      "coverage_before": 0.8847583643122676
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 3,
+      "paid_actions": 42,
+      "candidate_count": 7,
+      "same_state_top1": {
+        "G": 2,
+        "S": 2,
+        "X": 2
+      },
+      "G_S_scores_equal": false,
+      "S_X_scores_equal": false,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": 0.8156442030764776,
+      "max_prior_score_fit_residual": 3.399753273587857,
+      "coverage_before": 0.9869888475836431
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 4,
+      "paid_actions": 75,
+      "candidate_count": 3,
+      "same_state_top1": {
+        "G": 2,
+        "S": 2,
+        "X": 2
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.991635687732342
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 5,
+      "paid_actions": 87,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 6,
+      "paid_actions": 88,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 7,
+      "paid_actions": 89,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 8,
+      "paid_actions": 90,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 9,
+      "paid_actions": 91,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 10,
+      "paid_actions": 92,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 11,
+      "paid_actions": 93,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 12,
+      "paid_actions": 94,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "S",
+      "planning_call": 13,
+      "paid_actions": 95,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.996282527881041
+    },
+    {
+      "trajectory_mode": "X",
+      "planning_call": 1,
+      "paid_actions": 0,
+      "candidate_count": 4,
+      "same_state_top1": {
+        "G": 1,
+        "S": 1,
+        "X": 1
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.6310408921933085
+    },
+    {
+      "trajectory_mode": "X",
+      "planning_call": 2,
+      "paid_actions": 19,
+      "candidate_count": 8,
+      "same_state_top1": {
+        "G": 7,
+        "S": 5,
+        "X": 7
+      },
+      "G_S_scores_equal": false,
+      "S_X_scores_equal": false,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "4168222968352668/690335318840653",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": 0.5916106120170668,
+      "max_prior_score_fit_residual": 4.511643224877231,
+      "coverage_before": 0.8847583643122676
+    },
+    {
+      "trajectory_mode": "X",
+      "planning_call": 3,
+      "paid_actions": 44,
+      "candidate_count": 7,
+      "same_state_top1": {
+        "G": 2,
+        "S": 2,
+        "X": 2
+      },
+      "G_S_scores_equal": false,
+      "S_X_scores_equal": false,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": 1.0399479500899715,
+      "max_prior_score_fit_residual": 2.854492600369497,
+      "coverage_before": 0.9897769516728625
+    },
+    {
+      "trajectory_mode": "X",
+      "planning_call": 4,
+      "paid_actions": 69,
+      "candidate_count": 5,
+      "same_state_top1": {
+        "G": 2,
+        "S": 2,
+        "X": 2
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.9897769516728625
+    },
+    {
+      "trajectory_mode": "X",
+      "planning_call": 5,
+      "paid_actions": 79,
+      "candidate_count": 4,
+      "same_state_top1": {
+        "G": 3,
+        "S": 3,
+        "X": 3
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.9897769516728625
+    },
+    {
+      "trajectory_mode": "X",
+      "planning_call": 6,
+      "paid_actions": 95,
+      "candidate_count": 1,
+      "same_state_top1": {
+        "G": 0,
+        "S": 0,
+        "X": 0
+      },
+      "G_S_scores_equal": true,
+      "S_X_scores_equal": true,
+      "scalar_selection": {
+        "nonnegative_uniform_generic_weight_exists": true,
+        "lower": "0",
+        "upper": null,
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "best_uniform_scale_to_match_prior_scores": null,
+      "max_prior_score_fit_residual": 0.0,
+      "coverage_before": 0.991635687732342
+    }
+  ],
+  "source_unchanged_at_finish": true,
+  "limits": [
+    "Single prospectively specified synthetic Q1 parent, no detector or physical efficacy validation.",
+    "G/S prior-score changes and trajectory differences do not alone exclude geometric weighting explanations.",
+    "State counts are correlated planning states, not independent samples.",
+    "Uniform generic-weight selection constraints use exact rationals of saved binary-float coefficients; boundary floating addition caveat retained.",
+    "Coverage_before reconstructed from recorded area/constant reachable denominator; not physical area."
+  ],
+  "actual_S_common_uniform_generic_weight_interval": {
+    "lower_fraction": "4168222968352668/690335318840653",
+    "lower": 6.037968585111318,
+    "lower_inclusive": true,
+    "upper_fraction": null,
+    "upper": null,
+    "upper_inclusive": false,
+    "scope": "Recorded actualS states only; no added weighted rollout or parameter search. A positive interval prevents a claim of category-specific advantage from this comparison."
+  },
+  "G_X_steps_exact": true,
+  "first_planning_divergence_shared_state": {
+    "planning_call": 2,
+    "paid_actions": 19,
+    "inputs_exact": true,
+    "candidates_exact": true,
+    "candidate_audit_exact": true,
+    "score_audit_exact": true,
+    "earlier_steps_exact": true
+  },
+  "interpretation": "Positive within-parent synthetic allocation result versus nativeG/X; common genericweight feasibility remains, so category-specific advantage, natural semantic recognition, physical benefit and generalization are not established."
+}

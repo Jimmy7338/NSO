@@ -1,6 +1,6 @@
 {
   "schema": "nso.project_priorities.v1",
-  "updated_unix_s": 1794125066.502254,
+  "updated_unix_s": 1794127655.4225361,
   "updated_local_date": "2026-11-08",
   "source": "Direct user instructions in current conversation",
   "primary_objectives": [
@@ -26,7 +26,8 @@
     "latest_continuation_evidence_updated": true,
     "pdf_sha256": "fd6d8192718901d380f7795f45e134b4263897b7fee5f2c168286eb3f90b979f",
     "manuscript_sha256": "7a47d6c2a150eb7351e4ef79233684cb5172b91b31c00ad8ad866f8af4ae44fd",
-    "latest_real_episode_revision": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/manuscript_update/validation.json"
+    "latest_real_episode_revision": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/manuscript_update/validation.json",
+    "role": "Retained historical full evidence manuscript; latest focused small-paper draft is primary_manuscript."
   },
   "robot_subgoal": {
     "goal_retained": true,
@@ -103,7 +104,7 @@
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/github_alignment.json",
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/reference_restore_manifest.json"
   ],
-  "next_concrete_task": "当前按用户请求仅运行新二维/三维建图和展示，未启动自主行驶。遥控布置结束后的下一次实验须重新获取新epoch实际live0及锚点；不得沿用旧地图或S24待执行状态。先验证新地图移动时定位一致性；语义方面本轮6次G/S均相同且aperture全0，仍需有区分力的场景/已披露方案，不能声称语义收益。",
+  "next_concrete_task": "按用户最新指示试用已恢复的旧相机外参；新2D/3D会话已运行，未自动再跑。保留Q1正/负边界与C/S失败；小论文18+3页和毕设82页已完成本轮正文修订，作者等信息按用户要求留空。下一次实跑前应核验地面参考与实际深度投影，不能沿用今天新标定的初始化脚本/旧坐标或擅自删点提高阈值。",
   "source_authority": "Actual original Windows selected research files, received or verified against controller references, now independently materialized in the restored research workspace; GitHub is historical context",
   "local_migration": {
     "root": "/home/ouc/nso_robot/migrations/windows_local_20261029",
@@ -140,7 +141,7 @@
   "next_physical_experiment_recommendation": {
     "status": "ordered_C_S_pilot_recorded_S_failure_source_isolated",
     "purpose": "Evaluate unknown coverage and measured-surface joint exploration with matched physical comparison after the completed deployment feasibility cycle",
-    "navigation": "Original CSM + gmapping restarted in map_reset_20261108_01, current map /nso_visual/map, no active autonomous mission.",
+    "navigation": "Original CSM+gmapping new legacy-camera epoch; /nso_visual/map, no autonomous mission.",
     "preconditions": [
       "Real fresh measured RGB-D/scan/base TF and observed navigation map bound to a declared fixed grid",
       "Current source health and actual chassis control readiness, with original NSO guard and shared ROS/hardware protection"
@@ -150,10 +151,10 @@
     "timebox": "Proposed two working days for the initial physical integration case; preserve simulation ablation and thesis progress",
     "attempt_index": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/ATTEMPTS.json",
     "active_workspace": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029",
-    "current_state": "Fresh mapping-only epoch requested by user after manual relocation drift; previous S24 finished and stopped.",
+    "current_state": "实车C24正常终止返航、S13原anchor_footprint检查失败并零速停止；用户要求回退旧相机外参，新建图/展示会话已恢复，无自主程序。",
     "category_prior_source": "Declared YOLOE real_scene_structural_v1; cabinet/display counter -> closed-enclosure hypothesis, original class semantics not claimed",
     "manual_reposition_confirmed": true,
-    "next_step": "当前按用户请求仅运行新二维/三维建图和展示，未启动自主行驶。遥控布置结束后的下一次实验须重新获取新epoch实际live0及锚点；不得沿用旧地图或S24待执行状态。先验证新地图移动时定位一致性；语义方面本轮6次G/S均相同且aperture全0，仍需有区分力的场景/已披露方案，不能声称语义收益。",
+    "next_step": "First verify legacy-mount mapping after user-requested rollback. New motion requires actual fresh initialization in this epoch; known floor-reference inconsistency remains, no policy/point filtering or threshold relaxation authorized or applied.",
     "route_diagnosis": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/ROUTE_REJECTION_AND_METHOD_ALIGNMENT_20261029.txt",
     "historical_method_variant": "onboard_adaptation_four_structure_greedy",
     "historical_policy_mode": "G",
@@ -162,7 +163,7 @@
     "latest_historical_config": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/pilot_config_after_manual_reposition.json",
     "latest_historical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261029/desk_pilot_04",
     "historical_path_diagnostics_validation": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/preflight/candidate_path_diagnostics_validation_20261029.json",
-    "latest_physical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/calibrated_S24_02",
+    "latest_physical_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_S",
     "latest_progress": "C40/40 return,6.741m558.214s; S32/32 arrivals,5.233m451.992s, original current-footprint failure/no return. One sequential same-scene pilot with distinct measured initial inputs. Strict cached-semantic replays C41/S33 matched; no G/S choice benefit.",
     "completed_cycle": {
       "paid_actions": 40,
@@ -367,8 +368,8 @@
     "voxel_m": 0.02,
     "running": true,
     "last_preview": "/home/ouc/nso_robot/experiments/live_dashboard_20261029/preview.png",
-    "last_health_check": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/display_verification.json",
-    "last_runtime_observation": "/home/ouc/nso_robot/analyses/network_ros_handoff_20261108/handoff.json"
+    "last_health_check": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/verification.json",
+    "last_runtime_observation": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/summary.json"
   },
   "session_pause": {
     "status": "authorized_episode_completed_stopped",
@@ -394,22 +395,22 @@
     "original_policy_source": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/SOURCE_MANIFEST.json",
     "entry": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/run_hybrid.sh",
     "mode": "nso",
-    "last_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/calibrated_S24_02",
-    "last_actions": 24,
-    "last_CAN_distance_m": 3.5907609722614526,
-    "last_stop_reason": "budget_exhausted",
-    "last_stop_was_failed_method_termination": false,
+    "last_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_S",
+    "last_actions": 13,
+    "last_CAN_distance_m": 1.8566855460405343,
+    "last_stop_reason": "anchor_footprint_not_known_safe",
+    "last_stop_was_failed_method_termination": true,
     "semantic_labels_available": true,
     "learned_models_validated": false,
     "required_fresh_initialization_after_return": true,
-    "current_state": "用户要求重建地图：旧S24已24步返航并确认零速；新CSM/二维/TSDF/展示会话已重建，目前无自主控制程序。",
+    "current_state": "实车C24正常终止返航、S13原anchor_footprint检查失败并零速停止；用户要求回退旧相机外参，新建图/展示会话已恢复，无自主程序。",
     "reference_files_verified_unchanged": 38,
     "ROS_xy_goal_latch": true,
     "ROS_planner_frequency_hz": 0.0,
     "SDK_depth_mode": "NEURAL",
     "sparse_actual_RGBD_allowed": true,
     "policy_modified": true,
-    "last_return_completed": true,
+    "last_return_completed": false,
     "post_cleanup_CAN_zero_confirmed": true,
     "last_stop_was_execution_interruption": false,
     "original_macro_goal_reached": false,
@@ -425,7 +426,7 @@
     "SDK_depth_confidence": 80,
     "SDK_depth_texture_confidence": 100,
     "latest_no_motion_capture": "/home/ouc/nso_robot/analyses/instance_support_20261103/fresh_scene/source.json",
-    "last_verified_navigation_goals": 24,
+    "last_verified_navigation_goals": 13,
     "last_executed_goal_observation_unfused": false,
     "policy_variant": "exploration_joint_v1",
     "execution_profile": {
@@ -440,8 +441,8 @@
       "control_odometry_topic": "/nso_csm/control_odom",
       "Navfn_default_goal_tolerance_m": 0.0
     },
-    "latest_progress": "新标定S24:24步(14前进/10转向),3.59076m,368.8467s,返航完成；6次规划G/S同分同首选。用户报告遥控移动途中定位漂移，面积增长仅调试记录。随后按用户要求重建地图，无自主运动。",
-    "next_run_initialization": "Must capture fresh live0 and anchor in map_reset_20261108_01 epoch; do not reuse calibrated_S24_02 inputs or old odom alignment.",
+    "latest_progress": "一组新Q1 G/S/X仿真完成有条件S表面收益；实车C24返航/S13失败均保留；小论文18+3页、毕设82页完成修订；旧相机外参按用户指示恢复，地面基准误差尚未修复。",
+    "next_run_initialization": "Fresh actual capture must match camera_mount_rollback_20261108 legacy mount/epoch. Nov08 calibrated prepare_capture.py expects the other TF and must not be run unchanged.",
     "ROS_xy_goal_latch_parameter": true,
     "last_worker_accepted_action": 40,
     "last_supervisor_logged_accepted_action": 40,
@@ -462,7 +463,7 @@
     "fixed_body_mask_pixels": 0,
     "semantic_score_participation_observed": true,
     "semantic_changed_actual_top1_vs_G": false,
-    "last_elapsed_run_s": 368.8467353369997,
+    "last_elapsed_run_s": 184.86200660399845,
     "actuator_senders_present": false,
     "latest_semantic_root_cause": "/home/ouc/nso_robot/analyses/semantic_gain_20261031/SUMMARY.json",
     "paired_protocol": "/home/ouc/nso_robot/analyses/semantic_pair_20261031/manifest.json",
@@ -963,24 +964,25 @@
   },
   "thesis_unknown_exploration_chapter": {
     "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/unknown_exploration_revision_20261104/chapter.pdf",
-    "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/unknown_exploration_revision_20261104/chapter.md",
+    "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/unknown_exploration_revision_20261108/chapter.md",
     "pages": 6,
-    "status": "Historical standalone PDF retained without rebuild; updated chapter.md feeds current integrated78page thesis. Use graduation_thesis_integrated.path for latest results.",
-    "pdf_sha256": "78e83a51ae478062d034ddab15390388c98d7ad3af4bb0672b9a0e6fbaf098fe"
+    "status": "Updated source chapter feeds current82page integrated thesis; standalone old PDF remains historical.",
+    "pdf_sha256": "78e83a51ae478062d034ddab15390388c98d7ad3af4bb0672b9a0e6fbaf098fe",
+    "latest_integrated_pdf": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/thesis.pdf"
   },
   "graduation_thesis_integrated": {
-    "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261104_two_room/thesis.pdf",
-    "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261104_two_room/thesis.md",
-    "pages": 79,
+    "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/thesis.pdf",
+    "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/thesis.md",
+    "pages": 82,
     "chapters": 6,
-    "status": "complete_body_reading_draft_not_school_template_or_author_approved_submission",
-    "pdf_sha256": "e672288fd88a723e0c9d0b523b12ab9a9809c6352c74c64fc9aa361d69c9146c",
-    "source_sha256": "04ea8444ee6bcc9ce07bb15015857ca19d999abc10ae64360e16d998decd4c8e",
-    "validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261104_two_room/validation.json",
+    "status": "complete_revised_body_reading_draft_not_school_submission",
+    "pdf_sha256": "ef5f083e32a8da24ac5f0a00b3ccd90cd2a35b04ea2c2d05a11383f9a9dce622",
+    "source_sha256": "b442e6b722945806e63493cb9f275838e4d590c1d26eebc5fb0e5a61b8b5b366",
+    "validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/revision_validation.json",
     "local_math_formulas": 181,
     "math_render_failures": 0,
     "rebuild_from_external_working_directory": true,
-    "latest_real_episode_revision": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/manuscript_update/validation.json"
+    "latest_real_episode_revision": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/graduation_integrated_20261108/physical_pair_revision_manifest.json"
   },
   "latest_semantic_reachability_layers": {
     "directory": "/home/ouc/nso_robot/analyses/semantic_reach_20261104",
@@ -1064,10 +1066,12 @@
     "current_manuscript_class": "article",
     "journal_format_complete": false,
     "author_fields_complete": false,
-    "author_information_request_pending": true,
+    "author_information_request_pending": false,
     "submission_sent": false,
     "payment_authorized_or_made": false,
-    "focused_candidate": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107"
+    "focused_candidate": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108",
+    "author_fields_intentionally_blank_by_user": true,
+    "user_choice": "2026-11-08: 这些内容先空下; do not treat author/venue fields as current manuscript-writing blocker."
   },
   "semantic_scalar_equivalence_audit": {
     "directory": "/home/ouc/nso_robot/analyses/scalar_equivalence_20261104",
@@ -1298,7 +1302,7 @@
   "camera_mount_change": {
     "updated_unix_s": 1794049349.87493,
     "reason": "User moved camera to remove prior IMU obstruction",
-    "current_mount_calibrated": true,
+    "current_mount_calibrated": false,
     "user_measurements_pending": false,
     "raw_camera_continues": true,
     "lidar_csm_gmapping_continues": true,
@@ -1350,42 +1354,42 @@
     },
     "limits": "A single floor plane constrains approximate height and tilt but cannot determine chassis-relative X/Y/yaw. No guessed extrinsic has been applied.",
     "next_steps": [
-      "后续 NSO 使用本次新坐标会话的实际观测，记录标定来源并保持原有策略和保护。",
-      "独立评价重建精度和语义决策收益，不以本次接线和服务恢复代替实验结果。"
+      "先观察旧配置实际重建；不声称旧外参或重建独立精度已验证。",
+      "地面在图像/拟合中高度基准与原固定floor不一致，后续做显式传感器标定核验；不静默删除点或改0.15m阈值。"
     ],
     "runtime_mask_consumers": [
       "runtime/hybrid_sensor_bridge.py",
       "runtime/joint_observation.py",
       "runtime/reconstruction_worker.py via runtime/live_dashboard.py"
     ],
-    "readiness": "Calibrated camera, lidar, CSM, map, navigation and dashboard are running in a fresh session; no motion trial in this deployment.",
+    "readiness": "Legacy-mount fresh camera/lidar/CSM/map/TSDF/display verified; no autonomous mission.",
     "directory": "/home/ouc/nso_robot/analyses/camera_relocation_20261107",
-    "calibration_deferred_by_user": false,
+    "calibration_deferred_by_user": true,
     "user_instruction": "先不考虑更新外参，先继续任务",
     "mask_switch_verification": "/home/ouc/nso_robot/analyses/mount_unmasked_20261107/verification.json",
     "latest_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02",
-    "current_mount_calibration_loaded": true,
+    "current_mount_calibration_loaded": false,
     "current_mount_user_confirmation": "对应当前位置，之后未移动",
     "current_calibration_source": "/home/ouc/hjd/biaoding/bag/lidar_zed2i外参/left/result.yaml",
     "current_calibration_sha256": "a4df7e4c878ab01322b18f3a5061b2202c768d4e4379bcc993443a404811ebfc",
     "applied_base_from_camera_optical": [
       [
-        0.037408915714802815,
-        0.026968330397190265,
-        0.9989360751222425,
-        0.18725143692477933
+        2.220446049250313e-16,
+        2.220446049250313e-16,
+        1.0,
+        0.06099999999999999
       ],
       [
-        -0.9992918948041564,
-        -0.003026897759847047,
-        0.0375039580400533,
-        0.06740568615856077
+        -1.0,
+        0.0,
+        2.220446049250313e-16,
+        0.0591
       ],
       [
-        0.00403509649964473,
-        -0.9996317057024247,
-        0.026836001019137523,
-        0.2980276263436753
+        0.0,
+        -1.0,
+        2.220446049250313e-16,
+        0.303
       ],
       [
         0.0,
@@ -1437,7 +1441,10 @@
         ]
       }
     },
-    "publication_receipt": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/publication_receipt.json"
+    "publication_receipt": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/publication_receipt.json",
+    "latest_user_instruction": "先改回旧配置试一下？我感觉昨天的3d建图很好今天的不行",
+    "current_active_profile": "legacy_mount_user_requested_rollback_20261108",
+    "latest_rollback": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/summary.json"
   },
   "latest_physical_integration": {
     "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
@@ -1729,13 +1736,14 @@
   },
   "last_goal_turn_progress": {
     "classification": "progress",
-    "task": "Completed calibrated S24 closed loop; then user-requested fresh localization/2D/3D reset after reported drift.",
-    "evidence": "/home/ouc/nso_robot/analyses/map_reset_20261108_01/summary.json",
+    "task": "Fixed Q1 G/S/X comparison, complete realC/S outcomes and depth-source fault attribution, revised small paper/thesis, explicit user-requested legacy mount rollback.",
     "goal_complete": false,
     "consecutive_no_progress_turns": 0,
     "robot_motion_issued": true,
     "motion_complete_and_zero": true,
-    "autonomous_mission_currently_active": false
+    "autonomous_mission_currently_active": false,
+    "evidence": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108",
+    "publication_pending": true
   },
   "live_dashboard_current": {
     "url": "http://127.0.0.1:8766/",
@@ -1750,28 +1758,28 @@
     "stale_trajectory_visible_as_history": true,
     "pose_state_poll_hz": 2,
     "semantic_current_age_limit_s": 10,
-    "semantic_display_scope": "Actual YOLOE visible-depth projections using Nov06 calibration, confirmed for the current mount. Class correctness and independent geometric accuracy remain unverified.",
+    "semantic_display_scope": "Actual YOLOE measured-depth projection using user-requested legacy mounting TF; geometric accuracy not verified.",
     "robot_policy_changed": false,
     "entry_refresh_publication_receipt": "/home/ouc/nso_robot/analyses/dashboard_entry_refresh_20261108/publication_receipt.json",
     "entry_refresh_published_head": "a8e3540b9143f272134bae8550f3d76f41303d26",
-    "last_checked_unix_s": 1794125066.5023432,
-    "latest_source_recovery": "/home/ouc/nso_robot/analyses/map_reset_20261108_01/summary.json",
+    "last_checked_unix_s": 1794127655.443534,
+    "latest_source_recovery": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/summary.json",
     "pose_fresh_at_latest_check": true,
     "last_source_outage_reason": "CAN watchdog exit of odometry/TF bridge; lidar/matcher stayed live; same-config bridge restored",
     "semantic_source_state_distinguished_from_empty_detection": true,
     "source_recovery_publication_receipt": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/publication_receipt.json",
     "source_recovery_published_head": "79d05f5e357fa89cc8af65500e4ff417e3db0f2b",
     "running": true,
-    "last_runtime_observation": "/home/ouc/nso_robot/analyses/map_reset_20261108_01/display_verification.json",
-    "latest_runtime_state": "Fresh map-reset epoch, trajectory and TSDF restarted from current physical position; calibrated camera retained.",
-    "camera_extrinsics_loaded": true
+    "last_runtime_observation": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/verification.json",
+    "latest_runtime_state": "Fresh legacy camera mount epoch; new map/trajectory/TSDF, no current autonomous mission.",
+    "camera_extrinsics_loaded": false
   },
   "localization_runtime_current": {
-    "profile": "original_default_keyframes_CAN_control_fresh_reset_epoch",
+    "profile": "original_CSM_CAN_control_fresh_legacy_mount_epoch",
     "runtime_state": "running",
     "bridge": {
       "name": "csm_bridge",
-      "pid": 503736,
+      "pid": 537839,
       "argv": [
         "/usr/bin/python3",
         "-s",
@@ -1782,21 +1790,21 @@
         "--can-interface",
         "can0"
       ],
-      "started_unix_s": 1794124952.686461,
+      "started_unix_s": 1794127434.359817,
       "control_velocity_source": "can_feedback",
       "alignment_sha256": null
     },
     "alignment": null,
     "source_stamps_preserved": true,
     "physical_accuracy_verified": false,
-    "original_matcher_pid": 503762,
-    "map_pid": 503764,
-    "reconstruction_pid": 503882,
+    "original_matcher_pid": 537947,
+    "map_pid": 537952,
+    "reconstruction_pid": 538106,
     "recorded_process_ids_are_historical": false,
-    "source_epoch_start_unix_s": 1794124953.6929047,
-    "live_verification": "/home/ouc/nso_robot/analyses/map_reset_20261108_01/sensor_verification.json",
-    "restart_note": "Explicit user-requested fresh localization and 2D/3D map after reported relocation drift; calibrated camera retained; no old history/alignment.",
-    "previous_session_state": "/home/ouc/nso_robot/analyses/map_reset_20261108_01/request_and_previous_epoch.json"
+    "source_epoch_start_unix_s": 1794127435.364162,
+    "live_verification": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/verification.json",
+    "restart_note": "User-requested previous camera mount restored. Fresh CSM/map/TSDF; pair mapper stopped; default /nso_visual/map restored. No old coordinate alignment/history.",
+    "previous_session_state": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/request_and_previous_epoch.json"
   },
   "prior_physical_integrations": [
     {
@@ -2127,21 +2135,24 @@
     "previous_head": "79d05f5e357fa89cc8af65500e4ff417e3db0f2b"
   },
   "focused_submission_candidate": {
-    "directory": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107",
-    "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107/main.pdf",
-    "editable_source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107/main.tex",
-    "pages": 16,
-    "status": "venue_neutral_anonymous_author_review_draft_not_submitted",
-    "pdf_sha256": "b35e28a40b84f241cd38baff87c0d31d45491f0ab6691d3c53a997c0f180b743",
+    "directory": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108",
+    "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.pdf",
+    "editable_source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.tex",
+    "pages": 18,
+    "status": "completed_anonymous_manuscript_revision_not_submitted",
+    "pdf_sha256": "b8ca039b770d3abb1621377cae111a2d51ea6c6c7ffa280042c94d5539e279e2",
     "full32page_evidence_manuscript_retained": true,
     "thesis79page_body_retained": true,
     "full_scope_still_unknown_exploration_and_coverage": true,
     "reference_audit": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/focused_paper_review/reference_audit.json",
-    "validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107/validation.json",
-    "author_details_pending": true,
+    "validation": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/validation.json",
+    "author_details_pending": false,
     "venue_decided": false,
     "publication_receipt": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/focused_publication_receipt.json",
-    "published_head": "0a0d948d0e0f5f90819fbeefabe734ef034c2ee6"
+    "published_head": "0a0d948d0e0f5f90819fbeefabe734ef034c2ee6",
+    "supplement_pages": 3,
+    "author_fields_intentionally_blank_by_user": true,
+    "publication_pending": true
   },
   "semantic_candidate_proposal": {
     "path": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/SEMANTIC_CANDIDATE_PROPOSAL.json",
@@ -2258,9 +2269,70 @@
     "old_maps_trajectories_TSDF_retained_in_previous_directory": true,
     "old_pose_alignment_or_history_loaded": false,
     "research_policy_changed": false,
-    "autonomous_motion_started": false,
+    "autonomous_motion_started": true,
     "drift_root_cause_resolved": false,
     "next_motion_requires_new_live0_and_anchor": true,
     "checked_unix_s": 1794125066.5019329
+  },
+  "rapid_paper_evidence_20261108": {
+    "physical_protocol": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/protocol.json",
+    "physical_C_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_C",
+    "physical_status": "C24_original_normal_stop_returned_S13_anchor_footprint_failure_no_return_both_CAN_zero",
+    "semantic_directory": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/semantic",
+    "manuscript_directory": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108",
+    "goal": "Fixed disclosed comparison, preserve failures, complete concise anonymous submission candidate; no undisclosed policy changes.",
+    "prearm_duration_rejection": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/startup_rejection.json",
+    "physical_C_command_dir": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/run_C02",
+    "semantic_comparison": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/semantic/comparison.json",
+    "physical_S_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_S",
+    "C_summary": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/C_summary.json",
+    "comparison": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/comparison/comparison.json",
+    "S_summary": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/S_summary.json",
+    "failure_source": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/S_anchor_failure/result.json",
+    "floor_diagnostic": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/S_anchor_failure/ground_three_frame_conclusion.json",
+    "semantic_status": "Q1 nativeG/S/X one fixed synthetic parent completed;S endpoint gains but common generic weight explanation remains",
+    "manuscript_complete": true,
+    "author_metadata_left_blank_at_user_request": true,
+    "independent_physical_scenes": 1,
+    "ordered_pairs_this_round": 1,
+    "semantic_effect_in_physical_trials": false
+  },
+  "primary_manuscript": {
+    "path": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.pdf",
+    "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/main.tex",
+    "supplement": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261108/supplement.pdf",
+    "role": "Current focused anonymous small-paper manuscript; distinct from original v10 unknown-space thesis/deployment policy"
+  },
+  "latest_camera_rollback": {
+    "schema": "nso.user_requested_legacy_camera_mapping.v1",
+    "status": "restored_actual_TF_and_fresh_mapping_verified",
+    "source": "User explicitly requests trying the previous configuration because yesterday3D looked better; user declined measurements for now.",
+    "six_mount_parameters_only": true,
+    "launch_sha256": "58ea968ec11ee9fbdb235b099b54cdb1246e56b5f0dfb383996bacbec58edeb1",
+    "new_calibration_backup": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/hybrid_camera_neural.calibrated.before.launch",
+    "legacy_mount_xyz_m": [
+      0.071,
+      -0.0009,
+      0.288
+    ],
+    "legacy_mount_rpy_rad": [
+      0,
+      0,
+      0
+    ],
+    "sdk_depth_and_thresholds_unchanged": true,
+    "original_research_policy_unchanged": true,
+    "hardware_and_ROS_protection_unchanged": true,
+    "process_manifest": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/processes.json",
+    "verification": "/home/ouc/nso_robot/analyses/camera_mount_rollback_20261108/verification.json",
+    "old_maps_and_trials_preserved": true,
+    "fresh_odom_map_TSDF_epoch": true,
+    "no_autonomous_motion": true,
+    "new_calibration_receipt_not_applied": true,
+    "physical_accuracy_verified": false,
+    "floor_reference_issue_unresolved": true,
+    "three_frame_ground_diagnostic": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/S_anchor_failure/ground_three_frame_conclusion.json",
+    "next_capture_must_match_current_legacy_TF": true,
+    "updated_unix_s": 1794127655.4202747
   }
 }

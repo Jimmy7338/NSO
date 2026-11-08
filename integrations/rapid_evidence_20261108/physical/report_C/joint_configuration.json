@@ -1,0 +1,359 @@
+{
+  "configuration": {
+    "robot_radius_m": 0.7212185868375829,
+    "sensor_config": {
+      "width_px": 320,
+      "height_px": 180,
+      "fov_deg": 101.34615631189132,
+      "max_depth_m": 4.0,
+      "camera_height_m": 0.536,
+      "laser_height_m": 0.684,
+      "laser_rays": 2000,
+      "voxel_m": 0.03,
+      "truncation_m": 0.12
+    },
+    "planner_revision": "v10_3_1",
+    "policy_variant": "exploration_joint_v1",
+    "sensor_range_profile": "sensor_range_matched_v1",
+    "measured_extent_profile": "measured_extent_3m_v1",
+    "shape": [
+      400,
+      400
+    ],
+    "planning_from_odom": [
+      [
+        0.0009259175520301491,
+        -0.9999995713382516,
+        0.0,
+        40.100045643154786
+      ],
+      [
+        0.9999995713382516,
+        0.0009259175520301491,
+        0.0,
+        39.899795200313186
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.233
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "total_budget": 40,
+    "score_mode": "C",
+    "episode_id": "fresh_calibrated_pair_20261108_01_C",
+    "scene_id": "fresh_calibrated_pair_20261108_01_real_unknown_calibrated_20261108"
+  },
+  "execution_allowed": true,
+  "calibration": {
+    "source": "actual ZED K and actual camera/laser historical TF retained per capture",
+    "pixel_stride": 4,
+    "raw_observations_preserved": true,
+    "initial_grid": {
+      "shape": [
+        400,
+        400
+      ],
+      "resolution_m": 0.2,
+      "planning_from_odom": [
+        [
+          0.0009259175520301491,
+          -0.9999995713382516,
+          0.0,
+          40.100045643154786
+        ],
+        [
+          0.9999995713382516,
+          0.0009259175520301491,
+          0.0,
+          39.899795200313186
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.233
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "return_anchor": [
+        200,
+        200,
+        0
+      ],
+      "floor_odom_z_m": -0.233,
+      "planning_domain_is_resource_extent_not_observed_world": true,
+      "initial_actual_base_odom_pose": [
+        0.00020475733723326038,
+        4.583276284591365e-05,
+        0.0009259176843318449
+      ]
+    },
+    "initial_actual_base_odom_pose": [
+      0.00020475733723326038,
+      4.583276284591365e-05,
+      0.0009259176843318449
+    ],
+    "initial_odom_stamp_ns": 1794125879769907813,
+    "initial_odom_stamp_semantics": "actual historical TF query stamp",
+    "initial_odom_frame": "odom",
+    "initialization_unix_s": 1794125883.5190814,
+    "initialization_scope": "fresh actual Nov08 observation; common anchor comes from C; no motion sender",
+    "initialization_evidence": "new actual RGB-D/scan/map packet, not a reused paid/semantic observation ledger",
+    "initialization_source_state": {
+      "localization_source": "lidar_csm",
+      "active_matcher": "/nso_csm/matcher",
+      "matcher_parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false
+      },
+      "control_velocity_source": "can_feedback",
+      "pose_source": {
+        "profile": "original_csm_pose_source_v1",
+        "pose_topic": "/nso_csm/pose_stamped",
+        "expected_caller": "/nso_csm/matcher",
+        "source_frame": "odom",
+        "target_frame": "odom",
+        "fixed_coordinate_transform_applied": false,
+        "raw_registration_preserved": true,
+        "source_stamp_preserved": true,
+        "nanosecond_stamp_encoding": "decimal_string_in_ROS_parameters_only",
+        "alignment": {}
+      },
+      "controller_odom_topic": "/nso_csm/control_odom",
+      "camera_extrinsics_loaded": true,
+      "camera_extrinsics_verified": false,
+      "old_camera_TF_retained": false,
+      "experiment_map_epoch_fresh_per_arm": true,
+      "display_TSDF_epoch_retained": true,
+      "prior_episode_ledger_imported": false,
+      "semantic_model_executed_during_preparation": false,
+      "preparation_no_motion": true
+    },
+    "localization_source": "lidar_csm",
+    "source_state": "Nov08 fresh original-default-keyframe CSM epoch; explicit original-kernel CAN control velocity",
+    "source_registration": "Nov08 session coordinates; no prior fixed SE2 alignment or historical registration imported",
+    "coordinate_alignment_scope": "C actual initial pose defines common planning frame; S retains C frame and separately records its actual pose",
+    "history_acquisition": "no prior joint/paid/semantic ledger imported; per-arm independent fresh navigation map; captures are actual and not assumed identical",
+    "navigation_map_source": {
+      "topic": "/nso_pair/map",
+      "publisher": "/nso_pair/gmapping",
+      "map_frame": "nso_pair_map"
+    },
+    "paired_map_epoch_receipt": {
+      "scope": "fresh per-arm stock gmapping and ROS costmaps; original CSM/display map/TSDF retained",
+      "no_motion": true,
+      "stopped_navigation": [
+        "/usr/bin/python3",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom"
+      ],
+      "stopped_helper": null,
+      "mapper_helper": {
+        "pid": 513292,
+        "argv": [
+          "/usr/bin/python3",
+          "-s",
+          "-B",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+          "--launch-mapper"
+        ],
+        "started_unix_s": 1794125701.8667746
+      },
+      "initial_map": {
+        "stamp_ns": 1794125704222422457,
+        "frame": "nso_pair_map",
+        "publisher": "/nso_pair/gmapping",
+        "known_cells": 21828,
+        "occupied_cells": 631
+      },
+      "navigation": {
+        "pid": 513450,
+        "argv": [
+          "/opt/ros/noetic/bin/roslaunch",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+          "latch_xy_goal_tolerance:=true",
+          "odom_topic:=/nso_csm/control_odom",
+          "map_topic:=/nso_pair/map"
+        ],
+        "started_unix_s": 1794125704.2705626
+      },
+      "costmap_sources": {
+        "global_costmap": "/nso_pair/map",
+        "local_costmap": "/nso_pair/map"
+      },
+      "ready_unix_s": 1794125707.0022328
+    },
+    "common_grid_source": null,
+    "pair_id": "fresh_calibrated_pair_20261108_01",
+    "pair_arm": "C",
+    "pair_score_mode_difference_only": true,
+    "joint_coverage_pair_provenance": {
+      "schema": "nso.joint_coverage_pair.arm.v1",
+      "pair_id": "fresh_calibrated_pair_20261108_01",
+      "arm": "C",
+      "order": [
+        "C",
+        "S"
+      ],
+      "duration_s": 600,
+      "status": "prepared_not_run",
+      "fresh_initialization_claim": "actual fresh capture and separate fresh map; no imported observation ledger",
+      "initial_inputs_claim": "not assumed byte-identical across arms",
+      "map_source_receipt_path": "/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physical/epoch_C/start_receipt.json",
+      "map_source_receipt_sha256": "38cf10c6e4008c3a3d4fbbf814172039c6d33dcac87d709a0726cf656a44d939",
+      "policy_difference": "score_mode C/S only; budget40 and deadline600 fixed for both; episode_id is identity metadata"
+    },
+    "actual_capture_pose_this_arm": [
+      0.00020475733723326038,
+      4.583276284591365e-05,
+      0.0009259176843318449
+    ],
+    "common_anchor_actual_pose_error": {
+      "xy_m": 0.0,
+      "yaw_rad": 0.0,
+      "actual_pose": [
+        0.00020475733723326038,
+        4.583276284591365e-05,
+        0.0009259176843318449
+      ],
+      "shared_anchor_pose": [
+        0.00020475733723326038,
+        4.583276284591365e-05,
+        0.0009259176843318449
+      ]
+    },
+    "external_deadline_s": 600,
+    "controller_odometry_source": "/nso_csm/control_odom",
+    "controller_odometry_projection": "original CSM pose/source stamps; explicit kernel-timestamped CAN vx/w at or before scan with150ms TTL, vy=0",
+    "joint_turn_execution_profile": "measured_in_place_turn_v1",
+    "apply_approved_self_mask": false,
+    "self_mask_pixels": 0,
+    "self_mask_profile": "unmasked_after_camera_relocation_v1",
+    "camera_mount_calibrated": true,
+    "camera_mount_user_confirmed_unchanged_since_Nov06": true,
+    "camera_calibration_receipt": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/tf_verification.json",
+    "camera_calibration_receipt_sha256": "8e09f91d66efca2514d7d165a0bb83b119de382c21cc9bc351e284ce90acb1ad",
+    "camera_calibration_status": {
+      "camera_extrinsics_loaded": true,
+      "camera_extrinsics_verified": false,
+      "camera_calibration_status": "loaded_TF_matches",
+      "camera_calibration_receipt": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/tf_verification.json",
+      "camera_calibration_max_matrix_error": 4.150325916274511e-16
+    },
+    "camera_extrinsic_policy": "Nov06 left calibration loaded and matched to actual capture historical TF",
+    "captured_base_from_camera": [
+      [
+        0.037408915714802315,
+        0.026968330397190154,
+        0.9989360751222429,
+        0.18725143692477933
+      ],
+      [
+        -0.9992918948041567,
+        -0.0030268977598475466,
+        0.0375039580400533,
+        0.06740568615856077
+      ],
+      [
+        0.004035096499644564,
+        -0.9996317057024251,
+        0.02683600101913708,
+        0.2980276263436753
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "captured_base_from_laser": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -0.011
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0035
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.451
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "historical_semantic_source": "no old semantic history; pinned frontend infers actual trial observations",
+    "semantic_labels_available": "model predictions, not ground truth",
+    "nominal_view_forecast_calibrated": false,
+    "physical_reconstruction_accuracy_verified": false,
+    "evidence_scope": "calibrated-mount closed-loop integration; no semantic causal benefit or reconstruction accuracy established",
+    "SDK_depth_mode": "NEURAL",
+    "depth_confidence": 80,
+    "depth_texture_confidence": 100,
+    "ROS_execution_frame": "odom",
+    "ROS_xy_latch": true,
+    "ROS_xy_goal_tolerance_m": 0.08,
+    "Navfn_default_tolerance": 0,
+    "ROS_short_goal_forward_point_distance_m": 0.325,
+    "execution_contract": "ROS success and actual original pending grid state; metric error retained as diagnostic",
+    "execution_controller_profile": "exact_ros_goal_v1",
+    "correction_reverse_profile": "nso_nominal_correction_reverse_v1; same-pending endpoint retry only, maxreverse .05m/s; ordinary motion no reverse",
+    "sparse_actual_RGBD_observation_allowed": true,
+    "inherited_constant_fields": [
+      "configuration.robot_radius_m",
+      "configuration.sensor_config",
+      "configuration.planner_revision"
+    ],
+    "inherited_calibration_fields": [],
+    "nominal_camera_height_m": 0.536,
+    "actual_camera_height_from_base_TF_and_fixed_floor_m": 0.5310276263436753,
+    "camera_height_comparison_scope": "Nominal policy height retained; actual base-relative optical TF plus existing fixed floor offset is not an independently measured floor/accuracy calibration",
+    "nominal_sensor_constant_limit": "Original nominal camera/laser heights and freeze_joint_grid floor -0.233 retained; these are not newly measured floor/nominal forecast calibration. Actual sensor projection uses captured K/TF."
+  },
+  "semantic_configuration": {
+    "model_dir": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/models/real_semantics_20261030",
+    "confidence": 0.25,
+    "imgsz": 640,
+    "prior_profile": "real_scene_structural_v1"
+  }
+}

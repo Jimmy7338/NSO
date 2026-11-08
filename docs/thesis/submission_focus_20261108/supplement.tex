@@ -1,0 +1,48 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=27mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx,amsmath,amssymb,booktabs,array,graphicx}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\title{Supplement: Correctable Category Priors for Budget-Constrained Active Observation}
+\author{}\date{Anonymous research draft, 8 November 2026}\maketitle
+\section*{Evidence scope}
+The main paper's controlled two-template policy, current-source joint-exploration variant and physical adapters are distinct implementations. The following deterministic results share one Q0 scene context with two related arrangements. Trajectories, seeds, configurations and checkpoints are not independent environments. All 24 matrix trajectories are included; the two-room diagnostic and post-hoc controls are separate related analyses. New current-source experiments are not recovered historical Windows experiment inputs.
+
+Physical pilot outcomes, including both failed S returns and the calibrated S24 map-drift limitation, remain in main-paper Section 7; exact source records are indexed in the accompanying evidence index.
+\renewcommand{\thetable}{S\arabic{table}}
+\input{Table8.tex}
+\input{Table9.tex}
+\input{joint_diagnostic_detail.tex}
+\section{Two-room attribution control}
+The two-room construction adds a divider with a 1.6 m opening to Q0 shelf-west. The blocked initial doorway position was corrected during geometry preflight before policy trajectories were observed. G, S and a post-hoc G$\times$2 control each complete 96 actions, return to the anchor and record zero simulated collisions. Initial/final coverage is 60.12/99.01\% in all three runs. Newly visible surface is 123.965208, 126.576693 and 126.576693 m$^2$; F1 at 5 cm is 0.911938, 0.922122 and 0.922122; path length is 16.8, 16.4 and 16.4 m. First 99\% coverage occurs at actions 58, 56 and 56. G$\times$2 and S have identical action traces, so this diagnostic does not isolate a category-specific advantage from geometric-prior reweighting. The control was chosen after the G/S results and scalar audit, not preregistered.
+\section{Prospectively fixed Q1 synthetic parent}
+
+A further comparison fixed Q1 (outer seed 952), the shelf-west arrangement, a 96-action limit and native G/S/X modes before constructing the scene or observing trajectories. Each mode was executed once with the existing exploration\_joint\_v1/v10\_3\_1 policy, a fresh actual simulated first frame, exact poses and the original 0.2 m circular radius. X swaps the native class-prior scores. The category channel uses synthetic markers, without a natural-image detector. This adds one synthetic parent and three related policy trajectories, not three independent scenes. All three use 96 paid actions, return to the complete anchor and record zero simulated collisions. G and X have exactly identical step records.
+
+\begin{table}[!htbp]
+\centering
+\caption{All Q1 outcomes. Initial/final coverage is measured over reachable cells; surface gain excludes the initial frame; F1 uses 5 cm.}\label{tab:Q1}
+\small\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Mode & Coverage start/end (\%) & Area gain (m$^2$) & Surface gain (m$^2$) & F1 \\
+\midrule
+G & 63.104 / 99.164 & 15.52 & 107.233302 & 0.929464 \\
+S & 63.104 / 99.628 & 15.72 & 118.952383 & 0.978022 \\
+X & 63.104 / 99.164 & 15.52 & 107.233302 & 0.929464 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+S exceeds G/X by 11.719081 m$^2$ newly reference-visible surface, 0.20 m$^2$ observed area and 0.048558 F1. The first changed planning choice occurs after 19 actions at 88.475836\% coverage, with identical complete inputs, candidate sets and score components. The actual actions first differ at action 33. S has a temporary surface deficit before the terminal gain (Figure~\ref{fig:Q1}); the endpoint does not imply uniformly better progress.
+
+All 25 recorded planning states admit a nonnegative uniform geometric-prior weight that reproduces the S-selected candidate within that state's saved set. Moreover, every actually visited S state shares the feasible interval $\lambda\ge6.037968585111318$ under the audit's exact rational constraints and tie rule. No weighted-control rollout or weight search was added. Thus, saved-state selection remains consistent with generic reweighting; the audit does not prove that an unexecuted weighted policy reproduces the full S route. This complete-route gain supports controlled synthetic observation allocation while leaving category-specific advantage, early unknown-exploration efficiency and natural-semantic transfer unresolved.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=.90\linewidth]{Q1_curves.pdf}
+\caption{One prospectively fixed Q1 synthetic parent with native G/S/X. Left: observed reachable-cell coverage. Right: reference-visible surface added since the initial frame. G and X coincide exactly; S has a temporary surface deficit before the final gain. Each arm returns after 96 paid actions with no simulated collision. These related trajectories provide no between-scene uncertainty estimate.}\label{fig:Q1}
+\end{figure}
+
+\end{document}
