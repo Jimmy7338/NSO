@@ -1,6 +1,6 @@
 {
   "schema": "nso.project_priorities.v1",
-  "updated_unix_s": 1794070284.2751834,
+  "updated_unix_s": 1794123623.5690281,
   "updated_local_date": "2026-11-08",
   "source": "Direct user instructions in current conversation",
   "primary_objectives": [
@@ -103,7 +103,7 @@
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/github_alignment.json",
     "/home/ouc/nso_robot/workspaces/nso_onboard_20261028/evidence/research_alignment_20261029/reference_restore_manifest.json"
   ],
-  "next_concrete_task": "Independent portability deliverables are now published andverified. Revalidate the pending explicit userchoice for offlineentry_projection_relaxed_v1, actual localterminal8s rawcapture output, and author/venue information. No capture_01 directory exists at lastcheckedstate; no livecapturehandle ispending. Do not infer permission from automatedgoalmessages, repeatcompletedcounterfactuals/replays/UI checks, or add uninformedphysicaltrials. If pendinginputs remain absent and no meaningfulindependentwork isavailable, record a genuine no-progress audit and follow blockedthreshold. Keep originaldeployedmethod and allresearch/hardwaresafeguards.",
+  "next_concrete_task": "新外参已应用，新的传感器、定位、地图、导航和展示会话正常。下一轮 NSO 应从本次会话重新获取 live0 和起点，不复用旧轨迹、待执行动作或坐标对齐；保留原圆形模型、候选/评分/返航合同及执行时 0.08m 容差。离线 entry_projection_relaxed_v1 方案仍待用户选择，不启用。外参加载不等于独立重建精度验证；原始激光抓包和投稿作者信息仍分别待补。",
   "source_authority": "Actual original Windows selected research files, received or verified against controller references, now independently materialized in the restored research workspace; GitHub is historical context",
   "local_migration": {
     "root": "/home/ouc/nso_robot/migrations/windows_local_20261029",
@@ -357,7 +357,7 @@
     "V35_is_not_the_main_unknown_exploration_system": true
   },
   "live_display": {
-    "url": "http://127.0.0.1:8765",
+    "url": "http://127.0.0.1:8766/",
     "entry": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/run_dashboard.sh",
     "read_only": true,
     "actual_camera": true,
@@ -367,7 +367,8 @@
     "voxel_m": 0.02,
     "running": true,
     "last_preview": "/home/ouc/nso_robot/experiments/live_dashboard_20261029/preview.png",
-    "last_health_check": "/home/ouc/nso_robot/analyses/instance_support_20261103/localization_restart/verified_state.json"
+    "last_health_check": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/display_verification.json",
+    "last_runtime_observation": "/home/ouc/nso_robot/analyses/network_ros_handoff_20261108/handoff.json"
   },
   "session_pause": {
     "status": "authorized_episode_completed_stopped",
@@ -401,7 +402,7 @@
     "semantic_labels_available": true,
     "learned_models_validated": false,
     "required_fresh_initialization_after_return": true,
-    "current_state": "Completed S40 under original default-keyframe CSM + explicit CAN controller velocity + fixed SE2 coordinate alignment: 40 paid/40 verified ROS arrivals, 41 observations, original anchor return, CAN zero on cleanup. One integration episode; not a matched comparison or independent accuracy validation.",
+    "current_state": "新外参下的数据、导航和展示服务已恢复；本次新会话尚未运行 NSO 行驶试验，既往试验记录保留。",
     "reference_files_verified_unchanged": 38,
     "ROS_xy_goal_latch": true,
     "ROS_planner_frequency_hz": 0.0,
@@ -440,12 +441,12 @@
       "Navfn_default_goal_tolerance_m": 0.0
     },
     "latest_progress": "40 paid (36 forward,4 turns),7.3935058m CAN/542.443944s; internal observed area72.08→128.28m²; fixed-old-surface quality0.21376008→0.19910668. All12 new planning states G/S tied: first2 multi-candidate, remaining10 single-candidate. Negative and earlier interrupted trials preserved.",
-    "next_run_initialization": "Fresh actual live0/anchor in current continuous CSM frame. Never import old RF2O history or replay old pending. Calibration localization_source must be lidar_csm. Current data stack explicitly assembled; do not start RF2O as a fallback.",
+    "next_run_initialization": "Fresh actual observation and anchor in the Nov08 calibrated CSM epoch; no old pending actions, history or fixed SE2 alignment.",
     "ROS_xy_goal_latch_parameter": true,
     "last_worker_accepted_action": 40,
     "last_supervisor_logged_accepted_action": 40,
     "late_worker_observation_audit": "/home/ouc/nso_robot/analyses/resume_20261102/run04_control_case_boundary.json",
-    "current_attempt": "exploration_resume_S40_01 (completed, stopped)",
+    "current_attempt": null,
     "current_budget": 40,
     "current_external_duration_s": 600,
     "old_origin_reused": false,
@@ -545,7 +546,7 @@
     "raw_odometry_topic": "/nso_csm/odom",
     "controller_odometry_topic": "/nso_csm/control_odom",
     "controller_velocity_model": "Explicit original kernel-timestamped CAN vx/w input for DWA, vy=0; raw SE2-derived twist retained in raw odometry and pose uses fixed SE2 coordinate continuity.",
-    "current_initialization_scope": "Nov07 uninterrupted original matcher/map epoch with explicit fixed coordinate continuity after diagnostic B. This episode used fresh actual live0 and no previous joint/semantic ledger, while ROS navigation map retained earlier observations. Subsequent matched trials need identical frozen starting information; never reuse pending actions or assume previous frames survive a source reset.",
+    "current_initialization_scope": "Fresh localization and map epoch after reboot; Nov06 left-camera calibration applied to the user-confirmed current mount.",
     "Navfn_default_goal_tolerance_m": 0.0,
     "CSM_sensor_range_full_cycle_verified": true,
     "current_day_completed_CSM_cycles": [
@@ -592,35 +593,40 @@
   },
   "live_dashboard": {
     "url": "http://127.0.0.1:8765",
-    "output": "/home/ouc/nso_robot/experiments/live_dashboard_csm_20261103",
+    "output": "/home/ouc/nso_robot/experiments/live_dashboard_calibrated_20261108",
     "detached_service": true,
     "old_clouds_and_seeds_loaded": false,
     "physical_accuracy_verified": false,
     "running": true,
     "camera_last_checked_unix_s": 1793683134.3679562,
     "localization_source": "lidar_csm",
-    "source_epoch_start_unix_s": 1793682956.3797138,
+    "source_epoch_start_unix_s": 1794123449.6469789,
     "freshness": {
       "camera": {
         "fresh": true,
-        "age_s": 0.16929888725280762
+        "age_s": 0.33362889289855957
       },
       "pose": {
         "fresh": true,
-        "age_s": 0.23389840126037598
+        "age_s": 0.135545015335083
       },
       "map": {
         "fresh": true,
-        "age_s": 1.0850496292114258
+        "age_s": 2.100447654724121
       },
       "reconstruction": {
         "fresh": true,
-        "age_s": 4.569767951965332
+        "age_s": 3.033803939819336
+      },
+      "semantics": {
+        "fresh": true,
+        "age_s": 3.033803939819336
       }
     },
     "display_freshness_only": true,
     "new_epoch_reason": "robot manually driven to charge and returned during source pause",
-    "last_checked_unix_s": 1793683706.818281
+    "last_checked_unix_s": 1794123623.5689695,
+    "last_runtime_observation": "/home/ouc/nso_robot/analyses/network_ros_handoff_20261108/handoff.json"
   },
   "semantic_integration": {
     "frontend": "YOLOE-v8s-seg",
@@ -1279,10 +1285,10 @@
     "no_hardware_commands_or_other_batch_mutations": true
   },
   "latest_environment_recovery": {
-    "summary": "/home/ouc/nso_robot/analyses/environment_recovery_20261107/summary.json",
-    "verification": "/home/ouc/nso_robot/analyses/environment_recovery_20261107/verification.json",
-    "process_receipt": "/home/ouc/nso_robot/analyses/forward_controller_20261107/restart_after_tf_fix/processes.json",
-    "state": "Fresh CSM epoch after explicit use_tf=false; sensors/map/dashboard live. All three standard-ROS diagnostic probes ended with verified zero, no actuator mission. Default DWA restored: fp.325; joint mission still uses original .08 position tolerance. CAN candidate not deployed, original bridge source restored.",
+    "summary": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/summary.json",
+    "verification": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/sensor_verification.json",
+    "process_receipt": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/processes.json",
+    "state": "Fresh calibrated camera, original CSM with CAN controller velocity, gmapping, navigation and display are running. No actuator or motion trial was started.",
     "camera_serial": 37510078,
     "master": "http://127.0.0.1:11382",
     "dashboard": "http://127.0.0.1:8765",
@@ -1292,53 +1298,12 @@
   "camera_mount_change": {
     "updated_unix_s": 1794049349.87493,
     "reason": "User moved camera to remove prior IMU obstruction",
-    "current_mount_calibrated": false,
+    "current_mount_calibrated": true,
     "user_measurements_pending": false,
     "raw_camera_continues": true,
     "lidar_csm_gmapping_continues": true,
     "depth_bridge_navigation_and_3D_display_stopped": false,
     "prior_calibration_and_mask_assets_preserved": true,
-    "active_old_TF": {
-      "base_link<-zed2i_camera_center": {
-        "translation": [
-          0.071,
-          -0.0009,
-          0.303
-        ],
-        "quaternion_xyzw": [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      },
-      "base_link<-zed2i_left_camera_optical_frame": {
-        "translation": [
-          0.06099999999999999,
-          0.0591,
-          0.303
-        ],
-        "quaternion_xyzw": [
-          0.5,
-          -0.4999999999999999,
-          0.5,
-          -0.5000000000000001
-        ]
-      },
-      "base_link<-laser_link": {
-        "translation": [
-          -0.011,
-          0.0035,
-          0.451
-        ],
-        "quaternion_xyzw": [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      }
-    },
     "old_installation_parameters": {
       "point": "ZED bottom mounting screw / zed2i_base_link",
       "xyz_m": [
@@ -1385,20 +1350,93 @@
     },
     "limits": "A single floor plane constrains approximate height and tilt but cannot determine chassis-relative X/Y/yaw. No guessed extrinsic has been applied.",
     "next_steps": [
-      "Run short fresh-epoch joint integration with current inputs and original control protections",
-      "Retain calibration-deferred evidence boundary; measure new mounting before future reconstruction accuracy evaluation"
+      "后续 NSO 使用本次新坐标会话的实际观测，记录标定来源并保持原有策略和保护。",
+      "独立评价重建精度和语义决策收益，不以本次接线和服务恢复代替实验结果。"
     ],
     "runtime_mask_consumers": [
       "runtime/hybrid_sensor_bridge.py",
       "runtime/joint_observation.py",
       "runtime/reconstruction_worker.py via runtime/live_dashboard.py"
     ],
-    "readiness": "Camera/laser/CSM/map/dashboard remain live. Mission ended and actuator children exited; actual zero feedback verified. Extrinsic calibration still deferred by user.",
+    "readiness": "Calibrated camera, lidar, CSM, map, navigation and dashboard are running in a fresh session; no motion trial in this deployment.",
     "directory": "/home/ouc/nso_robot/analyses/camera_relocation_20261107",
-    "calibration_deferred_by_user": true,
+    "calibration_deferred_by_user": false,
     "user_instruction": "先不考虑更新外参，先继续任务",
     "mask_switch_verification": "/home/ouc/nso_robot/analyses/mount_unmasked_20261107/verification.json",
-    "latest_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02"
+    "latest_trial": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/relocated_unmasked_S40_02",
+    "current_mount_calibration_loaded": true,
+    "current_mount_user_confirmation": "对应当前位置，之后未移动",
+    "current_calibration_source": "/home/ouc/hjd/biaoding/bag/lidar_zed2i外参/left/result.yaml",
+    "current_calibration_sha256": "a4df7e4c878ab01322b18f3a5061b2202c768d4e4379bcc993443a404811ebfc",
+    "applied_base_from_camera_optical": [
+      [
+        0.037408915714802815,
+        0.026968330397190265,
+        0.9989360751222425,
+        0.18725143692477933
+      ],
+      [
+        -0.9992918948041564,
+        -0.003026897759847047,
+        0.0375039580400533,
+        0.06740568615856077
+      ],
+      [
+        0.00403509649964473,
+        -0.9996317057024247,
+        0.026836001019137523,
+        0.2980276263436753
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "independent_calibration_accuracy_verified": false,
+    "calibration_deployment": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/summary.json",
+    "historical_unverified_TF": {
+      "base_link<-zed2i_camera_center": {
+        "translation": [
+          0.071,
+          -0.0009,
+          0.303
+        ],
+        "quaternion_xyzw": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "base_link<-zed2i_left_camera_optical_frame": {
+        "translation": [
+          0.06099999999999999,
+          0.0591,
+          0.303
+        ],
+        "quaternion_xyzw": [
+          0.5,
+          -0.4999999999999999,
+          0.5,
+          -0.5000000000000001
+        ]
+      },
+      "base_link<-laser_link": {
+        "translation": [
+          -0.011,
+          0.0035,
+          0.451
+        ],
+        "quaternion_xyzw": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    }
   },
   "latest_physical_integration": {
     "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
@@ -1690,40 +1728,47 @@
   },
   "last_goal_turn_progress": {
     "classification": "progress",
-    "task": "Restored genuine live localization output after CAN-watchdog bridge exit, retained map/TSDF/1492-point history, verified real semantic overlay and clarified semantic source status.",
+    "task": "Applied the confirmed camera calibration and verified a fresh sensor/map/navigation/display session.",
+    "evidence": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/summary.json",
     "goal_complete": false,
     "consecutive_no_progress_turns": 0,
-    "robot_motion_issued": false,
-    "evidence": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/summary.json",
-    "next_task": "Current display request resolved. Continue broader goal only within pending explicit candidate-variant choice, actual local passive capture results and author/venue information. Those independent input constraints remain unchanged; this source recovery does not establish method efficacy."
+    "robot_motion_issued": false
   },
   "live_dashboard_current": {
     "url": "http://127.0.0.1:8766/",
     "post_pair_check": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/post_pair_display_state.json",
-    "trajectory_points": 1492,
-    "displayed_semantic_objects": 2,
+    "trajectory_points": 1,
+    "displayed_semantic_objects": 4,
     "pose_and_all_sources_fresh_at_check": true,
     "semantic_display_is_policy_independent": true,
-    "latest_ui_verification": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/semantic_status_browser.json",
+    "latest_ui_verification": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/browser_verification.json",
     "browser_verification": "/home/ouc/nso_robot/analyses/dashboard_entry_refresh_20261108/browser_verification.json",
     "legacy_entry_auto_selection": true,
     "stale_trajectory_visible_as_history": true,
     "pose_state_poll_hz": 2,
     "semantic_current_age_limit_s": 10,
-    "semantic_display_scope": "YOLOE current measured-visible-surface projections; unverified classes/extrinsics; no persistent object identity",
+    "semantic_display_scope": "Actual YOLOE visible-depth projections using Nov06 calibration, confirmed for the current mount. Class correctness and independent geometric accuracy remain unverified.",
     "robot_policy_changed": false,
     "entry_refresh_publication_receipt": "/home/ouc/nso_robot/analyses/dashboard_entry_refresh_20261108/publication_receipt.json",
     "entry_refresh_published_head": "a8e3540b9143f272134bae8550f3d76f41303d26",
     "last_checked_unix_s": 1794070284.2741983,
-    "latest_source_recovery": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/summary.json",
+    "latest_source_recovery": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/summary.json",
     "pose_fresh_at_latest_check": true,
     "last_source_outage_reason": "CAN watchdog exit of odometry/TF bridge; lidar/matcher stayed live; same-config bridge restored",
-    "semantic_source_state_distinguished_from_empty_detection": true
+    "semantic_source_state_distinguished_from_empty_detection": true,
+    "source_recovery_publication_receipt": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/publication_receipt.json",
+    "source_recovery_published_head": "79d05f5e357fa89cc8af65500e4ff417e3db0f2b",
+    "running": true,
+    "last_runtime_observation": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/summary.json",
+    "latest_runtime_state": "Fresh calibrated session. The previous 1492-point trajectory is preserved in its prior session and is not loaded here.",
+    "camera_extrinsics_loaded": true
   },
   "localization_runtime_current": {
-    "profile": "original_default_keyframes_CAN_control_fixed_SE2_coordinate_alignment",
+    "profile": "original_default_keyframes_CAN_control_fresh_calibrated_epoch",
+    "runtime_state": "running",
     "bridge": {
-      "pid": 1405987,
+      "name": "csm_bridge",
+      "pid": 486253,
       "argv": [
         "/usr/bin/python3",
         "-s",
@@ -1732,38 +1777,24 @@
         "--control-velocity-source",
         "can_feedback",
         "--can-interface",
-        "can0",
-        "--pose-topic",
-        "/nso_csm/pose_stamped",
-        "--expected-caller",
-        "/nso_csm/matcher",
-        "--source-frame",
-        "odom",
-        "--alignment-json",
-        "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/live_deployment/restore_alignment.json"
+        "can0"
       ],
-      "replaced_bridge_pid": 1080735,
+      "started_unix_s": 1794123449.6442347,
       "source_sha256": "e5a093420fac6c79b0fab3a5c17cc6b62fd7c774a060a019999871e3d602f144",
-      "alignment_sha256": "1f1777d476dbea3057c4a330c68d59e27d655e584680470341090d968fa95f00",
-      "active_matcher": "/nso_csm/matcher",
-      "keyframe_thresholds": {
-        "linear_m": 0.1,
-        "angular_rad": 0.17453292519943295
-      },
-      "control_velocity_source": "can_feedback",
-      "scope": "Restore uninterrupted original matcher/default keyframes; one fixed same-scan coordinate alignment preserves current map/TSDF epoch after the diagnostic. No output smoothing or source stamp changes.",
-      "previous_pid": 1084227,
-      "last_same_epoch_restart": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/restart_receipt.json"
+      "alignment_sha256": null,
+      "control_velocity_source": "can_feedback"
     },
-    "live_verification": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/live_deployment/restoration_verification.json",
-    "alignment": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/live_deployment/restore_alignment.json",
-    "zero_keyframe_shadow_retired": true,
-    "original_matcher_pid": 1000976,
-    "map_pid": 1000978,
-    "reconstruction_pid": 1000951,
+    "alignment": null,
     "source_stamps_preserved": true,
     "physical_accuracy_verified": false,
-    "restart_note": "During this existing map/TSDF epoch use the recorded bridge argv/alignment if restarting the bridge; default launch arguments omit the explicit CAN source and fixed coordinate alignment. Do not silently reuse this alignment in a fresh matcher/map epoch."
+    "original_matcher_pid": 486342,
+    "map_pid": 486343,
+    "reconstruction_pid": 486623,
+    "recorded_process_ids_are_historical": false,
+    "source_epoch_start_unix_s": 1794123449.6469789,
+    "live_verification": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/sensor_verification.json",
+    "restart_note": "Fresh calibrated epoch. Do not reuse Nov07 fixed SE2 alignment or old pose/map history. The current bridge uses CAN velocity and original CSM pose without alignment.",
+    "previous_session_state": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/previous_session_state.json"
   },
   "prior_physical_integrations": [
     {
@@ -2087,11 +2118,11 @@
     }
   },
   "post_publication_local_checkpoint": {
-    "head": "6a042d454ffbc642f44c8d30ed0753396676e76d",
-    "published_context_is_precommit_snapshot": true,
-    "receipt": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/portability_publication_receipt.json",
-    "no_new_field_trial": true,
-    "variant_implemented": false
+    "updated_unix_s": 1794070402.0654325,
+    "published_head": "79d05f5e357fa89cc8af65500e4ff417e3db0f2b",
+    "publication_receipt": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/publication_receipt.json",
+    "scope": "Dashboard source recovery and semantic source status only. Eight files readback-verified; draft PR1 unchanged in submission/merge state.",
+    "previous_head": "6a042d454ffbc642f44c8d30ed0753396676e76d"
   },
   "focused_submission_candidate": {
     "directory": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107",
@@ -2145,5 +2176,43 @@
     "publication_status": "published_verified",
     "publication_head": "6a042d454ffbc642f44c8d30ed0753396676e76d",
     "publication_receipt": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/portability_publication_receipt.json"
+  },
+  "last_completed_goal_progress": {
+    "classification": "progress",
+    "task": "Restored genuine live localization output after CAN-watchdog bridge exit, retained map/TSDF/1492-point history, verified real semantic overlay and clarified semantic source status.",
+    "goal_complete": false,
+    "consecutive_no_progress_turns": 0,
+    "robot_motion_issued": false,
+    "evidence": "/home/ouc/nso_robot/analyses/dashboard_bridge_recovery_20261108/summary.json",
+    "next_task": "Current display request resolved. Continue broader goal only within pending explicit candidate-variant choice, actual local passive capture results and author/venue information. Those independent input constraints remain unchanged; this source recovery does not establish method efficacy.",
+    "publication_head": "79d05f5e357fa89cc8af65500e4ff417e3db0f2b"
+  },
+  "pending_input_blocked_audit": {
+    "condition": "pending_offline_method_choice_local_privileged_capture_and_author_information",
+    "checked_unix_s": 1794070540.6094792,
+    "consecutive_no_progress_goal_turns": 3,
+    "previous_goal_turn_classification": "no_progress",
+    "proposal_status": "proposed_not_implemented_or_enabled_awaiting_user_direction",
+    "capture_01_exists": false,
+    "live_capture_handles": [],
+    "author_status": "draft_not_submitted; author and journal data pending",
+    "genuine_impasse": "Authorized independent manuscript, unchanged-policy diagnosis, portable reproduction and dashboard tasks are complete. Next informative method variant needs the explicit user choice required by architecture fidelity; raw packet evidence needs local privileged capture; author-specific submission work needs author details. No active job to poll.",
+    "robot_motion_issued": false,
+    "blocked_threshold_satisfied": true,
+    "goal_status_request": "blocked"
+  },
+  "network_ros_handoff": {
+    "path": "/home/ouc/nso_robot/analyses/network_ros_handoff_20261108/handoff.json",
+    "reference": "/home/ouc/nso_robot/docs/reference/robot_ros_peer_20261108.md",
+    "current_wifi_ip": "192.168.31.216",
+    "current_lidar_host_ip": "192.168.1.125",
+    "lidar_device_reachable_and_UDP_received": true,
+    "NSO_master_unaffected_by_wifi_IP": true,
+    "post_reboot_NSO_stack_running": true,
+    "calibration_candidate_found": true,
+    "current_mount_confirmation_pending": false,
+    "calibration_applied": true,
+    "current_mount_confirmed": true,
+    "calibration_deployment": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/summary.json"
   }
 }

@@ -127,7 +127,7 @@
       else if(sem.status&&sem.status.startsWith('waiting'))msg='等待语义数据与坐标变换';
       else if(m.frame!=='map'||sem.frame!=='map')msg='语义与地图坐标系不同';
       else if(!Array.isArray(sem.objects)||!sem.objects.length)msg=sem.status==='ok'?(isFresh('semantics',10)?'YOLOE · 本帧未检测到可投影语义目标':'语义观测已过期'+ageText):'等待语义数据';
-      else {const current=sem.objects.filter(semanticCurrent).length;msg=`YOLOE · ${current} 个近期观测`+(current<sem.objects.length?` / ${sem.objects.length-current} 个历史观测`:'')+' · '+formatTime(sem.stamp)+' · 可见表面投影，外参待校准';}
+      else {const current=sem.objects.filter(semanticCurrent).length;msg=`YOLOE · ${current} 个近期观测`+(current<sem.objects.length?` / ${sem.objects.length-current} 个历史观测`:'')+' · '+formatTime(sem.stamp)+' · 可见表面投影，'+(sem.camera_extrinsics_loaded===true?'已载入标定外参':'外参待校准');}
     }
     $('semantic-status').textContent=msg;
     if(!poseFresh){ctx.fillStyle='#d28b49';ctx.fillText('定位未更新 · 虚线为历史轨迹',12,h-5);}else if(state.pose&&!sameFrame){ctx.fillStyle='#d28b49';ctx.fillText('位置与地图坐标系不同，暂不叠加',12,h-5);}

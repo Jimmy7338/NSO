@@ -1,10 +1,13 @@
 """Pure offline overlay checks: no ROS, sockets, camera, or worker processes."""
 import importlib.util
+import hashlib
 import json
 import math
 from pathlib import Path
 import tempfile
 import unittest
+import numpy as np
+from types import SimpleNamespace
 
 PATH = Path(__file__).parents[1]/'runtime/dashboard_overlay_server.py'
 spec = importlib.util.spec_from_file_location('overlay', PATH)
@@ -105,6 +108,37 @@ class OverlayTests(unittest.TestCase):
             result = self.overlay.snapshot({})['semantics']
             self.assertEqual(result['objects'], [])
             self.assertFalse(result['freshness']['fresh'])
+
+    def test_calibration_requires_source_hash_and_actual_matching_camera_TF(self):
+        source = Path(self.directory.name)/'left.yaml'
+        source.write_text('actual calibration source')
+        receipt = Path(self.directory.name)/'calibration.json'
+        expected = np.eye(4)
+        expected[:3, 3] = [.2, .06, .3]
+        row = dict(schema='nso.camera_mount_tf_verification.v1', parent_frame='base_link',
+                   camera_frame='zed2i_left_camera_optical_frame',
+                   source_yaml=str(source), source_yaml_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
+                   expected_base_from_camera_optical=expected.tolist())
+        receipt.write_text(json.dumps(row))
+        loaded = module.camera_calibration_metadata(receipt, expected)
+        self.assertTrue(loaded['camera_extrinsics_loaded'])
+        self.assertFalse(loaded['camera_extrinsics_verified'])
+        wrong = expected.copy(); wrong[0, 3] += .01
+        self.assertFalse(module.camera_calibration_metadata(receipt, wrong)['camera_extrinsics_loaded'])
+        self.assertFalse(module.camera_calibration_metadata(receipt)['camera_extrinsics_loaded'])
+        source.write_text('changed calibration')
+        rejected = module.camera_calibration_metadata(receipt, expected)
+        self.assertFalse(rejected['camera_extrinsics_loaded'])
+        self.assertEqual(rejected['camera_calibration_status'], 'calibration_source_hash_mismatch')
+
+    def test_camera_rigid_matrix_preserves_full_optical_rotation(self):
+        transform = SimpleNamespace(translation=SimpleNamespace(x=1., y=2., z=3.),
+                                    rotation=SimpleNamespace(x=0., y=0., z=math.sqrt(.5), w=math.sqrt(.5)))
+        matrix = module.rigid_matrix(transform)
+        self.assertTrue(np.allclose(matrix @ [1, 0, 0, 1], [1, 3, 3, 1]))
+        transform.rotation.w = 2.
+        with self.assertRaises(ValueError):
+            module.rigid_matrix(transform)
 
 
 if __name__ == '__main__':

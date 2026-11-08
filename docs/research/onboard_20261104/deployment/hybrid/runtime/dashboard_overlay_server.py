@@ -3,6 +3,7 @@
 import argparse
 from collections import deque
 import copy
+import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import math
@@ -14,6 +15,56 @@ from urllib.parse import urlsplit
 from urllib.request import urlopen
 
 ASSETS = Path(__file__).parent / 'dashboard'
+
+
+def camera_calibration_metadata(receipt_path, actual_matrix=None):
+    """Report loaded calibration only for a source-hashed receipt and matching TF."""
+    result = dict(camera_extrinsics_loaded=False, camera_extrinsics_verified=False,
+                  camera_calibration_status='not_configured')
+    if receipt_path is None:
+        return result
+    try:
+        import numpy as np
+        receipt = json.loads(Path(receipt_path).read_text())
+        if (receipt.get('schema') != 'nso.camera_mount_tf_verification.v1' or
+                receipt.get('parent_frame') != 'base_link' or
+                receipt.get('camera_frame') != 'zed2i_left_camera_optical_frame'):
+            raise ValueError('unsupported_calibration_receipt_frames_or_schema')
+        source = Path(receipt['source_yaml'])
+        if hashlib.sha256(source.read_bytes()).hexdigest() != receipt['source_yaml_sha256']:
+            raise ValueError('calibration_source_hash_mismatch')
+        expected = np.asarray(receipt['expected_base_from_camera_optical'], dtype=float)
+        if (expected.shape != (4, 4) or not np.isfinite(expected).all() or
+                not np.allclose(expected[3], [0, 0, 0, 1], atol=1e-8, rtol=0) or
+                not np.allclose(expected[:3, :3].T @ expected[:3, :3], np.eye(3), atol=1e-6, rtol=0) or
+                not np.isclose(np.linalg.det(expected[:3, :3]), 1., atol=1e-6, rtol=0)):
+            raise ValueError('invalid_expected_calibration_matrix')
+        actual = np.asarray(actual_matrix, dtype=float)
+        if actual.shape != (4, 4) or not np.isfinite(actual).all():
+            raise ValueError('camera_TF_unavailable')
+        matched = bool(np.allclose(actual, expected, atol=1e-6, rtol=0))
+        result.update(camera_extrinsics_loaded=matched,
+                      camera_calibration_status='loaded_TF_matches' if matched else 'camera_TF_mismatch',
+                      camera_calibration_receipt=str(receipt_path),
+                      camera_calibration_max_matrix_error=float(np.max(np.abs(actual-expected))))
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        result['camera_calibration_status'] = str(exc)
+    return result
+
+
+def rigid_matrix(transform):
+    import numpy as np
+    q = transform.rotation
+    x, y, z, w = q.x, q.y, q.z, q.w
+    if not math.isclose(x*x+y*y+z*z+w*w, 1., abs_tol=1e-6):
+        raise ValueError('invalid_camera_TF_quaternion')
+    result = np.eye(4)
+    result[:3, :3] = [[1-2*(y*y+z*z), 2*(x*y-z*w), 2*(x*z+y*w)],
+                       [2*(x*y+z*w), 1-2*(x*x+z*z), 2*(y*z-x*w)],
+                       [2*(x*z-y*w), 2*(y*z+x*w), 1-2*(x*x+y*y)]]
+    t = transform.translation
+    result[:3, 3] = [t.x, t.y, t.z]
+    return result
 
 
 def freshness(stamp, now, limit):
@@ -137,7 +188,7 @@ class Overlay:
             return dict(status='unavailable', reason=str(exc), frame='map', objects=[],
                         freshness=dict(fresh=False, age_s=None), camera_extrinsics_verified=False)
 
-    def snapshot(self, upstream, current_transform=None):
+    def snapshot(self, upstream, current_transform=None, camera_calibration=None):
         now = self.clock()
         result = copy.deepcopy(upstream)
         with self.lock:
@@ -167,6 +218,7 @@ class Overlay:
             result['semantics'] = dict(status='waiting_for_TF', frame='map', objects=[],
                                       freshness=dict(fresh=False, age_s=None))
         result['freshness']['semantics'] = result['semantics']['freshness']
+        result['semantics'].update(camera_calibration or camera_calibration_metadata(None))
         result['trajectory_source'] = dict(sampler_hz=5, storage_frame='odom', display_frame='map',
                                          maximum_points=5000, seed=seed)
         result['errors'] = list(result.get('errors', [])) + errors
@@ -187,6 +239,7 @@ def main():
     parser.add_argument('--upstream', default='http://127.0.0.1:8765')
     parser.add_argument('--output', required=True)
     parser.add_argument('--semantic-state', required=True)
+    parser.add_argument('--camera-calibration-receipt', type=Path)
     args = parser.parse_args()
     if urlsplit(args.upstream).hostname not in ('127.0.0.1', 'localhost'):
         raise ValueError('upstream must be localhost')
@@ -229,7 +282,15 @@ def main():
                 if route == '/api/state':
                     payload, _ = fetch(route)
                     correction = buffer.lookup_transform('map', 'odom', rospy.Time(0), rospy.Duration(.05))
-                    payload = json.dumps(overlay.snapshot(json.loads(payload), tf_planar(correction.transform)), allow_nan=False).encode()
+                    camera_matrix = None
+                    if args.camera_calibration_receipt is not None:
+                        try:
+                            camera_tf = buffer.lookup_transform('base_link', 'zed2i_left_camera_optical_frame', rospy.Time(0), rospy.Duration(.05))
+                            camera_matrix = rigid_matrix(camera_tf.transform)
+                        except Exception:
+                            pass  # Unavailable camera TF must never claim loaded calibration.
+                    calibration = camera_calibration_metadata(args.camera_calibration_receipt, camera_matrix)
+                    payload = json.dumps(overlay.snapshot(json.loads(payload), tf_planar(correction.transform), calibration), allow_nan=False).encode()
                     kind = 'application/json'
                 elif route in ('/api/camera.jpg', '/api/map.png', '/api/cloud.json'):
                     payload, kind = fetch(route)

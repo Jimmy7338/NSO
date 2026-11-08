@@ -1,0 +1,138 @@
+{
+  "new_epoch": true,
+  "old_alignment_reused": false,
+  "no_actuator": true,
+  "env": {
+    "ROS_MASTER_URI": "http://127.0.0.1:11382",
+    "ROS_HOSTNAME": "127.0.0.1",
+    "ROS_IP": "127.0.0.1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "source_workspace": "/home/ouc/scout_nav/devel/setup.bash",
+  "started": [
+    {
+      "name": "master",
+      "pid": 485963,
+      "argv": [
+        "/opt/ros/noetic/bin/roscore",
+        "-p",
+        "11382"
+      ],
+      "started_unix_s": 1794123392.3849
+    },
+    {
+      "name": "camera",
+      "pid": 486004,
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_camera_neural.launch"
+      ],
+      "started_unix_s": 1794123393.5913482
+    },
+    {
+      "name": "csm_bridge",
+      "pid": 486253,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/csm_odometry_bridge.py",
+        "--control-velocity-source",
+        "can_feedback",
+        "--can-interface",
+        "can0"
+      ],
+      "started_unix_s": 1794123449.6442347
+    },
+    {
+      "name": "sensors",
+      "pid": 486254,
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_sensors_csm.launch"
+      ],
+      "started_unix_s": 1794123449.6469789
+    },
+    {
+      "name": "sensor_bridge",
+      "pid": 486257,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+        "--run",
+        "--localization-source",
+        "lidar_csm",
+        "--no-self-mask"
+      ],
+      "started_unix_s": 1794123449.6497006
+    },
+    {
+      "name": "navigation",
+      "pid": 486482,
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom"
+      ],
+      "started_unix_s": 1794123484.8094196
+    },
+    {
+      "name": "dashboard",
+      "pid": 486483,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/live_dashboard.py",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_calibrated_20261108",
+        "--port",
+        "8765",
+        "--no-self-mask"
+      ],
+      "started_unix_s": 1794123484.8127494
+    },
+    {
+      "name": "dashboard_overlay",
+      "pid": 486489,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_overlay_server.py",
+        "--port",
+        "8766",
+        "--upstream",
+        "http://127.0.0.1:8765",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_calibrated_20261108",
+        "--semantic-state",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_calibrated_20261108/semantic_state.json",
+        "--camera-calibration-receipt",
+        "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/tf_verification.json"
+      ],
+      "started_unix_s": 1794123484.8188431
+    },
+    {
+      "name": "dashboard_semantic",
+      "pid": 486494,
+      "argv": [
+        "/home/ouc/nso_robot/envs/science312/bin/python",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_semantic_worker.py",
+        "--input",
+        "/home/ouc/nso_robot/experiments/live_dashboard_calibrated_20261108/latest_display_frame.npz",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_calibrated_20261108/semantic_state.json",
+        "--interval",
+        "5"
+      ],
+      "started_unix_s": 1794123484.8292665
+    }
+  ]
+}
