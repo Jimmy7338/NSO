@@ -1,0 +1,7 @@
+# Offline budget evidence and authorized duration profile
+
+Earlier C40 and S40 physical episodes completed; G remained externally interrupted. This package adds offline counterfactual selections using saved actual observations and one fresh post-reboot packet. Across all 15 frozen-state/budget groups, G and S select the same top1. These dependent offline states do not establish actual coverage or semantic gains from longer physical runs. Full selections and negative/null findings are retained.
+
+The longer-duration profile is a proposed candidate with eight passing no-motion tests. The user subsequently authorized 96 actions with a 20 minute limit. Deployment receipts and the actual candidate sources are now included. The profile is deployed pending a physical terminal result; default 600 seconds, research policy and communication TTL are retained. Planned and frozen protocols do not establish an executed or successful outcome.
+
+Recovery files are metadata for the restored sensor epoch and read-only CAN observations. No robot action is performed by this publication. Original RGB-D, full sensor NPZ and logs are omitted. The small fresh canonical semantic NPZ is included for audit; historical source hashes do not replace the missing raw inputs. Full perception replay still requires separately retained actual observations. The controlled efficacy study is incomplete and the paper remains a working draft.
