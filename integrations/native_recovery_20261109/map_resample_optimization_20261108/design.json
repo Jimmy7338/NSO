@@ -1,0 +1,32 @@
+{
+  "status": "isolated_candidate_design_not_deployed_no_full_benchmark",
+  "created_unix_s": 1794141843.1531863,
+  "reference_source": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/joint_observation.py",
+  "reference_source_sha256": "eab243c06eff3491fe7b57190cfec306bbe7917ef44d723b137997584d7aa194",
+  "reference_function_lines": [
+    103,
+    155
+  ],
+  "algorithm": "Replace dy/dx Python iteration over full output grids with bounded tile x offset broadcasting, boolean all/any aggregation.",
+  "unchanged": [
+    "validation expressions and exceptions for ordinary valid inputs",
+    "float64 transform inverse and arithmetic order within each SAT comparison",
+    "floor integer cell indices and original reversed destination y rows",
+    "strict inequalities epsilon1e-10 and positive-area SAT tests",
+    "clipped source indexing combined with explicit inside mask",
+    "occupied only source100; free only all overlapping cells inbounds and exactly0; intermediate1..99/unknown/outside stayunknown unless occupied wins",
+    "output shape and int8 dtype"
+  ],
+  "risks": [
+    "No measured speedup yet; existing function already uses per-offset NumPy vectorization. More broadcasting may increase memory traffic and be slower.",
+    "Tile has at most1million cell-offset entries for ordinary nonemptyoffset sets, but peak live intermediates exceed that one array. Offset grids themselves still scale with resolution ratio.",
+    "No FMA, angle snapping, approximate transform cache, nearest sampling, GPU or changed grid semantics.",
+    "Full all-real-source equality and memory/time bench deferred until root reports mission terminal. Tiny synthetic math checks alone do not authorize deployment."
+  ],
+  "deferred_validation": [
+    "All saved B1_C source map arrays/transforms with exactarray equality and dtype/shape/hash checks.",
+    "Rotations, translations,near-touching SAT edges,non-squaremaps,unknown/intermediateprobabilities,out-of-bounds,and allowedsmall transformtolerances.",
+    "Single-thread bounded benchmark baseline vs candidate plus peakmemory; no timing trial during robot run.",
+    "If unequal, retain failure and do not apply."
+  ]
+}
