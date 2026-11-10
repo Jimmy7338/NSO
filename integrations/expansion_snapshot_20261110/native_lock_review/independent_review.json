@@ -1,0 +1,31 @@
+{
+  "status": "bounded independent offline review; not deployment approval",
+  "blocking_new_data_races_found": [],
+  "ownership_assessment": "SPSC triple-buffer ownership is coherent: producer only writes back; consumer only reads front; atomic middle exchanges transfer relinquished slots with acq_rel happens-before. Separate atomic flags exclude concurrent producer-producer and consumer-consumer access. Dirty load followed by exchange can acquire a newer publication safely because only producer can dirty the middle.",
+  "tests": "Independently reran candidate/run_validation.sh successfully: attended tests, timing tests, 200000 coherent publications with951636 reads, paused publisher TTL/ownership/source/boundary tests. Original contention reproduction fault6 at1065122ns.",
+  "limits": [
+    "Stress uses synthetic snapshot clocks, not scheduling qualification; no TSAN pass.",
+    "No deterministic fail-between-send-check-and-SDK-entry test.",
+    "No deterministic sender preemption after sample followed by resume before SDK entry: old sample may exceed TTL before sending."
+  ],
+  "existing_races": [
+    {
+      "file": "candidate/scout_radius_command_timeout_v1.hpp",
+      "line": 216,
+      "description": "Fault checked then SDK called at218. Concurrent fail/shutdown after check may allow one old nonzero send after latch. Same pattern exists in original; not newly introduced."
+    },
+    {
+      "file": "candidate/scout_radius_command_timeout_v1.hpp",
+      "line": 218,
+      "description": "No freshness recheck at actual SDK entry; preemption after sample can delay send past100ms. Existing architecture limitation; software tests do not prove a physical deadline."
+    }
+  ],
+  "semantic_changes": [
+    "Paused producer retains previous completed command until original TTL rather than fault6 after1ms lock wait. This is substantive stopping-profile change.",
+    "Producer/consumer monotonicity now separate rather than shared timestamp order.",
+    "lock_acquired_ns means ownership acquisition rather than mutex acquisition."
+  ],
+  "numeric_contract": "80ms wall source age,100ms input TTL,40ms tick gap,20ms cadence and speed bounds unchanged; source contract remains before submit.",
+  "recommendation": "No concrete new triple-buffer race found in bounded review. Require explicit stopping-profile acceptance before deployment; do not claim equivalent stop interleavings or firmware/physical-stop validation.",
+  "robot_ROS_or_SDK_writes": false
+}

@@ -1,0 +1,29 @@
+# Native lock review (offline, no deployment)
+
+Observed run: sdk_confidence_S40_20261110_01, 48.3967 s / 0.4013 m, native_driver_fault 6. Supplied first-fault timestamps give 1,032,198 ns sample duration; lock_acquired=-1. This proves the timed lock attempt failed, not who held the lock or how long that thread ran. The ~20.193 ms wake interval does not identify a late sender as the trigger. try_lock_for may return after its requested duration because of scheduling and may fail spuriously; this trace alone cannot prove uninterrupted callback ownership.
+
+## Exact critical sections
+
+Deployed scout_radius_command_timeout_v1.hpp:
+- submit(), lines 107–110: blocking mutex acquisition, submit_locked(command, supplied now), unlock.
+- submit_live(), lines 111–114: blocking acquisition, steady_clock::now(), submit_locked(), unlock. Validation checks six finite values, four forbidden axes, speed bounds, first-zero and input TTL; updates last_seen, armed, desired pair and last_input. Atomic fault loads/CAS also occur under this lock.
+- sample(), lines 115–119: immediate try-lock, sample_locked(), unlock. Not the PeriodicSender runtime path.
+- sample_live_with(), lines 133–140: timed acquisition (1 ms), instrumentation steady_clock::now(), clock() steady_clock::now(), sample_locked(), unlock. sample_locked checks shared monotonic clock state, fault, 40 ms sample gap and 100 ms TTL; updates last_tick and last_seen.
+
+No ROS, source-age check, SDK transport, sleep, file output, heap allocation or explicit blocking syscall appears in the successful lock body. Clock reads are inside the lock; their implementation/scheduling can delay a holder. Preemption anywhere inside the short callback critical section is plausible. Blocking clock internals, scheduler delay and spurious timed-lock failure remain alternatives. Sender is the sole sampler; callback is the other normal lock contender. radius_driver_node.cpp validates publisher/session/80 ms wall age before submit_live; spinOnce serializes callbacks. Stop callback only atomically latches fault. SDK send and timing-ring append occur after unlock. Existing timing captures no callback ownership/scheduling.
+
+## Reproducer and prior evidence
+
+reproduce.cpp uses the declared friend test seam to pause a lock holder with a promise, invokes the actual deployed sample_live, and verifies fault=6, unavailable lock timestamp, zero result and permanent latch. reproduce.txt records the result. It demonstrates the mechanism under deterministic ownership delay; it does not reproduce or diagnose the actual scheduler event. No ROS/SDK/robot calls occur.
+
+Prior validation_v2.json reports 2/2 tests, synthetic lock failure, exact 40 ms boundary/+1 ns and first-fault preservation. timing_test.cpp injects a failed waiter, so that test does not cover real callback preemption. watchdog_provenance.json identifies 40 ms/100 ms/80 ms as custom software settings; hardware watchdog timing is unverified. This review retains all those numeric settings.
+
+## Smallest useful fix to prepare for review
+
+Moving validation/clock work outside the mutex reduces exposure but cannot eliminate preemption while copying two doubles/timestamp. Moving a clock reading before lock can also introduce false clock regression and refresh a delayed input incorrectly; do not present that as a complete repair. Priority inheritance or real-time scheduling is more invasive and does not establish nonblocking handoff.
+
+The next reviewable concurrency repair is single-producer/single-consumer preallocated triple-buffer publication, with ownership swapped by lock-free atomics. Producer validates the complete source stream (including first-zero and successive-input 100 ms expiry) and publishes an immutable {v,w,acceptance_steady_ns,sequence} snapshot only when complete. Sender alone owns sample clock progression/40 ms tick state and samples the last completely published snapshot without waiting for the producer. If the producer is paused, old acceptance time is retained and the existing >=100 ms expiry latches zero; a paused producer cannot renew freshness. External, invalid-command, transport and shutdown faults retain the atomic first-fault latch and pre-send recheck. No heap allocation or shared_ptr atomic publication (which can internally lock) in this path. Plain double buffering or a seqlock over non-atomic fields is insufficient: a writer can overwrite the reader's slot, causing a C++ data race; unbounded retry can also stall the sender.
+
+This is a proposed synchronization change, not a ready patch. It deliberately makes lock_contention unreachable by removing shared-lock ownership from sampling, rather than increasing its timeout or suppressing a fault from a failed lock. That changes an engineering fault condition and must be recorded explicitly. Stream/input and sender clocks must become independently monotonic because the former shared last_seen cannot be accessed by both owners. Validate assumptions that exactly one producer and one consumer exist; assert target atomics are lock-free, otherwise reject the candidate before robot use. Do not add queue-overflow, candidate filters or research stop rules.
+
+Required bounded offline checks for that candidate: publisher paused before/after swap, reader paused while writer publishes repeatedly, complete v/w/time coherence, first nonzero rejection even if zero is superseded before first sample, input gap expiry even if a later message arrives, exact 40 ms and 100 ms boundaries, 80 ms source-age unchanged, invalid/source/stop faults racing with publish/send, and zero-after-fault behavior. First SDK attempt stays zero. Preserve existing send-boundary race semantics: an asynchronously arriving stop after final fault check cannot retract an already entered SDK call. Triple buffering is larger than a clock-hoist patch but addresses the actual scheduling coupling. No offline result proves physical stop latency.
