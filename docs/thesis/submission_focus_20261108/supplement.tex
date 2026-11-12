@@ -5,11 +5,11 @@
 \setlength{\emergencystretch}{3em}
 \begin{document}
 \title{Supplement: Correctable Category Priors for Budget-Constrained Active Observation}
-\author{}\date{Anonymous research draft, 8 November 2026}\maketitle
+\author{}\date{Anonymous research draft, 12 November 2026}\maketitle
 \section*{Evidence scope}
 The main paper's controlled two-template policy, current-source joint-exploration variant and physical adapters are distinct implementations. The following deterministic results share one Q0 scene context with two related arrangements. Trajectories, seeds, configurations and checkpoints are not independent environments. All 24 matrix trajectories are included; the two-room diagnostic and post-hoc controls are separate related analyses. New current-source experiments are not recovered historical Windows experiment inputs.
 
-Physical pilot outcomes, including both failed S returns and the calibrated S24 map-drift limitation, remain in main-paper Section 7; exact source records are indexed in the accompanying evidence index.
+Physical pilot outcomes, including failed returns, the calibrated S24 map-drift limitation, and the 10--12 November unknown-space episodes, remain in main-paper Section 7. The later episodes use separately declared sensor and execution profiles and are not additional controlled two-template pairs.
 \renewcommand{\thetable}{S\arabic{table}}
 \input{Table8.tex}
 \input{Table9.tex}
@@ -44,5 +44,13 @@ All 25 recorded planning states admit a nonnegative uniform geometric-prior weig
 \includegraphics[width=.90\linewidth]{Q1_curves.pdf}
 \caption{One prospectively fixed Q1 synthetic parent with native G/S/X. Left: observed reachable-cell coverage. Right: reference-visible surface added since the initial frame. G and X coincide exactly; S has a temporary surface deficit before the final gain. Each arm returns after 96 paid actions with no simulated collision. These related trajectories provide no between-scene uncertainty estimate.}\label{fig:Q1}
 \end{figure}
+
+
+\section{Saved-scan physical evidence and execution profiles}
+The 10 November snapshot S40 and 12 November S96 episodes are separate real-robot S trajectories. The S40 record has 40 paid actions, 41 accepted observations and 40 verified ROS primitive arrivals, with a recorded return. The S96 attempt has 60 paid actions, 61 observations and 60 arrivals before interruption on the next goal; no return is recorded. Their CAN distances and wall durations are 6.756875 m/440.470694 s and 11.081836 m/652.883974 s. Zero feedback after stopping is retained for both. The native option-endpoint arrival counter is distinct from the ROS primitive-arrival count.
+
+The cumulative laser estimator uses one archived real scan per accepted RGB-D packet, its own historical laser transform, a fixed 0.2 m planning grid and a 12.5 m-radius measurement region. Finite valid returns are capped at 8 m; a capped/max-range endpoint provides free-ray evidence without a hit. Invalid returns contribute no synthesized evidence. Cell unions include acquired rays and hit endpoints, which can conflict across observations. The S40 and S96 unions increase by 34.32 and 56.20 m$^2$, respectively. The S96 last-scan time is 640.190679 s after its first scan, whereas 652.883974 s is the complete run duration; scan and episode endpoints must not be substituted for each other. These figures provide no independent traversable-space denominator, localization reference or surface accuracy. The accompanying plotting script consumes the evaluated scan curve directly and exports all 61 dependent checkpoints.
+
+The S96 stop was triggered by measured CAN feedback of 0.154 m/s against the strict 0.15 m/s limit. The later 0.05 m/s positive-command profile changes execution clipping while retaining all speed-stop predicates and expiry limits. Its completed S12 record has 12 paid actions, 13 observations and 12 arrivals, with 0.998883 m travel, 152.766800 s duration and recorded return. The subsequent 0.05 m/s S40 attempt was interrupted after 9 paid actions, 10 observations and 9 verified arrivals, with 1.483731 m travel and 136.336224 s duration, without returning. A passive CAN observer recorded a 0.159 m/s maximum feedback velocity despite command frames bounded by 0.05 m/s. Local command-frame observation does not prove controller acceptance or independently measured physical speed. The shorter completion does not establish that the execution fault was resolved. Profile changes and unequal initial observations prevent a matched before/after efficacy claim. The S96 negative fixed-support quality change and failed return remain included.
 
 \end{document}

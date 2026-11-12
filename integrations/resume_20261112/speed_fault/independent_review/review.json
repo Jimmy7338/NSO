@@ -1,0 +1,30 @@
+{
+  "scope": "Independent offline code/test review; no production edits, ROS services, actuator calls or robot operations",
+  "reviewed_at_utc": "2026-11-12T10:24:37.430364+00:00",
+  "verdict": "pass_with_evidence_limits",
+  "candidate_hashes": {
+    "visual_velocity_adapter.py": "6f5aa6fef3917072c142a7b3f6d52d8d036ca9f66221778d981c7d723d445d20",
+    "mission.py": "ffddccd604480fdecb4e8ebe6fa5c096a65be564e40575e5aa2b59b0dfb8c790"
+  },
+  "expected_final_hashes_match": true,
+  "test_count": 55,
+  "test_status": "PASS",
+  "interpreter": "/home/ouc/nso_robot/envs/science312/bin/python",
+  "working_directory": "/home/ouc/nso_robot/analyses/resume_20261112/speed_fault/candidate",
+  "command": "PYTHONPATH=runtime:tests /home/ouc/nso_robot/envs/science312/bin/python -m unittest test_speed_execution_profile test_visual_velocity_adapter test_adapter_control_timing test_adapter_log_sampling test_hybrid_adapter_sources test_correction_reverse_scope test_navigation_reverse_setup.NavigationReverseTests",
+  "test_log": "/home/ouc/nso_robot/analyses/resume_20261112/speed_fault/independent_review/test.log",
+  "review_findings": [
+    "NSO/joint positive command cap changes from .1 to .05 m/s; other mission modes remain .1; this is explicitly declared execution behavior change.",
+    "No candidate generation, scoring or research-engine edits in reviewed two-file patch.",
+    "CAN stop predicates .15 m/s and .45 rad/s and freshness/expiry/stop timings unchanged.",
+    "Reverse authorization and -.05 m/s lower bound unchanged; disabled reverse remains zero; angular command cap .3 unchanged.",
+    "New tests cover .12 proposal clipping, ordinary commands, reverse enable/disable, exact .150/.450 allowed versus recorded .154 rejected, evidence deep copy, expiry, bad caps, mission mode metadata.",
+    "Final candidate fault evidence additionally includes CAN id/full payload and explicitly monotonic timestamp semantics."
+  ],
+  "limitations": [
+    "Offline tests do not prove chassis overshoot fixed or physical trial success.",
+    "Prior S96 interrupted failure must remain preserved and must not be pooled as successful revised-profile evidence.",
+    "MissionReverseLifecycleTests excluded: implementing agent reports three baseline missing-lifecycle-namespace subcase errors reproduced on original source; independent review did not rerun that unrelated failing suite.",
+    "Research policy unchanged does not imply physical execution equivalence with earlier profile."
+  ]
+}

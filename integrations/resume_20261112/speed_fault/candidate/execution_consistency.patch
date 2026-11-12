@@ -1,0 +1,111 @@
+--- a/runtime/visual_velocity_adapter.py
++++ b/runtime/visual_velocity_adapter.py
+@@ -93,6 +93,12 @@
+                for value in ranges)
+ 
+ 
++def validate_maximum_linear(value):
++    if type(value) not in (int, float) or not math.isfinite(value) or not 0 < value <= .1:
++        raise ValueError('maximum_linear_m_s must be finite numeric in (0, .1]')
++    return value
++
++
+ def configuration(cfg):
+     """Validate the contract without importing ROS or opening any socket."""
+     result = dict(master_uri='http://127.0.0.1:11382', can_interface='can0',
+@@ -104,6 +110,8 @@
+                   driver_publisher='/nso_scout_radius_driver_v1',
+                   odom_frame='odom', base_frame='base_link', depth_frame='zed2i_left_camera_optical_frame')
+     result.update(cfg)
++    result.setdefault('maximum_linear_m_s', .1)
++    validate_maximum_linear(result['maximum_linear_m_s'])
+     reverse = result.setdefault('navigation_allow_reverse', False)
+     mission_mode = result.setdefault('mission_mode', None)
+     profile = result.setdefault('duration_profile', STANDARD)
+@@ -171,6 +179,8 @@
+         correction_reverse_authorized=gate.nso_correction_reverse,
+         correction_reverse_active=gate.correction_reverse_active,
+         minimum_linear_m_s=gate.minimum_linear_m_s,
++        maximum_linear_m_s=gate.maximum_linear_m_s,
++        fault_evidence=deepcopy(gate.fault_evidence),
+         driver_connected=gate.driver_connected,
+         driver_status=None if gate.driver is None else dict(code=gate.driver[0],receipt_monotonic=gate.driver[1]),
+         last_control_tick_monotonic=gate.last_tick,
+@@ -187,7 +197,9 @@
+                  odom_frame='odom', base_frame='base_link',
+                  depth_frame='zed2i_left_camera_optical_frame', navigation_source='visual',
+                  navigation_allow_reverse=False, mission_mode=None, nso_correction_reverse=False,
+-                 correction_supervisor='/nso_onboard_supervisor', duration_profile=STANDARD):
++                 correction_supervisor='/nso_onboard_supervisor', duration_profile=STANDARD,
++                 maximum_linear_m_s=.1):
++        self.maximum_linear_m_s = validate_maximum_linear(maximum_linear_m_s)
+         self.duration_profile = validate_duration(duration_s, duration_profile, mission_mode)
+         if not finite(duration_s, proposal_ttl_s, observation_ttl_s):
+             raise ValueError('finite durations required')
+@@ -298,7 +310,13 @@
+                 if self.can_zero_since is None:self.can_zero_since=source
+             else:self.can_zero_since=None
+             if self.ever_armed and (abs(row['v'])>.15 or abs(row['w'])>.45):
+-                self.fail('chassis_speed_feedback_limit')
++                self.fail('chassis_speed_feedback_limit', dict(
++                    can_id='0x221', payload_hex=payload.hex(),
++                    timestamp_semantics='original kernel timestamp converted to host monotonic by receive-only reader',
++                    limits=dict(maximum_abs_v_m_s=.15, maximum_abs_w_rad_s=.45),
++                    source_monotonic=source, receipt_monotonic=receipt,
++                    can_velocity=deepcopy(row), proposal=deepcopy(self.proposal),
++                    can_status=deepcopy(self.can_status)))
+ 
+     def hardware_reason(self, now):
+         for name,row,ttl in [('status',self.can_status,.5),('velocity',self.can_velocity,.15)]:
+@@ -417,7 +435,7 @@
+         # No extra numerical-excess threshold changes admission.
+         # Raw proposals and bounded values remain available in the sampled log.
+         # A new receipt replaces the proposal. No output operation changes it.
+-        self.proposal = dict(v=max(self.minimum_linear_m_s,min(v,.1)), w=max(-.3,min(w,.3)), receipt=receipt,
++        self.proposal = dict(v=max(self.minimum_linear_m_s,min(v,self.maximum_linear_m_s)), w=max(-.3,min(w,.3)), receipt=receipt,
+                              number=self.proposal_count)
+ 
+     def sources_reason(self, now, wall):
+@@ -714,7 +732,7 @@
+     if Path('/proc/sys/kernel/random/boot_id').read_text().strip() != cfg['boot_id']:
+         raise ValueError('boot changed')
+     gate = Gate(cfg.get('duration_s',600.), **{key:cfg[key] for key in
+-        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile']})
++        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile','maximum_linear_m_s']})
+     gate.session_id=session
+     if not args.run:
+         print(json.dumps(dict(status='configuration_validated_only',no_ros_started=True)))
+@@ -869,7 +887,7 @@
+                         'bridge_publisher','proposal_publisher','driver_publisher','odom_frame','base_frame','depth_frame',
+                         'laser_health_topic','navigation_source']},
+         motion_deadline_starts_at_arm=True,pending_deadline_monotonic=pending_deadline,
+-        motion_envelope=dict(max_linear_m_s=.1,max_angular_rad_s=.3,
++        motion_envelope=dict(max_linear_m_s=gate.maximum_linear_m_s,max_angular_rad_s=.3,
+             min_linear_m_s=gate.minimum_linear_m_s,no_reverse=not gate.navigation_allow_reverse,
+             reverse_profile='navigation_setup_reverse_005_v1' if gate.navigation_allow_reverse else None,
+             spatial_limit=None,path_limit=None,angular_travel_limit=None)),indent=2),encoding='utf8')
+--- a/runtime/mission.py
++++ b/runtime/mission.py
+@@ -579,7 +579,10 @@
+         Navfn=rospy.get_param('/nso_visual/move_base/NavfnROS',{}),
+         global_obstacles=rospy.get_param('/nso_visual/move_base/global_costmap/obstacle_layer',{}),
+         local_obstacles=rospy.get_param('/nso_visual/move_base/local_costmap/obstacle_layer',{})))
+-    adapter_cfg=dict(session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
++    execution_max_linear = .05 if args.mode in ('nso', 'joint') else .1
++    execution_profile = ('nso_dwa_linear_consistency_005_v1' if args.mode in ('nso', 'joint')
++                         else 'legacy_linear_010_v1')
++    adapter_cfg=dict(maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
+         duration_s=args.duration,duration_profile=args.duration_profile,mission_mode=args.mode,output_directory=str(output/'adapter'),master_uri=MASTER,
+         navigation_source='lidar_rgbd')
+     if args.nso_correction_reverse:
+@@ -590,7 +593,9 @@
+     save(output/'adapter-config.json',adapter_cfg)
+     adapter_hash=hashlib.sha256((output/'adapter-config.json').read_bytes()).hexdigest()
+     save(output/'authorization.json',dict(source='direct user instruction to continue the recommended experiment; onsite readiness confirmed',
+-        maximum_linear_m_s=.1,maximum_angular_rad_s=.3,duration_s=args.duration,duration_profile=duration_profile,
++        maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,
++        execution_clipping_change="positive adapter cap aligned to declared DWA .05 for nso/joint; stop predicates unchanged",
++        maximum_angular_rad_s=.3,duration_s=args.duration,duration_profile=duration_profile,
+         automatic_reverse=args.navigation_allow_reverse,
+         minimum_linear_m_s=-.05 if args.navigation_allow_reverse else 0.,
+         reverse_scope='navigation_setup_only' if args.navigation_allow_reverse else None,

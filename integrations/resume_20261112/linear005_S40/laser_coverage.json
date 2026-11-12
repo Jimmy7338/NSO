@@ -1,0 +1,472 @@
+{
+  "schema": "nso.laser_coverage_evaluation.v1",
+  "profile": "saved_laser_coverage_v1",
+  "status": "offline_saved_scan_evaluation",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01",
+  "fixed_frame_config": "/home/ouc/nso_robot/analyses/resume_20261112/linear005_S40/configuration.json",
+  "frame_config_sha256": "8eae588e9dab7dd37124d614484ebfff5ed31d6d24a3149ff1b8ccbbf7922969",
+  "planning_from_odom": [
+    [
+      -0.9470768168991823,
+      0.3210070137740181,
+      0.0,
+      36.534077804039796
+    ],
+    [
+      -0.3210070137740181,
+      -0.9470768168991823,
+      0.0,
+      40.972643230709096
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.12447258789516671
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "grid_shape": [
+    400,
+    400
+  ],
+  "resolution_m": 0.2,
+  "ROI": {
+    "center_planning_xy": [
+      40.1,
+      39.900000000000006
+    ],
+    "radius_m": 12.5,
+    "cell_rule": "cell center inside closed circle",
+    "raster_area_m2": 491.2400000000001,
+    "purpose": "Predefined measurement ROI, not a guarantee enclosing all executed trajectories or known traversable environment."
+  },
+  "sensor": {
+    "source": "/scan /lslidar_driver_node laser_link",
+    "cap_m": 8.0,
+    "provenance": "All raw ranges, geometry and source stamps checked against saved ROS1 LaserScan bytes; own-source historical odom_from_laser required.",
+    "invalid": "Nonfinite/nonpositive/outside original range limits skipped; no synthesized rays.",
+    "endpoint": "Native matched-range convention: finite returns clipped at8m, hit only below effective_max−1mm; exact/max boundary is free-only.",
+    "raster": "Native grid_cell + supercover_line between endpoint cells; discretization can include portions/centers beyond exact8m metric radius.",
+    "within_scan_motion": "One historical TF per scan source stamp; recorded scan time_increment=0 does not enable ray deskew."
+  },
+  "area_semantics": "Cumulative observed/free-ray/hit-endpoint evidence unions; free evidence may overlap hit evidence across scans or coarse cells. free_without_ever_hit removes all ever-hit cells, and need not be monotone. Neither quantity is GT free space.",
+  "observation_sampling": "Only one archived real lidar scan per accepted RGBD observation; not every continuously received scan. Sensor/source/phase and capture procedure must be common across pilot arms.",
+  "initial": {
+    "paid_actions": 0,
+    "scan_stamp_ns": 1794479307690616131,
+    "elapsed_since_first_scan_s": 0.0,
+    "observed_union_m2": 49.76000000000001,
+    "free_evidence_union_m2": 47.48000000000001,
+    "hit_endpoint_union_m2": 5.480000000000001,
+    "free_without_ever_hit_m2": 44.28000000000001,
+    "free_hit_conflict_cells": 80,
+    "outside_ROI_unique_raster_cells": 0,
+    "outside_grid_unique_cells": 0,
+    "laser_origins_outside_ROI": 0,
+    "beam_endpoints_outside_ROI": 0,
+    "valid_rays": 1885,
+    "invalid_rays_skipped": 115,
+    "finite_over8m_clipped_free_only": 169,
+    "new_observed_vs_firstscan_m2": 0.0,
+    "new_free_evidence_vs_firstscan_m2": 0.0,
+    "CAN_counter": {
+      "asof_distance_m": 0.0,
+      "asof_source_age_s": 0.224677955,
+      "next_distance_m": 0.0,
+      "next_source_lead_s": 0.775433149,
+      "bracket_accounting_complete": true,
+      "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+    }
+  },
+  "final": {
+    "paid_actions": 9,
+    "scan_stamp_ns": 1794479431005689621,
+    "elapsed_since_first_scan_s": 123.31507349,
+    "observed_union_m2": 62.92000000000001,
+    "free_evidence_union_m2": 60.640000000000015,
+    "hit_endpoint_union_m2": 8.880000000000003,
+    "free_without_ever_hit_m2": 54.04000000000001,
+    "free_hit_conflict_cells": 165,
+    "outside_ROI_unique_raster_cells": 0,
+    "outside_grid_unique_cells": 0,
+    "laser_origins_outside_ROI": 0,
+    "beam_endpoints_outside_ROI": 0,
+    "valid_rays": 1859,
+    "invalid_rays_skipped": 141,
+    "finite_over8m_clipped_free_only": 148,
+    "new_observed_vs_firstscan_m2": 13.159999999999997,
+    "new_free_evidence_vs_firstscan_m2": 13.160000000000004,
+    "CAN_counter": {
+      "asof_distance_m": 1.3430671077966676,
+      "asof_source_age_s": 0.385838869,
+      "next_distance_m": 1.3450675097703921,
+      "next_source_lead_s": 0.194197227,
+      "bracket_accounting_complete": true,
+      "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+    }
+  },
+  "curve": [
+    {
+      "paid_actions": 0,
+      "scan_stamp_ns": 1794479307690616131,
+      "elapsed_since_first_scan_s": 0.0,
+      "observed_union_m2": 49.76000000000001,
+      "free_evidence_union_m2": 47.48000000000001,
+      "hit_endpoint_union_m2": 5.480000000000001,
+      "free_without_ever_hit_m2": 44.28000000000001,
+      "free_hit_conflict_cells": 80,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1885,
+      "invalid_rays_skipped": 115,
+      "finite_over8m_clipped_free_only": 169,
+      "new_observed_vs_firstscan_m2": 0.0,
+      "new_free_evidence_vs_firstscan_m2": 0.0,
+      "CAN_counter": {
+        "asof_distance_m": 0.0,
+        "asof_source_age_s": 0.224677955,
+        "next_distance_m": 0.0,
+        "next_source_lead_s": 0.775433149,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 1,
+      "scan_stamp_ns": 1794479321488519430,
+      "elapsed_since_first_scan_s": 13.797903299,
+      "observed_union_m2": 52.80000000000001,
+      "free_evidence_union_m2": 50.48000000000001,
+      "hit_endpoint_union_m2": 7.040000000000001,
+      "free_without_ever_hit_m2": 45.76000000000001,
+      "free_hit_conflict_cells": 118,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1889,
+      "invalid_rays_skipped": 111,
+      "finite_over8m_clipped_free_only": 167,
+      "new_observed_vs_firstscan_m2": 3.039999999999999,
+      "new_free_evidence_vs_firstscan_m2": 3.0,
+      "CAN_counter": {
+        "asof_distance_m": 0.04336629068851472,
+        "asof_source_age_s": 0.801028614,
+        "next_distance_m": 0.046466521024704006,
+        "next_source_lead_s": 0.199043322,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 2,
+      "scan_stamp_ns": 1794479349365317345,
+      "elapsed_since_first_scan_s": 41.674701214,
+      "observed_union_m2": 53.12000000000001,
+      "free_evidence_union_m2": 50.88000000000001,
+      "hit_endpoint_union_m2": 7.160000000000001,
+      "free_without_ever_hit_m2": 45.96000000000001,
+      "free_hit_conflict_cells": 123,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1893,
+      "invalid_rays_skipped": 107,
+      "finite_over8m_clipped_free_only": 177,
+      "new_observed_vs_firstscan_m2": 3.3599999999999994,
+      "new_free_evidence_vs_firstscan_m2": 3.3999999999999986,
+      "CAN_counter": {
+        "asof_distance_m": 0.29061492335796374,
+        "asof_source_age_s": 0.614654177,
+        "next_distance_m": 0.2927151608467103,
+        "next_source_lead_s": 0.025336607,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 3,
+      "scan_stamp_ns": 1794479360859727383,
+      "elapsed_since_first_scan_s": 53.169111252,
+      "observed_union_m2": 53.56000000000001,
+      "free_evidence_union_m2": 51.36000000000001,
+      "hit_endpoint_union_m2": 7.400000000000001,
+      "free_without_ever_hit_m2": 46.16000000000001,
+      "free_hit_conflict_cells": 130,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1885,
+      "invalid_rays_skipped": 115,
+      "finite_over8m_clipped_free_only": 185,
+      "new_observed_vs_firstscan_m2": 3.799999999999997,
+      "new_free_evidence_vs_firstscan_m2": 3.8799999999999955,
+      "CAN_counter": {
+        "asof_distance_m": 0.33451801228523287,
+        "asof_source_age_s": 0.287743255,
+        "next_distance_m": 0.3356780130863194,
+        "next_source_lead_s": 0.072237801,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 4,
+      "scan_stamp_ns": 1794479368851529598,
+      "elapsed_since_first_scan_s": 61.160913467,
+      "observed_union_m2": 53.60000000000001,
+      "free_evidence_union_m2": 51.44000000000001,
+      "hit_endpoint_union_m2": 7.440000000000001,
+      "free_without_ever_hit_m2": 46.16000000000001,
+      "free_hit_conflict_cells": 132,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1887,
+      "invalid_rays_skipped": 113,
+      "finite_over8m_clipped_free_only": 174,
+      "new_observed_vs_firstscan_m2": 3.8399999999999963,
+      "new_free_evidence_vs_firstscan_m2": 3.960000000000001,
+      "CAN_counter": {
+        "asof_distance_m": 0.5071396857500083,
+        "asof_source_age_s": 0.018393214,
+        "next_distance_m": 0.5072595511674888,
+        "next_source_lead_s": 0.021508482,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 5,
+      "scan_stamp_ns": 1794479382642320633,
+      "elapsed_since_first_scan_s": 74.951704502,
+      "observed_union_m2": 54.48000000000001,
+      "free_evidence_union_m2": 52.28000000000001,
+      "hit_endpoint_union_m2": 7.760000000000002,
+      "free_without_ever_hit_m2": 46.720000000000006,
+      "free_hit_conflict_cells": 139,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1891,
+      "invalid_rays_skipped": 109,
+      "finite_over8m_clipped_free_only": 157,
+      "new_observed_vs_firstscan_m2": 4.719999999999999,
+      "new_free_evidence_vs_firstscan_m2": 4.799999999999997,
+      "CAN_counter": {
+        "asof_distance_m": 0.6974390923976908,
+        "asof_source_age_s": 0.007918329,
+        "next_distance_m": 0.6974792330265055,
+        "next_source_lead_s": 0.012152071,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 6,
+      "scan_stamp_ns": 1794479394032834291,
+      "elapsed_since_first_scan_s": 86.34221816,
+      "observed_union_m2": 56.000000000000014,
+      "free_evidence_union_m2": 53.76000000000001,
+      "hit_endpoint_union_m2": 8.200000000000001,
+      "free_without_ever_hit_m2": 47.80000000000001,
+      "free_hit_conflict_cells": 149,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1895,
+      "invalid_rays_skipped": 105,
+      "finite_over8m_clipped_free_only": 127,
+      "new_observed_vs_firstscan_m2": 6.240000000000002,
+      "new_free_evidence_vs_firstscan_m2": 6.280000000000001,
+      "CAN_counter": {
+        "asof_distance_m": 0.8953233743906026,
+        "asof_source_age_s": 0.717172211,
+        "next_distance_m": 0.909544293761254,
+        "next_source_lead_s": 0.102861581,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 7,
+      "scan_stamp_ns": 1794479405821297646,
+      "elapsed_since_first_scan_s": 98.130681515,
+      "observed_union_m2": 56.360000000000014,
+      "free_evidence_union_m2": 54.16000000000001,
+      "hit_endpoint_union_m2": 8.480000000000002,
+      "free_without_ever_hit_m2": 47.88000000000001,
+      "free_hit_conflict_cells": 157,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1867,
+      "invalid_rays_skipped": 133,
+      "finite_over8m_clipped_free_only": 122,
+      "new_observed_vs_firstscan_m2": 6.600000000000001,
+      "new_free_evidence_vs_firstscan_m2": 6.68,
+      "CAN_counter": {
+        "asof_distance_m": 1.0904038122892388,
+        "asof_source_age_s": 0.064256494,
+        "next_distance_m": 1.0907638167142877,
+        "next_source_lead_s": 0.03572405,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 8,
+      "scan_stamp_ns": 1794479417312408686,
+      "elapsed_since_first_scan_s": 109.621792555,
+      "observed_union_m2": 60.640000000000015,
+      "free_evidence_union_m2": 58.360000000000014,
+      "hit_endpoint_union_m2": 8.680000000000001,
+      "free_without_ever_hit_m2": 51.96000000000001,
+      "free_hit_conflict_cells": 160,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1854,
+      "invalid_rays_skipped": 146,
+      "finite_over8m_clipped_free_only": 131,
+      "new_observed_vs_firstscan_m2": 10.880000000000003,
+      "new_free_evidence_vs_firstscan_m2": 10.880000000000003,
+      "CAN_counter": {
+        "asof_distance_m": 1.3021234434843065,
+        "asof_source_age_s": 0.074105198,
+        "next_distance_m": 1.3021634949445726,
+        "next_source_lead_s": 0.325975442,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    },
+    {
+      "paid_actions": 9,
+      "scan_stamp_ns": 1794479431005689621,
+      "elapsed_since_first_scan_s": 123.31507349,
+      "observed_union_m2": 62.92000000000001,
+      "free_evidence_union_m2": 60.640000000000015,
+      "hit_endpoint_union_m2": 8.880000000000003,
+      "free_without_ever_hit_m2": 54.04000000000001,
+      "free_hit_conflict_cells": 165,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0,
+      "valid_rays": 1859,
+      "invalid_rays_skipped": 141,
+      "finite_over8m_clipped_free_only": 148,
+      "new_observed_vs_firstscan_m2": 13.159999999999997,
+      "new_free_evidence_vs_firstscan_m2": 13.160000000000004,
+      "CAN_counter": {
+        "asof_distance_m": 1.3430671077966676,
+        "asof_source_age_s": 0.385838869,
+        "next_distance_m": 1.3450675097703921,
+        "next_source_lead_s": 0.194197227,
+        "bracket_accounting_complete": true,
+        "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479307683359516.npz",
+      "raw_ranges_sha256": "a2699895588bcac04b0563e914a00c1d2ecfb0bfc7c52b61d2b4b0df3a4f7d16",
+      "receipt_scan_stamp_ns": 1794479307690616131,
+      "historical_TF_query_stamp_ns": 1794479307690616131,
+      "source_packet_sha256_from_logged_receipt": "b7f59cc2d2c266e5f59d3e1701793a0989e9a16695efac452438887fb56786f4"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479321450873516.npz",
+      "raw_ranges_sha256": "ed611d0eca4f588121e5000a93cce105cdc6af75ebfc0a3cf54f1bc385ae882e",
+      "receipt_scan_stamp_ns": 1794479321488519430,
+      "historical_TF_query_stamp_ns": 1794479321488519430,
+      "source_packet_sha256_from_logged_receipt": "1c160f9a19686462dac260d5b2b0515adef573d682d54b3948f7a5418c757f32"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479349352150516.npz",
+      "raw_ranges_sha256": "f7e27bc054d606f822a90e83edef1c4b19b9c9e03e8acb5906d2f496bb0f602a",
+      "receipt_scan_stamp_ns": 1794479349365317345,
+      "historical_TF_query_stamp_ns": 1794479349365317345,
+      "source_packet_sha256_from_logged_receipt": "1c98aadb7960d49bd5cbb1f915314d01fa7ed1cfc0137f58e645910ff35b8cef"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479360853036516.npz",
+      "raw_ranges_sha256": "c585e78c2da6ca8c6823a447ebf20590a8689151743e409b9a18ee92045d00db",
+      "receipt_scan_stamp_ns": 1794479360859727383,
+      "historical_TF_query_stamp_ns": 1794479360859727383,
+      "source_packet_sha256_from_logged_receipt": "1a8861780ca0bf846327a32db49e212b6b0472d99720cc55c45e4db17dff934a"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479368886619516.npz",
+      "raw_ranges_sha256": "e953b91b217c1ffa3b5fac0b99312d8917a761b365a97be4205fc2295d4541a2",
+      "receipt_scan_stamp_ns": 1794479368851529598,
+      "historical_TF_query_stamp_ns": 1794479368851529598,
+      "source_packet_sha256_from_logged_receipt": "b08c3f3f5db19f68e959398e867e3eef05691cf01106496c1dde7e16535b20af"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479382620707516.npz",
+      "raw_ranges_sha256": "6c9155a4faaf6274ef01f4bfa5d7bbea539e5265bdf34e88c23958753bb110f0",
+      "receipt_scan_stamp_ns": 1794479382642320633,
+      "historical_TF_query_stamp_ns": 1794479382642320633,
+      "source_packet_sha256_from_logged_receipt": "04593d8de39e813292f1148cdfdd6a03e5e0a0a7d846051bc9f5b1f76452350d"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479394021501516.npz",
+      "raw_ranges_sha256": "bc3347e357b3e3171792f84a1fd2fc5dbc08b7b169dc55a5119c460bd0e92fbc",
+      "receipt_scan_stamp_ns": 1794479394032834291,
+      "historical_TF_query_stamp_ns": 1794479394032834291,
+      "source_packet_sha256_from_logged_receipt": "9cc69b85ccbb2724e474cba73e5fb0a278507805cbdeae469ff49beeaf11a6b9"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479405822225516.npz",
+      "raw_ranges_sha256": "70d14dcf8065439b29987929d68f8c5486ae0e31ffa6b8a41fa4f68e0de7c9ff",
+      "receipt_scan_stamp_ns": 1794479405821297646,
+      "historical_TF_query_stamp_ns": 1794479405821297646,
+      "source_packet_sha256_from_logged_receipt": "7963ea324bf52abf6abca25917ffca470369f553d98e8653bbf2d1fec584e0ca"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479417322668516.npz",
+      "raw_ranges_sha256": "6399394d9de389b80a8a0cc65d1fdc670d791b65bd06a3afd1a30c529cfa1873",
+      "receipt_scan_stamp_ns": 1794479417312408686,
+      "historical_TF_query_stamp_ns": 1794479417312408686,
+      "source_packet_sha256_from_logged_receipt": "55b85493500e69b183cbafe0ff2f467bfe7423ff9d421df484dc9c052ccc8253"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261112/linear005_S40_20261112_01/joint_inputs/joint-1794479430990218516.npz",
+      "raw_ranges_sha256": "ea48ae185ebed04818a06550b34d02b25c0a0108b38278de3044afd206e5d763",
+      "receipt_scan_stamp_ns": 1794479431005689621,
+      "historical_TF_query_stamp_ns": 1794479431005689621,
+      "source_packet_sha256_from_logged_receipt": "f709235d24ccf94dcf8b803c39c7464e2357747a461cb10188f08643d65e6060"
+    }
+  ],
+  "evidence_sha256": {
+    "joint/decisions.jsonl": "f2ae7e553b3b799924870641033d09870e627091b6d9e8b20d48a6bb4ae3d10a",
+    "adapter/events.jsonl": "397a4f70b6c074360ae30c905633289400311487716597381a871476e1f3cc4d"
+  },
+  "evaluator_sha256": "ec3ea38dba594cb8693078aac0568b27642dcee527a1e0be517659419c87db08",
+  "limitations": [
+    "No ground-truth environment coverage percentage or reconstruction accuracy.",
+    "Localization/extrinsic errors affect this independent measurement too.",
+    "Fixed common coordinate epoch/registration must be verified across future arms; equal matrices alone cannot prove the same odom epoch.",
+    "Sampled CAN cost brackets have finite time uncertainty.",
+    "This development sequence is not a predeclared efficacy comparison."
+  ],
+  "depth_fused_belief_read": false,
+  "robot_or_ROS_actions": false
+}
