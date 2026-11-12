@@ -1,0 +1,210 @@
+{
+  "schema": "nso.observed_current_constant_velocity_prediction06.v1",
+  "source_provenance": {
+    "can_pair": {
+      "current_minus_can_ns": 29766303,
+      "kernel_stamp_ns": 1794053131663426162,
+      "raw_frame_hex": "21020000080000000004012400000000",
+      "receipt_age_ns": 29663070,
+      "receipt_monotonic_ns": 122673469163891,
+      "scan_minus_can_ns": 17745970,
+      "scan_stamp_ns": 1794053131681172132,
+      "selected_monotonic_ns": 122673498826961,
+      "selected_wall_ns": 1794053131693192465,
+      "vx": 0.004,
+      "w": 0.292
+    },
+    "can_source": {
+      "accepted_frames": 8615,
+      "can_id": "0x221",
+      "can_interface": "can0",
+      "data_filter_mask": "0xc00007ff",
+      "dropped_frames": 0,
+      "reader_error": null,
+      "realtime_monotonic_offset_ns": 1793930458194370016,
+      "received_frames": 8615,
+      "source_timestamp_semantics": "original SocketCAN SO_TIMESTAMPNS kernel realtime nanoseconds",
+      "source_ttl_ns": 150000000,
+      "started_monotonic_ns": 122501165604215,
+      "timestamp_socket_option": 35
+    },
+    "control_twist": {
+      "vx": 0.004,
+      "vy": 0.0,
+      "w": 0.292
+    },
+    "control_velocity_source": "can_feedback",
+    "csm_source_stamp_ns": 1794053131681172132,
+    "raw_csm_twist": {
+      "vx": 0.24156358203766293,
+      "vy": -0.43838936808014156,
+      "w": 0.34103240039276417
+    },
+    "raw_pose_stamp_tf_unchanged": true,
+    "schema": "csm_control_velocity_provenance/1"
+  },
+  "prediction_model": "Exact installed getPrediction use_vel=true: dt*latest_vx,dt*latest_vy,dt*latest_w; current observed CAN sample held constant across this one step by explicit hypothesis. Not ZOH sequence integration, not actual measured interval motion.",
+  "dt_s": 0.1001091,
+  "expected_increment": [
+    0.00040043640000000003,
+    0,
+    0.0292318572
+  ],
+  "expected_angular_increment_degrees": 1.6748620448891078,
+  "results": [
+    {
+      "profile": "identity_increment",
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false,
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295,
+        "max_iterations": 10
+      },
+      "result": {
+        "reference_index": 96,
+        "reference_stamp_ns": 1794053131381242990,
+        "previous_stamp_ns": 1794053131581063032,
+        "target_stamp_ns": 1794053131681172132,
+        "actual_keyframe_pose": [
+          0.5154059410269083,
+          0.6272226691424465,
+          2.190117256589852
+        ],
+        "actual_previous_pose": [
+          0.5124816006909186,
+          0.6378616913666428,
+          2.244938895863188
+        ],
+        "motion_increment": [
+          0,
+          0,
+          0
+        ],
+        "corr_valid_count": 1652,
+        "corr_mean_nearest_distance_sq": 0.002247318833332549,
+        "corr_max_nearest_distance_sq": 0.012580646505157278,
+        "corr_index_hash": "16217298093389754664",
+        "first_guess": [
+          0.010185340688086832,
+          -0.004402547859409271,
+          0.054821639273336456
+        ],
+        "max_iterations": 10,
+        "icp_microseconds": 8804,
+        "valid": true,
+        "error": 64.7565731504332,
+        "nvalid": 1652,
+        "iterations": 11,
+        "laser_offset": [
+          0.03736444356359098,
+          -0.0468200034921946,
+          0.08896208594749586
+        ],
+        "result_pose": [
+          0.5308784908706593,
+          0.6844681534492013,
+          2.2790793425373477
+        ],
+        "actual_target_pose": [
+          0.5308784908706593,
+          0.6844681534492013,
+          2.2790793425373472
+        ],
+        "planar_jump_m": 0.050105966472451156,
+        "actual_target_xy_error_m": 0,
+        "actual_target_yaw_error_rad": 4.440892098500626e-16,
+        "would_switch_keyframe": false
+      }
+    },
+    {
+      "profile": "observed_current_velocity",
+      "parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": true,
+        "use_tf": false,
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295,
+        "max_iterations": 10
+      },
+      "result": {
+        "reference_index": 96,
+        "reference_stamp_ns": 1794053131381242990,
+        "previous_stamp_ns": 1794053131581063032,
+        "target_stamp_ns": 1794053131681172132,
+        "actual_keyframe_pose": [
+          0.5154059410269083,
+          0.6272226691424465,
+          2.190117256589852
+        ],
+        "actual_previous_pose": [
+          0.5124816006909186,
+          0.6378616913666428,
+          2.244938895863188
+        ],
+        "motion_increment": [
+          0.00040043640000000003,
+          0,
+          0.02923185720000001
+        ],
+        "corr_valid_count": 1651,
+        "corr_mean_nearest_distance_sq": 0.0022477903779042534,
+        "corr_max_nearest_distance_sq": 0.012522307291016811,
+        "corr_index_hash": "10873858562974407879",
+        "first_guess": [
+          0.010505423133846494,
+          -0.004708468705286138,
+          0.0840534964733364
+        ],
+        "max_iterations": 10,
+        "icp_microseconds": 8427,
+        "valid": true,
+        "error": 64.71475160090182,
+        "nvalid": 1651,
+        "iterations": 11,
+        "laser_offset": [
+          0.0373836814518682,
+          -0.046806137195414675,
+          0.08898011779092758
+        ],
+        "result_pose": [
+          0.5308558409691178,
+          0.6844756880957035,
+          2.279097374380779
+        ],
+        "actual_target_pose": [
+          0.5308784908706593,
+          0.6844681534492013,
+          2.2790793425373472
+        ],
+        "planar_jump_m": 0.05010466442216603,
+        "actual_target_xy_error_m": 2.387025215104364e-05,
+        "actual_target_yaw_error_rad": 1.80318434317428e-05,
+        "would_switch_keyframe": false
+      }
+    }
+  ],
+  "source_sample_age_at_scan_ns": 17745970,
+  "source_sample_age_at_original_selection_ns": 29766303,
+  "source_receipt_age_at_original_selection_ns": 29663070,
+  "frozen_ref_prev_target_verified": true,
+  "all_other_parameters_equal": true,
+  "live_modified": false
+}

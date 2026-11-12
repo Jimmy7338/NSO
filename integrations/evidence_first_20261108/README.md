@@ -1,0 +1,7 @@
+# Evidence-first records, 8 November
+
+Q2 retains ten declared fixed conditions, original outcomes, decisions and ledgers, including neutral or adverse results. Large JSON/JSONL files are compressed losslessly as `.gz`; for example, `gzip -dc theory/Q2_execution/Q2_shelf_west_96_S_choices.json.gz > /tmp/Q2_choices.json`. Recorded hashes of uncompressed files are in the publication manifest. Repeated conditions are not independent scenes.
+
+The real legacy-mount episode stopped after 22 paid actions with `anchor_disconnected_in_latest_map`, without returning; post-stop CAN feedback is retained. It is integration/debug evidence, not evidence of a semantic advantage. Full original RGB-D and ROS serializations remain local. Compressed result/events/decisions preserve actual records but do not by themselves enable full sensor replay.
+
+The floor ROI bundle is a derived sparse view of the three actual captures: exact sampled depth in the fixed ROI, K and transforms, with zeros elsewhere. It reproduces the recorded train/heldout fit but cannot reproduce full mapping or independently establish physical ground truth. The frozen candidate is not deployed. Some mapper scripts retain local paths and exact native dependencies; the source records and hashes identify them, not a clean-machine full replay. Frame22 source examples lie mostly on visually apparent floor or at a wall/floor edge; individual physical identities and safety remain unverified.

@@ -1,0 +1,136 @@
+{
+  "schema": "nso.passive_raw_scan_comparison.v1",
+  "data_kind": "SYNTHETIC_FIXTURE_NOT_MEASURED",
+  "pcap": {
+    "precision_ns": 1,
+    "link_type": 1,
+    "packets": 18,
+    "pcap_sha256": "e5c29c198f17cd646c5580ed66633855760cb36f6f094582f85f500542441769"
+  },
+  "complete_raw_sweeps": [
+    {
+      "sweep_index": 0,
+      "packet_index_bounds": [
+        5,
+        11
+      ],
+      "kernel_stamp_ns_bounds": [
+        1700000000100000000,
+        1700000000220000000
+      ],
+      "raw_point_count": 2000,
+      "valid_cloud_points": 1998,
+      "minimum_range_m": 0.5040000081062317,
+      "raw_distance_0_504_count": 1,
+      "cloud_matches": [
+        0
+      ],
+      "scan_matches": [
+        {
+          "scan_index": 0,
+          "source_stamp_ns": 1700000000221000000,
+          "bitwise_ranges_match": true,
+          "stamp_minus_last_packet_s": 0.001
+        }
+      ],
+      "same_geometry_source_stamp_associations": [
+        {
+          "scan_index": 0,
+          "cloud_index": 0,
+          "scan_minus_cloud_stamp_ns": 0
+        }
+      ],
+      "ranges_sha256": "a32191b6df22b8fc431b0ff7e43b2f8b57ef66aacfe8530e7d497015532b4e79"
+    },
+    {
+      "sweep_index": 1,
+      "packet_index_bounds": [
+        11,
+        16
+      ],
+      "kernel_stamp_ns_bounds": [
+        1700000000220000000,
+        1700000000320000000
+      ],
+      "raw_point_count": 2000,
+      "valid_cloud_points": 2000,
+      "minimum_range_m": 4.0,
+      "raw_distance_0_504_count": 0,
+      "cloud_matches": [
+        1
+      ],
+      "scan_matches": [
+        {
+          "scan_index": 1,
+          "source_stamp_ns": 1700000000321000000,
+          "bitwise_ranges_match": true,
+          "stamp_minus_last_packet_s": 0.001
+        }
+      ],
+      "same_geometry_source_stamp_associations": [
+        {
+          "scan_index": 1,
+          "cloud_index": 1,
+          "scan_minus_cloud_stamp_ns": 0
+        }
+      ],
+      "ranges_sha256": "e0f35f3597a46f796eaa052c3e0f3a33f8160ee83cfdc88db4dc92d74ccf95ea"
+    }
+  ],
+  "quality": {
+    "packet_decode_errors": [],
+    "multiwrap_packet_indices": [],
+    "boundary_partial_sweeps_discarded": true
+  },
+  "ROS_counts": {
+    "scans": 3,
+    "clouds": 2,
+    "times": 2
+  },
+  "source_stamp_regressions": {
+    "scans": [
+      2
+    ],
+    "clouds": []
+  },
+  "time_topic_associations": [
+    {
+      "scan_index": 0,
+      "time_topic_indices_within_1us_float_representation": [
+        0
+      ]
+    },
+    {
+      "scan_index": 1,
+      "time_topic_indices_within_1us_float_representation": [
+        1
+      ]
+    },
+    {
+      "scan_index": 2,
+      "time_topic_indices_within_1us_float_representation": [
+        0
+      ]
+    }
+  ],
+  "matched_scan_indices": [
+    0,
+    1
+  ],
+  "matched_cloud_indices": [
+    0,
+    1
+  ],
+  "unmatched_scan_indices": [
+    2
+  ],
+  "limits": [
+    "Only this finite window; nonrecurrence excludes no failure hypothesis",
+    "Raw-packet echo presence and sweep/header mispairing can coexist",
+    "Full-geometry match can be ambiguous if consecutive sweeps repeat",
+    "Host PCAP kernel timestamps retained; driver poll-time/interpolated scan stamp is not assumed equal",
+    "Float64 time_topic comparison permits 1us representation difference only; not beam-time accuracy",
+    "No per-beam acquisition time or deskew invented; no physical identity/noise classification",
+    "Boundary partial sweeps, packet loss and unsupported input are disclosed rather than treated as driver faults"
+  ]
+}

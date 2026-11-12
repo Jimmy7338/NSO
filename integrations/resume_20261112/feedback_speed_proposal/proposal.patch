@@ -1,0 +1,108 @@
+--- a/runtime/visual_velocity_adapter.py
++++ b/runtime/visual_velocity_adapter.py
+@@ -99,6 +99,12 @@
+     return value
+ 
+ 
++def validate_feedback_linear(value):
++    if type(value) not in (int, float) or not math.isfinite(value) or not 0 < value <= .2:
++        raise ValueError('maximum_feedback_linear_m_s must be finite numeric in (0, .2]')
++    return value
++
++
+ def configuration(cfg):
+     """Validate the contract without importing ROS or opening any socket."""
+     result = dict(master_uri='http://127.0.0.1:11382', can_interface='can0',
+@@ -110,6 +116,8 @@
+                   driver_publisher='/nso_scout_radius_driver_v1',
+                   odom_frame='odom', base_frame='base_link', depth_frame='zed2i_left_camera_optical_frame')
+     result.update(cfg)
++    result.setdefault('maximum_feedback_linear_m_s', .15)
++    validate_feedback_linear(result['maximum_feedback_linear_m_s'])
+     result.setdefault('maximum_linear_m_s', .1)
+     validate_maximum_linear(result['maximum_linear_m_s'])
+     reverse = result.setdefault('navigation_allow_reverse', False)
+@@ -180,6 +188,7 @@
+         correction_reverse_active=gate.correction_reverse_active,
+         minimum_linear_m_s=gate.minimum_linear_m_s,
+         maximum_linear_m_s=gate.maximum_linear_m_s,
++        maximum_feedback_linear_m_s=gate.maximum_feedback_linear_m_s,
+         fault_evidence=deepcopy(gate.fault_evidence),
+         driver_connected=gate.driver_connected,
+         driver_status=None if gate.driver is None else dict(code=gate.driver[0],receipt_monotonic=gate.driver[1]),
+@@ -198,7 +207,8 @@
+                  depth_frame='zed2i_left_camera_optical_frame', navigation_source='visual',
+                  navigation_allow_reverse=False, mission_mode=None, nso_correction_reverse=False,
+                  correction_supervisor='/nso_onboard_supervisor', duration_profile=STANDARD,
+-                 maximum_linear_m_s=.1):
++                 maximum_linear_m_s=.1, maximum_feedback_linear_m_s=.15):
++        self.maximum_feedback_linear_m_s = validate_feedback_linear(maximum_feedback_linear_m_s)
+         self.maximum_linear_m_s = validate_maximum_linear(maximum_linear_m_s)
+         self.duration_profile = validate_duration(duration_s, duration_profile, mission_mode)
+         if not finite(duration_s, proposal_ttl_s, observation_ttl_s):
+@@ -309,11 +319,11 @@
+             if max(map(abs,values)) <= .005:
+                 if self.can_zero_since is None:self.can_zero_since=source
+             else:self.can_zero_since=None
+-            if self.ever_armed and (abs(row['v'])>.15 or abs(row['w'])>.45):
++            if self.ever_armed and (abs(row['v'])>self.maximum_feedback_linear_m_s or abs(row['w'])>.45):
+                 self.fail('chassis_speed_feedback_limit', dict(
+                     can_id='0x221', payload_hex=payload.hex(),
+                     timestamp_semantics='original kernel timestamp converted to host monotonic by receive-only reader',
+-                    limits=dict(maximum_abs_v_m_s=.15, maximum_abs_w_rad_s=.45),
++                    limits=dict(maximum_abs_v_m_s=self.maximum_feedback_linear_m_s, maximum_abs_w_rad_s=.45),
+                     source_monotonic=source, receipt_monotonic=receipt,
+                     can_velocity=deepcopy(row), proposal=deepcopy(self.proposal),
+                     can_status=deepcopy(self.can_status)))
+@@ -732,7 +742,7 @@
+     if Path('/proc/sys/kernel/random/boot_id').read_text().strip() != cfg['boot_id']:
+         raise ValueError('boot changed')
+     gate = Gate(cfg.get('duration_s',600.), **{key:cfg[key] for key in
+-        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile','maximum_linear_m_s']})
++        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile','maximum_linear_m_s','maximum_feedback_linear_m_s']})
+     gate.session_id=session
+     if not args.run:
+         print(json.dumps(dict(status='configuration_validated_only',no_ros_started=True)))
+@@ -887,6 +897,7 @@
+                         'bridge_publisher','proposal_publisher','driver_publisher','odom_frame','base_frame','depth_frame',
+                         'laser_health_topic','navigation_source']},
+         motion_deadline_starts_at_arm=True,pending_deadline_monotonic=pending_deadline,
++        feedback_speed_limits=dict(maximum_abs_v_m_s=gate.maximum_feedback_linear_m_s,maximum_abs_w_rad_s=.45),
+         motion_envelope=dict(max_linear_m_s=gate.maximum_linear_m_s,max_angular_rad_s=.3,
+             min_linear_m_s=gate.minimum_linear_m_s,no_reverse=not gate.navigation_allow_reverse,
+             reverse_profile='navigation_setup_reverse_005_v1' if gate.navigation_allow_reverse else None,
+--- a/runtime/mission.py
++++ b/runtime/mission.py
+@@ -403,6 +403,7 @@
+     ap.add_argument('--joint-xy-goal-tolerance',type=float,choices=(.03,.08),default=.08,
+         help='ROS execution only: retain .08m default or test .03m grid-center stopping; original NSO cell/heading acceptance unchanged')
+     ap.add_argument('--navigation-allow-reverse',action='store_true',help='Navigation setup only: temporarily allow DWA and adapter reverse down to -0.05m/s; restore DWA afterwards')
++    ap.add_argument('--feedback-speed-profile',choices=['original_015_v1','measured_020_v1'],default='original_015_v1',help='Explicit stop-behavior change: measured_020_v1 raises linear CAN feedback stop threshold to .20 m/s; requires user approval')
+     ap.add_argument('--nso-correction-reverse',action='store_true',help='Explicit nso/joint nominal endpoint retry only: reverse down to -.05m/s and center-point correction; ordinary execution remains forward-only')
+     ap.add_argument('--navigation-goal-json',help='Standard ROS setup reposition only; JSON target_odom, never an NSO episode')
+     return ap
+@@ -579,10 +580,11 @@
+         Navfn=rospy.get_param('/nso_visual/move_base/NavfnROS',{}),
+         global_obstacles=rospy.get_param('/nso_visual/move_base/global_costmap/obstacle_layer',{}),
+         local_obstacles=rospy.get_param('/nso_visual/move_base/local_costmap/obstacle_layer',{})))
++    maximum_feedback_linear = .20 if args.feedback_speed_profile == 'measured_020_v1' else .15
+     execution_max_linear = .05 if args.mode in ('nso', 'joint') else .1
+     execution_profile = ('nso_dwa_linear_consistency_005_v1' if args.mode in ('nso', 'joint')
+                          else 'legacy_linear_010_v1')
+-    adapter_cfg=dict(maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
++    adapter_cfg=dict(maximum_feedback_linear_m_s=maximum_feedback_linear,feedback_speed_profile=args.feedback_speed_profile,maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
+         duration_s=args.duration,duration_profile=args.duration_profile,mission_mode=args.mode,output_directory=str(output/'adapter'),master_uri=MASTER,
+         navigation_source='lidar_rgbd')
+     if args.nso_correction_reverse:
+@@ -594,7 +596,10 @@
+     adapter_hash=hashlib.sha256((output/'adapter-config.json').read_bytes()).hexdigest()
+     save(output/'authorization.json',dict(source='direct user instruction to continue the recommended experiment; onsite readiness confirmed',
+         maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,
+-        execution_clipping_change="positive adapter cap aligned to declared DWA .05 for nso/joint; stop predicates unchanged",
++        maximum_feedback_linear_m_s=maximum_feedback_linear,maximum_feedback_angular_rad_s=.45,
++        feedback_speed_profile=args.feedback_speed_profile,
++        feedback_stop_behavior_changed=args.feedback_speed_profile != "original_015_v1",
++        execution_clipping_change="positive adapter command cap aligned to DWA .05; feedback stop threshold recorded separately by feedback_speed_profile",
+         maximum_angular_rad_s=.3,duration_s=args.duration,duration_profile=duration_profile,
+         automatic_reverse=args.navigation_allow_reverse,
+         minimum_linear_m_s=-.05 if args.navigation_allow_reverse else 0.,

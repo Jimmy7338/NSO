@@ -1,0 +1,207 @@
+--- a/runtime/mission.py
++++ b/runtime/mission.py
+@@ -427,6 +427,7 @@
+     ap.add_argument('--joint-configuration',help='Frozen real sensor/frame settings for unknown-coverage NSO')
+     ap.add_argument('--joint-xy-goal-tolerance',type=float,choices=(.03,.08),default=.08,
+         help='ROS execution only: retain .08m default or test .03m grid-center stopping; original NSO cell/heading acceptance unchanged')
++    ap.add_argument('--ros-allow-reverse',action='store_true',help='Explicit ordinary ROS reverse in nso/joint/navigation; linear command bounded to +/-.05m/s')
+     ap.add_argument('--navigation-allow-reverse',action='store_true',help='Navigation setup only: temporarily allow DWA and adapter reverse down to -0.05m/s; restore DWA afterwards')
+     ap.add_argument('--sensor-loss-profile',choices=['legacy_terminal_v1','recoverable_sensor_pause_v1'],default='legacy_terminal_v1',help='Explicit stale sensor pause profile; zero while stale, recover only with fresh sources/proposal')
+     ap.add_argument('--feedback-speed-profile',choices=['original_015_v1','measured_020_v1'],default='original_015_v1',help='Explicit stop-behavior change: measured_020_v1 raises linear CAN feedback stop threshold to .20 m/s; requires user approval')
+@@ -453,6 +454,8 @@
+ def main(argv=None):
+     args=argument_parser().parse_args(argv)
+     duration_profile = validate_duration(args.duration, args.duration_profile, args.mode)
++    if args.ros_allow_reverse and args.mode not in ('nso','joint','navigation'):
++        raise ValueError('ros-allow-reverse is restricted to nso/joint/navigation')
+     if args.navigation_allow_reverse and args.mode!='navigation':
+         raise ValueError('navigation-allow-reverse is restricted to navigation setup mode')
+     if args.nso_correction_reverse and args.mode not in ('nso','joint'):
+@@ -607,10 +610,11 @@
+         global_obstacles=rospy.get_param('/nso_visual/move_base/global_costmap/obstacle_layer',{}),
+         local_obstacles=rospy.get_param('/nso_visual/move_base/local_costmap/obstacle_layer',{})))
+     maximum_feedback_linear = .20 if args.feedback_speed_profile == 'measured_020_v1' else .15
+-    execution_max_linear = .05 if args.mode in ('nso', 'joint') else .1
+-    execution_profile = ('nso_dwa_linear_consistency_005_v1' if args.mode in ('nso', 'joint')
++    execution_max_linear = .05 if args.ros_allow_reverse or args.mode in ('nso', 'joint') else .1
++    execution_profile = ('ordinary_ros_reverse_005_v1' if args.ros_allow_reverse else
++                         'nso_dwa_linear_consistency_005_v1' if args.mode in ('nso', 'joint')
+                          else 'legacy_linear_010_v1')
+-    adapter_cfg=dict(sensor_loss_profile=args.sensor_loss_profile,maximum_feedback_linear_m_s=maximum_feedback_linear,feedback_speed_profile=args.feedback_speed_profile,maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
++    adapter_cfg=dict(ordinary_reverse=args.ros_allow_reverse,sensor_loss_profile=args.sensor_loss_profile,maximum_feedback_linear_m_s=maximum_feedback_linear,feedback_speed_profile=args.feedback_speed_profile,maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
+         duration_s=args.duration,duration_profile=args.duration_profile,mission_mode=args.mode,output_directory=str(output/'adapter'),master_uri=MASTER,
+         navigation_source='lidar_rgbd')
+     if args.nso_correction_reverse:
+@@ -628,13 +632,16 @@
+         feedback_stop_behavior_changed=args.feedback_speed_profile != "original_015_v1",
+         execution_clipping_change="positive adapter command cap aligned to DWA .05; feedback stop threshold recorded separately by feedback_speed_profile",
+         maximum_angular_rad_s=.3,duration_s=args.duration,duration_profile=duration_profile,
+-        automatic_reverse=args.navigation_allow_reverse,
+-        minimum_linear_m_s=-.05 if args.navigation_allow_reverse else 0.,
+-        reverse_scope='navigation_setup_only' if args.navigation_allow_reverse else None,
++        ordinary_reverse=args.ros_allow_reverse,
++        ordinary_reverse_profile="ordinary_ros_reverse_005_v1" if args.ros_allow_reverse else None,
++        automatic_reverse=args.navigation_allow_reverse or args.ros_allow_reverse,
++        minimum_linear_m_s=-.05 if args.navigation_allow_reverse or args.ros_allow_reverse else 0.,
++        reverse_scope=('ordinary_nso_joint_navigation' if args.ros_allow_reverse else
++                       'navigation_setup_only' if args.navigation_allow_reverse else None),
+         prior_short_range_caps=False,physical_stop_independently_observed=False,
+         nso_correction_reverse=args.nso_correction_reverse,
+         correction_reverse_profile='nso_nominal_correction_reverse_v1' if args.nso_correction_reverse else None,
+-        correction_reverse_scope='existing same-pending nominal retry only; normal minimum remains0; minvx-.05/fp0 only during retry; restore after; not original-method equivalence' if args.nso_correction_reverse else None))
++        correction_reverse_scope=('existing same-pending nominal retry; ordinary minimum follows ordinary_reverse authorization; retry minvx-.05/fp0; restore after; not original-method equivalence') if args.nso_correction_reverse else None))
+     mod=module(adapter_path,'visual_adapter')
+     journal=mod.Journal(output/'events.jsonl')
+     lock=threading.RLock()
+@@ -840,18 +847,25 @@
+                 actual_global_costmap_frame=rospy.get_param('/nso_visual/move_base/global_costmap/global_frame'),
+                 actual_global_costmap_rolling_window=rospy.get_param('/nso_visual/move_base/global_costmap/rolling_window'),
+                 changes_to_policy=False,shared_navigation_profile_required_for_comparisons=True))
+-        if args.navigation_allow_reverse:
++        if args.navigation_allow_reverse or args.ros_allow_reverse:
+             from dynamic_reconfigure.client import Client as ConfigurationClient
+             navigation_configuration=ConfigurationClient('/nso_visual/move_base/DWAPlannerROS',timeout=4.)
+             old_navigation=navigation_configuration.get_configuration(timeout=3.)
+             if navigation_restore is None:navigation_restore={}
+             navigation_restore['min_vel_x']=old_navigation['min_vel_x']
+-            applied_reverse=navigation_configuration.update_configuration(dict(min_vel_x=-.05))
+-            result['navigation_reverse_contract']=dict(profile='navigation_setup_reverse_005_v1',
+-                setup_only=True,NSO_action=False,changes_to_NSO_policy=False,
++            reverse_request=dict(min_vel_x=-.05)
++            if args.ros_allow_reverse:
++                for key in ('max_vel_x','max_vel_trans'):
++                    navigation_restore.setdefault(key,old_navigation[key])
++                    reverse_request[key]=.05
++            applied_reverse=navigation_configuration.update_configuration(reverse_request)
++            result['navigation_reverse_contract']=dict(profile='ordinary_ros_reverse_005_v1' if args.ros_allow_reverse else 'navigation_setup_reverse_005_v1',
++                setup_only=not args.ros_allow_reverse,ordinary_reverse=args.ros_allow_reverse,NSO_action=False,changes_to_NSO_policy=False,
+                 original_min_vel_x=old_navigation['min_vel_x'],requested_min_vel_x=-.05,
+                 applied_response=applied_reverse,restoration_required=True)
+             save(output/'navigation_reverse_contract.json',result['navigation_reverse_contract'])
++            if args.ros_allow_reverse and any(abs(float(applied_reverse[k])-.05)>1e-9 for k in ('max_vel_x','max_vel_trans')):
++                raise RuntimeError('DWA did not admit declared ordinary positive .05 limit')
+             if abs(float(applied_reverse['min_vel_x'])+.05)>1e-9:
+                 raise RuntimeError('DWA did not admit the declared setup reverse limit')
+         if not client.wait_for_server(rospy.Duration(6.)):raise RuntimeError('move_base_unavailable')
+@@ -967,12 +981,12 @@
+                         record(event,**fields)
+                     return correction_reverse_scope(navigation_configuration,phase,record_phase,endpoint)
+                 result['correction_reverse_profile']=dict(name='nso_nominal_correction_reverse_v1',
+-                    authorized=True,session_id=session,ordinary_min_vel_x=0.,retry_min_vel_x=-.05,
++                    authorized=True,session_id=session,ordinary_min_vel_x=-.05 if args.ros_allow_reverse else 0.,retry_min_vel_x=-.05,
+                     retry_forward_point_distance=0.,original_method_equivalence=False)
+             try:
+                 run_joint(dict(worker=reference_worker,task_receipt=reference_task,output=output,result=result,journal=journal,
+                     client=client,tfbuf=tfbuf,capture_pose=capture_pose,capture_odom_pose=capture_odom_pose,
+-                    execution_frame=navigation_execution_frame,
++                    execution_frame=navigation_execution_frame,ordinary_reverse_authorized=args.ros_allow_reverse,
+                     can_snapshot=can_snapshot,check=check,progress=progress,capture_observation=capture_joint_observation,
+                     capture_timings=joint_capture_timings,
+                     run_start=run_start,duration=args.duration,
+@@ -1023,7 +1037,7 @@
+         if navigation_restore is not None:
+             try:
+                 restored_navigation=navigation_configuration.update_configuration(navigation_restore)
+-                if args.navigation_allow_reverse:
++                if args.navigation_allow_reverse or args.ros_allow_reverse:
+                     result['navigation_reverse_restore']=dict(requested=navigation_restore,
+                         applied_response=restored_navigation,
+                         restored=abs(float(restored_navigation['min_vel_x'])-float(navigation_restore['min_vel_x']))<1e-9)
+--- a/runtime/visual_velocity_adapter.py
++++ b/runtime/visual_velocity_adapter.py
+@@ -132,6 +132,11 @@
+     validate_feedback_linear(result['maximum_feedback_linear_m_s'])
+     result.setdefault('maximum_linear_m_s', .1)
+     validate_maximum_linear(result['maximum_linear_m_s'])
++    ordinary = result.setdefault('ordinary_reverse', False)
++    if type(ordinary) is not bool or (ordinary and result.get('mission_mode') not in ('nso','joint','navigation')):
++        raise ValueError('ordinary reverse requires explicit nso/joint/navigation authorization')
++    if ordinary:
++        result['maximum_linear_m_s'] = min(result['maximum_linear_m_s'], .05)
+     reverse = result.setdefault('navigation_allow_reverse', False)
+     mission_mode = result.setdefault('mission_mode', None)
+     profile = result.setdefault('duration_profile', STANDARD)
+@@ -196,7 +201,7 @@
+         feedback_accounting_complete=gate.can_accounting_complete,hardware_reason=reason,
+         zero_feedback_confirmed=(reason is None and gate.can_zero_since is not None and now-gate.can_zero_since>=1.),
+         arm_stationarity_metrics=deepcopy(gate.arm_stationarity_metrics),
+-        correction_reverse_authorized=gate.nso_correction_reverse,
++        ordinary_reverse=gate.ordinary_reverse,correction_reverse_authorized=gate.nso_correction_reverse,
+         correction_reverse_active=gate.correction_reverse_active,
+         minimum_linear_m_s=gate.minimum_linear_m_s,
+         maximum_linear_m_s=gate.maximum_linear_m_s,
+@@ -217,7 +222,7 @@
+                  proposal_publisher='/nso_visual/move_base',
+                  odom_frame='odom', base_frame='base_link',
+                  depth_frame='zed2i_left_camera_optical_frame', navigation_source='visual',
+-                 navigation_allow_reverse=False, mission_mode=None, nso_correction_reverse=False,
++                 navigation_allow_reverse=False, ordinary_reverse=False, mission_mode=None, nso_correction_reverse=False,
+                  correction_supervisor='/nso_onboard_supervisor', duration_profile=STANDARD,
+                  maximum_linear_m_s=.1, maximum_feedback_linear_m_s=.15, sensor_loss_profile="legacy_terminal_v1"):
+         self.sensor_loss_profile = validate_sensor_loss_profile(sensor_loss_profile)
+@@ -232,11 +237,16 @@
+             raise ValueError('reverse is an explicit navigation setup-only option')
+         if type(nso_correction_reverse) is not bool or (nso_correction_reverse and mission_mode not in ('nso','joint')):
+             raise ValueError('correction reverse requires explicit nso/joint authorization')
++        if type(ordinary_reverse) is not bool or (ordinary_reverse and mission_mode not in ("nso","joint","navigation")):
++            raise ValueError("ordinary reverse requires explicit nso/joint/navigation authorization")
++        self.ordinary_reverse = ordinary_reverse
++        if ordinary_reverse:
++            self.maximum_linear_m_s = min(self.maximum_linear_m_s, .05)
+         self.nso_correction_reverse = nso_correction_reverse
+         self.correction_supervisor = correction_supervisor
+         self.correction_reverse_active = False
+         self.navigation_allow_reverse = navigation_allow_reverse
+-        self.minimum_linear_m_s = -.05 if navigation_allow_reverse else 0.
++        self.minimum_linear_m_s = -.05 if navigation_allow_reverse or ordinary_reverse else 0.
+         self.can_status = None
+         self.can_velocity = None
+         self.can_distance = 0.
+@@ -286,7 +296,7 @@
+         if enabled and (not self.armed or self.fault is not None):
+             return False, 'correction_reverse_requires_armed_fault_free_session'
+         self.correction_reverse_active = enabled
+-        self.minimum_linear_m_s = -.05 if enabled or self.navigation_allow_reverse else 0.
++        self.minimum_linear_m_s = -.05 if enabled or self.navigation_allow_reverse or self.ordinary_reverse else 0.
+         if not enabled and self.proposal is not None:
+             # Never renew proposal receipt, number or freshness on phase exit.
+             self.proposal['v'] = max(self.minimum_linear_m_s, self.proposal['v'])
+@@ -294,7 +304,7 @@
+ 
+     def fail(self, reason, evidence=None):
+         self.correction_reverse_active = False
+-        self.minimum_linear_m_s = -.05 if self.navigation_allow_reverse else 0.
++        self.minimum_linear_m_s = -.05 if self.navigation_allow_reverse or self.ordinary_reverse else 0.
+         if self.proposal is not None:
+             self.proposal['v'] = max(self.minimum_linear_m_s, self.proposal['v'])
+         if self.fault is None:
+@@ -765,7 +775,7 @@
+     if Path('/proc/sys/kernel/random/boot_id').read_text().strip() != cfg['boot_id']:
+         raise ValueError('boot changed')
+     gate = Gate(cfg.get('duration_s',600.), **{key:cfg[key] for key in
+-        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile','maximum_linear_m_s','maximum_feedback_linear_m_s','sensor_loss_profile']})
++        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','ordinary_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile','maximum_linear_m_s','maximum_feedback_linear_m_s','sensor_loss_profile']})
+     gate.session_id=session
+     if not args.run:
+         print(json.dumps(dict(status='configuration_validated_only',no_ros_started=True)))
+@@ -910,7 +920,7 @@
+         services.append(rospy.Service('/nso_visual/correction_reverse/'+session,SetBool,correction_phase))
+     (output/'started.json').write_text(json.dumps(dict(session_id=session,boot_id=cfg['boot_id'],
+         started_monotonic=started,config_sha256=args.config_sha256,zero_only_until_arm=True,
+-        correction_reverse_authorized=gate.nso_correction_reverse,
++        ordinary_reverse=gate.ordinary_reverse,correction_reverse_authorized=gate.nso_correction_reverse,
+         correction_reverse_service=None if not gate.nso_correction_reverse else '/nso_visual/correction_reverse/'+session,
+         sensor_loss_profile=gate.sensor_loss_profile,passive_chassis_supervision=True,duration_s=gate.duration,duration_profile=gate.duration_profile,navigation_source=cfg['navigation_source'],
+         actuator_state_topic='/nso_visual/actuator_state',actuator_state_frequency_hz=10.,
+@@ -922,8 +932,9 @@
+         motion_deadline_starts_at_arm=True,pending_deadline_monotonic=pending_deadline,
+         feedback_speed_limits=dict(maximum_abs_v_m_s=gate.maximum_feedback_linear_m_s,maximum_abs_w_rad_s=.45),
+         motion_envelope=dict(max_linear_m_s=gate.maximum_linear_m_s,max_angular_rad_s=.3,
+-            min_linear_m_s=gate.minimum_linear_m_s,no_reverse=not gate.navigation_allow_reverse,
+-            reverse_profile='navigation_setup_reverse_005_v1' if gate.navigation_allow_reverse else None,
++            min_linear_m_s=gate.minimum_linear_m_s,no_reverse=not (gate.navigation_allow_reverse or gate.ordinary_reverse),
++            reverse_profile=('ordinary_ros_reverse_005_v1' if gate.ordinary_reverse else
++                             'navigation_setup_reverse_005_v1' if gate.navigation_allow_reverse else None),
+             spatial_limit=None,path_limit=None,angular_travel_limit=None)),indent=2),encoding='utf8')
+     try:
+         while not rospy.is_shutdown():

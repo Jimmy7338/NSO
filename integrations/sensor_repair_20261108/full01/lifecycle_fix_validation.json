@@ -1,0 +1,71 @@
+{
+  "status": "implemented_dry_verified_not_robot_executed",
+  "files": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py",
+      "sha256": "fc8c78572aea468f332fb189a1a19aa77ae9939a81a6e54b6ff2092980b9a063"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/lifecycle_receipt.py",
+      "sha256": "b3cd1365ff4a91c349414fff0aa8fbd15b5d2df23a019640cf32441c6439a3a4"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/stop_feedback_wait.py",
+      "sha256": "b6562287fe66a5fe3e62064e5f0ca40b3c7a55ab6c59c9bf06f203fe852174e9"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_lifecycle_receipt.py",
+      "sha256": "959dd9f8b83d32639d7911b2d41e03f62b96fd53e550fefc2583cf770274b6be"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/run_with_fault_ring.py",
+      "sha256": "e3a5d63e4ed31766791d3c4913c5b48ec37db771ba55050d447cff0620aedd2b"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_fault_observer_lifecycle.py",
+      "sha256": "313e79037f04e8a1a4f845b4ac66bec5ae7bfb7ef456fbc0408e572e81a9ce00"
+    }
+  ],
+  "tests": [
+    {
+      "command": "python /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_lifecycle_receipt.py",
+      "passed": 2,
+      "details": "Real OS SIGTERM and SIGINT to dry subprocess; exact receipt order and successful exit; diagnostic callback/I/O failure does not skip cleanup."
+    },
+    {
+      "command": "python /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_stop_feedback_wait.py",
+      "passed": 13
+    },
+    {
+      "check": "py_compile of four changed Python runtime/observer modules",
+      "passed": true
+    },
+    {
+      "command": "python /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_fault_observer_lifecycle.py",
+      "passed": 1,
+      "details": "Executes real observer main with mocked ROS/CAN/process; three sensor callbacks cause no signal or stop; repeated INT+TERM forwards one INT; actual ring and summary writing verified."
+    },
+    {
+      "check": "Mutation check reinstating receive name-shadowing bug in temporary observer copy",
+      "passed": true,
+      "details": "Same actual-main regression fails against old closure bug."
+    }
+  ],
+  "behavior": [
+    "Mission signal event still sets original interrupted Event; adds best-effort immutable per-event JSON receipts.",
+    "No decision, candidate, score, stop threshold, timeout or actuator cleanup ordering change. Optional helper callbacks only occur after existing before/after verification returns.",
+    "Observer catches TERM/INT and forwards at most one SIGINT to existing mission PID, then keeps passive rings alive while waiting for mission cleanup; no new session/group or actuator ownership.",
+    "Milestone files use exclusive creation, flush/fsync; recording exceptions are swallowed and exposed in root lifecycle_recording_errors when root result survives.",
+    "supervisor_started/observer_started and every receipt record pid,ppid,pgid,sid; metadata only."
+  ],
+  "risks": [
+    "Synchronous diagnostic filesystem I/O adds small latency and can block on a hung filesystem; no timing equivalence claim.",
+    "SIGKILL, host loss or outer executor escalation cannot be handled; same-group TERM still reaches descendants independently. Receipts identify received signal, not sender.",
+    "Interrupted write may leave a partial diagnostic file; a root_saved marker means the existing save call returned, not independent disk durability certification.",
+    "Observer can wait indefinitely if a signalled mission hangs; it deliberately adds no new kill authority or shutdown deadline. Existing exception-path finally wait20s is retained.",
+    "Dry tests exercise actual observer main using mocked ROS, CAN and mission process; actual OS signals are separately exercised in pure-helper subprocess. No live actuator/process-tree test performed."
+  ],
+  "original_logs": "Prior full01 failure and report files were not modified.",
+  "deployment": "No service restart or robot trial executed; root owns next execution.",
+  "review_correction": "Root caught receive callback name shadowing in initial patch; fixed to receive_signal before any physical run. Prior pure-helper test was insufficient; actual-main regression and negative mutation check now added."
+}

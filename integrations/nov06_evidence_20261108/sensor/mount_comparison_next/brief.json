@@ -1,0 +1,119 @@
+{
+  "status": "frozen_single_frame_counterfactual_not_deployed",
+  "frame": 19,
+  "method": "Same actual raw RGB/depth/K/scan and existing fixed polygons/ROIs; captured historical timestamps/odom TF retained; only camera mount replaced by the Nov06 launch parameters, composed through fixed optical chain inv(old_mount)@actual_old_base_from_optical. No fitting of extrinsics or ICP.",
+  "source_packet_sha256": "9bb12ebb56a7357b04311adcf0494834028778f367bc1f5d511d5c2ef5a572bb",
+  "source_launch_sha256": "b36e8f53d354be263a1d00ef686a44251181b8079eb587e1ac15a1d047c8e112",
+  "ROI_protocol_sha256": "e8f2cf4e340a3416b5a2a1a69d10d14a8374799ffbda58269420da10fc0711fe",
+  "valid_original_scan_rays": 1874,
+  "left_common_both": {
+    "count": 51,
+    "old": {
+      "n": 51,
+      "median_signed_m": -0.038619421715855085,
+      "p05_p95_signed_m": [
+        -0.0427948670981535,
+        -0.03399348697909421
+      ],
+      "median_absolute_m": 0.038619421715855085,
+      "max_absolute_m": 0.04659744672483779
+    },
+    "nov06": {
+      "n": 51,
+      "median_signed_m": -0.008334566006014343,
+      "p05_p95_signed_m": [
+        -0.013476093991788729,
+        -0.00314086486210019
+      ],
+      "median_absolute_m": 0.008334566006014343,
+      "max_absolute_m": 0.015412210028310502
+    }
+  },
+  "right_common_actual_projected": {
+    "count": 112,
+    "old": {
+      "n": 112,
+      "median_signed_m": -0.15252059379256216,
+      "p05_p95_signed_m": [
+        -0.17315251271155185,
+        -0.14333725300800876
+      ],
+      "median_absolute_m": 0.15252059379256216,
+      "max_absolute_m": 0.1757088090239151
+    },
+    "nov06": {
+      "n": 112,
+      "median_signed_m": -0.002976834749929491,
+      "p05_p95_signed_m": [
+        -0.010052775347961573,
+        0.003970770209934704
+      ],
+      "median_absolute_m": 0.004015109109413995,
+      "max_absolute_m": 0.013716979296853782
+    }
+  },
+  "right_common_both": {
+    "count": 0,
+    "old": null,
+    "nov06": null
+  },
+  "membership": {
+    "left_face": {
+      "old_actual": {
+        "actual_hits_in_face": 74,
+        "positive_ray_intersections_in_face": 71,
+        "both": 70,
+        "actual_hits_only": 4,
+        "intersections_only": 1,
+        "neither": 1799
+      },
+      "nov06_counterfactual": {
+        "actual_hits_in_face": 62,
+        "positive_ray_intersections_in_face": 62,
+        "both": 62,
+        "actual_hits_only": 0,
+        "intersections_only": 0,
+        "neither": 1812
+      }
+    },
+    "right_face": {
+      "old_actual": {
+        "actual_hits_in_face": 142,
+        "positive_ray_intersections_in_face": 0,
+        "both": 0,
+        "actual_hits_only": 142,
+        "intersections_only": 0,
+        "neither": 1732
+      },
+      "nov06_counterfactual": {
+        "actual_hits_in_face": 135,
+        "positive_ray_intersections_in_face": 134,
+        "both": 131,
+        "actual_hits_only": 4,
+        "intersections_only": 3,
+        "neither": 1736
+      }
+    }
+  },
+  "conclusion": [
+    "Fixed Nov06 composition substantially reduces conditional cross-modal face residuals on this one frame without optimizing any transform or rejecting outliers. Old rollback TF therefore has weaker support from this local consistency check; visual appearance alone does not establish physical consistency.",
+    "Left common both-valid51 returns: signed median -38.62mm old vs -8.33mm Nov06. Right common projected112 returns: -152.52mm vs -2.98mm; these are common image-projection candidates, not confirmed ground-truth correspondences.",
+    "Right common both-valid count is0 because old ray-plane intersections never lie inside the fixed conservative face polygon; Nov06 has131 both-valid returns. Do not present a nonexistent matched-valid right-face comparison.",
+    "Two faces belong to the same cabinet in one frame. This does not independently verify all calibration axes, depth scale, ground height, absolute mapping accuracy, policy benefit or safe robot clearance.",
+    "No deployment or reinterpretation of captured TF; the old-TF trial failure remains its real original result."
+  ],
+  "artifacts": {
+    "result.json": {
+      "bytes": 12702,
+      "sha256": "32cc3b2d2074dc3b9debafb72addb2b826baa1039df61ae5d892b0c5fcc9f845"
+    },
+    "compare.py": {
+      "bytes": 6093,
+      "sha256": "0428cd48020675cf6ca81afdb37e66170ca686ba171462d9c2c4d4a7563cc914"
+    },
+    "all_rays.npz": {
+      "bytes": 330118,
+      "sha256": "7960c18f4197ed5a9a7af4bc47fe607949290639e79e296fce045231e42cb129"
+    }
+  }
+}

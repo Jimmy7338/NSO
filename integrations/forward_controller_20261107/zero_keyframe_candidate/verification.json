@@ -1,0 +1,39 @@
+{
+  "schema": "nso.zero_keyframe_bridge_candidate_validation.v1",
+  "staged_only": true,
+  "deployed": false,
+  "ROS_started": false,
+  "hardware_access": false,
+  "offline_tests_passed": 38,
+  "existing_functional_tests": 26,
+  "new_alignment_tests": 12,
+  "original_test_adjustments": "Two main metadata assertions now verify both control source and explicit default pose source parameters; all CAN/pose functional assertions retained",
+  "XMLRPC_real_marshalling_test_passed": true,
+  "aligned_to_default_parameter_store_test_passed": true,
+  "production_bridge_equals_before": true,
+  "CAN_module_unchanged": true,
+  "source_frame": "odom_zero_keyframe_20261107",
+  "expected_caller": "/nso_csm_zero_keyframe/matcher",
+  "pose_topic": "/nso_csm_zero_keyframe/pose_stamped",
+  "alignment_schema": "csm_fixed_se2_alignment/1",
+  "output_frame": "odom",
+  "default_pose_object_identity_retained": true,
+  "source_stamps_reused": true,
+  "alignment_receipt_nanoseconds": "Original integers in file/topic; decimal strings in ROSparam only",
+  "files": [
+    {
+      "path": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/runtime/csm_odometry_bridge.py",
+      "sha256": "e5a093420fac6c79b0fab3a5c17cc6b62fd7c774a060a019999871e3d602f144"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/runtime/can_control_feedback.py",
+      "sha256": "3a7c81b58a7e19f9a27fef00ffa0c09f69c7037cec93720f59e8090fa0ff2166"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/tests/test_candidate_alignment.py",
+      "sha256": "7730998e85b102f5f13c20f98b6f506e1300bb1809106a792f70bc47aa0c4138"
+    }
+  ],
+  "independent_review": "PASS: separate agent reran38/38;200random fixedSE2 body-twist checks maxerror1.39e-14;tilt/Z preservation;actual same-stamp initial alignment error0",
+  "independent_review_receipt": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate_review/receipt.json"
+}

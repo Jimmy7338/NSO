@@ -1,0 +1,684 @@
+{
+  "schema": "nso.fixed3frame_ground_projection.v1",
+  "protocol": {
+    "action_ids": [
+      0,
+      6,
+      13
+    ],
+    "crop_uv": [
+      360,
+      480,
+      1100,
+      710
+    ],
+    "stride": 4,
+    "seed": 0,
+    "trials": 120,
+    "tolerance_m": 0.01,
+    "plane_refinement": "SVD least squares on highest-inlier-count RANSAC support; strictcountimprovement, firsttie retained; upward odomnormal",
+    "neighborhood_centers_uv": [
+      [
+        656,
+        488
+      ],
+      [
+        664,
+        488
+      ],
+      [
+        672,
+        488
+      ],
+      [
+        528,
+        504
+      ],
+      [
+        536,
+        504
+      ],
+      [
+        544,
+        504
+      ]
+    ],
+    "neighborhood_offsets": [
+      -8,
+      -4,
+      0,
+      4,
+      8
+    ],
+    "scope": "Same fixed ROI and settings for all3predeclared frames; no choicebased on fit outcome. Floor-dominated ROI is a visual hypothesis, not ground truth."
+  },
+  "frames": [
+    {
+      "action_id": 0,
+      "source_packet": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_S/joint_inputs/joint-1794126359696007813.npz",
+      "source_sha256": "f39419c2fcc5f7cfeeb1bd33394ffba63db25a2727b35257fd369f9d54f090ac",
+      "RGBD_stamp_s": 1794126359.696008,
+      "base_odom_xy_yaw": [
+        -0.0025577206849210143,
+        -0.06754294755479841,
+        -0.06202800170316837
+      ],
+      "raw_depth_shape": [
+        720,
+        1280
+      ],
+      "raw_intrinsic": [
+        [
+          524.7156372070312,
+          0.0,
+          625.4193725585938
+        ],
+        [
+          0.0,
+          524.7156372070312,
+          362.1388854980469
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "odom_from_camera": [
+        [
+          -0.0246073660976156,
+          0.02672883502031942,
+          0.9993398055277269,
+          0.18851196875557732
+        ],
+        [
+          -0.9996890494198569,
+          -0.0046927958529146,
+          -0.024490449916373058,
+          -0.01187427652689868
+        ],
+        [
+          0.004035096499644675,
+          -0.9996317057024252,
+          0.026836001019136968,
+          0.29802762634367536
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ROI_valid_points": 10730,
+      "ransac_support_count": 10591,
+      "inlier_fraction_after_refinement": 0.9826654240447343,
+      "median_abs_residual_m": 0.0007954306177845177,
+      "p95_abs_residual_m": 0.003211983646203598,
+      "plane_normal_odom": [
+        -0.029040561787574044,
+        -0.006242354844343889,
+        0.9995587420342333
+      ],
+      "plane_d_odom_m": 0.13991692531469394,
+      "plane_z_at_odom_origin_m": -0.1399786920275887,
+      "plane_z_at_current_base_xy_m": -0.14047481563753939,
+      "apparent_offset_from_declared_floor_at_base_m": 0.09252518436246063,
+      "declared_floor_odom_z_m": -0.233,
+      "slope_deg": 1.7021580398520773,
+      "plane_normal_base_yaw_frame": [
+        -0.02859776075478063,
+        -0.008030523192976794,
+        0.9995587420342333
+      ],
+      "plane_normal_camera": [
+        0.010988341497242413,
+        -0.9999375365374426,
+        -0.0020443518706165956
+      ],
+      "plane_d_camera_m": 0.4324126745654838,
+      "camera_perpendicular_distance_to_plane_m": 0.4324126745654838,
+      "camera_vertical_height_above_plane_m": 0.4326035643342654,
+      "camera_vertical_height_from_declared_floor_m": 0.5310276263436754,
+      "pixel_neighborhoods": [
+        {
+          "center_uv": [
+            656,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6906174421310425,
+          "depth_max_m": 1.8600133657455444,
+          "median_abs_plane_residual_m": 0.0033543266507096436,
+          "planning_z_min_m": 0.14509878093033815,
+          "planning_z_max_m": 0.16529793610623247,
+          "above_original_height_threshold_count": 10,
+          "center_depth_m": 1.806255578994751,
+          "center_planning_xyz": [
+            40.26527979427787,
+            41.902208220279896,
+            0.14682646438474803
+          ]
+        },
+        {
+          "center_uv": [
+            664,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6850961446762085,
+          "depth_max_m": 1.8612816333770752,
+          "median_abs_plane_residual_m": 0.0026036962491184368,
+          "planning_z_min_m": 0.14509878093033815,
+          "planning_z_max_m": 0.16480280207106437,
+          "above_original_height_threshold_count": 10,
+          "center_depth_m": 1.8043972253799438,
+          "center_planning_xyz": [
+            40.29262347524192,
+            41.89963956466081,
+            0.1473327545366858
+          ]
+        },
+        {
+          "center_uv": [
+            672,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6833863258361816,
+          "depth_max_m": 1.8635196685791016,
+          "median_abs_plane_residual_m": 0.001470578548918744,
+          "planning_z_min_m": 0.14518468881874988,
+          "planning_z_max_m": 0.16385427334025285,
+          "above_original_height_threshold_count": 12,
+          "center_depth_m": 1.7955619096755981,
+          "center_planning_xyz": [
+            40.319106129759334,
+            41.89007125117588,
+            0.14932199836431112
+          ]
+        },
+        {
+          "center_uv": [
+            528,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4839657545089722,
+          "depth_max_m": 1.664602279663086,
+          "median_abs_plane_residual_m": 0.0023021307489796694,
+          "planning_z_min_m": 0.14516874041256897,
+          "planning_z_max_m": 0.15333150657631175,
+          "above_original_height_threshold_count": 9,
+          "center_depth_m": 1.56740403175354,
+          "center_planning_xyz": [
+            39.86302132850801,
+            41.67338415184941,
+            0.14831196143228773
+          ]
+        },
+        {
+          "center_uv": [
+            536,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.485837697982788,
+          "depth_max_m": 1.6741517782211304,
+          "median_abs_plane_residual_m": 0.0019448122338322493,
+          "planning_z_min_m": 0.144515840569673,
+          "planning_z_max_m": 0.1526415247927386,
+          "above_original_height_threshold_count": 6,
+          "center_depth_m": 1.568986415863037,
+          "center_planning_xyz": [
+            39.886683202546195,
+            41.67437360625473,
+            0.1480221128964064
+          ]
+        },
+        {
+          "center_uv": [
+            544,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4877870082855225,
+          "depth_max_m": 1.6741517782211304,
+          "median_abs_plane_residual_m": 0.0013103325562333068,
+          "planning_z_min_m": 0.14384484526844252,
+          "planning_z_max_m": 0.15045874346560564,
+          "above_original_height_threshold_count": 4,
+          "center_depth_m": 1.5728461742401123,
+          "center_planning_xyz": [
+            39.910100838610234,
+            41.67766312400692,
+            0.1471766689838406
+          ]
+        }
+      ]
+    },
+    {
+      "action_id": 6,
+      "source_packet": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_S/joint_inputs/joint-1794126445734185813.npz",
+      "source_sha256": "9fb876f142a0e3ffe9a0e60b2834b60db6bd858ab9c41eb8459c19cf8ec3525a",
+      "RGBD_stamp_s": 1794126445.7341857,
+      "base_odom_xy_yaw": [
+        -0.3616946984448653,
+        0.4005897826105201,
+        3.0657776669990464
+      ],
+      "raw_depth_shape": [
+        720,
+        1280
+      ],
+      "raw_intrinsic": [
+        [
+          524.7156372070312,
+          0.0,
+          625.4193725585938
+        ],
+        [
+          0.0,
+          524.7156372070312,
+          362.1388854980469
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "odom_from_camera": [
+        [
+          0.03838728862159413,
+          -0.026661597283517358,
+          -0.9989071905350236,
+          -0.5535137076305295
+        ],
+        [
+          0.9992547893648152,
+          0.005060848224568648,
+          0.03826556868422182,
+          0.34756059374315146
+        ],
+        [
+          0.004035096499644619,
+          -0.999631705702425,
+          0.02683600101913719,
+          0.29802762634367524
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ROI_valid_points": 10730,
+      "ransac_support_count": 10254,
+      "inlier_fraction_after_refinement": 0.9524697110904008,
+      "median_abs_residual_m": 0.0007018117811600777,
+      "p95_abs_residual_m": 0.00786906545497427,
+      "plane_normal_odom": [
+        0.028507516795261752,
+        0.0041087538108686645,
+        0.999585133757145
+      ],
+      "plane_d_odom_m": 0.14505548988387598,
+      "plane_z_at_odom_origin_m": -0.14511569348641198,
+      "plane_z_at_current_base_xy_m": -0.13644700424509787,
+      "apparent_offset_from_declared_floor_at_base_m": 0.09655299575490214,
+      "declared_floor_odom_z_m": -0.233,
+      "slope_deg": 1.6504664288363127,
+      "plane_normal_base_yaw_frame": [
+        -0.028114419896145115,
+        -0.0062561781954879134,
+        0.999585133757145
+      ],
+      "plane_normal_camera": [
+        0.009233440673256358,
+        -0.999956254405361,
+        -0.001494272041707437
+      ],
+      "plane_d_camera_m": 0.4286082142233081,
+      "camera_perpendicular_distance_to_plane_m": 0.4286082142233081,
+      "camera_vertical_height_above_plane_m": 0.4287861031028908,
+      "camera_vertical_height_from_declared_floor_m": 0.5310276263436753,
+      "pixel_neighborhoods": [
+        {
+          "center_uv": [
+            656,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6856377124786377,
+          "depth_max_m": 1.9289017915725708,
+          "median_abs_plane_residual_m": 0.004235974088461603,
+          "planning_z_min_m": 0.1458092057286117,
+          "planning_z_max_m": 0.15067780844496917,
+          "above_original_height_threshold_count": 5,
+          "center_depth_m": 1.7969013452529907,
+          "center_planning_xyz": [
+            39.57471707879241,
+            37.54435776067997,
+            0.1488161647984739
+          ]
+        },
+        {
+          "center_uv": [
+            664,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6848204135894775,
+          "depth_max_m": 1.9296560287475586,
+          "median_abs_plane_residual_m": 0.0038943338767772895,
+          "planning_z_min_m": 0.14642419352241912,
+          "planning_z_max_m": 0.15034628551378273,
+          "above_original_height_threshold_count": 5,
+          "center_depth_m": 1.7971088886260986,
+          "center_planning_xyz": [
+            39.547318652461435,
+            37.54522673723805,
+            0.14888257815485537
+          ]
+        },
+        {
+          "center_uv": [
+            672,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6835829019546509,
+          "depth_max_m": 1.9296560287475586,
+          "median_abs_plane_residual_m": 0.0037472492213203035,
+          "planning_z_min_m": 0.14689593070280674,
+          "planning_z_max_m": 0.15045245061331722,
+          "above_original_height_threshold_count": 5,
+          "center_depth_m": 1.7975155115127563,
+          "center_planning_xyz": [
+            39.51988819855451,
+            37.545896529607006,
+            0.14890669616166627
+          ]
+        },
+        {
+          "center_uv": [
+            528,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4818534851074219,
+          "depth_max_m": 1.665315866470337,
+          "median_abs_plane_residual_m": 0.000652754652343962,
+          "planning_z_min_m": 0.14647532147877,
+          "planning_z_max_m": 0.15030775916236597,
+          "above_original_height_threshold_count": 2,
+          "center_depth_m": 1.5684977769851685,
+          "center_planning_xyz": [
+            39.979327797841215,
+            37.757123894312286,
+            0.14804489982909821
+          ]
+        },
+        {
+          "center_uv": [
+            536,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4818534851074219,
+          "depth_max_m": 1.665315866470337,
+          "median_abs_plane_residual_m": 0.0005784810539464502,
+          "planning_z_min_m": 0.14659924660752774,
+          "planning_z_max_m": 0.15237266199922475,
+          "above_original_height_threshold_count": 4,
+          "center_depth_m": 1.5680431127548218,
+          "center_planning_xyz": [
+            39.95537363022371,
+            37.758524482153604,
+            0.14825238276212746
+          ]
+        },
+        {
+          "center_uv": [
+            544,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4819610118865967,
+          "depth_max_m": 1.6634807586669922,
+          "median_abs_plane_residual_m": 0.0005784810539464502,
+          "planning_z_min_m": 0.14626722007599688,
+          "planning_z_max_m": 0.153635605451751,
+          "above_original_height_threshold_count": 5,
+          "center_depth_m": 1.5696138143539429,
+          "center_planning_xyz": [
+            39.9316651836041,
+            37.757874493618104,
+            0.14796552199258292
+          ]
+        }
+      ]
+    },
+    {
+      "action_id": 13,
+      "source_packet": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/fresh_calibrated_pair_20261108_01_S/joint_inputs/joint-1794126535339697813.npz",
+      "source_sha256": "1ca1ce048b8a28cf78d932742ce85fd6be35c552ccaa13ad0b2df62da31ad0a8",
+      "RGBD_stamp_s": 1794126535.3396978,
+      "base_odom_xy_yaw": [
+        -1.071712992880242,
+        0.39897232385241216,
+        -0.07611973162829945
+      ],
+      "raw_depth_shape": [
+        720,
+        1280
+      ],
+      "raw_intrinsic": [
+        [
+          524.7156372070312,
+          0.0,
+          625.4193725585938
+        ],
+        [
+          0.0,
+          524.7156372070312,
+          362.1388854980469
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "odom_from_camera": [
+        [
+          -0.038691804772685856,
+          0.02666005377713382,
+          0.9988954829090146,
+          -0.8798778322197465
+        ],
+        [
+          -0.9992430446291192,
+          -0.005068972978909292,
+          -0.03856997891194852,
+          0.4519430543671299
+        ],
+        [
+          0.004035096499644564,
+          -0.9996317057024253,
+          0.026836001019136857,
+          0.2980276263436753
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ROI_valid_points": 10730,
+      "ransac_support_count": 10730,
+      "inlier_fraction_after_refinement": 1.0,
+      "median_abs_residual_m": 0.0010665004320444607,
+      "p95_abs_residual_m": 0.002630190533826885,
+      "plane_normal_odom": [
+        -0.02684030766538589,
+        -0.008905356999210468,
+        0.9996000662770806
+      ],
+      "plane_d_odom_m": 0.10711846340393517,
+      "plane_z_at_odom_origin_m": -0.10716132082992764,
+      "plane_z_at_current_base_xy_m": -0.13238352352053678,
+      "apparent_offset_from_declared_floor_at_base_m": 0.10061647647946323,
+      "declared_floor_odom_z_m": -0.233,
+      "slope_deg": 1.6204891156764416,
+      "plane_normal_base_yaw_frame": [
+        -0.02608536701657998,
+        -0.010920674267932393,
+        0.9996000662770806
+      ],
+      "plane_normal_camera": [
+        0.01397059871410736,
+        -0.999902342304573,
+        0.000358085742161763
+      ],
+      "plane_d_camera_m": 0.42461837593175195,
+      "camera_perpendicular_distance_to_plane_m": 0.42461837593175195,
+      "camera_vertical_height_above_plane_m": 0.42478826308325923,
+      "camera_vertical_height_from_declared_floor_m": 0.5310276263436753,
+      "pixel_neighborhoods": [
+        {
+          "center_uv": [
+            656,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6657401323318481,
+          "depth_max_m": 1.8936631679534912,
+          "median_abs_plane_residual_m": 0.0014562012960715326,
+          "planning_z_min_m": 0.15071476669165165,
+          "planning_z_max_m": 0.1577502240596955,
+          "above_original_height_threshold_count": 25,
+          "center_depth_m": 1.7730551958084106,
+          "center_planning_xyz": [
+            39.822733321350896,
+            40.7986115316177,
+            0.1538883807303695
+          ]
+        },
+        {
+          "center_uv": [
+            664,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6672874689102173,
+          "depth_max_m": 1.8949599266052246,
+          "median_abs_plane_residual_m": 0.0014349933850511948,
+          "planning_z_min_m": 0.15052276529752387,
+          "planning_z_max_m": 0.15745620983153916,
+          "above_original_height_threshold_count": 25,
+          "center_depth_m": 1.7745471000671387,
+          "center_planning_xyz": [
+            39.849914857984736,
+            40.79903597544915,
+            0.15368021497622794
+          ]
+        },
+        {
+          "center_uv": [
+            672,
+            488
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.6688799858093262,
+          "depth_max_m": 1.898302674293518,
+          "median_abs_plane_residual_m": 0.0013672525256746004,
+          "planning_z_min_m": 0.15036054517180766,
+          "planning_z_max_m": 0.15721168090939577,
+          "above_original_height_threshold_count": 25,
+          "center_depth_m": 1.7765473127365112,
+          "center_planning_xyz": [
+            39.877207635662174,
+            40.799967807907706,
+            0.15336417514824577
+          ]
+        },
+        {
+          "center_uv": [
+            528,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4700794219970703,
+          "depth_max_m": 1.6457747220993042,
+          "median_abs_plane_residual_m": 0.0012627745611222124,
+          "planning_z_min_m": 0.1488002553950644,
+          "planning_z_max_m": 0.154639015646619,
+          "above_original_height_threshold_count": 20,
+          "center_depth_m": 1.5526862144470215,
+          "center_planning_xyz": [
+            39.42270439386145,
+            40.59386129461635,
+            0.15190563550891142
+          ]
+        },
+        {
+          "center_uv": [
+            536,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4711363315582275,
+          "depth_max_m": 1.6500937938690186,
+          "median_abs_plane_residual_m": 0.001108969305435109,
+          "planning_z_min_m": 0.14803271551048078,
+          "planning_z_max_m": 0.15461043921015363,
+          "above_original_height_threshold_count": 18,
+          "center_depth_m": 1.5548073053359985,
+          "center_planning_xyz": [
+            39.44608393335283,
+            40.59507172632946,
+            0.15148337773128798
+          ]
+        },
+        {
+          "center_uv": [
+            544,
+            504
+          ],
+          "valid_depth_neighbors": 25,
+          "depth_min_m": 1.4737846851348877,
+          "depth_max_m": 1.6536049842834473,
+          "median_abs_plane_residual_m": 0.0003886418690176724,
+          "planning_z_min_m": 0.14742506999294067,
+          "planning_z_max_m": 0.15436012938380353,
+          "above_original_height_threshold_count": 15,
+          "center_depth_m": 1.558857798576355,
+          "center_planning_xyz": [
+            39.46930781269359,
+            40.598232562123755,
+            0.1505905129301731
+          ]
+        }
+      ]
+    }
+  ],
+  "S13_root_reproduction": {
+    "normal_max_abs_difference": 0.0,
+    "d_abs_difference_m": 2.7755575615628914e-17,
+    "median_residual_abs_difference_m": 8.326672684688674e-17
+  },
+  "script_sha256": "2cb187c07ffbfe99ed618783089723971c133167f21cf94d57303d58aa0f7fa3",
+  "no_runtime_change": true,
+  "no_thesis_change": true,
+  "limits": [
+    "Depth/K/TF-derived plane in a visually floor-dominated ROI is not independently measured ground truth.",
+    "The z at odomorigin is an extrapolation; local base/camera heights are reported separately.",
+    "Camera-relative plane distance is derived from same depthsensor, not an external calibration reference.",
+    "A stable plane does not identify which extrinsic, base mounting, fixedflooroffset or depthmodel is physically correct.",
+    "FixedUV neighborhoods acrossframes do not necessarily view the same physical ground patch."
+  ]
+}

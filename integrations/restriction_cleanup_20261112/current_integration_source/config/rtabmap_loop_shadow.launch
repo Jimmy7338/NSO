@@ -1,0 +1,67 @@
+<launch>
+  <arg name="database_path" />
+  <arg name="output_dir" />
+  <arg name="mode" default="mapping" />
+  <arg name="image_decimation" default="2" />
+  <arg name="rgb_topic" default="/zed2i/zed_node/rgb/image_rect_color" />
+  <arg name="depth_topic" default="/zed2i/zed_node/depth/depth_registered" />
+  <arg name="camera_info_topic" default="/zed2i/zed_node/rgb/camera_info" />
+  <group ns="nso_loop">
+    <node pkg="rtabmap_sync" type="rgbd_sync" name="rgbd_sync" output="screen" required="true">
+      <remap from="rgb/image" to="$(arg rgb_topic)" />
+      <remap from="depth/image" to="$(arg depth_topic)" />
+      <remap from="rgb/camera_info" to="$(arg camera_info_topic)" />
+      <param name="approx_sync" value="true" />
+      <param name="approx_sync_max_interval" value="0.05" />
+      <param name="topic_queue_size" value="10" />
+      <param name="sync_queue_size" value="10" />
+    </node>
+    <node pkg="rtabmap_slam" type="rtabmap" name="rtabmap" output="screen" required="true">
+      <param name="database_path" value="$(arg database_path)" />
+      <param name="frame_id" value="base_link" />
+      <param name="map_frame_id" value="nso_loop_map" />
+      <!-- Empty odom_frame_id selects the actual timestamped odometry topic. -->
+      <param name="odom_frame_id" value="" />
+      <param name="publish_tf" value="false" />
+      <param name="subscribe_depth" value="false" />
+      <param name="subscribe_rgbd" value="true" />
+      <param name="subscribe_scan" value="true" />
+      <param name="approx_sync" value="true" />
+      <param name="approx_sync_max_interval" value="0.10" />
+      <param name="topic_queue_size" value="20" />
+      <param name="sync_queue_size" value="20" />
+      <param name="wait_for_transform" value="0.3" />
+      <remap from="rgbd_image" to="rgbd_image" />
+      <remap from="odom" to="/nso_csm/odom" />
+      <remap from="scan" to="/scan" />
+      <param name="Mem/IncrementalMemory" type="string" value="$(eval 'true' if arg('mode') == 'mapping' else 'false')" />
+      <param name="Mem/InitWMWithAllNodes" type="string" value="$(eval 'false' if arg('mode') == 'mapping' else 'true')" />
+      <param name="Mem/BinDataKept" type="string" value="true" />
+      <param name="Mem/NotLinkedNodesKept" type="string" value="false" />
+      <param name="Mem/IntermediateNodeDataKept" type="string" value="false" />
+      <param name="Mem/SaveDepth16Format" type="string" value="true" />
+      <param name="Mem/DepthCompressionFormat" type="string" value=".rvl" />
+      <!-- Matching pre/post avoids installed core's mismatched RGB/depth save sizes. -->
+      <param name="Mem/ImagePreDecimation" type="string" value="$(arg image_decimation)" />
+      <param name="Mem/ImagePostDecimation" type="string" value="$(arg image_decimation)" />
+      <param name="Mem/LocalizationDataSaved" type="string" value="false" />
+      <param name="Rtabmap/DetectionRate" type="string" value="1" />
+      <param name="Reg/Strategy" type="string" value="2" />
+      <param name="Reg/Force3DoF" type="string" value="true" />
+      <param name="RGBD/NeighborLinkRefining" type="string" value="true" />
+      <param name="RGBD/ProximityBySpace" type="string" value="true" />
+      <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="10" />
+      <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false" />
+      <param name="RGBD/LinearUpdate" type="string" value="0.1" />
+      <param name="RGBD/AngularUpdate" type="string" value="0.1" />
+      <param name="Grid/Sensor" type="string" value="0" />
+      <param name="Icp/VoxelSize" type="string" value="0.05" />
+      <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.1" />
+    </node>
+    <node pkg="nso_loop_integration" type="rtabmap_loop_monitor.py" name="monitor" output="screen" required="true">
+      <param name="output_dir" value="$(arg output_dir)" />
+      <param name="database_path" value="$(arg database_path)" />
+      <param name="mode" value="$(arg mode)" />
+    </node>
+  </group>
+</launch>

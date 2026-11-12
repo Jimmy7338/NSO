@@ -1,0 +1,28 @@
+--- a/runtime/joint_observation.py
++++ b/runtime/joint_observation.py
+@@ -133,6 +133,15 @@
+     u=inv[:2,0];v=inv[:2,1];half=planning_resolution_m*.5;finehalf=raw_resolution_m*.5
+     extent=half*(np.abs(u)+np.abs(v))
+     bound_u=half+finehalf*np.abs(u).sum();bound_v=half+finehalf*np.abs(v).sum()
++    # Exact output compaction: cells with their entire transformed square
++    # outside the source AABB cannot overlap an in-bounds source square.
++    # Their output is necessarily unknown. Keep touching cells conservatively;
++    # the unchanged SAT tests below alone decide positive-area overlap.
++    active=((x+extent[0]>=0)&(y+extent[1]>=0)&
++            (x-extent[0]<=source.shape[1]*raw_resolution_m)&
++            (y-extent[1]<=source.shape[0]*raw_resolution_m))
++    original_size=len(x)
++    x=x[active];y=y[active]
+     ix=np.floor(x/raw_resolution_m).astype(np.int64)
+     iy=np.floor(y/raw_resolution_m).astype(np.int64)
+     free=np.ones(x.shape,bool);occupied=np.zeros(x.shape,bool);covered=np.zeros(x.shape,bool)
+@@ -152,7 +161,8 @@
+             occupied |= overlap&inside&(values==100)
+             covered |= overlap
+     belief=np.full(x.shape,-1,np.int8);belief[covered&free]=0;belief[occupied]=1
+-    return belief.reshape(shape)
++    result=np.full(original_size,-1,np.int8);result[active]=belief
++    return result.reshape(shape)
+ 
+ 
+ class JointObservationCollector:

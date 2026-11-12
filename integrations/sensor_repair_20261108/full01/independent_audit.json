@@ -1,0 +1,87 @@
+{
+  "schema": "nso.ground_S40.independent_readonly_audit.v1",
+  "scope": "actual worker and journal evidence; supervisor final result and summary missing",
+  "source_sha256": {
+    "joint/decisions.jsonl": "80c9d7187f732e4f27fa36d41dbb963add66af3d56712a823d49b571cf16b903",
+    "events.jsonl": "eeca4654377041993236b60130da6dcf62a13ad1bcc776f0e150cda45e220fa2",
+    "adapter/result.json": "10a81ede3b635b4072ed5a458f69af5ba15f336453e4d70d242cbbbf07db0318",
+    "joint_configuration.json": "40e0a7c31695ae0fa99149d02809f706d1b9db8b082fbf995d8e1a67a1fe6be8",
+    "running.json": "f7f5b86133adfd4093d7e25723365901531b6e14325bc526c752bc414dc58064"
+  },
+  "supervisor_result_present": false,
+  "supervisor_summary_present": false,
+  "worker_terminal": {
+    "reason": "budget_exhausted",
+    "returned_to_anchor": true,
+    "failed": false,
+    "current_footprint_known_safe": true,
+    "final_frame_id": "1794131891161092370",
+    "final_action_id": 40
+  },
+  "worker_paid_actions": 40,
+  "accepted_observations": 41,
+  "goal_count": 40,
+  "goal_results_status3": 40,
+  "arrival_evidence_verified": 40,
+  "last_arrival_target_error_m": 0.015873727493576812,
+  "last_arrival_yaw_error_rad": 0.07967258204052485,
+  "CAN_distance_m_adapter": 6.435906432986246,
+  "adapter_stop_reason": "native_driver_fault:8",
+  "adapter_zero_feedback_confirmed": true,
+  "physical_stop_independently_observed": false,
+  "proxy": {
+    "area_initial_m2": 67.00000000000001,
+    "area_final_m2": 107.56000000000002,
+    "old_quality_initial": 0.158267719312287,
+    "old_quality_final": 0.17230325071119607,
+    "fixed_old_support_count": 375
+  },
+  "global_plans": [
+    {
+      "rpc_id": 3,
+      "candidate_count": 5,
+      "G_S_equal": true,
+      "nonzero_aperture_factors": 0,
+      "nonzero_S_prior_factors": 0,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 2,
+        "deep_requires_available_entry": 2
+      }
+    },
+    {
+      "rpc_id": 39,
+      "candidate_count": 5,
+      "G_S_equal": true,
+      "nonzero_aperture_factors": 0,
+      "nonzero_S_prior_factors": 0,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 3,
+        "deep_requires_available_entry": 3
+      }
+    },
+    {
+      "rpc_id": 69,
+      "candidate_count": 4,
+      "G_S_equal": true,
+      "nonzero_aperture_factors": 0,
+      "nonzero_S_prior_factors": 0,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 4,
+        "deep_requires_available_entry": 4
+      }
+    },
+    {
+      "rpc_id": 79,
+      "candidate_count": 2,
+      "G_S_equal": true,
+      "nonzero_aperture_factors": 0,
+      "nonzero_S_prior_factors": 0,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 2,
+        "deep_requires_available_entry": 2
+      }
+    }
+  ],
+  "interpretation": "G/S same-state scores equal for all logged candidates; logged incremental aperture and semantic prior are zero. Missing target entry roles are reported reasons, not a complete geometric root-cause analysis. No independent G run or semantic benefit shown.",
+  "termination_limit": "Worker reports budget-exhausted anchor return, and 40 arrivals verified. Supervisor final result/summary absent; observer exit 143 reported by operator. Adapter native_driver_fault:8 and zero CAN are observed but code8 cause or cleanup ordering is not established here. Do not represent as a fully finalized successful supervisor run."
+}

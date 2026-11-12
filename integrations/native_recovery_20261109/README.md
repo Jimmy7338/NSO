@@ -1,0 +1,9 @@
+# Native execution diagnostics and recovery, 2026-11-09
+
+This compact package records mission wiring of native timing instrumentation, the previous setup navigation, measured latency diagnosis, exact map resampling optimization, and fresh process recovery after reboot. The original 40 ms sender gate and research candidate scoring are unchanged. The deployed joint_observation.py SHA-256 is 28da1c189a743450872ab3537cb4088c9eee65614f43e9b9b31b6e6126697d37.
+
+The prior setup reached its single goal (1.767 m, 42.94 s) and stopped; it is not a completed exploration trial. The subsequent capture interruption and previously published failed matched pilot remain failures. The fresh C40 diagnostic completed 40 paid actions, 41 observations and 40 verified arrivals, returned to its discrete anchor and stopped (7.084156 m, 430.715695 s). Fixed-support Q decreased by 0.0247242434; all global same-state G/S shadow choices and scores were equal. No semantic benefit is established. Native fault 8 during shutdown is retained in the phase audit and original timing ring; this does not establish a new loaded sender-late fault or hardware watchdog verification. New S/G comparisons are separate pending evidence and are not reported as completed here.
+
+Exact map checks cover 66 saved normal inputs and 200 synthetic cases; original NPZ files are retained locally and omitted here. Full RGB-D, continuous logs, model weights, and binaries are omitted. Compact records permit source and outcome audit, not full sensor replay. Independent reconstruction accuracy, repeated full physical trials, and semantic efficacy are unvalidated. The overall objective remains incomplete and the paper remains a working draft.
+
+Saved-scan ray union independent of depth belief increased from 67.2 to 111.0 m² (+43.8 m²) across 41 snapshots. This is sampled laser visibility, not ground-truth coverage or map accuracy.

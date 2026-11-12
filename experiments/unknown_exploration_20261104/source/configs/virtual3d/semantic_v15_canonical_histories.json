@@ -1,0 +1,20 @@
+{
+  "schema": "semantic_v15_canonical_histories/1",
+  "scene_protocol": "configs/virtual3d/semantic_gain_v12_scale_development.json",
+  "context": "D12-00",
+  "structure_seeds": [27101, 27102, 27103, 27104],
+  "total_budget": 192,
+  "renderer": "env.canonical_rgbd_v15.CanonicalRGBDInspectionWorldV15",
+  "sensor_conditions": "ideal zero noise, analytic box-union depth and scan, RGB marker decoding",
+  "history_policy": "G v10_3_1 with V14 bounded outbound recovery and 4+1+2*N observed-instance candidate capacity",
+  "decision_sampling": "all actual global planning calls, including internal recovery",
+  "grouping": "all four structural variants belong to one D12-00 development parent",
+  "matching": "exact depth/scan/pose history, shared pool, geometry descriptors and geometry feedback; changed semantic observations required",
+  "raw_color_excluded_from_geometry_match": true,
+  "replay": "separate process regenerates every sensor packet, action, global decision and terminal state",
+  "old_sensor_outcomes_reusable": false,
+  "external_prefix_actions": 0,
+  "training_allowed": false,
+  "future_candidate_branches_allowed": false,
+  "independent_confirmation": false
+}

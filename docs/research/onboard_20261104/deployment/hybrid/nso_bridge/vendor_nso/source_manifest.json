@@ -1,0 +1,83 @@
+{
+  "schema": "nso_onboard.source_manifest.v1",
+  "canonical_source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO",
+  "files": [
+    {
+      "path": "nso/__init__.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/nso/__init__.py",
+      "sha256": "a49ca782fb05203df5982082ee37a533dd6718e70a1119ce94f511db50a8b975",
+      "staging_sha256": "a49ca782fb05203df5982082ee37a533dd6718e70a1119ce94f511db50a8b975",
+      "upstream_sha256": "53df856db4ddc95f7d8a5c05a1298aea84298cfa974a0412017e61471feb76dd",
+      "modification": "Remove dangling lazy exports for neural/semantic modules absent from this bundle. Reference core files unchanged."
+    },
+    {
+      "path": "nso/instance_belief_v40.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/nso/instance_belief_v40.py",
+      "sha256": "249f9aa6ec14d9aefcf0dbfcc42641d4dd1cd46ae516d4f798e0d2f22063872d",
+      "staging_sha256": "249f9aa6ec14d9aefcf0dbfcc42641d4dd1cd46ae516d4f798e0d2f22063872d"
+    },
+    {
+      "path": "nso/observed_mapper_v42.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/nso/observed_mapper_v42.py",
+      "sha256": "0bd203864e9f734b378540d174384e778bd28714282990769c8e1918b6bc7a32",
+      "staging_sha256": null
+    },
+    {
+      "path": "utils/rgbd_contract.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/utils/rgbd_contract.py",
+      "sha256": "93d647c6dae79748d75f32148adf6aa9479a9f46950129557da99c6b28bb7f87",
+      "staging_sha256": null
+    },
+    {
+      "path": "nso/observed_geometry_v39.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/nso/observed_geometry_v39.py",
+      "sha256": "8ed3f534c96003a6ee6717c95f6f8afdea3b3e8620d39295c297641c90a323d5"
+    },
+    {
+      "path": "nso/cpu_four_modules_v35.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/nso/cpu_four_modules_v35.py",
+      "sha256": "e2924616b24f5ef66f52dcf10e49000c9ec9060e9fcb90a8e4e517bf13d9476a"
+    },
+    {
+      "path": "nso/observation_belief_v35.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/nso/observation_belief_v35.py",
+      "sha256": "09a6a4d9d0ac392b179a0da3cdd6a88fcb1c05e5bc3d20d393337d3a20551653"
+    },
+    {
+      "path": "nso/pixel_information_v34.py",
+      "source": "/home/ouc/nso_robot/releases/2968eae-20261007/NSO/nso/pixel_information_v34.py",
+      "sha256": "33f46e1afd1942d3d9323b9418bffe0cf77f79df5f657e3c4a04c09cddd91c11"
+    },
+    {
+      "path": "nso/online_planner_v35.py",
+      "source": "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/nso/online_planner_v35.py",
+      "sha256": "d689cf16745375ca668bdde604836fb0fbb7382565675e510e34ece18411b5d6",
+      "staging_sha256": "d689cf16745375ca668bdde604836fb0fbb7382565675e510e34ece18411b5d6"
+    }
+  ],
+  "external_dependencies": [
+    "numpy",
+    "open3d",
+    "scipy",
+    "torch==2.6.0",
+    "ultralytics==8.3.200"
+  ],
+  "models_copied": false,
+  "data_copied": false,
+  "original_files_modified": false,
+  "adapter_limitations": [
+    "Original marker interfaces remain isolated; paid natural COCO80 proposals use the pinned original V37 CPU detector, measured-plane association and original V40 independent-view/conflict gates. No natural-equipment prior registry is bundled.",
+    "V42 nominal posterior forecasts assume upright development marker mount and shared four-structure family.",
+    "V26/V27 planner rejected for runtime use: old image-grid convention and fixed category hypothesis.",
+    "V43 primitive router requires a frozen discrete public graph; runtime adapter accepts independently reachable ROS continuous candidates instead."
+  ],
+  "runtime_core": [
+    "ObservedMapperV42",
+    "ObservedGeometryV39.observe",
+    "ObservedGeometryV39.score_view",
+    "ObservedCoverageLedgerV21.predict_gain",
+    "assess_coverage_budget"
+  ],
+  "runtime_model_manifest": "../models/manifest.json",
+  "semantic_registry_bundled": false
+}

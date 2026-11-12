@@ -1,0 +1,254 @@
+{
+  "new_localization_epoch": true,
+  "old_grid_reused": false,
+  "no_actuator": true,
+  "started": [
+    {
+      "name": "master",
+      "pid": 2707717,
+      "argv": [
+        "/opt/ros/noetic/bin/roscore",
+        "-p",
+        "11382"
+      ],
+      "started_unix_s": 1794477047.413847
+    },
+    {
+      "name": "camera",
+      "pid": 2707749,
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_camera_neural.launch"
+      ],
+      "started_unix_s": 1794477048.8685873
+    },
+    {
+      "name": "csm_bridge",
+      "pid": 2707750,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/csm_odometry_bridge.py",
+        "--control-velocity-source",
+        "can_feedback",
+        "--can-interface",
+        "can0"
+      ],
+      "started_unix_s": 1794477048.8754601
+    },
+    {
+      "name": "sensors",
+      "pid": 2707751,
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_sensors_csm.launch"
+      ],
+      "started_unix_s": 1794477048.8797357
+    },
+    {
+      "name": "sensor_bridge",
+      "pid": 2707829,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+        "--run",
+        "--localization-source",
+        "lidar_csm",
+        "--no-self-mask"
+      ],
+      "started_unix_s": 1794477050.5074575
+    },
+    {
+      "name": "pair_helper",
+      "pid": 2731906,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+        "--launch-mapper"
+      ],
+      "started_unix_s": 1794479855.5855043
+    },
+    {
+      "name": "navigation",
+      "pid": 2708168,
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom",
+        "map_topic:=/nso_pair/map"
+      ],
+      "started_unix_s": 1794477061.6040812
+    },
+    {
+      "name": "dashboard",
+      "pid": 2708209,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/live_dashboard.py",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_reboot_20261112",
+        "--port",
+        "8765",
+        "--no-self-mask"
+      ],
+      "started_unix_s": 1794477064.0361595
+    },
+    {
+      "name": "overlay",
+      "pid": 2708210,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_overlay_server.py",
+        "--port",
+        "8766",
+        "--upstream",
+        "http://127.0.0.1:8765",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261112",
+        "--semantic-state",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261112/semantic_state.json",
+        "--camera-calibration-receipt",
+        "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_restore_trial/deployment/tf_verification.json"
+      ],
+      "started_unix_s": 1794477064.04383
+    },
+    {
+      "name": "semantics",
+      "pid": 2708211,
+      "argv": [
+        "/home/ouc/nso_robot/envs/science312/bin/python",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_semantic_worker.py",
+        "--input",
+        "/home/ouc/nso_robot/experiments/live_dashboard_reboot_20261112/latest_display_frame.npz",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261112/semantic_state.json",
+        "--interval",
+        "5"
+      ],
+      "started_unix_s": 1794477064.0522795
+    }
+  ],
+  "boot_id": "b0d5c5b5-4358-42fe-b231-cf3d2b08490a",
+  "last_health": {
+    "schema": "nso_hybrid_sensor_bridge/1",
+    "navigation_source": "lidar_rgbd",
+    "sampled_unix_s": 1794477059.833983,
+    "sampled_monotonic": 116505.107206239,
+    "odom": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794477059719033241,
+      "receipt_monotonic": 116505.004460184,
+      "fault": null,
+      "source": "lidar_csm",
+      "source_topic": "/nso_csm/odom",
+      "source_publisher": "/nso_csm_odometry_bridge",
+      "timestamp_semantics": "scan_acquisition_timestamp_preserved",
+      "velocity_source": "CSM_derived_SE2_base_twist"
+    },
+    "depth": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794477059619529516,
+      "receipt_monotonic": 116505.026539076,
+      "fault": null,
+      "source": "ZED_RGBD",
+      "statistics": {
+        "valid_fraction": 0.7252951388888889,
+        "valid_pixels": 41777,
+        "sampled_pixels": 57600,
+        "obstacle_points": 8678,
+        "supported_rows": 180,
+        "supported_columns": 320,
+        "minimum_valid_points": 0,
+        "minimum_support_rows": 0,
+        "minimum_support_columns": 0,
+        "whole_image_completeness_required": false,
+        "unknown_is_free": false,
+        "clearing_allowed": false
+      }
+    },
+    "laser_source": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794477059818840265,
+      "receipt_monotonic": 116505.103891085,
+      "fault": null,
+      "source": "lslidar_N301",
+      "source_topic": "/scan",
+      "source_publisher": "/lslidar_driver_node",
+      "caller": "/lslidar_driver_node",
+      "frame": "laser_link",
+      "frame_id": "laser_link",
+      "finite_returns": 1831,
+      "range_count": 2000
+    },
+    "self_mask": {
+      "file_sha256": "119af867a47bb7092ede51a3838cae386788081e0bc551411f1156ee8387b32b",
+      "raw_bool_sha256": "22ea770d293bf0134b29bc36c1541e7661863106cc5a69a9aee0ca4711c2c90b",
+      "pixels": 46499,
+      "asset_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask.npy",
+      "provenance_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask-provenance.json",
+      "excluded_is_free": false,
+      "physical_calibration": false,
+      "applied": false,
+      "profile": "unmasked_after_camera_relocation_v1",
+      "reason": "User relocated the camera; the original IMU no longer occludes the view."
+    },
+    "recent_errors": [],
+    "no_actuator": true,
+    "localization_source": "lidar_csm",
+    "mapping_source": "gmapping",
+    "localization_tf_owner": "/nso_csm_odometry_bridge",
+    "velocity_source": "CSM_derived_SE2_base_twist",
+    "dynamic_TF_published": false,
+    "legacy_topic_namespace_only": true,
+    "physical_extrinsic_calibration_verified": false,
+    "covariance_is_measured_accuracy": false,
+    "depth_scan_clearing_allowed": false
+  },
+  "initial_map": {
+    "stamp_ns": 1794479857854672242,
+    "frame": "nso_pair_map",
+    "publisher": "/nso_pair/gmapping"
+  },
+  "costmap_sources": {
+    "global_costmap": "/nso_pair/map",
+    "local_costmap": "/nso_pair/map"
+  },
+  "status": "data_started",
+  "display_output": "/home/ouc/nso_robot/experiments/live_dashboard_reboot_20261112",
+  "semantic_output": "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261112",
+  "completed_unix_s": 1794477064.058804,
+  "map_epoch_history": [
+    {
+      "previous": {
+        "name": "pair_helper",
+        "pid": 2708100,
+        "argv": [
+          "/usr/bin/python3",
+          "-s",
+          "-B",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+          "--launch-mapper"
+        ],
+        "started_unix_s": 1794477059.850893
+      },
+      "reset_unix_s": 1794479855.5855043,
+      "reason": "fresh map per predeclared C/G comparison arm"
+    }
+  ],
+  "comparison_current_arm": "C"
+}

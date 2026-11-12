@@ -1,0 +1,211 @@
+{
+  "configuration": {
+    "robot_radius_m": 0.7212185868375829,
+    "sensor_config": {
+      "width_px": 320,
+      "height_px": 180,
+      "fov_deg": 101.34615631189132,
+      "max_depth_m": 4.0,
+      "camera_height_m": 0.536,
+      "laser_height_m": 0.684,
+      "laser_rays": 2000,
+      "voxel_m": 0.03,
+      "truncation_m": 0.12
+    },
+    "planner_revision": "v10_3_1",
+    "policy_variant": "exploration_joint_v1",
+    "sensor_range_profile": "sensor_range_matched_v1",
+    "measured_extent_profile": "measured_extent_3m_v1",
+    "shape": [
+      400,
+      400
+    ],
+    "planning_from_odom": [
+      [
+        0.0005762570828807205,
+        -0.9999998339638735,
+        0.0,
+        40.099326419279514
+      ],
+      [
+        0.9999998339638735,
+        0.0005762570828807205,
+        0.0,
+        39.89867166085819
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.233
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "total_budget": 40,
+    "score_mode": "S",
+    "episode_id": "legacy_mount_S40_20261108_01",
+    "scene_id": "legacy_mount_unknown_exploration_20261108"
+  },
+  "execution_allowed": true,
+  "calibration": {
+    "source": "actual RGBD/scan and per-sensor historical TF",
+    "pixel_stride": 4,
+    "initial_grid": {
+      "shape": [
+        400,
+        400
+      ],
+      "resolution_m": 0.2,
+      "planning_from_odom": [
+        [
+          0.0005762570828807205,
+          -0.9999998339638735,
+          0.0,
+          40.099326419279514
+        ],
+        [
+          0.9999998339638735,
+          0.0005762570828807205,
+          0.0,
+          39.89867166085819
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.233
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "return_anchor": [
+        200,
+        200,
+        0
+      ],
+      "floor_odom_z_m": -0.233,
+      "planning_domain_is_resource_extent_not_observed_world": true,
+      "initial_actual_base_odom_pose": [
+        0.0013287270769201246,
+        -0.0006728151438093681,
+        0.0005762571147739042
+      ]
+    },
+    "initial_actual_base_odom_pose": [
+      0.0013287270769201246,
+      -0.0006728151438093681,
+      0.0005762571147739042
+    ],
+    "initial_odom_stamp_ns": 1794129147990858370,
+    "initial_odom_stamp_semantics": "actual historical query",
+    "initial_odom_frame": "odom",
+    "initialization_unix_s": 1794129153.6748714,
+    "initialization_scope": "current legacy-mount epoch; existing stationary navigation map retained; no old paid/semantic ledger",
+    "source_registration": "fresh current epoch with no previous SE2 alignment",
+    "localization_source": "lidar_csm",
+    "navigation_map_source": {
+      "topic": "/nso_visual/map",
+      "publisher": "/slam_gmapping",
+      "map_frame": "map"
+    },
+    "joint_turn_execution_profile": "measured_in_place_turn_v1",
+    "apply_approved_self_mask": false,
+    "self_mask_pixels": 0,
+    "self_mask_profile": "unmasked_after_camera_relocation_v1",
+    "camera_mount_calibrated": false,
+    "camera_extrinsic_policy": "user_requested_legacy_mount_rollback",
+    "camera_extrinsics_verified": false,
+    "captured_base_from_camera": [
+      [
+        2.220446049250313e-16,
+        2.220446049250313e-16,
+        1.0,
+        0.06099999999999999
+      ],
+      [
+        -1.0,
+        0.0,
+        2.220446049250313e-16,
+        0.0591
+      ],
+      [
+        0.0,
+        -1.0,
+        2.220446049250313e-16,
+        0.303
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "captured_base_from_laser": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -0.011
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0035
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.451
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "floor_reference_profile": "original_fixed_minus_0_233_retained",
+    "candidate_floor_profile_deployed": false,
+    "nominal_view_forecast_calibrated": false,
+    "physical_reconstruction_accuracy_verified": false,
+    "nominal_camera_height_m": 0.536,
+    "actual_camera_height_from_base_TF_and_fixed_floor_m": 0.536,
+    "depth_confidence": 80,
+    "depth_texture_confidence": 100,
+    "SDK_depth_mode": "NEURAL",
+    "ROS_execution_frame": "odom",
+    "ROS_xy_latch": true,
+    "ROS_xy_goal_tolerance_m": 0.08,
+    "Navfn_default_tolerance": 0,
+    "controller_odometry_source": "/nso_csm/control_odom",
+    "controller_odometry_projection": "original default-keyframe CSM pose and kernel-timestamped CAN control velocity",
+    "correction_reverse_profile": "endpoint_only_max0.05_mps_existing_authorization",
+    "external_deadline_s": 600,
+    "evidence_scope": "one legacy mount integration episode; uncalibrated floor reference; no matched efficacy or accuracy claim",
+    "prior_episode_ledger_imported": false,
+    "history_acquisition": "current stationary navigation epoch retained; actual fresh paid observations"
+  },
+  "semantic_configuration": {
+    "model_dir": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/models/real_semantics_20261030",
+    "confidence": 0.25,
+    "imgsz": 640,
+    "prior_profile": "real_scene_structural_v1"
+  }
+}

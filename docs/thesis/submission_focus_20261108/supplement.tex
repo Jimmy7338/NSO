@@ -1,0 +1,62 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=27mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx,amsmath,amssymb,booktabs,array,graphicx}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\title{Supplement: Correctable Category Priors for Budget-Constrained Active Observation}
+\author{}\date{Anonymous research draft, 12 November 2026}\maketitle
+\section*{Evidence scope}
+The main paper's controlled two-template policy, current-source joint-exploration variant and physical adapters are distinct implementations. The following deterministic results share one Q0 scene context with two related arrangements. Trajectories, seeds, configurations and checkpoints are not independent environments. All 24 matrix trajectories are included; the two-room diagnostic and post-hoc controls are separate related analyses. New current-source experiments are not recovered historical Windows experiment inputs.
+
+Physical pilot outcomes, including failed returns, the calibrated S24 map-drift limitation, and the 10--12 November unknown-space episodes, remain in main-paper Section 7. The later episodes use separately declared sensor and execution profiles and are not additional controlled two-template pairs.
+\renewcommand{\thetable}{S\arabic{table}}
+\input{Table8.tex}
+\input{Table9.tex}
+\input{joint_diagnostic_detail.tex}
+\section{Two-room attribution control}
+The two-room construction adds a divider with a 1.6 m opening to Q0 shelf-west. The blocked initial doorway position was corrected during geometry preflight before policy trajectories were observed. G, S and a post-hoc G$\times$2 control each complete 96 actions, return to the anchor and record zero simulated collisions. Initial/final coverage is 60.12/99.01\% in all three runs. Newly visible surface is 123.965208, 126.576693 and 126.576693 m$^2$; F1 at 5 cm is 0.911938, 0.922122 and 0.922122; path length is 16.8, 16.4 and 16.4 m. First 99\% coverage occurs at actions 58, 56 and 56. G$\times$2 and S have identical action traces, so this diagnostic does not isolate a category-specific advantage from geometric-prior reweighting. The control was chosen after the G/S results and scalar audit, not preregistered.
+\section{Prospectively fixed Q1 synthetic parent}
+
+A further comparison fixed Q1 (outer seed 952), the shelf-west arrangement, a 96-action limit and native G/S/X modes before constructing the scene or observing trajectories. Each mode was executed once with the existing exploration\_joint\_v1/v10\_3\_1 policy, a fresh actual simulated first frame, exact poses and the original 0.2 m circular radius. X swaps the native class-prior scores. The category channel uses synthetic markers, without a natural-image detector. This adds one synthetic parent and three related policy trajectories, not three independent scenes. All three use 96 paid actions, return to the complete anchor and record zero simulated collisions. G and X have exactly identical step records.
+
+\begin{table}[!htbp]
+\centering
+\caption{All Q1 outcomes. Initial/final coverage is measured over reachable cells; surface gain excludes the initial frame; F1 uses 5 cm.}\label{tab:Q1}
+\small\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Mode & Coverage start/end (\%) & Area gain (m$^2$) & Surface gain (m$^2$) & F1 \\
+\midrule
+G & 63.104 / 99.164 & 15.52 & 107.233302 & 0.929464 \\
+S & 63.104 / 99.628 & 15.72 & 118.952383 & 0.978022 \\
+X & 63.104 / 99.164 & 15.52 & 107.233302 & 0.929464 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+S exceeds G/X by 11.719081 m$^2$ newly reference-visible surface, 0.20 m$^2$ observed area and 0.048558 F1. The first changed planning choice occurs after 19 actions at 88.475836\% coverage, with identical complete inputs, candidate sets and score components. The actual actions first differ at action 33. S has a temporary surface deficit before the terminal gain (Figure~\ref{fig:Q1}); the endpoint does not imply uniformly better progress.
+
+All 25 recorded planning states admit a nonnegative uniform geometric-prior weight that reproduces the S-selected candidate within that state's saved set. Moreover, every actually visited S state shares the feasible interval $\lambda\ge6.037968585111318$ under the audit's exact rational constraints and tie rule. No weighted-control rollout or weight search was added. Thus, saved-state selection remains consistent with generic reweighting; the audit does not prove that an unexecuted weighted policy reproduces the full S route. This complete-route gain supports controlled synthetic observation allocation while leaving category-specific advantage, early unknown-exploration efficiency and natural-semantic transfer unresolved.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=.90\linewidth]{Q1_curves.pdf}
+\caption{One prospectively fixed Q1 synthetic parent with native G/S/X. Left: observed reachable-cell coverage. Right: reference-visible surface added since the initial frame. G and X coincide exactly; S has a temporary surface deficit before the final gain. Each arm returns after 96 paid actions with no simulated collision. These related trajectories provide no between-scene uncertainty estimate.}\label{fig:Q1}
+\end{figure}
+
+
+\section{Saved-scan physical evidence and execution profiles}
+The 10 November snapshot S40 and 12 November S96 episodes are separate real-robot S trajectories. The S40 record has 40 paid actions, 41 accepted observations and 40 verified ROS primitive arrivals, with a recorded return. The S96 attempt has 60 paid actions, 61 observations and 60 arrivals before interruption on the next goal; no return is recorded. Their CAN distances and wall durations are 6.756875 m/440.470694 s and 11.081836 m/652.883974 s. Zero feedback after stopping is retained for both. The native option-endpoint arrival counter is distinct from the ROS primitive-arrival count.
+
+The cumulative laser estimator uses one archived real scan per accepted RGB-D packet, its own historical laser transform, a fixed 0.2 m planning grid and a 12.5 m-radius measurement region. Finite valid returns are capped at 8 m; a capped/max-range endpoint provides free-ray evidence without a hit. Invalid returns contribute no synthesized evidence. Cell unions include acquired rays and hit endpoints, which can conflict across observations. The S40 and S96 unions increase by 34.32 and 56.20 m$^2$, respectively. The S96 last-scan time is 640.190679 s after its first scan, whereas 652.883974 s is the complete run duration; scan and episode endpoints must not be substituted for each other. These figures provide no independent traversable-space denominator, localization reference or surface accuracy. The accompanying plotting script consumes the evaluated scan curve directly and exports all 61 dependent checkpoints.
+
+The S96 stop was triggered by measured CAN feedback of 0.154 m/s against the strict 0.15 m/s limit. The later 0.05 m/s positive-command profile changes execution clipping while retaining all speed-stop predicates and expiry limits. Its completed S12 record has 12 paid actions, 13 observations and 12 arrivals, with 0.998883 m travel, 152.766800 s duration and recorded return. The subsequent 0.05 m/s S40 attempt was interrupted after 9 paid actions, 10 observations and 9 verified arrivals, with 1.483731 m travel and 136.336224 s duration, without returning. A passive CAN observer recorded a 0.159 m/s maximum feedback velocity despite command frames bounded by 0.05 m/s. Local command-frame observation does not prove controller acceptance or independently measured physical speed. The shorter completion does not establish that the execution fault was resolved. Profile changes and unequal initial observations prevent a matched before/after efficacy claim. The S96 negative fixed-support quality change and failed return remain included.
+
+
+\paragraph{Modified outcomes.}
+The reverse-enabled ros\_checked\_exploration\_v2 episode ended at its external deadline after 19 accepted attempts, including 16 exact primitive successes and three failed actual-pose observations (20 observations with bootstrap). Its 7.031573 m/603.310025 s totals include three ROS backoffs, whose brackets sum to 3.180978 m/230.314087 s; one succeeded and two aborted. The accepted-scan union increased by 33.04 m$^2$, while own-support quality decreased by 0.008163. The subsequent navigation-geometry trial ended on native driver fault 5: 39 ROS goals arrived, but only 38 paid observations plus bootstrap were accepted. Its 7.356553 m/470.210617 s totals, 37.68 m$^2$ scan-union gain and $-0.030885$ quality change remain interrupted outcomes without verified return. The trial's padded width of 0.48 m is below the current Mini URDF's 0.585 m; the physical envelope is unresolved and the prior navigation default was restored. G/S score separation appeared in one geometry-trial state but changed no recorded winner. These unmatched episodes support no efficacy or accuracy ranking.
+
+The optional viewpoint controller is installed but physically unexecuted. It preserves the candidate-score formulas while separating waypoint-attempt accounting from fixed nominal grid-motion predictions and freezing primitive gain calibration; no failed-goal blacklist or added re-ranking is active. The independent RTAB-Map interface processed parked mapping and database-localization inputs with navigation TF ownership unchanged. Initial counts were 475 information messages, 11 proximity events and zero descriptor-loop events; lean mapping and existing-database localization were exercised while parked, with no displaced relocalization proof. RTAB-Map is off. Interface operation does not validate closed-loop exploration or the original controlled method.
+
+\end{document}

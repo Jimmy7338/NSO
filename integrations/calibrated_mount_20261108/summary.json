@@ -1,0 +1,95 @@
+{
+  "schema": "nso.confirmed_mount_deployment.v1",
+  "verified_unix_s": 1794123623.5678,
+  "user_confirmation": "对应当前位置，之后未移动",
+  "source_calibration": "/home/ouc/hjd/biaoding/bag/lidar_zed2i外参/left/result.yaml",
+  "source_sha256": "a4df7e4c878ab01322b18f3a5061b2202c768d4e4379bcc993443a404811ebfc",
+  "source_copy": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/left_calibration_result.yaml",
+  "tf_verification": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/tf_verification.json",
+  "tf_max_matrix_error": 4.787836793695988e-16,
+  "fresh_epoch": true,
+  "old_alignment_reused": false,
+  "old_map_trajectory_or_TSDF_seeded": false,
+  "previous_data_preserved": true,
+  "camera_rgb_and_depth_verified": true,
+  "freshness": {
+    "camera": {
+      "fresh": true,
+      "age_s": 0.33362889289855957
+    },
+    "pose": {
+      "fresh": true,
+      "age_s": 0.135545015335083
+    },
+    "map": {
+      "fresh": true,
+      "age_s": 2.100447654724121
+    },
+    "reconstruction": {
+      "fresh": true,
+      "age_s": 3.033803939819336
+    },
+    "semantics": {
+      "fresh": true,
+      "age_s": 3.033803939819336
+    }
+  },
+  "semantic_objects": 4,
+  "camera_extrinsics_loaded": true,
+  "independent_reconstruction_accuracy_verified": false,
+  "reconstruction_frames": 56,
+  "trajectory_points": 1,
+  "control_velocity_source": "can_feedback",
+  "native_CSM_source_preserved": true,
+  "control_nominal_backward_allowed": false,
+  "navigation_startup_xy_tolerance_m": 0.15,
+  "mission_xy_tolerance_m": 0.08,
+  "mission_tolerance_note": "Navigation startup default remains 0.15m; the existing mission applies 0.08m when executed. No mission ran during this deployment.",
+  "self_mask_applied": false,
+  "robot_motion_commands_issued": false,
+  "NSO_policy_changed": false,
+  "runtime_children": {
+    "lslidar_driver_node": {
+      "pid": 486341,
+      "argv": [
+        "/home/ouc/scout_nav/devel/lib/lslidar_driver/lslidar_driver_node",
+        "__name:=lslidar_driver_node",
+        "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/lslidar_driver_node-1.log"
+      ]
+    },
+    "laser_scan_matcher_node": {
+      "pid": 486342,
+      "argv": [
+        "/opt/ros/noetic/lib/laser_scan_matcher/laser_scan_matcher_node",
+        "scan:=/scan",
+        "__name:=matcher",
+        "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/nso_csm-matcher-2.log"
+      ]
+    },
+    "slam_gmapping": {
+      "pid": 486343,
+      "argv": [
+        "/home/ouc/scout_nav/devel/lib/gmapping/slam_gmapping",
+        "scan:=scan",
+        "map:=/nso_visual/map",
+        "map_metadata:=/nso_visual/map_metadata",
+        "__name:=slam_gmapping",
+        "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/slam_gmapping-3.log"
+      ]
+    },
+    "reconstruction_worker": {
+      "pid": 486623,
+      "argv": [
+        "/home/ouc/nso_robot/envs/science312/bin/python",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/reconstruction_worker.py",
+        "--output-directory",
+        "/home/ouc/nso_robot/experiments/live_dashboard_calibrated_20261108/reconstruction"
+      ]
+    }
+  },
+  "process_receipt": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/processes.json",
+  "browser_verification": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/browser_verification.json",
+  "scope": "Confirmed mount calibration and fresh data/navigation/display session, not independent mapping accuracy or method comparison."
+}

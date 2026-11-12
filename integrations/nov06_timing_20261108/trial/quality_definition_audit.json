@@ -1,0 +1,728 @@
+{
+  "schema": "nso.quality_definition_audit.v1",
+  "status": "completed_readonly_source_and_lightweight_quality_only_verification",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02",
+  "definition": {
+    "formula": "Q_t=(1/235)sum_{k in K0}I_t(k)/(I_t(k)+.25+100*r_t(k))",
+    "fixed": "Bootstrap supported15cm integer voxel keys and denominator; not independently corresponding physical surfaces.",
+    "I": "incidence^2/max(range^2,.25), accumulated by historical max; per key nondecreasing.",
+    "r": "EMA of min(((new_point-old_point) dot old_normal)^2,.01), alpha=1/min(new_n,20). Representative point/normal also move by EMA.",
+    "nonmonotone": true,
+    "missing_keys": "_old_mean would fill absent keys with0, but mapper dictionary only appends/updates; all235 keys persisted at all41 recalculated states. No re-observation leaves a key unchanged, not0.",
+    "feedback_not_sampled": "_map_evidence iterates entire mapper.quality dictionary, not quality_evidence(max_points1600/10000). Later explored-map/height exclusion does not remove an old key from the quality mean."
+  },
+  "observed": {
+    "observations": 41,
+    "fixed_support_count": 235,
+    "fixed_support_sha256": "74779f7dfa5d00307ae084322e853677904ac36aa1de88c90f4d600adf4516e6",
+    "all_recorded_support_hashes_identical": true,
+    "initial_Q": 0.14224246950460842,
+    "final_Q": 0.12970779899548845,
+    "signed_delta": -0.012534670509119966,
+    "negative_updates": 13,
+    "positive_updates": 1,
+    "unchanged_paid_updates": 26,
+    "largest_drop": {
+      "paid": 40,
+      "recorded_Q": 0.12970779899548845,
+      "recomputed_Q": 0.12970779899548845,
+      "delta": -0.0049550772905109786,
+      "missing_keys": 0,
+      "reobserved_keys": 121,
+      "residual_increased_keys": 71,
+      "mean_residual": 0.0008740625488436957
+    },
+    "sequence": [
+      {
+        "paid": 0,
+        "recorded_Q": 0.1422424695046084,
+        "recomputed_Q": 0.14224246950460842,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.0
+      },
+      {
+        "paid": 1,
+        "recorded_Q": 0.14219329367863695,
+        "recomputed_Q": 0.14219329367863695,
+        "delta": -4.9175825971442544e-05,
+        "missing_keys": 0,
+        "reobserved_keys": 20,
+        "residual_increased_keys": 20,
+        "mean_residual": 0.00011186695631323534
+      },
+      {
+        "paid": 2,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": -0.0005518319995657106,
+        "missing_keys": 0,
+        "reobserved_keys": 7,
+        "residual_increased_keys": 5,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 3,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 4,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 5,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 6,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 7,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 8,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 9,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 10,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 11,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 12,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 13,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 14,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 15,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 16,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 17,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 18,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 19,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 20,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 21,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 22,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 23,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 24,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 25,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 26,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 27,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 28,
+        "recorded_Q": 0.14164146167907124,
+        "recomputed_Q": 0.14164146167907132,
+        "delta": 0.0,
+        "missing_keys": 0,
+        "reobserved_keys": 0,
+        "residual_increased_keys": 0,
+        "mean_residual": 0.00012904486740791948
+      },
+      {
+        "paid": 29,
+        "recorded_Q": 0.14042638934838186,
+        "recomputed_Q": 0.14042638934838192,
+        "delta": -0.0012150723306893763,
+        "missing_keys": 0,
+        "reobserved_keys": 6,
+        "residual_increased_keys": 6,
+        "mean_residual": 0.0001467029583917444
+      },
+      {
+        "paid": 30,
+        "recorded_Q": 0.13950683366119518,
+        "recomputed_Q": 0.1395068336611952,
+        "delta": -0.000919555687186685,
+        "missing_keys": 0,
+        "reobserved_keys": 11,
+        "residual_increased_keys": 10,
+        "mean_residual": 0.0001613242420165657
+      },
+      {
+        "paid": 31,
+        "recorded_Q": 0.13891488590123632,
+        "recomputed_Q": 0.13891488590123635,
+        "delta": -0.0005919477599588552,
+        "missing_keys": 0,
+        "reobserved_keys": 14,
+        "residual_increased_keys": 8,
+        "mean_residual": 0.0001856724877083243
+      },
+      {
+        "paid": 32,
+        "recorded_Q": 0.13788373976524462,
+        "recomputed_Q": 0.13788373976524465,
+        "delta": -0.0010311461359917007,
+        "missing_keys": 0,
+        "reobserved_keys": 19,
+        "residual_increased_keys": 15,
+        "mean_residual": 0.0002119314794858213
+      },
+      {
+        "paid": 33,
+        "recorded_Q": 0.1381552261763473,
+        "recomputed_Q": 0.1381552261763473,
+        "delta": 0.00027148641110266714,
+        "missing_keys": 0,
+        "reobserved_keys": 15,
+        "residual_increased_keys": 4,
+        "mean_residual": 0.00020765219604469262
+      },
+      {
+        "paid": 34,
+        "recorded_Q": 0.1377171204894202,
+        "recomputed_Q": 0.13771712048942022,
+        "delta": -0.00043810568692709273,
+        "missing_keys": 0,
+        "reobserved_keys": 23,
+        "residual_increased_keys": 11,
+        "mean_residual": 0.00022880432806287682
+      },
+      {
+        "paid": 35,
+        "recorded_Q": 0.13752393485267111,
+        "recomputed_Q": 0.13752393485267111,
+        "delta": -0.0001931856367490825,
+        "missing_keys": 0,
+        "reobserved_keys": 33,
+        "residual_increased_keys": 11,
+        "mean_residual": 0.00023472694146024214
+      },
+      {
+        "paid": 36,
+        "recorded_Q": 0.13659909767049144,
+        "recomputed_Q": 0.13659909767049144,
+        "delta": -0.0009248371821796719,
+        "missing_keys": 0,
+        "reobserved_keys": 40,
+        "residual_increased_keys": 27,
+        "mean_residual": 0.00028878399981562496
+      },
+      {
+        "paid": 37,
+        "recorded_Q": 0.13621975916017148,
+        "recomputed_Q": 0.13621975916017143,
+        "delta": -0.0003793385103199598,
+        "missing_keys": 0,
+        "reobserved_keys": 50,
+        "residual_increased_keys": 26,
+        "mean_residual": 0.0003234896492525594
+      },
+      {
+        "paid": 38,
+        "recorded_Q": 0.13566540609396227,
+        "recomputed_Q": 0.13566540609396227,
+        "delta": -0.0005543530662092122,
+        "missing_keys": 0,
+        "reobserved_keys": 53,
+        "residual_increased_keys": 17,
+        "mean_residual": 0.00035213136355545304
+      },
+      {
+        "paid": 39,
+        "recorded_Q": 0.13466287628599943,
+        "recomputed_Q": 0.13466287628599935,
+        "delta": -0.0010025298079628375,
+        "missing_keys": 0,
+        "reobserved_keys": 62,
+        "residual_increased_keys": 27,
+        "mean_residual": 0.0004852027991168635
+      },
+      {
+        "paid": 40,
+        "recorded_Q": 0.12970779899548845,
+        "recomputed_Q": 0.12970779899548845,
+        "delta": -0.0049550772905109786,
+        "missing_keys": 0,
+        "reobserved_keys": 121,
+        "residual_increased_keys": 71,
+        "mean_residual": 0.0008740625488436957
+      }
+    ]
+  },
+  "verification": {
+    "method": "Execute AST-extracted original QualityMapperV2.update with only first super().update TSDF/occupancy call omitted. Load canonical180x320 depth,K,historical camera TF only; zero labels are irrelevant to key/I/r/point/normal. No backend/planner/TSDF/detector/ROS.",
+    "old_keys": "All bootstrap height-valid keys exactly match recorded count and SHA256, independently verifying support identity.",
+    "all_41_Q_match_recorded": true,
+    "max_abs_error": 8.326672684688674e-17,
+    "missing_keys_at_all_states": 0,
+    "sources_match_actual_run_manifest": true,
+    "input_packets": [
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136284663503822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "a6eec35247efeb138e2431045f1f8a38cbf6e56ec298e5a34938e944090586ae"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136300997196822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "625cd28ee199909c32d408d58ec1867c13ca08a3face0e8b69553ed74813d178"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136309797792822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "522625df793037e122dea98837e7456df8b9c47633cb2553fd862393656d61bb"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136323265108822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "32f67d8686f560d9b4d38676af676e050efddd2397a381949561965ffd1f4f66"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136333599081822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "2449313890e60f5b69e7148e1da55a3d327996e366f069e1d081705a6bc0cd21"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136349166323822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "8b933f3a3e281b7fdb2bc8df06e67a8ef3e2c834a31e5d88d0a9dcc48f8b3b1e"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136360600470822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "d4e58ff2a23da413b1eb98808fb4b7f2ffbf96a3581a428a380dc13635c8a2ad"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136373201114822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "8e689bbad240bd114578ba87313c965d6423cdd84c496e681bcd789844780702"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136385868391822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "8b5ededa15b4b99365b6d7e764c271a4766e700bef616143ac03503fb6df8be1"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136401569183822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "4f926f59f3020b19e30feee62dcd4fdeb55ed1cbfd692347d7c32f8d85564a57"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136413103069822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "066cc7f915005c81481ecf6768e9ef4939a3107ba80f8a5af4b475f1677ce55b"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136424237082822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "266f8151386ee0ab3bf810fa47645da0b3dbb30bf93b7fb4bf9ea9c29eec42a1"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136439571027822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "6d2f4c1934da5cdefc252a2506c646ff389c89b7a8cfada8d40672943b089861"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136450538296822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "58c4c20336dc33c00f786ebb0470db8936568a81141e5636c0da0ceb11bda546"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136463639027822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "362f0743a43903e1f3d242e5c5753b8510c9b74cf9f54eda5ab8e60307650606"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136477206508822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "0279d0b452f876d1e0ebea0482a7feb489647d6e8a71cb1c84b3d3fa432bfb00"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136492207320822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "f8913b8ebf87fab9eca7602cc79c18094195c089700ac750c1fd45e0465a2009"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136507708165822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "4bc522415e00964bce9830437c7eb98a9e1c9f4583335bc596e2fdeca816093d"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136537643048822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "fc595518ee85fe7456e10d8a026c7c30d02f770186d22dc8c3459a402a21cad2"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136550443587822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "9f406091dc57a20ac38d07b62b492933b4b6cbec43214f735743bc37df616329"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136561144353822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "8b0a9ba81b628350d1253da9713d3ff3917f0c6d7c01bf2f2cda7be55e8c05ce"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136574445033822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "0886b816186c010feabf81c5b8fc90a594be2a59a09c14f2c2a01c414366d0c1"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136589212493822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "f6422d39ed60157d498fce054c2bb6835c2b7b4a92e026a6fea76f6e13f58e30"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136601946567822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "e65b88d612ebece25ea0e198d74ee32ff47cf18d73ab96cdc34b5c91418948e1"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136616180612822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "6ffab8616605571bf89c12a57a93e78d0e767eda356a5bcdbbb8d9c0afef2407"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136629581171822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "a0c4f22c45aec9ebdbeaec4965aefcb8a4e94fe0faa42b9188a82b9b1d32da2e"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136644248903822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "720fcdf19af0c092c950d21d19a337a355f78a48d5da7c037bd8785c8c5c46e5"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136659916388822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "dbfbccbdc20fd569bf41a6cb354a1e0f1a096b219946ffc444bc5a9881254c33"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136679184036822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "e173f917cf299a68ad7ee3b7ceafbaed9989e3c49400a99d8a287d0604e56069"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136692684598822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "1725dee22785f1f5b5f0fb2b0778c5bdbccccf4d641557d417f0c332fb556acb"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136706585544822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "83fd5e4523bc8f3ad085abd1e707bfa15c23ae2ef960ff0a49613d4dbbbf25a0"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136717719492822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "08807cdb09463fed645450e8308ebe3f3998e9761784b24c1f701c3e2142b76f"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136731953622822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "6d07cb1ce387b8ac2d3b3794e32951c3d7b1261cf2b494c8657ed030175e3659"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136745854409822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "cb006ba312585b25e61204be49eb160515b07367f96e305b211b518ed106d5a0"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136759055090822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "78f772e5c2d632272d1c0f42dc48518e5ce0a1941c1d39817ecfde5f986411d6"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136772189161822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "36ea80e0cfd531c147926ab0e0803e6179de0c9a0f8ddf4ef672c28997c83694"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136785623341822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "517c0efb22b5106ee97c8c9155eb35d40967d2088320aa0727a904b8961e927b"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136798757320822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "6b9126e7d27403f72443ab65ad0fe2e6876d17be414874467b27c3760477ff49"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136811659675822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "3fe9ff78d631a34faf97278e66ea3c71d62c5f687835d5dcbdbfa56d157bde12"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136824858745822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "f5093bbb1c528c53c2a919f020d1814c822d977f4762c5368b1887f399027f6f"
+      },
+      {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/joint_inputs/joint-1794136837692789822.npz",
+        "source_packet_sha256_from_logged_semantic_receipt": "5a0a18781a2041a564b746f02d4da5cf60b4085830068635ef36b6ee5b966a88"
+      }
+    ]
+  },
+  "endpoint_decomposition": {
+    "initial_Q": 0.14224246950460842,
+    "final_I_with_r_held_at_bootstrap_zero": 0.15570691797848935,
+    "information_only_change": 0.013464448473880924,
+    "residual_penalty_at_final_I": -0.02599911898300089,
+    "sum_equals_observed_delta": true,
+    "keys_I_improved": 59,
+    "keys_final_r_nonzero": 130,
+    "keys_Q_lower": 107,
+    "keys_Q_higher": 23,
+    "keys_never_reobserved": 105
+  },
+  "findings": {
+    "supported": "Nonmonotone definition and actual residual penalty outweighing information improvement exactly explain the logged decrease; no key loss, denominator change or aggregate logging mismatch is needed.",
+    "not_proven": [
+      "Independent reconstruction accuracy worsened",
+      "Pose drift alone caused residual growth",
+      "Depth noise alone caused residual growth",
+      "Voxel association implementation error caused this run"
+    ],
+    "unresolved": "Depth noise, pose/extrinsic error, moving representative normal/point and distinct surfaces in one coarse voxel can affect residual. No independent physical correspondence/metrology isolates their contributions."
+  },
+  "prediction_boundary": {
+    "same_quantity_as_measured_Q": false,
+    "quality_gain": "JointPlannerV2._quality_gain combines nonnegative directional novelty/completion and expected incidence/range precision on a changing sampled quality set, with uncertainty including current residual. response_features takes maximum gain over planned states; cpu scorer scales sum by .15^2.",
+    "difference": "It does not predict signed fixed-K0 reliability change or residual-growth penalties. Positive predicted quality_total_proxy/score is not observed Q improvement.",
+    "semantic_result": "All12 actual global plans G/S/X tied remains negative semantic-effect evidence despite successful return."
+  },
+  "sources": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d_v2.py",
+      "sha256": "25c4d4a6b05e778d180780d0f267d7fc3ee537eea5c2d89590e951c341f996fc",
+      "run_manifest_match": true,
+      "lines": [
+        17,
+        33,
+        43,
+        47,
+        49,
+        54,
+        56,
+        60
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/observed_feedback_v10.py",
+      "sha256": "0ec4cd572a08d5543013561f46aebd0afca1ccb6be9c38aaf53928c5058f4b59",
+      "run_manifest_match": true,
+      "lines": [
+        58,
+        72,
+        84,
+        153,
+        188,
+        192,
+        250,
+        254
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/joint_planner_v2.py",
+      "sha256": "dd51dfbb329224ef97de755b919ec97a95d443c676d3e6c5decd9d298deed9a3",
+      "run_manifest_match": true,
+      "lines": [
+        27,
+        47,
+        50,
+        51,
+        62
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/response_features_v7.py",
+      "sha256": "3317f74c906b62434de3b7b46051e8edbdd4d7214eb88d0eb0580d31a2129a91",
+      "run_manifest_match": true,
+      "lines": [
+        153,
+        169,
+        181,
+        185,
+        189
+      ]
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py",
+      "sha256": "76f4327fefa8fafd37d7c520cf6e1c92c05f5b9777f9f621605653ad2fb1568b",
+      "run_manifest_match": true,
+      "lines": [
+        278,
+        282,
+        285,
+        286,
+        299,
+        307,
+        331
+      ]
+    }
+  ],
+  "evidence_hashes": {
+    "joint_decisions_sha256": "a36844bd071edc7cd9d17c565794980111f923e36f39b6b553c52152ce4c0cb8",
+    "terminal_semantic_audit_sha256": "91748f421f7f848799752a005e38df7c8ca4da797031b4d7d2ac1c22df507843",
+    "source_manifest_sha256": "bc26477da709472665aa95ccf9d2799379af022538e3ba0ff0c383edbcdd246e"
+  },
+  "ROS_or_robot_actions": false,
+  "production_modified": false,
+  "manuscript_modified": false
+}

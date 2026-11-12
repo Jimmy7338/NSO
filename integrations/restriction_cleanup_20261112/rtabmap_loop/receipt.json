@@ -1,0 +1,75 @@
+{
+  "schema": "nso.rtabmap_loop_module_preparation.v1",
+  "status": "implemented_not_started",
+  "production_navigation_or_policy_changed": false,
+  "robot_actions": false,
+  "tf_publish": false,
+  "master": "http://127.0.0.1:11382",
+  "installed_core": "0.21.13",
+  "runtime_nodes": [
+    "/nso_loop/rgbd_sync",
+    "/nso_loop/rtabmap",
+    "/nso_loop/monitor"
+  ],
+  "tests": {
+    "count": 6,
+    "status": "PASS",
+    "scope": "monitor reported evidence parsing/dedup/negative cases only"
+  },
+  "dependency_and_launch_parse": "PASS; rospack + generated ROS message imports + roslaunch --nodes; no nodes launched",
+  "files": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/rtabmap_loop_shadow.launch",
+      "sha256": "3ad16aeff40e361969328df85fd255d8fad375ff54863c17d7a5bb17434b58e7"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_loop_monitor.py",
+      "sha256": "0b3441e9eacf9a81e32da318c712d723ae555e5f2132f3c9c28e59ed4f122d51"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/run_rtabmap_loop_shadow.sh",
+      "sha256": "a6d0b71b9267d0c2e6a1413322dc05ebbe11fd7240513e58cf6c203cc9105044"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/loop_module/package.xml",
+      "sha256": "91fd0931050220ea80d0171ae97e4aa85ba1bf827e3a3359290086ccb2819b20"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_rtabmap_loop_monitor.py",
+      "sha256": "2921fd5bd5a71dee5643ce1f46842d52a942dcef2548a17647311ec984b07346"
+    }
+  ],
+  "primary_sources": [
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/car_launch/launch/rtabmap_offical.launch",
+      "sha256": "18616cdfc1339e25d1cb9d8c0a82b8a84a35e0fef02b449a739f07027f2e73fd"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/car_launch/launch/rtabmap_localization.launch",
+      "sha256": "44f1af9fef9223e1a019f8c81a102c08083d1e082c81586eada00d274cb72469"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/rtabmap_ros/rtabmap_slam/src/CoreWrapper.cpp",
+      "sha256": "0001d602a4165b9c853f150b10bc00192e870cba41bb4f2d25651e4685d86990"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/rtabmap_ros/rtabmap_msgs/msg/Info.msg",
+      "sha256": "1afe7de5d2208a09dd0518aca2fb070d7d286771e017d4146698861ab3d22964"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/rtabmap_ros/rtabmap_msgs/msg/MapGraph.msg",
+      "sha256": "306dd9f7353ac4c3e8c51d2ebc837b6c934a23b17a09ac71eb0f263f57021b13"
+    },
+    {
+      "path": "/opt/ros/noetic/include/rtabmap-0.21/rtabmap/core/Parameters.h",
+      "sha256": "f6e3d1812ef74a74c1fe27566b7c5bba9cb8bec5cf460a76b0a5a21db28893f9"
+    }
+  ],
+  "run_command": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/run_rtabmap_loop_shadow.sh session_20261112_01",
+  "limitations": [
+    "Actual input ingestion and TF lookup await shadow start.",
+    "Nonzero loopClosureId and proximityDetectionId are recorded separately; processing readiness is not a closed-loop result.",
+    "No correction is fed back into navigation; mapToOdom/localization outputs are diagnostic shadow estimates.",
+    "DB retains compressed image/depth and feature data for true loop verification; post-decimation2 applies only saved imagery, not visual feature extraction."
+  ]
+}

@@ -1,0 +1,176 @@
+--- original/radius_driver_node.cpp
++++ candidate_v2/radius_driver_node.cpp
+@@ -29,6 +29,7 @@
+  public:
+   RadiusNode(ros::NodeHandle& node,ros::NodeHandle& params): execute_(false),captured_(0) {
+     params.param("execute",execute_,false);
++    params.param<std::string>("timing_output",timing_output_,"");
+     params.param<std::string>("session_id",session_,"");
+     params.param<std::string>("guard_node",guard_node_,"/nso_radius_guard");
+     std::string expected_boot,interface;
+@@ -61,9 +62,13 @@
+       sender_->latch_stop();
+       // Independent zero attempts continue during graceful shutdown.
+       std::this_thread::sleep_for(std::chrono::milliseconds(250));
+-      sender_->stop_and_join(); sender_.reset();
++      sender_->stop_and_join();
+     }
+     robot_.reset();
++    if (sender_ && !timing_output_.empty()) {
++      try { std::ofstream out(timing_output_.c_str()); if (out) sender_->timing().write(out); } catch (...) {}
++    }
++    sender_.reset();
+   }
+   void publish_fault() {
+     std_msgs::Int32 value; value.data=static_cast<int>(gate_.fault()); fault_.publish(value);
+@@ -85,7 +90,7 @@
+   }
+   bool execute_;
+   std::atomic<std::uint64_t> captured_;
+-  std::string session_,guard_node_;
++  std::string session_,guard_node_,timing_output_;
+   // Destruction/explicit cleanup joins the only sender before closing SDK.
+   std::unique_ptr<westonrobot::ScoutRobot> robot_;
+   nso_radius::CommandGate gate_;
+--- original/scout_radius_command_timeout_v1.hpp
++++ candidate_v2/scout_radius_command_timeout_v1.hpp
+@@ -9,6 +9,8 @@
+ // This does not cover stopped processes/hosts, blocked I/O or physical braking.
+ 
+ #include <atomic>
++#include <array>
++#include <ostream>
+ #include <chrono>
+ #include <cmath>
+ #include <cstdint>
+@@ -59,6 +61,37 @@
+       std::chrono::steady_clock::now().time_since_epoch()).count();
+ }
+ 
++// Sender thread alone writes this bounded ring; readers wait until join.
++struct TimingRow {
++  std::int64_t sleep_requested_ns=0, sleep_start_ns=0, wake_ns=0;
++  std::int64_t sample_enter_ns=-1, lock_acquired_ns=-1, gate_now_ns=-1, gate_prev_tick_ns=-1, sample_exit_ns=-1;
++  std::int64_t send_enter_ns=0, send_exit_ns=0; int fault_after_sample=0, fault_after_send=0;
++};
++class TimingRing {
++ public:
++  void append(const TimingRow& row) { if (!has_first_fault_ && (row.fault_after_sample || row.fault_after_send)) { first_fault_=row; has_first_fault_=true; } rows_[next_]=row; next_=(next_+1)%rows_.size(); if (size_<rows_.size()) ++size_; }
++  void write(std::ostream& out) const {
++    out << "{\"schema\":\"nso.native_sender_timing.v1\",\"clock\":\"steady_clock_ns\",\"rows\":[";
++    for (std::size_t i=0;i<size_;++i) {
++      const TimingRow& r=rows_[(next_+rows_.size()-size_+i)%rows_.size()];
++      if (i) out << ',';
++      write_row(out,r);
++    }
++    out << "],\"first_fault\":";
++    if (!has_first_fault_) out << "null"; else write_row(out,first_fault_);
++    out << "}\n";
++  }
++ private:
++  static void write_row(std::ostream& out,const TimingRow& r) {
++      out << "{\"sleep_requested_ns\":"<<r.sleep_requested_ns<<",\"sleep_start_ns\":"<<r.sleep_start_ns
++          <<",\"wake_ns\":"<<r.wake_ns<<",\"sample_enter_ns\":"<<r.sample_enter_ns
++          <<",\"lock_acquired_ns\":"<<r.lock_acquired_ns<<",\"gate_now_ns\":"<<r.gate_now_ns
++          <<",\"gate_prev_tick_ns\":"<<r.gate_prev_tick_ns<<",\"sample_exit_ns\":"<<r.sample_exit_ns
++          <<",\"send_enter_ns\":"<<r.send_enter_ns<<",\"send_exit_ns\":"<<r.send_exit_ns
++          <<",\"fault_after_sample\":"<<r.fault_after_sample<<",\"fault_after_send\":"<<r.fault_after_send<<'}';
++  }
++  std::array<TimingRow,512> rows_{}; std::size_t next_=0,size_=0; TimingRow first_fault_{}; bool has_first_fault_=false;
++};
+ class CommandGate {
+  public:
+   CommandGate(): fault_(Fault::none), armed_(false), desired_(),
+@@ -84,11 +117,11 @@
+     if (!lock.owns_lock()) { fail(Fault::lock_contention); return Motion(); }
+     return sample_locked(now);
+   }
+-  Motion sample_live() {
++  Motion sample_live(TimingRow* timing=nullptr) {
+     return sample_live_with(
+         [](std::unique_lock<std::timed_mutex>& lock, std::chrono::milliseconds limit) {
+           return lock.try_lock_for(limit);
+-        }, []() { return steady_ns(); });
++        }, []() { return steady_ns(); }, timing);
+   }
+  private:
+   friend struct CommandGateTestAccess;
+@@ -97,12 +130,13 @@
+   // a fresh clock reading. Waiting never renews either original deadline.
+   // The private policy seam lets tests control scheduling without sleep races.
+   template <typename Waiter, typename Clock>
+-  Motion sample_live_with(Waiter wait, Clock clock) {
++  Motion sample_live_with(Waiter wait, Clock clock, TimingRow* timing=nullptr) {
+     std::unique_lock<std::timed_mutex> lock(mutex_, std::defer_lock);
+     if (!wait(lock, std::chrono::milliseconds(1))) {
+       fail(Fault::lock_contention); return Motion();
+     }
+-    return sample_locked(clock());
++    if (timing) timing->lock_acquired_ns=steady_ns();
++    return sample_locked(clock(),timing);
+   }
+   bool time_ok(std::int64_t now) {
+     if (now<0 || (last_seen_ns_>=0 && now<last_seen_ns_)) {
+@@ -125,7 +159,8 @@
+     armed_=true; desired_=requested; last_input_ns_=now;
+     return true;
+   }
+-  Motion sample_locked(std::int64_t now) {
++  Motion sample_locked(std::int64_t now, TimingRow* timing=nullptr) {
++    if (timing) { timing->gate_now_ns=now; timing->gate_prev_tick_ns=last_tick_ns_; }
+     if (!time_ok(now) || fault()!=Fault::none) return Motion();
+     if (last_tick_ns_>=0 && now-last_tick_ns_>kMaximumTickGapNs) {
+       fail(Fault::sender_late); return Motion();
+@@ -162,28 +197,39 @@
+     if (worker_.joinable()) worker_.join();
+   }
+   ~PeriodicSender() { stop_and_join(); }
+- private:
+-  void send(Motion value) {
++  const TimingRing& timing() const { return timing_; }
++ private:
++  friend struct PeriodicSenderTestAccess;
++  void send(Motion value, TimingRow* timing=nullptr) {
+     if (gate_.fault()!=Fault::none) value=Motion();
++    if (timing) timing->send_enter_ns=steady_ns();
+     try { sender_(value.linear,value.angular); }
+     catch (...) {
+       gate_.fail(Fault::transport_exception);
+       try { sender_(0.0,0.0); } catch (...) {}
+     }
++    if (timing) { timing->send_exit_ns=steady_ns(); timing->fault_after_send=static_cast<int>(gate_.fault()); }
+   }
+   void run() {
+     // Even if a callback has already supplied a valid command, startup sends zero.
+     send(Motion());
+     auto deadline=std::chrono::steady_clock::now()+std::chrono::nanoseconds(kPeriodNs);
+     while (!stop_.load()) {
++      TimingRow row; row.sleep_start_ns=steady_ns();
++      row.sleep_requested_ns=std::chrono::duration_cast<std::chrono::nanoseconds>(deadline.time_since_epoch()).count()-row.sleep_start_ns;
+       std::this_thread::sleep_until(deadline);
++      row.wake_ns=steady_ns();
+       if (stop_.load()) break;
+-      send(gate_.sample_live());
++      row.sample_enter_ns=steady_ns();
++      Motion value=gate_.sample_live(&row);
++      row.sample_exit_ns=steady_ns(); row.fault_after_sample=static_cast<int>(gate_.fault());
++      send(value,&row); timing_.append(row);
+       deadline=std::chrono::steady_clock::now()+std::chrono::nanoseconds(kPeriodNs);
+     }
+     send(Motion());
+   }
+   CommandGate& gate_;
++  TimingRing timing_;
+   Sender sender_;
+   std::atomic<bool> stop_;
+   bool started_;
+--- original/CMakeLists.txt
++++ candidate_v2/CMakeLists.txt
+@@ -14,3 +14,7 @@
+ target_link_libraries(attended_gate_test Threads::Threads)
+ target_compile_options(attended_gate_test PRIVATE -UNDEBUG -Wall -Wextra -Werror)
+ add_test(NAME attended_gate COMMAND attended_gate_test)
++add_executable(timing_test timing_test.cpp)
++target_link_libraries(timing_test Threads::Threads)
++target_compile_options(timing_test PRIVATE -UNDEBUG -Wall -Wextra -Werror)
++add_test(NAME timing_test COMMAND timing_test)

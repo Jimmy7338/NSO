@@ -1,0 +1,49 @@
+{
+  "status": "passed_real_terminal_reference_read_only",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02",
+  "reference": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/terminal_semantic_audit.json",
+  "reduced_output": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/reducer_reference_output.json",
+  "checks": {
+    "native_paid40": true,
+    "observations41": true,
+    "ROS_verified40": true,
+    "native_option_endpoint_arrivals11": true,
+    "CAN_distance_matches": true,
+    "initialQ_matches": true,
+    "finalQ_matches": true,
+    "negativeQ_preserved": true,
+    "exactreturn": true,
+    "global12": true,
+    "first_actual_selected0": true,
+    "last_receipt_paid40": true
+  },
+  "native_arrival_semantics": "Native arrived_count=11 is option-pose arrival count (actual==s.option.pose and not collision), not ROS primitive goal verified count40. Source runtime_integration.py:353-356. This difference is expected, not a count correction.",
+  "schema_correction": "A genuine init RPC contains summary:null; reducer now treats null summary/runtime as absent. No report or runtime edits.",
+  "actual_fields": {
+    "native_paid": 40,
+    "accepted_observations": 41,
+    "ROS_verified_arrivals": 40,
+    "native_option_endpoint_arrivals": 11,
+    "actions": {
+      "right": 4,
+      "forward": 32,
+      "left": 4
+    },
+    "CAN_distance_m": 6.42550345265864,
+    "fixed_Q_delta": -0.012534670509119938,
+    "return_anchor": [
+      200,
+      200,
+      0
+    ]
+  },
+  "hashes": {
+    "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/reduce_episode.py": "1366762deb4b2acae2ed583b3801f33bda5705337025a1d8c1c303455702be12",
+    "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/terminal_semantic_audit.json": "91748f421f7f848799752a005e38df7c8ca4da797031b4d7d2ac1c22df507843",
+    "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/reducer_reference_output.json": "4a39850ad785dcfc98c998d62338ff7f0c4fb6c795a8d6ad1a2de09e677e4dd7"
+  },
+  "limits": [
+    "Reference episode only; liveB1_C not opened/evaluated.",
+    "No new fixture tests, ROS/model/replay or sourcepolicy changes."
+  ]
+}

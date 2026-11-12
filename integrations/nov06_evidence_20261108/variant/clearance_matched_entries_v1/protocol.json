@@ -1,0 +1,68 @@
+{
+  "schema": "nso.clearance_matched_entries_offline_protocol.v1",
+  "profile": "clearance_matched_entries_v1",
+  "status": "frozen_before_execution",
+  "formula": {
+    "entry_m": ".4 + max(0, R-.2)",
+    "deep_m": ".8 + max(0, R-.2)",
+    "projection_tolerance_m": 0.35,
+    "physical_radius_m": 0.7212185868375829,
+    "physical_entry_m": 0.921218586837583,
+    "physical_deep_m": 1.321218586837583
+  },
+  "justification": "For R>=.2, preserve original entry/deep excess over circle radius (.2/.6m); exact original offsets at R=.2. Fixed translation, not optimized values or a new scientific contribution.",
+  "design": {
+    "widewall": "Reuse prior unchanged fixture at R=.2 and R=.7212185868375829, both original generators and original/scaled offsets; fixed80budget only for the synthetic diagnostic.",
+    "full01": "Original full01 observations/labels/masks and four actual global planning states paid0,18,33,38, original remaining budget40-paid. Full 2x2 native/instance grouping x original/scaled offsets. Original native scoring G/S/X.",
+    "future_rollout": false,
+    "parameter_search": false,
+    "detector_rerun": false,
+    "original_action_replay_only": true,
+    "physical_mount": "Frozen full01 legacy mount/ground profile; no new Nov06 mount projection."
+  },
+  "guards_unchanged": [
+    "Circle radius and inflation",
+    "Observed map and measured quality",
+    "Unknown coverage candidate logic and objective",
+    "Projection tolerance .35",
+    "Wanted heading and backside .15",
+    "Aperture/FOV",
+    "Candidate cap and common target uniqueness",
+    "Minimum deep separation .2",
+    "Full paid outbound+anchor return and remaining budget",
+    "Native scoring weights and category use"
+  ],
+  "comparison_units": "One historical episode, four dependent planning checkpoints; no independent paired rollout or task benefit.",
+  "approval": "Offline review only. No production/real-motion/publication authorization. Separate user architecture approval required before experiment/deployment.",
+  "sources": [
+    {
+      "path": "/home/ouc/nso_robot/analyses/semantic_instance_adapter_20261108/scoring_probe_full01/probe.py",
+      "sha256": "f06ba83db1d6c7e350c11736d2a792fae754ef9d16e0d9a90ccebbf4f62d1cc8"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/semantic_instance_adapter_20261108/scoring_probe_full01/result.json",
+      "sha256": "ce50c47a3aac8f4d021ac6d288ffb7510fb06190c365aabd17518eb5594960d4"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/semantic_instance_adapter_20261108/physical_entry_scale_audit/MANIFEST.json",
+      "sha256": "697c0897d2fab55149cf5fcce0c2a299fc076360b9b526149f467480b1ba4a9a"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/semantic_instance_adapter_20261108/association.py",
+      "sha256": "ea2fde0c35a638e05dc6e9f9ab43aea8bc17ea9cb9a85d73809b20177cb48a75"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/semantic_instance_adapter_20261108/clearance_matched_entries_v1/adapter.py",
+      "sha256": "be15a0c2a3c89536ddec154a3537d2b3ef1db6c90784cd7e40701187ad410cbf"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/depth_ground_S40_20261108_01/joint_configuration.json",
+      "sha256": "40e0a7c31695ae0fa99149d02809f706d1b9db8b082fbf995d8e1a67a1fe6be8"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/depth_ground_S40_20261108_01/joint/decisions.jsonl",
+      "sha256": "80c9d7187f732e4f27fa36d41dbb963add66af3d56712a823d49b571cf16b903"
+    }
+  ],
+  "created_unix_s": 1794134937.8193827
+}

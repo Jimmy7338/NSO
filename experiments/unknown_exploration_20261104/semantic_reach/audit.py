@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+"""Summarize existing offline audits; reads JSON only, never contacts ROS or replays frames."""
+import json, pathlib, hashlib
+D=pathlib.Path(__file__).resolve().parent/'inputs'; O=pathlib.Path(__file__).parent
+paths=[D/'object_only_continuation.json',D/'first_observed_front.json',D/'depth_supported_front.json']
+x,f,d=[json.loads(p.read_text()) for p in paths]; s=x['stages'][0]; p=s['profiles'][0]
+assert s['action_id']==6 and p['profile']=='instance'
+assert all(not r['rear_reachable_any'] for r in s['marked_asset_reachability'])
+assert all(not any(a['incremental_aperture']) and not any(a['prior_potentials'].values()) for a in p['score_audit'])
+assets={a['track']:a for a in p['assets']}; reach={a['track']:a for a in s['marked_asset_reachability']}; depth={a['track']:a for a in d['assets']}
+rows=[]
+for a in f['assets']:
+ t=a['track']; z=assets[t]; q=reach[t]; cf=a.get('counterfactual_geometry'); dd=depth[t]
+ rows.append(dict(track=t,group=a['group'],marked_points=z['marked_points'],class_vote=z['class_vote'],first_support_action=a['action_id'],first_support_final_voxels=a['supported_final_quality_voxel_count'],depth_supported_count=a['depth_supported_count'],center_xy=a['center_xy'],observed_percentile_width_depth_height_m=[z['measured_width_m'],z['measured_depth_m'],z['measured_height_m']],global_front=a['global_front'],first_support_front=a['first_observed_front'],depth_supported_front=a['depth_supported_front'],reachable_rear_states_before_budget=q['rear_reachable_any'],reachable_aperture_states_before_budget=q['aperture_reachable_any'],first_support_counterfactual=cf,depth_supported_counterfactual=dd.get('counterfactual_geometry'),zero_reason='No return-connected safe graph state passes rear margin >0.15 m; aperture, budget and shortlist cannot be isolated as limiting causes.'))
+out=dict(scope='Offline JSON summary of recorded action 6; instance grouping is offline counterfactual, not robot deployment or certified identity',input_sha256={str(i):hashlib.sha256(i.read_bytes()).hexdigest() for i in paths},state={'continuation_action':6,'pose':s['pose'],'remaining_actions_including_return':s['remaining_budget'],'return_connected_states_before_budget':s['reachable_states'],'robot_radius_m':0.721,'candidates':len(p['candidates']),'top_S':p['top_S'],'top_G':p['top_G'],'omitted_by_cap':p['candidate_audit']['omitted_by_cap'],'all_candidate_prior_potentials_zero':True},assets=rows,limitations=['No physical-world unreachability inference; graph covers current observed safe space only.','The rear test fails before FOV and modeled aperture, which does not ray cast occlusion; physical occlusion remains unresolved.','Original episode and reconstructed semantic grouping are different; track IDs are not verified object identities.','Alternative front direction changes method and is offline only; no score recomputation.','Action 7 current_safe false and planning skipped; near-body point identity unresolved.'],references={'support':'first_observed_front.json assets; object_only_continuation.json stages[0].profiles[0].assets','graph':'object_only_continuation.json stages[0].marked_asset_reachability; object_only_continuation.py','axis_and_aperture':'nso/competition_candidates_v8.py:18,47','score':'nso/competition_prior_v8.py:11','candidate_roles':'nso_bridge/exploration_joint_policy.py:232'})
+(O/'result.json').write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n')
+print('wrote',O/'result.json','assets',len(rows))

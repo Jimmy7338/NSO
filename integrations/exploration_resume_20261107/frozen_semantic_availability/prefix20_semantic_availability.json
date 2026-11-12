@@ -1,0 +1,452 @@
+{
+  "schema": "nso.frozen_semantic_availability.v1",
+  "observation_count": 21,
+  "semantic_version": 21,
+  "graph_version": 21,
+  "current_state": [
+    200,
+    218,
+    0
+  ],
+  "return_anchor": [
+    200,
+    200,
+    0
+  ],
+  "actual_base_pose_planning": [
+    43.656401825424744,
+    39.867774049818976,
+    1.498854606622639
+  ],
+  "current_state_source": "unchanged final native packet discrete pose; actual measured continuous pose reported separately",
+  "current_equals_anchor": false,
+  "original_remaining_budget": 20,
+  "fresh_additional_budgets": [
+    40,
+    80
+  ],
+  "hypothetical_remaining_budgets": [
+    40,
+    80
+  ],
+  "hypothetical_total_budgets": [
+    60,
+    100
+  ],
+  "hypothetical_budget_increments_over_original": [
+    20,
+    60
+  ],
+  "prefix_acquisition": {
+    "paid_actions": 20,
+    "CAN_distance_m": 3.7363959349393903,
+    "CAN_end_record": {
+      "distance_m": 3.7363959349393903,
+      "absolute_yaw_rad": 8.55520384728912,
+      "accounting_complete": true,
+      "feedback_fresh": true,
+      "receipt_monotonic": 127918.276294381
+    },
+    "CAN_initial_record": {
+      "distance_m": 0.0,
+      "absolute_yaw_rad": 0.0,
+      "accounting_complete": true,
+      "feedback_fresh": true,
+      "receipt_monotonic": 127665.653423067
+    },
+    "elapsed_to_arrival_pose_source_s": 260.7394542694092,
+    "arrival_pose_source_stamp_s": 1794058376.37327,
+    "started_unix_s": 1794058115.6338158,
+    "time_definition": "difference of recorded arrival20 after-pose source timestamp and running.started_unix_s; not exact monotonic elapsed_run_s or observation21 completion time",
+    "prefix_not_free": true,
+    "source": "original result.successful_arrivals[19].can_end/after and running.json",
+    "source_sha256": {
+      "result.json": "f046f508605e86ea3ef4ef3bb61c85d688f4e1ee9e2a04f21072e52337bd69ba",
+      "running.json": "87275c0254682ee218c7e49cdadf8833a2994936e3a047a43f3aad015cc6a19a"
+    }
+  },
+  "interpretation": "Frozen accumulated measured prefix; hypothetical remaining40/80 (total paid-prefix+remaining), not original episode output, a free prefix, or physical efficacy.",
+  "grid_resolution_m": 0.2,
+  "robot_radius_m": 0.7212185868375829,
+  "belief_sha256": "3376e33ffff05e66c054005fc8c2007a8f7ba54307095613c40c152c2e2b13ae",
+  "safe_sha256": "d753f1cbb4360079554e60261001a0d99ab952ae4d25da98296127c21bd0e3f3",
+  "cost_contract": "native orientation_graph: paid forward/left/right; current to target plus target to original anchor including final heading; at least one outbound action",
+  "assets": [
+    {
+      "asset_index": 1,
+      "group": 3,
+      "class_vote": 1.0,
+      "marked_points": 78,
+      "prior_geometry": 4.215123495167536,
+      "prior_semantic": 1.2813222273792222,
+      "known_safe_rear_states": 524,
+      "known_safe_aperture_states": 1,
+      "reachable_rear_states": 0,
+      "reachable_aperture_states": 0,
+      "minimum_additional_budget": null,
+      "best_state": null,
+      "best_outbound_cost": null,
+      "best_return_cost": null,
+      "best_aperture_fraction": null,
+      "aabb_center": [
+        39.26385563858365,
+        43.17724968796675,
+        0.5935201920680294
+      ],
+      "back_axis": [
+        -0.0,
+        1.0
+      ],
+      "front_axis": [
+        0.0,
+        -1.0
+      ],
+      "measured_rear_boundary_xy": [
+        39.26385563858365,
+        43.526398501374224
+      ],
+      "navigation_rear_boundary_xy": [
+        39.26385563858365,
+        43.800000000000004
+      ],
+      "native_desired_entry_xy": [
+        39.26385563858365,
+        44.2
+      ],
+      "native_desired_deep_xy": [
+        39.26385563858365,
+        44.6
+      ],
+      "native_wanted_heading": 2,
+      "best_state_has_native_wanted_heading": null,
+      "wanted_heading_minimum_additional_budget": null,
+      "wanted_heading_best_state": null,
+      "budget_interpretation": "B* is arbitrary-heading aperture availability, not a selected native entry; projection<=.35, entry/deep sequencing and quota not evaluated",
+      "reason": "aperture_exists_only_outside_current_anchor_connected_component",
+      "original_remaining_budget_test": {
+        "remaining_budget": 20,
+        "available": false,
+        "states": 0
+      },
+      "additional_budget_tests": {
+        "40": {
+          "available": false,
+          "states": 0,
+          "reason": "aperture_exists_only_outside_current_anchor_connected_component"
+        },
+        "80": {
+          "available": false,
+          "states": 0,
+          "reason": "aperture_exists_only_outside_current_anchor_connected_component"
+        }
+      },
+      "excluded_measured_free_cells_with_aperture": {
+        "unknown_inflation_only": 88,
+        "occupied_inflation_only": 22,
+        "both": 269
+      }
+    },
+    {
+      "asset_index": 2,
+      "group": 5,
+      "class_vote": 1.0,
+      "marked_points": 27,
+      "prior_geometry": 10.853522275846572,
+      "prior_semantic": 2.019316358925857,
+      "known_safe_rear_states": 784,
+      "known_safe_aperture_states": 314,
+      "reachable_rear_states": 127,
+      "reachable_aperture_states": 46,
+      "minimum_additional_budget": 22,
+      "best_state": [
+        200,
+        217,
+        0
+      ],
+      "best_outbound_cost": 3,
+      "best_return_cost": 19,
+      "best_aperture_fraction": 0.7471919666207855,
+      "aabb_center": [
+        41.949771493834874,
+        41.616665076422564,
+        0.8770084461788197
+      ],
+      "back_axis": [
+        1.0,
+        -0.0
+      ],
+      "front_axis": [
+        -1.0,
+        0.0
+      ],
+      "measured_rear_boundary_xy": [
+        43.04750118723477,
+        41.616665076422564
+      ],
+      "navigation_rear_boundary_xy": [
+        43.2,
+        41.616665076422564
+      ],
+      "native_desired_entry_xy": [
+        43.6,
+        41.616665076422564
+      ],
+      "native_desired_deep_xy": [
+        44.0,
+        41.616665076422564
+      ],
+      "native_wanted_heading": 3,
+      "best_state_has_native_wanted_heading": false,
+      "wanted_heading_minimum_additional_budget": 26,
+      "wanted_heading_best_state": [
+        198,
+        218,
+        3
+      ],
+      "budget_interpretation": "B* is arbitrary-heading aperture availability, not a selected native entry; projection<=.35, entry/deep sequencing and quota not evaluated",
+      "reason": "available_in_known_safe_component",
+      "original_remaining_budget_test": {
+        "remaining_budget": 20,
+        "available": false,
+        "states": 0
+      },
+      "additional_budget_tests": {
+        "40": {
+          "available": true,
+          "states": 40,
+          "reason": "available"
+        },
+        "80": {
+          "available": true,
+          "states": 46,
+          "reason": "available"
+        }
+      },
+      "excluded_measured_free_cells_with_aperture": {
+        "unknown_inflation_only": 16,
+        "occupied_inflation_only": 243,
+        "both": 77
+      }
+    }
+  ],
+  "limits": [
+    "Aperture is hypothetical measured-geometry support, not ray-traced visibility or physical reachability proof.",
+    "No candidate shortlist, entry/deep projection, candidate-cap or G/S selection has been run.",
+    "No unobserved map cells have been filled or traversed; no policy or guard changed.",
+    "Blocked-cell attribution describes inflation masks; it does not establish unseen free space."
+  ],
+  "raw_geometry_group_audit": {
+    "status": "ok",
+    "profile": "measured_extent_3m_v1",
+    "algorithm": "original quality_evidence(max_points=10000),0.2m XY cells,3x3 binary_closing,label,5/95quantiles; no changed thresholds",
+    "thresholds": {
+      "min_support_points": 8,
+      "max_horizontal_extent_m": 3.0,
+      "min_vertical_extent_m": 0.25
+    },
+    "quality_sample_points": 2188,
+    "quality_sample_class2": 0,
+    "quality_sample_class3": 623,
+    "outside_grid_points": 0,
+    "groups": [
+      {
+        "group": 1,
+        "support_points": 1473,
+        "marked_class2": 0,
+        "marked_class3": 518,
+        "observed_low": [
+          43.33681640233933,
+          36.45255952255861,
+          0.14119440104562386
+        ],
+        "observed_high": [
+          47.686070239493944,
+          43.04019737918134,
+          1.7534118478614475
+        ],
+        "observed_spans_m": [
+          4.349253837154613,
+          6.5876378566227345,
+          1.6122174468158237
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": true,
+          "min_vertical_extent": false
+        },
+        "first_failed": "max_horizontal_extent",
+        "accepted": false
+      },
+      {
+        "group": 2,
+        "support_points": 42,
+        "marked_class2": 0,
+        "marked_class3": 0,
+        "observed_low": [
+          43.18048432819957,
+          43.19026672147783,
+          0.9993677011733995
+        ],
+        "observed_high": [
+          44.14002923125513,
+          43.94136983844547,
+          1.772375436398251
+        ],
+        "observed_spans_m": [
+          0.9595449030555585,
+          0.7511031169676343,
+          0.7730077352248514
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": null,
+        "accepted": true
+      },
+      {
+        "group": 3,
+        "support_points": 92,
+        "marked_class2": 0,
+        "marked_class3": 78,
+        "observed_low": [
+          38.563628601875855,
+          42.828100874559276,
+          0.13605348476852477
+        ],
+        "observed_high": [
+          39.96408267529145,
+          43.526398501374224,
+          1.050986899367534
+        ],
+        "observed_spans_m": [
+          1.4004540734155952,
+          0.6982976268149486,
+          0.9149334145990092
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": null,
+        "accepted": true
+      },
+      {
+        "group": 4,
+        "support_points": 3,
+        "marked_class2": 0,
+        "marked_class3": 0,
+        "observed_low": [
+          43.049373653062815,
+          42.82861478595318,
+          1.4790468475440626
+        ],
+        "observed_high": [
+          43.10985274154817,
+          42.886251403526785,
+          1.7388016379120697
+        ],
+        "observed_spans_m": [
+          0.06047908848535144,
+          0.05763661757360694,
+          0.2597547903680071
+        ],
+        "failed_predicates": {
+          "min_support": true,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": "min_support",
+        "accepted": false
+      },
+      {
+        "group": 5,
+        "support_points": 548,
+        "marked_class2": 0,
+        "marked_class3": 27,
+        "observed_low": [
+          40.81389571078349,
+          40.93664642007028,
+          0.12466890441413984
+        ],
+        "observed_high": [
+          43.05080689684853,
+          42.280496052305274,
+          1.6711162699490614
+        ],
+        "observed_spans_m": [
+          2.2369111860650364,
+          1.343849632234992,
+          1.5464473655349216
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": null,
+        "accepted": true
+      },
+      {
+        "group": 6,
+        "support_points": 30,
+        "marked_class2": 0,
+        "marked_class3": 0,
+        "observed_low": [
+          38.401450488492,
+          41.14460881545044,
+          0.12282729305426157
+        ],
+        "observed_high": [
+          38.81384934767682,
+          41.4156514805303,
+          1.0913440409001163
+        ],
+        "observed_spans_m": [
+          0.4123988591848189,
+          0.27104266507986097,
+          0.9685167478458547
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": null,
+        "accepted": true
+      }
+    ],
+    "passed_group_ids": [
+      2,
+      3,
+      5,
+      6
+    ],
+    "native_asset_group_ids": [
+      2,
+      3,
+      5,
+      6
+    ],
+    "passed_groups_equal_native": true,
+    "passed_support_and_marked_counts_equal_native": true,
+    "identity_limit": "Connected geometry groups may mix surfaces; no physical object identity or reason for physical scene arrangement is established."
+  },
+  "native_asset_count": 4,
+  "marked_native_asset_count": 2,
+  "status": "ok",
+  "known_safe_cells": 538,
+  "known_safe_orientation_states": 2152,
+  "reachable_nonzero_outbound_states": 1479,
+  "minimum_current_return_cost": 20.0,
+  "read_only_state_fingerprint_unchanged": true,
+  "elapsed_s": 1.990592762012966,
+  "native_source": {
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/nso/route_coverage_v2.py": "f01e604ea866bf19609f382527e5475d25010f5fda4f2ca0ab9478d66f57c3bb",
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/nso/competition_candidates_v8_1.py": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab",
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/env/virtual3d.py": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/utils/grid_geometry.py": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b"
+  }
+}

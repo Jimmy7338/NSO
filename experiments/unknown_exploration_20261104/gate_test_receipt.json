@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "test": "attended_gate",
+  "tests_run": 1,
+  "test_seconds": 0.01,
+  "scope": "existing in-memory C++ CommandGate assertions only; no ROS, CAN, SDK transport or driver execution",
+  "checks": [
+    "existing expiry latches stop",
+    "first nonzero command rejected",
+    "existing linear/angular maxima",
+    "source freshness contract"
+  ],
+  "command": "ctest --test-dir <native_build>/node-build -R ^attended_gate$ --output-on-failure"
+}

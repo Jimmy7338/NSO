@@ -1,0 +1,9 @@
+# Completed S40 robot trial and separate paid36 diagnosis
+
+The November 10 S40 trial exhausted its 40 paid-action budget with 41 accepted observations and completed its return. ROS reported status 3 for all 44 goals; 42 arrivals passed the separate arrival check. Four authorized corrections retained the same endpoint. Goal counts, verified arrivals and paid research actions therefore measure different events. CAN distance was 7.167796 m and elapsed time was 502.092825 s.
+
+The laser union increased from 64.08 to 118.72 square metres. Fixed-support native Q increased from 0.160068 to 0.240607. These are observed coverage and native reconstruction proxies; independent reconstruction accuracy remains unverified. All 12 nonempty global plans had equal G and S scores, so this trial provides no verified semantic decision effect or matched-method efficacy result.
+
+The semantic-entry diagnosis belongs to the older November 9 S96 episode at paid action 36. Its 37 baseline comparisons reproduced with zero differences. At that fixed belief, none of the ten entry-tolerance cells passed native safety; seven were blocked by supplied occupied cells. The nearest connected aperture with the required heading was 2.704786 m from the entry target and cost 90 actions including return. Increasing the remaining budget alone cannot satisfy the 0.35 m entry tolerance. Unknown cells remain distinct from measured obstacles. A target or acceptance-geometry change would be substantive policy work; actual observations may change connected map support. No proposed revision has demonstrated efficacy.
+
+This local evidence stage preserves one S40 physical episode and a dependent offline checkpoint diagnosis from S96. It does not establish comparative efficacy, independent accuracy, resolution of the S96 failure, or completion of the paper. No network publication was performed. Full RPC, RGBD packets, images, models and bulk assets are excluded.

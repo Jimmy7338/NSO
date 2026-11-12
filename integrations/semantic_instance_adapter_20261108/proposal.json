@@ -1,0 +1,85 @@
+{
+  "schema": "nso.measured_instance_association_proposal.v1",
+  "name": "measured_instance_association_v1",
+  "status": "offline_proposal_and_prototype_not_deployed_not_original_method_equivalent",
+  "frozen_before_prototype_replay_unix_s": 1794130879.9452698,
+  "data": {
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01",
+    "observations": 23,
+    "complete_retina_masks_available": true,
+    "detections": 61,
+    "raw_mask_shape": [
+      720,
+      1280
+    ],
+    "canonical_shape": [
+      180,
+      320
+    ],
+    "instance_ids": "Existing instance_index names one detection within a frame only;new cross-frame tracks are inferred measured-support associations,not certified object identities.",
+    "no_model_rerun_needed": true,
+    "prompt_list": [
+      "shelves",
+      "bookcase",
+      "closed equipment cabinet",
+      "cabinet",
+      "table",
+      "chair",
+      "display counter",
+      "floor",
+      "wall"
+    ]
+  },
+  "problem": "Original geometry-first closing joins all437 terminal class3 quality points into a2591-point component with7.300x3.514m horizontal 5/95extent;active3m predicate rejects it before class vote.",
+  "algorithm": {
+    "pixel_ownership": "Use every cached full segmentation mask,including floor/wall. Reproduce existing highest-confidence valid-depth ownership and stable storage-order tie. No boxes,category-specific exclusion or synthetic pixels.",
+    "measured_voxels": "Exactly original QualityMapperV2 validity,3-pixel canonical sampling,first sample per.15m quality voxel,actual captured TF and original planning Z.",
+    "association": "Greedy one-to-one matching of current instance measured-voxel sets against previous track unions,geometry only. Sort eligible edges by decreasing Jaccard,decreasing shared-count,increasing track-ID,increasing local-owner-ID. Never merge existing tracks;unmatched observations create new tracks.",
+    "minimum_shared_voxels": 3,
+    "minimum_jaccard": 0.2,
+    "no_lost_detection_retry_or_parameter_sweep": true,
+    "quality_membership": "At each existing quality voxel key,count measured owned observations per track. Assign a track only for a strict majority>0.5;ties/no majority stay unassigned0. Every original quality point belongs to exactly one track or0.",
+    "annotation": "Only after geometry membership,attach the latest nonzero cached2/3 label from observations of that voxel assigned to that same track. Unassigned or track-unlabeled support retains geometry and receives unknown0 annotation;do not import sticky labels from a different owner.",
+    "native_eligibility": "Within each partition,call preserved observed_patches with original active thresholds:8 support points,3m horizontal5/95extent,.25m vertical extent;no cropping or threshold relaxation."
+  },
+  "comparison_contract": {
+    "G_S_X_geometry": "One frozen perception partition shared byG/S/X;score-mode never enters ownership/association/group construction.",
+    "perception_caveat": "YOLOE masks depend on text prompts;G is geometry scoring conditional on the same semantic perception,not an entirely semantics-free perception pipeline.",
+    "class_use": "Native category annotations differ only after common grouping;native scoring formula would be unchanged,but no scorer or planner is executed by this prototype.",
+    "changes": [
+      "instance association",
+      "asset grouping",
+      "derived label-to-support association",
+      "potential candidate geometry/count/set"
+    ],
+    "unchanged": [
+      "rawRGB-D/scan",
+      "actualTF",
+      "planningfloorZ",
+      "circle radius",
+      "nominalsensorconfig",
+      "coverageobjective",
+      "nativegroupthresholds",
+      "scoreformula",
+      "budget",
+      "returncontract"
+    ],
+    "original_method_equivalence": false
+  },
+  "review_outputs": [
+    "allcachedmask/receipt/packet identities",
+    "mapping reproduction versus archived baseline",
+    "complete/disjoint quality ownership",
+    "native versus associated legal assets atpaid3/18/22",
+    "class-swap geometry invariance",
+    "track ambiguity/unassigned counts and category-retention losses"
+  ],
+  "not_claimed": [
+    "instance identity accuracy",
+    "correct hidden object structure",
+    "changed candidate selection",
+    "semantic policy benefit",
+    "safety or physical success"
+  ],
+  "deployment": false
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "nso.measured_instance_association.review_notes.v1",
+  "written_unix_s": 1794132010.782445,
+  "review_scope": "Independent source/record review of the frozen offline prototype;no scientific rerun,source/result rewrite or deployment.",
+  "frozen_identity": {
+    "proposal.json": "92ab9b497709f95310c85b3838eac01f7e320e587432d05dba525d81ee33ca48",
+    "preexecution.json": "73cb31c3b366ac09791f3c2011b1f25135c0898e46e17b952806b5459a761821",
+    "association.py": "ea2fde0c35a638e05dc6e9f9ab43aea8bc17ea9cb9a85d73809b20177cb48a75",
+    "run_review.py": "7f44d7f90fb984d8ac35f85be90a953f86ea34c11b4db850f82406e6ebbadb45",
+    "review.json": "b47a2f10224a0f70f0f60e5890101674d84397f68d3d7ff99a51ea46d1c83442",
+    "review_summary.json": "11f4294736501ba2948e6518f23487e0710d524d9db286930a8e25c8ac7c0b76"
+  },
+  "clarifications": [
+    {
+      "topic": "Partition completeness",
+      "scope": "Complete/disjoint ownership applies to the sampled array returned by native quality_evidence(max_points=10000),after its original height filter and possible10000point sampling.It is not a statement about all raw pixels,all accumulated voxels or all scene surfaces.",
+      "source": "association.py:quality_keys/associated_patches;run_review.py checkpoint evidence sampling"
+    },
+    {
+      "topic": "Retained geometry versus eligible assets",
+      "scope": "The original mapper and full geometry are retained.Each sampled quality point is in one track or unassigned0,then original patch eligibility can reject subsets.Thus retained geometry does not imply all points enter eligible assets or candidates."
+    },
+    {
+      "topic": "Ownerless observations",
+      "scope": "Frames/samples with owner0 do not add votes or negative evidence against prior track ownership.Later absence of an instance mask therefore does not invalidate historical associations."
+    },
+    {
+      "topic": "Historical-union Jaccard",
+      "scope": "Matching uses current measured instance keys against a track union over history.The union can grow beyond the current visible side,reducing Jaccard and causing fragmentation or missed matches.The fixed.20overlap threshold is an unvalidated new association choice."
+    },
+    {
+      "topic": "One-to-one association and ties",
+      "scope": "Deterministic greedy edge ordering ensures reproducibility,not optimal or correct identity association.Occlusion,mask splits/merges,nearby objects,pose/depth error can produce track splits,duplicates or false associations;existing tracks are never merged."
+    },
+    {
+      "topic": "Persistent labels",
+      "scope": "latest_nonzero cached2/3 labels may become stale.Ownerless observations and label0 do not clear them.The same-key/same-track restriction prevents importing another owner label,but an incorrect inferred track can still preserve an incorrect or stale label."
+    },
+    {
+      "topic": "Conditional baseline",
+      "scope": "G/S/X must use exactly the same frozen prompts,masks,confidence ownership,association and partition.Class-swap invariance verifies geometry for that frozen perception;YOLOE perception itself remains prompt dependent."
+    },
+    {
+      "topic": "Interpretation",
+      "scope": "17inferred tracks are not17verified objects;8terminal marked components are not8verified objects.Threshold applicability and surviving labeled support are input diagnostics,not score/action/coverage/safety or physical-benefit evidence."
+    }
+  ],
+  "deployment_authorization": "pending_user_decision;offline_only;no_production_change_authorized_by_this_review",
+  "manuscript_changed": false,
+  "prototype_or_numbers_changed": false
+}

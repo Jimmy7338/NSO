@@ -1,0 +1,23 @@
+{
+  "schema": "nso.physical_entry_scale_proposal.v1",
+  "status": "proposal_only_no_parameter_selected_or_deployed",
+  "possible_variant_name": "clearance_scaled_entry_v1",
+  "problem": "Fixed 0.4m entry plus 0.35m projection may conflict with original safety inflation at the physical circle on a locally wide occupied flat face, even with ideal known-free map.",
+  "changes_research_architecture": true,
+  "would_change": ["Asset desired entry and possibly deep target geometry", "Candidate membership and subsequent ranking possibilities", "Propagation through native deep-requires-entry dependency"],
+  "minimum_requirements": [
+    "Explicitly define standoff relative to navigation cell edge, not cell center; distinguish nominal camera XY from true translated camera/base extrinsic.",
+    "Account for physical circle, finite cell area and grid quantization. Necessary continuous flat-face bound with existing tolerance is e>0.4126399431m; aligned grid axial bound e>=0.55m. Neither is sufficient or a chosen parameter.",
+    "Freeze a class-independent scaling rule before comparison; no scene-wise parameter optimization or class-specific endpoint rule.",
+    "Keep native safe graph, heading, aperture, unused target, outbound-plus-anchor-return and budget conditions; separately assess their remaining infeasibility.",
+    "Assess deep-entry separation and FOV/range without using hidden geometry or granting unseen surface credit.",
+    "Preserve unknown-coverage candidates and objective, original physical circle, scores, budget and return anchor. All G/S/X conditions share the same frozen geometry/candidate adapter.",
+    "User approval of the named decision-rule change is required before any experiment or deployment. Existing instance-association approval would not silently authorize an entry rule change."
+  ],
+  "not_claimed": ["Chosen best standoff", "Physical closed-face diagnosis for any particular asset", "Semantic or coverage benefit", "Guaranteed feasible entry", "Original NSO equivalence", "Physical safety or reconstruction accuracy"],
+  "runtime_changes": false,
+  "score_changes": false,
+  "circle_changes": false,
+  "robot_execution": false,
+  "publication_authorized": false
+}

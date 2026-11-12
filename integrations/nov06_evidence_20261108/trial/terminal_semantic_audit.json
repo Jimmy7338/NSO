@@ -1,0 +1,406 @@
+{
+  "schema": "nso.nov06_sameground.terminal_semantic_audit.v1",
+  "source_sha256": {
+    "result.json": "16fa6b2a98e3c9763e642a8aaa7e549c684e03697a3b3c12f04660f00b78db19",
+    "summary.json": "30435742601c9ca07c9f8a59fb01772d4e61b003a51f2c7caca0879a91afd30b",
+    "joint/decisions.jsonl": "b06fc28c2f62da80ed3932473e55b8c578a28d3a02eae15abf2e4d4b45eb62b2",
+    "events.jsonl": "7fff7012d8c41e437b43d62e8bec8860293a41eb827792b0af06cafe91f0e1a1"
+  },
+  "terminal": {
+    "status": "execution_interrupted",
+    "reason": "chassis_before_stop:adapter_control_tick_invalid",
+    "execution_interrupted": true,
+    "method_failed": null,
+    "verified_arrivals": 29,
+    "CAN_distance_m": 5.233941296696675,
+    "elapsed_s": 380.5959157969992,
+    "feedback_zero_after_close": true,
+    "returned_to_discrete_anchor": false,
+    "last_recorded_worker_pose": [
+      200,
+      190,
+      1
+    ],
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "worker_feedback_paid": 29,
+    "worker_accepted_observations": 30,
+    "supervisor_joint_summary_paid": 28,
+    "supervisor_logged_accepted_observations": 29,
+    "action_counts_from_worker_observe": {
+      "left": 3,
+      "forward": 26
+    },
+    "counter_discrepancy": "Final worker observe29 accepted and feedback advanced, but supervisor events and joint_summary stop at observe28; distinct durable evidence, do not infer finalized supervisor paid29."
+  },
+  "observed_proxy": {
+    "initial_area_m2": 68.88000000000001,
+    "worker_final_area_m2": 113.16000000000003,
+    "supervisor_last_logged_area_m2": 112.92000000000002,
+    "initial_fixed_old_quality": 0.20252490770849835,
+    "worker_final_fixed_old_quality": 0.192902433049572,
+    "supervisor_last_logged_fixed_old_quality": 0.19307258998134863,
+    "fixed_old_support_count": 439,
+    "scope": "Internal proxies, no independent physical ground truth."
+  },
+  "global_plans": [
+    {
+      "paid_actions_before": 0,
+      "rpc_id": 3,
+      "candidate_count": 5,
+      "actual_S_selected": 0,
+      "actual_next_action": "left",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            200,
+            182,
+            2
+          ],
+          "cost": 40
+        },
+        {
+          "candidate_id": 1,
+          "group": "coverage_total_1",
+          "pose": [
+            199,
+            184,
+            2
+          ],
+          "cost": 40
+        },
+        {
+          "candidate_id": 2,
+          "group": "coverage_total_2",
+          "pose": [
+            204,
+            212,
+            2
+          ],
+          "cost": 38
+        },
+        {
+          "candidate_id": 3,
+          "group": "coverage_total_3",
+          "pose": [
+            189,
+            194,
+            1
+          ],
+          "cost": 40
+        },
+        {
+          "candidate_id": 4,
+          "group": "old_surface_rotation",
+          "pose": [
+            200,
+            200,
+            3
+          ],
+          "cost": 2
+        }
+      ],
+      "scores": {
+        "C": [
+          26.220000000000006,
+          21.080000000000005,
+          15.320000000000004,
+          20.340000000000003,
+          0.0
+        ],
+        "G": [
+          26.749856550914497,
+          22.89229153422257,
+          15.518804823658119,
+          25.610758044816343,
+          0.043948841812375516
+        ],
+        "S": [
+          26.749856550914497,
+          22.89229153422257,
+          15.518804823658119,
+          23.84694474870447,
+          0.043948841812375516
+        ],
+        "X": [
+          26.749856550914497,
+          22.89229153422257,
+          15.518804823658119,
+          27.374571340928217,
+          0.043948841812375516
+        ]
+      },
+      "S_minus_G": [
+        0.0,
+        0.0,
+        0.0,
+        -1.7638132961118735,
+        0.0
+      ],
+      "choices": {
+        "C": {
+          "candidate_id": 0,
+          "pose": [
+            200,
+            182,
+            2
+          ],
+          "first_action": "left",
+          "score": 26.220000000000006
+        },
+        "G": {
+          "candidate_id": 0,
+          "pose": [
+            200,
+            182,
+            2
+          ],
+          "first_action": "left",
+          "score": 26.749856550914497
+        },
+        "S": {
+          "candidate_id": 0,
+          "pose": [
+            200,
+            182,
+            2
+          ],
+          "first_action": "left",
+          "score": 26.749856550914497
+        },
+        "X": {
+          "candidate_id": 3,
+          "pose": [
+            189,
+            194,
+            1
+          ],
+          "first_action": "left",
+          "score": 27.374571340928217
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.835373379993786,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 2.5126300706687346,
+          "O": 2.5126300706687346,
+          "S": 0.748816774556862,
+          "X": 4.276443366780607,
+          "M": 2.5126300706687346
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    },
+    {
+      "paid_actions_before": 20,
+      "rpc_id": 43,
+      "candidate_count": 3,
+      "actual_S_selected": 2,
+      "actual_next_action": "left",
+      "candidates": [
+        {
+          "candidate_id": 0,
+          "group": "coverage_total_0",
+          "pose": [
+            200,
+            182,
+            1
+          ],
+          "cost": 20
+        },
+        {
+          "candidate_id": 1,
+          "group": "coverage_total_1",
+          "pose": [
+            200,
+            190,
+            1
+          ],
+          "cost": 20
+        },
+        {
+          "candidate_id": 2,
+          "group": "coverage_total_2",
+          "pose": [
+            200,
+            200,
+            1
+          ],
+          "cost": 20
+        }
+      ],
+      "scores": {
+        "C": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "G": [
+          0.1974375,
+          0.43179102615460174,
+          0.8869638841435082
+        ],
+        "S": [
+          0.1974375,
+          0.43179102615460174,
+          0.8869638841435082
+        ],
+        "X": [
+          0.1974375,
+          0.43179102615460174,
+          0.8869638841435082
+        ]
+      },
+      "S_minus_G": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "choices": {
+        "C": null,
+        "G": {
+          "candidate_id": 2,
+          "pose": [
+            200,
+            200,
+            1
+          ],
+          "first_action": "left",
+          "score": 0.8869638841435082
+        },
+        "S": {
+          "candidate_id": 2,
+          "pose": [
+            200,
+            200,
+            1
+          ],
+          "first_action": "left",
+          "score": 0.8869638841435082
+        },
+        "X": {
+          "candidate_id": 2,
+          "pose": [
+            200,
+            200,
+            1
+          ],
+          "first_action": "left",
+          "score": 0.8869638841435082
+        }
+      },
+      "incremental_aperture": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "prior_potentials": [
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        }
+      ]
+    }
+  ],
+  "interpretation": "Actual S selection and movement are recorded; G/X are shadow scores for the same recorded state, not independent trajectories. First state has unequal G/S scores but same S/G selection; X prefers another candidate. The second state G/S/X scores and choices coincide. No semantic benefit or mount-causality claim.",
+  "limits": [
+    "Execution interrupted; no completed return or S40 outcome.",
+    "Detection labels are prompt-conditioned, not verified object or hidden-state ground truth.",
+    "Aperture is not occlusion-certified."
+  ]
+}

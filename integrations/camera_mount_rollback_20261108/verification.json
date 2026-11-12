@@ -1,0 +1,323 @@
+{
+  "checked_unix_s": 1794127546.6729748,
+  "scope": "Actual legacy mount restored and fresh mapping output verified; no actuator or independent accuracy test",
+  "launch_byte_equal_to_prior_backup": true,
+  "launch_sha256": "58ea968ec11ee9fbdb235b099b54cdb1246e56b5f0dfb383996bacbec58edeb1",
+  "actual_base_from_camera_optical": [
+    [
+      2.220446049250313e-16,
+      2.220446049250313e-16,
+      1.0,
+      0.06099999999999999
+    ],
+    [
+      -1.0,
+      0.0,
+      2.220446049250313e-16,
+      0.0591
+    ],
+    [
+      0.0,
+      -1.0,
+      2.220446049250313e-16,
+      0.303
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "expected_legacy_matrix": [
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.061
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0591
+    ],
+    [
+      0.0,
+      -1.0,
+      0.0,
+      0.303
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "max_matrix_error": 2.220446049250313e-16,
+  "health": {
+    "schema": "nso_hybrid_sensor_bridge/1",
+    "navigation_source": "lidar_rgbd",
+    "sampled_unix_s": 1794127546.5152893,
+    "sampled_monotonic": 24369.52726796,
+    "odom": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794127546410166979,
+      "receipt_monotonic": 24369.441540168,
+      "fault": null,
+      "source": "lidar_csm",
+      "source_topic": "/nso_csm/odom",
+      "source_publisher": "/nso_csm_odometry_bridge",
+      "timestamp_semantics": "scan_acquisition_timestamp_preserved",
+      "velocity_source": "CSM_derived_SE2_base_twist"
+    },
+    "depth": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794127546332096370,
+      "receipt_monotonic": 24369.48417694,
+      "fault": null,
+      "source": "ZED_RGBD",
+      "statistics": {
+        "valid_fraction": 0.6190625,
+        "valid_pixels": 35658,
+        "sampled_pixels": 57600,
+        "obstacle_points": 4995,
+        "supported_rows": 180,
+        "supported_columns": 320,
+        "minimum_valid_points": 0,
+        "minimum_support_rows": 0,
+        "minimum_support_columns": 0,
+        "whole_image_completeness_required": false,
+        "unknown_is_free": false,
+        "clearing_allowed": false
+      }
+    },
+    "laser_source": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794127546410166979,
+      "receipt_monotonic": 24369.432596614,
+      "fault": null,
+      "source": "lslidar_N301",
+      "source_topic": "/scan",
+      "source_publisher": "/lslidar_driver_node",
+      "caller": "/lslidar_driver_node",
+      "frame": "laser_link",
+      "frame_id": "laser_link",
+      "finite_returns": 1867,
+      "range_count": 2000
+    },
+    "self_mask": {
+      "file_sha256": "119af867a47bb7092ede51a3838cae386788081e0bc551411f1156ee8387b32b",
+      "raw_bool_sha256": "22ea770d293bf0134b29bc36c1541e7661863106cc5a69a9aee0ca4711c2c90b",
+      "pixels": 46499,
+      "asset_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask.npy",
+      "provenance_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask-provenance.json",
+      "excluded_is_free": false,
+      "physical_calibration": false,
+      "applied": false,
+      "profile": "unmasked_after_camera_relocation_v1",
+      "reason": "User relocated the camera; the original IMU no longer occludes the view."
+    },
+    "recent_errors": [],
+    "no_actuator": true,
+    "localization_source": "lidar_csm",
+    "mapping_source": "gmapping",
+    "localization_tf_owner": "/nso_csm_odometry_bridge",
+    "velocity_source": "CSM_derived_SE2_base_twist",
+    "dynamic_TF_published": false,
+    "legacy_topic_namespace_only": true,
+    "physical_extrinsic_calibration_verified": false,
+    "covariance_is_measured_accuracy": false,
+    "depth_scan_clearing_allowed": false
+  },
+  "display": {
+    "url": "http://127.0.0.1:8766/",
+    "pose": {
+      "x": 0.0031035749850831626,
+      "y": -0.0013101490800975029,
+      "yaw": -0.0005022763302147665,
+      "frame": "map",
+      "stamp": 1794127546.410167
+    },
+    "map": {
+      "stamp": 1794127545.4577942,
+      "width": 384,
+      "height": 384,
+      "resolution": 0.05000000074505806,
+      "origin": [
+        -10.0,
+        -10.0
+      ],
+      "frame": "map"
+    },
+    "freshness": {
+      "camera": {
+        "fresh": true,
+        "age_s": 0.20647215843200684
+      },
+      "pose": {
+        "fresh": true,
+        "age_s": 0.128401517868042
+      },
+      "map": {
+        "fresh": true,
+        "age_s": 1.0807743072509766
+      },
+      "reconstruction": {
+        "fresh": true,
+        "age_s": 1.8067591190338135
+      },
+      "semantics": {
+        "fresh": true,
+        "age_s": 4.30667519569397
+      }
+    },
+    "trajectory_points": 2,
+    "reconstruction": {
+      "status": "integrated",
+      "integrated_frames": 41,
+      "reconstructed_point_count": 226876,
+      "frame": "odom",
+      "stamp": 1794127544.7318094
+    },
+    "camera_extrinsics_loaded": false
+  },
+  "processes": [
+    {
+      "name": "camera",
+      "pid": 537831,
+      "alive": true,
+      "children": [
+        {
+          "pid": 537857,
+          "argv": [
+            "/opt/ros/noetic/lib/robot_state_publisher/robot_state_publisher",
+            "__name:=robot_state_publisher",
+            "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/robot_state_publisher-1.log"
+          ]
+        },
+        {
+          "pid": 537858,
+          "argv": [
+            "/opt/ros/noetic/lib/robot_state_publisher/robot_state_publisher",
+            "robot_description:=zed2i_description",
+            "__name:=zed2i_state_publisher",
+            "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/zed2i-zed2i_state_publisher-2.log"
+          ]
+        },
+        {
+          "pid": 537860,
+          "argv": [
+            "/home/ouc/scout_nav/devel/lib/zed_wrapper/zed_wrapper_node",
+            "__name:=zed_node",
+            "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/zed2i-zed_node-3.log"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "csm_bridge",
+      "pid": 537839,
+      "alive": true,
+      "children": []
+    },
+    {
+      "name": "sensors",
+      "pid": 537890,
+      "alive": true,
+      "children": [
+        {
+          "pid": 537946,
+          "argv": [
+            "/home/ouc/scout_nav/devel/lib/lslidar_driver/lslidar_driver_node",
+            "__name:=lslidar_driver_node",
+            "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/lslidar_driver_node-1.log"
+          ]
+        },
+        {
+          "pid": 537947,
+          "argv": [
+            "/opt/ros/noetic/lib/laser_scan_matcher/laser_scan_matcher_node",
+            "scan:=/scan",
+            "__name:=matcher",
+            "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/nso_csm-matcher-2.log"
+          ]
+        },
+        {
+          "pid": 537952,
+          "argv": [
+            "/home/ouc/scout_nav/devel/lib/gmapping/slam_gmapping",
+            "scan:=scan",
+            "map:=/nso_visual/map",
+            "map_metadata:=/nso_visual/map_metadata",
+            "__name:=slam_gmapping",
+            "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/slam_gmapping-3.log"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sensor_bridge",
+      "pid": 538022,
+      "alive": true,
+      "children": []
+    },
+    {
+      "name": "navigation",
+      "pid": 538037,
+      "alive": true,
+      "children": [
+        {
+          "pid": 538061,
+          "argv": [
+            "/home/ouc/scout_nav/devel/lib/move_base/move_base",
+            "odom:=/nso_csm/control_odom",
+            "cmd_vel:=/nso_visual/cmd_vel_proposed",
+            "/cmd_vel:=/nso_visual/cmd_vel_proposed",
+            "move_base_simple/goal:=/nso_visual/move_base_simple/goal",
+            "/move_base_simple/goal:=/nso_visual/move_base_simple/goal",
+            "__name:=move_base",
+            "__log:=/home/ouc/.ros/log/1e9acc96-db47-11f1-83c4-48b02d94ff51/nso_visual-move_base-1.log"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dashboard",
+      "pid": 538071,
+      "alive": true,
+      "children": [
+        {
+          "pid": 538106,
+          "argv": [
+            "/home/ouc/nso_robot/envs/science312/bin/python",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/reconstruction_worker.py",
+            "--output-directory",
+            "/home/ouc/nso_robot/experiments/live_dashboard_mount_rollback_20261108/reconstruction"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dashboard_overlay",
+      "pid": 538122,
+      "alive": true,
+      "children": []
+    },
+    {
+      "name": "dashboard_semantic",
+      "pid": 538158,
+      "alive": true,
+      "children": []
+    }
+  ],
+  "physical_accuracy_verified": false,
+  "research_policy_changed": false,
+  "autonomous_mission_running": false
+}

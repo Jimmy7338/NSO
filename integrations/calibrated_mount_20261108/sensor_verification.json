@@ -1,0 +1,106 @@
+{
+  "checked_unix_s": 1794123466.2445624,
+  "health": {
+    "schema": "nso_hybrid_sensor_bridge/1",
+    "navigation_source": "lidar_rgbd",
+    "sampled_unix_s": 1794123466.1861427,
+    "sampled_monotonic": 20289.198120011,
+    "odom": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794123466120683670,
+      "receipt_monotonic": 20289.154630788,
+      "fault": null,
+      "source": "lidar_csm",
+      "source_topic": "/nso_csm/odom",
+      "source_publisher": "/nso_csm_odometry_bridge",
+      "timestamp_semantics": "scan_acquisition_timestamp_preserved",
+      "velocity_source": "CSM_derived_SE2_base_twist"
+    },
+    "depth": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794123465966403813,
+      "receipt_monotonic": 20289.121491421,
+      "fault": null,
+      "source": "ZED_RGBD",
+      "statistics": {
+        "valid_fraction": 0.83015625,
+        "valid_pixels": 47817,
+        "sampled_pixels": 57600,
+        "obstacle_points": 17647,
+        "supported_rows": 180,
+        "supported_columns": 320,
+        "minimum_valid_points": 0,
+        "minimum_support_rows": 0,
+        "minimum_support_columns": 0,
+        "whole_image_completeness_required": false,
+        "unknown_is_free": false,
+        "clearing_allowed": false
+      }
+    },
+    "laser_source": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794123466120683670,
+      "receipt_monotonic": 20289.148238637,
+      "fault": null,
+      "source": "lslidar_N301",
+      "source_topic": "/scan",
+      "source_publisher": "/lslidar_driver_node",
+      "caller": "/lslidar_driver_node",
+      "frame": "laser_link",
+      "frame_id": "laser_link",
+      "finite_returns": 1834,
+      "range_count": 2000
+    },
+    "self_mask": {
+      "file_sha256": "119af867a47bb7092ede51a3838cae386788081e0bc551411f1156ee8387b32b",
+      "raw_bool_sha256": "22ea770d293bf0134b29bc36c1541e7661863106cc5a69a9aee0ca4711c2c90b",
+      "pixels": 46499,
+      "asset_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask.npy",
+      "provenance_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask-provenance.json",
+      "excluded_is_free": false,
+      "physical_calibration": false,
+      "applied": false,
+      "profile": "unmasked_after_camera_relocation_v1",
+      "reason": "User relocated the camera; the original IMU no longer occludes the view."
+    },
+    "recent_errors": [],
+    "no_actuator": true,
+    "localization_source": "lidar_csm",
+    "mapping_source": "gmapping",
+    "localization_tf_owner": "/nso_csm_odometry_bridge",
+    "velocity_source": "CSM_derived_SE2_base_twist",
+    "dynamic_TF_published": false,
+    "legacy_topic_namespace_only": true,
+    "physical_extrinsic_calibration_verified": false,
+    "covariance_is_measured_accuracy": false,
+    "depth_scan_clearing_allowed": false
+  },
+  "map": {
+    "stamp": 1794123465.271378,
+    "frame": "map",
+    "width": 384,
+    "height": 384
+  },
+  "control_odom": {
+    "stamp": 1794123466.220677,
+    "frame": "odom",
+    "vx": 0.0,
+    "w": 0.0
+  },
+  "control_velocity_source": "can_feedback",
+  "pose_source": {
+    "profile": "original_csm_pose_source_v1",
+    "pose_topic": "/nso_csm/pose_stamped",
+    "expected_caller": "/nso_csm/matcher",
+    "source_frame": "odom",
+    "target_frame": "odom",
+    "fixed_coordinate_transform_applied": false,
+    "raw_registration_preserved": true,
+    "source_stamp_preserved": true,
+    "nanosecond_stamp_encoding": "decimal_string_in_ROS_parameters_only",
+    "alignment": {}
+  }
+}

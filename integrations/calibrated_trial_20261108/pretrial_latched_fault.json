@@ -1,0 +1,120 @@
+{
+  "checked_unix_s": 1794124396.4992661,
+  "health_before": {
+    "schema": "nso_hybrid_sensor_bridge/1",
+    "navigation_source": "lidar_rgbd",
+    "sampled_unix_s": 1794124393.486437,
+    "sampled_monotonic": 21216.498413215,
+    "odom": {
+      "valid": false,
+      "reason": "lidar_pose_jump",
+      "source_stamp_ns": 1794123892696741819,
+      "receipt_monotonic": 20715.72836098,
+      "fault": "lidar_pose_jump",
+      "source": "lidar_csm",
+      "source_topic": "/nso_csm/odom",
+      "source_publisher": "/nso_csm_odometry_bridge",
+      "timestamp_semantics": "scan_acquisition_timestamp_preserved",
+      "velocity_source": "CSM_derived_SE2_base_twist",
+      "fault_evidence": {
+        "previous_stamp_ns": 1794123892696741819,
+        "rejected_stamp_ns": 1794123892796566963,
+        "planar_distance_m": 0.09185708429883878,
+        "absolute_yaw_delta_rad": 0.0009124703621993645,
+        "absolute_height_delta_m": 0.0,
+        "previous_pose": [
+          0.4205227137250885,
+          0.033075153816588466,
+          0.0,
+          0.002965252502978177
+        ],
+        "rejected_pose": [
+          0.5123150797734082,
+          0.03652268498182226,
+          0.0,
+          0.0020527821407788126
+        ],
+        "allowed_planar_distance_m": 0.089912572,
+        "allowed_yaw_delta_rad": 0.179825144,
+        "allowed_height_delta_m": 0.0599650288
+      }
+    },
+    "depth": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794124393248581813,
+      "receipt_monotonic": 21216.411230729,
+      "fault": null,
+      "source": "ZED_RGBD",
+      "statistics": {
+        "valid_fraction": 0.6875694444444445,
+        "valid_pixels": 39604,
+        "sampled_pixels": 57600,
+        "obstacle_points": 10290,
+        "supported_rows": 180,
+        "supported_columns": 320,
+        "minimum_valid_points": 0,
+        "minimum_support_rows": 0,
+        "minimum_support_columns": 0,
+        "whole_image_completeness_required": false,
+        "unknown_is_free": false,
+        "clearing_allowed": false
+      }
+    },
+    "laser_source": {
+      "valid": true,
+      "reason": "ok",
+      "source_stamp_ns": 1794124393410035372,
+      "receipt_monotonic": 21216.431072973,
+      "fault": null,
+      "source": "lslidar_N301",
+      "source_topic": "/scan",
+      "source_publisher": "/lslidar_driver_node",
+      "caller": "/lslidar_driver_node",
+      "frame": "laser_link",
+      "frame_id": "laser_link",
+      "finite_returns": 1827,
+      "range_count": 2000
+    },
+    "self_mask": {
+      "file_sha256": "119af867a47bb7092ede51a3838cae386788081e0bc551411f1156ee8387b32b",
+      "raw_bool_sha256": "22ea770d293bf0134b29bc36c1541e7661863106cc5a69a9aee0ca4711c2c90b",
+      "pixels": 46499,
+      "asset_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask.npy",
+      "provenance_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask-provenance.json",
+      "excluded_is_free": false,
+      "physical_calibration": false,
+      "applied": false,
+      "profile": "unmasked_after_camera_relocation_v1",
+      "reason": "User relocated the camera; the original IMU no longer occludes the view."
+    },
+    "recent_errors": [],
+    "no_actuator": true,
+    "localization_source": "lidar_csm",
+    "mapping_source": "gmapping",
+    "localization_tf_owner": "/nso_csm_odometry_bridge",
+    "velocity_source": "CSM_derived_SE2_base_twist",
+    "dynamic_TF_published": false,
+    "legacy_topic_namespace_only": true,
+    "physical_extrinsic_calibration_verified": false,
+    "covariance_is_measured_accuracy": false,
+    "depth_scan_clearing_allowed": false
+  },
+  "current_samples": 30,
+  "first": [
+    1794124393.509804,
+    2.1520008479988926,
+    17.96240582932595,
+    -0.0902263615940917,
+    0.9959212838741284
+  ],
+  "last": [
+    1794124396.409195,
+    2.150989149105085,
+    17.963311214519358,
+    -0.09037703710618616,
+    0.995907621802297
+  ],
+  "max_current_step_m": 0.00644488713576576,
+  "scope": "Actual current raw odometry sample; no proof of the earlier jump cause. No autonomous mission had started."
+}

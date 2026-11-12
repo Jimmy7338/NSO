@@ -1,0 +1,63 @@
+{
+  "schema": "nso.forward_controller_can_addendum.v1",
+  "probe": "control_can_offset_05",
+  "scope": "single-variable controller twist source diagnostic; standard navigation; default DWA library unchanged and candidate DWA patch not deployed",
+  "controller_velocity_source": "CAN measured vx/w paired at or before scan; CSM raw pose and TF retained",
+  "status": "execution_interrupted",
+  "stop_reason": "chassis_before_stop:odometry_jump",
+  "elapsed_s": 8.214390680994256,
+  "CAN_distance_m": 0.17852642965316762,
+  "verified_arrivals": 0,
+  "reported_stopped": true,
+  "stop_feedback_before_close_confirmed": true,
+  "stop_feedback_after_close_confirmed": true,
+  "last_before_close_CAN_velocity": {
+    "source": 122550.89499950409,
+    "receipt": 122550.895077003,
+    "v": 0.0,
+    "w": 0.0,
+    "uninterpreted_tail_hex": "00000000"
+  },
+  "physical_stop_independently_observed": false,
+  "limitations": [
+    "One physical trial at its own starting pose; not a matched efficacy comparison or NSO action",
+    "CAN zero reported by feedback; independent physical stop observation not recorded",
+    "Future test pending; no final conclusion"
+  ],
+  "source_files": [
+    "probes/control_can_offset_05/summary.json",
+    "probes/control_can_offset_05/result.json",
+    "probes/control_can_offset_05/mission.log"
+  ],
+  "additional_probes": [
+    {
+      "probe": "control_can_offset_06",
+      "scope": "CAN control-twist diagnostic, standard navigation; default DWA unchanged",
+      "status": "execution_interrupted",
+      "stop_reason": "chassis_before_stop:odometry_jump",
+      "elapsed_s": 9.668819589991472,
+      "CAN_distance_m": 0.18494379711151127,
+      "verified_arrivals": 0,
+      "reported_stopped": true,
+      "stop_feedback_before_close_confirmed": true,
+      "stop_feedback_after_close_confirmed": true,
+      "physical_stop_independently_observed": false,
+      "failure_ring": {
+        "files": [
+          "probes/control_can_offset_06/failure_scan_ring.npz",
+          "probes/control_can_offset_06/failure_scan_ring.json"
+        ],
+        "messages_per_topic": {
+          "/scan": 150,
+          "/nso_csm/pose_stamped": 150
+        },
+        "scope": "bounded history only; not complete matcher state"
+      },
+      "limitations": [
+        "One physical trial at its own starting pose; not a matched efficacy comparison or NSO action",
+        "CAN zero reported by feedback; independent physical stop observation not recorded",
+        "Investigation of raw CSM remains ongoing"
+      ]
+    }
+  ]
+}

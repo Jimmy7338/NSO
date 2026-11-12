@@ -1,0 +1,65 @@
+{
+  "schema": "nso.dashboard_clock_fix.v1",
+  "syntax_checked_with": "V8 new Function over complete dashboard.js",
+  "test_method": "Execute the actual isFresh declaration extracted from dashboard.js with injected backend state, browser wall clock and monotonic clock",
+  "tests": [
+    {
+      "name": "browser clock ahead 7 days",
+      "passed": true
+    },
+    {
+      "name": "browser clock behind 7 days",
+      "passed": true
+    },
+    {
+      "name": "stale source age",
+      "passed": true
+    },
+    {
+      "name": "backend rejects source",
+      "passed": true
+    },
+    {
+      "name": "slow request exceeds limit",
+      "passed": true
+    },
+    {
+      "name": "source age plus request delay exceeds limit",
+      "passed": true
+    },
+    {
+      "name": "snapshot ages offline",
+      "passed": true
+    },
+    {
+      "name": "future timestamp despite fresh flag",
+      "passed": true
+    },
+    {
+      "name": "negative backend age",
+      "passed": true
+    },
+    {
+      "name": "missing backend age",
+      "passed": true
+    },
+    {
+      "name": "invalid timestamp",
+      "passed": true
+    },
+    {
+      "name": "snapshot not received",
+      "passed": true
+    },
+    {
+      "name": "monotonic time regression rejected",
+      "passed": true
+    }
+  ],
+  "passed": 13,
+  "monotonic_age_includes_full_request_duration": true,
+  "expiry_repaint_interval_ms": 250,
+  "frame_drawing_logic_changed": false,
+  "backend_changed": false,
+  "ROS_or_hardware_commands": false
+}

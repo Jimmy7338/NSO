@@ -1,0 +1,137 @@
+{
+  "scope": "read-only local source comparison; no colleague modifications, ROS calls, robot operations or publication",
+  "sources": [
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/car_launch/launch/navigation_simplified.launch",
+      "sha256": "e79ad4f6f9a3b506bf91eb11a75f0a496f6249a6231a487d820f7bcc05269d1f"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/car_launch/launch/rtabmap_offical.launch",
+      "sha256": "18616cdfc1339e25d1cb9d8c0a82b8a84a35e0fef02b449a739f07027f2e73fd"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/car_launch/launch/rtabmap_localization.launch",
+      "sha256": "44f1af9fef9223e1a019f8c81a102c08083d1e082c81586eada00d274cb72469"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/scout/scout_ros/scout_bringup/launch/scout_robot_base_nav_test.launch",
+      "sha256": "22001b0588c4732c96c93bb0358f64c37731122b301915c43b157f8590ba8509"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/scout/scout_ros/scout_description/launch/display_scout_mini.launch",
+      "sha256": "7e0f477fe62c9a418d67a8264f356056204cea513092f5d0fcfc7ecad2b2b9f1"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/scout/scout_ros/scout_description/urdf/scout_mini.urdf.xacro",
+      "sha256": "6f65f88bdddd11eb3ad6232aec66f6dbe086bcc36a895c23ca37ee857112c02c"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/scout/scout_ros/scout_description/urdf/scout_v2.xacro",
+      "sha256": "e3193a079f8b03ce7c59ea8a2572201fff6ec71892683841e05df82d2beecebf"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/nav/src/nav_demo/launch/move_base_lab.launch",
+      "sha256": "5c3b87c35cd0236484921d8b7af23adffd10a121f201e4b8df4a5192bc5d9ec0"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/nav/src/nav_demo/param/costmap_common_params_lab.yaml",
+      "sha256": "5753050f29fd8433bb69a77fc9aa771328b6c9e848706916f601eccf7b97bb76"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/nav/src/nav_demo/param/local_costmap_params_lab.yaml",
+      "sha256": "7a68f83bdc0d7d15a035bb82c959b88f1e4c5b60dde55962a4c8e02b864d30c6"
+    },
+    {
+      "path": "/home/ouc/hjd/catkin_ws/src/nav/src/nav_demo/param/base_local_planner_params_lab.yaml",
+      "sha256": "060474e77815496a5cb28009bf0276c7cfe7e2ef98e4e9d850eab20b46c55de4"
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/tf_verification.json",
+      "sha256": "8e09f91d66efca2514d7d165a0bb83b119de382c21cc9bc351e284ce90acb1ad"
+    }
+  ],
+  "launch_chain": [
+    "navigation_simplified.launch -> nav_demo/move_base_lab.launch -> *_lab.yaml",
+    "scout_robot_base_nav_test.launch -> display_scout_mini.launch -> scout_mini.urdf.xacro"
+  ],
+  "unused_argument": "scout_robot_base_nav_test.launch model_xacro defaults scout_v2.xacro but is never passed to display_scout_mini; cannot infer active full Scout model from that unused argument",
+  "footprint": {
+    "ours": {
+      "x_min": -0.392,
+      "x_max": 0.6,
+      "y_half": 0.2925,
+      "length": 0.992,
+      "width": 0.585,
+      "padding": 0
+    },
+    "colleague_navigation": {
+      "x_half": 0.28,
+      "y_half": 0.22,
+      "length": 0.56,
+      "width": 0.44,
+      "padding": 0.02
+    },
+    "mini_model_properties": {
+      "base_x_size": 0.62,
+      "base_y_size": 0.585,
+      "wheelbase": 0.463951,
+      "wheel_radius": 0.16,
+      "wheel_x_outer_extent_from_properties": 0.3919755
+    },
+    "interpretation": "Strong configuration inconsistency, not established physical measurement. Our rear -.392 and halfwidth .2925 numerically match Mini property envelope; front +.6 exceeds symmetric wheel extent by .2080245 m. Colleague navigation footprint is itself smaller than Mini model properties. No evidence here establishes front extension unnecessary, fullScout copy error, or colleague polygon physically complete. Model visual mesh and commented collision require independent envelope provenance."
+  },
+  "highest_value": [
+    {
+      "priority": 1,
+      "action": "Resolve actual robot/payload footprint provenance before next geometry-profile change; compare current robot_description and mounting envelope to the two polygons. If front +.6 has no physical support, explicitly revise that bound instead of arbitrary global shrink.",
+      "limit": "URDF properties and colleague working config are source evidence, not physical dimensions."
+    },
+    {
+      "priority": 2,
+      "action": "Consider colleague inflation_radius .25/cost_scaling_factor8 instead of current .55/5 as a declared local navigation profile; retain actual lethal footprint collision. This reduces broad inflation and trajectory penalties.",
+      "limit": "Inscribed radius/body collision still applies; cannot make truly occupied current footprint traversable or guarantee improvement."
+    },
+    {
+      "priority": 3,
+      "action": "Reuse existing move_base point-goal/recovery pipeline and live local sensor layers; current v3 already matches planner1Hz/recovery enabled/no rotation/no local static. Use descriptive ROS goal outcome diagnostics before considering another backend.",
+      "limit": "Colleague xy .18/yaw .8 and speed .45 are not drop-in replacements for NSO measured cell/cardinal heading or current low-speed envelope. Sending macro point-goals instead of paid primitives changes execution/accounting and must be declared."
+    }
+  ],
+  "local_layers": {
+    "colleague": "laser /scan_nav marking+clearing inf_is_valid true; separate vision_layer /zed2i/ground clearing + /zed2i/obstacles marking; no local static",
+    "ours": "live laser+depth-scan marking; no local static since v3",
+    "reuse_limit": "Do not silently transfer scan outlier or ground filters to research evidence; this changes actual measured input and requires parameter/source disclosure."
+  },
+  "relocalization": {
+    "reference": "/home/ouc/hjd/catkin_ws/src/car_launch/launch/rtabmap_localization.launch",
+    "database": "existing lab/rtabmap.db supplied by navigation_simplified",
+    "settings": {
+      "Mem/IncrementalMemory": false,
+      "Mem/InitWMWithAllNodes": true,
+      "Reg/Strategy": 0,
+      "Reg/Force3DoF": true,
+      "initialpose": "/initialpose",
+      "pub_loc_pose_only_when_localizing": true
+    },
+    "use": "Reference for optional global drift/relocalization study with actual prior database; no standalone helper script located in car_launch.",
+    "limit": "Known-map localization adds prior environment information; cannot replace unknown-space thesis initialization or current CSM mapping silently. rtabmap_offical mapping launch contains --delete_db_on_start; do not execute against saved evidence."
+  },
+  "TF": {
+    "colleague_note_nominal_base_camera_xyz": [
+      0.04,
+      0,
+      0.3
+    ],
+    "colleague_URDF_laser_xyz": [
+      -0.011,
+      0.0035,
+      0.451
+    ],
+    "our_Nov06_composed_base_camera_optical_translation": [
+      0.18725143692477933,
+      0.06740568615856075,
+      0.2980276263436753
+    ],
+    "interpretation": "Note nominal camera parent frame is not optical frame; composed optical translation includes wrapper optical/baseline offsets. Existing Nov06 receipt has nonidentity measured rotation and must be compared after frame composition, not replaced with note table. Laser URDF transform agrees current capture convention."
+  }
+}

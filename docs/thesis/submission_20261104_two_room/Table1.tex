@@ -1,0 +1,15 @@
+\begin{table}[!htbp]
+\caption{Functional components and their roles in the observation loop}\label{tab:1}
+\small\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{3pt}
+\setlength{\JournalTableWidth}{\dimexpr\linewidth-4\tabcolsep\relax}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\JournalTableWidth} >{\raggedright\arraybackslash}p{0.32\JournalTableWidth} >{\raggedright\arraybackslash}p{0.52\JournalTableWidth}@{}}
+\toprule
+Function & Input & Output and role \\
+\midrule
+Category support & Acquired RGB, pose, measured-map summary & Register category support and configuration prior \\
+Diagnostic planning & Graph, exposure sets, beliefs, remaining budget & Compare feasible continuations and select a subgoal \\
+Return-feasibility check & Proposed edge, budget, return distance & Permit or reject the executable action \\
+Geometric correction & Acquired depth/scan and public predictions & Bound geometric evidence and revise belief \\
+\bottomrule
+\end{tabular}
+\end{table}
