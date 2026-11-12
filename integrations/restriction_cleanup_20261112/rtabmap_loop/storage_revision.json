@@ -1,0 +1,77 @@
+{
+  "schema": "nso.rtabmap_storage_revision.v2",
+  "status": "implemented_not_started",
+  "original_session": {
+    "path": "/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/session_20261112_01",
+    "database_bytes": 1232343040,
+    "node_weight_counts": [
+      [
+        -9,
+        455
+      ],
+      [
+        0,
+        21
+      ]
+    ],
+    "blob_bytes": {
+      "rgb": 26977406,
+      "depth": 1082202617,
+      "scan": 6789898,
+      "obstacle_cells": 6541678,
+      "empty_cells": 60852056
+    },
+    "info_count": 475,
+    "graph_count": 475,
+    "descriptor_loop_events": 0,
+    "proximity_events": 11
+  },
+  "diagnosis": [
+    "1082202617 retained depth bytes dominate original DB; 455/476 rows have invalid/rehearsed/deleted weight -9, and 21 have weight0.",
+    "Installed headers support pre/post-decimation, linked-node retention and depth16/RVL. Preserved core source post-decimation branch bases depth scale on PRE while RGB uses POST; this matches observed640RGB/1280depth warning, but exact preserved-source-to-binary build identity is not established."
+  ],
+  "changes": [
+    "Mem/ImagePreDecimation=Mem/ImagePostDecimation=2: consistent saved RGB/depth; visual features now extracted at half input dimensions.",
+    "Mem/NotLinkedNodesKept=false: retain linked keyframes; omit newly discarded/rehearsed nodes.",
+    "Mem/SaveDepth16Format=true and DepthCompressionFormat=.rvl; bin/descriptor data retained for keyframe verification.",
+    "Explicit mapping freshDB versus localization backup of user-selected ownedDB; publish_tf=false both.",
+    "Original large DB untouched; localization from that DB copies its existing bulk, not automatic compact migration."
+  ],
+  "validation": {
+    "tests": 11,
+    "status": "PASS",
+    "dependency_launch_nodes": "PASS",
+    "localization_dump": "PASS incremental=false/allnodes=true/publish_tf=false"
+  },
+  "sources": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/rtabmap_loop_shadow.launch",
+      "sha256": "937ed520088b9d88a27596d48b372b93bb3a15b9083a19b9c3cce533c715aab0"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_loop_monitor.py",
+      "sha256": "a7b9171e7198f18abdb9bbc58894b467cb351025e783ff67edcab114c95e5ac5"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_loop_session.py",
+      "sha256": "91ed16ec0c9d092a7d707b978514b3e0fa5f00307c1adfb3a421f29f2a5b2afe"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/run_rtabmap_loop_shadow.sh",
+      "sha256": "73e20e57686a92c66d9d06ccd2e4a7775417434a61388327dfe4b4b3c7e0dfc1"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_rtabmap_loop_session.py",
+      "sha256": "fef773f75def6a52100f880c7758937a94d619ff7c976727105a74b82d44b69d"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_rtabmap_loop_monitor.py",
+      "sha256": "2921fd5bd5a71dee5643ce1f46842d52a942dcef2548a17647311ec984b07346"
+    }
+  ],
+  "limitations": [
+    "No revised shadow session has started; reduced growth must be measured.",
+    "Existing descriptor loop count is0, proximity count11; do not claim verified visual loop/relocalization success.",
+    "Depth16 stores millimeter units and drops >65m; current configured sensor range remains below that."
+  ]
+}

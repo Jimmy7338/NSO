@@ -1,0 +1,33 @@
+{
+  "schema": "nso.ROS_backoff_candidate.v1",
+  "status": "isolated_candidate_not_deployed_by_this_agent",
+  "production_original": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/joint_ros_coordinator.py",
+  "production_original_sha256": "22a4148ab533e49a2b41b9dae5774eba77d585076711be971bbd11e6076adeba",
+  "candidate": "/home/ouc/nso_robot/analyses/restriction_cleanup_20261112/reverse_recovery_candidate/runtime/joint_ros_coordinator.py",
+  "candidate_sha256": "8b76b160c38838eeed5416a094daebc3de075ec510df4e0b95aff595cf68a48e",
+  "activation": "configuration.policy_variant == 'ros_checked_exploration_v2' AND ctx.ordinary_reverse_authorized is True AND original ROS status4",
+  "behavior": "One 0.4m behind fresh actual odom at unchanged yaw, same move_base and frame projection, same heartbeat/external deadline; ROS rejection still proceeds to actual capture/replan",
+  "accounting": "Recovery is a separately logged non-NSO intervention with zero additional NSO primitive charge and no arrival credit. Existing failed RPC charges original attempted action once after actual post-recovery capture.",
+  "unchanged": [
+    "Legacy/unauthorized execution path",
+    "Status3 endpoint-mismatch path: no backoff",
+    "Research policy and scoring",
+    "Mission/adapter/navigation files",
+    "Hardware stop exception behavior"
+  ],
+  "tests": {
+    "count": 31,
+    "status": "PASS",
+    "log": "/home/ouc/nso_robot/analyses/restriction_cleanup_20261112/reverse_recovery_candidate/test.log",
+    "new_cases": [
+      "ABORT\u2192one backoff success, original status preserved, actual partial pose captured",
+      "Backoff rejection still capture/replan",
+      "Legacy/unauthorized/status3 no backoff",
+      "Hardware stop remains fatal"
+    ]
+  },
+  "limitations": [
+    "ROS backoff goal requests a pose behind the current heading; actual commanded speeds and direction are enforced by the separately authorized navigation/adapter profile, not this coordinator helper.",
+    "No physical test or deployment performed by this agent."
+  ]
+}

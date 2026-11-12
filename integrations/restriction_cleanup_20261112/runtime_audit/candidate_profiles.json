@@ -1,0 +1,30 @@
+{
+  "status": "proposal configurations, NOT parsed by current runtime until scoped implementation; no production edits",
+  "first_changes": [
+    {
+      "profile": "recoverable_sensor_pause_v1",
+      "adapter_source_ttl_s": 0.5,
+      "sensor_loss_terminal_s": null,
+      "supervisor_active_health_loss": "wait",
+      "require_new_post_recovery_proposal": true,
+      "operator_stop_and_mission_deadline": "unchanged"
+    },
+    {
+      "profile": "recoverable_command_watchdog_v1",
+      "native_command_ttl_s": 0.1,
+      "native_source_age_s": 0.08,
+      "native_sender_tick_gap_s": 0.04,
+      "adapter_tick_gap_s": 0.08,
+      "on_timing_overrun_or_expiry": "zero_and_discard_cached_command_then_require_new_fresh_command",
+      "on_clock_regression_or_wrong_identity": "terminal",
+      "stale_command_reuse": false
+    }
+  ],
+  "already_deployed_retained": {
+    "linear_command_cap_m_s": 0.05,
+    "linear_feedback_stop_m_s": 0.2,
+    "angular_command_cap_rad_s": 0.3,
+    "angular_feedback_stop_rad_s": 0.45
+  },
+  "unsupported_change": "No numerical watchdog widening or additional speed-limit increase proposed initially; change recoverability while preserving bounded staleness."
+}

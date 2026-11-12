@@ -87,7 +87,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>关键词：</strong>未知环境探索；主动覆盖；结构感知；语义先验；实测表面</p>
 <h2 id="abstract">Abstract</h2>
 <p>Mobile robots exploring large unknown environments must select observations with incomplete maps and limited motion budgets while also observing measured surfaces. This thesis studies joint unknown-space coverage and measured-surface observation, alongside a separate controlled facility study of the conditional effects of category priors and geometric feedback.</p>
-<p>The exploration pipeline updates an online map using laser, RGB-D and pose inputs, generates candidates in currently known feasible space, and scores coverage, surface-quality and structural-object proxies. A deployment variant of v10.3.1 changes camera gain, candidate organization and replanning after invalidation, and adapts sensor ranges. In one controlled Q0 scene with two related swapped layouts, the original and deployment policies each produced eight trajectories, plus four same-candidate coverage-scoring ablations and four frontier comparisons. All 24 returned, but they are not 24 independent scenes. Frontier reached 95% coverage earlier, while the joint policy reached 99% earlier under the 96-action budget. These mixed outcomes do not establish a semantic improvement in unknown-coverage efficiency. The S/G difference at west with a 96-action budget reversed between versions; other pairs tied. Physical records include two 40-action returns under different execution configurations and a dependent continuation stopped after seven actions. An earlier episode covered 7.394 m by CAN feedback in 542.444 s: its internal area proxy increased from 72.08 to 128.28 m², while fixed-old-surface quality decreased from 0.213760 to 0.199107. S/G tied at the earlier completed episode’s 12 planning states and the latest episode’s 12 states (only two with multiple candidates). Neither proxy is independent ground truth. Relative real-world efficiency, semantic benefit and reconstruction accuracy remain unvalidated.</p>
+<p>The exploration pipeline updates an online map using laser, RGB-D and pose inputs, generates candidates in currently known feasible space, and scores coverage, surface-quality and structural-object proxies. A deployment variant of v10.3.1 changes camera gain, candidate organization and replanning after invalidation, and adapts sensor ranges. In one controlled Q0 scene with two related swapped layouts, the original and deployment policies each produced eight trajectories, plus four same-candidate coverage-scoring ablations and four frontier comparisons. All 24 returned, but they are not 24 independent scenes. Frontier reached 95% coverage earlier, while the joint policy reached 99% earlier under the 96-action budget. These mixed outcomes do not establish a semantic improvement in unknown-coverage efficiency. The S/G difference at west with a 96-action budget reversed between versions; other pairs tied. Physical records include two 40-action returns under different execution configurations and a dependent continuation stopped after seven actions. An earlier episode covered 7.394 m by CAN feedback in 542.444 s: its internal area proxy increased from 72.08 to 128.28 m², while fixed-old-surface quality decreased from 0.213760 to 0.199107. S/G tied at the earlier completed episode’s 12 planning states and that episode’s 12 states (only two with multiple candidates). Neither proxy is independent ground truth. Relative real-world efficiency, semantic benefit and reconstruction accuracy remain unvalidated.</p>
 <p>In one additional predeclared synthetic Q1 parent, fixed 96-action native G/S/X runs all returned. S achieved higher terminal reference-visible surface and F1, while a common geometric prior weight remains compatible with its choices; category-specific advantage is not established.</p>
 <p>In a calibrated fresh-map ordered physical C/S comparison, C returned after 24 actions and stopped without positive options; S failed after 13 actions when depth occupancy made the anchor footprint not known safe. Its shorter incomplete run is not an efficiency gain.</p>
 <p>The separate V35 controlled mechanism uses a public pose graph and templates with exact simulated poses. Local paired tests on two previously seen parent layouts and two configurations yielded two wins and two ties, with a 6.16% mean increase in the coverage–surface-F1 product; four pairs on new backgrounds yielded one win and three ties, with a 2.98% mean increase. The budget extension retains 32 planning failures and a −0.70% difference at 54 steps. Nine scene-level S/B comparisons showed no action or quality difference. These results are confined to the controlled facility task and do not establish an unknown-exploration advantage.</p>
@@ -981,6 +981,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>激光并集由每个已接受RGB-D包对应的一帧真实扫描累积，使用该扫描时刻的历史TF、0.2 m网格、8 m量程上限和固定12.5 m半径测量区域。无效回波跳过，量程截断端点仅贡献自由射线证据；射线与命中格可在不同观测间冲突。S96的61个相关检查点增加56.20 m²记录支持，但没有已知可通行总面积分母和独立定位参考，因此不是物理覆盖率或已证实自由空间。S96在第29和56步因原下一步轮廓不满足已知安全条件而重规划，未到达此前选定端点。其后第61个目标执行期间，CAN反馈0.154 m/s超过未修改的0.15 m/s阈值而停止，60步的部分观测仍计入失败轮次。</p>
 <p>11月10日S40与11月12日S96各有三个有候选的全局决策，G/S逐候选同分且增量开口贡献为零。S96已记录类别3点，但所有对象入口均无未使用的可行开口姿态；后两次全局决策的当前对象也没有语义标记支持。固定初始表面支持上的内部质量代理在S40由0.196912增至0.348033，在S96由0.224206降至0.223401，均不能解释为独立重建精度。保存状态的G评分不是另行执行的G轨迹。</p>
 <p>另行声明的0.05 m/s正向命令上限保留候选、评分、CAN停止阈值、时效限制和已授权的端点纠偏反向边界。短程S12完成不证明故障修复：后续S40在9次到达后仍触发速度反馈停止。被动CAN观察器记录的命令帧上限为0.05 m/s，速度反馈峰值为0.159 m/s；命令帧观察不等于控制器接受或独立物理测速，不能将保护触发称为误报。两个轮次停止后均记录零反馈，内部质量变化分别为−0.006951和−0.000236。本组保留完成、失败与不同执行配置，不据短程成功宣称稳定部署或语义效率收益。</p>
+<p>在随后单独声明的ros_checked_exploration_v2部署中，研究规划图允许未知格中心通过，保留已测占据格，仅对机器人实际当前格使用虚拟起步例外，传感记录不改写为空闲。原圆形半径参数仍保留，但已知空闲圆形轮廓不再承担准入保证；实际碰撞由ROS原矩形车身轮廓检查，额外膨胀边距设为零。可达时按乐观图预留返航预算，不可达时采用尽力返航，取消已知空闲返航证书。ROS允许未知区域规划，本地未知区不作障碍，移除本地静态层，保留实时激光、深度障碍与inflation及全局静态图；源数据过期时命令清零，鲜活数据恢复后续行。经用户另行授权，线速度反馈停止阈值采用0.20 m/s，普通导航命令限定为±0.05 m/s。ROS动作失败按一次付费尝试记账，并获取实际部分位姿的新观测，不记原动作到达；已授权的ABORT可先执行一次同朝向、目标位于身后0.4 m的ROS回退，再获取实际观测。回退属于独立执行干预，实际运动和时间计入总物理代价，不增加NSO原子动作或原目标到达数。这些研究准入、返航和执行变化构成修改后策略实验，与受控机制研究及此前严格准入失败分开解释，不能据此宣称原版等价或新增语义收益。</p>
+<p>表4-8 修改后策略的实际终态。计数为已接受尝试、成功原子动作观测和含初始帧的全部观测；物理里程和时间包含恢复干预，两个轮次均未验证完整锚点返航。</p>
+<table>
+<thead>
+<tr class="header">
+<th>轮次及中止原因</th>
+<th style="text-align: right;">尝试/成功/观测</th>
+<th style="text-align: right;">CAN里程（m）/耗时（s）</th>
+<th style="text-align: right;">保存激光并集（m²）</th>
+<th style="text-align: right;">自身固定支持质量变化</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>普通后退S40，外部时限</td>
+<td style="text-align: right;">19/16/20</td>
+<td style="text-align: right;">7.032/603.310</td>
+<td style="text-align: right;">47.08→80.12</td>
+<td style="text-align: right;">−0.008163</td>
+</tr>
+<tr class="even">
+<td>导航几何试用S40，原生驱动故障5</td>
+<td style="text-align: right;">38/38/39</td>
+<td style="text-align: right;">7.357/470.211</td>
+<td style="text-align: right;">73.88→111.56</td>
+<td style="text-align: right;">−0.030885</td>
+</tr>
+</tbody>
+</table>
+<p>普通后退轮次包含3次失败尝试和3次ROS回退干预，回退中1次成功、2次ABORT，其区间累计3.181 m和230.314 s，均计入整轮物理代价，不增加NSO原子动作成功数。导航几何试用轮次有39次ROS到达，但驱动故障发生前只有38次付费观测获worker接受，加初始帧共39帧；最后一次未观测到达不补造帧或记为已融合动作。试用轮廓含padding宽度0.48 m，小于当前Mini URDF宽度0.585 m，实际安装外包络尚未确定，已恢复此前导航默认配置，不能以通过空间证明轮廓标定正确。该轮第2个全局状态出现非零开口贡献和G/S分数差，但赢家相同；普通后退轮次4个全局状态的G/S赢家也均相同。不同初始信息、导航几何、未返航和负质量变化使本组不能支持效率、语义收益或重建精度排名。</p>
+<p>可选ros_viewpoint_exploration_v3接口已安装，但没有实车试验，默认选择方式未变。该接口把NSO选出的完整观察位姿交由ROS导航，实际航点尝试与固定40单位的名义网格规划跨度分开；原子动作增益反馈被冻结，避免将多米宏路径误记为一次前进或转向。未加入失败目标黑名单或额外重排序。独立RTAB-Map接口完成了静止建图和自身数据库定位的数据通路，未改变导航TF权限；初始记录为475条信息、11次邻近事件、0次描述子闭环事件。没有移动后重定位或描述子闭环证明，模块现已关闭。这些软件接口记录不构成原方法等价、闭环定位改善或探索效率证据。</p>
 <h3 id="讨论与小结">10 讨论与小结</h3>
 <p>本章给出了未知区域覆盖和已测表面观察共同参与候选选择的数据流，并保留了实际部署相对原实现的决策变化。原始、部署策略及frontier仿真矩阵提供受控首帧覆盖记录，实车记录提供单场景闭环与中止案例；二者均不能单独建立未知大场景的效率优势。后续应在相同初始信息、传感器、预算、返航契约与执行保护下，取得匹配实车覆盖基线及独立重复，分别报告时间、路程、覆盖增量、失败和返航；还需以可改变候选的自然语义条件检验语义决策作用，并以独立参考评价表面重建精度。在这些证据取得之前，面积代理、自然语义连接和运动完成分别描述观测、接口与执行，不能合并为语义增强带来高效精确重建的结论。</p>
 <h2 id="受控设施仿真平台与实验分析">5 受控设施仿真平台与实验分析</h2>
