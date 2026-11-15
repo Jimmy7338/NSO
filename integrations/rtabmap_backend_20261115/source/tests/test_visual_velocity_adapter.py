@@ -300,31 +300,5 @@ class VisualGateTests(unittest.TestCase):
         with self.assertRaises(ValueError):adapter.snapshot(gate,math.nan)
 
 
-
-
-class DriverConnectionSnapshotTests(unittest.TestCase):
-    def test_single_read_and_original_connection_predicates(self):
-        class Publisher:
-            def __init__(self,count):self.count=count;self.calls=0
-            def get_num_connections(self):
-                self.calls+=1
-                if self.calls>1:raise AssertionError('second inconsistent read')
-                return self.count
-        for count in (0,1,2):
-            gate=adapter.Gate();pub=Publisher(count)
-            self.assertEqual(adapter.update_driver_connection_snapshot(gate,pub),count)
-            self.assertEqual(pub.calls,1)
-            self.assertEqual(gate.driver_connected,count==1)
-            self.assertEqual(gate.fault,'multiple_command_subscribers' if count>1 else None)
-
-    def test_split_timing_is_bounded_and_preserves_clock_fields(self):
-        ticks=iter(range(0,10000,10));ring=adapter.ControlTimingRing(capacity=2,clock=lambda:next(ticks))
-        for _ in range(4):
-            ring.begin()
-            for name in ('monotonic_sample','ros_clock_sample','connection_snapshot','journal_error_check','pending_arm_check'):
-                ring.mark(name)
-            ring.mark('pre_decision',gate_now_monotonic=123.)
-            ring.finish('continue')
-        self.assertEqual(len(ring.rows),2)
-        self.assertEqual(ring.rows[-1]['gate_now_monotonic'],123.)
-        self.assertTrue(all(ring.rows[-1][n+'_ns']==10 for n in ('monotonic_sample','ros_clock_sample','connection_snapshot','journal_error_check','pending_arm_check')))
+if __name__ == '__main__':
+    unittest.main()

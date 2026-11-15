@@ -1,0 +1,40 @@
+{
+  "schema": "adapter_rospy_copy_on_write_connections/1",
+  "deployed_for_next_process": true,
+  "baseline_sha256": "6f6e8c442b32684ced27c68ed77bfd783dbef0888da79e7f3824c7c641e933d2",
+  "candidate_sha256": "93a0fa17e46c40a4250708bc86fbde90c7e97a811a95540dd087e7014af23e22",
+  "installed_rospy_topics_sha256": "e705097f636798b9c6375bcb6d25916e0a0f432a8a517f581c224e786bd0a766",
+  "installed_rospy_justification": "topics.py _TopicImpl lines288-295 explicitly supports unlocked reads through copy-on-write list replacement; publish() uses same complete published list",
+  "python_version": "3.8.10 (default, Mar 18 2025, 20:04:55) \n[GCC 9.4.0]",
+  "tests": "37 targeted unittest PASS including original80ms boundary/clockregression/sourceguard/publish/stop and0/1/2/unsupported connectioncounts",
+  "unchanged": [
+    "80ms adapter tick threshold",
+    "native sender binary+capabilities+RT",
+    "hardware feedback thresholds",
+    "source timestamps/TTLs",
+    "NSO score/candidate/stop rules"
+  ],
+  "proof_limit": "Removes a known unbounded connection-management lock; prior97.57ms predecision interval lacked stage detail so no causal attribution; unarmed private-topic profile is not driving reliability proof",
+  "private_ROS_probe": {
+    "file": "/home/ouc/nso_robot/analyses/resume_20261115/control_latency_lockfree_v1/private_ros_probe_result.json",
+    "elapsed_s": 120.01202894200105,
+    "cycles": 5904,
+    "max_tick_ms": 36.17535904049873,
+    "p99_tick_ms": 23.144206032156944,
+    "max_connection_snapshot_ms": 4.501076,
+    "fault": null,
+    "ever_armed": false,
+    "actual_receive_events": 18478,
+    "command_nonzero_count": 0,
+    "management_lock_holds_s": [
+      0.10013117699418217,
+      0.10050142405088991,
+      0.10013805603375658,
+      0.10016880801413208,
+      0.10017859999788925,
+      0.10016131994780153
+    ],
+    "scope": "Actual adapter loop/callback code with real sensor+CAN inputs, private zero/state publishers and loopback; unarmed, no native or actuator commands; not driving deadline guarantee"
+  },
+  "updated_unix_s": 1794748078.7786987
+}

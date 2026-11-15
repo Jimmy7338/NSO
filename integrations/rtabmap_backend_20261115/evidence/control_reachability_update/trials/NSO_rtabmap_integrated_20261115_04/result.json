@@ -1,0 +1,1282 @@
+{
+  "native_scheduling_profile": {
+    "profile": "native_sender_only_rt_requested_v1",
+    "requested_cpu": 3,
+    "scope": "sender_only",
+    "sender_only": true,
+    "realtime": false,
+    "system_cpu_isolation": false,
+    "watchdogs_unchanged": true,
+    "inherited_main_affinity": [
+      0,
+      1,
+      4,
+      5,
+      6,
+      7
+    ],
+    "whole_process_taskset_applied": false,
+    "selected_binary": "/home/ouc/nso_robot/staging/ans-live-20261113-sender-rt-v1/bin/nso_scout_attended_node",
+    "selected_binary_sha256": "2b4ba4fafc9a9d3d3531244b09ff8d52208e2c772e0556ec883c02ecf788d2d1",
+    "original_binary": "/home/ouc/nso_robot/staging/ans-live-20261110-snapshot-v1/bin/nso_scout_attended_node",
+    "original_binary_sha256": "3a2be1df29771181f0ab25008e179d4cdbda007804b0170f249d61204771552e",
+    "sender_scheduling_output": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/native_sender_scheduling.json",
+    "requested_priority": 20,
+    "realtime_requested": true,
+    "realtime_actual": null,
+    "actual_scheduling_readback": "pending native_sender_scheduling.json"
+  },
+  "session_id": "hybrid_nso_1794749161046088951",
+  "mode": "nso",
+  "status": "execution_interrupted",
+  "navigation_source": "lidar_rgbd",
+  "experiment_config_sha256": null,
+  "duration_profile": {
+    "profile": "exploration_until_stopped_v1",
+    "duration_s": null,
+    "maximum_duration_s": null,
+    "mission_mode": "nso",
+    "adapter_deadline_starts_at_arm": false,
+    "supervisor_deadline_uses_run_start": false,
+    "historical_40_action_equivalence": false,
+    "overall_deadline_enabled": false
+  },
+  "successful_arrivals": [],
+  "physical_stop_independently_observed": false,
+  "cleanup": [
+    {
+      "name": "native",
+      "exited": true,
+      "returncode": 0
+    },
+    {
+      "name": "adapter",
+      "exited": true,
+      "returncode": 0
+    }
+  ],
+  "navigation_reverse_contract": {
+    "profile": "TEB_native_reverse_005_v1",
+    "actual_backend": "teb_local_planner/TebLocalPlannerROS",
+    "setup_only": false,
+    "ordinary_reverse": true,
+    "max_vel_x_backwards": 0.05,
+    "alignment_profile": "TEB_native_no_DWA_forward_point_parameter",
+    "controller_parameters_modified": [
+      "xy_goal_tolerance"
+    ],
+    "restoration_required": true,
+    "NSO_action": false,
+    "NSO_scoring_unchanged": true
+  },
+  "viewpoint_attempts": [],
+  "viewpoint_execution_profile": "ros_viewpoint_exploration_v4_unbounded",
+  "execution_limits_profile": "exploration_until_stopped_v1",
+  "viewpoint_goal_timeout_s": null,
+  "physical_cost_basis": "total original CAN distance and full episode elapsed time including ROS recoveries",
+  "joint_summary": {
+    "policy_revision": "v10_3_1",
+    "policy_variant": "ros_viewpoint_exploration_v4_unbounded",
+    "sensor_ranges": {
+      "profile": "sensor_range_matched_v1",
+      "camera_depth_quality_aperture_range_m": 4.0,
+      "lidar_forecast_range_m": 8.0,
+      "lidar_canonical_support_range_m": 8.0,
+      "observed_navigation_map_range_m": 8.0,
+      "original_paper_equivalence": false,
+      "last_scan_adapter_receipt": {
+        "profile": "sensor_range_matched_v1",
+        "raw_range_max_m": 25.0,
+        "canonical_range_max_m": 8.0,
+        "clipped_finite_returns": 100,
+        "rejected_beyond_source_max": 0,
+        "missing_nonfinite_returns": 263,
+        "source_ranges_sha256": "314afd4d74532f3672c22e363957707bf46d6ea4d0cf672defecb7455bb6f247",
+        "canonical_ranges_sha256": "e3c609463d8be55ae72fd04d322e3c382082be44d273e4456a4dda7e9082bfa1",
+        "endpoint_policy": "finite measured >8m clipped to8m free-only; NaN/Inf remain nonfinite",
+        "raw_source_file_unchanged": true
+      }
+    },
+    "system_variant": "ros_viewpoint_exploration_v4_unbounded+real_scene_structural_v1+sensor_range_matched_v1",
+    "closed": false,
+    "semantics_available": true,
+    "semantic_diagnostics": {
+      "frontend_enabled": true,
+      "receipt": {
+        "schema": "real_semantic_frontend/1",
+        "frame_id": "1794749165053971116",
+        "model_execution_performed": true,
+        "image_detection_alignment_verified": true,
+        "rgb_sha256": "946efc2db0be311a611538afc40e967bfd145540d154b4419dc37f4451b3159d",
+        "image_shape": [
+          720,
+          1280,
+          3
+        ],
+        "prompts": [
+          "shelves",
+          "bookcase",
+          "closed equipment cabinet",
+          "cabinet",
+          "table",
+          "chair",
+          "display counter",
+          "floor",
+          "wall"
+        ],
+        "prior_profile": "real_scene_structural_v1",
+        "v10_mapping": {
+          "shelves": 2,
+          "bookcase": 2,
+          "closed equipment cabinet": 3,
+          "cabinet": 3,
+          "display counter": 3
+        },
+        "unknown_label": 0,
+        "per_class_interpretation": {
+          "shelves": "original V10 class2 open multilayer structural prior",
+          "bookcase": "original V10 class2 open multilayer structural prior",
+          "closed equipment cabinet": "original V10 class3 prior from predicted closed equipment cabinet category",
+          "cabinet": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains cabinet; not recognition of a closed equipment cabinet or measurement of hidden structure",
+          "table": "no V10 structural prior; retain original prompt namespace",
+          "chair": "no V10 structural prior; retain original prompt namespace",
+          "display counter": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains display counter; not recognition of a closed equipment cabinet or measurement of hidden structure",
+          "floor": "no V10 structural prior; retain original prompt namespace",
+          "wall": "no V10 structural prior; retain original prompt namespace"
+        },
+        "semantic_prior_extended": true,
+        "core_formula_unchanged": true,
+        "class_semantics": "uncalibrated prompt predictions; closed state and class accuracy not independently validated",
+        "box_is_segmentation_mask": false,
+        "mask_source": "YOLOE retina instance segmentation",
+        "valid_depth_pixels": 568876,
+        "semantic_pixels": 20418,
+        "prediction_wall_seconds": 2.6144820979679935,
+        "confidence_threshold": 0.25,
+        "imgsz": 640,
+        "device": "cpu",
+        "model_manifest": {
+          "schema": "pinned_yoloe_model_assets/1",
+          "files": [
+            {
+              "filename": "yoloe-v8s-seg.pt",
+              "sha256": "ac2b90ed23011495a3e86d89caeb3432a15129cac8d849ba121293c8fc1e0536",
+              "bytes": 31135890,
+              "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yoloe-v8s-seg.pt"
+            },
+            {
+              "filename": "mobileclip_blt.ts",
+              "sha256": "a67804d1b0f07b8b9a20c1761ec0847f34660f5fa338ec70e8f3fce68ed95e54",
+              "bytes": 599764649,
+              "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/mobileclip_blt.ts"
+            },
+            {
+              "filename": "prompt_embeddings.pt",
+              "sha256": "96aa04ebecac9540e2d013fb862cc8e6c2f704009bb57328a677760fc0b211fd",
+              "bytes": 19662,
+              "source_url": null
+            }
+          ],
+          "prompts": [
+            "shelves",
+            "bookcase",
+            "closed equipment cabinet",
+            "cabinet",
+            "table",
+            "chair",
+            "display counter",
+            "floor",
+            "wall"
+          ],
+          "embedding_generation": "TorchScript MobileCLIP encode_text + YOLOE head.get_tpe; no model weights changed",
+          "ultralytics_version": "8.3.200",
+          "torch_version": "2.6.0+cpu",
+          "clip_source": "https://github.com/ultralytics/CLIP",
+          "clip_commit": "7ffa84b3bfa40c42ecc1c77147a855e69cb2dd40",
+          "generation_wall_seconds": 4.014119435014436
+        },
+        "detections": [
+          {
+            "instance_index": 0,
+            "source_class_id": 7,
+            "source_label": "floor",
+            "class_key": "yoloe_prompt:floor",
+            "detector_score": 0.27449721097946167,
+            "box_xyxy": [
+              14.8779296875,
+              377.45086669921875,
+              1280.0,
+              717.3600463867188
+            ],
+            "v10_class_id": null,
+            "mask_pixels": 317047,
+            "valid_depth_pixels": 304383,
+            "assigned_pixels": 304383,
+            "mask_sha256": "83f24eed6a742eae6f5c16197d213e2b7f35dda0f9a634ebc7d8cb4a92a5355c"
+          },
+          {
+            "instance_index": 1,
+            "source_class_id": 6,
+            "source_label": "display counter",
+            "class_key": "yoloe_prompt:display counter",
+            "detector_score": 0.26027339696884155,
+            "box_xyxy": [
+              724.156982421875,
+              301.73895263671875,
+              889.93408203125,
+              440.45513916015625
+            ],
+            "v10_class_id": 3,
+            "mask_pixels": 21268,
+            "valid_depth_pixels": 20418,
+            "assigned_pixels": 20418,
+            "mask_sha256": "5bd1a0ca5e5ab5351ac2d9af824720b4980b897be3888d9859875ed59e54542d"
+          }
+        ],
+        "overlap_assignment": "highest detector confidence owns each measured pixel including non-V10 classes",
+        "research_policy_changed": true,
+        "source_file_sha256": "a4733f9dd5f7cda4996b3f89ce81c1f05f2be65ea0c4e550fe00fd5f03c3cf24",
+        "pixel_stride": 4,
+        "canonical_labelled_pixels": 1267,
+        "canonical_semantic_sha256": "ec7c1645cde6a5b0e44ce97bc96b33c090a012729e981cfa04d071483abb9dbf",
+        "decision_effect_validated": false,
+        "mask_file": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/joint/semantics/1caafb7bfdd8d5eef5b05383.npz",
+        "mask_file_sha256": "5ccc38d4e8d86359b6a781da25f329d1312822d036a638e0cf844235814996c3"
+      },
+      "quality_labels": {
+        "2": 0,
+        "3": 57
+      },
+      "measured_assets": [
+        {
+          "group": 6,
+          "marked_points": 0,
+          "class_vote": 0.0
+        },
+        {
+          "group": 5,
+          "marked_points": 0,
+          "class_vote": 0.0
+        },
+        {
+          "group": 1,
+          "marked_points": 57,
+          "class_vote": 1.0
+        }
+      ],
+      "same_candidate_S_minus_G": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -2.8493371010667996,
+        0.0,
+        0.0,
+        -2.798258696561275
+      ],
+      "decision_effect_validated": false
+    },
+    "runtime": {
+      "scene_id": "manual_prior_RTAB_session_integration_diagnostic",
+      "episode_id": "NSO_rtabmap_integrated_20261115_04",
+      "closed": false,
+      "mapper_frames": 1,
+      "unique_packet_count": 1,
+      "arrived_count": 0,
+      "externally_scripted_prefix_actions": 0,
+      "termination": null,
+      "modules": {
+        "plans": 1,
+        "graph_version": 1,
+        "semantic_version": 1,
+        "feedback": {
+          "algorithm_version": "observed_feedback_v10.2",
+          "scene_id": "manual_prior_RTAB_session_integration_diagnostic",
+          "episode_id": "NSO_rtabmap_integrated_20261115_04",
+          "initialized": true,
+          "feedback_enabled": true,
+          "feedback_version": 1,
+          "planning_feedback_version": 1,
+          "total_budget": null,
+          "paid_actions": 0,
+          "remaining_budget": null,
+          "map_version": 1,
+          "last_action_id": 0,
+          "done": false,
+          "consumed_frame_ids": [
+            "1794749165053971116"
+          ],
+          "consumed_action_ids": [],
+          "prefix_frame_ids": [
+            "1794749165053971116"
+          ],
+          "actual_camera_pose_count": 1,
+          "planning_camera_pose_count": 1,
+          "actual_camera_poses_sha256": "ca60b6cf97b408e06d7aafad0ee50a0fc05744ec7f4dee4b78d1993f9d4347bd",
+          "planning_camera_poses_sha256": "ca60b6cf97b408e06d7aafad0ee50a0fc05744ec7f4dee4b78d1993f9d4347bd",
+          "fixed_old_support_count": 193,
+          "fixed_old_support_sha256": "ff315e1a59ff6302d172a563494e97d46336bcde97bd617b1314e0ae3a2e8f63",
+          "initial_old_quality_proxy": 0.28157240061401956,
+          "old_quality_proxy": 0.28157240061401956,
+          "old_quality_proxy_total_change": 0.0,
+          "paid_measurement_support_count": 0,
+          "observed_2d_area_m2": 810.6800000000002,
+          "no_progress_events": 0,
+          "failure_events": 0,
+          "last_event": {
+            "module": "IGCR",
+            "algorithm_version": "observed_feedback_v10.2",
+            "scene_id": "manual_prior_RTAB_session_integration_diagnostic",
+            "episode_id": "NSO_rtabmap_integrated_20261115_04",
+            "event_type": "bootstrap",
+            "accepted": true,
+            "duplicate": false,
+            "feedback_version": 1,
+            "planning_feedback_version": 1,
+            "frame_id": "1794749165053971116",
+            "action_id": 0,
+            "before_map_version": null,
+            "map_version": 1,
+            "timestamp_s": 1794749165.0539713,
+            "action_cost": 0,
+            "paid_actions": 0,
+            "remaining_budget": 1,
+            "actual_camera_pose_count": 1,
+            "planning_camera_pose_count": 1,
+            "fixed_old_support_count": 193,
+            "old_quality_proxy": 0.28157240061401956,
+            "reward": 0.0,
+            "parts": {},
+            "arrived": false,
+            "failed": false,
+            "collision": false,
+            "done": false,
+            "reason": null
+          },
+          "capability_status": {
+            "interface": "IGCR",
+            "backend": "observed_sensor_ledger",
+            "ground_truth_input": false,
+            "learned_reward": false,
+            "calibrated_information_gain": false,
+            "ppo_training_active": false,
+            "quality_is_ground_truth_f1": false
+          },
+          "accounting_unit": "actual_waypoint_attempt_unbounded"
+        },
+        "observed_gain_calibration": {
+          "schema_version": "observed_gain_calibration_v10_1/1",
+          "feedback_enabled": true,
+          "consume_predicted_attempts": false,
+          "posterior_mean": {
+            "radar": 0.5,
+            "camera": 0.5
+          },
+          "alpha": {
+            "radar": 1,
+            "camera": 1
+          },
+          "beta": {
+            "radar": 1,
+            "camera": 1
+          },
+          "observed_actions": 0,
+          "pending_action_ids": [],
+          "events": []
+        },
+        "planner_revision": "v10_3_1",
+        "conditional_gain_residual": {
+          "schema_version": "conditional_gain_residual_v11/1",
+          "feedback_enabled": true,
+          "prior_strength": 8.0,
+          "minimum_updates": 2,
+          "maximum_adjustment": 0.25,
+          "posteriors": [],
+          "events": [],
+          "observed_actions": 0
+        },
+        "semantic_gain_model": null,
+        "return_anchor": [
+          400,
+          400,
+          0
+        ],
+        "retained_hierarchy": "region -> pose option -> paid action"
+      }
+    },
+    "accounting_unit": "actual_waypoint_attempt",
+    "waypoint_attempts": 0,
+    "waypoint_ROS_successes": 0,
+    "waypoint_successes": 0,
+    "waypoint_success_definition": "actual ROS terminal status3; measured pose retained, no cardinal-grid acceptance gate",
+    "max_viewpoint_attempts": null,
+    "nominal_planning_horizon": null,
+    "primitive_arrivals_credited": 0,
+    "primitive_gain_feedback_disabled": true,
+    "legacy_ledger_field_semantics": "internal action/paid counter represents waypoint attempts, not grid primitives"
+  },
+  "decision_status_before_interruption": "running",
+  "execution_interrupted": true,
+  "reason": "RuntimeError: chassis:original_CAN_status_stale",
+  "TEB_xy_restore": {
+    "controller_namespace": "/nso_visual/move_base/TebLocalPlannerROS",
+    "requested": {
+      "xy_goal_tolerance": 0.15
+    },
+    "applied_response": {
+      "teb_autosize": true,
+      "global_plan_overwrite_orientation": true,
+      "allow_init_with_backwards_motion": true,
+      "exact_arc_length": false,
+      "publish_feedback": false,
+      "via_points_ordered": false,
+      "is_footprint_dynamic": false,
+      "cmd_angle_instead_rotvel": false,
+      "free_goal_vel": false,
+      "include_dynamic_obstacles": false,
+      "include_costmap_obstacles": true,
+      "legacy_obstacle_association": false,
+      "optimization_activate": true,
+      "optimization_verbose": false,
+      "enable_multithreading": false,
+      "selection_alternative_time_cost": false,
+      "viapoints_all_candidates": true,
+      "visualize_hc_graph": false,
+      "shrink_horizon_backup": true,
+      "oscillation_recovery": true,
+      "feasibility_check_no_poses": 50,
+      "obstacle_poses_affected": 30,
+      "no_inner_iterations": 5,
+      "no_outer_iterations": 4,
+      "max_number_classes": 5,
+      "roadmap_graph_no_samples": 15,
+      "dt_ref": 1.0,
+      "dt_hysteresis": 0.1,
+      "max_global_plan_lookahead_dist": 1.5,
+      "force_reinit_new_goal_dist": 1.0,
+      "force_reinit_new_goal_angular": 0.78,
+      "visualize_with_time_as_z_axis_scale": 0.0,
+      "global_plan_viapoint_sep": -0.1,
+      "max_vel_x": 0.05,
+      "max_vel_x_backwards": 0.05,
+      "max_vel_theta": 0.2,
+      "acc_lim_x": 0.25,
+      "acc_lim_theta": 0.8,
+      "min_turning_radius": 0.0,
+      "wheelbase": 1.0,
+      "max_vel_y": 0.0,
+      "acc_lim_y": 0.25,
+      "xy_goal_tolerance": 0.15,
+      "yaw_goal_tolerance": 0.35,
+      "min_obstacle_dist": 0.05,
+      "inflation_dist": 0.6,
+      "dynamic_obstacle_inflation_dist": 0.6,
+      "obstacle_association_force_inclusion_factor": 1.5,
+      "obstacle_association_cutoff_factor": 5.0,
+      "costmap_obstacles_behind_robot_dist": 4.0,
+      "penalty_epsilon": 0.005,
+      "weight_max_vel_x": 2.0,
+      "weight_max_vel_y": 2.0,
+      "weight_max_vel_theta": 1.0,
+      "weight_acc_lim_x": 1.0,
+      "weight_acc_lim_y": 1.0,
+      "weight_acc_lim_theta": 1.0,
+      "weight_kinematics_nh": 1000.0,
+      "weight_kinematics_forward_drive": 1.0,
+      "weight_kinematics_turning_radius": 1.0,
+      "weight_optimaltime": 1.0,
+      "weight_shortest_path": 0.0,
+      "weight_obstacle": 50.0,
+      "weight_inflation": 0.1,
+      "weight_dynamic_obstacle": 50.0,
+      "weight_dynamic_obstacle_inflation": 0.1,
+      "weight_viapoint": 1.0,
+      "weight_adapt_factor": 2.0,
+      "obstacle_cost_exponent": 1.0,
+      "selection_cost_hysteresis": 1.0,
+      "selection_prefer_initial_plan": 0.95,
+      "selection_obst_cost_scale": 2.0,
+      "selection_viapoint_cost_scale": 1.0,
+      "switching_blocking_period": 0.0,
+      "roadmap_graph_area_width": 5.0,
+      "roadmap_graph_area_length_scale": 1.0,
+      "h_signature_prescaler": 1.0,
+      "h_signature_threshold": 0.1,
+      "obstacle_heading_threshold": 0.45,
+      "groups": {
+        "id": 0,
+        "parent": 0,
+        "name": "Default",
+        "type": "",
+        "state": true,
+        "groups": {
+          "Trajectory": {
+            "id": 1,
+            "parent": 0,
+            "name": "Trajectory",
+            "type": "",
+            "state": true,
+            "groups": {},
+            "parameters": {},
+            "teb_autosize": true,
+            "dt_ref": 1.0,
+            "dt_hysteresis": 0.1,
+            "global_plan_overwrite_orientation": true,
+            "allow_init_with_backwards_motion": true,
+            "max_global_plan_lookahead_dist": 1.5,
+            "force_reinit_new_goal_dist": 1.0,
+            "force_reinit_new_goal_angular": 0.78,
+            "feasibility_check_no_poses": 50,
+            "exact_arc_length": false,
+            "publish_feedback": false,
+            "visualize_with_time_as_z_axis_scale": 0.0
+          },
+          "ViaPoints": {
+            "id": 2,
+            "parent": 0,
+            "name": "ViaPoints",
+            "type": "",
+            "state": true,
+            "groups": {},
+            "parameters": {},
+            "global_plan_viapoint_sep": -0.1,
+            "via_points_ordered": false
+          },
+          "Robot": {
+            "id": 3,
+            "parent": 0,
+            "name": "Robot",
+            "type": "",
+            "state": true,
+            "groups": {
+              "Carlike": {
+                "id": 4,
+                "parent": 3,
+                "name": "Carlike",
+                "type": "",
+                "state": true,
+                "groups": {},
+                "parameters": {},
+                "min_turning_radius": 0.0,
+                "wheelbase": 1.0,
+                "cmd_angle_instead_rotvel": false
+              },
+              "Omnidirectional": {
+                "id": 5,
+                "parent": 3,
+                "name": "Omnidirectional",
+                "type": "",
+                "state": true,
+                "groups": {},
+                "parameters": {},
+                "max_vel_y": 0.0,
+                "acc_lim_y": 0.25
+              }
+            },
+            "parameters": {},
+            "max_vel_x": 0.05,
+            "max_vel_x_backwards": 0.05,
+            "max_vel_theta": 0.2,
+            "acc_lim_x": 0.25,
+            "acc_lim_theta": 0.8,
+            "is_footprint_dynamic": false
+          },
+          "GoalTolerance": {
+            "id": 6,
+            "parent": 0,
+            "name": "GoalTolerance",
+            "type": "",
+            "state": true,
+            "groups": {},
+            "parameters": {},
+            "xy_goal_tolerance": 0.15,
+            "yaw_goal_tolerance": 0.35,
+            "free_goal_vel": false
+          },
+          "Obstacles": {
+            "id": 7,
+            "parent": 0,
+            "name": "Obstacles",
+            "type": "",
+            "state": true,
+            "groups": {},
+            "parameters": {},
+            "min_obstacle_dist": 0.05,
+            "inflation_dist": 0.6,
+            "dynamic_obstacle_inflation_dist": 0.6,
+            "include_dynamic_obstacles": false,
+            "include_costmap_obstacles": true,
+            "legacy_obstacle_association": false,
+            "obstacle_association_force_inclusion_factor": 1.5,
+            "obstacle_association_cutoff_factor": 5.0,
+            "costmap_obstacles_behind_robot_dist": 4.0,
+            "obstacle_poses_affected": 30
+          },
+          "Optimization": {
+            "id": 8,
+            "parent": 0,
+            "name": "Optimization",
+            "type": "",
+            "state": true,
+            "groups": {},
+            "parameters": {},
+            "no_inner_iterations": 5,
+            "no_outer_iterations": 4,
+            "optimization_activate": true,
+            "optimization_verbose": false,
+            "penalty_epsilon": 0.005,
+            "weight_max_vel_x": 2.0,
+            "weight_max_vel_y": 2.0,
+            "weight_max_vel_theta": 1.0,
+            "weight_acc_lim_x": 1.0,
+            "weight_acc_lim_y": 1.0,
+            "weight_acc_lim_theta": 1.0,
+            "weight_kinematics_nh": 1000.0,
+            "weight_kinematics_forward_drive": 1.0,
+            "weight_kinematics_turning_radius": 1.0,
+            "weight_optimaltime": 1.0,
+            "weight_shortest_path": 0.0,
+            "weight_obstacle": 50.0,
+            "weight_inflation": 0.1,
+            "weight_dynamic_obstacle": 50.0,
+            "weight_dynamic_obstacle_inflation": 0.1,
+            "weight_viapoint": 1.0,
+            "weight_adapt_factor": 2.0,
+            "obstacle_cost_exponent": 1.0
+          },
+          "HCPlanning": {
+            "id": 9,
+            "parent": 0,
+            "name": "HCPlanning",
+            "type": "",
+            "state": true,
+            "groups": {},
+            "parameters": {},
+            "enable_multithreading": false,
+            "max_number_classes": 5,
+            "selection_cost_hysteresis": 1.0,
+            "selection_prefer_initial_plan": 0.95,
+            "selection_obst_cost_scale": 2.0,
+            "selection_viapoint_cost_scale": 1.0,
+            "selection_alternative_time_cost": false,
+            "switching_blocking_period": 0.0,
+            "roadmap_graph_no_samples": 15,
+            "roadmap_graph_area_width": 5.0,
+            "roadmap_graph_area_length_scale": 1.0,
+            "h_signature_prescaler": 1.0,
+            "h_signature_threshold": 0.1,
+            "obstacle_heading_threshold": 0.45,
+            "viapoints_all_candidates": true,
+            "visualize_hc_graph": false
+          },
+          "Recovery": {
+            "id": 10,
+            "parent": 0,
+            "name": "Recovery",
+            "type": "",
+            "state": true,
+            "groups": {},
+            "parameters": {},
+            "shrink_horizon_backup": true,
+            "oscillation_recovery": true
+          }
+        },
+        "parameters": {}
+      }
+    },
+    "restored": true
+  },
+  "stop_feedback_verification": {
+    "before_close": {
+      "confirmed": true,
+      "status": "confirmed",
+      "timeout": false,
+      "reason": null,
+      "error": null,
+      "timeout_s": 5.0,
+      "started_monotonic": 388895.787939648,
+      "ended_monotonic": 388896.689551903,
+      "elapsed_s": 0.9016122549655847,
+      "sample_count": 45,
+      "last_sample": {
+        "confirmed": true,
+        "reason": null,
+        "snapshot": {
+          "sampled_monotonic": 388896.68949123,
+          "zero_since_monotonic": 388895.6730003357,
+          "zero_interval_s": 1.0164908943115734,
+          "can_status": {
+            "source": 388896.59418678284,
+            "receipt": 388896.595088398,
+            "state": 0,
+            "mode": 1,
+            "error": 0
+          },
+          "can_velocity": {
+            "source": 388896.6731157303,
+            "receipt": 388896.673304269,
+            "v": 0.0,
+            "w": 0.0,
+            "uninterpreted_tail_hex": "00000000"
+          },
+          "status_source_age_s": 0.09530444716801867,
+          "velocity_source_age_s": 0.0163754997192882,
+          "hardware_reason": null,
+          "reader_fault": null
+        }
+      }
+    },
+    "after_close": {
+      "confirmed": true,
+      "status": "confirmed",
+      "timeout": false,
+      "reason": null,
+      "error": null,
+      "timeout_s": 3.0,
+      "started_monotonic": 388897.281463453,
+      "ended_monotonic": 388897.281528318,
+      "elapsed_s": 6.48649875074625e-05,
+      "sample_count": 1,
+      "last_sample": {
+        "confirmed": true,
+        "reason": null,
+        "snapshot": {
+          "sampled_monotonic": 388897.281479965,
+          "zero_since_monotonic": 388895.6730003357,
+          "zero_interval_s": 1.60847962932894,
+          "can_status": {
+            "source": 388897.19473958015,
+            "receipt": 388897.194825055,
+            "state": 0,
+            "mode": 1,
+            "error": 0
+          },
+          "can_velocity": {
+            "source": 388897.2731869221,
+            "receipt": 388897.274190676,
+            "v": 0.0,
+            "w": 0.0,
+            "uninterpreted_tail_hex": "00000000"
+          },
+          "status_source_age_s": 0.0867403848678805,
+          "velocity_source_age_s": 0.008293042948935181,
+          "hardware_reason": null,
+          "reader_fault": null
+        }
+      }
+    },
+    "cleanup_error": null
+  },
+  "feedback_zero_before_close": true,
+  "actual_CAN_distance_m": 10.184138877630303,
+  "actual_CAN_absolute_yaw_rad": 10.420430352807035,
+  "feedback_accounting_complete": true,
+  "feedback_zero_after_close": true,
+  "goals": [
+    {
+      "event": "goal",
+      "id": "/nso_onboard_supervisor-1-1794749227.108",
+      "x": 13.299254473212372,
+      "y": -23.767967711089256,
+      "yaw": -0.9403790254085486,
+      "frame": "nso_pair_map",
+      "stamp": 1794749227.1085029,
+      "receipt_monotonic": 388672.388744882
+    }
+  ],
+  "goal_results": [
+    {
+      "event": "goal_result",
+      "id": "/nso_onboard_supervisor-1-1794749227.108",
+      "status": 2,
+      "text": "",
+      "receipt_monotonic": 388892.390943427
+    }
+  ],
+  "map_messages": 94,
+  "arrival_evidence": [
+    {
+      "goal": {
+        "event": "goal",
+        "id": "/nso_onboard_supervisor-1-1794749227.108",
+        "x": 13.299254473212372,
+        "y": -23.767967711089256,
+        "yaw": -0.9403790254085486,
+        "frame": "nso_pair_map",
+        "stamp": 1794749227.1085029,
+        "receipt_monotonic": 388672.388744882
+      },
+      "terminal": {
+        "event": "goal_result",
+        "id": "/nso_onboard_supervisor-1-1794749227.108",
+        "status": 2,
+        "text": "",
+        "receipt_monotonic": 388892.390943427
+      },
+      "before": {
+        "pose": [
+          4.988707404444634,
+          -4.5776116367698085,
+          0.6304372691138829
+        ],
+        "source_stamp_s": 1794749227.0078824,
+        "source_age_s": 0.10783863067626953,
+        "receipt_monotonic": 388672.388954518,
+        "source_stamp_ns": 1794749227007882357,
+        "target_frame": "nso_pair_map",
+        "source_frame": "base_link",
+        "translation": [
+          4.988707404444634,
+          -4.5776116367698085,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.31002434076621277,
+          0.9507286196031313
+        ]
+      },
+      "after": {
+        "pose": [
+          15.10733389794198,
+          -4.23246432221528,
+          0.006015335187073662
+        ],
+        "source_stamp_s": 1794749447.0254817,
+        "source_age_s": 0.09249734878540039,
+        "receipt_monotonic": 388892.39121364,
+        "source_stamp_ns": 1794749447025481701,
+        "target_frame": "nso_pair_map",
+        "source_frame": "base_link",
+        "translation": [
+          15.10733389794198,
+          -4.23246432221528,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.003007663058946448,
+          0.9999954769712333
+        ]
+      },
+      "can_start": {
+        "distance_m": 0.0,
+        "absolute_yaw_rad": 0.0,
+        "accounting_complete": true,
+        "feedback_fresh": true,
+        "receipt_monotonic": 388672.388997175
+      },
+      "can_end": {
+        "distance_m": 10.151215666294169,
+        "absolute_yaw_rad": 10.390026044964781,
+        "accounting_complete": true,
+        "feedback_fresh": false,
+        "receipt_monotonic": 388892.391269513
+      },
+      "verified": false,
+      "xy_tolerance_m": 0.15,
+      "yaw_tolerance_rad": 0.35,
+      "reason": "action_not_succeeded",
+      "before_pose_error": null,
+      "after_pose_error": null,
+      "recording_frame": "nso_pair_map"
+    }
+  ],
+  "elapsed_run_s": 287.23768585099606,
+  "journal_error": null,
+  "adapter_result_path": "adapter/result.json",
+  "adapter_shutdown_reason": "native_driver_fault:8",
+  "final_worker_observation_receipt": {
+    "status": "verified",
+    "source_path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/joint/decisions.jsonl",
+    "source_sha256": "4739d888a9d45b828ea1adce6dc491beb6a8a09d1fb5c1aed9b747e05afa42f6",
+    "accounting_unit": "actual_waypoint_attempt",
+    "count_source": "last validated accepted observe_viewpoint_result in this report",
+    "worker_closed": true,
+    "stop_confirmed": true,
+    "read_only": true,
+    "execution_authority": false,
+    "supervisor_summary_preserved": true,
+    "accepted_observations": [
+      {
+        "request_id": 2,
+        "line_number": 2,
+        "attempt_id": 0,
+        "packet_path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/joint_inputs/joint-1794749165053971116.npz",
+        "state": {
+          "action_id": 0,
+          "step": 0,
+          "pose": [
+            400,
+            400,
+            0
+          ],
+          "actual_base_pose_planning": [
+            80.10031799955385,
+            79.89963673269824,
+            1.5707013500904896
+          ],
+          "frame_id": "1794749165053971116"
+        },
+        "worker_waypoint_attempts": 0,
+        "ROS_status": null
+      }
+    ],
+    "unaccepted_observations": [],
+    "error": null,
+    "accepted_bootstrap_observations": 1,
+    "accepted_waypoint_result_observations": 0,
+    "worker_waypoint_attempts": 0,
+    "supervisor_waypoint_attempts": 0,
+    "waypoint_ROS_successes": 0,
+    "primitive_arrivals_credited": 0,
+    "final_summary_request_id": 2,
+    "final_summary_line": 2
+  },
+  "final_worker_summary": {
+    "policy_revision": "v10_3_1",
+    "policy_variant": "ros_viewpoint_exploration_v4_unbounded",
+    "sensor_ranges": {
+      "profile": "sensor_range_matched_v1",
+      "camera_depth_quality_aperture_range_m": 4.0,
+      "lidar_forecast_range_m": 8.0,
+      "lidar_canonical_support_range_m": 8.0,
+      "observed_navigation_map_range_m": 8.0,
+      "original_paper_equivalence": false,
+      "last_scan_adapter_receipt": {
+        "profile": "sensor_range_matched_v1",
+        "raw_range_max_m": 25.0,
+        "canonical_range_max_m": 8.0,
+        "clipped_finite_returns": 100,
+        "rejected_beyond_source_max": 0,
+        "missing_nonfinite_returns": 263,
+        "source_ranges_sha256": "314afd4d74532f3672c22e363957707bf46d6ea4d0cf672defecb7455bb6f247",
+        "canonical_ranges_sha256": "e3c609463d8be55ae72fd04d322e3c382082be44d273e4456a4dda7e9082bfa1",
+        "endpoint_policy": "finite measured >8m clipped to8m free-only; NaN/Inf remain nonfinite",
+        "raw_source_file_unchanged": true
+      }
+    },
+    "system_variant": "ros_viewpoint_exploration_v4_unbounded+real_scene_structural_v1+sensor_range_matched_v1",
+    "closed": false,
+    "semantics_available": true,
+    "semantic_diagnostics": {
+      "frontend_enabled": true,
+      "receipt": {
+        "schema": "real_semantic_frontend/1",
+        "frame_id": "1794749165053971116",
+        "model_execution_performed": true,
+        "image_detection_alignment_verified": true,
+        "rgb_sha256": "946efc2db0be311a611538afc40e967bfd145540d154b4419dc37f4451b3159d",
+        "image_shape": [
+          720,
+          1280,
+          3
+        ],
+        "prompts": [
+          "shelves",
+          "bookcase",
+          "closed equipment cabinet",
+          "cabinet",
+          "table",
+          "chair",
+          "display counter",
+          "floor",
+          "wall"
+        ],
+        "prior_profile": "real_scene_structural_v1",
+        "v10_mapping": {
+          "shelves": 2,
+          "bookcase": 2,
+          "closed equipment cabinet": 3,
+          "cabinet": 3,
+          "display counter": 3
+        },
+        "unknown_label": 0,
+        "per_class_interpretation": {
+          "shelves": "original V10 class2 open multilayer structural prior",
+          "bookcase": "original V10 class2 open multilayer structural prior",
+          "closed equipment cabinet": "original V10 class3 prior from predicted closed equipment cabinet category",
+          "cabinet": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains cabinet; not recognition of a closed equipment cabinet or measurement of hidden structure",
+          "table": "no V10 structural prior; retain original prompt namespace",
+          "chair": "no V10 structural prior; retain original prompt namespace",
+          "display counter": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains display counter; not recognition of a closed equipment cabinet or measurement of hidden structure",
+          "floor": "no V10 structural prior; retain original prompt namespace",
+          "wall": "no V10 structural prior; retain original prompt namespace"
+        },
+        "semantic_prior_extended": true,
+        "core_formula_unchanged": true,
+        "class_semantics": "uncalibrated prompt predictions; closed state and class accuracy not independently validated",
+        "box_is_segmentation_mask": false,
+        "mask_source": "YOLOE retina instance segmentation",
+        "valid_depth_pixels": 568876,
+        "semantic_pixels": 20418,
+        "prediction_wall_seconds": 2.6144820979679935,
+        "confidence_threshold": 0.25,
+        "imgsz": 640,
+        "device": "cpu",
+        "model_manifest": {
+          "schema": "pinned_yoloe_model_assets/1",
+          "files": [
+            {
+              "filename": "yoloe-v8s-seg.pt",
+              "sha256": "ac2b90ed23011495a3e86d89caeb3432a15129cac8d849ba121293c8fc1e0536",
+              "bytes": 31135890,
+              "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yoloe-v8s-seg.pt"
+            },
+            {
+              "filename": "mobileclip_blt.ts",
+              "sha256": "a67804d1b0f07b8b9a20c1761ec0847f34660f5fa338ec70e8f3fce68ed95e54",
+              "bytes": 599764649,
+              "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/mobileclip_blt.ts"
+            },
+            {
+              "filename": "prompt_embeddings.pt",
+              "sha256": "96aa04ebecac9540e2d013fb862cc8e6c2f704009bb57328a677760fc0b211fd",
+              "bytes": 19662,
+              "source_url": null
+            }
+          ],
+          "prompts": [
+            "shelves",
+            "bookcase",
+            "closed equipment cabinet",
+            "cabinet",
+            "table",
+            "chair",
+            "display counter",
+            "floor",
+            "wall"
+          ],
+          "embedding_generation": "TorchScript MobileCLIP encode_text + YOLOE head.get_tpe; no model weights changed",
+          "ultralytics_version": "8.3.200",
+          "torch_version": "2.6.0+cpu",
+          "clip_source": "https://github.com/ultralytics/CLIP",
+          "clip_commit": "7ffa84b3bfa40c42ecc1c77147a855e69cb2dd40",
+          "generation_wall_seconds": 4.014119435014436
+        },
+        "detections": [
+          {
+            "instance_index": 0,
+            "source_class_id": 7,
+            "source_label": "floor",
+            "class_key": "yoloe_prompt:floor",
+            "detector_score": 0.27449721097946167,
+            "box_xyxy": [
+              14.8779296875,
+              377.45086669921875,
+              1280.0,
+              717.3600463867188
+            ],
+            "v10_class_id": null,
+            "mask_pixels": 317047,
+            "valid_depth_pixels": 304383,
+            "assigned_pixels": 304383,
+            "mask_sha256": "83f24eed6a742eae6f5c16197d213e2b7f35dda0f9a634ebc7d8cb4a92a5355c"
+          },
+          {
+            "instance_index": 1,
+            "source_class_id": 6,
+            "source_label": "display counter",
+            "class_key": "yoloe_prompt:display counter",
+            "detector_score": 0.26027339696884155,
+            "box_xyxy": [
+              724.156982421875,
+              301.73895263671875,
+              889.93408203125,
+              440.45513916015625
+            ],
+            "v10_class_id": 3,
+            "mask_pixels": 21268,
+            "valid_depth_pixels": 20418,
+            "assigned_pixels": 20418,
+            "mask_sha256": "5bd1a0ca5e5ab5351ac2d9af824720b4980b897be3888d9859875ed59e54542d"
+          }
+        ],
+        "overlap_assignment": "highest detector confidence owns each measured pixel including non-V10 classes",
+        "research_policy_changed": true,
+        "source_file_sha256": "a4733f9dd5f7cda4996b3f89ce81c1f05f2be65ea0c4e550fe00fd5f03c3cf24",
+        "pixel_stride": 4,
+        "canonical_labelled_pixels": 1267,
+        "canonical_semantic_sha256": "ec7c1645cde6a5b0e44ce97bc96b33c090a012729e981cfa04d071483abb9dbf",
+        "decision_effect_validated": false,
+        "mask_file": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/joint/semantics/1caafb7bfdd8d5eef5b05383.npz",
+        "mask_file_sha256": "5ccc38d4e8d86359b6a781da25f329d1312822d036a638e0cf844235814996c3"
+      },
+      "quality_labels": {
+        "2": 0,
+        "3": 57
+      },
+      "measured_assets": [
+        {
+          "group": 6,
+          "marked_points": 0,
+          "class_vote": 0.0
+        },
+        {
+          "group": 5,
+          "marked_points": 0,
+          "class_vote": 0.0
+        },
+        {
+          "group": 1,
+          "marked_points": 57,
+          "class_vote": 1.0
+        }
+      ],
+      "same_candidate_S_minus_G": [],
+      "decision_effect_validated": false
+    },
+    "runtime": {
+      "scene_id": "manual_prior_RTAB_session_integration_diagnostic",
+      "episode_id": "NSO_rtabmap_integrated_20261115_04",
+      "closed": false,
+      "mapper_frames": 1,
+      "unique_packet_count": 1,
+      "arrived_count": 0,
+      "externally_scripted_prefix_actions": 0,
+      "termination": null,
+      "modules": {
+        "plans": 0,
+        "graph_version": 1,
+        "semantic_version": 1,
+        "feedback": {
+          "algorithm_version": "observed_feedback_v10.2",
+          "scene_id": "manual_prior_RTAB_session_integration_diagnostic",
+          "episode_id": "NSO_rtabmap_integrated_20261115_04",
+          "initialized": true,
+          "feedback_enabled": true,
+          "feedback_version": 1,
+          "planning_feedback_version": 1,
+          "total_budget": null,
+          "paid_actions": 0,
+          "remaining_budget": null,
+          "map_version": 1,
+          "last_action_id": 0,
+          "done": false,
+          "consumed_frame_ids": [
+            "1794749165053971116"
+          ],
+          "consumed_action_ids": [],
+          "prefix_frame_ids": [
+            "1794749165053971116"
+          ],
+          "actual_camera_pose_count": 1,
+          "planning_camera_pose_count": 1,
+          "actual_camera_poses_sha256": "ca60b6cf97b408e06d7aafad0ee50a0fc05744ec7f4dee4b78d1993f9d4347bd",
+          "planning_camera_poses_sha256": "ca60b6cf97b408e06d7aafad0ee50a0fc05744ec7f4dee4b78d1993f9d4347bd",
+          "fixed_old_support_count": 193,
+          "fixed_old_support_sha256": "ff315e1a59ff6302d172a563494e97d46336bcde97bd617b1314e0ae3a2e8f63",
+          "initial_old_quality_proxy": 0.28157240061401956,
+          "old_quality_proxy": 0.28157240061401956,
+          "old_quality_proxy_total_change": 0.0,
+          "paid_measurement_support_count": 0,
+          "observed_2d_area_m2": 810.6800000000002,
+          "no_progress_events": 0,
+          "failure_events": 0,
+          "last_event": {
+            "module": "IGCR",
+            "algorithm_version": "observed_feedback_v10.2",
+            "scene_id": "manual_prior_RTAB_session_integration_diagnostic",
+            "episode_id": "NSO_rtabmap_integrated_20261115_04",
+            "event_type": "bootstrap",
+            "accepted": true,
+            "duplicate": false,
+            "feedback_version": 1,
+            "planning_feedback_version": 1,
+            "frame_id": "1794749165053971116",
+            "action_id": 0,
+            "before_map_version": null,
+            "map_version": 1,
+            "timestamp_s": 1794749165.0539713,
+            "action_cost": 0,
+            "paid_actions": 0,
+            "remaining_budget": 1,
+            "actual_camera_pose_count": 1,
+            "planning_camera_pose_count": 1,
+            "fixed_old_support_count": 193,
+            "old_quality_proxy": 0.28157240061401956,
+            "reward": 0.0,
+            "parts": {},
+            "arrived": false,
+            "failed": false,
+            "collision": false,
+            "done": false,
+            "reason": null
+          },
+          "capability_status": {
+            "interface": "IGCR",
+            "backend": "observed_sensor_ledger",
+            "ground_truth_input": false,
+            "learned_reward": false,
+            "calibrated_information_gain": false,
+            "ppo_training_active": false,
+            "quality_is_ground_truth_f1": false
+          },
+          "accounting_unit": "actual_waypoint_attempt_unbounded"
+        },
+        "observed_gain_calibration": {
+          "schema_version": "observed_gain_calibration_v10_1/1",
+          "feedback_enabled": true,
+          "consume_predicted_attempts": false,
+          "posterior_mean": {
+            "radar": 0.5,
+            "camera": 0.5
+          },
+          "alpha": {
+            "radar": 1,
+            "camera": 1
+          },
+          "beta": {
+            "radar": 1,
+            "camera": 1
+          },
+          "observed_actions": 0,
+          "pending_action_ids": [],
+          "events": []
+        },
+        "planner_revision": "v10_3_1",
+        "conditional_gain_residual": {
+          "schema_version": "conditional_gain_residual_v11/1",
+          "feedback_enabled": true,
+          "prior_strength": 8.0,
+          "minimum_updates": 2,
+          "maximum_adjustment": 0.25,
+          "posteriors": [],
+          "events": [],
+          "observed_actions": 0
+        },
+        "semantic_gain_model": null,
+        "return_anchor": [
+          400,
+          400,
+          0
+        ],
+        "retained_hierarchy": "region -> pose option -> paid action"
+      }
+    },
+    "accounting_unit": "actual_waypoint_attempt",
+    "waypoint_attempts": 0,
+    "waypoint_ROS_successes": 0,
+    "waypoint_successes": 0,
+    "waypoint_success_definition": "actual ROS terminal status3; measured pose retained, no cardinal-grid acceptance gate",
+    "max_viewpoint_attempts": null,
+    "nominal_planning_horizon": null,
+    "primitive_arrivals_credited": 0,
+    "primitive_gain_feedback_disabled": true,
+    "legacy_ledger_field_semantics": "internal action/paid counter represents waypoint attempts, not grid primitives"
+  },
+  "supervisor_worker_count_difference": null,
+  "supervisor_worker_viewpoint_count_difference": {
+    "supervisor_waypoint_attempts": 0,
+    "worker_waypoint_attempts": 0,
+    "worker_minus_supervisor": 0,
+    "accounting_unit": "actual_waypoint_attempt",
+    "primitive_arrival_credit": false
+  },
+  "lifecycle_recording_errors": []
+}

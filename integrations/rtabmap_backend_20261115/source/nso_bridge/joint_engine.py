@@ -550,10 +550,16 @@ def main(argv=None):
                     compute_profile=params.get('calibration',{}).get('compute_profile')
                     if compute_profile is not None:
                         from nso_bridge.exact_candidate_batch_v1 import install
-                        install(compute_profile)
+                        if compute_profile == 'exact_candidate_batch_parallel_v1':
+                            install('exact_candidate_batch_v1')
+                        else:
+                            install(compute_profile)
                     if params.get('semantic_configuration') is not None:
                         params = dict(params, semantic_output=str(out/'semantics'))
-                    if params.get('calibration',{}).get('geometry_pose_backend')=='rtabmap_optimized_replay_v1':
+                    if params.get('configuration',{}).get('policy_variant')=='primitive_feedback_unbounded_v1':
+                        from nso_bridge.primitive_feedback_unbounded_v1 import FrozenEpochPrimitivePilot
+                        session = FrozenEpochPrimitivePilot(**dict(params,feedback_output=str(out/'primitive_feedback')))
+                    elif params.get('calibration',{}).get('geometry_pose_backend')=='rtabmap_optimized_replay_v1':
                         from nso_bridge.rtabmap_viewpoint_session import RtabmapViewpointSession
                         session = RtabmapViewpointSession(**params)
                     elif params.get('configuration', {}).get('policy_variant') == 'ros_viewpoint_exploration_v4_unbounded':
@@ -564,6 +570,11 @@ def main(argv=None):
                         session = ViewpointSession(**params)
                     else:
                         session = JointSession(**params)
+                    if compute_profile == 'exact_candidate_batch_parallel_v1':
+                        # Preserve the working frontend/native-library import order:
+                        # scipy.signal must not consume static TLS before Torch loads.
+                        from nso_bridge.exact_visibility_parallel_v1 import install as install_parallel_visibility
+                        install_parallel_visibility()
                     result = session.identity()
                     if compute_profile is not None:
                         result['receipt']['compute_profile']=dict(profile=compute_profile,
@@ -575,6 +586,7 @@ def main(argv=None):
                 elif method == 'observe_failed_action': result = session.observe_failed_action(**params)
                 elif method == 'next_viewpoint': result = session.next_viewpoint(**params)
                 elif method == 'observe_viewpoint_result': result = session.observe_viewpoint_result(**params)
+                elif method == 'observe_primitive_result': result = session.observe_primitive_result(**params)
                 elif method == 'next_action': result = session.next_action()
                 elif method == 'summary': result = session.summary()
                 else: raise ValueError('unknown joint RPC method')

@@ -1,0 +1,66 @@
+{
+  "schema": "teb_actual_stamp_wait_fix/1",
+  "source_url": "https://github.com/rst-tu-dortmund/teb_local_planner",
+  "tag": "0.9.1",
+  "commit": "fc97cfa5df69bb075d49c4d84828dfdbbc13f509",
+  "source_changed_files": [
+    "src/teb_local_planner_ros.cpp"
+  ],
+  "change": "Add ros::Duration(0.2) only to tf.transform(global_pose,robot_pose,plan_frame); existing first lookupTransform .5s kept",
+  "original_source_sha256": "5a5278365c30c2f6269630b568af6dca75028ae6509c97afe38a9063a9d94a14",
+  "patched_source_sha256": "7dadc5d3c3e24c1e75e3704393a4c7c5316b1e1431b02f95a32b094bc882d65f",
+  "source_timestamps_unchanged": true,
+  "research_policy_unchanged": true,
+  "collision_geometry_and_thresholds_unchanged": true,
+  "hardware_stops_unchanged": true,
+  "original_binary_retained": "/home/ouc/nso_robot/staging/teb-noetic-20261115/rootfs/opt/ros/noetic/lib/libteb_local_planner.so",
+  "build_status": "success",
+  "deployed": false,
+  "actual_stamp_probe": {
+    "immediate": {
+      "success": 13,
+      "failure": 47,
+      "max_wait_s": 0.0030895349918864667
+    },
+    "wait_actual_stamp_0p2s": {
+      "success": 60,
+      "failure": 0,
+      "max_wait_s": 0.009234589000698179
+    }
+  },
+  "preserved_original_source_comparison": {
+    "package.xml": {
+      "original_sha256": "d18bc1a8f7f03b0ed89aed8551add22b227fad79cf672e3d92e7fefa972cf22e",
+      "patched_sha256": "d18bc1a8f7f03b0ed89aed8551add22b227fad79cf672e3d92e7fefa972cf22e",
+      "unchanged": true
+    },
+    "include/teb_local_planner/teb_config.h": {
+      "original_sha256": "b60815ec37805c122c2816c90af7c044b4fbfd52e494af3b3babb97842d6e517",
+      "patched_sha256": "b60815ec37805c122c2816c90af7c044b4fbfd52e494af3b3babb97842d6e517",
+      "unchanged": true
+    },
+    "src/teb_config.cpp": {
+      "original_sha256": "e50ceecccfabb3be93b557c2eb4e3130ed5f3d4ce38964c5dfc2dbf344de062f",
+      "patched_sha256": "e50ceecccfabb3be93b557c2eb4e3130ed5f3d4ce38964c5dfc2dbf344de062f",
+      "unchanged": true
+    },
+    "src/optimal_planner.cpp": {
+      "original_sha256": "026db329edeccb7dd6d5d6fdb13d446d380c214f44f398a0a6b297a470ded832",
+      "patched_sha256": "026db329edeccb7dd6d5d6fdb13d446d380c214f44f398a0a6b297a470ded832",
+      "unchanged": true
+    },
+    "src/teb_local_planner_ros.cpp": {
+      "original_sha256": "5a5278365c30c2f6269630b568af6dca75028ae6509c97afe38a9063a9d94a14",
+      "patched_sha256": "7dadc5d3c3e24c1e75e3704393a4c7c5316b1e1431b02f95a32b094bc882d65f",
+      "unchanged": false
+    }
+  },
+  "library": "/home/ouc/nso_robot/staging/teb-transformwait-20261115/devel/lib/libteb_local_planner.so",
+  "library_sha256": "148f4ce494d7fa2d07b550e078b030b817dfc482b6134ffffad255d3ac52d6bd",
+  "library_bytes": 2112560,
+  "ldd_r_unresolved": [],
+  "RTLD_NOW_load_passed": true,
+  "build_completed_unix_s": 1794748772.4264467,
+  "build_processes_remaining": [],
+  "temporary_compile_CPU2_now_released": true
+}

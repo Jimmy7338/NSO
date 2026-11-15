@@ -1,0 +1,23 @@
+--- nso_bridge/nso_bridge/joint_engine.py
++++ nso_bridge/nso_bridge/joint_engine.py
+@@ -552,8 +552,6 @@
+                         from nso_bridge.exact_candidate_batch_v1 import install
+                         if compute_profile == 'exact_candidate_batch_parallel_v1':
+                             install('exact_candidate_batch_v1')
+-                            from nso_bridge.exact_visibility_parallel_v1 import install as install_parallel_visibility
+-                            install_parallel_visibility()
+                         else:
+                             install(compute_profile)
+                     if params.get('semantic_configuration') is not None:
+@@ -569,6 +567,11 @@
+                         session = ViewpointSession(**params)
+                     else:
+                         session = JointSession(**params)
++                    if compute_profile == 'exact_candidate_batch_parallel_v1':
++                        # Preserve the working frontend/native-library import order:
++                        # scipy.signal must not consume static TLS before Torch loads.
++                        from nso_bridge.exact_visibility_parallel_v1 import install as install_parallel_visibility
++                        install_parallel_visibility()
+                     result = session.identity()
+                     if compute_profile is not None:
+                         result['receipt']['compute_profile']=dict(profile=compute_profile,

@@ -1,0 +1,90 @@
+{
+  "schema": "NSO02_actual_control_tail_timing/1",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_02",
+  "scope": "Terminal bounded ring only; not entire drive distribution",
+  "adapter_tail_span_s": 5.189839313,
+  "adapter_tail_cycles": 256,
+  "adapter_fault": "native_driver_fault:8",
+  "adapter_tick_ms": {
+    "n": 255,
+    "max_ms": 29.63851299136877,
+    "p99_ms": 23.83650402771309,
+    "p95_ms": 20.914361986797303
+  },
+  "adapter_stage_ms": {
+    "guarded_publish_ns": {
+      "n": 256,
+      "max_ms": 1.385309,
+      "p99_ms": 0.445385,
+      "p95_ms": 0.343719
+    },
+    "sleep_ns": {
+      "n": 255,
+      "max_ms": 28.52537,
+      "p99_ms": 23.379246,
+      "p95_ms": 20.222731
+    },
+    "connection_snapshot_ns": {
+      "n": 256,
+      "max_ms": 0.069793,
+      "p99_ms": 0.034017,
+      "p95_ms": 0.026337
+    },
+    "lock_wait_ns": {
+      "n": 256,
+      "max_ms": 0.063745,
+      "p99_ms": 0.038977,
+      "p95_ms": 0.02656
+    },
+    "state_publish_ns": {
+      "n": 256,
+      "max_ms": 1.192441,
+      "p99_ms": 0.629069,
+      "p95_ms": 0.454698
+    },
+    "ros_clock_sample_ns": {
+      "n": 256,
+      "max_ms": 0.50033,
+      "p99_ms": 0.137282,
+      "p95_ms": 0.09949
+    }
+  },
+  "native_first_fault": {
+    "sleep_requested_ns": 19999296,
+    "sleep_start_ns": 387737145844481,
+    "wake_ns": 387737165862599,
+    "sample_enter_ns": 387737165863399,
+    "lock_acquired_ns": 387737165864295,
+    "gate_now_ns": 387737165864647,
+    "gate_prev_tick_ns": 387737145812544,
+    "sample_exit_ns": 387737165864967,
+    "send_enter_ns": 387737165864999,
+    "send_exit_ns": 387737165887720,
+    "fault_after_sample": 8,
+    "fault_after_send": 8
+  },
+  "native_fault_name": "external_guard: root operatorstop observed in mission result",
+  "native_before_fault_tail_cycles": 289,
+  "native_before_fault_tick_ms": {
+    "n": 288,
+    "max_ms": 20.104873,
+    "p99_ms": 20.098473,
+    "p95_ms": 20.080937
+  },
+  "native_before_fault_send_interval_ms": {
+    "n": 288,
+    "max_ms": 20.104905,
+    "p99_ms": 20.098441,
+    "p95_ms": 20.080905
+  },
+  "native_before_fault_send_call_ms": {
+    "n": 289,
+    "max_ms": 0.061665,
+    "p99_ms": 0.050337,
+    "p95_ms": 0.042209
+  },
+  "timing_guard_relaxed": false,
+  "root_owned_actuation": true,
+  "independentCANmonitor": "/home/ouc/nso_robot/analyses/resume_20261115/control_latency_lockfree_v1/NSO02_readonly_source_monitor.json",
+  "updated_unix_s": 1794748330.5955067
+}

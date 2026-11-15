@@ -77,11 +77,28 @@ class ControlTimingRing:
             return False
 
 
+def rospy_connection_count_snapshot(publisher):
+    """Read rospy's published copy-on-write connection list without c_lock.
+
+    Noetic _TopicImpl deliberately replaces the whole list when connections
+    change so publish()/other readers may inspect a complete list unlocked.
+    get_num_connections() instead holds c_lock, which also covers connection
+    socket cleanup and polling. That management work must not block a tick.
+    An unsupported/closed implementation never grants driver readiness; None
+    is a diagnostic unknown, not a cached count and not a freshness renewal.
+    """
+    impl = getattr(publisher, 'impl', None)
+    if impl is None or getattr(impl, 'closed', True):
+        return None
+    connections = getattr(impl, 'connections', None)
+    return len(connections) if type(connections) is list else None
+
+
 def update_driver_connection_snapshot(gate, publisher):
-    """One coherent publisher snapshot per control cycle; original predicates."""
-    count = publisher.get_num_connections()
+    """One coherent published-list snapshot; retain zero/one/multiple tests."""
+    count = rospy_connection_count_snapshot(publisher)
     gate.driver_connected = count == 1
-    if count > 1:
+    if count is not None and count > 1:
         gate.fail('multiple_command_subscribers')
     return count
 
@@ -941,7 +958,7 @@ def main():
 
     def arm(_):
         with lock:
-            gate.driver_connected = publisher.get_num_connections() == 1
+            update_driver_connection_snapshot(gate,publisher)
             ok,reason = gate.arm(time.monotonic(),rospy.Time.now().to_sec())
             journal.add(dict(event='arm',ok=ok,reason=reason,origin=gate.origin,
                 stationarity_metrics=gate.arm_stationarity_metrics,at_monotonic=time.monotonic()))
@@ -1011,7 +1028,9 @@ def main():
                 if not gate.ever_armed and now>=pending_deadline:
                     gate.fail('not_armed_timeout')
                 control_timing.mark('pending_arm_check')
-                control_timing.mark('pre_decision',gate_now_monotonic=now)
+                control_timing.mark('pre_decision',gate_now_monotonic=now,
+                    can_status_source_monotonic=None if gate.can_status is None else gate.can_status['source'],
+                    can_velocity_source_monotonic=None if gate.can_velocity is None else gate.can_velocity['source'])
                 v,w,reason=gate.decision(now,wall.to_sec())
                 control_timing.mark('decision')
                 stamp=wall.to_nsec()

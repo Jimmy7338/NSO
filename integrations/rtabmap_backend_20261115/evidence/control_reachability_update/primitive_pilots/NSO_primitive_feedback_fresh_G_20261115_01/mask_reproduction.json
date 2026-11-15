@@ -1,0 +1,137 @@
+{
+  "schema": "actual_pilot_grid_mask_reproduction/1",
+  "all_logged_counts_and_posteriors_exact": true,
+  "scope": "Reproduction of derived actual-controller grid feedback; not an additional robot trial or algorithm efficacy comparison",
+  "camera_eligibility": "camera_seen_after AND NOT camera_before AND NOT known_before (declared unknown-coverage variant)",
+  "radar_eligibility": "belief_after != -1 AND NOT known_before",
+  "raw_RGBD_included": false,
+  "independent_samples_added": 0,
+  "files": [
+    {
+      "path": "masks/prediction_inputs_000001.npz",
+      "bytes": 4394,
+      "sha256": "71792521f2a1ca400d50c99e787195b582dc15e8ec1e0c039c51d1a6b8b0ec48"
+    },
+    {
+      "path": "masks/actual_feedback_inputs_000001.npz",
+      "bytes": 2777,
+      "sha256": "05ba32908796fc30a167df93e55ba8a95d3d2478e13b12e77064341cf5b41a5e"
+    },
+    {
+      "path": "masks/prediction_inputs_000002.npz",
+      "bytes": 4373,
+      "sha256": "347ffc2bb34d2c212c3bef30c5ee2fb3e8c450ab73dd65e6eead805dca6bd867"
+    },
+    {
+      "path": "masks/actual_feedback_inputs_000002.npz",
+      "bytes": 2833,
+      "sha256": "f2067c26c2e5031f91b52fd2d17a4c2090f1f29de15b58612205a26e0a7552be"
+    },
+    {
+      "path": "masks/prediction_inputs_000003.npz",
+      "bytes": 4438,
+      "sha256": "c722197bb0e7cbc451aaac93240f94f0e87aa2e11ea662ac91ae357762fc5077"
+    },
+    {
+      "path": "masks/actual_feedback_inputs_000003.npz",
+      "bytes": 2850,
+      "sha256": "3a8f737d740328a2e8e9dbe5ef2cdfb08c42d991fd41975fd6d5dac5b50aa8a8"
+    }
+  ],
+  "rows": [
+    {
+      "action_id": 1,
+      "channel": "radar",
+      "predicted_cells": 68,
+      "realized_predicted_cells": 12,
+      "unrealized_predicted_cells": 56,
+      "unpredicted_realized_cells": 58,
+      "alpha": 13,
+      "beta": 57,
+      "posterior": 0.18571428571428572,
+      "ros_status": 3,
+      "primitive_arrival_verified": true
+    },
+    {
+      "action_id": 1,
+      "channel": "camera",
+      "predicted_cells": 0,
+      "realized_predicted_cells": 0,
+      "unrealized_predicted_cells": 0,
+      "unpredicted_realized_cells": 28,
+      "alpha": 1,
+      "beta": 1,
+      "posterior": 0.5,
+      "ros_status": 3,
+      "primitive_arrival_verified": true
+    },
+    {
+      "action_id": 2,
+      "channel": "radar",
+      "predicted_cells": 47,
+      "realized_predicted_cells": 26,
+      "unrealized_predicted_cells": 21,
+      "unpredicted_realized_cells": 83,
+      "alpha": 39,
+      "beta": 78,
+      "posterior": 0.3333333333333333,
+      "ros_status": 3,
+      "primitive_arrival_verified": true
+    },
+    {
+      "action_id": 2,
+      "channel": "camera",
+      "predicted_cells": 0,
+      "realized_predicted_cells": 0,
+      "unrealized_predicted_cells": 0,
+      "unpredicted_realized_cells": 63,
+      "alpha": 1,
+      "beta": 1,
+      "posterior": 0.5,
+      "ros_status": 3,
+      "primitive_arrival_verified": true
+    },
+    {
+      "action_id": 3,
+      "channel": "radar",
+      "predicted_cells": 44,
+      "realized_predicted_cells": 7,
+      "unrealized_predicted_cells": 37,
+      "unpredicted_realized_cells": 51,
+      "alpha": 46,
+      "beta": 115,
+      "posterior": 0.2857142857142857,
+      "ros_status": 3,
+      "primitive_arrival_verified": true
+    },
+    {
+      "action_id": 3,
+      "channel": "camera",
+      "predicted_cells": 0,
+      "realized_predicted_cells": 0,
+      "unrealized_predicted_cells": 0,
+      "unpredicted_realized_cells": 11,
+      "alpha": 1,
+      "beta": 1,
+      "posterior": 0.5,
+      "ros_status": 3,
+      "primitive_arrival_verified": true
+    }
+  ],
+  "unique_internal_unknown_to_known_grid_cells": 237,
+  "per_step_unknown_to_known_transition_sum": 237,
+  "unique_internal_camera_unknown_grid_cells": 102,
+  "coverage_scope": "Internal frozen-epoch grid support; no surveyed physical area or complete-room coverage is inferred",
+  "final_alpha": {
+    "radar": 46,
+    "camera": 1
+  },
+  "final_beta": {
+    "radar": 115,
+    "camera": 1
+  },
+  "final_posterior": {
+    "radar": 0.2857142857142857,
+    "camera": 0.5
+  }
+}

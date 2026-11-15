@@ -1,0 +1,22 @@
+--- nso_bridge/nso_bridge/joint_engine.py
++++ nso_bridge/nso_bridge/joint_engine.py
+@@ -556,7 +556,10 @@
+                             install(compute_profile)
+                     if params.get('semantic_configuration') is not None:
+                         params = dict(params, semantic_output=str(out/'semantics'))
+-                    if params.get('calibration',{}).get('geometry_pose_backend')=='rtabmap_optimized_replay_v1':
++                    if params.get('configuration',{}).get('policy_variant')=='primitive_feedback_unbounded_v1':
++                        from nso_bridge.primitive_feedback_unbounded_v1 import FrozenEpochPrimitivePilot
++                        session = FrozenEpochPrimitivePilot(**dict(params,feedback_output=str(out/'primitive_feedback')))
++                    elif params.get('calibration',{}).get('geometry_pose_backend')=='rtabmap_optimized_replay_v1':
+                         from nso_bridge.rtabmap_viewpoint_session import RtabmapViewpointSession
+                         session = RtabmapViewpointSession(**params)
+                     elif params.get('configuration', {}).get('policy_variant') == 'ros_viewpoint_exploration_v4_unbounded':
+@@ -583,6 +586,7 @@
+                 elif method == 'observe_failed_action': result = session.observe_failed_action(**params)
+                 elif method == 'next_viewpoint': result = session.next_viewpoint(**params)
+                 elif method == 'observe_viewpoint_result': result = session.observe_viewpoint_result(**params)
++                elif method == 'observe_primitive_result': result = session.observe_primitive_result(**params)
+                 elif method == 'next_action': result = session.next_action()
+                 elif method == 'summary': result = session.summary()
+                 else: raise ValueError('unknown joint RPC method')

@@ -126,6 +126,7 @@ class ActuatorTelemetry:
     """
     def __init__(self,session_id):
         self.session_id=session_id;self.receipt=None;self.fault=None;self.ever_armed=False
+        self.sampled_monotonic=None;self.sampled_unix_s=None;self.last_control_tick=None
         self.can_distance=0.;self.can_absolute_yaw=0.;self.can_zero_since=None
         self.can_accounting_complete=False;self.last_hardware_reason='adapter_telemetry_missing'
         self.can_status=self.can_velocity=None
@@ -137,6 +138,9 @@ class ActuatorTelemetry:
         if not 0<=receipt-row['sampled_monotonic']<=.5:
             raise ValueError('actuator telemetry snapshot is stale or future')
         self.receipt=receipt;self.fault=row.get('fault');self.ever_armed=row['ever_armed']
+        self.sampled_monotonic=row['sampled_monotonic']
+        self.sampled_unix_s=row.get('sampled_unix_s')
+        self.last_control_tick=row.get('last_control_tick_monotonic')
         self.can_distance=row['can_distance_m'];self.can_absolute_yaw=row['can_absolute_yaw_rad']
         self.can_zero_since=row['can_zero_since_monotonic']
         self.can_accounting_complete=row['feedback_accounting_complete']
@@ -149,6 +153,30 @@ class ActuatorTelemetry:
         for name,row in [('status',self.can_status),('velocity',self.can_velocity)]:
             if row is None or not 0<=now-row['source']<=.5:return 'original_CAN_'+name+'_stale'
         return self.last_hardware_reason
+
+    def health_evidence(self,now):
+        """Snapshot cache/source clocks at the original unchanged stop check.
+
+        Caller holds the supervisor lock. This records the received adapter
+        snapshot; it cannot claim to be a new direct read of the CAN socket.
+        """
+        return dict(schema='supervisor_actuator_telemetry_evidence/1',
+            checked_monotonic=now,reason=self.hardware_reason(now),
+            adapter_sampled_monotonic=self.sampled_monotonic,
+            adapter_sampled_unix_s=self.sampled_unix_s,
+            telemetry_received_monotonic=self.receipt,
+            sample_transport_age_s=None if self.receipt is None or self.sampled_monotonic is None else self.receipt-self.sampled_monotonic,
+            telemetry_receipt_age_s=None if self.receipt is None else now-self.receipt,
+            adapter_snapshot_age_s=None if self.sampled_monotonic is None else now-self.sampled_monotonic,
+            last_control_tick_monotonic=self.last_control_tick,
+            can_status=None if self.can_status is None else dict(self.can_status),
+            can_velocity=None if self.can_velocity is None else dict(self.can_velocity),
+            status_source_age_s=None if self.can_status is None else now-self.can_status['source'],
+            velocity_source_age_s=None if self.can_velocity is None else now-self.can_velocity['source'],
+            adapter_reported_hardware_reason=self.last_hardware_reason,
+            adapter_fault=self.fault,original_supervisor_source_TTL_s=.5,
+            original_adapter_status_TTL_s=.5,original_adapter_velocity_TTL_s=.15,
+            scope='cached adapter telemetry, not an independent live CAN observation')
 
 
 def visual_health_reason(health, odom, grid, now, wall):
@@ -217,15 +245,40 @@ def recoverable_sensor_health_reason(reason, health, odom, now, wall):
     return math.isfinite(stamp) and 0<stamp<=wall+.02
 
 
+def validate_primitive_pilot_harness_args(profile, attempts):
+    if attempts is not None:
+        if profile != 'primitive_feedback_unbounded_v1':raise ValueError('primitive pilot count applies only to primitive_feedback_unbounded_v1')
+        if type(attempts) is not int or attempts < 1:raise ValueError('positive explicit experiment-harness attempt count required')
+
+
+def setup_navigation_tolerances(goal_settings,mode,controller_profile):
+    """Explicit setup-only precision; original defaults and NSO goals unchanged."""
+    if mode!='navigation' or not isinstance(goal_settings,dict):
+        raise ValueError('setup precision requires navigation goal settings')
+    fields={'setup_xy_goal_tolerance_m':(.03,.15),'setup_yaw_goal_tolerance_rad':(.08,.35)}
+    explicit=any(key in goal_settings for key in fields)
+    if explicit and controller_profile not in ('teb_slow_polygon_v1','teb_onsite_062x059_v1'):
+        raise ValueError('explicit setup precision currently requires TEB')
+    values={}
+    for key,(minimum,maximum) in fields.items():
+        value=goal_settings.get(key,maximum)
+        if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not minimum<=value<=maximum:
+            raise ValueError(key+' must be finite in ['+str(minimum)+','+str(maximum)+']')
+        values[key]=float(value)
+    return dict(values,explicit=explicit,profile='setup_goal_precision_v1' if explicit else 'standard_setup_default_v1',
+        purpose='between_trial_initial_pose_reset',NSO_action=False,automatic_NSO_return=False)
+
+
 def select_execution_controller(settings, choice):
     """Choose an existing backend without changing the user's source file."""
-    if choice not in ('config','nso_primitive','ros_viewpoint'):
+    if choice not in ('config','nso_primitive','ros_viewpoint','primitive_feedback'):
         raise ValueError('unknown execution controller')
     selected=json.loads(json.dumps(settings))
     original=selected['configuration'].get('policy_variant','original')
     if choice!='config':
         selected['configuration']['policy_variant']={'nso_primitive':'ros_checked_exploration_v2',
-            'ros_viewpoint':'ros_viewpoint_exploration_v3'}[choice]
+            'ros_viewpoint':'ros_viewpoint_exploration_v3',
+            'primitive_feedback':'primitive_feedback_unbounded_v1'}[choice]
     return selected,dict(selector=choice,original_policy_variant=original,
                          resolved_policy_variant=selected['configuration'].get('policy_variant','original'))
 
@@ -432,7 +485,8 @@ def write_source_manifest(output, selected_native=NATIVE):
 
 def argument_parser():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--execution-controller',choices=['config','nso_primitive','ros_viewpoint'],default='config',help='NSO/joint only: config preserves original/v1 settings; nso_primitive selects current v2 own execution; ros_viewpoint selects continuous ROS navigation')
+    ap.add_argument('--primitive-feedback-pilot-attempts',type=int,default=None,help='Optional explicit integration-experiment harness count; no NSO policy budget or automatic return')
+    ap.add_argument('--execution-controller',choices=['config','nso_primitive','ros_viewpoint','primitive_feedback'],default='config',help='NSO/joint only: config preserves original/v1 settings; nso_primitive selects current v2 own execution; ros_viewpoint selects continuous ROS navigation')
     ap.add_argument('--mode',choices=['visual','nso','joint','reference','navigation'],default='nso')
     ap.add_argument('--duration',type=float,default=600.)
     ap.add_argument('--duration-profile',choices=PROFILES,default=STANDARD)
@@ -468,11 +522,18 @@ def argument_parser():
 
 def result_summary(result, output):
     """Small user-facing record; detailed decisions and arrivals stay in their records."""
-    return dict(report=str(output),status=result.get('status'),reason=result.get('reason'),
+    summary=dict(report=str(output),status=result.get('status'),reason=result.get('reason'),
         goals=len(result.get('goals',[])),verified_arrivals=len(result.get('successful_arrivals',[])),
         distance_m=result.get('actual_CAN_distance_m'),elapsed_s=result.get('elapsed_run_s'),
         stopped=result.get('feedback_zero_after_close',False),
         execution_interrupted=result.get('execution_interrupted',False))
+    if result.get('primitive_feedback_profile') == 'primitive_feedback_unbounded_v1':
+        summary.update(verified_arrivals=result.get('primitive_verified_arrivals',0),
+            ROS_metric_arrivals=len(result.get('successful_arrivals',[])),
+            primitive_attempts=len(result.get('primitive_feedback_attempts',[])),
+            macro_verified_arrivals=result.get('macro_verified_arrivals',0),
+            accounting_unit='actual_primitive_attempt')
+    return summary
 
 
 def execution_interruption(result, reason):
@@ -487,6 +548,8 @@ def native_cpu_prefix(cpu):
 
 def main(argv=None):
     args=argument_parser().parse_args(argv)
+    if args.primitive_feedback_pilot_attempts is not None and args.mode not in ('nso','joint'):
+        raise ValueError('primitive pilot count requires nso/joint primitive-feedback profile')
     if args.native_cpu is not None and args.native_sender_cpu is not None:
         raise ValueError('--native-cpu and --native-sender-cpu are mutually exclusive')
     if args.native_sender_rt_priority is not None and args.native_sender_cpu is None:
@@ -515,12 +578,13 @@ def main(argv=None):
         raise ValueError('nso-correction-reverse is restricted to nso/joint mode')
     if args.joint_xy_goal_tolerance != .08 and args.mode not in ('nso','joint'):
         raise ValueError('joint-xy-goal-tolerance is restricted to nso/joint mode')
-    navigation_goal=None
+    navigation_goal=None;setup_precision=None
     if args.mode=='navigation':
         if not args.navigation_goal_json:
             raise ValueError('standard navigation setup requires an explicit goal JSON')
         from standard_navigation_goal import validate_goal_odom
         navigation_goal_settings=json.loads(Path(args.navigation_goal_json).read_text())
+        setup_precision=setup_navigation_tolerances(navigation_goal_settings,args.mode,args.local_controller_profile)
         navigation_goal=validate_goal_odom(navigation_goal_settings['target_odom'])
         setup_frame=navigation_goal_settings.get('frame','odom')
         if setup_frame not in ('odom','nso_pair_map') or (setup_frame=='nso_pair_map' and
@@ -576,9 +640,15 @@ def main(argv=None):
         from joint_ros_coordinator import validate_joint_identity
         source_settings=Path(args.joint_configuration).read_bytes()
         settings,controller_selection=select_execution_controller(json.loads(source_settings),args.execution_controller)
+        validate_primitive_pilot_harness_args(settings['configuration'].get('policy_variant'),args.primitive_feedback_pilot_attempts)
+        if settings['configuration'].get('policy_variant') == 'primitive_feedback_unbounded_v1' and args.duration_profile != UNTIL_STOPPED:
+            raise ValueError('unbounded primitive feedback requires until-stopped runtime, no episode duration')
         controller_selection.update(source=str(Path(args.joint_configuration).resolve()),
                                     original_settings_sha256=hashlib.sha256(source_settings).hexdigest())
-        if args.duration_profile == UNTIL_STOPPED:
+        if args.duration_profile == UNTIL_STOPPED and settings['configuration'].get('policy_variant')=='primitive_feedback_unbounded_v1':
+            settings['configuration'].update(total_budget=None,execution_limits_profile=UNTIL_STOPPED,return_policy='no_automatic_return')
+            controller_selection.update(resolved_policy_variant='primitive_feedback_unbounded_v1',execution_limits_profile=UNTIL_STOPPED)
+        elif args.duration_profile == UNTIL_STOPPED:
             if settings['configuration'].get('policy_variant') not in ('ros_viewpoint_exploration_v3','ros_viewpoint_exploration_v4_unbounded'):
                 raise ValueError('until-stopped profile requires selected ROS viewpoint execution')
             settings['configuration'].update(policy_variant='ros_viewpoint_exploration_v4_unbounded',
@@ -634,11 +704,15 @@ def main(argv=None):
         if reference_worker:reference_worker.close()
         raise
     import rospy, actionlib, tf2_ros
+    from rospy.numpy_msg import numpy_msg
     from nav_msgs.msg import Odometry,OccupancyGrid,Path as NavigationPath
     from move_base_msgs.msg import MoveBaseAction,MoveBaseActionGoal,MoveBaseActionResult
     from std_msgs.msg import Bool,Int32,String
     from std_srvs.srv import Trigger
     from rosgraph_msgs.msg import Log
+    # Same ROS wire type/header/data values, without allocating a Python int
+    # tuple for every large grid while other callback threads need the GIL.
+    OccupancyGridInput=numpy_msg(OccupancyGrid)
     rospy.init_node('nso_onboard_supervisor',disable_signals=True)
     from joint_observation import navigation_map_source
     joint_map_source=navigation_map_source(reference_task['calibration']
@@ -843,12 +917,12 @@ def main(argv=None):
         if m.name=='/nso_visual/explore' and m.msg=='Exploration stopped.':
             with lock:state['explorer_stopped']=True
     subscribers=[rospy.Subscriber('/nso_visual/odom',Odometry,odom,queue_size=20),
-        rospy.Subscriber(joint_map_source['topic'],OccupancyGrid,grid,queue_size=2),
-        rospy.Subscriber('/nso_visual/move_base/global_costmap/costmap',OccupancyGrid,costmap,queue_size=1),
-        rospy.Subscriber('/nso_visual/move_base/local_costmap/costmap',OccupancyGrid,local_costmap,queue_size=1),
+        rospy.Subscriber(joint_map_source['topic'],OccupancyGridInput,grid,queue_size=2),
+        rospy.Subscriber('/nso_visual/move_base/global_costmap/costmap',OccupancyGridInput,costmap,queue_size=1),
+        rospy.Subscriber('/nso_visual/move_base/local_costmap/costmap',OccupancyGridInput,local_costmap,queue_size=1),
         rospy.Subscriber('/nso_visual/health',String,health,queue_size=2),
         rospy.Subscriber('/nso_radius/driver_fault',Int32,driver,queue_size=2),
-        rospy.Subscriber('/nso_visual/actuator_state',String,actuator_state,queue_size=2),
+        rospy.Subscriber('/nso_visual/actuator_state',String,actuator_state,queue_size=1,tcp_nodelay=True),
         rospy.Subscriber('/nso_visual/move_base/goal',MoveBaseActionGoal,goal,queue_size=10),
         rospy.Subscriber('/nso_visual/move_base/NavfnROS/plan',NavigationPath,
             lambda m:plan_endpoint(m,'/nso_visual/move_base/NavfnROS/plan'),queue_size=1),
@@ -883,11 +957,17 @@ def main(argv=None):
                 # this lock. Read the comparison clock after taking the lock.
                 now=time.monotonic()
                 fault=hardware.fault;chassis_reason=hardware.hardware_reason(now)
+                chassis_evidence=hardware.health_evidence(now) if active and (fault or chassis_reason) else None
                 h,o,g,d=state['health'],state['odom'],state['map'],state['driver']
                 explicitly_stopped=state['explorer_stopped']
                 zero=hardware.can_zero_since is not None and now-hardware.can_zero_since>=1.
-            if fault:raise RuntimeError('chassis:'+str(fault))
-            if active and chassis_reason:raise RuntimeError('chassis:'+chassis_reason)
+            if fault or (active and chassis_reason):
+                if chassis_evidence is not None and 'first_chassis_health_failure' not in result:
+                    result['first_chassis_health_failure']=chassis_evidence
+                    # Existing queue keeps disk I/O off this stop path. The
+                    # final result also persists the evidence after cleanup.
+                    journal.add(dict(event='first_chassis_health_failure',evidence=chassis_evidence))
+                raise RuntimeError('chassis:'+str(fault or chassis_reason))
             if d and d[1]!=0:raise RuntimeError('native_driver_fault:'+str(d[1]))
             if active and (not d or not 0<=now-d[0]<=.25):raise RuntimeError('native_driver_status_stale')
             for name,p in children:
@@ -936,13 +1016,20 @@ def main(argv=None):
             if args.mode in ('nso','joint'):
                 navigation_restore=dict(xy_goal_tolerance=original['xy_goal_tolerance'])
                 applied=navigation_configuration.update_configuration(dict(xy_goal_tolerance=args.joint_xy_goal_tolerance))
+            elif args.mode=='navigation' and setup_precision['explicit']:
+                navigation_restore={key:original[key] for key in ('xy_goal_tolerance','yaw_goal_tolerance')}
+                applied=navigation_configuration.update_configuration(dict(
+                    xy_goal_tolerance=setup_precision['setup_xy_goal_tolerance_m'],
+                    yaw_goal_tolerance=setup_precision['setup_yaw_goal_tolerance_rad']))
             else:
                 applied=original
             actual=rospy.get_param(controller_namespace)
             actual.update(applied)  # Dynamic readback authoritative; static footprint/max_samples retain source params.
             contract=validate_teb_backend(rospy.get_param('/nso_visual/move_base/base_local_planner'),actual,
                 rospy.get_param('/nso_visual/move_base/local_costmap/footprint'),
-                xy_tolerance=args.joint_xy_goal_tolerance if args.mode in ('nso','joint') else .15,
+                xy_tolerance=args.joint_xy_goal_tolerance if args.mode in ('nso','joint') else
+                    setup_precision['setup_xy_goal_tolerance_m'] if args.mode=='navigation' else .15,
+                yaw_tolerance=setup_precision['setup_yaw_goal_tolerance_rad'] if args.mode=='navigation' else .35,
                 profile=args.local_controller_profile)
             contract['global_costmap_footprint']=checked_footprint(
                 rospy.get_param('/nso_visual/move_base/global_costmap/footprint'),profile=args.local_controller_profile)
@@ -950,12 +1037,18 @@ def main(argv=None):
                 DWA_centered_alignment_not_applicable=True,ordinary_reverse=args.ros_allow_reverse,
                 original_xy_goal_tolerance=original['xy_goal_tolerance'],
                 outer_arrival_evidence_xy_tolerance_m=.15,outer_arrival_evidence_yaw_tolerance_rad=.35)
+            if args.mode=='navigation':
+                contract['setup_goal_precision']=dict(setup_precision,
+                    original_xy_goal_tolerance=original['xy_goal_tolerance'],original_yaw_goal_tolerance=original['yaw_goal_tolerance'],
+                    applied_xy_goal_tolerance=actual['xy_goal_tolerance'],applied_yaw_goal_tolerance=actual['yaw_goal_tolerance'],
+                    applied_before_arm=True,restoration_required_after_setup=bool(navigation_restore))
+                result['setup_goal_precision']=contract['setup_goal_precision']
             save(output/'local_controller_contract.json',contract)
             result['navigation_reverse_contract']=dict(profile='TEB_native_reverse_005_v1',
                 actual_backend='teb_local_planner/TebLocalPlannerROS',setup_only=not args.ros_allow_reverse,
                 ordinary_reverse=args.ros_allow_reverse,max_vel_x_backwards=actual['max_vel_x_backwards'],
                 alignment_profile='TEB_native_no_DWA_forward_point_parameter',
-                controller_parameters_modified=['xy_goal_tolerance'] if navigation_restore else [],
+                controller_parameters_modified=list(navigation_restore) if navigation_restore else [],
                 restoration_required=bool(navigation_restore),NSO_action=False,NSO_scoring_unchanged=True)
             save(output/'navigation_reverse_contract.json',result['navigation_reverse_contract'])
         if args.mode in ('nso','joint'):
@@ -1104,6 +1197,9 @@ def main(argv=None):
         elif args.mode in ('nso','joint'):
             from joint_ros_coordinator import run_joint
             joint_runner=run_joint
+            if reference_task.get('configuration',{}).get('policy_variant')=='primitive_feedback_unbounded_v1':
+                from primitive_feedback_coordinator import run_primitive_feedback
+                joint_runner=run_primitive_feedback
             if reference_task.get('configuration',{}).get('policy_variant') in ('ros_viewpoint_exploration_v3','ros_viewpoint_exploration_v4_unbounded'):
                 from ros_viewpoint_coordinator import run_viewpoints
                 joint_runner=run_viewpoints
@@ -1151,6 +1247,7 @@ def main(argv=None):
                     client=client,tfbuf=tfbuf,capture_pose=capture_pose,capture_odom_pose=capture_odom_pose,
                     capture_planning_pose=lambda:capture_navigation_pose(navigation_execution_frame),
                     execution_frame=navigation_execution_frame,ordinary_reverse_authorized=args.ros_allow_reverse,
+                    primitive_feedback_pilot_attempts=args.primitive_feedback_pilot_attempts,
                     viewpoint_goal_timeout_s=None if args.duration_profile == UNTIL_STOPPED else 120.,
                     execution_limits_profile=args.duration_profile,
                     selected_goal_window_resize=args.duration_profile == UNTIL_STOPPED,
@@ -1169,10 +1266,18 @@ def main(argv=None):
                 progress()
                 if args.duration is not None and time.monotonic()-run_start>=args.duration:
                     raise RuntimeError('setup_navigation_duration_complete')
-            run_standard_navigation_goal(dict(goal_odom=navigation_goal,client=client,
+            setup_evidence=run_standard_navigation_goal(dict(goal_odom=navigation_goal,client=client,
                 execution_frame=navigation_execution_frame,
                 capture_odom_pose=lambda:capture_navigation_pose(navigation_execution_frame),can_snapshot=can_snapshot,
                 heartbeat=navigation_heartbeat,result=result,journal=journal))
+            if setup_precision['explicit']:
+                result['setup_pose_precision_evidence']=dict(setup_precision,
+                    verified=bool(setup_evidence.get('verified') and
+                        setup_evidence.get('target_error_m',math.inf)<=setup_precision['setup_xy_goal_tolerance_m'] and
+                        setup_evidence.get('target_yaw_error_rad',math.inf)<=setup_precision['setup_yaw_goal_tolerance_rad']),
+                    measured_target_error_m=setup_evidence.get('target_error_m'),
+                    measured_target_yaw_error_rad=setup_evidence.get('target_yaw_error_rad'),
+                    standard_arrival_evidence_unchanged=True,source='actual post-goal pose and original CAN evidence')
         else:
             spawn(explore_command,'explore')
             while args.duration is None or time.monotonic()-run_start<args.duration:
@@ -1191,6 +1296,14 @@ def main(argv=None):
         lifecycle.record('stop_request_begin')
         stop.publish(Bool(data=True))
         lifecycle.record('stop_requested')
+        if result.get('first_chassis_health_failure') is not None:
+            try:
+                # Preserve the first check's clocks before potentially slow
+                # worker/actuator cleanup. Request native zero before disk I/O.
+                evidence_path=output/'first_chassis_health_failure.json'
+                save(evidence_path,result['first_chassis_health_failure'])
+            except Exception as exc:
+                result['first_chassis_health_failure_write_error']=str(exc)
         lifecycle.record('worker_close_begin',present=reference_worker is not None)
         if reference_worker:reference_worker.close()
         lifecycle.record('worker_close_end')

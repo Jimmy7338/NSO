@@ -1,0 +1,55 @@
+{
+  "schema": "exact_depth_projection_candidate/1",
+  "active_deployed": false,
+  "exact_projection_cases": 480,
+  "exact_serialized_ROS_payload_cases": 161,
+  "actual_frozen_stamp_ns": 1794748711160262116,
+  "actual_source_sha256": "6f19ea64915eddd6e2122e4a2e48713ea6f575bdec9fb5de5e4727fe6f329c31",
+  "actual_depth_sha256": "c65778def87edf5ed37ef8e5916e5e0817133c8d9cc5a41d0c650b45143770bc",
+  "actual_laserscan_bytes_sha256": "8278d7f88a97a2301fa18000c7e2ab89f45e78a2fa14936088ac9de82737d222",
+  "actual_filtered_image_bytes_sha256": "045c01a8b5d4ef8c52ac57d439233056aac548ab5bccfab41fc65bff05b15e3b",
+  "source_sha256": {
+    "baseline": "2996eff879a7a9c793f6e0fcacf051d4075768892c00887f5f888e57f116cf13",
+    "candidate": "ecf0b04ba20b97bc8ede7d6af4a779e60c3af94d207709b53c5f9bfd7c345b4c"
+  },
+  "affinity": [
+    4
+  ],
+  "benchmark": {
+    "baseline": {
+      "n": 50,
+      "median_ms": 18.855699,
+      "p95_ms": 44.283783,
+      "max_ms": 53.562333,
+      "mean_ms": 21.826605240000003
+    },
+    "candidate": {
+      "n": 50,
+      "median_ms": 14.3034015,
+      "p95_ms": 21.759692,
+      "max_ms": 39.860528,
+      "mean_ms": 15.8649928
+    }
+  },
+  "changes": [
+    "cache exact mgrid coordinates and pixel-minus-principal-point offsets keyed by shape/stride; original calibration invariant retained",
+    "count supported row/column axes without sorting duplicate coordinates",
+    "reuse exact valid/available pixel counts",
+    "apply original height eligibility predicate before hypot/atan2 to avoid evaluating points that cannot contribute; eligible point order/arithmetic unchanged"
+  ],
+  "unchanged": [
+    "camera extrinsics",
+    "pixel inputs",
+    "ray arithmetic/order",
+    "obstacle height/range/binning",
+    "mask/health thresholds",
+    "source timestamps and500msTTL",
+    "ROS image/scangeometry andpayload bytes"
+  ],
+  "limits": "One frozen actualframe alternating compute benchmark undercurrentload, not proof of eliminating live source expiry",
+  "existing_tests": "11 existing depth tests PASS with candidate module and original approved-mask asset paths explicitly bound for staged location",
+  "private_live_probe": "private_depth_timing_probe_result.json:20 actual matched depth/info frames; short probe did not reproduce500ms expiry",
+  "recommendation": "Root may review/deploy exactcandidate on next ownedbridge restart; noTTL orinputsource changes. Must monitor real source expiry afterdeployment.",
+  "source_freshness_caveat": "Projection speed is one contributor. Camera/source delivery already134msmedian/220msmax in20frame probe; complete callback max132ms. No proof all expiry episodes hadsamecause.",
+  "updated_unix_s": 1794748765.1429667
+}

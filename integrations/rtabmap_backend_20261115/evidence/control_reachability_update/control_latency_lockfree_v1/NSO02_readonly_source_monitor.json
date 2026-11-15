@@ -1,0 +1,136 @@
+{
+  "schema": "actual_trial_readonly_source_monitor/1",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_02",
+  "started_monotonic": 387644.439421923,
+  "elapsed_s": 97.71537622797769,
+  "monitor_affinity": [
+    4
+  ],
+  "CAN_samples": 4880,
+  "CAN_kernel_gap_ms": {
+    "n": 4879,
+    "max": 80.058127,
+    "p99": 20.323245,
+    "p95": 20.060589,
+    "min": 17.838142
+  },
+  "CAN_monitor_receive_error": null,
+  "CAN_accepted": 4880,
+  "CAN_dropped": 0,
+  "CAN_max_abs_v": 0.067,
+  "CAN_max_abs_w": 0.221,
+  "CAN_moving_samples": 412,
+  "actuator_states": 916,
+  "adapter_faults": [
+    "native_driver_fault:8"
+  ],
+  "visual_source_age_ms": {
+    "n": 3664,
+    "max": 558.448076248169,
+    "p99": 378.9806365966797,
+    "p95": 328.4106254577637,
+    "min": 15.72871208190918
+  },
+  "CAN_recorded_distance_m": 0.31722446203231836,
+  "last_state": {
+    "schema": "nso_visual_actuator_state/1",
+    "session_id": "hybrid_nso_1794748126740699328",
+    "navigation_source": "lidar_rgbd",
+    "sensor_loss_profile": "recoverable_sensor_pause_v1",
+    "laser_source": {
+      "stamp": 1794748293.0664518,
+      "stamp_ns": 1794748293066451788,
+      "receipt": 387738.376875831,
+      "source": "lslidar_N301",
+      "caller": "/lslidar_driver_node",
+      "frame": "laser_link"
+    },
+    "sampled_monotonic": 387738.419186707,
+    "sampled_unix_s": 1794748293.1459596,
+    "CAN_timestamp_basis": "original kernel timestamps converted to host monotonic by receive-only reader",
+    "fault": "native_driver_fault:8",
+    "armed": false,
+    "ever_armed": true,
+    "started_monotonic": 387576.074338664,
+    "duration_s": null,
+    "duration_profile": {
+      "profile": "exploration_until_stopped_v1",
+      "duration_s": null,
+      "maximum_duration_s": null,
+      "mission_mode": "nso",
+      "adapter_deadline_starts_at_arm": false,
+      "supervisor_deadline_uses_run_start": false,
+      "historical_40_action_equivalence": false,
+      "overall_deadline_enabled": false
+    },
+    "can_status": {
+      "source": 387738.41859555244,
+      "receipt": 387738.418757706,
+      "state": 0,
+      "mode": 1,
+      "error": 0
+    },
+    "can_velocity": {
+      "source": 387738.3987696171,
+      "receipt": 387738.398880935,
+      "v": 0.0,
+      "w": 0.0,
+      "uninterpreted_tail_hex": "00000000"
+    },
+    "can_distance_m": 0.31722446203231836,
+    "can_absolute_yaw_rad": 1.0743199733495707,
+    "can_zero_since_monotonic": 387681.1519563198,
+    "feedback_accounting_complete": true,
+    "hardware_reason": null,
+    "zero_feedback_confirmed": true,
+    "arm_stationarity_metrics": {
+      "window_s": 1.4025774609763175,
+      "count": 15,
+      "maximum_position_displacement_m": 0.0023498592006820944,
+      "maximum_yaw_displacement_rad": 0.0010095839004187201,
+      "maximum_odom_derivative_v_m_s": 0.02598508070663564,
+      "maximum_odom_derivative_w_rad_s": 0.012612149101644703,
+      "actual_zero_feedback_duration_s": 2.515140999748837,
+      "derivative_velocities_used_for_stationary_decision": false,
+      "stationary_basis": "continuous raw chassis 0x221 zero feedback >=1s; odometry displacement is diagnostic",
+      "navigation_source": "lidar_rgbd",
+      "source_quality_required": true
+    },
+    "ordinary_reverse": true,
+    "correction_reverse_authorized": false,
+    "correction_reverse_active": false,
+    "minimum_linear_m_s": -0.05,
+    "maximum_linear_m_s": 0.05,
+    "maximum_feedback_linear_m_s": 0.2,
+    "odometry_jump_profile": "source_owned_diagnostic_v1",
+    "odometry_jump_diagnostics_count": 0,
+    "last_odometry_jump_diagnostic": null,
+    "fault_evidence": null,
+    "driver_connected": true,
+    "driver_status": {
+      "code": 8,
+      "receipt_monotonic": 387738.406840239
+    },
+    "last_control_tick_monotonic": 387737.162459744,
+    "visual_sources": {
+      "odom": {
+        "source_stamp_unix_s": 1794748293.0664518,
+        "receipt_monotonic": 387738.360258552
+      },
+      "scan": {
+        "source_stamp_unix_s": 1794748292.868695,
+        "receipt_monotonic": 387738.345056248
+      },
+      "odom_health": {
+        "source_stamp_unix_s": 1794748293.0664518,
+        "receipt_monotonic": 387738.360027315
+      },
+      "depth_health": {
+        "source_stamp_unix_s": 1794748292.868695,
+        "receipt_monotonic": 387738.351230778
+      }
+    },
+    "finished": true
+  },
+  "scope": "read-only independent CAN kernel gaps plus10Hzactuator state; not50Hzadapter tick histogram; no command-topic subscription, publisher, arm service, native process, or navigation goals"
+}

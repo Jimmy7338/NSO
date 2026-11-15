@@ -1,0 +1,63 @@
+{
+  "schema": "fresh_matched_RTAB_preparation_validation/1",
+  "prepared_only": true,
+  "ros_nodes_started": false,
+  "ros_messages_published": false,
+  "ros_parameters_written": false,
+  "robot_motion": false,
+  "offline_tests": "6PASS",
+  "launch_nodes_validation": [
+    {
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "--nodes",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/rtabmap_loop_shadow.launch",
+        "database_path:=/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/matched_pair01_G_PREPARE_ONLY/rtabmap.db",
+        "output_dir:=/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/matched_pair01_G_PREPARE_ONLY",
+        "mode:=mapping",
+        "scan_topic:=/nso_scan/self_filtered"
+      ],
+      "returncode": 0,
+      "stdout": "/nso_loop/rgbd_sync\n/nso_loop/rtabmap\n/nso_loop/monitor\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "--nodes",
+        "/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_viewer/candidate/unified_rtab.launch",
+        "expected_database:=/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/matched_pair01_G_PREPARE_ONLY/rtabmap.db",
+        "epoch_id:=matched_pair01_G_PREPARE_ONLY",
+        "epoch_start_s:=1794749135.4014149",
+        "receipt:=/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/matched_pair01_G_PREPARE_ONLY/full_history_load.json"
+      ],
+      "returncode": 0,
+      "stdout": "/nso_unified_rtab/assembler\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "--nodes",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom",
+        "map_topic:=/nso_pair/map",
+        "navigation_params:=/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation_teb_rtabmap_062x059_v1.yaml"
+      ],
+      "returncode": 0,
+      "stdout": "/nso_visual/move_base\n",
+      "stderr": ""
+    }
+  ],
+  "new_session_directory_created": false,
+  "source_bindings": {
+    "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/README.txt": "140e9bdc2746b6bcecd3bac6c6487247f79749ff48c32ac919d3f41576c1d8e0",
+    "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/example_launch_spec.json": "c108626bbeb5b97b764346fe1b5bf8a463cfbad623b4f7247d37d6f648a17dfc",
+    "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/build_launch_spec.py": "f199f67271c5f60a2d5f080049b481c0f754d50df6f7b0af7a68adf0d0ba4fb9",
+    "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/paired_protocol_template.json": "216d56fb31b1d8d4cf551993dfa6102e9ef34bde1e51bbb9f9bf6e21bb608996",
+    "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/test_launch_spec.py": "6fdc7aabc1a490767ddc29f804cce0841a1a22181b161af7e542b0d89a4d2e9f"
+  },
+  "updated_unix_s": 1794749357.1265323,
+  "current_spec_revision": "Fresh binding instructions and explicit saved-environment option added; same validated RTAB/assembler/navigation launch files/argument types"
+}
