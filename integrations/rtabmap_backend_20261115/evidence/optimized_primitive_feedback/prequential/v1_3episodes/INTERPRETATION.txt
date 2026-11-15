@@ -1,0 +1,58 @@
+Actual frozen-event gain prediction check — staged evidence, manuscript unchanged
+
+All 32 completed primitive attempts from the short S3/G3 pair and optimized S26
+continuation are retained. S26 includes ROS-blocked turns 25–26 and five empty
+radar prediction masks (15,23,24,25,26). Prepared action27 has no completed
+feedback and is listed without an invented outcome. These are three recorded
+episodes in the same scene; S26 starts from the G3-created RTAB map. They are
+not 32 independent trials or three independent scenes.
+
+Verification: each original source and every frozen prediction/actual-feedback
+archive matches its recorded SHA256. The script executes the exact preserved
+ExplorationObservedGainCalibration.observe method on those arrays and exactly
+reproduces every count, Beta posterior and event history. Each prediction uses
+only the stored posterior_before, checked against earlier events in that same
+episode; all three start Beta(1,1). Historical optimized map changes are not
+used to recompute observed gains.
+
+Fixed .5 vs online, radar-channel losses (lower is better):
+                 S3                 G3                 optimized S26
+Brier      .250000 -> .228666   .250000 -> .265321   .250000 -> .163938
+Logloss    .693147 -> .649701   .693147 -> .741591   .693147 -> .512327
+MAE/action 10.667  -> 7.867     13.167  -> 15.646    5.192   -> 1.814
+
+The S26 Brier improvement is 34.4%, logloss improvement 26.1%, and in-mask gain
+MAE improvement 65.1%. Macro Brier over its 21 nonempty-mask attempts improves
+.250000 -> .184046. Its MAE on those 21 attempts improves 6.429 -> 2.246 cell
+events. G3 is a negative result on these per-event/per-action predictive losses;
+retain it. Aggregate predicted-vs-realized sum error can hide cancellation and
+must not replace these local scores.
+
+Scope: the implementation's "radar" actual target is newly known occupancy
+after combined RGB-D/scan fusion, intersected with its frozen radar proposal.
+This is intent-realization yield under the current perception/control stack,
+not isolated lidar accuracy. Of S26's 821 newly known cell events, only 67 are
+inside predicted masks and 754 (91.84%) are outside; these are descriptive cell
+events, not independently referenced coverage area. Conditional yield accuracy
+therefore does not establish accurate total gain prediction or exploration
+efficiency. All camera prediction masks are empty; its zero in-mask count error
+is vacuous, and no camera calibration benefit is established.
+
+The .5 baseline is the preserved gain probability with feedback disabled,
+evaluated retrospectively on identical actual frozen events. No physical
+no-feedback-policy trajectory or counterfactual motion is fabricated. The
+analysis supports a component-level predictive-loss case study; it does not
+establish semantic benefit, G/S efficiency superiority, full exploration
+completion, independent reconstruction accuracy, or generalization. No
+independence-based error bars or significance tests are used.
+
+Figure caption for review: Pre-action yield predictions on retained robot
+observations. (a) In-mask Brier scores for all three recorded episodes retain
+the negative short G3 result. (b) In optimized S26, online probabilities use
+only earlier outcomes; orange squares show actual success fractions within
+nonempty frozen prediction masks. Empty masks and ROS-blocked final turns are
+retained. Cell events and action observations are dependent. This same-event
+prediction comparison does not measure a counterfactual policy trajectory.
+
+Reproduce (no ROS, no model inference, no actuation):
+env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 taskset -c 4 nice -n 10 /home/ouc/nso_robot/envs/science312/bin/python -s -B /home/ouc/nso_robot/analyses/prequential_gain_calibration_20261115/evaluate_frozen_gain.py --plot

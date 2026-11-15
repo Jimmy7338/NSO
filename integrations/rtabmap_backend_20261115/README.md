@@ -1,10 +1,48 @@
 # Optional RTAB-backed NSO integration and bounded evidence
 
-This directory preserves the earlier integration, original vendor dependencies and default choices. The current `source/` snapshot adds transport and execution repairs; historical trials must be read with their own source manifests and the previous commit `1bdc0a647eaedbbc93cd03bafb098113aebb0bf0`. The original 80 ms adapter guard, native sender guards, hardware feedback thresholds and common ROS collision avoidance remain. No matched physical G/S superiority is established by these runs.
+The latest `source/` checkpoint matches the completed exterior primitive run
+`NSO_exterior_optimized_S_20261115_01`; exact source bindings distinguish it
+from the earlier S26 worker. Previous files, methods, failures and source
+manifests remain. The small paper, supplement and thesis are unchanged.
+
+## Optimized primitive geometry checkpoint
+
+The optional optimized primitive profile records each genuine terminal outcome
+once, then rebuilds measured geometry in the acquired RTAB graph without
+relearning historical gain. Its declared same-target route repair preserves
+the selected fixed-map goal. Source, tested scope and actual outcomes are in
+[`evidence/optimized_primitive_feedback`](evidence/optimized_primitive_feedback/README.txt).
+The deployed I/O update changes only transient archive handling; the atomic
+records update preserves terminal boundary metadata. Historical S26 module
+bytes remain under `frozen_trial_source` and did not use those later updates.
+
+S26 has26 committed feedback attempts/24 verified primitive arrivals. The later
+exterior worker committed19 verified outcomes while its supervisor summary
+froze18; both original records are retained and reconciled. Neither run proves
+full exploration completion, macro arrival, semantic-efficiency gain or mapping
+accuracy. Four recorded global plans and27 related audited score states retain
+identical G/S winners.
+
+The versioned prequential bundles include all recorded episodes and a NumPy-only
+derived-mask verifier. They compare probability predictions on the same frozen
+events. The later L19 episode is adverse/tied on Brier/logloss; its acquisition
+overlapped the first analysis, so only the documented post-freeze suffix is
+prospective. Camera prediction masks remain empty. These results do not stand
+in for a physical no-feedback or matched G/S efficiency experiment.
+
+`OPTIMIZED_PRIMITIVE_FEEDBACK_UPDATE_MANIFEST.json` binds this additive update.
+No raw RGB-D, images, videos, databases, weights, native binaries or undeployed
+in-memory/native-clone proposals are added. The draft PR remains unmerged.
+
+## Historical checkpoint at 1a67365e7bb3c437e241ebb4cba0339600134a33
+
+The following retained descriptions refer to that earlier source checkpoint.
+
+This directory preserves the earlier integration, original vendor dependencies and default choices. The then-current `source/` snapshot added transport and execution repairs; historical trials must be read with their own source manifests and the previous commit `1bdc0a647eaedbbc93cd03bafb098113aebb0bf0`. The original 80 ms adapter guard, native sender guards, hardware feedback thresholds and common ROS collision avoidance remain. No matched physical G/S superiority is established by these runs.
 
 `manifest.json` preserves the first publication's frozen manifest. `CONTROL_REACHABILITY_UPDATE_MANIFEST.json` binds this update; historical hashes are not silently rewritten to describe later source.
 
-## Current repairs and their evidence
+## Earlier repairs and their evidence
 
 The mapping backend exports an authenticated small epoch correction to `rtabmap_tf_hold.py`. That lightweight process holds the same inverse RTAB correction at actual CSM source stamps, independently of grid/RGB-D/graph serialization. It neither synthesizes wall-clock sensor timestamps nor changes map geometry. The optional recorded bootstrap remains bound to the actual database, epoch, exact graph/grid stamp and grid hash. The refreshed metadata bootstrap covered 791/791 accepted graph nodes. The backend skips a retained-epoch JSON rewrite only when no metadata used by that graph changed; new epochs and relevant metadata changes still publish.
 

@@ -17,7 +17,7 @@ def run_primitive_feedback(ctx):
     import rospy
     from move_base_msgs.msg import MoveBaseGoal
     worker,client=ctx['worker'],ctx['client'];result=ctx['result'];attempts=[]
-    result.update(primitive_feedback_attempts=attempts,primitive_feedback_profile=PROFILE,primitive_feedback_pilot_attempt_limit=pilot,pilot_limit_is_method_budget=False,primitive_feedback_original_gain_enabled=True,full_optimized_geometry_replay=False)
+    result.update(primitive_feedback_attempts=attempts,primitive_feedback_profile=PROFILE,primitive_feedback_pilot_attempt_limit=pilot,pilot_limit_is_method_budget=False,primitive_feedback_original_gain_enabled=True,full_optimized_geometry_replay=((identity.get('receipt',{}).get('geometry_pilot')or{}).get('full_optimized_history_replay_implemented')is True),primitive_geometry_profile=((identity.get('receipt',{}).get('geometry_pilot')or{}).get('profile')))
     def record(event,**fields):ctx['journal'].add(dict(event=event,**fields))
     def heartbeat():ctx['check'](True);ctx['progress']()
     def call(method,params):

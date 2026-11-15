@@ -1,0 +1,57 @@
+Version 2 — unchanged metrics applied to previously unanalyzed later observations
+
+The parent directory remains the byte-identical version1 three-episode bundle.
+prior_freeze_receipt.json stores every earlier artifact SHA and mtime; the script
+checks those hashes and verifies that all original episode actions and metrics
+are exactly unchanged. No probability model, prior, metric, mask definition or
+outcome-selection rule was tuned using the added episode.
+
+Added actual report: NSO_exterior_optimized_S_20261115_01 (L19).
+Its immutable supervisor summary lists18 attempts/18 verified primitive arrivals,
+19 ROS metric arrivals,3.720264m CAN distance,506.993s and operator_stop. Its
+accepted worker RPC journal and retained records/masks contain19 committed real
+primitive-feedback outcomes, all ROS3/verified. The final19th accepted response
+finished during stop/cleanup after the supervisor count froze. Calibration uses
+all19 real committed outcomes, while preserving the original supervisor summary
+and explicit -1 supervisor-minus-worker count difference. No raw result is
+rewritten. Total:51 actual committed attempts across four recorded episodes;
+55 original frames incl four bootstraps plus102 mask archives hash-verified.
+
+L19 had a fresh Beta(1,1) prior and retained the previous S26 RTAB map. It is not
+an independent new scene. Its acquisition overlapped preparation of version1:
+RGB-D captures1–9 predate the first results artifact,10–19 follow it; captures
+11–19 follow even the conservative complete-bundle manifest timestamp. Thus
+call it a previously unanalyzed later episode, not an entirely prospectively
+collected-after-freeze episode. Per-action timestamps and both cutoff suffixes
+are recorded. The strict post-bundle suffix has nine attempts, eight with
+nonempty prediction masks; all27 predicted cell events occur in that suffix.
+Stored earlier-outcome posteriors are retained without resetting the suffix.
+
+Fixed .5 -> online predictive losses, all four episodes (lower is better):
+                S3             G3             S26             L19
+Brier     .2500 -> .2287  .2500 -> .2653  .2500 -> .1639  .2500 -> .2506
+Logloss   .6931 -> .6497  .6931 -> .7416  .6931 -> .5123  .6931 -> .6946
+
+L19 does not reproduce S26's Brier/logloss benefit. L19 in-mask gain-count MAE
+over eight nonempty attempts improves .5625 -> .5250, but MSE worsens
+.40625 -> .40952. These mixed/negative results remain visible; no selective
+claim based on aggregate cancellation or the small MAE improvement is justified.
+L19 has11 zero-radar-prediction attempts,27 predicted cell events,11 realized
+within the masks and947 realized outside. Only1.15% of958 newly known cell
+events were predicted. All19 camera prediction masks are empty, with13 realized
+camera cell events outside. Empty-support camera count error is vacuous.
+
+The implementation's radar channel is newly known occupancy after combined
+RGB-D/scan fusion, not isolated lidar accuracy. This same-event prediction
+comparison does not create a physical no-feedback-policy trajectory or prove
+G/S exploration efficiency, semantic benefit, total-gain accuracy, full coverage,
+or independently referenced map accuracy. No significance or independence claim
+is made for cells, actions, episodes, or suffixes. Future whole-waypoint runs do
+not supply primitive calibration events and are outside this analysis.
+
+Figure caption for review: Frozen-event yield predictions across all retained
+robot sequences. The later L19 episode does not reproduce S26's lower Brier
+score. Its full observations and the strict post-version1-freeze suffix are
+distinguished; gray triangles mark empty proposal masks. These dependent
+occupancy-cell observations support an episode-specific component case study,
+not a general policy-efficiency claim.

@@ -1,0 +1,37 @@
+--- /home/ouc/nso_robot/analyses/primitive_resume_checkpoint_exact/optimized_primitive_feedback.before_records_fix.py	2026-11-15 22:53:39.570668078 +0800
++++ /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/optimized_primitive_feedback_v1.py	2026-11-15 22:53:39.626661101 +0800
+@@ -6,7 +6,7 @@
+ again. Whole-waypoint and frozen-epoch primitive modes remain separate options.
+ """
+ from copy import deepcopy
+-import hashlib,json,time
++import hashlib,json,time,os
+ from pathlib import Path
+ import numpy as np
+ from scipy.sparse.csgraph import dijkstra
+@@ -16,6 +16,14 @@
+ 
+ PROFILE='optimized_rebase_after_feedback_v1'
+ 
++def persist_completed_records(directory,records):
++    """Publish unchanged committed records before exposing the new directory."""
++    path=Path(directory)/'records.json';temporary=path.with_name(path.name+'.tmp.'+str(os.getpid()))
++    data=json.dumps(records,indent=2,allow_nan=False)+'\n'
++    temporary.write_text(data,encoding='utf8');os.replace(str(temporary),str(path))
++    return dict(path=str(path),sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
++        records=len(records),action_ids=[r['action_id']for r in records],record_values_unchanged=True)
++
+ def repair_same_fixed_map_target(inner):
+     """Repair only execution actions; preserve the literal selected target/score."""
+     state=inner.runtime.states[0];scene=inner.backend.scenes[0];packet=state['packet']
+@@ -89,6 +97,10 @@
+         route=repair_same_fixed_map_target(candidate.inner)
+         receipt.update(geometry_rebuild_elapsed_s=time.monotonic()-started,explicit_execution_route_repair=route,history_packets=len(self.records),cost_scaling='full original observation history rebuild; no truncation or hidden cap')
+         if candidate.inner.backend.scenes[0]['gain'].snapshot()!=before['gain_snapshot']:raise RuntimeError('route repair changed actual learned gain history')
++        # summary() advertises directory/records.json immediately after swap.
++        # The preceding actual commit was persisted in the OLD directory;
++        # atomically publish its unchanged records in the new one first.
++        receipt['completed_records_manifest']=persist_completed_records(candidate.directory,candidate.records)
+         # Swap only the completed candidate. No prior active state has been
+         # modified by geometry reconstruction or the execution-route repair.
+         for name in ['configuration','inner','directory','snapshot','grid','records','pending_raw_goal','frozen_prediction_inputs']:

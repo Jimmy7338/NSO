@@ -1,0 +1,123 @@
+--- /home/ouc/nso_robot/analyses/resume_20261115/primitive_replay_performance_exact/primitive_geometry_rebase.before.py	2026-11-15 22:35:24.362537804 +0800
++++ /home/ouc/nso_robot/analyses/resume_20261115/primitive_replay_performance_exact/candidate/primitive_geometry_rebase_transient_io_v1.py	2026-11-15 22:37:00.901611798 +0800
+@@ -8,6 +8,7 @@
+ """
+ from copy import deepcopy
+ import hashlib,json,tempfile,types
++import os
+ from pathlib import Path
+ import numpy as np
+ from nso_bridge.primitive_feedback_unbounded_v1 import PrimitiveSession,FrozenEpochPrimitivePilot
+@@ -17,6 +18,40 @@
+ from nso.cpu_sensor_contract_v10 import digest
+ from utils.grid_geometry import DIRECTIONS
+ PROFILE='primitive_geometry_rebase_preserve_actual_feedback_v1'
++STORAGE_PROFILE='transient_primitive_geometry_npz_v1'
++
++def array_hash(value):
++    value=np.asarray(value)
++    return hashlib.sha256(str(value.dtype).encode()+str(value.shape).encode()+value.tobytes()).hexdigest()
++
++def atomic_json(path,value):
++    path=Path(path);temporary=path.with_name(path.name+'.tmp')
++    temporary.write_text(json.dumps(value,indent=2,allow_nan=False)+'\n');os.replace(temporary,path)
++
++def original_arrays(record,keys=None):
++    path=Path(record['original_path']);raw=path.read_bytes()
++    if hashlib.sha256(raw).hexdigest()!=record['original_sha256']:raise ValueError('original source changed before rebase')
++    with np.load(path,allow_pickle=False)as z:
++        return {k:z[k].copy()for k in (z.files if keys is None else keys)}
++
++def regenerate_transient_archive(manifest_path,index,destination):
++    """Reproduce discarded geometry inputs from retained originals and matrices."""
++    manifest=json.loads(Path(manifest_path).read_text())
++    if manifest.get('profile')!=STORAGE_PROFILE:raise ValueError('unsupported transient geometry manifest')
++    item=manifest['archives'][index];arrays=original_arrays(item)
++    for key,value in item['geometry_updates'].items():arrays[key]=np.asarray(value,float)
++    if item['grid_role']=='unknown_historical':arrays['joint_belief_grid']=np.full(manifest['grid_shape'],-1,np.int8)
++    else:
++        source=manifest['current_grid_source'];path=Path(source['path'])
++        if hashlib.sha256(path.read_bytes()).hexdigest()!=source['file_sha256']:raise ValueError('retained current-grid source changed')
++        with np.load(path,allow_pickle=False)as z:grid=z[source['key']].copy()
++        if array_hash(grid)!=manifest['current_grid_array_sha256']:raise ValueError('current-grid payload differs')
++        arrays['joint_belief_grid']=grid
++    meta=json.loads(str(arrays['joint_metadata_json'].item()));meta['primitive_geometry_rebase']=item['metadata_patch']
++    arrays['joint_metadata_json']=np.asarray(json.dumps(meta,sort_keys=True,allow_nan=False))
++    if list(arrays)!=item['array_order']:raise ValueError('source array order differs')
++    np.savez(destination,**arrays)
++    return dict(path=str(destination),encoded_sha256=hashlib.sha256(Path(destination).read_bytes()).hexdigest(),expected_encoded_sha256=item['transient_sha256'],encoded_byte_identical=hashlib.sha256(Path(destination).read_bytes()).hexdigest()==item['transient_sha256'])
+ 
+ def stats_fingerprint(inner):
+     scene=inner.backend.scenes[0];state=inner.runtime.states[0];ledger=scene['ledger'];gain=scene['gain']
+@@ -110,22 +145,18 @@
+     current=np.asarray(current_navigation_grid)
+     if current.shape!=tuple(pilot.configuration['shape'])or not np.isin(current,[-1,0,1]).all():raise ValueError('actual latest grid must match fixed planning lattice')
+     root=Path(output or tempfile.mkdtemp(prefix='nso-primitive-geometry-rebase-'));root.mkdir(parents=True,exist_ok=True)
+-    cache={}if semantic_cache is None else semantic_cache;derived=[];poses=[];geometries=[];cached={}
++    cache={}if semantic_cache is None else semantic_cache;plans=[];poses=[];geometries=[];cached={}
++    # First pass reads only receipts and computes transforms. Keep no N-frame
++    # raw image/depth array list and write no N-frame temporary archive prefix.
+     for index,record in enumerate(pilot.records):
+-        path=Path(record['original_path']);raw=path.read_bytes()
+-        if hashlib.sha256(raw).hexdigest()!=record['original_sha256']:raise ValueError('original source changed before rebase')
+-        with np.load(path,allow_pickle=False)as z:arrays={k:z[k].copy()for k in z.files}
++        path=Path(record['original_path']);arrays=original_arrays(record,['receipt_json','joint_metadata_json'])
+         meta=json.loads(str(arrays['joint_metadata_json'].item()))
+         source=meta.get('rtabmap_graph_snapshot',{})
+         for key in ['source_database_path','source_epoch']:
+             if source.get(key)and snapshot.get(key)and source[key]!=snapshot[key]:raise ValueError('cannot rebase across an unrelated map/DB epoch')
+-        labels=read_cached_labels(pilot,arrays,meta,cache);cached[str(meta['frame_id'])]=labels
+         updates,receipt=corrected_geometry(arrays,snapshot)
+-        for key in ['world_from_camera','world_from_laser','base_odom_pose']:arrays[key]=np.asarray(updates[key],float)
+-        arrays['joint_belief_grid']=current.copy()if index==len(pilot.records)-1 else np.full(current.shape,-1,np.int8)
+-        meta['primitive_geometry_rebase']=dict(profile=PROFILE,original_path=str(path),original_sha256=record['original_sha256'],graph_revision_sha256=snapshot['graph_revision_sha256'],actual_execution_and_gain_reobserved=False,grid_scope='latest_actual_current_grid'if index==len(pilot.records)-1 else'unknown_external_grid_original_RGBD_scan_only',geometry=receipt)
+-        arrays['joint_metadata_json']=np.asarray(json.dumps(meta,sort_keys=True,allow_nan=False))
+-        path_out=root/f'geometry_{index:06d}.npz';np.savez_compressed(path_out,**arrays);derived.append(path_out);poses.append(pilot.inner.planning_from_odom@updates['world_from_camera']);geometries.append(receipt)
++        patch=dict(profile=PROFILE,original_path=str(path),original_sha256=record['original_sha256'],graph_revision_sha256=snapshot['graph_revision_sha256'],actual_execution_and_gain_reobserved=False,grid_scope='latest_actual_current_grid'if index==len(pilot.records)-1 else'unknown_external_grid_original_RGBD_scan_only',geometry=receipt)
++        plans.append(dict(updates=updates,metadata_patch=patch));poses.append(pilot.inner.planning_from_odom@updates['world_from_camera']);geometries.append(receipt)
+         if index==0:bootstrap=updates['base_odom_pose']
+     config=deepcopy(pilot.configuration);anchor=projected_anchor(config,bootstrap);config['return_anchor']=anchor
+     old=pilot.inner
+@@ -143,14 +174,33 @@
+     # Forbidden during reconstruction: no predictions, no gain observations and
+     # no ledger.observe. Every history item is geometry-only actual fusion.
+     def forbidden(*args,**kwargs):raise RuntimeError('counterfactual feedback called during geometry replay')
++    latest=pilot.records[-1];last_grid=original_arrays(latest,['joint_belief_grid'])['joint_belief_grid']
++    if last_grid.dtype==current.dtype and np.array_equal(last_grid,current):
++        grid_source=dict(path=latest['original_path'],file_sha256=latest['original_sha256'],key='joint_belief_grid',role='retained original last actual observation')
++    else:
++        grid_path=root/'retained_rebase_current_grid.npz';np.savez_compressed(grid_path,grid=current)
++        grid_source=dict(path=str(grid_path),file_sha256=hashlib.sha256(grid_path.read_bytes()).hexdigest(),key='grid',role='retained supplied measured navigation-grid boundary input; not a new observation')
++    manifest_path=root/'derived_geometry_manifest.json'
++    manifest=dict(profile=STORAGE_PROFILE,numpy_version=np.__version__,encoding='np.savez ZIP_STORED for transient derived packets only',raw_sources_reencoded=False,grid_shape=list(current.shape),current_grid_source=grid_source,current_grid_array_sha256=array_hash(current),archives=[],only_transient_geometry_archives_discarded=True,prediction_actual_mask_and_source_archives_deleted=False)
+     calls=[]
+-    for index,(record,path)in enumerate(zip(pilot.records,derived)):
++    for index,(record,plan)in enumerate(zip(pilot.records,plans)):
++        arrays=original_arrays(record);meta=json.loads(str(arrays['joint_metadata_json'].item()))
++        labels=read_cached_labels(pilot,arrays,meta,cache);cached[str(meta['frame_id'])]=labels
++        for key,value in plan['updates'].items():arrays[key]=np.asarray(value,float)
++        arrays['joint_belief_grid']=current.copy()if index==len(pilot.records)-1 else np.full(current.shape,-1,np.int8)
++        meta['primitive_geometry_rebase']=plan['metadata_patch'];arrays['joint_metadata_json']=np.asarray(json.dumps(meta,sort_keys=True,allow_nan=False))
++        path=root/f'geometry_{index:06d}.npz';np.savez(path,**arrays)
++        archive=dict(original_path=record['original_path'],original_sha256=record['original_sha256'],transient_path=str(path),transient_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),transient_bytes=path.stat().st_size,array_order=list(arrays),geometry_updates={k:v.tolist()for k,v in plan['updates'].items()},metadata_patch=plan['metadata_patch'],grid_role='latest_current'if index==len(pilot.records)-1 else'unknown_historical',discarded_after_successful_fusion=False)
++        manifest['archives'].append(archive);atomic_json(manifest_path,manifest)
+         if index:
+             candidate.backend.scenes[0]['gain'].prepare_action=forbidden
+             candidate.backend.scenes[0]['gain'].observe=forbidden
+             candidate.backend.scenes[0]['ledger'].observe=forbidden
+         action=None if index==0 else before['primitive_outcomes'][index-1]['action']
+         calls.append(candidate.observe(str(path),index,action=action))
++        # observe() has closed its NPZ and materialized the frame/scan payloads.
++        # Keep source archives, actual feedback/prediction masks and all receipts.
++        path.unlink();archive['discarded_after_successful_fusion']=True;atomic_json(manifest_path,manifest)
+     restore_frozen_feedback(old,candidate,poses)
+     after=stats_fingerprint(candidate)
+     after_ledger_snapshot=candidate.backend.scenes[0]['ledger'].snapshot()
+@@ -162,6 +212,7 @@
+     new.configuration=deepcopy(config);new.inner=candidate;new.directory=root;new.snapshot=deepcopy(snapshot);new.grid=current.copy();new.records=deepcopy(pilot.records);new.pending_raw_goal=None;new.frozen_prediction_inputs=deepcopy(pilot.frozen_prediction_inputs)
+     packet=candidate.last_packet;state=candidate.runtime.states[0];endpoint=literal_prefix_endpoint(packet.position,packet.heading,state['active_actions']);option=state.get('option');target=None if option is None else option['pose']
+     receipt=dict(profile=PROFILE,status='geometry_rebase_candidate_not_activated',records=len(pilot.records),source_files_unchanged=True,semantic_reinference=False,actual_sensor_fusions=len(calls),gain_prepare_calls=0,gain_observe_calls=0,ledger_observe_calls=0,frozen_feedback_exact=before==after,before_feedback_sha256=digest(before),after_feedback_sha256=digest(after),graph_revision=snapshot['graph_revision_sha256'],actual_geometry_receipts=geometries,bootstrap_anchor_reexpression=dict(old=old.configuration['return_anchor'],new=anchor,same_physical_first_observation=True,automatic_return=False),historical_arrival_credit_changed=False,history_camera_poses_rebased=True,remaining_actions_preserved=state['active_actions']==before['remaining_committed_actions'],original_selected_target_unchanged=True,literal_prefix_endpoint_from_rebased_pose=endpoint,selected_fixed_map_target=target,literal_prefix_still_reaches_selected_target=target is None or endpoint==target,no_extra_candidate_filter_or_score_or_stop_or_target_override=True,activation_limitation='If a loop correction changes the grid state, unchanged literal remaining actions may no longer end at the fixed-map selected target. This receipt surfaces it; caller must review a declared same-target route repair instead of hidden reselect/target mutation.',geometry_derived_ledger_snapshot_changes=geometry_snapshot_changes,frozen_ledger_event_statistics_exact=True,future_actual_feedback_enabled=True,future_geometry_baselines='Current rebuilt support/masks/initial physical support rebase; source-time feedback events remain frozen. Changed current reconstruction proxies are not new measured action yield or claimed method improvement.')
++    receipt['derived_geometry_storage']=dict(profile=STORAGE_PROFILE,manifest=str(manifest_path),encoding='uncompressed transient NPZ; original sensor archives unchanged',transient_archives_discarded=len(manifest['archives']),retained_transient_geometry_archives=0,largest_transient_archive_bytes=max(a['transient_bytes']for a in manifest['archives']),retained_original_sources=len(pilot.records),derived_zip_hashes_changed_by_encoding=True,canonical_arrays_and_array_order_unchanged=True,reproducible_from_original_sources_and_retained_matrices_grid=True,no_TSDF_or_mapper_clone=True)
+     (root/'receipt.json').write_text(json.dumps(receipt,indent=2,allow_nan=False)+'\n')
+     if stats_fingerprint(pilot.inner)!=before:raise ValueError('old active state mutated during rebuild')
+     return new,receipt
