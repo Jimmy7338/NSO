@@ -1,0 +1,366 @@
+{
+  "profile": "teb_onsite_062x059_v1",
+  "actual_plugin": "teb_local_planner/TebLocalPlannerROS",
+  "controller_namespace": "/nso_visual/move_base/TebLocalPlannerROS",
+  "actual_parameters": {
+    "odom_topic": "/nso_csm/control_odom",
+    "map_frame": "odom",
+    "max_vel_x": 0.05,
+    "max_vel_x_backwards": 0.05,
+    "max_vel_y": 0.0,
+    "max_vel_theta": 0.2,
+    "acc_lim_x": 0.25,
+    "acc_lim_y": 0.25,
+    "acc_lim_theta": 0.8,
+    "min_turning_radius": 0.0,
+    "cmd_angle_instead_rotvel": false,
+    "footprint_model": {
+      "type": "polygon",
+      "vertices": [
+        [
+          -0.31,
+          -0.295
+        ],
+        [
+          0.31,
+          -0.295
+        ],
+        [
+          0.31,
+          0.295
+        ],
+        [
+          -0.31,
+          0.295
+        ]
+      ]
+    },
+    "is_footprint_dynamic": false,
+    "xy_goal_tolerance": 0.08,
+    "yaw_goal_tolerance": 0.35,
+    "free_goal_vel": false,
+    "complete_global_plan": true,
+    "max_global_plan_lookahead_dist": 1.5,
+    "global_plan_overwrite_orientation": true,
+    "allow_init_with_backwards_motion": true,
+    "dt_ref": 1.0,
+    "dt_hysteresis": 0.1,
+    "min_samples": 3,
+    "max_samples": 50,
+    "feasibility_check_no_poses": 50,
+    "min_obstacle_dist": 0.05,
+    "include_costmap_obstacles": true,
+    "costmap_obstacles_behind_robot_dist": 4.0,
+    "costmap_converter_plugin": "",
+    "enable_homotopy_class_planning": false,
+    "enable_multithreading": false,
+    "weight_kinematics_forward_drive": 1.0,
+    "min_resolution_collision_check_angular": 0.05,
+    "penalty_epsilon": 0.005,
+    "global_plan_viapoint_sep": -0.1,
+    "teb_autosize": true,
+    "force_reinit_new_goal_dist": 1.0,
+    "force_reinit_new_goal_angular": 0.78,
+    "exact_arc_length": false,
+    "publish_feedback": false,
+    "visualize_with_time_as_z_axis_scale": 0.0,
+    "via_points_ordered": false,
+    "wheelbase": 1.0,
+    "inflation_dist": 0.6,
+    "dynamic_obstacle_inflation_dist": 0.6,
+    "include_dynamic_obstacles": false,
+    "legacy_obstacle_association": false,
+    "obstacle_association_force_inclusion_factor": 1.5,
+    "obstacle_association_cutoff_factor": 5.0,
+    "obstacle_poses_affected": 30,
+    "no_inner_iterations": 5,
+    "no_outer_iterations": 4,
+    "optimization_activate": true,
+    "optimization_verbose": false,
+    "weight_max_vel_x": 2.0,
+    "weight_max_vel_y": 2.0,
+    "weight_max_vel_theta": 1.0,
+    "weight_acc_lim_x": 1.0,
+    "weight_acc_lim_y": 1.0,
+    "weight_acc_lim_theta": 1.0,
+    "weight_kinematics_nh": 1000.0,
+    "weight_kinematics_turning_radius": 1.0,
+    "weight_optimaltime": 1.0,
+    "weight_shortest_path": 0.0,
+    "weight_obstacle": 50.0,
+    "weight_inflation": 0.1,
+    "weight_dynamic_obstacle": 50.0,
+    "weight_dynamic_obstacle_inflation": 0.1,
+    "weight_viapoint": 1.0,
+    "weight_adapt_factor": 2.0,
+    "obstacle_cost_exponent": 1.0,
+    "max_number_classes": 5,
+    "selection_cost_hysteresis": 1.0,
+    "selection_prefer_initial_plan": 0.95,
+    "selection_obst_cost_scale": 2.0,
+    "selection_viapoint_cost_scale": 1.0,
+    "selection_alternative_time_cost": false,
+    "switching_blocking_period": 0.0,
+    "roadmap_graph_no_samples": 15,
+    "roadmap_graph_area_width": 5.0,
+    "roadmap_graph_area_length_scale": 1.0,
+    "h_signature_prescaler": 1.0,
+    "h_signature_threshold": 0.1,
+    "obstacle_heading_threshold": 0.45,
+    "viapoints_all_candidates": true,
+    "visualize_hc_graph": false,
+    "shrink_horizon_backup": true,
+    "oscillation_recovery": true,
+    "groups": {
+      "id": 0,
+      "parent": 0,
+      "name": "Default",
+      "type": "",
+      "state": true,
+      "groups": {
+        "Trajectory": {
+          "id": 1,
+          "parent": 0,
+          "name": "Trajectory",
+          "type": "",
+          "state": true,
+          "groups": {},
+          "parameters": {},
+          "teb_autosize": true,
+          "dt_ref": 1.0,
+          "dt_hysteresis": 0.1,
+          "global_plan_overwrite_orientation": true,
+          "allow_init_with_backwards_motion": true,
+          "max_global_plan_lookahead_dist": 1.5,
+          "force_reinit_new_goal_dist": 1.0,
+          "force_reinit_new_goal_angular": 0.78,
+          "feasibility_check_no_poses": 50,
+          "exact_arc_length": false,
+          "publish_feedback": false,
+          "visualize_with_time_as_z_axis_scale": 0.0
+        },
+        "ViaPoints": {
+          "id": 2,
+          "parent": 0,
+          "name": "ViaPoints",
+          "type": "",
+          "state": true,
+          "groups": {},
+          "parameters": {},
+          "global_plan_viapoint_sep": -0.1,
+          "via_points_ordered": false
+        },
+        "Robot": {
+          "id": 3,
+          "parent": 0,
+          "name": "Robot",
+          "type": "",
+          "state": true,
+          "groups": {
+            "Carlike": {
+              "id": 4,
+              "parent": 3,
+              "name": "Carlike",
+              "type": "",
+              "state": true,
+              "groups": {},
+              "parameters": {},
+              "min_turning_radius": 0.0,
+              "wheelbase": 1.0,
+              "cmd_angle_instead_rotvel": false
+            },
+            "Omnidirectional": {
+              "id": 5,
+              "parent": 3,
+              "name": "Omnidirectional",
+              "type": "",
+              "state": true,
+              "groups": {},
+              "parameters": {},
+              "max_vel_y": 0.0,
+              "acc_lim_y": 0.25
+            }
+          },
+          "parameters": {},
+          "max_vel_x": 0.05,
+          "max_vel_x_backwards": 0.05,
+          "max_vel_theta": 0.2,
+          "acc_lim_x": 0.25,
+          "acc_lim_theta": 0.8,
+          "is_footprint_dynamic": false
+        },
+        "GoalTolerance": {
+          "id": 6,
+          "parent": 0,
+          "name": "GoalTolerance",
+          "type": "",
+          "state": true,
+          "groups": {},
+          "parameters": {},
+          "xy_goal_tolerance": 0.08,
+          "yaw_goal_tolerance": 0.35,
+          "free_goal_vel": false
+        },
+        "Obstacles": {
+          "id": 7,
+          "parent": 0,
+          "name": "Obstacles",
+          "type": "",
+          "state": true,
+          "groups": {},
+          "parameters": {},
+          "min_obstacle_dist": 0.05,
+          "inflation_dist": 0.6,
+          "dynamic_obstacle_inflation_dist": 0.6,
+          "include_dynamic_obstacles": false,
+          "include_costmap_obstacles": true,
+          "legacy_obstacle_association": false,
+          "obstacle_association_force_inclusion_factor": 1.5,
+          "obstacle_association_cutoff_factor": 5.0,
+          "costmap_obstacles_behind_robot_dist": 4.0,
+          "obstacle_poses_affected": 30
+        },
+        "Optimization": {
+          "id": 8,
+          "parent": 0,
+          "name": "Optimization",
+          "type": "",
+          "state": true,
+          "groups": {},
+          "parameters": {},
+          "no_inner_iterations": 5,
+          "no_outer_iterations": 4,
+          "optimization_activate": true,
+          "optimization_verbose": false,
+          "penalty_epsilon": 0.005,
+          "weight_max_vel_x": 2.0,
+          "weight_max_vel_y": 2.0,
+          "weight_max_vel_theta": 1.0,
+          "weight_acc_lim_x": 1.0,
+          "weight_acc_lim_y": 1.0,
+          "weight_acc_lim_theta": 1.0,
+          "weight_kinematics_nh": 1000.0,
+          "weight_kinematics_forward_drive": 1.0,
+          "weight_kinematics_turning_radius": 1.0,
+          "weight_optimaltime": 1.0,
+          "weight_shortest_path": 0.0,
+          "weight_obstacle": 50.0,
+          "weight_inflation": 0.1,
+          "weight_dynamic_obstacle": 50.0,
+          "weight_dynamic_obstacle_inflation": 0.1,
+          "weight_viapoint": 1.0,
+          "weight_adapt_factor": 2.0,
+          "obstacle_cost_exponent": 1.0
+        },
+        "HCPlanning": {
+          "id": 9,
+          "parent": 0,
+          "name": "HCPlanning",
+          "type": "",
+          "state": true,
+          "groups": {},
+          "parameters": {},
+          "enable_multithreading": false,
+          "max_number_classes": 5,
+          "selection_cost_hysteresis": 1.0,
+          "selection_prefer_initial_plan": 0.95,
+          "selection_obst_cost_scale": 2.0,
+          "selection_viapoint_cost_scale": 1.0,
+          "selection_alternative_time_cost": false,
+          "switching_blocking_period": 0.0,
+          "roadmap_graph_no_samples": 15,
+          "roadmap_graph_area_width": 5.0,
+          "roadmap_graph_area_length_scale": 1.0,
+          "h_signature_prescaler": 1.0,
+          "h_signature_threshold": 0.1,
+          "obstacle_heading_threshold": 0.45,
+          "viapoints_all_candidates": true,
+          "visualize_hc_graph": false
+        },
+        "Recovery": {
+          "id": 10,
+          "parent": 0,
+          "name": "Recovery",
+          "type": "",
+          "state": true,
+          "groups": {},
+          "parameters": {},
+          "shrink_horizon_backup": true,
+          "oscillation_recovery": true
+        }
+      },
+      "parameters": {}
+    }
+  },
+  "footprint": [
+    [
+      -0.31,
+      -0.295
+    ],
+    [
+      0.31,
+      -0.295
+    ],
+    [
+      0.31,
+      0.295
+    ],
+    [
+      -0.31,
+      0.295
+    ]
+  ],
+  "optimizer_footprint": [
+    [
+      -0.31,
+      -0.295
+    ],
+    [
+      0.31,
+      -0.295
+    ],
+    [
+      0.31,
+      0.295
+    ],
+    [
+      -0.31,
+      0.295
+    ]
+  ],
+  "original_costmap_footprint_readback": "[[-0.31,-0.295],[0.31,-0.295],[0.31,0.295],[-0.31,0.295]]",
+  "collision_equivalence_with_DWA": false,
+  "native_collision_semantics": "lethal-1 rejected; unknown-2/outside-3 are not equivalent to DWA rejection",
+  "geometry_basis": "user-confirmed approximate62x59cm/nooverhang; declaredbase_linkcentred assumption, not independent laser metrology",
+  "source_velocity_caps": {
+    "v": 0.05,
+    "reverse": 0.05,
+    "w": 0.2
+  },
+  "full_discrete_check": "max_samples50/feasibility50 plus native interpolated checks",
+  "global_costmap_footprint": [
+    [
+      -0.31,
+      -0.295
+    ],
+    [
+      0.31,
+      -0.295
+    ],
+    [
+      0.31,
+      0.295
+    ],
+    [
+      -0.31,
+      0.295
+    ]
+  ],
+  "NSO_scoring_unchanged": true,
+  "source_clipping_unchanged": true,
+  "DWA_centered_alignment_not_applicable": true,
+  "ordinary_reverse": true,
+  "original_xy_goal_tolerance": 0.15,
+  "outer_arrival_evidence_xy_tolerance_m": 0.15,
+  "outer_arrival_evidence_yaw_tolerance_rad": 0.35
+}

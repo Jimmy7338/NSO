@@ -57,3 +57,30 @@ Terminal records are `/home/ouc/nso_robot/analyses/rapid_evidence_20261108/physi
 Initial odometry differed by 0.066946348 m and −0.062592959 rad; common-frame initial known-mask XOR was 430 cells (17.20 m²). Own-support surface-proxy supports differ (479 versus 437), so their changes cannot establish matched accuracy or policy superiority. All five candidate-bearing planning states had equal G/S scores; the terminal S state had no candidates. A shorter failed S route is not an efficiency benefit. Both episodes belong to one ordered pair in one physical scene.
 
 The calibrated S24 drift report was made after the run and referred to preceding manual relocation to the test area. Its onset was not established; its initial map may already have been affected.
+
+
+## 15 November measured-correction × forecast-diagnosis factorial
+
+The new main-paper correction-factorial table (`tab:correction-factorial`, currently Table 3) reports all eight actual controlled simulated routes. The frozen protocol is `/home/ouc/nso_robot/analyses/paper_evidence_20261115/correction_factorial/protocol.v2.json`; `public_cache/manifest.json`, `equivalence.v2.json`, `runs_v2/*/{started.json,partial_trace.jsonl,trace.json,beliefs.json,prediction_seal.json,result.json}` and `actual_summary.v2.json` retain cache binding, implementation equivalence, complete trajectories, predictions sealed before reference evaluation, and every endpoint. No case was replaced or retried. The earlier `protocol.json` and `archive_v1/` remain preserved.
+
+The two switches independently enable acquired-measurement posterior correction and hypothetical diagnostic anticipation. Every route retains the original V35 renderer/optimizer, wrong prior, 42-action budget, 18-action common prefix, disparity-noise seed 1901, measured TSDF fusion and surface evaluator. All eight use one regenerated and frozen public cache; the older X/Xnf endpoints are contextual references, not pooled observations. The independent layout count is one P00 parent, with two related configurations. Four original-versus-wrapper endpoint equivalence trajectories match every action, posterior and planning receipt on identical acquired inputs; these software checks are not additional efficacy samples.
+
+| Configuration | Measured correction | Forecast diagnosis | J5 | F1 at 5 cm | Coverage | Paid actions | Returned / collision / eligible |
+|---|---|---|---:|---:|---:|---:|---|
+| h0 | Off | Off | 0.651868 | 0.680814 | 0.957483 | 42 | yes / 0 / yes |
+| h0 | Off | On | 0.651868 | 0.680814 | 0.957483 | 42 | yes / 0 / yes |
+| h0 | On | Off | 0.669091 | 0.698802 | 0.957483 | 42 | yes / 0 / yes |
+| h0 | On | On | 0.669091 | 0.698802 | 0.957483 | 42 | yes / 0 / yes |
+| h1 | Off | Off | 0.657205 | 0.686388 | 0.957483 | 42 | yes / 0 / yes |
+| h1 | Off | On | 0.657205 | 0.686388 | 0.957483 | 42 | yes / 0 / yes |
+| h1 | On | Off | 0.674799 | 0.704764 | 0.957483 | 42 | yes / 0 / yes |
+| h1 | On | On | 0.674799 | 0.704764 | 0.957483 | 42 | yes / 0 / yes |
+
+Measured correction increases the endpoint mean from 0.654536718 to 0.671945191 (+2.659663%). All four forecast on/off comparisons have identical complete trajectory SHA-256 digests as well as identical surface/coverage metrics. This setting therefore supports measured correction, while providing no independent observed benefit from forecast anticipation. A null effect in this one-parent factorial does not establish universal ineffectiveness. No p-value, confidence interval or independent N=8 interpretation is used. The earlier h1 adverse 2 cm difference, low-budget failures, larger-budget reversal, neutral/adverse multi-instance results and generic geometric-weight ambiguity remain unchanged.
+
+Editable numeric export: `figure_source/correction_factorial_20261115.csv`, reproducible with `figure_source/export_correction_factorial_20261115.py --summary PATH/actual_summary.v2.json`; its values and result hashes come from `actual_summary.v2.json`. These supplied-graph V35 routes are separate from the V10 unknown-coverage simulations and modified real-robot integration episodes. Standard ROS setup-goal arrivals or an unfinished NSO motion episode are not V35 efficacy evidence.
+
+
+## 15 November unified-backend NSO terminal (integration only)
+
+The retained report `NSO_rtabmap_integrated_20261115_01/summary.json` records one ROS goal, zero verified arrivals, 10.783868 m CAN-estimated travel and 556.023 s. The ROS status-4 outcome was acquired as one actual failed observation and charged once, with no primitive-arrival credit. While awaiting the next plan, an adapter cycle reached 98.0869 ms and triggered the unchanged 80 ms guard; zero feedback was confirmed before and after. The timing record locates 97.5689 ms in the preceding pre-decision stage but cannot identify publisher work, OS scheduling or GIL as the cause. The subsequent single-read connection snapshot, finer bounded timing stages and optional adapter CPU affinity remain unvalidated for long-duration operation. These records do not establish NSO target arrival, coverage efficiency or reconstruction accuracy. The two separately reached standard ROS setup goals remain engineering diagnostics.

@@ -5,7 +5,7 @@
 \setlength{\emergencystretch}{3em}
 \begin{document}
 \title{Supplement: Correctable Category Priors for Budget-Constrained Active Observation}
-\author{}\date{Anonymous research draft, 12 November 2026}\maketitle
+\author{}\date{Anonymous research draft, 15 November 2026}\maketitle
 \section*{Evidence scope}
 The main paper's controlled two-template policy, current-source joint-exploration variant and physical adapters are distinct implementations. The following deterministic results share one Q0 scene context with two related arrangements. Trajectories, seeds, configurations and checkpoints are not independent environments. All 24 matrix trajectories are included; the two-room diagnostic and post-hoc controls are separate related analyses. New current-source experiments are not recovered historical Windows experiment inputs.
 
@@ -58,5 +58,33 @@ The S96 stop was triggered by measured CAN feedback of 0.154 m/s against the str
 The reverse-enabled ros\_checked\_exploration\_v2 episode ended at its external deadline after 19 accepted attempts, including 16 exact primitive successes and three failed actual-pose observations (20 observations with bootstrap). Its 7.031573 m/603.310025 s totals include three ROS backoffs, whose brackets sum to 3.180978 m/230.314087 s; one succeeded and two aborted. The accepted-scan union increased by 33.04 m$^2$, while own-support quality decreased by 0.008163. The subsequent navigation-geometry trial ended on native driver fault 5: 39 ROS goals arrived, but only 38 paid observations plus bootstrap were accepted. Its 7.356553 m/470.210617 s totals, 37.68 m$^2$ scan-union gain and $-0.030885$ quality change remain interrupted outcomes without verified return. The trial's padded width of 0.48 m is below the current Mini URDF's 0.585 m; the physical envelope is unresolved and the prior navigation default was restored. G/S score separation appeared in one geometry-trial state but changed no recorded winner. These unmatched episodes support no efficacy or accuracy ranking.
 
 The optional viewpoint controller is installed but physically unexecuted. It preserves the candidate-score formulas while separating waypoint-attempt accounting from fixed nominal grid-motion predictions and freezing primitive gain calibration; no failed-goal blacklist or added re-ranking is active. The independent RTAB-Map interface processed parked mapping and database-localization inputs with navigation TF ownership unchanged. Initial counts were 475 information messages, 11 proximity events and zero descriptor-loop events; lean mapping and existing-database localization were exercised while parked, with no displaced relocalization proof. RTAB-Map is off. Interface operation does not validate closed-loop exploration or the original controlled method.
+
+\section{Measured correction and forecast diagnosis factorial}
+A separately frozen $2\times2$ factorial separates measured posterior correction from forecast diagnostic anticipation (Table~\ref{tab:correction-factorial}). All eight routes use the same regenerated public cache for P00, its two configurations, the fixed incorrect category interpretation, a 42-action budget, an 18-action common prefix, and disparity-noise seed 1901. The original renderer, planner, return rules, fusion backend and evaluator are retained. Four endpoint equivalence runs compare the wrapper with the original X and Xnf controllers on identical acquired packets; every action, posterior and planning receipt agrees. These implementation checks are excluded from the eight factorial routes. The eight routes represent one parent layout and two related configurations, with no additional independent layout replication; their endpoints are not pooled with the older development-cache results.
+
+\begin{table}[!htbp]
+\caption{Complete correction factorial on one P00 parent and two configurations: eight actual simulated routes with a common public cache, wrong prior, budget 42, prefix 18 and noise seed 1901. All routes return without collision and share $C_{\rm map}=0.957483$. Higher $J_5$ and F1 are better.}
+\label{tab:correction-factorial}
+\centering\small\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}lllrr@{}}
+\toprule
+Configuration & Measured correction & Forecast diagnosis & $J_5$ & F1 at 5 cm \\
+\midrule
+h0 & Off & Off & 0.651868 & 0.680814 \\
+h0 & Off & On & 0.651868 & 0.680814 \\
+h0 & On & Off & 0.669091 & 0.698802 \\
+h0 & On & On & 0.669091 & 0.698802 \\
+h1 & Off & Off & 0.657205 & 0.686388 \\
+h1 & Off & On & 0.657205 & 0.686388 \\
+h1 & On & Off & 0.674799 & 0.704764 \\
+h1 & On & On & 0.674799 & 0.704764 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Measured correction raises mean $J_5$ from 0.654537 to 0.671945, a relative increase of 2.6597\%, within this controlled P00 setting. Forecast diagnosis changes neither trajectory nor endpoint in any of the four matched on/off contrasts: each pair has an identical complete trajectory SHA-256 digest. Thus, the factorial supports a measured-correction effect under these conditions and supplies no observed independent benefit of diagnostic anticipation. It does not show that diagnostic lookahead is generally ineffective, or that the measured-correction gain transfers to other layouts. No confidence interval or significance test treats the eight routes as independent scenes.
+
+
+The complete recorded inputs and results are indexed in \texttt{supplement.md}. The editable numeric table export is \texttt{figure\_source/correction\_factorial\_20261115.csv}; all eight endpoints are retained. These V35 supplied-graph simulations are separate from the unknown-exploration matrix and modified physical deployments.
 
 \end{document}
