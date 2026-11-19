@@ -1,0 +1,149 @@
+{
+  "schema": "nso.controlled_unknown_dual_template.v1",
+  "created_date": "2026-11-19",
+  "status": "frozen_before_twelve_closed_loop_runs",
+  "purpose": "Paired unknown exploration with original full V3 two-template mechanisms replacing v10 analytic area prior; no hardware.",
+  "layouts": {
+    "shelf_left": {
+      "scene_id": "controlled_functional_shelf_left",
+      "role": "paired_controlled_development_layout",
+      "difference": "open shelf left, closed cabinet right"
+    },
+    "shelf_right": {
+      "scene_id": "controlled_functional_shelf_right",
+      "role": "paired_controlled_development_layout",
+      "difference": "closed cabinet left, open shelf right"
+    }
+  },
+  "independence": "Two furniture-position permutations of one synthetic floorplan family; not two independent natural environments or stochastic replications.",
+  "arms": {
+    "C": {
+      "score_mode": "C",
+      "meaning": "coverage only, same measured-instance frontend and candidate generator"
+    },
+    "J": {
+      "score_mode": "N",
+      "meaning": "coverage plus measured surface quality, no predicted template term"
+    },
+    "G": {
+      "score_mode": "G",
+      "meaning": "joint common terms plus both templates, neutral category prior, measured geometric fit and depth history"
+    },
+    "S": {
+      "score_mode": "S",
+      "meaning": "joint common terms plus both templates, visible category prior, measured geometric fit and depth history"
+    },
+    "S_no_fit": {
+      "score_mode": "S",
+      "meaning": "same S with geometric-fit likelihood disabled, category prior retained"
+    },
+    "S_no_history": {
+      "score_mode": "S",
+      "meaning": "same S with historical free-space rejection AND already-measured surface consumption disabled"
+    }
+  },
+  "environment": {
+    "config": {
+      "resolution_m": 0.2,
+      "robot_radius_m": 0.2,
+      "camera_height_m": 1.2,
+      "width_px": 120,
+      "height_px": 90,
+      "fov_deg": 90.0,
+      "max_depth_m": 8.0,
+      "depth_sigma_m": 0.0,
+      "dropout": 0.0,
+      "action_duration_s": 1.0,
+      "voxel_m": 0.06,
+      "max_steps": 256,
+      "laser_height_m": 0.25,
+      "laser_rays": 180,
+      "truncation_m": 0.12
+    },
+    "noise_seed": 20261119,
+    "initial_position": [
+      34,
+      25
+    ],
+    "initial_heading": 0,
+    "world_adapter": "scene.controlled_world.ControlledFunctionalWorld",
+    "mesh_assets": "Unscaled original ReplicaCAD shelf31 and complete cabinet118; custom declared architecture/placements",
+    "sensor_limits": "Opaque first-hit mesh RGBD/laser, noiseless exact discrete pose, no glass/lighting/localization model; render natively at 120x90, not resizing old sensor frame"
+  },
+  "policy": {
+    "version": "dual_template_exploration_v1_N19",
+    "base": "frozen exploration_joint_v1/v10_3_1 + declared measured instance frontend",
+    "paid_action_budget": 256,
+    "return_anchor_required": true,
+    "args": {
+      "nso_backend": "cpu_v10",
+      "eval": true,
+      "train_global": false,
+      "use_open_vocab_semantic": true,
+      "use_topo_graph": true,
+      "use_rpn_uq": true,
+      "use_igcr": true,
+      "cpu_disable_feedback": false,
+      "cpu_force_gain_feedback": false,
+      "cpu_freeze_gain_posterior": false,
+      "cpu_max_candidates": 12,
+      "cpu_coverage_slots": 4,
+      "cpu_planner_revision": "v10_3_1",
+      "cpu_measured_novelty_floor": 0.25
+    },
+    "changes": [
+      "Replace analytic AABB prior with outbound union of expected unobserved surface area from original box/shelf hypotheses",
+      "Original V3 category dictionary adapted only at template input: current2open/3closed -> V3 3shelf/2box",
+      "Shared measured-instance partition prevents wall merging; unknown measured partition retained"
+    ],
+    "unchanged": [
+      "unknown coverage posterior and measured-surface quality",
+      "v10 candidate generator and original stopping/return rules",
+      "native measured-only TSDF and mapping",
+      "source thresholds and V3 dimensions/likelihood scale"
+    ],
+    "completion_area_coefficient": 1.0,
+    "coefficient_reason": "Same square-metre units as replaced v10 prior; old V3 planner weight4 used different objective normalization and is not transferred.",
+    "original_method_equivalence": false,
+    "V3_candidate_proposer_used": false,
+    "RPN_trained_model_active": false
+  },
+  "perception": {
+    "natural_detector": false,
+    "labels": "Only current valid-depth first-hit furniture surfaces, 2open/3closed; all other surfaces0",
+    "instance_support": "Same partial ideal visible instance boundaries for all arms, associated through measured voxel overlap",
+    "global_bounds_hidden_geometry_or_global_object_ID_to_actor": false,
+    "geometry_parameters": "Inferred from measured points using original V3 dimension priors, never source-model bounds"
+  },
+  "evaluation": {
+    "thresholds": [
+      0.9,
+      0.95,
+      0.99,
+      1.0
+    ],
+    "primary": "start-reachable reference free coverage vs paid actions, correct-free and false-occupied separately",
+    "secondary": [
+      "native TSDF precision recall F1 at5cm and10cm on independently fixed visible source surface",
+      "path length",
+      "simulated collisions",
+      "goal outcomes",
+      "first threshold actions",
+      "no coverage gain streak",
+      "template hypotheses/posterior/history and candidate score audits"
+    ],
+    "paired_rule": "same scene/start/sensors/frontend/budget; all six arms each layout; no selected winners or automatic budget extension",
+    "failure_accounting": "All failed/interrupted attempts retained, no complete result for partial attempts",
+    "reference_actor_separation": true
+  },
+  "execution": {
+    "hardware": false,
+    "library_threads": 1,
+    "runs_planned": 12,
+    "no_continuous_images_or_video": true,
+    "only_root_starts_rollouts": true,
+    "source_and_protocol_frozen_before_runs": true
+  },
+  "geometry_acceptance": "scene/acceptance.json: two layouts, all four-side views reachable, initial known reference fraction0.4260614934",
+  "method_tests": "method/tests.log:11 mechanism checks including original constructor parity; no robot actions"
+}

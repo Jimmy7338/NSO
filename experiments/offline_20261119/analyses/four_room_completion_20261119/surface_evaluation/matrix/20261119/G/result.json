@@ -1,0 +1,157 @@
+{
+  "status": "complete_matrix_surface_evaluation",
+  "seed": 20261119,
+  "arm": "G",
+  "scene_id": "N19_ROOMS_SEED20261119",
+  "scene_role": "development",
+  "source_attempt": "/home/ouc/nso_robot/analyses/four_room_completion_20261119/matrix_study/scenes/20261119/runs/G/attempt_001",
+  "paid_actions": 512,
+  "final_coverage_fraction": 0.9338162660520251,
+  "metrics": {
+    "surface_samples": 12000,
+    "reference_samples": 56620,
+    "surface_error_mean_m": 0.005137419793754816,
+    "surface_error_p95_m": 0.014760688971728084,
+    "precision_05cm": 0.99675,
+    "recall_05cm": 0.8097492052278347,
+    "f1_05cm": 0.8935708556916315,
+    "joint_05cm": 0.8344309999148722,
+    "simple_recall_05cm": 0.6667424931756142,
+    "complex_recall_05cm": 0.853484602917342,
+    "precision_10cm": 0.9999166666666667,
+    "recall_10cm": 0.8359060402684564,
+    "f1_10cm": 0.9105850780407688,
+    "joint_10cm": 0.8503191574987226,
+    "simple_recall_10cm": 0.7081437670609645,
+    "complex_recall_10cm": 0.9494327390599676,
+    "completeness_error_mean_m": 0.11746268719434738,
+    "completeness_error_p95_m": 0.865914040803909
+  },
+  "reference": {
+    "reference_definition": "Area-sampled exact box-union exterior visible from fixed reachable 0.8m lattice at camera height with arbitrary yaw; first-hit visibility; independent of trajectory",
+    "source_boxes": 68,
+    "raw_mesh_triangles": 816,
+    "exterior_mesh_triangles": 5288,
+    "raw_mesh_area_m2": 904.8586695026308,
+    "exterior_mesh_area_m2": 837.4311166909237,
+    "area_samples_drawn": 100000,
+    "reference_samples": 56620,
+    "reference_classes": {
+      "1": 49139,
+      "2": 4396,
+      "3": 3085
+    },
+    "selfchecks": [
+      {
+        "name": "single",
+        "area_m2": 6.0,
+        "expected_area_m2": 6.0
+      },
+      {
+        "name": "identical",
+        "area_m2": 6.0,
+        "expected_area_m2": 6.0
+      },
+      {
+        "name": "touching",
+        "area_m2": 10.0,
+        "expected_area_m2": 10.0
+      },
+      {
+        "name": "overlap",
+        "area_m2": 8.0,
+        "expected_area_m2": 8.0
+      },
+      {
+        "name": "nested",
+        "area_m2": 24.0,
+        "expected_area_m2": 24.0
+      }
+    ],
+    "first_hit_equivalence": [
+      {
+        "azimuth_offset_rad": 0.0,
+        "rays": 34176,
+        "non_tangent_max_depth_difference_m": 1.9073486328125e-06,
+        "tangent_edge_contact_disagreements": [
+          {
+            "index": 16752,
+            "ray": [
+              8.100000381469727,
+              5.5,
+              0.800000011920929,
+              6.123234262925839e-17,
+              -1.0,
+              -0.6000000238418579
+            ],
+            "raw_t": 1.3333332538604736,
+            "exterior_t": 0.5
+          },
+          {
+            "index": 16753,
+            "ray": [
+              8.100000381469727,
+              5.5,
+              0.800000011920929,
+              6.123234262925839e-17,
+              -1.0,
+              0.0
+            ],
+            "raw_t": 5.300000190734863,
+            "exterior_t": 0.5
+          },
+          {
+            "index": 16754,
+            "ray": [
+              8.100000381469727,
+              5.5,
+              0.800000011920929,
+              6.123234262925839e-17,
+              -1.0,
+              0.6000000238418579
+            ],
+            "raw_t": null,
+            "exterior_t": 0.5
+          }
+        ],
+        "all_non_tangent_rays_match": true
+      },
+      {
+        "azimuth_offset_rad": 0.04908738521234052,
+        "rays": 34176,
+        "non_tangent_max_depth_difference_m": 1.9073486328125e-06,
+        "tangent_edge_contact_disagreements": [],
+        "all_non_tangent_rays_match": true
+      }
+    ]
+  },
+  "reference_points_and_classes_sha256": "88dae87a015e54e20097bbd1c2b30f731d50419677e92bacd598f3c7b745201d",
+  "sensor_replay": {
+    "performed": true,
+    "verified_packets": 513,
+    "every_frame_coverage_identical": true,
+    "exported_mesh_identical_to_replayed_depth_tsdf": true,
+    "elapsed_s": 28.54656703100045
+  },
+  "export_manifest_fully_verified": true,
+  "source_hashes_unchanged": true,
+  "no_actor_executed": true,
+  "no_robot_or_ros": true,
+  "evaluator_sha256": {
+    "/home/ouc/nso_robot/analyses/four_room_completion_20261119/surface_evaluation/evaluate_matrix_run.py": "1f238af7584e0a7c7dc54669379bfca74c1035f530638be92d41fe63f087a7c9",
+    "/home/ouc/nso_robot/analyses/four_room_completion_20261119/surface_evaluation/exterior_reference.py": "3d14e69c6fa87ba2479e2cd7ef27b2ad794db3b8d64a03f935bc002413cbd958",
+    "/home/ouc/nso_robot/analyses/four_room_completion_20261119/surface_evaluation/protocol.json": "fe624703816a694fc84e612b5d134836aefdcf465795b5f7960be947ba18d2c8",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/utils/reconstruction_metrics.py": "92731c70a02d527812260d4487c817bd3829d9c4a35accd65c1320a62833987c"
+  },
+  "source_receipts_sha256": {
+    "/home/ouc/nso_robot/analyses/four_room_completion_20261119/matrix_study/scenes/20261119/runs/G/attempt_001/artifact_manifest.json": "9b8298e1199aa59c7615c3a15b52049c56af4f8f8587946b371ed5fbbbc7f164",
+    "/home/ouc/nso_robot/analyses/four_room_completion_20261119/matrix_study/protocol.json": "511c514bc4a2898856f0eb17570154f312ec175ff41d74f7f6dab393bc780436",
+    "/home/ouc/nso_robot/analyses/four_room_completion_20261119/matrix_study/run.py": "75f5bbed7220a105bdc18f8d55fc6e9c7bc8656fcdeb9ed01078cebe1323d81d",
+    "/home/ouc/nso_robot/analyses/four_room_completion_20261119/matrix_study/scenes/20261119/prepared/freeze.json": "72f69daa0c05286b9b5b8a59fe4140b96e5430f52b79ae3f1de7454adc6d62d3"
+  },
+  "source_mesh_sha256": "b07a36d4e1b5065743eb10dd0ffefb6e875fe00ff7af25a74adfd58dfa92a5fc",
+  "reference_npz_sha256": "b074b9430f52446c6eb267c4717b374421f0abd21ff139416eac9c3003634d43",
+  "elapsed_s": 31.697629981999853,
+  "metric_protocol": "/home/ouc/nso_robot/analyses/four_room_completion_20261119/surface_evaluation/protocol.json",
+  "limitation": "Synthetic constructed scene with exact pose and ideal visible labels; shared topology and class-specific outcomes do not provide additional independent scenes."
+}

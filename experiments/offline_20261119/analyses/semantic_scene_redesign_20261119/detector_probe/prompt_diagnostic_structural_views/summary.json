@@ -1,0 +1,96 @@
+{
+  "status": "completed",
+  "failures": [],
+  "unchanged": true,
+  "v10_mapping": null,
+  "structural_claim": false,
+  "rows": [
+    {
+      "index": 0,
+      "name": "open_aisle_a",
+      "status": "completed",
+      "detections": [
+        {
+          "label": "cabinet",
+          "score": 0.590143620967865,
+          "assigned_pixels": 43978,
+          "mask_pixels": 43978
+        },
+        {
+          "label": "chair",
+          "score": 0.5900532007217407,
+          "assigned_pixels": 7089,
+          "mask_pixels": 7089
+        },
+        {
+          "label": "shelving unit",
+          "score": 0.5510078072547913,
+          "assigned_pixels": 3106,
+          "mask_pixels": 44239
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "open_aisle_b",
+      "status": "completed",
+      "detections": [
+        {
+          "label": "cabinet",
+          "score": 0.7811360359191895,
+          "assigned_pixels": 45742,
+          "mask_pixels": 45742
+        },
+        {
+          "label": "shelving unit",
+          "score": 0.7164352536201477,
+          "assigned_pixels": 184,
+          "mask_pixels": 44584
+        },
+        {
+          "label": "chair",
+          "score": 0.34501326084136963,
+          "assigned_pixels": 8894,
+          "mask_pixels": 8894
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "closed_aisle_a",
+      "status": "completed",
+      "detections": []
+    },
+    {
+      "index": 3,
+      "name": "closed_aisle_b",
+      "status": "completed",
+      "detections": [
+        {
+          "label": "chair",
+          "score": 0.3822285830974579,
+          "assigned_pixels": 2158,
+          "mask_pixels": 2158
+        },
+        {
+          "label": "cabinet",
+          "score": 0.29996517300605774,
+          "assigned_pixels": 3194,
+          "mask_pixels": 3194
+        },
+        {
+          "label": "chair",
+          "score": 0.29692891240119934,
+          "assigned_pixels": 1730,
+          "mask_pixels": 1730
+        }
+      ]
+    }
+  ],
+  "visual_check": {
+    "scope": "Qualitative image review, no pixel ground-truth labels or accuracy computation",
+    "closed_aisle_a": "No detections despite clearly visible overhead cabinet.",
+    "closed_aisle_b": "The generic cabinet box is a small lower-cabinet fragment at the bottom edge, not the intended overhead cabinet; chair boxes do not visibly correspond to chairs. Both overhead target views were missed.",
+    "open_view_note": "Shelf words occur in both views but retain only 3106/44239 and 184/44584 mask pixels under original maximum-confidence ownership."
+  }
+}

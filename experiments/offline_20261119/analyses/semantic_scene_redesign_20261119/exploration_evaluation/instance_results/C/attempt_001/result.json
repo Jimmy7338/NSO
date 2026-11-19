@@ -1,0 +1,54 @@
+{
+  "status": "completed_independent_surface_evaluation",
+  "source_attempt": "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/instance_frontend_study/runs/C/attempt_001",
+  "metrics": {
+    "predicted_surface_samples": 12000,
+    "predicted_mesh_triangles": 147567,
+    "surface_error_mean_m": 0.00645839748904109,
+    "surface_error_p95_m": 0.023149605281651,
+    "target_surface_metrics": {
+      "open31": {
+        "reference_samples": 6474,
+        "completeness_error_mean_m": 0.027021976187825203,
+        "completeness_error_p95_m": 0.07843995504081248,
+        "recall_05cm": 0.893574297188755,
+        "recall_10cm": 0.9641643497065184
+      },
+      "closed115_fronts": {
+        "reference_samples": 6004,
+        "completeness_error_mean_m": 0.006166905630379915,
+        "completeness_error_p95_m": 0.014276699908077712,
+        "recall_05cm": 1.0,
+        "recall_10cm": 1.0
+      }
+    },
+    "precision_05cm": 0.99425,
+    "recall_05cm": 0.8615568731980634,
+    "f1_05cm": 0.9231595523741251,
+    "precision_10cm": 1.0,
+    "recall_10cm": 0.9237066855246695,
+    "f1_10cm": 0.960340464037779,
+    "reference_samples": 36766,
+    "completeness_error_mean_m": 0.02891603857278824,
+    "completeness_error_p95_m": 0.1452186368405819
+  },
+  "reference_sha256": "a3adbf31713a9ac6d28c5f8a6a106e2bb55b02044b5cad7a59a937374ed85e45",
+  "reference_protocol_sha256": "dd5e0bb003c9699ba25b9de8d1953359ebdac48f18e690a73c1afa274bc37339",
+  "all_run_artifact_hashes_verified": true,
+  "native_TSDF_mesh_sha256": "a58182b1855731e2c56e0204aabe4f7958374cee2ca6ed2d964bb37874d185b2",
+  "source_artifact_manifest_sha256": "11c3a02c41d7c7c8a334652dd90e524674c0224e8d3e411d76677c790a390afb",
+  "evaluator_source_sha256": {
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_evaluation/evaluate_run.py": "cfcda72dfef28413e7818a21aa33e2440a2730169df2bbd20222e1b4761cb5e0",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_evaluation/surface_reference.py": "8d8488a56f28729abe858b9f978ddabf4a5c67a3dbbf529d38956a6de7bed409"
+  },
+  "no_actor_executed": true,
+  "registration_performed": false,
+  "surface_counts_are_not_accuracy": true,
+  "target_precision_omitted": "No predicted per-instance reconstruction exists; target completeness is geometrically well-defined.",
+  "limitations": [
+    "One inspected apartment is one development scene, not independent trials.",
+    "Ideal visible structure labels and exact simulated pose do not validate natural recognition or robot SLAM.",
+    "Source geometry is opaque first-hit scan/CAD representation; transparent material accuracy is not evaluated."
+  ],
+  "elapsed_s": 0.44775050199677935
+}

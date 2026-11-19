@@ -1,0 +1,126 @@
+{
+  "schema": "single_vocabulary_diagnostic_summary/1",
+  "new_bank_count": 1,
+  "completed_views": 7,
+  "failures": [],
+  "baseline_counts": {
+    "chair": 5,
+    "cabinet": 16,
+    "table": 2,
+    "wall": 2,
+    "floor": 4
+  },
+  "new_counts": {
+    "chair": 5,
+    "cabinet": 16,
+    "table": 2,
+    "shelving unit": 2,
+    "wall": 2,
+    "floor": 4
+  },
+  "structural_mapping_enabled": false,
+  "structural_claim": "Generic cabinet remains unknown. A category detection is not verified hidden open/closed geometry.",
+  "accuracy_claim": false,
+  "planning_benefit_claim": false,
+  "production_unchanged": true,
+  "rows": [
+    {
+      "index": 0,
+      "baseline_count": 6,
+      "new_count": 6,
+      "baseline_detections_exactly_retained": 6,
+      "new_shelf_detections": []
+    },
+    {
+      "index": 1,
+      "baseline_count": 2,
+      "new_count": 3,
+      "baseline_detections_exactly_retained": 2,
+      "new_shelf_detections": [
+        {
+          "label": "shelving unit",
+          "confidence": 0.41940805315971375,
+          "mask_pixels": 23630,
+          "assigned_pixels": 132,
+          "overlaps_cabinets": [
+            {
+              "cabinet_index": 0,
+              "confidence": 0.5791856646537781,
+              "intersection": 23498,
+              "iou": 0.8271031326997537,
+              "shelf_coverage": 0.9944138806601778
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "baseline_count": 2,
+      "new_count": 2,
+      "baseline_detections_exactly_retained": 2,
+      "new_shelf_detections": []
+    },
+    {
+      "index": 3,
+      "baseline_count": 0,
+      "new_count": 0,
+      "baseline_detections_exactly_retained": 0,
+      "new_shelf_detections": []
+    },
+    {
+      "index": 4,
+      "baseline_count": 5,
+      "new_count": 6,
+      "baseline_detections_exactly_retained": 4,
+      "new_shelf_detections": [
+        {
+          "label": "shelving unit",
+          "confidence": 0.7805950045585632,
+          "mask_pixels": 33041,
+          "assigned_pixels": 33041,
+          "overlaps_cabinets": [
+            {
+              "cabinet_index": 1,
+              "confidence": 0.7505070567131042,
+              "intersection": 31480,
+              "iou": 0.9198223468910706,
+              "shelf_coverage": 0.9527556672013558
+            },
+            {
+              "cabinet_index": 4,
+              "confidence": 0.3888455331325531,
+              "intersection": 0,
+              "iou": 0.0,
+              "shelf_coverage": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "baseline_count": 6,
+      "new_count": 6,
+      "baseline_detections_exactly_retained": 6,
+      "new_shelf_detections": []
+    },
+    {
+      "index": 6,
+      "baseline_count": 8,
+      "new_count": 8,
+      "baseline_detections_exactly_retained": 8,
+      "new_shelf_detections": []
+    }
+  ],
+  "baseline_total": 29,
+  "new_total": 31,
+  "baseline_exactly_retained_total": 28,
+  "hashes": {
+    "bank_protocol.json": "3854a9574fa79ec48b071b52ba7bff1cead1e9fde8ee901a8e9e0d96c7518d89",
+    "run.py": "6c1d2c927b8f71a311816b6ccddcf43908d87b3b3f8e54cda1e7d5a6786013ba",
+    "prompt_embeddings.pt": "8e04b9292e3f7650cd51a39162292db5567eb1e895eac6faf2ffd22c4a1ba5a7",
+    "embedding_manifest.json": "85f320d62af36d07e23b4eb4243d338a9718c3aa1bd6de8c6013f0085c6ccc65",
+    "attempt_001/receipt.json": "2c2bbda42a726f63474500bdb91e1e9a199eee493ef15dda47de3f4130d9846e"
+  }
+}

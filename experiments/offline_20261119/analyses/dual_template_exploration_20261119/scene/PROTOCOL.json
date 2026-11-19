@@ -1,0 +1,184 @@
+{
+  "schema": "controlled_functional_three_branch_v1",
+  "scene_role": "controlled_synthetic_architecture_and_furniture_placement",
+  "selection_basis": "Fixed geometric design before any NSO policy execution; A/B swap objects, never select by score or winner",
+  "width_m": 10.0,
+  "height_m": 8.0,
+  "resolution_m": 0.2,
+  "robot_radius_m": 0.2,
+  "shape": [
+    40,
+    50
+  ],
+  "start": [
+    34,
+    25
+  ],
+  "heading": 0,
+  "wall_thickness_m": 0.2,
+  "wall_height_m": 2.4,
+  "wall_boxes_xyz_size": [
+    [
+      0,
+      0,
+      0,
+      10,
+      0.2,
+      2.4
+    ],
+    [
+      0,
+      7.8,
+      0,
+      10,
+      0.2,
+      2.4
+    ],
+    [
+      0,
+      0.2,
+      0,
+      0.2,
+      7.6,
+      2.4
+    ],
+    [
+      9.8,
+      0.2,
+      0,
+      0.2,
+      7.6,
+      2.4
+    ],
+    [
+      0.2,
+      2.6,
+      0,
+      4.0,
+      0.2,
+      2.4
+    ],
+    [
+      5.8,
+      2.6,
+      0,
+      4.0,
+      0.2,
+      2.4
+    ],
+    [
+      4.2,
+      2.8,
+      0,
+      0.2,
+      1.6,
+      2.4
+    ],
+    [
+      4.2,
+      6.0,
+      0,
+      0.2,
+      1.8,
+      2.4
+    ],
+    [
+      5.6,
+      2.8,
+      0,
+      0.2,
+      1.6,
+      2.4
+    ],
+    [
+      5.6,
+      6.0,
+      0,
+      0.2,
+      1.8,
+      2.4
+    ]
+  ],
+  "floor_box_xyz_size": [
+    0,
+    0,
+    -0.02,
+    10,
+    8,
+    0.02
+  ],
+  "slots": {
+    "left": [
+      2.2,
+      5.2
+    ],
+    "right": [
+      7.8,
+      5.2
+    ]
+  },
+  "layouts": {
+    "shelf_left": {
+      "left": 31,
+      "right": 118
+    },
+    "shelf_right": {
+      "left": 118,
+      "right": 31
+    }
+  },
+  "object_front_world": [
+    0.0,
+    -1.0,
+    0.0
+  ],
+  "assets": {
+    "31": "objects/frl_apartment_wall_cabinet_02.glb",
+    "118": "urdf/cabinet/cabinet.urdf; body and two doors at zero displacement"
+  },
+  "asset_transform_rule": "Undo original scene-instance placement, retain mesh/link transforms, rotate Y-up to Z-up, centre horizontal bounds at slot, set lowest mesh point to Z=0. No scaling.",
+  "labels": "Current first-hit source31->open class2, complete source118->closed class3; architecture0. Observed owner1/2 only where valid depth.",
+  "template_limits": "Original V3 clips estimated height0.9..1.5m and min horizontal dims0.9x0.65m. Source shelf heightabout1.98m and cabinetheightabout.778m are not exact templates; no dimension or likelihood-threshold edit.",
+  "physical_claim": false,
+  "natural_distribution_claim": false,
+  "planner_used_to_select_layout": false,
+  "prior_natural_negative_case": "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_evaluation/summary_five_arms.json",
+  "config": {
+    "resolution_m": 0.2,
+    "robot_radius_m": 0.2,
+    "camera_height_m": 1.2,
+    "width_px": 120,
+    "height_px": 90,
+    "fov_deg": 90.0,
+    "max_depth_m": 8.0,
+    "depth_sigma_m": 0.0,
+    "dropout": 0.0,
+    "action_duration_s": 1.0,
+    "voxel_m": 0.06,
+    "max_steps": 256,
+    "laser_height_m": 0.25,
+    "laser_rays": 180,
+    "truncation_m": 0.12
+  },
+  "acceptance": {
+    "initial_known_reachable_fraction_max": 0.5,
+    "both_objects_must_have_reachable_front_back_left_right_fixed_views": true,
+    "each_target_fixed_view_min_visible_pixels": 20,
+    "full_closed_cabinet_min_front8cm_hit_fraction": 0.9,
+    "full_closed_cabinet_min_back_hit_fraction": 0.99,
+    "shelf_front_open_through_fraction_min": 0.7
+  },
+  "frozen_before_policy_execution": true,
+  "source_dependencies": {
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/scene/controlled_world.py": "76750572d7562be1317b2f0e8f8cf33be6c8396e9c3c8a5d1d9fc9d78560bfab",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/scene/validate_scene.py": "0d68700949b5da45deaa0d6c193f97b64a1680f744f37fa770e5ae68354186f1",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/scene_adapter/replicacad_world.py": "195e7b9e33f95c88501608edf393e790418347258cddef5f90d7674ab5fe06f1",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/textured_raycast.py": "7ed2cc5eed09c50aa4cfb5f857b38fd7199b87846eecaec6033acc810de61234",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/assemble_apt0.py": "86ef4c84adb6970a884780a896087eb2913aaf5648cae1b5ba1bb83a655c9426",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/download_receipt.json": "b7319aab0fea9298a4ce5cb7f3429608c62b17ca9a1d3185b56073db514292e3",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/objects/frl_apartment_wall_cabinet_02.glb": "2897554423edbbb7fb3dec983f711707b52ae72cd0e63b3dab35291252d1a72f",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/urdf/cabinet/cabinet.urdf": "bf560d8611d45dfe01a07a04e6553e489d9c16d9838d39302a6328d2d6fe0b22",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/urdf/cabinet/cabinet.glb": "1a2fc25987e8340595a9cba2cb5ff6de3a0c8a3ed899b79a01154b20e99bda43",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/urdf/cabinet/door.glb": "e8a3745f531600609d590e84c345d495962121dfb93e2792ddd1b71659c61603"
+  }
+}
