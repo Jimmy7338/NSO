@@ -1,0 +1,81 @@
+{
+  "status": "complete_not_promoted_to_closed_loop",
+  "created_utc": "2026-11-20T04:20:50.242036+00:00",
+  "staged_summary": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_instance_20261120/audit/staged_summary.json",
+    "sha256": "221313986348eda7a9abe71304377bd6cdd32339ed3fe1a9f6799f1c862da889"
+  },
+  "aggregate_csv": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_instance_20261120/audit/staged_aggregate.csv",
+    "sha256": "f2bb01635dde9025fc455f128216d094ed01f09860912cad18b340e5def44bf8"
+  },
+  "evidence_scope": {
+    "matched_states": 6,
+    "old_reused_candidate_branches": 66,
+    "new_candidate_executions": 0,
+    "layouts": 2,
+    "independent_floorplans": 1,
+    "object_permutations": 2,
+    "aggregation": "candidate means inside each state, then equal six-state weights; no independent-N66 claim",
+    "prediction_threshold_m": 0.05
+  },
+  "variants": {
+    "pooling": {
+      "template_rank_rho": 0.6788692498090314,
+      "template_rank_rho_delta_B2": -0.023310023310023298,
+      "source_supported_fraction": 0.3624920467794818,
+      "absolute_supported_weight_m2": 1.1906354662173375,
+      "realized_supported_weight_m2": 0.8432528093714028,
+      "selected_object_net_m2": 1.0168064472137484,
+      "selected_global_net_m2": 16.161269733133647,
+      "selected_actions": 45.166666666666664,
+      "G_S_different_winner_states": 0,
+      "skipped_pooled_groups": 0
+    },
+    "pooling_geometry": {
+      "template_rank_rho": 0.6931299935308145,
+      "template_rank_rho_delta_B2": -0.0090492795882402,
+      "source_supported_fraction": 0.2964891425969304,
+      "absolute_supported_weight_m2": 1.0928741821013694,
+      "realized_supported_weight_m2": 0.6740978363781819,
+      "selected_object_net_m2": 1.0323563951669281,
+      "selected_global_net_m2": 16.193131390028093,
+      "selected_actions": 45.0,
+      "G_S_different_winner_states": 1,
+      "skipped_pooled_groups": 0
+    },
+    "pooling_applicability": {
+      "template_rank_rho": 0.6446964668454671,
+      "template_rank_rho_delta_B2": -0.057482806273587594,
+      "source_supported_fraction": 0.33441681112911076,
+      "absolute_supported_weight_m2": 0.21184022782665804,
+      "realized_supported_weight_m2": 0.1536279971812525,
+      "selected_object_net_m2": 1.049613242545009,
+      "selected_global_net_m2": 15.791526319405087,
+      "selected_actions": 39.5,
+      "G_S_different_winner_states": 0,
+      "skipped_pooled_groups": 0
+    },
+    "pooling_geometry_applicability": {
+      "template_rank_rho": 0.610453095134073,
+      "template_rank_rho_delta_B2": -0.09172617798498173,
+      "source_supported_fraction": 0.2919527767309247,
+      "absolute_supported_weight_m2": 0.27934220955794214,
+      "realized_supported_weight_m2": 0.17806798904620413,
+      "selected_object_net_m2": 1.0168064472137484,
+      "selected_global_net_m2": 16.161269733133647,
+      "selected_actions": 45.166666666666664,
+      "G_S_different_winner_states": 0,
+      "skipped_pooled_groups": 0
+    }
+  },
+  "assessment": [
+    "No v2 stage improves aggregate template-only rank agreement over B2; this does not establish a generally better hidden-surface predictor.",
+    "Pooling alone keeps every full-score choice unchanged while lowering mean rank agreement. It corrects duplicated instance representation, but observed decision benefits are not demonstrated.",
+    "Pooling+applicability changes two left-layout choices and trades slightly higher object recovery and fewer actions against lower full-scene recovery. G and S make identical choices in all6states; this is not semantic superiority or a matched-budget policy comparison.",
+    "Pooling+geometry+applicability returns all choices to B2 and reduces rank agreement to .61045. Absolute prediction shrinkage alone cannot justify promotion.",
+    "No pooled object was excluded by inherited size eligibility in these6states, so observed changes are not explained by that gate.",
+    "Sampling-only reproduces all frozen candidate integrals/choices and removes the known history-dependent point-cap confound. A separately declared six-run G/S/no-measured-consumption closed-loop matrix is scientifically justified; preserve earlier C/J controls as reused controls."
+  ],
+  "recommendation": "Keep B2 plus sampling-integrity correction for clean ablation; do not silently adopt geometry, pooling, or applicability as validated improvements. Retain all negative variants and test new method hypotheses prospectively."
+}

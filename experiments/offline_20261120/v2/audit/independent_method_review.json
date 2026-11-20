@@ -1,0 +1,36 @@
+{
+  "status": "ready_for_frozen_fixed_prefix_diagnostics_not_effect_claim",
+  "reviewed_utc": "2026-11-20T04:16:00.738556+00:00",
+  "reviewer": "independent_policy_evaluation_agent",
+  "files_sha256": {
+    "method/model.py": "d8a07782110d284abe415c8471240008e7c222d4e52f056432f2bb1f23447e9f",
+    "method/geometry.py": "b0a0490e2166cb0ebcb520df0a2f70c2a72eb7b0b8a81712eeb16377698caf09",
+    "method/METHOD_SPEC.md": "d46a361747c5c0671780440468ae84b1108f1ba5ff1a27287f39020fda1ed201",
+    "method/test_method.py": "745c83b3ce11aeb898d1dc4cde39ff2652333e39c88959a9de88193607d861ca",
+    "replay/run_instance_predictions.py": "c6578bcd78612751519528545ee15301c0c160330446dfdb7402ac3ac0003106",
+    "run.py": "a99b7a6061da99da902c9d26a10a61453cbc95016f2ed45f73bf3c250497b762"
+  },
+  "test_receipt_verified": {
+    "tests": 19,
+    "result": "pass",
+    "validation_sha256": "072dba9d0851a73126d49755401e32b9061aea9a88f92361f86156ca0c69a30f"
+  },
+  "findings": {
+    "no_evaluator_truth_in_model": true,
+    "track0_components_preserved": true,
+    "tracked_fragments_unioned_before_template_instantiation": true,
+    "mass_formula": "retain v1 clipped conditional p, multiply both alternatives by Z=sum geometry_only_mass*absolute_free_likelihood; no renormalization of Z and no second free-likelihood factor",
+    "free_evidence_and_geometry_shared_G_S": true,
+    "new_prediction_runner_uses_old66_branch_outcomes_only": true,
+    "fixed_prefix_native_mesh_and_candidates_checked_equal": true,
+    "rollout_binding_uses_same_stage_and_explicit_ablation_switches": true,
+    "frozen_v1_evaluator_reused": true
+  },
+  "limitations": [
+    "Heuristic free-consistency attenuation is not calibrated applicability or third-class inference. Unknown extents are unpenalized.",
+    "Pooling assumes acquired support tracks are correct; inherited size eligibility can newly skip a pooled large object and all such skipped_pooled_groups must be reported.",
+    "No claim that geometry or semantic prior improves decisions follows from unit tests, model mass reduction, or a changed G/S winner.",
+    "Diagnostic 6states/66branches reuse one controlled floorplan and two object permutations, not independent new policy trials.",
+    "S_no_applicability in future run.py keeps relative free evidence and ablates absolute Z only; S_no_history disables measured-surface consumption, not valid-free-space rejection."
+  ]
+}

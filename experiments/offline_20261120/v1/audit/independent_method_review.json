@@ -1,0 +1,39 @@
+{
+  "status": "independent_code_review_ready_for_frozen_diagnostics_not_effect_validation",
+  "reviewed_utc": "2026-11-20T03:57:25.096278+00:00",
+  "files_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/method/model.py": "82258f2e01a802d08fb6c4b9853b99b822fed33ffb7a5c250b06143348e40607",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/method/geometry.py": "b0a0490e2166cb0ebcb520df0a2f70c2a72eb7b0b8a81712eeb16377698caf09",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/method/test_method.py": "00f6bfd55cfe6e528e450e8d4d1dd1cb3aab70df82dd2799bcee5d4a05ff74a0",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/run.py": "697e189ff4850d3c4d5ac4a79bc2b060c14b207fc8d15ce863f27edd496587eb",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/replay/run_staged_branches.py": "8f403373ebe7ffafeb531df4a1d25a797fe5aceb6d6b1ba82d9c8a08c5e0f2a0",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/audit/evaluate_stage.py": "191f78ace67b6a04835a3d954acf0dd15f8d0c53438eb193c83eb7d05d2eed12"
+  },
+  "blocking_findings": [],
+  "review_scope": [
+    "B3 measured geometry and full quadrature",
+    "G/S and ablation model binding",
+    "sealed original prefix and fixed candidate branches",
+    "independent source-reference evaluator"
+  ],
+  "observations": [
+    "No source asset dimensions/mesh consumed by new geometry or likelihood method; actual RGBD history and measured quality only.",
+    "G/S share geometry, evidence, candidate set and code; semantic prior only differs in regular G/S arms.",
+    "S_no_geometry deliberately changes S geometry; within-arm counterfactual G/S values there are not pure semantic comparisons.",
+    "S_no_history now removes measured-surface reward consumption only; retained free rejection and visibility are explicit. This differs from historical B2 combined-history ablation.",
+    "Full quadrature uses shared raw sample basis, history represented by zero weights; old 3500 point thinning removed.",
+    "Recorded12 author tests reviewed, covering B2 integral parity, opposite/partial face fit, vertical extent, depth boundaries, duplicate history and ablation separation. No need to repeat tests without code change.",
+    "Fixed-candidate branches clone exact measured TSDF and execute no new policy selection; outcomes shared across predicted-model stages.",
+    "Evaluator six independent unit tests and two old B2 interval compatibility checks passed; all8 primary/secondary prediction dictionaries exactly reproduce existing evidence."
+  ],
+  "limits": [
+    "Yaw/extent estimator is a partial envelope point estimate, not a full shape optimization or calibrated posterior. Internal shelf faces can still be mistaken for envelope faces.",
+    "Observation support still cropped to0.12<z<1.8m; unknown upper extent and grounded-object assumption retained explicitly.",
+    "Free-space likelihood reuses discrepancy scales as heuristic pseudo-likelihood; no probabilistic calibration claim.",
+    "Same source-supported prediction ratio can improve through lower predicted mass; require absolute supported and realized weight plus actual gross/new/lost source area.",
+    "No source-to-quadrature-point5cm recall: original quadrature spacing up to0.22m makes it a discretization artifact.",
+    "Candidate rank summaries must pair within each of6states then aggregate states equally; all66branches are dependent development evidence.",
+    "No promotion based only on G/S divergence. Closed-loop benefit remains untested."
+  ],
+  "hardware": false
+}
