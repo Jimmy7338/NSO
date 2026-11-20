@@ -1,0 +1,66 @@
+{
+  "status": "ready_for_frozen_three_stage_prediction_evaluation",
+  "created_utc": "2026-11-20T06:07:39.412236+00:00",
+  "stages": [
+    "object_support",
+    "object_full_support",
+    "object_fit"
+  ],
+  "method_validation": {
+    "schema": "B5_observed_object_outer_plane_method_freeze_v1",
+    "frozen_at": "2026-11-20T06:05:55.089261+00:00",
+    "status": "frozen_before_outcome_evaluation",
+    "tests": {
+      "count": 15,
+      "passed": 15,
+      "log": "tests.log"
+    },
+    "stages": [
+      "object_support",
+      "object_full_support",
+      "object_fit"
+    ],
+    "files": {
+      "model.py": "82093d7cef4b8e18e973d35c66341a7658ba09b38aef8b65d9dbb6cba008f6c8",
+      "geometry.py": "85a56e0ae664af15e126dc7c077df8e69eba22dbdc2000eeeaef11bffd6f34a3",
+      "test_method.py": "1dd7ee7fa7a09e9b25a3f5c8cb1603d78bfed7035819fe5e1b526efe92cef7b4",
+      "tests.log": "d8de68d8a74410fda2304f85f627b9f446d7e8c5c7de9e4e07dfddf8f1b904c7",
+      "METHOD_SPEC.md": "92be580e38f31608d92d28c49e1f507ff4c7963080d76a9106972ba910dd5480"
+    },
+    "source_geometry_consumed_by_method": false,
+    "candidate_scoring_weights_stops_changed": false,
+    "robot_motion": false
+  },
+  "evaluator_tests": {
+    "test_cases": 2,
+    "passed": 2,
+    "checks": [
+      "hypothesis pair to support-track attribution",
+      "exact frozen source triangle/vertex reconstruction",
+      "legacyP positive-track subset forecast equivalence and object attribution to12decimal places",
+      "reject altered acquired support hash"
+    ],
+    "fixture_not_model_experiment": true,
+    "initial_test_adjustment": "A strict whole-dictionary float comparison failed at last-bit summation order from retained zero slots; replaced with12decimal equality before freezing. Classification and metrics unchanged."
+  },
+  "review_findings": [
+    "G/S objectness shared1 for observed-track mode; generic label multiplier retained only in explicit legacy mode.",
+    "TLS unsupported refinement is rejected rather than constructing a too-small plane.",
+    "O uses inherited cropped positive-track hypotheses; fullsupport input adaptation separated from newfit.",
+    "Observed support NPZ preserves crop/full association and exact source ordering. Method fits no source or evaluator geometry.",
+    "Per-object geometric truth loaded only in evaluator and verified against frozen source mesh; stageweights compared to same positive-track oldPsubset.",
+    "Source fractions cannot alone trigger promotion; actual per-object recovery, absolute realized weight, rank and selected cost tradeoffs retained."
+  ],
+  "limitations": [
+    "Grounded Manhattan envelopes, min/max outlier sensitivity and hidden extent priors remain unvalidated beyond stated tests.",
+    "Input-owner currently category-derived for oneopen/oneclosed controlledobject; not general instance segmentation."
+  ],
+  "reviewed_sha256": {
+    "method/model.py": "82093d7cef4b8e18e973d35c66341a7658ba09b38aef8b65d9dbb6cba008f6c8",
+    "method/geometry.py": "85a56e0ae664af15e126dc7c077df8e69eba22dbdc2000eeeaef11bffd6f34a3",
+    "method/METHOD_SPEC.md": "92be580e38f31608d92d28c49e1f507ff4c7963080d76a9106972ba910dd5480",
+    "replay/run_objectfit_predictions.py": "d2b1d720cbb0b0bdf7b32fa8324aad4ac32fc51d4671b2a4a7da43901abf2dfe",
+    "audit/evaluate_objectfit.py": "e230e1fa1c46993ccd79bdcb3fc35ee3a8bf7bbb09466da4f0dd401b762ca6e7",
+    "audit/test_evaluator.py": "727f96f318aa8ea8a5461306538772809cfe2bd5201a271bde466c7120e0fa9a"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "nso.observed_depth_identifiability_profile.v1",
+  "created_date": "2026-11-20",
+  "status": "frozen_before_depth_profile",
+  "purpose": "Test whether acquired observations can exclude the fixed0.65m depth prior before changing any model parameter or policy.",
+  "states": {
+    "shelf_left": [
+      24,
+      54,
+      109
+    ],
+    "shelf_right": [
+      24,
+      53,
+      110
+    ]
+  },
+  "baseline": "Frozen B6 outer_and_layers on full already acquired positive object tracks",
+  "method_api": "profile_model(mapper, b6_ab_model) -> JSON-compatible diagnostic; pure/no mutation",
+  "profile_design": {
+    "axis": 1,
+    "eligible": "Exactly one acquired outside endpoint; retain current depth for no-anchor, two-anchor or degenerate domains.",
+    "grid": "21 uniform depths from acquired span to max(1.3m,span), plus current depth explicitly.",
+    "rays": "All already acquired finite positive stride3 RGBD rays intersecting fixed maximum-search ROI containing all B6parts; exact duplicates removed; identical rays and denominator for all depths/hypotheses.",
+    "geometry": "Width/yaw/box-legheight/slabheights/backboard orientation and part thickness fixed to frozen B6AB; measured depth endpoint anchored.",
+    "evidence": "Mean clipped squared surface distances plus valid strict-free first-hit discrepancies using B2 cross-history surface veto; no penalty for occlusion or unknown/invalid data.",
+    "mixture": "Neutral0.5/0.5 box/shelf, scale.06m and clip.15m inherited; heuristic discrepancy, not a calibrated likelihood.",
+    "plausible_band": "J<=minJ+1, not confidence interval. Prior retained if in band, no free-conflict reduction, multimodal, or band reaches artificial upper search bound. Otherwise closest plausible grid point to prior is reported, not applied.",
+    "proposal_adoption_condition": "Prior excluded from a connected finite plausible band, and lower measured free contradiction in at least one hypothesis. This diagnostic reports the proposal without updating any model."
+  },
+  "actor_input": "Reconstruct original frozen B S prefixes only, assert packet/feedback/scores and native TSDF hash; current B6 AB G/S model arrays equal prior outputs. Profile receives neutral G model and actual acquired mapper.",
+  "unchanged": [
+    "G/S object support and geometry, current template parameters and all arrays",
+    "candidate construction, score weights, action budget, return/stops",
+    "B5 O eight-run matrix, all B3/B4/B5/B6 frozen evidence",
+    "No robot motion, new branch acquisition, candidate scoring or model promotion in this phase"
+  ],
+  "execution": {
+    "prefix_jobs": 6,
+    "new_candidate_actions": 0,
+    "new_candidate_scores": 0,
+    "model_parameter_update_applied": false,
+    "hardware": false,
+    "candidate_evaluation_conditional": "Only if the profile supports a separately specified parameter update; then all6prefixes and66branches must be evaluated with a new frozen model before any closed loop."
+  },
+  "outputs": [
+    "Per-object depth candidate curves, anchors, fixed ray hashes and admissible bands from the method",
+    "Full acquired input hashes and exact baseline model-array parity",
+    "All attempts and failures; no discarded states"
+  ],
+  "interpretation": "Observed depth compatibility is not reconstruction accuracy or semantic efficiency. Same six development prefixes remain dependent, not new scenes. Baseline array parity reflects the unchanged diagnostic phase, not a claim about a future parameter update.",
+  "method_specification": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_depth_20261120/method/METHOD_SPEC.md",
+    "sha256": "44d79d29304bc3b645f1fef7e42d8bf2290aa82dba4aa7376da55d94a3466d63"
+  },
+  "method_validation": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_depth_20261120/method/validation.json",
+    "sha256": "1c35abb08b99384977c7dd9eab42e180e4304062bbe4634cbf6eaf5881ea25bf",
+    "tests_passed": 11,
+    "files": {
+      "profile.py": "194fced5f4fbf79f84c9b593c2c908d8470faf55ea21a4fe433688a46170ebca",
+      "test_profile.py": "178603e2823b7f8e80ae6c25e95a93d9564efeb5a68922c36f3c1ff07403f00d",
+      "tests.log": "cc755817f80e92b6837a824b70fbe93aaaac9d27ffdd356064da3043ac9c2f48",
+      "METHOD_SPEC.md": "44d79d29304bc3b645f1fef7e42d8bf2290aa82dba4aa7376da55d94a3466d63"
+    }
+  },
+  "independent_review": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_depth_20261120/audit/independent_profile_review.json",
+    "sha256": "dfa5ab4beaecad90c3fe3e3dfc1446e07135d728e4edd85ef4f6a94b88ce6519"
+  }
+}

@@ -1,0 +1,20 @@
+\begin{table}[!htbp]
+\centering\small\setlength{\tabcolsep}{4.0pt}
+\caption{Complete O-policy matrix on the two existing furniture permutations. All eight runs reach 100\% correct-free coverage, return, use 256 paid actions and record zero simulated collisions. Both G and S receive the same ideal acquired instance support; only their structural-class prior differs. S$^{-\ell}$ disables only the inherited measured-distance likelihood, whereas S$^{-m}$ disables only measured-surface reward consumption and retains verified-free rejection. $a_{100}$ is the first full-coverage action; $d$ is full-budget path length. $R_o$/$R_c$ denote open-shelf/closed-cabinet recall at 5~cm. These are eight deterministic runs of four policies on one floorplan family, not eight independent environments or repeats.}
+\label{tab:observed-object-policy}
+\begin{tabular}{llrrrrrr}
+\toprule
+Layout & Mode & $a_{100}$ & $d$ (m) & F1$_5$ (\%) & F1$_{10}$ (\%) & $R_o$ (\%) & $R_c$ (\%) \\
+\midrule
+Left & G & 88 & 42.0 & 92.76 & 94.00 & 82.17 & 88.71 \\
+ & S & 97 & 43.2 & 92.38 & 93.80 & 83.46 & 85.87 \\
+ & S$^{-\ell}$ & 97 & 43.2 & 92.38 & 93.80 & 83.46 & 85.87 \\
+ & S$^{-m}$ & 97 & 43.6 & 92.46 & 93.79 & 83.28 & 86.13 \\
+\midrule
+Right & G & 100 & 43.2 & 92.60 & 93.88 & 81.09 & 79.21 \\
+ & S & 100 & 43.2 & 92.60 & 93.88 & 81.09 & 79.21 \\
+ & S$^{-\ell}$ & 100 & 43.2 & 92.60 & 93.88 & 81.09 & 79.21 \\
+ & S$^{-m}$ & 100 & 43.2 & 92.45 & 93.88 & 80.23 & 79.21 \\
+\bottomrule
+\end{tabular}
+\end{table}
