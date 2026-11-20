@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Complete unknown exploration in four new layouts with a shared 256-action budget including return. V and A denote the visibility and acquisition forecasts with the same category prior, fitted full geometry posterior, and original candidate generator. $C_{\rm free}$ is terminal correct-free coverage; $R_{\rm obj}$ is object recall weighted by fixed visible source area. Recall and scene F1 use a 5\,cm tolerance. A95/A100 are first actions reaching 95\%/100\% correct-free source-reachable coverage. Unreached thresholds remain \texttt{--} and are censored at executed actions, rather than filled with the budget.}
+\label{tab:b11-complete-policy}
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{llrrrrrrl}
+\toprule
+Layout & Arm & $C_{\rm free}$ (\%) & A95 & A100 & $R_{\rm obj}$ (\%) & F1 (\%) & Path (m) & Return \\
+\midrule
+chain\_a & V & 100.00 & 70 & 154 & 80.17 & 99.17 & 45.2 & Yes \\
+chain\_a & A & 99.27 & 70 & -- & 76.04 & 98.69 & 45.6 & Yes \\
+cycle\_a & V & 100.00 & 67 & 133 & 75.36 & 99.38 & 44.0 & Yes \\
+cycle\_a & A & 100.00 & 67 & 133 & 75.36 & 99.38 & 44.0 & Yes \\
+chain\_b & V & 92.40 & -- & -- & 86.53 & 92.29 & 44.0 & Yes \\
+chain\_b & A & 92.40 & -- & -- & 86.53 & 92.29 & 44.0 & Yes \\
+cycle\_b & V & 100.00 & 97 & 191 & 86.47 & 98.65 & 46.4 & Yes \\
+cycle\_b & A & 100.00 & 97 & 191 & 86.47 & 98.65 & 46.4 & Yes \\
+\bottomrule
+\end{tabular}
+\end{table}

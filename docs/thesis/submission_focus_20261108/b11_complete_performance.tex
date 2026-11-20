@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Complete recorded execution and computation costs. Decisions include local action requests and global selection. Wall times are measured with up to three concurrent single-library-thread processes; they are not logical action durations, robot travel times, isolated latency, or real-time guarantees.}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrrrr}
+\toprule
+Layout & Arm & Paid actions & Global calls & Decision wall (s) & Total wall (s) & Collisions \\
+\midrule
+chain\_a & V & 256 & 29 & 244.7 & 395.0 & 0 \\
+chain\_a & A & 256 & 32 & 1483.8 & 1638.0 & 0 \\
+cycle\_a & V & 256 & 28 & 228.1 & 384.0 & 0 \\
+cycle\_a & A & 256 & 28 & 1761.2 & 1921.3 & 0 \\
+chain\_b & V & 256 & 28 & 203.5 & 353.1 & 0 \\
+chain\_b & A & 256 & 13 & 1282.2 & 1432.9 & 0 \\
+cycle\_b & V & 256 & 13 & 104.8 & 245.1 & 0 \\
+cycle\_b & A & 256 & 14 & 960.9 & 1098.1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}

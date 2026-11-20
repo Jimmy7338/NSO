@@ -1,0 +1,52 @@
+{
+  "schema": "B11_paired_unseen_gain_scope_v1",
+  "status": "v2_cost_only_prefix_preparation_before_any_new_gains",
+  "user_protocol": "USER_PROTOCOL.txt",
+  "hardware": false,
+  "layouts": 4,
+  "topologies_required": 2,
+  "decision_states_per_layout": 2,
+  "executed_short_routes_per_state": 3,
+  "short_branch_total": 24,
+  "staging": "First layouts0/1:12 branches and first frozen table; then layouts2/3:12 branches; only then8 complete matched policy runs.",
+  "full_runs": "S_visibility versus S_acquisition \u00d74 layouts; neutral class prior evaluated on same short candidate data.",
+  "fair_geometry": "Frozen B9T16 full positive structure/geometry posterior and identical original0.22m surface quadrature, fitted only from acquired measurements. Do not substitute B10 conditional-mean geometry in primary comparison.",
+  "primary_estimator_difference": "Original repaired point visibility/history expected area versus prediction-only RGBD/TSDF acquisition gross-new area on the identical per-hypothesis surface basis. Same class prior, geometry, common score, candidate provider and execution contract.",
+  "short_candidate_design": {
+    "rule": "On original native routes and before reading prediction gains or outcome truth, choose the largest outbound-action cost band of width3actions; ties choose lower band then lower ordered candidate IDs. Require at least3 routes. Rank old/new S within that shared cost-matched pool, retain both selected routes and fill to3 by ascending original candidate ID. Re-rank neutral/semantic priors on that final shared3 for all matched diagnostics.",
+    "winner_definition": "Actual maximizer in this declared controlled short-replay pool, not a claim to be the winner over every original full-run route.",
+    "best_area_definition": "Best actual gross-new object area among the3 executed short branches; not global-optimal or best-over-unexecuted route evidence.",
+    "infeasible_band": "Keep as protocol preparation failure with route costs; do not replace states/layouts using outcomes. No widening after gains.",
+    "full_policy": "The controlled cost band is used only for short replay; complete runs keep all original native candidates."
+  },
+  "prefix_rule": "Scene generator predetermines two legal acquisition prefixes without prediction gains or future outcome metrics; freeze all paths and states before either estimator scores them.",
+  "execution": "Every short branch begins from exactly reconstructed same acquired prefix; actual trajectory/frames/TSDF reused by both estimators; frozen actions shared per route; preserve failures and interruptions.",
+  "metrics": [
+    "object gross new/lost/net reference surface area5cm",
+    "old/new selected gain and3-candidate bestgap",
+    "per-candidate MAE/rank",
+    "target tie/failure/runtime",
+    "full object recall/A95/A100/sceneF1/return"
+  ],
+  "scope_limits": "Four new controlled layouts across two topologies with reused authored furniture assets, noiseless exact poses and ideal visible categories/instances; not four independent natural sensor environments. Unknown coverage remains primary and no source reference enters gain or prefix/candidate selection.",
+  "layout_order": [
+    "chain_a",
+    "cycle_a",
+    "chain_b",
+    "cycle_b"
+  ],
+  "stage1_layouts": [
+    "chain_a",
+    "cycle_a"
+  ],
+  "stage2_layouts": [
+    "chain_b",
+    "cycle_b"
+  ],
+  "scene_freeze": "scene/freeze.json",
+  "scene_limitations": [
+    "Central0.2m-wide opening can transmit rays but is not robot-traversable; robot room graph is chain or cycle as declared.",
+    "Inherited radius-zero occupancy queries can miss exact wall-boundary grid points; reference reachable robot-center free set and sampled mesh surface references are independently checked."
+  ],
+  "controlled_prefix_preparation_revision": "PREFIX_PREPARATION_V2.json"
+}

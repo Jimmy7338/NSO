@@ -1,0 +1,13 @@
+# Paired unseen-layout observation-gain study (B11)
+
+This evidence package preserves four predeclared constructed room layouts (chain/cycle topologies, two each), eight controlled acquired states and twenty-four actually executed short candidate branches. The staged first12 and final24 tables precede the authorized eight complete visibility/acquisition policy runs. Source CAD assets are reused; these are new placements/topologies, not four natural sensor environments. Physical robot experiments remain paused.
+
+Both estimators share the frozen B9T16 full geometry/structure posterior, every positive particle, original0.22m surface quadrature, visible ideal instance/category input, common score and execution contract. Only observation-gain prediction changes: repaired historical visibility versus prediction-only RGBD/TSDF reconstruction acquisition. No conditional-mean collapse, positive-mass truncation or coefficient tuning is used. Neutral/class prior rankings share the same three executed branches at each short state.
+
+The short cost-matched pool is an explicit controlled experiment; complete runs retain all native candidates. Two initially infeasible prefix states are preserved, alongside the cost-only pre-outcome revision selecting their earliest valid scripted successors. See USER_PROTOCOL.txt, STUDY_SCOPE.json, PREFIX_PREPARATION_V2.json and all preparation records. The central0.2m optical opening and inherited zero-radius occupancy-boundary limitation are disclosed; actual robot-room connectivity and reference robot-center reachable space were independently checked.
+
+Raw traces, all ties/negative results/failures, state/branch costs and independent source-surface measurements are retained. The best-candidate comparator means the best of the three actually executed controlled routes, not an unexecuted global optimum. Object gross gains, lost/net areas, scene quality and unknown coverage remain separate outcomes.
+
+Exact cached computations and process copy-on-write accelerate hypothetical TSDF fusion while preserving original volume weights and actual measured state. Computational fork failure retries the identical fresh-replay formula without skipping candidates or changing policy stopping rules. Tests and bitwise compatibility records accompany the source.
+
+SOURCE_INDEX.json maps direct and zipped files to their hashes. Extracting ZIP members restores the study tree. Large sensor arrays and native/source geometry remain local with OMITTED_ARRAYS.json hashes; separately obtained licensed assets and earlier frozen B3/B8/B9/B10 dependencies are required for reproduction. Formal updated PDFs and editable manuscript assets are under docs/thesis/submission_focus_20261108.

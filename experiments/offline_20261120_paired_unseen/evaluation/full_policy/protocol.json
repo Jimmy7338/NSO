@@ -1,0 +1,106 @@
+{
+  "schema": "B11_independent_eight_full_policy_evaluation_v1",
+  "status": "specified_before_any_B11_full_policy_result",
+  "layout_order": [
+    "chain_a",
+    "cycle_a",
+    "chain_b",
+    "cycle_b"
+  ],
+  "arms": [
+    "S_visibility",
+    "S_acquisition"
+  ],
+  "attempt_selection": {
+    "rule": "attempt_001 only for primary complete-run pairs; no automatic best/latest/retry selection",
+    "all_attempts_in_inventory": true,
+    "amendment_required_for_replacement": true
+  },
+  "paired_design": {
+    "layouts": 4,
+    "topologies": 2,
+    "arms_per_layout": 2,
+    "planned_complete_episodes": 8,
+    "stochastic_replicates": 0,
+    "independent_aggregation_unit": "specified layout, not arm, prefix, route, surface sample or object",
+    "natural_scene_population_generalization": false
+  },
+  "execution": {
+    "freeze_sha256": "00d0850a2e3ad1375b4337cb84ec2322d57b1d0a0b633a251cb37c52d393db4a",
+    "protocol_sha256": "422d0972ea922bc77ad35e9f42ea934991e11bd2cd305f341d0ce5212bd6e28a",
+    "scene_freeze_sha256": "0880a212d633b40825d07aca2f007137516a5af18d53054f4a3d76a55bccb5d5",
+    "action_budget": 256,
+    "no_new_actor_actions_by_evaluator": true
+  },
+  "coverage": {
+    "denominator": "frozen scene evaluator_truth reachable boolean cells from cold start",
+    "known": "belief != -1 within reachable",
+    "correct_free": "belief == 0 within reachable",
+    "false_occupied": "belief == 1 within reachable",
+    "primary_A95_A100": "first paid action reaching correct-free fraction >= 0.95 / 1.0 including initial action 0",
+    "unreached": "null; right-censor at executed paid_actions, no imputed 256",
+    "per_action_provenance": "saved scalar receipts checked for contiguous steps and threshold chronology; final belief independently remeasured; raw per-step maps not recreated"
+  },
+  "native_surface": {
+    "source": "four frozen scene/evaluator_references/* fixed_visible source references",
+    "registration": "none",
+    "distance": "float32 source points to native TSDF triangles",
+    "threshold_m": [
+      0.05,
+      0.1
+    ],
+    "global_prediction_samples": 12000,
+    "prediction_area_sampling_seed": 812,
+    "global_metrics": [
+      "precision",
+      "recall",
+      "F1"
+    ],
+    "objects": [
+      "open31",
+      "closed118"
+    ],
+    "object_metrics": [
+      "recall5cm",
+      "recall10cm",
+      "5cm equal-object macro recall",
+      "5cm fixed-visible-area-weighted recall"
+    ],
+    "object_precision_claimed": false,
+    "reference_points_are_evaluation_only": true
+  },
+  "additional_metrics": [
+    "paid_actions",
+    "actual path_length from grid poses",
+    "collision count from steps",
+    "return to exact cold anchor",
+    "termination",
+    "elapsed_s",
+    "decision_wall_s_total"
+  ],
+  "audits": [
+    "all critical final artifact hashes and immutable source freeze",
+    "same cold initial packet/budget/reference within layout",
+    "all acquired frame receipt count/order/hash chain",
+    "no probability pruning or geometry collapse",
+    "independent B9 T16 posterior recomputation, shared G/S observed geometry likelihood bank",
+    "acquisition all actual past frames, no candidate modification",
+    "final map belief/pose/native file hash"
+  ],
+  "limitations": [
+    "Per-frame receipt integrity is verified, not independent rereading of all raw frames.",
+    "Frozen actor interface/source review and declaration audit are not an OS filesystem trace.",
+    "Four new layouts use ideal masks, exact poses and noise-free synthetic sensors; no robot or natural detector validation.",
+    "Shared three-process runtime is not an isolated realtime benchmark.",
+    "Negative changes, tied paths, failures, partial attempts and unreached thresholds all retained."
+  ],
+  "compatibility_case": {
+    "purpose": "software metric compatibility, not a new experiment",
+    "attempt": "dual_template_gain_alignment_20261120/rollouts/native_novelty/layouts/shelf_left/runs/S_native_novelty/attempt_002",
+    "expected": "all nested native metric values exact versus existing frozen B10 result"
+  },
+  "copied_source": {
+    "evaluate_full_run.py": "8717e2af58459cb85e8401e1f69bd452593b4d59c2794a5edc589af4b5ffec53",
+    "test_full_metrics.py": "4d236d6077690ebe8151737f5556f3d5883c49e0a2b14b754e602a245923089e"
+  }
+}
