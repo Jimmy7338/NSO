@@ -1,0 +1,73 @@
+{
+  "schema": "B9_independent_object_interval_protocol_v1",
+  "status": "frozen_before_primary_observations_and_any_new_inference",
+  "user_scope": "Independent report-only object interval calibration and one held-out test; physical paused; no policy changes.",
+  "sampling": {
+    "seed": 2026112009,
+    "objects": 48,
+    "split": {
+      "calibration": 24,
+      "test": 24
+    },
+    "conditions": [
+      "front",
+      "front_side",
+      "around",
+      "occluded"
+    ],
+    "cases": 192,
+    "frames": 576,
+    "distribution": "IID draws from fixed equal family / 3 depth-stratum / regular-vs-part-mismatch mixture; no quota correction or redraw."
+  },
+  "sensors": "Clean first-hit RGB-D, exact pose, ideal visible instance and category masks; same public sensor constants as B8.",
+  "base": {
+    "method": "/home/ouc/nso_robot/analyses/dual_template_uncertainty_20261120/method/model.py",
+    "method_sha256": "dddd54a2d0347571b48e3aacc3f428a2dccfd23747362d333360fe2223584c45",
+    "structural_prior": "G-neutral [0.5,0.5]",
+    "sigma_m": 0.01,
+    "temperature_retuned": false,
+    "posterior_unchanged": true
+  },
+  "calibration": {
+    "s0_source": "B8 selected-scale training12 only; object median of four-condition absolute median-prediction errors, then median objects.",
+    "q_source": "New calibration24 only; per-object maximum normalized outside-raw95-interval residual across exactly four conditions.",
+    "alpha": 0.05,
+    "order_statistic": "ceil((n_cal+1)*(1-alpha)), +infinity when rank>n_cal.",
+    "expected_calibration_rank": 24,
+    "test_truth_opened_only_after_q_receipt": true
+  },
+  "evaluation": {
+    "target": "Private source geometry projected onto each inferred world depth axis; yaw error and width/depth swap reported without truth-based axis reassignment.",
+    "metrics": [
+      "original posterior CRPS",
+      "original median MAE",
+      "raw and corrected 95% interval coverage,width,interval score",
+      "simultaneous four-condition object coverage",
+      "condition and regular/mismatch/family breakdowns"
+    ],
+    "full_denominator": true,
+    "failed_case_behavior": "Same public unconditional uniform-density prior [0.2,1.4] and fixed world-y target axis as B8; report failure reason; no GT-best track choice.",
+    "test_uses": 1,
+    "no_acceptance_threshold_or_model_tuning_on_test": true
+  },
+  "isolation": {
+    "actor_input": "Sanitized observation manifest and public constants only",
+    "forbidden": [
+      "new generator and evaluator_private",
+      "B8 generator and evaluator_private",
+      "network"
+    ],
+    "truth_usage": "Generator and split-scoped evaluator only; calibration sees only calibration truth, test evaluator only after q frozen."
+  },
+  "computation": {
+    "workers": 3,
+    "numerical_library_thread_limit": 1
+  },
+  "prohibited_claims": [
+    "planning benefit from interval expansion",
+    "natural detector performance",
+    "physical accuracy",
+    "nominal posterior calibration",
+    "reuse of B8 heldout for model selection"
+  ]
+}

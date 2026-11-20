@@ -1,0 +1,24 @@
+% Supplemental draft; does not modify the formal manuscript.
+\subsection{Object-level interval correction under geometric mismatch}
+\label{supp:object-conformal}
+
+\paragraph{Scope and independent units.}
+The conditional depth model can assign narrow intervals despite geometric model error. We evaluated a standard split-conformal correction~\cite{Angelopoulos_2023} as a reporting diagnostic, keeping the unreweighted neutral B8 predictor (structural temperature $T=1$), its $\sigma=0.01$ depth distribution, and its planning policy fixed. The new set contains 48 independently drawn procedural objects: 24 for calibration and 24 for a single held-out evaluation. Both splits follow the same frozen mixture of closed and open structures, regular panels and declared part mismatches, with no rejection or redraw. Each object provides front, front-and-side, around, and occluded observations, giving 192 dependent cases and 576 frames in total. Rendering uses exact poses, noiseless first-hit depth and ideal visible instance/category labels. The target for each case is the true object's extent projected onto the inferred depth axis; axis errors remain part of the evaluation. Generator truth is unavailable to inference. A separate pair with identical acquired fronts and different hidden depths produces exactly equal particle banks, likelihoods and posteriors; this fixture adds no independent object to the test set.
+
+\paragraph{Frozen correction.}
+Let $[L_{ic},U_{ic}]$ be the raw 95\% interval for object $i$ under condition $c$, and $y_{ic}$ its projected target extent. The scale floor $s_0=0.04756$\,m is the median, over the original 12 training objects, of their median absolute posterior-median error across four conditions. It uses neither the new calibration objects nor the test objects. We compute
+\[
+s_{ic}=\max\!\left\{\frac{U_{ic}-L_{ic}}{2},s_0\right\},\qquad
+R_i=\max_c\frac{\max\{L_{ic}-y_{ic},\,y_{ic}-U_{ic},\,0\}}{s_{ic}}.
+\]
+For $n=24$ calibration objects and $\alpha=0.05$, the order statistic at $\lceil(n+1)(1-\alpha)\rceil=24$ gives $q=10.2982$. The corrected set is
+\[
+\left[\max\{0,L_{ic}-q s_{ic}\},\ U_{ic}+q s_{ic}\right].
+\]
+The upper endpoint is not clipped to the original 1.4\,m prior support. This standard object-group construction targets simultaneous coverage of the four condition-specific extents of a new object, marginally over exchangeable objects from the same mixture. It does not assert coverage conditional on a particular class or observation direction. The interval expansion changes neither the probability mass function nor candidate scores. CRPS therefore remains a property of the original distribution; interval width and interval score assess the corrected set separately.
+
+\paragraph{Coverage--width tradeoff.}
+All 96 held-out cases remain in the denominator, including eight cases with multiple observed tracks that use the predeclared public uniform-prior/world-$y$ fallback. Calibration retains five fallback cases. The original neutral posterior attains CRPS $0.1099$\,m, compared with $0.1887$\,m for its prior-only control and $0.3146$\,m for a fixed 0.65\,m estimate. The correction increases case coverage from $61/96$ to $93/96$ and all-four-condition coverage from $5/24$ to $21/24$ objects (Table~\ref{tab:b9-intervals}). However, mean width grows from $0.278$ to $2.316$\,m, and mean interval score worsens from $2.140$ to $2.704$\,m. All three remaining misses occur in front-only observations. The observed object coverage of $87.5\%$ is below the nominal $95\%$ target; the marginal conformal statement does not guarantee that every finite test batch achieves its nominal fraction. These wide intervals are retained as a diagnostic and are not adopted by the planner. The experiment supplies no evidence that set expansion improves point geometry, probability scores, navigation or reconstruction.
+
+\input{interval_original_pmf.tex}
+\input{interval_results.tex}

@@ -1,0 +1,29 @@
+% Draft before complete-policy results; no unobserved policy numbers appear here.
+\subsection{Structural evidence calibration and semantic decision sensitivity}
+\label{supp:structure-temperature}
+
+\paragraph{Why a category prior can leave the selected target unchanged.}
+A category cue affects the score only through the structures' different predicted observation opportunities. For the shared particle bank, let $A_{oh}(r)$ denote the visible template area of object $o$ under structure $h$ along candidate route $r$, integrated over that structure's conditional depth and placement distribution and retaining the same visibility and observation-history terms. Both policies share the common coverage and measured-surface terms. For $p_o^G$ and $p_o^S$, the respective probabilities of the open structure,
+\[
+S(r)-G(r)=\sum_o (p_o^S-p_o^G)\left[A_{o1}(r)-A_{o0}(r)\right].
+\]
+This identity applies to the evaluated fixed-extent and full-distribution variants with shared geometry; it is not asserted for separately collapsed point sets. A cue can change probabilities without changing a route when the two structures expose similar area, when those differences are shared by every candidate, or when the induced score changes are smaller than the existing ranking margin. If $r_G$ is the unique geometric maximizer, a competing route $r$ has a strictly higher semantic score only when $[S(r)-G(r)]-[S(r_G)-G(r_G)]>G(r_G)-G(r)$. Thus, nonzero semantic score changes establish neither a target change nor improved reconstruction.
+
+\paragraph{Modular structural update.}
+The depth loss scale and the structural probability serve different calibration targets. Write $q_0(k)$ for the geometric particle prior and $E_{hk}$ for its frozen acquired-data loss under structure $h$. We retain the conditional particle distribution
+\[
+Z_h=\sum_k q_0(k)\exp\!\left(-\frac{E_{hk}}{2\sigma^2}\right),\qquad
+q(k\mid h,D)=\frac{q_0(k)\exp(-E_{hk}/(2\sigma^2))}{Z_h},
+\]
+and revise only the structural mixture:
+\[
+P_T(h\mid D,C)=\frac{P(h\mid C)\exp(\log Z_h/T)}{\sum_{h'}P(h'\mid C)\exp(\log Z_{h'}/T)},\qquad
+P_T(h,k\mid D,C)=P_T(h\mid D,C)q(k\mid h,D).
+\]
+Here $\sigma=0.01$ remains fixed. G uses a neutral structural prior and S retains its finite acquired-category prior. Positive temperature scales the structural log-evidence difference before adding category log-odds. It preserves the neutral class preference and can soften overconfident wrong evidence, but cannot repair its sign, an incorrect object association, or invalid template geometry. This is an explicitly modular posterior revision using the temperature-scaling principle~\cite{pmlr-v70-guo17a}, not a new calibration algorithm or the original generative joint update. $T=1$ recovers the preceding weights exactly. Conditional geometry is unchanged, although the marginal depth distribution can change through the structure mixture. The separate conformal interval diagnostic applies only to the unreweighted $T=1$ neutral predictor.
+
+\paragraph{Independent structural test.}
+Temperature is selected by neutral class negative log likelihood (NLL), equally weighting four conditions within each of the 24 new calibration objects. The frozen grid is $\{0.25,0.5,1,2,4,8,16,32,64,128\}$; it selects $T=16$ before any test result or exploration outcome is evaluated. The same 24 held-out objects used for the interval diagnostic supply one structural test, not another set of independent objects. All eight geometric-bank fallbacks remain in the test denominator. Neutral NLL falls from $5.0804$ to $0.6791$, Brier score from $0.3251$ to $0.2363$, and wrong predictions above 0.9 confidence from 27 to 3. Neutral accuracy remains $63.02\%$, as expected from preserving the sign of the evidence. The around-view condition worsens from NLL $0.0829$ to $0.3414$, and neutral marginal-depth median error also increases. With an explicitly supplied correct 9:1 category prior, S improves from NLL $4.3604$ to $0.1393$ and from $71.875\%$ to $96.875\%$ class accuracy. This controlled-prior result does not evaluate automatic semantic recognition. These probability tests motivate a matched decision comparison; they do not establish exploration efficiency.
+
+\input{structure_temperature.tex}
+\input{structure_temperature_conditions.tex}

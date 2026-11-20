@@ -1,0 +1,58 @@
+{
+  "schema": "B9_structural_temperature_protocol_v1",
+  "created_utc": "2026-11-20T09:43:30.747743+00:00",
+  "status": "frozen_before_new_calibration_or_test_evaluation",
+  "revision": "Modular structural mass calibration; not the original standard joint generative posterior.",
+  "sigma_m": 0.01,
+  "temperatures": [
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0,
+    64.0,
+    128.0
+  ],
+  "calibration_split": "new24 calibration objects in B9 uncertainty generator",
+  "test_split": "new24 test objects, single evaluation after T selected",
+  "selection": "Neutral class NLL averaged equally over four conditions per object then over24 objects; exact tie closest log2 distance to1 then larger T.",
+  "formulation": "q(k|h,D) unchanged; logZ_h=logsumexp(logq0(k)-E_hk/(2sigma^2)); P_T(h|D,C) proportional exp(logZ_h/T)*P(h|C). S keeps original finite category prior, G is neutral.",
+  "fallback": "Keep all cases. Missing/ambiguous/out-of-prior geometric bank uses neutral .5 structural evaluator fallback (L=0) independent of T; depth evaluation remains B8 uniform fallback. No truth-best-track choice.",
+  "metrics": [
+    "neutral and controlled-correct-category class NLL and binary Brier",
+    "neutral accuracy with exactties counted half",
+    "wrong high-confidence cases >.9",
+    "marginal depth CRPS changes",
+    "all four conditions and complete failures"
+  ],
+  "test_primary": "Neutral equal-object class NLL vs T=1; Brier and other outcomes reported, not retuned.",
+  "replay": "If NLL improves on independent test, evaluate both G/S at frozen T on all66 previous branches; no new truth acquisition and no selection by positive outcome. Full closed-loop only if an actual target change merits evaluation; preserve negative actual branch outcomes.",
+  "unchanged": [
+    "B8 conditional shape-specific depth/position distributions",
+    "geometry/mesh family",
+    "9:1 category prior bound",
+    "candidate generator",
+    "score common terms/weights",
+    "history filter",
+    "action/return protocol"
+  ],
+  "changes": [
+    "shape mixture probability",
+    "marginal depth probabilities may consequently change"
+  ],
+  "limits": [
+    "Positive T cannot correct log-evidence sign or wrong geometry/association.",
+    "Calibration on class likelihood is distinct from B9 G-neutral interval postprocessing; do not transfer interval guarantee to T-reweighted or semantic posteriors.",
+    "Temperature method is standard calibration adapted to modular structural evidence; no new calibration-algorithm novelty.",
+    "All calibration and test remain synthetic ideal visible semantics/exact pose/noiseless sensing."
+  ],
+  "code_sha256": {
+    "model.py": "abd1850ad3f4756f2aff0dbff6f6f908cfc0cfae6c6bcd1f5bcc1b7447fff1df",
+    "test_model.py": "97f72a321cd46c38761ff134fa5416ff9be87d0307baed02aeddadfb206704eb"
+  },
+  "test_count": 9,
+  "hardware": false
+}
