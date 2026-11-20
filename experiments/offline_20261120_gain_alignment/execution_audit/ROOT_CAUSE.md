@@ -1,0 +1,44 @@
+# Prediction-to-native-reconstruction alignment: execution audit
+
+Status: read-only diagnosis of frozen B5–B9 sources and all existing 66 native branches. No new scene was selected, no candidate was changed, and no new actor action or complete exploration was executed. Quantities below are weighted template quadrature, not unique physical square metres unless explicitly called source-reference area.
+
+## Confirmed interface differences
+
+1. **Point visibility is not native image support.** B8/B9 call B2 `trace_gain`: each face quadrature center (nominal spacing 0.22 m) casts a continuous ray; passing the range, continuous FOV, observed-TSDF and same-hypothesis self-occlusion tests earns its entire area weight. The gain has no discrete pixel occupancy, projected patch footprint, incidence or distance-dependent reconstruction yield. The actual renderer casts exactly 120×90 axial rays at integer pixel centers, with fx=fy=60 for90° horizontal FOV. RGB-D and Open3D integration use this same K; no axial/radial depth bug was found. At2/4/8m, one frontal pixel spans approximately3.33/6.67/13.33cm horizontally. Thin and grazing patches or narrow openings can be continuously visible without enough measured support for a6cm TSDF. This is a plausible yield error requiring a sensor/native-fusion probe, not yet a quantified dominant cause. Do not insert an arbitrary angle or pixel hard gate from this observation.
+
+2. **Reward history is sparser than fused data.** Every acquired frame is fused once into native TSDF. `SemanticHistoryMapperV3` retains a history keyframe only after >0.45m translation or optical-axis dot<0.8, with512-frame thinning irrelevant to these256-action runs. A straight0.2m action generally integrates observations omitted from reward history. B8 consumption calls `classify_history` on retained keyframes. Existing native surfaces can consequently retain reward. However, native interpolation and different distance/projection conventions also contribute; the native-mask audit alone does not isolate omitted frames causally.
+
+3. **Observation and evaluation tolerances differ.** History uses nearest-pixel reprojection and an axial ±0.10m measured-surface band; strict-free hits require a positive valid depth plus cross-history measured-surface veto. Predicted TSDF occlusion permits a6cm Euclidean gap. The final surface metric uses5cm point-to-triangle distance. History can consume an un-reconstructed location near a measured depth, or fail to consume TSDF-interpolated surfaces. Therefore simply tightening all tolerances would mix distinct changes and could destroy valid occlusion handling. Preserve strict-free evidence and reward-consumption changes separately.
+
+4. **Route predictions freeze the prefix map.** Every outbound successor sees the same prefix measured mesh and object hypothesis bank; route integration is a pointwise maximum, not a simulated incremental map. Newly revealed intervening obstacles are not assimilated within the forecast. Actual branches acquire and fuse a new frame after each primitive. This is the ordinary prediction/feedback gap, not evidence that an evaluator supplied truth to the actor.
+
+5. **Gain and actual increment are different estimands.** Prediction integrates alternative, posterior-weighted template surface area. The evaluator's same-point partition asks whether those quadrature points are within5cm of source triangles and pre/post native triangles. Separately, actual surface gain is area-weighted fixed source-reference samples matched to native triangles before/after; it reports gross new, lost and net. A small TSDF shift may lose prior support. Predictions have no negative loss term. Comparing a template weight directly with all-scene net area is not a calibrated error: the latter includes floor/walls outside the object term. Object/global increments must remain separate, and actual mesh area itself is not reference-correct area.
+
+6. **No evidence of a depth convention mismatch.** Renderer rays use camera-z=1, so t_hit is axial depth; RGBDFrame.points and Open3D PinholeCameraIntrinsic use the same focal length and principal point. Continuous FOV spans outer half-pixel bounds, while the rendered first-hit samples are discrete pixel centers. This does not justify calling the pinhole transform incorrect.
+
+## Direct 66-branch quantification
+
+`audit_native_consumption.py` loads B9 T16 G/S route-gain vectors, the same six native prefix meshes and all66 after meshes. It executes no actor and changes no old file. Each candidate is retained. The result is132 prediction rows; aggregation first averages candidates within each prefix, then weights the six prefixes equally.
+
+| Existing predicted gain component | G mean (m²) | S mean (m²) |
+|---|---:|---:|
+| Total route gain |0.751715|0.711343|
+| Native already within5cm, but still rewarded |0.057667|0.053176|
+| Source-true and already matched before |0.048759|0.047781|
+| False template geometry |0.286525|0.243072|
+| Source-true, unmatched before, realized after |0.220857|0.246048|
+| Source-true, unmatched before, unrealized after |0.195573|0.174442|
+
+Native-already reward is7.67%/7.48% of the respective equal-state mean total. The separate exported mean_per_candidate_native_already_fraction field weights all66 candidates equally (8.82%/8.66%), not the six states. It is a concrete defect candidate but is not the dominant remaining mismatch. Here source-true means within5cm of the full-scene source mesh, not object-only support: a nearby wall or floor can support a misplaced furniture hypothesis. These rows cannot be interpreted as target-object attribution. The source-supported/already plus unsupported geometry plus supported-new-realized plus supported-new-unrealized partition sums exactly to total; the broader native-already row overlaps false geometry and must not be added again.
+
+A native5cm consumption-only counterfactual would remove this retained mass and leave mean gains0.694048/0.658167m². No target ranking or policy rollout using that counterfactual has been executed. Ground truth is used only for this diagnostic partition, never for the proposed mask. History-removed/native-unmatched area is also exported, but includes legitimate strict-free contradictions and must not all be called missed reward.
+
+## Reusable execution basis and smallest next comparison
+
+`prefix_adapter.py::rebuild_observed_prefix(layout,paid)` calls the already frozen B8/B3 sealed-prefix reconstruction and verifies original packets/actions/owners/quality/gain feedback, unchanged original routes, and exact native PLY hash against B9. Returned `AcquiredPrefix` exposes only mapper, routes, common rows, acquired frames/scans and audit receipt. It does not return simulator/source geometry. Six supported prefixes: left24/54/109 and right24/53/110. Historical prefix reconstruction is not a new independent trial. Native TSDF is reconstructed from acquired measurements, never pickled or filled with hypotheses.
+
+For the minimal revision, freeze a new reward-only adapter with `new_weights = original_weights * (distance_to_current_native_TSDF > .05)`. Keep the current strict-free/history filter, likelihood, object bank, category priors, candidate routes, common score, return contract and navigation unchanged. Empty native meshes retain all original weights. Native distance uses acquired triangles only. This only removes redundant claimed-new reward; it does not claim to predict yield or recover falsely consumed reward. Do **not** overwrite `mapper.keyframes` to contain all frames: that would also change fitting, posterior weights and occlusion repair, confounding this comparison. First compare original and native-consumption-only forecast partitions/rankings on every retained branch; independent newly frozen cases are needed before generalizing.
+
+## Proposed new sensor/yield validation, not yet authorized or executed
+
+Use a small predeclared procedural box/shelf set with exposed solid faces, thin horizontal layers and a fixed partial occluder. Fix geometry seed, dimensions, render resolution, TSDF voxel/truncation and complete view/candidate lists before observing gains. Separate a canonical sensor probe (frontal/oblique/grazing views at fixed distances, explicitly not a policy experiment) from native candidate branches produced by the unchanged observed-state generator. Record all candidates, including zero-yield or failed routes. Each branch starts from the same acquired prefix with byte-identical native mesh and receives all actual intermediate frames. Evaluate (a) source geometry correctness, (b) actual acquired pixel support, (c) before/after native reconstruction, (d) object/global gross new/lost/net and coverage/cost. A later pixel/yield model should be calibrated and tested on disjoint object units, not fitted to a favorable B9 branch. No hard pixel or incidence cutoff is proposed here.

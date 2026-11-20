@@ -1,0 +1,17 @@
+\begin{table}[!htbp]
+\centering\small
+\caption{Prediction versus actual object gross-new area at 5\,cm. Known-geometry rows average three dependent routes on each of twelve new objects; their single error has no G/S prior. Fitted rows use all eleven original candidates at one retained prefix. The last three share conditional-mean shapes and a 0.06\,m quadrature; the original distribution also differs in geometric integration and basis. MAE is in m$^2$; $\rho$ is candidate Spearman correlation. No complete policy uses the acquisition forecast.}
+\label{tab:acquisition-alignment}
+\begin{tabular}{llrrrr}
+\toprule
+Geometry & Estimator & MAE (G) & MAE (S) & $\rho_G$ & $\rho_S$ \\
+\midrule
+Known geometry & Visibility & 0.1532 & -- & -- & -- \\
+Known geometry & Acquisition forecast & 0.0143 & -- & -- & -- \\
+Fitted geometry & Original distribution & 0.2061 & 0.1961 & 0.927 & 0.891 \\
+Fitted geometry & Mean + fine visibility & 0.3107 & 0.3961 & 0.691 & 0.791 \\
+Fitted geometry & Mean + native visibility & 0.3070 & 0.3563 & 0.700 & 0.764 \\
+Fitted geometry & Mean + acquisition forecast & 0.3172 & 0.3973 & 0.836 & 0.855 \\
+\bottomrule
+\end{tabular}
+\end{table}

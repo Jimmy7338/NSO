@@ -1,0 +1,11 @@
+\paragraph{Experimental acquisition-aligned reward.}
+Visibility in Eq.~\ref{eq:template-area} does not ensure that an observation will add reconstructed surface. We therefore test an optional forward estimator. For each structural alternative, a separate TSDF replays all acquired RGB-D and then fuses images rendered along the candidate route from the current measured mesh plus that alternative. Let $\widehat M_{oh}(r)$ be this forecast mesh, $M_t$ the measured mesh, and $b_{ohj}$ the original strict-free-space acceptance mask. On a hypothesis-owned surface quadrature,
+\begin{equation}
+\widehat H_t^m(r)=\sum_{o,h}\pi_{o,T}^m(h)
+\sum_j a_{ohj}b_{ohj}
+\mathbf 1\{d(p_{ohj},M_t)>\tau\}
+\mathbf 1\{d(p_{ohj},\widehat M_{oh}(r))\leq\tau\},
+\quad \tau=0.05\,\mathrm m.
+\label{eq:acquisition-reward}
+\end{equation}
+This predicts gross newly reconstructed object area; lost and net area are reported separately. It replaces the old measured-point consumption rule, retains measured-support vetoes against free-space contradictions, and never fuses hypothetical observations into the measured map. The fitted probe uses per-structure conditional-mean geometry and a 0.06\,m surface quadrature, rather than the full particle integral. Unknown unmodeled occluders remain absent. This estimator is tested separately from the complete policies below.
