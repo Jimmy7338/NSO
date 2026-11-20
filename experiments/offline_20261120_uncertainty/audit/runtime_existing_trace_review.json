@@ -1,0 +1,101 @@
+{
+  "schema": "B8_existing_trace_runtime_review_v1",
+  "status": "readonly_diagnostic_not_instrumented_profile",
+  "reviewed_at_utc": "2026-11-20T08:49:03.469480+00:00",
+  "bank_constructor_seconds": 0.7841225529991789,
+  "bank_receipt_sha256": "ae9348d428c9cbb1c7da5d0d4fb73903ae5b97f32af87fc8bf60343fa5a2b3a3",
+  "replay": {
+    "G_fixed": {
+      "points": 2272,
+      "route_gain_union_and_npz_serialization_elapsed_s": 2.3402783240017015,
+      "unique_gain_calls": 168,
+      "source_sha256": "1190eb5e132f4cdbe15d6c28cc09daf75e1945beb0aa6e978de1e2b3b0fd382b"
+    },
+    "S_fixed": {
+      "points": 2272,
+      "route_gain_union_and_npz_serialization_elapsed_s": 2.3107858129951637,
+      "unique_gain_calls": 168,
+      "source_sha256": "aab5e98baed1559fdd88379f5a929d0479d5b2dfb3dfd8dbfdbaa904ad96dd6c"
+    },
+    "G_uncertainty": {
+      "points": 34246,
+      "route_gain_union_and_npz_serialization_elapsed_s": 28.498336912001832,
+      "unique_gain_calls": 168,
+      "source_sha256": "32b5386e9313d15c2729a680950edbb4ba5400e5bccd9d2959c7b4e19bbc5bef"
+    },
+    "S_uncertainty": {
+      "points": 34246,
+      "route_gain_union_and_npz_serialization_elapsed_s": 28.577431555007934,
+      "unique_gain_calls": 168,
+      "source_sha256": "3029f45b0085ca9c6fc9b31f06e6e0ce35f2be0f2dc43096f622fa42b17d1567"
+    },
+    "S_mean_collapse": {
+      "points": 1020,
+      "route_gain_union_and_npz_serialization_elapsed_s": 0.8799832850054372,
+      "unique_gain_calls": 168,
+      "source_sha256": "03fc628b79411163f772eee7ed9695157c4907976f5051ba48857f43875a261f"
+    }
+  },
+  "online_existing_steps": {
+    "G_fixed": {
+      "54": {
+        "decision_wall_s": 0.006440714001655579,
+        "sensor_wall_s": 0.010339690998080187,
+        "observe_wall_s": 0.30094367799756583,
+        "active_option_id": "controlled_functional_shelf_left/single_observation_cold_start/plan-2"
+      },
+      "55": {
+        "decision_wall_s": 12.142458265996538,
+        "sensor_wall_s": 0.010649390998878516,
+        "observe_wall_s": 0.31552010599989444,
+        "active_option_id": "controlled_functional_shelf_left/single_observation_cold_start/plan-3"
+      }
+    },
+    "S_fixed": {
+      "54": {
+        "decision_wall_s": 0.006680941995000467,
+        "sensor_wall_s": 0.010816209993208759,
+        "observe_wall_s": 0.30646383299608715,
+        "active_option_id": "controlled_functional_shelf_left/single_observation_cold_start/plan-2"
+      },
+      "55": {
+        "decision_wall_s": 12.334133124997607,
+        "sensor_wall_s": 0.011352442990755662,
+        "observe_wall_s": 0.34548946299764793,
+        "active_option_id": "controlled_functional_shelf_left/single_observation_cold_start/plan-3"
+      }
+    },
+    "G_uncertainty": {
+      "54": {
+        "decision_wall_s": 0.0064898029959294945,
+        "sensor_wall_s": 0.01034935399366077,
+        "observe_wall_s": 0.31354167200333904,
+        "active_option_id": "controlled_functional_shelf_left/single_observation_cold_start/plan-2"
+      },
+      "55": {
+        "decision_wall_s": 64.58365129899175,
+        "sensor_wall_s": 0.01077009699656628,
+        "observe_wall_s": 0.3276248539914377,
+        "active_option_id": "controlled_functional_shelf_left/single_observation_cold_start/plan-3"
+      }
+    }
+  },
+  "first54_sensor_packets_actions_poses_equal": true,
+  "first54_fingerprint": "b9113246f94860085ed4987854a5fe8881f2a0abe02757f2e4652145e43cef0b",
+  "finding": "The delay after 54 paid actions is replanning charged to action 55. Evidence points to repeated particle-surface visibility/route evaluation as the scaling bottleneck rather than the bank constructor alone.",
+  "limits": [
+    "Replay arm elapsed_s includes compressed NPZ serialization; it is not a pure gain timer.",
+    "Bank constructor time excludes subsequent model materialization and history classification.",
+    "Online logs time the full decision phase, so exact online bank/gain fractions cannot be inferred."
+  ],
+  "proposed_exact_equivalence_optimization": "For fixed and uncertainty modes only, compute per-pose geometry visibility once on the union of nonzero G/S point indices, then multiply separately by G/S weights and retain the original pointwise route maximum. Derive per-arm weighted audit counts from the common masks. Do not share mean-collapse geometry. Validate exact gain/score/winner parity before any later use.",
+  "code_locations": [
+    "method/model.py:286-295",
+    "rollouts/joint_depth/run.py:94-114",
+    "../dual_template_exploration_20261119/method/adapter.py:81-89",
+    "../dual_template_repair_20261119/method/occlusion_repair.py:67-145"
+  ],
+  "process_attached_or_profiled": false,
+  "new_experiments": false,
+  "implementation_modified": false
+}

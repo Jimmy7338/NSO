@@ -1,0 +1,46 @@
+{
+  "schema": "B8_isolated_observation_inference_protocol_v1",
+  "status": "frozen_before_model_inference",
+  "dataset_manifest_sha256": "027dbde1fc8831103e6876f15284921f0ea753cbd4b7f16fa45472e9fdbafd20",
+  "generator_freeze_sha256": "36fe929f056b6613baefa044e7220def4a83cdfd2481e8b1bf2439e81d5644bb",
+  "cases": 96,
+  "objects": 24,
+  "split_objects": {
+    "train": 12,
+    "validation": 6,
+    "heldout": 6
+  },
+  "primary_sensor_frames": 288,
+  "counterfactual_fixture_frames": 2,
+  "counterfactual_independent_units": 0,
+  "method_api": "infer_depth_distribution(mapper, neutral_model=None, frozen_scale_config=None)",
+  "method_input": "Sanitized RGBDFrames and first-hit visible_owner masks reconstructed with frozen mapper and InstanceSupportIndex",
+  "input_isolation": {
+    "separate_subprocess": true,
+    "denied_read_subtrees": [
+      "generator",
+      "evaluator_private"
+    ],
+    "no_split_or_truth_argument": true,
+    "network_denied": true
+  },
+  "model_output": "All tracks, particle prior/energy and observed axis. No scalar choice or prior fitting.",
+  "prior": "Continuous uniform depth0.2..1.4; fixed0.1m nodes with Voronoi mass and acquired-span conditioning as method defines.",
+  "sigma_candidates_m": [
+    0.01,
+    0.015,
+    0.025,
+    0.04,
+    0.06,
+    0.09,
+    0.14,
+    0.22
+  ],
+  "selection": "Independent evaluator chooses train-only equal-object/equal-condition CRPS; ties choose larger sigma; validation and heldout evaluate once after selected scale frozen.",
+  "failure_handling": "Actor preserves all missing/multiple tracks and failures. Evaluator fallback is unconditional public uniform[.2,1.4] with world-y axis, independent of sigma; no GT-based selection. Full denominator and separate failure rates retained.",
+  "axis_evaluation": "Evaluator projects private true vertices onto inferred depth axis; yaw/axis mismatch separately reported. No private projected truth enters actor.",
+  "policy_or_branch_actions": 0,
+  "hardware": false,
+  "method_validation_sha256": "fc8cb19961d9ecc8ead6618595e08d158d76931bfe188b515b3749fc9b7cc971",
+  "evaluator_validation_sha256": "1637a525a439bbf1e090d5a5a6ccdb6124b2153de4b970d60e2221e692d971b9"
+}

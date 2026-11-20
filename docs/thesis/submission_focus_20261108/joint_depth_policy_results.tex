@@ -1,0 +1,70 @@
+\section{Matched policies with conditional depth}
+\label{sec:joint-depth-policy}
+
+\paragraph{Controls and fixed-prefix prediction.}
+The five declared arms are G fixed, S fixed, G distribution, S distribution
+and S mean collapse. Every arm uses the same conditional non-depth geometry,
+observed-instance support, joint loss update and frozen scale
+$\sigma=0.01$\,m. Fixed mode retains the location-allocation hypotheses and
+their update; its unresolved depth is $\max(0.65\,\mathrm{m},s)$, while
+credible opposing faces retain their measured extent. It is therefore a
+matched extent control, not the preceding O policy or the original fixed
+template implementation. Mean collapse first computes the full S joint
+distribution, retains each structure's probability, and replaces that
+structure's geometry distribution by its conditional mean depth and lower
+coordinate. It does not recompute the likelihood or class weights.
+
+The same six acquired development prefixes and all 66 original measured
+candidate branches provide 330 forecasts, without new branch executions.
+The input geometry and actual branch outcomes are shared across arms.
+Table~\ref{tab:joint-depth-replay} uses equal-state averages after averaging
+candidates within a state. Relative to S fixed, S distribution increases
+absolute source-supported forecast weight from 0.3600 to 0.4368\,m$^2$,
+realized forecast weight from 0.1623 to 0.2216\,m$^2$, and rank correlation
+from 0.787 to 0.835. These improvements are not uniform across states, and
+mean collapse has still greater realized weight (0.2448\,m$^2$) and rank
+(0.849). Within each of the fixed and distribution modes, G and S select
+the same candidate at all six states. Only the left state after 54 actions
+changes its choice between fixed and distribution modes: it trades slightly
+less actual object/global net surface for fewer actions and a shorter path.
+The six prefixes have already been inspected during method development;
+neither 330 forecasts nor 66 reused branches represent independent scenes.
+
+\paragraph{Complete unknown exploration.}
+All five arms run in both existing furniture permutations with the unchanged
+unknown-coverage and measured-quality scores, candidates, sensor fusion,
+256-action budget and return rules. They share the same acquired prefix,
+whose correct-free coverage is 42.606\%. The ten complete runs all reach
+100\% correct-free coverage, return and incur zero simulated collisions
+(Table~\ref{tab:joint-depth-policy}). Their native measured TSDFs are
+evaluated independently; predicted templates are never fused as observations.
+
+On the left layout, distribution mode reaches full coverage at action 88
+rather than 97 and travels 42.0 rather than 43.2\,m. Final 5\,cm F1 increases
+from 92.381\% to 92.758\%. Cabinet recall increases by 2.834 percentage
+points, while shelf recall decreases by 1.294 points. This effect occurs
+equally for G and S. Mean collapse reproduces the complete distribution
+trajectory and TSDF exactly. On the right, all five trajectories and TSDFs
+are identical. Thus the matched comparison demonstrates a benefit from
+replacing the fixed extent in one inspected layout; it does not isolate a
+benefit of keeping geometric spread or using the semantic class prior.
+Historical O outputs are references, not additional new trials or matched
+controls for the changed joint update.
+
+The category pathway is active despite the tied policies. Paired G/S scores
+differ by more than $10^{-12}$ at 4/27 left and 5/26 right planning states in
+fixed mode, and at 7/30 left and 6/26 right states in distribution mode.
+None of these score differences changes the selected candidate.
+
+Distribution mode also costs more computation: its elapsed times are
+417.8--500.4\,s, compared with 274.2--292.8\,s for fixed mode and
+259.5--297.3\,s for mean collapse. These are wall times under three concurrent
+processes, each restricted to one numerical-library thread, on a host with
+eight available CPU cores. The budget counts logical simulated actions;
+these times do not measure real-robot motion or real-time control throughput.
+The study has one floorplan family, two related furniture permutations and
+no stochastic repeats. The controlled coverage result, conditional surface
+tradeoff, semantic tie and extra distribution cost are all retained.
+
+\input{joint_depth_replay_table.tex}
+\input{joint_depth_policy_table.tex}
