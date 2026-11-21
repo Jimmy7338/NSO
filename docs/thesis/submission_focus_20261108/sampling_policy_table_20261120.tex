@@ -1,0 +1,19 @@
+% Generated only after all six declared runs pass independent evaluation.
+\begin{table}[!htbp]
+\centering\small\setlength{\tabcolsep}{3.1pt}
+\caption{Complete full-quadrature policy comparison and measured-consumption ablation. S$^{-m}$ disables only measured-surface reward consumption; valid-free rejection and B2 visibility remain. $C$ is final reachable-cell coverage, $a_{100}$ its first 100\% action, $n_a$ paid actions and $d$ traveled distance. F1 and object recall use the unchanged native-mesh evaluator; $R_o$/$R_c$ denote open-shelf/closed-cabinet recall at 5~cm. These are six deterministic reruns on the same two permutations, not new independent scenes. Historical C/J controls are reused from Table~S10.}
+\label{tab:clean-consumption-policy}
+\begin{tabular}{llrrrrrrrr}
+\toprule
+Layout & Mode & $C$ (\%) & $a_{100}$ & $n_a$ & $d$ (m) & F1$_5$ (\%) & F1$_{10}$ (\%) & $R_o$ (\%) & $R_c$ (\%) \\
+\midrule
+Left & G & 100.00 & 97 & 256 & 42.8 & 92.63 & 94.00 & 82.61 & 83.79 \\
+ & S & 100.00 & 97 & 256 & 42.8 & 92.63 & 94.00 & 82.61 & 83.79 \\
+ & S$^{-m}$ & 100.00 & 67 & 256 & 44.0 & 92.29 & 93.83 & 83.17 & 74.31 \\
+\midrule
+Right & G & 100.00 & 100 & 256 & 43.2 & 92.60 & 93.88 & 81.09 & 79.21 \\
+ & S & 100.00 & 100 & 256 & 43.2 & 92.60 & 93.88 & 81.09 & 79.21 \\
+ & S$^{-m}$ & 100.00 & 100 & 256 & 43.2 & 92.54 & 93.88 & 80.78 & 78.39 \\
+\bottomrule
+\end{tabular}
+\end{table}

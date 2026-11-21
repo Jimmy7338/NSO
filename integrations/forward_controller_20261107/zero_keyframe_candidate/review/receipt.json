@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "scope": "independent static and targeted mock tests only; no live ROS/CAN access, source edits or motion",
+  "tests": {
+    "count": 38,
+    "exit_code": 0,
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/tests",
+      "-p",
+      "test*.py",
+      "-v"
+    ]
+  },
+  "geometry_checks": "geometry_checks.json",
+  "reviewed_sha256": {
+    "runtime/can_control_feedback.py": "3a7c81b58a7e19f9a27fef00ffa0c09f69c7037cec93720f59e8090fa0ff2166",
+    "runtime/csm_odometry_bridge.py": "e5a093420fac6c79b0fab3a5c17cc6b62fd7c774a060a019999871e3d602f144",
+    "tests/test_can_control_feedback.py": "e0cb47a684d795f077db4160eab131e0e61aa275649426ec285a16d13c6e1618",
+    "tests/test_candidate_alignment.py": "7730998e85b102f5f13c20f98b6f506e1300bb1809106a792f70bc47aa0c4138",
+    "tests/test_csm_odometry_bridge.py": "8b6476c196d717f6749f7c55c8a6dfdd40f8803becdf2ce0b23d03e527d639fe"
+  },
+  "findings_resolved": [
+    {
+      "finding": "same-name ROS node parameter persisted aligned pose-source metadata after default restoration",
+      "minimal_fix": "both modes explicitly overwrite complete pose_source profile; same-store aligned-to-default main regression passed"
+    },
+    {
+      "finding_owner": "root",
+      "finding": "ROS XMLRPC cannot marshal original nanosecond int64 metadata",
+      "minimal_fix": "decimal strings in ROS parameter copy only; original file and topic JSON retain integer nanoseconds; actual xmlrpc marshal regression passed"
+    }
+  ],
+  "confirmed": [
+    "actual incoming connection caller/frame validated without header forgery",
+    "default original pose object and source stamp preserved",
+    "fixed SE2 transform cached once with SHA and same-stamp anchor binding",
+    "aligned output explicitly declares numerical coordinates changed; raw registration preserved without smoothing",
+    "body SE2 twist invariant under constant world-frame change",
+    "full quaternion world-Z left multiplication preserves measured Z/tilt",
+    "CAN receiver bytes identical to before; source TTL/startup/latch retained",
+    "no motion publisher or CAN transmit path added"
+  ],
+  "runtime_boundary": "one TF broadcaster per bridge instance; actual sole owner and stopping old bridge are root-owned runtime handover checks, not statically verified or claimed here",
+  "remaining_required_code_changes": [],
+  "live_runtime_modified": false
+}

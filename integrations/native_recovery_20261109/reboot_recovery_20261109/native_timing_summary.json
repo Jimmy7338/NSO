@@ -1,0 +1,156 @@
+{
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261109/native_timing_C40_20261109_01",
+  "scope": "JSON-only post-run diagnostic; no replay or device control",
+  "result": {
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261109/native_timing_C40_20261109_01",
+    "status": "nso_joint_core_stopped",
+    "reason": "budget_exhausted",
+    "goals": 40,
+    "verified_arrivals": 40,
+    "distance_m": 7.084156145572656,
+    "elapsed_s": 430.7156947530002,
+    "stopped": true,
+    "execution_interrupted": false
+  },
+  "unchanged_limits_ms": {
+    "native_sender_gap": 40,
+    "command_TTL": 100,
+    "source_wall_age": 80
+  },
+  "native": {
+    "schema": "nso.native_sender_timing.v1",
+    "clock": "steady_clock_ns",
+    "retained_rows": 512,
+    "retained_span_s": 10.343037623,
+    "pre_stop_rows": 375,
+    "pre_stop_metrics": {
+      "gate_interval": {
+        "n": 375,
+        "min_ms": 20.043196,
+        "median_ms": 20.111869,
+        "p99_ms": 22.373505,
+        "max_ms": 27.561938
+      },
+      "sdk_send": {
+        "n": 375,
+        "min_ms": 0.017313,
+        "median_ms": 0.028385,
+        "p99_ms": 0.042624,
+        "max_ms": 0.064961
+      },
+      "sleep_overshoot": {
+        "n": 375,
+        "min_ms": 0.013211,
+        "median_ms": 0.069116,
+        "p99_ms": 2.331072,
+        "max_ms": 7.521266
+      },
+      "lock_wait": {
+        "n": 375,
+        "min_ms": 0.004224,
+        "median_ms": 0.009184,
+        "p99_ms": 0.014465,
+        "max_ms": 0.022113
+      }
+    },
+    "normal_rows_metrics": {
+      "gate_interval": {
+        "n": 375,
+        "min_ms": 20.043196,
+        "median_ms": 20.111869,
+        "p99_ms": 22.373505,
+        "max_ms": 27.561938
+      },
+      "sdk_send": {
+        "n": 375,
+        "min_ms": 0.017313,
+        "median_ms": 0.028385,
+        "p99_ms": 0.042624,
+        "max_ms": 0.064961
+      },
+      "sleep_overshoot": {
+        "n": 375,
+        "min_ms": 0.013211,
+        "median_ms": 0.069116,
+        "p99_ms": 2.331072,
+        "max_ms": 7.521266
+      },
+      "lock_wait": {
+        "n": 375,
+        "min_ms": 0.004224,
+        "median_ms": 0.009184,
+        "p99_ms": 0.014465,
+        "max_ms": 0.022113
+      }
+    },
+    "first_fault": {
+      "sleep_requested_ns": 19999104,
+      "sleep_start_ns": 7429331485668,
+      "wake_ns": 7429351519872,
+      "sample_enter_ns": 7429351522336,
+      "lock_acquired_ns": 7429351532096,
+      "gate_now_ns": 7429351532128,
+      "gate_prev_tick_ns": 7429331460932,
+      "sample_exit_ns": 7429351534784,
+      "send_enter_ns": 7429351535200,
+      "send_exit_ns": 7429351561953,
+      "fault_after_sample": 8,
+      "fault_after_send": 8
+    },
+    "first_fault_name": "external_guard",
+    "first_fault_after_stop_request_begin_ms": 13.525493,
+    "first_fault_after_stop_requested_ms": 11.866619,
+    "first_fault_gate_interval_ms": 20.071196,
+    "pre_stop_fault_rows": 0,
+    "pre_stop_gate_gaps_over_40ms": 0
+  },
+  "adapter": {
+    "fault": "native_driver_fault:8",
+    "rows": 256,
+    "pre_stop_rows": 255,
+    "pre_stop_cycle_interval": {
+      "n": 254,
+      "min_ms": 20.062972,
+      "median_ms": 20.153549,
+      "p99_ms": 25.51589,
+      "max_ms": 26.721925
+    },
+    "pre_stop_sleep_overshoot": {
+      "n": 255,
+      "min_ms": 0.02658700007635355,
+      "median_ms": 0.09090800009310246,
+      "p99_ms": 5.473393000597853,
+      "max_ms": 6.671493000471272
+    },
+    "fault_cycle_after_stop_request_begin_ms": 15.198095
+  },
+  "cleanup_milestones_monotonic_ns": {
+    "zero_before": 7431844954239,
+    "stop_request_begin": 7429337996843,
+    "supervisor_started": 6998605093906,
+    "stop_requested": 7429339655717,
+    "actuator_close_end": 7432314694595,
+    "root_saved": 7432439643155,
+    "zero_after": 7432316342397,
+    "actuator_close_begin": 7431846818492,
+    "worker_close_begin": 7429340722166,
+    "worker_close_end": 7430822476122
+  },
+  "zero_feedback_before_and_after": true,
+  "conclusion": "No pre-stop native abnormality observed. First latched fault is external_guard (8), first observed after explicit shutdown request, with normal ~20ms gate interval; not sender_late (5). Adapter terminal native_driver_fault:8 is consistent with cleanup stop.",
+  "limits": [
+    "512-row native ring retains only final ~10s; first_fault is retained separately for entire sender lifetime. No first latched sender_late over entire run; interval/SDK/sleep extrema describe retained window only.",
+    "Post-fault gate_prev_tick freezes; later gate_now-minus-prev values are not sender intervals and excluded from normal statistics.",
+    "Successful single diagnostic C40 does not establish sporadic earlier fault resolved or method comparison effectiveness.",
+    "steady_clock_ns and Python monotonic_ns comparison assumes same Linux CLOCK_MONOTONIC domain; observed times consistent.",
+    "CAN zero feedback confirms reported chassis feedback, not independent physical braking measurement.",
+    "first_fault timestamps mark sender observation, not callback latch instant; exact external_guard latch time is not instrumented. Last zero-fault row precedes stop_request_begin by ~6.5ms, so cleanup attribution is consistent with ordering and fault type, not direct timestamp proof of the callback."
+  ],
+  "source_sha256": {
+    "native_timing.json": "5a3537f3ae2be6a596dd4b98a898f2c7b42f0fec4a3d3803ddd1fb289247746d",
+    "adapter/control_timing_fault.json": "7ad552270ef4de88b56122d50356eadeb89bb2e4e375ca679c72bfda240e5ba9",
+    "adapter/result.json": "468216bf67f1b4e2c4141a3355debcfd7d54aafe2a9ae9cd5a100cfaeda25498",
+    "result.json": "216276ec981865acc0d0f2a0e67e855a0ebc3eaa8135f104a448a83a9e622b62",
+    "summary.json": "8752129c8a16aaad77c08d5e3b6c934fc3744af3bead8406623e66a385925aa9"
+  }
+}

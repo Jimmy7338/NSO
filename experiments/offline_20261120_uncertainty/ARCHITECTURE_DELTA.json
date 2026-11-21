@@ -1,0 +1,21 @@
+{
+  "schema": "B8_explicit_research_model_delta_v1",
+  "user_authorization": "Improve uncertainty for unobserved dimensions, calibrate on independent geometries and rerun comparisons.",
+  "conditional_geometry_parent": "frozen B6 outer-and-layers",
+  "changed": [
+    "Replace one unresolved local depth with a quadrature distribution, including unobserved-end placement when no unique endpoint is measured.",
+    "Use one normalized joint structure/geometry loss update, including B7 strict-free contradiction, with a scale selected on independent training CRPS.",
+    "This joint update replaces the old 6cm surface-only update and its clipped conditional class-log-odds implementation; the old update is not applied again.",
+    "G/S may have different marginal depth distributions because their class priors differ, while geometry basis and all measured errors are shared.",
+    "New fixed-depth controls also use this joint update and common placement hypotheses. They are not claimed equivalent to O8 or original B6."
+  ],
+  "unchanged": [
+    "Measured map and acquired sensor input",
+    "Observed instance association and B6 conditional width, qualified yaw, box/leg height and layer rules",
+    "Existing part surface quadrature and history/occlusion interpretation",
+    "Navigation candidate construction, common coverage and quality scores, score coefficients, execution, action budget and stopping/return rules"
+  ],
+  "probability_limit": "Training CRPS selection improves the declared depth distribution metric but does not ensure calibrated class probabilities or nominal interval coverage. Evaluate class marginals separately; do not retune on these diagnostics.",
+  "experiment_limit": "Calibration shapes are independent of the old scene assets. Reused exploration layouts and six prefixes remain inspected development environments.",
+  "hardware": false
+}

@@ -1,0 +1,37 @@
+{
+  "study": "historical_E1_single_target_intervention",
+  "layout": "N19_ROOMS_SEED20261120",
+  "independent_layout_count": 1,
+  "seed": 20261120,
+  "initial_anchor_row_column_yaw_index": [32, 5, 1],
+  "historical_run": "four_room_completion_20261119/matrix_study/scenes/20261120/runs/S/attempt_001",
+  "historical_observed_packet_sha256": "42f51b66d8dcc4738fd78d4d525f7b7625da12dfdca36aa1dee19e772386bc98",
+  "historical_plan_number": 6,
+  "paid_prefix_actions": 198,
+  "shared_paid_action_budget": 512,
+  "remaining_at_intervention": 314,
+  "return_actions_count_against_budget": true,
+  "continuation_policy": "historical S arm, exploration_joint_v1 v10_3_1, same feedback and guard",
+  "policy_intervention": "Recompute original S and verify the complete selection receipt. Substitute only the chosen route at its original call. Run via native local execution and revert to unmodified S selections afterwards.",
+  "branches": {
+    "3": {"type": "coverage", "target": [53, 20, 3], "planned_outbound_actions": 78, "planned_return_actions": 40},
+    "5": {"type": "facility entry", "target": [7, 12, 2], "planned_outbound_actions": 79, "planned_return_actions": 89}
+  },
+  "binding_checks": [
+    "Match initial and all 198 paid observation packet hashes, actions, positions, headings, collisions, path length, and coverage.",
+    "Match all six historical decision records including all 12 candidates, scores, observed safe-map and history hashes at the intervention.",
+    "Reproduce the full historical candidate-5 branch behavior and native mesh exactly.",
+    "Retain failures and guard interventions. Do not try a different historical checkpoint if restoration fails."
+  ],
+  "evaluation": {
+    "reference": "historical E1 S fixed_reference.npz, sampled before this study",
+    "area_sample_count_drawn_and_seed": [100000, 20261119],
+    "reconstruction_sample_count_and_seed": [12000, 812],
+    "C_free": "Correctly observed free among frozen source-reachable cells",
+    "surface_F1": "Historical area-sampled reconstruction precision and fixed visible-source recall at 5cm",
+    "J": "C_free times surface_F1@5cm with both factors in [0,1]",
+    "area_increment": "Fixed reference points newly within 5cm of the acquired TSDF mesh, minus or alongside lost reference points. Weight by source exterior area per drawn point.",
+    "frontier_return_telemetry": "After initial route arrival, record first later robot center observed free and 4-adjacent to unknown, and cost to first later selected coverage option whose endpoint is actually reached. If either is absent at stop, retain null. Coverage improvement arrival does not follow from the frontier indicator alone.",
+    "reference_access": "Truth coverage and reference surfaces are evaluated outside planner inputs. Sensor rendering uses the frozen source world."
+  }
+}

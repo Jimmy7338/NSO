@@ -1,0 +1,164 @@
+{
+  "schema": "nso.calibrated_S24_02.readonly_terminal_audit.v1",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/calibrated_S24_02",
+  "paid_actions": 24,
+  "accepted_observations": 25,
+  "accepted_action_counts": {
+    "forward": 14,
+    "right": 5,
+    "left": 5
+  },
+  "verified_arrivals": 24,
+  "canonical_semantic_positive_frames": 17,
+  "semantic_scope": "actual detector output, not recognition accuracy; semantic labels alone do not establish scoring influence",
+  "plans": [
+    {
+      "plan": 1,
+      "candidate_count": 5,
+      "G_S_scores_exactly_equal": true,
+      "top1": {
+        "C": 0,
+        "G": 0,
+        "S": 0
+      },
+      "nonzero_aperture_factors": 0,
+      "observed_asset_count": 1,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 1,
+        "deep_requires_available_entry": 1
+      }
+    },
+    {
+      "plan": 2,
+      "candidate_count": 5,
+      "G_S_scores_exactly_equal": true,
+      "top1": {
+        "C": 0,
+        "G": 2,
+        "S": 2
+      },
+      "nonzero_aperture_factors": 0,
+      "observed_asset_count": 0,
+      "role_reasons": {}
+    },
+    {
+      "plan": 3,
+      "candidate_count": 5,
+      "G_S_scores_exactly_equal": true,
+      "top1": {
+        "C": 0,
+        "G": 3,
+        "S": 3
+      },
+      "nonzero_aperture_factors": 0,
+      "observed_asset_count": 0,
+      "role_reasons": {}
+    },
+    {
+      "plan": 4,
+      "candidate_count": 3,
+      "G_S_scores_exactly_equal": true,
+      "top1": {
+        "C": 0,
+        "G": 1,
+        "S": 1
+      },
+      "nonzero_aperture_factors": 0,
+      "observed_asset_count": 1,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 1,
+        "deep_requires_available_entry": 1
+      }
+    },
+    {
+      "plan": 5,
+      "candidate_count": 2,
+      "G_S_scores_exactly_equal": true,
+      "top1": {
+        "C": 0,
+        "G": 1,
+        "S": 1
+      },
+      "nonzero_aperture_factors": 0,
+      "observed_asset_count": 1,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 1,
+        "deep_requires_available_entry": 1
+      }
+    },
+    {
+      "plan": 6,
+      "candidate_count": 1,
+      "G_S_scores_exactly_equal": true,
+      "top1": {
+        "C": 0,
+        "G": 0,
+        "S": 0
+      },
+      "nonzero_aperture_factors": 0,
+      "observed_asset_count": 1,
+      "role_reasons": {
+        "no_unused_feasible_aperture_pose": 1,
+        "deep_requires_available_entry": 1
+      }
+    }
+  ],
+  "semantic_no_effect_reason": "All candidate incremental aperture factors are zero at all6 planning states; G/S score arrays are exactly identical. Plans2/3 have no accepted measured geometry assets, others have1; no entry is available and deep requires entry. No target_projection_error_exceeds_limit is logged in this trial; do not attribute failure to .35m projection gate.",
+  "measured_extent": {
+    "profile": "measured_extent_3m_v1",
+    "limit_m": 3.0,
+    "scope": "Existing declared measured-patch extent adapter; logs do not record discarded patch spans, so absence of assets cannot be assigned specifically to extent filtering."
+  },
+  "terminal": {
+    "reason": "budget_exhausted",
+    "method_failed": false,
+    "final_state": [
+      200,
+      200,
+      0
+    ],
+    "anchor": [
+      200,
+      200,
+      0
+    ],
+    "feedback_zero_after_close": true,
+    "distance_CAN_m": 3.5907609722614526,
+    "elapsed_s": 368.8467353369997
+  },
+  "coverage_proxy": {
+    "initial_m2": 180.12000000000003,
+    "final_m2": 256.6,
+    "delta_m2": 76.47999999999999,
+    "interpretation": "Diagnostic only: user reports drift while manually moving to experimental environment in this map epoch. Must not claim mapping/coverage benefit or physical area accuracy."
+  },
+  "distance_consistency": {
+    "CAN_m": 3.5907609722614526,
+    "adapter_odometry_m": 9.609643434913968,
+    "interpretation": "Substantial disagreement, including stationary-pose odometry accumulation; neither establishes ground-truth error by itself. Preserve as consistency warning."
+  },
+  "shutdown": {
+    "raw_adapter_shutdown_reason": "native_driver_fault:8",
+    "raw_reason_preserved": true,
+    "native_code_8": "Fault::external_guard, not a chassis hardware error code",
+    "source_definitions": [
+      "staging/ans-live-20261023-standard-attended-a1/native/scout_radius_command_timeout_v1.hpp:27",
+      "staging/ans-live-20261023-standard-attended-a1/native/radius_driver_node.cpp:73-83",
+      "workspaces/nso_hybrid_20261029/runtime/mission.py:952",
+      "workspaces/nso_hybrid_20261029/runtime/visual_velocity_adapter.py:212"
+    ],
+    "first_recorded_fault_monotonic": 21624.256170468,
+    "final_goal_result_monotonic": 21617.745559241,
+    "after_final_goal_s": 6.5106112270004814,
+    "before_close_zero_confirmed": true,
+    "native_exit_code": 0,
+    "interpretation": "Consistent with normal supervisor cleanup: mission finally publishes /nso_radius/stop, native callback latches external_guard(8), adapter records any nonzero code as fault. All24 arrivals preceded first recorded8 and method ends budget_exhausted. However native8 can also arise from invalid guarded-command provenance; no stop-publication timestamp/callback-cause log exists, so unique causal proof is unavailable. Not evidence of an in-motion chassis fault; do not rewrite raw reason."
+  },
+  "source_sha256": {
+    "result.json": "7acbaa431c6bc6e0f42500801746fc3ec3b89fdb43a9d34c3fa124ca750ed22a",
+    "joint/decisions.jsonl": "012d325ff7d737d9c8efd5d7328baada2086af3b0419e242807dfbd8f33434e3",
+    "adapter/events.jsonl": "378a2913f2a2b3a4e4c82e5f6ba7514c2912a49cd88c7ce52de0cf90e7568616"
+  },
+  "read_only": true,
+  "no_new_trial": true
+}

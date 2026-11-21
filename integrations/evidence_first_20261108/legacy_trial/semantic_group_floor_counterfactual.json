@@ -1,0 +1,1135 @@
+{
+  "schema": "nso.legacy_semantic_group_frozen_floor_counterfactual.v1",
+  "status": "offline_input_counterfactual_only_not_deployed",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01",
+  "profile": {
+    "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/frozen_profile.json",
+    "sha256": "3524effc63e9633640c8224d3946a473dfe72c81e34ae3e0b8246b8602c1ef00",
+    "epoch": "rollback_20261108",
+    "source_training_sha256": "b60b1ee6badd332c45eb5d2e42520c9fea2769ad3fc97cf8c00745744284b434",
+    "training_before_initial_packet": true,
+    "training_timestamp_s": 1794128889.3092413,
+    "initial_timestamp_s": 1794129182.1259034,
+    "floor_relative_to_training_base_m": -0.12447258789516671,
+    "baseline_floor_odom_z_m": -0.233,
+    "candidate_floor_odom_z_m": -0.12447258789516671,
+    "planning_Z_translation_delta_m": -0.1085274121048333,
+    "profile_scope_correction": {
+      "previous_profile_sha256": "094feddd52dfc8e125e62ceebe046d5b0312f0742439511cb89ef8a3fa6df9e5",
+      "reason": "Text previously said scalar at odom origin; executed mapper used floor_relative_to_training_base_m at the training base. No numeric value or fit changed."
+    }
+  },
+  "held_constant": {
+    "actual_camera_and_laser_TF": true,
+    "raw_depth_RGB_scan": true,
+    "K": true,
+    "cached_semantic_masks": true,
+    "planning_XY_and_rotation": true,
+    "nominal_sensor_config": true,
+    "grouping_algorithm": true,
+    "min_support": 8,
+    "max_horizontal_extent_m": 3.0,
+    "min_vertical_extent_m": 0.25,
+    "robot_radius_m": 0.7212185868375829,
+    "navigation_grid": true,
+    "no_added_policy": true
+  },
+  "verification": {
+    "candidate_belief_matches_independent_existing_mapper_replay_at_all23_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "all_packet_mask_and_label_hashes_verified": true,
+    "all_source_hashes_match_recorded_trial_and_baseline": true
+  },
+  "comparisons": [
+    {
+      "paid_action": 3,
+      "baseline": {
+        "paid_action": 3,
+        "quality_points": 1431,
+        "quality_class_counts": {
+          "2": 0,
+          "3": 196
+        },
+        "qualified_assets": [
+          {
+            "group": 8,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 4,
+            "marked_points": 0,
+            "class_vote": 0.0
+          }
+        ],
+        "groups": [
+          {
+            "group": 4,
+            "quality_points": 9,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              44.34395761858032,
+              43.56629564938162,
+              1.1892611261866628
+            ],
+            "quantile95_xyz_m": [
+              44.658764520217055,
+              43.82528193037156,
+              1.7298358342476996
+            ],
+            "quantile_span_xyz_m": [
+              0.31480690163673586,
+              0.25898628098993726,
+              0.5405747080610368
+            ],
+            "max_horizontal_extent_m": 0.31480690163673586,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 7,
+            "quality_points": 656,
+            "class2_points": 0,
+            "class3_points": 196,
+            "quantile05_xyz_m": [
+              38.8729012067101,
+              36.02624592036999,
+              0.23708680252494146
+            ],
+            "quantile95_xyz_m": [
+              43.943591461632934,
+              37.319333175520065,
+              1.7292452454370921
+            ],
+            "quantile_span_xyz_m": [
+              5.070690254922837,
+              1.293087255150077,
+              1.4921584429121506
+            ],
+            "max_horizontal_extent_m": 5.070690254922837,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": false,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [
+              "horizontal_extent_above_3.0m"
+            ],
+            "accepted_by_native_observed_patches": false
+          },
+          {
+            "group": 8,
+            "quality_points": 61,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              36.482933731623284,
+              35.70163500240433,
+              0.22593462800176195
+            ],
+            "quantile95_xyz_m": [
+              36.63425035151823,
+              36.314969384896,
+              1.770190019396823
+            ],
+            "quantile_span_xyz_m": [
+              0.15131661989494916,
+              0.6133343824916722,
+              1.544255391395061
+            ],
+            "max_horizontal_extent_m": 0.6133343824916722,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          }
+        ],
+        "class3_rejected": 196,
+        "class3_accepted": 0
+      },
+      "candidate": {
+        "quality_points": 1233,
+        "quality_class_counts": {
+          "2": 0,
+          "3": 170
+        },
+        "class3_accepted": 0,
+        "class3_rejected": 170,
+        "qualified_assets": [
+          {
+            "group": 2,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 10,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 6,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 5,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 4,
+            "marked_points": 0,
+            "class_vote": 0.0
+          }
+        ],
+        "groups": [
+          {
+            "group": 2,
+            "quality_points": 87,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              36.152707505259194,
+              42.81208643283232,
+              0.2000478116040695
+            ],
+            "quantile95_xyz_m": [
+              36.748024579610814,
+              43.84647932904102,
+              1.7683759263612444
+            ],
+            "quantile_span_xyz_m": [
+              0.5953170743516196,
+              1.0343928962087006,
+              1.5683281147571748
+            ],
+            "max_horizontal_extent_m": 1.0343928962087006,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 4,
+            "quality_points": 13,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              44.32468326383318,
+              43.535981385048935,
+              1.0895980038420687
+            ],
+            "quantile95_xyz_m": [
+              44.650818192969346,
+              43.830693780351,
+              1.7784467392597063
+            ],
+            "quantile_span_xyz_m": [
+              0.3261349291361668,
+              0.2947123953020636,
+              0.6888487354176376
+            ],
+            "max_horizontal_extent_m": 0.3261349291361668,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 5,
+            "quality_points": 8,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              43.8468544273801,
+              43.045884546872244,
+              1.296789836759353
+            ],
+            "quantile95_xyz_m": [
+              44.112200678315574,
+              43.323467033852516,
+              1.6273142376412224
+            ],
+            "quantile_span_xyz_m": [
+              0.2653462509354725,
+              0.2775824869802719,
+              0.3305244008818693
+            ],
+            "max_horizontal_extent_m": 0.2775824869802719,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 6,
+            "quality_points": 117,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              38.71665404528416,
+              42.511055644228705,
+              0.13544462550382944
+            ],
+            "quantile95_xyz_m": [
+              40.662917704547496,
+              42.9106855705078,
+              0.9336061399165713
+            ],
+            "quantile_span_xyz_m": [
+              1.9462636592633373,
+              0.399629926279097,
+              0.7981615144127419
+            ],
+            "max_horizontal_extent_m": 1.9462636592633373,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 9,
+            "quality_points": 639,
+            "class2_points": 0,
+            "class3_points": 170,
+            "quantile05_xyz_m": [
+              38.8819451028978,
+              36.00948083425325,
+              0.25014733618995716
+            ],
+            "quantile95_xyz_m": [
+              43.98489240519863,
+              37.291469438100506,
+              1.7414848748001754
+            ],
+            "quantile_span_xyz_m": [
+              5.1029473023008265,
+              1.2819886038472532,
+              1.4913375386102183
+            ],
+            "max_horizontal_extent_m": 5.1029473023008265,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": false,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [
+              "horizontal_extent_above_3.0m"
+            ],
+            "accepted_by_native_observed_patches": false
+          },
+          {
+            "group": 10,
+            "quality_points": 62,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              36.46886946712353,
+              35.69859407208563,
+              0.2629699062026639
+            ],
+            "quantile95_xyz_m": [
+              36.633653202101314,
+              36.314946727797214,
+              1.7645172245395513
+            ],
+            "quantile_span_xyz_m": [
+              0.16478373497778165,
+              0.6163526557115802,
+              1.5015473183368875
+            ],
+            "max_horizontal_extent_m": 0.6163526557115802,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          }
+        ],
+        "quality_point_sha256": "69f57dee8f8c316d587efbee62ebdd2711b0a982ae836e83f73a6ae3ee92aa8a",
+        "quality_label_sha256": "d120fa9182944d4a74879bcf0fe30b867745996cf70e68b1f505bff36bf17a04",
+        "belief_sha256": "61bc2eb22d2266a06141fce0158d228f7bd465e356b2871da0f52f3d19aaaa3b"
+      }
+    },
+    {
+      "paid_action": 18,
+      "baseline": {
+        "paid_action": 18,
+        "quality_points": 3247,
+        "quality_class_counts": {
+          "2": 0,
+          "3": 411
+        },
+        "qualified_assets": [
+          {
+            "group": 6,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 4,
+            "marked_points": 0,
+            "class_vote": 0.0
+          }
+        ],
+        "groups": [
+          {
+            "group": 4,
+            "quality_points": 9,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              44.34395761858032,
+              43.56629564938162,
+              1.1892611261866628
+            ],
+            "quantile95_xyz_m": [
+              44.658764520217055,
+              43.82528193037156,
+              1.7298358342476996
+            ],
+            "quantile_span_xyz_m": [
+              0.31480690163673586,
+              0.25898628098993726,
+              0.5405747080610368
+            ],
+            "max_horizontal_extent_m": 0.31480690163673586,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 6,
+            "quality_points": 24,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              37.15523675500272,
+              39.21916513938127,
+              1.3539206220776852
+            ],
+            "quantile95_xyz_m": [
+              37.396066266863166,
+              40.08763962133137,
+              1.7915502413560787
+            ],
+            "quantile_span_xyz_m": [
+              0.2408295118604471,
+              0.868474481950102,
+              0.4376296192783935
+            ],
+            "max_horizontal_extent_m": 0.868474481950102,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 7,
+            "quality_points": 2512,
+            "class2_points": 0,
+            "class3_points": 411,
+            "quantile05_xyz_m": [
+              36.324948971297864,
+              34.91592105300141,
+              0.12818472553011323
+            ],
+            "quantile95_xyz_m": [
+              43.59136459614267,
+              38.41009685175328,
+              1.753909545417697
+            ],
+            "quantile_span_xyz_m": [
+              7.266415624844804,
+              3.4941757987518685,
+              1.6257248198875838
+            ],
+            "max_horizontal_extent_m": 7.266415624844804,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": false,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [
+              "horizontal_extent_above_3.0m"
+            ],
+            "accepted_by_native_observed_patches": false
+          }
+        ],
+        "class3_rejected": 411,
+        "class3_accepted": 0
+      },
+      "candidate": {
+        "quality_points": 2804,
+        "quality_class_counts": {
+          "2": 0,
+          "3": 337
+        },
+        "class3_accepted": 0,
+        "class3_rejected": 337,
+        "qualified_assets": [
+          {
+            "group": 2,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 9,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 6,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 5,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 4,
+            "marked_points": 0,
+            "class_vote": 0.0
+          }
+        ],
+        "groups": [
+          {
+            "group": 2,
+            "quality_points": 87,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              36.152707505259194,
+              42.81208643283232,
+              0.2000478116040695
+            ],
+            "quantile95_xyz_m": [
+              36.748024579610814,
+              43.84647932904102,
+              1.7683759263612444
+            ],
+            "quantile_span_xyz_m": [
+              0.5953170743516196,
+              1.0343928962087006,
+              1.5683281147571748
+            ],
+            "max_horizontal_extent_m": 1.0343928962087006,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 4,
+            "quality_points": 13,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              44.32468326383318,
+              43.535981385048935,
+              1.0895980038420687
+            ],
+            "quantile95_xyz_m": [
+              44.650818192969346,
+              43.830693780351,
+              1.7784467392597063
+            ],
+            "quantile_span_xyz_m": [
+              0.3261349291361668,
+              0.2947123953020636,
+              0.6888487354176376
+            ],
+            "max_horizontal_extent_m": 0.3261349291361668,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 5,
+            "quality_points": 8,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              43.8468544273801,
+              43.045884546872244,
+              1.296789836759353
+            ],
+            "quantile95_xyz_m": [
+              44.112200678315574,
+              43.323467033852516,
+              1.6273142376412224
+            ],
+            "quantile_span_xyz_m": [
+              0.2653462509354725,
+              0.2775824869802719,
+              0.3305244008818693
+            ],
+            "max_horizontal_extent_m": 0.2775824869802719,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 6,
+            "quality_points": 117,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              38.71665404528416,
+              42.511055644228705,
+              0.13544462550382944
+            ],
+            "quantile95_xyz_m": [
+              40.662917704547496,
+              42.9106855705078,
+              0.9336061399165713
+            ],
+            "quantile_span_xyz_m": [
+              1.9462636592633373,
+              0.399629926279097,
+              0.7981615144127419
+            ],
+            "max_horizontal_extent_m": 1.9462636592633373,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 9,
+            "quality_points": 36,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              37.10006120114861,
+              39.288980213217926,
+              1.2880895343348764
+            ],
+            "quantile95_xyz_m": [
+              37.38573158871896,
+              40.397933890906785,
+              1.7868582959271404
+            ],
+            "quantile_span_xyz_m": [
+              0.2856703875703488,
+              1.1089536776888593,
+              0.498768761592264
+            ],
+            "max_horizontal_extent_m": 1.1089536776888593,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 10,
+            "quality_points": 2237,
+            "class2_points": 0,
+            "class3_points": 337,
+            "quantile05_xyz_m": [
+              36.33040951913973,
+              34.8834630376512,
+              0.2553229815379863
+            ],
+            "quantile95_xyz_m": [
+              43.627184236507205,
+              38.43702156744406,
+              1.757590727913962
+            ],
+            "quantile_span_xyz_m": [
+              7.296774717367477,
+              3.5535585297928662,
+              1.5022677463759757
+            ],
+            "max_horizontal_extent_m": 7.296774717367477,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": false,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [
+              "horizontal_extent_above_3.0m"
+            ],
+            "accepted_by_native_observed_patches": false
+          }
+        ],
+        "quality_point_sha256": "6d24c3c28ea66717b6389e9498cf91aaa44db4c20b47b416f837d248ee7bab07",
+        "quality_label_sha256": "45321854a8416b2ac0b3f6cda534affcb1f1d9bc8a25ac8749e5668506082264",
+        "belief_sha256": "616e5379512415affc2af8095a487fde67d8eade00dc2172e62d9ce5944e61c6"
+      }
+    },
+    {
+      "paid_action": 22,
+      "baseline": {
+        "paid_action": 22,
+        "quality_points": 3625,
+        "quality_class_counts": {
+          "2": 0,
+          "3": 437
+        },
+        "qualified_assets": [
+          {
+            "group": 6,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 4,
+            "marked_points": 0,
+            "class_vote": 0.0
+          }
+        ],
+        "groups": [
+          {
+            "group": 4,
+            "quality_points": 9,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              44.34395761858032,
+              43.56629564938162,
+              1.1892611261866628
+            ],
+            "quantile95_xyz_m": [
+              44.658764520217055,
+              43.82528193037156,
+              1.7298358342476996
+            ],
+            "quantile_span_xyz_m": [
+              0.31480690163673586,
+              0.25898628098993726,
+              0.5405747080610368
+            ],
+            "max_horizontal_extent_m": 0.31480690163673586,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 6,
+            "quality_points": 24,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              37.15523675500272,
+              39.21916513938127,
+              1.3539206220776852
+            ],
+            "quantile95_xyz_m": [
+              37.396066266863166,
+              40.08763962133137,
+              1.7915502413560787
+            ],
+            "quantile_span_xyz_m": [
+              0.2408295118604471,
+              0.868474481950102,
+              0.4376296192783935
+            ],
+            "max_horizontal_extent_m": 0.868474481950102,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 7,
+            "quality_points": 2591,
+            "class2_points": 0,
+            "class3_points": 437,
+            "quantile05_xyz_m": [
+              36.328482069830926,
+              34.92419416474792,
+              0.12858546335048976
+            ],
+            "quantile95_xyz_m": [
+              43.62863634849206,
+              38.437870976420186,
+              1.7541916959946198
+            ],
+            "quantile_span_xyz_m": [
+              7.300154278661132,
+              3.513676811672269,
+              1.62560623264413
+            ],
+            "max_horizontal_extent_m": 7.300154278661132,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": false,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [
+              "horizontal_extent_above_3.0m"
+            ],
+            "accepted_by_native_observed_patches": false
+          }
+        ],
+        "class3_rejected": 437,
+        "class3_accepted": 0
+      },
+      "candidate": {
+        "quality_points": 3102,
+        "quality_class_counts": {
+          "2": 0,
+          "3": 356
+        },
+        "class3_accepted": 0,
+        "class3_rejected": 356,
+        "qualified_assets": [
+          {
+            "group": 2,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 8,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 6,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 5,
+            "marked_points": 0,
+            "class_vote": 0.0
+          },
+          {
+            "group": 4,
+            "marked_points": 0,
+            "class_vote": 0.0
+          }
+        ],
+        "groups": [
+          {
+            "group": 2,
+            "quality_points": 87,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              36.152707505259194,
+              42.81208643283232,
+              0.2000478116040695
+            ],
+            "quantile95_xyz_m": [
+              36.748024579610814,
+              43.84647932904102,
+              1.7683759263612444
+            ],
+            "quantile_span_xyz_m": [
+              0.5953170743516196,
+              1.0343928962087006,
+              1.5683281147571748
+            ],
+            "max_horizontal_extent_m": 1.0343928962087006,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 4,
+            "quality_points": 13,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              44.32468326383318,
+              43.535981385048935,
+              1.0895980038420687
+            ],
+            "quantile95_xyz_m": [
+              44.650818192969346,
+              43.830693780351,
+              1.7784467392597063
+            ],
+            "quantile_span_xyz_m": [
+              0.3261349291361668,
+              0.2947123953020636,
+              0.6888487354176376
+            ],
+            "max_horizontal_extent_m": 0.3261349291361668,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 5,
+            "quality_points": 8,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              43.8468544273801,
+              43.045884546872244,
+              1.296789836759353
+            ],
+            "quantile95_xyz_m": [
+              44.112200678315574,
+              43.323467033852516,
+              1.6273142376412224
+            ],
+            "quantile_span_xyz_m": [
+              0.2653462509354725,
+              0.2775824869802719,
+              0.3305244008818693
+            ],
+            "max_horizontal_extent_m": 0.2775824869802719,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 6,
+            "quality_points": 117,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              38.71665404528416,
+              42.511055644228705,
+              0.13544462550382944
+            ],
+            "quantile95_xyz_m": [
+              40.662917704547496,
+              42.9106855705078,
+              0.9336061399165713
+            ],
+            "quantile_span_xyz_m": [
+              1.9462636592633373,
+              0.399629926279097,
+              0.7981615144127419
+            ],
+            "max_horizontal_extent_m": 1.9462636592633373,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 8,
+            "quality_points": 36,
+            "class2_points": 0,
+            "class3_points": 0,
+            "quantile05_xyz_m": [
+              37.10006120114861,
+              39.288980213217926,
+              1.2880895343348764
+            ],
+            "quantile95_xyz_m": [
+              37.38573158871896,
+              40.397933890906785,
+              1.7868582959271404
+            ],
+            "quantile_span_xyz_m": [
+              0.2856703875703488,
+              1.1089536776888593,
+              0.498768761592264
+            ],
+            "max_horizontal_extent_m": 1.1089536776888593,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": true,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [],
+            "accepted_by_native_observed_patches": true
+          },
+          {
+            "group": 9,
+            "quality_points": 2323,
+            "class2_points": 0,
+            "class3_points": 356,
+            "quantile05_xyz_m": [
+              36.33801908413689,
+              34.89145901215809,
+              0.2575987256029873
+            ],
+            "quantile95_xyz_m": [
+              43.63791010671695,
+              38.478822146612366,
+              1.7577340828212864
+            ],
+            "quantile_span_xyz_m": [
+              7.299891022580063,
+              3.5873631344542787,
+              1.5001353572182992
+            ],
+            "max_horizontal_extent_m": 7.299891022580063,
+            "predicates": {
+              "nonzero_component": true,
+              "minimum_support": true,
+              "maximum_horizontal_extent": false,
+              "minimum_vertical_extent": true
+            },
+            "failed_predicates": [
+              "horizontal_extent_above_3.0m"
+            ],
+            "accepted_by_native_observed_patches": false
+          }
+        ],
+        "quality_point_sha256": "336501b2b20503ce6d5c4afbbba2ca62e1edff4ee1d74c7ddf56ecd1e5aab8e5",
+        "quality_label_sha256": "c4da3a620e79b579bf50fc654be9bce68fc95034db8da56cfcb7f4c79a0ee36d",
+        "belief_sha256": "c27d60ef40049368d260670758898ecea045510aa287be40e0840ebf5d9bb8ad"
+      }
+    }
+  ],
+  "baseline_source": {
+    "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/legacy_trial/semantic_group_audit.json",
+    "sha256": "465dfa38f2be0e978c4e0fad7b192f5cf739afb27ed6d8f7979f0b847da3ce6e",
+    "source_sha256": {
+      "nso_bridge/nso_bridge/joint_engine.py": "12a6dab0c7400d323048143bd6261225bae86c41f623e0077feeb7f3c1d82bd7",
+      "nso_bridge/joint_vendor/nso/mapping3d.py": "275144d68c1bc6e8876ac622629f19916d09ca07651681dd8cf2b11dbe64b38f",
+      "nso_bridge/joint_vendor/nso/observed_runtime_mapper_v10.py": "c27a977a1b7ae417748a786a118287b282771b630ac88b56c0de7e11f5b00a3b",
+      "nso_bridge/nso_bridge/sensor_range_adapter.py": "4811fe011a526ec4c1282dc938484c07ee0e22caf335eda52afc2d98da73e2d5",
+      "nso_bridge/nso_bridge/measured_extent_adapter.py": "f839b03d74c3810c2ff30bcc6e63a6e1f1cf6038a476a4a23b96157a4b2429de",
+      "nso_bridge/joint_vendor/nso/response_features_v7.py": "3317f74c906b62434de3b7b46051e8edbdd4d7214eb88d0eb0580d31a2129a91",
+      "nso_bridge/joint_vendor/nso/competition_candidates_v8_1.py": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab"
+    }
+  },
+  "candidate_source": {
+    "source_sha256": {
+      "nso_bridge/nso_bridge/joint_engine.py": "12a6dab0c7400d323048143bd6261225bae86c41f623e0077feeb7f3c1d82bd7",
+      "nso_bridge/joint_vendor/nso/mapping3d.py": "275144d68c1bc6e8876ac622629f19916d09ca07651681dd8cf2b11dbe64b38f",
+      "nso_bridge/joint_vendor/nso/observed_runtime_mapper_v10.py": "c27a977a1b7ae417748a786a118287b282771b630ac88b56c0de7e11f5b00a3b",
+      "nso_bridge/nso_bridge/sensor_range_adapter.py": "4811fe011a526ec4c1282dc938484c07ee0e22caf335eda52afc2d98da73e2d5",
+      "nso_bridge/nso_bridge/measured_extent_adapter.py": "f839b03d74c3810c2ff30bcc6e63a6e1f1cf6038a476a4a23b96157a4b2429de",
+      "nso_bridge/joint_vendor/nso/response_features_v7.py": "3317f74c906b62434de3b7b46051e8edbdd4d7214eb88d0eb0580d31a2129a91",
+      "nso_bridge/joint_vendor/nso/competition_candidates_v8_1.py": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab"
+    },
+    "configuration_sha256": "197edf5f4a06eedeea02604fc03b9f4e77d5ddbe258d8157310f1cc4a545a535",
+    "decision_log_sha256": "1f9bf0ff17ef96c0f7e6e0c51c9c5f738e3581963d185f5b8bdd61b490bbd23e"
+  },
+  "independent_existing_replay": {
+    "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/legacy_mapper_compare.json",
+    "sha256": "864657798a591dfae5bc16813ccf06713f5fdeff5f7dca230d886eeaf9a6868c"
+  },
+  "limits": [
+    "This changes planning-Z sensor projection and therefore input quality points/voxels;matching group numbers do not imply the same point membership or physical object.",
+    "Frozen profile is sensor-internal same-stationary-pose consistency,not independent true floor/extrinsic calibration or validity over all route positions.",
+    "No planner,detector,ROS,actualtrial,groupthreshold change or efficacy claim;observed group change cannot establish safety or benefit."
+  ],
+  "findings": {
+    "result": "The single frozen-floor branch does not restore labeled eligible assets at paid3,18,22;all class3 quality support still belongs to over-3m horizontal components.",
+    "floor_contribution_boundary": "The height reference changes quality point counts and component numbering,so it affects measured representation.But this branch does not remove the large-component horizontal-extent rejection or explain it away.",
+    "mechanism_attribution": "Both baseline and candidate class3-bearing components satisfy minimum support and vertical extent;only the horizontal3m predicate rejects them in these three snapshots.",
+    "no_benefit_claim": "No executed action,return,safety,recognition accuracy or coverage benefit was tested by this branch."
+  }
+}

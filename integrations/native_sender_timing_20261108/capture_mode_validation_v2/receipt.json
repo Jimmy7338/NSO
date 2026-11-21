@@ -1,0 +1,76 @@
+{
+  "scope": "Actual ROS capture-mode integration; no SDK, CAN socket, or actuation in this native mode",
+  "candidate_binary_sha256": "3c35da96051d4096185b7bf6772a6190f3223016e073c9e5b1db4cc6586cacb0",
+  "results": [
+    {
+      "name": "late",
+      "argv": [
+        "/home/ouc/nso_robot/analyses/native_sender_timing_20261108/build_v2/devel/lib/nso_scout_radius_driver_v1/nso_scout_attended_node",
+        "_execute:=false",
+        "_session_id:=native_capture_late",
+        "_expected_boot_id:=a0482916-9b5f-4e1d-802a-fa100751b134",
+        "_can_interface:=can0",
+        "_guard_node:=/nso_native_capture_late_guard",
+        "_timing_output:=/home/ouc/nso_robot/analyses/native_sender_timing_20261108/capture_mode_validation_v2/late_timing.json",
+        "__name:=nso_native_capture_late",
+        "/nso_radius/guarded_cmd:=/nso_native_capture_late/guarded_cmd",
+        "/nso_radius/stop:=/nso_native_capture_late/stop",
+        "/nso_radius/driver_fault:=/nso_native_capture_late/driver_fault"
+      ],
+      "execute": false,
+      "SDK_opened": false,
+      "robot_motion_commands": false,
+      "topics_isolated": true,
+      "pid": 704744,
+      "first_driver_fault": 0,
+      "SIGSTOP_monotonic_ns": 37064922310891,
+      "SIGCONT_monotonic_ns": 37065022579062,
+      "exit_code": 0,
+      "first_fault": {
+        "sleep_requested_ns": 19999040,
+        "sleep_start_ns": 37064905238648,
+        "wake_ns": 37065022605207,
+        "sample_enter_ns": 37065022606999,
+        "lock_acquired_ns": 37065022615991,
+        "gate_now_ns": 37065022616055,
+        "gate_prev_tick_ns": 37064905232888,
+        "sample_exit_ns": 37065022617431,
+        "send_enter_ns": 37065022617559,
+        "send_exit_ns": 37065022619447,
+        "fault_after_sample": 5,
+        "fault_after_send": 5
+      },
+      "gate_gap_ms": 117.383167,
+      "retained_rows": 74,
+      "output_sha256": "3b4b765c72ebf0345631a7d37cb568f3f448a076a0119aac4fdd70dd052997e1"
+    },
+    {
+      "name": "bad_output",
+      "argv": [
+        "/home/ouc/nso_robot/analyses/native_sender_timing_20261108/build_v2/devel/lib/nso_scout_radius_driver_v1/nso_scout_attended_node",
+        "_execute:=false",
+        "_session_id:=native_capture_bad_output",
+        "_expected_boot_id:=a0482916-9b5f-4e1d-802a-fa100751b134",
+        "_can_interface:=can0",
+        "_guard_node:=/nso_native_capture_bad_output_guard",
+        "_timing_output:=/proc/nso_native_no_such_directory/timing.json",
+        "__name:=nso_native_capture_bad_output",
+        "/nso_radius/guarded_cmd:=/nso_native_capture_bad_output/guarded_cmd",
+        "/nso_radius/stop:=/nso_native_capture_bad_output/stop",
+        "/nso_radius/driver_fault:=/nso_native_capture_bad_output/driver_fault"
+      ],
+      "execute": false,
+      "SDK_opened": false,
+      "robot_motion_commands": false,
+      "topics_isolated": true,
+      "pid": 704778,
+      "first_driver_fault": 0,
+      "exit_code": 0,
+      "failed_output_open_did_not_change_clean_exit": true
+    }
+  ],
+  "limitations": [
+    "Deliberately injected scheduling pause is not the cause of B1_C inferred from data.",
+    "No SDK timing, hardware zero transmission, or motion validation performed."
+  ]
+}

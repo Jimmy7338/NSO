@@ -1,0 +1,20 @@
+{
+  "change": "Defer optional parallel count-table module import/installation until after construction of the unchanged real semantic frontend/session.",
+  "reason": "Combined profile imported scipy.signal before Torch loaded; real03 failed torch libgomp static TLS allocation before actuation.",
+  "before_sha256": "1555ec37f5b828e92c39b8b12723c5f74df89c9b018c7d2ea868f2fe134566aa",
+  "after_sha256": "5f7588683a58c1f403706e53348c5843954a0ab8006e9db8f3d5f1814bd4f421",
+  "active_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+  "decision_or_guard_change": false,
+  "global_LD_preload_or_system_change": false,
+  "original_sequential_profile_unchanged": true,
+  "original03_log_retained": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_03/joint/decisions.jsonl",
+  "original03_failures": [
+    {
+      "method": "init",
+      "error": {
+        "type": "ImportError",
+        "message": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/torch/lib/../../torch.libs/libgomp-98df74fd.so.1.0.0: cannot allocate memory in static TLS block"
+      }
+    }
+  ]
+}

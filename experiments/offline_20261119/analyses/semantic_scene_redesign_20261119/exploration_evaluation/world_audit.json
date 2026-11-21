@@ -1,0 +1,104 @@
+{
+  "status": "independent_static_world_contract_and_topology_audit_passed",
+  "world_geometry_receipt": {
+    "source_triangles": 147002,
+    "clipped_obstacle_parts": 108662,
+    "floor_triangles": 439,
+    "floor_projected_area_m2": 80.97060304786538,
+    "topology_cache_key": "c3c6771a60d857e7b5225f6d54b23efe1ac31a3a029a9640eb9501409d07d4d6",
+    "world_from_source": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        3.7000000000000006
+      ],
+      [
+        0.0,
+        0.0,
+        -1.0,
+        9.3
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "shape": [
+      76,
+      47
+    ],
+    "start": [
+      46,
+      29
+    ],
+    "heading": 2,
+    "robot_valid_cells": 825,
+    "reachable_cells": 753,
+    "directed_swept_edges": 2924,
+    "semantic_reference_sha256": "8980604eea4f92499dbf9f58fe4d3560c64ac837066b828837ab0f9303e02efb",
+    "elapsed_s": 20.23482300899923,
+    "collision_model": "mesh_triangle_clip_exact_xy_capsule_v1",
+    "collision_height_m": [
+      0.15,
+      1.2
+    ],
+    "floor_support_height_m": [
+      -0.03,
+      0.06
+    ],
+    "floor_normal_min": 0.995,
+    "evaluator_truth_never_in_sensor_packet": true
+  },
+  "packet_validate": true,
+  "all_grid_cells_roundtrip_xy_row_col": 3572,
+  "all_cached_valid_centres_recomputed": 3572,
+  "directed_edge_validations": 3300,
+  "edge_symmetry_verified": true,
+  "reachable_flood_independently_matches": true,
+  "evaluator_properties_return_copies": true,
+  "mapper_cold_started_from_all_unknown": true,
+  "observed_frame_count": 1,
+  "sensor_dimensions": [
+    120,
+    90
+  ],
+  "depth_range_m": 8.0,
+  "camera_height_m": 1.2,
+  "strict_semantic_interface_note": "Declared partial ideal visible structure labels from source first-hit and verified node/XYZ whitelist; these are not natural detector predictions.",
+  "visible_label_pixels": {
+    "0": 9920,
+    "2": 880,
+    "3": 0
+  },
+  "no_hidden_GT_actor_input_found_in_review": true,
+  "reviewed_boundary": "world sense/scan return RGBDFrame/PlanarScan; runner passes only these with pose/config to runtime. Complete occupancy/reachable/instance records are simulator/evaluator data.",
+  "motion_model": "Height-clipped triangle projections and continuous 0.2m-radius centreline distance test; floor union must cover centreline and have boundary clearance>=radius; rotations preserve circular footprint.",
+  "not_proven": [
+    "Dynamic physics/settling",
+    "Real robot footprint or performance",
+    "Noise and localization reliability",
+    "Semantic recognition accuracy",
+    "World boundaries inferred from unknown sensor observations"
+  ],
+  "source_files_sha256": {
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_evaluation/audit_world.py": "1aa75d39cf0c76e60ff925c0e6bed501f17f4a6f8bc672feb07f424bcd6cebf5",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/scene_adapter/replicacad_world.py": "195e7b9e33f95c88501608edf393e790418347258cddef5f90d7674ab5fe06f1",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_study/run.py": "38bbe6e262c0d0491b93353fac4fbb30ce05f995a00f98d6cc23a8133ef62203",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_study/protocol.json": "1b088a0ee07fe4687671b920cb49600f87a54c37f8498771bbf8bef16e88fbdd",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_evaluation/structural_reference_low.json": "8980604eea4f92499dbf9f58fe4d3560c64ac837066b828837ab0f9303e02efb",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/cpu_sensor_contract_v10.py": "28d0870913d67bd102b83b61025a992cf68c76021c270eabd267fb021f14db02"
+  },
+  "world_actions": 0,
+  "policy_calls": 0,
+  "ROS_hardware_io": false,
+  "elapsed_s": 21.366628023002704
+}

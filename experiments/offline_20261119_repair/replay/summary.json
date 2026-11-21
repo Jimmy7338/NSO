@@ -1,0 +1,896 @@
+{
+  "status": "completed_fixed_replay_and_independent_increment_evaluation",
+  "source_replay_result": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/result.json",
+  "replay_receipt": {
+    "status": "completed_fixed_action_and_target_replay",
+    "actions": 256,
+    "fused_frames": 257,
+    "verified_recorded_score_calls": 25,
+    "checkpoints": [
+      0,
+      24,
+      54,
+      109,
+      127,
+      167,
+      208,
+      256
+    ],
+    "new_policy_decisions": 0,
+    "old_packet_pose_action_owner_quality_asset_feedback_match_all_steps": true,
+    "final_native_TSDF_exact_bytes_match": true,
+    "final_native_TSDF_sha256": "a4cefcef5daeb4f0ccf48b5112b4be01259b4bd1defde7ae74b6c9ac60104081",
+    "final_belief_exact_match": true,
+    "template_frame_receipts_exact_match": true,
+    "source_attempt": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_left/runs/S/attempt_001",
+    "source_manifest_sha256": "7f1965e125d0ebfd93bb6447db7215225617ede8c6bb871154c0e3bbd294f1a8",
+    "reference_sha256": "63e5cf17d04b85242d93fa9e6092c8bd5cc601a5d9e4a90346fef52a3af912ab",
+    "script_sha256": "5ccb47f41837ec3b6a2f5dedf8c20a388b1cbe9c09c7950edb6265c21e81059c",
+    "diagnostic_hook_sha256": "3cd7c53641c33fb1a0f4c95ba3470ecee229ff47c8047b30a642268d5aa4eb62",
+    "elapsed_s": 133.10538528899997,
+    "area_interpretation": "Monte Carlo area estimates on the SAME frozen uniform source-area samples; gross gain/loss/net separately. Not exact physical area.",
+    "visibility_interpretation": "Evaluator-only continuous FOV source-mesh first-hit visibility along actual acquired poses, not pixel-resolved depth measurements or TSDF completeness.",
+    "template_reward_interpretation": "Hypothetical area-weighted visibility score; neither measured surface area nor measured TSDF gain.",
+    "hardware": false,
+    "source_files_modified": false
+  },
+  "intervals": [
+    {
+      "start_action": 0,
+      "end_action": 24,
+      "acquired_actions": 24,
+      "first_selected_candidate": 0,
+      "first_selected_outbound_actions": 24,
+      "interval_exactly_one_selected_outbound_option": true,
+      "old_predicted_template_reward_m2": {
+        "G": 11.242085394526853,
+        "S": 11.242085394526853
+      },
+      "old_common_total_proxy": 43.337651125125056,
+      "old_coverage_only_proxy": 42.10000000000001,
+      "old_measured_quality_total_proxy": 1.2376511251250446,
+      "actual_reference_changes": {
+        "all": {
+          "fixed_reference_area_estimate_m2": 233.39182353316687,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 90.50785270564434,
+          "05cm": {
+            "start_action": 0,
+            "end_action": 24,
+            "new_correct_samples": 21677,
+            "lost_correct_samples": 36,
+            "net_correct_samples": 21641,
+            "new_correct_area_estimate_m2": 96.37187951175225,
+            "lost_correct_area_estimate_m2": 0.1600492532372137,
+            "net_correct_area_estimate_m2": 96.21183025851504,
+            "recall_delta_percentage_points": 41.22330799855229
+          },
+          "10cm": {
+            "start_action": 0,
+            "end_action": 24,
+            "new_correct_samples": 22389,
+            "lost_correct_samples": 7,
+            "net_correct_samples": 22382,
+            "new_correct_area_estimate_m2": 99.53729807577714,
+            "lost_correct_area_estimate_m2": 0.031120688129458215,
+            "net_correct_area_estimate_m2": 99.50617738764768,
+            "recall_delta_percentage_points": 42.6348172276511
+          },
+          "recall_05cm_before": 0.09175762424519496,
+          "recall_05cm_after": 0.5039907042307179
+        },
+        "open31": {
+          "fixed_reference_area_estimate_m2": 4.632423515688023,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 1.02875373886789,
+          "05cm": {
+            "start_action": 0,
+            "end_action": 24,
+            "new_correct_samples": 2546,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 2546,
+            "new_correct_area_estimate_m2": 1.7152632738425984,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 1.7152632738425984,
+            "recall_delta_percentage_points": 37.02734147760326
+          },
+          "10cm": {
+            "start_action": 0,
+            "end_action": 24,
+            "new_correct_samples": 3232,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 3232,
+            "new_correct_area_estimate_m2": 2.1774276909109496,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 2.1774276909109496,
+            "recall_delta_percentage_points": 47.004072134962186
+          },
+          "recall_05cm_before": 0.0,
+          "recall_05cm_after": 0.3702734147760326
+        },
+        "closed118": {
+          "fixed_reference_area_estimate_m2": 3.291823659443295,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 1.5379400136919075,
+          "05cm": {
+            "start_action": 0,
+            "end_action": 24,
+            "new_correct_samples": 1363,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 1363,
+            "new_correct_area_estimate_m2": 1.0255441480734198,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 1.0255441480734198,
+            "recall_delta_percentage_points": 31.154285714285713
+          },
+          "10cm": {
+            "start_action": 0,
+            "end_action": 24,
+            "new_correct_samples": 1865,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 1865,
+            "new_correct_area_estimate_m2": 1.4032573999683988,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 1.4032573999683988,
+            "recall_delta_percentage_points": 42.628571428571426
+          },
+          "recall_05cm_before": 0.0,
+          "recall_05cm_after": 0.3115428571428571
+        }
+      }
+    },
+    {
+      "start_action": 24,
+      "end_action": 54,
+      "acquired_actions": 30,
+      "first_selected_candidate": 1,
+      "first_selected_outbound_actions": 30,
+      "interval_exactly_one_selected_outbound_option": true,
+      "old_predicted_template_reward_m2": {
+        "G": 4.1497210679120125,
+        "S": 4.101516484353575
+      },
+      "old_common_total_proxy": 6.257007281520683,
+      "old_coverage_only_proxy": 1.436665537106066,
+      "old_measured_quality_total_proxy": 4.820341744414617,
+      "actual_reference_changes": {
+        "all": {
+          "fixed_reference_area_estimate_m2": 233.39182353316687,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 23.14934615572699,
+          "05cm": {
+            "start_action": 24,
+            "end_action": 54,
+            "new_correct_samples": 6074,
+            "lost_correct_samples": 42,
+            "net_correct_samples": 6032,
+            "new_correct_area_estimate_m2": 27.00386567118989,
+            "lost_correct_area_estimate_m2": 0.1867241287767493,
+            "net_correct_area_estimate_m2": 26.81714154241314,
+            "recall_delta_percentage_points": 11.490180391260463
+          },
+          "10cm": {
+            "start_action": 24,
+            "end_action": 54,
+            "new_correct_samples": 5320,
+            "lost_correct_samples": 7,
+            "net_correct_samples": 5313,
+            "new_correct_area_estimate_m2": 23.651722978388246,
+            "lost_correct_area_estimate_m2": 0.031120688129458215,
+            "net_correct_area_estimate_m2": 23.620602290258788,
+            "recall_delta_percentage_points": 10.120578318761076
+          },
+          "recall_05cm_before": 0.5039907042307179,
+          "recall_05cm_after": 0.6188925081433225
+        },
+        "open31": {
+          "fixed_reference_area_estimate_m2": 4.632423515688023,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.00404225437669112,
+          "05cm": {
+            "start_action": 24,
+            "end_action": 54,
+            "new_correct_samples": 0,
+            "lost_correct_samples": 6,
+            "net_correct_samples": -6,
+            "new_correct_area_estimate_m2": 0.0,
+            "lost_correct_area_estimate_m2": 0.00404225437669112,
+            "net_correct_area_estimate_m2": -0.00404225437669112,
+            "recall_delta_percentage_points": -0.08726003490401313
+          },
+          "10cm": {
+            "start_action": 24,
+            "end_action": 54,
+            "new_correct_samples": 0,
+            "lost_correct_samples": 11,
+            "net_correct_samples": -11,
+            "new_correct_area_estimate_m2": 0.0,
+            "lost_correct_area_estimate_m2": 0.007410799690600386,
+            "net_correct_area_estimate_m2": -0.007410799690600386,
+            "recall_delta_percentage_points": -0.1599767306573574
+          },
+          "recall_05cm_before": 0.3702734147760326,
+          "recall_05cm_after": 0.36940081442699246
+        },
+        "closed118": {
+          "fixed_reference_area_estimate_m2": 3.291823659443295,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.4732701901233903,
+          "05cm": {
+            "start_action": 24,
+            "end_action": 54,
+            "new_correct_samples": 1634,
+            "lost_correct_samples": 19,
+            "net_correct_samples": 1615,
+            "new_correct_area_estimate_m2": 1.229449110749793,
+            "lost_correct_area_estimate_m2": 0.014295919892439453,
+            "net_correct_area_estimate_m2": 1.2151531908573534,
+            "recall_delta_percentage_points": 36.914285714285725
+          },
+          "10cm": {
+            "start_action": 24,
+            "end_action": 54,
+            "new_correct_samples": 1465,
+            "lost_correct_samples": 1,
+            "net_correct_samples": 1464,
+            "new_correct_area_estimate_m2": 1.1022906653907263,
+            "lost_correct_area_estimate_m2": 0.0007524168364441817,
+            "net_correct_area_estimate_m2": 1.101538248554282,
+            "recall_delta_percentage_points": 33.462857142857146
+          },
+          "recall_05cm_before": 0.3115428571428571,
+          "recall_05cm_after": 0.6806857142857143
+        }
+      }
+    },
+    {
+      "start_action": 54,
+      "end_action": 109,
+      "acquired_actions": 55,
+      "first_selected_candidate": 0,
+      "first_selected_outbound_actions": 55,
+      "interval_exactly_one_selected_outbound_option": true,
+      "old_predicted_template_reward_m2": {
+        "G": 4.530632523786059,
+        "S": 4.331335681681632
+      },
+      "old_common_total_proxy": 5.728900837609792,
+      "old_coverage_only_proxy": 0.585418060200669,
+      "old_measured_quality_total_proxy": 5.1434827774091225,
+      "actual_reference_changes": {
+        "all": {
+          "fixed_reference_area_estimate_m2": 233.39182353316687,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 18.14336117947414,
+          "05cm": {
+            "start_action": 54,
+            "end_action": 109,
+            "new_correct_samples": 4022,
+            "lost_correct_samples": 112,
+            "net_correct_samples": 3910,
+            "new_correct_area_estimate_m2": 17.881058236668707,
+            "lost_correct_area_estimate_m2": 0.49793101007133145,
+            "net_correct_area_estimate_m2": 17.383127226597377,
+            "recall_delta_percentage_points": 7.448044650170482
+          },
+          "10cm": {
+            "start_action": 54,
+            "end_action": 109,
+            "new_correct_samples": 3528,
+            "lost_correct_samples": 8,
+            "net_correct_samples": 3520,
+            "new_correct_area_estimate_m2": 15.684826817246941,
+            "lost_correct_area_estimate_m2": 0.03556650071938082,
+            "net_correct_area_estimate_m2": 15.649260316527561,
+            "recall_delta_percentage_points": 6.705145055907957
+          },
+          "recall_05cm_before": 0.6188925081433225,
+          "recall_05cm_after": 0.6933729546450274
+        },
+        "open31": {
+          "fixed_reference_area_estimate_m2": 4.632423515688023,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 2.4017728088173067,
+          "05cm": {
+            "start_action": 54,
+            "end_action": 109,
+            "new_correct_samples": 2887,
+            "lost_correct_samples": 109,
+            "net_correct_samples": 2778,
+            "new_correct_area_estimate_m2": 1.9449980642512104,
+            "lost_correct_area_estimate_m2": 0.07343428784322201,
+            "net_correct_area_estimate_m2": 1.8715637764079884,
+            "recall_delta_percentage_points": 40.40139616055847
+          },
+          "10cm": {
+            "start_action": 54,
+            "end_action": 109,
+            "new_correct_samples": 2982,
+            "lost_correct_samples": 48,
+            "net_correct_samples": 2934,
+            "new_correct_area_estimate_m2": 2.0090004252154863,
+            "lost_correct_area_estimate_m2": 0.03233803501352896,
+            "net_correct_area_estimate_m2": 1.9766623902019576,
+            "recall_delta_percentage_points": 42.67015706806282
+          },
+          "recall_05cm_before": 0.36940081442699246,
+          "recall_05cm_after": 0.7734147760325771
+        },
+        "closed118": {
+          "fixed_reference_area_estimate_m2": 3.291823659443295,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.02633458927554636,
+          "05cm": {
+            "start_action": 54,
+            "end_action": 109,
+            "new_correct_samples": 14,
+            "lost_correct_samples": 45,
+            "net_correct_samples": -31,
+            "new_correct_area_estimate_m2": 0.010533835710218544,
+            "lost_correct_area_estimate_m2": 0.03385875763998818,
+            "net_correct_area_estimate_m2": -0.023324921929769635,
+            "recall_delta_percentage_points": -0.7085714285714362
+          },
+          "10cm": {
+            "start_action": 54,
+            "end_action": 109,
+            "new_correct_samples": 5,
+            "lost_correct_samples": 17,
+            "net_correct_samples": -12,
+            "new_correct_area_estimate_m2": 0.0037620841822209087,
+            "lost_correct_area_estimate_m2": 0.01279108621955109,
+            "net_correct_area_estimate_m2": -0.00902900203733018,
+            "recall_delta_percentage_points": -0.2742857142857158
+          },
+          "recall_05cm_before": 0.6806857142857143,
+          "recall_05cm_after": 0.6736
+        }
+      }
+    },
+    {
+      "start_action": 109,
+      "end_action": 127,
+      "acquired_actions": 18,
+      "first_selected_candidate": 8,
+      "first_selected_outbound_actions": 18,
+      "interval_exactly_one_selected_outbound_option": true,
+      "old_predicted_template_reward_m2": {
+        "G": 1.3653129868459848,
+        "S": 1.4356106870488827
+      },
+      "old_common_total_proxy": 2.2850799189556557,
+      "old_coverage_only_proxy": 0.0,
+      "old_measured_quality_total_proxy": 2.2850799189556557,
+      "actual_reference_changes": {
+        "all": {
+          "fixed_reference_area_estimate_m2": 233.39182353316687,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 4.330221462584615,
+          "05cm": {
+            "start_action": 109,
+            "end_action": 127,
+            "new_correct_samples": 870,
+            "lost_correct_samples": 108,
+            "net_correct_samples": 762,
+            "new_correct_area_estimate_m2": 3.867856953232664,
+            "lost_correct_area_estimate_m2": 0.4801477597116411,
+            "net_correct_area_estimate_m2": 3.3877091935210233,
+            "recall_delta_percentage_points": 1.4515115149437041
+          },
+          "10cm": {
+            "start_action": 109,
+            "end_action": 127,
+            "new_correct_samples": 689,
+            "lost_correct_samples": 39,
+            "net_correct_samples": 650,
+            "new_correct_area_estimate_m2": 3.0631648744566733,
+            "lost_correct_area_estimate_m2": 0.1733866910069815,
+            "net_correct_area_estimate_m2": 2.8897781834496916,
+            "recall_delta_percentage_points": 1.2381659904375453
+          },
+          "recall_05cm_before": 0.6933729546450274,
+          "recall_05cm_after": 0.7078880697944644
+        },
+        "open31": {
+          "fixed_reference_area_estimate_m2": 4.632423515688023,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.5746738305529209,
+          "05cm": {
+            "start_action": 109,
+            "end_action": 127,
+            "new_correct_samples": 229,
+            "lost_correct_samples": 140,
+            "net_correct_samples": 89,
+            "new_correct_area_estimate_m2": 0.1542793753770444,
+            "lost_correct_area_estimate_m2": 0.09431926878945945,
+            "net_correct_area_estimate_m2": 0.05996010658758494,
+            "recall_delta_percentage_points": 1.2943571844095336
+          },
+          "10cm": {
+            "start_action": 109,
+            "end_action": 127,
+            "new_correct_samples": 81,
+            "lost_correct_samples": 46,
+            "net_correct_samples": 35,
+            "new_correct_area_estimate_m2": 0.05457043408533011,
+            "lost_correct_area_estimate_m2": 0.03099061688796525,
+            "net_correct_area_estimate_m2": 0.023579817197364863,
+            "recall_delta_percentage_points": 0.5090168702734155
+          },
+          "recall_05cm_before": 0.7734147760325771,
+          "recall_05cm_after": 0.7863583478766725
+        },
+        "closed118": {
+          "fixed_reference_area_estimate_m2": 3.291823659443295,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.9450355465738922,
+          "05cm": {
+            "start_action": 109,
+            "end_action": 127,
+            "new_correct_samples": 959,
+            "lost_correct_samples": 197,
+            "net_correct_samples": 762,
+            "new_correct_area_estimate_m2": 0.7215677461499702,
+            "lost_correct_area_estimate_m2": 0.14822611677950379,
+            "net_correct_area_estimate_m2": 0.5733416293704665,
+            "recall_delta_percentage_points": 17.417142857142863
+          },
+          "10cm": {
+            "start_action": 109,
+            "end_action": 127,
+            "new_correct_samples": 905,
+            "lost_correct_samples": 153,
+            "net_correct_samples": 752,
+            "new_correct_area_estimate_m2": 0.6809372369819845,
+            "lost_correct_area_estimate_m2": 0.1151197759759598,
+            "net_correct_area_estimate_m2": 0.5658174610060247,
+            "recall_delta_percentage_points": 17.18857142857142
+          },
+          "recall_05cm_before": 0.6736,
+          "recall_05cm_after": 0.8477714285714286
+        }
+      }
+    },
+    {
+      "start_action": 127,
+      "end_action": 167,
+      "acquired_actions": 40,
+      "first_selected_candidate": 10,
+      "first_selected_outbound_actions": 40,
+      "interval_exactly_one_selected_outbound_option": true,
+      "old_predicted_template_reward_m2": {
+        "G": 0.28446764913429445,
+        "S": 0.09110960466686036
+      },
+      "old_common_total_proxy": 1.1470959343243177,
+      "old_coverage_only_proxy": 0.0,
+      "old_measured_quality_total_proxy": 1.1470959343243177,
+      "actual_reference_changes": {
+        "all": {
+          "fixed_reference_area_estimate_m2": 233.39182353316687,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 2.120652605393081,
+          "05cm": {
+            "start_action": 127,
+            "end_action": 167,
+            "new_correct_samples": 697,
+            "lost_correct_samples": 9,
+            "net_correct_samples": 688,
+            "new_correct_area_estimate_m2": 3.098731375176054,
+            "lost_correct_area_estimate_m2": 0.040012313309303424,
+            "net_correct_area_estimate_m2": 3.0587190618667504,
+            "recall_delta_percentage_points": 1.31055107910929
+          },
+          "10cm": {
+            "start_action": 127,
+            "end_action": 167,
+            "new_correct_samples": 551,
+            "lost_correct_samples": 1,
+            "net_correct_samples": 550,
+            "new_correct_area_estimate_m2": 2.449642737047354,
+            "lost_correct_area_estimate_m2": 0.0044458125899226025,
+            "net_correct_area_estimate_m2": 2.445196924457431,
+            "recall_delta_percentage_points": 1.047678914985617
+          },
+          "recall_05cm_before": 0.7078880697944644,
+          "recall_05cm_after": 0.7209935805855573
+        },
+        "open31": {
+          "fixed_reference_area_estimate_m2": 4.632423515688023,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.0006737090627818533,
+          "05cm": {
+            "start_action": 127,
+            "end_action": 167,
+            "new_correct_samples": 27,
+            "lost_correct_samples": 8,
+            "net_correct_samples": 19,
+            "new_correct_area_estimate_m2": 0.018190144695110037,
+            "lost_correct_area_estimate_m2": 0.005389672502254826,
+            "net_correct_area_estimate_m2": 0.012800472192855211,
+            "recall_delta_percentage_points": 0.2763234438627138
+          },
+          "10cm": {
+            "start_action": 127,
+            "end_action": 167,
+            "new_correct_samples": 4,
+            "lost_correct_samples": 6,
+            "net_correct_samples": -2,
+            "new_correct_area_estimate_m2": 0.002694836251127413,
+            "lost_correct_area_estimate_m2": 0.00404225437669112,
+            "net_correct_area_estimate_m2": -0.0013474181255637065,
+            "recall_delta_percentage_points": -0.02908667830133771
+          },
+          "recall_05cm_before": 0.7863583478766725,
+          "recall_05cm_after": 0.7891215823152996
+        },
+        "closed118": {
+          "fixed_reference_area_estimate_m2": 3.291823659443295,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.003009667345776727,
+          "05cm": {
+            "start_action": 127,
+            "end_action": 167,
+            "new_correct_samples": 119,
+            "lost_correct_samples": 13,
+            "net_correct_samples": 106,
+            "new_correct_area_estimate_m2": 0.08953760353685762,
+            "lost_correct_area_estimate_m2": 0.009781418873774362,
+            "net_correct_area_estimate_m2": 0.07975618466308326,
+            "recall_delta_percentage_points": 2.4228571428571377
+          },
+          "10cm": {
+            "start_action": 127,
+            "end_action": 167,
+            "new_correct_samples": 6,
+            "lost_correct_samples": 6,
+            "net_correct_samples": 0,
+            "new_correct_area_estimate_m2": 0.00451450101866509,
+            "lost_correct_area_estimate_m2": 0.00451450101866509,
+            "net_correct_area_estimate_m2": 0.0,
+            "recall_delta_percentage_points": 0.0
+          },
+          "recall_05cm_before": 0.8477714285714286,
+          "recall_05cm_after": 0.872
+        }
+      }
+    },
+    {
+      "start_action": 167,
+      "end_action": 208,
+      "acquired_actions": 41,
+      "first_selected_candidate": 7,
+      "first_selected_outbound_actions": 41,
+      "interval_exactly_one_selected_outbound_option": true,
+      "old_predicted_template_reward_m2": {
+        "G": 0.0,
+        "S": 0.0
+      },
+      "old_common_total_proxy": 1.0061600126325705,
+      "old_coverage_only_proxy": 0.0,
+      "old_measured_quality_total_proxy": 1.0061600126325705,
+      "actual_reference_changes": {
+        "all": {
+          "fixed_reference_area_estimate_m2": 233.39182353316687,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 4.97041847553347,
+          "05cm": {
+            "start_action": 167,
+            "end_action": 208,
+            "new_correct_samples": 1033,
+            "lost_correct_samples": 34,
+            "net_correct_samples": 999,
+            "new_correct_area_estimate_m2": 4.592524405390049,
+            "lost_correct_area_estimate_m2": 0.1511576280573685,
+            "net_correct_area_estimate_m2": 4.4413667773326795,
+            "recall_delta_percentage_points": 1.9029658837647845
+          },
+          "10cm": {
+            "start_action": 167,
+            "end_action": 208,
+            "new_correct_samples": 1113,
+            "lost_correct_samples": 2,
+            "net_correct_samples": 1111,
+            "new_correct_area_estimate_m2": 4.948189412583856,
+            "lost_correct_area_estimate_m2": 0.008891625179845205,
+            "net_correct_area_estimate_m2": 4.939297787404011,
+            "recall_delta_percentage_points": 2.1163114082709544
+          },
+          "recall_05cm_before": 0.7209935805855573,
+          "recall_05cm_after": 0.7400232394232051
+        },
+        "open31": {
+          "fixed_reference_area_estimate_m2": 4.632423515688023,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.2465775169781583,
+          "05cm": {
+            "start_action": 167,
+            "end_action": 208,
+            "new_correct_samples": 404,
+            "lost_correct_samples": 122,
+            "net_correct_samples": 282,
+            "new_correct_area_estimate_m2": 0.2721784613638687,
+            "lost_correct_area_estimate_m2": 0.0821925056593861,
+            "net_correct_area_estimate_m2": 0.18998595570448262,
+            "recall_delta_percentage_points": 4.10122164048865
+          },
+          "10cm": {
+            "start_action": 167,
+            "end_action": 208,
+            "new_correct_samples": 181,
+            "lost_correct_samples": 26,
+            "net_correct_samples": 155,
+            "new_correct_area_estimate_m2": 0.12194134036351544,
+            "lost_correct_area_estimate_m2": 0.017516435632328187,
+            "net_correct_area_estimate_m2": 0.10442490473118726,
+            "recall_delta_percentage_points": 2.2542175683537002
+          },
+          "recall_05cm_before": 0.7891215823152996,
+          "recall_05cm_after": 0.8301337987201861
+        },
+        "closed118": {
+          "fixed_reference_area_estimate_m2": 3.291823659443295,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.0,
+          "05cm": {
+            "start_action": 167,
+            "end_action": 208,
+            "new_correct_samples": 0,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 0,
+            "new_correct_area_estimate_m2": 0.0,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 0.0,
+            "recall_delta_percentage_points": 0.0
+          },
+          "10cm": {
+            "start_action": 167,
+            "end_action": 208,
+            "new_correct_samples": 1,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 1,
+            "new_correct_area_estimate_m2": 0.0007524168364441817,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 0.0007524168364441817,
+            "recall_delta_percentage_points": 0.022857142857146684
+          },
+          "recall_05cm_before": 0.872,
+          "recall_05cm_after": 0.872
+        }
+      }
+    },
+    {
+      "start_action": 208,
+      "end_action": 256,
+      "acquired_actions": 48,
+      "first_selected_candidate": 3,
+      "first_selected_outbound_actions": 2,
+      "interval_exactly_one_selected_outbound_option": false,
+      "old_predicted_template_reward_m2": {
+        "G": 0.0,
+        "S": 0.0
+      },
+      "old_common_total_proxy": 0.4636908893138204,
+      "old_coverage_only_proxy": 0.0,
+      "old_measured_quality_total_proxy": 0.4636908893138204,
+      "actual_reference_changes": {
+        "all": {
+          "fixed_reference_area_estimate_m2": 233.39182353316687,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 30.347116738811685,
+          "05cm": {
+            "start_action": 208,
+            "end_action": 256,
+            "new_correct_samples": 6609,
+            "lost_correct_samples": 76,
+            "net_correct_samples": 6533,
+            "new_correct_area_estimate_m2": 29.38237540679848,
+            "lost_correct_area_estimate_m2": 0.3378817568341178,
+            "net_correct_area_estimate_m2": 29.044493649964362,
+            "recall_delta_percentage_points": 12.444520639274625
+          },
+          "10cm": {
+            "start_action": 208,
+            "end_action": 256,
+            "new_correct_samples": 6658,
+            "lost_correct_samples": 79,
+            "net_correct_samples": 6579,
+            "new_correct_area_estimate_m2": 29.60022022370469,
+            "lost_correct_area_estimate_m2": 0.3512191946038856,
+            "net_correct_area_estimate_m2": 29.249001029100803,
+            "recall_delta_percentage_points": 12.532144693982506
+          },
+          "recall_05cm_before": 0.7400232394232051,
+          "recall_05cm_after": 0.8644684458159514
+        },
+        "open31": {
+          "fixed_reference_area_estimate_m2": 4.632423515688023,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.0,
+          "05cm": {
+            "start_action": 208,
+            "end_action": 256,
+            "new_correct_samples": 0,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 0,
+            "new_correct_area_estimate_m2": 0.0,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 0.0,
+            "recall_delta_percentage_points": 0.0
+          },
+          "10cm": {
+            "start_action": 208,
+            "end_action": 256,
+            "new_correct_samples": 0,
+            "lost_correct_samples": 0,
+            "net_correct_samples": 0,
+            "new_correct_area_estimate_m2": 0.0,
+            "lost_correct_area_estimate_m2": 0.0,
+            "net_correct_area_estimate_m2": 0.0,
+            "recall_delta_percentage_points": 0.0
+          },
+          "recall_05cm_before": 0.8301337987201861,
+          "recall_05cm_after": 0.8301337987201861
+        },
+        "closed118": {
+          "fixed_reference_area_estimate_m2": 3.291823659443295,
+          "new_actual_pose_continuous_FOV_visible_area_estimate_m2": 0.0,
+          "05cm": {
+            "start_action": 208,
+            "end_action": 256,
+            "new_correct_samples": 14,
+            "lost_correct_samples": 3,
+            "net_correct_samples": 11,
+            "new_correct_area_estimate_m2": 0.010533835710218544,
+            "lost_correct_area_estimate_m2": 0.002257250509332545,
+            "net_correct_area_estimate_m2": 0.008276585200885998,
+            "recall_delta_percentage_points": 0.2514285714285691
+          },
+          "10cm": {
+            "start_action": 208,
+            "end_action": 256,
+            "new_correct_samples": 6,
+            "lost_correct_samples": 1,
+            "net_correct_samples": 5,
+            "new_correct_area_estimate_m2": 0.00451450101866509,
+            "lost_correct_area_estimate_m2": 0.0007524168364441817,
+            "net_correct_area_estimate_m2": 0.0037620841822209087,
+            "recall_delta_percentage_points": 0.11428571428571122
+          },
+          "recall_05cm_before": 0.872,
+          "recall_05cm_after": 0.8745142857142857
+        }
+      }
+    }
+  ],
+  "all_input_checks_passed": true,
+  "numeric_definitions": {
+    "correct_reference_sample": "Distance from fixed source reference point to native measured TSDF triangles <= tolerance.",
+    "new_correct": "False at interval start, true at end; includes distance improvement into tolerance, not only newly allocated TSDF triangles.",
+    "lost_correct": "True at start, false at end; retained rather than forcing monotonicity.",
+    "net": "End minus start; equals gross new minus lost.",
+    "area": "Uniform area sample count times source sampling area/drawn count from the pre-existing reference receipt; Monte Carlo estimate, not exact surface integration.",
+    "visibility": "Whole-source first-hit continuous FOV visibility at actual acquired poses; not a pixel-resolution observation or a TSDF surface metric.",
+    "prediction_comparison": "Template reward covers all inferred measured groups; full-scene and target reference increments have different support. These side-by-side values are not a calibrated prediction residual or module-level causal effect.",
+    "last_interval": "208\u2192256 contains additional original replanning; the 208 prediction applies to only its two-action selected option, not the full final interval."
+  },
+  "repair_hook_status": {
+    "role": "Provisional counterfactual only; no repair was installed into the replay actor.",
+    "original_gain_mirror": "Elementwise equality checked against unchanged frozen source at every traced viewpoint.",
+    "repair_source_version": "Pre-boundary-revision implementation imported after action-0 checkpoint; exact full source SHA was not captured.",
+    "known_loaded_near_surface_test": "abs(z - measured) <= tolerance",
+    "subsequent_disk_revision": "Inclusive interval z >= measured - tolerance and z <= measured + tolerance; also diagnostics/install guards added later.",
+    "do_not_attribute_to_current_disk_repair_sha": true,
+    "effect_on_original_replay_or_TSDF": false,
+    "provisional_outputs": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/gain_hook_checks.json",
+    "superseded_for_current_repair_quantitative_claims_by": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_002/result.json"
+  },
+  "artifacts_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/protocol.json": "4f61cf06719f4800b0289f271f566edf74974c166e01b5a1a07652a8e22da448",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/run_fixed_replay.py": "5ccb47f41837ec3b6a2f5dedf8c20a388b1cbe9c09c7950edb6265c21e81059c",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/result.json": "a06921427d2f1bdd26f63c946f77a0ca96d091b5e288cb27f85239c734f0a6b2",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/checkpoints.json": "71ecb5a307735d36b196c1404c41af17ea97b27e3b65bc104ed8db46ef418353",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/score_checks.json": "f35d859ea712622dd6d25e543b8eec393fe35640cc914cb0aa06e6fd0364e1e0",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/gain_hook_checks.json": "e5a90002f444f6d691460a74b115967b9a1f02d9199f878220cb6e69dd6bbd61",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/intervals.csv": "4f76df14b9153d5110f805515f4b1a629507d9623e75276a958ae425da907665",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_002/result.json": "6d275ad9441b66103d194344c9dd7f75b034786d5cc9f952af515f390b8dccfb",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_003/prediction_matching.json": "ef08b3bedf9997673bd2ca239419b03551aeb71a7f5e5c3179829c15bba233fa"
+  },
+  "native_mesh_retention": "Eight local checkpoint PLY files; not included in paper publication bundle.",
+  "same_domain_prediction_validation": {
+    "available": true,
+    "independent_evaluation_result": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_003/prediction_matching.json",
+    "sha256": "ef08b3bedf9997673bd2ca239419b03551aeb71a7f5e5c3179829c15bba233fa",
+    "new_capture_result": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_003/result.json",
+    "capture_actions_replayed": 109,
+    "capture_fused_frames": 110,
+    "fixed_states": [
+      54,
+      109
+    ],
+    "threshold_m": 0.05,
+    "source_truth_to_actor": false,
+    "same_prediction_points_used_for_old_repair_delta": true,
+    "weights_are_template_hypothesis_area_not_independent_real_area": true,
+    "source_geometry_and_before_after_TSDF_point_match": true,
+    "nearest_actual_source_point_secondary_check_retained": true,
+    "separate_capture_execution_and_geometry_replay_disclosed": true,
+    "repair_trajectory_performance_claim": false
+  },
+  "hardware": false,
+  "new_policy_episodes": 0,
+  "authoritative_current_repair_diagnostic": {
+    "separate_execution_from_actual_geometry_replay": true,
+    "result": {
+      "status": "completed_versioned_fixed_state_hook_replay",
+      "paid_actions_replayed": 167,
+      "fused_frames": 168,
+      "fixed_states": [
+        54,
+        109,
+        167
+      ],
+      "original_score_calls_matched": 6,
+      "new_policy_decisions": 0,
+      "action_168_executed": false,
+      "repair_installed_into_actor": false,
+      "repair_source_sha256": "57c5cd1bb58a2e816d81184014cbfbad2a3d5ddeb872c43c7b5d9895378bb2fb",
+      "hook_source_sha256": "3cd7c53641c33fb1a0f4c95ba3470ecee229ff47c8047b30a642268d5aa4eb62",
+      "source_snapshots_unchanged": true,
+      "live_sources_unchanged": true,
+      "original_packets_actions_poses_owners_quality_assets_feedback_all_match": true,
+      "native_mesh_or_reference_recomputed": false,
+      "actual_surface_increment_source": "attempt_001 separate replay with final 256-step native TSDF byte identity",
+      "elapsed_s": 76.800197913999
+    },
+    "freeze_sha256": "000559d3678f73fb9405a7c2dd7eecdb9846d91f1a1190b339897c86d7fe9dab",
+    "hooks_sha256": "0ed905dae95a2bf17498e189afbfd1ba97a15abf6efedcd0b0527f80dc630055",
+    "states": [
+      {
+        "paid_action": 54,
+        "models": {
+          "G": {
+            "original_route_area_m2": 4.530632523786059,
+            "repaired_route_area_m2": 9.153968851406756,
+            "recovered_union_area_m2": 4.623336327620699,
+            "original_gain_elementwise_identical": true,
+            "unique_outbound_views": 55
+          },
+          "S": {
+            "original_route_area_m2": 4.331335681681632,
+            "repaired_route_area_m2": 9.098309083323304,
+            "recovered_union_area_m2": 4.766973401641672,
+            "original_gain_elementwise_identical": true,
+            "unique_outbound_views": 55
+          }
+        }
+      },
+      {
+        "paid_action": 109,
+        "models": {
+          "G": {
+            "original_route_area_m2": 1.3653129868459848,
+            "repaired_route_area_m2": 3.2687446719031765,
+            "recovered_union_area_m2": 1.9034316850571917,
+            "original_gain_elementwise_identical": true,
+            "unique_outbound_views": 18
+          },
+          "S": {
+            "original_route_area_m2": 1.4356106870488827,
+            "repaired_route_area_m2": 3.282624267885804,
+            "recovered_union_area_m2": 1.8470135808369217,
+            "original_gain_elementwise_identical": true,
+            "unique_outbound_views": 18
+          }
+        }
+      },
+      {
+        "paid_action": 167,
+        "models": {
+          "G": {
+            "original_route_area_m2": 0.0,
+            "repaired_route_area_m2": 0.20994189696898705,
+            "recovered_union_area_m2": 0.20994189696898705,
+            "original_gain_elementwise_identical": true,
+            "unique_outbound_views": 41
+          },
+          "S": {
+            "original_route_area_m2": 0.0,
+            "repaired_route_area_m2": 0.10261581009529766,
+            "recovered_union_area_m2": 0.10261581009529766,
+            "original_gain_elementwise_identical": true,
+            "unique_outbound_views": 41
+          }
+        }
+      }
+    ],
+    "interpretation": "Counterfactual scoring of the same recorded selected routes at fixed measured states; no repaired route was executed and no performance advantage follows.",
+    "old_provisional_hook_numbers_used_as_current_version_evidence": false
+  },
+  "same_domain_prediction_validation_before_new_capture": {
+    "available": false,
+    "missing": "Predicted point coordinates and per-point route union-gain vectors were not retained by either frozen hook.",
+    "consequence": "Cannot match rewarded hypothesis samples to independently valid source surfaces that become newly correct in TSDF; no calibration residual or causal surface attribution is reported.",
+    "no_third_replay": true
+  }
+}

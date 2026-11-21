@@ -1,0 +1,689 @@
+Category-Conditioned Observation in Joint Unknown-Space
+Exploration and Reconstruction
+Anonymous research draft, 20 November 2026
+Abstract
+Unknown-environment exploration must discover accessible space while acquiring views that
+reconstruct its surfaces. We study a joint planner that adds category-conditioned structural observation value to inherited unknown-coverage and measured-surface terms. Candidate routes and
+mapping use acquired observations; hypothetical closed/open surfaces guide selection but never
+enter the measured reconstruction. An exact score decomposition identifies when category probabilities can alter route rankings. A conditional depth-and-placement model and an independently
+selected structural temperature address overconfident geometric evidence while preserving shared
+candidates and execution rules. On 24 held-out procedural objects, neutral structural negative log
+likelihood decreases from 5.0804 to 0.6791, although class accuracy is unchanged and aroundobject loss worsens. Complete exploration tests use two furniture permutations of one floorplan
+with exact poses and ideal visible instance labels. All matched runs attain full correct-free coverage, return and record zero simulated collisions within 256 actions. The calibrated semantic
+policy changes one complete trajectory, but reaches full coverage nine actions later, travels 1.2 m
+farther and loses 0.377 percentage points of surface F1; the other permutation ties. Separate
+native-candidate branches demonstrate a category-induced object-surface gain accompanied by
+lower whole-scene surface gain. These findings establish controlled exploration feasibility, improved structural probability loss and conditional semantic decision effects. They do not establish
+a general semantic efficiency advantage, natural-detector performance or physical reconstruction
+accuracy. Full failures, adverse comparisons and independent object counts are retained.
+
+Keywords: unknown-space exploration, active reconstruction, category priors, structural calibration,
+observation planning
+Anonymous manuscript draft; not submitted.
+
+1
+
+Introduction
+
+Unknown-environment exploration must discover accessible space while acquiring enough views to
+reconstruct its surfaces. These objectives overlap but are not interchangeable. A robot can map a
+corridor while missing the back of a cabinet or the interior of a shelf; inspecting those surfaces can
+also delay exploration elsewhere. The practical question is how category information should affect
+observation allocation when both the map and object structure remain incomplete.
+We study a joint unknown-coverage and measured-surface planner in which category votes weight
+closed and open structural alternatives. Candidate routes come from acquired occupancy and surface
+data, and each executed motion is followed by a new observation. The measured map remains separate
+from hypothetical completion. A neutral class-prior control G and a category-conditioned policy S
+share instance associations, geometry, routes, mapping and execution at any identical observed state.
+This comparison isolates the class-prior contribution within the declared frontend; it does not compare
+semantic perception against a wholly geometric sensing system.
+A recurring failure is that available category information produces no target change. We make this
+behavior explicit: the semantic score difference is the class-probability difference multiplied by each
+1
+
+route’s difference in predicted structural observation opportunity. If geometric evidence is overconfident, the two structural predictions expose similar area, or the score change does not overcome the
+ranking margin, G and S choose the same route. A target change is only an intermediate result; it must
+improve actual coverage or reconstruction to support a task-level advantage.
+Our evaluation separates complete exploration from probability calibration and short-branch
+mechanism tests. Complete simulated runs cover two furniture permutations of one branching
+layout from a single initial sensor packet. Independent procedural objects test conditional extent
+and structural probability, with fitting and evaluation separated by object. Finally, original candidate
+branches under correct, neutral and swapped cues test how a changed prior alters actual surface
+acquisition. Earlier supplied-graph studies and physical integration pilots are retained as supporting
+evidence with their own assumptions.
+The contributions are threefold. First, an implementation-traced joint planning formulation separates acquired mapping, hypothetical structural reward and realized execution outcomes. Second, an
+exact score decomposition explains why semantic probabilities can change while the selected target
+remains fixed, and motivates independently testing structural evidence scale. Third, a matched evaluation connects probability changes to native candidate choices and complete exploration, retaining
+failures, ties and adverse tradeoffs. The current evidence establishes exploration feasibility and improved structural probability loss on a held-out procedural set. It does not establish a general semantic
+advantage in unknown-space coverage or reconstruction.
+
+2
+
+Related Work
+
+Active mapping selects motion to improve an environmental representation while accounting for estimation [2]. Hierarchical systems such as TARE [3] and Active Neural SLAM [4] separate strategic
+exploration from local execution. Our virtual study uses the existing observed-state route generator
+and primitive executor to examine the additional value of a category-conditioned surface reward. Exact poses remove localization uncertainty from that comparison; they do not validate physical SLAM
+accuracy.
+Reconstruction-driven next-best-view planning optimizes surface acquisition; GenNBV [5] learns
+a generalizable policy in a larger viewpoint space. Semantic exploration and inspection methods use
+category or scene structure to prioritize observations [8–11]. Here the comparison concerns two explicit structural alternatives on a ground robot’s available routes. Measured surfaces are integrated
+volumetrically [6, 7], while predicted geometry affects only observation selection. Adapted mechanisms and historical native-system integration results in the supplement are not rankings of those
+complete original systems.
+Belief-based planning and robotic information gathering provide the decision background [12, 13].
+The present loss-based shape weights follow a generalized updating approach [15]; the structuraltemperature adjustment uses standard probability calibration [17]. Conditional depth CRPS, class
+NLL and interval coverage assess different properties. We therefore evaluate them separately and treat
+a standard split-conformal interval correction [18] as a diagnostic, not a new navigation algorithm or
+a guarantee of improved reconstruction.
+
+3
+
+Problem Formulation: Joint Unknown-Space Exploration and Reconstruction
+
+We consider a ground robot that must discover a previously unmapped static environment and reconstruct its observed surfaces. The robot starts from one acquired RGB-D and planar-scan packet and
+subsequently receives measurements only after executed actions. It is not supplied with the environment’s complete occupancy map, a complete safe pose graph, hidden object bounds, or source meshes.
+
+2
+
+The online state contains the current pose, an acquired occupancy map, a measured surface representation, acquired instance/category support, and an action/observation ledger. Reference geometry and
+the start-reachable free-space set are reserved for evaluation. Exact simulated poses and partial ideal
+first-hit instance/category labels are controlled sensing assumptions, not evidence of automatic detection or SLAM accuracy.
+The primary objective is efficient unknown-space coverage together with measured surface reconstruction. Discovering new free space remains an objective throughout the exploration task; object
+completion supplies an additional observation preference rather than replacing exploration with inspection of a supplied target. Let Dt denote all measurements acquired by time t, Mt the corresponding
+occupancy map, and Qt the measured surface state. The declared v10_3_1-derived candidate generator produces a finite set Rt of observation routes from this acquired state. Its occupancy, connectivity,
+footprint, action-budget and return checks are shared by G and S. The two policies therefore compare
+the same routes at an identical acquired state. Once their actions diverge, their later observations and
+candidate sets may differ.
+For a candidate r, the implemented joint score is
+Utm (r) = Jt (r) + Htm (r),
+
+m ∈ {G, S},
+
+(1)
+
+where Jt retains the inherited unknown-coverage and measured-surface-quality terms and Htm is
+the expected unobserved template area. More explicitly, the common coverage contribution is
+bL,t |UL,t (r)| + η
+bD,t |UD,t (r)|]: the route masks U contain predicted new support for the planar
+acell [η
+b . The measured-quality
+scan and camera, and the inherited observation-gain update supplies η
+proxy is added using the same coefficient and implementation in every matched arm. This is a
+total outbound-gain score; it does not divide the score by route length or replace it with the final
+reconstruction metric.
+Completion is defined only for the shared acquired positive instance tracks. For object o, h ∈
+{closed, open} denotes a structural hypothesis and k denotes a geometric particle. Both policies use
+the same acquired support, conditional geometry, visibility model and observation history. G has a
+neutral structural-class prior, whereas S uses a finite prior from the acquired category votes. Thus
+G is a neutral class-prior control with the same instance frontend, not a completely semantics-free
+perception system. In the particle revision, the expected completion term integrates area-weighted
+visibility over the joint structure–geometry distribution. For each template point, the maximum over
+committed outbound successor poses forms a route union; previously measured or strictly free-spacecontradicted points do not earn new area. Hypothesized surfaces never enter the measured TSDF.
+Geometry, likelihood-scale and structural-temperature revisions are identified separately in the method
+and matched experiments.
+The planner selects the highest positive score, breaking ties by lower route cost and then candidate
+identifier. Its original heading-state local planner executes the selected option through forward and
+turn primitives. Each executed primitive is charged once, checked by the common execution layer,
+and followed by a real simulator observation and measured-map update. Completion of an option
+or its invalidation triggers another global selection; no future branch measurement is supplied to the
+decision. A trained reachability network is not active in these virtual experiments. The complete
+virtual comparisons use 0.2 m forward moves, 90◦ turns and a common 256-action budget that includes
+return to the initial pose. These are declared evaluation conditions, not a claim that the current physical
+deployment uses the same budget or return contract.
+We evaluate coverage efficiency separately from reconstruction quality. With the evaluation-only
+start-reachable free set Fref ,
+Ctfree =
+
+|{c ∈ Fref : Mt (c) = free}|
+,
+|Fref |
+
+F1,τ =
+
+2Pτ Rτ
+.
+Pτ + Rτ
+
+(2)
+
+The primary coverage outcomes are the first paid actions reaching declared thresholds and the complete coverage curve. We also report travel, action count, collisions, return outcome, correctly free
+3
+
+and falsely occupied cells, whole-scene surface precision/recall/F1, and object recall. Surface measurements compare the native measured TSDF with a separately fixed visible source reference at
+τ = 0.05 m (with the additional threshold retained in the supplement), without aligning or inserting
+predicted geometry. Object-surface improvement, whole-scene improvement and coverage improvement are distinct outcomes. Neither a changed category probability nor a changed target alone establishes an efficiency benefit.
+
+4
+4.1
+
+Joint Planning with Acquired Structural Evidence
+Measured state and conditional completion
+
+The mapping backend integrates only acquired RGB-D and scan measurements. Measured occupancy
+supplies traversability and unknown-space masks; an Open3D CPU TSDF supplies the reconstructed
+surfaces [6, 7]. Observed instance tracks associate measured surface patches with objects. Template
+completion is restricted to these positive tracks, while unassigned geometry still contributes to mapping, collision checking and the common coverage/quality terms. This prevents a small unassigned
+fragment from independently receiving a whole furniture template. Both G and S receive the same
+ideal visible instance associations in the virtual tests.
+Each modeled object has closed-box and open-shelf alternatives. Their common coordinate frame,
+width, vertical parts and measured support are estimated from acquired points. Qualified outer faces
+constrain orientation; measured horizontal faces constrain available layers. These estimates remain
+imperfect. We represent uncertainty only in local depth and the allocation of unseen extent; orientation, width, layer count and pose are not integrated out. Model mismatch is therefore retained rather
+than absorbed into a claim of a complete shape posterior.
+For object o, geometric particle k = (d, a) has depth d and an allocation a of unseen extent around
+the measured interval. The public depth density is uniform on [0.2, 1.4] m, conditioned on the acquired span. Nodes at 0.1 m spacing, together with an inserted measured-span boundary, receive
+clipped Voronoi integration masses. A qualified measured end fixes that coordinate. Without an end
+anchor, a ∈ {0, 0.5, 1} has prior masses {0.25, 0.5, 0.25} and places the lower endpoint at measured
+minimum minus a(d − span). Opposite observed ends fix depth directly. Out-of-support spans and
+missing/multiple tracks remain explicit failures in independent probability evaluation; its public-prior
+fallback is an evaluator convention, not hidden ground-truth object selection.
+
+4.2
+
+Observation loss and structural mixture
+
+Every alternative is evaluated using the same acquired points and valid depth rays. The loss Eohk adds
+mean point-to-template squared distance and mean strict-free first-hit depth discrepancy, each clipped
+at 0.15 m before squaring. The common ray set encloses all alternatives. A template hit behind a
+nearer observed hit is occluded; it is not free-space evidence. Invalid depth adds no evidence, and
+measured surface support vetoes conflicting free-space classification across views. Rebuilding from
+the acquired state avoids multiplying a previous posterior by the same observations again.
+The loss-based distribution [15] uses one externally selected scale σ :
+2
+
+2
+
+Zoh = ∑ qo0 (k)e−Eohk /(2σ ) ,
+
+qo (k | h, Dt ) =
+
+k
+
+qo0 (k)e−Eohk /(2σ )
+.
+Zoh
+
+(3)
+
+The depth scale is fixed at 0.01 m by a separate training CRPS comparison. This generalized loss is
+not an exact RGB-D sensor likelihood, and its scale does not by itself calibrate structural confidence.
+We therefore evaluate a declared modular structural-temperature revision:
+m
+πo,T
+(h) =
+
+m (h) exp(log Z /T )
+πo,0
+oh
+m (h0 ) exp(log Z 0 /T )
+∑h0 πo,0
+oh
+
+4
+
+,
+
+m
+wm
+ohk = πo,T (h)qo (k | h, Dt ).
+
+(4)
+
+G = (0.5, 0.5); S uses the same finite acquired-label vote rule as the preceding implementaG uses πo,0
+tion. Temperature scaling [17] is applied to structural evidence before category log-odds are added.
+Any positive T preserves G’s class preference; the selected T = 16 softens its confidence. Conditional
+geometry remains unchanged, whereas its structural mixture can change the marginal depth distribution. T = 1 exactly reproduces the preceding joint weights. All policies in a matched temperature
+comparison share this update, geometry and execution loop; the revision is not described as equivalent
+to the earlier bounded surface-only likelihood.
+Let aohk j be the area quadrature weight of point j on an alternative and vohk j (s) its retained visibility contribution at pose s, with measured or strictly free-space-contradicted points receiving zero new
+area. The completion term is
+
+Htm (r) = ∑ ∑ wm
+vohk j (s).
+ohk ∑ aohk j max
++
+o h,k
+
+j
+
+(5)
+
+s∈rout
+
++
+contains outbound observations only. The maximum forms a route union, so
+The successor set rout
+revisiting a view cannot multiply its reward. Particle alternatives are mutually exclusive hypotheses,
+not extra physical objects. No predicted point is fused into the measured TSDF. The shared visibility
+repair, face-area basis and history consumption are retained in all temperature arms.
+
+4.3
+
+When semantics changes a target
+
+m
+Define Aoh (r) as the inner area term in Eq. 5, integrated over qo (k | h, Dt ), and let pm
+o = πo,T (open).
+Since G and S share the common score and conditional geometry,
+
+
+∆t (r) ≡ UtS (r) −UtG (r) = ∑(pSo − pG
+(6)
+o ) Ao,open (r) − Ao,closed (r) .
+o
+
+This exact identity separates three causes of unchanged selection: nearly identical class probabilities,
+similar observation opportunities under the two structures, and score changes too small to overcome
+the existing ranking margin. If rG uniquely maximizes G, another route r strictly overtakes it only if
+∆t (r) − ∆t (rG ) > UtG (rG ) −UtG (r).
+
+(7)
+
+A connected semantic frontend can therefore change scores without changing the chosen route. A
+route change can still reduce measured quality when the template or visibility surrogate is inaccurate.
+The experiment must follow this chain from probabilities to scores, executed observations and final
+coverage/reconstruction; stronger class confidence alone is insufficient.
+
+4.4
+
+Decision–execution–observation feedback
+
+The original heading-state local planner produces a sequence of forward and turn primitives for the
+selected observation option. Before each primitive, the common execution layer checks current acquired traversability and the remaining action/return contract. The next observation updates measured
+mapping and realized gain estimates; an invalidated option is replanned from that state. Global reselection occurs at option completion or invalidation, not after every frame. The declared virtual runs
+retain the original collision and return checks without target blacklists, additional candidate filters or
+a learned reachability network.
+Unknown-exploration loop. Acquire the initial packet; update the measured map and instance
+support. Generate feasible observation routes from acquired state. Construct a common geometric
+bank and score each route with coverage, measured quality and expected completion. Select the
+highest positive route under the shared tie rule. Execute a checked primitive, charge its cost and
+acquire a new packet. Continue the option while valid; otherwise replan. Return according to the
+declared budget contract, and retain all failures and actual observations for independent evaluation.
+
+5
+
+5
+5.1
+
+Experiments and Results
+Evidence levels and matched exploration protocol
+
+The primary complete-exploration comparison uses two inspected furniture permutations of one synthetic branching floorplan, with textured assets and partial ideal visible instance/category labels. Each
+run begins with one actual simulated packet, giving 42.606% correct-free coverage; the remaining
+map is unknown. Exact poses, a 0.2 m circular radius, 120×90 RGB-D at 90◦ field of view, 8 m sensing range and 180 planar scan beams are shared. The measured TSDF uses 6 cm voxels and 12 cm
+truncation. The 256-action cap includes return and is not shortened at first complete coverage, because
+surface acquisition can continue after floor exploration.
+Four new T = 16 G/S runs are compared with four frozen T = 1 distribution runs on these same
+layouts. Temperature was selected only on independent object classification loss. The complete-policy
+trigger was any changed target in the six fixed prefixes, irrespective of whether its actual branch outcome improved. It was met at one prefix; no new candidate, score coefficient, budget or stopping rule
+was introduced. Independent evaluation checks the complete action and sensor records, source hashes
+and native measured meshes. There are no random repeats or independent floorplan replications in
+this comparison.
+Other experiments answer narrower questions. An earlier 24-object split (12 training, six validation, six held-out) selects the conditional-depth scale. A new 48-object set (24 calibration, 24 test)
+independently evaluates structural temperature and a report-only interval correction. Four viewing
+conditions per object are dependent observations of that object. Six retained exploration prefixes and
+66 previously acquired outbound branches support repeated model diagnostics; reusing them does not
+increase sample count. The final cue mechanism uses eight separate native outbound branches reused
+across twelve score conditions. Supplied-graph observation and real-robot pilots have different state
+and execution assumptions and are retained separately in the supplement.
+
+5.2
+
+Complete unknown-space coverage and reconstruction
+
+All eight matched entries in Table 1 reach 100% correctly free reference coverage, return to the initial
+pose and record zero simulated collisions. At T = 1, G and S have identical trajectories and native
+TSDF meshes in each layout. At T = 16, the left-layout S decision first differs after 54 paid actions,
+selecting candidate 0 instead of 8 from identical acquired inputs; the actual trajectories first diverge at
+action 71. The changed policy reaches full coverage at action 97 instead of 88, travels 43.2 instead
+of 42.0 m and loses 0.377 percentage points of surface F1. Shelf recall rises by 1.294 points, while
+cabinet recall falls by 2.834 points. G remains identical to its T = 1 control. In the right layout, both
+new policies remain trajectory- and mesh-identical to both T = 1 controls.
+This complete-run result differs from the local branch forecast. At the changed left prefix, the
+selected S branch adds 0.0434 m2 more object surface and 1.0581 m2 more whole-scene surface than
+the selected G branch, but requires four additional actions and 0.6 m more travel, with unchanged free
+coverage. Its favorable surface increment does not compensate for the downstream complete-policy
+cost and F1 loss. Figure 1 therefore provides a necessary check beyond a changed score or a successful
+short route.
+The earlier matched fixed-extent/distribution/mean comparison helps isolate the effect of representing unresolved extent. In the left layout, distribution and posterior-mean modes improve F1 by
+0.377 points, reach full coverage nine actions earlier and travel 1.2 m less than fixed extent; shelf recall
+is lower. All right-layout outcomes tie, and posterior mean exactly reproduces the distribution routes.
+Thus those tests support a layout-specific extent-modeling benefit, without evidence that retaining
+spread is necessary. Historical coverage-only and joint-without-template controls also remain in the
+supplement: coverage-only reaches full coverage sooner in the branching layouts, and outperforms
+G/S coverage and F1 in the earlier three four-room layouts. Completion reward has not established a
+
+6
+
+Table 1: Complete unknown-exploration comparisons. All runs start at 42.606% correct-free coverage, execute 256 actions, finish at 100%, return and record zero simulated collisions. A100 is the first
+full-coverage action. T = 1 reuses four previously frozen distribution runs; T = 16 adds four runs
+on the same two inspected furniture permutations, not new independent scenes. Surface metrics use
+measured TSDFs at 5 cm.
+Layout Policy
+
+T A100 Path (m) F1 (%) Shelf (%) Cabinet (%)
+
+Left
+Left
+Left
+Left
+
+G
+S
+G
+S
+
+1
+1
+16
+16
+
+88
+88
+88
+97
+
+42.0
+42.0
+42.0
+43.2
+
+92.758
+92.758
+92.758
+92.381
+
+82.170
+82.170
+82.170
+83.464
+
+88.709
+88.709
+88.709
+85.874
+
+Right
+Right
+Right
+Right
+
+G
+S
+G
+S
+
+1
+1
+16
+16
+
+100
+100
+100
+100
+
+43.2
+43.2
+43.2
+43.2
+
+92.596
+92.596
+92.596
+92.596
+
+81.088
+81.088
+81.088
+81.088
+
+79.214
+79.214
+79.214
+79.214
+
+(a) Left layout
+
+(b) Right layout
+
+Correctly mapped free space (%)
+
+100
+90
+80
+T=1 (G and S)
+T=16, G
+T=16, S
+
+70
+60
+50
+40
+
+Initial coverage: 42.61%
+
+0
+
+64
+
+128
+192
+Paid primitive actions
+
+256 0
+
+Initial coverage: 42.61%
+
+64
+
+128
+192
+Paid primitive actions
+
+256
+
+Figure 1: Correct-free coverage over all 256 paid actions. The two T = 1 policies coincide in each layout. Structural temperature produces a left-layout semantic route change that delays complete coverage; all right-layout curves coincide. Curves are related deterministic trajectories on two permutations
+of one floorplan, not independent scene replicates. The source CSV preserves all eight curves.
+
+7
+
+consistent efficiency advantage over prioritizing unknown coverage.
+
+5.3
+
+Independent structural calibration and its limits
+
+The structural study fixes 24 new calibration and 24 new test objects before observing predictions,
+using the same IID mixture of closed/open objects and predeclared geometry mismatch. Each object
+is measured from front, front–side, around-object and occluded conditions. Generated first-hit depth
+and visible labels are passed to the actor; hidden dimensions and source meshes are reserved for
+generation and evaluation. The inferred-axis projection of true geometry defines the depth target, so
+axis errors are not mislabeled as successful depth estimation. All eight multiple-track fallbacks remain
+in the test denominator.
+Neutral class NLL selects T = 16 on the calibration objects. On the held-out test objects, neutral
+NLL falls from 5.0804 to 0.6791, Brier score from 0.3251 to 0.2363, and wrong predictions above
+0.9 confidence from 27 to 3. Neutral accuracy remains 63.02%, consistent with preserving its class
+ordering. With a supplied correct 9:1 cue, S∗ reaches NLL 0.1393 and 96.875% class accuracy; this is
+a controlled-prior condition, not an automatic-recognition result. Around-object neutral NLL worsens
+from 0.0829 to 0.3414, and neutral depth median error increases. The complete condition table and
+calibration/test rows are retained in the supplement.
+These results identify excessive structural confidence as one cause of suppressed category influence, but not the only cause of G/S ties. In the preceding distribution runs, G/S scores differ at seven
+of 30 left and six of 26 right planning calls while their selected candidates remain identical. Eq. 6
+explains why probability and score changes need not cross the route-ranking margin. The temperature revision makes a category-dependent choice executable, but Table 1 shows no coverage-efficiency
+benefit.
+Conditional extent probability also has important limits. The earlier depth scale was chosen from
+eight values by training CRPS; 0.01 m is the grid’s lower endpoint, not a demonstrated globally optimal scale. Informative-view CRPS improves in its independent validation/held-out objects, while
+nominal 95% intervals under-cover. A separate standard object-level split-conformal diagnostic on
+the new 24/24 objects raises test case coverage from 61/96 to 93/96 and simultaneous four-condition
+object coverage from 5/24 to 21/24. Mean interval width increases from 0.278 to 2.316 m and interval
+score worsens from 2.140 to 2.704. Its observed object coverage is 87.5%, not an empirical 95%
+success claim. This correction applies only to the unreweighted T = 1 neutral distribution, leaves all
+probability masses unchanged and is not used for planning.
+
+5.4
+
+Controlled category effects on native observation branches
+
+In two procedural object arrangements, correct, neutral and swapped category cues are evaluated at
+T = 1 and T = 16 using the original candidate generator. Within each arrangement all cues share
+exactly the same acquired input, particle bank, common score and four candidates. The four available
+candidates all lie to the right; the experiment therefore tests their actual ranking, not a designed symmetric left/right choice. Across arrangements, rendered depth differs by at most 5 × 10−7 m, so they
+are not exact sensor counterfactuals. Eight native outbound routes are executed once and their outcomes reused for the twelve score conditions; all eight reach their endpoints over 114 actions without
+simulated collision.
+At T = 16 in the right arrangement, the correct cue changes the original target and increases object
+net-new surface by 1.3565 m2 , improves correctly free coverage gain by 3.328 percentage points and
+uses two fewer actions. Whole-scene net-new surface simultaneously decreases by 24.1218 m2 . The
+left arrangement ties at T = 16; at T = 1, its correct cue reduces object surface gain while increasing
+whole-scene gain. These complete contrasts demonstrate that category input can influence native
+observation allocation, with substantial objective tradeoffs. They do not demonstrate a completeexploration or uniformly positive semantic effect.
+
+8
+
+5.5
+
+Supporting controlled and physical evidence
+
+A reduced supplied-graph study uses public facility templates, a shared 18-action prefix and a 42action reference budget. It reports two improvements and two ties in four reference pairs, and a 6.16%
+mean joint coverage–surface gain at unchanged planar coverage. Changed-background tests include
+one improvement and three ties; an independent correction factorial finds a 2.66% gain from measured
+correction and no trajectory effect from forecast diagnosis. Planning failures and a larger-budget
+reversal remain included. These are conditional observation-allocation mechanisms, not unknownspace initialization or stopping rules. Their full formulation, recursion and results are archived in the
+supplement.
+The real-robot record includes completed short joint-exploration episodes, failed returns, control
+interruptions and map drift. A fresh-map ordered C/S pilot has different initial observations and a
+failed S return, preventing a matched efficiency ranking. Internal scan unions and quality proxies
+lack independent geometric ground truth. The physical implementation therefore provides integration
+evidence; it does not validate the simulated semantic comparison, SLAM accuracy or the complete
+temperature policy. Hardware experiments are paused following platform damage.
+
+6
+
+Discussion and Limitations
+
+The main unresolved issue is the gap between predicted observation value and the joint task outcome.
+Softer structural evidence restores the influence of a finite category prior, and native branches show that
+this influence can change actual surface acquisition. Yet an object-focused gain can displace a larger
+whole-scene gain or delay unknown coverage. The complete left-layout comparison demonstrates that
+this tradeoff can persist beyond the first changed target. A better probability loss is therefore useful
+model evidence, not a substitute for coverage and reconstruction evaluation.
+Geometry remains conditional and imperfect. The particle model integrates depth and placement
+while retaining estimated orientation, width and parts. Ideal instance labels do not remove these geometric errors. The earlier fixed-state audits identify unassigned fragments receiving whole templates,
+unreliable outer-plane fits, unobserved depth and imperfect layer placement; their failures remain in
+the supplement. Independent procedural measurements have exact poses and noiseless depth, and the
+two exploration layouts were inspected during development. Neither independent object tests nor multiple policy runs convert these related floorplan permutations into broad environment generalization.
+The class-temperature adjustment and split-conformal interval correction are standard calibration
+tools applied to distinct targets. Positive temperature cannot correct the sign of neutral structural
+evidence, while wide residual intervals can improve coverage without improving usefulness. The
+interval diagnostic’s mean width exceeds 2 m and its proper interval score worsens. Nominal interval
+coverage, class calibration and navigation utility must consequently remain separate claims. The
+matched G control also shares ideal instance association; it should not be interpreted as a semanticsfree perception baseline.
+Computational and physical limits remain substantial. Policies use a logical action budget and
+exact virtual poses; three concurrent runs with numerical-library thread limits of one do not establish
+real-time robot control. Native measured reconstruction is evaluated against a fixed source reference,
+without predicted geometry insertion or post-hoc alignment. The physical records lack such a reference and include localization/control failures. Deployment with estimated poses, natural detections
+and robust execution requires a separate matched evaluation after hardware recovery.
+
+7
+
+Conclusion
+
+We have formulated and tested joint unknown-space coverage and surface observation with a categoryconditioned structural reward. The implementation preserves the separation between acquired maps,
+
+9
+
+hypothetical geometry and execution outcomes. Its score decomposition makes semantic inactivity
+diagnosable: changing a class probability matters only when structural observation opportunities and
+route margins permit a different target.
+Independent structural calibration reduces probability loss, and complete simulated runs establish full-coverage feasibility under the declared action and return contract. Category information can
+change native target selection, but the complete comparison remains adverse in one permutation and
+tied in the other. The evidence therefore supports an active-planning system and a concrete semantic
+decision mechanism, while leaving a general coverage or reconstruction advantage unproven. Future
+improvements should be judged by complete unknown-exploration outcomes alongside object and
+whole-scene surface acquisition, rather than by stronger probabilities or selected favorable branches.
+
+8
+
+Reproducibility and Data
+
+The primary policy traces to the frozen v10_3_1 observed-state scoring/runtime source and its declared joint-exploration adapter. The common coverage and measured-quality terms, original candidates, heading-state local planner and execution contract are retained in the compared arms. Separate
+frozen modules specify conditional geometry and structural-temperature changes. Historical interface names OV-SDF, STGHP, RPN-UQ and IGCR do not imply that a trained reachability network or
+complete original supplied-graph controller was active in these virtual runs.
+The accompanying sources contain object-level splits, generated sensor manifests, sanitized actor inputs, frozen method/configuration hashes, all candidate scores, acquired action records, native
+meshes and independent evaluation receipts. Public summary tables identify reused controls and
+branches. No test-set score, hidden source mesh or future observation is supplied to the actor. Python
+file-access audit hooks provide provenance checks for trusted code; they are not an operating-system
+security sandbox. The supplement preserves earlier controlled results, null/negative exploration comparisons, rejected geometry variants and physical failures. Author identities and submission details
+remain unfilled.
+
+References
+[1] World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White
+paper, 2025-09-04. Official white paper.
+[2] Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A
+Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers.
+IEEE Transactions on Robotics, 2023. https://doi.org/10.1109/TRO.2023.3248510.
+[3] Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring
+Complex 3D Environments. RSS, 2021. https://doi.org/10.15607/RSS.2021.XVII.018.
+[4] Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using
+Active Neural SLAM. ICLR, 2020. Author manuscript: https://doi.org/10.48550/arXiv.
+2004.05155.
+[5] Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436–16445. https://doi.org/10.1109/
+CVPR52733.2024.01555.
+[6] Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing.
+arXiv:1801.09847, 2018. https://doi.org/10.48550/arXiv.1801.09847.
+
+10
+
+[7] Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images.
+Proceedings of SIGGRAPH, 1996:303–312. https://doi.org/10.1145/237170.237269.
+[8] Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA,
+2023. https://doi.org/10.1109/ICRA48891.2023.10160469.
+[9] Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE
+Transactions on Field Robotics, 2025. https://doi.org/10.1109/TFR.2025.3578402.
+[10] Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M.
+VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian
+Splatting. IEEE Robotics and Automation Letters, 11(3):3150–3157, 2026. https://doi.org/
+10.1109/LRA.2026.3653276.
+[11] Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semanticsdriven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. https:
+//doi.org/10.52202/085713-1113.
+[12] Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable
+Stochastic Domains. Artificial Intelligence, 101(1–2):99–134, 1998. https://doi.org/10.
+1016/S0004-3702(98)00023-X.
+[13] Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms.
+The International Journal of Robotics Research, 33(9):1271–1287, 2014. https://doi.org/
+10.1177/0278364914533443.
+[14] Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale
+Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. https://doi.org/10.
+1145/3072959.3073599.
+[15] P. G. Bissiri, C. C. Holmes, and S. G. Walker, “A general framework for updating belief distributions,” Journal of the Royal Statistical Society: Series B, vol. 78, no. 5, pp. 1103–1130, 2016.
+doi:10.1111/rssb.12158.
+[16] N. Syring and R. Martin, “Calibrating general posterior credible regions,” Biometrika, vol. 106,
+no. 2, pp. 479–486, 2019. doi:10.1093/biomet/asy054.
+[17] C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger. On Calibration of Modern Neural Networks.
+Proceedings of ICML, PMLR 70, pp. 1321–1330, 2017. https://proceedings.mlr.press/
+v70/guo17a.html.
+[18] A. N. Angelopoulos and S. Bates. Conformal Prediction: A Gentle Introduction. Foundations
+and Trends in Machine Learning, 16(4), pp. 494–591, 2023. doi:10.1561/2200000101.
+
+Statements and Declarations
+Funding
+
+Competing interests
+
+11
+
+Author contributions
+
+Data and code availability
+See the Reproducibility and Data section and accompanying supplement. The final public version
+identifier and any access restrictions require author confirmation.
+
+AI assistance disclosure: draft for author confirmation
+OpenAI Codex assisted with manuscript organization and revision and with developing experiment,
+analysis, and plotting code. Tool/model versions, the extent of assistance, and the authors’ verification
+and responsibility statement must be completed before submission. This draft disclosure does not
+assert that the authors have already approved the manuscript.
+
+12
+
+

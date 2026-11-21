@@ -1,0 +1,584 @@
+{
+  "schema": "actual_S3_geometry_replay_performance_profile/1",
+  "source_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01",
+  "actual_original_packets": 4,
+  "new_measurement_or_feedback_or_inference": false,
+  "actuation": false,
+  "active_source_edits": false,
+  "affinity": [
+    4
+  ],
+  "source_fixture_reconstruction_s": 8.743153824994806,
+  "profiled_full_rebuild_s": 8.18828957399819,
+  "TSDF_clone_probe": {
+    "type": "<class 'open3d.cpu.pybind.pipelines.integration.ScalableTSDFVolume'>",
+    "copy_supported": true,
+    "original_before": "0f53af9914e0ca000963bed9b99134463b3ed6cf666d918ffc9430814454eac5",
+    "original_after": "cf4017058e3f75efaf3dd5b5b1932567509ab5b53e92f5c14031ef5ce2def62a",
+    "clone_after": "cf4017058e3f75efaf3dd5b5b1932567509ab5b53e92f5c14031ef5ce2def62a",
+    "deepcopy_independent": false,
+    "synthetic_probe_only": true
+  },
+  "mapper_copy": {
+    "supported": true,
+    "elapsed_s": 0.050610092002898455
+  },
+  "mapper_attribute_types": {
+    "shape": "<class 'tuple'>",
+    "config": "<class 'env.virtual3d_v2.VirtualConfigV2'>",
+    "belief": "<class 'numpy.ndarray'>",
+    "visible": "<class 'numpy.ndarray'>",
+    "surface": "<class 'dict'>",
+    "volume": "<class 'open3d.cpu.pybind.pipelines.integration.ScalableTSDFVolume'>",
+    "frames": "<class 'int'>",
+    "quality": "<class 'dict'>",
+    "camera_seen": "<class 'numpy.ndarray'>",
+    "keyframes": "<class 'list'>",
+    "current_footprint_conflict": "<class 'bool'>",
+    "current_footprint_conflict_details": "<class 'dict'>",
+    "current_footprint_conflict_count": "<class 'int'>",
+    "sensor_range_profile": "<class 'str'>",
+    "measured_extent_profile": "<class 'str'>",
+    "input_observed_grid": "<class 'numpy.ndarray'>"
+  },
+  "actual_canonical_geometry_equality": [
+    {
+      "action_id": 0,
+      "all_three_matrices_exact": true,
+      "matrix_max_delta": {
+        "world_from_camera": 0.0,
+        "world_from_laser": 0.0,
+        "base_odom_pose": 0.0
+      }
+    },
+    {
+      "action_id": 1,
+      "all_three_matrices_exact": true,
+      "matrix_max_delta": {
+        "world_from_camera": 0.0,
+        "world_from_laser": 0.0,
+        "base_odom_pose": 0.0
+      }
+    },
+    {
+      "action_id": 2,
+      "all_three_matrices_exact": true,
+      "matrix_max_delta": {
+        "world_from_camera": 0.0,
+        "world_from_laser": 0.0,
+        "base_odom_pose": 0.0
+      }
+    },
+    {
+      "action_id": 3,
+      "all_three_matrices_exact": true,
+      "matrix_max_delta": {
+        "world_from_camera": 0.0,
+        "world_from_laser": 0.0,
+        "base_odom_pose": 0.0
+      }
+    }
+  ],
+  "feedback_fingerprint_exact": true,
+  "top_cumulative_functions": [
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+      "line": 391,
+      "name": "observe",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_s": 0.003946519,
+      "cumulative_s": 5.678382333
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/numpy/lib/npyio.py",
+      "line": 647,
+      "name": "savez_compressed",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.00013565200000000002,
+      "cumulative_s": 4.211435935
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/numpy/lib/npyio.py",
+      "line": 713,
+      "name": "_savez",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.002367685,
+      "cumulative_s": 4.211289178
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/numpy/lib/format.py",
+      "line": 666,
+      "name": "write_array",
+      "primitive_calls": 132,
+      "calls": 132,
+      "self_s": 0.004606965,
+      "cumulative_s": 4.174514707
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/zipfile/__init__.py",
+      "line": 1246,
+      "name": "write",
+      "primitive_calls": 264,
+      "calls": 264,
+      "self_s": 0.0025109610000000004,
+      "cumulative_s": 4.1490710140000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'compress' of 'zlib.Compress' objects>",
+      "primitive_calls": 264,
+      "calls": 264,
+      "self_s": 4.065678229,
+      "cumulative_s": 4.065678229
+    },
+    {
+      "file": "/home/ouc/nso_robot/analyses/resume_20261115/primitive_feedback_optimized_replay/candidate/primitive_geometry_rebase_v1.py",
+      "line": 37,
+      "name": "_fuse_packet",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.002447047,
+      "cumulative_s": 3.1297917180000003
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+      "line": 94,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.002022908,
+      "cumulative_s": 1.529985428
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/observed_runtime_mapper_v10.py",
+      "line": 20,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.000138118,
+      "cumulative_s": 1.527951032
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/semantic_completion_v3.py",
+      "line": 23,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.037129497000000004,
+      "cumulative_s": 1.527812914
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/camera_mapping_v2.py",
+      "line": 12,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.019313418000000002,
+      "cumulative_s": 1.436342562
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d_v2.py",
+      "line": 17,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.11245853600000001,
+      "cumulative_s": 1.3765032910000001
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_sensor_contract_v10.py",
+      "line": 21,
+      "name": "digest",
+      "primitive_calls": 140,
+      "calls": 140,
+      "self_s": 0.043004865,
+      "cumulative_s": 1.1875425320000002
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d.py",
+      "line": 23,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.931630555,
+      "cumulative_s": 1.170705758
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/runtime_integration.py",
+      "line": 294,
+      "name": "_update_sensor_modules",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.0014074340000000002,
+      "cumulative_s": 1.07447187
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+      "line": 111,
+      "name": "update_semantic",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 2.6561000000000002e-05,
+      "cumulative_s": 0.8198117210000001
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py",
+      "line": 107,
+      "name": "update_semantic",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.020788205,
+      "cumulative_s": 0.81978516
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/json/__init__.py",
+      "line": 183,
+      "name": "dumps",
+      "primitive_calls": 148,
+      "calls": 148,
+      "self_s": 0.0014816100000000002,
+      "cumulative_s": 0.815556774
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/json/encoder.py",
+      "line": 183,
+      "name": "encode",
+      "primitive_calls": 148,
+      "calls": 148,
+      "self_s": 0.001097789,
+      "cumulative_s": 0.8137817140000001
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/json/encoder.py",
+      "line": 205,
+      "name": "iterencode",
+      "primitive_calls": 94,
+      "calls": 94,
+      "self_s": 0.8098370180000001,
+      "cumulative_s": 0.809848282
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+      "line": 461,
+      "name": "_fuse_packet",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_s": 0.000171014,
+      "cumulative_s": 0.6996073340000001
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/numpy/lib/npyio.py",
+      "line": 235,
+      "name": "__getitem__",
+      "primitive_calls": 188,
+      "calls": 188,
+      "self_s": 0.003271181,
+      "cumulative_s": 0.6105638990000001
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/numpy/lib/format.py",
+      "line": 738,
+      "name": "read_array",
+      "primitive_calls": 188,
+      "calls": 188,
+      "self_s": 0.026026320000000002,
+      "cumulative_s": 0.573730909
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/zipfile/__init__.py",
+      "line": 992,
+      "name": "read",
+      "primitive_calls": 1204,
+      "calls": 1204,
+      "self_s": 0.0062960310000000005,
+      "cumulative_s": 0.5167196860000001
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/numpy/lib/format.py",
+      "line": 951,
+      "name": "_read_bytes",
+      "primitive_calls": 1016,
+      "calls": 1016,
+      "self_s": 0.0034458360000000003,
+      "cumulative_s": 0.511326174
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/zipfile/__init__.py",
+      "line": 1074,
+      "name": "_read1",
+      "primitive_calls": 728,
+      "calls": 728,
+      "self_s": 0.015961899,
+      "cumulative_s": 0.509755505
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_sensor_contract_v10.py",
+      "line": 167,
+      "name": "sha256",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_s": 0.0016913910000000002,
+      "cumulative_s": 0.506961664
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'decompress' of 'zlib.Decompress' objects>",
+      "primitive_calls": 728,
+      "calls": 728,
+      "self_s": 0.416220097,
+      "cumulative_s": 0.416220097
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_sensor_contract_v10.py",
+      "line": 9,
+      "name": "json_value",
+      "primitive_calls": 160,
+      "calls": 3731,
+      "self_s": 0.189871481,
+      "cumulative_s": 0.30301248000000003
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+      "line": 113,
+      "name": "update_topo",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 2.7713e-05,
+      "cumulative_s": 0.25309322
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/ros_checked_exploration_v2.py",
+      "line": 64,
+      "name": "update_topo",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.000131012,
+      "cumulative_s": 0.253065507
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py",
+      "line": 158,
+      "name": "update_topo",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.000465422,
+      "cumulative_s": 0.25293449500000004
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/utils/grid_geometry.py",
+      "line": 25,
+      "name": "supercover_line",
+      "primitive_calls": 7144,
+      "calls": 7144,
+      "self_s": 0.114858501,
+      "cumulative_s": 0.160712557
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method _hashlib.openssl_sha256>",
+      "primitive_calls": 179,
+      "calls": 179,
+      "self_s": 0.12630223000000002,
+      "cumulative_s": 0.12630223000000002
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d.py",
+      "line": 19,
+      "name": "grid_cell",
+      "primitive_calls": 28943,
+      "calls": 28943,
+      "self_s": 0.12074773500000001,
+      "cumulative_s": 0.12074773500000001
+    }
+  ],
+  "top_self_functions": [
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'compress' of 'zlib.Compress' objects>",
+      "primitive_calls": 264,
+      "calls": 264,
+      "self_s": 4.065678229,
+      "cumulative_s": 4.065678229
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d.py",
+      "line": 23,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.931630555,
+      "cumulative_s": 1.170705758
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/json/encoder.py",
+      "line": 205,
+      "name": "iterencode",
+      "primitive_calls": 94,
+      "calls": 94,
+      "self_s": 0.8098370180000001,
+      "cumulative_s": 0.809848282
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'decompress' of 'zlib.Decompress' objects>",
+      "primitive_calls": 728,
+      "calls": 728,
+      "self_s": 0.416220097,
+      "cumulative_s": 0.416220097
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_sensor_contract_v10.py",
+      "line": 9,
+      "name": "json_value",
+      "primitive_calls": 160,
+      "calls": 3731,
+      "self_s": 0.189871481,
+      "cumulative_s": 0.30301248000000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method _hashlib.openssl_sha256>",
+      "primitive_calls": 179,
+      "calls": 179,
+      "self_s": 0.12630223000000002,
+      "cumulative_s": 0.12630223000000002
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d.py",
+      "line": 19,
+      "name": "grid_cell",
+      "primitive_calls": 28943,
+      "calls": 28943,
+      "self_s": 0.12074773500000001,
+      "cumulative_s": 0.12074773500000001
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/utils/grid_geometry.py",
+      "line": 25,
+      "name": "supercover_line",
+      "primitive_calls": 7144,
+      "calls": 7144,
+      "self_s": 0.114858501,
+      "cumulative_s": 0.160712557
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d_v2.py",
+      "line": 17,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.11245853600000001,
+      "cumulative_s": 1.3765032910000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'tolist' of 'numpy.ndarray' objects>",
+      "primitive_calls": 134,
+      "calls": 134,
+      "self_s": 0.110661722,
+      "cumulative_s": 0.110661722
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'read' of '_io.BufferedReader' objects>",
+      "primitive_calls": 1469,
+      "calls": 1469,
+      "self_s": 0.082698882,
+      "cumulative_s": 0.082698882
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method zlib.crc32>",
+      "primitive_calls": 1632,
+      "calls": 1632,
+      "self_s": 0.061122848,
+      "cumulative_s": 0.061122848
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'write' of '_io.BufferedRandom' objects>",
+      "primitive_calls": 1196,
+      "calls": 1196,
+      "self_s": 0.055079893000000005,
+      "cumulative_s": 0.055079893000000005
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<built-in method scipy.ndimage._nd_image.binary_erosion>",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_s": 0.054894897000000005,
+      "cumulative_s": 0.054894897000000005
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'append' of 'list' objects>",
+      "primitive_calls": 241703,
+      "calls": 241703,
+      "self_s": 0.045329809000000006,
+      "cumulative_s": 0.045329809000000006
+    },
+    {
+      "file": "/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/numpy/lib/arraysetops.py",
+      "line": 524,
+      "name": "in1d",
+      "primitive_calls": 12,
+      "calls": 12,
+      "self_s": 0.044908703,
+      "cumulative_s": 0.049317543000000005
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_sensor_contract_v10.py",
+      "line": 21,
+      "name": "digest",
+      "primitive_calls": 140,
+      "calls": 140,
+      "self_s": 0.043004865,
+      "cumulative_s": 1.1875425320000002
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/observed_feedback_v10.py",
+      "line": 58,
+      "name": "_map_evidence",
+      "primitive_calls": 3,
+      "calls": 3,
+      "self_s": 0.039506667,
+      "cumulative_s": 0.088929795
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "name": "<method 'get' of 'dict' objects>",
+      "primitive_calls": 58998,
+      "calls": 58998,
+      "self_s": 0.037412912,
+      "cumulative_s": 0.037412912
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/semantic_completion_v3.py",
+      "line": 23,
+      "name": "update",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_s": 0.037129497000000004,
+      "cumulative_s": 1.527812914
+    }
+  ],
+  "no_model_reinference": true,
+  "limits": "One actual cached four-frame profile; cProfile overhead and current CPUload affect elapsedtime. Copy construction alone doesnot prove safe independent checkpointing."
+}

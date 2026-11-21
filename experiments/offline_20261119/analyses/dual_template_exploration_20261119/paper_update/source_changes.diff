@@ -1,0 +1,20 @@
+--- before/main.tex
++++ after/main.tex
+@@ -462,6 +462,8 @@
+ 
+ A further diagnostic uses the original textured ReplicaCAD apartment layout with partial oracle labels and the unchanged observed-state joint policy (supplementary Table~S7). Coverage-only C reaches 100.00\% coverage and 92.32\% surface F1 within the common 256-action cap; G/S and both label controls yield identical trajectories, 95.62\% coverage and 90.28\% F1. The original grouping stage rejects the oversized components containing semantic observations before class-dependent scoring. This single-layout transfer test remains separate from the V35 controlled study and does not establish natural-detector or physical performance.
+ 
++A further controlled extension replaces that analytic prior with the V3 box/shelf expected visible-area module while retaining v10 unknown coverage, measured quality, candidates, and return rules. Twelve runs compare six arms in two furniture permutations of one synthetic branching layout, using original textured assets and partial ideal semantics (supplementary Table~S8). All runs reach full reference coverage and return without simulated collision. G/S produce identical trajectories; the joint control without templates ties them in one layout and exceeds their surface F1 by 0.36 percentage points in the other at the same 256-action budget. C reaches full coverage sooner and ends after 130 actions. The extension establishes complete exploration in these controlled layouts, without a semantic or completion-module efficiency advantage.
++
+ \section{Physical Deployment Pilot}\label{physical-deployment}
+ The physical deployment is a declared joint-exploration variant, distinct from the supplied-graph, two-template controlled study. It uses exploration\_joint\_v1 derived from v10\_3\_1, with revised joint unknown-coverage and measured-surface candidate generation, real-scene semantics, measured sensor-range and 3 m extent adapters (rather than the original 2.2 m applicability cap), default CSM keyframes, measured CAN controller velocity and fixed SE2 alignment. The camera had been relocated without recalibrating its earlier extrinsics; its earlier self-mask was disabled. The navigation map retained prior observations in the first episode.
+ 
+--- before/supplement.tex
++++ after/supplement.tex
+@@ -89,5 +89,6 @@
+ 
+ \input{four_room_completion_supplement_20261119.tex}
+ \input{replicacad_diagnostic_20261119.tex}
++\input{dual_template_exploration_20261119.tex}
+ 
+ \end{document}

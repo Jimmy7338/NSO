@@ -1,0 +1,21 @@
+--- nso_bridge/nso_bridge/joint_engine.py
++++ nso_bridge/nso_bridge/joint_engine.py
+@@ -557,8 +557,16 @@
+                     if params.get('semantic_configuration') is not None:
+                         params = dict(params, semantic_output=str(out/'semantics'))
+                     if params.get('configuration',{}).get('policy_variant')=='primitive_feedback_unbounded_v1':
+-                        from nso_bridge.primitive_feedback_unbounded_v1 import FrozenEpochPrimitivePilot
+-                        session = FrozenEpochPrimitivePilot(**dict(params,feedback_output=str(out/'primitive_feedback')))
++                        primitive_geometry=params.get('calibration',{}).get('primitive_geometry_profile')
++                        if primitive_geometry is None:
++                            from nso_bridge.primitive_feedback_unbounded_v1 import FrozenEpochPrimitivePilot
++                            primitive_type=FrozenEpochPrimitivePilot
++                        elif primitive_geometry == 'optimized_rebase_after_feedback_v1':
++                            from nso_bridge.optimized_primitive_feedback_v1 import OptimizedRebasePrimitivePilot
++                            primitive_type=OptimizedRebasePrimitivePilot
++                        else:
++                            raise ValueError('unsupported explicit primitive geometry profile')
++                        session = primitive_type(**dict(params,feedback_output=str(out/'primitive_feedback')))
+                     elif params.get('calibration',{}).get('geometry_pose_backend')=='rtabmap_optimized_replay_v1':
+                         from nso_bridge.rtabmap_viewpoint_session import RtabmapViewpointSession
+                         session = RtabmapViewpointSession(**params)

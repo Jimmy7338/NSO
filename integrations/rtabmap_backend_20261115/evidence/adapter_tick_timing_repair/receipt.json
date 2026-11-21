@@ -1,0 +1,19 @@
+{
+  "schema": "adapter_tick_timing_candidate/1",
+  "baseline_sha256": "690ea0c8e4c81a7c3079563f0a8cd8f30b07e040995e7c258987fe326cc93c8b",
+  "candidate_sha256": "6f6e8c442b32684ced27c68ed77bfd783dbef0888da79e7f3824c7c641e933d2",
+  "deployed": false,
+  "tests": "25PASS (23existing+2new),py_compilePASS",
+  "changes": [
+    "one publisher connection snapshot per control cycle with same zero/one/multiple predicates",
+    "bounded timing stages separate monotonic/ROSclock/publisher snapshot/journal error/pending arm work"
+  ],
+  "invariants": [
+    "80ms tick guard unchanged",
+    "nativebinary/capabilities/guards unchanged",
+    "no automatic rearm",
+    "stop logic unchanged",
+    "no source-clock cross-comparison"
+  ],
+  "proof_limit": "Prior97.568922ms predecision interval does not identify ROS publisher vs OS scheduling/GIL; this patch is not proof of deadline reliability. Root owns optional CPU2 mission wiring."
+}

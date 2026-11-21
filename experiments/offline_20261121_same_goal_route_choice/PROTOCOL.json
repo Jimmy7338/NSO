@@ -1,0 +1,53 @@
+{
+  "schema": "nso_same_goal_route_choice_20261121_v1",
+  "declared_before_developer_policy_runs": true,
+  "source_commit": "91ca80ad47973a945f6e3bc52eacb011b907ad6c",
+  "source_experiment": "experiments/offline_20261121_candidate_route_persistence/",
+  "source_local": "/home/ouc/nso_robot/analyses/candidate_route_persistence_20261121",
+  "development": {
+    "layouts": ["warehouse_left", "warehouse_right", "gallery_left", "gallery_right"],
+    "modes": ["newG", "newS"],
+    "paid_action_budget": 256,
+    "return_required": true,
+    "all_plans_free_choice": true,
+    "screening_gate": {
+      "admitted_non_native_route_required": true,
+      "category_caused_executed_action_difference_required": true,
+      "causal_definition": "Before the first divergent paid action the paired modes must have identical initial/actual observation prefix, active shared global G goal including heading, same admissible local candidate action traces, and same route costs. Chosen local trajectories must explain the charged-action difference. A plan or score flip without an executed divergence fails this gate.",
+      "safe_definition": "Every declared run has zero simulated collisions, no action-budget violation and reaches the original return anchor using the native guard. Record any stop or sensor/runtime failure. Stop evaluation upon a demonstrated failure of the acceptance batch, keeping all eight declared results; no condition relaxation or tuning on this batch.",
+      "decision": "Release held-out runs only after the eight complete verified development records jointly meet all three requirements. If no legal alternatives, no executed category effect, or a safety regression, retain the code, options, every result and the audited diagnostic as the completed deliverable."
+    }
+  },
+  "local_route": {
+    "switch_default": "off",
+    "max_extra_outbound_actions": 8,
+    "max_alternates": 4,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-9,
+    "shared_global_explorer": "Native neutral geometry G using unchanged v10_3_1 target selection and B11 visibility evaluator. Lock the same target grid pose including heading for the whole originally committed option. Apply local choice to the selected native execution copy. Allow native replan or return under the existing runtime contract.",
+    "candidate_rule": "Keep the full native command sequence. Traverse the original observed-known-free directed pose graph via at most one orientation-state waypoint. An alternative must preserve goal cell and heading, original return path and reserve, fit current paid budget and bound, and make a currently observed instance visible from at least one additional azimuth sector. Duplicate physical command sequences are removed. Generation, availability checks and truncation use class-agnostic observations and have deterministic order. A rotation may qualify if it reveals a sector the baseline could not observe.",
+    "coverage_rule": "Compute a class-independent union of forecast observable currently-unknown cells along each route from the observed map using the original range and field of view model. Approve alternative only if the count is at least 0.95 of original. This is an online visibility proxy for future coverage, with true correct-free evaluation reserved for the offline evaluator. No new minimum is imposed when the original union is empty.",
+    "selection_rule": "Use the same received-geometry and B11 expected novel object surface in both arms. newG uses the neutral structural prior, newS the visible category prior. Larger expected novel surface wins; equal within 1e-9 favors fewer charged actions, then native, then deterministic route order. No extra local fee or change to the native global score.",
+    "budget_and_safety": "Every accepted issued turn, forward translation, detour and return action debits the same original ledger once. Keep the native circular footprint, exact packed terminal heading, per-action feasibility and observed-safe return reservation; native replan/return remains in effect.",
+    "online_inputs_only": "Measured belief, already acquired visible property supports/instance tracks, camera model, fitted hypotheses, goal and remaining budget. Independent reference cells, mesh and evaluator labels remain outside the actor. Visible category input is the simulator's ideal visible property label, not a detector test."
+  },
+  "heldout": {
+    "layouts": ["ordinary_chain_13", "ordinary_cycle_14", "ordinary_chain_15", "ordinary_cycle_16"],
+    "modes": ["newG", "newS", "originalS", "F_strict"],
+    "paid_action_budget": 512,
+    "originalS": "Original B11 category S targeting and original execution route, local option disabled.",
+    "F_strict": "Preserved B11 follow-up strict nearest reachable observed-free frontier, own reachable frontiers and no forced current pose, same physical and time accounting.",
+    "scope": "Four freshly specified ordinary connected parent maps, two four-room chain and two four-room cycle layouts. Each has its own footprint/room and doorway coordinates, shared existing shelf/cabinet mesh inventory. No mirrored development scene, score-oriented forced divergence or forced first route. Layout input identities and code frozen without reading outcomes.",
+    "primary_contrast": "newS - newG",
+    "system_contrast": "newS - originalS",
+    "baseline_contrast": "newS - F_strict",
+    "engineering_gate": "For further investment in the category prior, require at least 3 of 4 layouts to show newS minus newG terminal J > 0.001, no loss of an achieved return or increase in collisions against newG, and no budget breach. Report all pair values and use the same +0.001 threshold to describe system and strict-frontier comparisons, not as a statistical test. Any gains versus originalS alongside no supported gains versus newG concern the new planning workflow."
+  },
+  "evaluation": {
+    "main": "Actual terminal J = correctly mapped start-reachable reference free-cell fraction multiplied by whole-scene native TSDF F1 at 0.05 m.",
+    "keep": ["C_free", "F1_scene_05cm", "J", "actual_paid", "returned", "collisions", "stop_reason", "failure", "legal_alternates", "selected_modes", "first_actual_divergence"],
+    "no_padding": true,
+    "experimental_unit": "Independent parent layout, with paired modes; the two developer swaps per parent are dependent placements. Report practical pair differences without significance claims."
+  }
+}

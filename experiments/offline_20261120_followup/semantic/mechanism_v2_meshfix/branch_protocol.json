@@ -1,0 +1,12 @@
+{
+  "status": "frozen_before_actual_branch_outcomes",
+  "acquisition": "Every original generated outbound route in both physical layouts from the common initial sensor state",
+  "policy": "No manual target insertion, no closed-loop selection, no weight or route changes; preserve route failures",
+  "reference": "Independent actual source triangles sampled deterministically:100000 global and10000 per object; seeds20261120,20261121,20261122. Fixed original0.8m reachable camera lattice plus start/four headings,1mm first-hit visibility; same reference helper as earlier experiments",
+  "quality_threshold_m": 0.05,
+  "surface_metrics": "Per object and global correct surface net increment, newly recovered area, regression area; source sample area weights. Completeness measured against native TSDF triangle distance, not predicted templates",
+  "other_metrics": ["correct-free and known coverage increment", "actual actions", "path length", "endpoint reached", "collisions"],
+  "aggregation": "All candidate outcomes and all2layouts×3cues×2temperatures retained; compare selected G/S actual area/cost. Cue and temperature rows share branch outcomes and are not independent trials",
+  "claim_boundary": "Controlled mechanism branch study only, not full unknown exploration, physical robotics or natural semantic detection",
+  "render_limit": "Cross-layout depth differs by at most5e-7m due float32 triangle intersection. No raw data editing. Within each layout all cues and temperatures use exactly the same acquired bank"
+}

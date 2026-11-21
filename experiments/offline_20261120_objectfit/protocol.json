@@ -1,0 +1,237 @@
+{
+  "schema": "nso.observed_object_support_partial_shape.v1",
+  "created_date": "2026-11-20",
+  "status": "frozen_before_prediction_replay",
+  "purpose": "Model-development diagnostic separating observed object support from partial-shape fitting; retain all prior negative outcomes and use the same six states and 66 measured branches.",
+  "layouts": {
+    "shelf_left": {
+      "scene_id": "controlled_functional_shelf_left",
+      "role": "paired_controlled_development_layout",
+      "difference": "open shelf left, closed cabinet right"
+    },
+    "shelf_right": {
+      "scene_id": "controlled_functional_shelf_right",
+      "role": "paired_controlled_development_layout",
+      "difference": "closed cabinet left, open shelf right"
+    }
+  },
+  "independence": "Two furniture-position permutations of one synthetic floorplan family; not two independent natural environments or stochastic replications.",
+  "arms": {
+    "G": {
+      "score_mode": "G",
+      "meaning": "Neutral structural-class prior using the same actually acquired instance support as S; not a no-semantic frontend."
+    },
+    "S": {
+      "score_mode": "S",
+      "meaning": "Class-conditioned structural prior on the shared observed-instance support."
+    }
+  },
+  "environment": {
+    "config": {
+      "resolution_m": 0.2,
+      "robot_radius_m": 0.2,
+      "camera_height_m": 1.2,
+      "width_px": 120,
+      "height_px": 90,
+      "fov_deg": 90.0,
+      "max_depth_m": 8.0,
+      "depth_sigma_m": 0.0,
+      "dropout": 0.0,
+      "action_duration_s": 1.0,
+      "voxel_m": 0.06,
+      "max_steps": 256,
+      "laser_height_m": 0.25,
+      "laser_rays": 180,
+      "truncation_m": 0.12
+    },
+    "noise_seed": 20261119,
+    "initial_position": [
+      34,
+      25
+    ],
+    "initial_heading": 0,
+    "world_adapter": "scene.controlled_world.ControlledFunctionalWorld",
+    "mesh_assets": "Unscaled original ReplicaCAD shelf31 and complete cabinet118; custom declared architecture/placements",
+    "sensor_limits": "Opaque first-hit mesh RGBD/laser, noiseless exact discrete pose, no glass/lighting/localization model; render natively at 120x90, not resizing old sensor frame"
+  },
+  "policy": {
+    "version": "observed_object_partial_fit_v1_N20",
+    "base": "frozen exploration_joint_v1/v10_3_1 + declared measured instance frontend",
+    "paid_action_budget": 256,
+    "return_anchor_required": true,
+    "args": {
+      "nso_backend": "cpu_v10",
+      "eval": true,
+      "train_global": false,
+      "use_open_vocab_semantic": true,
+      "use_topo_graph": true,
+      "use_rpn_uq": true,
+      "use_igcr": true,
+      "cpu_disable_feedback": false,
+      "cpu_force_gain_feedback": false,
+      "cpu_freeze_gain_posterior": false,
+      "cpu_max_candidates": 12,
+      "cpu_coverage_slots": 4,
+      "cpu_planner_revision": "v10_3_1",
+      "cpu_measured_novelty_floor": 0.25
+    },
+    "changes": [
+      "Preserve the B extension of expected unobserved template surface area plus original joint coverage and measured-quality scores.",
+      "Preserve B2 visibility repair and full uncapped template quadrature with zero-weight historical masks.",
+      "Build one template pair from each actually associated track>0; exclude untracked fragments from hypothetical object completion only, retaining all acquired map/quality evidence and original candidates.",
+      "Separately expose all already acquired quality points of each tracked object, then fit stable outside planes using point positions. Unseen ends retain declared priors; G/S share support and fitted hypotheses.",
+      "Disable prior v1 relative-free likelihood and v2 absolute applicability attenuation in all three stages; retain valid-free historical reward rejection and B2 visibility."
+    ],
+    "unchanged": [
+      "v10_3_1 candidate generation, unknown coverage, measured surface quality and coefficient",
+      "Actual observed-only map/TSDF fusion and original 256-action simulation budget/return/stop semantics",
+      "Source layout, original textured assets, partial ideal visible instance frontend and deterministic sensors",
+      "No new candidate filtering, scoring coefficient, goal override or runtime promotion gate"
+    ],
+    "completion_area_coefficient": 1.0,
+    "coefficient_reason": "Same square-metre units as replaced v10 prior; old V3 planner weight4 used different objective normalization and is not transferred.",
+    "original_method_equivalence": false,
+    "V3_candidate_proposer_used": false,
+    "RPN_trained_model_active": false
+  },
+  "perception": {
+    "natural_detector": false,
+    "labels": "Only current valid-depth first-hit furniture surfaces, 2open/3closed; all other surfaces0",
+    "instance_support": "Same partial ideal visible instance boundaries for all arms, associated through measured voxel overlap",
+    "global_bounds_hidden_geometry_or_global_object_ID_to_actor": false,
+    "geometry_parameters": "Inferred from measured points using original V3 dimension priors, never source-model bounds",
+    "G_S_frontend": "Both receive the same actually acquired ideal visible instance boundary/support index; only structural-class prior differs. G is not a pure no-semantic system."
+  },
+  "evaluation": {
+    "thresholds": [
+      0.9,
+      0.95,
+      0.99,
+      1.0
+    ],
+    "primary": "start-reachable reference free coverage vs paid actions, correct-free and false-occupied separately",
+    "secondary": [
+      "native TSDF precision recall F1 at5cm and10cm on independently fixed visible source surface",
+      "path length",
+      "simulated collisions",
+      "goal outcomes",
+      "first threshold actions",
+      "no coverage gain streak",
+      "template hypotheses/posterior/history and candidate score audits"
+    ],
+    "paired_rule": "Every one of the same66 fixed outbound candidate routes is evaluated for all three model stages and G/S, with the same observed prefix and same acquired branch outcome. Any future complete-policy matrix requires a separately frozen rollout protocol.",
+    "failure_accounting": "Keep all export, prediction and evaluation failures as recorded attempts; no complete result for partial state coverage. Previous method negatives and66 branch outcomes remain intact.",
+    "reference_actor_separation": true
+  },
+  "execution": {
+    "hardware": false,
+    "library_threads": 1,
+    "fixed_prefix_jobs": 6,
+    "reused_candidate_branches": 66,
+    "new_candidate_acquisitions": 0,
+    "no_continuous_images_or_video": true,
+    "only_root_starts_policy_runs": true,
+    "source_and_protocol_frozen_before_prediction_runs": true,
+    "full_policy_matrix_not_yet_declared": true
+  },
+  "geometry_acceptance": "scene/acceptance.json: two layouts, all four-side views reachable, initial known reference fraction0.4260614934",
+  "method_tests": {
+    "validation": "/home/ouc/nso_robot/analyses/dual_template_objectfit_20261120/method/validation.json",
+    "sha256": "19d44e2720fa5a4e9647cd33634a187b5b66d7ef49c30cf25fb20b5c0ac87871",
+    "count": 15,
+    "passed": 15,
+    "scope": "Synthetic isolated geometry, acquired-support and invariance unit tests; not performance evidence."
+  },
+  "parent_protocol": "/home/ouc/nso_robot/analyses/dual_template_instance_20261120/protocol.json",
+  "parent_evaluation_reference": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/audit/references",
+  "fixed_trace_evidence": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/result.json",
+  "candidate_audit": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/candidate_audit/evidence.json",
+  "stages": {
+    "object_support": {
+      "object_support": true,
+      "full_observed_support": false,
+      "geometry_fit": false
+    },
+    "object_full_support": {
+      "object_support": true,
+      "full_observed_support": true,
+      "geometry_fit": false
+    },
+    "object_fit": {
+      "object_support": true,
+      "full_observed_support": true,
+      "geometry_fit": true
+    }
+  },
+  "fixed_replay": {
+    "source": "original B S attempt001 each layout",
+    "states": {
+      "shelf_left": [
+        24,
+        54,
+        109
+      ],
+      "shelf_right": [
+        24,
+        53,
+        110
+      ]
+    },
+    "all_candidates_at_each_state": true,
+    "actor_actions_targets": "sealed old trace only",
+    "sensor_prefix_validation": "old packet, position, heading, owner and measured source checks; old scorer equality before diagnostic calls",
+    "branches": "No new branch acquisition; reuse all66 v1 native before/after meshes and receipts, verify beforemesh equal when replaying same acquired prefix.",
+    "branch_scope": "counterfactual acquisition diagnostic, not autonomous policy experiment",
+    "reference": "unchanged B evaluator source reference; never passed into actor or fitting",
+    "storage": "compact receipts, gains and native meshes; no persistent raw RGBD or video",
+    "candidate_total": 66,
+    "planned_outbound_action_total": 0,
+    "reused_prior_outbound_actions": 1569
+  },
+  "readiness_assessment": {
+    "role": "offline development stage selection only, never an added runtime decision filter",
+    "required": "sampling integrity tests; strict actor/evaluator separation; complete declared fixed states and branches; report both layouts and all states including failures",
+    "metrics": [
+      "weighted source support of positive hypothetical reward at5cm",
+      "actual new source surface reconstructed at5cm, gross/lost/net separate",
+      "candidate rank association and prediction residuals",
+      "selected candidate actual increment and action cost",
+      "measured-fit residual and historical-free conflict",
+      "wall time and integral sample counts"
+    ],
+    "rule": "Development diagnosis only: assess prediction consistency and actual selected outcomes with costs; no promotion based solely on changed G/S target or reduced prediction mass. A complete-policy matrix requires a separately frozen explicit rollout protocol.",
+    "independence": "These old states and reference data are development evidence; not independent held-out validation.",
+    "aggregation": "Per-state ranks and absolute quantities first, then equal-weight summary over six paired development states; 66 candidates are dependent, not 66 independent trials.",
+    "shrinkage_check": "Check absolute supported and realized hypothesis weight alongside supported fraction and unique actual source area. Source-to-predicted-point nearest-neighbor recall at5cm is not used because template quadrature spacing can exceed5cm.",
+    "stage_comparison": "Three declared stages separate object-only template support, the inherited height-crop correction and point-plane shape fitting, using the same6originalstates and66measuredbranches. G/S share actual observed supports; no statistical independence or natural detection claim."
+  },
+  "method_specification": "/home/ouc/nso_robot/analyses/dual_template_objectfit_20261120/method/METHOD_SPEC.md",
+  "method_changes": [
+    "Preserve the B extension of expected unobserved template surface area plus original joint coverage and measured-quality scores.",
+    "Preserve B2 visibility repair and full uncapped template quadrature with zero-weight historical masks.",
+    "Build one template pair from each actually associated track>0; exclude untracked fragments from hypothetical object completion only, retaining all acquired map/quality evidence and original candidates.",
+    "Separately expose all already acquired quality points of each tracked object, then fit stable outside planes using point positions. Unseen ends retain declared priors; G/S share support and fitted hypotheses.",
+    "Disable prior v1 relative-free likelihood and v2 absolute applicability attenuation in all three stages; retain valid-free historical reward rejection and B2 visibility."
+  ],
+  "method_specification_sha256": "92be580e38f31608d92d28c49e1f507ff4c7963080d76a9106972ba910dd5480",
+  "method_source_sha256": {
+    "model.py": "82093d7cef4b8e18e973d35c66341a7658ba09b38aef8b65d9dbb6cba008f6c8",
+    "geometry.py": "85a56e0ae664af15e126dc7c077df8e69eba22dbdc2000eeeaef11bffd6f34a3",
+    "test_method.py": "1dd7ee7fa7a09e9b25a3f5c8cb1603d78bfed7035819fe5e1b526efe92cef7b4"
+  },
+  "method_design_status": "frozen method and independently reviewed replay/evaluator before any new predictions",
+  "observed_support_export": "/home/ouc/nso_robot/analyses/dual_template_objectfit_20261120/replay/observed_prefixes",
+  "observed_support_basis": {
+    "object_support": "Original quality crop .12<z<1.8 and inherited10000point sampling; observed tracks only.",
+    "object_full_support": "All quality points already associated with the tracked object, without inherited global z crop; original shape construction retained.",
+    "object_fit": "Exactly the same full acquired track support as object_full_support; point-position outside-plane fit replaces old construction."
+  },
+  "independent_review": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_objectfit_20261120/audit/independent_method_review.json",
+    "sha256": "d9d7ed045f0b35e59f83c18eb02eefda517b0033aaf7bc4d11d36eed52696939"
+  },
+  "evaluator": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_objectfit_20261120/audit/evaluate_objectfit.py",
+    "sha256": "e230e1fa1c46993ccd79bdcb3fc35ee3a8bf7bbb09466da4f0dd401b762ca6e7"
+  }
+}

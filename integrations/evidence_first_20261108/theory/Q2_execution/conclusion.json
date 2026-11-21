@@ -1,0 +1,110 @@
+{
+  "schema": "nso.Q2.fixed_ten_run_conclusion.v1",
+  "status": "completed_experiments_working_evidence_only",
+  "scientific_completion": "Primary unknown-coverage efficiency gain NOT demonstrated; witness is a selection-mechanism proof, not a performance proof. Existing manuscripts remain working drafts.",
+  "conditions": "Q2outerseed953, west/east relatedplacements,96budget, nativeC/G/S/X plus explicitly named G_lambda_dev7",
+  "counts": {
+    "rollouts": 10,
+    "full_pose_returns": 10,
+    "simulated_collisions": 0,
+    "normal_early_stop": "eastC86paid at no_positive_option_at_anchor; other9used96",
+    "independent_unit": "one syntheticparent; two related arrangements and10correlated trajectories"
+  },
+  "primary": {
+    "west_S_minus_G_AUC": -0.0014818485696509454,
+    "east_S_minus_G_AUC": 0.0,
+    "all_C_G_S_X_first90_paid": 18,
+    "all_C_G_S_X_first95_paid": 25,
+    "S_G_first99_paid": 32,
+    "interpretation": "S has lower time-averaged paid-action coverage in west and ties G/C in east; no earlycoverage efficiency improvement."
+  },
+  "secondary": {
+    "west_S_minus_G_surface_m2": 12.060796024999973,
+    "west_S_minus_G_F1_5cm": 0.050128694023077514,
+    "east_S_G": "exact complete step records and endpoints",
+    "east_S_minus_X_surface_m2": -2.693546925000007,
+    "east_S_minus_X_F1_5cm": -0.018941922174255832,
+    "interpretation": "Positive west terminal surface allocation does not generalize to all placements/metrics; all negative/tied outcomes retained."
+  },
+  "mechanism": {
+    "actual_native_S_witness": "west planningcall2, paid21,91.138%known;9samecandidates; Sselects7",
+    "generic_weight_impossibility": "To outrank candidate6 requires lambda>12.0356325983; to outrank candidate5 requires lambda<5.3152848505. No lambda>=0 satisfies both.",
+    "not_early": "Actual S/G actions diverge31 after the already91.138%known planning state.",
+    "states": {
+      "recorded_planning_calls": 123,
+      "unique_recorded_state_keys": 79,
+      "selected_option_unreproducible_calls": 6,
+      "full_ranking_unreproducible_calls": 19,
+      "actual_S_common_intervals": {
+        "shelf_west": {
+          "empty": true,
+          "lower": 18.191541442550417,
+          "upper": 5.315284850500124,
+          "lower_fraction": "1449494298148047/79679575407373",
+          "upper_fraction": "97757776216880/18391822633491",
+          "lower_inclusive": true,
+          "upper_inclusive": false
+        },
+        "shelf_east": {
+          "empty": false,
+          "lower": 0.0,
+          "upper": 2.7960986321607333,
+          "lower_fraction": "0",
+          "upper_fraction": "378630377771792/135413813166955",
+          "lower_inclusive": true,
+          "upper_inclusive": false
+        }
+      },
+      "all_actual_S_common_interval": {
+        "empty": true,
+        "lower": 18.191541442550417,
+        "upper": 2.7960986321607333,
+        "lower_fraction": "1449494298148047/79679575407373",
+        "upper_fraction": "378630377771792/135413813166955",
+        "lower_inclusive": true,
+        "upper_inclusive": false
+      },
+      "boundary": "Exact rational inequalities on savedbinaryfloat coefficients; floataddition boundary caveat. Counterfactual savedstate choices are not extra trajectories or independent samples.",
+      "actual_S_unreproducible_selected_option_calls": 1,
+      "counterfactual_S_on_other_trajectory_unreproducible_calls": 5,
+      "unique_unreproducible_selected_option_state_keys": 2
+    },
+    "evidence": "ranking_witness.json; repeated shared-prefix records count as one state, not5samples"
+  },
+  "verification": {
+    "initial_packet_matches_within_arrangements": true,
+    "ledger_counts_and_contiguous_paid_ids_match": true,
+    "archived_call_output_hashes_match": true,
+    "control_selected_by_exact_common_plus7generic": true,
+    "control_planning_calls_checked": 32,
+    "native_midpoint_max_abs_error": 3.552713678800501e-15,
+    "runner_source_sha256": "c35eba97b19ccb418299c6e1dde7e4ad4a37720c0c07bff7715a6e953263d656",
+    "sources_frozen_unchanged": true
+  },
+  "resources": {
+    "completed": 10,
+    "elapsed_s": 419.725260160998,
+    "peak_rss_MiB": 717.8828125,
+    "pid": 556661,
+    "status": "completed_all_ten"
+  },
+  "scope_limits": [
+    "Originalsimcircle.20m is unchanged; physicalcircle.7212185868375829m and allhardware remained untouched.",
+    "No V35 mechanism substituted for the main exploration policy.",
+    "No ROS, robot motion, camera configuration, detector execution or manuscript modifications.",
+    "No outcome-dependent retry, seed/budget/weight sweep or discarded failure.",
+    "A constant weight7 control was fixed from developmentQ1 before Q2, and every nonnegativeuniformweight was additionally audited analytically on savedstates. This does not exclude all possible geometry-only methods."
+  ],
+  "artifact_index": {
+    "summary": "summary.csv",
+    "all_conditions": "results.json",
+    "complete_audit": "comparison.json",
+    "primary_curves": [
+      "coverage_curves.csv",
+      "coverage_curves.pdf"
+    ],
+    "raw": "10*_ledger.json;10*_choices.json;10*_steps.json;10*_runtime_audit.json;10*_result.json",
+    "sources": "protocol.json;executed_runner.py;approved_controlled_plan.json;environment.json"
+  },
+  "reproduction": "Machine-bound source roots remain explicit. Verify current research/hybridsource files against archived protocol hashes first. Copy executed_runner.py and controlled_plan.json into a fresh parent with matching dependencies; it creates a new Q2_execution child and refuses an existing child. The copied analysis/plot scripts use that same child convention. No extra rerun was performed."
+}

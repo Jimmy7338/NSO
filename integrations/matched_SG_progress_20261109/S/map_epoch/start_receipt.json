@@ -1,0 +1,53 @@
+{
+  "scope": "fresh per-arm stock gmapping and ROS costmaps; original CSM/display map/TSDF retained",
+  "no_motion": true,
+  "stopped_navigation": [
+    "/usr/bin/python3",
+    "/opt/ros/noetic/bin/roslaunch",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+    "latch_xy_goal_tolerance:=true",
+    "odom_topic:=/nso_csm/control_odom",
+    "map_topic:=/nso_pair/map"
+  ],
+  "stopped_helper": [
+    "/usr/bin/python3",
+    "-s",
+    "-B",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+    "--launch-mapper"
+  ],
+  "mapper_helper": {
+    "pid": 23050,
+    "argv": [
+      "/usr/bin/python3",
+      "-s",
+      "-B",
+      "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+      "--launch-mapper"
+    ],
+    "started_unix_s": 1794212947.0206504
+  },
+  "initial_map": {
+    "stamp_ns": 1794212948810979576,
+    "frame": "nso_pair_map",
+    "publisher": "/nso_pair/gmapping",
+    "known_cells": 22013,
+    "occupied_cells": 602
+  },
+  "navigation": {
+    "pid": 23147,
+    "argv": [
+      "/opt/ros/noetic/bin/roslaunch",
+      "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+      "latch_xy_goal_tolerance:=true",
+      "odom_topic:=/nso_csm/control_odom",
+      "map_topic:=/nso_pair/map"
+    ],
+    "started_unix_s": 1794212948.8436835
+  },
+  "costmap_sources": {
+    "global_costmap": "/nso_pair/map",
+    "local_costmap": "/nso_pair/map"
+  },
+  "ready_unix_s": 1794212951.5687609
+}

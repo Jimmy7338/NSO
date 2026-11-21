@@ -1,0 +1,3 @@
+Fault5 is sender_late, not chassis CANerror. Native tick40.109336ms exceeded40ms by0.109336ms; requested~20ms sleep lasted40.070456ms. Lockwait1.856us, SDKsend32.832us. Last logged command was alreadyzero/proposal_expired; CANstate0/mode1/error0.
+
+Fault19:47:21.671580CST occurred124.6068s afterRTABlaunch. Retainedsenderprefaultring coversonly~7s, allafterRTABstart; causationcannotbeassigned. Nice10 andnoTF do not guarantee scheduler isolation. Keepallnative deadlines/protections. OptionalRTAB/controlCPUisolation is defensibleloadmitigation, not provenfix.39arrivals retained, returnincomplete; nooperations/codechanges.

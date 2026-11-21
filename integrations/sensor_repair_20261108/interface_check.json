@@ -1,0 +1,139 @@
+{
+  "schema": "nso.depth_ground_reference_interface_check.v1",
+  "status": "read_only_interface_review",
+  "profile": "depth_ground_reference_v1",
+  "supported_by_existing_interface": true,
+  "mechanism": "Prepare a fresh frozen grid using freeze_joint_grid(..., floor_odom_z_m=candidate); pass its planning_from_odom through existing configuration. No new missionflag or ROSparameter required.",
+  "necessary_keys": {
+    "runtime_effective": {
+      "configuration.planning_from_odom[2][3]": 0.12447258789516671,
+      "configuration.planning_from_odom": "Fresh grid complete4x4; preserve declared XY/yaw construction, shape and new actual anchor",
+      "configuration.return_anchor": "new actual frozen grid anchor",
+      "configuration.shape": "same grid shape",
+      "configuration.episode_id": "new unique trial identity",
+      "configuration.total_budget": "explicit existingmethod resource condition",
+      "configuration.score_mode": "existing native scoremode"
+    },
+    "metadata_bindings": {
+      "calibration.initial_grid.floor_odom_z_m": -0.12447258789516671,
+      "calibration.initial_grid.planning_from_odom": "exactly same matrix as configuration.planning_from_odom",
+      "calibration.input_geometry_profile": "depth_ground_reference_v1",
+      "calibration.ground_reference_receipt": "path+SHA256+fixedROI/fit/sourcepacket identifiers, interpretation and oldfloor",
+      "calibration.initialization_scope": "fresh worker/actualcapture; no old fused researchmap or paid/semantic ledger",
+      "calibration.apply_approved_self_mask": false
+    },
+    "do_not_add": "configuration.floor_odom_z_m or configuration.input_geometry_profile: JointSession strictly rejects undeclared configuration keys. Profile/provenance belongs under calibration.",
+    "important": "Changing calibration.initial_grid.floor_odom_z_m alone is only metadata; actual effect requires matching configuration.planning_from_odom and newly bound observationpacket joint metadata."
+  },
+  "single_variable": {
+    "old_floor_odom_z_m": -0.233,
+    "candidate_floor_odom_z_m": -0.12447258789516671,
+    "old_planning_z_translation": 0.233,
+    "new_planning_z_translation": 0.12447258789516671,
+    "actual_point_z_change_m": -0.1085274121048333,
+    "camera_TF": "keep actual legacy TF unchanged",
+    "nominal_sensor_config": "keep camera_height_m=.536 and laser_height_m=.684 unchanged for this diagnostic",
+    "other_preserved": [
+      "scorer/candidate source, .35projection, headinggraph, cap and positive-option stop",
+      "radius.7212185868375829m",
+      "depthobstacle .15<z<1.2 threshold",
+      "real sensor depth/K/TF/ranges, actual missing data, ROS/hardware protections",
+      "same declared range/extent/turn/reverse profiles"
+    ],
+    "effect_boundary": "Vertical inputframe translation changes depth occupancy, surface/asset heights and possibly future candidate/scoring outcomes. It is an explicit inputgeometry repair, not behavior-equivalent original evidence."
+  },
+  "height_mismatch": {
+    "assumption": "base.z=0 for current planarCSM and legacy actual base_from_camera.z=.303, base_from_laser.z=.451",
+    "actual_camera_height_relative_new_ground_m": 0.42747258789516673,
+    "nominal_forecast_camera_height_m": 0.536,
+    "forecast_minus_actual_camera_m": 0.1085274121048333,
+    "actual_laser_height_relative_new_ground_m": 0.5754725878951668,
+    "nominal_forecast_laser_height_m": 0.684,
+    "forecast_minus_actual_laser_m": 0.1085274121048333,
+    "scope": "TF+candidatefloor derived values, not independently measured ground truth. If base.z differs, compute absolutefloor as currentactualbase.z plus frozen relativefloor; do not reuse odomorigin extrapolation after an epoch change."
+  },
+  "matching_nominal_later": {
+    "configuration_keys": [
+      "configuration.sensor_config.camera_height_m",
+      "configuration.sensor_config.laser_height_m"
+    ],
+    "interpretation": "Algebra/source can remain unchanged, but camera_pose and camera aperture/FOV/quality forecasts change. This is a separate declared prediction-geometry calibration variant and can alter decisions; not a metadata-only engineering fix.",
+    "comparison": "Keep initial single-variable trial separate. If later authorized, freeze a separately named height-matched profile before outcomes and apply identically across comparedmethods; preserve baseline mismatch results.",
+    "laser_caveat": "Matching nominal laserheight changes its declared model; scan-based actual fusion still uses its own actual historical TF. Do not assume all 2Dgain masks use height."
+  },
+  "preservation": [
+    "Keep existing configuration/report/workerledger/rawcapture/TSDF untouched; new uniquely named config/report/worker for this change.",
+    "Hash-copy oldconfiguration, candidatefitreceipt and newconfiguration; record a key-by-key diff limited to floor/frame/provenance and newidentity/resourceintent.",
+    "New actual packet must be captured/converted with the same fresh grid; do not edit or reuse old jointpacket metadata to falsely bind a changed transform.",
+    "Raw depth/K/world_from_camera/world_from_laser remain original odom measurements; apply planningframe transform exactly once in worker.",
+    "Do not import previous researchfusion/quality support, pendingactions or paidledger across this vertical frame change. An unchanged displayTSDF is separate from newresearchfusion.",
+    "Report method failures/return/CANzero and forecast/measurement mismatch; do not mark extrinsics or reconstruction accuracy independently verified."
+  ],
+  "source_refs": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/joint_observation.py",
+      "lines": [
+        45,
+        58
+      ],
+      "meaning": "floor argument sets transform[2,3]"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+      "lines": [
+        126,
+        145
+      ],
+      "meaning": "strictconfiguration keys and rigidplanningframe accepted"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py",
+      "lines": [
+        396,
+        407
+      ],
+      "meaning": "actualframe and scan use planning_from_odom times original historicalTF"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py",
+      "lines": [
+        475,
+        501
+      ],
+      "meaning": "existing jointconfiguration entry"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py",
+      "lines": [
+        878,
+        885
+      ],
+      "meaning": "collector uses initialized worker grid"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/env/virtual3d.py",
+      "lines": [
+        41,
+        46
+      ],
+      "meaning": "nominal camera_pose uses configured cameraheight"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d.py",
+      "lines": [
+        52,
+        58
+      ],
+      "meaning": "unchanged depthobstacle planningheight test"
+    }
+  ],
+  "no_code_or_ROS_change": true,
+  "no_added_gate_or_approval": true,
+  "source_sha256": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/joint_observation.py": "6dae524e6091b3bc8e6109f1f435a85aae264362c19207f1f8d7f351b2056bd5",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py": "12a6dab0c7400d323048143bd6261225bae86c41f623e0077feeb7f3c1d82bd7",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py": "566e842b7e8096f8af2cea5ad90467d6bf02fffa04ddf7dd5307cb2b7b532ba3",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/env/virtual3d.py": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/mapping3d.py": "275144d68c1bc6e8876ac622629f19916d09ca07651681dd8cf2b11dbe64b38f"
+  }
+}

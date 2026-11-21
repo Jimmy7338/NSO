@@ -1,0 +1,96 @@
+{
+  "profile": "saved_laser_coverage_v1",
+  "evaluator_sha256": "ec3ea38dba594cb8693078aac0568b27642dcee527a1e0be517659419c87db08",
+  "common_config": "/home/ouc/nso_robot/reports/nso-hybrid-20261110/recovery_S40_20261110_01/joint_configuration.json",
+  "common_config_sha256": "f67e2203402e83b37f8a26a7210a48a0ce09892cddf9538cddc97e684f1fe28c",
+  "planning_from_odom": [
+    [
+      0.0004880516769050494,
+      -0.9999998809027733,
+      0.0,
+      40.099580042671384
+    ],
+    [
+      0.9999998809027733,
+      0.0004880516769050494,
+      0.0,
+      39.899655062304475
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.12447258789516671
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "ROI": {
+    "center": [
+      40.1,
+      39.900000000000006
+    ],
+    "radius_m": 12.5,
+    "resolution_m": 0.2,
+    "area_m2": 491.24
+  },
+  "stages": [
+    {
+      "stage": "S40_end",
+      "accepted_scans": 41,
+      "observed_union_m2": 118.72000000000003,
+      "free_evidence_union_m2": 115.08000000000003,
+      "hit_endpoint_union_m2": 22.000000000000004,
+      "free_without_ever_hit_m2": 96.72000000000001,
+      "free_hit_conflict_cells": 459,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0
+    },
+    {
+      "stage": "expansion_start",
+      "accepted_scans": 42,
+      "observed_union_m2": 118.72000000000003,
+      "free_evidence_union_m2": 115.08000000000003,
+      "hit_endpoint_union_m2": 22.000000000000004,
+      "free_without_ever_hit_m2": 96.72000000000001,
+      "free_hit_conflict_cells": 459,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0
+    },
+    {
+      "stage": "expansion_end",
+      "accepted_scans": 103,
+      "observed_union_m2": 146.44000000000003,
+      "free_evidence_union_m2": 143.16000000000003,
+      "hit_endpoint_union_m2": 35.64000000000001,
+      "free_without_ever_hit_m2": 110.80000000000003,
+      "free_hit_conflict_cells": 809,
+      "outside_ROI_unique_raster_cells": 0,
+      "outside_grid_unique_cells": 0,
+      "laser_origins_outside_ROI": 0,
+      "beam_endpoints_outside_ROI": 0
+    }
+  ],
+  "accepted_unique_scans": 103,
+  "additional_observed_cells_beyond_S40": 693,
+  "additional_observed_m2_beyond_S40": 27.72,
+  "paid_actions": 101,
+  "distance_m": 15.87586888384818,
+  "elapsed_s": 1330.906964688,
+  "limitations": [
+    "Scene acquisition development sequence, not independent repeats or efficacy comparison.",
+    "Sampled actual laser evidence union, not ground-truth environment coverage or reconstruction accuracy.",
+    "Common fixed S40 frame; same continuous CSM odom epoch established externally.",
+    "One accepted scan per observation; not all live scans.",
+    "ROI omissions retained in stage metrics; native range cap8m and supercover unchanged."
+  ],
+  "robot_or_ROS_actions": false
+}

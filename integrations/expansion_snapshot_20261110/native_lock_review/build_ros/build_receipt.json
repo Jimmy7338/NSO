@@ -1,0 +1,37 @@
+{
+  "scope": "isolated offline full ROS node compilation only; node never executed; no ROS master, SDK operation, CAN or actuator access; no deployment",
+  "status": "build_and_tests_passed",
+  "commands": "#!/bin/bash\nset -eo pipefail\ncd \"$(dirname \"$0\")\"\nsource /opt/ros/noetic/setup.bash\ncmake -S src -B build -DPYTHON_EXECUTABLE=/usr/bin/python3 -Dcatkin_DIR=/opt/ros/noetic/share/catkin/cmake -DNSO_UGV_SDK_INCLUDE_DIR=/home/ouc/nso_robot/staging/scout-owned-sdk-build-20261009-r0/workspace/src/ugv_sdk/include -DNSO_UGV_SDK_LIBRARY=/home/ouc/nso_robot/staging/scout-owned-sdk-build-20261009-r0/workspace/devel/lib/libugv_sdk.so\ncmake --build build --parallel 2\nctest --test-dir build --output-on-failure\n/usr/bin/c++ -std=c++11 -UNDEBUG -Wall -Wextra -Werror -pthread src/concurrency_test.cpp -o build/concurrency_test\n./build/concurrency_test\nldd build/devel/lib/nso_scout_radius_driver_v1/nso_scout_attended_node > ldd.txt\n",
+  "source_hashes": {
+    "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/src/CMakeLists.txt": "2a1e38aec27d2246516b683cb46adb5eb688238c219e9974983f898c67fce076",
+    "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/src/attended_gate_test.cpp": "3881d6d1f69c506ece0948d7d59e528273e7bffb6110bdff0057dc732fa533db",
+    "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/src/concurrency_test.cpp": "30c795adb5c53306b2e5c1d59c7e3cd47fd5988ad0a0d861c013ad7c78bdc85a",
+    "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/src/package.xml": "e97f6ab5d5bc45d92470081d84bbf895230c107201b092ad32eb4f6e94413732",
+    "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/src/radius_driver_node.cpp": "d53bb73c3b7896758406fecb4393597644d134b4bb408ea504c8a61f74c9af01",
+    "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/src/scout_radius_command_timeout_v1.hpp": "08a910705cd027304d3998d5ab83ba606bec9af46e25cfe2ec043c5fab16b8e2",
+    "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/src/timing_test.cpp": "2461a06cd4cdaf0665a722812161f6d9066e2c834cb4c40d51a65c1546622899"
+  },
+  "binary": "/home/ouc/nso_robot/analyses/expand_scene_20261110/native_lock_review/build_ros/build/devel/lib/nso_scout_radius_driver_v1/nso_scout_attended_node",
+  "binary_sha256": "3a2be1df29771181f0ab25008e179d4cdbda007804b0170f249d61204771552e",
+  "sdk_declared": "/home/ouc/nso_robot/staging/scout-owned-sdk-build-20261009-r0/workspace/devel/lib/libugv_sdk.so",
+  "sdk_resolved_by_ldd": "/home/ouc/nso_robot/staging/scout-owned-sdk-build-20261009-r0/workspace/devel/lib/libugv_sdk.so",
+  "sdk_sha256": "6d989e815080503efd6e1904a2bae6fd436273d4d5a7f5626deb6d172c9109fc",
+  "sdk_resolved_sha256": "6d989e815080503efd6e1904a2bae6fd436273d4d5a7f5626deb6d172c9109fc",
+  "ldd_no_missing_libraries": true,
+  "standard": "C++11",
+  "warnings": "-Wall -Wextra -Werror from unchanged original CMakeLists; concurrency separately compiled with same flags",
+  "tests": {
+    "ctest": "2/2 passed",
+    "concurrency": "200000 publication coherence and deterministic preemption/TTL/source/stop checks passed",
+    "TSAN": "unavailable: missing libtsan_preinit.o; see candidate/tsan.txt"
+  },
+  "limitations": [
+    "host compile/link evidence only; no robot or physical stopping validation",
+    "fault6/timing/clock semantics changed as documented in candidate/NOTES.md",
+    "existing check-to-SDK-send stop race is not eliminated"
+  ],
+  "logs": [
+    "build.log",
+    "ldd.txt"
+  ]
+}

@@ -1,0 +1,4989 @@
+Supplement: Category-Conditioned Observation in Joint
+Unknown-Space Exploration and Reconstruction
+Anonymous research draft, 20 November 2026
+
+Evidence scope
+The main task is unknown-environment coverage and measured surface reconstruction. This supplement preserves earlier diagnostics, the reduced supplied-graph mechanism, physical integration
+failures and all later calibration/branch comparisons. Related policy trajectories, object viewing conditions and reused branches are not independent environments. The archived supplied-graph method
+has a different initialization, planner and stopping contract from the main observed-state exploration
+system.
+Table S1: Current-source unknown-exploration diagnostic. Each row is one deterministic trajectory.
+Joint v1 is the declared exploration variant; C is its coverage-only scoring ablation. Used denotes
+actual paid actions. Surface and F1 are simulation measures.
+
+1
+
+Policy
+
+Layout Budget Mode Used Path Coverage Surface
+(m) gain (m2 ) gain (m2 )
+
+F1
+5 cm
+
+V10.3.1
+V10.3.1
+V10.3.1
+V10.3.1
+V10.3.1
+V10.3.1
+V10.3.1
+V10.3.1
+
+west
+west
+west
+west
+east
+east
+east
+east
+
+48
+48
+96
+96
+48
+48
+96
+96
+
+G
+S
+G
+S
+G
+S
+G
+S
+
+48
+48
+96
+96
+48
+48
+96
+96
+
+7.6
+7.6
+16.8
+16.0
+7.6
+7.6
+16.8
+16.8
+
+12.52
+12.52
+16.96
+16.92
+12.52
+12.52
+16.96
+16.96
+
+95.52
+95.52
+114.11
+111.44
+95.39
+95.39
+118.71
+118.71
+
+0.8857
+0.8857
+0.9689
+0.9483
+0.8830
+0.8830
+0.9857
+0.9857
+
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+Joint v1
+
+west
+west
+west
+west
+west
+west
+east
+east
+east
+east
+east
+east
+
+48
+48
+48
+96
+96
+96
+48
+48
+48
+96
+96
+96
+
+C
+G
+S
+C
+G
+S
+C
+G
+S
+C
+G
+S
+
+48
+48
+48
+96
+96
+96
+48
+48
+48
+94
+96
+96
+
+8.4
+8.4
+8.4
+17.2
+17.2
+16.4
+8.4
+8.4
+8.4
+17.2
+16.8
+16.8
+
+14.16
+14.16
+14.16
+16.92
+16.92
+16.96
+14.16
+14.16
+14.16
+16.92
+16.92
+16.92
+
+96.58
+96.58
+96.58
+108.56
+109.51
+118.52
+96.46
+96.46
+96.46
+112.11
+114.00
+114.00
+
+0.8909
+0.8909
+0.8909
+0.9426
+0.9456
+0.9829
+0.8883
+0.8883
+0.8883
+0.9552
+0.9638
+0.9638
+
+Q0 matrix interpretation
+
+Tables S1–S2 retain the 24 original/joint/C/frontier trajectories. Each matched condition starts from
+the same simulated packet and anchor at 61.50% reachable-cell coverage. Exact poses, a 0.2 m
+1
+
+Table S2: Local observed-frontier baseline with the shared execution guard. These four additional
+deterministic Q0 trajectories use the same initial inputs and action limits as Table S1. The adapter
+permanently returns after a rejected action; it is not ROS explore_lite.
+Layout
+west
+west
+east
+east
+
+Budget
+
+Path (m)
+
+Coverage gain (m2 )
+
+Surface gain (m2 )
+
+F1 at 5 cm
+
+48
+96
+48
+96
+
+8.4
+17.6
+8.4
+16.8
+
+15.00
+16.88
+15.00
+16.76
+
+84.12
+107.23
+84.02
+96.56
+
+0.8158
+0.9359
+0.8130
+0.8751
+
+grid/radius and synthetic category markers limit transfer to measured robot localization and natural
+semantics. C removes quality and prior scores while retaining joint candidates. These are one Q0
+context and two related arrangements, not 24 independent environments. All runs return without simulated collision; east/96 C uses 94 actions and the others use their full limits.
+G/S tie in three of four conditions within each implementation. The west/96 semantic difference
+is adverse in V10.3.1 and positive in joint v1. Joint G/S first reach 90/95/99% coverage at actions
+18/24/29; surface histories diverge at action 31, after 99.55% coverage. Mean surface error increases
+from 3.73 to 4.31 mm despite S’s F1 gain. Frontier first reaches 95% coverage at action 20 at both
+budgets, while joint policies do not reach it under the 48-action limit. Frontier permanently returns
+after rejection; the adapter differs from NSO replanning.
+A separate post-hoc west/96 intervention after 41 S actions selects an option unavailable to any
+nonnegative uniform geometric-prior weight on that saved set. Its continuation adds 0.099926 m2
+surface, loses 0.001203 F1 and observes 0.04 m2 less area than G. This mixed late-state outcome
+supplies no additional independent scene or general semantic advantage.
+
+2
+
+Two-room attribution control
+
+The two-room construction adds a divider with a 1.6 m opening to Q0 shelf-west. The blocked initial
+doorway position was corrected during geometry preflight before policy trajectories were observed.
+G, S and a post-hoc G×2 control each complete 96 actions, return to the anchor and record zero
+simulated collisions. Initial/final coverage is 60.12/99.01% in all three runs. Newly visible surface
+is 123.965208, 126.576693 and 126.576693 m2 ; F1 at 5 cm is 0.911938, 0.922122 and 0.922122;
+path length is 16.8, 16.4 and 16.4 m. First 99% coverage occurs at actions 58, 56 and 56. G×2
+and S have identical action traces, so this diagnostic does not isolate a category-specific advantage
+from geometric-prior reweighting. The control was chosen after the G/S results and scalar audit, not
+preregistered.
+
+3
+
+Prospectively fixed Q1 synthetic parent
+
+A further comparison fixed Q1 (outer seed 952), the shelf-west arrangement, a 96-action limit and
+native G/S/X modes before constructing the scene or observing trajectories. Each mode was executed
+once with the existing exploration_joint_v1/v10_3_1 policy, a fresh actual simulated first frame, exact
+poses and the original 0.2 m circular radius. X swaps the native class-prior scores. The category
+channel uses synthetic markers, without a natural-image detector. This adds one synthetic parent and
+three related policy trajectories, not three independent scenes. All three use 96 paid actions, return to
+the complete anchor and record zero simulated collisions. G and X have exactly identical step records.
+S exceeds G/X by 11.719081 m2 newly reference-visible surface, 0.20 m2 observed area and
+0.048558 F1. The first changed planning choice occurs after 19 actions at 88.475836% coverage, with
+identical complete inputs, candidate sets and score components. The actual actions first differ at action
+
+2
+
+Table S3: All Q1 outcomes. Initial/final coverage is measured over reachable cells; surface gain
+excludes the initial frame; F1 uses 5 cm.
+Mode
+
+Coverage start/end (%)
+
+Area gain (m2 )
+
+Surface gain (m2 )
+
+F1
+
+63.104 / 99.164
+63.104 / 99.628
+63.104 / 99.164
+
+15.52
+15.72
+15.52
+
+107.233302
+118.952383
+107.233302
+
+0.929464
+0.978022
+0.929464
+
+G
+S
+X
+
+33. S has a temporary surface deficit before the terminal gain (Figure 1); the endpoint does not imply
+uniformly better progress.
+All 25 recorded planning states admit a nonnegative uniform geometric-prior weight that reproduces the S-selected candidate within that state’s saved set. Moreover, every actually visited S state
+shares the feasible interval λ ≥ 6.037968585111318 under the audit’s exact rational constraints and
+tie rule. No weighted-control rollout or weight search was added. Thus, saved-state selection remains consistent with generic reweighting; the audit does not prove that an unexecuted weighted
+policy reproduces the full S route. This complete-route gain supports controlled synthetic observation allocation while leaving category-specific advantage, early unknown-exploration efficiency and
+natural-semantic transfer unresolved.
+
+New visible surface (m²)
+
+Observed area (%)
+
+100
+90
+80
+70
+0
+
+20
+
+40
+60
+Paid actions
+
+80
+
+120
+100
+80
+60
+40
+20
+0
+
+G
+0
+
+20
+
+40
+60
+Paid actions
+
+S
+
+X
+80
+
+Figure 1: One prospectively fixed Q1 synthetic parent with native G/S/X. Left: observed reachablecell coverage. Right: reference-visible surface added since the initial frame. G and X coincide exactly;
+S has a temporary surface deficit before the final gain. Each arm returns after 96 paid actions with no
+simulated collision. These related trajectories provide no between-scene uncertainty estimate.
+
+4
+
+Saved-scan physical evidence and execution profiles
+
+The 10 November snapshot S40 and 12 November S96 episodes are separate real-robot S trajectories.
+The S40 record has 40 paid actions, 41 accepted observations and 40 verified ROS primitive arrivals,
+with a recorded return. The S96 attempt has 60 paid actions, 61 observations and 60 arrivals before
+interruption on the next goal; no return is recorded. Their CAN distances and wall durations are
+6.756875 m/440.470694 s and 11.081836 m/652.883974 s. Zero feedback after stopping is retained
+for both. The native option-endpoint arrival counter is distinct from the ROS primitive-arrival count.
+The cumulative laser estimator uses one archived real scan per accepted RGB-D packet, its own
+historical laser transform, a fixed 0.2 m planning grid and a 12.5 m-radius measurement region. Finite
+valid returns are capped at 8 m; a capped/max-range endpoint provides free-ray evidence without a
+hit. Invalid returns contribute no synthesized evidence. Cell unions include acquired rays and hit
+endpoints, which can conflict across observations. The S40 and S96 unions increase by 34.32 and
+56.20 m2 , respectively. The S96 last-scan time is 640.190679 s after its first scan, whereas 652.883974
+3
+
+s is the complete run duration; scan and episode endpoints must not be substituted for each other.
+These figures provide no independent traversable-space denominator, localization reference or surface
+accuracy. The accompanying plotting script consumes the evaluated scan curve directly and exports
+all 61 dependent checkpoints.
+The S96 stop was triggered by measured CAN feedback of 0.154 m/s against the strict 0.15 m/s
+limit. The later 0.05 m/s positive-command profile changes execution clipping while retaining all
+speed-stop predicates and expiry limits. Its completed S12 record has 12 paid actions, 13 observations and 12 arrivals, with 0.998883 m travel, 152.766800 s duration and recorded return. The
+subsequent 0.05 m/s S40 attempt was interrupted after 9 paid actions, 10 observations and 9 verified
+arrivals, with 1.483731 m travel and 136.336224 s duration, without returning. A passive CAN observer recorded a 0.159 m/s maximum feedback velocity despite command frames bounded by 0.05
+m/s. Local command-frame observation does not prove controller acceptance or independently measured physical speed. The shorter completion does not establish that the execution fault was resolved.
+Profile changes and unequal initial observations prevent a matched before/after efficacy claim. The
+S96 negative fixed-support quality change and failed return remain included.
+Modified outcomes. The reverse-enabled ros_checked_exploration_v2 episode ended at its external
+deadline after 19 accepted attempts, including 16 exact primitive successes and three failed actualpose observations (20 observations with bootstrap). Its 7.031573 m/603.310025 s totals include three
+ROS backoffs, whose brackets sum to 3.180978 m/230.314087 s; one succeeded and two aborted. The
+accepted-scan union increased by 33.04 m2 , while own-support quality decreased by 0.008163. The
+subsequent navigation-geometry trial ended on native driver fault 5: 39 ROS goals arrived, but only
+38 paid observations plus bootstrap were accepted. Its 7.356553 m/470.210617 s totals, 37.68 m2
+scan-union gain and −0.030885 quality change remain interrupted outcomes without verified return.
+The trial’s padded width of 0.48 m is below the current Mini URDF’s 0.585 m; the physical envelope
+is unresolved and the prior navigation default was restored. G/S score separation appeared in one
+geometry-trial state but changed no recorded winner. These unmatched episodes support no efficacy
+or accuracy ranking.
+The optional viewpoint controller is installed but physically unexecuted. It preserves the
+candidate-score formulas while separating waypoint-attempt accounting from fixed nominal gridmotion predictions and freezing primitive gain calibration; no failed-goal blacklist or added re-ranking
+is active. The independent RTAB-Map interface processed parked mapping and database-localization
+inputs with navigation TF ownership unchanged. Initial counts were 475 information messages, 11
+proximity events and zero descriptor-loop events; lean mapping and existing-database localization
+were exercised while parked, with no displaced relocalization proof. RTAB-Map is off. Interface
+operation does not validate closed-loop exploration or the original controlled method.
+
+5
+
+Measured correction and forecast diagnosis factorial
+
+A separately frozen 2 × 2 factorial separates measured posterior correction from forecast diagnostic
+anticipation (Table S4). All eight routes use the same regenerated public cache for P00, its two configurations, the fixed incorrect category interpretation, a 42-action budget, an 18-action common prefix,
+and disparity-noise seed 1901. The original renderer, planner, return rules, fusion backend and evaluator are retained. Four endpoint equivalence runs compare the wrapper with the original X and Xnf
+controllers on identical acquired packets; every action, posterior and planning receipt agrees. These
+implementation checks are excluded from the eight factorial routes. The eight routes represent one
+parent layout and two related configurations, with no additional independent layout replication; their
+endpoints are not pooled with the older development-cache results.
+Measured correction raises mean J5 from 0.654537 to 0.671945, a relative increase of 2.6597%,
+within this controlled P00 setting. Forecast diagnosis changes neither trajectory nor endpoint in any
+4
+
+Table S4: Complete correction factorial on one P00 parent and two configurations: eight actual simulated routes with a common public cache, wrong prior, budget 42, prefix 18 and noise seed 1901. All
+routes return without collision and share Cmap = 0.957483. Higher J5 and F1 are better.
+Configuration
+
+Measured correction
+
+Forecast diagnosis
+
+h0
+h0
+h0
+h0
+h1
+h1
+h1
+h1
+
+Off
+Off
+On
+On
+Off
+Off
+On
+On
+
+Off
+On
+Off
+On
+Off
+On
+Off
+On
+
+J5
+
+F1 at 5 cm
+
+0.651868
+0.651868
+0.669091
+0.669091
+0.657205
+0.657205
+0.674799
+0.674799
+
+0.680814
+0.680814
+0.698802
+0.698802
+0.686388
+0.686388
+0.704764
+0.704764
+
+of the four matched on/off contrasts: each pair has an identical complete trajectory SHA-256 digest.
+Thus, the factorial supports a measured-correction effect under these conditions and supplies no observed independent benefit of diagnostic anticipation. It does not show that diagnostic lookahead is
+generally ineffective, or that the measured-correction gain transfers to other layouts. No confidence
+interval or significance test treats the eight routes as independent scenes.
+The complete recorded inputs and results are indexed in supplement.md. The editable numeric
+table export is figure_source/correction_factorial_20261115.csv; all eight endpoints are
+retained. These V35 supplied-graph simulations are separate from the unknown-exploration matrix
+and modified physical deployments.
+
+6
+
+Four-room budget and six-arm diagnostics
+
+This extension concerns exploration_joint_v1/v10_3_1, not the supplied-graph V35 method. Three
+object-layout seeds are fixed at 20261119 (development), 20261120 and 20261121. They share one
+wall-topology family, one initial-view rule, ideal visible semantic labels and exact odometry. The
+default gray RGB pixels do not support an evaluation of natural-image recognition. The scene uses
+regularly arranged object slots rather than a distribution estimated from real rooms. Expanding the
+category list or adding textures alone would not establish realistic semantic distributions.
+
+6.1
+
+Budget and interruption accounting
+
+All completed G diagnostics retain the fixed-anchor return contract. Their different budgets are not
+additional independent environments. The S/1024 process ends with exit code 143 after SIGTERM,
+with 398 accepted actions and 93.3816% last coverage. No result or verified final return exists; the
+interruption has no established sender/cause and is not classified as an algorithmic failure.
+Table S5: All completed G budget diagnostics. Dashes denote thresholds not reached. Distance is the
+full episode, including return.
+Budget
+
+Executed
+
+Coverage (%)
+
+First 95%
+
+First 99%
+
+First 100%
+
+Distance (m)
+
+96
+256
+512
+1024
+
+96
+256
+512
+1024
+
+39.84
+85.18
+93.38
+100.00
+
+–
+–
+–
+448
+
+–
+–
+–
+716
+
+–
+–
+–
+727
+
+17.2
+46.0
+93.2
+189.6
+
+The 96-action pilot stops gaining coverage at action 53, leaving 43 actions while the minimum
+5
+
+return needs 41. In the 512/1024 pair, the first 366 actions and sensor-packet hashes, belief map and
+safe-grid hashes coincide. At that state, the longer-budget run selects a route with 92 outbound and
+78 return actions. Its 170-action round trip is infeasible under the shorter run's remaining 146 actions.
+Thus, a comparison restricted to the 512-action candidate set cannot attribute the plateau solely to
+score ordering. G/1024 first reaches full coverage at action 727 and 135.0 m; its final 1024-action
+return is a separate event.
+
+6.2
+
+Surface reference and fairness
+
+The evaluator constructs the exterior boundary of the simulator axis-aligned box union, removing internal and duplicate coplanar faces. It draws 100,000 area-weighted samples with seed 20261119; a
+fixed 0.8 m lattice of start-reachable camera origins and a first-hit ray test retain the sensor-observable
+reference. The reference permits arbitrary planar yaw and is an approximation to observation opportunity on that fixed lattice, not all exterior surface. D retains 56,620 reference points. Precision uses
+12,000 area-weighted reconstructed samples with seed 812 and distance to exterior triangles; recall
+uses the reverse distance from the fixed reference to the reconstructed mesh. Thresholds are 5 and 10
+cm. This is a local adaptation of thresholded surface comparison, not an official benchmark score. No
+geometric alignment to the reference is performed.
+All arms share 512-action caps, return and collision rules, candidate generation, initial packet
+and per-layout reference hashes. C is a coverage-only score on the same candidate generator, not an
+external frontier implementation. G2 multiplies the generic prior by two without scaling the public
+common term. The frozen-gain arm retains camera history, direction observations and mapping. Every
+completed attempt and its artifacts are hashed; the development G mesh is additionally reproduced
+from all 513 packets, with identical coverage at every frame and identical final mesh vertices and
+triangles. Known-cell coverage can include false occupied labels on the free reference, so the records
+also retain those errors and per-room coverage. Coverage-curve area uses trapezoidal integration over
+the common budget, holding the final observation after an early stop without inventing actions.
+
+6.3
+
+Same-state scalar explainability
+
+For each recorded S winner w, the audit solves all inequalities cw + λ pw ≥ c j + λ p j for λ ≥ 0, using
+strict inequality whenever the original full-round-trip-cost/id tie rule favors j. A selected score must
+be positive. Recorded binary floating-point values are represented as exact rationals for interval intersection; interior solutions are checked with the original floating-point selector. This is a post-hoc
+analysis of S states, not an additional weighted trajectory.
+Table S6: Weights reproducing every recorded S choice in each layout. Counts are planning calls, not
+independent samples.
+Layout
+D
+E1
+E2
+All three
+
+Calls
+21
+15
+17
+53
+
+Feasible common λ interval
+[0.838004716, 2.082011542]
+Empty
+(0.806291688, 6.089982889]
+Empty
+
+E1 decisions after actions 198, 373, 408 and 464 each have an empty feasible interval.
+At action 373, the S winner has (c, pG ) = (0.883156, 5.107287) while another candidate has
+(1.146875, 5.665380) and therefore strictly dominates it for every nonnegative scalar weight.
+Category-conditioned priors reverse their ordering, but this decision effect produces no terminal
+coverage improvement and slightly lower F1. The result excludes this scalar explanation only, not
+richer geometric decision models.
+
+6
+
+6.4
+
+Predicted and realized surface benefit
+
+In D, G/S have identical complete traces. Replaying the 98-action segment from action 366 to 464
+yields zero reference coverage gain but raises 5 cm recall from 79.1169% to 80.2490% and F1 from
+88.1847% to 88.9299%. It adds 886 measured 15 cm patch keys; among the fixed 1,600 old points
+used by the quality proxy, 241 acquire a new direction and 255 improve measured information. Patch
+counts are not surface area or accuracy. Holding the starting assets and route fixed while updating only
+their measured direction support reduces generic prior value from 7.2256 to 5.7445 and category prior
+value from 9.4781 to 7.8134. The prior is consumed partially, leaving a large residual. The preceding
+92-action segment gains 4.2476 coverage percentage points and 4.1613 F1 points, so local observation
+benefit does not establish efficient allocation.
+The coverage posteriors at action 366 are 0.97778 for radar and 0.07990 for camera. These are
+conditional yields of predicted cells, not calibrated sensor correctness: the episode realizes 483 of
+493 predicted radar events and 30 of 386 predicted camera events, while also recording 3,438 and
+952 unpredicted new-cell events. The old-quality score deduplicates route observations by pointwise
+maximum; its route-cost normalization cancels when converted back to total gain. No repeated-sum
+or sorting error is found. Candidate limitation, uncalibrated structural residuals and the observation–
+coverage tradeoff remain distinct explanations. Calibrating structural priors against actual new support
+is a proposed method change, not an implemented correction or a result of this experiment.
+
+7
+
+7
+
+Textured-apartment exploration diagnostic
+
+The unchanged observed-state joint policy, exploration_joint_v1/v10_3_1, was evaluated on the official ReplicaCAD v1.6 apt_0 apartment with its original furniture placements.1 This is one inspected
+development layout with five paired arms, separate from the supplied-graph V35 study. Each arm
+starts from the same single RGB-D/laser observation and pose on an unknown map, with exact poses,
+noise-free 120×90 RGB-D, a 90◦ field of view, 8 m range and 1.2 m camera height. The simulator retains the 0.2 m grid, 0.2 m circular radius, mesh-based collision and floor support, full forward sweeps,
+a 256-action cap and the original fixed-anchor return rule. Partial oracle labels identify only current
+first-hit surfaces of one verified open shelf and three opaque drawer fronts; other visible surfaces
+remain unknown. No hidden geometry or whole-scene labels enter the actor.
+Table S7: All five outcomes on one textured apartment under the same 256-action cap. Coverage
+uses 753 start-reachable circular-robot cells; F1 uses 5 cm. C terminates after 178 actions because no
+positive option remains at the anchor. All arms return and record zero simulated collisions.
+Arm
+C: coverage only
+G: geometric joint
+S: category joint
+X: reversed cue
+S, absent labels
+
+Executed actions
+
+Distance (m)
+
+Coverage (%) ↑
+
+F1 (%) ↑
+
+178
+256
+256
+256
+256
+
+32.4
+40.4
+40.4
+40.4
+40.4
+
+100.00
+95.62
+95.62
+95.62
+95.62
+
+92.32
+90.28
+90.28
+90.28
+90.28
+
+Coverage-only C attains higher coverage and surface F1 with fewer actions (Table S7); G, S,
+reversed-cue X and S with absent labels have identical complete action/pose traces and native TSDF
+mesh hashes. Replay of all 31 joint-policy planning states locates the semantic failure at object grouping: labeled measured points join oversized wall/furniture components, which the original 2.2 m extent criterion rejects before class voting. Every retained scoring asset is unmarked, producing identical
+generic and category prior scores. Thus the tie is not evidence that the scene contains no semantic observations. Reconstruction uses 6 cm TSDF voxels and 12 cm truncation. Surface recall uses 36,766
+source-mesh samples visible from a fixed 0.8 m reachable lattice and four cardinal camera headings;
+precision uses 12,000 reconstructed-surface samples and point-to-source-triangle distances, without
+per-run alignment. This controlled result supplies no semantic-planning advantage or physical accuracy claim. Separate RGB-only detector probes failed to establish reliable open/closed structural
+labels and are not the source of these oracle inputs; end-to-end visual-semantic exploration remains
+unvalidated.
+An explicitly declared shared instance-support frontend was then evaluated with the same five
+arms and partial visible oracle support, giving ten runs across two frontends on one layout; it changes
+object grouping and is not equivalent to the original extractor. Each adapted arm exactly reproduces
+its original counterpart’s action/pose trace and coverage, although S−G scores become nonzero in 17
+of 31 planning states; the top two G candidates receive equal semantic increments in all 21 multicandidate states. For the closed structure, all 1,606 recorded route-state occurrences fail the original
+rear-aperture condition (largest projection −0.482 m versus required > 0.15 m), so its factor vanishes
+before the field-of-view test. Both frontend versions use an analytic prior from the observed axisaligned bounding box (AABB), without invoking the complete two-template hidden-surface module;
+score activation supplies no trajectory or coverage benefit here.
+
+1 ReplicaCAD
+
+supplies authored reconstructions of scanned apartments; see A. Szot et al., “Habitat 2.0: Training Home
+Assistants to Rearrange their Habitat,” NeurIPS, 2021, and https://aihabitat.org/datasets/replica_cad/.
+
+8
+
+8
+
+Two-template gain within unknown-space exploration
+
+This declared composition retains the observed-state v10_3_1 unknown-coverage and measuredquality score Jt (r), candidate generator, execution primitives, and stopping/return rules. It replaces
+the entire analytic AABB prior with the V3 box/shelf module’s expected visible area:
+gm (v),
+Utm (r) = Jt (r) + ∑ max
++ t,i
+
+m ∈ {G, S}.
+
+(1)
+
+i v∈r
+
+Here r+ contains committed outbound successors only, and g is the inherited area-weighted visibility with camera field of view, measured-TSDF occlusion, and per-hypothesis self-occlusion. The
+pointwise maximum avoids repeated reward. Its coefficient is one, retaining the replaced prior’s area
+convention rather than the V3 controller’s different normalization. V3 candidate proposals are not
+used. Shared observed-instance support partitions measured samples, including an unassigned partition, before geometric grouping. Thus this is a new variant, separate from the V35 supplied-graph
+study and either original controller.
+Both G and S fit the same two geometric hypotheses. Their initial shelf weights are respectively
+0.5 and 0.1 + 0.8 fopen , where fopen is the observed open-category vote fraction; sensor labels 2/open
+and 3/closed are translated to the V3 dictionary, 3/shelf and 2/box. The update adds (ebox −eshelf )/(2×
+0.062 ) to the prior log odds, clips to [−6, 6], and applies the logistic function. The e values are mean
+squared measured-point distances, truncated at 0.15 m. This model-discrepancy pseudo-posterior is
+rebuilt from the prior and current measurements, without recursively reusing the previous posterior.
+It is not calibrated uncertainty or a trained shape network. Historical depth removes reward samples
+already measured within 0.10 m or contradicted by measured free space. It does not modify the
+posterior through free-space evidence or change the self-occlusion meshes: a contradicted backboard
+can remain an occluder.
+Fixed protocol. The two controlled layouts swap original, unscaled ReplicaCAD shelf 31 and complete cabinet 118 in a synthetic 10 × 8 m branching floorplan. Front, rear, and side views are geometrically reachable. These are two related permutations of one authored scene family, not naturaldistribution samples. The identical first-frame initialization leaves 57.39% of 1,366 reachable cells
+unknown. Sensors use 120 × 90 RGB-D, 90◦ horizontal field of view, 8 m range, 1.2 m camera height,
+zero depth noise, and exact pose. Labels and instance support are ideal current first-hit observations,
+not RGB-detector predictions. The actor receives no reference map, source bounds, or hidden mesh.
+All arms share a 0.2 m-radius robot, mesh-based swept-footprint/floor checks, 0.2 m forward actions,
+90◦ turns, and a 256-paid-action cap including return actions. The 1.98 m shelf without a backboard
+and 0.78 m cabinet do not match the inherited 0.9–1.5 m template-height range or optional shelf backboard; these mismatches are retained.
+C uses coverage only; J retains coverage and measured quality without a template prior. G adds
+neutral-prior templates; S adds category-prior templates. Sno fit disables the geometric-fit log-ratio.
+Sno history jointly disables already-measured reward consumption and free-space rejection, while retaining measured mapping. Each arm runs once in each layout. TSDF fusion uses 6 cm voxels and
+12 cm truncation. Surface evaluation uses the same fixed visible source-mesh reference within each
+layout and 12,000 predicted-surface samples, without alignment or predicted-template insertion.
+
+9
+
+Table S8: All twelve controlled unknown-exploration runs. L/R denotes the shelf’s side; the cabinet
+occupies the other side. All rows end at 100% reference coverage. A100 is the first action reaching
+full coverage, whereas Aend includes subsequent observations and return. F1 is whole-scene surface
+F1; Ro /Rc are open-shelf/closed-cabinet surface recall. All surface percentages use 5 cm tolerance.
+The common allocated cap is 256, with C stopping earlier under the unchanged rule. No independent
+stochastic repeats are present.
+Layout Arm
+
+Aend A100 Path (m) F1 (%) Ro (%) Rc (%)
+
+L
+L
+L
+L
+L
+L
+
+C
+J
+G
+S
+Sno fit
+Sno history
+
+130
+256
+256
+256
+256
+256
+
+67
+88
+97
+97
+97
+69
+
+22.4
+42.0
+43.6
+43.6
+43.6
+42.8
+
+91.92
+92.76
+92.40
+92.40
+92.40
+92.64
+
+73.69
+82.17
+83.01
+83.01
+83.01
+77.95
+
+49.26
+88.71
+87.45
+87.45
+87.45
+92.18
+
+R
+R
+R
+R
+R
+R
+
+C
+J
+G
+S
+Sno fit
+Sno history
+
+130
+256
+256
+256
+256
+256
+
+66
+100
+100
+100
+100
+100
+
+22.4
+43.2
+43.2
+43.2
+43.2
+43.2
+
+92.43
+92.60
+92.60
+92.60
+92.60
+92.54
+
+70.80
+81.09
+81.09
+81.09
+81.09
+80.78
+
+70.04
+79.21
+79.21
+79.21
+79.21
+78.39
+
+Results and attribution. All twelve runs attain 100% correct-free coverage of the start-reachable
+reference, with zero simulated collisions and a return to the initial pose. C reaches full coverage sooner
+and stops after 130 actions; the other arms exhaust 256. G and S have identical complete trajectories
+and TSDF meshes in both layouts, as does Sno fit relative to S. Category-dependent scores are nonzero
+in 5/25 and 4/26 S planning states, but do not change the G-selected candidate. Against J at the
+same action budget, S reduces whole-scene F1 by 0.36 percentage points and travels 1.6 m farther
+in the left-shelf layout; the right-shelf layout ties. Removing history changes both trajectories and
+shifts F1 by +0.24 and −0.06 percentage points. It also activates the inherited 3,500-point weighted
+thinning in 28/14 planning states (left/right), versus none in the other arms; this comparison therefore
+includes a sampling effect. Higher furniture completeness relative to C accompanies 126 additional
+actions and establishes neither semantic nor efficiency benefit. The comparison demonstrates complete
+exploration by this composition under controlled sensing; it does not validate a benefit from category
+weighting, fit correction, or history rejection, or establish detector-level or physical performance. The
+earlier natural-apartment negative results remain separate.
+
+10
+
+9
+
+Prediction checks and consistent template visibility
+
+Fixed-action diagnosis. Replaying the original left-layout S trajectory reproduces all 256 actions
+and 257 sensor packets, matches 25 saved planning-score sets within 10−10 , and reproduces the final
+native TSDF byte for byte. It performs no new route selection. The 31 original G/S planning states
+with one candidate and zero template gain occur after full coverage, when the remaining budget equals
+the shortest return cost. This is a return-budget effect, not evidence that early candidates prevent
+exploration.
+Eight fixed reconstruction checkpoints separate predicted reward from acquired geometry. On
+actions 54–109, independently referenced correct surface area at 5 cm increases by 17.38 m2 globally
+and 1.87 m2 on the shelf; the cabinet loses 0.02 m2 . On 109–127, the respective net increments are
+3.39, 0.06 and 0.57 m2 . These are Monte Carlo estimates over the fixed visible source reference,
+including gains and losses. They cannot be subtracted from weighted hypothetical-template reward as
+a calibration residual.
+Visibility repair. The original gain removes free-space-contradicted reward samples but leaves their
+template triangles able to occlude other samples. Revision B2 changes only this visibility query. For
+an intersection x, let z f (x) and d f (x) denote its camera depth and valid measured depth at the nearest
+projected pixel in historical frame f . With the existing ε = 0.10 m,
+F(x) =
+
+_
+
+[z f (x) < d f (x) − ε],
+
+M(x) =
+
+_
+
+[d f (x) − ε ≤ z f (x) ≤ d f (x) + ε].
+
+f
+
+f
+
+Only F(x) ∧ ¬M(x) permits skipping an intersection. Only valid projections with finite positive measured depth enter these predicates; every preceding intersection is checked. Measured and unknown
+blockers remain opaque, and measured-TSDF occlusion is unchanged. This shared G/S revision retains templates, pseudo-posterior fitting, score weights, candidates, fusion and return rules. It does not
+correct template topology or feed free-space evidence into the fit posterior. The no-history arm still
+removes historical reward filtering, but retains this common visibility repair.
+Prediction-to-measurement matching. A separately frozen evaluation-only replay captures original/repaired route-union weights on the same hypothetical points at actions 54 and 109. A point is
+source-supported when its distance to true source triangles is at most 5 cm; before/after reconstruction
+matching uses that same point and tolerance. No reference geometry reaches the actor. Table S9 retains both intervals. Of the newly restored weight, 0.998 and 1.483 are source-supported, unmatched
+before and matched after; these are weighted template-area units, not unique true square metres. A
+secondary nearest-source-point test yields 0.998 and 1.290. Restored weights also include 2.324 and
+0.269 unsupported by source geometry. The repair recovers useful visibility, but these two fixed states
+retain substantial template mismatch and do not establish a causal endpoint or semantic advantage.
+Table S9: Same-point diagnosis of two intervals on the original S route. Each pair is original/repaired.
+W is weighted hypothetical-template area; source support is its weighted fraction within 5 cm of true
+triangles. Increment support uses only restored per-point weight. Overlapping hypotheses do not
+define unique true surface area. These are saved states, not new trials.
+Interval W (template units)
+54–109
+109–127
+
+4.331 / 9.098
+1.436 / 3.283
+
+Source support (%)
+
+Increment support (%)
+
+24.04 / 38.30
+51.76 / 70.71
+
+51.25
+85.43
+
+11
+
+Table S10: All twelve visibility-repaired runs (B2). Definitions, sensing, action costs, 256-action
+allocation and fixed references are unchanged from Table S8. Every row reaches 100% correct-free
+reference coverage, records zero simulated collisions and returns to its initial pose. C stops at 130
+actions; other arms use 256. This repeats the same two related layouts, not twelve new environments.
+Layout Arm
+
+Aend A100 Path (m) F1 (%) Ro (%) Rc (%)
+
+L
+L
+L
+L
+L
+L
+
+C
+J
+G
+S
+Sno fit
+Sno history
+
+130
+256
+256
+256
+256
+256
+
+67
+88
+97
+97
+97
+67
+
+22.4
+42.0
+42.8
+42.8
+43.2
+43.6
+
+91.92
+92.76
+92.63
+92.63
+92.38
+92.31
+
+73.69
+82.17
+82.61
+82.61
+83.46
+82.42
+
+49.26
+88.71
+83.79
+83.79
+85.87
+74.29
+
+R
+R
+R
+R
+R
+R
+
+C
+J
+G
+S
+Sno fit
+Sno history
+
+130
+256
+256
+256
+256
+256
+
+66
+100
+100
+100
+100
+100
+
+22.4
+43.2
+43.2
+43.2
+43.2
+43.2
+
+92.43
+92.60
+92.60
+92.60
+92.60
+92.54
+
+70.80
+81.09
+81.09
+81.09
+81.09
+80.78
+
+70.04
+79.21
+79.21
+79.21
+79.21
+78.39
+
+Shelf left
+(a)
+
+Shelf right
+(b)
+
+C
+
+0.000
+0.000
+
+0
+0
+
+J
+
+0.000
+0.000
+
+0
+0
+
+G
+
+0.000
+
+S
+
+0
+0
+
++0.239
+0.000
+
+0
+0
+
+0.000
+
+0
+0
+
+-0.016
+
+Sno fit
+Sno history
+
++0.239
+
+-0.333
+
+-2
+0.000
+
+−0.4
+
+0
+
+−0.2
+0.0
+0.2
+0.4
+ΔF1 at 5 cm (percentage points)
+Higher is better
+
+−2
+
+0
+2
+Δ first full-coverage actions
+Lower is better
+
+Figure 2: Paired B2 minus B changes for every arm and layout. Higher endpoint F1 and fewer actions
+to first full coverage are improvements. The two metrics use different checkpoints. These deterministic, related-layout comparisons do not support between-scene error bars.
+
+Complete paired outcomes. G and S still have identical trajectories and native TSDF in both layouts. The repair increases left-layout F1 by 0.239 percentage points for both, without earlier full
+coverage; right-layout endpoints are unchanged. Left-layout S remains below J by 0.123 points at the
+same budget. S exceeds Sno fit by 0.254 points there but has lower recall on both target objects; the
+right layout ties. This does not establish a category benefit or generally improved target observation.
+The no-history arm triggers weighted point thinning in 22/14 planning states, so its mixed outcomes
+include a sampling effect. C/J retain their original complete trajectories. The 24 B/B2 runs reuse two
+related layouts. Earlier null results remain retained. Visibility consistency improves, but semantic
+exploration benefit remains unproven.
+
+12
+
+10
+
+Template support and complete candidate acquisition
+
+Separate model revisions. We evaluate three cumulative changes to B2 while retaining its visibility
+correction, common coverage and measured-quality scores, candidates, coefficient and measured-only
+TSDF. First, all template quadrature points are retained and history changes their weights through
+a mask. This removes the global 3,500-point thinning operation. Second, acquired face normals
+estimate an orientation modulo 90◦ , and opposing measured planes constrain horizontal extents. A
+single observed face anchors the inherited extent prior; its unobserved endpoint remains unresolved.
+Measured upper-plane support can move the height estimate outside the inherited 0.9–1.5 m bounds;
+unobserved geometry remains unresolved. This finite envelope estimator retains the grounded-object
+assumption and fixed box/shelf parts; it is not full shape optimization or a calibrated distribution over
+unseen geometry. G and S share the estimated geometry.
+Third, we add free-space evidence to the structure pseudo-likelihood. For each hypothesis h, let Ahf
+and Am
+h denote template quadrature area supported as strictly free or measured surface by the acquired
+keyframes. Set fh = Ahf /(Ahf + Am
+h ), or zero when neither type of support exists. The shelf log odds
+receive the additional term
+0.152
+∆` f = ( fbox − fshelf )
+.
+2(0.06)2
+The scales come from the inherited distance pseudo-likelihood. Finite positive depth is required; the
+closed ±0.10 m surface band vetoes conflicting free evidence. Invalid, occluded and unobserved
+samples add no evidence, and repeated frames do not multiply a sample’s contribution. Category
+priors remain the only G/S difference. The resulting weights are heuristic pseudo-posteriors.
+After this diagnostic, a second declared revision addresses duplicated templates and unsupported
+probability mass using the same acquired ideal-label frontend. Acquired fragments assigned to the
+same tracked instance are pooled before constructing one box/shelf pair; unknown-instance groups
+remain separate. Let q denote the shelf probability after the category prior and measured-surface
+update, and p its value after the relative free-space update. With K = 3.125, set
+Z = (1 − q)e−K fbox + qe−K fshelf ,
+
+(mbox , mshelf ) = Z(1 − p, p).
+
+The residual 1 − Z is heuristic accounting for unmodeled mass, not a fitted third structure class; it
+creates no surface. The inherited conditional log-odds clipping remains in p. This heuristic discounts
+both hypotheses when both conflict with observed free space, without asserting that unknown geometry validates either template. Geometry estimation and absolute attenuation are crossed in four
+pooled-instance variants. No tracked group is excluded by inherited size eligibility at the six states.
+Fixed inputs and actual candidate outcomes. Before execution, the protocol fixes states 24/54/109
+from the original left-layout S route and 24/53/110 from the right route, including every recorded candidate. Prefix replay matches original packets, poses, instance association, quality counts, feedback
+and scores. Each of 66 branches starts from a byte-identical reconstruction of its acquired prefix and
+executes its fixed outbound actions. All endpoints are reached in 1,569 total branch actions with zero
+simulated collisions. All eight model versions share those acquired outcomes; no model chooses new
+actions during a branch. The second diagnostic reconstructs and verifies each prefix, then reuses the
+original branch meshes and receipts without acquiring new branches. These are dependent development diagnostics from two permutations of one floorplan, not 66 autonomous episodes or independent
+environments. Reference geometry is used only by the subsequent evaluator.
+Prediction consistency and decision consequences. Full-basis integration reproduces B2 gains and
+choices at all six normal-history states, which did not activate the old cap. For S, geometric estimation lowers the mean source-supported fraction of predicted reward from 36.45% to 29.16%, while
+adding free-space evidence recovers it to 30.13%. Absolute source-supported and realized weights
+13
+
+Table S11: All staged fixed-state predictions using the same acquired candidate outcomes. F retains
+the full quadrature basis; M estimates the measured envelope; E adds relative free-space evidence. P
+pools acquired instance fragments on the full basis. A includes relative evidence and absolute mass
+attenuation. Each statistic is first computed within a state, then averaged with equal weight over six
+dependent states from two furniture permutations. W is predicted weighted template area; Ps is its
+fraction within 5 cm of source triangles; Ws and Wr are source-supported and subsequently matched,
+previously unmatched template weights. They are not unique physical areas. ρ is the within-state
+Spearman association between template gain and actual object net surface gain. ∆Ao is the truereference object surface gain estimated for the candidate selected by the unchanged full score; na is
+its actual action count. All 66 fixed candidate branches are retained and reused across versions; no
+additional branch or independent scene is counted.
+W Ps (%)
+
+ρ ∆Ao (m2 )
+
+Stage
+
+Model
+
+B2
+
+G
+S
+
+3.923 38.56 1.291 0.909 0.711
+3.849 36.45 1.260 0.886 0.702
+
+1.017 45.2
+1.017 45.2
+
+F
+
+G
+S
+
+3.923 38.56 1.291 0.909 0.711
+3.849 36.45 1.260 0.886 0.702
+
+1.017 45.2
+1.017 45.2
+
+F+M
+
+G
+S
+
+3.987 29.97 1.132 0.690 0.723
+3.982 29.16 1.098 0.678 0.722
+
+1.057 40.2
+1.032 45.0
+
+F+M+E G
+S
+
+3.941 30.99 1.172 0.718 0.720
+3.939 30.13 1.138 0.706 0.722
+
+1.057 40.2
+1.032 45.0
+
+P
+
+G
+S
+
+3.721 38.42 1.225 0.868 0.687
+3.645 36.25 1.191 0.843 0.679
+
+1.017 45.2
+1.017 45.2
+
+P+M
+
+G
+S
+
+3.819 30.63 1.132 0.693 0.694
+3.832 29.65 1.093 0.674 0.693
+
+1.057 40.2
+1.032 45.0
+
+P+A
+
+G
+S
+
+0.784 35.17 0.220 0.160 0.645
+0.768 33.44 0.212 0.154 0.645
+
+1.050 39.5
+1.050 39.5
+
+P+M+A G
+S
+
+1.153 29.44 0.279 0.177 0.640
+1.161 29.20 0.279 0.178 0.610
+
+1.017 45.2
+1.017 45.2
+
+Ws
+
+14
+
+Wr
+
+na
+
+also remain below B2 (Table S11); this is not an improvement obtained by discarding predicted mass.
+Mean within-state rank association rises from 0.702 to 0.722, but the two geometry variants change
+the full-score choice only at left state 109. There, G selects an 18-action branch adding an estimated
+0.633 m2 object surface and 3.388 m2 global surface; S selects a 47-action branch adding 0.486 and
+4.739 m2 , respectively. These are net changes after subtracting lost surface matches. Both add zero
+coverage at this already covered state. The other five selected candidates remain unchanged for F,
+F+M and F+M+E in both G and S.
+Across the six states, selected global net area averages 16.161 m2 for B2 G/S, 15.968 for revised
+G and 16.193 for revised S; selected coverage gain remains 1.318 percentage points. The changed
+choice does not establish a semantic efficiency benefit.
+Instance pooling alone preserves all selected candidates while reducing S rank association to
+0.679. Pooling plus absolute attenuation reduces it further to 0.645. This variant slightly increases
+selected object net area from 1.017 to 1.050 m2 and reduces mean action count from 45.2 to 39.5,
+but reduces selected global net area from 16.161 to 15.792 m2 . G and S select identical candidates in
+all six states. Combining pooling, geometry and attenuation lowers S rank association to 0.610 and
+restores every B2 choice. Thus, reduced prediction magnitude alone does not identify a better surface
+predictor or a semantic advantage. None of these geometric or pooled-instance variants is promoted
+to the conditional complete-policy comparison.
+Decomposing the selected S rewards explains why free-space attenuation can suppress useful object evidence. In P+A, the labeled furniture hypotheses retain only Z = 0.070–0.142, whereas some
+unmarked groups retain Z = 1. The mean unmarked share of the selected predicted reward rises from
+66.44% in B2 to 73.24% in P+A and 78.44% in P+M+A. These are six-state means of predictionweight fractions, not recovered physical area. A mismatched shape can conflict with observed free
+space even when its object is present; an unmarked hypothesis without contradictory observations can
+retain weight without being geometrically supported. Thus, treating unrefuted geometry as applicable
+does not resolve the fixed-template mismatch.
+
+10.1
+
+Measured-surface consumption on a common quadrature basis
+
+A separately fixed six-run comparison isolates measured-surface reward consumption in the full-basis
+version F. G, S and S−m each execute a complete 256-action policy in both existing layouts. S−m
+removes only measured-surface consumption; strict valid-free-space rejection, B2 visibility, the full
+quadrature basis and all other policy settings remain. All six runs reach 100% correct-free coverage,
+return to the anchor and record zero simulated collisions. G and S have identical trajectories and native
+mesh hashes in each layout, also matching their corresponding B2 records. These reruns validate
+implementation parity and the isolated switch; they add no independent scene or stochastic repetition.
+Table S12: Complete full-quadrature policy comparison and measured-consumption ablation. S−m
+disables only measured-surface reward consumption; valid-free rejection and B2 visibility remain. C
+is final reachable-cell coverage, a100 its first 100% action, na paid actions and d traveled distance. F1
+and object recall use the unchanged native-mesh evaluator; Ro /Rc denote open-shelf/closed-cabinet
+recall at 5 cm. These are six deterministic reruns on the same two permutations, not new independent
+scenes. Historical C/J controls are reused from Table S10.
+Layout Mode C (%) a100
+
+na d (m) F15 (%) F110 (%) Ro (%) Rc (%)
+
+Left
+
+G
+S
+S−m
+
+100.00
+100.00
+100.00
+
+97 256
+97 256
+67 256
+
+42.8
+42.8
+44.0
+
+92.63
+92.63
+92.29
+
+94.00
+94.00
+93.83
+
+82.61
+82.61
+83.17
+
+83.79
+83.79
+74.31
+
+Right
+
+G
+S
+S−m
+
+100.00 100 256
+100.00 100 256
+100.00 100 256
+
+43.2
+43.2
+43.2
+
+92.60
+92.60
+92.54
+
+93.88
+93.88
+93.88
+
+81.09
+81.09
+80.78
+
+79.21
+79.21
+78.39
+
+15
+
+Retaining measured-surface consumption raises terminal 5 cm F1 by 0.350 percentage points on
+the left and 0.060 on the right, and closed-cabinet recall by 9.486 and 0.828 points. The coverage
+tradeoff remains explicit: in the left layout, S reaches full coverage at action 97 compared with 67
+for S−m , although its full-budget path is 1.2 m shorter. Both right-layout arms reach full coverage at
+action 100 and travel 43.2 m. Open-shelf recall is slightly lower with consumption on the left and
+slightly higher on the right (Table S12). Thus, consumption affects observation allocation and final
+surface recovery without establishing faster unknown-space coverage or a semantic advantage.
+The left S−m run has two scoring calls whose retained points exceed the former 3,500-point cap;
+all are integrated. The earlier no-history rows removed both measured and free-space history and
+used state-dependent thinning, so they remain separate descriptive results. The new contrast isolates
+measured-surface consumption with identical quadrature rules. Historical C/J controls are reused as
+declared, and retain their previously reported outcomes.
+
+16
+
+11
+
+Observed-object support, part geometry and complete-policy tests
+
+Shared object support. The previous decomposition motivates an explicit restriction of the completion model’s domain. Variant O constructs one box/shelf pair per acquired positive instance track and
+removes unassociated fragments from hypothetical furniture completion. All measured map points,
+generic measured-quality rewards, unknown-coverage scores and candidates remain. This changes
+the research model, rather than being an equivalent engineering implementation. G and S receive
+the same ideal visible instance support; G has a neutral structural-class prior and is not a completely
+semantics-free frontend. O retains the inherited 0.12 < z < 1.8 m input crop and shape initializer.
+Ofull restores all already acquired points assigned to those tracks. OF uses this same full support to
+estimate outer planes from point positions and depth-validated viewing directions. Unobserved endpoints retain the original extent priors. Figure 3 exposes both the missing input support and remaining
+placement errors.
+Two further part-model revisions. A requires observed outer-boundary and outward-view support
+before a vertical plane determines orientation; otherwise the zero-yaw prior remains. B preserves
+the three inherited slabs’ absolute prior heights and constrains observed faces using acquired twodimensional horizontal patches. Unpaired faces retain the 0.08 m thickness prior; compatible opposite
+faces constrain thickness. Overlapping intervals are merged, while unconstrained slabs remain, including those above the estimated box/leg height. The fixed plane tests require 2.5 cm residual tolerance,
+four points and 15 cm horizontal spans. Hidden lateral extents remain unresolved. A-only, B-only
+and A+B share OF’s full acquired support. Their changed hypothetical area is kept separate from the
+measured TSDF, with no new reward coefficient, candidate rule or stop condition.
+Matched diagnostic outcomes. Every variant reuses the same six prefixes and 66 acquired outbound branches from Section 10. No new branch is acquired and no additional independent sample is
+claimed. Input points, normals and labels match by ordered hashes; reconstructed prefix meshes match
+byte for byte. The evaluator alone accesses reference object surfaces. O preserves every previously
+assigned positive track and the preceding pooling variant’s pointwise forecasts for those tracks, while
+removing only unassociated furniture hypotheses. Some acquired points near actual furniture remain
+unassigned by the frontend; they stay in the measured map and are not relabeled using the reference.
+O’s mean within-state rank correlation is approximately 0.848 for both G and S. Restoring cropped
+points alone does not change any selected candidate. OF lowers S’s newly realized true-object prediction weight from 0.0857 to 0.0489 m2 and rank correlation from 0.848 to 0.800. A+B increases
+realized weight to 0.0729 m2 , whereas rank correlation decreases further to 0.791. Supported weight
+also increases relative to OF, but realized weight and ranking remain below O. A-only and B-only
+are also retained in Table S13. For all three A/B revisions, G and S select the same candidate at
+every state. The selected A+B branches trade more object recovery for less global recovery than O;
+their mean shelf recall rises while cabinet recall falls. None is promoted to a complete-policy test.
+Across all 12 object/state fits, the depth estimate still uses the 0.65 m prior rather than two observed
+opposing faces. These are development findings on repeatedly inspected states, not held-out shapegeneralization evidence.
+Observed-data depth identifiability. A final frozen diagnostic profiles local object depth while
+holding all other A+B parts fixed. It compares 21 depths from the measured span to 1.3 m, plus the
+current prior, using the same acquired valid-depth rays for every candidate and a neutral box/shelf
+mixture. Surface discrepancy and verified-free contradiction form a heuristic cost J(d); the predeclared plausible band is J(d) ≤ min J + 1, not a confidence interval. Of 12 object/state pairs, eight lack
+a unique observed endpoint. All four eligible curves prefer the measured-span lower bound, but the
+0.65 m prior remains inside the band: its cost gaps are 0.351–0.676. Thus the measurements contain
+
+17
+
+Table S13: Observed-object and part-geometry diagnostics on the same six prefixes and 66 reused
+branches. O uses acquired tracks; Ofull restores cropped points; OF fits envelopes; A qualifies outsideplane orientation; B fits absolute slab heights. U/V are candidate-mean weights supported by actual
+furniture surfaces/newly realized after acquisition, in m2 . These alternative-hypothesis integrals are
+not unique physical area. ρ correlates predicted reward with actual object net increment within each
+state. The last three columns report selected-candidate net object/global area and actions. State means
+receive equal weight; no additional branch executions or independent samples are added.
+Stage
+
+Arm
+
+O
+
+ρ ∆Ao (m2 ) ∆Ag (m2 ) Actions
+
+U
+
+V
+
+G
+S
+G
+S
+G
+S
+
+0.216
+0.164
+0.214
+0.162
+0.237
+0.163
+
+0.124
+0.086
+0.123
+0.084
+0.090
+0.049
+
+0.848
+0.848
+0.849
+0.848
+0.788
+0.800
+
+1.050
+1.057
+1.050
+1.057
+1.161
+1.168
+
+15.792
+15.968
+15.792
+15.968
+13.949
+14.125
+
+39.5
+40.2
+39.5
+40.2
+38.3
+39.0
+
+G
+S
+OF+B
+G
+S
+OF+A+B G
+S
+
+0.244
+0.176
+0.274
+0.232
+0.292
+0.262
+
+0.104
+0.051
+0.097
+0.071
+0.109
+0.073
+
+0.807
+0.819
+0.794
+0.758
+0.811
+0.791
+
+1.161
+1.161
+1.168
+1.168
+1.168
+1.168
+
+13.949
+13.949
+14.125
+14.125
+14.125
+14.125
+
+38.3
+38.3
+39.0
+39.0
+39.0
+39.0
+
+Ofull
+OF
+OF+A
+
+a depth preference, but this estimator cannot exclude the prior under the fixed rule. No dimension is
+proposed or updated. The G/S model arrays remain exactly equal to frozen A+B outputs; no candidate
+scoring, branch acquisition or closed-loop run is repeated. This does not establish that the sensors
+contain no usable size information.
+
+11.1
+
+O-only closed-loop comparison and isolated ablations
+
+O is tested in a separately frozen eight-run matrix: G, S, S−` and S−m in both existing layouts. S−`
+removes only the original measured surface-distance likelihood from the structural posterior; it does
+not remove the category prior or change template placement. S−m removes only measured-surface
+reward consumption, retaining strict valid-free rejection. All other inputs, scoring terms, candidates,
+256-action budgets and return rules are shared. All eight runs complete correct-free coverage, return
+and record zero simulated collisions (Table S14). This supports controlled exploration feasibility, with
+the outcomes below limiting the claim of semantic benefit.
+In the left layout, S reaches full coverage nine actions later than G (97 versus 88), travels 1.2 m
+farther, and loses 0.377 percentage points of terminal 5 cm F1. Shelf recall increases by 1.294 points,
+while cabinet recall decreases by 2.834 points. The right-layout G/S trajectories and native meshes
+remain identical. The first left-layout choice difference occurs at planning action 54, and execution
+first differs at action 71. A per-component audit traces the score change mainly to the cabinet completion: the compared cabinet-forecast points have zero support within 5 cm of the actual cabinet
+surface. A category prior can therefore amplify a misplaced geometric hypothesis; a changed decision
+is insufficient evidence of improved information gathering.
+S and S−` have identical trajectories and native meshes in both layouts. Thus the inherited likelihood has no observed policy-level effect in this matrix. Consumption also has mixed effects: removing
+it raises left-layout F1 by 0.076 points with 0.4 m additional path and slightly lower shelf recall; on
+the right it lowers F1 by 0.147 points and shelf recall by 0.858 points. These outcomes differ from the
+earlier full-basis consumption contrast because the model domain and resulting policy have changed.
+Historical cap-free B2, C and J outcomes remain reused controls, not new runs or independent scenes.
+The eight new deterministic runs add neither natural-detector validation nor physical SLAM evidence.
+18
+
+(a) Left layout, track 1
+
+(b) Left layout, track 2
+
+1
+
+0
+
+0
+
+1
+−1
+−1
+
+Δy
+
+(m
+
+)
+
+0
+
+0
+
+Δx (
+m)
+
+(c) Right layout, track 1
+
+1
+
+−1
+
+Δy
+
+(m
+
+)
+
+(d) Right layout, track 2
+
+1
+
+2
+
+z (m)
+
+2
+
+1
+
+0
+
+0
+
+1
+−1
+
+0
+
+0
+
+Δx (
+m)
+
+1
+
+−1
+
+(
+Δy
+
+z (m)
+
+1
+
+1
+−1
+
+0
+
+0
+
+Δx (
+m)
+
+z (m)
+
+1
+
+2
+
+z (m)
+
+2
+
+1
+−1
+
+m)
+
+0
+
+0
+
+Δx (
+m)
+
+Acquired points within old crop
+Acquired points outside old crop
+
+1
+
+−1
+
+Δy
+
+(m
+
+)
+
+O: inherited envelope
+OF: fitted envelope
+
+Figure 3: Acquired points and predicted envelopes at the preselected 24-action prefixes. Black points
+fall inside the old input height crop; purple triangles are already acquired points outside it. Dashed
+orange and solid blue outlines show O and OF, respectively. Both tracked objects in each layout are
+shown, including the rotated fit in (c). Axes share a metric scale; horizontal origins are observed-point
+centroids and height is relative to the simulated ground. The outlines are shared template envelopes,
+not complete measured reconstructions or evidence of unseen-surface accuracy.
+
+Table S14: Complete O-policy matrix on the two existing furniture permutations. All eight runs reach
+100% correct-free coverage, return, use 256 paid actions and record zero simulated collisions. Both
+G and S receive the same ideal acquired instance support; only their structural-class prior differs.
+S−` disables only the inherited measured-distance likelihood, whereas S−m disables only measuredsurface reward consumption and retains verified-free rejection. a100 is the first full-coverage action;
+d is full-budget path length. Ro /Rc denote open-shelf/closed-cabinet recall at 5 cm. These are eight
+deterministic runs of four policies on one floorplan family, not eight independent environments or
+repeats.
+Layout Mode a100 d (m) F15 (%) F110 (%) Ro (%) Rc (%)
+Left
+
+G
+S
+S−`
+S−m
+
+88
+97
+97
+97
+
+42.0
+43.2
+43.2
+43.6
+
+92.76
+92.38
+92.38
+92.46
+
+94.00
+93.80
+93.80
+93.79
+
+82.17
+83.46
+83.46
+83.28
+
+88.71
+85.87
+85.87
+86.13
+
+Right
+
+G
+S
+S−`
+S−m
+
+100
+100
+100
+100
+
+43.2
+43.2
+43.2
+43.2
+
+92.60
+92.60
+92.60
+92.45
+
+93.88
+93.88
+93.88
+93.88
+
+81.09
+81.09
+81.09
+80.23
+
+79.21
+79.21
+79.21
+79.21
+
+19
+
+12
+
+Conditional depth and placement distributions
+
+The preceding dimension profile could not exclude the 0.65 m prior under its declared heuristic band.
+We therefore evaluate a distribution over unresolved depth, with its loss scale selected on separate
+procedural geometries. This revision retains the observed-instance domain, qualified outside orientation, width, box/leg height and absolute-layer construction of the preceding outer-orientation/layer
+model. Uncertainty over those quantities, missing parts, camera pose and instance association is not
+represented by the depth distribution.
+Joint geometry and structure update. Let [umin , umax ] be the acquired support interval on the estimated local depth axis, with span s = umax − umin . A continuous uniform prior on d ∈ [0.2, 1.4] m is
+conditioned on this observed span. Its quadrature nodes have 0.1 m spacing and include the acquired
+lower boundary; masses are clipped Voronoi-cell lengths, rather than equal masses at irregular nodes.
+A credible observed endpoint fixes that endpoint. Without either endpoint, the lower coordinate is
+`k = umin − ak (dk − s),
+
+ak ∈ {0, 12 , 1},
+
+q(ak ) ∈ { 14 , 12 , 14 }.
+
+(2)
+
+Credible opposing faces give a direct measured extent. Inconsistent anchors fall back to the unanchored construction and are recorded. An acquired span above 1.4 m is explicitly outside the prior
+domain; its numerical boundary particle is not interpreted as calibrated certainty.
+For structure h ∈ {box, shelf} and geometry particle k = (dk , `k ), the acquired-data error is Ehk =
+surface + E free . The first term averages acquired-point-to-template squared distances; the second averEhk
+hk
+ages strict-free first-hit depth-gap squared discrepancies. Both clip distances at 0.15 m before squaring.
+All alternatives use the same fixed set of valid acquired rays, including cross-view surface vetoes: a
+template hit behind a closer measured surface is occluded, and invalid depth provides no free-space
+evidence. The joint mass for policy m is
+wm (h, k) =
+
+πm (h)q0 (k) exp[−Ehk /(2σ 2 )]
+.
+∑h0 ,k0 πm (h0 )q0 (k0 ) exp[−Eh0 k0 /(2σ 2 )]
+
+(3)
+
+G has a neutral structure prior, while S uses the acquired category prior. They share the observed
+inputs, particle geometry and error bank; their marginal depth distributions may differ through the
+structure mixture. Equation (3) replaces the earlier 6 cm surface-only likelihood and clipped conditional log-odds update. The earlier likelihood is not applied a second time. These are normalized
+loss-based weights, not an exact physical sensor posterior. This use of a specified loss follows the general updating framework of Bissiri et al. [15]; that framework does not validate the present template
+loss or its scale.
+For a route r and one observed object, the template term averages the existing surface quadrature
+over mutually exclusive alternatives:
+Im (r) = ∑ wm (h, k)
+
+∑
+
+h,k
+
+j∈Qhk
+
+A j H j max V j (v).
+v∈r
+
+(4)
+
+The system sums this quantity over observed objects, normalizing the joint mass separately for each
+object. Here A j is the inherited quadrature area, H j removes already observed or verified-free samples,
+and V j (v) is the retained B2 visibility contribution. No new candidate filter, score coefficient, overlap
+correction or navigation rule is introduced. Width, pose, unconfirmed layers and primitive overlap
+remain conditional assumptions in the resulting expected area.
+Independent procedural evaluation. The frozen generator contains 24 objects, equally divided
+between closed panelled boxes and open multi-layer shelving. It uses three depth strata, varied widths,
+heights, panel thicknesses, yaw and layer layouts, without reusing the exploration-scene meshes or
+20
+
+the predictor’s primitive builder. Whole objects are assigned to 12 training, six validation and six
+held-out objects before inference. Four observation conditions use front-only (one frame), front–
+side (three frames), around-object (five frames), and foreground-occluded front–side (three frames)
+views. This gives 96 cases and 288 frames, but only 24 distinct geometries. Conditions of the same
+object are dependent. Poses are exact and instance masks identify visible first hits; these conditions
+do not evaluate a natural-image detector or physical sensor noise. The inference process receives
+sanitized acquired frames, masks and public constants, with no access to hidden source geometry,
+split membership or later observations.
+The evaluator projects each private true mesh onto the inferred depth axis to obtain the target
+extent. It additionally reports orientation error and width/depth axis exchange, without choosing a
+different axis to improve the score. For a depth mass function {(xi , pi )} and target y, the score is
+CRPS = ∑ pi |xi − y| − 12 ∑ pi p j |xi − x j |.
+i
+
+(5)
+
+i, j
+
+The scale grid is {0.01, 0.015, 0.025, 0.04, 0.06, 0.09, 0.14, 0.22} m. Selection minimizes CRPS over
+all four conditions equally within each training object, then equally across training objects. Ties within
+10−12 m choose the larger scale. Validation and held-out truth are opened only after the selected-scale
+receipt is saved. The prior-only baseline retains the same acquired-span and anchor conditioning but
+has no loss update; fixed 0.65 m is a separate point-distribution benchmark. Neither baseline is a full
+exploration-policy comparison.
+Missing, multiple-track or unusable inference retains its place in the denominator. For lossupdated and prior-only evaluation, such a case receives the public uniform prior over depths from
+0.2 to 1.4 m, without observed-span conditioning. Its axis is fixed to world y; the fixed-size benchmark remains 0.65 m. This fallback does not select a track or axis using the hidden truth and does
+not modify the actor. All-case and valid-only metrics are retained. Central 50%, 80% and 95% intervals use the discrete inverse CDF, alongside median absolute error. A separate counterfactual pair has
+identical visible observations but different hidden depths; its complete bank, energies and posterior
+are identical at all eight scale values. It is an invariance check, not two more independent calibration
+objects.
+Results and limits. Training selects σ = 0.01 m, the lower end of the declared grid, with allcondition CRPS 0.1142 m. This is a selected generalized-loss scale, not an estimate of physical depth
+noise or a global optimum. There are seven fallback cases: five of 48 training cases and one of 24
+in each evaluation split. Two cases contain multiple observed tracks; five have an acquired-axis span
+above the prior upper bound. These failures remain in Table S15 and the released per-case data.
+On the predeclared front–side/around-object subset, validation and held-out CRPS decrease to
+0.0213 and 0.0229 m, compared with 0.1761 and 0.1570 m for the conditioned prior. Median absolute
+errors are 0.0396 and 0.0295 m. The all-condition errors and every observation condition are reported
+in Tables S15–S16 and Figure 4. Validation front-view CRPS worsens relative to the prior. Nominal
+95% intervals cover only 9/12 and 8/12 cases in the informative subset; around-object counts fall to
+3/6 and 2/6. Direct measured-face estimates can produce narrow intervals while retaining discretization or conditional-axis error. The distribution therefore improves the declared synthetic extent score
+without attaining nominal uncertainty coverage. Nominal credible-region coverage is a separate calibration target [16]; we do not implement that paper’s calibration algorithm. These depth scores do
+not establish calibrated structure probabilities or uncertainty in the remaining geometry. In a separate
+neutral-prior structure diagnostic, one held-out closed object in the front-view condition receives shelf
+probability 0.9986. This failure is retained without retuning the depth-selected scale. The following
+policy matrix tests whether the revised geometry changes complete exploration; the calibration scores
+alone establish no G/S efficiency improvement.
+
+21
+
+Table S15: Independent conditional-depth evaluation. All-case CRPS averages the four conditions
+within each object, then objects. The remaining columns use the predeclared front–side and aroundobject subset, with two dependent conditions per object. Errors and widths are in metres; n in the split
+label counts objects. Fallback counts for all conditions are 5/48, 1/24 and 1/24. Fixed-size intervals
+are point distributions, not confidence estimates.
+Split (n)
+
+Distribution
+
+Train (12)
+
+Loss update
+Conditioned prior
+Fixed 0.65 m
+
+0.1142
+0.2298
+0.3408
+
+0.0610
+0.1808
+0.3072
+
+0.0768
+0.2549
+0.3072
+
+13/24 0.1813
+11/24 0.4953
+0/24 0.0000
+
+Validation (6) Loss update
+Conditioned prior
+Fixed 0.65 m
+
+0.0851
+0.1948
+0.2620
+
+0.0213
+0.1761
+0.2369
+
+0.0396
+0.2669
+0.2369
+
+9/12 0.1220
+9/12 0.5637
+0/12 0.0000
+
+Held out (6)
+
+0.0448
+0.1661
+0.2330
+
+0.0229
+0.1570
+0.2449
+
+0.0295
+0.2278
+0.2449
+
+8/12 0.1081
+3/12 0.4944
+0/12 0.0000
+
+Loss update
+Conditioned prior
+Fixed 0.65 m
+
+All CRPS Subset CRPS Median MAE 95% count Width
+
+Table S16: All four observation conditions on untouched evaluation objects. Each row contains six
+objects. CRPS and posterior median absolute error (MAE) are in metres. The 95% count and width
+describe the loss-updated depth distribution, with declared failed cases retained through the publicprior fallback.
+Split
+
+Condition
+
+Fixed
+
+Prior Update
+
+MAE 95% count
+
+Width
+
+Validation (6) Front
+Front + side
+Around object
+Occluded
+
+0.3395
+0.2355
+0.2383
+0.2346
+
+0.2027
+0.2241
+0.1282
+0.2243
+
+0.2684
+0.0291
+0.0134
+0.0296
+
+0.3395
+0.0592
+0.0201
+0.0580
+
+3/6
+6/6
+3/6
+6/6
+
+0.5067
+0.2136
+0.0305
+0.2115
+
+Held out (6)
+
+0.2017
+0.2427
+0.2471
+0.2405
+
+0.1844
+0.2088
+0.1052
+0.1662
+
+0.0760
+0.0334
+0.0124
+0.0574
+
+0.0970
+0.0469
+0.0121
+0.0650
+
+6/6
+6/6
+2/6
+6/6
+
+0.6050
+0.2088
+0.0073
+0.3997
+
+Front
+Front + side
+Around object
+Occluded
+
+22
+
+(a) Validation: six objects
+0.6
+0.5
+
+0.6
+
+CRPS (m; lower is better)
+
+CRPS (m; lower is better)
+
+(b) Held out: six objects
+Fixed 0.65 m
+Conditioned prior
+Observation posterior
+
+0.4
+0.3
+0.2
+0.1
+0.0
+
+0.5
+0.4
+0.3
+0.2
+0.1
+
+Front
+
+Front + side
+
+Around object
+
+0.0
+
+Occluded
+
+Front
+
+(c) Posterior 95% interval: empirical coverage
+6/6
+
+100
+
+6/6
+
+6/6
+
+6/6
+
+Front + side
+
+Around object
+
+Occluded
+
+(d) Posterior 95% interval: mean width
+Validation
+Heldout
+
+0.6
+
+6/6
+
+60
+
+3/6
+
+Interval width (m)
+
+Truth covered (%)
+
+0.5
+80
+
+3/6
+
+40
+
+2/6
+
+20
+
+0
+
+0.4
+0.3
+0.2
+0.1
+
+Front
+
+Front + side
+
+Around object
+
+0.0
+
+Occluded
+
+Front
+
+Front + side
+
+Around object
+
+Occluded
+
+Figure 4: Independent conditional-depth evaluation. CRPS bars show means and sample standard
+deviations across six objects per split, for every observation condition; they are not confidence intervals. One common scale was selected using 12 separate training objects. Declared failures use
+the public-prior fallback and remain in the denominator. The lower panels give empirical coverage
+counts and mean widths of nominal 95% central intervals; the dashed line is the requested level, not
+an achieved guarantee. Views and conditions of each object are dependent. The results are conditional
+on orientation, width and part assumptions, exact poses and ideal visible instance masks.
+
+23
+
+13
+
+Matched policies with conditional depth
+
+Controls and fixed-prefix prediction. The five declared arms are G fixed, S fixed, G distribution, S distribution and S mean collapse. Every arm uses the same conditional non-depth geometry,
+observed-instance support, joint loss update and frozen scale σ = 0.01 m. Fixed mode retains the
+location-allocation hypotheses and their update; its unresolved depth is max(0.65 m, s), while credible
+opposing faces retain their measured extent. It is therefore a matched extent control, not the preceding
+O policy or the original fixed template implementation. Mean collapse first computes the full S joint
+distribution, retains each structure’s probability, and replaces that structure’s geometry distribution by
+its conditional mean depth and lower coordinate. It does not recompute the likelihood or class weights.
+The same six acquired development prefixes and all 66 original measured candidate branches provide 330 forecasts, without new branch executions. The input geometry and actual branch outcomes
+are shared across arms. Table S17 uses equal-state averages after averaging candidates within a state.
+Relative to S fixed, S distribution increases absolute source-supported forecast weight from 0.3600
+to 0.4368 m2 , realized forecast weight from 0.1623 to 0.2216 m2 , and rank correlation from 0.787 to
+0.835. These improvements are not uniform across states, and mean collapse has still greater realized
+weight (0.2448 m2 ) and rank (0.849). Within each of the fixed and distribution modes, G and S select
+the same candidate at all six states. Only the left state after 54 actions changes its choice between
+fixed and distribution modes: it trades slightly less actual object/global net surface for fewer actions
+and a shorter path. The six prefixes have already been inspected during method development; neither
+330 forecasts nor 66 reused branches represent independent scenes.
+Complete unknown exploration. All five arms run in both existing furniture permutations with
+the unchanged unknown-coverage and measured-quality scores, candidates, sensor fusion, 256-action
+budget and return rules. They share the same acquired prefix, whose correct-free coverage is 42.606%.
+The ten complete runs all reach 100% correct-free coverage, return and incur zero simulated collisions
+(Table S18). Their native measured TSDFs are evaluated independently; predicted templates are never
+fused as observations.
+On the left layout, distribution mode reaches full coverage at action 88 rather than 97 and travels
+42.0 rather than 43.2 m. Final 5 cm F1 increases from 92.381% to 92.758%. Cabinet recall increases
+by 2.834 percentage points, while shelf recall decreases by 1.294 points. This effect occurs equally
+for G and S. Mean collapse reproduces the complete distribution trajectory and TSDF exactly. On
+the right, all five trajectories and TSDFs are identical. Thus the matched comparison demonstrates a
+benefit from replacing the fixed extent in one inspected layout; it does not isolate a benefit of keeping
+geometric spread or using the semantic class prior. Historical O outputs are references, not additional
+new trials or matched controls for the changed joint update.
+The category pathway is active despite the tied policies. Paired G/S scores differ by more than
+−12
+10
+at 4/27 left and 5/26 right planning states in fixed mode, and at 7/30 left and 6/26 right states in
+distribution mode. None of these score differences changes the selected candidate.
+Distribution mode also costs more computation: its elapsed times are 417.8–500.4 s, compared
+with 274.2–292.8 s for fixed mode and 259.5–297.3 s for mean collapse. These are wall times under
+three concurrent processes, each restricted to one numerical-library thread, on a host with eight available CPU cores. The budget counts logical simulated actions; these times do not measure real-robot
+motion or real-time control throughput. The study has one floorplan family, two related furniture
+permutations and no stochastic repeats. The controlled coverage result, conditional surface tradeoff,
+semantic tie and extra distribution cost are all retained.
+
+24
+
+Table S17: Five-arm prediction replay on the same six acquired development states and 66 original
+branches (330 forecasts, no new branch executions). Forecast columns average candidates within each
+state, then states equally. Supported and realized weights are weighted template expectations in m2 ,
+not unique physical surface area. Rank is within-state correlation with actual object net surface gain.
+The final columns describe actual gains and costs of the chosen branches.
+Policy
+
+Supported Realized
+
+G fixed
+S fixed
+G distribution
+S distribution
+S mean collapse
+
+0.3700
+0.3600
+0.4412
+0.4368
+0.4593
+
+ρ Object net Global net Actions
+
+0.1751
+0.1623
+0.2178
+0.2216
+0.2448
+
+0.793
+0.787
+0.842
+0.835
+0.849
+
+1.0568
+1.0568
+1.0496
+1.0496
+1.0496
+
+15.968
+15.968
+15.792
+15.792
+15.792
+
+40.17
+40.17
+39.50
+39.50
+39.50
+
+Table S18: Complete matched conditional-depth policies. All ten runs begin at 42.606% correct-free
+coverage, finish 256 logical actions with 100% coverage, return and incur zero simulated collisions.
+A100 is the first full-coverage action; surface scores use native measured TSDFs at 5 cm. Elapsed
+seconds are host computation under three concurrent runs with numerical-library thread limits set
+to one, not robot execution time. These are two furniture permutations of one inspected floorplan,
+without stochastic repeats.
+Layout Policy
+
+A100 Path (m) F1 (%) Shelf (%) Cabinet (%) Time (s)
+
+Left
+
+G fixed
+S fixed
+G distribution
+S distribution
+S mean collapse
+
+97
+97
+88
+88
+88
+
+43.2
+43.2
+42.0
+42.0
+42.0
+
+92.381
+92.381
+92.758
+92.758
+92.758
+
+83.464
+83.464
+82.170
+82.170
+82.170
+
+85.874
+85.874
+88.709
+88.709
+88.709
+
+292.6
+292.8
+417.8
+424.7
+297.3
+
+Right
+
+G fixed
+S fixed
+G distribution
+S distribution
+S mean collapse
+
+100
+100
+100
+100
+100
+
+43.2
+43.2
+43.2
+43.2
+43.2
+
+92.596
+92.596
+92.596
+92.596
+92.596
+
+81.088
+81.088
+81.088
+81.088
+81.088
+
+79.214
+79.214
+79.214
+79.214
+79.214
+
+274.2
+275.2
+498.4
+500.4
+259.5
+
+25
+
+Archived supplied-graph formulation and results
+The following original formulation and result sections concern the reduced V35 supplied-graph mechanism. Its public facility coordinates, 18-action common prefix, 1 m motion, diagnostic recursion and
+floor-exposure stopping requirement are not the main unknown-exploration policy. All original outcome tables and negative results are retained. Historical figure and table numbers in prose refer to that
+archived presentation; cross-referenced items are renumbered here.
+
+14
+
+Problem Formulation
+
+Each acquisition task takes place in a static environment; changes occur between tasks. The local
+inspection target is one equipment-scale facility with an unknown configuration h ∈ {0, 1}. Both
+policies receive two public templates, a facility coordinate frame, an initial pose s0 , and a safe pose
+graph. They receive RGB-D, planar scan, and pose observations only when those observations are
+acquired. The category–configuration association is manually specified public knowledge. Evaluation references, true configuration identifiers, and actual measurements from unexecuted actions are
+unavailable to the planner.
+A forward motion of 1 m or a 90◦ turn consumes one action and acquires a sensor frame. An
+identical 18-action observation prefix precedes autonomous selection within total budget B. The original confirmation uses B = 42; the extension also evaluates 30 and 54. A qualified task must remain
+collision-free, finish within budget, attain at least 80% planar coverage, and return to the initial position and orientation. The experiment consequently tests allocation after common observation, rather
+than unknown-environment exploration from the first action.
+The principal measured score combines planar coverage and surface quality:
+Cmap =
+
+|{c ∈ R : mT (c) 6= −1}|
+,
+|R|
+
+F1,τ =
+
+2Pτ Rτ
+,
+Pτ + Rτ
+
+J5 = Cmap F1,0.05 .
+
+Here R is the start-reachable evaluation grid, mT is the terminal measured occupancy map, and −1
+denotes an unobserved cell. Pτ and Rτ denote surface precision and recall within distance τ, measured
+in meters. Section 16.1 specifies the evaluation region, sampling, and qualification rules.
+The desired policy maximizes expected measured J5 using acquired information while respecting
+budget and return constraints. Online template exposure is only its planning surrogate. A larger
+predicted opportunity need not produce a more accurate fused mesh, and additional observations do
+not guarantee improvement at every surface threshold.
+
+15
+15.1
+
+Observation Planning with Correctable Category Priors
+System overview and planning state
+
+The NSO research prototype selects observation actions using a configuration belief and the budget
+required to return. Figure 1 separates four functions: category support supplies an initial preference,
+geometric correction revises it, diagnostic planning evaluates feasible continuations, and a returnfeasibility check admits the next action (Table 1). Each executed action acquires a new measurement
+for replanning and measured reconstruction. The category-conditioned policy S and geometric control
+G share the graph, public templates, diagnostic planning, and fusion backend; only S receives the
+category prior. The shared controls limit attribution of individual mechanisms.
+After action t, the planning state is
+xt = (st , bt , M0,t , M1,t , pt , Vt ),
+
+26
+
+bt = B − t.
+
+Table S19: Functional components and their roles in the observation loop
+Function
+
+Input
+
+Output and role
+
+Category support Acquired RGB, pose,
+measured-map summary
+Diagnostic
+Graph, exposure sets, beliefs,
+planning
+remaining budget
+ReturnProposed edge, budget, return
+feasibility
+distance
+check
+Geometric
+Acquired depth/scan and public
+correction
+predictions
+
+Register category support and configuration prior
+Compare feasible continuations and select a subgoal
+Permit or reject the executable action
+
+Bound geometric evidence and revise belief
+
+Controlled observation loop
+
+Acquired data
+RGB-D / scan
+Executed pose
+Depth
+
+Category
+support
+Finite prior L s
+Geometric
+correction
+
+Diagnostic planning
+p = σ(L s + L g)
+Public templates
+Safe graph + budget
+
+Bounded L g
+Next acquired frame
+
+Action
+
+Measured reconstruction
+
+Execution
+
+Acquired depth + poses → TSDF
+Sealed mesh → offline evaluation
+
+Graph legality
+Return feasibility
+One action
+
+Partial physical integration
+Camera / pose → NSO → ROS navigation → robot
+
+Figure 5: Information flow and execution boundary. Category support and acquired geometric evidence update a configuration belief; the planner selects a feasible observation action. Acquired depth
+separately updates the measured reconstruction. Public predictions score candidate actions and never
+become fused measurements. The robot interface is an integration path whose current evidence is
+reported separately in Section 18
+
+27
+
+Here st includes position and heading, pt weights configuration 0, and Vt contains measured poses.
+Each Mh,t records the union of floor samples and surface patches predicted visible from previously observed poses under public template h. These exposure sets support prospective planning; the measured
+map separately integrates acquired depth. Neither hidden configuration identifiers nor evaluation surfaces enter the state. The common 18-action prefix updates observations and returns to s0 ; subsequent
+actions depend on the resulting belief.
+Both hypotheses remain available throughout execution. Category information changes their
+weights rather than selecting a template as reconstructed truth. The online belief module additionally
+retains geometric log-support and category-registration history, while each planning call receives their
+current combined weight. This separates two questions: which configuration the acquired evidence
+supports, and which affordable observation sequence is valuable under that uncertainty.
+
+15.2
+
+Category support and geometric correction
+
+A category cue must influence early decisions without preventing later contradictory measurements
+from changing the route. We therefore register finite category support once and combine it with
+bounded evidence from newly acquired viewpoints. This design allows a cue to establish a preference
+while preserving both configuration hypotheses.
+The category-support function registers a category when its marker occupies at least 16 exact-color
+pixels at each of two distinct XY positions, without a competing marker in those frames. Registration
+supplies Lts = ± log 9; repeated detections do not multiply this prior, and conflicting category support
+clears it. G uses Lts = 0. Synthetic markers provide a controlled category channel, independently of
+natural-image recognition performance.
+Geometric correction compares acquired depth and scan measurements with both public predictions. Let ekh,t be the mean residual loss for eligible modality k under template h, and Kt its validmodality set. At a newly visited pose,
+!
+
+1
+k
+k
+δt = clip[−6,6]
+∑ e1,t − e0,t ,
+|Kt | k∈K
+t
+g
++ δt ),
+Ltg = clip[−24,24] (Lt−1
+
+pt = σ (Ltg + Lts ).
+
+Here σ (z) = (1+e−z )−1 . The increment is zero when no modality qualifies or the pose has already
+supplied evidence. Residuals use samples where public predictions differ by more than 10−5 m. Depth
+requires eight valid pixels and normalized disparity residual (57.6/z − 57.6/b
+zh )/0.25; scan requires
+three valid beams and residual (r −b
+rh )/0.02. Each sample contributes half its squared residual, capped
+at 12.5. Missing measured returns are ignored; a missing predicted depth return receives the capped
+loss. Eligible modality means receive equal weight.
+These bounded pseudo-likelihoods prevent individual extreme residuals from dominating. They
+are not calibrated probabilities, and excluding exact repeats does not establish independence between
+neighboring views. New depth from a repeated pose still contributes to fusion. An incorrect prior
+remains correctable: for Ls > 0, configuration-1 support reaches η > 1/2 whenever
+Ltg ≤ −Ls − logit(η).
+This threshold is attainable only if sufficient contrary observations occur and the cumulative cap
+permits it. The finite prior therefore expresses a revisable preference rather than a permanent semantic
+constraint.
+
+15.3
+
+Predictive value and diagnostic lookahead
+
+A diagnostic view can be valuable because it changes a later route choice, even when its immediate
+predicted surface gain is small. The planner therefore evaluates future exposure under both configu28
+
+rations and includes one possible diagnostic event within each planning call. Its predicted exposure
+score guides sensing, while the endpoint score remains a measurement of the reconstructed surface.
+For template h, let Fh contain its floor samples, Ph its exterior vertical patches, au the patch area,
+and Ah the total exterior vertical area. Writing Mhf and Mhs for the corresponding exposed subsets gives
+|M f |
+Ceh = h ,
+|Fh |
+
+
+
+∑u∈Mhs au
+e
+Sh = min 1,
+,
+Ah
+
+Jeh = Ceh Seh .
+
+Thus Seh is an exposed-area fraction, not reconstructed surface F1. The surrogate rewards opportunities to observe missing surfaces but does not model TSDF error or improvements from repeated
+measurements. Its relation to measured J5 is tested empirically.
+Exposure is accumulated by set union, so viewing an already exposed patch supplies no additional
+proxy area. Changing direction can still reveal previously occluded patches. Floor samples are those
+declared by the public planning model, distinct from the finer reachable-cell grid used to measure
+Cmap . Consequently, neither component of the surrogate is substituted for an endpoint measurement.
+Keeping both representations makes the planning assumption explicit: access to additional surface
+area is a useful, imperfect predictor of reconstructed quality.
+Let M = (M0 , M1 ). Stopping requires the complete initial pose and adequate predicted floor exposure under both configurations:
+(
+pJe0 (M0 ) + (1 − p)Je1 (M1 ), s = s0 , minh Ceh (Mh ) ≥ 0.8,
+Z(s, M, p) =
+−∞,
+otherwise.
+Diagnostic planning approximates belief-space planning [12, 13] with one future diagnostic event
+per planning call. Diagnostic candidates are determined from public sensor predictions: treating each
+template prediction as a hypothetical observation must yield geometric evidence at least + log 99 for
+configuration 0 and at most − log 99 for configuration 1. Previously measured poses are excluded.
+This identifies potentially discriminative viewpoints without obtaining their actual observations.
+For an anticipated diagnosis of assumed accuracy rd = 0.99, the branch weights and updated
+planning beliefs are
+λ0 = prd + (1 − p)(1 − rd ),
+λ1 = 1 − λ0 ,
+prd
+p(1 − rd )
+p(0) =
+,
+p(1) =
+.
+λ0
+λ1
+Let q ∈ {0, 1} indicate whether this event remains available. Action a reaches s0 , consumes one
+action, and updates Mh0 = Mh ∪ Eh (s0 ), where Eh is public predicted exposure. The continuation and
+value recursions are
+(
+∑1y=0 λyV0 (s0 , b − 1, M 0 , p(y) ), q = 1, s0 diagnostic,
+Qq (a) =
+Vq (s0 , b − 1, M 0 , p),
+otherwise,
+
+
+Vq (s, b, M, p) = max Z(s, M, p), max Qq (a) .
+a∈A (s)
+
+At b = 0, only stopping is available. States whose return distance exceeds b are infeasible, as are
+diagnostic actions with either infeasible branch. Forecast beliefs remain inside the current calculation.
+The controller executes only the first selected action, updates belief from acquired measurements, and
+replans. The category strength 0.9 and forecast accuracy 0.99 are fixed design settings shared across
+the comparisons, rather than measured classifier or sensor accuracies.
+The recursion evaluates complete remaining continuations, rather than immediately visible area
+alone. Anticipated diagnosis is useful only through the different actions it may enable afterward.
+Requiring a feasible continuation in both branches prevents a low-weight configuration from being
+29
+
+silently discarded to satisfy the return and coverage gates. The approximation limits the number of
+belief changes within one forecast; it does not limit the number of measured corrections over the
+executed trajectory. A later call can anticipate another diagnostic event after assimilating the latest
+frame.
+
+15.4
+
+Budgeted execution and reconstruction
+
+An informative view is useful only if the robot can execute it and still return within budget. The
+execution layer reserves the shortest graph return cost before each action; the reconstruction layer
+then integrates only the depth acquired at the executed pose.
+The return-feasibility check accepts a legal edge only if
+1 + dreturn (s0 ) ≤ bt ,
+where return distance includes restoration of the starting heading. On the fixed graph with unit
+action costs, this preserves an affordable return path: after each accepted action, dreturn (st+1 ) ≤ bt −1 =
+bt+1 . This certificate concerns graph feasibility; task qualification additionally requires measured
+coverage, collision-free execution, and actual return.
+Algorithm 1. Category-conditioned receding-horizon observation.
+
+Input: common graph, templates, budget B, prefix, policy G or S
+Initialize belief support, exposures, and visited poses
+Repeat:
+Read the initial frame or latest executed-action frame
+Fuse acquired depth exactly once into the measured TSDF
+Register category support and update geometric evidence
+Add current template exposures and record the measured pose
+If collision or budget exhaustion: record termination; exit
+If the shared prefix is unfinished: select its next action
+Otherwise:
+Exclude measured poses from diagnostic candidates
+Solve V1 from the current state and remaining budget
+If infeasible or a resource cap is exceeded: fail; exit
+If stopping is optimal within tolerance: stop; exit
+Select the first maximizing action in fixed graph-edge order
+Check graph legality and the return-budget inequality
+If rejected: record the termination reason; exit
+Execute one action, charge its cost, and obtain the next frame
+Output: measured map, trajectory, observations, and stop reason
+
+Equal-valued choices use a 10−12 tolerance and fixed edge order. The shared Open3D CPU TSDF
+[6, 7] uses 4 cm voxels and 12 cm truncation; public templates never contribute synthetic depth.
+Outputs precede independent endpoint evaluation. Incorrect-prior controls exchange category interpretation; the no-correction variant additionally disables measured correction and forecast diagnosis.
+For N poses and exposure bitset lengths m0 , m1 , the cached state count is conservatively bounded
+by K ≤ 3N(B + 1)2m0 +m1 , covering the initial and two post-diagnosis weights. With maximum outdegree d, bitset-update cost Tm , and terminal-evaluation cost Tz , planning costs O(K(dTm + Tz )), excluding return-distance preprocessing. Each call permits 1.5 million cached states and approximately
+20 s; elapsed time is checked every 1024 new states and at selection completion. This finite implementation supports the controlled task, with exponential exposure-state dependence.
+
+30
+
+15.5
+
+Decision interpretation and conditions for benefit
+
+A recorded example connects the recursion to robot behavior. After the common prefix in P00,
+G assigns both configurations weight 0.5; left/right continuation values of 0.650944 tie. With
+configuration-1 category support 0.9, S obtains 0.668008/0.711865 and turns right at action 19. A
+misleading prior can subsequently reverse: geometric evidence of −6 at step 28 gives configuration-1
+weight 1 − σ (−6 + log 9) = 0.978178, followed by a changed action at step 29. These are planning
+values and belief weights; measured reconstruction outcomes are reported separately.
+The underlying tradeoff can be expressed using established belief-based decision principles [12,
+13]. Assume two initially equally likely configurations, two return-feasible routes, matched utility
+U+ , mismatched utility U− , and ∆ = U+ −U− > 0. A category cue has symmetric reliability rc ≥ 1/2.
+Optional geometric diagnosis has symmetric reliability rd ≥ 1/2, is conditionally independent given
+configuration, and costs utility κ. Both routes remain feasible afterward. For current belief p, direct
+choice succeeds with probability m = max(p, 1 − p); optimal choice after diagnosis succeeds with
+probability max(m, rd ). Its net value is
+∆ max(0, rd − m) − κ.
+G benefits from diagnosis when κ < (rd − 1/2)∆, whereas a category-conditioned decision requires κ < (rd − rc )+ ∆, with κ ≥ 0. An informative cue can therefore avoid a diagnostic detour while
+preserving a useful observation direction. Its benefit disappears when geometry already resolves the
+choice or route utilities coincide. When rd ≥ rc and diagnosis is free, both policies can attain the same
+expected directional utility; a free but less reliable diagnosis need not remove the category advantage.
+These analytical reliabilities are assumptions distinct from implementation settings. The argument
+identifies conditions for improved allocation; it does not guarantee better measured reconstruction
+under the exposure surrogate.
+The practical consequence is a conditional experimental prediction: a category cue should matter
+when it changes a consequential route ranking before equivalent geometric evidence is affordable.
+If geometry and category already favor the same route, identical actions and quality are expected.
+Tests therefore examine action changes, acquired surfaces, and measured quality together, rather than
+interpreting stronger belief alone as a mapping improvement.
+
+16
+
+Experiments and Results
+
+The controlled experiments test category-conditioned observation at matched coverage, geometric
+correction, and sensitivity to budget and changed backgrounds. Sections 17 and 18 evaluate unknownexploration and physical deployment separately.
+
+16.1
+
+Experimental setup and matched comparisons
+
+The simulator supplies 96×72 depth images over a 4 m range and a 360◦ planar scan with 180 beams
+over 8 m. Poses are exact. Depth noise has a standard deviation of 0.25 pixels in reference disparity; no additional random scan noise is applied. The experiments isolate planning under controlled
+observations rather than reproduce physical sensor errors.
+The evaluator derives the start-reachable safe-cell set R using a 0.2 m grid and 0.2 m robot radius.
+It contains 588 cells in P00 and 668 in P01. A nonunknown cell counts as observed, including one
+marked occupied, so coverage is not occupancy-classification accuracy. Ground truth is used after
+prediction sealing, not to supply runtime measurements.
+Surface precision and recall follow distance-threshold comparison [14]. Precision queries the
+reference from sampled predicted surfaces; recall queries the prediction from fixed exterior vertical
+reference surfaces. The prediction is cropped to the common bounding box of both templates with
+
+31
+
+a 0.20 m margin, and the known ground is removed. Thus, errors outside this region do not enter
+precision. No registration or hole filling is applied. Thresholds are fixed at 2, 5, and 10 cm, with 5
+cm primary; empty predictions receive zero quality. Coverage, precision, recall, and task qualification
+accompany the product to avoid hiding its components.
+Confirmation freezes the controller and uses a held-out noise seed on two previously seen parent
+layouts, each with two configurations: eight runs and four G/S pairs. The layout-level units are the
+two parent layouts. Two configurations per layout and repeated noise realizations are paired conditions, not independent evidence of category-level generalization. The policies differ as follows: G has
+no category support; S uses the designated correct cue; X reverses the category interpretation; and
+Xnf uses the same reversed interpretation while disabling measured correction and future diagnostic
+anticipation. The historical development X/Xnf contrast therefore evaluates the bundled correction
+policy; the separate factorial below isolates its two switches. Replays and alternative thresholds reuse
+these trajectories; they do not increase the number of independent layouts or trials. The principal G
+control retains the diagnostic views and revisiting available to S; Xnf deliberately disables measured
+correction and anticipated diagnosis.
+For each matched condition we report the absolute score difference, ∆J5 = J5,S − J5,G . A relative
+mean change is 100(J 5,S /J 5,G − 1), rather than an average of per-condition percentages. Qualification
+is reported over all declared attempts; endpoint means include only the explicitly qualified groups.
+The recorded software is Python 3.12.3, NumPy 1.26.4, SciPy 1.11.4, and Open3D 0.19.0, with
+one OpenMP, OpenBLAS, and MKL thread. No GPU is required. Figures use actual recorded actions
+and measured meshes except the explicitly schematic architecture diagram.
+
+16.2
+
+Surface reconstruction at matched coverage
+
+Across the four confirmation conditions in Table 2, mean J5 increases from 0.702576 to 0.745881, a
+relative improvement of 6.1638%. Every run uses 42 actions, avoids collision, and returns exactly.
+Mean coverage is identical at 0.952544; mean surface F1 increases from 0.737490 to 0.782951. This
+decomposition attributes the observed joint-score gain to surface reconstruction at matched planar
+coverage.
+Table S20: Complete confirmation pairs; relative change compares policy means
+Layout/configuration
+
+G: J5
+
+S: J5
+
+S−G
+
+P00/h0
+P00/h1
+P01/h0
+P01/h1
+Mean
+
+0.772200
+0.672703
+0.727281
+0.638118
+0.702576
+
+0.772200
+0.760456
+0.727281
+0.723586
+0.745881
+
+0
++0.087753
+0
++0.085468
++0.043305
+
+In both h1 cases, category conditioning changes the first autonomous turn. The resulting surface
+recall rises from 0.5958 to 0.7249 in P00 and from 0.5555 to 0.6845 in P01. Both h0 pairs follow
+identical trajectories. The relative mean gains at 2 and 10 cm are 5.5040% and 6.2110%, respectively.
+These descriptive sensitivities do not establish statistical significance across unseen layouts. The primary outcome pattern is two wins, two ties, and no losses across four configuration pairs; the two ties
+are exact trajectory and metric matches. We therefore report every pair and the absolute mean difference of 0.043305 alongside the relative mean change. No confidence interval treating configurations,
+seeds, frames, or checkpoints as independent layouts is used.
+Retained endpoint meshes show the recovered side structures using matched cameras and scales.
+P00/h1 needs 28 m and 14 turns for G versus 26 m and 16 turns for S; P01/h1 uses 28 m and 14 turns
+for both. Every run acquires the same number of frames. The effect therefore depends on allocating
+observations differently, rather than increasing sensing or travel.
+32
+
+16.3
+
+Geometric correction and reconstruction progress
+
+The P00 development timeline connects the decision example in Section 4.5 to acquired evidence.
+Category support changes the first autonomous observation direction at action 19, while subsequent
+geometric measurements can reverse the influence of an incorrect cue.
+With the incorrect cue, X initially assigns configuration 1 a weight of 0.1. At step 28, 1092 informative depth pixels provide sufficient contrary evidence to raise this weight to 0.978178. X then
+moves forward at action 29, while Xnf turns right. Across the two development configurations, X
+improves mean J5 over Xnf from 0.655065 to 0.672254, or 2.6241%. Because Xnf also removes anticipated diagnosis, this is not an isolated posterior-update ablation. At the stricter 2 cm threshold, the
+h1 difference is −0.00216, indicating that correction does not improve every surface-scale measure.
+Measured Correction and Forecast Diagnosis. A separately frozen 2 × 2 factorial separates measured posterior correction from forecast diagnostic anticipation (Table S21). All eight routes use the
+same regenerated public cache for P00, its two configurations, the fixed incorrect category interpretation, a 42-action budget, an 18-action common prefix, and disparity-noise seed 1901. The original
+renderer, planner, return rules, fusion backend and evaluator are retained. Four endpoint equivalence
+runs compare the wrapper with the original X and Xnf controllers on identical acquired packets; every action, posterior and planning receipt agrees. These implementation checks are excluded from
+the eight factorial routes. The eight routes represent one parent layout and two related configurations, with no additional independent layout replication; their endpoints are not pooled with the older
+development-cache results.
+Table S21: Complete correction factorial on one P00 parent and two configurations: eight actual
+simulated routes with a common public cache, wrong prior, budget 42, prefix 18 and noise seed 1901.
+All routes return without collision and share Cmap = 0.957483. Higher J5 and F1 are better.
+Configuration
+
+Measured correction
+
+Forecast diagnosis
+
+h0
+h0
+h0
+h0
+h1
+h1
+h1
+h1
+
+Off
+Off
+On
+On
+Off
+Off
+On
+On
+
+Off
+On
+Off
+On
+Off
+On
+Off
+On
+
+J5
+
+F1 at 5 cm
+
+0.651868
+0.651868
+0.669091
+0.669091
+0.657205
+0.657205
+0.674799
+0.674799
+
+0.680814
+0.680814
+0.698802
+0.698802
+0.686388
+0.686388
+0.704764
+0.704764
+
+Measured correction raises mean J5 from 0.654537 to 0.671945, a relative increase of 2.6597%,
+within this controlled P00 setting. Forecast diagnosis changes neither trajectory nor endpoint in any
+of the four matched on/off contrasts: each pair has an identical complete trajectory SHA-256 digest.
+Thus, the factorial supports a measured-correction effect under these conditions and supplies no observed independent benefit of diagnostic anticipation. It does not show that diagnostic lookahead is
+generally ineffective, or that the measured-correction gain transfers to other layouts. No confidence
+interval or significance test treats the eight routes as independent scenes.
+We further reintegrate the eight saved confirmation trajectories at 18, 24, 30, 36, and 42 paid actions: 40 measured checkpoints, with unchanged observations, poses, fusion settings, and evaluator.
+All 16 previously available prefix/endpoint checkpoints reproduce their original metrics exactly. Coverage matches within every pair at every checkpoint and reaches its endpoint value by action 30. Later
+differences mainly accompany increased surface recall and F1. P00/h1 is still slightly worse for S at
+action 24 (−0.000819), then positive at 30, 36, and 42; P01/h1 is already positive at 24. Both h0 pairs
+
+33
+
+remain tied. Intermediate states may not satisfy return or coverage requirements and are not successful
+terminal trials.
+
+16.4
+
+Sensitivity to budget, noise, and facility geometry
+
+The fixed extension declares 128 trials. Original P00/P01, two configurations, budgets 30/42/54, two
+noise seeds, and four policies define 96 trials. Two same-family variants at budget 42 add 32: one P00
+rib shifts 0.25 m, while three P01 ribs lower their upper boundary from 1.80 to 1.35 m. Transformations apply consistently to both public hypotheses, sensed geometry, and reference surfaces. The safe
+graph, prefix, controller, and prior settings remain unchanged. These variants test nearby geometry,
+not unseen natural equipment categories.
+All 128 tasks are attempted once: 96 qualify and 32 fail at budget 30 after the common prefix. The
+controller cannot find a return plan meeting its predicted 80% coverage gate under both templates.
+This is a planning-constraint boundary, not universal physical impossibility. Failure maps remain
+separate from successful endpoint means.
+Table S22: Complete extension groups. Each row declares 32 trials; qualified rows contain eight per
+policy
+Condition/budget
+
+Qualified
+
+G: J5
+
+S: J5
+
+S/G change
+
+S/G win / tie /
+loss
+
+Original/30
+Original/42
+Original/54
+Variants/42
+
+0/32
+32/32
+32/32
+32/32
+
+—
+0.702648
+0.926298
+0.704562
+
+—
+0.746567
+0.919819
+0.734357
+
+—
++6.2505%
+−0.6995%
++4.2289%
+
+—
+4/4/0
+0/4/4
+4/4/0
+
+The three qualified groups each contain eight G/S pairs, including two noise seeds per geometry/configuration condition. The bundled X/Xnf correction contrast improves its group mean by
+1.7328%, 2.5163%, and 1.7016% for original/42, original/54, and variants/42, respectively. These are
+correction-policy contrasts, not isolated module estimates.
+At budget 42, improvements occur in the h1 configurations of both the original and variant layouts, while the h0 routes remain unchanged. At budget 54, the mean difference reverses to −0.6995%,
+with lower scores in four conditions and unchanged scores in the other four. Coverage reaches 1.0 for
+both policies; G/S recall is 0.985764/0.983826 and precision 0.873764/0.863789. The negative difference mainly accompanies lower precision, exposing a gap between template exposure and measured
+reconstruction. This decomposition does not independently identify a fusion-error cause. X also exceeds G/S at this budget, so a correct prior does not guarantee the best measured endpoint under the
+finite-lookahead surrogate.
+The two variants individually improve S/G by 5.0337% and 3.3974%. At 2/5/10 cm, originallayout improvements at budget 42 are 5.4991%/6.2505%/6.3063%, whereas budget-54 differences
+are −1.2217%/−0.6995%/−0.2866%. The reversal is therefore not created by selecting the primary
+threshold. Noise repeats describe the same geometry and are not additional independent layouts.
+
+16.5
+
+Transfer to changed background layouts
+
+A background-layout protocol fixes two additional layouts before observing results: a side column
+removes one right-aisle navigation center, while a rear partition interrupts direct rear passage. Both
+retain the P00 facility family and public templates. The controller, category mapping, sensor noise
+rule, fusion, evaluation region, 18-action common prefix, and 42-action budget remain unchanged.
+All legal safe-grid centers are retained; each new layout has 23 centers and 92 oriented poses. The
+noise seed is the original confirmation seed, so this test adds two background-layout units, not new
+34
+
+noise replicates or unseen facility categories. Each layout uses both configurations and G/S, giving
+eight tasks and four pairs.
+All eight tasks complete 42 paid actions and 43 acquired frames, avoid collision, and return to the
+full initial pose. Table S23 reports every paired endpoint. Mean coverage is identical at 0.934732;
+mean precision increases from 0.864441 to 0.870224, recall from 0.672455 to 0.704742, and surface
+F1 from 0.754450 to 0.777445. Mean joint quality increases from 0.705188 to 0.726215, or 2.9818%.
+The gain is concentrated in the rear-partition h1 condition; the other three conditions retain the same
+trajectories and endpoint quality. Relative differences at 2 and 10 cm are 2.8176% and 3.1200%.
+These are descriptive paired results from two new layouts; configurations do not increase the number
+of independent layout units.
+Table S23: Changed-background results at 5 cm for all four paired conditions. Coverage is equal
+within each pair; all eight tasks qualify
+Layout / config.
+
+Coverage
+
+G F1
+
+S F1
+
+G joint
+
+S joint
+
+Side column / h0
+Side column / h1
+Rear partition / h0
+Rear partition / h1
+Mean
+
+0.954145
+0.955908
+0.914439
+0.914439
+0.934732
+
+0.806490
+0.702575
+0.806490
+0.702246
+0.754450
+
+0.806490
+0.702575
+0.806490
+0.794224
+0.777445
+
+0.769508
+0.671597
+0.737485
+0.642160
+0.705188
+
+0.769508
+0.671597
+0.737485
+0.726269
+0.726215
+
+The retained trajectories show the effect’s dependence on the available observation routes. In the
+side-column layout, both initial directions are return-feasible. Category information changes their
+predicted values but preserves their ordering, so both planners select the same route. In the rearpartition h1 condition, G assigns nearly equal values to the two directions and selects left through its
+fixed tie rule, whereas S selects right. Up to step 18 their acquired nonsemantic histories and geometric
+support are identical. The category-conditioned decision changes action 19 and improves endpoint
+surface recall from 0.595795 to 0.724945. In this condition, J5 rises from 0.642160 to 0.726269, a
+relative improvement of 13.10%, at unchanged coverage and action count. This is a complete-route
+effect: the subsequent measurements differ, so the endpoint gain is not attributed to a single frame.
+G/S mean travel is 27.0/26.5 m, with 15.0/15.5 turns. Single-thread planning wall time averages
+0.0474/0.0484 s per task on an Intel Xeon processor (Sapphire Rapids); complete task times, including
+sensing, fusion and evaluation, range from 5.0 to 5.8 s. Timing is descriptive for this four-logical-CPU
+host, not a real-time or cross-hardware benchmark. The controller and all evaluation settings remain
+fixed throughout this background-layout comparison.
+
+16.6
+
+Additional constructed layouts and incorrect category cues
+
+Two further background layouts were fixed before execution: staggered aisles (L04) and an offset rear
+gate (L05). Each retains the P00 equipment family and both public configuration hypotheses. The
+complete batch crosses two layouts, two configurations and G/S/X, where X uses the swapped category interpretation with geometric correction retained. All 12 declared routes complete the common
+18-action prefix and 42-action total budget, travel 28 m with 14 turns, avoid simulated collisions and
+return to the full initial pose. Source hashes and the nonsemantic observation prefixes agree across
+matched conditions. These are two constructed layout units with related configurations, not 12 independent environments.
+S improves J5 in two of the four G/S configuration pairs and ties in two. The ratio of the
+four-condition means increases by 3.60% (0.676498 to 0.700881); mean surface F1 increases from
+0.696390 to 0.742764. Mean planar coverage falls from 97.14% to 94.41%, including an 8.50
+percentage-point loss in L05/h0. The joint-score gain therefore describes a surface–coverage tradeoff,
+not faster exploration. S exceeds X in all four configurations; X matches G in h0 and is worse
+35
+
+Table S24: All twelve additional controlled routes. Coverage, F1 at 5 cm and joint quality are reported
+separately; higher is better. Budget and motion cost are identical across all rows. X is the incorrect
+category cue with correction enabled.
+Layout/config.
+
+Policy
+
+Coverage (%)
+
+F1 at 5 cm
+
+J5
+
+L04/h0
+L04/h0
+L04/h0
+
+G
+S
+X
+
+97.09
+94.67
+97.09
+
+0.648048
+0.726418
+0.648048
+
+0.629191
+0.687666
+0.629191
+
+L04/h1
+L04/h1
+L04/h1
+
+G
+S
+X
+
+97.09
+97.09
+94.67
+
+0.715053
+0.715053
+0.659373
+
+0.694247
+0.694247
+0.624198
+
+L05/h0
+L05/h0
+L05/h0
+
+G
+S
+X
+
+97.19
+88.70
+97.19
+
+0.658529
+0.765657
+0.658529
+
+0.640055
+0.679110
+0.640055
+
+L05/h1
+L05/h1
+L05/h1
+
+G
+S
+X
+
+97.19
+97.19
+88.70
+
+0.763930
+0.763930
+0.665028
+
+0.742499
+0.742499
+0.589856
+
+in h1. Divergent routes first differ at action 19 after identical nonsemantic measurements. These
+controlled outcomes remain within one equipment family and do not by themselves exclude a generic
+geometric-weight explanation.
+
+16.7
+
+Evaluation boundaries
+
+We retain three distinct experimental units: parent layouts, paired configuration conditions within a
+layout, and repeated measurements along an existing trajectory. The 40 reconstruction checkpoints
+belong to eight trajectories; the 128 attempts include repeated noise conditions and four policies.
+A separately retained 36-attempt multi-instance study compares controller versions. It includes nine
+shared/fixed-prior ties and adverse category comparisons, with 35 original evaluation-pipeline completions and one separately corrected numerical evaluation; it supplies no cross-instance-sharing benefit.
+Adding these counts does not produce a single sample size. Endpoint summaries are accompanied
+by qualification counts, and failed tasks remain in the attempted-task denominator. The present small
+number of independent layouts supports descriptive paired comparisons, not a population-level superiority claim.
+
+36
+
+17
+
+Joint Unknown-Space Exploration Diagnostic
+
+Unknown-space exploration remains the broader system objective. A separate 24-trajectory diagnostic
+starts from a simulated RGB-D/scan packet at 61.50% reachable-cell coverage, using exact poses and a
+0.2 m grid/radius. It compares original V10.3.1 G/S, exploration_joint_v1 C/G/S and a local observedfrontier implementation at 48/96-action limits in two related arrangements of one Q0 scene. The
+joint variant restricts coverage gain to unknown support, diversifies candidates and replans invalidated
+macro-actions. These declared policy changes distinguish it from the supplied-graph mechanism. All
+runs return without simulated collision; east/96 C uses 94 actions and the others exhaust their limits.
+Supplementary Tables S1–S2 retain every outcome.
+Three of four G/S conditions tie within each version. In west/96, original S recovers less new
+reference-visible surface than G (111.44/114.11 m2 ), while joint S recovers more (118.52/109.51 m2 ).
+Joint G/S reach 90/95/99% coverage at identical actions 18/24/29, with surface histories diverging
+after 99.55% coverage. At budget 48, frontier reaches 95% coverage earlier and gains more observed
+area, while joint C/G/S recover more surface. The frontier adapter permanently returns after rejection,
+unlike NSO replanning; common execution protection does not imply equivalent policy contracts.
+A post-hoc doubled geometric-prior control exactly reproduces the improved S trajectory in a
+related two-room case. A separate paid-41 west/96 intervention isolates a ranking unavailable to uniform nonnegative prior reweighting on that saved set, yet gains surface and loses terminal F1 against
+G. A further synthetic parent fixed before execution yields 11.72 m2 more new surface and 0.04856
+higher F1 for S than G/X over complete 96-action routes, but all saved S decisions admit a common
+geometric-prior weight (supplementary Table S3). These related diagnostics establish conditional allocation effects, with general early-coverage efficiency and category-specific attribution unresolved.
+Four-room development pilot. A new 16 × 12 m constructed four-room layout contains 16 objects
+and 121.48 m2 of start-reachable free space. The frozen joint-exploration implementation starts from
+one rendered RGB-D/scan packet, with no movement prefix and 8.53% initial coverage. The original 96-action budget and return contract are retained. Inputs include exact simulated odometry and
+ideal visible semantic labels; an explicit class-2/class-3 dictionary adapter reconciles the older scene
+generator with the v10 scorer. Hidden geometry is reserved for simulation and evaluation.
+Both G and S execute 96 actions, travel 17.2 m, make ten turns, avoid simulated collisions and
+return to the start. Their coverage curves coincide and reach 39.84%; neither reaches 90% coverage.
+Actions first diverge at step 79, so equal coverage does not imply identical trajectories. This is one
+development layout with two paired runs, not a completed full-coverage benchmark or an observed
+semantic efficiency gain. The mapper’s surface-patch counts do not measure reconstruction accuracy;
+the following extension evaluates TSDF quality against a separate exterior reference.
+Budget sufficiency and fixed-cost comparison. The development pilot is extended without changing its candidates, scores or execution rules. G attains 85.18%, 93.38% and 100% coverage at budgets
+256, 512 and 1024, respectively (Figure 7). It first covers all free cells in the start-reachable reference
+at action 727 after 135.0 m; the complete 1024-action episode travels 189.6 m and returns without collision or false occupied labels on that reference. These are one-layout budget diagnostics. A matched
+S/1024 attempt receives SIGTERM after 398 actions and 93.38% last-observed coverage; its cause is
+undetermined, and no terminal outcome or policy failure is assigned.
+A separate frozen protocol compares six arms at a common 512-action cap on three generated
+object layouts: the inspected development layout D and two new layouts E1/E2, all sharing one fourroom wall topology. Each paired set begins with an identical single sensor packet and exact pose. C
+scores unknown coverage; G adds measured quality and a generic structural prior; S uses categoryconditioned priors; X reverses that interpretation. G2 doubles only the generic prior. S with frozen
+gain disables only the radar/camera posterior update while retaining fusion and directional histories.
+
+37
+
+100
+
+12
+
+G
+S
+Start / return
+
+Reachable-cell coverage (%)
+
+10
+
+Grid y (m)
+
+8
+6
+4
+2
+0
+
+0
+
+2
+
+4
+
+6
+
+8
+10
+Grid x (m)
+
+12
+
+14
+
+G
+S
+
+80
+60
+40
+20
+
+16
+
+0
+
+0
+
+20
+
+40
+60
+Paid actions
+
+80
+
+Figure 6: Four-room development pilot. Left: evaluator-only occupancy geometry and actual G/S
+trajectories; the full geometry is not supplied to the planner. Right: coverage measured on the same
+start-reachable free-cell reference after each paid action. The curves overlap from 8.53% to 39.84%,
+despite a late action difference. Both routes exhaust the 96-action budget and return.
+
+12
+G/1024, completed
+
+10
+
+80
+
+8
+60
+y (m)
+
+Reachable-cell coverage (%)
+
+100
+
+6
+
+40
+4
+G, budget 96
+G, budget 256
+G, budget 512
+G, budget 1024
+S/1024, interrupted at 398
+
+20
+
+0
+
+0
+
+200
+
+400
+600
+Paid actions
+
+800
+
+1000
+
+2
+
+0
+
+0
+
+2
+
+4
+
+6
+
+8
+x (m)
+
+10
+
+12
+
+14
+
+16
+
+Figure 7: Development budget diagnostics, retaining the shorter incomplete trials. The interrupted S
+curve ends at its last actual observation. Right: the completed G/1024 trajectory over evaluator-only
+geometry. Full coverage is a measured checkpoint, separate from the later return.
+
+38
+
+All eighteen runs are retained (Table S25); they represent three layouts, not eighteen independent
+environments.
+The renderer supplies constant-gray valid RGB pixels and ideal visible category labels. Objects
+occupy regularly arranged slots, with no natural-image detector or measured real-world category distribution. These scenes test a synthetic planning mechanism, not realistic semantic perception. Neither
+the complete two-template posterior nor a trained reachability network runs in this joint variant.
+Native measured-depth TSDF meshes use 6 cm voxels and 12 cm truncation. A fixed reference
+samples the exterior box-union boundary, excluding internal faces, and retains surfaces visible from a
+0.8 m lattice of reachable camera origins. Reconstructed-area precision and fixed-reference recall at 5
+cm yield surface F1 [14]. The reference is independent of each trajectory; the supplementary protocol
+specifies its sampling and visibility limits.
+Table S25: All eighteen outcomes at a common 512-action cap. Entries are reachable-cell coverage
+/ surface F1 at 5 cm, both in percent. D is development; E1/E2 are new object layouts of the same
+topology.
+Policy
+C
+G
+S
+X (reversed cue)
+G, 2× prior
+S, frozen gain
+
+D: Coverage/F1
+
+E1: Coverage/F1
+
+E2: Coverage/F1
+
+97.43/94.73
+93.38/89.36
+93.38/89.36
+93.91/90.09
+93.38/89.36
+93.38/90.17
+
+98.08/93.59
+94.59/93.28
+94.59/93.19
+94.86/93.71
+94.59/93.28
+94.59/93.19
+
+98.03/93.53
+94.67/87.68
+94.67/87.68
+98.03/93.13
+94.67/87.68
+94.67/87.68
+
+C exceeds G and S in both coverage and F1 on all three layouts; X also exceeds S in F1 throughout.
+G/S trajectories coincide in D/E2. In E1 they differ but finish with equal coverage, while S lowers
+F1 by 0.083 percentage points; its normalized coverage-curve area increases by only 0.000968. G2
+reproduces G in all three layouts. Freezing the gain posterior improves F1 only in D, with unchanged
+coverage. These outcomes provide no consistent benefit from the semantic prior or gain calibration.
+A post-hoc audit nevertheless distinguishes ranking from utility. For E1, four recorded S choices
+cannot be reproduced by any nonnegative weight in common + λ priorG , even separately at each state,
+with the original cost/id tie rule. D/E2 admit uniform weights including 1 and 2. Category-conditioned
+ranking therefore operates in E1 without an observed endpoint benefit. On D, replay of the 98-action
+zero-coverage segment raises surface F1 from 88.185% to 88.930%: observation is useful locally but
+inefficient relative to the coverage control. Detailed score intervals, reference construction and replay
+results are retained in the supplement.
+
+39
+
+Development
+
+New layout 1
+
+40
+
+0
+
+100
+
+200
+300
+Paid actions
+
+400
+
+80
+
+60
+
+40
+
+0
+
+500
+
+C
+G
+S
+
+20
+
+0
+
+100
+
+200
+300
+Paid actions
+
+400
+
+80
+
+60
+
+40
+
+12
+
+12
+
+12
+
+10
+
+10
+
+10
+
+8
+
+8
+
+8
+
+6
+4
+
+4
+
+2
+0
+0.0
+
+6
+
+G
+S
+2.5
+
+5.0
+
+7.5
+10.0
+x (m)
+
+12.5
+
+15.0
+
+0
+
+100
+
+200
+300
+Paid actions
+
+400
+
+500
+
+6
+4
+
+2
+0
+0.0
+
+C
+G
+S
+
+20
+
+0
+
+500
+
+y (m)
+
+y (m)
+
+C
+G
+S
+
+20
+
+100
+
+Reachable-cell coverage (%)
+
+60
+
+Reachable-cell coverage (%)
+
+80
+
+0
+
+New layout 2
+
+100
+
+y (m)
+
+Reachable-cell coverage (%)
+
+100
+
+G
+S
+2.5
+
+5.0
+
+7.5
+10.0
+x (m)
+
+12.5
+
+15.0
+
+2
+0
+0.0
+
+G
+S
+2.5
+
+5.0
+
+7.5
+10.0
+x (m)
+
+12.5
+
+15.0
+
+Figure 8: Fixed-cost coverage histories and G/S trajectories for D/E1/E2. Background geometry
+is evaluator-only. The full table retains the additional controls; repeated checkpoints are dependent
+measurements.
+A further diagnostic uses the original textured ReplicaCAD apartment layout with partial oracle labels and the unchanged observed-state joint policy (supplementary Table S7). Coverage-only
+C reaches 100.00% coverage and 92.32% surface F1 within the common 256-action cap; G/S and
+both label controls yield identical trajectories, 95.62% coverage and 90.28% F1. The original grouping stage rejects the oversized components containing semantic observations before class-dependent
+scoring. This single-layout transfer test remains separate from the V35 controlled study and does not
+establish natural-detector or physical performance.
+A further controlled extension replaces that analytic prior with the V3 box/shelf expected visiblearea module while retaining v10 unknown coverage, measured quality, candidates, and return rules.
+Twelve runs compare six arms in two furniture permutations of one synthetic branching layout, using
+original textured assets and partial ideal semantics (supplementary Table S8). All runs reach full reference coverage and return without simulated collision. G/S produce identical trajectories; the joint
+control without templates ties them in one layout and exceeds their surface F1 by 0.36 percentage
+points in the other at the same 256-action budget. C reaches full coverage sooner and ends after 130
+actions. The extension establishes complete exploration in these controlled layouts, without a semantic or completion-module efficiency advantage. Fixed-action replay then reproduces its measurements,
+saved scores, and final TSDF exactly. It identifies a visibility inconsistency: a template surface contradicted by acquired free space can still occlude other hypothetical surfaces. A separately frozen
+repair preserves measured and unknown occluders while skipping strictly free intersections. Across
+another twelve paired runs on the same layouts, it raises left-layout G/S F1 from 92.40% to 92.63%,
+still below J at 92.76%; the right layout is unchanged. G/S remain trajectory-identical, and their first
+full-coverage actions are unchanged. Same-point prediction checks recover some subsequently reconstructed surface support but retain substantial template mismatch (supplementary Tables S9–S10
+and the paired-change figure). Thus neither revision establishes a semantic advantage in unknown
+exploration.
+Fixed-prefix diagnostics isolate template sampling, geometry, free-space evidence and object support on the same six acquired states and 66 outbound branches. The earlier geometry/pooling variants
+retain substantial prediction mismatch and no semantic efficiency benefit (supplementary Table S11).
+40
+
+A clean six-run full-basis ablation shows that measured-surface consumption can improve F1 while
+delaying full coverage (Table S12). A further declared revision O constructs completion hypotheses
+only for acquired positive instance tracks; measured mapping, unknown coverage and candidates are
+unchanged. G and S share the ideal instance frontend, so G is a neutral structural-class control rather
+than a completely semantics-free system. Outer-plane and layer-placement revisions improve some
+prediction components but do not exceed O in realized surface prediction and ranking (supplementary
+Table S13); they are not promoted as stand-alone policy revisions. Fixed acquired-ray depth profiles
+prefer smaller depths but cannot exclude the 0.65 m prior under their predeclared heuristic band, so
+that profile applies no dimension update.
+All eight O-policy runs complete coverage, return and record zero simulated collisions (supplementary Table S14). On the left, S reaches full coverage at action 97 versus 88 for G, travels 1.2 m
+farther, and loses 0.377 percentage points of 5 cm F1. Shelf recall rises by 1.294 points while cabinet
+recall falls by 2.834 points. G/S remain trajectory- and mesh-identical on the right. Removing only the
+inherited geometric likelihood leaves both S trajectories unchanged; removing only measured-surface
+consumption yields mixed outcomes. The first changed left-layout decision is driven mainly by a
+misplaced cabinet hypothesis, illustrating how a category prior can amplify geometry error. These
+results establish controlled exploration feasibility and a semantic decision effect, without a semantic
+efficiency advantage.
+A separately frozen revision represents unresolved depth and unseen-extent placement with joint
+structure–geometry particles. It replaces the earlier surface-only update with one loss-based observation update [15]; G/S share the acquired support and geometric errors. An independent set of 24
+procedural objects is split by object into 12 training, six validation and six held-out objects. Training CRPS selects 0.01 m, the lower endpoint of eight declared scales. On the predeclared front–
+side/around-object subset, validation/held-out CRPS is 0.0213/0.0229 m versus 0.1761/0.1570 m for
+the conditioned prior. All seven unusable cases remain in full-denominator evaluation. Nominal 95%
+intervals cover only 9/12 and 8/12 subset cases; the result is not nominal probability calibration [16].
+Supplementary Tables S15–S16 and the four-condition figure retain the front-view weakness, failure
+cases and interval widths.
+Ten complete runs compare matched G/S fixed, G/S distribution and S posterior-mean policies
+with unchanged 256-action budgets. All reach 100% correct-free coverage, return and incur zero
+simulated collisions (supplementary Table S18). On the left, distribution and mean modes reach full
+coverage at action 88 rather than 97, shorten travel from 43.2 to 42.0 m and raise 5 cm F1 from
+92.381% to 92.758%; cabinet recall rises by 2.834 percentage points while shelf recall falls by 1.294
+points. All right-layout outcomes tie. Within both extent modes, G/S trajectories and measured meshes
+are identical; mean collapse also reproduces the full distribution in both layouts. Category priors
+change some scores but never the selected candidate. The six-state forecast comparison (Table S17)
+likewise favors mean collapse over distribution in aggregate realized weight and rank. Thus this
+revision supports a benefit from replacing fixed extent in one inspected layout, without a demonstrated
+semantic or distribution-spread advantage. Distribution computation is also more expensive. These
+simulated timings are not robot control measurements.
+
+41
+
+18
+
+Physical Deployment Pilot
+
+The physical deployment is a declared joint-exploration variant, distinct from the supplied-graph,
+two-template controlled study. It uses exploration_joint_v1 derived from v10_3_1, with revised
+joint unknown-coverage and measured-surface candidate generation, real-scene semantics, measured
+sensor-range and 3 m extent adapters (rather than the original 2.2 m applicability cap), default CSM
+keyframes, measured CAN controller velocity and fixed SE2 alignment. The camera had been relocated without recalibrating its earlier extrinsics; its earlier self-mask was disabled. The navigation
+map retained prior observations in the first episode.
+One S40 episode completed 40 paid actions and 40 arrivals, returned to its grid anchor, and acquired 41 frames over 7.394 m of CAN-estimated travel and 542.444 s. Its observed-area proxy
+increased from 72.08 to 128.28 m2 , while its fixed old-surface quality proxy decreased from 0.213760
+to 0.199107. These are internal proxies, without an independent map or surface-accuracy reference.
+All 12 recorded planning states gave equal G and S scores for shared candidates; only two had multiple
+candidates. This does not constitute a separate G trial.
+
+18.1
+
+Fresh-map ordered C/S physical pilot
+
+A subsequent pilot executed coverage-only C followed by joint S in the same physical scene. Each
+arm used a fresh, separately supervised stock gmapping instance and a new policy session, with the
+same 40-action budget, 600 s limit, circular footprint, candidates, return rule, sensing configuration
+and execution protection. Only score mode differed within the policy configuration; C retained the
+same candidate generator and sensor modalities. CSM odometry and the display TSDF remained continuous. The actual bootstraps differed by 0.0701 m and 0.0672 rad, and their initial navigation-known
+masks differed in 205 cells (8.20 m2 ) on the common 0.2 m planning grid. This is an approximate
+starting-condition comparison, not identical-input pairing.
+Table S26: One ordered physical C/S pilot with fresh navigation maps; failures remain included
+Arm and
+termination
+
+Paid / obs.
+
+C: budget
+40 / 41
+exhausted, returned
+S: method failure, 32 / 33
+no return
+
+CAN / time
+
+Internal area (m2 )
+
+Own-support old-quality
+
+6.741 m /
+558.214 s
+5.233 m /
+451.992 s
+
+66.40 → 123.44
+
+0.249536 → 0.190989
+(270 points)
+0.234949 → 0.299275
+(290 points)
+
+65.32 → 122.00
+
+C completed its budget and returned to the discrete anchor. S stopped after its 32nd accepted
+action when the existing circular-footprint check reported current_footprint_not_known_safe;
+it did not return. This was an original method check, not a newly introduced policy gate. CAN
+feedback was zero after both runs. Unequal completed actions, the failed S return, and different
+initial information prevent an efficiency ranking or a causal policy-benefit claim. Quality is reported
+separately on each arm’s own fixed bootstrap support, whose identities differ; the C decrease and S
+increase are not a matched reconstruction-accuracy comparison. This C/S objective ablation does not
+isolate a semantic S/G effect.
+At paid action 12, both runs replanned after the original next-footprint check; at each run’s own
+state, C and S selected the same candidate, while the maps differed across runs. At S action 31,
+frozen-state C had no positive candidate whereas G and S selected the same positive candidate. These
+recorded counterfactuals are not additional physical trials, and G/S ties do not establish a semantic
+decision effect.
+A mapper-only replay of the retained S observations reproduced the final belief: a measured 0.504
+m laser return inserted a nearby occupied cell before depth fusion, while the input navigation grid
+
+42
+
+(a) Recorded observation poses
+
+3.0
+
+C
+S
+
+2.5
+2.0
+1.5
+1.0
+
+(b) Internally observed area
+C
+S
+
+120
+Observed 2D area (m²)
+
+Aligned odom y (m)
+
+3.5
+
+110
+100
+90
+80
+70
+
+0
+1
+Aligned odom x (m)
+
+0
+
+10
+
+20
+Paid action
+
+30
+
+40
+
+Figure 9: Recorded aligned-odometry poses and internal observed-area proxy in the ordered C/S pilot.
+S stops after action 32; no continuation is inferred. The two episodes use different initial measurements
+and provide no independent accuracy reference.
+alone still passed the footprint check. This identifies the recorded fusion source, not the physical
+object or a verified noise or localization cause.
+
+18.2
+
+Calibrated 24-action integration run
+
+After revising the camera extrinsics, a later S24 integration episode completed 24 paid actions, 24
+verified arrivals and 25 observations, returning to its discrete anchor over 3.591 m of CAN-estimated
+travel and 368.847 s. This episode used a different sensor calibration and map state from the earlier
+C/S pilot and is not a matched continuation or policy comparison. All six newly recorded planning
+states gave equal G/S candidate scores and zero incremental aperture contribution, so they show no
+semantic selection effect.
+After the run, the operator reported that localization had drifted during the preceding manual
+relocation to the test area. The drift onset was not established, so the map at S24 initialization may already have been affected. Discrete-anchor acceptance and measured travel therefore support bounded
+execution integration, not independent localization accuracy, comparative exploration efficiency or reconstruction accuracy. The internal area proxy (180.12 to 256.60 m2 ) is not treated as verified newly
+discovered physical area. A subsequent mapping reset starts a new epoch; its observations cannot be
+pooled with this episode as a shared initial map.
+
+18.3
+
+Calibrated fresh-map C/S comparison
+
+A new ordered C/S pilot used independently restarted stock gmapping maps and fresh acquired initial
+packets in the reset localization epoch. Both arms retained the same 40-action allowance, 600 s external limit, circular footprint, candidate generator, return rules, sensor configuration and ROS/hardware
+protection. The score mode was the policy difference; this remains a coverage-only versus jointobjective comparison, not a semantic-only ablation. The planning transform was identical and anchored at the actual C start. Initial odometry differed by 0.06695 m and −0.06259 rad, while the
+initial navigation-known masks differed in 430 cells (17.20 m2 ) on the common grid. Similar initial
+area therefore does not imply identical initial information.
+C completed 24 verified arrivals and stopped normally under the original rule that stops when
+no positive option remains at the anchor. S completed 13 verified arrivals, then failed the original
+check requiring the anchor footprint to remain known safe without returning. Neither endpoint was an
+external timeout or interruption, and both recorded zero CAN feedback after closing. At S action 10,
+
+43
+
+Table S27: One further ordered C/S pilot after calibration and map reset. Both arms have a 40action/600 s allowance; actual exposure and return differ. Internal quality uses a separate fixed bootstrap support in each arm.
+Arm and
+termination
+
+Paid / obs.
+
+C: no positive
+24 / 25
+option at anchor,
+returned
+S: anchor-footprint 13 / 14
+failure, no return
+
+CAN / time
+
+Internal area (m2 )
+
+Own-support old-quality
+
+3.738 m /
+342.345 s
+
+65.24 → 98.52
+
+0.165048 → 0.277736
+(479 points)
+
+1.857 m /
+184.862 s
+
+65.32 → 88.88
+
+0.193484 → 0.180111
+(437 points)
+
+the original next-footprint rejection triggered replanning; C and S would select different candidates at
+that saved state, while G and S were tied. Across both episodes, all five candidate-bearing planning
+states gave equal G/S scores; the terminal S state had no candidates. These are within-state diagnostics,
+not separately executed alternatives.
+The shorter failed S route supplies no efficiency benefit. Unequal completed exposure, different
+initial measurements and distinct fixed surface supports prevent a matched endpoint-quality or causal
+policy ranking. This is one ordered pair in one physical scene, with no independent localization,
+map or surface-accuracy reference. No return override or replacement policy was introduced after the
+anchor check failed.
+
+18.4
+
+Unknown-space exploration with recorded execution failures
+
+Further real-robot episodes extended unknown-space observation under the same declared
+exploration_joint_v1 decision policy and circular footprint.
+These episodes retained the
+real_scene_structural_v1 category mapping, 4 m depth/8 m laser range profile and measured_extent_3m_v1 geometry adapter. The camera transform used the confirmed relocated
+mount; its height reference reused the frozen depth-ground calibration scalar. A native snapshot
+handoff changed the execution synchronization, and the camera used SDK confidence/texture
+thresholds of 50/100. These input and execution adaptations remain separate from the controlled
+two-template study. Each episode has its own measured initial state; the records do not form a
+matched policy comparison.
+Table S28: Additional physical S-mode episodes. Paid actions, accepted observations and verified
+ROS primitive arrivals are separate counts. Return denotes recorded discrete-anchor acceptance.
+Laser union uses only archived scans; a dash denotes an unevaluated quantity. Each row is a separate episode; interrupted attempts remain included.
+Episode / outcome
+
+Paid / obs. / ar- CAN (m)
+rivals
+
+Time (s)
+
+Laser
+(m2 )
+
+union Return
+
+10 Nov., S40: budget
+exhausted
+12 Nov., S96: speed-stop
+interruption
+12 Nov., 0.05 m/s S12:
+budget exhausted
+12 Nov., 0.05 m/s S40:
+speed-stop interruption
+
+40 / 41 / 40
+
+6.757
+
+440.471
+
+73.68 → 108.00 Yes
+
+60 / 61 / 60
+
+11.082
+
+652.884
+
+61.72 → 117.92 No
+
+12 / 13 / 12
+
+0.999
+
+152.767
+
+—
+
+Yes
+
+9 / 10 / 9
+
+1.484
+
+136.336
+
+49.76 → 62.92
+
+No
+
+The 10 November S40 episode completed its allowance and returned. The 12 November S96
+44
+
+episode acquired 61 accepted observations and completed 60 verified primitive arrivals before a CAN
+velocity sample of 0.154 m/s exceeded the unchanged 0.15 m/s stop threshold during the next goal.
+The run stopped with zero feedback and did not return; its partial coverage is retained as an interrupted
+outcome. In the S96 episode, the original next-footprint check rejected the outbound option at paid
+actions 29 and 56, triggering replanning on the latest measured map before either selected endpoint
+was reached. The initial coverage option forecast unknown laser and camera support, and the later
+route remained subject to the original return-budget check.
+
+Observed laser union (m2)
+
+130
+
+117.92; interrupted after action 60
+
+120
+110
+100
+90
+80
+70
+
+61.72
+
+60
+0
+
+12
+
+24
+36
+Paid primitive actions
+
+48
+
+60
+
+Figure 10: One interrupted physical S96 trajectory. The cumulative observed laser union increases
+from 61.72 to 117.92 m2 across 61 saved scans, one per accepted RGB-D observation. Dotted lines
+mark recorded next-footprint replans at actions 29 and 56. The cross marks the last accepted observation at action 60; the subsequent goal was interrupted by the CAN speed stop. Rasterization
+uses a 0.2 m grid, an 8 m measured-range cap and a fixed 12.5 m-radius measurement region. The
+curve measures acquired ray/endpoint evidence in estimated poses, without a known traversable-area
+denominator or independent map reference. Checkpoints belong to one trajectory.
+For these two episodes, saved-scan evaluation accumulates the union of measured laser ray and
+endpoint cells within the fixed region. Nonfinite or invalid returns are skipped; returns clipped at 8
+m provide free-ray evidence without a hit endpoint. Only one archived scan per accepted RGB-D
+packet enters the curve. The resulting increases of 34.32 and 56.20 m2 quantify additional recorded
+observation support. Pose error, coarse cells and free/hit conflicts prevent interpreting this quantity as
+independently verified free space or a coverage percentage. The fixed-bootstrap surface-quality proxy
+increases from 0.196912 to 0.348033 in S40, whereas S96 decreases from 0.224206 to 0.223401;
+neither is reconstruction accuracy.
+All three candidate-bearing global decisions in each episode give identical G/S scores and zero
+incremental aperture contribution. S96 already has class-3 semantic points at initialization, but all
+recorded asset-entry roles report no unused feasible aperture pose; deep roles require an available
+entry. At its two later global decisions, none of the current geometry assets has marked semantic
+support despite class-3 points elsewhere in the accumulated ledger. The observed semantic frontend
+therefore does not demonstrate a semantic selection benefit. These saved-state G scores are diagnostics
+within the executed S route, not separately executed geometric-control trajectories.
+A separately declared execution profile capped positive adapter commands at 0.05 m/s while preserving the decision policy, CAN stops, expiry limits and authorized correction reverse bound of
+−0.05 m/s. Its S12 episode returned after 12 arrivals, but a subsequent S40 attempt stopped after nine
+arrivals on the same 0.15 m/s feedback check and did not return. The passive CAN observer recorded
+command frames no greater than 0.05 m/s and peak velocity feedback of 0.159 m/s during that attempt.
+This measurement does not independently establish command acceptance or physical speed; it shows
+
+45
+
+that the command cap did not prevent the recorded feedback fault. Both episodes stopped with zero
+feedback. Their own-support quality changes were −0.006951 and −0.000236. The short completion
+therefore establishes neither a resolved execution fault nor improved exploration efficiency.
+Modified unknown-space deployment. The subsequent ros_checked_exploration_v2 policy admits unknown graph centers and a virtual actual-start exception without clearing measured occupancy. Its circular-radius parameter remains, but ROS’s rectangular footprint replaces the research
+known-free footprint gate. Return is optimistic/best effort. Local navigation permits unknown space
+and retains live laser/depth obstacles and inflation in place of the local static layer; stale inputs pause
+commands at zero. Separately authorized execution uses a 0.20 m/s linear-feedback stop and ordinary
+commands bounded to ±0.05 m/s. A failed original primitive is charged once and observed at its
+actual partial pose without arrival credit. One 0.4 m ROS backoff may precede that observation; recovery motion/time remain physical costs, with no additional NSO primitive or original-arrival credit.
+These are modified-policy integration episodes, separate from the controlled mechanism study.
+Table S29: Terminal modified-policy episodes. Counts are accepted attempts / exact primitive-success
+observations / all accepted observations. Both episodes were interrupted without a verified full-anchor
+return. Physical costs include recoveries; laser union uses the accepted archived scans.
+Episode / stop
+
+Attempts / suc- CAN (m) / time (s) Laser union (m2 )
+cesses / obs.
+
+Reverse-enabled S40:
+19 / 16 / 20
+deadline
+Navigation-geometry trial 38 / 38 / 39
+S40: driver fault
+
+Own-support
+∆Q
+
+7.032 / 603.310
+
+47.08 → 80.12
+
+−0.008163
+
+7.357 / 470.211
+
+73.88 → 111.56
+
+−0.030885
+
+The reverse-enabled episode retained three failed attempts and three backoff interventions (one
+ROS success, two aborts). Recovery brackets alone accounted for 3.181 m and 230.314 s of its total
+cost. The geometry trial recorded 39 ROS arrivals, but only 38 were followed by an accepted paid
+observation before native driver fault 5; the final unobserved arrival is not silently charged or fused.
+Its trial footprint, including padding, was 0.48 m wide, below the current Mini URDF width of 0.585
+m. The mounted envelope remains unresolved and the previous navigation default was restored, so
+passage in this trial does not validate body clearance. At its second global decision, S/G scores differed with nonzero aperture support but selected the same candidate; all four reverse-episode global
+decisions also retained the same G/S winner. Unequal initial observations, changed navigation geometry, interrupted returns and negative quality changes preclude an efficiency, semantic-benefit or
+reconstruction-accuracy claim.
+Unexecuted interfaces. An optional ros_viewpoint_exploration_v3 controller was installed without
+changing the default selector and has no physical trial here. It passes a selected full viewpoint to
+ROS, separates actual waypoint attempts from a fixed 40-unit nominal grid-planning horizon, and
+disables primitive gain feedback to avoid treating a macro route as one forward/turn action. It adds no
+failed-goal exclusion or re-ranking. A separate RTAB-Map interface exercised parked mapping and
+localization against its own database without changing navigation TF authority. The initial interface
+record contains 475 information messages, 11 proximity events and zero descriptor-loop events; no
+displaced relocalization was demonstrated. The module is off. Neither interface establishes originalmethod equivalence or improved exploration.
+
+46
+
+19
+
+Independent follow-up calibration and native decisions
+
+The following follow-up studies retain separate object splits, fixed-prefix branch evaluation and complete policy outcomes. The 24 calibration and 24 test objects are shared by the structural and interval
+studies; they are not 96 independent objects. The interval predictor remains neutral T = 1, and its
+correction is report-only. Structural temperature changes only the declared class mixture in the policy
+comparison.
+
+19.1
+
+Structural evidence calibration and semantic decision sensitivity
+
+Why a category prior can leave the selected target unchanged. A category cue affects the score
+only through the structures’ different predicted observation opportunities. For the shared particle
+bank, let Aoh (r) denote the visible template area of object o under structure h along candidate route
+r, integrated over that structure’s conditional depth and placement distribution and retaining the same
+visibility and observation-history terms. Both policies share the common coverage and measuredS
+surface terms. For pG
+o and po , the respective probabilities of the open structure,
+S(r) − G(r) = ∑(pSo − pG
+o ) [Ao1 (r) − Ao0 (r)] .
+o
+
+This identity applies to the evaluated fixed-extent and full-distribution variants with shared geometry;
+it is not asserted for separately collapsed point sets. A cue can change probabilities without changing a route when the two structures expose similar area, when those differences are shared by every
+candidate, or when the induced score changes are smaller than the existing ranking margin. If rG is
+the unique geometric maximizer, a competing route r has a strictly higher semantic score only when
+[S(r) − G(r)] − [S(rG ) − G(rG )] > G(rG ) − G(r). Thus, nonzero semantic score changes establish
+neither a target change nor improved reconstruction.
+Modular structural update. The depth loss scale and the structural probability serve different calibration targets. Write q0 (k) for the geometric particle prior and Ehk for its frozen acquired-data loss
+under structure h. We retain the conditional particle distribution
+
+
+Ehk
+q0 (k) exp(−Ehk /(2σ 2 ))
+Zh = ∑ q0 (k) exp − 2 ,
+q(k | h, D) =
+,
+2σ
+Zh
+k
+and revise only the structural mixture:
+PT (h | D,C) =
+
+P(h | C) exp(log Zh /T )
+,
+∑h0 P(h0 | C) exp(log Zh0 /T )
+
+PT (h, k | D,C) = PT (h | D,C)q(k | h, D).
+
+Here σ = 0.01 remains fixed. G uses a neutral structural prior and S retains its finite acquired-category
+prior. Positive temperature scales the structural log-evidence difference before adding category logodds. It preserves the neutral class preference and can soften overconfident wrong evidence, but cannot
+repair its sign, an incorrect object association, or invalid template geometry. This is an explicitly modular posterior revision using the temperature-scaling principle [17], not a new calibration algorithm or
+the original generative joint update. T = 1 recovers the preceding weights exactly. Conditional geometry is unchanged, although the marginal depth distribution can change through the structure mixture.
+The separate conformal interval diagnostic applies only to the unreweighted T = 1 neutral predictor.
+Independent structural test. Temperature is selected by neutral class negative log likelihood
+(NLL), equally weighting four conditions within each of the 24 new calibration objects. The frozen
+grid is {0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128}; it selects T = 16 before any test result or exploration
+outcome is evaluated. The same 24 held-out objects used for the interval diagnostic supply one
+47
+
+Table S30: Structural-temperature calibration on 24 held-out procedural objects (96 dependent observations), with temperature selected on 24 separate objects. G has a neutral category prior; S receives a
+correct 9:1 category prior as a controlled diagnostic, not a detector output. Exact class ties count one
+half in accuracy. All eight statistical fallbacks remain in the denominator. Depth columns describe
+changed marginal distributions, not the separate interval correction.
+Prior
+
+T
+
+NLL ↓
+
+Brier ↓
+
+Acc. (%)
+
+Wrong > 0.9
+
+CRPS (m)
+
+MAE (m)
+
+G neutral
+S correct cue
+G neutral
+S correct cue
+
+1
+1
+16
+16
+
+5.080
+4.360
+0.679
+0.139
+
+0.325
+0.261
+0.236
+0.031
+
+63.02
+71.88
+63.02
+96.88
+
+27
+23
+3
+0
+
+0.1099
+0.1087
+0.1090
+0.1054
+
+0.1388
+0.1388
+0.1444
+0.1357
+
+Table S31: Neutral structural predictions by observation condition on the same 24 test objects. Every
+row retains 24 dependent condition cases. Temperature improves aggregate NLL while worsening the
+already informative around-view condition.
+Condition
+
+T
+
+NLL ↓
+
+Brier ↓
+
+Acc. (%)
+
+Front
+Front
+Front + side
+Front + side
+Around
+Around
+Occluded
+Occluded
+
+1
+16
+1
+16
+1
+16
+1
+16
+
+6.923
+0.793
+7.819
+0.811
+0.083
+0.341
+5.497
+0.771
+
+0.407
+0.286
+0.450
+0.283
+0.025
+0.098
+0.419
+0.278
+
+52.08
+52.08
+54.17
+54.17
+97.92
+97.92
+47.92
+47.92
+
+structural test, not another set of independent objects. All eight geometric-bank fallbacks remain in
+the test denominator. Neutral NLL falls from 5.0804 to 0.6791, Brier score from 0.3251 to 0.2363,
+and wrong predictions above 0.9 confidence from 27 to 3. Neutral accuracy remains 63.02%, as
+expected from preserving the sign of the evidence. The around-view condition worsens from NLL
+0.0829 to 0.3414, and neutral marginal-depth median error also increases. With an explicitly supplied
+correct 9:1 category prior, S improves from NLL 4.3604 to 0.1393 and from 71.875% to 96.875%
+class accuracy. This controlled-prior result does not evaluate automatic semantic recognition. These
+probability tests motivate a matched decision comparison; they do not establish exploration efficiency.
+
+19.2
+
+Object-level interval correction under geometric mismatch
+
+Scope and independent units. The conditional depth model can assign narrow intervals despite
+geometric model error. We evaluated a standard split-conformal correction [18] as a reporting diagnostic, keeping the unreweighted neutral B8 predictor (structural temperature T = 1), its σ = 0.01
+depth distribution, and its planning policy fixed. The new set contains 48 independently drawn procedural objects: 24 for calibration and 24 for a single held-out evaluation. Both splits follow the same
+frozen mixture of closed and open structures, regular panels and declared part mismatches, with no
+rejection or redraw. Each object provides front, front-and-side, around, and occluded observations,
+giving 192 dependent cases and 576 frames in total. Rendering uses exact poses, noiseless first-hit
+depth and ideal visible instance/category labels. The target for each case is the true object’s extent
+projected onto the inferred depth axis; axis errors remain part of the evaluation. Generator truth is
+unavailable to inference. A separate pair with identical acquired fronts and different hidden depths
+produces exactly equal particle banks, likelihoods and posteriors; this fixture adds no independent
+object to the test set.
+
+48
+
+Table S32: Unchanged neutral depth distributions on the same 24 test objects (96 dependent cases).
+All eight evaluator fallbacks remain in the denominator. CRPS and median error are in metres. The
+set correction in Table S33 does not change these probability scores.
+Prediction
+
+CRPS ↓
+
+Median error ↓
+
+0.1099
+0.1887
+0.3146
+
+0.1388
+0.2882
+0.3146
+
+Frozen neutral posterior
+Conditional prior only
+Fixed 0.65 m
+
+Frozen correction. Let [Lic ,Uic ] be the raw 95% interval for object i under condition c, and yic its
+projected target extent. The scale floor s0 = 0.04756 m is the median, over the original 12 training
+objects, of their median absolute posterior-median error across four conditions. It uses neither the new
+calibration objects nor the test objects. We compute
+
+
+Uic − Lic
+max{Lic − yic , yic −Uic , 0}
+sic = max
+.
+, s0 ,
+Ri = max
+c
+2
+sic
+For n = 24 calibration objects and α = 0.05, the order statistic at d(n + 1)(1 − α)e = 24 gives q =
+10.2982. The corrected set is
+[max{0, Lic − qsic }, Uic + qsic ] .
+The upper endpoint is not clipped to the original 1.4 m prior support. This standard object-group
+construction targets simultaneous coverage of the four condition-specific extents of a new object,
+marginally over exchangeable objects from the same mixture. It does not assert coverage conditional
+on a particular class or observation direction. The interval expansion changes neither the probability
+mass function nor candidate scores. CRPS therefore remains a property of the original distribution;
+interval width and interval score assess the corrected set separately.
+Coverage–width tradeoff. All 96 held-out cases remain in the denominator, including eight cases
+with multiple observed tracks that use the predeclared public uniform-prior/world-y fallback. Calibration retains five fallback cases. The original neutral posterior attains CRPS 0.1099 m, compared with
+0.1887 m for its prior-only control and 0.3146 m for a fixed 0.65 m estimate. The correction increases
+case coverage from 61/96 to 93/96 and all-four-condition coverage from 5/24 to 21/24 objects (Table S33). However, mean width grows from 0.278 to 2.316 m, and mean interval score worsens from
+2.140 to 2.704 m. All three remaining misses occur in front-only observations. The observed object
+coverage of 87.5% is below the nominal 95% target; the marginal conformal statement does not guarantee that every finite test batch achieves its nominal fraction. These wide intervals are retained as a
+diagnostic and are not adopted by the planner. The experiment supplies no evidence that set expansion
+improves point geometry, probability scores, navigation or reconstruction.
+
+19.3
+
+Category interventions on native candidate branches
+
+Matched acquired state. A controlled branching scene tests whether category input can change
+the original candidate selection when visible geometry is ambiguous. Two procedural arrangements
+exchange an open structure and a closed structure behind partial screens. For each arrangement, one
+acquired cold-start state supplies the original four candidates, the shared geometric bank and the common coverage/measured-surface terms. All four native candidates lie on the right side of the scene,
+which limits the available observation alternatives. Correct, neutral and swapped category priors are
+evaluated at both T = 1 and the independently selected T = 16, giving 12 scoring conditions. No
+goal, route, common score weight or stopping rule is inserted to obtain a preferred result. The first
+fixture failed to produce modeled objects under the frozen frontend and remains a failed representability pilot. The revised physical fixture provides visible posts and top support; its geometry is frozen
+49
+
+Table S33: Report-only 95% interval correction on 24 independent test objects, each with four dependent observations. Calibration uses 24 separate objects and the frozen neutral depth predictor. Case
+coverage and all-four-condition object coverage have distinct denominators. Width and interval score
+are in metres; lower values are better. The corrected intervals leave the original probability distribution
+and navigation unchanged.
+Cases covered
+
+Objects covered
+
+Width ↓
+
+Score ↓
+
+Raw
+Corrected
+
+61/96
+93/96
+
+5/24
+21/24
+
+0.278
+2.316
+
+2.140
+2.704
+
+Raw
+Corrected
+Raw
+Corrected
+Raw
+Corrected
+Raw
+Corrected
+
+13/24
+21/24
+19/24
+24/24
+9/24
+24/24
+20/24
+24/24
+
+–
+–
+–
+–
+–
+–
+–
+–
+
+0.440
+3.242
+0.131
+1.399
+0.062
+1.227
+0.478
+3.395
+
+6.652
+4.794
+0.444
+1.399
+0.325
+1.227
+1.137
+3.395
+
+Condition
+
+Interval
+
+All conditions
+All conditions
+Front
+Front
+Front + side
+Front + side
+Around
+Around
+Occluded
+Occluded
+
+before candidate outcomes. Rendering checks retain cross-layout float32 depth differences of at most
+5 × 10−7 m and corresponding template-gain differences of approximately 0.034 m2 . The two arrangements therefore do not constitute an exact sensor counterfactual. Within each arrangement, all cue and
+temperature conditions share exactly the same acquired input and point basis.
+Measured consequences of selection. All eight original outbound routes are acquired once from
+their respective common initial states. They complete 114 actions in total, reach all eight endpoints
+and record no simulated collisions. Each branch fuses only its acquired depth into a native TSDF.
+Independent evaluation uses fixed source-surface references and reports both object and global surface
+increments, correct-free coverage and execution cost. Scoring conditions reuse these eight outcomes;
+they are neither 12 independent trials nor complete autonomous exploration episodes.
+At T = 16, the correct cue changes the right-arrangement selection. Object net recovered area rises
+from 0.046 to 1.403 m2 , outbound actions fall from 17 to 15, and correct-free coverage gain increases
+by 3.33 percentage points. Global net recovered surface nevertheless decreases by 24.122 m2 . The
+left arrangement retains its selected route. At T = 1, the correct left cue changes the target but reduces
+object recovery while increasing global surface recovery. Neutral and swapped cues, including adverse
+outcomes, remain in Table S34. These contrasts demonstrate a category-dependent native target and a
+measurable allocation tradeoff. They establish neither a uniform reconstruction improvement nor an
+unknown-exploration efficiency advantage.
+
+19.4
+
+Complete structural-temperature policies
+
+The main text reports the complete coverage curves and adverse left-layout semantic outcome. Full
+T1 control rows are reused, not new repeats. The first changed left planning decision is at paid action
+54; the actual action streams first diverge at action 71. All runs continue after first complete coverage
+to the declared 256-action endpoint and return. Elapsed timings are recorded under three concurrent
+runs with numerical-library thread limits set to one; they are host computation rather than physical
+execution or independent real-time benchmarks.
+
+50
+
+Table S34: All 12 controlled mechanism conditions. Each layout retains its four original candidate
+routes; eight actual outbound branches (114 actions) supply all outcomes. Columns report S minus
+G after selecting from the same candidate set. Surface increments use native TSDF distance at 5 cm
+against fixed visible source triangles; coverage is correct-free area in percentage points. Within each
+layout, cue and temperature interventions share exactly the same acquired bank. The two layouts
+have disclosed float32 rendering differences and are not exact sensor counterfactuals. These are short
+fixed-route branches, not complete exploration trials.
+Layout
+
+T
+
+Cue
+
+G→S
+
+∆Aob j (m2 )
+
+∆Aall (m2 )
+
+∆C (pp)
+
+∆ actions
+
+Left
+Left
+Left
+Left
+Left
+Left
+Right
+Right
+Right
+Right
+Right
+Right
+
+1
+1
+1
+16
+16
+16
+1
+1
+1
+16
+16
+16
+
+Correct
+Neutral
+Swapped
+Correct
+Neutral
+Swapped
+Correct
+Neutral
+Swapped
+Correct
+Neutral
+Swapped
+
+0→2
+0→0
+0→0
+2→2
+2→2
+2→0
+0→0
+0→0
+0→2
+2→0
+2→2
+2→2
+
+-1.221
++0.000
++0.000
++0.000
++0.000
++1.221
++0.000
++0.000
+-1.356
++1.356
++0.000
++0.000
+
++24.534
++0.000
++0.000
++0.000
++0.000
+-24.534
++0.000
++0.000
++24.122
+-24.122
++0.000
++0.000
+
+-2.33
++0.00
++0.00
++0.00
++0.00
++2.33
++0.00
++0.00
+-3.33
++3.33
++0.00
++0.00
+
++2
++0
++0
++0
++0
+-2
++0
++0
++2
+-2
++0
++0
+
+Table S35: Complete unknown-exploration comparisons. All runs start at 42.606% correct-free coverage, execute 256 actions, finish at 100%, return and record zero simulated collisions. A100 is the
+first full-coverage action. T = 1 reuses four previously frozen distribution runs; T = 16 adds four runs
+on the same two inspected furniture permutations, not new independent scenes. Surface metrics use
+measured TSDFs at 5 cm.
+Layout Policy
+
+T A100 Path (m) F1 (%) Shelf (%) Cabinet (%)
+
+Left
+Left
+Left
+Left
+
+G
+S
+G
+S
+
+1
+1
+16
+16
+
+88
+88
+88
+97
+
+42.0
+42.0
+42.0
+43.2
+
+92.758
+92.758
+92.758
+92.381
+
+82.170
+82.170
+82.170
+83.464
+
+88.709
+88.709
+88.709
+85.874
+
+Right
+Right
+Right
+Right
+
+G
+S
+G
+S
+
+1
+1
+16
+16
+
+100
+100
+100
+100
+
+43.2
+43.2
+43.2
+43.2
+
+92.596
+92.596
+92.596
+92.596
+
+81.088
+81.088
+81.088
+81.088
+
+79.214
+79.214
+79.214
+79.214
+
+51
+
+(b) Fixed replay: left layout, action 54
+8
+
+20
+
+15
+
+10
+5.080
+
+4.360
+
+5
+0.679
+
+0.139
+
+0
+
+Coverage + surface planning score
+
+Mean NLL per object (nats; lower is better)
+
+(a) Independent test: 24 objects
+25
+
+7
+6
+5
+4
+3
+2
+1
+
+G, T = 1
+S, T = 1
+
+G, T = 16
+S, T = 16
+
+0
+G
+T=1
+
+G
+T = 16
+
+S*
+T=1
+
+S*
+T = 16
+
+0
+
+1
+
+2
+
+3
+
+4
+5
+6
+Original candidate ID
+
+7
+
+8
+
+9
+
+10
+
+Figure 11: Independent structural calibration and a fixed acquired decision. Left: each line joins one
+held-out object’s mean class NLL over four dependent conditions, for neutral G or a supplied correctcategory S∗ prior. Right: all eleven original candidates at the retained left-layout prefix after 54 paid
+actions, with unchanged common terms. Probability-loss improvement and a changed local winner do
+not establish complete exploration benefit. The complete-policy left S result is adverse.
+
+References
+[1] World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White
+paper, 2025-09-04. Official white paper.
+[2] Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A
+Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers.
+IEEE Transactions on Robotics, 2023. https://doi.org/10.1109/TRO.2023.3248510.
+[3] Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring
+Complex 3D Environments. RSS, 2021. https://doi.org/10.15607/RSS.2021.XVII.018.
+[4] Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using
+Active Neural SLAM. ICLR, 2020. Author manuscript: https://doi.org/10.48550/arXiv.
+2004.05155.
+[5] Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436–16445. https://doi.org/10.1109/
+CVPR52733.2024.01555.
+[6] Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing.
+arXiv:1801.09847, 2018. https://doi.org/10.48550/arXiv.1801.09847.
+[7] Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images.
+Proceedings of SIGGRAPH, 1996:303–312. https://doi.org/10.1145/237170.237269.
+[8] Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA,
+2023. https://doi.org/10.1109/ICRA48891.2023.10160469.
+[9] Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE
+Transactions on Field Robotics, 2025. https://doi.org/10.1109/TFR.2025.3578402.
+[10] Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M.
+VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian
+Splatting. IEEE Robotics and Automation Letters, 11(3):3150–3157, 2026. https://doi.org/
+10.1109/LRA.2026.3653276.
+52
+
+[11] Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semanticsdriven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. https:
+//doi.org/10.52202/085713-1113.
+[12] Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable
+Stochastic Domains. Artificial Intelligence, 101(1–2):99–134, 1998. https://doi.org/10.
+1016/S0004-3702(98)00023-X.
+[13] Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms.
+The International Journal of Robotics Research, 33(9):1271–1287, 2014. https://doi.org/
+10.1177/0278364914533443.
+[14] Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale
+Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. https://doi.org/10.
+1145/3072959.3073599.
+[15] P. G. Bissiri, C. C. Holmes, and S. G. Walker, “A general framework for updating belief distributions,” Journal of the Royal Statistical Society: Series B, vol. 78, no. 5, pp. 1103–1130, 2016.
+doi:10.1111/rssb.12158.
+[16] N. Syring and R. Martin, “Calibrating general posterior credible regions,” Biometrika, vol. 106,
+no. 2, pp. 479–486, 2019. doi:10.1093/biomet/asy054.
+[17] C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger. On Calibration of Modern Neural Networks.
+Proceedings of ICML, PMLR 70, pp. 1321–1330, 2017. https://proceedings.mlr.press/
+v70/guo17a.html.
+[18] A. N. Angelopoulos and S. Bates. Conformal Prediction: A Gentle Introduction. Foundations
+and Trends in Machine Learning, 16(4), pp. 494–591, 2023. doi:10.1561/2200000101.
+
+53
+
+

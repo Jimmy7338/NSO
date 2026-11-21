@@ -1,0 +1,121 @@
+{
+  "schema": "nso.cached_semantic_S_policy_replay.v1",
+  "status": "matched",
+  "scope": "offline downstream physical-input replay, cached semantic arrays replace frontend model; no robot, ROS or inference",
+  "tolerances": {
+    "atol": 1e-08,
+    "rtol": 1e-08
+  },
+  "counts": {
+    "observe": 41,
+    "next_action": 41,
+    "global_choice": 5,
+    "next_action_returns_matched": 41,
+    "paid_actions_matched": 40,
+    "candidate_factors_compared": 145
+  },
+  "actual_actions": [
+    "right",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "right",
+    "forward",
+    "left",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "left",
+    "left",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "forward",
+    "right",
+    "forward",
+    null
+  ],
+  "actual_global_choices": [
+    {
+      "selection_call_id": 4,
+      "selected_map_version": 1,
+      "candidate_id": 0,
+      "plan_number": 1
+    },
+    {
+      "selection_call_id": 54,
+      "selected_map_version": 13,
+      "candidate_id": 0,
+      "plan_number": 2
+    },
+    {
+      "selection_call_id": 91,
+      "selected_map_version": 22,
+      "candidate_id": 0,
+      "plan_number": 3
+    },
+    {
+      "selection_call_id": 96,
+      "selected_map_version": 23,
+      "candidate_id": 0,
+      "plan_number": 4
+    },
+    {
+      "selection_call_id": null,
+      "selected_map_version": null,
+      "candidate_id": null,
+      "plan_number": 5
+    }
+  ],
+  "recorded_init_equals_source_configuration": true,
+  "comparison_scope": {
+    "exact_frontend_substitution": [
+      "recorded real_scene_structural_v1 to replay no_real_semantics",
+      "recorded frontend_enabled true to replay false",
+      "recorded inference receipt to replay null; cached labels preserved"
+    ],
+    "selection": "all keys, candidate paths, scores, score audit, candidate audit and hashes",
+    "integers_and_timestamps": "exact",
+    "other_numeric": "declared atol/rtol",
+    "event_comparison": "complete runtime event objects including guard assessments"
+  },
+  "source_sha256": {
+    "replay.py": "056d9cd5c240639879957a0ed1a348a029550fcc1bfd53a6d6ff1e3f1867dbb6",
+    "decisions.jsonl": "b3c3b6372538ad9cceffe8ce42e905a607f57225edd27f29bbbd98b350af7b1f",
+    "frames_manifest.json": "625e5b2fa70ce327299a0ef151eb66f48ef83771c47125a6112d09138c9c03ce",
+    "source/joint_configuration.json": "9e60da776fd538bf7a35162d2415dec139e2cfcbe457c74ecfe13422b133ed98",
+    "source/source_manifest.json": "e2d30a045a22d2f8f4913535c602344a753562e38d1cd48666552ffec931cc86"
+  },
+  "versions": {
+    "python": "3.12.15",
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "open3d": "0.19.0+597106a"
+  },
+  "elapsed_s": 38.03627540598973,
+  "difference_count": 0,
+  "differences": [],
+  "error": null
+}

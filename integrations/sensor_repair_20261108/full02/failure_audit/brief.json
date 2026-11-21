@@ -1,0 +1,133 @@
+{
+  "status": "frozen_readonly_native_mapper_attribution",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/depth_ground_S40_20261108_02",
+  "method": "One exact native20frame mapper-only replay with original cached semantics; stages observed through read-only Python tracing; no planner/detector/ROS execution.",
+  "verified": {
+    "frames": 20,
+    "logged_belief_hash_matches": [
+      0,
+      18,
+      19
+    ],
+    "source_hashes": {
+      "nso_bridge/nso_bridge/joint_engine.py": "12a6dab0c7400d323048143bd6261225bae86c41f623e0077feeb7f3c1d82bd7",
+      "nso_bridge/joint_vendor/nso/mapping3d.py": "275144d68c1bc6e8876ac622629f19916d09ca07651681dd8cf2b11dbe64b38f",
+      "nso_bridge/joint_vendor/nso/observed_runtime_mapper_v10.py": "c27a977a1b7ae417748a786a118287b282771b630ac88b56c0de7e11f5b00a3b",
+      "nso_bridge/nso_bridge/sensor_range_adapter.py": "4811fe011a526ec4c1282dc938484c07ee0e22caf335eda52afc2d98da73e2d5"
+    },
+    "radius_m": 0.7212185868375829,
+    "action18": {
+      "pose": [
+        205,
+        189,
+        2
+      ],
+      "action": "forward"
+    },
+    "action19": {
+      "pose": [
+        205,
+        189,
+        1
+      ],
+      "action": "left"
+    },
+    "unsafe_cell": [
+      206,
+      193
+    ],
+    "cell_value_0through18": 0,
+    "cell_value19": 1,
+    "source": "depth obstacle insertion at action19",
+    "laser_stage_cell_value": 0,
+    "navigation_input_cell_value": 0,
+    "laser_endpoint_support": 0,
+    "depth_point_support": 139
+  },
+  "geometry": {
+    "cell_center_distance_to_logical_current_m": 0.8246211251235321,
+    "original_inflation_margin_m": 0.14142135623730953,
+    "original_cell_center_block_threshold_m": 0.8626399430748924,
+    "actual_base_planning_xyz": [
+      37.911722960757515,
+      38.92511476242284,
+      0.12447258789516671
+    ],
+    "logical_cell_center_planning_xy": [
+      37.9,
+      38.900000000000006
+    ],
+    "actual_vs_logical_xy_offset_m": 0.027716044098635765,
+    "support_point_actual_base_horizontal_distance_minmax_m": [
+      0.9047222339086349,
+      0.9234817542387876
+    ]
+  },
+  "source_support": {
+    "source_packet": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/depth_ground_S40_20261108_02/joint_inputs/joint-1794132633313361370.npz",
+    "source_sha256": "9bb12ebb56a7357b04311adcf0494834028778f367bc1f5d511d5c2ef5a572bb",
+    "source_rgbd_scan_stamp_ns": {
+      "rgb": 1794132633313361370,
+      "depth": 1794132633313361370,
+      "scan": 1794132633271945953
+    },
+    "raw_pixel_u_minmax": [
+      752.0000000000018,
+      776.0000000000023
+    ],
+    "raw_pixel_v_minmax": [
+      159.9999999999998,
+      536.0
+    ],
+    "planning_height_minmax_m": [
+      0.15133701686378648,
+      0.7523932099965875
+    ],
+    "optical_depth_minmax_m": [
+      0.8291865587234472,
+      0.8441110849380492
+    ],
+    "closest_support_raw_pixel": [
+      759.9999999999997,
+      367.99999999999994
+    ]
+  },
+  "interpretation": [
+    "The support pixels align visually with the nearby white exhibition cabinet front corner/vertical face and lower blue strip, not floor. RGB inspection is not physical ground truth.",
+    "Same cell is free through accepted action18; action19 is an in-place left turn, which exposes new depth support. Native policy could select the turn from previous safe belief; the new observation triggers the existing current-footprint stop.",
+    "Native circle inflation conservatively treats the whole occupied grid cell; measured support points themselves are all at least0.904722m from actual base XY, beyond radius0.721219m. No physical circle/chassis/polygon collision is established.",
+    "Depth insertion attribution does not classify these observations as noise or prove a calibration defect. Navigation-grid/scan disagreement alone does not identify which measurement is physically correct."
+  ],
+  "preserved": "No threshold, TF, mapper, original policy or report modification; root result remains current_footprint_not_known_safe/no return. Lifecycle completes normally, separately recorded.",
+  "files": {
+    "depth_support139.npz": {
+      "bytes": 7237,
+      "sha256": "2d614be09271b0df950d29b3f283e008eb85a5932c59481683228fd933ce52e9"
+    },
+    "replay.py": {
+      "bytes": 9628,
+      "sha256": "a337aa7dcc82c1296f15df101f4b1d4399b91211f770b87afc0f8d9a7029f75d"
+    },
+    "result.json": {
+      "bytes": 9232,
+      "sha256": "e30550cbc1d94c008b8812538d19167a93cfe2abeb14dbd44b243fd06fd5486c"
+    },
+    "source19_full.png": {
+      "bytes": 1153987,
+      "sha256": "b77c362e59d21e4f410aa48fbce163d3e05b511ec50b12840243dc0f7bfcfebd"
+    },
+    "support_pixels.json": {
+      "bytes": 1315,
+      "sha256": "60537bacdc82a638f16d575edc974e0803b75bab8d08d0bc65a60dbbecda39b2"
+    },
+    "support_pixels.py": {
+      "bytes": 2576,
+      "sha256": "379c6de98fb098eb07c13a1fb0a4fa0b8ca73cbc2dc39884e91f01ae36af25f0"
+    }
+  },
+  "limits": [
+    "One trajectory, not independent scenes.",
+    "139 samples are the native sampled obstacle support, not every full-resolution pixel.",
+    "Stage attribution and source hashes support exact reproduction; no independent metrology."
+  ]
+}

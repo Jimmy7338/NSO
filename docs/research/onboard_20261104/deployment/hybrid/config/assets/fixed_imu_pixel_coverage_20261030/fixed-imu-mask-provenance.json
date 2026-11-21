@@ -1,0 +1,96 @@
+{
+  "added_pixels": 337,
+  "application_authorized": true,
+  "approval": {
+    "answer": "允许按固定IMU外形修订",
+    "question": "是否允许按上图中已确认属于小车的固定 IMU 外形，修订自体遮罩？草案仅补入白色 IMU 上缘内部2498个像素，用于阻止自体深度成为环境障碍；原遮罩、原始数据、旧地图和失败记录均保留，不删除外部障碍。批准后我会冻结新版本，再准备下一次真实闭环。这是在修订 Goal 的固定遮罩限制，不是重新索取运动许可。",
+    "questionItemId": [
+      "request_user_input_async",
+      "call_f0d99329200a44449667d55717b7d947",
+      0
+    ],
+    "scope": "Exact reviewed fixed-body silhouette change only; not fresh physical site facts or new motion authorization."
+  },
+  "deployed": true,
+  "evidence_id": "reviewed-fixed-IMU-silhouette-r20-approved-20261028:raw-sha256:c90493065ef436da1d293c1d5042c29998d920d4d712f6f97667ff61e5dc3fed",
+  "exact_proposal_pin": {
+    "path": "C:\\Users\\31212\\Documents\\Codex\\2026-10-13\\outputs-nso-docs-robot-handoff-20261013\\outputs\\NSO_RTABMAP_IMPLEMENTATION_20261027\\p3-r20-review-proposals-20261028\\self-mask-proposal.json",
+    "sha256": "695713d1e1e354a9fe7647f7b75d08973ff56f5d654ca83ed356b34cf093b38a"
+  },
+  "historical_maps_modified": false,
+  "historical_mask_modified": false,
+  "identification_basis": "User-confirmed fixed foreground IMU; first-qualified saved RGB reviewed by parent and independent reviewer. Added pixels lie inside visible white upper surface; no visible environment intrusion in that fixed view.",
+  "limitations": "Single fixed mounting/image geometry; invalidate upon camera mounting, calibration, resolution or self-geometry change. This is not an independent metric calibration.",
+  "npy_sha256": "e61022b40475831b71379705ba72b234c1fa314ce4fadbcd706f6f9a02f65226",
+  "old_npy_sha256": "6fb14a427e5e33ddd30ac1854a6727ecc007d9337a4e4163557b04a2b42bd7ff",
+  "old_pixels": 45018,
+  "pixels": 45355,
+  "polygon_uv": [
+    [
+      615,
+      719
+    ],
+    [
+      616,
+      688
+    ],
+    [
+      632,
+      673
+    ],
+    [
+      657,
+      661
+    ],
+    [
+      700,
+      654
+    ],
+    [
+      1125,
+      644
+    ],
+    [
+      1230,
+      654
+    ],
+    [
+      1279,
+      664
+    ],
+    [
+      1279,
+      719
+    ]
+  ],
+  "raw_bool_sha256": "5f4abc28822513b1cbc110868dcdb60fe6027e1c4cdce64c44ea4c7c16d6b3d7",
+  "raw_sources_modified": false,
+  "removed_pixels": 0,
+  "schema": "nso_fixed_imu_pixel_coverage/3",
+  "shape": [
+    720,
+    1280
+  ],
+  "source_original_rgb": "C:\\Users\\31212\\Documents\\Codex\\2026-10-13\\outputs-nso-docs-robot-handoff-20261013\\outputs\\NSO_RTABMAP_IMPLEMENTATION_20261027\\p3-r20-first-support-images-20261028\\rgb.png",
+  "source_original_rgb_sha256": "739a866ad069adcccdb0359a1b02415d85d7839c2e64d8de00eafaafa4e28f92",
+  "source_original_stamp_ns": 1793168166110695553,
+  "use": "Exclude fixed self pixels from geometric evidence only. Never label free, clear historical cells, alter raw source messages or import an old map.",
+  "used_for_motion": false,
+  "authorization_basis": "User requested resumption of actual robot task after review recommending the fixed-body input correction; same previously approved polygon, pixel-area rasterization only",
+  "rasterization": "positive-area intersection with centered unit pixel squares",
+  "current_mount_review": {
+    "rgb": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261030/resume_camera.png",
+    "rgb_sha256": "b0dd92f3b140bc6b2dfd3ffd0bd863c8c9e8278cb82d42ad291c07ef9daf9968",
+    "source_stamp_ns": 1793352063059651859,
+    "shape": [
+      720,
+      1280
+    ],
+    "fixed_foreground_body_visible": true,
+    "review": "Original fixed foreground white/gray plate remains at the same lower image boundary; no environment-based filter"
+  },
+  "offline_replay_receipt": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261030/mask_fix/provenance-replay.json",
+  "physical_calibration": false,
+  "updated_unix_s": 1793352131.851118,
+  "approval_scope_note": "Original approval retained for source silhouette identity; no new human answer fabricated. Current authorized task implements the documented rasterization correction."
+}

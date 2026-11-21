@@ -1,0 +1,49 @@
+{
+  "schema": "nso.architecture_delta.v1",
+  "scope": "Offline B9 experiment; no hardware deployment",
+  "parent": "B8 conditional hidden-depth model",
+  "decision_affecting_revision": true,
+  "revision": "Structural model evidence is divided by a calibrated temperature before combining it with the acquired category prior. Conditional geometric hypotheses within each structure remain unchanged; structural mixture and marginal depth can change.",
+  "selection": {
+    "temperature": 16,
+    "grid": [
+      0.25,
+      0.5,
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "unit": "24 new independent calibration objects, each averaged over four observation conditions",
+    "objective": "neutral structural negative log likelihood",
+    "test_objects_used_for_selection": false
+  },
+  "declaration": "Revision was explicitly described to the user and frozen before held-out test evaluation and policy execution.",
+  "unchanged": [
+    "candidate generation",
+    "common score terms and weights",
+    "geometry-conditional probabilities and template support",
+    "measured-history rule",
+    "virtual action/return budget",
+    "collision checks",
+    "hardware pause"
+  ],
+  "interval_revision": {
+    "role": "posthoc diagnostic sets only",
+    "used_in_planning": false,
+    "promoted": false,
+    "reason": "Object coverage remains 21/24 in held-out set and mean width grows to 2.316 m; interval score worsens."
+  },
+  "controlled_scene_adaptation": {
+    "semantic_cue": "ideal first-hit acquired instance/category, including neutral/swapped interventions",
+    "all_native_branches_executed": true,
+    "strictly_matched_within_layout": true,
+    "cross_layout_exact_sensor_equality": false,
+    "cross_layout_difference": "Up to two float32 ULP depth differences can cross discrete history thresholds; disclosed in mechanism audit."
+  },
+  "evidence_boundary": "Prediction calibration, candidate changes, object surface gains and complete exploration efficiency are separate outcomes. All adverse and tied results are retained."
+}

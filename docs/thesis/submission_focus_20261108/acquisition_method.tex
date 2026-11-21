@@ -1,0 +1,11 @@
+\paragraph{Acquisition-forward comparison.}
+Visible hypothetical area need not become reconstructed surface. We therefore compare Eq.~\ref{eq:template-area} with a forward acquisition term on the same complete hypothesis bank. For every object, structure and geometric particle, a separate prediction-only TSDF replays all acquired RGB-D and fuses hypothetical depth along the candidate route. Future depth contains the current measured mesh and that fitted alternative; it does not use hidden source geometry or actual future observations. Let $\widehat M_{ohk}(r)$ be the resulting forecast mesh, $M_t$ the acquired mesh, and $b_{ohkj}$ the original strict-free-space acceptance mask. The alternative score is
+\begin{equation}
+\widehat H_t^m(r)=\sum_{o,h,k}w_{ohk}^m
+\sum_j a_{ohkj}b_{ohkj}
+\mathbf 1\{d(p_{ohkj},M_t)>\tau\}
+\mathbf 1\{d(p_{ohkj},\widehat M_{ohk}(r))\leq\tau\},
+\quad \tau=0.05\,\mathrm m.
+\label{eq:acquisition-reward}
+\end{equation}
+This predicts gross newly reconstructed object area; lost and net area are evaluated separately. During predicted ray casting, strict-free-contradicted hypothesis intersections are skipped before comparison with the nearest current-native hit; the cross-view measured-support veto is retained and current-native hits are never removed. The four-layout comparison keeps every positive posterior term and the original $0.22\,$m quadrature in both arms, rather than combining a new estimator with a conditional-mean or finer-basis approximation. Native reconstructed-point consumption replaces the former measured-point history rule within this term; the strict-free contradiction mask and its measured-support veto remain. All other scores, candidates and execution rules are shared. Hypothetical frames never update the measured map. Unseen unmodeled occluders and errors in fitted orientation, width or parts remain unrepresented and can cause forecast error. Earlier known-geometry and mean/fine probes are retained separately in the supplement.

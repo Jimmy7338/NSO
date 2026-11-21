@@ -1,0 +1,50 @@
+{
+  "status": "frozen_before_setup_motion",
+  "purpose": "Separate native sender fault diagnosis under original C exploration policy; not completion/replacement of interrupted frozen pilot",
+  "declared_unix_s": 1794141283.6477916,
+  "score_mode": "C",
+  "paid_budget": 40,
+  "external_duration_s": 600,
+  "anchor_odom": [
+    -0.021110804715877195,
+    0.7401597189473775,
+    -3.052113072636933
+  ],
+  "common_grid_reference": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+  "common_grid_sha256": "d1e17da8b981a6a9e9dd4a8d5a601eb8046c2c4403b9a015150f11648658d662",
+  "declared_native_profile": "native_sender_timing_v2_same_guards",
+  "native_binary_sha256": "3c35da96051d4096185b7bf6772a6190f3223016e073c9e5b1db4cc6586cacb0",
+  "unchanged": {
+    "planner": "v10_3_1",
+    "policy": "exploration_joint_v1",
+    "circle_radius_m": 0.7212185868375829,
+    "ground": -0.12447258789516671,
+    "camera": "existing confirmed Nov06",
+    "sender_maximum_sample_gap_ms": 40,
+    "command_TTL_ms": 100,
+    "source_wall_age_ms": 80,
+    "research_candidate_score_and_return": true,
+    "ROS_collision_hardware_stop": true
+  },
+  "setup": {
+    "mode": "stock ROS navigation",
+    "duration_s": 120,
+    "automatic_reverse": false,
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/native_timing_setup_return_01",
+    "counts_as_NSO_result": false
+  },
+  "fresh_input": "Reset independent /nso_pair/map; retain CSM epoch; prepare current live capture with common grid then actual mission observe0 from new live capture; do not reuse prior belief.",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/native_timing_C40_20261108_01",
+  "limits": [
+    "Different fresh sensor inputs; diagnostic repeat is not exact same-belief counterfactual.",
+    "A successful repeat does not prove sporadic sender fault fixed.",
+    "Do not relax40ms threshold or alter old failedpilot outcomes."
+  ],
+  "frozen_unix_s": 1794141764.128552,
+  "source_binding": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py": "1a1605cacce0405f5e5d5c09b94bb2932376d8c2bc49d5d6d52c3f1e4be19039",
+    "/home/ouc/nso_robot/staging/ans-live-20261108-native-timing-v2/manifest.json": "a6d405f9c51ecbb4d9fcbd509129447fa3b20834a7bf5b39da32aa983ef10f57",
+    "/home/ouc/nso_robot/staging/ans-live-20261108-native-timing-v2/bin/nso_scout_attended_node": "3c35da96051d4096185b7bf6772a6190f3223016e073c9e5b1db4cc6586cacb0",
+    "/home/ouc/nso_robot/analyses/native_sender_timing_20261108/deployment/receipt.json": "fb9ec9dd93b7ec5b40331d2f15fce1d9d8ee9653f0d8eca3713b932695b00360"
+  }
+}

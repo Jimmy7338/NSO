@@ -1,0 +1,893 @@
+{
+  "schema": "nso.physical_entry_scale_audit.v1",
+  "status": "fixed_synthetic_configuration_counterexample_only",
+  "fixture": {
+    "shape": [
+      50,
+      50
+    ],
+    "resolution_m": 0.2,
+    "budget": 80,
+    "current_anchor": [
+      14,
+      25,
+      2
+    ],
+    "known_free_except_wall": true,
+    "camera_seen_all": true,
+    "wall_row": 24,
+    "wall_cols_halfopen": [
+      10,
+      40
+    ],
+    "physical_acquisition_simulated": false,
+    "rendering_or_detector_used": false,
+    "score_or_rollout_run": false,
+    "common_inputs_except_radius": true,
+    "source_quality_points": 209
+  },
+  "algebra": {
+    "radius_m": 0.7212185868375829,
+    "obstacle_center_margin_m": 0.14142135623730953,
+    "nav_boundary_edge_shift_from_center_m": 0.1,
+    "strict_flat_face_edge_clearance_lower_bound_m": 0.7626399430748925,
+    "entry_offset_plus_tolerance_m": 0.75,
+    "continuous_necessary_gap_m": 0.012639943074892468,
+    "first_safe_axial_center_distance_m": 1.0,
+    "first_safe_axial_edge_clearance_m": 0.9,
+    "axial_projection_error_lower_bound_m": 0.5,
+    "continuous_radius_threshold_m": 0.7085786437626904,
+    "fixed_tolerance_min_axial_offset_for_this_grid_m": 0.55
+  },
+  "cases": [
+    {
+      "radius_m": 0.2,
+      "geometry": {
+        "nav_rear_xy": [
+          5.0175,
+          5.2
+        ],
+        "measured_rear_xy": [
+          5.0175,
+          5.1
+        ],
+        "desired_entry_xy": [
+          5.0175,
+          5.6000000000000005
+        ],
+        "wanted_heading": 2,
+        "safe_cells": 2208,
+        "feasible_wanted_backside_positive_aperture": 580,
+        "passing_entry_geometry_count": 10,
+        "nearest": {
+          "pose": [
+            21,
+            25,
+            2
+          ],
+          "xy": [
+            5.1000000000000005,
+            5.7
+          ],
+          "error_m": 0.12963892162464175,
+          "cost": 18.0,
+          "outward": 7.0,
+          "aperture_max": 0.9775884039685507,
+          "edge_normal_clearance_m": 0.5
+        },
+        "safe_sha256": "46ed5c1bbdfca86e315d32979711ff2e2bdd7189d48ce1b74a60a7bbec7db925"
+      },
+      "native_generators": {
+        "restored_hierarchical_options_v10": {
+          "target_audit": [
+            {
+              "role": "asset_0_entry",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                5.6000000000000005
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": 0.12963892162464175,
+              "actual_back_axis_offset_m": 0.6000000000000005,
+              "aperture_support_fraction": 0.348299344016726,
+              "reason": "selected"
+            },
+            {
+              "role": "asset_0_deep",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                6.0
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": 0.12963892162464175,
+              "actual_back_axis_offset_m": 0.8000000000000007,
+              "aperture_support_fraction": 0.7519006404982749,
+              "reason": "selected"
+            }
+          ],
+          "available_roles": [
+            "coverage_total_0",
+            "coverage_total_1",
+            "coverage_total_2",
+            "coverage_total_3",
+            "asset_0_entry",
+            "asset_0_deep"
+          ],
+          "safe_sha256": "46ed5c1bbdfca86e315d32979711ff2e2bdd7189d48ce1b74a60a7bbec7db925",
+          "entry_routes": [
+            {
+              "candidate_id": 4,
+              "group": "asset_0_entry",
+              "asset_index": 0,
+              "pose": [
+                21,
+                25,
+                2
+              ],
+              "states": [
+                [
+                  14,
+                  25,
+                  2
+                ],
+                [
+                  15,
+                  25,
+                  2
+                ],
+                [
+                  16,
+                  25,
+                  2
+                ],
+                [
+                  17,
+                  25,
+                  2
+                ],
+                [
+                  18,
+                  25,
+                  2
+                ],
+                [
+                  19,
+                  25,
+                  2
+                ],
+                [
+                  20,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  3
+                ],
+                [
+                  21,
+                  25,
+                  0
+                ],
+                [
+                  20,
+                  25,
+                  0
+                ],
+                [
+                  19,
+                  25,
+                  0
+                ],
+                [
+                  18,
+                  25,
+                  0
+                ],
+                [
+                  17,
+                  25,
+                  0
+                ],
+                [
+                  16,
+                  25,
+                  0
+                ],
+                [
+                  15,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  3
+                ],
+                [
+                  14,
+                  25,
+                  2
+                ]
+              ],
+              "actions": [
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "right",
+                "right",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "left",
+                "left"
+              ],
+              "outbound_actions": [
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward"
+              ],
+              "return_actions": [
+                "right",
+                "right",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "left",
+                "left"
+              ],
+              "return_states": [
+                [
+                  21,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  3
+                ],
+                [
+                  21,
+                  25,
+                  0
+                ],
+                [
+                  20,
+                  25,
+                  0
+                ],
+                [
+                  19,
+                  25,
+                  0
+                ],
+                [
+                  18,
+                  25,
+                  0
+                ],
+                [
+                  17,
+                  25,
+                  0
+                ],
+                [
+                  16,
+                  25,
+                  0
+                ],
+                [
+                  15,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  3
+                ],
+                [
+                  14,
+                  25,
+                  2
+                ]
+              ],
+              "outbound_states": [
+                [
+                  14,
+                  25,
+                  2
+                ],
+                [
+                  15,
+                  25,
+                  2
+                ],
+                [
+                  16,
+                  25,
+                  2
+                ],
+                [
+                  17,
+                  25,
+                  2
+                ],
+                [
+                  18,
+                  25,
+                  2
+                ],
+                [
+                  19,
+                  25,
+                  2
+                ],
+                [
+                  20,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  2
+                ]
+              ],
+              "cost": 18,
+              "outbound_cost": 7,
+              "return_cost": 11,
+              "arrival_action": 7,
+              "return_anchor": [
+                14,
+                25,
+                2
+              ],
+              "is_coverage_anchor": false,
+              "endpoint_measured_fov_support": 0.5167464114832536
+            }
+          ]
+        },
+        "physical_exploration_joint_v1": {
+          "target_audit": [
+            {
+              "role": "asset_0_entry",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                5.6000000000000005
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": 0.12963892162464175,
+              "actual_back_axis_offset_m": 0.6000000000000005,
+              "aperture_support_fraction": 0.348299344016726,
+              "reason": "selected"
+            },
+            {
+              "role": "asset_0_deep",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                6.0
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": 0.12963892162464244,
+              "actual_back_axis_offset_m": 1.0000000000000009,
+              "aperture_support_fraction": 0.9135560464482038,
+              "reason": "selected"
+            }
+          ],
+          "available_roles": [
+            "coverage_total_0",
+            "coverage_total_1",
+            "coverage_total_2",
+            "coverage_total_3",
+            "asset_0_entry",
+            "asset_0_deep"
+          ],
+          "safe_sha256": "46ed5c1bbdfca86e315d32979711ff2e2bdd7189d48ce1b74a60a7bbec7db925",
+          "entry_routes": [
+            {
+              "candidate_id": 4,
+              "group": "asset_0_entry",
+              "asset_index": 0,
+              "pose": [
+                21,
+                25,
+                2
+              ],
+              "states": [
+                [
+                  14,
+                  25,
+                  2
+                ],
+                [
+                  15,
+                  25,
+                  2
+                ],
+                [
+                  16,
+                  25,
+                  2
+                ],
+                [
+                  17,
+                  25,
+                  2
+                ],
+                [
+                  18,
+                  25,
+                  2
+                ],
+                [
+                  19,
+                  25,
+                  2
+                ],
+                [
+                  20,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  3
+                ],
+                [
+                  21,
+                  25,
+                  0
+                ],
+                [
+                  20,
+                  25,
+                  0
+                ],
+                [
+                  19,
+                  25,
+                  0
+                ],
+                [
+                  18,
+                  25,
+                  0
+                ],
+                [
+                  17,
+                  25,
+                  0
+                ],
+                [
+                  16,
+                  25,
+                  0
+                ],
+                [
+                  15,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  3
+                ],
+                [
+                  14,
+                  25,
+                  2
+                ]
+              ],
+              "actions": [
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "right",
+                "right",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "left",
+                "left"
+              ],
+              "outbound_actions": [
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward"
+              ],
+              "return_actions": [
+                "right",
+                "right",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "forward",
+                "left",
+                "left"
+              ],
+              "return_states": [
+                [
+                  21,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  3
+                ],
+                [
+                  21,
+                  25,
+                  0
+                ],
+                [
+                  20,
+                  25,
+                  0
+                ],
+                [
+                  19,
+                  25,
+                  0
+                ],
+                [
+                  18,
+                  25,
+                  0
+                ],
+                [
+                  17,
+                  25,
+                  0
+                ],
+                [
+                  16,
+                  25,
+                  0
+                ],
+                [
+                  15,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  0
+                ],
+                [
+                  14,
+                  25,
+                  3
+                ],
+                [
+                  14,
+                  25,
+                  2
+                ]
+              ],
+              "outbound_states": [
+                [
+                  14,
+                  25,
+                  2
+                ],
+                [
+                  15,
+                  25,
+                  2
+                ],
+                [
+                  16,
+                  25,
+                  2
+                ],
+                [
+                  17,
+                  25,
+                  2
+                ],
+                [
+                  18,
+                  25,
+                  2
+                ],
+                [
+                  19,
+                  25,
+                  2
+                ],
+                [
+                  20,
+                  25,
+                  2
+                ],
+                [
+                  21,
+                  25,
+                  2
+                ]
+              ],
+              "cost": 18,
+              "outbound_cost": 7,
+              "return_cost": 11,
+              "arrival_action": 7,
+              "return_anchor": [
+                14,
+                25,
+                2
+              ],
+              "is_coverage_anchor": false,
+              "endpoint_measured_fov_support": 0.5167464114832536
+            }
+          ]
+        }
+      }
+    },
+    {
+      "radius_m": 0.7212185868375829,
+      "geometry": {
+        "nav_rear_xy": [
+          5.0175,
+          5.2
+        ],
+        "measured_rear_xy": [
+          5.0175,
+          5.1
+        ],
+        "desired_entry_xy": [
+          5.0175,
+          5.6000000000000005
+        ],
+        "wanted_heading": 2,
+        "safe_cells": 1442,
+        "feasible_wanted_backside_positive_aperture": 523,
+        "passing_entry_geometry_count": 0,
+        "nearest": {
+          "pose": [
+            19,
+            25,
+            2
+          ],
+          "xy": [
+            5.1000000000000005,
+            6.1000000000000005
+          ],
+          "error_m": 0.5067605450308854,
+          "cost": 14.0,
+          "outward": 5.0,
+          "aperture_max": 0.9407998047840402,
+          "edge_normal_clearance_m": 0.9000000000000004
+        },
+        "safe_sha256": "5d96b7c0e36e08c82e38c2c84d89824603159ef07735db2ae24a1cb25a25103d"
+      },
+      "native_generators": {
+        "restored_hierarchical_options_v10": {
+          "target_audit": [
+            {
+              "role": "asset_0_entry",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                5.6000000000000005
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": 0.5067605450308854,
+              "actual_back_axis_offset_m": null,
+              "aperture_support_fraction": null,
+              "reason": "target_projection_error_exceeds_limit"
+            },
+            {
+              "role": "asset_0_deep",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                6.0
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": null,
+              "actual_back_axis_offset_m": null,
+              "aperture_support_fraction": null,
+              "reason": "deep_requires_available_entry"
+            }
+          ],
+          "available_roles": [
+            "coverage_total_0",
+            "coverage_total_1",
+            "coverage_total_2",
+            "coverage_total_3"
+          ],
+          "safe_sha256": "5d96b7c0e36e08c82e38c2c84d89824603159ef07735db2ae24a1cb25a25103d",
+          "entry_routes": []
+        },
+        "physical_exploration_joint_v1": {
+          "target_audit": [
+            {
+              "role": "asset_0_entry",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                5.6000000000000005
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": 0.5067605450308854,
+              "actual_back_axis_offset_m": null,
+              "aperture_support_fraction": null,
+              "reason": "target_projection_error_exceeds_limit"
+            },
+            {
+              "role": "asset_0_deep",
+              "asset_index": 0,
+              "desired_xy": [
+                5.0175,
+                6.0
+              ],
+              "navigation_rear_boundary_xy": [
+                5.0175,
+                5.2
+              ],
+              "measured_point_rear_boundary_xy": [
+                5.0175,
+                5.1
+              ],
+              "nearest_error_m": null,
+              "actual_back_axis_offset_m": null,
+              "aperture_support_fraction": null,
+              "reason": "deep_requires_available_entry"
+            }
+          ],
+          "available_roles": [
+            "coverage_total_0",
+            "coverage_total_1",
+            "coverage_total_2",
+            "coverage_total_3"
+          ],
+          "safe_sha256": "5d96b7c0e36e08c82e38c2c84d89824603159ef07735db2ae24a1cb25a25103d",
+          "entry_routes": []
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/env/virtual3d.py",
+      "sha256": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/competition_candidates_v8_1.py",
+      "sha256": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/hierarchical_options_v10.py",
+      "sha256": "7244f0044264e84c07ed0155820376e7156d1f8ef15f0c036fbfc480bee5bfb1"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/route_coverage_v2.py",
+      "sha256": "f01e604ea866bf19609f382527e5475d25010f5fda4f2ca0ab9478d66f57c3bb"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/utils/grid_geometry.py",
+      "sha256": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py",
+      "sha256": "adc651625adcb456562f0907e8fd5b1aa94c9536f8eb856ce193b12af3f1de2c"
+    }
+  ],
+  "script_sha256": "605913e29f3c2efe1a21f98cd22754723270e6191f5b7450a146026f1facb0be"
+}

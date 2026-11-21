@@ -1,0 +1,600 @@
+{
+  "session_id": "hybrid_navigation_1794482317636818303",
+  "mode": "navigation",
+  "status": "standard_navigation_setup_goal_reached",
+  "navigation_source": "lidar_rgbd",
+  "experiment_config_sha256": null,
+  "duration_profile": {
+    "profile": "standard_600s_v1",
+    "duration_s": 90.0,
+    "maximum_duration_s": 600.0,
+    "mission_mode": "navigation",
+    "adapter_deadline_starts_at_arm": true,
+    "supervisor_deadline_uses_run_start": true,
+    "historical_40_action_equivalence": null
+  },
+  "successful_arrivals": [
+    {
+      "goal": {
+        "event": "goal",
+        "id": "/nso_onboard_supervisor-1-1794482321.291",
+        "x": -3.135179363509075,
+        "y": 2.4579616720113053,
+        "yaw": 2.438726245404334,
+        "frame": "odom",
+        "stamp": 1794482321.2915556,
+        "receipt_monotonic": 121766.565646673
+      },
+      "terminal": {
+        "event": "goal_result",
+        "id": "/nso_onboard_supervisor-1-1794482321.291",
+        "status": 3,
+        "text": "Goal reached.",
+        "receipt_monotonic": 121777.866331128
+      },
+      "before": {
+        "pose": [
+          -3.4403808692494944,
+          2.7175537989924057,
+          2.4378540143173275
+        ],
+        "source_stamp_s": 1794482321.22195,
+        "source_age_s": 0.0706934928894043,
+        "receipt_monotonic": 121766.565878774,
+        "source_stamp_ns": 1794482321221950054,
+        "target_frame": "odom",
+        "source_frame": "base_link",
+        "translation": [
+          -3.4403808692494944,
+          2.7175537989924057,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.9387300863651726,
+          0.34465319518733
+        ]
+      },
+      "after": {
+        "pose": [
+          -3.234672341350174,
+          2.5366531529358975,
+          2.3833554716249443
+        ],
+        "source_stamp_s": 1794482332.5130024,
+        "source_age_s": 0.08028793334960938,
+        "receipt_monotonic": 121777.866524092,
+        "source_stamp_ns": 1794482332513002396,
+        "target_frame": "odom",
+        "source_frame": "base_link",
+        "translation": [
+          -3.234672341350174,
+          2.5366531529358975,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.9289912074493935,
+          0.3701017920541841
+        ]
+      },
+      "can_start": {
+        "distance_m": 0.0,
+        "absolute_yaw_rad": 0.0,
+        "accounting_complete": true,
+        "feedback_fresh": true,
+        "receipt_monotonic": 121766.565936567
+      },
+      "can_end": {
+        "distance_m": 0.3083927994966509,
+        "absolute_yaw_rad": 0.6804117774963377,
+        "accounting_complete": true,
+        "feedback_fresh": true,
+        "receipt_monotonic": 121777.866571005
+      },
+      "verified": true,
+      "xy_tolerance_m": 0.15,
+      "yaw_tolerance_rad": 0.35,
+      "target_error_m": 0.12685110094041338,
+      "target_yaw_error_rad": 0.055370773779389815,
+      "displacement_m": 0.27393620095592963,
+      "CAN_distance_delta_m": 0.3083927994966509,
+      "CAN_absolute_yaw_delta_rad": 0.6804117774963377,
+      "reason": "verified_ROS_goal_pose_and_fresh_chassis_feedback",
+      "before_pose_error": null,
+      "after_pose_error": null,
+      "recording_frame": "odom"
+    }
+  ],
+  "physical_stop_independently_observed": false,
+  "cleanup": [
+    {
+      "name": "native",
+      "exited": true,
+      "returncode": 0
+    },
+    {
+      "name": "adapter",
+      "exited": true,
+      "returncode": 0
+    }
+  ],
+  "navigation_reverse_contract": {
+    "profile": "ordinary_ros_reverse_005_v1",
+    "setup_only": false,
+    "ordinary_reverse": true,
+    "NSO_action": false,
+    "changes_to_NSO_policy": false,
+    "original_min_vel_x": 0.0,
+    "requested_min_vel_x": -0.05,
+    "applied_response": {
+      "prune_plan": true,
+      "use_dwa": true,
+      "restore_defaults": false,
+      "vx_samples": 10,
+      "vy_samples": 1,
+      "vth_samples": 20,
+      "max_vel_trans": 0.05,
+      "min_vel_trans": 0.02,
+      "max_vel_x": 0.05,
+      "min_vel_x": -0.05,
+      "max_vel_y": 0.0,
+      "min_vel_y": 0.0,
+      "max_vel_theta": 0.3,
+      "min_vel_theta": 0.05,
+      "acc_lim_x": 0.25,
+      "acc_lim_y": 0.25,
+      "acc_lim_theta": 0.8,
+      "acc_lim_trans": 0.25,
+      "xy_goal_tolerance": 0.15,
+      "yaw_goal_tolerance": 0.08,
+      "trans_stopped_vel": 0.01,
+      "theta_stopped_vel": 0.03,
+      "sim_time": 1.7,
+      "sim_granularity": 0.025,
+      "angular_sim_granularity": 0.01,
+      "path_distance_bias": 0.6,
+      "goal_distance_bias": 0.8,
+      "occdist_scale": 0.01,
+      "twirling_scale": 0.0,
+      "stop_time_buffer": 0.2,
+      "oscillation_reset_dist": 0.05,
+      "oscillation_reset_angle": 0.2,
+      "forward_point_distance": 0.325,
+      "scaling_speed": 0.25,
+      "max_scaling_factor": 0.2,
+      "groups": {
+        "id": 0,
+        "parent": 0,
+        "name": "Default",
+        "type": "",
+        "state": true,
+        "groups": {},
+        "parameters": {},
+        "max_vel_trans": 0.05,
+        "min_vel_trans": 0.02,
+        "max_vel_x": 0.05,
+        "min_vel_x": -0.05,
+        "max_vel_y": 0.0,
+        "min_vel_y": 0.0,
+        "max_vel_theta": 0.3,
+        "min_vel_theta": 0.05,
+        "acc_lim_x": 0.25,
+        "acc_lim_y": 0.25,
+        "acc_lim_theta": 0.8,
+        "acc_lim_trans": 0.25,
+        "prune_plan": true,
+        "xy_goal_tolerance": 0.15,
+        "yaw_goal_tolerance": 0.08,
+        "trans_stopped_vel": 0.01,
+        "theta_stopped_vel": 0.03,
+        "sim_time": 1.7,
+        "sim_granularity": 0.025,
+        "angular_sim_granularity": 0.01,
+        "path_distance_bias": 0.6,
+        "goal_distance_bias": 0.8,
+        "occdist_scale": 0.01,
+        "twirling_scale": 0.0,
+        "stop_time_buffer": 0.2,
+        "oscillation_reset_dist": 0.05,
+        "oscillation_reset_angle": 0.2,
+        "forward_point_distance": 0.325,
+        "scaling_speed": 0.25,
+        "max_scaling_factor": 0.2,
+        "vx_samples": 10,
+        "vy_samples": 1,
+        "vth_samples": 20,
+        "use_dwa": true,
+        "restore_defaults": false
+      }
+    },
+    "restoration_required": true
+  },
+  "standard_navigation_setup_evidence": {
+    "goal": {
+      "id": "/nso_onboard_supervisor-1-1794482321.291",
+      "frame": "odom",
+      "x": -3.135179363509075,
+      "y": 2.4579616720113053,
+      "yaw": 2.438726245404334
+    },
+    "terminal": {
+      "id": "/nso_onboard_supervisor-1-1794482321.291",
+      "status": 3
+    },
+    "before": {
+      "pose": [
+        -3.4403808692494944,
+        2.7175537989924057,
+        2.4378540143173275
+      ],
+      "source_stamp_s": 1794482321.22195,
+      "source_age_s": 0.06905198097229004,
+      "receipt_monotonic": 121766.564235285,
+      "source_stamp_ns": 1794482321221950054,
+      "target_frame": "odom",
+      "source_frame": "base_link",
+      "translation": [
+        -3.4403808692494944,
+        2.7175537989924057,
+        0.0
+      ],
+      "quaternion": [
+        0.0,
+        0.0,
+        0.9387300863651726,
+        0.34465319518733
+      ]
+    },
+    "after": {
+      "pose": [
+        -3.234672341350174,
+        2.5366531529358975,
+        2.3833554716249443
+      ],
+      "source_stamp_s": 1794482332.5130024,
+      "source_age_s": 0.08159160614013672,
+      "receipt_monotonic": 121777.86782719,
+      "source_stamp_ns": 1794482332513002396,
+      "target_frame": "odom",
+      "source_frame": "base_link",
+      "translation": [
+        -3.234672341350174,
+        2.5366531529358975,
+        0.0
+      ],
+      "quaternion": [
+        0.0,
+        0.0,
+        0.9289912074493935,
+        0.3701017920541841
+      ]
+    },
+    "can_start": {
+      "distance_m": 0.0,
+      "absolute_yaw_rad": 0.0,
+      "accounting_complete": true,
+      "feedback_fresh": true,
+      "receipt_monotonic": 121766.564273206
+    },
+    "can_end": {
+      "distance_m": 0.3083927994966509,
+      "absolute_yaw_rad": 0.6804117774963377,
+      "accounting_complete": true,
+      "feedback_fresh": true,
+      "receipt_monotonic": 121777.867850454
+    },
+    "verified": true,
+    "xy_tolerance_m": 0.15,
+    "yaw_tolerance_rad": 0.35,
+    "target_error_m": 0.12685110094041338,
+    "target_yaw_error_rad": 0.055370773779389815,
+    "displacement_m": 0.27393620095592963,
+    "CAN_distance_delta_m": 0.3083927994966509,
+    "CAN_absolute_yaw_delta_rad": 0.6804117774963377,
+    "reason": "verified_ROS_goal_pose_and_fresh_chassis_feedback",
+    "purpose": "experimental_setup_reset",
+    "NSO_action": false,
+    "credited_to_NSO": false,
+    "execution_frame": "odom"
+  },
+  "navigation_reverse_restore": {
+    "requested": {
+      "min_vel_x": 0.0,
+      "max_vel_x": 0.05,
+      "max_vel_trans": 0.05
+    },
+    "applied_response": {
+      "prune_plan": true,
+      "use_dwa": true,
+      "restore_defaults": false,
+      "vx_samples": 10,
+      "vy_samples": 1,
+      "vth_samples": 20,
+      "max_vel_trans": 0.05,
+      "min_vel_trans": 0.02,
+      "max_vel_x": 0.05,
+      "min_vel_x": 0.0,
+      "max_vel_y": 0.0,
+      "min_vel_y": 0.0,
+      "max_vel_theta": 0.3,
+      "min_vel_theta": 0.05,
+      "acc_lim_x": 0.25,
+      "acc_lim_y": 0.25,
+      "acc_lim_theta": 0.8,
+      "acc_lim_trans": 0.25,
+      "xy_goal_tolerance": 0.15,
+      "yaw_goal_tolerance": 0.08,
+      "trans_stopped_vel": 0.01,
+      "theta_stopped_vel": 0.03,
+      "sim_time": 1.7,
+      "sim_granularity": 0.025,
+      "angular_sim_granularity": 0.01,
+      "path_distance_bias": 0.6,
+      "goal_distance_bias": 0.8,
+      "occdist_scale": 0.01,
+      "twirling_scale": 0.0,
+      "stop_time_buffer": 0.2,
+      "oscillation_reset_dist": 0.05,
+      "oscillation_reset_angle": 0.2,
+      "forward_point_distance": 0.325,
+      "scaling_speed": 0.25,
+      "max_scaling_factor": 0.2,
+      "groups": {
+        "id": 0,
+        "parent": 0,
+        "name": "Default",
+        "type": "",
+        "state": true,
+        "groups": {},
+        "parameters": {},
+        "max_vel_trans": 0.05,
+        "min_vel_trans": 0.02,
+        "max_vel_x": 0.05,
+        "min_vel_x": 0.0,
+        "max_vel_y": 0.0,
+        "min_vel_y": 0.0,
+        "max_vel_theta": 0.3,
+        "min_vel_theta": 0.05,
+        "acc_lim_x": 0.25,
+        "acc_lim_y": 0.25,
+        "acc_lim_theta": 0.8,
+        "acc_lim_trans": 0.25,
+        "prune_plan": true,
+        "xy_goal_tolerance": 0.15,
+        "yaw_goal_tolerance": 0.08,
+        "trans_stopped_vel": 0.01,
+        "theta_stopped_vel": 0.03,
+        "sim_time": 1.7,
+        "sim_granularity": 0.025,
+        "angular_sim_granularity": 0.01,
+        "path_distance_bias": 0.6,
+        "goal_distance_bias": 0.8,
+        "occdist_scale": 0.01,
+        "twirling_scale": 0.0,
+        "stop_time_buffer": 0.2,
+        "oscillation_reset_dist": 0.05,
+        "oscillation_reset_angle": 0.2,
+        "forward_point_distance": 0.325,
+        "scaling_speed": 0.25,
+        "max_scaling_factor": 0.2,
+        "vx_samples": 10,
+        "vy_samples": 1,
+        "vth_samples": 20,
+        "use_dwa": true,
+        "restore_defaults": false
+      }
+    },
+    "restored": true
+  },
+  "stop_feedback_verification": {
+    "before_close": {
+      "confirmed": true,
+      "status": "confirmed",
+      "timeout": false,
+      "reason": null,
+      "error": null,
+      "timeout_s": 5.0,
+      "started_monotonic": 121777.921969524,
+      "ended_monotonic": 121779.927235961,
+      "elapsed_s": 2.00526643700141,
+      "sample_count": 100,
+      "last_sample": {
+        "confirmed": true,
+        "reason": null,
+        "snapshot": {
+          "sampled_monotonic": 121779.927182712,
+          "zero_since_monotonic": 121778.91873264313,
+          "zero_interval_s": 1.0084500688681146,
+          "can_status": {
+            "source": 121779.76387834549,
+            "receipt": 121779.763964461,
+            "state": 0,
+            "mode": 1,
+            "error": 0
+          },
+          "can_velocity": {
+            "source": 121779.9188811779,
+            "receipt": 121779.918977491,
+            "v": 0.0,
+            "w": 0.0,
+            "uninterpreted_tail_hex": "00000000"
+          },
+          "status_source_age_s": 0.16330436650605407,
+          "velocity_source_age_s": 0.00830153409333434,
+          "hardware_reason": null,
+          "reader_fault": null
+        }
+      }
+    },
+    "after_close": {
+      "confirmed": true,
+      "status": "confirmed",
+      "timeout": false,
+      "reason": null,
+      "error": null,
+      "timeout_s": 3.0,
+      "started_monotonic": 121780.35083249,
+      "ended_monotonic": 121780.350896076,
+      "elapsed_s": 6.358599057421088e-05,
+      "sample_count": 1,
+      "last_sample": {
+        "confirmed": true,
+        "reason": null,
+        "snapshot": {
+          "sampled_monotonic": 121780.350848683,
+          "zero_since_monotonic": 121778.91873264313,
+          "zero_interval_s": 1.4321160398685606,
+          "can_status": {
+            "source": 121780.16329073906,
+            "receipt": 121780.163388154,
+            "state": 0,
+            "mode": 1,
+            "error": 0
+          },
+          "can_velocity": {
+            "source": 121780.33889842033,
+            "receipt": 121780.339007645,
+            "v": 0.0,
+            "w": 0.0,
+            "uninterpreted_tail_hex": "00000000"
+          },
+          "status_source_age_s": 0.18755794393655378,
+          "velocity_source_age_s": 0.011950262662139721,
+          "hardware_reason": null,
+          "reader_fault": null
+        }
+      }
+    },
+    "cleanup_error": null
+  },
+  "feedback_zero_before_close": true,
+  "actual_CAN_distance_m": 0.31091277933120726,
+  "actual_CAN_absolute_yaw_rad": 0.7072553958892823,
+  "feedback_accounting_complete": true,
+  "feedback_zero_after_close": true,
+  "goals": [
+    {
+      "event": "goal",
+      "id": "/nso_onboard_supervisor-1-1794482321.291",
+      "x": -3.135179363509075,
+      "y": 2.4579616720113053,
+      "yaw": 2.438726245404334,
+      "frame": "odom",
+      "stamp": 1794482321.2915556,
+      "receipt_monotonic": 121766.565646673
+    }
+  ],
+  "goal_results": [
+    {
+      "event": "goal_result",
+      "id": "/nso_onboard_supervisor-1-1794482321.291",
+      "status": 3,
+      "text": "Goal reached.",
+      "receipt_monotonic": 121777.866331128
+    }
+  ],
+  "map_messages": 4,
+  "arrival_evidence": [
+    {
+      "goal": {
+        "event": "goal",
+        "id": "/nso_onboard_supervisor-1-1794482321.291",
+        "x": -3.135179363509075,
+        "y": 2.4579616720113053,
+        "yaw": 2.438726245404334,
+        "frame": "odom",
+        "stamp": 1794482321.2915556,
+        "receipt_monotonic": 121766.565646673
+      },
+      "terminal": {
+        "event": "goal_result",
+        "id": "/nso_onboard_supervisor-1-1794482321.291",
+        "status": 3,
+        "text": "Goal reached.",
+        "receipt_monotonic": 121777.866331128
+      },
+      "before": {
+        "pose": [
+          -3.4403808692494944,
+          2.7175537989924057,
+          2.4378540143173275
+        ],
+        "source_stamp_s": 1794482321.22195,
+        "source_age_s": 0.0706934928894043,
+        "receipt_monotonic": 121766.565878774,
+        "source_stamp_ns": 1794482321221950054,
+        "target_frame": "odom",
+        "source_frame": "base_link",
+        "translation": [
+          -3.4403808692494944,
+          2.7175537989924057,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.9387300863651726,
+          0.34465319518733
+        ]
+      },
+      "after": {
+        "pose": [
+          -3.234672341350174,
+          2.5366531529358975,
+          2.3833554716249443
+        ],
+        "source_stamp_s": 1794482332.5130024,
+        "source_age_s": 0.08028793334960938,
+        "receipt_monotonic": 121777.866524092,
+        "source_stamp_ns": 1794482332513002396,
+        "target_frame": "odom",
+        "source_frame": "base_link",
+        "translation": [
+          -3.234672341350174,
+          2.5366531529358975,
+          0.0
+        ],
+        "quaternion": [
+          0.0,
+          0.0,
+          0.9289912074493935,
+          0.3701017920541841
+        ]
+      },
+      "can_start": {
+        "distance_m": 0.0,
+        "absolute_yaw_rad": 0.0,
+        "accounting_complete": true,
+        "feedback_fresh": true,
+        "receipt_monotonic": 121766.565936567
+      },
+      "can_end": {
+        "distance_m": 0.3083927994966509,
+        "absolute_yaw_rad": 0.6804117774963377,
+        "accounting_complete": true,
+        "feedback_fresh": true,
+        "receipt_monotonic": 121777.866571005
+      },
+      "verified": true,
+      "xy_tolerance_m": 0.15,
+      "yaw_tolerance_rad": 0.35,
+      "target_error_m": 0.12685110094041338,
+      "target_yaw_error_rad": 0.055370773779389815,
+      "displacement_m": 0.27393620095592963,
+      "CAN_distance_delta_m": 0.3083927994966509,
+      "CAN_absolute_yaw_delta_rad": 0.6804117774963377,
+      "reason": "verified_ROS_goal_pose_and_fresh_chassis_feedback",
+      "before_pose_error": null,
+      "after_pose_error": null,
+      "recording_frame": "odom"
+    }
+  ],
+  "elapsed_run_s": 13.893602649011882,
+  "journal_error": null,
+  "adapter_result_path": "adapter/result.json",
+  "adapter_shutdown_reason": "native_driver_fault:8",
+  "lifecycle_recording_errors": []
+}

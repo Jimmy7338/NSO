@@ -1,0 +1,19 @@
+<launch>
+  <arg name="enable_exploration" default="false" />
+  <group ns="nso_visual" if="$(arg enable_exploration)">
+    <node pkg="explore_lite" type="/home/ouc/nso_robot/staging/ans-live-20261023-standard-attended-a4/explore-build/devel/lib/explore_lite/explore" name="explore" output="screen" respawn="false">
+      <param name="robot_base_frame" value="base_link" />
+      <param name="costmap_topic" value="/nso_visual/move_base/global_costmap/costmap" />
+      <param name="costmap_updates_topic" value="/nso_visual/move_base/global_costmap/costmap_updates" />
+      <param name="visualize" value="true" />
+      <param name="planner_frequency" value="0.2" />
+      <param name="progress_timeout" value="45.0" />
+      <param name="potential_scale" value="4.0" />
+      <param name="orientation_scale" value="1.5" />
+      <param name="gain_scale" value="1.0" />
+      <param name="transform_tolerance" value="0.50" />
+      <param name="min_frontier_size" value="0.4" />
+      <param name="goal_update_min_distance" value="0.25" />
+    </node>
+  </group>
+</launch>

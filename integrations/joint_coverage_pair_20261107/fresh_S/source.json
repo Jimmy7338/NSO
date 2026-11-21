@@ -1,0 +1,206 @@
+{
+  "raw_observation": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/fresh_S/observed/1794064084719867857.npz",
+  "joint_input": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/fresh_S/joint_inputs/joint-1794064084719867857.npz",
+  "grid": {
+    "shape": [
+      400,
+      400
+    ],
+    "resolution_m": 0.2,
+    "planning_from_odom": [
+      [
+        0.469065560268529,
+        0.8831633485205164,
+        0.0,
+        39.339850791970434
+      ],
+      [
+        -0.8831633485205164,
+        0.469065560268529,
+        0.0,
+        39.703382155367294
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.233
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "floor_odom_z_m": -0.233,
+    "planning_domain_is_resource_extent_not_observed_world": true,
+    "initial_actual_base_odom_pose": [
+      0.18291414010735346,
+      0.7635625793900424,
+      2.6533602331406048
+    ]
+  },
+  "no_motion": true,
+  "actual_CAN_snapshot": {
+    "velocity": {
+      "receipt_monotonic": 133630.995439435,
+      "kernel_unix_s": 1794064089.189286,
+      "raw_frame_hex": "21020000080000000000000000000000",
+      "v": 0.0,
+      "w": 0.0
+    },
+    "status": {
+      "receipt_monotonic": 133630.896627963,
+      "kernel_unix_s": 1794064089.0853713,
+      "raw_frame_hex": "11020000080000000001010f00000000",
+      "state": 0,
+      "mode": 1,
+      "error": 0
+    }
+  },
+  "initialization_source_state": {
+    "localization_source": "lidar_csm",
+    "active_matcher": "/nso_csm/matcher",
+    "matcher_parameters": {
+      "base_frame": "base_link",
+      "fixed_frame": "odom",
+      "publish_tf": false,
+      "publish_pose": false,
+      "publish_pose_stamped": true,
+      "publish_pose_with_covariance": false,
+      "publish_pose_with_covariance_stamped": false,
+      "use_imu": false,
+      "use_odom": false,
+      "use_vel": false,
+      "use_tf": false
+    },
+    "effective_keyframe_parameters": {
+      "kf_dist_linear": 0.1,
+      "kf_dist_angular": 0.17453292519943295
+    },
+    "control_velocity_source": "can_feedback",
+    "pose_source": {
+      "profile": "fixed_se2_pose_source_diagnostic_v1",
+      "pose_topic": "/nso_csm/pose_stamped",
+      "expected_caller": "/nso_csm/matcher",
+      "source_frame": "odom",
+      "target_frame": "odom",
+      "fixed_coordinate_transform_applied": true,
+      "raw_registration_preserved": true,
+      "source_stamp_preserved": true,
+      "nanosecond_stamp_encoding": "decimal_string_in_ROS_parameters_only",
+      "alignment": {
+        "schema": "csm_fixed_se2_alignment/1",
+        "source_topic": "/nso_csm/pose_stamped",
+        "expected_caller": "/nso_csm/matcher",
+        "source_frame": "odom",
+        "target_frame": "odom",
+        "path": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/live_deployment/restore_alignment.json",
+        "sha256": "1f1777d476dbea3057c4a330c68d59e27d655e584680470341090d968fa95f00",
+        "odom_from_source": [
+          0.016166110131489362,
+          -0.028621712372425057,
+          0.014678487554931507
+        ],
+        "anchor": {
+          "source_stamp_ns": "1794056665825573921",
+          "odom_stamp_ns": "1794056665825573921",
+          "source_pose": [
+            0.1693285498088515,
+            0.7595266559602172,
+            2.565198047829644
+          ],
+          "odom_pose": [
+            0.17432811644750693,
+            0.7333085197699746,
+            2.5798765353845754
+          ]
+        },
+        "anchor_position_error_m": 0.0,
+        "anchor_angle_error_rad": 0.0,
+        "operation": "fixed rigid SE2 coordinates only; no smoothing/fallback/stamp replacement",
+        "physical_accuracy_verified": false
+      }
+    },
+    "controller_odom_topic": "/nso_csm/control_odom",
+    "camera_extrinsics_verified": false,
+    "old_camera_TF_retained": true,
+    "old_approved_self_mask_applied": false,
+    "semantic_model_executed_during_preparation": false,
+    "semantic_configuration_reused": true,
+    "map_and_TSDF_epoch_retained": false,
+    "display_TSDF_epoch_retained": true,
+    "experiment_map_source": {
+      "topic": "/nso_pair/map",
+      "publisher": "/nso_pair/gmapping",
+      "map_frame": "nso_pair_map"
+    },
+    "experiment_map_receipt": {
+      "scope": "fresh per-arm stock gmapping and ROS costmaps; original CSM/display map/TSDF retained",
+      "no_motion": true,
+      "stopped_navigation": [
+        "/usr/bin/python3",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom",
+        "map_topic:=/nso_pair/map"
+      ],
+      "stopped_helper": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+        "--launch-mapper"
+      ],
+      "mapper_helper": {
+        "pid": 1229455,
+        "argv": [
+          "/usr/bin/python3",
+          "-s",
+          "-B",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+          "--launch-mapper"
+        ],
+        "started_unix_s": 1794064025.7461936
+      },
+      "initial_map": {
+        "stamp_ns": 1794064027418068912,
+        "frame": "nso_pair_map",
+        "publisher": "/nso_pair/gmapping",
+        "known_cells": 20219,
+        "occupied_cells": 620
+      },
+      "navigation": {
+        "pid": 1229595,
+        "argv": [
+          "/opt/ros/noetic/bin/roslaunch",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+          "latch_xy_goal_tolerance:=true",
+          "odom_topic:=/nso_csm/control_odom",
+          "map_topic:=/nso_pair/map"
+        ],
+        "started_unix_s": 1794064027.454492
+      },
+      "costmap_sources": {
+        "global_costmap": "/nso_pair/map",
+        "local_costmap": "/nso_pair/map"
+      },
+      "ready_unix_s": 1794064029.8796415
+    },
+    "preparation_no_motion": true
+  },
+  "original_reference_script": "/home/ouc/nso_robot/analyses/exploration_resume_20261107/capture_fresh_S40.py",
+  "experiment_map_source": {
+    "topic": "/nso_pair/map",
+    "publisher": "/nso_pair/gmapping",
+    "map_frame": "nso_pair_map"
+  },
+  "experiment_map_receipt_path": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/epoch_S/start_receipt.json"
+}

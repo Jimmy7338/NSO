@@ -1,0 +1,29 @@
+\subsection{Paired Forecast Selection in Unseen Layouts}
+\label{sec:paired-forecast-layouts}
+
+\paragraph{Comparison Question.}
+We test whether a forecast that explicitly simulates future RGB-D acquisition selects a route that reconstructs more object surface than the visibility-based forecast. Both forecasts use the same geometry fitted from the acquired prefix, the same full geometric and structural posterior, the same category cues, and the same original surface quadrature. The only replaced term is predicted template-surface gain. The unknown-coverage and measured-surface scores, route costs, and execution rules remain shared. Hypothetical surfaces are used for prediction and are never fused into the measured reconstruction.
+
+\paragraph{Layouts and Observations.}
+Four layouts combine two furniture arrangements for each of two room-connectivity topologies: a four-room chain and a four-room cycle. Dimensions, doorway positions, furniture positions, and furniture orientations differ across the layouts. The layouts reuse the open-shelf and closed-cabinet assets used in development; thus, this experiment tests new spatial arrangements and topologies, rather than unseen CAD categories or natural-scene generalization. The simulator supplies exact poses, noiseless opaque RGB-D observations, and ideal visible category and instance labels. A fixed scripted acquisition history defines two decision states per layout. These states are controlled replay checkpoints, not autonomous prefix trajectories or independent scenes.
+
+\paragraph{Matched Candidate Routes.}
+Before evaluating either forecast, we group the original candidate routes by outbound action count. We retain the largest group whose action counts differ by at most three, resolving ties by the lower cost band and then candidate identifiers. The three evaluated routes include the visibility and acquisition forecasts' respective selections under the category prior; any remaining slot is filled by candidate identifier. All four combinations of forecast and neutral/category prior are then ranked on this same three-route set. The best measured route refers only to these three routes. This matching applies to the short-branch diagnostic; complete policy episodes retain every candidate produced by the inherited planner.
+
+\paragraph{Prefix Preparation.}
+Two originally frozen chain-layout checkpoints initially lacked three cost-close routes in the prescribed cost band. Before any new forecast score or branch outcome was evaluated, the preparation protocol was amended to advance only these two checkpoints along their existing acquisition scripts. The earliest checkpoint with three eligible routes was used: Chain~A p1 advances from 17 to 24 paid actions and Chain~B p1 from 17 to 20, with a separation of at least four actions from each second checkpoint. The original preparation failures, all intervening cost-only checks, the other six checkpoints, and the four source layouts are retained. This amendment changes controlled acquisition prefixes and does not modify the complete exploration policy.
+
+\paragraph{Measured Outcome.}
+Each route is executed once from an identical copy of its acquired prefix. Both forecasts are evaluated against this shared actual branch record. We measure object surface using fixed, independently sampled reference points from the source shelf and cabinet surfaces that are visible from the reference camera lattice. For reference point $i$, let $w_i$ be its surface-area weight and $b_i$ and $a_i$ indicate whether the measured native TSDF lies within $5\,$cm before and after the branch. Gross-new, lost, and net surface are
+\begin{equation}
+ A_{+}=\sum_i w_i(1-b_i)a_i,\qquad
+ A_{-}=\sum_i w_i b_i(1-a_i),\qquad
+ A_{\mathrm{net}}=A_{+}-A_{-}.
+\end{equation}
+The primary selection metric is $A_{+}$ for the chosen route; lost and net area are retained to expose reconstruction changes that gross gain alone would hide. Reference geometry is opened only by the independent evaluator after predictions and actual branches are recorded. We also report the chosen route's gap to the best of three, prediction mean absolute error, unchanged selections, failures, and recorded execution time. Missing measurements remain missing; partial execution is retained with its actual measured surface and completion status.
+
+\paragraph{Complete Exploration Comparison.}
+After the first twelve branches are tabulated and the remaining twelve are evaluated, each forecast is run once in every layout with the category prior. The eight complete episodes share initial observations, geometry inference, sensing, candidates, and a budget of $256$ paid actions including return. We report source-referenced object recall and whole-scene surface F1 at $5\,$cm, actions to $95\%$ and $100\%$ correct-free coverage, path length, collisions, and return status. Correct-free coverage uses the source start-reachable robot-free cells as its denominator; falsely occupied cells are not counted as covered free space. Unreached thresholds and incomplete attempts remain censored or failed. The independent comparison unit is the layout ($n=4$); the two states and three branches per state are dependent measurements.
+
+\paragraph{Evaluation Scope.}
+The frozen synthetic walls contain a small light-transmitting junction that is not traversable by the finite-radius robot; the same source geometry is used by sensing and evaluation. The motion graph and coverage denominator are validated for the robot radius. The simulated labels, opaque rendering, exact poses, reused furniture assets, and single episode per arm and layout limit transfer to real cameras, glass, localization drift, and between-run variability. These experiments can establish paired outcomes in the declared controlled layouts; a category-induced trajectory change alone does not establish an efficiency or reconstruction advantage.

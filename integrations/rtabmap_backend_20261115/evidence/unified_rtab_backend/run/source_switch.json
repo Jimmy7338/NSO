@@ -1,0 +1,67 @@
+{
+  "started_unix_s": 1794740242.9276295,
+  "stopped": [
+    {
+      "pid": 3554488,
+      "cmd": "/usr/bin/python3 /opt/ros/noetic/bin/roslaunch /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch latch_xy_goal_tolerance:=true odom_topic:=/nso_csm/control_odom map_topic:=/nso_pair/map navigation_params:=/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation_teb_onsite_062x059_v1.yaml "
+    },
+    {
+      "pid": 3426849,
+      "cmd": "/usr/bin/python3 -s -B /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py --launch-mapper --scan-topic /nso_scan/self_filtered "
+    },
+    {
+      "pid": 3426973,
+      "cmd": "/usr/bin/python3 -s -B /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/live_dashboard.py --output /home/ouc/nso_robot/experiments/live_dashboard_resume_20261115_1794729655770934335 --port 8765 --no-self-mask --map-source navpair "
+    },
+    {
+      "pid": 3519467,
+      "cmd": "/usr/bin/python3 /opt/ros/noetic/bin/roslaunch /home/ouc/nso_robot/analyses/resume_20261115/optimized3d_future_preview/candidate/future_rgbd_preview.launch "
+    },
+    {
+      "pid": 3525037,
+      "cmd": "/usr/bin/python3 -s -B /home/ouc/nso_robot/analyses/resume_20261115/optimized3d_future_preview/viewer_candidate/optimized_preview.py "
+    },
+    {
+      "pid": 3458974,
+      "cmd": "/usr/bin/python3 -s -B /home/ouc/nso_robot/analyses/resume_20261115/dashboard_private_relay.py "
+    }
+  ],
+  "started": [
+    {
+      "name": "mapping_backend",
+      "pid": 3634956,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_mapping_backend.py",
+        "_latest_snapshot_path:=/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_backend/run/latest_snapshot.json",
+        "_source_database_path:=/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/resume_20261115_1794729655770934335/rtabmap.db",
+        "_source_epoch:=resume_20261115_1794729655770934335",
+        "_initial_metadata_path:=/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_backend/run/initial_node_metadata.json"
+      ],
+      "started_unix_s": 1794740247.3682394
+    },
+    {
+      "name": "dashboard_capture",
+      "pid": 3634957,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/live_dashboard.py",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_resume_20261115_1794729655770934335",
+        "--port",
+        "8765",
+        "--no-self-mask",
+        "--map-source",
+        "navpair",
+        "--capture-only"
+      ],
+      "started_unix_s": 1794740247.3697972
+    }
+  ],
+  "robot_motion": false,
+  "old_sources_preserved": true
+}

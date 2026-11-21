@@ -1,0 +1,105 @@
+{
+  "schema": "actual_live_semantic_decision_diagnostic/1",
+  "status": "read_only_complete_no_adaptation_needed_now",
+  "evidence_scope": "Actual autonomous04 bootstrap and original selected-goal scores; semantic score participation, not semantic efficiency gain or independent class accuracy.",
+  "actual_frame": "1794749165053971116",
+  "source_packet": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/joint_inputs/joint-1794749165053971116.npz",
+  "source_packet_sha256": "b1e54e267b0f2f6d103c2be9224faa9fad601cebde662756d6821e3adbd4dcc0",
+  "semantic_receipt": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/joint/semantics/1caafb7bfdd8d5eef5b05383.json",
+  "semantic_mask_sha256": "5ccc38d4e8d86359b6a781da25f329d1312822d036a638e0cf844235814996c3",
+  "original_next_viewpoint_record_sha256": "7160ee10d7d549b2d5ddd8f86bea91696a5f0c8feea3d493538fa3cd33c67696",
+  "actual_real_model_execution": true,
+  "structural_pixels": 20418,
+  "canonical_structural_pixels": 1267,
+  "detections": [
+    {
+      "source_label": "floor",
+      "detector_score": 0.27449721097946167,
+      "v10_class_id": null,
+      "mask_pixels": 317047,
+      "finite_positive_depth_pixels": 315971,
+      "finite_depth_min_m": 0.6110000014305115,
+      "finite_depth_median_m": 0.9780102372169495,
+      "finite_depth_max_m": 14.991894721984863,
+      "depth_within_4m": 304383,
+      "depth_beyond_4m": 11588,
+      "assigned_pixels": 304383
+    },
+    {
+      "source_label": "display counter",
+      "detector_score": 0.26027339696884155,
+      "v10_class_id": 3,
+      "mask_pixels": 21268,
+      "finite_positive_depth_pixels": 20546,
+      "finite_depth_min_m": 2.7979438304901123,
+      "finite_depth_median_m": 3.02897047996521,
+      "finite_depth_max_m": 4.234973907470703,
+      "depth_within_4m": 20418,
+      "depth_beyond_4m": 128,
+      "assigned_pixels": 20418
+    }
+  ],
+  "earlier_frozen_bootstrap": {
+    "frame_id": "1794749017812180116",
+    "canonical_structural_pixels": 0,
+    "detected_labels": [
+      "floor"
+    ],
+    "difference": "Different real frames; earlier frame only had a floor detection above confidence. Current live frame has display counter. Do not propagate earlier zero as current status."
+  },
+  "measured_asset_count": 3,
+  "candidate_count": 11,
+  "nonzero_semantic_score_rows": [
+    {
+      "candidate_id": 7,
+      "group": "asset_2_entry",
+      "G": 8.595594152056554,
+      "S": 5.746257050989755,
+      "S_minus_G": -2.8493371010667996,
+      "common_total_proxy": 1.8794623400912678,
+      "coverage_only_proxy": 0.5000000000000001,
+      "prior_potential_G": 6.716131811965287,
+      "prior_potential_S": 3.8667947108984864,
+      "incremental_aperture": [
+        0.0,
+        0.7058725364303561,
+        0.9609393939989226
+      ],
+      "closed_class_vote1_expected_delta": -2.8493371010668005,
+      "expected_delta_residual": 8.881784197001252e-16
+    },
+    {
+      "candidate_id": 10,
+      "group": "asset_2_deep",
+      "G": 8.40789996060294,
+      "S": 5.609641264041665,
+      "S_minus_G": -2.798258696561275,
+      "common_total_proxy": 1.8749918239416412,
+      "coverage_only_proxy": 0.5000000000000001,
+      "prior_potential_G": 6.532908136661299,
+      "prior_potential_S": 3.7346494401000236,
+      "incremental_aperture": [
+        0.0,
+        0.6790389264225177,
+        0.9437131938930824
+      ],
+      "closed_class_vote1_expected_delta": -2.798258696561275,
+      "expected_delta_residual": 0.0
+    }
+  ],
+  "winners": {
+    "G": 0,
+    "S": 0,
+    "X": 0,
+    "C": 0
+  },
+  "all_GS_winners_same": true,
+  "winner_common_unknown_coverage": 185.58000000000004,
+  "winner_semantic_potential": 0.0,
+  "strongest_G_asset_score": 8.595594152056554,
+  "conclusion": "Semantic pixels reach the original structural asset score. Closed counter prior suppresses spurious rear cavity potential as intended; coverage dominates current choices. Detector prompt adaptation or threshold reduction is not the present primary fix.",
+  "model_threshold_qualification": "The predicted display counter confidence0.26027 is close to configured0.25; early-frame variability is real. Retain original predictions/masks rather than inventing temporal labels or relabeling manual inputs as detections.",
+  "active_code_or_config_modified": false,
+  "new_inference": false,
+  "new_robot_motion": false
+}

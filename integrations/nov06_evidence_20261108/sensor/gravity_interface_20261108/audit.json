@@ -1,0 +1,243 @@
+{
+  "status": "bounded_receive_only_gravity_interface_check_not_calibration_truth",
+  "live_samples": {
+    "n": 100,
+    "source_span_s": 0.49698,
+    "window_s": 2,
+    "retention_cap": 100,
+    "frame": "zed2i_imu_link",
+    "publisher": "/zed2i/zed_node",
+    "acc_mean_m_s2": [
+      0.061955091133713724,
+      -0.07766024675220251,
+      9.780814790725708
+    ],
+    "acc_axis_std_m_s2": [
+      0.00816064965118813,
+      0.010848004809668707,
+      0.009897912971485711
+    ],
+    "mean_acc_norm_m_s2": 9.781319313759354,
+    "gyro_mean_rad_s": [
+      -8.969019136808627e-05,
+      -0.00011140278759983434,
+      -0.00012188885041707244
+    ],
+    "gyro_norm_max_rad_s": 0.006072339328353458,
+    "stationarity": "Low gyro/acc scatter consistent with near-static camera; not independent proof of zero vehicle acceleration."
+  },
+  "semantics": {
+    "raw_topic": "/zed2i/zed_node/imu/data_raw",
+    "source": "Installed wrapper lines3739-3745 publishes SDK calibrated linear_acceleration directly, despite raw topic name; data topic publishes same acceleration. Quaternion not used.",
+    "gravity": "Official SDK docs explicitly include gravity, static reaction vector points away from Earth center. Treat normalized static acceleration as up, not downward gravity.",
+    "official_url": "https://docs.stereolabs.com/docs/development/zed-sdk/modules/sensors/imu",
+    "units": "m/s\u00b2 acceleration, wrapper converts SDK deg/s gyro to ROS rad/s."
+  },
+  "frame_interface": {
+    "driver_source": "zed_wrapper_nodelet.cpp:196 RIGHT_HANDED_Z_UP_X_FWD;337 sensors_configuration.camera_imu_transform;2399-2413 static parent left_camera_frame child imu_link;1304 IMU header frame.",
+    "optical_URDF": "zed_macro.urdf.xacro:119-123 left_camera_frame -> left_camera_optical_frame rpy[-pi/2,0,-pi/2].",
+    "base_laser_assumption": "scout_mini.urdf.xacro:127 laser_link mount rpy0; this is a declared geometric assumption, not measured gravity leveling.",
+    "live_up_optical": [
+      -0.0017392114866289776,
+      -0.9999278523907442,
+      0.011885501951497051
+    ],
+    "live_transforms": {
+      "zed2i_left_camera_frame": {
+        "source": "zed2i_imu_link",
+        "matrix": [
+          [
+            0.9999462555497454,
+            -0.008799492887966937,
+            0.005482238316420229,
+            -0.0020000000949949026
+          ],
+          [
+            0.00874646175143287,
+            0.9999154423146399,
+            0.009623285694021225,
+            -0.023061001673340797
+          ],
+          [
+            -0.005566454785061015,
+            -0.009574818308075148,
+            0.9999386668368682,
+            0.00021700002253055573
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "stamp_ns": 0
+      },
+      "zed2i_left_camera_optical_frame": {
+        "source": "zed2i_imu_link",
+        "matrix": [
+          [
+            -0.008746461751432788,
+            -0.9999154423146399,
+            -0.009623285694021155,
+            0.023061001673340964
+          ],
+          [
+            0.005566454785061181,
+            0.009574818308075161,
+            -0.9999386668368682,
+            -0.00021700002253055573
+          ],
+          [
+            0.9999462555497453,
+            -0.008799492887966942,
+            0.0054822383164204735,
+            -0.002000000094994875
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "stamp_ns": 0
+      },
+      "base_link": {
+        "source": "zed2i_imu_link",
+        "matrix": [
+          [
+            0.9999462555497454,
+            -0.008799492887966937,
+            0.005482238316420229,
+            0.05899999990500509
+          ],
+          [
+            0.00874646175143287,
+            0.9999154423146399,
+            0.009623285694021225,
+            0.0360389983266592
+          ],
+          [
+            -0.005566454785061015,
+            -0.009574818308075148,
+            0.9999386668368682,
+            0.30321700002253055
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "stamp_ns": 0
+      },
+      "laser_link": {
+        "source": "zed2i_imu_link",
+        "matrix": [
+          [
+            0.9999462555497454,
+            -0.008799492887966947,
+            0.005482238316420229,
+            0.06999999990500515
+          ],
+          [
+            0.00874646175143288,
+            0.9999154423146399,
+            0.009623285694021223,
+            0.03253899832665924
+          ],
+          [
+            -0.005566454785061015,
+            -0.009574818308075146,
+            0.9999386668368682,
+            -0.14778299997746958
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "stamp_ns": 0
+      }
+    }
+  },
+  "comparison": {
+    "legacy": {
+      "imu_derived_up_base": [
+        0.011885501951497051,
+        0.0017392114866289776,
+        0.9999278523907442
+      ],
+      "imu_up_to_assumed_base_z_deg": 0.6882579136402042,
+      "training_depth_floor_normal_base": [
+        -0.0017448674746392556,
+        -0.012974619623011234,
+        0.9999143036696364
+      ],
+      "training_depth_floor_normal_optical": [
+        0.012974619623011234,
+        -0.9999143036696364,
+        -0.0017448674746392556
+      ],
+      "live_IMU_up_vs_historical_depth_floor_deg": 1.1492017573366322,
+      "historical_depth_floor_vs_base_z_deg": 0.7501046269164217
+    },
+    "nov06": {
+      "imu_derived_up_base": [
+        -0.015158590042253632,
+        0.005210412684822836,
+        0.9998715261210237
+      ],
+      "imu_up_to_assumed_base_z_deg": 0.9184376917033609,
+      "training_depth_floor_normal_base": [
+        -0.02822366392505468,
+        -0.01000423329817982,
+        0.9995515695104287
+      ],
+      "training_depth_floor_normal_optical": [
+        0.012974619623011345,
+        -0.9999143036696366,
+        -0.001744867474639173
+      ],
+      "live_IMU_up_vs_historical_depth_floor_deg": 1.149201757336315,
+      "historical_depth_floor_vs_base_z_deg": 1.7159373502925712
+    }
+  },
+  "limits": [
+    "Live IMU is not simultaneous with historical training depth. Pose/slope or camera handling changes cannot be excluded by this record.",
+    "IMU-depth floor angle is invariant under applying the same fixed mount rotation to both; it cannot independently select a camera-to-base mount or establish base/laser level.",
+    "Absolute base/laser horizontal reference is not independently measured. Nov06 can improve camera-laser wall consistency while tilting both inferred gravity and floor relative to assumed base z.",
+    "No external IMU topic appeared in current IMU-named topic list; full sensor_msgs/Imu topic type audit saved separately.",
+    "No SDK orientation quaternion or SDK visual pose used as independent truth; IMU factory bias/axis calibration remains a shared dependency.",
+    "Installed source inspected; exact running binary/source build identity not independently established."
+  ],
+  "hashes": {
+    "sample": "953692da8acb28bb4c13f18d6ca2190d7c9c577b6e7e7c57e48f7d35620adcd2",
+    "historical_training_packet": "b60b1ee6badd332c45eb5d2e42520c9fea2769ad3fc97cf8c00745744284b434",
+    "floor_profiles": "1667d5e3a106ae8f4ae6ceafdea49fffc6b7697ad14b622a0e9040098a58880f",
+    "source_files": {
+      "/home/ouc/scout_nav/src/zed-ros/zed-ros-wrapper/zed_nodelets/src/zed_nodelet/src/zed_wrapper_nodelet.cpp": "a80f99bbd3c26260bd9ffb13c692972b51d350f7ec580e95b1a19837c4efa7d1",
+      "/home/ouc/scout_nav/src/zed-ros/zed-ros-wrapper/zed_wrapper/urdf/zed_macro.urdf.xacro": "2e7efa2e06d43451fd8610919d64ebe37c5342ea52364f55f16a241e798bf14c",
+      "/home/ouc/scout_nav/src/scout/scout_ros/scout_description/urdf/scout_mini.urdf.xacro": "6f65f88bdddd11eb3ad6232aec66f6dbe086bcc36a895c23ca37ee857112c02c",
+      "/usr/local/zed/include/sl/Camera.hpp": "7700eb6f96e0da92b0096123cd1e9f96b8f3050b6ac73d8be2058af05063c403"
+    },
+    "script": "76a8eb12422ed55508be7a472c6531bc860d8cc92f7e898b73a2e22625b57411",
+    "capture_script": "db872ef2900b7a98652933248631c01e576eefb7d87148cf28683fceab0ff414",
+    "topic_types": "45571b45f1330616e9087861cbcf54e5b03df0f5670b08158177a8e2303f7f2d"
+  },
+  "published_imu_topics": [
+    {
+      "topic": "/zed2i/zed_node/imu/data",
+      "type": "sensor_msgs/Imu"
+    },
+    {
+      "topic": "/zed2i/zed_node/imu/data_raw",
+      "type": "sensor_msgs/Imu"
+    }
+  ],
+  "conclusion": "Available IMU provides a documented camera-relative gravity direction, but these noncontemporaneous data and unmeasured base/laser leveling do not resolve mount correctness. The floor-normal1.716deg is relative to assumed base/odom z, not independently measured gravity. Multiwall improvement and larger base-axis floor tilt can coexist without logical contradiction."
+}

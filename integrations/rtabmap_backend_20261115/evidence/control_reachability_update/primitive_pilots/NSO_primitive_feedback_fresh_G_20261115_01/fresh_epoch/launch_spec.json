@@ -1,0 +1,247 @@
+{
+  "schema": "fresh_matched_RTAB_launch_spec/1",
+  "generated_unix_s": 1794751726.347187,
+  "prepared_only": true,
+  "actuator_launched": false,
+  "boot_id": "b0d5c5b5-4358-42fe-b231-cf3d2b08490a",
+  "epoch_id": "feedback_fresh_20261115_G01",
+  "epoch_start_s": 1794751726.3457682,
+  "new_database_path": "/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/feedback_fresh_20261115_G01/rtabmap.db",
+  "database_session_preexisting": false,
+  "run_directory": "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/feedback_fresh_20261115_G01",
+  "new_snapshot_path": "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/feedback_fresh_20261115_G01/latest_snapshot.json",
+  "old_bootstrap_imported": false,
+  "environment": {
+    "ROS_PACKAGE_PATH": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/loop_module:/home/ouc/hjd/catkin_ws/src:/home/ouc/nso_robot/staging/teb-transformwait-20261115/src/teb_local_planner:/home/ouc/nso_robot/staging/teb-noetic-20261115/rootfs/opt/ros/noetic/share:/home/ouc/nso_robot/staging/global-planner-copy-20261115:/home/ouc/Voxel-SVIO-HA/src:/home/ouc/voxel_svio_all_ws/src:/home/ouc/voxel_svio_modified_ws/src:/home/ouc/voxel_svio_ws/src:/home/ouc/scout_nav/src:/opt/ros/noetic/share",
+    "LD_LIBRARY_PATH": "/home/ouc/nso_robot/staging/teb-transformwait-20261115/devel/lib:/home/ouc/nso_robot/staging/teb-noetic-20261115/rootfs/opt/ros/noetic/lib:/home/ouc/nso_robot/staging/global-planner-copy-20261115/build/devel/lib:/home/ouc/Voxel-SVIO-HA/devel/lib:/home/ouc/voxel_svio_all_ws/devel/lib:/home/ouc/voxel_svio_modified_ws/devel/lib:/home/ouc/voxel_svio_ws/devel/lib:/home/ouc/scout_nav/devel/lib:/opt/ros/noetic/lib:/opt/ros/noetic/lib/aarch64-linux-gnu:/home/ouc/ORB_SLAM3_backup_20260414/lib:/home/ouc/ORB_SLAM3_backup_20260414/Thirdparty/DBoW2/lib:/home/ouc/ORB_SLAM3_backup_20260414/Thirdparty/g2o/lib:/usr/local/lib:/home/ouc/2D-SLAM/devel_isolated/cartographer/lib:/usr/local/cuda/lib64",
+    "CMAKE_PREFIX_PATH": "/home/ouc/nso_robot/staging/teb-transformwait-20261115/devel:/home/ouc/nso_robot/staging/teb-noetic-20261115/rootfs/opt/ros/noetic:/home/ouc/nso_robot/staging/global-planner-copy-20261115/build/devel:/home/ouc/Voxel-SVIO-HA/devel:/home/ouc/voxel_svio_all_ws/devel:/home/ouc/voxel_svio_modified_ws/devel:/home/ouc/voxel_svio_ws/devel:/home/ouc/scout_nav/devel:/opt/ros/noetic:/home/ouc/2D-SLAM/devel_isolated/cartographer",
+    "PYTHONPATH": "/home/ouc/hjd/catkin_ws/devel/lib/python3/dist-packages:/home/ouc/scout_nav/devel/lib/python3/dist-packages:/opt/ros/noetic/lib/python3/dist-packages",
+    "ROS_MASTER_URI": "http://127.0.0.1:11382",
+    "ROS_HOSTNAME": "127.0.0.1",
+    "ROS_IP": "127.0.0.1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "kept": [
+    "camera/current extrinsics",
+    "LiDAR hardware/driver/self-filter",
+    "CSM registration + rawodom bridge/control feedback",
+    "hybrid sensor bridge",
+    "capture-only camera dashboard/upstream semantic display"
+  ],
+  "root_stop_before_start": [
+    "current mission+native+adapter (confirmed zero first)",
+    "move_base navigation process",
+    "unified_viewer+history_relay+assembler",
+    "RTAB wrapper+rtabmap+rgbd_sync+loopmonitor",
+    "mapping_backend+tf_hold"
+  ],
+  "parameter_cleanup_after_stop": [
+    [
+      "rosparam",
+      "delete",
+      "/nso_loop"
+    ],
+    [
+      "rosparam",
+      "delete",
+      "/nso_rtabmap_mapping_backend"
+    ],
+    [
+      "rosparam",
+      "delete",
+      "/nso_rtabmap_tf_hold"
+    ]
+  ],
+  "parameter_cleanup_note": "Prepared command arguments only; root handles absent namespaces and enumerates actual process identities. No global param deletion; no commands executed by this generator.",
+  "launch_commands": [
+    {
+      "name": "mapping_backend",
+      "phase": 1,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_mapping_backend.py",
+        "_latest_snapshot_path:=/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/feedback_fresh_20261115_G01/latest_snapshot.json",
+        "_source_database_path:=/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/feedback_fresh_20261115_G01/rtabmap.db",
+        "_source_epoch:=feedback_fresh_20261115_G01",
+        "_initial_metadata_path:=\"\"",
+        "_initial_epoch_graph_path:=\"\"",
+        "_initial_epoch_graph_manifest_path:=\"\"",
+        "_publish_held_tf:=false"
+      ],
+      "requirement": "Start before fresh RTAB; no old bootstrap or reused snapshot; explicit empty private params"
+    },
+    {
+      "name": "tf_hold",
+      "phase": 1,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_tf_hold.py"
+      ],
+      "requirement": "Old correction publisher/holder already exited; starts with no correction"
+    },
+    {
+      "name": "assembler",
+      "phase": 1,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_viewer/candidate/unified_rtab.launch",
+        "expected_database:=/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/feedback_fresh_20261115_G01/rtabmap.db",
+        "epoch_id:=feedback_fresh_20261115_G01",
+        "epoch_start_s:=1794751726.3457682",
+        "receipt:=/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/feedback_fresh_20261115_G01/full_history_load.json"
+      ],
+      "requirement": "New process to discard earlier map/point caches; waits for history relay"
+    },
+    {
+      "name": "unified_viewer",
+      "phase": 1,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_viewer/candidate/unified_viewer.py",
+        "--epoch-id",
+        "feedback_fresh_20261115_G01",
+        "--epoch-start-s",
+        "1794751726.3457682",
+        "--semantic-state",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_resume_20261115_1794729655770934335/semantic_state.json",
+        "--history-receipt",
+        "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/feedback_fresh_20261115_G01/full_history_load.json",
+        "--host",
+        "192.168.31.216",
+        "--port",
+        "8766"
+      ],
+      "requirement": "New process discards old graph/map/cloud; existing camera upstream retained, semantic packets before epoch rejected"
+    },
+    {
+      "name": "rtabmap",
+      "phase": 2,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/run_rtabmap_loop_shadow.sh",
+        "feedback_fresh_20261115_G01",
+        "--mode",
+        "mapping",
+        "--scan-topic",
+        "/nso_scan/self_filtered"
+      ],
+      "requirement": "Run only after primary backend+TFholder subscribers registered. Wrapper creates new absent DB; mapping cannot import source DB"
+    },
+    {
+      "name": "history_relay",
+      "phase": 3,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_viewer/candidate/full_history_relay.py",
+        "--expected-database",
+        "/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/feedback_fresh_20261115_G01/rtabmap.db",
+        "--epoch-id",
+        "feedback_fresh_20261115_G01",
+        "--epoch-start-s",
+        "1794751726.3457682",
+        "--receipt",
+        "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/feedback_fresh_20261115_G01/full_history_load.json"
+      ],
+      "requirement": "After first live exact snapshot; otherwise empty GetMap header can make relay exit. Service pulls current DB only"
+    },
+    {
+      "name": "navigation",
+      "phase": 3,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom",
+        "map_topic:=/nso_pair/map",
+        "navigation_params:=/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation_teb_rtabmap_062x059_v1.yaml"
+      ],
+      "requirement": "New move_base clears costmaps/TFbuffer and namespace parameters via clear_params=true; retained current patchedTEB+privateGlobalPlanner environment"
+    }
+  ],
+  "first_data_contract": {
+    "map_source": "/nso_loop/grid_map",
+    "graph_source": "/nso_loop/mapGraph or enclosing MapData header",
+    "map_alias": "/nso_pair/map",
+    "map_frame": "nso_loop_map",
+    "alias_frame": "nso_pair_map",
+    "expected_RTAB_caller": "/nso_loop/rtabmap",
+    "expected_correction_caller": "/nso_rtabmap_mapping_backend",
+    "expected_database": "/home/ouc/nso_robot/experiments/rtabmap_loop_shadow/b0d5c5b5-4358-42fe-b231-cf3d2b08490a/feedback_fresh_20261115_G01/rtabmap.db",
+    "expected_epoch": "feedback_fresh_20261115_G01",
+    "earliest_source_time_s": 1794751726.3457682,
+    "initial_metadata_path": "",
+    "initial_epoch_graph_path": "",
+    "initial_epoch_graph_manifest_path": "",
+    "no_metadata_service_bootstrap_needed": "All node raw poses are observed from first live MapData; do not start source first then recover from old latched graph"
+  },
+  "root_before_motion": [
+    "Verify new snapshot source_database_path/source_epoch/map_stamp >= epoch lowerbound; currentrawnode metadata present",
+    "Verify one aliasTFowner /nso_rtabmap_tf_hold at realCSMstamps and fresh /nso_pair/map provenance",
+    "Create new RGBD/scan packet and new research session/P matrix in this alias frame; nevercopy prior planning transform/records/semantic_cache",
+    "Record actual initial RTAB map+graph+packet hashes and physicalstartplace/orientation; then execute declared G orS mode"
+  ],
+  "new_trial_configuration_bindings": {
+    "geometry_pose_backend": "rtabmap_optimized_replay_v1",
+    "rtabmap_graph_snapshot_path": "/home/ouc/nso_robot/analyses/resume_20261115/fresh_matched_RTAB_protocol/runs/feedback_fresh_20261115_G01/latest_snapshot.json",
+    "restore_epoch_id": "feedback_fresh_20261115_G01",
+    "navigation_map_initialization": "fresh own RTAB mapping DB; no prior manual/exploration map imported",
+    "current_input": "New actual measured packet from this epoch, created after live source routing is established",
+    "planning_from_odom": "Must derive from new actual alias-frame capture; do not copy prior P matrix",
+    "prior_observation_records_imported": false,
+    "prior_semantic_cache_imported": false,
+    "paired_map_epoch_receipt": "Replace old registry/provenance bundle with actual fresh-source launch and first-snapshot receipts",
+    "stale_provenance_keys_to_remove": [
+      "warm_history_candidate",
+      "warm_history_paid_actions",
+      "warm_history_arrival_credit"
+    ]
+  },
+  "navigation_environment_source": {
+    "kind": "actual_navigation_process",
+    "pid": 3912049
+  },
+  "source_bindings": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_mapping_backend.py": "d31f8413a18398a7a348ddc2bcd852da5f928e1fb6149b1925de7d44f0126f8b",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_tf_hold.py": "bbbadef2d00c277f4ed21919f31e79bccbe081dd1c0d1d286cdbf86eefc4d0c0",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/rtabmap_loop_session.py": "02f38118c6c5e2c5d81d364c22df43641e6c3d4213352e6bf9203fdf5c5bfa9b",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/run_rtabmap_loop_shadow.sh": "0879c8e32ed6bce61647bf515237d84b0190e7c2a7c2d8cf97bac8c8e224f803",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/rtabmap_loop_shadow.launch": "2683d040bbc3b8a27ac24543a238d725b5f5c671a65c0f81b6bb4924574ccae6",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch": "e1f8f99f229e56d2b27fed24ebca9b804410e6b35b9bcbc590bafe936cd61fad",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation_teb_rtabmap_062x059_v1.yaml": "58c768a44bd04a997b84bce958294f78bb1b1cd3013923e6fc8c428432983fb7",
+    "/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_viewer/candidate/unified_rtab.launch": "0d1e23abeb6812b5ec65a2ebaf68879fe8f84e10757280655eb6a83a25393fc5",
+    "/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_viewer/candidate/full_history_relay.py": "687a3ddfe54313c49e0108188559c8f601ede8c9b7c418db772e88a0b9ec3d4c",
+    "/home/ouc/nso_robot/analyses/resume_20261115/unified_rtab_viewer/candidate/unified_viewer.py": "1997aaa236ce53c466f965f7894270cf68a8b6eab54f013c6bd1dfec328a1c01"
+  },
+  "boundary": "This resets mapping state only. It neither validates policy reachability nor creates G/S efficacy evidence. Root alone may execute reviewed commands."
+}

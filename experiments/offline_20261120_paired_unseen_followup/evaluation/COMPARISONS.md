@@ -1,0 +1,9 @@
+# Four-layout follow-up to the frozen B11 study
+
+The comparison unit is one layout. The new full episodes reuse the four frozen B11 simulation layouts, exact initial observations, sensor configuration, measured-only map and 256-action cap including return. Each new policy is run once per layout. The existing B11 S visibility runs supply their paired comparator. The original acquisition results remain in the B11 evidence package.
+
+- **G versus S** tests the structural class prior during complete exploration. Both select from the original joint planner's candidates; both use the same visibility forecast, geometry, and ideal visible instance observations. Only the selected score mode changes.
+- **Nearest reachable frontier versus joint planning** compares complete planners. The frontier policy generates and ranks its own candidates by path distance, with unknown gain as a tie-breaker. The policies share the frozen B11 map updates and action guard. Frontier-specific stops and guard interventions are recorded explicitly.
+- **Fitted-geometry gain calibration** is a separate short-branch component study. It uses new furniture assemblies and a frozen split by scene. The independent B11 evaluation layouts are excluded from fitting and from the new holdout. The correction remains experimental.
+
+Report terminal correct-free coverage, first actions to 95% and 100%, area-weighted object recall and per-object recall at 5 cm, whole-scene F1 at 5 cm, paid actions, path length, return, and collisions. The independent evaluator remeasures final occupancy and native mesh metrics and verifies threshold indices from the per-action correct-free counts. Report a missing threshold as unreached at the observed stop and preserve failed or interrupted attempts. Four layouts give descriptive paired evidence under clean simulated sensing and ideal visible instance labels.

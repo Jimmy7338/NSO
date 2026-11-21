@@ -1,0 +1,26 @@
+<launch>
+  
+  <!--RF2O/gmapping plus RGB-D; legacy nso_visual namespace is compatibility only.--><arg name="map_topic" default="/nso_visual/map" />
+  <arg name="scan_topic" default="/nso_visual/scan" />
+  <arg name="odom_topic" default="/nso_visual/odom" />
+  <arg name="latch_xy_goal_tolerance" default="true" />
+  <!-- Default body model retained; colleague geometry is an explicit trial file. -->
+  <arg name="navigation_params" default="$(dirname)/joint_navigation_params.yaml" />
+  <group ns="nso_visual">
+    <node pkg="move_base" type="move_base" name="move_base" output="screen" respawn="false" clear_params="true" required="true">
+      <rosparam command="load" file="$(arg navigation_params)" />
+      <param name="global_costmap/static_layer/map_topic" value="$(arg map_topic)" />
+      <param name="local_costmap/static_layer/map_topic" value="$(arg map_topic)" />
+      <param name="global_costmap/obstacle_layer/depth_scan/topic" value="$(arg scan_topic)" />
+      <param name="local_costmap/obstacle_layer/depth_scan/topic" value="$(arg scan_topic)" />
+      <param name="latch_xy_goal_tolerance" value="$(arg latch_xy_goal_tolerance)" type="bool" />
+      <param name="DWAPlannerROS/latch_xy_goal_tolerance" value="$(arg latch_xy_goal_tolerance)" type="bool" />
+      <param name="DWAPlannerROS/odom_topic" value="$(arg odom_topic)" />
+      <remap from="odom" to="$(arg odom_topic)" />
+      <remap from="cmd_vel" to="/nso_visual/cmd_vel_proposed" />
+      <remap from="/cmd_vel" to="/nso_visual/cmd_vel_proposed" />
+      <remap from="move_base_simple/goal" to="/nso_visual/move_base_simple/goal" />
+      <remap from="/move_base_simple/goal" to="/nso_visual/move_base_simple/goal" />
+    </node>
+  </group>
+</launch>

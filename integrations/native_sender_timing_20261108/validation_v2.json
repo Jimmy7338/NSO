@@ -1,0 +1,19 @@
+{
+  "status": "isolated_v2_not_deployed",
+  "candidate_binary": "/home/ouc/nso_robot/analyses/native_sender_timing_20261108/build_v2/devel/lib/nso_scout_radius_driver_v1/nso_scout_attended_node",
+  "candidate_binary_sha256": "3c35da96051d4096185b7bf6772a6190f3223016e073c9e5b1db4cc6586cacb0",
+  "v1_binary_sha256": "71aa2f9cf125d385225fa17e4015cabe122154a8a50775b4414d0812e3fb2356",
+  "candidate_source_sha256": {
+    "radius_driver_node.cpp": "d53bb73c3b7896758406fecb4393597644d134b4bb408ea504c8a61f74c9af01",
+    "scout_radius_command_timeout_v1.hpp": "0ce4161eba7aa70032935f3dc85ec815ee72cbb91cf55fd16c559a17609907a6",
+    "CMakeLists.txt": "2a1e38aec27d2246516b683cb46adb5eb688238c219e9974983f898c67fce076",
+    "timing_test.cpp": "734f8912a53ded87f74a58a123939a7d997680ed4eab55291b64dc32bcc6377d"
+  },
+  "diff_sha256": "fd88f7c78e6e62daff7086e78bf298c1ed3ad89482e73f2781217a48ba4854dc",
+  "tests": "ctest 2/2 passed; explicit lock fail sentinel, regressed clock sample, 40ms boundary/40ms+1ns, full first fault after wrap, deterministic synthetic sender exception and zero, bad ostream",
+  "limitations": [
+    "v1 capture not v2 validation; v2 requires independent capture",
+    "instrumentation has real clock/memory overhead",
+    "SDK permanent blocking prevents completed cycle and cleanup output"
+  ]
+}

@@ -1,0 +1,1026 @@
+{
+  "controller": {
+    "maximum_candidates": 32,
+    "maximum_views_per_instance": 8,
+    "discovery_weight": 1.0,
+    "inspection_weight": 1.0,
+    "discovery_radius_m": 2.0,
+    "no_progress_patience": 12
+  },
+  "mapper": {
+    "resolution_m": 0.1,
+    "voxel_m": 0.04,
+    "sdf_trunc_m": 0.12
+  },
+  "maximum_episode_bytes": 67108864,
+  "maximum_file_bytes": 33554432,
+  "terminal_record_reserve_bytes": 262144,
+  "maximum_elapsed_s": 600.0,
+  "evaluation": {
+    "max_samples": 1000000,
+    "sample_spacing_m": 0.3,
+    "seed": 4002,
+    "threshold_m": 0.05
+  },
+  "development_gates": {
+    "semantic_relative_J_vs_strong_G_minimum": 0.05,
+    "candidate_relative_J_vs_ordinary_Bayes_on_primary_shift_group_minimum": 0.02,
+    "reliable_group_relative_J_degradation_maximum": 0.01,
+    "mean_coverage_difference_minimum": -0.01,
+    "return_rate_decrease_allowed": false,
+    "positive_parent_count_minimum": 4,
+    "development_parent_count": 6,
+    "maximum_one_parent_share_of_positive_J_differences": 0.5,
+    "requires_frozen_finite_matrix_before_primary_performance": true
+  },
+  "schema": "semantic.scene_experiment.protocol.v1",
+  "status": "frozen",
+  "phase_id": "semantic_development_constructor_fixed_20260923",
+  "scope": "Finite six-parent development comparison; no independent held-out generalization claim.",
+  "primary_experiment_started": true,
+  "asset_root": "audit_results/semantic_scene_assets_20260923",
+  "asset_manifest_sha256": "1566282bc88ef557daa7498c2816e4968c08ae7088bcc6e3d1413b6a96dadfd1",
+  "navigation_root": "audit_results/semantic_scene_navigation_20260923",
+  "navigation_manifest_sha256": "3b6d8de9316ed8952c81dfa43130fc52cef9c5104b775388d6b61be02e2a0813",
+  "reference_index_path": "audit_results/semantic_scene_references_capacity_fixed_20260923/reference_index.json",
+  "reference_index_sha256": "7bf9fa5900e118e5a6915c1093e82120bdbacb510a159f59278acf828ad838c2",
+  "ledger_relative_path": "audit_results/semantic_development_constructor_fixed_20260923/start_ledger.json",
+  "output_relative_path": "audit_results/semantic_development_constructor_fixed_20260923/episodes",
+  "expected_batch_peak_bytes": 402653184,
+  "failure_policy": "Keep all attempts and technical failures; no automatic rerun, slot expansion or post-score scene selection.",
+  "cost_revision_scope": "164-run proposal reduced to 96 before any new-parent policy performance, solely using measured complete integration costs and storage. All six primary parents and five core controls retained.",
+  "slots": {
+    "core_P00_nom_G_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_nom_F_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_nom_B_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_nom_S_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_nom_K_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_shift_G_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_shift_F_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_shift_B_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_shift_S_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P00_shift_K_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_nom_G_b120_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_nom_F_b120_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_nom_B_b120_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_nom_S_b120_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_nom_K_b120_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_shift_G_b120_lexicographic": {
+      "asset_id": "SEM_P01__structure_relationship_shift",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_shift_F_b120_lexicographic": {
+      "asset_id": "SEM_P01__structure_relationship_shift",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_shift_B_b120_lexicographic": {
+      "asset_id": "SEM_P01__structure_relationship_shift",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_shift_S_b120_lexicographic": {
+      "asset_id": "SEM_P01__structure_relationship_shift",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P01_shift_K_b120_lexicographic": {
+      "asset_id": "SEM_P01__structure_relationship_shift",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_nom_G_b120_lexicographic": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_nom_F_b120_lexicographic": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_nom_B_b120_lexicographic": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_nom_S_b120_lexicographic": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_nom_K_b120_lexicographic": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_shift_G_b120_lexicographic": {
+      "asset_id": "SEM_P02__structure_relationship_shift",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_shift_F_b120_lexicographic": {
+      "asset_id": "SEM_P02__structure_relationship_shift",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_shift_B_b120_lexicographic": {
+      "asset_id": "SEM_P02__structure_relationship_shift",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_shift_S_b120_lexicographic": {
+      "asset_id": "SEM_P02__structure_relationship_shift",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P02_shift_K_b120_lexicographic": {
+      "asset_id": "SEM_P02__structure_relationship_shift",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_nom_G_b120_lexicographic": {
+      "asset_id": "SEM_P03__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_nom_F_b120_lexicographic": {
+      "asset_id": "SEM_P03__nominal_relationship",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_nom_B_b120_lexicographic": {
+      "asset_id": "SEM_P03__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_nom_S_b120_lexicographic": {
+      "asset_id": "SEM_P03__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_nom_K_b120_lexicographic": {
+      "asset_id": "SEM_P03__nominal_relationship",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_shift_G_b120_lexicographic": {
+      "asset_id": "SEM_P03__structure_relationship_shift",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_shift_F_b120_lexicographic": {
+      "asset_id": "SEM_P03__structure_relationship_shift",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_shift_B_b120_lexicographic": {
+      "asset_id": "SEM_P03__structure_relationship_shift",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_shift_S_b120_lexicographic": {
+      "asset_id": "SEM_P03__structure_relationship_shift",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P03_shift_K_b120_lexicographic": {
+      "asset_id": "SEM_P03__structure_relationship_shift",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_nom_G_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_nom_F_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_nom_B_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_nom_S_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_nom_K_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_shift_G_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_shift_F_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_shift_B_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_shift_S_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P04_shift_K_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_nom_G_b120_lexicographic": {
+      "asset_id": "SEM_P05__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_nom_F_b120_lexicographic": {
+      "asset_id": "SEM_P05__nominal_relationship",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_nom_B_b120_lexicographic": {
+      "asset_id": "SEM_P05__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_nom_S_b120_lexicographic": {
+      "asset_id": "SEM_P05__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_nom_K_b120_lexicographic": {
+      "asset_id": "SEM_P05__nominal_relationship",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_shift_G_b120_lexicographic": {
+      "asset_id": "SEM_P05__structure_relationship_shift",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_shift_F_b120_lexicographic": {
+      "asset_id": "SEM_P05__structure_relationship_shift",
+      "method": "fixed_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_shift_B_b120_lexicographic": {
+      "asset_id": "SEM_P05__structure_relationship_shift",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_shift_S_b120_lexicographic": {
+      "asset_id": "SEM_P05__structure_relationship_shift",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "core_P05_shift_K_b120_lexicographic": {
+      "asset_id": "SEM_P05__structure_relationship_shift",
+      "method": "known_structure_reference",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "noinfo_P01_none_G_b120_lexicographic": {
+      "asset_id": "SEM_P01__uninformative_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "noinfo_P01_none_B_b120_lexicographic": {
+      "asset_id": "SEM_P01__uninformative_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "noinfo_P01_none_S_b120_lexicographic": {
+      "asset_id": "SEM_P01__uninformative_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "noinfo_P05_none_G_b120_lexicographic": {
+      "asset_id": "SEM_P05__uninformative_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "noinfo_P05_none_B_b120_lexicographic": {
+      "asset_id": "SEM_P05__uninformative_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "noinfo_P05_none_S_b120_lexicographic": {
+      "asset_id": "SEM_P05__uninformative_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "recognition_P00_wrong_G_b120_lexicographic": {
+      "asset_id": "SEM_P00__persistent_recognition_error",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "recognition_P00_wrong_B_b120_lexicographic": {
+      "asset_id": "SEM_P00__persistent_recognition_error",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "recognition_P00_wrong_S_b120_lexicographic": {
+      "asset_id": "SEM_P00__persistent_recognition_error",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "recognition_P04_wrong_G_b120_lexicographic": {
+      "asset_id": "SEM_P04__persistent_recognition_error",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "recognition_P04_wrong_B_b120_lexicographic": {
+      "asset_id": "SEM_P04__persistent_recognition_error",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "recognition_P04_wrong_S_b120_lexicographic": {
+      "asset_id": "SEM_P04__persistent_recognition_error",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "budget_P01_nom_G_b80_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 80,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "budget_P01_nom_B_b80_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 80,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "budget_P01_nom_S_b80_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 80,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "budget_P01_nom_G_b160_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 160,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "budget_P01_nom_B_b160_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 160,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "budget_P01_nom_S_b160_lexicographic": {
+      "asset_id": "SEM_P01__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 160,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "tie_P02_nom_G_b120_reverse": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "reverse",
+      "tie_seed": 0
+    },
+    "tie_P02_nom_B_b120_reverse": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "reverse",
+      "tie_seed": 0
+    },
+    "tie_P02_nom_S_b120_reverse": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "reverse",
+      "tie_seed": 0
+    },
+    "tie_P02_nom_G_b120_seeded_random": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "G",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "seeded_random",
+      "tie_seed": 731
+    },
+    "tie_P02_nom_B_b120_seeded_random": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "bayes_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "seeded_random",
+      "tie_seed": 731
+    },
+    "tie_P02_nom_S_b120_seeded_random": {
+      "asset_id": "SEM_P02__nominal_relationship",
+      "method": "shared_semantic",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "seeded_random",
+      "tie_seed": 731
+    },
+    "ablation_P00_nom_NF_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "shared_no_feedback",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P00_nom_NP_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "shared_no_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P00_nom_NC_b120_lexicographic": {
+      "asset_id": "SEM_P00__nominal_relationship",
+      "method": "shared_no_cross_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P00_shift_NF_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "shared_no_feedback",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P00_shift_NP_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "shared_no_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P00_shift_NC_b120_lexicographic": {
+      "asset_id": "SEM_P00__structure_relationship_shift",
+      "method": "shared_no_cross_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P04_nom_NF_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "shared_no_feedback",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P04_nom_NP_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "shared_no_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P04_nom_NC_b120_lexicographic": {
+      "asset_id": "SEM_P04__nominal_relationship",
+      "method": "shared_no_cross_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P04_shift_NF_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "shared_no_feedback",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P04_shift_NP_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "shared_no_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    },
+    "ablation_P04_shift_NC_b120_lexicographic": {
+      "asset_id": "SEM_P04__structure_relationship_shift",
+      "method": "shared_no_cross_future",
+      "noise_seed": 230923,
+      "budget": 120,
+      "tie_rule": "lexicographic",
+      "tie_seed": 0
+    }
+  },
+  "maximum_new_world_slots": 96,
+  "analysis_blocks": {
+    "core": {
+      "run_ids": [
+        "core_P00_nom_G_b120_lexicographic",
+        "core_P00_nom_F_b120_lexicographic",
+        "core_P00_nom_B_b120_lexicographic",
+        "core_P00_nom_S_b120_lexicographic",
+        "core_P00_nom_K_b120_lexicographic",
+        "core_P00_shift_G_b120_lexicographic",
+        "core_P00_shift_F_b120_lexicographic",
+        "core_P00_shift_B_b120_lexicographic",
+        "core_P00_shift_S_b120_lexicographic",
+        "core_P00_shift_K_b120_lexicographic",
+        "core_P01_nom_G_b120_lexicographic",
+        "core_P01_nom_F_b120_lexicographic",
+        "core_P01_nom_B_b120_lexicographic",
+        "core_P01_nom_S_b120_lexicographic",
+        "core_P01_nom_K_b120_lexicographic",
+        "core_P01_shift_G_b120_lexicographic",
+        "core_P01_shift_F_b120_lexicographic",
+        "core_P01_shift_B_b120_lexicographic",
+        "core_P01_shift_S_b120_lexicographic",
+        "core_P01_shift_K_b120_lexicographic",
+        "core_P02_nom_G_b120_lexicographic",
+        "core_P02_nom_F_b120_lexicographic",
+        "core_P02_nom_B_b120_lexicographic",
+        "core_P02_nom_S_b120_lexicographic",
+        "core_P02_nom_K_b120_lexicographic",
+        "core_P02_shift_G_b120_lexicographic",
+        "core_P02_shift_F_b120_lexicographic",
+        "core_P02_shift_B_b120_lexicographic",
+        "core_P02_shift_S_b120_lexicographic",
+        "core_P02_shift_K_b120_lexicographic",
+        "core_P03_nom_G_b120_lexicographic",
+        "core_P03_nom_F_b120_lexicographic",
+        "core_P03_nom_B_b120_lexicographic",
+        "core_P03_nom_S_b120_lexicographic",
+        "core_P03_nom_K_b120_lexicographic",
+        "core_P03_shift_G_b120_lexicographic",
+        "core_P03_shift_F_b120_lexicographic",
+        "core_P03_shift_B_b120_lexicographic",
+        "core_P03_shift_S_b120_lexicographic",
+        "core_P03_shift_K_b120_lexicographic",
+        "core_P04_nom_G_b120_lexicographic",
+        "core_P04_nom_F_b120_lexicographic",
+        "core_P04_nom_B_b120_lexicographic",
+        "core_P04_nom_S_b120_lexicographic",
+        "core_P04_nom_K_b120_lexicographic",
+        "core_P04_shift_G_b120_lexicographic",
+        "core_P04_shift_F_b120_lexicographic",
+        "core_P04_shift_B_b120_lexicographic",
+        "core_P04_shift_S_b120_lexicographic",
+        "core_P04_shift_K_b120_lexicographic",
+        "core_P05_nom_G_b120_lexicographic",
+        "core_P05_nom_F_b120_lexicographic",
+        "core_P05_nom_B_b120_lexicographic",
+        "core_P05_nom_S_b120_lexicographic",
+        "core_P05_nom_K_b120_lexicographic",
+        "core_P05_shift_G_b120_lexicographic",
+        "core_P05_shift_F_b120_lexicographic",
+        "core_P05_shift_B_b120_lexicographic",
+        "core_P05_shift_S_b120_lexicographic",
+        "core_P05_shift_K_b120_lexicographic"
+      ],
+      "trajectories": 60
+    },
+    "noinfo": {
+      "run_ids": [
+        "noinfo_P01_none_G_b120_lexicographic",
+        "noinfo_P01_none_B_b120_lexicographic",
+        "noinfo_P01_none_S_b120_lexicographic",
+        "noinfo_P05_none_G_b120_lexicographic",
+        "noinfo_P05_none_B_b120_lexicographic",
+        "noinfo_P05_none_S_b120_lexicographic"
+      ],
+      "trajectories": 6
+    },
+    "recognition": {
+      "run_ids": [
+        "recognition_P00_wrong_G_b120_lexicographic",
+        "recognition_P00_wrong_B_b120_lexicographic",
+        "recognition_P00_wrong_S_b120_lexicographic",
+        "recognition_P04_wrong_G_b120_lexicographic",
+        "recognition_P04_wrong_B_b120_lexicographic",
+        "recognition_P04_wrong_S_b120_lexicographic"
+      ],
+      "trajectories": 6
+    },
+    "budget": {
+      "run_ids": [
+        "budget_P01_nom_G_b80_lexicographic",
+        "budget_P01_nom_B_b80_lexicographic",
+        "budget_P01_nom_S_b80_lexicographic",
+        "budget_P01_nom_G_b160_lexicographic",
+        "budget_P01_nom_B_b160_lexicographic",
+        "budget_P01_nom_S_b160_lexicographic"
+      ],
+      "trajectories": 6
+    },
+    "tie": {
+      "run_ids": [
+        "tie_P02_nom_G_b120_reverse",
+        "tie_P02_nom_B_b120_reverse",
+        "tie_P02_nom_S_b120_reverse",
+        "tie_P02_nom_G_b120_seeded_random",
+        "tie_P02_nom_B_b120_seeded_random",
+        "tie_P02_nom_S_b120_seeded_random"
+      ],
+      "trajectories": 6
+    },
+    "ablation": {
+      "run_ids": [
+        "ablation_P00_nom_NF_b120_lexicographic",
+        "ablation_P00_nom_NP_b120_lexicographic",
+        "ablation_P00_nom_NC_b120_lexicographic",
+        "ablation_P00_shift_NF_b120_lexicographic",
+        "ablation_P00_shift_NP_b120_lexicographic",
+        "ablation_P00_shift_NC_b120_lexicographic",
+        "ablation_P04_nom_NF_b120_lexicographic",
+        "ablation_P04_nom_NP_b120_lexicographic",
+        "ablation_P04_nom_NC_b120_lexicographic",
+        "ablation_P04_shift_NF_b120_lexicographic",
+        "ablation_P04_shift_NP_b120_lexicographic",
+        "ablation_P04_shift_NC_b120_lexicographic"
+      ],
+      "trajectories": 12
+    }
+  },
+  "storage_plan": {
+    "integration_cost_receipts": [
+      {
+        "run_id": "integration_A_G",
+        "manifest_sha256": "15ae2472211281e168dc20f0f68203015a6bbf11f194a55296922f2f439046ac",
+        "paid_actions": 160,
+        "elapsed_s": 227.81018477631733,
+        "artifact_bytes": 44240198
+      },
+      {
+        "run_id": "integration_A_B",
+        "manifest_sha256": "7b49aab020b4b8ef2a20face9bb17a73a3f3676eb7b67e06e66b8ca5c84eb4ab",
+        "paid_actions": 160,
+        "elapsed_s": 227.06388170085847,
+        "artifact_bytes": 44249933
+      },
+      {
+        "run_id": "integration_A_S",
+        "manifest_sha256": "7021f85e83ef1df04d5fd431479993b7278f9fce90e0c7054cedee7c4ce8be42",
+        "paid_actions": 160,
+        "elapsed_s": 227.70751951495185,
+        "artifact_bytes": 44251089
+      }
+    ],
+    "total_slots": 96,
+    "maximum_active_batch_slots": 6,
+    "maximum_measured_episode_bytes": 44251089,
+    "point_estimate_total_episode_bytes": 4248104544,
+    "planning_margin": 1.3,
+    "estimated_total_episode_bytes_with_margin": 5522535908,
+    "initial_persistent_free_bytes": 15380758528,
+    "per_start_rule": "Mandatory persistent >= max(10GiB,2*expected_active_batch_peak+2GiB); retain resource failures.",
+    "note": "Integration task had four reference facilities, of which only three acquired qualified observed-instance identities; 160 actions. New parents also have four facilities, mostly 120 actions, but different layouts. Extrapolation is uncertain; 64MiB cap per episode. Retain technical exhaustion, never silently retry."
+  },
+  "analysis_rules": {
+    "unit": "parent layout; condition/budget/tie/recognition variants do not increase n",
+    "main_reliable_block": "core nominal_relationship, six parents",
+    "main_algorithm_block": "core structure_relationship_shift, six parents",
+    "robustness_limit": "No-information/recognition/ablations use two parents; budget/tie use one. These are mechanism boundary diagnostics, not six-parent robustness claims.",
+    "singleton_class_boundary": "Use the observed-history boundary in integration DEV_A_G/B/S: at most one qualified observed instance per category. The physical task contains two cabinets, but they did not both enter qualified shared belief. This is not a true singleton-class scene or independent primary parent. Mathematical single-instance equivalence remains separately tested.",
+    "known_uniform_prior_boundary": "Existing algebraic tests only; not substituted for actual uninformed relation trajectories.",
+    "paired_effects": "For each fixed parent/condition compute absolute J differences and relative differences; development gates use relative difference of means, not mean of ratios.",
+    "missing_or_failed": "Keep every attempted slot, separate technical failures from task outcomes. Do not invent missing J=0; report complete-pair counts and sensitivity bounds. Core gate cannot pass with missing required pairs.",
+    "stopping": "One candidate plus at most one diagnosed bounded correction; compare implementations separately. No expansion to achieve positive effects. Required matrix or a declared integrity/resource stop must be reported truthfully.",
+    "metric": "J_nav=C_nav*equal-facility exterior F1@5cm; full prediction mesh; missed facilities retained. .3m is surface-evaluation quadrature spacing; TSDF voxel .04m; matching distance threshold .05m.",
+    "gate_comparisons": {
+      "semantic_information": "core nominal: shared_semantic versus G; relative difference of means >=5%",
+      "candidate_increment": "core relationship shift: shared_semantic versus bayes_semantic; relative difference of means >=2%, positive J difference in >=4/6 parents, no parent >50% of summed positive J differences",
+      "reliable_noninferiority": "core nominal: shared_semantic versus bayes_semantic; mean J relative difference >=-1%",
+      "coverage_guard": "For each core comparison S/G nominal, S/B shifted and S/B nominal: mean C_nav difference >=-0.01",
+      "return_guard": "For each same comparison, S return rate must not be lower; all attempted task outcomes retained",
+      "zero_denominator": "Baseline mean J=0 makes relative difference undefined; report absolute difference and do not pass a relative gate automatically",
+      "uncertainty": "These are finite development investment gates, not confirmatory statistical significance",
+      "attribution": "Inspect matched noinfo/tie/error/ablation actions and outcomes. If they contradict semantic attribution or incremental mechanism, numeric core thresholds alone cannot yield full pass."
+    }
+  },
+  "freeze_record": {
+    "date": "2026-09-23",
+    "primary_new_parent_policy_results_before_freeze": 0,
+    "independent_slot_review": "all 96 slots covered, no duplicate or omitted block; gate comparison and metric-unit clarifications applied",
+    "static_sensing_report": "audit_results/semantic_scene_sensing_20260923/report.json",
+    "static_sensing_report_sha256": "19f85b44d4fb3bd74530d0d08ad35e8ba8f65052c7027b3c5191dfca738e98fc",
+    "retained_static_failures": "P03 facility 0: 0 of 2 nearest declared views qualified; original geometry and thresholds unchanged",
+    "positive_surface_evaluator": "nso/complete_surface_evaluation.py",
+    "positive_surface_evaluator_sha256": "7f56ab54eec7197cb09c22e135e70ab655b2ed64f10a4c3381ca0da3ca4ad203",
+    "primary_performance_not_used_for_slot_selection": true
+  },
+  "constructor_correction": {
+    "record": "audit_results/semantic_development_constructor_fixed_20260923/constructor_correction.json",
+    "record_sha256": "db1dfb202ab962a686f785610bf07351e9de1f5b961096d28d69c1397713d324",
+    "original_phase_id": "semantic_development_20260923",
+    "counts": 1,
+    "total_attempt_ceiling_including_failure": 97,
+    "total_primary_world_ceiling": 96
+  }
+}

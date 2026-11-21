@@ -1,0 +1,46 @@
+{
+  "schema_version": "semantic_gain_v13_paired_information/1",
+  "status": "protocol_frozen_before_missing_paired_outcomes; execution_not_started",
+  "histories": "eval_results/semantic_gain_v13_multistate_development_v13_1_20260914",
+  "pairing_audit": "audit_results/semantic_gain_v13_pairing_20260914/result.json",
+  "parents": ["Q0", "Q1", "Q2", "Q3"],
+  "eligible_pairs": [
+    {"parent": "Q0", "action_id": 0, "candidates_per_arrangement": 4},
+    {"parent": "Q0", "action_id": 19, "candidates_per_arrangement": 9},
+    {"parent": "Q1", "action_id": 0, "candidates_per_arrangement": 4},
+    {"parent": "Q1", "action_id": 18, "candidates_per_arrangement": 9},
+    {"parent": "Q2", "action_id": 0, "candidates_per_arrangement": 4},
+    {"parent": "Q2", "action_id": 20, "candidates_per_arrangement": 9},
+    {"parent": "Q3", "action_id": 0, "candidates_per_arrangement": 4},
+    {"parent": "Q3", "action_id": 20, "candidates_per_arrangement": 8}
+  ],
+  "arrangements": ["shelf_east", "shelf_west"],
+  "expected_candidate_outcomes": 102,
+  "total_budget": 96,
+  "first_option": "complete roundtrip then unchanged geometry continuation with live feedback",
+  "primary_reward": "delta(coverage_2d_fraction * global_f1_at_5cm)",
+  "pair_value": "mean_over_arrangements(max_over_common_candidates(reward)) - max_over_common_candidates(mean_over_arrangements(reward))",
+  "parent_aggregation": "equal-weight mean of that parent's two predeclared matched decision pairs",
+  "aggregate": "equal weight per parent, never per frame or candidate",
+  "numerical_positive_tolerance": 1e-12,
+  "development_training_screen": {
+    "all_expected_outcomes_present": true,
+    "all_geometry_history_pool_and_feedback_certificates_valid": true,
+    "zero_collisions_and_safe_returns_and_no_budget_violations": true,
+    "minimum_positive_parent_count": 3,
+    "minimum_mean_value_relative_to_geometry_blind_oracle": 0.005,
+    "minimum_geometry_blind_oracle_mean": 1e-12,
+    "reference_sample_seeds_for_sensitivity": [2026, 2027, 2028],
+    "same_screen_required_on_each_reference_seed": true,
+    "interpretation": "engineering screen for whether training is worth attempting, not statistical significance, application acceptance or semantic model efficacy"
+  },
+  "existing_evidence": {
+    "source": "eval_results/semantic_gain_v13_continuations_Q0_east_20260914",
+    "eligible_subset": "Q0/east step 0 and 19 only; 13 previously inspected development outcomes",
+    "reuse_requires": ["full checkpoint state hash", "candidate pool and full route hashes", "prefix sensor hashes", "runtime source hashes", "same evaluation reference", "same task budget", "same continuation definition", "successful physical replay"]
+  },
+  "negative_and_unmatched_states": "retain; unmatched later states may be used for grouped development after this screen, never mislabel them as exact geometry-conditioned pairs",
+  "frozen_confirmation_excluded": "F00-F11",
+  "training_models_not_yet_implemented": true,
+  "independent_confirmation": false
+}

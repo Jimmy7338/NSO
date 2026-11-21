@@ -1,0 +1,34 @@
+{
+  "arm": "S",
+  "effective_args": {
+    "nso_backend": "cpu_v10",
+    "eval": true,
+    "train_global": false,
+    "use_open_vocab_semantic": true,
+    "use_topo_graph": true,
+    "use_rpn_uq": true,
+    "use_igcr": true,
+    "cpu_disable_feedback": false,
+    "cpu_force_gain_feedback": false,
+    "cpu_freeze_gain_posterior": false,
+    "cpu_max_candidates": 12,
+    "cpu_coverage_slots": 4,
+    "cpu_planner_revision": "v10_3_1",
+    "cpu_measured_novelty_floor": 0.25,
+    "cpu_score_mode": "S",
+    "run_id": "N19-20261120-S"
+  },
+  "backend": "ExplorationJointCPUFourModules",
+  "policy_variant": "exploration_joint_v1",
+  "gain_feedback_enabled": true,
+  "history_feedback_enabled": true,
+  "consume_predicted_attempts": false,
+  "generic_prior_multiplier": 1.0,
+  "initial_packet_sha256": "42f51b66d8dcc4738fd78d4d525f7b7625da12dfdca36aa1dee19e772386bc98",
+  "capabilities": {
+    "semantic": "measured RGB-D marker support; declared category prior; open vocabulary unavailable",
+    "topology": "observed connected-region graph and full pose options; room segmentation unvalidated",
+    "reachability_uq": "deterministic observed-map guard; trained/calibrated uncertainty unavailable",
+    "igcr": "actual sensor feedback consumed in next option score; quality is an observed proxy"
+  }
+}

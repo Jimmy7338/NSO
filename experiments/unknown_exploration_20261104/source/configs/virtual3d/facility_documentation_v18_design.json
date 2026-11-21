@@ -1,0 +1,120 @@
+{
+  "schema": "facility_documentation_v18/design_1",
+  "status": "design_not_executed",
+  "task": "Explore an unknown workshop and reconstruct all mission assets under coverage and return constraints",
+  "architecture": [
+    "ANS global/local",
+    "OV-SDF",
+    "STGHP",
+    "RPN-UQ",
+    "IGCR"
+  ],
+  "document": "docs/research/V18_TASK_SCENARIO_AND_EVALUATION_DESIGN_20260914.md",
+  "sensor_stage": "CPU RGB-D plus planar laser; ideal pose/completeness mechanism first",
+  "semantic_stage": "visible artificial markers initially; natural recognition evaluated separately",
+  "scene_families": [
+    "correlated_occluded_structure",
+    "simple_or_abundant_budget_boundary",
+    "misleading_or_blocked_prior"
+  ],
+  "asset_types": [
+    "open_shelf_with_back_panel",
+    "closed_equipment_cabinet",
+    "workbench_with_occluded_lower_surfaces"
+  ],
+  "main_scale_assets": [
+    4,
+    8,
+    16
+  ],
+  "pilot_assets_per_scene": 2,
+  "reference_policy": "Evaluator-only, pre-frozen safely observable asset surface set; unseen assets score zero; no strategy-dependent denominator",
+  "primary": {
+    "quality": "macro mean over all frozen mission-asset F1 at 0.05m",
+    "joint": "coverage_2d_fraction * asset_macro_F1",
+    "eligibility": {
+      "coverage_2d_min": 0.8,
+      "returned": true,
+      "collisions": 0
+    },
+    "threshold_status": "engineering initial values; reachability checked and versioned before any policy outcomes"
+  },
+  "completion": {
+    "precision_min": 0.95,
+    "recall_min": 0.8,
+    "threshold_m": 0.05,
+    "asset_weights": "uniform independent of semantic class"
+  },
+  "supplementary": [
+    "original global coverage*F1",
+    "global and per-asset precision recall F1",
+    "surface errors",
+    "new visible surface area",
+    "worst quartile asset quality",
+    "completion fraction",
+    "time to joint service requirement with failures censored",
+    "path length",
+    "planning wall time",
+    "collisions",
+    "return success"
+  ],
+  "sensitivity": {
+    "coverage_min": [
+      0.6,
+      0.9
+    ],
+    "distance_m": [
+      0.02,
+      0.1
+    ]
+  },
+  "pilot": {
+    "parent_layout_ids": [
+      "D18-P00",
+      "D18-P01"
+    ],
+    "paired_structure_assignments": [
+      "A_open_B_closed",
+      "A_closed_B_open"
+    ],
+    "shared_options": [
+      "continue_coverage",
+      "observe_asset_A",
+      "observe_asset_B"
+    ],
+    "physical_outcomes": 12,
+    "total_budget": "freeze before outcomes using common geometric feasibility; charged prefix, actions, sensing and execution timing reported",
+    "continuation": "same task-aware geometric policy with existing safe denial recovery",
+    "screen": "within each parent, observed-class-conditioned oracle improves feasible common-choice oracle J_asset by >5%; necessary pilot screen only",
+    "failure_policy": "preserve all failures; no feasible options means task/budget infeasible, not evidence of semantics",
+    "training_allowed": false,
+    "independent_confirmation": false
+  },
+  "controls": [
+    "generic coverage",
+    "task-aware geometric NBV with same discovered target masks",
+    "fixed semantic",
+    "equal-capacity geometric predictor",
+    "semantic predictor",
+    "swapped semantic",
+    "zero semantic confidence",
+    "no feedback"
+  ],
+  "planner_truth_forbidden": [
+    "hidden instance geometry",
+    "future sensor packets",
+    "reference surfaces",
+    "ground-truth completion",
+    "physical structure seed"
+  ],
+  "incomplete": [
+    "new world generator",
+    "reference observability and predicted-surface ownership evaluator",
+    "new task utility head",
+    "physical candidate outcomes",
+    "model fitting and held-out confirmation"
+  ],
+  "historical_evidence": "V13-V17 results preserved under original task; not reclassified as new-task confirmation",
+  "protected": "F00-F11",
+  "supersedes_next_action": "old-task 12-branch diagnostic deferred per user scenario redesign request"
+}

@@ -1,0 +1,201 @@
+{
+  "source_packet": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/depth_ground_S40_20261108_02/joint_inputs/joint-1794132633313361370.npz",
+  "source_sha256": "9bb12ebb56a7357b04311adcf0494834028778f367bc1f5d511d5c2ef5a572bb",
+  "protocol_sha256": "e8f2cf4e340a3416b5a2a1a69d10d14a8374799ffbda58269420da10fc0711fe",
+  "script_sha256": "9bae0eb9df7ce9dcd4d068d71c435eae5034a9c86c3c946b246d4b5fb82eebc9",
+  "source_stamps_ns": {
+    "rgb": 1794132633313361370,
+    "depth": 1794132633313361370,
+    "scan": 1794132633271945953
+  },
+  "motion_before": {
+    "receipt": 29456.173850106,
+    "source": 29456.173785448074,
+    "uninterpreted_tail_hex": "00000000",
+    "v": -0.004,
+    "w": -0.03
+  },
+  "motion_after": {
+    "receipt": 29456.493784412,
+    "source": 29456.493713855743,
+    "uninterpreted_tail_hex": "00000000",
+    "v": 0.0,
+    "w": -0.02
+  },
+  "laser_height_planning_m": {
+    "n": 1874,
+    "median": 0.5754725878951668,
+    "p05_p95": [
+      0.5754725878951668,
+      0.5754725878951668
+    ],
+    "minmax": [
+      0.5754725878951668,
+      0.5754725878951668
+    ]
+  },
+  "faces": [
+    {
+      "face": "left_face",
+      "depth_roi_raw_xyxy": [
+        640,
+        280,
+        733,
+        440
+      ],
+      "depth_fit": {
+        "n": 960,
+        "median": -8.966854010294956e-05,
+        "p05_p95": [
+          -0.002356361982776489,
+          0.0029296733851983153
+        ],
+        "minmax": [
+          -0.004772568983903991,
+          0.004674405347775412
+        ]
+      },
+      "normal_odom": [
+        0.3921810932346542,
+        -0.9198416857141091,
+        -0.009233814590791757
+      ],
+      "offset_odom": 1.3704341255535462,
+      "actual_hit_projected_into_face_n": 74,
+      "both_actual_expected_in_face_n": 70,
+      "all_projected_hit_signed_residual_m": {
+        "n": 74,
+        "median": -0.04015466437616977,
+        "p05_p95": [
+          -0.12349391995776766,
+          -0.0348022514356584
+        ],
+        "minmax": [
+          -0.14101960295854643,
+          -0.032088798428238086
+        ]
+      },
+      "both_expected_actual_signed_residual_m": {
+        "n": 70,
+        "median": -0.039936191852570135,
+        "p05_p95": [
+          -0.10568857026667652,
+          -0.03476684480294941
+        ],
+        "minmax": [
+          -0.1225946089269414,
+          -0.032088798428238086
+        ]
+      },
+      "selected_cell_counts": {
+        "[205, 195]": 23,
+        "[205, 196]": 3,
+        "[206, 194]": 35,
+        "[206, 195]": 13
+      },
+      "near_target_return_count": 139
+    },
+    {
+      "face": "right_face",
+      "depth_roi_raw_xyxy": [
+        813,
+        287,
+        1013,
+        440
+      ],
+      "depth_fit": {
+        "n": 1950,
+        "median": 2.3031474192192203e-05,
+        "p05_p95": [
+          -0.001762280184633258,
+          0.0017304006039804002
+        ],
+        "minmax": [
+          -0.0038243776754418035,
+          0.004271136860585334
+        ]
+      },
+      "normal_odom": [
+        0.9199737467380846,
+        0.3919797915460498,
+        -0.00038513920342051015
+      ],
+      "offset_odom": 0.352137089074062,
+      "actual_hit_projected_into_face_n": 142,
+      "both_actual_expected_in_face_n": 0,
+      "all_projected_hit_signed_residual_m": {
+        "n": 142,
+        "median": -0.15522266155583198,
+        "p05_p95": [
+          -0.25717526550718695,
+          -0.1434484955943984
+        ],
+        "minmax": [
+          -0.32004807508356564,
+          -0.13811769072684427
+        ]
+      },
+      "both_expected_actual_signed_residual_m": null,
+      "selected_cell_counts": {
+        "[206, 194]": 4,
+        "[207, 195]": 38,
+        "[208, 195]": 22,
+        "[208, 196]": 7,
+        "[209, 196]": 23,
+        "[210, 196]": 8,
+        "[210, 197]": 9,
+        "[211, 197]": 14,
+        "[212, 197]": 2,
+        "[212, 198]": 4,
+        "[214, 199]": 11
+      },
+      "near_target_return_count": 139
+    }
+  ],
+  "limits": "RGB polygon is approximate surface identity, not point GT; distinct modalities/timestamps and corner/height/occlusion effects remain. Plane fits and consistency do not prove extrinsic or absolute accuracy.",
+  "edge_domain": {
+    "selection": "Same raw u span752..776 as depth139 supports; no residual gate.",
+    "scan_index_minmax": [
+      932,
+      945
+    ],
+    "n": 14,
+    "cells": {
+      "[206, 194]": 12,
+      "[207, 195]": 2
+    },
+    "raw_v_range": [
+      285.996458815581,
+      289.0716585374484
+    ]
+  },
+  "interpretation": [
+    "Central face depth planes are internally tight, but actual scan returns projected into cabinet left/right RGB polygons disagree with these planes by median -40.15mm/-155.22mm. Normals point towards camera, so negative means behind the fitted plane. This conditional discrepancy prevents attributing all modality disagreement to grid quantization.",
+    "Left face:70 returns also have predicted ray-plane intersection inside conservative RGB polygon. Right face:0 pass this additional test; do not force those142 projected returns into confirmed same-face correspondences. Coarse polygon/height/corner effects and unknown true TF remain unresolved. The central fit ROI and polygons were fixed before residual computation; no outlier removal or registration.",
+    "14 scan returns at raw u752..776 map to adjacent cells[206,194]/[207,195], not failed cell[206,193]. Thus a free target scan cell is compatible with adjacent returns. This is not proof scan missed the object or depth is wrong.",
+    "Scan plane planning z=.5754726m lies within depth-supported height range .1513..7524m; different heights sample the face/corner differently, but height alone cannot be established as the cause.",
+    "Same original historical odom transforms at each source timestamp were used. No independent absolute/extrinsic accuracy truth or physical collision conclusion."
+  ],
+  "motion_and_timing": {
+    "scan_minus_rgbd_ns": -41415417,
+    "before": {
+      "receipt": 29456.173850106,
+      "source": 29456.173785448074,
+      "uninterpreted_tail_hex": "00000000",
+      "v": -0.004,
+      "w": -0.03
+    },
+    "after": {
+      "receipt": 29456.493784412,
+      "source": 29456.493713855743,
+      "uninterpreted_tail_hex": "00000000",
+      "v": 0.0,
+      "w": -0.02
+    }
+  },
+  "artifact_sha256": {
+    "returns.npz": "e6a99e405444976c6b1f4fc8f7c1b092e303e02e064fc593d2a051f7be72393b",
+    "protocol.json": "e8f2cf4e340a3416b5a2a1a69d10d14a8374799ffbda58269420da10fc0711fe",
+    "check.py": "9bae0eb9df7ce9dcd4d068d71c435eae5034a9c86c3c946b246d4b5fb82eebc9"
+  }
+}

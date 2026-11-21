@@ -1,0 +1,56 @@
+{
+  "status": "success",
+  "scope": "standalone no-ROS simulation initialization and one next-action call; no action executed",
+  "policy_variant": "exploration_joint_v1",
+  "base_revision": "v10_3_1",
+  "mode": "S",
+  "initial_packet_sha256": "adaca0723ae054aa4422955a850ebdf24cc615af807c811be9f2a24c12195273",
+  "sensor_input": "deterministic_simulator_rgbd_and_scan; simulator_exact_discrete_odometry",
+  "budget": 48,
+  "paid_prefix_actions": 0,
+  "anchor": [
+    32,
+    20,
+    0
+  ],
+  "action": "forward",
+  "configuration": {
+    "max_candidates": 12,
+    "coverage_slots": 4,
+    "measured_novelty_floor": 0.25,
+    "robot_radius_m": 0.2,
+    "sensor_range_profile": null
+  },
+  "policy_changes": [
+    "camera coverage and camera yield target actual unknown cells only",
+    "coverage candidate shortlist uses historical spatial bins",
+    "invalidated outbound macro replans on latest measured map before return"
+  ],
+  "common_python_files_checked": 36,
+  "common_source_differences": {
+    "nso/__init__.py": {
+      "research": "53df856db4ddc95f7d8a5c05a1298aea84298cfa974a0412017e61471feb76dd",
+      "vendor": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "env/__init__.py": {
+      "research": "742fd98c397a6206625b9cde3fedc948e64d7b79e8c9391d827c2f6b80c14c37",
+      "vendor": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "namespace": "fresh standalone process; research NSO modules; all shared vendor Python files except package initializers match byte-for-byte",
+  "source_sha256": {
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/deployed_variant_probe.py": "8a9bdc83e0eabe79828986eda81233bbb0770a378036820094dc71e68218d4e6",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/fresh_pair.py": "b77454bd9b66c529ce56fcbe8d7dc54c640e47d0f62f9340f767385b262df93f",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/fresh_first_frame_pair/manifest.json": "09835cea395d2562446ef2a86272f2d523c5f018efafe27dc70a9e40aceb12d5",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py": "adc651625adcb456562f0907e8fd5b1aa94c9536f8eb856ce193b12af3f1de2c",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/sensor_range_adapter.py": "4811fe011a526ec4c1282dc938484c07ee0e22caf335eda52afc2d98da73e2d5",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py": "12a6dab0c7400d323048143bd6261225bae86c41f623e0077feeb7f3c1d82bd7",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/SOURCE_MANIFEST.json": "e110a56f2dc3b059a796db027dc7784da4cfee824e047258ab4ec9a7118be209"
+  },
+  "limitations": [
+    "Callability only, no policy performance or real robot claim.",
+    "Sensor and map are simulator-generated; no JointSession physical input adapter.",
+    "Package initializers differ: research initializers have lazy exports/environment helpers; vendor initializers are empty.",
+    "Physical sensor-range, measured-extent, instance and semantic adapters are not enabled."
+  ]
+}

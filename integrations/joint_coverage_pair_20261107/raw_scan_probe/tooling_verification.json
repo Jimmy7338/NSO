@@ -1,0 +1,49 @@
+{
+  "schema": "nso.raw_scan_tooling_verification.v1",
+  "status": "compatible_offline_portability_update_verified_no_new_field_capture",
+  "unit_test_methods_passed": 6,
+  "synthetic_fixture": {
+    "explicitly_not_measured": true,
+    "PCAP_packets": 18,
+    "complete_raw_sweeps": 2,
+    "exact_geometry_scans_matched": [
+      0,
+      1
+    ],
+    "deliberately_altered_scan_unmatched": [
+      2
+    ],
+    "native_cloud_hash_matches": [
+      0,
+      1
+    ]
+  },
+  "checks": [
+    "Vendor source/header hashes pinned",
+    "Native decoder skips metadata slot15; independent expected point values checked",
+    "Original native2000-bin nearest-range rebin known-bin test",
+    "Nanosecond Ethernet PCAP parser and truncated-file refusal",
+    "ROS/kernel receipt overlap and source-authority negative checks",
+    "Fixed nonpromiscuous eth0/srcIP/dstport/count/time argv and mocked owned-child cleanup"
+  ],
+  "limitations": [
+    "Privileged tcpdump path not executed; local terminal sudo verification remains pending (not a request for new robot-motion authorization)",
+    "Synthetic data are not evidence about S32 return or driver-race causality"
+  ],
+  "file_sha256": {
+    "capture.py": "7d68ea83e14b5a080db9951d30db4397596676530a9ecabb811327c9617a4fb7",
+    "analyze.py": "b95cd20f7194c82d9b95f116f5d82d517cf9390d629d9827277bd7796c339a85",
+    "build_oracle.py": "9ce4443e4262b2f70d781c3b533dd2de906f06ed828d19799e51103d9237c647",
+    "vendor_oracle.cpp": "8c7527ec18e418590e1653d4385ebec900d6e18ee25756916d2e1370cc84090c",
+    "vendor_oracle.so": "e3e517d88c2687bd581cfb73b731c3d755c3a8b7e6f4e473f962d401e86db692",
+    "test_probe.py": "636c582d5144c3c222e9fea01a03b62c735153957ea29176a22409b7677ebb6c",
+    "README.md": "aa63e472728ab5ebc2f3afdc2a5e00074512604c7f8200b09f4ef3964876dccf",
+    "oracle_build.json": "2d3d68caba29d62f687159913533b1bd2e6f4c81129871a9ddc692edeeb6ad85",
+    "permission_receipt.json": "61cc86259d1d821ff7bc9f71590371c9afffa8fe0609995eae1204e8cf6a4571",
+    "build_snapshot.py": "e68e7efc2cb4f9d07d4a427e5e5056f1fe93cbfc09687a2b01bcf6df1f67974d"
+  },
+  "updated_unix_s": 1794069418.1313956,
+  "initial_verification_preserved": "tooling_verification_20261107.json",
+  "portable_verification": "portable_verification.json",
+  "unit_tests_repeated_after_compatible_analysis_API_change": 6
+}

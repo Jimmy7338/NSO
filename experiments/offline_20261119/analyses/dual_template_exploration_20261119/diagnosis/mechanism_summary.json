@@ -1,0 +1,6338 @@
+{
+  "schema": "dual_template_actual_episode_mechanism_summary_v1",
+  "protocol_sha256": "ab3b3c0bc3fd56aa1cc4b2c0b8f8a20a833d26fc6f656ff08e33a5161fd79b83",
+  "analysis_script_sha256": "6ba782e6a683999c9a746a52afd5cf5a265eb05e7d872b8287091599a2130933",
+  "evidence_unit": "12 deterministic strategy episodes in two position permutations of one floorplan family; not 12 independent environments",
+  "interpretation": "Same-state G/S winners are counterfactual diagnostics at actual states, not extra trajectories or independent samples. Model ranges concern cumulative-evidence rebuild snapshots, not unique removed surfaces.",
+  "mechanism_boundaries": [
+    "Historical depth rejects candidate reward samples in measured free space or near measured surfaces; it does not enter the geometric-fit likelihood or update the box/shelf posterior directly.",
+    "Original complete box/shelf hypothesis meshes remain in self-occlusion ray tests after sample rejection; history does not remove a contradicted backboard from that ray mesh or correct its topology.",
+    "S_no_history jointly disables free-space rejection and already-measured surface consumption; it is not a pure memory-only ablation.",
+    "S_no_history can also activate the unchanged 3500-point global weighted thinning cap because more hypothesis points remain; cap activations are reported, so trajectory differences cannot isolate history alone from this induced approximation.",
+    "The shape probability is the source mean-distance Gibbs pseudo-posterior, not calibrated uncertainty.",
+    "C and J still compute template counterfactuals for diagnosis but do not use their values for target selection; raw wall time is not a clean algorithm-cost comparison.",
+    "Current visible ideal semantic masks and measured instance support are shared. No natural YOLOE recognition or real-robot efficacy is established.",
+    "The source full template estimator and gain are integrated with v10 candidates; original V3 candidate proposals are not used."
+  ],
+  "completed_episodes": 12,
+  "pending": [],
+  "failures": [],
+  "runs": {
+    "shelf_left/C": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_left/runs/C/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 130,
+      "trajectory_sha256": "80c883004cb6712eb232d804cac7b0085bfd274f7ae0aa9ccf491d241c4b81e9",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 18,
+        "0.95": 21,
+        "0.99": 53,
+        "1.0": 67
+      },
+      "path_length_m": 22.400000000000002,
+      "collisions": 0,
+      "termination": {
+        "reason": "no_positive_option_at_anchor",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-130",
+        "final_action_id": 130
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 4,
+      "nonempty_actual_planning_states": 4,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 3,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 0,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.12471583533657604,
+            0.1878245277510353
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 40,
+          "candidates": 12,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.10865623756396481,
+            0.15532870364740958
+          ],
+          "nonzero_semantic_deltas": 6
+        },
+        {
+          "paid": 80,
+          "candidates": 9,
+          "selected": null,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.17066149174581968,
+            0.21224544801868905
+          ],
+          "nonzero_semantic_deltas": 6
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 4,
+          "object_snapshot_count": 28,
+          "marked_object_snapshot_count": 6,
+          "marked_object_snapshots_with_fit_shift": 6,
+          "objects_per_snapshot": [
+            5,
+            10
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.2917931451854166,
+            0.7778587225170496
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4483466829516032,
+            0.7778587225170496
+          ],
+          "raw_fit_llr_range": [
+            -0.8866910745079319,
+            1.2532313525702599
+          ],
+          "consumed_fit_llr_range": [
+            -0.8866910745079319,
+            1.2532313525702599
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 40,
+            "support_track": 2,
+            "marked_points": 86,
+            "prior": 0.5,
+            "posterior": 0.7778587225170496,
+            "raw_llr": 1.2532313525702599,
+            "consumed_llr": 1.2532313525702599,
+            "absolute_change": 0.2778587225170496
+          },
+          "history_keyframes_range": [
+            1,
+            32
+          ],
+          "raw_template_points_range": [
+            2710,
+            6848
+          ],
+          "points_after_history_range": [
+            730,
+            2445
+          ],
+          "output_points_range": [
+            730,
+            2445
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2890
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1513
+          ],
+          "snapshots_with_actual_history_removal": 4,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 451,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 4,
+          "object_snapshot_count": 28,
+          "marked_object_snapshot_count": 6,
+          "marked_object_snapshots_with_fit_shift": 6,
+          "objects_per_snapshot": [
+            5,
+            10
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.11010262156223195,
+            0.8952654185778057
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.11010262156223195,
+            0.8952654185778057
+          ],
+          "raw_fit_llr_range": [
+            -0.8866910745079319,
+            1.2532313525702599
+          ],
+          "consumed_fit_llr_range": [
+            -0.8866910745079319,
+            1.2532313525702599
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 40,
+            "support_track": 0,
+            "marked_points": 0,
+            "prior": 0.5,
+            "posterior": 0.2917931451854166,
+            "raw_llr": -0.8866910745079319,
+            "consumed_llr": -0.8866910745079319,
+            "absolute_change": 0.2082068548145834
+          },
+          "history_keyframes_range": [
+            1,
+            32
+          ],
+          "raw_template_points_range": [
+            2710,
+            6848
+          ],
+          "points_after_history_range": [
+            730,
+            2445
+          ],
+          "output_points_range": [
+            730,
+            2445
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2890
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1513
+          ],
+          "snapshots_with_actual_history_removal": 4,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 451,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "C",
+        "template_term_in_actual_selection": false
+      },
+      "input_artifacts_sha256": {
+        "result.json": "d0ec002cf941587447f42aee5e13f11a9544fe7121835f862c2bdffc09dc8ee3",
+        "choices.json": "1f5c4907c7ccabb5d1736980da9e68a44f7f2f877189f82c9f1cda1e8242c902",
+        "template_audit.json": "fed6491fea76111573cfcdf404b06a5fe00c5d5b78bfde059c24a6bbdb5dd3db",
+        "template_frame_receipts.json": "9f1cae20ab47ffc8ff27513ee825d963c7fe0d938317d3e66b812f4c303d2a0a",
+        "artifact_manifest.json": "b87932d4498d2ce99f46eda3add9e447e6210827ea891368977c2c24e6448f97"
+      }
+    },
+    "shelf_left/J": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_left/runs/J/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "83e645b55ea2c60c9c4f9099d62906841a351e1676584d836e1629b5f06b62e3",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 18,
+        "0.95": 21,
+        "0.99": 77,
+        "1.0": 88
+      },
+      "path_length_m": 42.0,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 30,
+      "nonempty_actual_planning_states": 30,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 7,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.12471583533657604,
+            0.1878245277510353
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 54,
+          "candidates": 11,
+          "selected": 8,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.2091181144188664,
+            0.18782452775103575
+          ],
+          "nonzero_semantic_deltas": 7
+        },
+        {
+          "paid": 105,
+          "candidates": 9,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.20122096352781327,
+            0.2027789377637575
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 145,
+          "candidates": 9,
+          "selected": 5,
+          "G_winner": 5,
+          "S_winner": 5,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.0795946479662702,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 2
+        },
+        {
+          "paid": 184,
+          "candidates": 7,
+          "selected": 6,
+          "G_winner": 6,
+          "S_winner": 6,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.0563414726008621,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 5
+        },
+        {
+          "paid": 189,
+          "candidates": 7,
+          "selected": 6,
+          "G_winner": 6,
+          "S_winner": 6,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.04932140173170495,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 5
+        },
+        {
+          "paid": 194,
+          "candidates": 7,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.049163803215618376,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 5
+        },
+        {
+          "paid": 212,
+          "candidates": 5,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 215,
+          "candidates": 4,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 235,
+          "candidates": 2,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 237,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 238,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 30,
+          "object_snapshot_count": 221,
+          "marked_object_snapshot_count": 58,
+          "marked_object_snapshots_with_fit_shift": 58,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.2919319346218555,
+            0.7835505165414509
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4661560534614573,
+            0.7835505165414509
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2864783477400326
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.2864783477400326
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 235,
+            "support_track": 2,
+            "marked_points": 155,
+            "prior": 0.5,
+            "posterior": 0.7835505165414509,
+            "raw_llr": 1.2864783477400326,
+            "consumed_llr": 1.2864783477400326,
+            "absolute_change": 0.2835505165414509
+          },
+          "history_keyframes_range": [
+            1,
+            101
+          ],
+          "raw_template_points_range": [
+            2710,
+            5674
+          ],
+          "points_after_history_range": [
+            611,
+            2148
+          ],
+          "output_points_range": [
+            611,
+            2148
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2388
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1890
+          ],
+          "snapshots_with_actual_history_removal": 30,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 772,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 30,
+          "object_snapshot_count": 221,
+          "marked_object_snapshot_count": 58,
+          "marked_object_snapshots_with_fit_shift": 58,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2864783477400326
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.2864783477400326
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 145,
+            "support_track": 0,
+            "marked_points": 0,
+            "prior": 0.5,
+            "posterior": 0.2919319346218555,
+            "raw_llr": -0.8860195521265268,
+            "consumed_llr": -0.8860195521265268,
+            "absolute_change": 0.20806806537814448
+          },
+          "history_keyframes_range": [
+            1,
+            101
+          ],
+          "raw_template_points_range": [
+            2710,
+            5674
+          ],
+          "points_after_history_range": [
+            611,
+            2148
+          ],
+          "output_points_range": [
+            611,
+            2148
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2388
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1890
+          ],
+          "snapshots_with_actual_history_removal": 30,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 772,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "N",
+        "template_term_in_actual_selection": false
+      },
+      "input_artifacts_sha256": {
+        "result.json": "489a700af09d8c72f577b8cc9a5080c472b6797726c226a2b74ae317498241c3",
+        "choices.json": "5e08ecc02339f49b76e236e66a8ecc59d85be3e1fc8d4e2f9ad6c4d58b1840ac",
+        "template_audit.json": "4542d45d413708d028d001827a16fff0e54832e7d4e0442cee6f5a8ddd5d0a5f",
+        "template_frame_receipts.json": "9bc41201e9b9d2e288dc4364dea9df6bbcdcd73d8a5e25ba850a9f976c2c823d",
+        "artifact_manifest.json": "d9835ca3ddfc7dee2460305111e703ff1aa80763269ea43d98558c27f1006328"
+      }
+    },
+    "shelf_left/G": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_left/runs/G/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "eedde020d42416c95d0a6ea54708113b610d2311ed8824a8333fb4eaef9b644c",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 18,
+        "0.95": 21,
+        "0.99": 85,
+        "1.0": 97
+      },
+      "path_length_m": 43.6,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 25,
+      "nonempty_actual_planning_states": 25,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 5,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.12471583533657604,
+            0.1878245277510353
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 54,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.2091181144188664,
+            0.18782452775103575
+          ],
+          "nonzero_semantic_deltas": 7
+        },
+        {
+          "paid": 109,
+          "candidates": 11,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.19372109386912761,
+            0.15535951737604137
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 127,
+          "candidates": 11,
+          "selected": 10,
+          "G_winner": 10,
+          "S_winner": 10,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.1933580444674341,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 167,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 208,
+          "candidates": 6,
+          "selected": 3,
+          "G_winner": 3,
+          "S_winner": 3,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.04803676637551335,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 210,
+          "candidates": 3,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 25,
+          "object_snapshot_count": 182,
+          "marked_object_snapshot_count": 48,
+          "marked_object_snapshots_with_fit_shift": 48,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.2919319346218555,
+            0.7829545112349594
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.43509401393111236,
+            0.7829545112349594
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 210,
+            "support_track": 2,
+            "marked_points": 155,
+            "prior": 0.5,
+            "posterior": 0.7829545112349594,
+            "raw_llr": 1.2829676416004077,
+            "consumed_llr": 1.2829676416004077,
+            "absolute_change": 0.2829545112349594
+          },
+          "history_keyframes_range": [
+            1,
+            97
+          ],
+          "raw_template_points_range": [
+            2710,
+            5658
+          ],
+          "points_after_history_range": [
+            310,
+            2093
+          ],
+          "output_points_range": [
+            310,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2497
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1650
+          ],
+          "snapshots_with_actual_history_removal": 25,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 789,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 25,
+          "object_snapshot_count": 182,
+          "marked_object_snapshot_count": 48,
+          "marked_object_snapshots_with_fit_shift": 48,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 167,
+            "support_track": 0,
+            "marked_points": 0,
+            "prior": 0.5,
+            "posterior": 0.2919319346218555,
+            "raw_llr": -0.8860195521265268,
+            "consumed_llr": -0.8860195521265268,
+            "absolute_change": 0.20806806537814448
+          },
+          "history_keyframes_range": [
+            1,
+            97
+          ],
+          "raw_template_points_range": [
+            2710,
+            5658
+          ],
+          "points_after_history_range": [
+            310,
+            2093
+          ],
+          "output_points_range": [
+            310,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2497
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1650
+          ],
+          "snapshots_with_actual_history_removal": 25,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 789,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "G",
+        "template_term_in_actual_selection": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "ea4fc76f231d0250d1d9b3df3045e6360834531406ab99d6e4f45ba3b9f83964",
+        "choices.json": "f5f58fe5a2883fd893d6cd9090dc8e056faefecd06b0a32b06c9566afed9e454",
+        "template_audit.json": "c78fcbcb65256e857c437a1308318795ff812d2c61f19aa1662258928a72dcd3",
+        "template_frame_receipts.json": "f2bd4752c9ffacd385379e4f7fe0e7102e170be68ac60ec8d540da8b12feea1a",
+        "artifact_manifest.json": "9cfb132d501e60b0471df14670f533a9013706acc8de52bb15bcb1846f4ca279"
+      }
+    },
+    "shelf_left/S": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_left/runs/S/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "eedde020d42416c95d0a6ea54708113b610d2311ed8824a8333fb4eaef9b644c",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 18,
+        "0.95": 21,
+        "0.99": 85,
+        "1.0": 97
+      },
+      "path_length_m": 43.6,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 25,
+      "nonempty_actual_planning_states": 25,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 5,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.12471583533657604,
+            0.1878245277510353
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 54,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.2091181144188664,
+            0.18782452775103575
+          ],
+          "nonzero_semantic_deltas": 7
+        },
+        {
+          "paid": 109,
+          "candidates": 11,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.19372109386912761,
+            0.15535951737604137
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 127,
+          "candidates": 11,
+          "selected": 10,
+          "G_winner": 10,
+          "S_winner": 10,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.1933580444674341,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 167,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 208,
+          "candidates": 6,
+          "selected": 3,
+          "G_winner": 3,
+          "S_winner": 3,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.04803676637551335,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 210,
+          "candidates": 3,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 25,
+          "object_snapshot_count": 182,
+          "marked_object_snapshot_count": 48,
+          "marked_object_snapshots_with_fit_shift": 48,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.2919319346218555,
+            0.7829545112349594
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.43509401393111236,
+            0.7829545112349594
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 210,
+            "support_track": 2,
+            "marked_points": 155,
+            "prior": 0.5,
+            "posterior": 0.7829545112349594,
+            "raw_llr": 1.2829676416004077,
+            "consumed_llr": 1.2829676416004077,
+            "absolute_change": 0.2829545112349594
+          },
+          "history_keyframes_range": [
+            1,
+            97
+          ],
+          "raw_template_points_range": [
+            2710,
+            5658
+          ],
+          "points_after_history_range": [
+            310,
+            2093
+          ],
+          "output_points_range": [
+            310,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2497
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1650
+          ],
+          "snapshots_with_actual_history_removal": 25,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 789,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 25,
+          "object_snapshot_count": 182,
+          "marked_object_snapshot_count": 48,
+          "marked_object_snapshots_with_fit_shift": 48,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 167,
+            "support_track": 0,
+            "marked_points": 0,
+            "prior": 0.5,
+            "posterior": 0.2919319346218555,
+            "raw_llr": -0.8860195521265268,
+            "consumed_llr": -0.8860195521265268,
+            "absolute_change": 0.20806806537814448
+          },
+          "history_keyframes_range": [
+            1,
+            97
+          ],
+          "raw_template_points_range": [
+            2710,
+            5658
+          ],
+          "points_after_history_range": [
+            310,
+            2093
+          ],
+          "output_points_range": [
+            310,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2497
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1650
+          ],
+          "snapshots_with_actual_history_removal": 25,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 789,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "S",
+        "template_term_in_actual_selection": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "d8dccf1d9a62b59f9834b20bbb6c00715524df2554d030559c170cfe29caa1eb",
+        "choices.json": "4aebf31a55b07ba71f4c73673e5c6fcc8ea881521ccb38d9be4163848749079f",
+        "template_audit.json": "46d9f9c5d5a9d716115014ca13ecd9e468b790815eb8e87cc9a6daa79e26614f",
+        "template_frame_receipts.json": "f2bd4752c9ffacd385379e4f7fe0e7102e170be68ac60ec8d540da8b12feea1a",
+        "artifact_manifest.json": "7f1965e125d0ebfd93bb6447db7215225617ede8c6bb871154c0e3bbd294f1a8"
+      }
+    },
+    "shelf_left/S_no_fit": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_left/runs/S_no_fit/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "eedde020d42416c95d0a6ea54708113b610d2311ed8824a8333fb4eaef9b644c",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 18,
+        "0.95": 21,
+        "0.99": 85,
+        "1.0": 97
+      },
+      "path_length_m": 43.6,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 25,
+      "nonempty_actual_planning_states": 25,
+      "score_column_comparison": "G=neutral prior with fit/history; S=category prior with fit disabled: this comparison changes two factors, not semantics alone",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 6,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.10540105099318353,
+            0.21842289673882398
+          ],
+          "nonzero_semantic_deltas": 6
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.00042124116019204294,
+            0.3529068801256936
+          ],
+          "nonzero_semantic_deltas": 12
+        },
+        {
+          "paid": 54,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.2818213266777212,
+            0.3646325113901847
+          ],
+          "nonzero_semantic_deltas": 10
+        },
+        {
+          "paid": 109,
+          "candidates": 11,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.23655401699289746,
+            0.2713940809979387
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 127,
+          "candidates": 11,
+          "selected": 10,
+          "G_winner": 10,
+          "S_winner": 10,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.2433516839706071,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 167,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 208,
+          "candidates": 6,
+          "selected": 3,
+          "G_winner": 3,
+          "S_winner": 3,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.04908514032858141,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 210,
+          "candidates": 3,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 25,
+          "object_snapshot_count": 182,
+          "marked_object_snapshot_count": 48,
+          "marked_object_snapshots_with_fit_shift": 48,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.2919319346218555,
+            0.7829545112349594
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.43509401393111236,
+            0.7829545112349594
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 210,
+            "support_track": 2,
+            "marked_points": 155,
+            "prior": 0.5,
+            "posterior": 0.7829545112349594,
+            "raw_llr": 1.2829676416004077,
+            "consumed_llr": 1.2829676416004077,
+            "absolute_change": 0.2829545112349594
+          },
+          "history_keyframes_range": [
+            1,
+            97
+          ],
+          "raw_template_points_range": [
+            2710,
+            5658
+          ],
+          "points_after_history_range": [
+            310,
+            2093
+          ],
+          "output_points_range": [
+            310,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2497
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1650
+          ],
+          "snapshots_with_actual_history_removal": 25,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 789,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 25,
+          "object_snapshot_count": 182,
+          "marked_object_snapshot_count": 48,
+          "marked_object_snapshots_with_fit_shift": 0,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.10000000000000002,
+            0.8999999999999999
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.10000000000000002,
+            0.8999999999999999
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.2829676416004077
+          ],
+          "consumed_fit_llr_range": [
+            0.0,
+            0.0
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 24,
+            "support_track": 1,
+            "marked_points": 48,
+            "prior": 0.9,
+            "posterior": 0.8999999999999999,
+            "raw_llr": -0.060783931985497475,
+            "consumed_llr": 0.0,
+            "absolute_change": 1.1102230246251565e-16
+          },
+          "history_keyframes_range": [
+            1,
+            97
+          ],
+          "raw_template_points_range": [
+            2710,
+            5658
+          ],
+          "points_after_history_range": [
+            310,
+            2093
+          ],
+          "output_points_range": [
+            310,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2497
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1650
+          ],
+          "snapshots_with_actual_history_removal": 25,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            false
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 789,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "S",
+        "template_term_in_actual_selection": true,
+        "fit_actually_off": true,
+        "raw_fit_evidence_exists": true,
+        "posterior_equals_category_prior": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "32cb03041cf245f6dc90ac0f0c66a3843f319bd6fb196e79af9f039bec6c0081",
+        "choices.json": "1647e338b9e8d76292cad62a752bcc5804d1d1881514bc7c6978157239d20e1a",
+        "template_audit.json": "91599d83f109bdf04d215b015f336a7edb02ca7d3e5e31c8ea7b851bcb28733a",
+        "template_frame_receipts.json": "f2bd4752c9ffacd385379e4f7fe0e7102e170be68ac60ec8d540da8b12feea1a",
+        "artifact_manifest.json": "1ed52c2b09120f53712b0fe2973d5ced737e57362adad4a1d86850a768aec040"
+      }
+    },
+    "shelf_left/S_no_history": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_left/runs/S_no_history/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "ca09ed220cf812868281e92504abde582c86fece879ac8f961dd46f3aaf4fe2e",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 18,
+        "0.95": 21,
+        "0.99": 42,
+        "1.0": 69
+      },
+      "path_length_m": 42.800000000000004,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 29,
+      "nonempty_actual_planning_states": 29,
+      "score_column_comparison": "G=neutral prior with history; S=category prior without history/consumption: this comparison changes two factors, not semantics alone",
+      "same_state_G_S_winner_disagreements": 6,
+      "same_state_G_S_nonzero_score_states": 17,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            3.416477450420535,
+            4.954006545076611
+          ],
+          "nonzero_semantic_deltas": 6
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 9,
+          "G_winner": 1,
+          "S_winner": 9,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            3.6153632070825337,
+            13.565305766575797
+          ],
+          "nonzero_semantic_deltas": 12
+        },
+        {
+          "paid": 47,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 1,
+          "S_winner": 0,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            1.4929035494747327,
+            19.267584939396592
+          ],
+          "nonzero_semantic_deltas": 11
+        },
+        {
+          "paid": 98,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 5,
+          "S_winner": 7,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            0.0,
+            20.30769286195568
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 149,
+          "candidates": 9,
+          "selected": 8,
+          "G_winner": 7,
+          "S_winner": 8,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            1.3454976575597444,
+            13.860375483309328
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 189,
+          "candidates": 7,
+          "selected": 3,
+          "G_winner": 6,
+          "S_winner": 3,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            0.7222507086350748,
+            10.526014293701742
+          ],
+          "nonzero_semantic_deltas": 7
+        },
+        {
+          "paid": 215,
+          "candidates": 4,
+          "selected": 2,
+          "G_winner": 0,
+          "S_winner": 2,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            1.4280534048923856,
+            7.055502911734829
+          ],
+          "nonzero_semantic_deltas": 4
+        },
+        {
+          "paid": 231,
+          "candidates": 3,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.7918373115711056,
+            7.154493343071529
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 234,
+          "candidates": 3,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            1.279080893868575,
+            2.2712971005192464
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 235,
+          "candidates": 3,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            5.464918621636753
+          ],
+          "nonzero_semantic_deltas": 2
+        },
+        {
+          "paid": 236,
+          "candidates": 3,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            1.279080811487181,
+            2.2712943899472995
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 237,
+          "candidates": 2,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.19057457042335246
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 239,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.7918373401090295,
+            0.7918373401090295
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 240,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            2.1105164028842314,
+            2.1105164028842314
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.617636457225802,
+            0.617636457225802
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            1.552436457225802,
+            1.552436457225802
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.8899018074619355,
+            0.8899018074619355
+          ],
+          "nonzero_semantic_deltas": 1
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 29,
+          "object_snapshot_count": 209,
+          "marked_object_snapshot_count": 56,
+          "marked_object_snapshots_with_fit_shift": 56,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.2919319346218555,
+            0.77958379847444
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.46624840609456325,
+            0.77958379847444
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.26324260135233
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.26324260135233
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 231,
+            "support_track": 2,
+            "marked_points": 153,
+            "prior": 0.5,
+            "posterior": 0.77958379847444,
+            "raw_llr": 1.26324260135233,
+            "consumed_llr": 1.26324260135233,
+            "absolute_change": 0.27958379847444004
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2710,
+            5550
+          ],
+          "points_after_history_range": [
+            509,
+            2252
+          ],
+          "output_points_range": [
+            509,
+            2252
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2710
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1587
+          ],
+          "snapshots_with_actual_history_removal": 29,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 699,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 29,
+          "object_snapshot_count": 209,
+          "marked_object_snapshot_count": 56,
+          "marked_object_snapshots_with_fit_shift": 56,
+          "objects_per_snapshot": [
+            5,
+            9
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            2
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.11010262156223195,
+            0.89439489156286
+          ],
+          "raw_fit_llr_range": [
+            -0.8860195521265268,
+            1.26324260135233
+          ],
+          "consumed_fit_llr_range": [
+            -0.8860195521265268,
+            1.26324260135233
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 189,
+            "support_track": 0,
+            "marked_points": 0,
+            "prior": 0.5,
+            "posterior": 0.2919319346218555,
+            "raw_llr": -0.8860195521265268,
+            "consumed_llr": -0.8860195521265268,
+            "absolute_change": 0.20806806537814448
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2710,
+            5550
+          ],
+          "points_after_history_range": [
+            2710,
+            5550
+          ],
+          "output_points_range": [
+            2710,
+            3500
+          ],
+          "original_global_point_cap_activations": 28,
+          "removed_by_free_space_per_snapshot": [
+            0,
+            0
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            0,
+            0
+          ],
+          "snapshots_with_actual_history_removal": 0,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            false
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 699,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "S",
+        "template_term_in_actual_selection": true,
+        "history_and_consumption_actually_off": true,
+        "historical_frames_still_available": true,
+        "fit_remains_active": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "f4b4aa6a049e26a5ea9a5a0449f377c78be64a69cd4e75b80f53d8d3cde9c5df",
+        "choices.json": "cc5390ae77fb3b6db733b5675aebf1f6ba02879af312b472f83c507197937ad4",
+        "template_audit.json": "c65ab3c8ab9c9383a74e0ad440b5424b4ffa9d24527b1c1b2bab41a937bd6b7b",
+        "template_frame_receipts.json": "f4ab589eb87b95e6cea74687ca90f18d58e5de62d95a606c1c96cba373e1a26b",
+        "artifact_manifest.json": "2fe67e7940165698a4524b6469cde80d4162cec30873b1253f3d40367f64a5b0"
+      }
+    },
+    "shelf_right/C": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/runs/C/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 130,
+      "trajectory_sha256": "db11d8caaa9c82ec528e78335cae5d1e51a82dd89d7826056a63ae3a66aade5f",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 19,
+        "0.95": 21,
+        "0.99": 49,
+        "1.0": 66
+      },
+      "path_length_m": 22.400000000000002,
+      "collisions": 0,
+      "termination": {
+        "reason": "no_positive_option_at_anchor",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-130",
+        "final_action_id": 130
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 4,
+      "nonempty_actual_planning_states": 4,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 3,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 0,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.23945142857142843,
+            0.2933963599115348
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 38,
+          "candidates": 12,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.17410658406269386,
+            0.0490909513735609
+          ],
+          "nonzero_semantic_deltas": 5
+        },
+        {
+          "paid": 78,
+          "candidates": 9,
+          "selected": null,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.258843133893226,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 3
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 4,
+          "object_snapshot_count": 27,
+          "marked_object_snapshot_count": 7,
+          "marked_object_snapshots_with_fit_shift": 5,
+          "objects_per_snapshot": [
+            5,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.30725051272141735,
+            0.7937832071553396
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4859385066793,
+            0.7937832071553396
+          ],
+          "raw_fit_llr_range": [
+            -0.8130050264298916,
+            1.3478823772553976
+          ],
+          "consumed_fit_llr_range": [
+            -0.8130050264298916,
+            1.3478823772553976
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 78,
+            "support_track": 1,
+            "marked_points": 96,
+            "prior": 0.5,
+            "posterior": 0.7937832071553396,
+            "raw_llr": 1.3478823772553976,
+            "consumed_llr": 1.3478823772553976,
+            "absolute_change": 0.29378320715533957
+          },
+          "history_keyframes_range": [
+            1,
+            31
+          ],
+          "raw_template_points_range": [
+            2710,
+            5284
+          ],
+          "points_after_history_range": [
+            1026,
+            2093
+          ],
+          "output_points_range": [
+            1026,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2564
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1378
+          ],
+          "snapshots_with_actual_history_removal": 4,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 491,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 4,
+          "object_snapshot_count": 27,
+          "marked_object_snapshot_count": 7,
+          "marked_object_snapshots_with_fit_shift": 5,
+          "objects_per_snapshot": [
+            5,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.123647425199522,
+            0.8999999999999999
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.123647425199522,
+            0.8999999999999999
+          ],
+          "raw_fit_llr_range": [
+            -0.8130050264298916,
+            1.3478823772553976
+          ],
+          "consumed_fit_llr_range": [
+            -0.8130050264298916,
+            1.3478823772553976
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 78,
+            "support_track": 1,
+            "marked_points": 96,
+            "prior": 0.1,
+            "posterior": 0.2995708642736382,
+            "raw_llr": 1.3478823772553976,
+            "consumed_llr": 1.3478823772553976,
+            "absolute_change": 0.1995708642736382
+          },
+          "history_keyframes_range": [
+            1,
+            31
+          ],
+          "raw_template_points_range": [
+            2710,
+            5284
+          ],
+          "points_after_history_range": [
+            1026,
+            2093
+          ],
+          "output_points_range": [
+            1026,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2564
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1378
+          ],
+          "snapshots_with_actual_history_removal": 4,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 491,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "C",
+        "template_term_in_actual_selection": false
+      },
+      "input_artifacts_sha256": {
+        "result.json": "db7b95efabd8e167cf0b6aab5730207ea711a41d6a7b9dfa39a167070e1984d2",
+        "choices.json": "81d0bc2a07b93e7711e4420eba0e26b0f0b756cc3b96e97d9f440bad0fe8b5d8",
+        "template_audit.json": "a4dd1dee8fca92046c0382fafe02823a5df8e2d3457609647632264c8b62df1b",
+        "template_frame_receipts.json": "a25fa37272535946f0317144bf85bc318811ec40d3c9e0504d4d6d44b742b9c0",
+        "artifact_manifest.json": "bfeddb0fc662a8a333ba65af491794fd9286714dbac14bee9d3db0681b1f7e72"
+      }
+    },
+    "shelf_right/J": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/runs/J/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "acf6aa898c6048215da2d6fc3bf73b99e299beb024032e764916ea017823926a",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 19,
+        "0.95": 21,
+        "0.99": 84,
+        "1.0": 100
+      },
+      "path_length_m": 43.2,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 26,
+      "nonempty_actual_planning_states": 26,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 4,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.23945142857142843,
+            0.2933963599115348
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 53,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.046279768668735066,
+            0.11666685460372433
+          ],
+          "nonzero_semantic_deltas": 10
+        },
+        {
+          "paid": 110,
+          "candidates": 9,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.22139221798302705,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 162,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.28189367314927327,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 4
+        },
+        {
+          "paid": 202,
+          "candidates": 6,
+          "selected": 5,
+          "G_winner": 5,
+          "S_winner": 5,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 207,
+          "candidates": 6,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 237,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 238,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 2,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 49,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.3103795039047271,
+            0.7893772700480896
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4477002346943005,
+            0.7893772700480896
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.5,
+            "posterior": 0.7893772700480896,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.28937727004808955
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 49,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.1,
+            "posterior": 0.29399724735612937,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.19399724735612936
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "N",
+        "template_term_in_actual_selection": false
+      },
+      "input_artifacts_sha256": {
+        "result.json": "e2c9825442f5c4407fbc001f68b33e8eff3af74588e4cc6b7d6d95c426cc0304",
+        "choices.json": "11518047ae9d443e42b770c2497e1b29d638189d56f77a9a808acf43c19fab95",
+        "template_audit.json": "e3201ba441939fcf5460baad25ea56ff739cacfaea58b2c778a94a3a7c51ff3c",
+        "template_frame_receipts.json": "f2df6860014468e6ea704bff7f0c5f362fff2340d91d4a6d725e992befb63898",
+        "artifact_manifest.json": "dfddfbaa813fd538ef08634a0f5889248096df16421c3d8d0d50a9a014db248a"
+      }
+    },
+    "shelf_right/G": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/runs/G/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "acf6aa898c6048215da2d6fc3bf73b99e299beb024032e764916ea017823926a",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 19,
+        "0.95": 21,
+        "0.99": 84,
+        "1.0": 100
+      },
+      "path_length_m": 43.2,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 26,
+      "nonempty_actual_planning_states": 26,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 4,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.23945142857142843,
+            0.2933963599115348
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 53,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.046279768668735066,
+            0.11666685460372433
+          ],
+          "nonzero_semantic_deltas": 10
+        },
+        {
+          "paid": 110,
+          "candidates": 9,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.22139221798302705,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 162,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.28189367314927327,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 4
+        },
+        {
+          "paid": 202,
+          "candidates": 6,
+          "selected": 5,
+          "G_winner": 5,
+          "S_winner": 5,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 207,
+          "candidates": 6,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 237,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 238,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 2,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 49,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.3103795039047271,
+            0.7893772700480896
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4477002346943005,
+            0.7893772700480896
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.5,
+            "posterior": 0.7893772700480896,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.28937727004808955
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 49,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.1,
+            "posterior": 0.29399724735612937,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.19399724735612936
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "G",
+        "template_term_in_actual_selection": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "cbd5c6d189178270396984a5365eccfe9add16e4baa03a616a7a884ec938755a",
+        "choices.json": "9152b07f7db63a6ba132cb6cdea8cb0ec23eb901d0fdb058c52918e5ed522309",
+        "template_audit.json": "b3b47beaa03aec2a1e693d0aeffa46b430c14dcc90d3ccabe10f33ec08bcb738",
+        "template_frame_receipts.json": "f2df6860014468e6ea704bff7f0c5f362fff2340d91d4a6d725e992befb63898",
+        "artifact_manifest.json": "d203a59902ca56b9e0ee8d990e135fc413240d7f4a85f2742b6c8f9cf8e5fc12"
+      }
+    },
+    "shelf_right/S": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/runs/S/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "acf6aa898c6048215da2d6fc3bf73b99e299beb024032e764916ea017823926a",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 19,
+        "0.95": 21,
+        "0.99": 84,
+        "1.0": 100
+      },
+      "path_length_m": 43.2,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 26,
+      "nonempty_actual_planning_states": 26,
+      "score_column_comparison": "G versus S changes only category prior at this actual accumulated-evidence state",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 4,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.23945142857142843,
+            0.2933963599115348
+          ],
+          "nonzero_semantic_deltas": 8
+        },
+        {
+          "paid": 53,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.046279768668735066,
+            0.11666685460372433
+          ],
+          "nonzero_semantic_deltas": 10
+        },
+        {
+          "paid": 110,
+          "candidates": 9,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.22139221798302705,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 162,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.28189367314927327,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 4
+        },
+        {
+          "paid": 202,
+          "candidates": 6,
+          "selected": 5,
+          "G_winner": 5,
+          "S_winner": 5,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 207,
+          "candidates": 6,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 237,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 238,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 2,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 49,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.3103795039047271,
+            0.7893772700480896
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4477002346943005,
+            0.7893772700480896
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.5,
+            "posterior": 0.7893772700480896,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.28937727004808955
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 49,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.1,
+            "posterior": 0.29399724735612937,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.19399724735612936
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "S",
+        "template_term_in_actual_selection": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "720ff5300f5b59f3be5c45f26e6c986d6fa2fcd1038835c9ccb7257774fbeeee",
+        "choices.json": "e46cc14df4b6453c3581ada5547f8b2b85752ce79aaed3e36b0748760f8f786f",
+        "template_audit.json": "88349b19cf4ea828d295940a1c9db31749062eb20cfa85c78f100d61763a2369",
+        "template_frame_receipts.json": "f2df6860014468e6ea704bff7f0c5f362fff2340d91d4a6d725e992befb63898",
+        "artifact_manifest.json": "5f00e75769abbd987fdc39af0c82178f71790e7c1d5407ec7f7a57d53ab729a0"
+      }
+    },
+    "shelf_right/S_no_fit": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/runs/S_no_fit/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "acf6aa898c6048215da2d6fc3bf73b99e299beb024032e764916ea017823926a",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 19,
+        "0.95": 21,
+        "0.99": 84,
+        "1.0": 100
+      },
+      "path_length_m": 43.2,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 26,
+      "nonempty_actual_planning_states": 26,
+      "score_column_comparison": "G=neutral prior with fit/history; S=category prior with fit disabled: this comparison changes two factors, not semantics alone",
+      "same_state_G_S_winner_disagreements": 0,
+      "same_state_G_S_nonzero_score_states": 5,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.10540105099318353,
+            0.21842289673882398
+          ],
+          "nonzero_semantic_deltas": 6
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.00042124116019248703,
+            0.5155784828932033
+          ],
+          "nonzero_semantic_deltas": 12
+        },
+        {
+          "paid": 53,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.26812365028093765
+          ],
+          "nonzero_semantic_deltas": 10
+        },
+        {
+          "paid": 110,
+          "candidates": 9,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.30732296669079456,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 162,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            -0.3748741501851721,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 4
+        },
+        {
+          "paid": 202,
+          "candidates": 6,
+          "selected": 5,
+          "G_winner": 5,
+          "S_winner": 5,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 207,
+          "candidates": 6,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 237,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 238,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 2,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 2,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 49,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.3103795039047271,
+            0.7893772700480896
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4477002346943005,
+            0.7893772700480896
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.5,
+            "posterior": 0.7893772700480896,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.28937727004808955
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 26,
+          "object_snapshot_count": 134,
+          "marked_object_snapshot_count": 51,
+          "marked_object_snapshots_with_fit_shift": 0,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.10000000000000002,
+            0.8999999999999999
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.10000000000000002,
+            0.8999999999999999
+          ],
+          "raw_fit_llr_range": [
+            -0.79834568572955,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            0.0,
+            0.0
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 24,
+            "support_track": 2,
+            "marked_points": 22,
+            "prior": 0.9,
+            "posterior": 0.8999999999999999,
+            "raw_llr": 0.0,
+            "consumed_llr": 0.0,
+            "absolute_change": 1.1102230246251565e-16
+          },
+          "history_keyframes_range": [
+            1,
+            99
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            67,
+            2093
+          ],
+          "output_points_range": [
+            67,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1428
+          ],
+          "snapshots_with_actual_history_removal": 26,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            false
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 747,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "S",
+        "template_term_in_actual_selection": true,
+        "fit_actually_off": true,
+        "raw_fit_evidence_exists": true,
+        "posterior_equals_category_prior": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "dedff0820e964013fd1934432463d14903688b418c07a66a06604ed739eca37a",
+        "choices.json": "30cf2963377f5832f6b66e873437317d32a516729f803c0362d83b89efb0558d",
+        "template_audit.json": "0b70e8ef999cc658ac3fbac52c1525affb51fa9f9ba714de4db1f1ba9e0c5c58",
+        "template_frame_receipts.json": "f2df6860014468e6ea704bff7f0c5f362fff2340d91d4a6d725e992befb63898",
+        "artifact_manifest.json": "22ce97576462cb42d595255cf0f6e9ee64c91272ee3b8fd9a6e54bef785eea04"
+      }
+    },
+    "shelf_right/S_no_history": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/runs/S_no_history/attempt_001",
+      "status": "completed_execution",
+      "artifact_hash_check_passed": true,
+      "bad_artifact_hashes": [],
+      "internal_checks_passed": true,
+      "actual_plan_score_call_alignment": true,
+      "G_S_same_measured_template_geometry_and_raw_fit": true,
+      "paid_actions": 256,
+      "trajectory_sha256": "6351930931af79173b67d15d52e6397f5ae8b417383f14b924995e5a75d1bf35",
+      "final_coverage_fraction": 1.0,
+      "first_coverage_action": {
+        "0.9": 19,
+        "0.95": 21,
+        "0.99": 84,
+        "1.0": 100
+      },
+      "path_length_m": 43.2,
+      "collisions": 0,
+      "termination": {
+        "reason": "sensor_terminal",
+        "returned_to_anchor": true,
+        "failed": false,
+        "current_footprint_known_safe": true,
+        "final_frame_id": "frame-256",
+        "final_action_id": 256
+      },
+      "final_pose_equals_initial_anchor": true,
+      "planning_decisions": 28,
+      "nonempty_actual_planning_states": 28,
+      "score_column_comparison": "G=neutral prior with history; S=category prior without history/consumption: this comparison changes two factors, not semantics alone",
+      "same_state_G_S_winner_disagreements": 3,
+      "same_state_G_S_nonzero_score_states": 13,
+      "plans": [
+        {
+          "paid": 0,
+          "candidates": 6,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            3.416477450420535,
+            4.954006545076611
+          ],
+          "nonzero_semantic_deltas": 6
+        },
+        {
+          "paid": 24,
+          "candidates": 12,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            3.7892543007452053,
+            13.097385560666966
+          ],
+          "nonzero_semantic_deltas": 12
+        },
+        {
+          "paid": 53,
+          "candidates": 11,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.05319012444653916,
+            21.485610077166726
+          ],
+          "nonzero_semantic_deltas": 11
+        },
+        {
+          "paid": 110,
+          "candidates": 9,
+          "selected": 8,
+          "G_winner": 8,
+          "S_winner": 8,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            15.346629395008469
+          ],
+          "nonzero_semantic_deltas": 7
+        },
+        {
+          "paid": 162,
+          "candidates": 9,
+          "selected": 7,
+          "G_winner": 7,
+          "S_winner": 7,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.1732397491132834,
+            7.989430645853852
+          ],
+          "nonzero_semantic_deltas": 9
+        },
+        {
+          "paid": 202,
+          "candidates": 6,
+          "selected": 2,
+          "G_winner": 5,
+          "S_winner": 2,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            0.008381769993257434,
+            8.562842186057757
+          ],
+          "nonzero_semantic_deltas": 6
+        },
+        {
+          "paid": 231,
+          "candidates": 3,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            3.9464636099543333
+          ],
+          "nonzero_semantic_deltas": 2
+        },
+        {
+          "paid": 234,
+          "candidates": 3,
+          "selected": 0,
+          "G_winner": 1,
+          "S_winner": 0,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            0.583740004834719,
+            1.5370460564388042
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 235,
+          "candidates": 3,
+          "selected": 2,
+          "G_winner": 2,
+          "S_winner": 2,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            3.0976826590826216
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 236,
+          "candidates": 3,
+          "selected": 0,
+          "G_winner": 1,
+          "S_winner": 0,
+          "G_S_winner_diff": true,
+          "candidate_semantic_delta_range": [
+            0.583740004834719,
+            1.5370411700945792
+          ],
+          "nonzero_semantic_deltas": 3
+        },
+        {
+          "paid": 237,
+          "candidates": 2,
+          "selected": 1,
+          "G_winner": 1,
+          "S_winner": 1,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 239,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 240,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 241,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 242,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 243,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 244,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 245,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 246,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 247,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 248,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 249,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 250,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 251,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 252,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.0,
+            0.0
+          ],
+          "nonzero_semantic_deltas": 0
+        },
+        {
+          "paid": 253,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            0.632007075573984,
+            0.632007075573984
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 254,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            1.566807075573984,
+            1.566807075573984
+          ],
+          "nonzero_semantic_deltas": 1
+        },
+        {
+          "paid": 255,
+          "candidates": 1,
+          "selected": 0,
+          "G_winner": 0,
+          "S_winner": 0,
+          "G_S_winner_diff": false,
+          "candidate_semantic_delta_range": [
+            3.130733703240211,
+            3.130733703240211
+          ],
+          "nonzero_semantic_deltas": 1
+        }
+      ],
+      "models": {
+        "G": {
+          "model_rebuild_snapshots": 28,
+          "object_snapshot_count": 144,
+          "marked_object_snapshot_count": 55,
+          "marked_object_snapshots_with_fit_shift": 53,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.5,
+            0.5
+          ],
+          "posterior_range": [
+            0.3177816792153309,
+            0.7893772700480896
+          ],
+          "marked_prior_range": [
+            0.5,
+            0.5
+          ],
+          "marked_posterior_range": [
+            0.4477002346943005,
+            0.7893772700480896
+          ],
+          "raw_fit_llr_range": [
+            -0.7639851214157211,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.7639851214157211,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.5,
+            "posterior": 0.7893772700480896,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.28937727004808955
+          },
+          "history_keyframes_range": [
+            1,
+            98
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            117,
+            2093
+          ],
+          "output_points_range": [
+            117,
+            2093
+          ],
+          "original_global_point_cap_activations": 0,
+          "removed_by_free_space_per_snapshot": [
+            95,
+            2301
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            522,
+            1012
+          ],
+          "snapshots_with_actual_history_removal": 28,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            true
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 711,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        },
+        "S": {
+          "model_rebuild_snapshots": 28,
+          "object_snapshot_count": 144,
+          "marked_object_snapshot_count": 55,
+          "marked_object_snapshots_with_fit_shift": 53,
+          "objects_per_snapshot": [
+            4,
+            8
+          ],
+          "marked_objects_per_snapshot": [
+            0,
+            3
+          ],
+          "first_paid_action_with_marked_object": 24,
+          "prior_range": [
+            0.1,
+            0.9
+          ],
+          "posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "marked_prior_range": [
+            0.1,
+            0.9
+          ],
+          "marked_posterior_range": [
+            0.1236474181914013,
+            0.8999999999999999
+          ],
+          "raw_fit_llr_range": [
+            -0.7639851214157211,
+            1.3211758454821798
+          ],
+          "consumed_fit_llr_range": [
+            -0.7639851214157211,
+            1.3211758454821798
+          ],
+          "max_absolute_prior_to_fit_change": {
+            "paid": 162,
+            "support_track": 1,
+            "marked_points": 102,
+            "prior": 0.1,
+            "posterior": 0.29399724735612937,
+            "raw_llr": 1.3211758454821798,
+            "consumed_llr": 1.3211758454821798,
+            "absolute_change": 0.19399724735612936
+          },
+          "history_keyframes_range": [
+            1,
+            98
+          ],
+          "raw_template_points_range": [
+            2552,
+            5036
+          ],
+          "points_after_history_range": [
+            2552,
+            5036
+          ],
+          "output_points_range": [
+            2552,
+            3500
+          ],
+          "original_global_point_cap_activations": 14,
+          "removed_by_free_space_per_snapshot": [
+            0,
+            0
+          ],
+          "removed_as_measured_or_depth_tolerance_per_snapshot": [
+            0,
+            0
+          ],
+          "snapshots_with_actual_history_removal": 0,
+          "history_counts_balance": true,
+          "fit_enabled_values": [
+            true
+          ],
+          "history_enabled_values": [
+            false
+          ],
+          "hidden_truth_input_always_false": true,
+          "prior_rebuilt_each_snapshot": true,
+          "actual_source_gain_function_calls": 711,
+          "source_gain_calls_are_function_evaluations_not_observations": true
+        }
+      },
+      "ablation": {
+        "selected_mode": "S",
+        "template_term_in_actual_selection": true,
+        "history_and_consumption_actually_off": true,
+        "historical_frames_still_available": true,
+        "fit_remains_active": true
+      },
+      "input_artifacts_sha256": {
+        "result.json": "f77c6a05266fe30304cdb67183fd7d1c64f965636d177349233b80b8353fce7d",
+        "choices.json": "b93349850affb072fb1e21635c655ab56c2b720fb35a346c0ae5dd0c8e018127",
+        "template_audit.json": "cf125cdd9818666ec7655a2f14e6a9800f53056914567c32b92cd710c0be1d49",
+        "template_frame_receipts.json": "96f418afa14f06665d46a1f03c23564ed7af6d73cd5200f913018d9c3ac44245",
+        "artifact_manifest.json": "479f4c94ae389f835b58ed55847958eaa320d3ec7909a8d4e3e4dbcf115301ff"
+      }
+    }
+  },
+  "G_S_pairs": {
+    "shelf_left": {
+      "complete_action_pose_trajectories_identical": true,
+      "shared_action_pose_prefix_steps": 256,
+      "first_actual_action_pose_divergence": null,
+      "first_length_divergence": null,
+      "same_packets_and_owner_masks_on_shared_prefix": true,
+      "same_candidates_at_shared_history_plans": true,
+      "same_G_S_counterfactual_scores_at_shared_history_plans": true,
+      "actual_G_S_decision_divergences_on_shared_history": [],
+      "matched_shared_history_planning_states": 25,
+      "final_coverage_delta_S_minus_G": 0.0,
+      "path_length_delta_S_minus_G": 0.0
+    },
+    "shelf_right": {
+      "complete_action_pose_trajectories_identical": true,
+      "shared_action_pose_prefix_steps": 256,
+      "first_actual_action_pose_divergence": null,
+      "first_length_divergence": null,
+      "same_packets_and_owner_masks_on_shared_prefix": true,
+      "same_candidates_at_shared_history_plans": true,
+      "same_G_S_counterfactual_scores_at_shared_history_plans": true,
+      "actual_G_S_decision_divergences_on_shared_history": [],
+      "matched_shared_history_planning_states": 26,
+      "final_coverage_delta_S_minus_G": 0.0,
+      "path_length_delta_S_minus_G": 0.0
+    }
+  },
+  "ablation_trajectories": {
+    "shelf_left/G_vs_J": {
+      "complete_trajectory_identical": false,
+      "first_action_pose_difference": 71,
+      "first_length_difference": null,
+      "baseline_first_full_coverage": 97,
+      "intervention_first_full_coverage": 88,
+      "baseline_path_length_m": 43.6,
+      "intervention_path_length_m": 42.0
+    },
+    "shelf_left/S_vs_S_no_fit": {
+      "complete_trajectory_identical": true,
+      "first_action_pose_difference": null,
+      "first_length_difference": null,
+      "baseline_first_full_coverage": 97,
+      "intervention_first_full_coverage": 97,
+      "baseline_path_length_m": 43.6,
+      "intervention_path_length_m": 43.6
+    },
+    "shelf_left/S_vs_S_no_history": {
+      "complete_trajectory_identical": false,
+      "first_action_pose_difference": 25,
+      "first_length_difference": null,
+      "baseline_first_full_coverage": 97,
+      "intervention_first_full_coverage": 69,
+      "baseline_path_length_m": 43.6,
+      "intervention_path_length_m": 42.800000000000004
+    },
+    "shelf_right/G_vs_J": {
+      "complete_trajectory_identical": true,
+      "first_action_pose_difference": null,
+      "first_length_difference": null,
+      "baseline_first_full_coverage": 100,
+      "intervention_first_full_coverage": 100,
+      "baseline_path_length_m": 43.2,
+      "intervention_path_length_m": 43.2
+    },
+    "shelf_right/S_vs_S_no_fit": {
+      "complete_trajectory_identical": true,
+      "first_action_pose_difference": null,
+      "first_length_difference": null,
+      "baseline_first_full_coverage": 100,
+      "intervention_first_full_coverage": 100,
+      "baseline_path_length_m": 43.2,
+      "intervention_path_length_m": 43.2
+    },
+    "shelf_right/S_vs_S_no_history": {
+      "complete_trajectory_identical": false,
+      "first_action_pose_difference": 203,
+      "first_length_difference": null,
+      "baseline_first_full_coverage": 100,
+      "intervention_first_full_coverage": 100,
+      "baseline_path_length_m": 43.2,
+      "intervention_path_length_m": 43.2
+    }
+  },
+  "frozen_code_checks": {
+    "shelf_left": true,
+    "shelf_right": true
+  },
+  "all_planned_episodes_complete": true,
+  "all_completed_internal_checks_passed": true
+}

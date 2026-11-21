@@ -1,0 +1,82 @@
+% Single insertion point for new physical evidence. Replace only from verified terminal records.
+\subsection{Calibrated 24-action integration run}
+
+After revising the camera extrinsics, a later S24 integration episode completed 24 paid actions, 24 verified arrivals and 25 observations, returning to its discrete anchor over 3.591 m of CAN-estimated travel and 368.847 s. This episode used a different sensor calibration and map state from the earlier C/S pilot and is not a matched continuation or policy comparison. All six newly recorded planning states gave equal G/S candidate scores and zero incremental aperture contribution, so they show no semantic selection effect.
+
+After the run, the operator reported that localization had drifted during the preceding manual relocation to the test area. The drift onset was not established, so the map at S24 initialization may already have been affected. Discrete-anchor acceptance and measured travel therefore support bounded execution integration, not independent localization accuracy, comparative exploration efficiency or reconstruction accuracy. The internal area proxy (180.12 to 256.60 m$^2$) is not treated as verified newly discovered physical area. A subsequent mapping reset starts a new epoch; its observations cannot be pooled with this episode as a shared initial map.
+
+\subsection{Calibrated fresh-map C/S comparison}
+
+A new ordered C/S pilot used independently restarted stock gmapping maps and fresh acquired initial packets in the reset localization epoch. Both arms retained the same 40-action allowance, 600 s external limit, circular footprint, candidate generator, return rules, sensor configuration and ROS/hardware protection. The score mode was the policy difference; this remains a coverage-only versus joint-objective comparison, not a semantic-only ablation. The planning transform was identical and anchored at the actual C start. Initial odometry differed by 0.06695 m and $-0.06259$ rad, while the initial navigation-known masks differed in 430 cells (17.20 m$^2$) on the common grid. Similar initial area therefore does not imply identical initial information.
+
+\begin{table}[!htbp]
+\caption{One further ordered C/S pilot after calibration and map reset. Both arms have a 40-action/600 s allowance; actual exposure and return differ. Internal quality uses a separate fixed bootstrap support in each arm.}\label{tab:physical-pair-calibrated}
+\small\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.18\linewidth}p{.12\linewidth}p{.18\linewidth}p{.17\linewidth}p{.23\linewidth}@{}}
+\toprule
+Arm and termination & Paid / obs. & CAN / time & Internal area (m$^2$) & Own-support old-quality \\
+\midrule
+C: no positive option at anchor, returned & 24 / 25 & 3.738 m /\newline 342.345 s & 65.24 $\to$ 98.52 & 0.165048 $\to$ 0.277736 (479 points) \\
+S: anchor-footprint failure, no return & 13 / 14 & 1.857 m /\newline 184.862 s & 65.32 $\to$ 88.88 & 0.193484 $\to$ 0.180111 (437 points) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+C completed 24 verified arrivals and stopped normally under the original rule that stops when no positive option remains at the anchor. S completed 13 verified arrivals, then failed the original check requiring the anchor footprint to remain known safe without returning. Neither endpoint was an external timeout or interruption, and both recorded zero CAN feedback after closing. At S action 10, the original next-footprint rejection triggered replanning; C and S would select different candidates at that saved state, while G and S were tied. Across both episodes, all five candidate-bearing planning states gave equal G/S scores; the terminal S state had no candidates. These are within-state diagnostics, not separately executed alternatives.
+
+The shorter failed S route supplies no efficiency benefit. Unequal completed exposure, different initial measurements and distinct fixed surface supports prevent a matched endpoint-quality or causal policy ranking. This is one ordered pair in one physical scene, with no independent localization, map or surface-accuracy reference. No return override or replacement policy was introduced after the anchor check failed.
+
+\subsection{Unknown-space exploration with recorded execution failures}
+
+Further real-robot episodes extended unknown-space observation under the same declared exploration\_joint\_v1 decision policy and circular footprint. These episodes retained the real\_scene\_structural\_v1 category mapping, 4 m depth/8 m laser range profile and measured\_extent\_3m\_v1 geometry adapter. The camera transform used the confirmed relocated mount; its height reference reused the frozen depth-ground calibration scalar. A native snapshot handoff changed the execution synchronization, and the camera used SDK confidence/texture thresholds of 50/100. These input and execution adaptations remain separate from the controlled two-template study. Each episode has its own measured initial state; the records do not form a matched policy comparison.
+
+\begin{table}[!htbp]
+\caption{Additional physical S-mode episodes. Paid actions, accepted observations and verified ROS primitive arrivals are separate counts. Return denotes recorded discrete-anchor acceptance. Laser union uses only archived scans; a dash denotes an unevaluated quantity. Each row is a separate episode; interrupted attempts remain included.}\label{tab:physical-latest}
+\small\renewcommand{\arraystretch}{1.13}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.25\linewidth}p{.14\linewidth}p{.11\linewidth}p{.15\linewidth}p{.15\linewidth}p{.10\linewidth}@{}}
+\toprule
+Episode / outcome & Paid / obs. / arrivals & CAN (m) & Time (s) & Laser union (m$^2$) & Return \\
+\midrule
+10 Nov., S40: budget exhausted & 40 / 41 / 40 & 6.757 & 440.471 & 73.68 $\to$ 108.00 & Yes \\
+12 Nov., S96: speed-stop interruption & 60 / 61 / 60 & 11.082 & 652.884 & 61.72 $\to$ 117.92 & No \\
+12 Nov., 0.05 m/s S12: budget exhausted & 12 / 13 / 12 & 0.999 & 152.767 & --- & Yes \\
+12 Nov., 0.05 m/s S40: speed-stop interruption & 9 / 10 / 9 & 1.484 & 136.336 & 49.76 $\to$ 62.92 & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 10 November S40 episode completed its allowance and returned. The 12 November S96 episode acquired 61 accepted observations and completed 60 verified primitive arrivals before a CAN velocity sample of 0.154 m/s exceeded the unchanged 0.15 m/s stop threshold during the next goal. The run stopped with zero feedback and did not return; its partial coverage is retained as an interrupted outcome. In the S96 episode, the original next-footprint check rejected the outbound option at paid actions 29 and 56, triggering replanning on the latest measured map before either selected endpoint was reached. The initial coverage option forecast unknown laser and camera support, and the later route remained subject to the original return-budget check.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=.84\linewidth]{Physical_S96_20261112.pdf}
+\caption{One interrupted physical S96 trajectory. The cumulative observed laser union increases from 61.72 to 117.92 m$^2$ across 61 saved scans, one per accepted RGB-D observation. Dotted lines mark recorded next-footprint replans at actions 29 and 56. The cross marks the last accepted observation at action 60; the subsequent goal was interrupted by the CAN speed stop. Rasterization uses a 0.2 m grid, an 8 m measured-range cap and a fixed 12.5 m-radius measurement region. The curve measures acquired ray/endpoint evidence in estimated poses, without a known traversable-area denominator or independent map reference. Checkpoints belong to one trajectory.}\label{fig:physical-S96}
+\end{figure}
+
+For these two episodes, saved-scan evaluation accumulates the union of measured laser ray and endpoint cells within the fixed region. Nonfinite or invalid returns are skipped; returns clipped at 8 m provide free-ray evidence without a hit endpoint. Only one archived scan per accepted RGB-D packet enters the curve. The resulting increases of 34.32 and 56.20 m$^2$ quantify additional recorded observation support. Pose error, coarse cells and free/hit conflicts prevent interpreting this quantity as independently verified free space or a coverage percentage. The fixed-bootstrap surface-quality proxy increases from 0.196912 to 0.348033 in S40, whereas S96 decreases from 0.224206 to 0.223401; neither is reconstruction accuracy.
+
+All three candidate-bearing global decisions in each episode give identical G/S scores and zero incremental aperture contribution. S96 already has class-3 semantic points at initialization, but all recorded asset-entry roles report no unused feasible aperture pose; deep roles require an available entry. At its two later global decisions, none of the current geometry assets has marked semantic support despite class-3 points elsewhere in the accumulated ledger. The observed semantic frontend therefore does not demonstrate a semantic selection benefit. These saved-state G scores are diagnostics within the executed S route, not separately executed geometric-control trajectories.
+
+A separately declared execution profile capped positive adapter commands at 0.05 m/s while preserving the decision policy, CAN stops, expiry limits and authorized correction reverse bound of $-0.05$ m/s. Its S12 episode returned after 12 arrivals, but a subsequent S40 attempt stopped after nine arrivals on the same 0.15 m/s feedback check and did not return. The passive CAN observer recorded command frames no greater than 0.05 m/s and peak velocity feedback of 0.159 m/s during that attempt. This measurement does not independently establish command acceptance or physical speed; it shows that the command cap did not prevent the recorded feedback fault. Both episodes stopped with zero feedback. Their own-support quality changes were $-0.006951$ and $-0.000236$. The short completion therefore establishes neither a resolved execution fault nor improved exploration efficiency.
+
+
+\paragraph{Modified unknown-space deployment.}
+The subsequent ros\_checked\_exploration\_v2 policy admits unknown graph centers and a virtual actual-start exception without clearing measured occupancy. Its circular-radius parameter remains, but ROS's rectangular footprint replaces the research known-free footprint gate. Return is optimistic/best effort. Local navigation permits unknown space and retains live laser/depth obstacles and inflation in place of the local static layer; stale inputs pause commands at zero. Separately authorized execution uses a 0.20 m/s linear-feedback stop and ordinary commands bounded to $\pm0.05$ m/s. A failed original primitive is charged once and observed at its actual partial pose without arrival credit. One 0.4 m ROS backoff may precede that observation; recovery motion/time remain physical costs, with no additional NSO primitive or original-arrival credit. These are modified-policy integration episodes, separate from the controlled mechanism study.
+
+\begin{table}[!htbp]
+\caption{Terminal modified-policy episodes. Counts are accepted attempts / exact primitive-success observations / all accepted observations. Both episodes were interrupted without a verified full-anchor return. Physical costs include recoveries; laser union uses the accepted archived scans.}\label{tab:modified-terminal}
+\small\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.24\linewidth}p{.16\linewidth}p{.18\linewidth}p{.20\linewidth}p{.14\linewidth}@{}}
+\toprule
+Episode / stop & Attempts / successes / obs. & CAN (m) / time (s) & Laser union (m$^2$) & Own-support $\Delta Q$ \\
+\midrule
+Reverse-enabled S40: deadline & 19 / 16 / 20 & 7.032 / 603.310 & 47.08 $\to$ 80.12 & $-0.008163$ \\
+Navigation-geometry trial S40: driver fault & 38 / 38 / 39 & 7.357 / 470.211 & 73.88 $\to$ 111.56 & $-0.030885$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The reverse-enabled episode retained three failed attempts and three backoff interventions (one ROS success, two aborts). Recovery brackets alone accounted for 3.181 m and 230.314 s of its total cost. The geometry trial recorded 39 ROS arrivals, but only 38 were followed by an accepted paid observation before native driver fault 5; the final unobserved arrival is not silently charged or fused. Its trial footprint, including padding, was 0.48 m wide, below the current Mini URDF width of 0.585 m. The mounted envelope remains unresolved and the previous navigation default was restored, so passage in this trial does not validate body clearance. At its second global decision, S/G scores differed with nonzero aperture support but selected the same candidate; all four reverse-episode global decisions also retained the same G/S winner. Unequal initial observations, changed navigation geometry, interrupted returns and negative quality changes preclude an efficiency, semantic-benefit or reconstruction-accuracy claim.
+
+\paragraph{Unexecuted interfaces.}
+An optional ros\_viewpoint\_exploration\_v3 controller was installed without changing the default selector and has no physical trial here. It passes a selected full viewpoint to ROS, separates actual waypoint attempts from a fixed 40-unit nominal grid-planning horizon, and disables primitive gain feedback to avoid treating a macro route as one forward/turn action. It adds no failed-goal exclusion or re-ranking. A separate RTAB-Map interface exercised parked mapping and localization against its own database without changing navigation TF authority. The initial interface record contains 475 information messages, 11 proximity events and zero descriptor-loop events; no displaced relocalization was demonstrated. The module is off. Neither interface establishes original-method equivalence or improved exploration.

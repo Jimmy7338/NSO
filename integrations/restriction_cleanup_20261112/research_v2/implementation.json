@@ -1,0 +1,45 @@
+{
+  "schema": "nso.research_admission_profile_implementation.v1",
+  "profile": "ros_checked_exploration_v2",
+  "authorization": "Direct user instruction permits unobserved-space attempts/removal of research restrictions; supplied by root",
+  "scope": "Research-layer only; no ROS mission/navigation/velocity adapter/hardware files changed by this agent",
+  "research_policy_changed": true,
+  "original_method_equivalence": false,
+  "measured_map_clearing": false,
+  "changed_source_sha256": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/joint_engine.py": "fd7c4f39e485a64879ae23022be9e869c8c62b5d0e29ee3e5232921cc0ff9cda",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py": "12b88c1835afa1fe3152f79fa086b3be21a7f522a5ba87492e1b3aed591d28cf",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/ros_checked_exploration_v2.py": "f406167e8e74b7591c9105ca0116f7f72ba6c47f026679a49834b77eb07ef03f",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/tests/test_ros_checked_exploration_v2.py": "d6957ae3bc23634cfa84eb45b10571047c907d14e1d80f6e840faf5ed955601b"
+  },
+  "original_vendor_all_manifest_hashes_unchanged": true,
+  "tests": {
+    "count": 21,
+    "status": "PASS",
+    "log": "/home/ouc/nso_robot/analyses/ros_checked_exploration_v2_20261112/tests.log",
+    "command": "PYTHONPATH=.:tests OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /home/ouc/nso_robot/envs/science312/bin/python -m unittest test_ros_checked_exploration_v2 test_exploration_joint_policy test_joint_engine"
+  },
+  "identity_contract": "/home/ouc/nso_robot/analyses/ros_checked_exploration_v2_20261112/PROFILE.md",
+  "failure_RPC": "observe_failed_action(path, action_id, action, reason): charge attempted primitive and actual observation; no arrival credit; clear macro and replan",
+  "limitations": [
+    "No physical v2 trial by this agent; offline tests do not establish collision-free execution.",
+    "Research circular admission removed; configured circular radius retained but actual existing ROS rectangle is collision authority.",
+    "Return is optimistic/best-effort, not a known-free certificate or guaranteed physical return.",
+    "Future modified-policy trials must remain separate from original NSO evidence."
+  ],
+  "actual_saved_C9_replay": {
+    "observations": 10,
+    "action": "left",
+    "next_pose": [
+      202,
+      198,
+      2
+    ],
+    "remaining_budget": 31,
+    "measured_belief_unchanged_by_planning": true,
+    "belief_sha256": "124421e941ae9ce2c31c4dfc8b3c2bb4c7ea7b2595759ceb6ce15b1bf75dc268",
+    "scope": "OFFLINE forced actual C prefix observations0..9, then new-profile next_action; not a v2 rollout or actual execution",
+    "summary": "/home/ouc/nso_robot/analyses/ros_checked_exploration_v2_20261112/C9_summary.json",
+    "raw_next_action": "/home/ouc/nso_robot/analyses/ros_checked_exploration_v2_20261112/C9_next_action.json"
+  }
+}

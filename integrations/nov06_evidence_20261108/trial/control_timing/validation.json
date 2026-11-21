@@ -1,0 +1,49 @@
+{
+  "status": "implemented_offline_tested_no_robot_or_process_operations",
+  "changed_files": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/visual_velocity_adapter.py",
+      "sha256": "193a725c700e8c208cba90b794d980a4255184af48803b4e492f32b817588fac"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_adapter_control_timing.py",
+      "sha256": "a17cf1519c71e2c6a2ad303d850d9586d19d598baa0e1ee771beefa5646fcded"
+    }
+  ],
+  "backup": {
+    "path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_restore_trial/control_timing/visual_velocity_adapter.before.py",
+    "sha256": "f1535ae6bf3546707bac8e83705e31f6dac7a561e7d5fd8521e40422ca7efe2a",
+    "matches_original_trial_manifest": true
+  },
+  "tests": [
+    {
+      "command": "python /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_adapter_control_timing.py",
+      "passed": 4,
+      "coverage": [
+        "Original literal80ms boundary, strict overrun and backwards-clock evidence.",
+        "First fault/evidence preserved when subsequent invalid tick occurs.",
+        "Ring bounded, same Gate output with/without diagnostic calls, no normal save and only one fault save.",
+        "Actual main while AST executed with mocked ROS/publisher, both normal and current fault rows recorded; write failure swallowed after mocked stop; diagnostic clock failure nonthrowing."
+      ]
+    },
+    {
+      "command": "python /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_visual_velocity_adapter.py",
+      "passed": 23
+    }
+  ],
+  "implementation": [
+    "Original gate decision monotonic sample remains after lock acquisition; tick predicate unchanged. Evidence now/previous/delta/threshold/classification is attached only through existing first-fault latch.",
+    "Ring capacity256 cycles, primitive timestamps/durations only. No per-tick JSON/disk.",
+    "Separate wall elapsed stages: lock wait, decision, guarded command publish, journal.add, snapshot, noncontrol state publish and requested/actual sleep.",
+    "Current fault iteration appended before loop break. Partial exceptional iteration is marked after stop cleanup.",
+    "Fault sidecar control_timing_fault.json written only after original native stop, finalfeedback, journalclose and result.json; existing output files not overwritten. Ordinary diagnostic exceptions are swallowed."
+  ],
+  "risks": [
+    "Measurement adds small CPU/GIL/clock overhead and may perturb observed timing; it is not timing equivalence proof.",
+    "Wall elapsed stages do not uniquely attribute OS scheduling, GIL, CPU contention or ROS internal locks. No CPU thread-time instrumentation added.",
+    "Fatal signals/OOM or process kill may prevent sidecar write; original stop/result authority retained.",
+    "Zero-only real runtime has not been executed by this agent; no ROS/hardware motion validation claimed.",
+    "Existing adapter finally latches adapter_shutdown when no earlier fault, so that normal-close reason may also produce a diagnostic sidecar."
+  ],
+  "scope": "Only one runtime module and one dedicated test changed; source backup and validation are task-owned analysis files. No thresholds, native sender, candidates/scoring or source admission changes."
+}

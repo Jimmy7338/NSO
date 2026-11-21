@@ -1,0 +1,41 @@
+--- runtime/visual_velocity_adapter.py.before
++++ runtime/visual_velocity_adapter.py
+@@ -75,6 +75,15 @@
+         except Exception as exc:
+             self.errors.append(type(exc).__name__+': '+str(exc))
+             return False
++
++
++def update_driver_connection_snapshot(gate, publisher):
++    """One coherent publisher snapshot per control cycle; original predicates."""
++    count = publisher.get_num_connections()
++    gate.driver_connected = count == 1
++    if count > 1:
++        gate.fail('multiple_command_subscribers')
++    return count
+ 
+ 
+ def finite(*values):
+@@ -990,14 +999,18 @@
+                 control_timing.mark('lock_wait')
+                 # Capture clocks after acquiring the same lock as callbacks.
+                 # A callback while waiting must not look newer than this check.
+-                now=time.monotonic(); wall=rospy.Time.now()
+-                gate.driver_connected = publisher.get_num_connections() == 1
+-                if publisher.get_num_connections() > 1:
+-                    gate.fail('multiple_command_subscribers')
++                now=time.monotonic()
++                control_timing.mark('monotonic_sample')
++                wall=rospy.Time.now()
++                control_timing.mark('ros_clock_sample')
++                connection_count=update_driver_connection_snapshot(gate,publisher)
++                control_timing.mark('connection_snapshot',driver_connection_count=connection_count)
+                 if journal.error:
+                     gate.fail(journal.error)
++                control_timing.mark('journal_error_check')
+                 if not gate.ever_armed and now>=pending_deadline:
+                     gate.fail('not_armed_timeout')
++                control_timing.mark('pending_arm_check')
+                 control_timing.mark('pre_decision',gate_now_monotonic=now)
+                 v,w,reason=gate.decision(now,wall.to_sec())
+                 control_timing.mark('decision')

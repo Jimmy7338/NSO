@@ -1,0 +1,57 @@
+<launch>
+  <!-- Physical RGB-D sensor session. Original mounting TF remains explicitly
+       uncalibrated; SDK tracking uses the left sensor reference instead. -->
+  <param name="use_sim_time" value="false" />
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(find scout_description)/urdf/scout_mini.urdf.xacro" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher" output="screen" required="true" />
+  <include file="$(find zed_wrapper)/launch/zed2i.launch">
+    <!-- Keep the URDF attachment separate from the SDK's tracking reference.
+         Setting this argument to zed2i_base_link would create a URDF self-loop. -->
+    <arg name="base_frame" value="base_link" />
+    <arg name="publish_urdf" value="true" />
+    <arg name="cam_pos_x" value="0.071" />
+    <arg name="cam_pos_y" value="-0.0009" />
+    <arg name="cam_pos_z" value="0.288" />
+    <arg name="cam_roll" value="0.0" />
+    <arg name="cam_pitch" value="0.0" />
+    <arg name="cam_yaw" value="0.0" />
+    <arg name="save_rgbd" value="false" />
+    <arg name="rgbd_remote_enable" value="false" />
+  </include>
+  <!-- This new capture uses the SDK NEURAL mode and explicit native
+       confidence thresholds. Original ULTRA launch is retained unchanged. -->
+  <param name="/zed2i/zed_node/depth/depth_mode" value="NEURAL" />
+  <param name="/zed2i/zed_node/depth_confidence" value="80" />
+  <param name="/zed2i/zed_node/depth_texture_conf" value="100" />
+  <param name="/zed2i/zed_node/general/pub_frame_rate" value="10.0" />
+  <param name="/zed2i/zed_node/general/grab_resolution" value="HD720" />
+  <param name="/zed2i/zed_node/general/grab_frame_rate" value="30" />
+  <param name="/zed2i/zed_node/general/serial_number" value="37510078" />
+  <!-- Source-confirmed mDepthFrameId. Its transform to itself is identity,
+       so the SDK pose does not incorporate the unverified chassis mount. -->
+  <param name="/zed2i/zed_node/general/base_frame" value="zed2i_left_camera_frame" />
+  <param name="/zed2i/zed_node/pos_tracking/pos_tracking_enabled" value="true" />
+  <param name="/zed2i/zed_node/pos_tracking/pos_tracking_mode" value="GEN_1" />
+  <param name="/zed2i/zed_node/pos_tracking/imu_fusion" value="false" />
+  <param name="/zed2i/zed_node/pos_tracking/map_frame" value="nso_camera_world" />
+  <param name="/zed2i/zed_node/pos_tracking/odometry_frame" value="nso_camera_odom" />
+  <param name="/zed2i/zed_node/pos_tracking/two_d_mode" value="false" />
+  <param name="/zed2i/zed_node/pos_tracking/area_memory" value="false" />
+  <param name="/zed2i/zed_node/pos_tracking/area_memory_db_path" value="" />
+  <param name="/zed2i/zed_node/pos_tracking/save_area_memory_db_on_exit" value="false" />
+  <param name="/zed2i/zed_node/pos_tracking/floor_alignment" value="false" />
+  <param name="/zed2i/zed_node/pos_tracking/set_as_static" value="false" />
+  <param name="/zed2i/zed_node/pos_tracking/set_gravity_as_origin" value="true" />
+  <rosparam param="/zed2i/zed_node/pos_tracking/initial_base_pose">[0.0, 0.0, 0.0, 0.0, 0.0, 0.0]</rosparam>
+  <param name="/zed2i/zed_node/pos_tracking/publish_tf" value="false" />
+  <param name="/zed2i/zed_node/pos_tracking/publish_map_tf" value="false" />
+  <param name="/zed2i/zed_node/mapping/mapping_enabled" value="false" />
+  <param name="/zed2i/zed_node/object_detection/od_enabled" value="false" />
+  <param name="/zed2i/zed_node/sensors/sensors_timestamp_sync" value="false" />
+  <param name="/zed2i/zed_node/depth/openni_depth_mode" value="false" />
+  <!-- This probe publishes no camera-world TF or motion commands. No subscriber
+       to odom_status: installed source routes that status to pose_status. -->
+  <param name="/zed2i/zed_node/diagnostic_period" value="0.05" />
+</launch>

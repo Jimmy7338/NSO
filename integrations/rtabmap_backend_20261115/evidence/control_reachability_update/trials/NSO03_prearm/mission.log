@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py", line 1325, in <module>
+    main()
+  File "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py", line 604, in main
+    reference_task=reference_worker.call('init',settings,lambda:None)
+  File "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/reference_transport.py", line 55, in call
+    raise RuntimeError('reference worker: '+str(response.get('error')))
+RuntimeError: reference worker: {'type': 'ImportError', 'message': '/home/ouc/nso_robot/envs/science312/lib/python3.12/site-packages/torch/lib/../../torch.libs/libgomp-98df74fd.so.1.0.0: cannot allocate memory in static TLS block'}

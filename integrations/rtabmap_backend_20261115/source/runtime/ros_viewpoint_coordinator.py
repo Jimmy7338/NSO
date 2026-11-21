@@ -1,0 +1,242 @@
+"""Explicit v3: NSO selects complete viewpoints; existing ROS navigates to them.
+
+One attempted waypoint yields one real observation, not synthetic grid steps.
+Importing this module does not open ROS or actuators.
+"""
+import math
+import time
+from joint_ros_coordinator import validate_joint_identity,metric_goal_to_map
+from nso_ros_coordinator import matrix,reference_pose_error
+PROFILE='ros_viewpoint_exploration_v3'
+UNBOUNDED_PROFILE='ros_viewpoint_exploration_v4_unbounded'
+UNTIL_STOPPED='exploration_until_stopped_v1'
+
+def fit_selected_goal_global_window(ctx, source, odom_target, record):
+    """Grow ROS rolling window to contain the already selected whole target."""
+    import rospy
+    if not rospy.get_param('/nso_visual/move_base/global_costmap/rolling_window',False):
+        record('ROS_selected_goal_window',profile='selected_goal_window_v1',resize_needed=False,reason='nonrolling_global_map')
+        return
+    frame=rospy.get_param('/nso_visual/move_base/global_costmap/global_frame','odom').lstrip('/')
+    current=list(source['pose']);target=list(odom_target)
+    source_frame=source.get('target_frame','odom')
+    if frame!=source_frame:
+        stamp=source.get('source_stamp_ns')
+        if type(stamp) is int:
+            sec,nsec=divmod(stamp,10**9);query=rospy.Time(sec,nsec)
+        else:query=rospy.Time.from_sec(source['source_stamp_s'])
+        tf=ctx['tfbuf'].lookup_transform(frame,source_frame,query,rospy.Duration(.3))
+        transform=matrix(tf.transform)
+        current=metric_goal_to_map(current,transform);target=metric_goal_to_map(target,transform)
+    client=ctx.get('_selected_goal_window_client')
+    if client is None:
+        from dynamic_reconfigure.client import Client
+        client=Client('/nso_visual/move_base/global_costmap',timeout=4.)
+        ctx['_selected_goal_window_client']=client
+    before=client.get_configuration(timeout=3.)
+    requested=dict(width=max(int(before['width']),int(math.ceil(2*(abs(target[0]-current[0])+1.5)))),
+                   height=max(int(before['height']),int(math.ceil(2*(abs(target[1]-current[1])+1.5)))))
+    changed=any(before[k]!=v for k,v in requested.items())
+    after=client.update_configuration(requested) if changed else before
+    if any(after[k]<v for k,v in requested.items()):raise RuntimeError('global rolling costmap resize did not contain selected target')
+    record('ROS_selected_goal_window',profile='selected_goal_window_v1',resize_needed=changed,
+           global_frame=frame,current_xy=current[:2],selected_target_xy=target[:2],
+           before={k:before.get(k) for k in ('width','height','resolution')},requested=requested,
+           after={k:after.get(k) for k in ('width','height','resolution')},
+           changed_parameters=['width','height'] if changed else [],research_target_changed=False,
+           obstacles_footprint_and_resolution_parameters_untouched=True,margin_m=1.5)
+
+
+def run_viewpoints(ctx):
+    identity=validate_joint_identity(ctx['task_receipt'])
+    if identity.get('configuration',{}).get('policy_variant') not in (PROFILE,UNBOUNDED_PROFILE):
+        raise ValueError('continuous viewpoint execution requires explicit v3 identity')
+    import rospy
+    from move_base_msgs.msg import MoveBaseGoal
+    client,worker=ctx['client'],ctx['worker']
+    unbounded=ctx.get('execution_limits_profile') == UNTIL_STOPPED
+    if unbounded and (ctx.get('duration') is not None or identity.get('configuration',{}).get('policy_variant')!=UNBOUNDED_PROFILE):
+        raise ValueError('until-stopped runtime requires unbounded viewpoint identity and no duration')
+    timeout=ctx.get('viewpoint_goal_timeout_s',None if unbounded else 120.)
+    if not (unbounded and timeout is None) and (type(timeout) not in (float,int) or not math.isfinite(timeout) or not 0<timeout<=120.):
+        raise ValueError('viewpoint goal timeout must be finite in (0,120] seconds')
+    frame=ctx.get('execution_frame','odom')
+    graph_geometry=identity['calibration'].get('geometry_pose_backend')=='rtabmap_optimized_replay_v1'
+    if frame not in ('map','odom','nso_pair_map') or (frame=='nso_pair_map' and not graph_geometry):
+        raise ValueError('viewpoint execution frame requires an explicitly bound geometry backend')
+    if graph_geometry and frame!='nso_pair_map':raise ValueError('RTAB geometry targets require the matching optimized execution frame')
+    capture_planning_pose=ctx['capture_planning_pose'] if graph_geometry else ctx['capture_odom_pose']
+    result=ctx['result'];attempts=[]
+    result.update(viewpoint_attempts=attempts,viewpoint_execution_profile=identity['configuration']['policy_variant'],
+                  execution_limits_profile=ctx.get('execution_limits_profile'),
+                  viewpoint_goal_timeout_s=timeout,physical_cost_basis='total original CAN distance and full episode elapsed time including ROS recoveries')
+    def record(event,**fields):ctx['journal'].add(dict(event=event,**fields))
+    def heartbeat():
+        ctx['check'](True);ctx['progress']()
+        if ctx['duration'] is not None and time.monotonic()-ctx['run_start']>=ctx['duration']:
+            raise RuntimeError('external_execution_duration_complete')
+    def call(method,params):
+        response=worker.call(method,params,heartbeat)
+        record('NSO_viewpoint_rpc',method=method,params=params,response=response)
+        if 'summary' in response:result['joint_summary']=response['summary']
+        return response
+    def observation(attempt_id,ros_status,reason):
+        heartbeat();before=capture_planning_pose()
+        # No assigned viewpoint, cell, yaw or ideal pose enters acquisition.
+        path=ctx['capture_observation'](identity['calibration'],attempt_id,None,None)
+        after=capture_planning_pose()
+        response=call('observe_viewpoint_result',dict(path=str(path),attempt_id=attempt_id,ros_status=ros_status,reason=reason))
+        outcome=response.get('outcome',{})
+        if attempt_id>0 and (outcome.get('waypoint_attempt_charged') is not True
+                            or outcome.get('primitive_arrival_credit') is not False):
+            raise RuntimeError('v3 worker lacks charged-waypoint/no-primitive-credit receipt')
+        record('NSO_viewpoint_actual_observation',attempt_id=attempt_id,path=str(path),
+               ros_status=ros_status,reason=reason,actual_odom_before=before,actual_odom_after=after,
+               state=response.get('state'),outcome=outcome,synthetic_intermediate_observations=0)
+        return response
+    if identity.get('current_state') is not None or identity.get('pending') is not None:
+        raise RuntimeError('v3 resume requires explicit actual-history support')
+    observation(0,None,'bootstrap_actual_observation')
+    last_attempt=0
+    while True:
+        heartbeat()
+        remaining=None if unbounded else ctx['duration']-(time.monotonic()-ctx['run_start'])
+        decision=call('next_viewpoint',dict(remaining_time_s=remaining,return_requested=False) if unbounded else dict(remaining_time_s=remaining))
+        target=decision.get('target')
+        if target is None:
+            termination=((decision.get('summary') or {}).get('runtime') or {}).get('termination') or {}
+            result.update(status='nso_viewpoint_core_failed' if termination.get('failed') else 'nso_viewpoint_core_stopped',
+                          method_stop=True,method_failed=bool(termination.get('failed')),reason=termination.get('reason'))
+            return
+        attempt_id=target.get('attempt_id');odom_target=target.get('target_odom_pose')
+        if type(attempt_id) is not int or attempt_id!=last_attempt+1 or (attempt_id>40 and not unbounded):
+            raise RuntimeError('v3 viewpoint attempt sequence differs')
+        if not isinstance(odom_target,list) or len(odom_target)!=3 or not all(type(v) in (float,int) and math.isfinite(v) for v in odom_target):
+            raise ValueError('finite absolute viewpoint odom endpoint required')
+        if graph_geometry and target.get('target_world_frame')!=frame:
+            raise ValueError('RTAB policy endpoint lacks matching world-frame receipt')
+        source=capture_planning_pose();projection=None
+        if ctx.get('selected_goal_window_resize'):
+            fit_selected_goal_global_window(ctx,source,odom_target,record)
+            heartbeat()
+        if frame=='map':
+            stamp=source.get('source_stamp_ns')
+            if type(stamp) is int:
+                sec,nsec=divmod(stamp,10**9);query=rospy.Time(sec,nsec)
+            else:query=rospy.Time.from_sec(source['source_stamp_s'])
+            tf=ctx['tfbuf'].lookup_transform('map','odom',query,rospy.Duration(.3))
+            transform=matrix(tf.transform);metric_target=metric_goal_to_map(odom_target,transform)
+            projection=dict(matrix=transform.tolist(),query_stamp_ns=query.to_nsec())
+        else:metric_target=list(odom_target)
+        goal=MoveBaseGoal();goal.target_pose.header.frame_id=frame;goal.target_pose.header.stamp=rospy.Time.now()
+        goal.target_pose.pose.position.x,goal.target_pose.pose.position.y=metric_target[:2]
+        goal.target_pose.pose.orientation.z=math.sin(metric_target[2]/2);goal.target_pose.pose.orientation.w=math.cos(metric_target[2]/2)
+        can_before=ctx['can_snapshot']();started=time.monotonic()
+        client.send_goal(goal);goal_id=client.gh.comm_state_machine.action_goal.goal_id.id
+        execution=dict(attempt_id=attempt_id,goal=dict(id=goal_id,frame=frame,x=metric_target[0],y=metric_target[1],yaw=metric_target[2]),
+            target_odom_pose=odom_target,selected=target.get('selected'),goal_role=target.get('goal_role'),
+            predicted_nominal_grid_cost=target.get('predicted_nominal_grid_cost'),
+            predicted_nominal_outbound_cost=target.get('predicted_nominal_outbound_cost'),
+            planning_cost_is_physical_primitive_count=False,actual_odom_before=source,CAN_before=can_before,
+            started_monotonic=started,map_projection=projection,goal_timeout_s=timeout)
+        record('NSO_viewpoint_goal_sent',**execution)
+        timed_out=False
+        try:
+            while not client.wait_for_result(rospy.Duration(.05)):
+                heartbeat()
+                if timeout is not None and time.monotonic()-started>=timeout:
+                    timed_out=True;client.cancel_goal()
+                    record('NSO_viewpoint_goal_timeout_cancel',attempt_id=attempt_id,goal_id=goal_id)
+                    # Never send a replacement until this goal acknowledges termination.
+                    while not client.wait_for_result(rospy.Duration(.05)):heartbeat()
+                    break
+            heartbeat()
+        except BaseException:
+            client.cancel_goal()
+            raise
+        status=client.get_state()
+        if status not in (2,3,4,5,8,9):raise RuntimeError('ROS viewpoint wait completed without terminal status')
+        after=capture_planning_pose();can_after=ctx['can_snapshot']()
+        error=reference_pose_error(odom_target,after['pose'],ctx['xy_tolerance_m'],ctx['yaw_tolerance_rad'])
+        reason='ROS_goal_timeout_cancel_acknowledged' if timed_out else 'ROS_terminal_status_'+str(status)
+        execution.update(terminal=dict(id=goal_id,status=status),timed_out=timed_out,reason=reason,
+            actual_odom_after=after,CAN_after=can_after,elapsed_s=time.monotonic()-started,
+            metric_endpoint_error=error,ROS_success=status==3,scientific_cardinal_cell_gate=False,
+            synthetic_intermediate_observations=0,primitive_arrival_credit=False)
+        attempts.append(execution);record('NSO_viewpoint_goal_result',**execution)
+        observation(attempt_id,status,reason)
+        last_attempt=attempt_id
+
+
+def final_viewpoint_observation_audit(report, supervisor_summary, *, worker_closed, stop_confirmed):
+    """Post-stop journal audit; viewpoint counts never become primitive arrivals."""
+    import hashlib,json
+    from pathlib import Path
+    report=Path(report).resolve();path=report/'joint/decisions.jsonl'
+    receipt=dict(status='audit_error',source_path=str(path),source_sha256=None,
+        accounting_unit='actual_waypoint_attempt',count_source='last validated accepted observe_viewpoint_result in this report',
+        worker_closed=worker_closed,stop_confirmed=stop_confirmed,read_only=True,execution_authority=False,
+        supervisor_summary_preserved=True,accepted_observations=[],unaccepted_observations=[],error=None)
+    result=dict(final_worker_observation_receipt=receipt,final_worker_summary=None,
+        supervisor_worker_count_difference=None,supervisor_worker_viewpoint_count_difference=None)
+    try:
+        if worker_closed is not True or stop_confirmed is not True:raise ValueError('post-stop closed-worker evidence required')
+        if path.resolve().parent!=report/'joint':raise ValueError('journal outside report')
+        raw=path.read_bytes();receipt['source_sha256']=hashlib.sha256(raw).hexdigest()
+        expected=None;previous=0;last=None;last_id=None;last_line=None;next_attempt=0
+        for lineno,line in enumerate(raw.splitlines(),1):
+            if not line.strip():continue
+            row=json.loads(line);req,resp=row['request'],row['response'];rid=req['id'];method=req['method']
+            if type(rid) is not int or type(resp.get('id')) is not int or resp['id']!=rid:raise ValueError('request/response id mismatch')
+            if rid==-1:
+                if method!='shutdown':raise ValueError('invalid shutdown')
+            elif rid<=previous:raise ValueError('request id regressed')
+            else:previous=rid
+            if type(resp.get('ok')) is not bool:raise ValueError('invalid response status')
+            if method=='init':
+                cfg=req['params']['configuration']
+                if expected is not None or not resp['ok'] or cfg.get('policy_variant') not in (PROFILE,UNBOUNDED_PROFILE):raise ValueError('wrong v3 initialization')
+                expected=(cfg['scene_id'],cfg['episode_id']);continue
+            if method!='observe_viewpoint_result':continue
+            if expected is None:raise ValueError('observation before init')
+            params=req['params'];aid=params['attempt_id'];packet=Path(params['path']).resolve()
+            if type(aid) is not int or aid<0 or packet.parent!=report/'joint_inputs' or not packet.is_file():raise ValueError('attempt/path outside report')
+            if not resp['ok']:raise ValueError('viewpoint RPC failed')
+            value=resp['result'];reference=dict(request_id=rid,line_number=lineno,attempt_id=aid,packet_path=str(packet))
+            if type(value.get('accepted')) is not bool:raise ValueError('missing acceptance')
+            if not value['accepted'] or value.get('duplicate'):
+                receipt['unaccepted_observations'].append(reference);continue
+            state=value['state'];summary=value['summary'];outcome=value['outcome'];runtime=summary['runtime']
+            if (aid!=next_attempt or summary.get('accounting_unit')!='actual_waypoint_attempt'
+                or summary.get('waypoint_attempts')!=aid or summary.get('primitive_arrivals_credited')!=0
+                or state.get('action_id')!=aid or state.get('step')!=aid
+                or (runtime.get('scene_id'),runtime.get('episode_id'))!=expected
+                or packet.name!='joint-'+str(state['frame_id'])+'.npz' or outcome.get('attempt_id')!=aid):
+                raise ValueError('accepted viewpoint state/count disagreement')
+            if aid==0:
+                if params.get('ros_status') is not None or outcome.get('waypoint_attempt_charged') is not False:raise ValueError('bootstrap charged')
+            elif (type(params.get('ros_status')) is not int or params['ros_status'] not in (2,3,4,5,8,9)
+                  or outcome.get('ros_status')!=params['ros_status'] or outcome.get('waypoint_attempt_charged') is not True
+                  or outcome.get('primitive_arrival_credit') is not False):raise ValueError('invalid viewpoint outcome credit')
+            reference.update(state=state,worker_waypoint_attempts=aid,ROS_status=params.get('ros_status'))
+            receipt['accepted_observations'].append(reference);last=summary;last_id=rid;last_line=lineno;next_attempt+=1
+        if last is None:
+            receipt.update(status='no_accepted_observation',error='no accepted v3 observation; attempt count unknown');return result
+        supervisor=None
+        if supervisor_summary is not None:
+            runtime=supervisor_summary['runtime'];supervisor=supervisor_summary.get('waypoint_attempts')
+            if type(supervisor) is not int or (runtime.get('scene_id'),runtime.get('episode_id'))!=expected or supervisor>last['waypoint_attempts']:
+                raise ValueError('supervisor viewpoint count/identity differs')
+        count=last['waypoint_attempts']
+        receipt.update(status='verified',accepted_bootstrap_observations=1,accepted_waypoint_result_observations=count,
+            worker_waypoint_attempts=count,supervisor_waypoint_attempts=supervisor,
+            waypoint_ROS_successes=last.get('waypoint_ROS_successes'),primitive_arrivals_credited=0,
+            final_summary_request_id=last_id,final_summary_line=last_line)
+        result['final_worker_summary']=last
+        result['supervisor_worker_viewpoint_count_difference']=dict(supervisor_waypoint_attempts=supervisor,
+            worker_waypoint_attempts=count,worker_minus_supervisor=None if supervisor is None else count-supervisor,
+            accounting_unit='actual_waypoint_attempt',primitive_arrival_credit=False)
+    except Exception as exc:
+        receipt['error']=type(exc).__name__+': '+str(exc)
+        result['final_worker_summary']=None;result['supervisor_worker_viewpoint_count_difference']=None
+    return result

@@ -1,0 +1,31 @@
+\begin{table}[tb]
+\centering
+\small
+\caption{Paired exploration outcomes. Frontier* is the original implementation with an unconditional current-pose candidate. Frontier restricts candidates to reachable observed-free cells adjacent to unknown cells. G and S use the same visibility forecast and differ in the structural class prior. Coverage is the fraction of reachable free cells correctly mapped as free. A95 and A100 are first actions reaching 95\% and 100\%, with dashes for thresholds unreached by the recorded stop. Object recall is weighted by reference surface area. Recall and scene F1 use a 5\,cm tolerance. The 256-action cap includes return.}
+\label{tab:matched-frontier-prior}
+\begin{tabular}{llrrrrrrc}
+\toprule
+Layout & Method & Cov. (\%) & A95 & A100 & Obj. (\%) & F1 (\%) & Actions & Return \\
+\midrule
+Chain A & Frontier* & 32.58 & -- & -- & 58.77 & 32.37 & 256 & Yes \\
+ & Frontier & 100.00 & 76 & 140 & 80.57 & 97.82 & 202 & Yes \\
+ & G & 100.00 & 70 & 154 & 80.17 & 99.17 & 256 & Yes \\
+ & S & 100.00 & 70 & 154 & 80.17 & 99.17 & 256 & Yes \\
+\addlinespace
+Cycle A & Frontier* & 45.16 & -- & -- & 31.70 & 35.36 & 256 & Yes \\
+ & Frontier & 100.00 & 56 & 80 & 74.44 & 95.39 & 136 & Yes \\
+ & G & 100.00 & 67 & 133 & 79.16 & 99.46 & 256 & Yes \\
+ & S & 100.00 & 67 & 133 & 75.36 & 99.38 & 256 & Yes \\
+\addlinespace
+Chain B & Frontier* & 32.86 & -- & -- & 57.53 & 30.22 & 256 & Yes \\
+ & Frontier & 100.00 & 95 & 102 & 87.20 & 98.14 & 200 & Yes \\
+ & G & 92.40 & -- & -- & 86.53 & 92.29 & 256 & Yes \\
+ & S & 92.40 & -- & -- & 86.53 & 92.29 & 256 & Yes \\
+\addlinespace
+Cycle B & Frontier* & 43.17 & -- & -- & 43.10 & 35.19 & 256 & Yes \\
+ & Frontier & 99.88 & 65 & -- & 85.59 & 98.60 & 220 & Yes \\
+ & G & 100.00 & 97 & 191 & 86.47 & 98.65 & 256 & Yes \\
+ & S & 100.00 & 97 & 191 & 86.47 & 98.65 & 256 & Yes \\
+\bottomrule
+\end{tabular}
+\end{table}

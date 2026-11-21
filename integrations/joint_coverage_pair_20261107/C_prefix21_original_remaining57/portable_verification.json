@@ -1,0 +1,75 @@
+{
+  "schema": "nso.C21.portable_verification.v1",
+  "status": "passed",
+  "one_relocated_mapper_validation_run": true,
+  "paths_with_spaces": true,
+  "matched_scientific_leaf_count": 3304,
+  "excluded_fields": [
+    "script_sha256",
+    "elapsed_s"
+  ],
+  "comparison": "identical types and integers; timestamps exact; other floats atol=rtol=1e-8",
+  "source_files_checked_before_import": 112,
+  "frame_files_checked_before_import": 22,
+  "negative_tests": [
+    {
+      "name": "output_collision",
+      "exit_code": 2,
+      "expected_reason": "output already exists",
+      "output_created": true,
+      "native_mapper_not_entered": true
+    },
+    {
+      "name": "canonical_metadata_missing_or_mismatch",
+      "exit_code": 2,
+      "expected_reason": "canonical input hash mismatch",
+      "output_created": false,
+      "native_mapper_not_entered": true
+    },
+    {
+      "name": "source_missing",
+      "exit_code": 2,
+      "expected_reason": "recorded source hash mismatch",
+      "output_created": false,
+      "native_mapper_not_entered": true
+    },
+    {
+      "name": "frame_hash_mismatch",
+      "exit_code": 2,
+      "expected_reason": "canonical frame hash mismatch",
+      "output_created": false,
+      "native_mapper_not_entered": true
+    }
+  ],
+  "actual_command": [
+    "/home/ouc/nso_robot/envs/science312/bin/python",
+    "-B",
+    "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/C_prefix21_original_remaining57/audit_portable.py",
+    "--package",
+    "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/C_prefix21_original_remaining57/portable C21 29i7c4x_/relocated package",
+    "--code",
+    "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/C_prefix21_original_remaining57/portable C21 29i7c4x_/recorded code",
+    "--output",
+    "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/C_prefix21_original_remaining57/portable C21 29i7c4x_/fresh output"
+  ],
+  "temporary_fixture_removed_after_validation": true,
+  "original_audit_sha256": "842ffd61324102d6f188ceec66ba869a39e638e488547e689e6305c8aabf34c9",
+  "original_result_sha256": "4cf9c578b64b55625f2f46c2ba6d6c7256914e20c11b6c80f4cfbed5563c71ed",
+  "portable_script_sha256": "981957867a077366541ac2bcd20d7b79b0e571d30fe2374a82f31086ebffeae8",
+  "portable_result_sha256": "b882cbede3dff59e98162142909dcd95d80913bdc1d6ac4f6d3cfb95ed7042df",
+  "source_snapshot_origin_counts": {
+    "published_or_staged_snapshot": 101,
+    "active_hash_matched_source": 11
+  },
+  "published_source_mapping": "source_repository_mapping.json",
+  "published_source_files_verified": 112,
+  "published_commit": "de7d3344c2f569ab0331408457185a036fbb7e29",
+  "environment": {
+    "python": "3.12.15",
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "open3d": "0.19.0+597106a",
+    "machine": "aarch64",
+    "scope": "existing science312 environment used for the one relocated run; no cross-platform validation"
+  }
+}

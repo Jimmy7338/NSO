@@ -1,0 +1,7 @@
+Isolated candidate; no deployment or actuator commands performed.
+
+Profile nso_dwa_linear_consistency_005_v1 explicitly changes NSO/joint positive adapter clipping0.10→0.05m/s to match declared DWA max_vel_x/max_vel_trans. Other modes retain0.10. Angular±0.3, normal negative0, authorized correction−0.05, CAN stop abs(v)>0.15 or abs(w)>0.45, all TTLs, stop rules and research decisions remain unchanged. Snapshot/startup/authorization expose actual cap. Fault evidence adds source/receipt monotonic, parsed CANvelocity, currentstatus, boundedproposal and unchangedlimits; CANid and full payload_hex are retained; exact kernelns remain in independent ring.
+
+Review execution_consistency.patch and manifest.json. For authorized deployment copy ONLY runtime/visual_velocity_adapter.py and runtime/mission.py to matching active runtime and verify hashes; supporting files are unchanged copies for offline imports, not deployment targets. Preserve failed S96 report. Use a NEW report ID and execution profile disclosure for validation; do not resume terminated adapter or attribute new clipping to unchanged historical execution. Recheck live DWA max_vel_x and max_vel_trans0.05 before new trial. No upstream navigation C++ patch is included.
+
+Validation: passing_test_results.txt contains43passed tests. Full test_results.txt includes baseline failure in existing navigation lifecycle AST harness (missing lifecycle mock); identical baseline failure in ../baseline_lifecycle_test.txt.

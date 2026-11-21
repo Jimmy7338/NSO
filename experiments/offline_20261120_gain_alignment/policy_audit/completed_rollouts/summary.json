@@ -1,0 +1,597 @@
+{
+  "status": "completed_independent_four_run_evaluation",
+  "attempt_selection": {
+    "shelf_left": {
+      "G_native_novelty": "attempt_002",
+      "S_native_novelty": "attempt_002"
+    },
+    "shelf_right": {
+      "G_native_novelty": "attempt_002",
+      "S_native_novelty": "attempt_001"
+    }
+  },
+  "external_interruption": {
+    "status": "external_interruption_observed",
+    "observed_unix_s": 1795172982.4505067,
+    "supervisor_tool_session": 38782,
+    "supervisor_exit_code": 143,
+    "supervisor_signal_interpretation": "128+SIGTERM",
+    "cause": "not determined from logs; root confirms no user or root stop request",
+    "actor_processes_remaining": false,
+    "completed_result_files": 0,
+    "scientific_method_modified": false,
+    "counts_as_complete_policy": false,
+    "all_partial_attempts_retained": true,
+    "states": [
+      {
+        "layout": "shelf_left",
+        "arm": "G_native_novelty",
+        "step": 240,
+        "elapsed_s": 309.0522406050004,
+        "coverage_fraction": 1.0
+      },
+      {
+        "layout": "shelf_left",
+        "arm": "S_native_novelty",
+        "step": 238,
+        "elapsed_s": 311.97776660999807,
+        "coverage_fraction": 1.0
+      },
+      {
+        "layout": "shelf_right",
+        "arm": "G_native_novelty",
+        "step": 202,
+        "elapsed_s": 304.61061180901015,
+        "coverage_fraction": 1.0
+      }
+    ]
+  },
+  "interruption_sha256": "748b0b2e2368ad6c9d5dc5d1f5667e3af1e7904a81816cf409e71e1e97ebbe5b",
+  "protocol_sha256": "73df939856caa91d0f58e3f4d16462c9cad02dacf40e21779db283f88dd62b96",
+  "rows": {
+    "shelf_left": {
+      "G_native_novelty": {
+        "elapsed_s": 423.6494429680024,
+        "decision_wall_s_total": 284.3858425420185,
+        "paid_actions": 256,
+        "paid_action_budget": 256,
+        "initial_coverage_fraction": 0.4260614934114202,
+        "final_coverage_fraction": 1.0,
+        "free_correct_fraction": 1.0,
+        "false_occupied_fraction": 0.0,
+        "path_length_m": 42.0,
+        "turn_actions": 46,
+        "collisions": 0,
+        "final_pose_equals_initial_anchor": true,
+        "termination": {
+          "reason": "sensor_terminal",
+          "returned_to_anchor": true,
+          "failed": false,
+          "current_footprint_known_safe": true,
+          "final_frame_id": "frame-256",
+          "final_action_id": 256
+        },
+        "trajectory_sha256": "83e645b55ea2c60c9c4f9099d62906841a351e1676584d836e1629b5f06b62e3",
+        "global_planning_calls": 30,
+        "first_coverage_action": {
+          "0.9": 18,
+          "0.95": 21,
+          "0.99": 77,
+          "1.0": 88
+        },
+        "first_free_correct_action": {
+          "0.9": 18,
+          "0.95": 21,
+          "0.99": 77,
+          "1.0": 88
+        },
+        "zero_gain_actions": 221,
+        "longest_zero_gain_streak": 168,
+        "target_pose_matches": 30,
+        "attempt": "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/rollouts/native_novelty/layouts/shelf_left/runs/G_native_novelty/attempt_002",
+        "attempt_name": "attempt_002",
+        "status": "completed_independently_evaluated",
+        "extent_mode": "uncertainty",
+        "surface_metrics": {
+          "predicted_surface_samples": 12000,
+          "predicted_mesh_triangles": 112747,
+          "surface_error_mean_m": 0.0034281392581760883,
+          "surface_error_p95_m": 0.011384984105825424,
+          "target_surface_metrics": {
+            "open31": {
+              "reference_samples": 6876,
+              "completeness_error_mean_m": 0.038250718265771866,
+              "completeness_error_p95_m": 0.18730318173766136,
+              "recall_05cm": 0.8216986620127982,
+              "recall_10cm": 0.9012507271669575
+            },
+            "closed118": {
+              "reference_samples": 4375,
+              "completeness_error_mean_m": 0.02331269159913063,
+              "completeness_error_p95_m": 0.10610509142279627,
+              "recall_05cm": 0.8870857142857143,
+              "recall_10cm": 0.9449142857142857
+            }
+          },
+          "precision_05cm": 0.9945,
+          "recall_05cm": 0.8690972817494333,
+          "f1_05cm": 0.9275794241215486,
+          "precision_10cm": 1.0,
+          "recall_10cm": 0.8868125797664629,
+          "f1_10cm": 0.940011307192182,
+          "reference_samples": 52497,
+          "completeness_error_mean_m": 0.08046094328165054,
+          "completeness_error_p95_m": 0.5685793042182918
+        },
+        "reference_sha256": "63e5cf17d04b85242d93fa9e6092c8bd5cc601a5d9e4a90346fef52a3af912ab",
+        "native_TSDF_mesh_sha256": "006791d9078e70a77d4b050d7175553f0d1206a415aa31b0600508e7f77739a4",
+        "manifest_sha256": "f8eaca6dbfaa73ee3a6335a4fd96086e4b38a8926cefaeabdf22e4e417ee45c8",
+        "surface_result_sha256": "cefc52d22e7a7f2ff2e2bdaf9f271d286796b7d5b16599c0e48e5b2116ca3adf",
+        "actual_frames": 257,
+        "template_score_calls": 30,
+        "plan_states_with_nonzero_S_minus_G": 8,
+        "native_consumption_call_events": {
+          "G": 11983,
+          "S": 11983
+        },
+        "consumption_events_not_unique_physical_surface_points": true,
+        "max_raw_template_points": 44030,
+        "actual_template_point_cap_activations": 0,
+        "shared_observed_support_and_bank_verified": true,
+        "likelihood_applied_once_verified": true,
+        "measured_frame_fusion_once_verified": true,
+        "timing_scope": "Original wall-clock timings from shared three-process batch; not isolated realtime benchmark or physical travel time",
+        "native_novelty_reward_revision": true,
+        "wrapper_runner_sha256": "82b7c53fbcf0ca33c95213cfa60a6ebbd0cc6e1fe71b8d6443412071e8c733f7",
+        "model_sha256": "abd1850ad3f4756f2aff0dbff6f6f908cfc0cfae6c6bcd1f5bcc1b7447fff1df",
+        "sigma_m": 0.01,
+        "structural_temperature": 16.0
+      },
+      "S_native_novelty": {
+        "elapsed_s": 426.07674262300134,
+        "decision_wall_s_total": 294.9725856630539,
+        "paid_actions": 256,
+        "paid_action_budget": 256,
+        "initial_coverage_fraction": 0.4260614934114202,
+        "final_coverage_fraction": 1.0,
+        "free_correct_fraction": 1.0,
+        "false_occupied_fraction": 0.0,
+        "path_length_m": 43.2,
+        "turn_actions": 40,
+        "collisions": 0,
+        "final_pose_equals_initial_anchor": true,
+        "termination": {
+          "reason": "sensor_terminal",
+          "returned_to_anchor": true,
+          "failed": false,
+          "current_footprint_known_safe": true,
+          "final_frame_id": "frame-256",
+          "final_action_id": 256
+        },
+        "trajectory_sha256": "48638ee2c43c8219455a41f2f6e0caad68c29d0481627c2b67cc2251f410d296",
+        "global_planning_calls": 27,
+        "first_coverage_action": {
+          "0.9": 18,
+          "0.95": 21,
+          "0.99": 85,
+          "1.0": 97
+        },
+        "first_free_correct_action": {
+          "0.9": 18,
+          "0.95": 21,
+          "0.99": 85,
+          "1.0": 97
+        },
+        "zero_gain_actions": 223,
+        "longest_zero_gain_streak": 159,
+        "target_pose_matches": 27,
+        "attempt": "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/rollouts/native_novelty/layouts/shelf_left/runs/S_native_novelty/attempt_002",
+        "attempt_name": "attempt_002",
+        "status": "completed_independently_evaluated",
+        "extent_mode": "uncertainty",
+        "surface_metrics": {
+          "predicted_surface_samples": 12000,
+          "predicted_mesh_triangles": 112510,
+          "surface_error_mean_m": 0.003532920265570283,
+          "surface_error_p95_m": 0.011223665950819845,
+          "target_surface_metrics": {
+            "open31": {
+              "reference_samples": 6876,
+              "completeness_error_mean_m": 0.03646278381347656,
+              "completeness_error_p95_m": 0.17248550057411194,
+              "recall_05cm": 0.8346422338568935,
+              "recall_10cm": 0.9240837696335078
+            },
+            "closed118": {
+              "reference_samples": 4375,
+              "completeness_error_mean_m": 0.02943890169262886,
+              "completeness_error_p95_m": 0.13334713727235797,
+              "recall_05cm": 0.8587428571428571,
+              "recall_10cm": 0.9236571428571428
+            }
+          },
+          "precision_05cm": 0.9921666666666666,
+          "recall_05cm": 0.8642589100329543,
+          "f1_05cm": 0.9238063649487295,
+          "precision_10cm": 1.0,
+          "recall_10cm": 0.8831552279177858,
+          "f1_10cm": 0.9379526603277362,
+          "reference_samples": 52497,
+          "completeness_error_mean_m": 0.08128700405359268,
+          "completeness_error_p95_m": 0.5693513751029957
+        },
+        "reference_sha256": "63e5cf17d04b85242d93fa9e6092c8bd5cc601a5d9e4a90346fef52a3af912ab",
+        "native_TSDF_mesh_sha256": "bbed95e35af4dd08fc69e5ff262b01ed80f5cd7e8eb40b1019cb507cbd9922c2",
+        "manifest_sha256": "b85b74a79f998e58672032d2683571b38f4e2ec737e2e14ff11fe8cbae926371",
+        "surface_result_sha256": "0f470707d47daf52c6f3afcd3b216a3d12bc3c7bbaff6b3e547ac8ad217bccbc",
+        "actual_frames": 257,
+        "template_score_calls": 27,
+        "plan_states_with_nonzero_S_minus_G": 5,
+        "native_consumption_call_events": {
+          "G": 11226,
+          "S": 11226
+        },
+        "consumption_events_not_unique_physical_surface_points": true,
+        "max_raw_template_points": 44030,
+        "actual_template_point_cap_activations": 0,
+        "shared_observed_support_and_bank_verified": true,
+        "likelihood_applied_once_verified": true,
+        "measured_frame_fusion_once_verified": true,
+        "timing_scope": "Original wall-clock timings from shared three-process batch; not isolated realtime benchmark or physical travel time",
+        "native_novelty_reward_revision": true,
+        "wrapper_runner_sha256": "82b7c53fbcf0ca33c95213cfa60a6ebbd0cc6e1fe71b8d6443412071e8c733f7",
+        "model_sha256": "abd1850ad3f4756f2aff0dbff6f6f908cfc0cfae6c6bcd1f5bcc1b7447fff1df",
+        "sigma_m": 0.01,
+        "structural_temperature": 16.0
+      }
+    },
+    "shelf_right": {
+      "G_native_novelty": {
+        "elapsed_s": 500.9390285230038,
+        "decision_wall_s_total": 371.02633828316175,
+        "paid_actions": 256,
+        "paid_action_budget": 256,
+        "initial_coverage_fraction": 0.4260614934114202,
+        "final_coverage_fraction": 1.0,
+        "free_correct_fraction": 1.0,
+        "false_occupied_fraction": 0.0,
+        "path_length_m": 43.2,
+        "turn_actions": 40,
+        "collisions": 0,
+        "final_pose_equals_initial_anchor": true,
+        "termination": {
+          "reason": "sensor_terminal",
+          "returned_to_anchor": true,
+          "failed": false,
+          "current_footprint_known_safe": true,
+          "final_frame_id": "frame-256",
+          "final_action_id": 256
+        },
+        "trajectory_sha256": "acf6aa898c6048215da2d6fc3bf73b99e299beb024032e764916ea017823926a",
+        "global_planning_calls": 26,
+        "first_coverage_action": {
+          "0.9": 19,
+          "0.95": 21,
+          "0.99": 84,
+          "1.0": 100
+        },
+        "first_free_correct_action": {
+          "0.9": 19,
+          "0.95": 21,
+          "0.99": 84,
+          "1.0": 100
+        },
+        "zero_gain_actions": 223,
+        "longest_zero_gain_streak": 156,
+        "target_pose_matches": 26,
+        "attempt": "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/rollouts/native_novelty/layouts/shelf_right/runs/G_native_novelty/attempt_002",
+        "attempt_name": "attempt_002",
+        "status": "completed_independently_evaluated",
+        "extent_mode": "uncertainty",
+        "surface_metrics": {
+          "predicted_surface_samples": 12000,
+          "predicted_mesh_triangles": 113254,
+          "surface_error_mean_m": 0.0036508413031697273,
+          "surface_error_p95_m": 0.012237855046987522,
+          "target_surface_metrics": {
+            "open31": {
+              "reference_samples": 6874,
+              "completeness_error_mean_m": 0.035577286034822464,
+              "completeness_error_p95_m": 0.14948883131146426,
+              "recall_05cm": 0.8108815827756765,
+              "recall_10cm": 0.9141693337212685
+            },
+            "closed118": {
+              "reference_samples": 4349,
+              "completeness_error_mean_m": 0.04311792925000191,
+              "completeness_error_p95_m": 0.19966432452201832,
+              "recall_05cm": 0.7921361232467233,
+              "recall_10cm": 0.853529547022304
+            }
+          },
+          "precision_05cm": 0.9933333333333333,
+          "recall_05cm": 0.867144190653992,
+          "f1_05cm": 0.9259592962315555,
+          "precision_10cm": 0.9993333333333333,
+          "recall_10cm": 0.8852037414512411,
+          "f1_10cm": 0.9388126319825563,
+          "reference_samples": 52493,
+          "completeness_error_mean_m": 0.0808219388127327,
+          "completeness_error_p95_m": 0.5692238688468916
+        },
+        "reference_sha256": "c362cca1ba554d3a30c83bb98616a149da2fbd320795afb2b5baafb7ed6dc204",
+        "native_TSDF_mesh_sha256": "144e1a2c9a70268e874fb2323e8624c1bc620406f2ecd62db2d92dbe447d0dfd",
+        "manifest_sha256": "ff4dd9f078b6a6436a9ee08e21eb47c458e4345c000bade9b6985ebb406abb62",
+        "surface_result_sha256": "19130581c687f1302bffe38212ed963b92f128d8ffe97e961b4cfb12dcb0ebcd",
+        "actual_frames": 257,
+        "template_score_calls": 26,
+        "plan_states_with_nonzero_S_minus_G": 7,
+        "native_consumption_call_events": {
+          "G": 8208,
+          "S": 8208
+        },
+        "consumption_events_not_unique_physical_surface_points": true,
+        "max_raw_template_points": 49488,
+        "actual_template_point_cap_activations": 0,
+        "shared_observed_support_and_bank_verified": true,
+        "likelihood_applied_once_verified": true,
+        "measured_frame_fusion_once_verified": true,
+        "timing_scope": "Original wall-clock timings from shared three-process batch; not isolated realtime benchmark or physical travel time",
+        "native_novelty_reward_revision": true,
+        "wrapper_runner_sha256": "82b7c53fbcf0ca33c95213cfa60a6ebbd0cc6e1fe71b8d6443412071e8c733f7",
+        "model_sha256": "abd1850ad3f4756f2aff0dbff6f6f908cfc0cfae6c6bcd1f5bcc1b7447fff1df",
+        "sigma_m": 0.01,
+        "structural_temperature": 16.0
+      },
+      "S_native_novelty": {
+        "elapsed_s": 485.37935444299364,
+        "decision_wall_s_total": 359.98849114500626,
+        "paid_actions": 256,
+        "paid_action_budget": 256,
+        "initial_coverage_fraction": 0.4260614934114202,
+        "final_coverage_fraction": 1.0,
+        "free_correct_fraction": 1.0,
+        "false_occupied_fraction": 0.0,
+        "path_length_m": 43.2,
+        "turn_actions": 40,
+        "collisions": 0,
+        "final_pose_equals_initial_anchor": true,
+        "termination": {
+          "reason": "sensor_terminal",
+          "returned_to_anchor": true,
+          "failed": false,
+          "current_footprint_known_safe": true,
+          "final_frame_id": "frame-256",
+          "final_action_id": 256
+        },
+        "trajectory_sha256": "acf6aa898c6048215da2d6fc3bf73b99e299beb024032e764916ea017823926a",
+        "global_planning_calls": 26,
+        "first_coverage_action": {
+          "0.9": 19,
+          "0.95": 21,
+          "0.99": 84,
+          "1.0": 100
+        },
+        "first_free_correct_action": {
+          "0.9": 19,
+          "0.95": 21,
+          "0.99": 84,
+          "1.0": 100
+        },
+        "zero_gain_actions": 223,
+        "longest_zero_gain_streak": 156,
+        "target_pose_matches": 26,
+        "attempt": "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/rollouts/native_novelty/layouts/shelf_right/runs/S_native_novelty/attempt_001",
+        "attempt_name": "attempt_001",
+        "status": "completed_independently_evaluated",
+        "extent_mode": "uncertainty",
+        "surface_metrics": {
+          "predicted_surface_samples": 12000,
+          "predicted_mesh_triangles": 113254,
+          "surface_error_mean_m": 0.0036508413031697273,
+          "surface_error_p95_m": 0.012237855046987522,
+          "target_surface_metrics": {
+            "open31": {
+              "reference_samples": 6874,
+              "completeness_error_mean_m": 0.035577286034822464,
+              "completeness_error_p95_m": 0.14948883131146426,
+              "recall_05cm": 0.8108815827756765,
+              "recall_10cm": 0.9141693337212685
+            },
+            "closed118": {
+              "reference_samples": 4349,
+              "completeness_error_mean_m": 0.04311792925000191,
+              "completeness_error_p95_m": 0.19966432452201832,
+              "recall_05cm": 0.7921361232467233,
+              "recall_10cm": 0.853529547022304
+            }
+          },
+          "precision_05cm": 0.9933333333333333,
+          "recall_05cm": 0.867144190653992,
+          "f1_05cm": 0.9259592962315555,
+          "precision_10cm": 0.9993333333333333,
+          "recall_10cm": 0.8852037414512411,
+          "f1_10cm": 0.9388126319825563,
+          "reference_samples": 52493,
+          "completeness_error_mean_m": 0.0808219388127327,
+          "completeness_error_p95_m": 0.5692238688468916
+        },
+        "reference_sha256": "c362cca1ba554d3a30c83bb98616a149da2fbd320795afb2b5baafb7ed6dc204",
+        "native_TSDF_mesh_sha256": "144e1a2c9a70268e874fb2323e8624c1bc620406f2ecd62db2d92dbe447d0dfd",
+        "manifest_sha256": "b425cce738f9f8fd6daaed0594ebb375ef7d89b7b778cf796263a1187bda991a",
+        "surface_result_sha256": "4194279b998e2f95836d83cc0bbfd50eac67a76d9671d13badd65eec2b495016",
+        "actual_frames": 257,
+        "template_score_calls": 26,
+        "plan_states_with_nonzero_S_minus_G": 7,
+        "native_consumption_call_events": {
+          "G": 8208,
+          "S": 8208
+        },
+        "consumption_events_not_unique_physical_surface_points": true,
+        "max_raw_template_points": 49488,
+        "actual_template_point_cap_activations": 0,
+        "shared_observed_support_and_bank_verified": true,
+        "likelihood_applied_once_verified": true,
+        "measured_frame_fusion_once_verified": true,
+        "timing_scope": "Original wall-clock timings from shared three-process batch; not isolated realtime benchmark or physical travel time",
+        "native_novelty_reward_revision": true,
+        "wrapper_runner_sha256": "82b7c53fbcf0ca33c95213cfa60a6ebbd0cc6e1fe71b8d6443412071e8c733f7",
+        "model_sha256": "abd1850ad3f4756f2aff0dbff6f6f908cfc0cfae6c6bcd1f5bcc1b7447fff1df",
+        "sigma_m": 0.01,
+        "structural_temperature": 16.0
+      }
+    }
+  },
+  "paired_differences": {
+    "shelf_left": {
+      "S_native_novelty_minus_G_native_novelty": {
+        "difference_direction": "S minus G",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": -0.37730591728191154,
+        "open31_recall_5cm_delta_pp": 1.2943571844095336,
+        "closed118_recall_5cm_delta_pp": -2.8342857142857114,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 1.2000000000000028,
+        "trajectory_identical": false,
+        "native_TSDF_mesh_identical": false,
+        "first_coverage_action_delta": {
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 8,
+          "1.0": 9
+        },
+        "collisions_delta": 0
+      }
+    },
+    "shelf_right": {
+      "S_native_novelty_minus_G_native_novelty": {
+        "difference_direction": "S minus G",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true,
+        "first_coverage_action_delta": {
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "1.0": 0
+        },
+        "collisions_delta": 0
+      }
+    }
+  },
+  "matched_T16_control_differences": {
+    "shelf_left": {
+      "G_native_novelty": {
+        "old_arm": "G_temperature",
+        "role": "Frozen matched B9 T16 control reused, not a new run or independent replicate",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true,
+        "first_coverage_action_delta": {
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "1.0": 0
+        },
+        "collisions_delta": 0
+      },
+      "S_native_novelty": {
+        "old_arm": "S_temperature",
+        "role": "Frozen matched B9 T16 control reused, not a new run or independent replicate",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true,
+        "first_coverage_action_delta": {
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "1.0": 0
+        },
+        "collisions_delta": 0
+      }
+    },
+    "shelf_right": {
+      "G_native_novelty": {
+        "old_arm": "G_temperature",
+        "role": "Frozen matched B9 T16 control reused, not a new run or independent replicate",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true,
+        "first_coverage_action_delta": {
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "1.0": 0
+        },
+        "collisions_delta": 0
+      },
+      "S_native_novelty": {
+        "old_arm": "S_temperature",
+        "role": "Frozen matched B9 T16 control reused, not a new run or independent replicate",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true,
+        "first_coverage_action_delta": {
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "1.0": 0
+        },
+        "collisions_delta": 0
+      }
+    }
+  },
+  "failures": [],
+  "pending": [],
+  "old_B9_summary_sha256": "2fdcef3364df4ac2890b3bfa5ddaca2737de80962b9adea9e478c291a75b1fbc",
+  "selected_temperature_sha256": "c0f0e382d943a99b4f29c20ddb2c36cf830923efdff1d7df806bfc000a07286e",
+  "evaluator_source_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/policy_audit/completed_rollouts/evaluate_batch.py": "c10c7c805a034cac64ea01fc37f1eacc71f539a404d94ad214a526b76492f159",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/audit/evaluate_run.py": "fbb08ec2628ac0d7c5919bd8d8463ca041dfa4549acd07bab831c3cfe38635aa",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/audit/surface_metrics.py": "70abf00907801f5e9b20e1c2dfb8985b888f4e2801303fc18f0fa70eb69a3e7b",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/audit/sampling_rollouts/evaluate_batch.py": "3a64521ac88cb8a512e026ee0db340902eb2d55f1932ba458c4629f1009e8566"
+  },
+  "design": {
+    "new_runs_planned": 4,
+    "new_runs_completed": 4,
+    "independent_floorplan_families": 1,
+    "furniture_permutations": 2,
+    "stochastic_repeats": 0,
+    "reused_T16_control_runs": 4,
+    "interrupted_partial_attempts_retained": 3,
+    "interrupted_attempts_are_not_complete_trials": true,
+    "actor_executed_by_evaluator": false
+  },
+  "boundaries": [
+    "Native5cm consumption is a declared reward change developed from old six-prefix/66-branch diagnostics; this is development evaluation, not held-out validation.",
+    "G shares ideal acquired visible instance support and only has neutral structural prior; neither arm measures natural detector accuracy.",
+    "Geometry, sigma, structural temperature16 and original history are unchanged from matched B9 controls; only the acquired-native novelty multiplier changes. Original T1 conformal diagnostic does not apply.",
+    "Full coverage threshold timing and fixed-budget native reconstruction are separate. All negative results, failures and exact trajectory/mesh ties are retained.",
+    "Two previously inspected furniture permutations of one floorplan are dependent development layouts, not independent held-out environments or robot trials."
+  ]
+}

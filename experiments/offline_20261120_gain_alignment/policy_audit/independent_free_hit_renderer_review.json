@@ -1,0 +1,22 @@
+{
+  "status": "passed_read_only_free_hit_renderer_review",
+  "files_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_forecast/render_observed_free.py": "79efc1ce6acddd98dd576dee4fc8b9462c72d8524f5e8324bde03a3902685126",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_forecast/test_render_observed_free.py": "0ba09db57df3127c7bdb6a4cb6fca195faf7395d3cd9c79f38fa1a5c46c2cdc2",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/method/occlusion_repair.py": "57c5cd1bb58a2e816d81184014cbfbad2a3d5ddeb872c43c7b5d9895378bb2fb"
+  },
+  "blocking_issues": [],
+  "checks": [
+    "Inputs are one hypothesis scene, acquired native scene, fixed pose/intrinsics and acquired history.",
+    "The original first intersection is kept unless strictly free under the frozen B2 history rule.",
+    "Only contradicted rays enumerate alternatives; nearest non-contradicted positive intersection wins.",
+    "Cross-view measured support vetoes free-space evidence and empty intersection listings cannot erase the original first hit.",
+    "Current native geometry is never filtered and competes as the nearer first hit.",
+    "The fitted sensor convention is axial depth in the explicit 0.15\u20138m range."
+  ],
+  "limits": [
+    "Wrapper must freeze and verify the imported B2 history source hash; empty REPAIR_SHA variable itself provides no validation.",
+    "Caller-level distinction between predicted and actual future observations requires separate audit.",
+    "This renderer cannot fix inaccurate hypotheses or current native geometry and does not demonstrate full-policy improvement."
+  ]
+}

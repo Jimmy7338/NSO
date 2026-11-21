@@ -1,0 +1,101 @@
+--- runtime/mission.py
++++ runtime/mission.py
+@@ -245,15 +245,22 @@
+     return math.isfinite(stamp) and 0<stamp<=wall+.02
+ 
+ 
++def validate_primitive_pilot_harness_args(profile, attempts):
++    if attempts is not None:
++        if profile != 'primitive_feedback_unbounded_v1':raise ValueError('primitive pilot count applies only to primitive_feedback_unbounded_v1')
++        if type(attempts) is not int or attempts < 1:raise ValueError('positive explicit experiment-harness attempt count required')
++
++
+ def select_execution_controller(settings, choice):
+     """Choose an existing backend without changing the user's source file."""
+-    if choice not in ('config','nso_primitive','ros_viewpoint'):
++    if choice not in ('config','nso_primitive','ros_viewpoint','primitive_feedback'):
+         raise ValueError('unknown execution controller')
+     selected=json.loads(json.dumps(settings))
+     original=selected['configuration'].get('policy_variant','original')
+     if choice!='config':
+         selected['configuration']['policy_variant']={'nso_primitive':'ros_checked_exploration_v2',
+-            'ros_viewpoint':'ros_viewpoint_exploration_v3'}[choice]
++            'ros_viewpoint':'ros_viewpoint_exploration_v3',
++            'primitive_feedback':'primitive_feedback_unbounded_v1'}[choice]
+     return selected,dict(selector=choice,original_policy_variant=original,
+                          resolved_policy_variant=selected['configuration'].get('policy_variant','original'))
+ 
+@@ -460,7 +467,8 @@
+ 
+ def argument_parser():
+     ap=argparse.ArgumentParser(description=__doc__)
+-    ap.add_argument('--execution-controller',choices=['config','nso_primitive','ros_viewpoint'],default='config',help='NSO/joint only: config preserves original/v1 settings; nso_primitive selects current v2 own execution; ros_viewpoint selects continuous ROS navigation')
++    ap.add_argument('--primitive-feedback-pilot-attempts',type=int,default=None,help='Optional explicit integration-experiment harness count; no NSO policy budget or automatic return')
++    ap.add_argument('--execution-controller',choices=['config','nso_primitive','ros_viewpoint','primitive_feedback'],default='config',help='NSO/joint only: config preserves original/v1 settings; nso_primitive selects current v2 own execution; ros_viewpoint selects continuous ROS navigation')
+     ap.add_argument('--mode',choices=['visual','nso','joint','reference','navigation'],default='nso')
+     ap.add_argument('--duration',type=float,default=600.)
+     ap.add_argument('--duration-profile',choices=PROFILES,default=STANDARD)
+@@ -496,11 +504,18 @@
+ 
+ def result_summary(result, output):
+     """Small user-facing record; detailed decisions and arrivals stay in their records."""
+-    return dict(report=str(output),status=result.get('status'),reason=result.get('reason'),
++    summary=dict(report=str(output),status=result.get('status'),reason=result.get('reason'),
+         goals=len(result.get('goals',[])),verified_arrivals=len(result.get('successful_arrivals',[])),
+         distance_m=result.get('actual_CAN_distance_m'),elapsed_s=result.get('elapsed_run_s'),
+         stopped=result.get('feedback_zero_after_close',False),
+         execution_interrupted=result.get('execution_interrupted',False))
++    if result.get('primitive_feedback_profile') == 'primitive_feedback_unbounded_v1':
++        summary.update(verified_arrivals=result.get('primitive_verified_arrivals',0),
++            ROS_metric_arrivals=len(result.get('successful_arrivals',[])),
++            primitive_attempts=len(result.get('primitive_feedback_attempts',[])),
++            macro_verified_arrivals=result.get('macro_verified_arrivals',0),
++            accounting_unit='actual_primitive_attempt')
++    return summary
+ 
+ 
+ def execution_interruption(result, reason):
+@@ -515,6 +530,8 @@
+ 
+ def main(argv=None):
+     args=argument_parser().parse_args(argv)
++    if args.primitive_feedback_pilot_attempts is not None and args.mode not in ('nso','joint'):
++        raise ValueError('primitive pilot count requires nso/joint primitive-feedback profile')
+     if args.native_cpu is not None and args.native_sender_cpu is not None:
+         raise ValueError('--native-cpu and --native-sender-cpu are mutually exclusive')
+     if args.native_sender_rt_priority is not None and args.native_sender_cpu is None:
+@@ -604,9 +621,15 @@
+         from joint_ros_coordinator import validate_joint_identity
+         source_settings=Path(args.joint_configuration).read_bytes()
+         settings,controller_selection=select_execution_controller(json.loads(source_settings),args.execution_controller)
++        validate_primitive_pilot_harness_args(settings['configuration'].get('policy_variant'),args.primitive_feedback_pilot_attempts)
++        if settings['configuration'].get('policy_variant') == 'primitive_feedback_unbounded_v1' and args.duration_profile != UNTIL_STOPPED:
++            raise ValueError('unbounded primitive feedback requires until-stopped runtime, no episode duration')
+         controller_selection.update(source=str(Path(args.joint_configuration).resolve()),
+                                     original_settings_sha256=hashlib.sha256(source_settings).hexdigest())
+-        if args.duration_profile == UNTIL_STOPPED:
++        if args.duration_profile == UNTIL_STOPPED and settings['configuration'].get('policy_variant')=='primitive_feedback_unbounded_v1':
++            settings['configuration'].update(total_budget=None,execution_limits_profile=UNTIL_STOPPED,return_policy='no_automatic_return')
++            controller_selection.update(resolved_policy_variant='primitive_feedback_unbounded_v1',execution_limits_profile=UNTIL_STOPPED)
++        elif args.duration_profile == UNTIL_STOPPED:
+             if settings['configuration'].get('policy_variant') not in ('ros_viewpoint_exploration_v3','ros_viewpoint_exploration_v4_unbounded'):
+                 raise ValueError('until-stopped profile requires selected ROS viewpoint execution')
+             settings['configuration'].update(policy_variant='ros_viewpoint_exploration_v4_unbounded',
+@@ -1142,6 +1165,9 @@
+         elif args.mode in ('nso','joint'):
+             from joint_ros_coordinator import run_joint
+             joint_runner=run_joint
++            if reference_task.get('configuration',{}).get('policy_variant')=='primitive_feedback_unbounded_v1':
++                from primitive_feedback_coordinator import run_primitive_feedback
++                joint_runner=run_primitive_feedback
+             if reference_task.get('configuration',{}).get('policy_variant') in ('ros_viewpoint_exploration_v3','ros_viewpoint_exploration_v4_unbounded'):
+                 from ros_viewpoint_coordinator import run_viewpoints
+                 joint_runner=run_viewpoints
+@@ -1189,6 +1215,7 @@
+                     client=client,tfbuf=tfbuf,capture_pose=capture_pose,capture_odom_pose=capture_odom_pose,
+                     capture_planning_pose=lambda:capture_navigation_pose(navigation_execution_frame),
+                     execution_frame=navigation_execution_frame,ordinary_reverse_authorized=args.ros_allow_reverse,
++                    primitive_feedback_pilot_attempts=args.primitive_feedback_pilot_attempts,
+                     viewpoint_goal_timeout_s=None if args.duration_profile == UNTIL_STOPPED else 120.,
+                     execution_limits_profile=args.duration_profile,
+                     selected_goal_window_resize=args.duration_profile == UNTIL_STOPPED,

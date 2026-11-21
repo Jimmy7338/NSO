@@ -1,0 +1,46 @@
+{
+  "scope": "fresh per-arm stock gmapping and ROS costmaps; original CSM/display map/TSDF retained",
+  "no_motion": true,
+  "stopped_navigation": [
+    "/usr/bin/python3",
+    "/opt/ros/noetic/bin/roslaunch",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+    "latch_xy_goal_tolerance:=true",
+    "odom_topic:=/nso_csm/control_odom"
+  ],
+  "stopped_helper": null,
+  "mapper_helper": {
+    "pid": 513292,
+    "argv": [
+      "/usr/bin/python3",
+      "-s",
+      "-B",
+      "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+      "--launch-mapper"
+    ],
+    "started_unix_s": 1794125701.8667746
+  },
+  "initial_map": {
+    "stamp_ns": 1794125704222422457,
+    "frame": "nso_pair_map",
+    "publisher": "/nso_pair/gmapping",
+    "known_cells": 21828,
+    "occupied_cells": 631
+  },
+  "navigation": {
+    "pid": 513450,
+    "argv": [
+      "/opt/ros/noetic/bin/roslaunch",
+      "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+      "latch_xy_goal_tolerance:=true",
+      "odom_topic:=/nso_csm/control_odom",
+      "map_topic:=/nso_pair/map"
+    ],
+    "started_unix_s": 1794125704.2705626
+  },
+  "costmap_sources": {
+    "global_costmap": "/nso_pair/map",
+    "local_costmap": "/nso_pair/map"
+  },
+  "ready_unix_s": 1794125707.0022328
+}

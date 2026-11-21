@@ -1,0 +1,36 @@
+{
+  "status": "ISOLATED_CANDIDATE_NOT_STARTED_NO_FULL_HISTORY_REQUEST_MADE",
+  "epoch": "resume_20261115_1794729655770934335",
+  "source_frame": "nso_loop_map",
+  "depth_adapter_alias": "nso_pair_map is identityalias ofsameRTABsource; viewer deliberately readsoriginalframe",
+  "data_sources": {
+    "2D": "/nso_loop/grid_map originalpayload/epoch/PNG",
+    "robot": "/nso_csm/odom transformed bysameRTABgraph.mapToOdom",
+    "trajectory": "optimizedMapGraphposes sortedpositivekeyframeIDs, not rawodomtrail",
+    "semantics": "latestoriginalodomsemanticpacket transformed bycurrentgraphcorrection; explicitly notfullhistoricaloptimizedsemanticfusion",
+    "3D": "/nso_unified_rtab/assembler/cloud_map from currentownDB globaloptimizedRGBDhistory +liveMapData",
+    "diagnostic": "originalTSDF retained viaold8766 /api/cloud.json proxiedas /api/raw-tsdf-cloud.json"
+  },
+  "history_method": "GetMapRequest global_=True optimized=True graphOnly=False, verifyexpectedcurrentdatabase+epoch. StandardassemblerconstructorglobalfalseWMpull bypassed; relayownsoneglobalrequest then originalstamp liveforwarding. No colleagueknownDB.",
+  "memory": "Full servicecompressedresponse +serialization/latchedpayload +assemblernodecache/localRGBDgrids can cost multipleGB. Root should freeold~6GBTSDFworker first and inspectcurrentfreeRAM; candidate makes no blanket9GBfitguarantee. Firstlivepacket replaceslatchedfullsnapshot toreleasepayload. Browserzero-copystructuredarraystrides sourcepointdata to<=50000pointsuniformly, notprefixcropping; assemblerhistorynotreducedbydisplaycap.",
+  "source_integrity": "expectedpublishernames enforced; wrongframe/epoch rejected, no framealias relabeling or source stamp renewal; old2D/pose/history never copied fromupstream; onlycamera/robotstatus proxied.",
+  "synchronization": "samegraphframe+epoch; map/graph/cloud/odom are asynchronoussourceheaders, exposestamps+graphclouddelta andfreshness; no exactsynchronized-exposure claim.",
+  "limitations": [
+    "Fullrequest !=proofeveryhistoricalframe/RGBD exists; actualreceipt reportsreturnedsignatures/RGBDcounts, currentmap onlysavedhistory.",
+    "No re-integration oforiginal2cmTSDF; new3D isgraphcoloredcloud regeneratedfrommeasuredRGBDlocalgrids at5cm, no accuracyclaim.",
+    "No independent relocalization/physicalGT validation.",
+    "StoppingoldTSDFworker maystoplatest_display_frame producer; semanticstate thenstales unlessindependentlightproducerisrun. Viewerdoesnotfakefreshsemantic.",
+    "No fullinit/liveHTTP/ROSsourceexerciseyet; only7offlinechecks."
+  ],
+  "tests": "7offlinePASS; allPythonAST+launchXMLparse; no ROS/CAN/controller startup",
+  "files": {
+    "unified_viewer.py": "1997aaa236ce53c466f965f7894270cf68a8b6eab54f013c6bd1dfec328a1c01",
+    "commands.txt": "1349c9d0360e054eee2fc79891f9d96fd3a7bd14e77d6f33a1198b3c4ce35b74",
+    "unified_rtab.launch": "0d1e23abeb6812b5ec65a2ebaf68879fe8f84e10757280655eb6a83a25393fc5",
+    "full_history_relay.py": "687a3ddfe54313c49e0108188559c8f601ede8c9b7c418db772e88a0b9ec3d4c",
+    "tests/test_unified_viewer.py": "3abecf062cdbebb8ca4fccdc6f869d7827381564649366962f54fde5ddebf6f9",
+    "assets/index.html": "7aa21780ad1d67e008e4be571284a2751f59e7816231289fd53ad73f8d0e75e6",
+    "assets/dashboard.css": "905bb988694a49c50e88fc3092d2ba6ca39b03101fe41970b7d2ca25d787efe0",
+    "assets/dashboard.js": "25834eee07f38fa098dfc9b1f3827a4b1bfe54eeb53bffb5506520d04d2f9bbf"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "version": "facility-joint-online-budget-v21-probe-1",
+  "status": "declared_before_probe_outcomes",
+  "task": "Geometry and exterior-reconstruction quality under a shared online coverage budget heuristic",
+  "default_mode": "G",
+  "allowed_modes": [
+    "G",
+    "N"
+  ],
+  "mode_scope": {
+    "G": "Geometry and reconstruction quality under the shared fixed-public-ROI coverage proxy budget",
+    "N": "Pure coverage selection throughout the same V21 runtime; requires separate explicit preparation"
+  },
+  "parents": [
+    "D19-P00",
+    "D19-P01"
+  ],
+  "assignments": [
+    "A_complex_B_simple",
+    "A_simple_B_complex"
+  ],
+  "budgets": {
+    "D19-P00": 160,
+    "D19-P01": 184
+  },
+  "task_asset_count": 6,
+  "sensor_model": "iid_025px",
+  "noise_seed": 1901,
+  "initial_history_actions": 0,
+  "install_v19_declared_first_option": false,
+  "replan_interval_actions": 5,
+  "coverage_candidate_slots": 8,
+  "coverage_minimum": 0.8,
+  "eligibility": "coverage >= 0.8, returned_to_anchor, zero collisions, termination.failed == false",
+  "coverage_trace_action_stride": 1,
+  "quality_curve_action_stride": 20,
+  "reference_seeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "primary_reference_seed": 2026,
+  "global_reference_count": 12000,
+  "reference_mode": "Read only existing frozen V19 caches; never copy, regenerate or modify",
+  "reference_sampling_repeats_are_independent_experiments": false,
+  "world_scope": "Existing V19 generic stereo surrogate, perfect pose and artificial RGB markers; not ZED calibration",
+  "truth_boundary": "Evaluator truth and true reachable-floor coverage never enter runtime arguments or feedback; planner uses observed known cells over a fixed public ROI",
+  "outputs": [
+    "raw_packets",
+    "actions",
+    "evaluator_coverage_trace",
+    "final_mesh",
+    "external_and_global_metrics",
+    "compressed_module_calls",
+    "compressed_runtime_audit",
+    "frozen_sources",
+    "fresh_process_replay"
+  ],
+  "minimum_free_space_mib": 32,
+  "automatic_mode_expansion": false,
+  "semantic_information_test": false,
+  "training_allowed": false,
+  "full_architecture_efficacy_proven": false,
+  "physical_contract": {
+    "max_depth_m": 5.0,
+    "voxel_m": 0.04,
+    "truncation_m": 0.12
+  },
+  "planning_coverage_proxy": {
+    "kind": "known_cells_over_fixed_public_roi",
+    "numerator": "Observed belief known cells (free or occupied) inside the fixed public task ROI",
+    "denominator": "All cells in the fixed public task ROI; no evaluator reachability or geometry",
+    "target_fraction": 0.8,
+    "target_is_heuristic": true,
+    "evaluation_truth_used": false,
+    "true_coverage_guaranteed": false,
+    "scope": "Shared planner reserve heuristic only; the evaluator coverage gate remains unchanged and is checked separately"
+  },
+  "joint_planning_efficacy_proven": false
+}

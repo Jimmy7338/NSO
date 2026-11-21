@@ -1,0 +1,3 @@
+# Dashboard entry check
+
+The existing base view at port 8765 continues to provide the underlying camera, map and reconstruction; it does not expose the semantic overlay API. Its page includes a link to the enriched view at `http://127.0.0.1:8766/`. The desktop launcher opens port 8766 directly. The verification records describe the observed local service and browser checks, not independent localization accuracy or proof of movement. A stationary robot can have fresh pose timestamps without its trajectory growing. Semantic labels remain model predictions and displayed positions remain approximate because extrinsics are unverified.

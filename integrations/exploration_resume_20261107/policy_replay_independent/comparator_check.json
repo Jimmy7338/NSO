@@ -1,0 +1,65 @@
+{
+  "script_sha256": "8d623571fc122c09ca7b4adcd24eb938fb8a68ed4bf8ca9cb01ecf64759f836d",
+  "positive_identity_passed": true,
+  "negative_injections": [
+    {
+      "mutation": "candidate",
+      "detected": true,
+      "first_field": "next.selection.candidates[0].candidate_id"
+    },
+    {
+      "mutation": "action",
+      "detected": true,
+      "first_field": "next.action"
+    },
+    {
+      "mutation": "frame",
+      "detected": true,
+      "first_field": "next.runtime_events[0].frame_id"
+    },
+    {
+      "mutation": "score",
+      "detected": true,
+      "first_field": "next.selection.scores.S[0]"
+    },
+    {
+      "mutation": "guard",
+      "detected": true,
+      "first_field": "next.runtime_events[1].assessment.allowed"
+    },
+    {
+      "mutation": "support_integer",
+      "detected": true,
+      "first_field": "next.summary.runtime.modules.feedback.fixed_old_support_count"
+    },
+    {
+      "mutation": "timestamp",
+      "detected": true,
+      "first_field": "next.summary.runtime.modules.feedback.last_event.timestamp_s"
+    },
+    {
+      "mutation": "unknown_key",
+      "detected": true,
+      "first_field": "next.summary.runtime.modules"
+    },
+    {
+      "mutation": "missing_key",
+      "detected": true,
+      "first_field": "next.selection"
+    },
+    {
+      "mutation": "mixed_integer_float",
+      "detected": true,
+      "first_field": "next.selection.candidates[0].candidate_id"
+    },
+    {
+      "mutation": "int64_one_nanosecond",
+      "detected": true
+    },
+    {
+      "mutation": "unapproved_system_variant",
+      "detected": true
+    }
+  ],
+  "scope": "Comparator AST from published runner on actual first next_action object; no planning or input mutation"
+}

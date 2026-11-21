@@ -1,0 +1,3 @@
+Research draft, not submitted.
+
+This package retains the controlled mechanism and robot evidence and adds current-source exploration diagnostics. Table 8 preserves the 20 original/joint/C trajectories; Table 9 adds four local frontier+guard matrix runs. The protocol was frozen after the west/48 smoke run, which the matrix reproduces exactly. All 24 matrix trajectories are related conditions in one Q0 context, not independent scenes. Section 6.3 distinguishes the late S–G surface difference from unproven early coverage gains. Build locally with two pdflatex -no-shell-escape runs. This is not a full ROS explore_lite comparison or proof of physical semantic benefit. Relative Markdown links resolve from this package; the canonical manuscript resides one level above it.

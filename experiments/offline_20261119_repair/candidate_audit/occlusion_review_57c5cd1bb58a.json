@@ -1,0 +1,86 @@
+{
+  "schema": "independent_occlusion_repair_review_v1",
+  "all_passed": true,
+  "reviewed_source_sha256": "57c5cd1bb58a2e816d81184014cbfbad2a3d5ddeb872c43c7b5d9895378bb2fb",
+  "script_sha256": "1701ac80217ac14601f3993ad068952668b33726180bea024161ab284e62da04",
+  "ray_cases": [
+    {
+      "name": "all_preceding_intersections_strict_free_can_recover",
+      "source_gain": 0.0,
+      "repaired_gain": 0.125,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "later_unresolved_intersection_still_blocks",
+      "source_gain": 0.0,
+      "repaired_gain": 0.0,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "measured_first_surface_still_blocks",
+      "source_gain": 0.0,
+      "repaired_gain": 0.0,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "another_frame_measured_surface_vetoes_free",
+      "source_gain": 0.0,
+      "repaired_gain": 0.0,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "zero_depth_cannot_prove_free",
+      "source_gain": 0.0,
+      "repaired_gain": 0.0,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "nan_depth_cannot_prove_free",
+      "source_gain": 0.0,
+      "repaired_gain": 0.0,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "infinite_depth_cannot_prove_free",
+      "source_gain": 0.0,
+      "repaired_gain": 0.0,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "real_TSDF_occluder_is_not_removed",
+      "source_gain": 0.0,
+      "repaired_gain": 0.0,
+      "original_exact": true,
+      "expected_matched": true
+    },
+    {
+      "name": "already_visible_positive_gain_preserved",
+      "source_gain": 0.125,
+      "repaired_gain": 0.125,
+      "original_exact": true,
+      "expected_matched": true
+    }
+  ],
+  "classification_checks": [
+    "minimum_depth",
+    "strict_free_vs_surface_tolerance",
+    "out_of_image",
+    "closed_tolerance_boundary_vetoes_other_frame_free"
+  ],
+  "test_fixture_correction": "Initial fixture used nominal .15m exactly; world-to-camera subtraction produced .15000000000000013, so the strict >.15 check accepted it. Corrected the lower-bound test to .10m, not the implementation; exact-boundary binary rounding is not claimed to be eliminated.",
+  "no_actor_replay": true,
+  "no_hardware": true,
+  "limits": [
+    "Synthetic ray checks are not evidence of exploration or reconstruction improvement.",
+    "Nearest-pixel free evidence inherits sensor rasterization and the declared depth tolerance.",
+    "S_no_history retains this visibility repair; it disables reward-history filtering only.",
+    "Fixed-state measured-depth replay must separately verify repaired scoring on actual retained frames."
+  ]
+}

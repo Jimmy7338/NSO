@@ -1,0 +1,41 @@
+{
+  "study": "Visible facility categories in unknown multi-room active reconstruction",
+  "date_predeclared_local": "2026-11-21",
+  "evaluation": {
+    "primary": "J = C_free * F1_scene_05cm, both factors expressed as fractions",
+    "coverage": "Final belief cells explicitly mapped free among the layout's evaluator-only start-reachable true free cells",
+    "surface": "Whole-scene F1 between the acquired-only native TSDF mesh and a fixed first-hit reachable reference surface for that layout at 0.05 m, with source geometry and reference hidden from the actor",
+    "outcomes": ["J", "C_free", "F1_scene_05cm", "actual_paid_actions", "budget", "returned", "collisions", "stop_reason"],
+    "early_termination": "Evaluate the actual stop. Returns and turns count as actions. No padding to the cap. Keep failed, nontriggered, unchanged and negative attempts with their receipts.",
+    "independent_unit": "A parent building layout. Swaps within a parent pair are controlled placements, not additional buildings. Report paired differences descriptively."
+  },
+  "historical_E1": {
+    "source": "four_room_completion_20261119/matrix_study/scenes/20261120/runs/S/attempt_001",
+    "checkpoint_actions": 198,
+    "checkpoint_plan": 6,
+    "required_candidates": 12,
+    "routes": {"3": {"outbound": 78, "return": 40}, "5": {"outbound": 79, "return": 89}},
+    "common_action_budget": 512,
+    "test": "Exact recorded prefix and acquisition history, one initial forced route followed by the same frozen observed-state policy, preserving runtime protection. Compare native surface increment, measured actions before frontier resumption, terminal J and return.",
+    "failure_rule": "Report missing or mismatched evidence if exact causal replay fails. Do not substitute a different historical state."
+  },
+  "controlled_mechanism": {
+    "design": "Two different parent warehouse/gallery layouts, two opposite open-shelf and closed-cabinet placements per parent, three arms per placement with a single common online trigger and common policy outside the intervention",
+    "arms": {"S": "Correct visible class priors", "G": "Neutral structural prior", "X": "Swap only the class labels used for estimating the score"},
+    "gate_numerical_tie_fraction": 1e-9,
+    "per_parent_requirements": [
+      "All six final observations and scored runs belong to the declared pair and share the declared acquisition and action contract. A nontrigger or unclassifiable S route fails the side-reversal criterion.",
+      "S chooses the route affording the previously occluded diagnostic facility view in both placements. The route must switch sides when furniture is swapped. Evaluation-side path labels are fixed by geometry before scores are opened.",
+      "The mean of S terminal J across both placements strictly exceeds the corresponding means for both G and X. A placement may tie if a comparator picks the same route.",
+      "S returns in any placement in which either comparator returns. Keep volumes, coverage and collision outcomes alongside the composite."
+    ],
+    "both_supported": "Release four larger independent cold-start tests with S, G, and F_strict.",
+    "only_one_supported": "Keep the large-layout confirmatory batch gated. Diagnose differences and limit any development change to one mechanism at a time on declared development layouts.",
+    "neither_supported": "Do not run confirmatory layouts. Audit availability of a usable route, ranking sensitivity to category, and realized surface and travel outcomes, then deliver the data and resulting paper judgment."
+  },
+  "confirmatory": {
+    "design": "Four previously unused larger parent layouts fixed without preference to the existence of an informative junction. Evaluate continuous S category use, matched G and F_strict at common starting observation and budget.",
+    "confirmatory_metric_contrasts": ["S minus G: isolate category prior", "S minus F_strict: compare policy systems"],
+    "historical_boundary": "B11's four smaller layouts are already examined and may be reused as descriptive context. They cannot be counted as the new held-out larger buildings. F_nearest is an implementation failure and is excluded from the effective baseline."
+  }
+}

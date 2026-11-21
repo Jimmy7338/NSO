@@ -1,0 +1,48 @@
+{
+  "scope": "Actual adapter zero-only passive test, no native driver and no arm; not an armed/moving reliability result",
+  "duration_s": 92.12604689900036,
+  "received_zero_commands": 4384,
+  "received_nonzero_commands": 0,
+  "ever_armed": false,
+  "terminal_reason": "adapter_shutdown",
+  "tick_fault_observed": false,
+  "retained_cycles": 256,
+  "retained_nonterminal_max_tick_gap_s": 0.026705234002292855,
+  "retained_nonterminal_max_stage_ms": {
+    "lock_wait_ns": 0.366567,
+    "guarded_publish_ns": 4.349563,
+    "journal_add_ns": 1.085335,
+    "snapshot_ns": 0.814513,
+    "state_publish_ns": 2.680025,
+    "sleep_ns": 26.097541
+  },
+  "terminal_cycle": {
+    "cycle_enter_ns": 32646245205021,
+    "lock_wait_ns": 9537,
+    "pre_decision_ns": 101282,
+    "gate_now_monotonic": 32646.245220062,
+    "decision_ns": 34208,
+    "guard_message_build_ns": 57634,
+    "guarded_publish_ns": 171363,
+    "pre_journal_ns": 4800,
+    "journal_add_ns": 348136,
+    "snapshot_ns": 4096,
+    "lock_exit_ns": 2240,
+    "state_publish_ns": 3392,
+    "state_published": false,
+    "pre_sleep_ns": 7968,
+    "sleep_requested_s": 0.01927425699934247,
+    "sleep_ns": 623150110,
+    "outcome": "continue"
+  },
+  "limits": [
+    "Only the final 256-cycle timing ring is preserved; no full-run percentile claims.",
+    "Final cycle contains externally requested SIGINT/ROS shutdown within sleep and no subsequent decision. Its 623ms sleep duration cannot establish the earlier moving-trial fault cause.",
+    "No tick fault reproduced during this passive probe; earlier moving-trial exact interval remains unknown."
+  ],
+  "source_sha256": {
+    "probe_result.json": "4ef37747480d731c8226e44d93ad1de006902782b43bb4229648c58e736ec95c",
+    "adapter/control_timing_fault.json": "23b28aee9908e47a28258fe6a92782c0a9749b6ed33a7835aac59c85aefa760c",
+    "adapter/result.json": "dab3e1bc698f52609c15fac87bae9a60def3578219f03dfb35b5d3cfe9276903"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "status": "passed_same_geometry_and_all_original_measurement_contracts",
+  "legacy_S96_observations": 61,
+  "legacy_initial": {
+    "paid_actions": 0,
+    "scan_stamp_ns": 1794477646440635204,
+    "elapsed_since_first_scan_s": 0.0,
+    "observed_union_m2": 61.72000000000001,
+    "free_evidence_union_m2": 58.04000000000001,
+    "hit_endpoint_union_m2": 6.200000000000001,
+    "free_without_ever_hit_m2": 55.52000000000001,
+    "free_hit_conflict_cells": 63,
+    "outside_ROI_unique_raster_cells": 0,
+    "outside_grid_unique_cells": 0,
+    "laser_origins_outside_ROI": 0,
+    "beam_endpoints_outside_ROI": 0,
+    "valid_rays": 1872,
+    "invalid_rays_skipped": 128,
+    "finite_over8m_clipped_free_only": 65,
+    "new_observed_vs_firstscan_m2": 0.0,
+    "new_free_evidence_vs_firstscan_m2": 0.0,
+    "CAN_counter": {
+      "asof_distance_m": 0.0,
+      "asof_source_age_s": 0.14360122,
+      "next_distance_m": 0.0,
+      "next_source_lead_s": 0.856540604,
+      "bracket_accounting_complete": true,
+      "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+    }
+  },
+  "legacy_final": {
+    "paid_actions": 60,
+    "scan_stamp_ns": 1794478286631314278,
+    "elapsed_since_first_scan_s": 640.190679074,
+    "observed_union_m2": 117.92000000000002,
+    "free_evidence_union_m2": 115.80000000000003,
+    "hit_endpoint_union_m2": 16.960000000000004,
+    "free_without_ever_hit_m2": 100.96000000000002,
+    "free_hit_conflict_cells": 371,
+    "outside_ROI_unique_raster_cells": 0,
+    "outside_grid_unique_cells": 0,
+    "laser_origins_outside_ROI": 0,
+    "beam_endpoints_outside_ROI": 0,
+    "valid_rays": 1888,
+    "invalid_rays_skipped": 112,
+    "finite_over8m_clipped_free_only": 149,
+    "new_observed_vs_firstscan_m2": 56.2,
+    "new_free_evidence_vs_firstscan_m2": 57.76000000000001,
+    "CAN_counter": {
+      "asof_distance_m": 10.82482488656044,
+      "asof_source_age_s": 0.620820582,
+      "next_distance_m": 10.834325083613399,
+      "next_source_lead_s": 0.079189914,
+      "bracket_accounting_complete": true,
+      "semantics": "Sampled integrated original CAN counters bracketing scan source time; no interpolation or exact cost-at-scan claim. CAN kernel stamps are logged float seconds."
+    }
+  },
+  "original_validation_checks": [
+    {
+      "name": "90deg_laser_TF_maps_local_x_north_and_original_index1_west",
+      "passed": true
+    },
+    {
+      "name": "grid_row_reversal_and_metric_boundary_index",
+      "passed": true
+    },
+    {
+      "name": "invalid_rays_do_not_create_free_space",
+      "passed": true
+    },
+    {
+      "name": "native_1mm_max_boundary_and_exact8_free_only",
+      "passed": true
+    },
+    {
+      "name": "finite_beyond8_endpoint_clipped_geometrically",
+      "passed": true
+    },
+    {
+      "name": "analytic_axis_8m_ray_has_41_cells_and_free_endpoint",
+      "passed": true
+    },
+    {
+      "name": "ROI_clips_metrics_and_counts_outside_instead_of_hiding",
+      "passed": true
+    },
+    {
+      "name": "out_of_ROI_origin_recorded_not_a_runtime_gate",
+      "passed": true
+    },
+    {
+      "name": "all_accepted_saved_scans_bound_and_failed_short_episodes_allowed",
+      "passed": true
+    },
+    {
+      "name": "cumulative_observed_and_free_evidence_unions_monotone",
+      "passed": true
+    },
+    {
+      "name": "all_saved_scan_costs_have_complete_CAN_brackets",
+      "passed": true
+    },
+    {
+      "name": "actual_source_TF_origin_not_camera_or_ideal_anchor",
+      "passed": true
+    },
+    {
+      "name": "CAN_cost_keeps_measurement_brackets_without_interpolation",
+      "passed": true
+    },
+    {
+      "name": "reject_depth_scan_provenance",
+      "passed": true
+    },
+    {
+      "name": "reject_TF_from_different_source_stamp",
+      "passed": true
+    }
+  ],
+  "v2_filter_scope": "observe plus accepted nonduplicate observe_failed_action only; all raster/range/ROI/TF/timestamp/CANbracket rules unchanged",
+  "actual_v2": {
+    "observation_counts": {
+      "total_accepted": 29,
+      "normal_observe": 4,
+      "failed_attempt_observe": 25
+    },
+    "last_paid_attempt": 28,
+    "initial_observed_union_m2": 47.08000000000001,
+    "final_observed_union_m2": 51.44000000000001,
+    "failed_observations_have_no_arrival_credit": true,
+    "all_CAN_brackets_complete": true
+  },
+  "evaluator_sha256": "f52f83f2ac85318e458830f792b02e94aac0222f1f421492621cf46737708598"
+}

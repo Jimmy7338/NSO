@@ -1,0 +1,165 @@
+{
+  "status": "eligible_for_predeclared_matched_five_arm_policy_evaluation",
+  "closed_loop_launch_authorized_by_evaluator": false,
+  "reason": "Source/basis integrity passes; extent-distribution forecasts improve aggregate absolute supported/realized weights and rank versus the matched fixed-extent arm. Actual selected outcomes trade modest surface loss for lower movement cost; no universal improvement or semantic advantage is established.",
+  "summary": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_uncertainty_20261120/audit/particle_replay/summary.json",
+    "sha256": "c62999a59ab4b7ba2150584dc9226804abed7355709342a1c3bfaae39700fe87"
+  },
+  "six_states_all_completed": true,
+  "prediction_rows": 330,
+  "reused_original_branches": 66,
+  "new_candidate_actions": 0,
+  "rank_and_effect_state_counts": {
+    "G_uncertainty_minus_G_fixed": {
+      "prediction.true_object_supported_weight_m2": {
+        "positive": 5,
+        "negative": 1,
+        "tie": 0
+      },
+      "prediction.realized_true_object_weight_m2": {
+        "positive": 4,
+        "negative": 2,
+        "tie": 0
+      },
+      "selected.actual_object_net_new_m2": {
+        "positive": 0,
+        "negative": 1,
+        "tie": 5
+      },
+      "selected.actual_global_net_new_m2": {
+        "positive": 0,
+        "negative": 1,
+        "tie": 5
+      },
+      "selected.completed_actions": {
+        "positive": 0,
+        "negative": 1,
+        "tie": 5
+      }
+    },
+    "S_uncertainty_minus_S_fixed": {
+      "prediction.true_object_supported_weight_m2": {
+        "positive": 5,
+        "negative": 1,
+        "tie": 0
+      },
+      "prediction.realized_true_object_weight_m2": {
+        "positive": 4,
+        "negative": 2,
+        "tie": 0
+      },
+      "selected.actual_object_net_new_m2": {
+        "positive": 0,
+        "negative": 1,
+        "tie": 5
+      },
+      "selected.actual_global_net_new_m2": {
+        "positive": 0,
+        "negative": 1,
+        "tie": 5
+      },
+      "selected.completed_actions": {
+        "positive": 0,
+        "negative": 1,
+        "tie": 5
+      }
+    },
+    "S_uncertainty_minus_S_mean_collapse": {
+      "prediction.true_object_supported_weight_m2": {
+        "positive": 2,
+        "negative": 4,
+        "tie": 0
+      },
+      "prediction.realized_true_object_weight_m2": {
+        "positive": 1,
+        "negative": 5,
+        "tie": 0
+      },
+      "selected.actual_object_net_new_m2": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      },
+      "selected.actual_global_net_new_m2": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      },
+      "selected.completed_actions": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      }
+    },
+    "S_fixed_minus_G_fixed": {
+      "prediction.true_object_supported_weight_m2": {
+        "positive": 1,
+        "negative": 5,
+        "tie": 0
+      },
+      "prediction.realized_true_object_weight_m2": {
+        "positive": 1,
+        "negative": 4,
+        "tie": 1
+      },
+      "selected.actual_object_net_new_m2": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      },
+      "selected.actual_global_net_new_m2": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      },
+      "selected.completed_actions": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      }
+    },
+    "S_uncertainty_minus_G_uncertainty": {
+      "prediction.true_object_supported_weight_m2": {
+        "positive": 2,
+        "negative": 4,
+        "tie": 0
+      },
+      "prediction.realized_true_object_weight_m2": {
+        "positive": 5,
+        "negative": 1,
+        "tie": 0
+      },
+      "selected.actual_object_net_new_m2": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      },
+      "selected.actual_global_net_new_m2": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      },
+      "selected.completed_actions": {
+        "positive": 0,
+        "negative": 0,
+        "tie": 6
+      }
+    }
+  },
+  "mandatory_preserved_negatives": [
+    "L24/L54 realized weighted support is lower under uncertainty than fixed; L54/L109 object rank declines.",
+    "Only L54 changes selected branch: less object/global net surface, fewer actions and shorter path, same coverage increment.",
+    "G and S select identical candidates in all six states within both fixed and uncertainty modes.",
+    "Mean-collapse has greater aggregate realized weight and rank than full uncertainty, with identical selected branches.",
+    "The six prefixes have been repeatedly used for development and are not independent held-out scenes.",
+    "Independent procedural calibration has under-covering probability intervals and one heldout front high-confidence wrong structure prediction."
+  ],
+  "proposed_next": "Root may start the frozen five arms on both existing layouts (10 runs), retain every failure and all outcomes, with no re-tuning from these replay scores. Evaluate complete unknown coverage, time-to-coverage and fixed-budget native reconstruction separately.",
+  "not_claimed": [
+    "S superiority",
+    "distribution superior to posterior mean",
+    "nominally calibrated credible intervals",
+    "robot or natural-semantic-detector performance"
+  ]
+}

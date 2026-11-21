@@ -1,0 +1,119 @@
+{
+  "status": "complete_closed_loop_evidence_tradeoffs_no_semantic_superiority",
+  "summary_sha256": "34f49b75dcf31c23d936ae522aab611b21629cc214737dd9053b64fcbb03b34d",
+  "new_runs_completed": 8,
+  "independent_floorplan_families": 1,
+  "position_permutations": 2,
+  "stochastic_repeats": 0,
+  "all_runs": {
+    "paid_actions": 256,
+    "correct_free_coverage": 1.0,
+    "simulated_collisions": 0,
+    "returned_to_anchor": true
+  },
+  "supported_claims": [
+    "The declared O observed-object policy completes exploration on both controlled permutations within the fixed simulation budget.",
+    "Category priors can change an actual selected target and subsequent trajectory; first left divergence occurs at planning action54, execution action71.",
+    "All G/S and ablation arms share acquired instance support, map fusion, candidate generation and execution rules.",
+    "Measured-surface reward consumption changes some trajectories and surface outcomes, with mixed effects."
+  ],
+  "unsupported_claims": [
+    "S has better overall exploration/reconstruction efficiency than G.",
+    "The inherited geometric likelihood improves final outcomes: S and no_fit are identical in both layouts.",
+    "A natural detector or real-robot SLAM/control benefit has been demonstrated.",
+    "The eight deterministic arms are eight independent environments or statistical repetitions."
+  ],
+  "paired_results": {
+    "shelf_left": {
+      "G_vs_S": {
+        "difference_direction": "S minus G",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": -0.37730591728191154,
+        "open31_recall_5cm_delta_pp": 1.2943571844095336,
+        "closed118_recall_5cm_delta_pp": -2.8342857142857114,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 1.2000000000000028,
+        "trajectory_identical": false,
+        "native_TSDF_mesh_identical": false
+      },
+      "S_vs_S_no_fit": {
+        "difference_direction": "S_no_fit minus S",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true
+      },
+      "S_vs_S_no_measured_consumption": {
+        "difference_direction": "S_no_measured_consumption minus S",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.07620301366342286,
+        "open31_recall_5cm_delta_pp": -0.18906340895868956,
+        "closed118_recall_5cm_delta_pp": 0.2514285714285691,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.3999999999999986,
+        "trajectory_identical": false,
+        "native_TSDF_mesh_identical": false
+      }
+    },
+    "shelf_right": {
+      "G_vs_S": {
+        "difference_direction": "S minus G",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true
+      },
+      "S_vs_S_no_fit": {
+        "difference_direction": "S_no_fit minus S",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": 0.0,
+        "open31_recall_5cm_delta_pp": 0.0,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": true,
+        "native_TSDF_mesh_identical": true
+      },
+      "S_vs_S_no_measured_consumption": {
+        "difference_direction": "S_no_measured_consumption minus S",
+        "coverage_delta_pp": 0.0,
+        "F1_5cm_delta_pp": -0.14738684931527857,
+        "open31_recall_5cm_delta_pp": -0.8583066627873115,
+        "closed118_recall_5cm_delta_pp": 0.0,
+        "paid_action_delta": 0,
+        "path_length_delta_m": 0.0,
+        "trajectory_identical": false,
+        "native_TSDF_mesh_identical": false
+      }
+    }
+  },
+  "coverage100_actions": {
+    "shelf_left": {
+      "S": 97,
+      "S_no_fit": 97,
+      "G": 88,
+      "S_no_measured_consumption": 97
+    },
+    "shelf_right": {
+      "G": 100,
+      "S": 100,
+      "S_no_fit": 100,
+      "S_no_measured_consumption": 100
+    }
+  },
+  "notes": [
+    "Left S improves shelf recall by1.294pp but worsens cabinet recall by2.834pp and F1 by0.377pp, using1.2m longer path and9more actions to fullcoverage.",
+    "Right G/S/no_fit are trajectory and native TSDF identical.",
+    "No-consumption comparison is mixed: left F1 improves0.076pp with0.4m extra path but shelf recall decreases; right F1 decreases0.147pp and shelf recall decreases0.858pp.",
+    "The first semantic flip favors a cabinet template component whose forecast points have zero support on the true cabinet surface; this is a geometric-model failure amplified by the class prior.",
+    "Previous B2, V1, V2 and OF negatives remain separate preserved evidence."
+  ]
+}

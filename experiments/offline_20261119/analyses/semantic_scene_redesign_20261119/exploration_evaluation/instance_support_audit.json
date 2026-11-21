@@ -1,0 +1,64 @@
+{
+  "scope": "Independent read-only source and completed fixed-trajectory replay audit; no actor or hardware started.",
+  "status": "pass_with_explicit_scope_limits",
+  "replay_summary_sha256": "1dfbd408d57eb804a4baa6cd4eceaa4184dd8dd1cc457b45a08e49ac72d95d5b",
+  "replay_protocol_sha256": "88773c1791f90f86a6870579358dc9d19e593b00ccd631197b332defbd8d1188",
+  "replay_runner_sha256": "fb806ddf7b381d8d4018f2e450ed900f9a5cca03fefdd8d53bbeceb458e30231",
+  "study_freeze_sha256": "e4bff2ee97e336b6d9f7daa675cfaa348a726c1237c2bf1b96c8b92cd20d8fa8",
+  "source_files_verified": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/instance_support.py": "c1e49e4e433e783d9456be1724bc698d4adb33bd5fdd3e31f8369a28ae005165",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/instance_asset_adapter.py": "a8577c405400cdbf43e8c0abb19462e6623f20c56e35fc71740386ff446d6270",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/response_features_v7.py": "3317f74c906b62434de3b7b46051e8edbdd4d7214eb88d0eb0580d31a2129a91",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/competition_candidates_v8.py": "59df410132cab71c833241e77024684b3ba62170023c2fa3dd15aeef5e319b36",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/competition_candidates_v8_1.py": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso_bridge/exploration_joint_policy.py": "adc651625adcb456562f0907e8fd5b1aa94c9536f8eb856ce193b12af3f1de2c"
+  },
+  "additional_source_sha256": {
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/mapping3d_v2.py": "25c4d4a6b05e778d180780d0f267d7fc3ee537eea5c2d89590e951c341f996fc"
+  },
+  "dynamic_checks": {
+    "actual_initial_sampler_keys_equal_original_source_AST": true,
+    "actual_initial_sampled_voxels": 799,
+    "actual_initial_height_filtered_quality_points": 409,
+    "actual_initial_unowned_points_preserved": 370,
+    "partition_disjoint_and_exhaustive_before_original_extractor": true,
+    "dictionary_key_used_when_averaged_point_crosses_voxel_boundary": true,
+    "global_10000_cap_not_multiplied_per_instance": true
+  },
+  "fairness": {
+    "G_S_same_mapper_and_same_measured_instance_index": true,
+    "S0_separate_original_mapper_with_same_RGB_depth_scan_and_same_instance_index": true,
+    "S0_clears_classes_not_instance_boundaries": true,
+    "track_matching_uses_current_measured_voxel_overlap_not_label_or_global_identity": true,
+    "no_hidden_bounds_or_global_object_identity_supplied_to_index_or_scorer": true,
+    "unknown_support_track0_processed_by_original_extractor": true,
+    "original_geometry_thresholds_and_common_score_preserved": true,
+    "native_baseline_reproduced_for_all_recorded_candidates": true,
+    "source_hashes_unchanged_at_independent_readback": true
+  },
+  "counts": {
+    "verified_packets": 257,
+    "planning_states": 31,
+    "nonzero_semantic_prior_states": 17,
+    "different_first_rank_states": 0,
+    "new_policy_runs": 0,
+    "measured_support_tracks": 4,
+    "owned_measured_voxels": 165
+  },
+  "limits": [
+    "Only visible class2/class3 parts of two verified structures form ideal masks. These are not detected YOLOE instance masks or complete object masks.",
+    "Instance support is a substantive grouping adaptation. It changes accepted assets and would change generated candidates in a full adapted policy; original-method equivalence is not claimed.",
+    "The support index may fragment a physical object into multiple tracks when successive views share no measured voxels; track counts are not object counts.",
+    "The adapter preserves every globally sampled unknown point before original extraction; original height, size, support, grid and closing rules may still reject resulting groups.",
+    "All scores use the original recorded candidate set and original history/posterior. This does not test new candidate generation, changed feedback history, autonomous motion, coverage, or reconstruction gains.",
+    "17 nonzero score differences and zero first-rank changes are a mechanism diagnostic on one fixed development trajectory, not 31 independent experiments."
+  ],
+  "evidence_lines": {
+    "shared_owner_and_S0": "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_study/diagnosis/instance_support_replay/run.py:48-59,76-86",
+    "fixed_routes_original_packet_and_hash_checks": "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_study/diagnosis/instance_support_replay/run.py:62-75,104-119",
+    "sample_and_overlap_association": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/instance_support.py:65-123",
+    "quality_keys_unknown_partition_and_original_extractor": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/instance_asset_adapter.py:28-65",
+    "original_sampling": "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/mapping3d_v2.py:17-34,60-65",
+    "original_group_thresholds": "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/response_features_v7.py:16-24,55-80"
+  }
+}

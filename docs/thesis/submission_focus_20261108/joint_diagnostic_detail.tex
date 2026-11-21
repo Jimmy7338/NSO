@@ -1,0 +1,7 @@
+\section{Q0 matrix interpretation}
+
+Tables~\ref{tab:8}--\ref{tab:9} retain the 24 original/joint/C/frontier trajectories. Each matched condition starts from the same simulated packet and anchor at 61.50\% reachable-cell coverage. Exact poses, a 0.2 m grid/radius and synthetic category markers limit transfer to measured robot localization and natural semantics. C removes quality and prior scores while retaining joint candidates. These are one Q0 context and two related arrangements, not 24 independent environments. All runs return without simulated collision; east/96 C uses 94 actions and the others use their full limits.
+
+G/S tie in three of four conditions within each implementation. The west/96 semantic difference is adverse in V10.3.1 and positive in joint v1. Joint G/S first reach 90/95/99\% coverage at actions 18/24/29; surface histories diverge at action 31, after 99.55\% coverage. Mean surface error increases from 3.73 to 4.31 mm despite S's F1 gain. Frontier first reaches 95\% coverage at action 20 at both budgets, while joint policies do not reach it under the 48-action limit. Frontier permanently returns after rejection; the adapter differs from NSO replanning.
+
+A separate post-hoc west/96 intervention after 41 S actions selects an option unavailable to any nonnegative uniform geometric-prior weight on that saved set. Its continuation adds 0.099926 m$^2$ surface, loses 0.001203 F1 and observes 0.04 m$^2$ less area than G. This mixed late-state outcome supplies no additional independent scene or general semantic advantage.

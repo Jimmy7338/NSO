@@ -1,0 +1,116 @@
+{
+  "schema": "nso_completed_closed_loop_readonly_summary/1",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
+  "terminal_confirmed_by": [
+    "mission PID exited",
+    "result.json",
+    "summary.json",
+    "joint_summary closed and termination"
+  ],
+  "summary": {
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/exploration_resume_S40_01",
+    "status": "nso_joint_core_stopped",
+    "reason": "budget_exhausted",
+    "goals": 40,
+    "verified_arrivals": 40,
+    "distance_m": 7.393505834221814,
+    "elapsed_s": 542.4439440459973,
+    "stopped": true,
+    "execution_interrupted": false
+  },
+  "paid_actions": 40,
+  "paid_action_types": {
+    "right": 2,
+    "forward": 36,
+    "left": 2
+  },
+  "real_observations_including_bootstrap": 41,
+  "extra_fixed_endpoint_retries": 0,
+  "ROS_goal_results": {
+    "3": 40
+  },
+  "logical_return": {
+    "anchor": [
+      200,
+      200,
+      0
+    ],
+    "final_observed_grid_pose": [
+      200,
+      200,
+      0
+    ],
+    "termination": {
+      "reason": "budget_exhausted",
+      "returned_to_anchor": true,
+      "failed": false,
+      "current_footprint_known_safe": true,
+      "final_frame_id": "1794058649254376857",
+      "final_action_id": 40
+    },
+    "runtime_phase_counts": {
+      "outbound": 40
+    },
+    "interpretation": "Returned to the declared anchor through the original planner option sequence; all authorized actions labeled outbound, no separate return phase claimed."
+  },
+  "last_ROS_anchor_arrival": {
+    "source_stamp_ns": 1794058649053097486,
+    "actual_aligned_odom_pose": [
+      0.1740779494406252,
+      0.7577323348481368,
+      2.6316227675440698
+    ],
+    "position_error_m": 0.02402054906757806,
+    "yaw_error_rad": 0.05066167133334476,
+    "actual_grid_pose": [
+      200,
+      200,
+      0
+    ],
+    "grid_pose_matches": true,
+    "existing_xy_tolerance_m": 0.08,
+    "existing_yaw_tolerance_rad": 0.08
+  },
+  "observed_2d_coverage_proxy": {
+    "initial_m2": 72.08000000000001,
+    "final_m2": 128.28000000000003,
+    "increase_m2": 56.20000000000002,
+    "independent_coverage_truth": false,
+    "initial_navigation_map_was_retained_existing_observations": true
+  },
+  "old_surface_quality_proxy_negative_result": {
+    "initial": 0.21376008051653103,
+    "final": 0.19910668419652838,
+    "delta": -0.014653396320002648,
+    "fixed_old_support_count": 312,
+    "paid_measurement_support_count": 4189,
+    "is_GT_accuracy_or_F1": false
+  },
+  "semantic_execution": {
+    "actual_frontend_executed_observations": 41,
+    "observations_with_nonfloor_wall_assigned_depth_support": 29,
+    "claims": "Actual YOLOE inference with measured masks; not verified object identities, independent class accuracy, or causal semantic benefit."
+  },
+  "chassis_and_stop": {
+    "CAN_distance_m": 7.393505834221814,
+    "CAN_absolute_yaw_rad": 16.426855961561174,
+    "feedback_accounting_complete": true,
+    "zero_before_close": true,
+    "zero_after_close": true,
+    "adapter_shutdown_reason_preserved": "native_driver_fault:8",
+    "execution_interrupted": false
+  },
+  "configuration_boundaries": {
+    "policy_variant": "exploration_joint_v1",
+    "planner_revision": "v10_3_1",
+    "score_mode": "S",
+    "total_budget": 40,
+    "robot_radius_m": 0.7212185868375829,
+    "control_velocity_source": "can_feedback",
+    "pose_source": "original default-keyframe CSM plus fixed SE2 coordinate continuity",
+    "old_camera_extrinsics_verified": false,
+    "old_approved_mask_applied": false,
+    "correction_reverse_authorized_but_no_extra_retry_seen": true
+  },
+  "evidence_scope": "One completed physical unknown-coverage/measured-surface integration loop; not a method-comparison, efficiency, accuracy or semantic-benefit validation. Old-surface proxy decrease is retained. No observer-side live changes or motion."
+}

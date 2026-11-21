@@ -1,0 +1,237 @@
+{
+  "schema": "B10_native_novelty_four_run_closed_loop_v1",
+  "status": "frozen_wrapper_before_policy_runs",
+  "purpose": "Matched complete unknown exploration with a native5cm measured-surface reward mask; compare against frozen B9 T16 G/S, retaining favorable, tied and adverse outcomes.",
+  "layouts": {
+    "shelf_left": {
+      "scene_id": "controlled_functional_shelf_left",
+      "role": "paired_controlled_development_layout",
+      "difference": "open shelf left, closed cabinet right"
+    },
+    "shelf_right": {
+      "scene_id": "controlled_functional_shelf_right",
+      "role": "paired_controlled_development_layout",
+      "difference": "closed cabinet left, open shelf right"
+    }
+  },
+  "arms": {
+    "G_native_novelty": {
+      "score_mode": "G",
+      "class_prior": "neutral",
+      "extent_mode": "uncertainty",
+      "structural_temperature": 16.0,
+      "native_novelty_tolerance_m": 0.05
+    },
+    "S_native_novelty": {
+      "score_mode": "S",
+      "class_prior": "acquired_category",
+      "extent_mode": "uncertainty",
+      "structural_temperature": 16.0,
+      "native_novelty_tolerance_m": 0.05
+    }
+  },
+  "environment": {
+    "config": {
+      "resolution_m": 0.2,
+      "robot_radius_m": 0.2,
+      "camera_height_m": 1.2,
+      "width_px": 120,
+      "height_px": 90,
+      "fov_deg": 90.0,
+      "max_depth_m": 8.0,
+      "depth_sigma_m": 0.0,
+      "dropout": 0.0,
+      "action_duration_s": 1.0,
+      "voxel_m": 0.06,
+      "max_steps": 256,
+      "laser_height_m": 0.25,
+      "laser_rays": 180,
+      "truncation_m": 0.12
+    },
+    "noise_seed": 20261119,
+    "initial_position": [
+      34,
+      25
+    ],
+    "initial_heading": 0,
+    "world_adapter": "scene.controlled_world.ControlledFunctionalWorld",
+    "mesh_assets": "Unscaled original ReplicaCAD shelf31 and complete cabinet118; custom declared architecture/placements",
+    "sensor_limits": "Opaque first-hit mesh RGBD/laser, noiseless exact discrete pose, no glass/lighting/localization model; render natively at 120x90, not resizing old sensor frame"
+  },
+  "independence": "Two previously inspected furniture permutations of one floorplan; dependent development evaluation, not new held-out scenes.",
+  "policy": {
+    "version": "B10_native_novelty_on_B9_T16_conditional_particles",
+    "base": "Frozen B v10_3_1 common score/candidate/mapping/navigation/return loop with shared observed-instance frontend",
+    "paid_action_budget": 256,
+    "return_anchor_required": true,
+    "args": {
+      "nso_backend": "cpu_v10",
+      "eval": true,
+      "train_global": false,
+      "use_open_vocab_semantic": true,
+      "use_topo_graph": true,
+      "use_rpn_uq": true,
+      "use_igcr": true,
+      "cpu_disable_feedback": false,
+      "cpu_force_gain_feedback": false,
+      "cpu_freeze_gain_posterior": false,
+      "cpu_max_candidates": 12,
+      "cpu_coverage_slots": 4,
+      "cpu_planner_revision": "v10_3_1",
+      "cpu_measured_novelty_floor": 0.25
+    },
+    "completion_area_coefficient": 1.0,
+    "original_method_equivalence": false,
+    "V3_candidate_proposer_used": false,
+    "RPN_trained_model_active": false,
+    "changes": [
+      "After the unchanged B9 T16 posterior/history reweight, multiply template reward weights by distance(current native TSDF mesh,point)>float32(0.05m). This is a declared decision-affecting acquisition-reward revision.",
+      "G/S share identical pointwise native-novelty mask. No hypothetical-particle mutual deduplication; base posterior and particle geometry unchanged."
+    ],
+    "unchanged": [
+      "v10_3_1 candidate generation and all common coverage/measured-quality score coefficients",
+      "Sensing, actual TSDF fusion and instance association",
+      "Local planning, collision model, action accounting, stopping and return semantics",
+      "256 paid actions, original sensor cold-start prefix and initial pose",
+      "B9 externally calibrated structural temperature16, B8 sigma.01, all geometry, free-space/history masks and current native TSDF visibility",
+      "Measured TSDF integration, retained keyframe selection and update, original template self-occlusion/visibility repair"
+    ]
+  },
+  "method": {
+    "sigma_m": 0.01,
+    "structural_temperature": 16.0,
+    "temperature_selection": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/audit/calibration_attempt_001/selected_temperature.json",
+      "sha256": "c0f0e382d943a99b4f29c20ddb2c36cf830923efdff1d7df806bfc000a07286e"
+    },
+    "source": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/model.py",
+      "sha256": "abd1850ad3f4756f2aff0dbff6f6f908cfc0cfae6c6bcd1f5bcc1b7447fff1df"
+    },
+    "reweight_implementation": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/replay.py",
+      "sha256": "ec64b28424420e3d9798c9518ec62624b14592c6e1704dc3a2d1513911b35bf3"
+    },
+    "temperature_protocol": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/protocol.json",
+      "sha256": "91239885619761304940bf77e4fcd97c330f2c7cdf60f30b3949d5da91bc74f7"
+    },
+    "base_B8_model": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_uncertainty_20261120/method/model.py",
+      "sha256": "dddd54a2d0347571b48e3aacc3f428a2dccfd23747362d333360fe2223584c45"
+    },
+    "scale": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_uncertainty_20261120/audit/calibration_attempt_001/selected_scale.json",
+      "sha256": "c92367d5c17719b42e235d42af3123c28c3970ccdcb97bb79fd0a16715beeeb1"
+    },
+    "history_rejection": true,
+    "measured_surface_consumption": true,
+    "old_surface_likelihood_reapplied": false,
+    "global_point_cap": null,
+    "extent_mode": "uncertainty",
+    "structural_update": "P_T(h) proportional P_category(h) * exp(logZ_h/T); retain q(k|h) exactly",
+    "original_T1_identity": "The frozen reweight implementation asserts exact B8 weights at T=1 before applying the selected T.",
+    "native_novelty_source": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/method/measured_novelty.py",
+      "sha256": "e6966c52423e71f6b9b73f9bd7181bb88c0dff551a272d900ff0e5e51aeaa011"
+    },
+    "native_novelty_tolerance_m": 0.05,
+    "novelty_application": "Once after reweight and current-native mesh construction, before any gain caches. Empty mesh consumes nothing. history_keep and base_weights remain unchanged.",
+    "validation": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/method/validation.json",
+      "sha256": "a0bdd174cf2b841ea0ee802d1b470a71fe839a18ca4bbffb58f583575fd0bd82"
+    }
+  },
+  "perception": {
+    "natural_detector": false,
+    "labels": "Only current valid-depth first-hit furniture surfaces, 2open/3closed; all other surfaces0",
+    "instance_support": "Same partial ideal visible instance boundaries for all arms, associated through measured voxel overlap",
+    "global_bounds_hidden_geometry_or_global_object_ID_to_actor": false,
+    "geometry_parameters": "Frozen B6 AB fitted width/yaw/height/absolute layers from full acquired positive-track points, with declared residual priors; B8 conditional depth/location distribution. No source-model bounds.",
+    "G_S_frontend": "Shared ideal acquired visible instance masks; G is a neutral structural-class prior, not a semantics-free frontend."
+  },
+  "evaluation": {
+    "thresholds": [
+      0.9,
+      0.95,
+      0.99,
+      1.0
+    ],
+    "primary": "start-reachable reference free coverage vs paid actions, correct-free and false-occupied separately",
+    "secondary": [
+      "native TSDF precision recall F1 at5cm and10cm on independently fixed visible source surface",
+      "path length",
+      "simulated collisions",
+      "goal outcomes",
+      "first threshold actions",
+      "no coverage gain streak",
+      "template hypotheses/posterior/history and candidate score audits"
+    ],
+    "paired_rule": "New native-novelty G/S on each existing layout compared with archived B9 T16 G/S controls, sharing initial sensor packet, candidates, common score and 256-action/return contract. Historical controls are not new independent samples.",
+    "failure_accounting": "All failed/interrupted attempts retained, no complete result for partial attempts",
+    "reference_actor_separation": true
+  },
+  "execution": {
+    "hardware": false,
+    "library_threads": 1,
+    "runs_planned": 4,
+    "no_continuous_images_or_video": true,
+    "only_root_starts_rollouts": true,
+    "source_and_protocol_frozen_before_runs": true,
+    "fresh_initial_state_per_arm": true,
+    "policy_actions_authorized_by_this_preparation": false,
+    "progression": "Root explicitly authorized all four complete G/S runs after66-branch review and independent implementation audit, despite no selected-target change at the six frozen prefixes. Preserve all outcomes; reward correction may affect later unexamined states. Three concurrent runs, numerical-library threads1. No threshold or policy retuning.",
+    "maximum_concurrent_runs": 3
+  },
+  "calibration_evidence": {
+    "temperature_summary": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/audit/summary.json",
+      "sha256": "792713370c50e942321506c4405f05b3013ec9fb68e6ed24a3c5bb40feea69b5"
+    },
+    "test_assessment": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/audit/test_attempt_001/assessment.json",
+      "sha256": "7dba7205970e0f05f3e24f660a42b8dd2a8cce695a8438dce8fdd153dc340872"
+    },
+    "scope": "24 new calibration and24 new heldout objects; selected on neutral structure NLL only; T=16 fixed before all new policy scoring. Correct-category S calibration diagnostic uses an oracle9:1 prior, not automatic recognition accuracy.",
+    "limits": [
+      "Depth conditional distributions are retained but their marginal mixture may change.",
+      "Positive T cannot fix the sign of wrong structural evidence.",
+      "Neutral class accuracy is unchanged and around-only class NLL worsens.",
+      "Do not transfer unreweighted B8 T1 conformal interval guarantees to this T16 model."
+    ]
+  },
+  "initial_coverage": "Shared parent initial measured correct-free coverage0.4260614934, reported separately from the subsequently explored region.",
+  "historical_controls": {
+    "B9_summary": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/policy_audit/summary.json",
+      "sha256": "2fdcef3364df4ac2890b3bfa5ddaca2737de80962b9adea9e478c291a75b1fbc"
+    },
+    "new_trials": false,
+    "matched_arms": {
+      "G_native_novelty": "G_temperature",
+      "S_native_novelty": "S_temperature"
+    },
+    "role": "Frozen same-environment T16 baseline; no new independent-scene claim."
+  },
+  "fixed_replay": {
+    "states": {
+      "shelf_left": [
+        24,
+        54,
+        109
+      ],
+      "shelf_right": [
+        24,
+        53,
+        110
+      ]
+    },
+    "reused_branch_count": 66,
+    "new_branch_actions": 0,
+    "readiness_at_wrapper_preparation": "All6 prefixes/66 reused branches complete;12 arm-state preferred targets unchanged; MAE smaller, ranking mixed. This does not establish complete-policy improvement.",
+    "summary": {
+      "path": "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/replay_attempt_001/summary.json",
+      "sha256": "85aaa8a82c13c69927309d4b19162681f4b470076fb73a2dd3d809c2ef88b3a8"
+    }
+  }
+}

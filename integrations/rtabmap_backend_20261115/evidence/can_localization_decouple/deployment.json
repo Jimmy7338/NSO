@@ -1,0 +1,54 @@
+{
+  "deployed_unix_s": 1794730138.5440476,
+  "files": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/csm_odometry_bridge.py": "f35f6beff6d305baca9c435930ccf3e82b66e3cf054fd880f8f77bd8dc7d5cd6",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py": "2ae9838cd9d547272616c22793141d9b30525b9ebc7683628219aa5f944e5638"
+  },
+  "tests_passed": 20,
+  "new_bridge_processes": [
+    {
+      "name": "csm_bridge",
+      "pid": 3433450,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,2,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/csm_odometry_bridge.py",
+        "--control-velocity-source",
+        "can_feedback",
+        "--can-interface",
+        "can0"
+      ],
+      "started_unix_s": 1794730138.5409596
+    },
+    {
+      "name": "sensor_bridge",
+      "pid": 3433451,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,2,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+        "--run",
+        "--localization-source",
+        "lidar_csm",
+        "--no-self-mask",
+        "--depth-projection-profile",
+        "source_tf_v1"
+      ],
+      "started_unix_s": 1794730138.542867
+    }
+  ],
+  "CSM_matcher_restarted": false,
+  "raw_CSM_pose_or_TF_aligned": false,
+  "actuator_started": false,
+  "CAN_failure_latch_retained": true,
+  "control_odom_health_never_refreshed_by_raw_pose": true,
+  "source_TTL_and_native_limits_unchanged": true
+}

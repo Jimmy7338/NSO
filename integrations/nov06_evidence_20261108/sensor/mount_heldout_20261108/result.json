@@ -1,0 +1,569 @@
+{
+  "status": "offline_fixed_ROI_heldout_mount_comparison_not_deployed",
+  "protocol_path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/cross_sensor/protocol.json",
+  "protocol_sha256": "b1909d79771ce6b902b87c7a0e957779d50374f1404fa5171f0cfd75598a7842",
+  "fixed_transform_source": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/mount_comparison_next/result.json",
+  "fixed_transform_source_sha256": "32cc3b2d2074dc3b9debafb72addb2b826baa1039df61ae5d892b0c5fcc9f845",
+  "calibrated_launch_sha256": "b36e8f53d354be263a1d00ef686a44251181b8079eb587e1ac15a1d047c8e112",
+  "script_sha256": "ee20d5b1e57cca630e20bd0105ab3a91e3c1fe6e3cf6527eeee390251c769047",
+  "old_mount": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.071
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      -0.0009
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.288
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "nov06_mount": [
+    [
+      0.9989360751222427,
+      -0.037408915714802315,
+      -0.026968330397190085,
+      0.19988985757484776
+    ],
+    [
+      0.03750395804005305,
+      0.9992918948041565,
+      0.0030268977598471034,
+      0.007777808584314198
+    ],
+    [
+      0.02683600101913717,
+      -0.004035096499644478,
+      0.9996317057024249,
+      0.28354361655830895
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "fixed_optical_chain": [
+    [
+      2.220446049250313e-16,
+      2.220446049250313e-16,
+      1.0,
+      -0.010000000000000002
+    ],
+    [
+      -1.0,
+      0.0,
+      2.220446049250313e-16,
+      0.06
+    ],
+    [
+      0.0,
+      -1.0,
+      2.220446049250313e-16,
+      0.015000000000000013
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "frames": [
+    {
+      "action_id": 0,
+      "source": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01/joint_inputs/joint-1794129182125903370.npz",
+      "source_sha256": "5f277eb7f6c616b8c7c9fec68188ee21505f248bf364fdbcbc388434c02df8d7",
+      "stamps_ns": {
+        "rgb": 1794129182125903370,
+        "depth": 1794129182125903370,
+        "scan": 1794129182088216066
+      },
+      "motion_before": {
+        "receipt": 26004.963056972,
+        "source": 26004.96070408821,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.0
+      },
+      "motion_after": {
+        "receipt": 26005.260816633,
+        "source": 26005.260738134384,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.0
+      },
+      "valid_original_scan_rays": 1866,
+      "models": [
+        {
+          "model": "old_actual",
+          "plane_normal_odom": [
+            -0.9887585883307108,
+            -0.14882662829208385,
+            0.014390577245893177
+          ],
+          "plane_offset_odom": 2.7751491618669566,
+          "depth_fit": {
+            "n": 1530,
+            "median_signed_m": 0.00011926122474315015,
+            "p05_p95_signed_m": [
+              -0.022078326151036175,
+              0.02100869803984879
+            ],
+            "median_absolute_m": 0.010374979149765373,
+            "max_absolute_m": 0.053473002790418445
+          },
+          "actual_hits": 91,
+          "intersections": 0,
+          "both": 0,
+          "actual_only": 91,
+          "intersection_only": 0,
+          "neither": 1775,
+          "actual_residual": {
+            "n": 91,
+            "median_signed_m": -0.3133421378482981,
+            "p05_p95_signed_m": [
+              -4.401453762277934,
+              -0.27712009784138525
+            ],
+            "median_absolute_m": 0.3133421378482981,
+            "max_absolute_m": 4.495340133669554
+          },
+          "both_residual": null
+        },
+        {
+          "model": "nov06_counterfactual",
+          "plane_normal_odom": [
+            -0.9825272236602437,
+            -0.18576006802766018,
+            -0.011552138020841832
+          ],
+          "plane_offset_odom": 2.910327353124364,
+          "depth_fit": {
+            "n": 1530,
+            "median_signed_m": 0.00011926122474381629,
+            "p05_p95_signed_m": [
+              -0.02207832615103509,
+              0.021008698039850122
+            ],
+            "median_absolute_m": 0.010374979149765151,
+            "max_absolute_m": 0.05347300279041978
+          },
+          "actual_hits": 193,
+          "intersections": 193,
+          "both": 193,
+          "actual_only": 0,
+          "intersection_only": 0,
+          "neither": 1673,
+          "actual_residual": {
+            "n": 193,
+            "median_signed_m": -0.13500970980689386,
+            "p05_p95_signed_m": [
+              -0.17753356060440195,
+              0.00134949176388878
+            ],
+            "median_absolute_m": 0.13500970980689386,
+            "max_absolute_m": 0.19257923691083656
+          },
+          "both_residual": {
+            "n": 193,
+            "median_signed_m": -0.13500970980689386,
+            "p05_p95_signed_m": [
+              -0.17753356060440195,
+              0.00134949176388878
+            ],
+            "median_absolute_m": 0.13500970980689386,
+            "max_absolute_m": 0.19257923691083656
+          }
+        }
+      ],
+      "common_actual": {
+        "count": 78,
+        "old": {
+          "n": 78,
+          "median_signed_m": -0.30971812713381675,
+          "p05_p95_signed_m": [
+            -0.33976444489808105,
+            -0.27594274031206717
+          ],
+          "median_absolute_m": 0.30971812713381675,
+          "max_absolute_m": 0.3483289317003724
+        },
+        "nov06": {
+          "n": 78,
+          "median_signed_m": -0.164962338899447,
+          "p05_p95_signed_m": [
+            -0.18295869468574416,
+            -0.14464093875320677
+          ],
+          "median_absolute_m": 0.164962338899447,
+          "max_absolute_m": 0.19257923691083656
+        }
+      },
+      "common_both": {
+        "count": 0,
+        "old": null,
+        "nov06": null
+      },
+      "actual_membership_changes": {
+        "old_only": 13,
+        "nov06_only": 115
+      }
+    },
+    {
+      "action_id": 18,
+      "source": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01/joint_inputs/joint-1794129418472766370.npz",
+      "source_sha256": "2eab9f6b84382da5fa6e191f932aa93ea08c063faefa732755d95d262175cef7",
+      "stamps_ns": {
+        "rgb": 1794129418472766370,
+        "depth": 1794129418472766370,
+        "scan": 1794129418488954544
+      },
+      "motion_before": {
+        "receipt": 26241.408018324,
+        "source": 26241.40776872635,
+        "uninterpreted_tail_hex": "00000000",
+        "v": -0.009000000000000001,
+        "w": 0.02
+      },
+      "motion_after": {
+        "receipt": 26241.627852067,
+        "source": 26241.627794742584,
+        "uninterpreted_tail_hex": "00000000",
+        "v": -0.004,
+        "w": 0.01
+      },
+      "valid_original_scan_rays": 1876,
+      "models": [
+        {
+          "model": "old_actual",
+          "plane_normal_odom": [
+            -0.9710065587944666,
+            -0.2390413341508676,
+            -0.0023459210347548795
+          ],
+          "plane_offset_odom": -1.0451454789720547,
+          "depth_fit": {
+            "n": 1680,
+            "median_signed_m": -7.296726976990797e-05,
+            "p05_p95_signed_m": [
+              -0.0027449296346573893,
+              0.0031290158676222533
+            ],
+            "median_absolute_m": 0.0013100114471408242,
+            "max_absolute_m": 0.006172811128222655
+          },
+          "actual_hits": 91,
+          "intersections": 91,
+          "both": 91,
+          "actual_only": 0,
+          "intersection_only": 0,
+          "neither": 1785,
+          "actual_residual": {
+            "n": 91,
+            "median_signed_m": 0.002542922479899623,
+            "p05_p95_signed_m": [
+              -0.009458468355829752,
+              0.017975573635494624
+            ],
+            "median_absolute_m": 0.007067445766986147,
+            "max_absolute_m": 0.02149293246157158
+          },
+          "both_residual": {
+            "n": 91,
+            "median_signed_m": 0.002542922479899623,
+            "p05_p95_signed_m": [
+              -0.009458468355829752,
+              0.017975573635494624
+            ],
+            "median_absolute_m": 0.007067445766986147,
+            "max_absolute_m": 0.02149293246157158
+          }
+        },
+        {
+          "model": "nov06_counterfactual",
+          "plane_normal_odom": [
+            -0.961352126421912,
+            -0.27505523922576824,
+            -0.012112159118978123
+          ],
+          "plane_offset_odom": -0.9827271051590345,
+          "depth_fit": {
+            "n": 1680,
+            "median_signed_m": -7.296726977279455e-05,
+            "p05_p95_signed_m": [
+              -0.002744929634660609,
+              0.0031290158676194777
+            ],
+            "median_absolute_m": 0.0013100114471438218,
+            "max_absolute_m": 0.006172811128219102
+          },
+          "actual_hits": 80,
+          "intersections": 80,
+          "both": 80,
+          "actual_only": 0,
+          "intersection_only": 0,
+          "neither": 1796,
+          "actual_residual": {
+            "n": 80,
+            "median_signed_m": 0.00040883965544591394,
+            "p05_p95_signed_m": [
+              -0.009340561128383685,
+              0.006721447753053036
+            ],
+            "median_absolute_m": 0.003486020383718036,
+            "max_absolute_m": 0.014348506466245081
+          },
+          "both_residual": {
+            "n": 80,
+            "median_signed_m": 0.00040883965544591394,
+            "p05_p95_signed_m": [
+              -0.009340561128383685,
+              0.006721447753053036
+            ],
+            "median_absolute_m": 0.003486020383718036,
+            "max_absolute_m": 0.014348506466245081
+          }
+        }
+      ],
+      "common_actual": {
+        "count": 57,
+        "old": {
+          "n": 57,
+          "median_signed_m": 0.010367279396981122,
+          "p05_p95_signed_m": [
+            -0.004373729495124401,
+            0.018686500631967504
+          ],
+          "median_absolute_m": 0.010367279396981122,
+          "max_absolute_m": 0.02149293246157158
+        },
+        "nov06": {
+          "n": 57,
+          "median_signed_m": -0.000811645903059488,
+          "p05_p95_signed_m": [
+            -0.01054475969629709,
+            0.005248235519955545
+          ],
+          "median_absolute_m": 0.003153574832009731,
+          "max_absolute_m": 0.014348506466245081
+        }
+      },
+      "common_both": {
+        "count": 57,
+        "old": {
+          "n": 57,
+          "median_signed_m": 0.010367279396981122,
+          "p05_p95_signed_m": [
+            -0.004373729495124401,
+            0.018686500631967504
+          ],
+          "median_absolute_m": 0.010367279396981122,
+          "max_absolute_m": 0.02149293246157158
+        },
+        "nov06": {
+          "n": 57,
+          "median_signed_m": -0.000811645903059488,
+          "p05_p95_signed_m": [
+            -0.01054475969629709,
+            0.005248235519955545
+          ],
+          "median_absolute_m": 0.003153574832009731,
+          "max_absolute_m": 0.014348506466245081
+        }
+      },
+      "actual_membership_changes": {
+        "old_only": 34,
+        "nov06_only": 23
+      }
+    },
+    {
+      "action_id": 22,
+      "source": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01/joint_inputs/joint-1794129472075951370.npz",
+      "source_sha256": "6afbc9edbe10d98e347a48164b3e9faa84d94b86c25267983d4056c240b26dd9",
+      "stamps_ns": {
+        "rgb": 1794129472075951370,
+        "depth": 1794129472075951370,
+        "scan": 1794129472044163227
+      },
+      "motion_before": {
+        "receipt": 26294.973987643,
+        "source": 26294.97390437126,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.08
+      },
+      "motion_after": {
+        "receipt": 26295.174190839,
+        "source": 26295.17399907112,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.02
+      },
+      "valid_original_scan_rays": 1876,
+      "models": [
+        {
+          "model": "old_actual",
+          "plane_normal_odom": [
+            0.9538088617870611,
+            0.29740121478100295,
+            0.042440224118808004
+          ],
+          "plane_offset_odom": 3.4461281780785398,
+          "depth_fit": {
+            "n": 1440,
+            "median_signed_m": 0.0007596239731517684,
+            "p05_p95_signed_m": [
+              -0.00690846536412566,
+              0.005260922760710817
+            ],
+            "median_absolute_m": 0.0028472095764979777,
+            "max_absolute_m": 0.013282692276428865
+          },
+          "actual_hits": 81,
+          "intersections": 80,
+          "both": 80,
+          "actual_only": 1,
+          "intersection_only": 0,
+          "neither": 1795,
+          "actual_residual": {
+            "n": 81,
+            "median_signed_m": 0.021783890252762728,
+            "p05_p95_signed_m": [
+              -0.12893631553414275,
+              0.03211081509972136
+            ],
+            "median_absolute_m": 0.025824613452984035,
+            "max_absolute_m": 0.16830887164942876
+          },
+          "both_residual": {
+            "n": 80,
+            "median_signed_m": 0.02199014542527644,
+            "p05_p95_signed_m": [
+              -0.11645673332111081,
+              0.03212243539550645
+            ],
+            "median_absolute_m": 0.02555638724680298,
+            "max_absolute_m": 0.15844744296649171
+          }
+        },
+        {
+          "model": "nov06_counterfactual",
+          "plane_normal_odom": [
+            0.9420260277974745,
+            0.33394441101976563,
+            0.03268169672421629
+          ],
+          "plane_offset_odom": 3.4481242195214326,
+          "depth_fit": {
+            "n": 1440,
+            "median_signed_m": 0.00075962397314977,
+            "p05_p95_signed_m": [
+              -0.006908465364126992,
+              0.00526092276070944
+            ],
+            "median_absolute_m": 0.0028472095764959793,
+            "max_absolute_m": 0.013282692276430641
+          },
+          "actual_hits": 73,
+          "intersections": 73,
+          "both": 73,
+          "actual_only": 0,
+          "intersection_only": 0,
+          "neither": 1803,
+          "actual_residual": {
+            "n": 73,
+            "median_signed_m": 0.002981208291951809,
+            "p05_p95_signed_m": [
+              -0.0046205415180919475,
+              0.01135679983277029
+            ],
+            "median_absolute_m": 0.0037576936211669576,
+            "max_absolute_m": 0.013835965849779974
+          },
+          "both_residual": {
+            "n": 73,
+            "median_signed_m": 0.002981208291951809,
+            "p05_p95_signed_m": [
+              -0.0046205415180919475,
+              0.01135679983277029
+            ],
+            "median_absolute_m": 0.0037576936211669576,
+            "max_absolute_m": 0.013835965849779974
+          }
+        }
+      ],
+      "common_actual": {
+        "count": 51,
+        "old": {
+          "n": 51,
+          "median_signed_m": 0.025288161040621926,
+          "p05_p95_signed_m": [
+            0.01787202054841397,
+            0.03300761843808475
+          ],
+          "median_absolute_m": 0.025288161040621926,
+          "max_absolute_m": 0.03438278733283928
+        },
+        "nov06": {
+          "n": 51,
+          "median_signed_m": 0.0035330993264359734,
+          "p05_p95_signed_m": [
+            -0.006351224299350866,
+            0.011718510213928779
+          ],
+          "median_absolute_m": 0.004710590143874871,
+          "max_absolute_m": 0.013835965849779974
+        }
+      },
+      "common_both": {
+        "count": 51,
+        "old": {
+          "n": 51,
+          "median_signed_m": 0.025288161040621926,
+          "p05_p95_signed_m": [
+            0.01787202054841397,
+            0.03300761843808475
+          ],
+          "median_absolute_m": 0.025288161040621926,
+          "max_absolute_m": 0.03438278733283928
+        },
+        "nov06": {
+          "n": 51,
+          "median_signed_m": 0.0035330993264359734,
+          "p05_p95_signed_m": [
+            -0.006351224299350866,
+            0.011718510213928779
+          ],
+          "median_absolute_m": 0.004710590143874871,
+          "max_absolute_m": 0.013835965849779974
+        }
+      },
+      "actual_membership_changes": {
+        "old_only": 30,
+        "nov06_only": 22
+      }
+    }
+  ],
+  "limits": [
+    "All three predeclared frames retained, including invalid S0 and any worse Nov06 residuals. No new view or ROI adjustment.",
+    "Actual historical TF for each modality at own timestamp. Camera-only fixed mount composition; no ICP/optimization/residual gate.",
+    "Common image projection does not establish true same-object correspondence; report common both-valid separately.",
+    "One correlated trajectory; not independent calibration truth or mapping/coverage performance."
+  ]
+}

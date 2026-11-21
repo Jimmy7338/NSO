@@ -1,0 +1,47 @@
+{
+  "schema": "nso.joint_coverage_pair.v1",
+  "status": "C_complete_S_failed_original_current_footprint_check",
+  "order": [
+    "C",
+    "S"
+  ],
+  "paid_action_budget_per_episode": 40,
+  "duration_limit_s": 600,
+  "policy_variant": "exploration_joint_v1",
+  "planner_revision": "v10_3_1",
+  "policy_difference": "configuration.score_mode only; C retains original candidate generator and removes quality/object-prior scores",
+  "same_frontend": "identical automatic semantic frontend configuration; C still collects/fuses the same modalities",
+  "initialization": "a new independent gmapping map and actual fresh measured initialization per arm; retain CSM and display TSDF; exact map-source interface supplied by root",
+  "initial_information": "fresh real captures are not byte-identical; report pose, map, transform and input differences, never conceal them",
+  "experimental_units": "one scene, one ordered C/S pair, two dependent episodes; observations/actions are repeated within episodes",
+  "historical_S40": "excluded as a paired arm",
+  "changes_not_performed": [
+    "no new candidate/scoring/footprint/return rule",
+    "no budget/weight search"
+  ],
+  "actual_C_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/fresh_map_C_then_S_01_C_1794063422561485948",
+  "actual_C_initialization": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/fresh_C/source.json",
+  "mapping_lifecycle": {
+    "scope": "separate fresh stock gmapping per arm, isolated map TF inverted exactly; original localization/display TSDF retained",
+    "default_research_method_unchanged": true,
+    "navigation_map_topic": "/nso_pair/map",
+    "initialization_equivalence": "same fresh-state procedure and common planning frame; actual captures are different and retained"
+  },
+  "actual_S_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/fresh_map_C_then_S_01_S_1794064101296331873",
+  "actual_S_initialization": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/fresh_S/source.json",
+  "terminal_comparison": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/comparison/comparison.json",
+  "outcome_summary": {
+    "C": {
+      "paid_actions": 40,
+      "accepted_observations": 41,
+      "returned_to_anchor": true
+    },
+    "S": {
+      "paid_actions": 32,
+      "accepted_observations": 33,
+      "returned_to_anchor": false,
+      "reason": "current_footprint_not_known_safe"
+    },
+    "efficacy_claim": false
+  }
+}

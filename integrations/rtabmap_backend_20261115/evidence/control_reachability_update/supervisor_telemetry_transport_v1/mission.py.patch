@@ -1,0 +1,119 @@
+--- /home/ouc/nso_robot/analyses/resume_20261115/supervisor_telemetry_transport_v1/mission.before.py	2026-11-15 21:34:24.772189917 +0800
++++ /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py	2026-11-15 21:37:13.751348701 +0800
+@@ -126,6 +126,7 @@
+     """
+     def __init__(self,session_id):
+         self.session_id=session_id;self.receipt=None;self.fault=None;self.ever_armed=False
++        self.sampled_monotonic=None;self.sampled_unix_s=None;self.last_control_tick=None
+         self.can_distance=0.;self.can_absolute_yaw=0.;self.can_zero_since=None
+         self.can_accounting_complete=False;self.last_hardware_reason='adapter_telemetry_missing'
+         self.can_status=self.can_velocity=None
+@@ -137,6 +138,9 @@
+         if not 0<=receipt-row['sampled_monotonic']<=.5:
+             raise ValueError('actuator telemetry snapshot is stale or future')
+         self.receipt=receipt;self.fault=row.get('fault');self.ever_armed=row['ever_armed']
++        self.sampled_monotonic=row['sampled_monotonic']
++        self.sampled_unix_s=row.get('sampled_unix_s')
++        self.last_control_tick=row.get('last_control_tick_monotonic')
+         self.can_distance=row['can_distance_m'];self.can_absolute_yaw=row['can_absolute_yaw_rad']
+         self.can_zero_since=row['can_zero_since_monotonic']
+         self.can_accounting_complete=row['feedback_accounting_complete']
+@@ -150,6 +154,30 @@
+             if row is None or not 0<=now-row['source']<=.5:return 'original_CAN_'+name+'_stale'
+         return self.last_hardware_reason
+ 
++    def health_evidence(self,now):
++        """Snapshot cache/source clocks at the original unchanged stop check.
++
++        Caller holds the supervisor lock. This records the received adapter
++        snapshot; it cannot claim to be a new direct read of the CAN socket.
++        """
++        return dict(schema='supervisor_actuator_telemetry_evidence/1',
++            checked_monotonic=now,reason=self.hardware_reason(now),
++            adapter_sampled_monotonic=self.sampled_monotonic,
++            adapter_sampled_unix_s=self.sampled_unix_s,
++            telemetry_received_monotonic=self.receipt,
++            sample_transport_age_s=None if self.receipt is None or self.sampled_monotonic is None else self.receipt-self.sampled_monotonic,
++            telemetry_receipt_age_s=None if self.receipt is None else now-self.receipt,
++            adapter_snapshot_age_s=None if self.sampled_monotonic is None else now-self.sampled_monotonic,
++            last_control_tick_monotonic=self.last_control_tick,
++            can_status=None if self.can_status is None else dict(self.can_status),
++            can_velocity=None if self.can_velocity is None else dict(self.can_velocity),
++            status_source_age_s=None if self.can_status is None else now-self.can_status['source'],
++            velocity_source_age_s=None if self.can_velocity is None else now-self.can_velocity['source'],
++            adapter_reported_hardware_reason=self.last_hardware_reason,
++            adapter_fault=self.fault,original_supervisor_source_TTL_s=.5,
++            original_adapter_status_TTL_s=.5,original_adapter_velocity_TTL_s=.15,
++            scope='cached adapter telemetry, not an independent live CAN observation')
++
+ 
+ def visual_health_reason(health, odom, grid, now, wall):
+     if not health or not 0<=now-health[0]<=.5:return 'bridge_health_receipt_stale'
+@@ -634,11 +662,15 @@
+         if reference_worker:reference_worker.close()
+         raise
+     import rospy, actionlib, tf2_ros
++    from rospy.numpy_msg import numpy_msg
+     from nav_msgs.msg import Odometry,OccupancyGrid,Path as NavigationPath
+     from move_base_msgs.msg import MoveBaseAction,MoveBaseActionGoal,MoveBaseActionResult
+     from std_msgs.msg import Bool,Int32,String
+     from std_srvs.srv import Trigger
+     from rosgraph_msgs.msg import Log
++    # Same ROS wire type/header/data values, without allocating a Python int
++    # tuple for every large grid while other callback threads need the GIL.
++    OccupancyGridInput=numpy_msg(OccupancyGrid)
+     rospy.init_node('nso_onboard_supervisor',disable_signals=True)
+     from joint_observation import navigation_map_source
+     joint_map_source=navigation_map_source(reference_task['calibration']
+@@ -843,12 +875,12 @@
+         if m.name=='/nso_visual/explore' and m.msg=='Exploration stopped.':
+             with lock:state['explorer_stopped']=True
+     subscribers=[rospy.Subscriber('/nso_visual/odom',Odometry,odom,queue_size=20),
+-        rospy.Subscriber(joint_map_source['topic'],OccupancyGrid,grid,queue_size=2),
+-        rospy.Subscriber('/nso_visual/move_base/global_costmap/costmap',OccupancyGrid,costmap,queue_size=1),
+-        rospy.Subscriber('/nso_visual/move_base/local_costmap/costmap',OccupancyGrid,local_costmap,queue_size=1),
++        rospy.Subscriber(joint_map_source['topic'],OccupancyGridInput,grid,queue_size=2),
++        rospy.Subscriber('/nso_visual/move_base/global_costmap/costmap',OccupancyGridInput,costmap,queue_size=1),
++        rospy.Subscriber('/nso_visual/move_base/local_costmap/costmap',OccupancyGridInput,local_costmap,queue_size=1),
+         rospy.Subscriber('/nso_visual/health',String,health,queue_size=2),
+         rospy.Subscriber('/nso_radius/driver_fault',Int32,driver,queue_size=2),
+-        rospy.Subscriber('/nso_visual/actuator_state',String,actuator_state,queue_size=2),
++        rospy.Subscriber('/nso_visual/actuator_state',String,actuator_state,queue_size=1,tcp_nodelay=True),
+         rospy.Subscriber('/nso_visual/move_base/goal',MoveBaseActionGoal,goal,queue_size=10),
+         rospy.Subscriber('/nso_visual/move_base/NavfnROS/plan',NavigationPath,
+             lambda m:plan_endpoint(m,'/nso_visual/move_base/NavfnROS/plan'),queue_size=1),
+@@ -883,11 +915,17 @@
+                 # this lock. Read the comparison clock after taking the lock.
+                 now=time.monotonic()
+                 fault=hardware.fault;chassis_reason=hardware.hardware_reason(now)
++                chassis_evidence=hardware.health_evidence(now) if active and (fault or chassis_reason) else None
+                 h,o,g,d=state['health'],state['odom'],state['map'],state['driver']
+                 explicitly_stopped=state['explorer_stopped']
+                 zero=hardware.can_zero_since is not None and now-hardware.can_zero_since>=1.
+-            if fault:raise RuntimeError('chassis:'+str(fault))
+-            if active and chassis_reason:raise RuntimeError('chassis:'+chassis_reason)
++            if fault or (active and chassis_reason):
++                if chassis_evidence is not None and 'first_chassis_health_failure' not in result:
++                    result['first_chassis_health_failure']=chassis_evidence
++                    # Existing queue keeps disk I/O off this stop path. The
++                    # final result also persists the evidence after cleanup.
++                    journal.add(dict(event='first_chassis_health_failure',evidence=chassis_evidence))
++                raise RuntimeError('chassis:'+str(fault or chassis_reason))
+             if d and d[1]!=0:raise RuntimeError('native_driver_fault:'+str(d[1]))
+             if active and (not d or not 0<=now-d[0]<=.25):raise RuntimeError('native_driver_status_stale')
+             for name,p in children:
+@@ -1191,6 +1229,14 @@
+         lifecycle.record('stop_request_begin')
+         stop.publish(Bool(data=True))
+         lifecycle.record('stop_requested')
++        if result.get('first_chassis_health_failure') is not None:
++            try:
++                # Preserve the first check's clocks before potentially slow
++                # worker/actuator cleanup. Request native zero before disk I/O.
++                evidence_path=output/'first_chassis_health_failure.json'
++                save(evidence_path,result['first_chassis_health_failure'])
++            except Exception as exc:
++                result['first_chassis_health_failure_write_error']=str(exc)
+         lifecycle.record('worker_close_begin',present=reference_worker is not None)
+         if reference_worker:reference_worker.close()
+         lifecycle.record('worker_close_end')

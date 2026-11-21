@@ -1,0 +1,20 @@
+{
+  "status": "fixed_before_any_controlled_policy_episode_or_score",
+  "seed": 20261121,
+  "layouts": ["warehouse_left", "warehouse_right", "gallery_left", "gallery_right"],
+  "arms": ["G", "S", "X"],
+  "budget_including_return": 256,
+  "outside_intervention": "B11 G_visibility, including immediate feedback and original action and return protection",
+  "intervention": {
+    "timing": "First native planning call that passes the observed junction test. The one-call treatment ends after native selection, even if a guard then rejects the route. Nontriggers retain the whole neutral policy run.",
+    "start_axis": "Require current heading equal to received initial heading and camera center within two lateral cells of the initial axis.",
+    "current_view": "Count valid current-frame first-hit facility pixels without distinguishing open from closed, at +/- 6 percent of image width from the principal point. Require at least 16 pixels on each side.",
+    "route_side": "In the first 28 outbound primitives, use the first state whose lateral position relative to current center deviates by at least 3 cells. Left is negative displacement in the current camera-right direction. Record null when there is no such state.",
+    "paired_candidates": "Among the original region-allowed candidates, require a left-right pair whose absolute outbound costs differ by at most 6 and whose reserved return costs differ by at most 8. This qualifies the event, but all original candidates remain eligible.",
+    "mode": {"G":"neutral class prior", "S":"aligned observed class prior", "X":"complement the two shape-prior probabilities of each measured support-track model; keep the B11 T16 posterior recomputation, fit, shape hypotheses, and measured input identical"},
+    "coefficient": 1.0,
+    "selection": "Original v10_3_1 score-descending, cost-ascending, candidate-ID-ascending, with native above-zero requirement. No manual route or mode-specific candidate addition."
+  },
+  "physical_hardware": "not used",
+  "budget_policy": "No adaptation based on outcomes. Every normal early stop and execution failure is retained with actual paid actions."
+}

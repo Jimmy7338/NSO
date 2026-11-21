@@ -1,0 +1,69 @@
+{
+  "checked_unix_s": 1793789710.730541,
+  "physical_master_port": 11382,
+  "processes": [
+    {
+      "pid": 50026,
+      "status_fields": [
+        "Name:\tpython3",
+        "State:\tT (stopped)",
+        "PPid:\t1",
+        "TracerPid:\t0"
+      ],
+      "command": "/usr/bin/python3 -s -B /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/csm_odometry_bridge.py",
+      "wchan": "do_signal_stop"
+    },
+    {
+      "pid": 50101,
+      "status_fields": [
+        "Name:\tlslidar_driver_",
+        "State:\tT (stopped)",
+        "PPid:\t50027",
+        "TracerPid:\t0"
+      ],
+      "command": "/home/ouc/scout_nav/devel/lib/lslidar_driver/lslidar_driver_node __name:=lslidar_driver_node __log:=/home/ouc/.ros/log/6cafea5c-d80d-11f1-834e-48b02d94ff51/lslidar_driver_node-1.log",
+      "wchan": "do_signal_stop"
+    },
+    {
+      "pid": 50176,
+      "status_fields": [
+        "Name:\tzed_wrapper_nod",
+        "State:\tT (stopped)",
+        "PPid:\t50025",
+        "TracerPid:\t0"
+      ],
+      "command": "/home/ouc/scout_nav/devel/lib/zed_wrapper/zed_wrapper_node __name:=zed_node __log:=/home/ouc/.ros/log/6cafea5c-d80d-11f1-834e-48b02d94ff51/zed2i-zed_node-3.log",
+      "wchan": "do_signal_stop"
+    },
+    {
+      "pid": 50472,
+      "status_fields": [
+        "Name:\tpython3",
+        "State:\tT (stopped)",
+        "PPid:\t1",
+        "TracerPid:\t0"
+      ],
+      "command": "/usr/bin/python3 -s -B /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py --run --localization-source lidar_csm",
+      "wchan": "do_signal_stop"
+    }
+  ],
+  "receive_attempts": [
+    "snapshot_184433/result.json",
+    "source_headers.json",
+    "node_responses.json"
+  ],
+  "conclusion": "A separate batch recorded suspension of the robot stack; all 14 tracked process identities matched and remained stopped at the check. Its owner protocol records restoration after completion.",
+  "actions": "Read-only process inspection; no signals, restarts, motion, mask changes or new experiments.",
+  "near_body_conflict": "Unresolved external object identity from prior paid frame; no current keyframe captured.",
+  "initial_conclusion": "Sensor processes exist but are stopped (T), so registration is not evidence of fresh observations. Cause and owner of suspension are unknown.",
+  "suspension_source": {
+    "paused_at": "2026-11-04T16:31:41.379977+08:00",
+    "tracked_count": 14,
+    "all_identity_matches": true,
+    "all_stopped": true,
+    "checked_unix_s": 1793789773.0666938,
+    "automatic_restoration_in_owner_protocol": true,
+    "scope": "Read-only coordination evidence; no mutation of the other batch or its files.",
+    "redaction": "Other project manifest path, controller identity and command omitted."
+  }
+}

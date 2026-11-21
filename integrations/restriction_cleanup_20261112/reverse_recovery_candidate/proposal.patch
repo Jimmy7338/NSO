@@ -1,0 +1,77 @@
+--- /home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/joint_ros_coordinator.py
++++ /home/ouc/nso_robot/analyses/restriction_cleanup_20261112/reverse_recovery_candidate/runtime/joint_ros_coordinator.py
+@@ -244,6 +244,62 @@
+                exposure_pose_source='joint_NPZ_actual_historical_base_TF_validated_by_worker',
+                state=response['state'])
+         return response['state']
++
++    def backoff_after_abort(original_execution, original_terminal):
++        """One separately logged ROS recovery; never an NSO-selected arrival."""
++        heartbeat()
++        source=ctx['capture_odom_pose']()
++        x,y,yaw=source['pose']
++        if not all(math.isfinite(v) for v in (x,y,yaw)):
++            raise RuntimeError('backoff requires fresh finite actual odometry')
++        target_odom=[x-.4*math.cos(yaw),y-.4*math.sin(yaw),yaw]
++        projection=None
++        if execution_frame=='map':
++            if type(source.get('source_stamp_ns')) is int:
++                seconds,nanoseconds=divmod(source['source_stamp_ns'],10**9)
++                query=rospy.Time(seconds,nanoseconds)
++            else:
++                query=rospy.Time.from_sec(source['source_stamp_s'])
++            tf=ctx['tfbuf'].lookup_transform('map','odom',query,rospy.Duration(.3))
++            transform=matrix(tf.transform)
++            target=metric_goal_to_map(target_odom,transform)
++            projection=dict(matrix=transform.tolist(),query_stamp_ns=query.to_nsec())
++        else:
++            target=list(target_odom)
++        goal=MoveBaseGoal()
++        goal.target_pose.header.frame_id=execution_frame
++        goal.target_pose.header.stamp=rospy.Time.now()
++        goal.target_pose.pose.position.x,goal.target_pose.pose.position.y=target[:2]
++        goal.target_pose.pose.orientation.z=math.sin(target[2]/2)
++        goal.target_pose.pose.orientation.w=math.cos(target[2]/2)
++        before=ctx['capture_odom_pose']();can_before=ctx['can_snapshot']()
++        recovery_start=time.monotonic()
++        client.send_goal(goal)
++        goal_id=client.gh.comm_state_machine.action_goal.goal_id.id
++        intervention=dict(profile='ROS_backoff_040_v1',original_method_equivalence=False,
++            intervention='non_NSO_selected_ROS_backoff',original_action_id=original_execution['action_id'],
++            original_goal=dict(original_execution['goal']),original_terminal=dict(original_terminal),
++            source_actual_odom=source,target_odom_pose=target_odom,
++            goal=dict(id=goal_id,frame=execution_frame,x=target[0],y=target[1],yaw=target[2]),
++            requested_reverse_distance_m=.4,declared_command_speed_cap_m_s=.05,
++            collision_authority='existing move_base costmaps and local planner',
++            NSO_selected=False,NSO_arrival_credit=False,additional_NSO_primitive_charge=0,
++            actual_odom_before=before,CAN_before=can_before,map_projection=projection,
++            started_monotonic=recovery_start)
++        record('ROS_backoff_recovery_goal_sent',**intervention)
++        while not client.wait_for_result(rospy.Duration(.05)):
++            heartbeat()
++        heartbeat()
++        terminal=dict(id=goal_id,status=client.get_state())
++        after=ctx['capture_odom_pose']();can_after=ctx['can_snapshot']()
++        intervention.update(terminal=terminal,actual_odom_after=after,CAN_after=can_after,
++            elapsed_s=time.monotonic()-recovery_start,
++            actual_odom_translation_m=math.hypot(after['pose'][0]-before['pose'][0],after['pose'][1]-before['pose'][1]),
++            target_error=reference_pose_error(target_odom,after['pose'],ctx['xy_tolerance_m'],ctx['yaw_tolerance_rad']),
++            post_recovery='capture actual pose and replan whether ROS recovery succeeds or rejects')
++        ctx['result'].setdefault('recovery_interventions',[]).append(intervention)
++        record('ROS_backoff_recovery_result',**intervention)
++        return intervention
+ 
+     if identity.get('current_state') is not None or identity.get('pending') is not None:
+         raise RuntimeError('joint resume requires an explicit executed-history adapter')
+@@ -329,7 +385,11 @@
+                 if recover_failed_attempt and terminal['status'] in (3, 4):
+                     reason=('ROS_ABORTED' if terminal['status'] == 4 else 'ROS_success_endpoint_not_verified')
+                     execution.update(failed_execution_attempt=True,arrival_credited=False,
++                                     original_ros_terminal=dict(terminal),
+                                      recovery='fresh_actual_observation_then_replan')
++                    if terminal['status']==4 and ctx.get('ordinary_reverse_authorized') is True:
++                        execution['backoff_recovery']=backoff_after_abort(execution,terminal)
++                        execution['recovery']='one_ROS_backoff_then_actual_observation_replan'
+                     state=capture(endpoint['action_id'], endpoint['action'], failed_reason=reason)
+                     record('NSO_joint_failed_attempt_replan', action_id=endpoint['action_id'],
+                            reason=reason, terminal=terminal, actual_state=state,

@@ -1,0 +1,20 @@
+<launch>
+  <arg name="expected_database" />
+  <arg name="epoch_id" />
+  <arg name="epoch_start_s" />
+  <arg name="receipt" />
+  <group ns="nso_unified_rtab">
+    <node pkg="rtabmap_util" type="map_assembler" name="assembler" output="screen" required="true">
+      <param name="regenerate_local_grids" value="true" />
+      <param name="Grid/Sensor" type="string" value="1" />
+      <param name="Grid/3D" type="string" value="true" />
+      <param name="Grid/CellSize" type="string" value="0.05" />
+      <remap from="mapData" to="/nso_unified_rtab/mapData" />
+      <!-- Constructor's global=false pull is deliberately bypassed. Relay below
+           requests exactly once global=true from the CURRENT owned session. -->
+      <remap from="/nso_unified_rtab/get_map_data" to="/nso_unified_rtab/no_constructor_WM_pull/get_map_data" />
+    </node>
+  </group>
+  <!-- Files are invoked explicitly by root after review; this launch starts only
+       assembler. Run full_history_relay.py then unified_viewer.py via commands. -->
+</launch>
