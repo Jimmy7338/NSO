@@ -1,0 +1,1601 @@
+{
+  "status": "measured_read_only",
+  "phase": "all",
+  "source_commit": "53ef1f0b292e5f358e05c27aee56d19e4052b22c",
+  "protocol_sha256": "1ee151a9019d5f95796a0ec4d71d00f940e7a22922e20019a9acb3373c9e7b24",
+  "runner_freeze_sha256": "42afca9b1a3409bc5b891201846c522f4de0d5253621684efe9b4535ad78b7c2",
+  "evaluator_freeze_sha256": "040068ecb4a373d06b904df44ee922c19f2cdbf36f998b3c16b1f99ecbd46a7e",
+  "supervisor_receipts_sha256": {
+    "primary": "bfca312c5467ccc730170d28c121bb9498d24eb809a9dac9e9ad2a088f662022",
+    "baselines": "c08ec28c68a6e5aaf32151a701f1c02b1e1222bbed336c77c281f75701c81a4a"
+  },
+  "layouts": [
+    {
+      "layout": "ordinary_chain_13",
+      "topology": "chain",
+      "rooms": 4,
+      "doors": 3,
+      "room_connections": [
+        [
+          "A_southwest",
+          "B_southeast"
+        ],
+        [
+          "B_southeast",
+          "D_northeast"
+        ],
+        [
+          "C_northwest",
+          "D_northeast"
+        ]
+      ],
+      "gross_floor_area_m2": 161.04,
+      "grid_resolution_m": 0.2,
+      "reachable_cells": 3090,
+      "reachable_area_m2": 123.6,
+      "scan_range_m": 8.0,
+      "image_width_px": 120,
+      "image_height_px": 90,
+      "camera_fov_deg": 90.0,
+      "robot_radius_m": 0.2,
+      "initial_pose": [
+        55,
+        5,
+        0
+      ],
+      "scene_seed": 202611211607,
+      "baseline_native_budget": 512,
+      "reference_scene_samples": 51895,
+      "reference_shelf_samples": 6879,
+      "reference_cabinet_samples": 4435
+    },
+    {
+      "layout": "ordinary_cycle_14",
+      "topology": "cycle",
+      "rooms": 4,
+      "doors": 4,
+      "room_connections": [
+        [
+          "A_southwest",
+          "B_southeast"
+        ],
+        [
+          "A_southwest",
+          "C_northwest"
+        ],
+        [
+          "B_southeast",
+          "D_northeast"
+        ],
+        [
+          "C_northwest",
+          "D_northeast"
+        ]
+      ],
+      "gross_floor_area_m2": 181.76,
+      "grid_resolution_m": 0.2,
+      "reachable_cells": 3611,
+      "reachable_area_m2": 144.44,
+      "scan_range_m": 8.0,
+      "image_width_px": 120,
+      "image_height_px": 90,
+      "camera_fov_deg": 90.0,
+      "robot_radius_m": 0.2,
+      "initial_pose": [
+        58,
+        5,
+        0
+      ],
+      "scene_seed": 202611211607,
+      "baseline_native_budget": 512,
+      "reference_scene_samples": 51485,
+      "reference_shelf_samples": 6887,
+      "reference_cabinet_samples": 4969
+    },
+    {
+      "layout": "ordinary_chain_15",
+      "topology": "chain",
+      "rooms": 4,
+      "doors": 3,
+      "room_connections": [
+        [
+          "A_southwest",
+          "B_southeast"
+        ],
+        [
+          "B_southeast",
+          "D_northeast"
+        ],
+        [
+          "C_northwest",
+          "D_northeast"
+        ]
+      ],
+      "gross_floor_area_m2": 203.68,
+      "grid_resolution_m": 0.2,
+      "reachable_cells": 4127,
+      "reachable_area_m2": 165.08,
+      "scan_range_m": 8.0,
+      "image_width_px": 120,
+      "image_height_px": 90,
+      "camera_fov_deg": 90.0,
+      "robot_radius_m": 0.2,
+      "initial_pose": [
+        61,
+        5,
+        0
+      ],
+      "scene_seed": 202611211607,
+      "baseline_native_budget": 512,
+      "reference_scene_samples": 52430,
+      "reference_shelf_samples": 6977,
+      "reference_cabinet_samples": 4756
+    },
+    {
+      "layout": "ordinary_cycle_16",
+      "topology": "cycle",
+      "rooms": 4,
+      "doors": 4,
+      "room_connections": [
+        [
+          "A_southwest",
+          "B_southeast"
+        ],
+        [
+          "A_southwest",
+          "C_northwest"
+        ],
+        [
+          "B_southeast",
+          "D_northeast"
+        ],
+        [
+          "C_northwest",
+          "D_northeast"
+        ]
+      ],
+      "gross_floor_area_m2": 230.4,
+      "grid_resolution_m": 0.2,
+      "reachable_cells": 4690,
+      "reachable_area_m2": 187.6,
+      "scan_range_m": 8.0,
+      "image_width_px": 120,
+      "image_height_px": 90,
+      "camera_fov_deg": 90.0,
+      "robot_radius_m": 0.2,
+      "initial_pose": [
+        66,
+        5,
+        0
+      ],
+      "scene_seed": 202611211607,
+      "baseline_native_budget": 512,
+      "reference_scene_samples": 51934,
+      "reference_shelf_samples": 6906,
+      "reference_cabinet_samples": 4733
+    }
+  ],
+  "independent_unit": "building",
+  "stop_clock_not_imputed": true,
+  "local_time_scope": "Decision wall time on charged steps; shared-host simulator timings, not deployment latency and no stop-loop cost imputed.",
+  "rows": [
+    {
+      "layout": "ordinary_chain_13",
+      "neutral_mode": "fullG",
+      "semantic_mode": "fullS",
+      "status": "different_category_choice_executed",
+      "common_start": true,
+      "first_observed_difference": {
+        "paid": 1,
+        "actions": [
+          "right",
+          "forward"
+        ],
+        "post_poses": [
+          [
+            55,
+            5,
+            1
+          ],
+          [
+            54,
+            5,
+            0
+          ]
+        ],
+        "actual_action_changed": true,
+        "observed_pose_changed": true
+      },
+      "causal_paid_action": 1,
+      "paired_events": [
+        {
+          "paid_before": 0,
+          "goal_pose": [
+            37,
+            24,
+            0
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "62c54dc8eb6d6596a116f55477adc07391393cc468f37941b36802d002bc211d",
+          "belief_sha256": "3283c77b85d8a0c67e3ed32ce002f4e574a647f8886b97416d2e830fddd9f52e",
+          "native_outbound_sha256": "e7cb90e880753ac5ae0f4deed529bd700f7d6b311bd20d0337f29162ffc058ee",
+          "candidate_pool_sha256": "d5e5339c3c52ad565cac885e7daa5da0354437e08a9fab1fe40f5837f5422ae6",
+          "legal_alternates": 98,
+          "selected_route_ids": [
+            "via_57_17_0",
+            "via_52_21_0"
+          ],
+          "selected_mode_winners_different": true,
+          "selected_scores": [
+            {
+              "G": 0.8622284846685556,
+              "S": 0.4636481592733855
+            },
+            {
+              "G": 0.8183117329751003,
+              "S": 0.4758681149782782
+            }
+          ],
+          "status": "different_category_choice_executed",
+          "applied_routes_match_each_actual_prefix": true,
+          "actual_difference": {
+            "paid": 1,
+            "actions": [
+              "right",
+              "forward"
+            ],
+            "post_poses": [
+              [
+                55,
+                5,
+                1
+              ],
+              [
+                54,
+                5,
+                0
+              ]
+            ],
+            "actual_action_changed": true,
+            "observed_pose_changed": true
+          }
+        }
+      ],
+      "same_effective_runtime": true,
+      "identical_charged_action_and_packet_trace": false,
+      "identical_terminal_mesh": false,
+      "verified_actual_split": true,
+      "first_command_difference": {
+        "paid": 1,
+        "different_fields": [
+          "action"
+        ],
+        "fullG": {
+          "action": "right"
+        },
+        "fullS": {
+          "action": "forward"
+        }
+      },
+      "first_pose_difference": {
+        "paid": 1,
+        "different_fields": [
+          "position",
+          "heading"
+        ],
+        "fullG": {
+          "position": [
+            55,
+            5
+          ],
+          "heading": 1
+        },
+        "fullS": {
+          "position": [
+            54,
+            5
+          ],
+          "heading": 0
+        }
+      },
+      "first_sensor_content_difference": {
+        "paid": 1,
+        "different_fields": [
+          "depth_values_sha256",
+          "rgb_values_sha256",
+          "scan_ranges_sha256"
+        ],
+        "fullG": {
+          "depth_values_sha256": "c4314a09a7d7e52a2d281a8a38fa2155037274dbe31893895acd4fb03cfed26f",
+          "rgb_values_sha256": "1fc7ed301f00346975ebd39bb9085cd435cd0de036a00d9e80d7abe39d6eeea8",
+          "scan_ranges_sha256": "a1912886af621a904fea548830a11d38d000a082697475ae8f5acb2ce834ccd0"
+        },
+        "fullS": {
+          "depth_values_sha256": "758951387096a687247dd5e73525d51c01d90261e7f110aca0589327c91b9d2e",
+          "rgb_values_sha256": "f46f5dbb563e12ddd439bf9d473d015dcddce577a25d9a0b970c1d1b780ac289",
+          "scan_ranges_sha256": "0d0d7bdbe6cef17d722ada74bb455a2c5f3313f261c418f8f91b82e9eaa67044"
+        }
+      },
+      "first_packet_difference": {
+        "paid": 1,
+        "different_fields": [
+          "packet_sha256"
+        ],
+        "fullG": {
+          "packet_sha256": "cb792db834e5d6929e6855c018d7a27189ea93bd4387d3bb9006038ec5f1424c"
+        },
+        "fullS": {
+          "packet_sha256": "820c718aef90de730b7fbb1ac7ff9d5c82849d74622015b794edebc56b579017"
+        }
+      },
+      "measured_inputs_identical_until_first_different_command": true,
+      "command_difference_attribution_unresolved": false,
+      "actual_paid_G": 512,
+      "actual_paid_S": 512
+    },
+    {
+      "layout": "ordinary_cycle_14",
+      "neutral_mode": "fullG",
+      "semantic_mode": "fullS",
+      "status": "different_category_choice_executed",
+      "common_start": true,
+      "first_observed_difference": {
+        "paid": 425,
+        "actions": [
+          "right",
+          "left"
+        ],
+        "post_poses": [
+          [
+            50,
+            24,
+            0
+          ],
+          [
+            50,
+            24,
+            2
+          ]
+        ],
+        "actual_action_changed": true,
+        "observed_pose_changed": true
+      },
+      "causal_paid_action": 425,
+      "paired_events": [
+        {
+          "paid_before": 0,
+          "goal_pose": [
+            25,
+            25,
+            1
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "36402cbc1561fd9f4c6f61231a48a3701a92ad5689455036c8d5223d6f42d3aa",
+          "belief_sha256": "6b60e8a5dd3fee2429c06fe8547550b01a1d2c8126f089ced266af701a20f982",
+          "native_outbound_sha256": "d5245eb719fea0d9c9a7de47303590a346d75924e2cfe2d594162d6e96c26a17",
+          "candidate_pool_sha256": "6d59dde9aceed46fd961f029cd3be05b30cb3d8b6a4aa1d17d42a56e7480bd4f",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 45,
+          "goal_pose": [
+            40,
+            40,
+            1
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "781a798b17347b171f4c9d9b0f527b9ffd8471e782fd96c084a0ffebd01902fb",
+          "belief_sha256": "b63cc3dd724f7c79efbe6a62d390724128e2dbd3ee6dae92a41b500e10b79c56",
+          "native_outbound_sha256": "f0c22c1e6f246648c29ca3e0fbb4257f9a716dfdd482f875a111a82e43403b06",
+          "candidate_pool_sha256": "0a43fd67e18e4ed1a2cc1446cba13157584969889aa998cecf47018361e89933",
+          "legal_alternates": 197,
+          "selected_route_ids": [
+            "via_40_43_3",
+            "via_40_43_3"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 5.917576193562458,
+              "S": 5.614536631266558
+            },
+            {
+              "G": 5.917576193562458,
+              "S": 5.614536631266558
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 90,
+          "goal_pose": [
+            11,
+            46,
+            1
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "0d2558b43d9b269f8c4e92eb66020e190df1bd1ef23c8ba56b88b16124be7db0",
+          "belief_sha256": "279c8bc6c8f35eedb23d68d4ccbbd24e1e320c1223880d9027a7b613dc35feff",
+          "native_outbound_sha256": "c5c0decb8842ce30055d3f0407cf909e7f5e39f6e9a1ac1d118513ca9a08c61f",
+          "candidate_pool_sha256": "93e7728a523b2b13d5fef39588f7ed0811245e4022f5b13971b8fcba97d77415",
+          "legal_alternates": 45,
+          "selected_route_ids": [
+            "via_10_47_2",
+            "via_10_47_2"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 2.1171965795347605,
+              "S": 1.9520531643226562
+            },
+            {
+              "G": 2.1171965795347605,
+              "S": 1.9520531643226562
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 185,
+          "goal_pose": [
+            50,
+            26,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "bcde0a120e1eb9f55bbd3e3d939b7be743e8970fd0c7e002d783fcb3f50cd55d",
+          "belief_sha256": "0392664e1d9ad10caf2d15835de30f97adad0bafc4acabbd61b54d969019e699",
+          "native_outbound_sha256": "08004c078abd7a7131f640eb3031e7d46bc5698d3bc98ce3ee10f1aa545d2d04",
+          "candidate_pool_sha256": "e9e0da6b22f36bdba91cf66cf66e9141473907892f12c05e4810e87eacaa17e9",
+          "legal_alternates": 497,
+          "selected_route_ids": [
+            "via_30_55_0",
+            "via_30_55_0"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.4191248485665269,
+              "S": 0.40777570200707136
+            },
+            {
+              "G": 0.4191248485665269,
+              "S": 0.40777570200707136
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 270,
+          "goal_pose": [
+            17,
+            58,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "750d7d884ca842f1658f1c3c31f68aa6535309e42ca132d47dd28f200c376217",
+          "belief_sha256": "0791d4b26b2ed9321b4abcedc17ecd22df7324a640d007516d00d42748bf291f",
+          "native_outbound_sha256": "6a45adf3aebba1f6141065beb20f6ecefb1cdda32a3daf6dbaa39d323cf415c5",
+          "candidate_pool_sha256": "c818f53fa2c7828f305932e397a66db63c5e65615c93c5c478e55bc26a2545f0",
+          "legal_alternates": 350,
+          "selected_route_ids": [
+            "via_16_60_3",
+            "via_16_60_3"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.12344085807159731,
+              "S": 0.11862309044473121
+            },
+            {
+              "G": 0.12344085807159731,
+              "S": 0.11862309044473121
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 349,
+          "goal_pose": [
+            50,
+            24,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "5e99e43d3df5c1958017cafe857bf4bf93fae500a30abe5a8c8c71036b5659f2",
+          "belief_sha256": "0791d4b26b2ed9321b4abcedc17ecd22df7324a640d007516d00d42748bf291f",
+          "native_outbound_sha256": "b8835368ff2268a7a5536d6ce31b9c962d42a192a7e5306ed4774a9675465d31",
+          "candidate_pool_sha256": "98268df63bf67abaef31be562b86f28691965bbac34b9ef317efc5495db2b42f",
+          "legal_alternates": 153,
+          "selected_route_ids": [
+            "via_31_58_0",
+            "via_31_58_0"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.1161362757977621,
+              "S": 0.11687243121970442
+            },
+            {
+              "G": 0.1161362757977621,
+              "S": 0.11687243121970442
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 424,
+          "goal_pose": [
+            54,
+            19,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "7de0a7aca69ea98ba548e463790d9241bde05a5a8483060e82f584bb987ccdfc",
+          "belief_sha256": "0791d4b26b2ed9321b4abcedc17ecd22df7324a640d007516d00d42748bf291f",
+          "native_outbound_sha256": "ae33d653a07da612b7b2b670ce9a2da1f89b93c8eb904171c66bd6dee05038eb",
+          "candidate_pool_sha256": "5d9e99cb4f604eb89f14a99e17b411c886d6bd326652b95d822c75c59fa23541",
+          "legal_alternates": 5,
+          "selected_route_ids": [
+            "via_49_25_3",
+            "via_54_27_3"
+          ],
+          "selected_mode_winners_different": true,
+          "selected_scores": [
+            {
+              "G": 0.06628019616187995,
+              "S": 0.06568320678889958
+            },
+            {
+              "G": 0.0630963151629929,
+              "S": 0.06601892419446462
+            }
+          ],
+          "status": "different_category_choice_executed",
+          "applied_routes_match_each_actual_prefix": true,
+          "actual_difference": {
+            "paid": 425,
+            "actions": [
+              "right",
+              "left"
+            ],
+            "post_poses": [
+              [
+                50,
+                24,
+                0
+              ],
+              [
+                50,
+                24,
+                2
+              ]
+            ],
+            "actual_action_changed": true,
+            "observed_pose_changed": true
+          }
+        }
+      ],
+      "same_effective_runtime": true,
+      "identical_charged_action_and_packet_trace": false,
+      "identical_terminal_mesh": false,
+      "verified_actual_split": true,
+      "first_command_difference": {
+        "paid": 425,
+        "different_fields": [
+          "action"
+        ],
+        "fullG": {
+          "action": "right"
+        },
+        "fullS": {
+          "action": "left"
+        }
+      },
+      "first_pose_difference": {
+        "paid": 425,
+        "different_fields": [
+          "heading"
+        ],
+        "fullG": {
+          "position": [
+            50,
+            24
+          ],
+          "heading": 0
+        },
+        "fullS": {
+          "position": [
+            50,
+            24
+          ],
+          "heading": 2
+        }
+      },
+      "first_sensor_content_difference": {
+        "paid": 425,
+        "different_fields": [
+          "depth_values_sha256",
+          "rgb_values_sha256",
+          "scan_ranges_sha256"
+        ],
+        "fullG": {
+          "depth_values_sha256": "cdbce42359aeff3b0deeabec963074c10cb9ce272f2a75abf7b13cee08b87f10",
+          "rgb_values_sha256": "dee7699f481bc3cb02161d3975e22e6a5b5785f234ac41dc31fb3369d4e5eb21",
+          "scan_ranges_sha256": "d1a0e564ac4f14813e73354b53b7c14c6aa28634b2746a49569b232a1e8aae0d"
+        },
+        "fullS": {
+          "depth_values_sha256": "41860e4b6c2673f5f6539db4838b8741eda0f6d552cadc069843f316155ccba1",
+          "rgb_values_sha256": "70c4e6b6a1518e5a5eee8bd9c4661300e0582ed35f625d4d59d0b044dfbb3033",
+          "scan_ranges_sha256": "3987fc493984e544a39317e17afa3b6bdaaccfad2e27287720432fb2d55ec0ea"
+        }
+      },
+      "first_packet_difference": {
+        "paid": 425,
+        "different_fields": [
+          "packet_sha256"
+        ],
+        "fullG": {
+          "packet_sha256": "af8f432284f21be11594772bb940d9773bd451004c0009d94788defe99227c89"
+        },
+        "fullS": {
+          "packet_sha256": "4c692b4ff4613d2cc80d8ce10defb2b02080e97501c26340f091d9279f269bc5"
+        }
+      },
+      "measured_inputs_identical_until_first_different_command": true,
+      "command_difference_attribution_unresolved": false,
+      "actual_paid_G": 512,
+      "actual_paid_S": 512
+    },
+    {
+      "layout": "ordinary_chain_15",
+      "neutral_mode": "fullG",
+      "semantic_mode": "fullS",
+      "status": "checked_no_attributed_difference",
+      "common_start": true,
+      "first_observed_difference": null,
+      "causal_paid_action": null,
+      "paired_events": [
+        {
+          "paid_before": 0,
+          "goal_pose": [
+            41,
+            38,
+            1
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "587b31c78590ffe64752b3aa9faaad00a7028f42c481e2398f0ff0e926dbc3c8",
+          "belief_sha256": "4610d6fe305dd5ce0f39116189dee847439daf0efe206da0de43ce2e2c2257db",
+          "native_outbound_sha256": "3cec38eff0c92a3929c9e4ee4397ed757fbd6dcee5e59e086965ec9063669a5b",
+          "candidate_pool_sha256": "c0da0cbfca33f6f9ad9701e4a3dd92267a9373a8e22a86e3afe2f83ae134a481",
+          "legal_alternates": 198,
+          "selected_route_ids": [
+            "via_42_39_3",
+            "via_42_35_3"
+          ],
+          "selected_mode_winners_different": true,
+          "selected_scores": [
+            {
+              "G": 1.974297751181747,
+              "S": 1.6068723582522697
+            },
+            {
+              "G": 1.9412213081608618,
+              "S": 1.6089646529123538
+            }
+          ],
+          "status": "different_plan_no_execution_proof"
+        },
+        {
+          "paid_before": 31,
+          "goal_pose": [
+            38,
+            48,
+            0
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "210dd791cd4a24d91ec24ed87261819065319403975d957fdf7e12c2dfa89d88",
+          "belief_sha256": "2f6b84fe5296b6f7ca33a1ac29b8c3ea0da7f28283db487c553ce16382c7ce94",
+          "native_outbound_sha256": "2d38bfca3deb19284c1dc08013120e046ba25c5fa117d0046d3775b79d751299",
+          "candidate_pool_sha256": "151554601db9dbad43acd4670ff5d54a377a98af67bdcc3504a42799dcee2f6f",
+          "legal_alternates": 192,
+          "selected_route_ids": [
+            "via_46_51_3",
+            "via_46_51_3"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 1.3313386375746246,
+              "S": 1.3264916356334961
+            },
+            {
+              "G": 1.3313386375746246,
+              "S": 1.3264916356334961
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 82,
+          "goal_pose": [
+            21,
+            61,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "1b833047e68b48e756d0e22103eeda17db1dfa329d3ed778865a02d5ca2b6b5d",
+          "belief_sha256": "3accc1d696b16fe0d368e03e32256acfd41f4df8c12eccb30edf74489def4965",
+          "native_outbound_sha256": "22cbe73d9b54459f74136b064527fa6427a92ec1e284ce60202ee470a1a5990b",
+          "candidate_pool_sha256": "1abb5dfa2d395549e95e9349216fbf6a9105f38a6c44ef02539e05c60552c34b",
+          "legal_alternates": 136,
+          "selected_route_ids": [
+            "via_38_63_2",
+            "via_38_63_2"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0837420537199409,
+              "S": 0.07160115265886229
+            },
+            {
+              "G": 0.0837420537199409,
+              "S": 0.07160115265886229
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 125,
+          "goal_pose": [
+            16,
+            32,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "4418448e28fc6d8fda3d80a1bcda33b02af15a88ed7d597672f4b0627a2cf8dd",
+          "belief_sha256": "f3fe26bfcc5ac7dcb9f78599735984b4fd7380655152e19255e355d2ffe27f8d",
+          "native_outbound_sha256": "1a9de51d42794b46baedc4196821448a5ba4529a96ac3d94dc123389aaef29bc",
+          "candidate_pool_sha256": "5c79c0fef7fd2396a8283e57cf0b4ccac955e2788f3ef0b87e1398da8c5a64ad",
+          "legal_alternates": 98,
+          "selected_route_ids": [
+            "via_21_56_2",
+            "via_21_56_2"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.006758288701320885,
+              "S": 0.02303380383506794
+            },
+            {
+              "G": 0.006758288701320885,
+              "S": 0.02303380383506794
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 161,
+          "goal_pose": [
+            35,
+            19,
+            2
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "95efb0bd1a1b6793ad5493e01d4791305bb72c72d692ca6feb4f7c733c12597f",
+          "belief_sha256": "d5f485694da0a10886f631ee8ac13c53073129008ef3b0ced1092ca8b9b47935",
+          "native_outbound_sha256": "1466db1b33d65c2025c73c60245103a2d9af560f8b927d09dab5bb2cc6ef651e",
+          "candidate_pool_sha256": "70d55a06513cfe347c8f4235bbeb5c7b3f311bc213a7c552fb8f08509d0f40fe",
+          "legal_alternates": 93,
+          "selected_route_ids": [
+            "via_35_25_2",
+            "via_35_25_2"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.3505708454343255,
+              "S": 0.1164828531969666
+            },
+            {
+              "G": 0.3505708454343255,
+              "S": 0.1164828531969666
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 270,
+          "goal_pose": [
+            15,
+            31,
+            2
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "0a04cd1fe256ce00939d5330cc45b314730d08d37a6974b678f8d14ce7b6a607",
+          "belief_sha256": "b4c21efaff680cd2ba39ea22ba4c8e47a4918015c71b6106014714a0b217bab8",
+          "native_outbound_sha256": "d6dc60865c1617c8b9905639dbda735197f97ad0c66292671eed124f73e2d69a",
+          "candidate_pool_sha256": "3487256647ee0a2278843b53dbc3bbdff2cc0eac119ef5dc8d439006d2824f0c",
+          "legal_alternates": 6,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0006568806823659547,
+              "S": 0.0002299913931440572
+            },
+            {
+              "G": 0.0006568806823659547,
+              "S": 0.0002299913931440572
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 380,
+          "goal_pose": [
+            40,
+            58,
+            2
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "721ac13dfc286bc63742f572fa3951bafbded924ec2544b8ac9801e97f360303",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "eceb1e6c1917349ab61ed811983796d4afde5c0c9f17ec12702bf64d69e1102f",
+          "candidate_pool_sha256": "1b8c46ac8e1c6ab29c1c79e5118d6318e25abb33b22e45498f353bc57cb8e371",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0288067074000696,
+              "S": 0.010393191103334325
+            },
+            {
+              "G": 0.0288067074000696,
+              "S": 0.010393191103334325
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 434,
+          "goal_pose": [
+            61,
+            19,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "767aa69741563129e3eacd089adc29c0aaacd38cd85d6e16a0628f02859a32ee",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "499d17bd16c11d852d9572cb84d4691f1aede22192f382d9bc9b9d4d934b30d8",
+          "candidate_pool_sha256": "9a76ae7ce3d159e567e026530d2f3dd7226dc7fc5cd3f38a43073beff94022d8",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.028401500265420272,
+              "S": 0.01001316802115965
+            },
+            {
+              "G": 0.028401500265420272,
+              "S": 0.01001316802115965
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 497,
+          "goal_pose": [
+            61,
+            18,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "c0f84ae829762118421d20076f2889a480b23ccb5998bca68650f964043d62dc",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "2fdf48688cb24939b030f0fd971320ac0680b22f4f095f609524357b3383b0de",
+          "candidate_pool_sha256": "4ad20ef5334c3c570689770fa1b774d4c4202819af0b5b24e428db56a6003db1",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 498,
+          "goal_pose": [
+            61,
+            17,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "aa127698d53426ea74e76761ced8b565a35237bfd9a34edee8878b537425784d",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "ba0140bb78514311c378fb445a6e27f38c4f91f0f8b08a55337ddba61311c572",
+          "candidate_pool_sha256": "f71c3583bbbd6279c8a7459be1a6aa37cdf12f70c35cfe541b8eadbf4b0adad3",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 499,
+          "goal_pose": [
+            61,
+            16,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "ea71e8c6845c7b16ebe4927a8913344d29588ec9b33e4835c7d0703284151176",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "af2859fb621fb8ea27704fe070990640d7ffb1bc8333d96acc7c9631fb8c7f30",
+          "candidate_pool_sha256": "f18bcce99deeef561be98c01512f771d35ee729da6df4db878ca7fcd1ac30020",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 500,
+          "goal_pose": [
+            61,
+            15,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "e500d05f9a8004e3087fe40cd5e7530065601b5b06d8a6d5d6129c18beed47a6",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "8d27d7c7d06b17029f0632472e93223be695d2bfd3a9db4fba2cb2143acc8d29",
+          "candidate_pool_sha256": "a4b17dbd6d10a22708c3a30c1e0883b75f88bb2bbb044975a7d64199da89f813",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 501,
+          "goal_pose": [
+            61,
+            14,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "22a92edffa69099bc1ba8ec07c43b39def6cb0eb5ea116a8b254f86f03e04740",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "936c1c62d5ee9d7501847495ef4ed0692fe283ea6bbe20591ac1e90aa83c9a63",
+          "candidate_pool_sha256": "302f25dac382de56e26e8c06ad38cad35bb8c149c42998230cca1de3713bf0cd",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 502,
+          "goal_pose": [
+            61,
+            13,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "38d28728ebee5fcb9bdeeeac329fb918b01c2323a69be815cccf9fa8bbf8a2e1",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "1286c7bda14e2df36403a0d8eb1a9fbacbeebb1d7e782bd4ebc449bfed0b3be6",
+          "candidate_pool_sha256": "7a15dccdde62b37707b5843add8a68ac4ff2a7520085ebacd9a151a95d2f211f",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 503,
+          "goal_pose": [
+            61,
+            12,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "5e3f025016cd9c5ed4bec1dde881d105a591e06c69072cd51a6b7c644ef860ce",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "bbf364509eb9f6aba67a6020de009e80730e907806337025f7f32899f0938be2",
+          "candidate_pool_sha256": "8c4642d610dcb1e7dd3c0e01e195092e74cb20baff5bf1ffec34e6776ae479ce",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 504,
+          "goal_pose": [
+            61,
+            11,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "4b80ae3f1d714a11497bfe543b7d3c688e1c4ca2aff837ffa3f6870195e10e9f",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "4119d91fe54dddd71f7f64b5e2fd4bd0b8527bc95685c2b310b94c192131f77d",
+          "candidate_pool_sha256": "653c10e5ccd77c7d73f9cf93a2b39c23c6d572a1444674ca124d424c74055ba7",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 505,
+          "goal_pose": [
+            61,
+            10,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "813f87d601c5f82ad1e06349ea84adc069851676aeb7f49a3dec52234a140950",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "141beb538fe2003f462f702a65963933230ead0f9d6770f37bd9e65a746aae14",
+          "candidate_pool_sha256": "6c92f1e332f21a721c444212526d98ce10a2d9a04c310f3f0ae168419789270a",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 506,
+          "goal_pose": [
+            61,
+            9,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "3a5c992b319d83096c647acb103d0731061dee4ae062d6c4aa369977312a9aaf",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "e99bdc1f4a36be62534c745e7b79ef1c01549ca2ddea9269292d2976bea42865",
+          "candidate_pool_sha256": "806bb4d457efc64cf633cc826d6300079215d25b4ee9b70c0a41186c72d33711",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 507,
+          "goal_pose": [
+            61,
+            8,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "c811903ac2d3af667de54ab261dccbc98a17fd1a5a037068129b3c397a84b51c",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "b303df666f34912343974b161b4237e7cbeeb961edcc63237600c20807c73c84",
+          "candidate_pool_sha256": "358d3ecfd7f6cadf0838399f1204fec438b64a84d7cfcbd63482450ce83eec62",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 508,
+          "goal_pose": [
+            61,
+            7,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "fc6fcd64a34d4bec19499f2405236798225f4cab74db96aa7e2cb474a814ab08",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "d33cdc4a26ab961813424616b94543beadb750228d34153f9d5e3a0a1fe32b66",
+          "candidate_pool_sha256": "95bf23eb4e3a225aa7af7786cf907f13d2ef61e4278219f839899d3b0cc1f984",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 509,
+          "goal_pose": [
+            61,
+            6,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "b1e38cd842eb6944f8baabcc557df317e8036ed7d7b94b4fba1c37c1ca42d063",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "d732e16ffe4d8d6b03e166b15d1461bb1f67bd453e77c8773d3ceb926499b021",
+          "candidate_pool_sha256": "d4547f853a7e01f20fd210b75e9fff6e8d7c41b738b67ba9e7fd3739cfda71a3",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 510,
+          "goal_pose": [
+            61,
+            5,
+            3
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "acaddbbd58aa800ec53338411885ec0149003ef2cec43474ed8eac865af3d38b",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "7efa74b0572903d7aaccbb317cfb1678de0819001c7b4e6d7663c90a5aaab5c4",
+          "candidate_pool_sha256": "06782f040fb17a33ed018a1a276512ec095b964bb41585045d411d321b5c17de",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        },
+        {
+          "paid_before": 511,
+          "goal_pose": [
+            61,
+            5,
+            0
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "8ef5889b5abfb9f39e7772fac8b597011991240b1883809f7ef4b83624821151",
+          "belief_sha256": "058fd540c98164037681fb27db298da8a7b41deba36d164efa6ef6514ab4c610",
+          "native_outbound_sha256": "3734f146162d6b416b7cb0ddeeaf923d4fb58c5100449967648de2edd6ab62d5",
+          "candidate_pool_sha256": "6557559b1c3b1938c15ccf580fc1c015f1e3df22d70ab94966643123ed50267e",
+          "legal_alternates": 0,
+          "selected_route_ids": [
+            "native",
+            "native"
+          ],
+          "selected_mode_winners_different": false,
+          "selected_scores": [
+            {
+              "G": 0.0,
+              "S": 0.0
+            },
+            {
+              "G": 0.0,
+              "S": 0.0
+            }
+          ],
+          "status": "common_choice"
+        }
+      ],
+      "same_effective_runtime": true,
+      "identical_charged_action_and_packet_trace": true,
+      "identical_terminal_mesh": true,
+      "verified_actual_split": false,
+      "first_command_difference": null,
+      "first_pose_difference": null,
+      "first_sensor_content_difference": null,
+      "first_packet_difference": null,
+      "measured_inputs_identical_until_first_different_command": false,
+      "command_difference_attribution_unresolved": false,
+      "actual_paid_G": 512,
+      "actual_paid_S": 512
+    },
+    {
+      "layout": "ordinary_cycle_16",
+      "neutral_mode": "fullG",
+      "semantic_mode": "fullS",
+      "status": "different_category_choice_executed",
+      "common_start": true,
+      "first_observed_difference": {
+        "paid": 51,
+        "actions": [
+          "forward",
+          "right"
+        ],
+        "post_poses": [
+          [
+            44,
+            30,
+            0
+          ],
+          [
+            45,
+            30,
+            1
+          ]
+        ],
+        "actual_action_changed": true,
+        "observed_pose_changed": true
+      },
+      "causal_paid_action": 51,
+      "paired_events": [
+        {
+          "paid_before": 0,
+          "goal_pose": [
+            40,
+            34,
+            0
+          ],
+          "common_observation_goal": true,
+          "same_route_pool_and_scores": true,
+          "same_global_selection": true,
+          "packet_sha256": "a1373034e3cdaa7a0710cdc62c2856459d4de41116ba93d597bc25ca2196fb3b",
+          "belief_sha256": "accaefa7c255a189a1a0d9a7ba535e4816e0c68a2a10aa1c324f89e76f140273",
+          "native_outbound_sha256": "a80744fbd31e7bf91e80cd13946f69e2d3e38fa8f55efce799b0c0d2477313cd",
+          "candidate_pool_sha256": "7cedd7f5758fdcb072993650362f3037e4ca906988690990115b1e421abd524b",
+          "legal_alternates": 186,
+          "selected_route_ids": [
+            "via_43_34_3",
+            "via_45_31_3"
+          ],
+          "selected_mode_winners_different": true,
+          "selected_scores": [
+            {
+              "G": 3.920366214651318,
+              "S": 4.184952983344112
+            },
+            {
+              "G": 3.912141874463932,
+              "S": 4.1941881454311085
+            }
+          ],
+          "status": "different_category_choice_executed",
+          "applied_routes_match_each_actual_prefix": true,
+          "actual_difference": {
+            "paid": 51,
+            "actions": [
+              "forward",
+              "right"
+            ],
+            "post_poses": [
+              [
+                44,
+                30,
+                0
+              ],
+              [
+                45,
+                30,
+                1
+              ]
+            ],
+            "actual_action_changed": true,
+            "observed_pose_changed": true
+          }
+        }
+      ],
+      "same_effective_runtime": true,
+      "identical_charged_action_and_packet_trace": false,
+      "identical_terminal_mesh": false,
+      "verified_actual_split": true,
+      "first_command_difference": {
+        "paid": 51,
+        "different_fields": [
+          "action"
+        ],
+        "fullG": {
+          "action": "forward"
+        },
+        "fullS": {
+          "action": "right"
+        }
+      },
+      "first_pose_difference": {
+        "paid": 51,
+        "different_fields": [
+          "position",
+          "heading"
+        ],
+        "fullG": {
+          "position": [
+            44,
+            30
+          ],
+          "heading": 0
+        },
+        "fullS": {
+          "position": [
+            45,
+            30
+          ],
+          "heading": 1
+        }
+      },
+      "first_sensor_content_difference": {
+        "paid": 51,
+        "different_fields": [
+          "depth_values_sha256",
+          "rgb_values_sha256",
+          "scan_ranges_sha256"
+        ],
+        "fullG": {
+          "depth_values_sha256": "d145e814e2ece76f332df2fc9858634095a60ed20e742bc35f50caeb33f64d9e",
+          "rgb_values_sha256": "f935991b3d098e94377cdb3b20629d64f163bb2cb65541eabe872cf9c2eb0f40",
+          "scan_ranges_sha256": "2aedbe4e493b0ad5338e677a46fa1821039689bd2206dda5148a7c6c39e6ac0b"
+        },
+        "fullS": {
+          "depth_values_sha256": "78b0c3720581936fabbae73f1932b10f7dbe621fd179c7cca7caee5d6fc7893f",
+          "rgb_values_sha256": "ae806ae8927980e4843ed416607c9687bbd5b1d7d562dc1b8a5976953c24ce18",
+          "scan_ranges_sha256": "c4d3ffb8f5ce9b5057d5454f0d519112516095d5b6a58f517f2fad829e40df6d"
+        }
+      },
+      "first_packet_difference": {
+        "paid": 51,
+        "different_fields": [
+          "packet_sha256"
+        ],
+        "fullG": {
+          "packet_sha256": "5104211df0a43c8cc95b939bc3c0da6f95f1fbc9a69267640b7551f1c09c47ee"
+        },
+        "fullS": {
+          "packet_sha256": "9acc510c51ef2d57ef7a2cdbc32832526cebc29cb8318e498373a97d8cc78a9a"
+        }
+      },
+      "measured_inputs_identical_until_first_different_command": true,
+      "command_difference_attribution_unresolved": false,
+      "actual_paid_G": 512,
+      "actual_paid_S": 512
+    }
+  ]
+}

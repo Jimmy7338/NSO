@@ -1,0 +1,51 @@
+{
+  "schema": "nso_cold_start_full_pool_v1",
+  "stage": "sealed_four_building_cold_holdout",
+  "source_commit": "53ef1f0b292e5f358e05c27aee56d19e4052b22c",
+  "published_sources_git_sha1": {
+    "53ef1f0b:RESULTS_ZH.md": "859df2a91b883fc4573c1d8fccef477114e43360",
+    "53ef1f0b:PROTOCOL.json": "62332e80a7aac2ac23b4ddd1eabd52a46f581100",
+    "53ef1f0b:completion_audit.json": "f9e7f7dae1f6a88e3cc61c6291de2b5f1c88e289",
+    "02e9c5dc:PROTOCOL.json": "ce364296b1d1edc299319fc46e6a6e736a660726"
+  },
+  "layout_source_commit": "02e9c5dcc0da7df61f23d8683fec2dd92c145c1e",
+  "source_actor_freeze_sha256": "123bfdd4444f5ea6176ae56f6ede95a21b8aac3df3d0dc374a956c808ed40f46",
+  "source_evaluator_freeze_sha256": "f57f6960e24c879423490f454f37d526c446a4d632bf870ed4a5941ac95fec7a",
+  "scene_seed": 202611211607,
+  "layouts": ["ordinary_chain_13", "ordinary_cycle_14", "ordinary_chain_15", "ordinary_cycle_16"],
+  "modes": ["fullG", "fullS", "originalS", "F_strict"],
+  "batches": [["fullG", "fullS"], ["originalS", "F_strict"]],
+  "native_budget": 512,
+  "capture_paid": [0, 64, 128, 192, 256, 320, 384, 448, 512],
+  "frozen_online_fields": {
+    "max_extra_outbound_actions": 8,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-9
+  },
+  "scope": "One independent complete episode per building and mode. Exact cold initial pose, packet, shared front end and acquired-only map. Original sensor configuration, circular footprint, action ledger, per-action guard, replanning and return reservation. No reuse of prior 256-action episodes. Both baseline modes run after the main batch regardless of the results.",
+  "prior_release_evidence": {"verified_single_intervention_development_pairs": 2, "terminal_delta_J_percentage_points": [1.3300701568803364, 0.581932544869701]},
+  "engineering_regression_before_holdout": {
+    "gallery_left:56:230": {"winners": {"G": "via_24_40_2", "S": "via_14_41_2"}, "paid_first_divergence": 66, "actions": {"G": "forward", "S": "right"}, "equal_prior_actions_and_observations_after_injection": 9},
+    "warehouse_right:142:578": {"winners": {"G": "via_40_15_1", "S": "via_23_41_2"}, "paid_first_divergence": 143, "actions": {"G": "left", "S": "right"}, "original_guard_rejection_call": 577, "native_reselection_call": 578, "authorization_call": 579},
+    "receipt": "Both selections exercise the same full-pool adapter used in holdout. The archived witness IDs restore development states only. Compare actual allowed actions and acquired RGB, depth and laser packets. No evaluation on the four test buildings during development."
+  },
+  "modes_definition": {
+    "fullG": "Native v10_3_1 B11 neutral global target. At each normal selection evaluate the full distinct local pool with neutral structural prior.",
+    "fullS": "Same neutral global target rule, local pool and scoring components as fullG on a common state. Use visible ideal simulated category prior only for local surface score.",
+    "originalS": "Original B11 category-conditional global target and native execution, local experiment adapter disabled.",
+    "F_strict": "Archived strict nearest reachable observed-free frontier policy with its own candidate generator. Same acquisition, physical guard, budget and independent evaluator."
+  },
+  "full_pool_rule": "Evaluate all distinct one-oriented-waypoint traces from the archived observed-state generator plus the native route. Preserve exact target and heading, additional visible sector, deduplication, original return reserve, and unknown observation-union guard. Use the native route if there is no admitted alternative. For numerical ties use shorter charged route, then native, then original deterministic order. No hard cap on admitted proposals. No witness-triggered behavior in the four test layouts. After divergence each policy acts using its own newly measured state.",
+  "data_boundary": "Actors use current and historical acquired RGB-D and lidar observations, simulator-provided ideal labels of actually visible instances, acquired mapper state, particle hypotheses and ledger. No detector evaluation. Independent reference free masks, reference mesh and truth labels are available only to the offline evaluator. The measured map is fused from acquired depth and laser observations.",
+  "evaluation": {
+    "independent_unit": "building",
+    "primary": "Actual-stop J = start-reachable reference correct-free fraction times measured whole-scene native TSDF F1 at 5 cm, both on 0 to 1 scale.",
+    "same_clock_diagnostics": "Record registered paid counts 0,64,128,192,256,320,384,448,512. Mark points after early stop as unreached. No carry-forward padding.",
+    "secondary": ["terminal correct-free fraction", "terminal scene surface F1 at 5 cm", "registered equal-clock component metrics", "final stop and returned status", "actual paid actions and budget", "collisions", "common-state candidate pool and score digest", "first actual action, pose and sensor-content split", "net matched facility surface area versus first frame", "pool count and planning wall time", "reference reachable free area and floor-plan topology"],
+    "primary_difference_points": "100 * (fullS J - fullG J)",
+    "baseline_difference_points": ["100 * (fullS J - originalS J)", "100 * (fullS J - F_strict J)"],
+    "practical_gate": {"minimum_buildings": 3, "threshold_delta_J_fraction_strict_gt": 0.001, "maintain_all_achieved_G_returns": true, "no_increased_collision_count": true, "all_episodes_within_budget": true, "inference": "descriptive engineering decision with four building units"}
+  },
+  "recovery": "Retain completed runs and all partial or failed attempts. Resume identical inputs and source/configuration. Preserve the pending matrix without changing pool, layouts, criteria or budgets based on outcomes."
+}
