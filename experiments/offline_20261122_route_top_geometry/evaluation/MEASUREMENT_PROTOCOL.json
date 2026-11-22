@@ -1,0 +1,78 @@
+{
+  "schema": "nso_route_top_geometry_measurement_v1",
+  "source_commit": "874bff785debcad6982059530cdeda892a26e7ba",
+  "design": "One post hoc mechanism case selected from a known disagreement. Report both the pre-existing same-cost comparison and the new comparison against the actual geometric winner. Scope is the exact state, oriented goal, and action budget.",
+  "layout": "paired_chain_17",
+  "fork_paid": 105,
+  "selection_call_id": 428,
+  "target_facility": "open31",
+  "surface_match_distance_m": 0.05,
+  "hard_paid_budget_including_return": 192,
+  "arms": {
+    "category": {
+      "route_id": "via_32_37_0",
+      "g_perf_rank": 13,
+      "nominal_outbound_actions": 67,
+      "old_arm": "category"
+    },
+    "geometry_equal_cost": {
+      "route_id": "via_33_29_3",
+      "g_perf_rank": 12,
+      "nominal_outbound_actions": 67,
+      "old_arm": "geometry"
+    },
+    "geometry_top": {
+      "route_id": "native",
+      "g_perf_rank": 1,
+      "nominal_outbound_actions": 63,
+      "new_arm": "native"
+    }
+  },
+  "continuation": {
+    "mode": "G_perf",
+    "unknown_weight": 0.25,
+    "action_cost": 0.2
+  },
+  "comparisons": {
+    "category_minus_top": [
+      "category",
+      "geometry_top"
+    ],
+    "category_minus_equal_cost": [
+      "category",
+      "geometry_equal_cost"
+    ]
+  },
+  "reference": "Use open31 samples, visibility/evaluable sampling mask and per-sample area weights fixed in the earlier route-intervention evaluation. Use the same actual fused meshes and Euclidean point-to-triangle threshold <= 5 cm. Compute each point once and assess all maps against the original shared fork mask. Use the same frozen definitions for C_free, whole-scene F1@5cm and J. Truth crosses no actor boundary.",
+  "route_event": "Measure each arm at the exact first oriented arrival or original-route abandonment. Cumulative action count at abandonment is the last charged action before continuation.",
+  "same_clock": "Independently for each comparison use the maximum of the arms\u2019 exact first route event cumulative clocks. The early arm can continue using G_perf. Report number of such actions. Use an already captured exact grid/mesh, or obtain the exact requested frame by deterministic replay only if missing and independently verify the complete original trajectory, belief, terminal mesh and intervention provenance against the archived outcome. If a branch terminates before that step, its comparison measurement is missing. Never pad.",
+  "terminal": "Compare each actual terminal. Label 192-step paired results only if the two completed measurement clocks are 192. Retain all early/outcome/failure facts.",
+  "surface_decomposition": "For every measured phase, report represented area/recall, gross newly represented, lost baseline represented area and net change. At each matched clock additionally report common newly represented, each arm\u2019s exclusive newly represented, gross signed difference and loss decomposition. At terminal, for each equal-clock exclusive set count samples retained only by own arm, only by the other arm, by both or by neither.",
+  "motion_and_metrics": "Log first actual action, position, pose and raw observation differences after the fork. Report original-route charged actions and distance excluding shared prefix/continuation, in addition to total actions and distance, arrival/termination, return, collisions, and C_free, F1 and J.",
+  "cold_start_exclusion": {
+    "g_perf_first_action_difference_from_S_at_paid": 44,
+    "use_as_arm": false
+  },
+  "cycle_20": {
+    "reuse_old_result_as_context_only": true,
+    "geometry_route_g_perf_rank": 1
+  },
+  "fixed_inputs_sha256": {
+    "../route_intervention_20261122/evaluation/MEASUREMENT_PROTOCOL.json": "af8c5d214d01647b3b0a0a6bde9c2ea05e2d013c17a8401288b00dc0b4e88911",
+    "../route_intervention_20261122/evaluation/evaluate.py": "004a1ad424e378ed9565b56b900896957750195e47da5d6d55749d3be11108fc",
+    "../route_intervention_20261122/evaluation/results/measured.json": "c5dd0e87e76b035b004289169553ef4ecfb4be316530f535b025f0db1c4ecf6e",
+    "../route_intervention_20261122/RUN_FREEZE.json": "0e2655f1997bee6873b1add37c386d028ea2cb46486dd511a1c0cf3403be9e9f",
+    "../route_intervention_20261122/publication/receipt.json": "3883108636cc20032039836e217dc886811605497d92b5883d3e04ab3472e6b5",
+    "../route_intervention_20261122/source/frozen_anchors.json": "65bc85bd183db6828b798abc45430561af221b970503175ddb71e0aa848f06e1",
+    "../route_intervention_20261122/source/evaluator_bindings.json": "b0e8ebb0de81c945fa68743b6aba48ccc0997ac480e19657445d99b34ed92b42",
+    "../weighted_geometric_control_20261122/runner/weighted_score.py": "5a806624b427f07975ad6b5097b4245c4a934f8c91e383f06de46151cd1bd923",
+    "../weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/G_perf/manifest.json": "e1c0581b08c9a6d249ea5208c5ee78693f57766b8e84cb4ce408632411d4d18e",
+    "../weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/G_perf/steps.json": "c8f71f6fe8d1fd07330e72064c9d79c78e2f531ef4d87388a7fe54fa81d34272",
+    "../route_intervention_20261122/runner/runs/paired_chain_17/category/manifest.json": "40ff84c7c5ff7f1dbfe400e0b362c9fbda27d71e3a84e8d3660567473b3bd55b",
+    "../route_intervention_20261122/runner/runs/paired_chain_17/category/fork_ready.json": "c56969971bdb4517867b4a8e52190941288763b901ee7ac9dde3a85e6397d567",
+    "../route_intervention_20261122/runner/runs/paired_chain_17/category/intervention.json": "d81a0307c0a8bde76fd8b305d091326f18ef8eaea2bf77aef6e9786ec7ccbbd6",
+    "../route_intervention_20261122/runner/runs/paired_chain_17/geometry/manifest.json": "7a3db79c8545cf252dab35fde986fceb945c2a74f99e4864c74601082c210cbc",
+    "../route_intervention_20261122/runner/runs/paired_chain_17/geometry/fork_ready.json": "c56969971bdb4517867b4a8e52190941288763b901ee7ac9dde3a85e6397d567",
+    "../route_intervention_20261122/runner/runs/paired_chain_17/geometry/intervention.json": "1625a78bdd9ca8fd2f26c676a359c421f8ac23412f43d72c1cd1d02f2b75612d"
+  }
+}
