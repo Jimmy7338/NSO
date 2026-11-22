@@ -1,0 +1,18 @@
+{
+  "schema": "nso_region_structure_floor_dev_v1",
+  "role": "Known development buildings and regression inputs only. Read outcomes for diagnosis, with at most two documented method revisions tied to a failure mechanism, no optimization against the formal buildings.",
+  "source_commits": ["4c388a5c06d51e53251a9c901bbefd511d5b2a95", "8071a50fc7d04980d2eb390f633be7cae950706e"],
+  "layouts": ["paired_cycle_18"],
+  "arms": ["original_G", "region_G"],
+  "budget": 192,
+  "capture_paid": [0, 48, 96, 144, 192],
+  "initialization": "Exact previously sealed cold first frame of a four-room cycle building. Each execution owns its subsequent RGB-D and scan observations. No paid replay prefix.",
+  "local_auxiliary_weights": {"unknown_weight": 0.25, "action_cost": 0.2},
+  "local_route_invariants": {"max_extra_outbound_actions":8, "min_unknown_union_ratio":0.95, "azimuth_bins":8, "score_equality_tolerance":1e-9},
+  "global_intervention": "Case arm switches only the macro decision. The inherited neutral selector remains the shadow and fallback. New doorway/frontier viewpoints come from measured occupancy only, are ranked with structural region and visit evidence, and must pass the original known-footprint, connected return component, directed shortest action and return reserve tests. Original and new admitted poses share the ranking. No object categories enter the region layer. Keep native action guard and actual replanning.",
+  "baseline_reuse": "Run a literal off-switch regression first. Use the independently verified identical initialization, selected macro, actual trace, mesh, belief and map evaluation as the development control. Preserve the original receipt alongside the new run. The known building remains development only.",
+  "budget_events": "Count actual movements and rotations including return. Derive return, safety outcomes, and closures from the native receipt. Never pad an unobserved checkpoint after actual termination.",
+  "diagnostic_order": ["observed entrance evidence", "stable room partition", "native safe admission and return reserve", "actual macro selection and paid dispatch", "target reach or native interruption", "new region crossing", "new measured free space and surfaces"],
+  "measurements": "Reuse fixed visible source-triangle truth for the TSDF (5 cm tolerance). J equals C_free times whole-scene F1 at 5 cm. Record actual selected and dispatched macro, first different actual dispatch, physical room-boundary crossing from evaluator-only room labels, repeated edge path metres and actual captured checkpoints. Synthetic blocked/visited contrast is supplemental structural diagnosis and not a closed-loop trial.",
+  "rule_revision_limit": 2
+}

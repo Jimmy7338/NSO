@@ -1,0 +1,16 @@
+flowchart LR
+    A[RGB-D, planar laser, current pose] --> B[Measured TSDF and occupancy]
+    B --> C[Native neutral candidate provider]
+    B --> D[Observed regions, entrances and actual visits]
+    D --> E[Observed footprint and paid return certification]
+    C --> F[Optional regional ranking with native fallback]
+    E --> F
+    F --> G[Fixed macro target pose]
+    G --> H[Full same-target local route pool]
+    B --> H
+    H --> I[Neutral or category-conditioned visibility score]
+    I --> J[Native action guard, execution and replanning]
+    J --> A
+    J --> K[Trace and captured maps]
+    L[Fixed source-only reference] --> M[Offline coverage, surface F1 and J]
+    K --> M
