@@ -102,7 +102,7 @@ def common_clock(phase,spec,output):
             axis.plot(grid,[by_clock.get(stamp,np.nan) for stamp in grid],marker='o',ms=3,lw=1.2,
                       color=STYLE[arm][0],ls=STYLE[arm][1])
     handles=[Line2D([],[],color=STYLE[a][0],ls=STYLE[a][1],label=STYLE[a][2]) for a in arms]
-    fig.legend(handles=handles,ncol=len(arms),loc='outside lower center',frameon=False)
+    fig.legend(handles=handles,ncol=len(arms),loc='outside upper center',frameon=False)
     fig.supylabel('Joint map quality J (%)')
     fig.supxlabel(f"Actual paid actions · {len(layouts)} floor(s), cap {spec['budget']} including return\n"
                   f"Source: results/{phase}/checkpoints.csv · no post-stop padding",fontsize=8)

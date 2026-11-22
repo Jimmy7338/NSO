@@ -1,0 +1,117 @@
+{
+  "schema": "nso.offline_fixed_actions_pose_refusion/1",
+  "layout": "floor26_ordinary",
+  "poses": [
+    "exact",
+    "CSM"
+  ],
+  "frozen_mapper_path": "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/nso/observed_runtime_mapper_v10.py",
+  "frozen_mapper_sha256": "c27a977a1b7ae417748a786a118287b282771b630ac88b56c0de7e11f5b00a3b",
+  "source_trial_freeze_sha256": "9280106beda7a3a0fc8fbc365456949121af170df68a47dd8c749abf5c24831f",
+  "csm_replay_receipt_sha256": "a2ae3e7a053b275108410e342a2a8f2544d45a0fef8bbfb181e143a5ede6bf2a",
+  "evaluator_reference_receipt_sha256": "366172abb8b586ff4321fe91e9b1bb92fe54602b2db3ad8a141ae1cf6fe37894",
+  "max_worker_threads": 1,
+  "same_sensor_payloads_intrinsics_timing_and_order": true,
+  "estimated_pose_input": "Continuous CSM boundary pose with common fixed starting anchor and sensor extrinsics",
+  "simulator_ground_truth_after_initial_anchor_used_in_estimated_pose": false,
+  "packet_validation_or_guard_modified": false,
+  "hardware_io": false,
+  "estimated_pose_closed_loop": false,
+  "rtab_pose_graph_applied": false,
+  "arms": [
+    {
+      "fused_frames_per_mode": 37,
+      "native_exact_grid_reproduced_at_all_paid_clocks": true,
+      "historical_native_belief_sha256": "0029e6d528458610d465f585ae0735b95545bf1ee7ee9f37a905135cc650096a",
+      "planning_or_execution_policy_called": false,
+      "arm": "original_G",
+      "metrics": {
+        "exact": {
+          "C_free": 0.7515822784810127,
+          "correct_free_cells": 950,
+          "reachable_cells": 1264,
+          "F1_scene_05cm": 0.6701322276911915,
+          "p_scene_05cm": 0.9971666666666666,
+          "r_scene_05cm": 0.5046314467383625,
+          "J": 0.5036595065717024,
+          "native_mesh_triangles": 57231,
+          "sampled_predicted_surface": 12000
+        },
+        "CSM": {
+          "C_free": 0.7515822784810127,
+          "correct_free_cells": 950,
+          "reachable_cells": 1264,
+          "F1_scene_05cm": 0.6701871653235679,
+          "p_scene_05cm": 0.9973333333333333,
+          "r_scene_05cm": 0.5046510715126776,
+          "J": 0.5037007967226182,
+          "native_mesh_triangles": 57223,
+          "sampled_predicted_surface": 12000
+        }
+      },
+      "final_cells_differing_from_exact": 38,
+      "max_cells_differing_from_exact_across_clocks": 40,
+      "csm_minus_exact": {
+        "C_free": 0.0,
+        "F1_scene_05cm": 5.493763237640614e-05,
+        "p_scene_05cm": 0.0001666666666666483,
+        "r_scene_05cm": 1.9624774315163407e-05,
+        "J": 4.129015091580701e-05
+      },
+      "output_files_sha256": {
+        "fusion_input_receipts.json": "2c07f2c7208f2d0babf5ddbdcaf7d647c495aae879e5f4fdf40f973ab0659c11",
+        "CSM_belief.npz": "08f6f7db714ca6b67eec56dee2034ac39b3f49515ef27106697028446f68da24",
+        "CSM.ply": "b2f848f6b38b74316ea0b39f274ad56f60d234b9fcce93502c301b48f5e732f6",
+        "exact.ply": "128f68d8f3a17a58b975dba46586e735ddf91965aef0bbfa6c924c83d02ad749",
+        "exact_belief.npz": "95b2af5dbe37d566661408466bc32935cb8278986928a4f350ffaedd82619da6"
+      }
+    },
+    {
+      "fused_frames_per_mode": 37,
+      "native_exact_grid_reproduced_at_all_paid_clocks": true,
+      "historical_native_belief_sha256": "8be815df393feb446f097f91ad218b276a759fd76ece95fd95b51ea3bdf9639c",
+      "planning_or_execution_policy_called": false,
+      "arm": "region_G",
+      "metrics": {
+        "exact": {
+          "C_free": 0.7879746835443038,
+          "correct_free_cells": 996,
+          "reachable_cells": 1264,
+          "F1_scene_05cm": 0.7335730012897871,
+          "p_scene_05cm": 0.9928333333333333,
+          "r_scene_05cm": 0.581678310699427,
+          "J": 0.5780369535479651,
+          "native_mesh_triangles": 68304,
+          "sampled_predicted_surface": 12000
+        },
+        "CSM": {
+          "C_free": 0.7879746835443038,
+          "correct_free_cells": 996,
+          "reachable_cells": 1264,
+          "F1_scene_05cm": 0.7336256219959232,
+          "p_scene_05cm": 0.9930833333333333,
+          "r_scene_05cm": 0.5816586859251118,
+          "J": 0.5780784173322306,
+          "native_mesh_triangles": 68378,
+          "sampled_predicted_surface": 12000
+        }
+      },
+      "final_cells_differing_from_exact": 24,
+      "max_cells_differing_from_exact_across_clocks": 51,
+      "csm_minus_exact": {
+        "C_free": 0.0,
+        "F1_scene_05cm": 5.262070613609726e-05,
+        "p_scene_05cm": 0.00024999999999997247,
+        "r_scene_05cm": -1.9624774315163407e-05,
+        "J": 4.146378426550523e-05
+      },
+      "output_files_sha256": {
+        "fusion_input_receipts.json": "5b940d481a92f1e5b3ebce452dcb2b79e6f759b91979b7e5adeda58af4b0b61e",
+        "CSM_belief.npz": "3f9183c2ce31c5e74bb2c51ca4f7129fe5bf75931a0f31aeff8fd641f9e05386",
+        "CSM.ply": "4014d7ae78dd5d57d89f0861a4c138d5ce1b61c42313312ea989c9eec0e1ea6e",
+        "exact.ply": "bcc2da18f6bc3809e55b507828a7519ad71b4eaf484fc63241b96676cf69ba9c",
+        "exact_belief.npz": "55ac529ab029e601aea3d2859bbbe408098728cabe66c60febee787ff11798bd"
+      }
+    }
+  ]
+}

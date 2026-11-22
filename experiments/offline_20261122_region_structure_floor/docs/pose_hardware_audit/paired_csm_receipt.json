@@ -1,0 +1,107 @@
+{
+  "schema": "nso.paired_csm_offline_trace_receipt/1",
+  "protocol_sha256": "7cf51947a2535504603530651e655102bf56600b675bf4c574fa718dc1e3addb",
+  "building": "floor26_ordinary",
+  "independent_layouts": 1,
+  "same_estimator_binary_library_launch_and_effective_parameters": true,
+  "same_input_sampling_and_original_lidar_header_timestamps": true,
+  "side_effect_topics_not_present": true,
+  "hardware_io": false,
+  "pose_used_for_closed_loop_decisions": false,
+  "rtab_pose_graph_applied": false,
+  "geometry_is_noiseless_mesh_geometry": true,
+  "interpretation": "Interface/provenance and sensor-only estimated pose on two fixed paths at a single noiseless simulated layout. Does not establish navigation/reconstruction efficacy under estimated pose or physical localization accuracy.",
+  "arms": {
+    "original_G": {
+      "reference_path_distance_m": 5.800000000000001,
+      "observed_scans_with_published_estimates": 361,
+      "measured_action_boundaries_including_bootstrap": 37,
+      "native_action_end_ate": {
+        "xy_rmse_m": 3.082562274432158e-07,
+        "xy_p95_m": 5.09337896777352e-07,
+        "xy_max_m": 5.254637720349464e-07,
+        "yaw_rmse_deg": 4.008713298391155e-06,
+        "yaw_p95_deg": 6.189368763503209e-06,
+        "yaw_max_deg": 6.773943579470376e-06
+      },
+      "all_matched_scan_ate": {
+        "xy_rmse_m": 3.065916152842144e-07,
+        "xy_p95_m": 5.11189697277317e-07,
+        "xy_max_m": 5.593216023226802e-07,
+        "yaw_rmse_deg": 3.889574894823653e-06,
+        "yaw_p95_deg": 6.08634953888201e-06,
+        "yaw_max_deg": 6.793521750978718e-06
+      },
+      "one_paid_action_rpe": {
+        "xy_rmse_m": 1.0739549608274866e-07,
+        "xy_p95_m": 2.4519181323573054e-07,
+        "xy_max_m": 2.6592924366314057e-07,
+        "yaw_rmse_deg": 8.994266913749255e-07,
+        "yaw_p95_deg": 1.9625364642316567e-06,
+        "yaw_max_deg": 2.3942293026755355e-06
+      },
+      "substep_translation_errors_above_1_mm": [],
+      "files_sha256": {
+        "replay_original_G/independent_simulator_reference.npz": "2a24008cc5c581948170fd21b597d450ef71d4dca4b0ce652208c8493215eaf0",
+        "replay_original_G/csm_stamped_poses.csv": "788022389d63882bf70399bf0d801aa10f25eda5d7510929912df69884534612",
+        "replay_original_G/csm_replay_metrics.json": "58f116ef001d105e13e79678b18e24f3e547be75aac88e3e1491c5d689f9d4ff",
+        "replay_original_G/native_sensor_input.npz": "49cb8786feb4943cf72ef3bf96ed016c573c7f3898b3d01fa853b053909f9b93",
+        "replay_original_G/csm_stamped_poses.json": "c74e26a2f0461c482de41240782bd13bc4511f290c81bffed018eb3a20d83f6d",
+        "replay_original_G/trace_receipt.json": "85adacfccaa989a2eff9940b5ea814cf4c79a817f729398e271b32f7ded4f85a"
+      }
+    },
+    "region_G": {
+      "reference_path_distance_m": 6.4,
+      "observed_scans_with_published_estimates": 361,
+      "measured_action_boundaries_including_bootstrap": 37,
+      "native_action_end_ate": {
+        "xy_rmse_m": 2.4085566610613445e-07,
+        "xy_p95_m": 3.803922935867548e-07,
+        "xy_max_m": 4.568876985186418e-07,
+        "yaw_rmse_deg": 1.6133331671461543e-06,
+        "yaw_p95_deg": 3.039755515402918e-06,
+        "yaw_max_deg": 3.6418080594779008e-06
+      },
+      "all_matched_scan_ate": {
+        "xy_rmse_m": 0.001428809139532318,
+        "xy_p95_m": 3.832396360331443e-07,
+        "xy_max_m": 0.019999937307513246,
+        "yaw_rmse_deg": 4.3163609337736904e-05,
+        "yaw_p95_deg": 3.543768606421473e-06,
+        "yaw_max_deg": 0.0008194873037307404
+      },
+      "one_paid_action_rpe": {
+        "xy_rmse_m": 1.4847493588331856e-07,
+        "xy_p95_m": 3.3480184509382306e-07,
+        "xy_max_m": 5.200083344770189e-07,
+        "yaw_rmse_deg": 6.989378198914073e-07,
+        "yaw_p95_deg": 1.0258232772738206e-06,
+        "yaw_max_deg": 2.494353011381382e-06
+      },
+      "substep_translation_errors_above_1_mm": [
+        {
+          "scan_index": 233,
+          "xy_error_m": 0.01835707990927642,
+          "stamp_ns": 1750000023300000000,
+          "paid_endpoint_id": -1,
+          "reported_xy_nearly_equal_to_previous": false
+        },
+        {
+          "scan_index": 239,
+          "xy_error_m": 0.019999937307513246,
+          "stamp_ns": 1750000023900000000,
+          "paid_endpoint_id": -1,
+          "reported_xy_nearly_equal_to_previous": true
+        }
+      ],
+      "files_sha256": {
+        "replay_region_G/independent_simulator_reference.npz": "c80dda01228cf32be61746b25ae58503b1fe79e4c859cc23f391b18d494d3a70",
+        "replay_region_G/csm_stamped_poses.csv": "9ffaee95cc8066811d574bd60d4c3d69ea4d55e713ec50fd13103f4b19d63fcf",
+        "replay_region_G/csm_replay_metrics.json": "0fb66261038c0fb96d005878bae72222fbee3ff70c982b05b4dc6b07cf9f3fbd",
+        "replay_region_G/native_sensor_input.npz": "a3941f751acf389985fcb9d40eef71afdde5c4480c600c175d5c1b8063a62cae",
+        "replay_region_G/csm_stamped_poses.json": "0b3b409fca6a72916ba9fab00662085ad0107d592cf573d10c0e37812125ed29",
+        "replay_region_G/trace_receipt.json": "1cd6a7697978e8b9f1b08fd1e3fc108074051bb9fb2f9de171c2e1fc9dfe1281"
+      }
+    }
+  }
+}
