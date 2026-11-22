@@ -1,0 +1,78 @@
+{
+  "schema": "nso_route_intervention_measurement_v1",
+  "source_commit": "8071a50fc7d04980d2eb390f633be7cae950706e",
+  "surface_match_distance_m": 0.05,
+  "hard_paid_budget_including_return": 192,
+  "arms": [
+    "category",
+    "geometry"
+  ],
+  "reference": {
+    "sampling": "Reuse the published weighted study’s fixed first-hit-visible source-geometry samples with no resampling. For each fixture the area weight per sample is the deduplicated source triangle area divided by the original 10000 uniform area draws. The fixed visible subset is the denominator for recall.",
+    "matching": "A visible reference sample is represented if its Euclidean point-to-triangle distance to the actual depth-fused native mesh is at most 0.05 m. Each reference sample contributes at most once per mesh. No predicted or template-generated points are evaluated. Truth is read by the offline evaluator.",
+    "primary": "Gross newly represented area relative to the exact common pre-action fork: visible target samples represented at a measured checkpoint and absent at the fork, weighted in square metres. Report lost area, net change, represented area and recall separately.",
+    "pair_partition": "At shared clock t, common is added in both branches; exclusive is added in exactly the named branch. Compute all from the same baseline and reference labels. At actual terminal, also partition retention of each same-clock exclusive set by presence in the original branch, the other branch, or neither.",
+    "global": "C_free is correctly free divided by the frozen reachable free grid. F1@5cm uses the existing frozen whole-scene source-visible recall and deterministic 12000 predicted-area precision draws (seed 812). J=C_free×F1."
+  },
+  "checkpoints": {
+    "fork": "Measure the native checkpoint immediately before the single intervention; compare common trace, occupancy and mesh.",
+    "route_end": "Each intervention arm first bound route arrival at the same target including heading, or actual first abandonment/failure of the bound route. Use the actor’s observed paid action before planning any continuation at this receipt.",
+    "equal_clock": "Select the larger of the two actual route_end paid counts. Evaluate each actual mesh at that exact count. If a run has not reached that clock, leave its value and paired comparison missing; do not extend or pad.",
+    "terminal": "Compare individual actual terminal checkpoints, exactly 192 charged actions when the native episode reaches its budget. Record differing terminal clocks rather than reporting them as a shared-time pair."
+  },
+  "cases": {
+    "paired_chain_17": {
+      "fork_paid": 105,
+      "selection_call_id": 428,
+      "nominal_outbound_end_paid": 172,
+      "primary_target": "open31",
+      "target_binding": "Archived selected global option asset_0_entry at asset index 0. Measured support of the selected rear entry is adjacent to the source shelf; the other facility lies in a different room.",
+      "published_input_sha256": {
+        "weighted_geometric_control_20261122/scenes/prepared/paired_chain_17/initial_state.json": "22d9c31adc4cb835216830d9316b6b817bafa415def228a0738db4b138268db3",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_chain_17/evaluator_truth.npz": "6063d0888a3c6a27b06323af55867fd53f3dc5a54ab116b4d64c59b237a77e6f",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_chain_17/fixed_reference.npz": "ab6eedf3b465b50f45486d174a1564bf48829f0feb48b3992c8c67611735614b",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_chain_17/source_mesh.ply": "c788e4f3ed1fabfb63498223b569a20aff891c4eda47ce676ee02a4d072a6d67",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_chain_17/RECEIPT.json": "87c24522e7ee37720e388e676a5dfa75e63161d46314921b6384af04afabf8fa",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/S/manifest.json": "7e8e752d3e78604036aec74c3526398f9bdee03317caa5dfc3ec8f0d14064ba8",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/S/steps.json": "4787278dc127a208cc5ad5f313a54845333ff1af2481d204d77b0cb059095982",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/S/initial_raw_rgbd_scan_sha256.json": "a7176cbbc59a543779eca1c39cd1694647a213345e6c448aa445b006c6ecb0d0",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/S/observed_belief_trace.npz": "a4ab8351b79ddb7d13665a0ae886f33dc10bee2cc80bef071240b688298b6420",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/S/local_choices.json": "9dd5142a39d3e76c8b4936bfe0946d93cc24c0766ea15bbe8424ca33d17f074c",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_chain_17/S/global_choices.json": "16b6b4d9252b55c96459d4c7ad21aff3fef844efce38c19de57d6dab834e2731"
+      }
+    },
+    "paired_cycle_20": {
+      "fork_paid": 0,
+      "selection_call_id": 5,
+      "nominal_outbound_end_paid": 47,
+      "primary_target": "closed118",
+      "target_binding": "Archived target is for coverage. Both alternatives specify the same novelty tag [2,5] for the sole modeled observed track 2; replaying the published first observation associates closed-cabinet owner 2 with measured track 2.",
+      "published_input_sha256": {
+        "weighted_geometric_control_20261122/scenes/prepared/paired_cycle_20/initial_state.json": "ed3eabb8758f4142cea89c3c31e262d54035c063ea1f05dfc384608f37c7f5ad",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_cycle_20/evaluator_truth.npz": "d5b13c676fb236302d9275c5004424a63d73b3fe404f375b4be50c9deb5e5da1",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_cycle_20/fixed_reference.npz": "8317b6da2859db2329aeb0ebd93d6606e752b2adadca6e56ff3942b28c3f3244",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_cycle_20/source_mesh.ply": "50750aad5511d4c19fecbb8cf5f9bd431da06d10df8b8c36cc96f0feed15fa56",
+        "weighted_geometric_control_20261122/scenes/evaluator_references/paired_cycle_20/RECEIPT.json": "bf7fc6e8826b7593dc6f4e1a26f36a7b3b37cb4d94de508a4421bb42cae46a2b",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_cycle_20/S/manifest.json": "f5415c65e4a4bf98ca9ba637b07a4b7dbfbfe40ea952f485ed3c3221f5e5fa7e",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_cycle_20/S/steps.json": "8321174f5cb324a68b7af7d2305644b939a81b45a56b1b0b49f8c60f54510fd7",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_cycle_20/S/initial_raw_rgbd_scan_sha256.json": "83f2a8f5137fc15b8d2bbe75c0a450755ca757cf75899c609cbda514dc823bd6",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_cycle_20/S/observed_belief_trace.npz": "bfbb8886997b02cd49d2b2f1a8990a9b267596a39c18aa274180f7db8451f6be",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_cycle_20/S/local_choices.json": "c65edceeb23cd9fbea8983aac7440ab08ba0799cdce537a6e4bc371fd2aed2dc",
+        "weighted_geometric_control_20261122/runner/runs/holdout/paired_cycle_20/S/global_choices.json": "7d60ccbb168ac8f520183cdbe43a9ed0605acbf1151af7ee37bc8198f7794c17"
+      }
+    }
+  },
+  "metric_and_reference_bindings_sha256": {
+    "weighted_geometric_control_20261122/scenes/evaluator_freeze_holdout.json": "500e7b11a62a05d47254919cc78cfd466e30ba91fb75cbce6135345f7b7cf0a0",
+    "weighted_geometric_control_20261122/scenes/actor_freeze_holdout.json": "10e28bb7a34ee826c0f44f85a449dcf2328357294d1fc06a30c281e2823b5139",
+    "weighted_geometric_control_20261122/scenes/reference_protocol.json": "293838ee331c9a3b870fcde3790fc1bf6b64b3a405a10185e53d5dccc76fc6b0",
+    "weighted_geometric_control_20261122/measurement/evaluate.py": "48194dc7602d830afe2a7d33ef6d80751c87c4c30f557bc0c2a63100bfc712bf",
+    "same_goal_route_choice_20261121/measurement/evaluate.py": "eeb978d6ea1be7e7462fc5b3b92cdbf358f8ef7ba0ee5f2e7ee9bc3d43d05a50",
+    "candidate_route_persistence_20261121/measurement/evaluate.py": "214d0c124ceb3f786faea873df8bc95767417aded977e2a384ec791501149c70",
+    "candidate_route_yield_20261121/measurement/measure.py": "5feb7893936e4d268d460782ef30bb18ea91c2486befca6eebdeccfd121d2df7",
+    "semantic_scene_redesign_20261119/exploration_evaluation/surface_reference.py": "8d8488a56f28729abe858b9f978ddabf4a5c67a3dbbf529d38956a6de7bed409",
+    "semantic_large_scene_20261121/evaluation/measure.py": "547afc59307cd21ac6f45f8b19c0bb46af5f8c6fc2f5667a8729d084b86d441d",
+    "route_intervention_20261122/source/frozen_anchors.json": "65bc85bd183db6828b798abc45430561af221b970503175ddb71e0aa848f06e1",
+    "route_intervention_20261122/source/evaluator_bindings.json": "b0e8ebb0de81c945fa68743b6aba48ccc0997ac480e19657445d99b34ed92b42"
+  }
+}
