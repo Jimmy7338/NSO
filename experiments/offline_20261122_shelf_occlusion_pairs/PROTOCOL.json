@@ -1,0 +1,50 @@
+{
+  "schema": "nso_shelf_front_occlusion_paired_v1",
+  "question": "Within a fixed room, shelf, start and budget, does partial frontal occlusion change the advantage of class-conditioned structure over directly observed inspection, and is any unique surface retained after return?",
+  "repository": "Jimmy7338/NSO",
+  "branch": "codex/robot-evidence-20261104",
+  "base_commit": "2f6c97352aeb7fed719bb82c422418c7412eaa8b",
+  "source_experiments": [
+    "experiments/offline_20261122_region_structure_floor/local",
+    "experiments/offline_20261122_region_global_revision/next/local_increment"
+  ],
+  "native_budget": 192,
+  "capture_paid": [0, 48, 96, 144, 192],
+  "max_trigger_paid": 64,
+  "weights": {"unknown_weight": 0.25, "action_cost": 0.20},
+  "local_route": {
+    "max_extra_outbound_actions": 8,
+    "score_equality_tolerance": 1e-9,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8
+  },
+  "direct_scale": 4.0,
+  "hidden_scale": 1.0,
+  "arm_order": ["G", "S", "D", "D+"],
+  "arms": {
+    "G": "Frozen weighted neutral structural visibility score.",
+    "S": "Replace neutral with correct currently observed class prior in the same visibility model and score.",
+    "D": "Frozen directly measured inspection score with the same visible class/instance inputs as S and shared candidate feasibility.",
+    "D+": "D plus the frozen evidence-supported hidden-surface increment from the prior local_increment component."
+  },
+  "schedule": {
+    "development_parents": ["shelf_dev"],
+    "test_parents": ["shelf_01", "shelf_02", "shelf_03", "shelf_04", "shelf_05", "shelf_06"],
+    "conditions": ["open", "screen"],
+    "progress_gate": "Complete the first two test parents, both conditions and all four assignments, verify action/optical manipulation and release interim report before launching the remaining four parents. The schedule, predictor weights, evaluation and tie rule cannot depend on interim endpoint performance.",
+    "resource_policy": "Each native process is single-threaded in numerical libraries, with up to six independent trajectory processes. Prior full-duration outcomes remain regardless of scientific stop or unfavorable score. One same-freeze recovery attempt for process-only failure. Preserve all original attempts and failures. Any scientific settings change restarts affected pair(s) as a labelled version."
+  },
+  "scene_pair": "Within parent the same room shell, shelf mesh and shelf area reference, start and orientation, nominal geometry routes, seed, action budget, simulator sensor profile and local feasible/return rules are bound. Conditions differ only by the registered physical occluder. Report per-condition frontal optical visibility and representative lateral visibility, paired sweep clearance, physical reachability differences and shared asset IDs with independent reference hashes.",
+  "trigger": "First actual native same-oriented-goal route selection at an action clock no greater than 64 with actual measured support assigned to the target shelf and at least two distinct legal outbound routes. No score advantage, treatment disagreement, views chosen with evaluator data or achieved future outcome enters eligibility.",
+  "execution": "Cold start using shared neutral G global and weighted G local. Make one autonomous local selection at the registered common fork; actual executed route is subject to the existing guard and replanning. Use identical weighted G local continuation and neutral global after the fork. No-trigger episodes continue the same neutral task and retain their scheduled assignment outcomes and trigger status. Both forward and rotational native commands, including return, consume budget. Preserve actual arrival, guard cancellation, scientific early terminal and process-only failure as separate observations. Environment uses ideal visible simulated classes and exact pose, with the existing measured occupancy/TSDF.",
+  "deduplication": "Only decisions sharing the same sealed condition, observed prefix and same oriented goal, exact outbound states and actions, return certificate and continuation may share one measured trajectory. No-trigger actors share the identical weighted G continuation. Recompute the exact choice and fork binding in every distinct branch. Retain equivalent assignment rows and distinguish missing scientific checkpoints from technical missing outputs. Actual runtime is counted once per physical execution.",
+  "metrics": {
+    "primary": "At actual paid action 96 match fixed independent shelf samples to the actual RGB-D fusion triangle mesh with Euclidean 0.05 m. Net m2 equals weighted newly matched points minus formerly matched points lost relative to the common cold fusion mesh within that same placement. Use the identical shelf truth sample positions and weights across paired conditions.",
+    "contrasts": ["S-D", "S-G", "D+-D"],
+    "interactions": "For each parent compute (S-D)screen and ((S-D)screen - (S-D)open) only where each relevant component is observed. Compute corresponding secondary contrasts where supported. Record same-selected routes, equal outcomes and complete cases. All parents have equal weight within an observed contrast.",
+    "tolerance": "For area win/tie/loss use max(1e-9 m2, maximum same-snapshot numeric difference from independently repeated development evaluation). Freeze the resulting number before test actors. This is numerical repeatability, not a sampling confidence bound.",
+    "secondary": "Net shelf area at actual paid 48, 144 and actual terminal, correct reachable free coverage, whole-scene F1 at 5 cm, product J, path length, first-choice and episode decisions/wall-clock and actual return. Mark actual terminal clock and never substitute it for an unexecuted scheduled clock; equal-action-only contrasts separately from endpoint summaries.",
+    "retention": "Among shelf samples outside the common fork support that only one paired policy represents at action 96, measure the area still represented only by that same policy at their respective actual return snapshots. Both must return to support this comparison. Report early and retained absolute areas, eligible denominator and missingness, and distinguish later shared representation."
+  },
+  "mechanism_figure": "Choose the first scheduled screened placement with measured 96 and returned outcomes for both S and D and an actual trajectory divergence after a shared fork. If none, use the first eligible open placement. If execution is tied throughout eligible placements, use the first complete screened placement or then the first complete open placement and explicitly display zero exclusive differences. If no such complete pair exists, use the first scheduled placement with an actual observed fork and mark unavailable panels. Never select by largest benefit or favorable sign."
+}
