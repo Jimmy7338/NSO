@@ -1,0 +1,146 @@
+{
+  "scope": "frozen region_S factual decision states, candidate scores only, no new sensor/trajectory outcomes",
+  "counts": {
+    "all_dispatches": 133,
+    "qualified": 17,
+    "overrides": 15,
+    "fallbacks": 116,
+    "exact_budget_one_step_fallbacks": 93
+  },
+  "changed_route_counts_on_17_eligible_states": {
+    "old": 0,
+    "target_region_only": 11,
+    "outbound_measured_only": 13,
+    "both": 14,
+    "pure_native_N": 15,
+    "pure_native_G": 15
+  },
+  "fallback_counts_by_floor": {
+    "floor26_ordinary": {
+      "other_fallback": 1,
+      "exact_budget_one_step": 19
+    },
+    "floor26_branch": {
+      "other_fallback": 16,
+      "exact_budget_one_step": 21
+    },
+    "floor26_corridor": {
+      "other_fallback": 4,
+      "exact_budget_one_step": 27
+    },
+    "floor26_loop": {
+      "other_fallback": 2,
+      "exact_budget_one_step": 26
+    }
+  },
+  "fixed_branch_candidates": {
+    "floor26_corridor/region_S/paid-000/call-5": [
+      {
+        "pose": "20,15,1",
+        "candidate_id": 2,
+        "score_modes": [
+          "old"
+        ]
+      },
+      {
+        "pose": "24,10,0",
+        "candidate_id": 3,
+        "score_modes": [
+          "target_region_only"
+        ]
+      },
+      {
+        "pose": "15,20,1",
+        "candidate_id": 1,
+        "score_modes": [
+          "outbound_measured_only",
+          "both"
+        ]
+      }
+    ],
+    "floor26_loop/region_S/paid-059/call-243": [
+      {
+        "pose": "30,35,1",
+        "candidate_id": 14,
+        "score_modes": [
+          "old"
+        ]
+      },
+      {
+        "pose": "9,34,1",
+        "candidate_id": 12,
+        "score_modes": [
+          "target_region_only"
+        ]
+      },
+      {
+        "pose": "31,42,0",
+        "candidate_id": 21,
+        "score_modes": [
+          "outbound_measured_only",
+          "both"
+        ]
+      }
+    ],
+    "floor26_ordinary/region_S/paid-000/call-5": [
+      {
+        "pose": "30,22,3",
+        "candidate_id": 8,
+        "score_modes": [
+          "old"
+        ]
+      },
+      {
+        "pose": "30,17,1",
+        "candidate_id": 9,
+        "score_modes": [
+          "target_region_only"
+        ]
+      },
+      {
+        "pose": "15,14,2",
+        "candidate_id": 7,
+        "score_modes": [
+          "outbound_measured_only",
+          "both"
+        ]
+      }
+    ]
+  },
+  "recorded_stage": {
+    "selection": "old ranking eligibility",
+    "execution": "actual post-dispatch steps"
+  },
+  "formulas": {
+    "old": "standing topology + capped endpoint area + entrance - costs",
+    "target_region_only": "explicit valid doorway-destination topology replaces standing topology",
+    "outbound_measured_only": "old formula with capped endpoint area replaced by native N = C + quality_total_proxy",
+    "both": "combine the target-region and outbound-measured changes",
+    "pure_native_N": "native full-route C + measured-surface quality; control with native ties",
+    "pure_native_G": "native measured subtotal with original neutral template term; control with native ties"
+  },
+  "fallback": "no qualified archived regional-ranked candidate. Existing native choice used for all versions",
+  "source_sha256": {
+    "results/formal/decisions.csv": "50bc567558acae50ddd1710060854051407f12630c14f14c2cf3bc984c44d852",
+    "results/formal/summary.json": "bc36eaec8dc9a4f88e592ead3ae1eb419c933a75fe2502e87e6e1ca6257aebb6",
+    "FORMAL_FREEZE.json": "9280106beda7a3a0fc8fbc365456949121af170df68a47dd8c749abf5c24831f",
+    "policy/observed_regions.py": "461eeaea7b9a053bec27a3505303124d43ac18fda0645a2d3d589324505fe0be",
+    "regional_adapter.py": "72efcfabc850d316186cd3bc3998fe8c2d862c6d313f9a7833bbf572da99ed62",
+    "execution/formal/floor26_ordinary/region_S/attempt_001/run/manifest.json": "cd61db11d46fe57f5ab80490155dba3671f5534ba6ac42fc3ce231fad13b9813",
+    "execution/formal/floor26_ordinary/region_S/attempt_001/run/regional_choices.json": "b971654040497c0a156ef7ffb370a641082467e5456f5af492e51d502bc4e491",
+    "execution/formal/floor26_ordinary/region_S/attempt_001/run/global_choices.json": "56ca2a994dda702585b03636351a26b2e08761619b60a0978f67cedb91e502a8",
+    "execution/formal/floor26_ordinary/region_S/attempt_001/run/steps.json": "8dea83191d7de8d9cb90626607835ab29eb706ba06cddc45cef0959df7456524",
+    "execution/formal/floor26_branch/region_S/attempt_001/run/manifest.json": "93a5eecc7e0fa6de5b817b981e58dc373f30a035f87b604dadee9b4bd5a2a647",
+    "execution/formal/floor26_branch/region_S/attempt_001/run/regional_choices.json": "e157ab97b2219a048067c486cfdaa1f93fba4468a6107867dd656f81fb1edea4",
+    "execution/formal/floor26_branch/region_S/attempt_001/run/global_choices.json": "76d0d770e513ba71420f113d9348d3dac4fb37d952d7df1feb458f2d21c89263",
+    "execution/formal/floor26_branch/region_S/attempt_001/run/steps.json": "6da61e5fc5348298ade0fe762c4f5c0bd5acd2294b848b056d117ad2fb177074",
+    "execution/formal/floor26_corridor/region_S/attempt_001/run/manifest.json": "587de960ac5f698dbac3647b281e5b5d1a5cd31685eb65bfa0c5c9382aafe8fa",
+    "execution/formal/floor26_corridor/region_S/attempt_001/run/regional_choices.json": "df787f1488956aeb6399b7a53eceb464e1d80cb580597a714b05452671abd616",
+    "execution/formal/floor26_corridor/region_S/attempt_001/run/global_choices.json": "776fb75c7baa46b733b5afee27482f3b3ccc0890d2ca745053e6195f16140279",
+    "execution/formal/floor26_corridor/region_S/attempt_001/run/steps.json": "16683e65dd1f3c3c247e5823f790fd63d56ae356ce1226955efbaca548d19cbc",
+    "execution/formal/floor26_loop/region_S/attempt_001/run/manifest.json": "66d2a660bb418fc189166cbcbbf2a4adfca1a70a301d388ad612a4d4f1bccbd7",
+    "execution/formal/floor26_loop/region_S/attempt_001/run/regional_choices.json": "1f1dc996064e75dce8dcc12deab285b78fcb4d27e6e23fee429d029d6bef0297",
+    "execution/formal/floor26_loop/region_S/attempt_001/run/global_choices.json": "13181ced921fa87bb93f2afad8e25f0b55b3289f025bcd038f5acfa3d09be42d",
+    "execution/formal/floor26_loop/region_S/attempt_001/run/steps.json": "004f1d43c7816d79124df41a744ef3b9fe46cd336c20d967fd51b5074fe4a1ff"
+  }
+}

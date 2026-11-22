@@ -1,0 +1,24 @@
+{
+  "schema": "nso_supported_hidden_increment_v1",
+  "case_scope": "Two preregistered new simulated near-field shelf observations, one exposed and one with a partial opaque screen. New configurations and seeds use the same existing two source asset identities. These are distinct cases, not an isolated randomized occlusion contrast or a scene-general sample.",
+  "layouts": ["increment_open", "increment_screen"],
+  "native_budget": 192,
+  "max_prefix_actions": 24,
+  "prefix": "From the sealed cold state, run the neutral global selector with weighted G local and original per-command guards. Use the first same-goal native option at no more than 24 paid actions with at least two distinct admitted routes and nonzero direct observed support. No occupancy or surface outcome after this decision selects the fork. A missing fork remains an outcome.",
+  "weights": {"unknown_weight": 0.25, "action_cost": 0.2},
+  "frozen_online_fields": {"max_extra_outbound_actions": 8, "score_equality_tolerance": 1e-9, "min_unknown_union_ratio": 0.95, "azimuth_bins": 8},
+  "direct_calibration_source": "region_structure_floor_20261122/local/calibration.json",
+  "direct_calibration_scale": 4.0,
+  "supported_hidden": {
+    "same_instance_radius_m": 0.25,
+    "same_instance_measured_voxels_min": 4,
+    "majority_vote_threshold": 0.75,
+    "minimum_unmeasured_separation_m": 0.1,
+    "clearance_ray_fractions": [0.4, 0.7],
+    "increment_weight": 1.0,
+    "formula": "D+ = scaled D plus pointwise union of positive posterior area uplift max(S−G,0), only among history-unmeasured same-track hypotheses supported by measured surface within 0.25 m but farther than 0.10 m. The native first-hit model must accept the sample against measured TSDF and the hypothesis ray. Both prescribed intermediate ray samples need positively measured RGB-D free evidence with existing 0.10 m history tolerance. The current support track must contain at least four measured voxels and at least 75% category vote agreement. Candidate area inherits the original posterior and includes no unmapped-space credit beyond these evidence tests."
+  },
+  "route_pools": "D, D+, and S all score the original admitted same-target candidate pool. Prospectively choose an evaluation subpool of distinct D/D+/S nominations plus the native route. If those all coincide, also include the shortest admitted alternative with the existing route hash tie break. Keep complete candidate and score tables. Execute each distinct subpool route independently from the sealed observed prefix. Best and regret refer only to the entire frozen executed subpool at a common clock, not the unexecuted native proposal pool.",
+  "execution": "One bound route intervention for each run. Keep the native global goal, exact heading, reserved return path and per-action guard. Charge actual actions. Stop at its first native arrival, guard cancellation/replan without charging the non-bound action, or real terminal, with no continuation or new return claim. Preserve technical and early failures.",
+  "evaluation": "Primary outcome is same-clock net area on open shelf measured with a fixed independent first-hit reference and 5 cm point-to-fused-triangle distance. Clock is fork plus minimum nominal outbound actions across the sealed subpool. A branch ending earlier is missing. Measure genuine baseline, each branch common clock and its own actual route end; secondary cabinet and aggregate area. Report gross newly represented and lost former support, best measured executable subpool and selection regret, numbers with missing evidence, and actual per-route clocks. Never use an own endpoint as a matched-clock value if clocks differ."
+}
