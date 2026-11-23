@@ -1,0 +1,474 @@
+{
+  "schema": "nso_independent_four_floor_registration_v1",
+  "registered_client_date": "2026-11-23",
+  "base_commit": "f482722f6cbfc3135358080b08f27274f54cb535",
+  "source": "Predesigned rectilinear synthetic floors. Each uses a new room arrangement and cold start. The same archived ReplicaCAD furniture meshes are reused with fixed new poses.",
+  "policy_calls_at_registration": 0,
+  "budget_actions": 192,
+  "resolution_m": 0.2,
+  "robot_radius_m": 0.2,
+  "room_clearance_band_m": 0.4,
+  "door_min_clear_width_m": 1.4,
+  "reference_match_m": 0.05,
+  "admission": [
+    "All registered room interiors tile the floor and declared doors connect the room graph.",
+    "Exactly the registered room graph is realized by safe native swept motions. Each doorway has safe crossings in both directions for the inherited circular footprint.",
+    "The start is safe, all room interiors have a reachable center at least 0.4 m inside their room, and a source-only tour visits all interiors and returns to the initial pose including heading within 192 actions.",
+    "Cold-start fields reproduce the known-study sensing and fusion configuration exactly. Initial native bootstrap uses zero policy calls and zero motion and retains unknown reachable cells.",
+    "The source mesh and all fixed reference groups are structurally complete, finite, nonempty and independently bound to the registered floor and fixed reference protocol.",
+    "World seeds and 2D source occupancy/reachability differ from prior archive and from the other registered floors under rotations and reflections."
+  ],
+  "exclusion": "Exclude a registered candidate only if a preregistered geometry, seed, cold sensor or reference check fails. Record the exact failed condition and leave the candidate in the ledger. No replacements or changes after any policy launch. Method metrics, choices and trajectory divergence never enter admission.",
+  "layouts": {
+    "ind26_vertical_spine": {
+      "topology": "vertical_long_corridor_with_six_staggered_side_rooms",
+      "seed": 202611234201,
+      "width_m": 9.8,
+      "height_m": 11.6,
+      "rooms": {
+        "west_lower": [
+          0,
+          0,
+          3.6,
+          3.4
+        ],
+        "west_middle": [
+          0,
+          3.4,
+          3.6,
+          7
+        ],
+        "west_upper": [
+          0,
+          7,
+          3.6,
+          11.6
+        ],
+        "spine": [
+          3.6,
+          0,
+          5.8,
+          11.6
+        ],
+        "east_lower": [
+          5.8,
+          0,
+          9.8,
+          4.4
+        ],
+        "east_middle": [
+          5.8,
+          4.4,
+          9.8,
+          8
+        ],
+        "east_upper": [
+          5.8,
+          8,
+          9.8,
+          11.6
+        ]
+      },
+      "doors": [
+        [
+          "spine",
+          "west_lower",
+          1.6,
+          1.6
+        ],
+        [
+          "spine",
+          "west_middle",
+          5.2,
+          1.4
+        ],
+        [
+          "spine",
+          "west_upper",
+          9.6,
+          1.6
+        ],
+        [
+          "spine",
+          "east_lower",
+          2.8,
+          1.6
+        ],
+        [
+          "spine",
+          "east_middle",
+          6.8,
+          1.4
+        ],
+        [
+          "spine",
+          "east_upper",
+          9.8,
+          1.6
+        ]
+      ],
+      "start_xy": [
+        4.7,
+        1.3
+      ],
+      "heading": 0,
+      "shelf": [
+        1.5,
+        9.3,
+        25
+      ],
+      "cabinet": [
+        8.5,
+        6.1,
+        -28
+      ]
+    },
+    "ind26_bent_corridor": {
+      "topology": "orthogonal_corridor_with_joint_and_five_side_rooms",
+      "seed": 202611234213,
+      "width_m": 12.6,
+      "height_m": 7.8,
+      "rooms": {
+        "entry_bay": [
+          0,
+          0,
+          3,
+          4
+        ],
+        "west_storeroom": [
+          0,
+          4,
+          3,
+          7.8
+        ],
+        "north_leg": [
+          3,
+          0,
+          5.4,
+          7.8
+        ],
+        "south_near": [
+          5.4,
+          0,
+          9,
+          3.2
+        ],
+        "south_far": [
+          9,
+          0,
+          12.6,
+          3.2
+        ],
+        "east_leg": [
+          5.4,
+          3.2,
+          12.6,
+          5.6
+        ],
+        "north_gallery": [
+          5.4,
+          5.6,
+          12.6,
+          7.8
+        ]
+      },
+      "doors": [
+        [
+          "north_leg",
+          "entry_bay",
+          1.5,
+          1.4
+        ],
+        [
+          "north_leg",
+          "west_storeroom",
+          6.4,
+          1.6
+        ],
+        [
+          "north_leg",
+          "east_leg",
+          4.4,
+          1.4
+        ],
+        [
+          "east_leg",
+          "south_near",
+          6.9,
+          1.4
+        ],
+        [
+          "east_leg",
+          "south_far",
+          10.9,
+          1.6
+        ],
+        [
+          "east_leg",
+          "north_gallery",
+          9.9,
+          1.6
+        ]
+      ],
+      "start_xy": [
+        4.3,
+        4.1
+      ],
+      "heading": 1,
+      "shelf": [
+        2,
+        5.9,
+        -20
+      ],
+      "cabinet": [
+        11,
+        1.5,
+        25
+      ]
+    },
+    "ind26_offset_ring": {
+      "topology": "staggered_six_room_perimeter_ring_with_north_archive_spur",
+      "seed": 202611234229,
+      "width_m": 10.8,
+      "height_m": 9,
+      "rooms": {
+        "south_west": [
+          0,
+          0,
+          3.4,
+          4.2
+        ],
+        "south_middle": [
+          3.4,
+          0,
+          7.6,
+          4.2
+        ],
+        "south_east": [
+          7.6,
+          0,
+          10.8,
+          4.2
+        ],
+        "north_west": [
+          0,
+          4.2,
+          4.4,
+          9
+        ],
+        "loop_north": [
+          4.4,
+          4.2,
+          7,
+          7.2
+        ],
+        "archive": [
+          4.4,
+          7.2,
+          7,
+          9
+        ],
+        "north_east": [
+          7,
+          4.2,
+          10.8,
+          9
+        ]
+      },
+      "doors": [
+        [
+          "south_west",
+          "south_middle",
+          2.6,
+          1.4
+        ],
+        [
+          "south_middle",
+          "south_east",
+          1.5,
+          1.6
+        ],
+        [
+          "south_east",
+          "north_east",
+          9.1,
+          1.6
+        ],
+        [
+          "north_east",
+          "loop_north",
+          5.8,
+          1.6
+        ],
+        [
+          "loop_north",
+          "north_west",
+          5.6,
+          1.4
+        ],
+        [
+          "north_west",
+          "south_west",
+          1.8,
+          1.6
+        ],
+        [
+          "loop_north",
+          "archive",
+          5.7,
+          1.4
+        ]
+      ],
+      "start_xy": [
+        8.9,
+        1.3
+      ],
+      "heading": 0,
+      "shelf": [
+        1.5,
+        6.7,
+        55
+      ],
+      "cabinet": [
+        5,
+        2,
+        25
+      ]
+    },
+    "ind26_double_loop": {
+      "topology": "seven_room_dual_cycle_gallery_bridges_and_offset_partitions",
+      "seed": 202611234237,
+      "width_m": 11.6,
+      "height_m": 8.8,
+      "rooms": {
+        "south_west": [
+          0,
+          0,
+          4.6,
+          3
+        ],
+        "south_east": [
+          4.6,
+          0,
+          11.6,
+          3
+        ],
+        "west": [
+          0,
+          3,
+          3.2,
+          5.4
+        ],
+        "gallery": [
+          3.2,
+          3,
+          8.4,
+          5.4
+        ],
+        "east": [
+          8.4,
+          3,
+          11.6,
+          5.4
+        ],
+        "north_west": [
+          0,
+          5.4,
+          5.8,
+          8.8
+        ],
+        "north_east": [
+          5.8,
+          5.4,
+          11.6,
+          8.8
+        ]
+      },
+      "doors": [
+        [
+          "north_west",
+          "north_east",
+          7,
+          1.4
+        ],
+        [
+          "south_west",
+          "south_east",
+          1.4,
+          1.6
+        ],
+        [
+          "gallery",
+          "west",
+          4.2,
+          1.4
+        ],
+        [
+          "gallery",
+          "east",
+          4.2,
+          1.4
+        ],
+        [
+          "gallery",
+          "south_east",
+          6.6,
+          1.6
+        ],
+        [
+          "south_west",
+          "west",
+          1.5,
+          1.4
+        ],
+        [
+          "east",
+          "north_east",
+          10.3,
+          1.4
+        ],
+        [
+          "north_west",
+          "west",
+          1.8,
+          1.6
+        ]
+      ],
+      "start_xy": [
+        5.9,
+        4.1
+      ],
+      "heading": 3,
+      "shelf": [
+        8.8,
+        7.1,
+        5
+      ],
+      "cabinet": [
+        2.8,
+        1.7,
+        45
+      ]
+    }
+  },
+  "revision": "v2_pre_actor_anchor_only",
+  "pre_actor_correction": {
+    "layout": "ind26_bent_corridor",
+    "old_anchor_xy_m": [
+      1.3,
+      1.3
+    ],
+    "new_anchor_xy_m": [
+      4.3,
+      4.1
+    ],
+    "heading_before_after": [
+      1,
+      1
+    ],
+    "old_minimum_all_room_return_actions": 210,
+    "new_minimum_all_room_return_actions": 192,
+    "geometry_only_validation": "Same swept graph and unchanged mesh. The first tested admissible elbow anchor is adopted. No strategy outcomes or actions were consulted.",
+    "prior_audit_sha256": "598c79051099ced49451214bfd6b01d924dba4bab375f48fc4fb837b1a4f76a2"
+  }
+}

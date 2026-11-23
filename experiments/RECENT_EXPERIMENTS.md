@@ -4,6 +4,8 @@
 
 | 日期 | 实验 | 成果入口 |
 | --- | --- | --- |
+| 11 月 23 日 | 四个独立楼层的区域探索验证（12 轮仿真） | [协议、原始记录与复跑](offline_20261123_region_independent_floors/README.md) · [逐楼对照](offline_20261123_region_independent_floors/paper/TABLES.md) · [覆盖与联合质量图](offline_20261123_region_independent_floors/paper/coverage_joint_quality.pdf) · [实验简报](offline_20261123_region_independent_floors/paper/BRIEF.md) |
+| 11 月 23 日 | 货架观察路线的时间代价与新增表面 | [协议与复跑](offline_20261123_shelf_time_opportunity/README.md) · [配对实验简报](offline_20261123_shelf_time_opportunity/paper/BRIEF.md) · [核验记录](offline_20261123_shelf_time_opportunity/completion_audit.json) |
 | 11 月 22 日 | 六组货架遮挡配对实验 | [实验协议与复跑](offline_20261122_shelf_occlusion_pairs/README.md) · [逐回合](offline_20261122_shelf_occlusion_pairs/results/formal/episodes.csv) · [逐布局](offline_20261122_shelf_occlusion_pairs/results/formal/pairs.csv) · [失败记录](offline_20261122_shelf_occlusion_pairs/results/formal/failures.csv) · [结果核验](offline_20261122_shelf_occlusion_pairs/completion_audit.json) |
 | 11 月 22 日 | 货架实验补充诊断 | [全局表面差距的传感器回放](offline_20261122_shelf_occlusion_pairs/followup/global_residual/SENSOR_RESULTS.md) · [局部候选短分支](offline_20261122_shelf_occlusion_pairs/followup/local_witness/RESULTS.md) · [D+ 隐面收益](offline_20261122_shelf_occlusion_pairs/followup/local_scoring_diagnostic/RESULTS.md) · [西侧返航复核](offline_20261122_shelf_occlusion_pairs/followup/west_projection_native/RESULTS.md) |
 | 11 月 22 日 | 区域全局选点修订 | [修订与留出楼层](offline_20261122_region_global_revision/README.md) · [目标区域归属与沿途收益对照](offline_20261122_region_global_revision/next/global_attribution/results/RESULTS.md) · [旧回合技术诊断](offline_20261122_region_global_revision/next/local_technical/RESULTS.md) |

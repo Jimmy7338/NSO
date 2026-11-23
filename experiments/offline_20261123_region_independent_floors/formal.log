@@ -1,0 +1,29 @@
+ind26_bent_corridor F_strict attempt_001 exit 0
+ind26_vertical_spine F_strict attempt_001 exit 0
+ind26_bent_corridor region_S attempt_001 exit 0
+ind26_vertical_spine combined_S attempt_001 exit 0
+ind26_vertical_spine region_S attempt_001 exit 0
+ind26_offset_ring F_strict attempt_001 exit 0
+ind26_double_loop F_strict attempt_001 exit 0
+ind26_offset_ring combined_S attempt_001 exit 0
+ind26_bent_corridor combined_S attempt_001 exit 0
+ind26_double_loop combined_S attempt_001 exit 0
+ind26_offset_ring region_S attempt_001 exit 0
+ind26_double_loop region_S attempt_001 exit 0
+12 of 12 native episodes completed
+ind26_vertical_spine region_S: completed_execution, A95=113, final=192, return=True
+Traceback (most recent call last):
+  File "/home/ouc/nso_robot/analyses/region_independent_floors_20261123/evaluation/evaluate.py", line 482, in <module>
+    main()
+  File "/home/ouc/nso_robot/analyses/region_independent_floors_20261123/evaluation/evaluate.py", line 478, in main
+    evaluate(root, (args.out or root/"results/formal").resolve(), args.known_smoke)
+  File "/home/ouc/nso_robot/analyses/region_independent_floors_20261123/evaluation/evaluate.py", line 417, in evaluate
+    proof = check_success(ev, job, directory, value, parts, binding, scene_root)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ouc/nso_robot/analyses/region_independent_floors_20261123/evaluation/evaluate.py", line 266, in check_success
+    native_guards = guards(directory, case, CAP, len(trace))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ouc/nso_robot/analyses/region_independent_floors_20261123/evaluation/evaluate.py", line 204, in guards
+    kind = event["event"]
+           ~~~~~^^^^^^^^^
+KeyError: 'event'
