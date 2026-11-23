@@ -44,6 +44,7 @@ def plot(analysis,out):
             occ=ref['occupancy']
         track.imshow(occ, cmap='Greys',alpha=.23,vmin=0,vmax=1,origin='upper',extent=(0,width*r,0,height*r),interpolation='nearest')
         tracks=analysis['arms'][layout]
+        fork_marked=False
         for arm in ARMS:
             val=tracks.get(arm,{})
             if val.get('status')!='verified_native_episode':
@@ -57,8 +58,9 @@ def plot(analysis,out):
             prefix_pose=initial['anchor'][:2] if prefix==0 else sites[prefix-1]
             xy=points_xy([prefix_pose]+sites[prefix:],height,r)
             track.plot(xy[:,0],xy[:,1],LINE[arm],color=COLORS[arm],linewidth=1.5,alpha=.90)
-            if arm=='S':
+            if not fork_marked:
                 track.scatter(*xy[0],marker='*',c='#111111',s=40,zorder=5)
+                fork_marked=True
         hits=preflight['visible_shelf_samples']
         track.set_title(f"{label[layout]} — side-view hits {hits:,}/10,000",loc='left',fontsize=11)
         track.set_xlim(.0,width*r);track.set_ylim(.0,height*r)
@@ -71,16 +73,18 @@ def plot(analysis,out):
             xyz=mask['reference_shelf_xyz_m']
             plotted=xyz[:,[0,2]]
             shelf.scatter(*plotted.T,s=1,c='#BBBBBB',alpha=.35)
-            if not {'S_common_shelf','D_common_shelf','S_fork_shelf','S_terminal_shelf','D_terminal_shelf'}<=set(mask.files):
-                shelf.text(.5,.98,'No paired surface checkpoint',ha='center',va='top',transform=shelf.transAxes)
-            else:
+            usable={'S_common_shelf','D_common_shelf','S_fork_shelf','S_terminal_shelf','D_terminal_shelf'}<=set(mask.files)
+            if usable:
                 before=mask['S_fork_shelf']
                 l,rnew=mask['S_common_shelf']&~before,mask['D_common_shelf']&~before
                 for points,color,sz in [(l&rnew,'#667481',2),(l&~rnew,COLORS['S'],4),(rnew&~l,COLORS['D'],4)]:
                     shelf.scatter(*plotted[points].T,s=sz,c=color,alpha=.8)
                 retained=((l&~rnew)&mask['S_terminal_shelf']&~mask['D_terminal_shelf'])|((rnew&~l)&mask['D_terminal_shelf']&~mask['S_terminal_shelf'])
                 shelf.scatter(*plotted[retained].T,s=9,facecolor='none',edgecolor='#222222',linewidth=.45)
-        shelf.set_title(f'Shelf surfaces at action {analysis["common_paid"]}',loc='center',fontsize=10)
+        caption=(f'Shelf surfaces at action {analysis["common_paid"]}' if usable
+                 else f'Action {analysis["common_paid"]} comparison unavailable')
+        shelf.set_title(caption,loc='center',fontsize=10)
+        shelf.set_xticks(np.round(np.quantile(plotted[:,0],(.04,.96)),2))
         shelf.set_xlabel('x (m)');shelf.set_ylabel('z (m)');shelf.set_aspect('equal')
     handles=[Line2D([0],[0],color=COLORS[arm],linestyle=LINE[arm],label={'G':'neutral G_perf','D':'direct inspection','S':'correct structure','X':'swapped category'}[arm]) for arm in ARMS]
     handles.extend([Line2D([0],[0],color='#111111',marker='*',linestyle='None',label='shared fork'),
