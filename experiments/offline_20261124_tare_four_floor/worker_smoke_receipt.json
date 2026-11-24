@@ -1,0 +1,355 @@
+[
+  {
+    "status": "ready",
+    "master_uri": "http://127.0.0.1:40971/",
+    "pid": 69970,
+    "node_sha256": "a41fd3967455594eed3f3eafbb5e130d89b5d9077ea0a19b1178c2af7435258e",
+    "parameters": {
+      "sub_start_exploration_topic_": "/start_exploration",
+      "sub_terrain_map_topic_": "/terrain_map",
+      "sub_terrain_map_ext_topic_": "/terrain_map_ext",
+      "sub_state_estimation_topic_": "/state_estimation_at_scan",
+      "sub_registered_scan_topic_": "/registered_scan",
+      "sub_coverage_boundary_topic_": "/sensor_coverage_planner/coverage_boundary",
+      "sub_viewpoint_boundary_topic_": "/navigation_boundary",
+      "sub_nogo_boundary_topic_": "/sensor_coverage_planner/nogo_boundary",
+      "sub_joystick_topic_": "/joy",
+      "sub_reset_waypoint_topic_": "/reset_waypoint",
+      "pub_exploration_finish_topic_": "exploration_finish",
+      "pub_runtime_breakdown_topic_": "runtime_breakdown",
+      "pub_runtime_topic_": "/runtime",
+      "pub_waypoint_topic_": "/way_point",
+      "pub_momentum_activation_count_topic_": "momentum_activation_count",
+      "kAutoStart": true,
+      "kRushHome": true,
+      "kUseTerrainHeight": false,
+      "kCheckTerrainCollision": true,
+      "kExtendWayPoint": true,
+      "kUseLineOfSightLookAheadPoint": true,
+      "kNoExplorationReturnHome": true,
+      "kExtendWayPointDistanceBig": 8.0,
+      "kExtendWayPointDistanceSmall": 3.5,
+      "kKeyposeCloudDwzFilterLeafSize": 0.2,
+      "kRushHomeDist": 5,
+      "kAtHomeDistThreshold": 0.5,
+      "kTerrainCollisionThreshold": 0.5,
+      "kLookAheadDistance": 8,
+      "kUseMomentum": false,
+      "kDirectionChangeCounterThr": 6,
+      "kDirectionNoChangeCounterThr": 5,
+      "kResetWaypointJoystickAxesID": 2,
+      "kUseFrontier": true,
+      "kFrontierClusterTolerance": 1.0,
+      "kFrontierClusterMinSize": 10,
+      "kUseCoverageBoundaryOnFrontier": false,
+      "kUseCoverageBoundaryOnObjectSurface": false,
+      "rolling_occupancy_grid/resolution_x": 0.3,
+      "rolling_occupancy_grid/resolution_y": 0.3,
+      "rolling_occupancy_grid/resolution_z": 0.3,
+      "kSurfaceCloudDwzLeafSize": 0.3,
+      "kCollisionCloudDwzLeafSize": 0.2,
+      "kKeyposeCloudStackNum": 5,
+      "kPointCloudRowNum": 50,
+      "kPointCloudColNum": 50,
+      "kPointCloudLevelNum": 30,
+      "kMaxCellPointNum": 100000,
+      "kPointCloudCellSize": 18,
+      "kPointCloudCellHeight": 1.8,
+      "kPointCloudManagerNeighborCellNum": 5,
+      "kCoverCloudZSqueezeRatio": 2.0,
+      "keypose_graph/kAddNodeMinDist": 1.0,
+      "keypose_graph/kAddNonKeyposeNodeMinDist": 0.5,
+      "keypose_graph/kAddEdgeConnectDistThr": 3.0,
+      "keypose_graph/kAddEdgeToLastKeyposeDistThr": 3.0,
+      "keypose_graph/kAddEdgeVerticalThreshold": 1.0,
+      "keypose_graph/kAddEdgeCollisionCheckResolution": 0.4,
+      "keypose_graph/kAddEdgeCollisionCheckRadius": 0.4,
+      "keypose_graph/kAddEdgeCollisionCheckPointNumThr": 1,
+      "viewpoint_manager/number_x": 50,
+      "viewpoint_manager/number_y": 50,
+      "viewpoint_manager/number_z": 1,
+      "viewpoint_manager/resolution_x": 0.6,
+      "viewpoint_manager/resolution_y": 0.6,
+      "viewpoint_manager/resolution_z": 0.0,
+      "kConnectivityHeightDiffThr": 0.25,
+      "kGreedyViewPointSampleRange": 3,
+      "kLocalPathOptimizationItrMax": 10,
+      "kViewPointCollisionMargin": 0.5,
+      "kViewPointCollisionMarginZPlus": 0.5,
+      "kViewPointCollisionMarginZMinus": 0.5,
+      "kCollisionGridZScale": 1.0,
+      "kCollisionGridResolutionX": 0.2,
+      "kCollisionGridResolutionY": 0.2,
+      "kCollisionGridResolutionZ": 0.0,
+      "kCollisionPointThr": 1,
+      "kLineOfSightStopAtNearestObstacle": false,
+      "kViewPointHeightFromTerrain": 0.75,
+      "kViewPointHeightFromTerrainChangeThreshold": 0.6,
+      "kCheckDynamicObstacleCollision": false,
+      "kCollisionFrameCountMax": 3,
+      "kSensorRange": 7.5,
+      "kNeighborRange": 3.0,
+      "kCoverageOcclusionThr": 0.3,
+      "kCoverageDilationRadius": 0.5,
+      "kGridWorldXNum": 121,
+      "kGridWorldYNum": 121,
+      "kGridWorldZNum": 121,
+      "kGridWorldCellHeight": 3.0,
+      "kGridWorldNearbyGridNum": 5,
+      "kMinAddPointNumSmall": 40,
+      "kMinAddPointNumBig": 60,
+      "kMinAddFrontierPointNum": 20,
+      "kCellExploringToCoveredThr": 1,
+      "kCellCoveredToExploringThr": 10,
+      "kCellExploringToAlmostCoveredThr": 10,
+      "kCellAlmostCoveredToExploringThr": 20,
+      "kCellUnknownToExploringThr": 1,
+      "kExploringSubspaceMarkerColorGradientAlpha": true,
+      "kExploringSubspaceMarkerColorMaxAlpha": 0.8,
+      "kExploringSubspaceMarkerColorR": 0.0,
+      "kExploringSubspaceMarkerColorG": 1.0,
+      "kExploringSubspaceMarkerColorB": 0.0,
+      "kExploringSubspaceMarkerColorA": 1.0,
+      "kLocalPlanningHorizonMarkerColorR": 0.0,
+      "kLocalPlanningHorizonMarkerColorG": 1.0,
+      "kLocalPlanningHorizonMarkerColorB": 0.0,
+      "kLocalPlanningHorizonMarkerColorA": 1.0,
+      "kLocalPlanningHorizonMarkerWidth": 0.3,
+      "kLocalPlanningHorizonHeight": 3.0
+    },
+    "parameters_sha256": "f41086a82d38a172391479556d03d90120bff1112e1e25f0f49bdb1a03bf651e",
+    "native_log": "/home/ouc/nso_robot/analyses/tare_four_floor_20261124/worker_smoke_native.log",
+    "scans_per_keypose": 5,
+    "native_timer_hz": 1,
+    "terrain_inputs_published": false,
+    "boundary_inputs_published": false,
+    "initial_unsensed_waypoint_ignored": true
+  },
+  {
+    "status": "observed",
+    "action_id": 0,
+    "packet_sha256": "3f5b89fb7f0e325dc75acb207247ddc39af6ec7cf5b2749f72ca1ec8916f7c99",
+    "rgbd_points": 3119,
+    "planar_hit_points": 95,
+    "published_registered_scans": 1,
+    "unique_paid_observations": 1,
+    "expected_native_planning_due": false,
+    "native_keypose_completed": false,
+    "native_keypose_completion_timeout": false,
+    "fresh_waypoint": false,
+    "waypoint": null,
+    "paths": {},
+    "exploration_finished": false,
+    "fresh_exploration_finished": false,
+    "native_runtime_s": null,
+    "wall_wait_s": 0.06044435300282203,
+    "odometry_xyz": [
+      4.1000000000000005,
+      0.7000000000000001,
+      0.8
+    ],
+    "odometry_yaw_rad": 1.5707963267948966,
+    "odometry_reference": "laser_xy_yaw_and_camera_height"
+  },
+  {
+    "status": "observed",
+    "action_id": 1,
+    "packet_sha256": "b45fe9be1125ff98f18e075ab8b512501aa099fa84975bdc3f9ff5abd6108031",
+    "rgbd_points": 4333,
+    "planar_hit_points": 95,
+    "published_registered_scans": 2,
+    "unique_paid_observations": 2,
+    "expected_native_planning_due": false,
+    "native_keypose_completed": false,
+    "native_keypose_completion_timeout": false,
+    "fresh_waypoint": false,
+    "waypoint": null,
+    "paths": {},
+    "exploration_finished": false,
+    "fresh_exploration_finished": false,
+    "native_runtime_s": null,
+    "wall_wait_s": 0.06046224098827224,
+    "odometry_xyz": [
+      4.1000000000000005,
+      0.7000000000000001,
+      0.8
+    ],
+    "odometry_yaw_rad": 0.0,
+    "odometry_reference": "laser_xy_yaw_and_camera_height"
+  },
+  {
+    "status": "observed",
+    "action_id": 2,
+    "packet_sha256": "3e1900cefabb7a997e9eeda26d784334374267d335e7781d9aca41347d39c422",
+    "rgbd_points": 6829,
+    "planar_hit_points": 95,
+    "published_registered_scans": 3,
+    "unique_paid_observations": 3,
+    "expected_native_planning_due": false,
+    "native_keypose_completed": false,
+    "native_keypose_completion_timeout": false,
+    "fresh_waypoint": false,
+    "waypoint": null,
+    "paths": {},
+    "exploration_finished": false,
+    "fresh_exploration_finished": false,
+    "native_runtime_s": null,
+    "wall_wait_s": 0.06053808200522326,
+    "odometry_xyz": [
+      4.1000000000000005,
+      0.7000000000000001,
+      0.8
+    ],
+    "odometry_yaw_rad": -1.5707963267948966,
+    "odometry_reference": "laser_xy_yaw_and_camera_height"
+  },
+  {
+    "status": "observed",
+    "action_id": 3,
+    "packet_sha256": "7fa653c7ff004857d4e35a9298f7b3d64a4a6a49b0b3d9a5adba5ec5fc25cb34",
+    "rgbd_points": 5944,
+    "planar_hit_points": 95,
+    "published_registered_scans": 4,
+    "unique_paid_observations": 4,
+    "expected_native_planning_due": false,
+    "native_keypose_completed": false,
+    "native_keypose_completion_timeout": false,
+    "fresh_waypoint": false,
+    "waypoint": null,
+    "paths": {},
+    "exploration_finished": false,
+    "fresh_exploration_finished": false,
+    "native_runtime_s": null,
+    "wall_wait_s": 0.060529378009960055,
+    "odometry_xyz": [
+      4.1000000000000005,
+      0.7000000000000001,
+      0.8
+    ],
+    "odometry_yaw_rad": 3.141592653589793,
+    "odometry_reference": "laser_xy_yaw_and_camera_height"
+  },
+  {
+    "status": "observed",
+    "action_id": 4,
+    "packet_sha256": "b2e226eec91575d7653cdcb9abe8bb7dab7c5267374412cfcaff7c02e42951fe",
+    "rgbd_points": 3121,
+    "planar_hit_points": 95,
+    "published_registered_scans": 5,
+    "unique_paid_observations": 5,
+    "expected_native_planning_due": true,
+    "native_keypose_completed": true,
+    "native_keypose_completion_timeout": false,
+    "fresh_waypoint": true,
+    "waypoint": {
+      "frame_id": "map",
+      "xyz": [
+        -3.8671456517416303,
+        1.424285968340145,
+        0.8
+      ],
+      "valid": true,
+      "source_action_id": 4
+    },
+    "paths": {
+      "local_path": {
+        "frame_id": "map",
+        "xyz": [
+          [
+            4.4,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            3.8000000000000007,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            3.2000000000000006,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            2.6000000000000005,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            2.000000000000001,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            1.400000000000001,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            0.8000000000000009,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            1.400000000000001,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            2.000000000000001,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            2.6000000000000005,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            3.2000000000000006,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            3.8000000000000007,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            4.4,
+            0.9999999999999987,
+            0.8
+          ]
+        ],
+        "source_action_id": 4
+      },
+      "global_path": {
+        "frame_id": "map",
+        "xyz": [
+          [
+            4.4,
+            0.9999999999999987,
+            0.8
+          ],
+          [
+            4.4,
+            0.9999999999999987,
+            0.8
+          ]
+        ],
+        "source_action_id": 4
+      }
+    },
+    "exploration_finished": false,
+    "fresh_exploration_finished": false,
+    "native_runtime_s": 0.32600000500679016,
+    "wall_wait_s": 0.9019820700050332,
+    "odometry_xyz": [
+      4.1000000000000005,
+      0.7000000000000001,
+      0.8
+    ],
+    "odometry_yaw_rad": 1.5707963267948966,
+    "odometry_reference": "laser_xy_yaw_and_camera_height"
+  }
+]

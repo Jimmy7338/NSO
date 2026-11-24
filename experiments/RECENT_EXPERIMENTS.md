@@ -4,6 +4,7 @@
 
 | 日期 | 实验 | 成果入口 |
 | --- | --- | --- |
+| 11 月 24 日 | TARE 共用传感器对照（四楼） | [协议与复跑](offline_20261124_tare_four_floor/README.md) · [逐楼结果](offline_20261124_tare_four_floor/RESULTS.md) · [逐帧核验](offline_20261124_tare_four_floor/results/formal/transport_audit.json) |
 | 11 月 24 日 | Explore Lite 和 ARiADNE 同楼层对照（8 轮仿真） | [协议、结果与复跑](offline_20261124_external_exploration_baselines/README.md) · [Explore Lite 配对](offline_20261124_external_exploration_baselines/results/explore/pairs.csv) · [ARiADNE 配对](offline_20261124_external_exploration_baselines/results/ariadne/pairs.csv) · [TARE 接口验证](offline_20261124_external_exploration_baselines/work/tare/PROBE.md) |
 | 11 月 23 日 | 四个独立楼层的区域探索验证（12 轮仿真） | [协议、原始记录与复跑](offline_20261123_region_independent_floors/README.md) · [逐楼对照](offline_20261123_region_independent_floors/paper/TABLES.md) · [覆盖与联合质量图](offline_20261123_region_independent_floors/paper/coverage_joint_quality.pdf) · [实验简报](offline_20261123_region_independent_floors/paper/BRIEF.md) |
 | 11 月 23 日 | 货架观察路线的时间代价与新增表面 | [协议与复跑](offline_20261123_shelf_time_opportunity/README.md) · [配对实验简报](offline_20261123_shelf_time_opportunity/paper/BRIEF.md) · [核验记录](offline_20261123_shelf_time_opportunity/completion_audit.json) |
