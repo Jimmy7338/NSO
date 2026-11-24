@@ -1,9 +1,10 @@
 # NSO 近期实验归档
 
-更新于 2026 年 11 月 23 日。各实验入口给出对应的协议、评估数据和复跑材料。货架遮挡实验及西侧返航修复的结果来自仿真。
+更新于 2026 年 11 月 24 日。各实验入口给出对应的协议、评估数据和复跑材料。货架遮挡实验及西侧返航修复的结果来自仿真。
 
 | 日期 | 实验 | 成果入口 |
 | --- | --- | --- |
+| 11 月 24 日 | Explore Lite 和 ARiADNE 同楼层对照（8 轮仿真） | [协议、结果与复跑](offline_20261124_external_exploration_baselines/README.md) · [Explore Lite 配对](offline_20261124_external_exploration_baselines/results/explore/pairs.csv) · [ARiADNE 配对](offline_20261124_external_exploration_baselines/results/ariadne/pairs.csv) · [TARE 接口验证](offline_20261124_external_exploration_baselines/work/tare/PROBE.md) |
 | 11 月 23 日 | 四个独立楼层的区域探索验证（12 轮仿真） | [协议、原始记录与复跑](offline_20261123_region_independent_floors/README.md) · [逐楼对照](offline_20261123_region_independent_floors/paper/TABLES.md) · [覆盖与联合质量图](offline_20261123_region_independent_floors/paper/coverage_joint_quality.pdf) · [实验简报](offline_20261123_region_independent_floors/paper/BRIEF.md) |
 | 11 月 23 日 | 货架观察路线的时间代价与新增表面 | [协议与复跑](offline_20261123_shelf_time_opportunity/README.md) · [配对实验简报](offline_20261123_shelf_time_opportunity/paper/BRIEF.md) · [核验记录](offline_20261123_shelf_time_opportunity/completion_audit.json) |
 | 11 月 22 日 | 六组货架遮挡配对实验 | [实验协议与复跑](offline_20261122_shelf_occlusion_pairs/README.md) · [逐回合](offline_20261122_shelf_occlusion_pairs/results/formal/episodes.csv) · [逐布局](offline_20261122_shelf_occlusion_pairs/results/formal/pairs.csv) · [失败记录](offline_20261122_shelf_occlusion_pairs/results/formal/failures.csv) · [结果核验](offline_20261122_shelf_occlusion_pairs/completion_audit.json) |
