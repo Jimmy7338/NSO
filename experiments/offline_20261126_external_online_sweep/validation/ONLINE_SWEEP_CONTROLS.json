@@ -1,0 +1,108 @@
+{
+  "schema": "nso_online_sweep_blind_regression_v1",
+  "adapter": "/home/ouc/nso_robot/analyses/external_online_sweep_20261126/sensor_probe/blind_fixture_adapter.py:admit",
+  "adapter_sha256": "81ec116aa4d8b85d4a4fb9f9c72e7639d8e38a93f33b80ae17c92a86edb6295a",
+  "tests": [
+    {
+      "fixture": "observed_open_room_admitted",
+      "expected_admitted": true,
+      "actual_admitted": true,
+      "passes": true,
+      "basis": "finite returns surround the sweep and all hit points are at least 1.8 m away"
+    },
+    {
+      "fixture": "wall_inside_swept_radius_rejected",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "a finite segment at 0.16 m intersects the footprint near the end, clear of the start disk"
+    },
+    {
+      "fixture": "wall_outside_swept_radius_admitted",
+      "expected_admitted": true,
+      "actual_admitted": true,
+      "passes": true,
+      "basis": "a finite measured wall at 0.24 m stays outside the 0.20 m capsule"
+    },
+    {
+      "fixture": "doorway_inside_exact_radius_rejected",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "0.38 m opening is too narrow although both jambs quantize like the safe doorway"
+    },
+    {
+      "fixture": "same_grid_cells_wider_doorway_admitted",
+      "expected_admitted": true,
+      "actual_admitted": true,
+      "passes": true,
+      "basis": "0.42 m opening clears the exact footprint although both jamb cells match the unsafe doorway"
+    },
+    {
+      "fixture": "unobserved_forward_wedge_rejected",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "invalid forward rays leave the newly swept area unobserved despite finite surrounding rays"
+    },
+    {
+      "fixture": "unobserved_lateral_area_rejected",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "a narrow forward slice does not observe the newly swept lateral sides"
+    },
+    {
+      "fixture": "no_return_forward_wedge_rejected",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "max-range no-return rays do not establish traversal through a large unsupported forward arc"
+    },
+    {
+      "fixture": "measured_lower_support_rejected",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "RGB-D shows a lower surface at the landing capsule while lidar sees the far enclosure"
+    },
+    {
+      "fixture": "rotated_open_capsule_admitted",
+      "expected_admitted": true,
+      "actual_admitted": true,
+      "passes": true,
+      "basis": "same free sweep after translation and a non-cardinal rotation"
+    },
+    {
+      "fixture": "rotated_endpoint_hit_rejected",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "return is 0.16 m beyond the target, inside only the terminal cap"
+    },
+    {
+      "fixture": "rotated_beyond_endpoint_admitted",
+      "expected_admitted": true,
+      "actual_admitted": true,
+      "passes": true,
+      "basis": "return is 0.24 m beyond the target and outside both swept caps"
+    },
+    {
+      "fixture": "contradictory_rgbd_obstacle_wins",
+      "expected_admitted": false,
+      "actual_admitted": false,
+      "passes": true,
+      "basis": "a body-height RGB-D point inside the endpoint cap overrides free lidar at another height"
+    },
+    {
+      "fixture": "rgbd_obstacle_outside_capsule_admitted",
+      "expected_admitted": true,
+      "actual_admitted": true,
+      "passes": true,
+      "basis": "same RGB-D obstacle height, now outside the full swept footprint"
+    }
+  ],
+  "passed": 14,
+  "total": 14,
+  "all_required_pass": true
+}
