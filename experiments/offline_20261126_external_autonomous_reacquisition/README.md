@@ -12,7 +12,7 @@ B 检查当前车位相邻、现有通行图无法到达的一步边。两侧中
 
 ## 复现
 
-在具备前述基线、已登记扫描资产和原仿真依赖的实验目录中执行。冻结文件记录了基线源、场景准入、首帧、对应评价掩膜和依赖的 SHA-256。网格和表面真值仅供评价使用。
+新增试验从具备前述基线、已登记扫描资产和原仿真依赖的空执行目录启动。冻结文件记录了基线源、场景准入、首帧、对应评价掩膜和依赖的 SHA-256。网格和表面真值仅供评价使用。
 
 ```bash
 python study.py development
@@ -21,6 +21,14 @@ python study.py seal
 python study.py run
 python evaluate.py
 python figures/plot_trajectory_case.py
+```
+
+查看已完成实验可直接用原生归档中的位姿、动作与传感包校验值重放，保留原执行目录结构。以下命令把重新计算的证据输出到独立路径。
+
+```bash
+python evaluate.py --phase development --out /tmp/nso_autonomous_development_replay
+python evaluate.py --phase formal --out /tmp/nso_autonomous_formal_replay
+python figures/plot_trajectory_case.py --development
 ```
 
 预登记开发回合用于核验自动补测、实际跨边和实体拒绝。四个正式起点各跑一次 A 和一次 B，每轮最多 192 个动作。第 96、192 步仅用实际执行到相应步数的记录。早停另列最后共同时点和真实终点。用覆盖率与 5 cm 距离阈值下的全场景表面 F1 的乘积报告联合质量 J。

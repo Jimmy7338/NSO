@@ -5,6 +5,7 @@
 | 日期 | 实验 | 成果入口 |
 | --- | --- | --- |
 | 11 月 26 日 | RAS 四楼因子消融（8 轮新增、8 轮复用） | [协议与结果](offline_20261126_ras_regional_factorial/README.md) · [交互与逐楼结果](offline_20261126_ras_regional_factorial/factor_audit/A_FACTOR_RESULTS.md) · [原生地图图件](offline_20261126_ras_regional_factorial/paper/checkpoints_a96.pdf) |
+| 11 月 26 日 | 通用地面补测（四起点配对仿真） | [配对结果](offline_20261126_external_autonomous_reacquisition/FINDINGS.md) · [冻结协议](offline_20261126_external_autonomous_reacquisition/FORMAL_PROTOCOL.json) |
 | 11 月 26 日 | HM3D 指定出口主动补测（独立验证＋12 轮） | [同掩膜结果](offline_20261126_external_active_sweep_observation/FINDINGS.md) · [主动补测核验](offline_20261126_external_active_sweep_observation/validation/GATE_AUDIT.json) · [正式回合](offline_20261126_external_active_sweep_observation/FORMAL_OBSERVATION_AUDIT.json) |
 | 11 月 26 日 | 在线扫掠窄通道修正（12 轮） | [共同掩膜与对照结果](offline_20261126_external_online_sweep/FINDINGS.md) · [固定回放](offline_20261126_external_online_sweep/replay/README.md) · [执行核验](offline_20261126_external_online_sweep/SWEEP_EXECUTION_AUDIT.json) |
 | 11 月 26 日 | 异源场景连续地面修正和 HM3D 停滞核验（12 轮） | [配对复跑](offline_20261126_external_support_continuity/FINDINGS.md) · [停滞诊断](offline_20261126_external_support_continuity/plateau/README.md) · [同轨迹核验](offline_20261126_external_support_continuity/HM3D_START1_RERUN_AUDIT.json) |

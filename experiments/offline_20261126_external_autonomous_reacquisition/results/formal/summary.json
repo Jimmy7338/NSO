@@ -1,0 +1,662 @@
+{
+  "schema": "nso_autonomous_reacquisition_comparison_v1",
+  "scope": "registered-start A/B comparison",
+  "registered_pairs": 4,
+  "distinct_source_floor_count": 2,
+  "formal_runs": 8,
+  "source_scope": {
+    "distinct_source_floors": [
+      "hm3d_00770",
+      "replica_apartment1"
+    ],
+    "previously_used_source_floors": [
+      "hm3d_00770",
+      "replica_apartment1"
+    ]
+  },
+  "measurement_provenance": {
+    "freeze_sha256": "405a22244f12669dde4fc4526c1173b3fbbcdec8e43d5c7394c6022eb04640b4",
+    "protocol_sha256": "5edd80b4ea145c43b25ca34143519bb5ce7228d17dd0cdaddd5c2c35d03e8a09",
+    "phase_receipt_sha256": "ea2ce233a36e5bb43f528f1ea7a3b29e11ce2b03ed04ae1f14d002ca6c07149d",
+    "evaluator_sha256": "a2e0ca29f1984946ec87bef21e73a91fda4c66a316129022d5dbf307474f9cf8"
+  },
+  "reference": "same frozen V2-style reachable mask and surface samples within each start pair",
+  "clock_policy": "96 and 192 require native capture at exactly that paid time. Last common time is min(terminal A, terminal B). Terminal rows may have unequal paid counts.",
+  "arms": {
+    "A": "combined_S no autonomous inspection",
+    "B": "combined_S with autonomous inspection"
+  },
+  "comparisons": {
+    "paid_96": {
+      "registered_pairs": 4,
+      "observed_pairs": 2,
+      "observed_source_floors": 1,
+      "same_paid_is_required": true,
+      "metrics": {
+        "C_free": {
+          "positive": 0,
+          "tied": 1,
+          "negative": 1,
+          "paired_start_mean_pp": -0.1417769376181488,
+          "equal_floor_mean_pp": -0.1417769376181488
+        },
+        "F1_scene_05cm": {
+          "positive": 1,
+          "tied": 1,
+          "negative": 0,
+          "paired_start_mean_pp": 0.00812290497709256,
+          "equal_floor_mean_pp": 0.00812290497709256
+        },
+        "J": {
+          "positive": 0,
+          "tied": 1,
+          "negative": 1,
+          "paired_start_mean_pp": -0.11111078829414422,
+          "equal_floor_mean_pp": -0.11111078829414422
+        }
+      }
+    },
+    "paid_192": {
+      "registered_pairs": 4,
+      "observed_pairs": 1,
+      "observed_source_floors": 1,
+      "same_paid_is_required": true,
+      "metrics": {
+        "C_free": {
+          "positive": 0,
+          "tied": 0,
+          "negative": 1,
+          "paired_start_mean_pp": -0.4725897920604849,
+          "equal_floor_mean_pp": -0.4725897920604849
+        },
+        "F1_scene_05cm": {
+          "positive": 0,
+          "tied": 0,
+          "negative": 1,
+          "paired_start_mean_pp": -1.08476324289567,
+          "equal_floor_mean_pp": -1.08476324289567
+        },
+        "J": {
+          "positive": 0,
+          "tied": 0,
+          "negative": 1,
+          "paired_start_mean_pp": -1.470699491287708,
+          "equal_floor_mean_pp": -1.470699491287708
+        }
+      }
+    },
+    "last_common_paid": {
+      "registered_pairs": 4,
+      "observed_pairs": 4,
+      "observed_source_floors": 2,
+      "same_paid_is_required": true,
+      "metrics": {
+        "C_free": {
+          "positive": 1,
+          "tied": 0,
+          "negative": 3,
+          "paired_start_mean_pp": -5.598052156010939,
+          "equal_floor_mean_pp": -5.598052156010939
+        },
+        "F1_scene_05cm": {
+          "positive": 1,
+          "tied": 0,
+          "negative": 3,
+          "paired_start_mean_pp": -2.617181994476442,
+          "equal_floor_mean_pp": -2.617181994476442
+        },
+        "J": {
+          "positive": 1,
+          "tied": 0,
+          "negative": 3,
+          "paired_start_mean_pp": -1.7725429710005793,
+          "equal_floor_mean_pp": -1.7725429710005793
+        }
+      }
+    },
+    "terminal": {
+      "registered_pairs": 4,
+      "observed_pairs": 4,
+      "observed_source_floors": 2,
+      "same_paid_is_required": false,
+      "metrics": {
+        "C_free": {
+          "positive": 1,
+          "tied": 1,
+          "negative": 2,
+          "paired_start_mean_pp": -2.978219049082936,
+          "equal_floor_mean_pp": -2.978219049082936
+        },
+        "F1_scene_05cm": {
+          "positive": 3,
+          "tied": 0,
+          "negative": 1,
+          "paired_start_mean_pp": 1.3840519854779423,
+          "equal_floor_mean_pp": 1.3840519854779423
+        },
+        "J": {
+          "positive": 2,
+          "tied": 0,
+          "negative": 2,
+          "paired_start_mean_pp": -0.5195290659113816,
+          "equal_floor_mean_pp": -0.5195290659113816
+        }
+      }
+    }
+  },
+  "source_floor_comparisons": {
+    "hm3d_00770": {
+      "paid_96": {
+        "registered_pairs": 2,
+        "observed_pairs": 0,
+        "observed_source_floors": 0,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          }
+        }
+      },
+      "paid_192": {
+        "registered_pairs": 2,
+        "observed_pairs": 0,
+        "observed_source_floors": 0,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          }
+        }
+      },
+      "last_common_paid": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 2,
+            "paired_start_mean_pp": -11.148845332815835,
+            "equal_floor_mean_pp": -11.148845332815835
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 2,
+            "paired_start_mean_pp": -5.120541741539925,
+            "equal_floor_mean_pp": -5.120541741539925
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 2,
+            "paired_start_mean_pp": -3.3750216221909106,
+            "equal_floor_mean_pp": -3.3750216221909106
+          }
+        }
+      },
+      "terminal": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": false,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 1,
+            "negative": 1,
+            "paired_start_mean_pp": -5.909179118959829,
+            "equal_floor_mean_pp": -5.909179118959829
+          },
+          "F1_scene_05cm": {
+            "positive": 2,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": 2.881926218368844,
+            "equal_floor_mean_pp": 2.881926218368844
+          },
+          "J": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.8689938120125151,
+            "equal_floor_mean_pp": -0.8689938120125151
+          }
+        }
+      }
+    },
+    "replica_apartment1": {
+      "paid_96": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 1,
+            "negative": 1,
+            "paired_start_mean_pp": -0.1417769376181488,
+            "equal_floor_mean_pp": -0.1417769376181488
+          },
+          "F1_scene_05cm": {
+            "positive": 1,
+            "tied": 1,
+            "negative": 0,
+            "paired_start_mean_pp": 0.00812290497709256,
+            "equal_floor_mean_pp": 0.00812290497709256
+          },
+          "J": {
+            "positive": 0,
+            "tied": 1,
+            "negative": 1,
+            "paired_start_mean_pp": -0.11111078829414422,
+            "equal_floor_mean_pp": -0.11111078829414422
+          }
+        }
+      },
+      "paid_192": {
+        "registered_pairs": 2,
+        "observed_pairs": 1,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.4725897920604849,
+            "equal_floor_mean_pp": -0.4725897920604849
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -1.08476324289567,
+            "equal_floor_mean_pp": -1.08476324289567
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -1.470699491287708,
+            "equal_floor_mean_pp": -1.470699491287708
+          }
+        }
+      },
+      "last_common_paid": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.04725897920604405,
+            "equal_floor_mean_pp": -0.04725897920604405
+          },
+          "F1_scene_05cm": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.1138222474129591,
+            "equal_floor_mean_pp": -0.1138222474129591
+          },
+          "J": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.17006431981024805,
+            "equal_floor_mean_pp": -0.17006431981024805
+          }
+        }
+      },
+      "terminal": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": false,
+        "metrics": {
+          "C_free": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.04725897920604405,
+            "equal_floor_mean_pp": -0.04725897920604405
+          },
+          "F1_scene_05cm": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.1138222474129591,
+            "equal_floor_mean_pp": -0.1138222474129591
+          },
+          "J": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.17006431981024805,
+            "equal_floor_mean_pp": -0.17006431981024805
+          }
+        }
+      }
+    }
+  },
+  "per_arm": {
+    "A": {
+      "registered_runs": 4,
+      "completed_native_runs": 4,
+      "technical_failures": 0,
+      "native_collision_count": 3,
+      "stopped_at_anchor": 1,
+      "A95_reached": 0,
+      "event_counts": {}
+    },
+    "B": {
+      "registered_runs": 4,
+      "completed_native_runs": 4,
+      "technical_failures": 0,
+      "native_collision_count": 2,
+      "stopped_at_anchor": 2,
+      "A95_reached": 0,
+      "event_counts": {
+        "dispatched": 13,
+        "reached_viewpoint": 12,
+        "fresh_viewpoint_packets": 12,
+        "paid_to_inspection_view": 169,
+        "positive_ground_additions": 6,
+        "full_view_certificates": 2,
+        "guarded_actual_crossings": 2,
+        "positive_support_packets": 8,
+        "paid_to_cross_after_view": 36,
+        "collisions_on_inspection_actions": 1
+      }
+    }
+  },
+  "attempt_conditioned_comparisons": {
+    "certified_crossing": {
+      "paid_96": {
+        "registered_pairs": 2,
+        "observed_pairs": 0,
+        "observed_source_floors": 0,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          }
+        }
+      },
+      "paid_192": {
+        "registered_pairs": 2,
+        "observed_pairs": 0,
+        "observed_source_floors": 0,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": null,
+            "equal_floor_mean_pp": null
+          }
+        }
+      },
+      "last_common_paid": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 2,
+            "paired_start_mean_pp": -11.148845332815835,
+            "equal_floor_mean_pp": -11.148845332815835
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 2,
+            "paired_start_mean_pp": -5.120541741539925,
+            "equal_floor_mean_pp": -5.120541741539925
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 2,
+            "paired_start_mean_pp": -3.3750216221909106,
+            "equal_floor_mean_pp": -3.3750216221909106
+          }
+        }
+      },
+      "terminal": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": false,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 1,
+            "negative": 1,
+            "paired_start_mean_pp": -5.909179118959829,
+            "equal_floor_mean_pp": -5.909179118959829
+          },
+          "F1_scene_05cm": {
+            "positive": 2,
+            "tied": 0,
+            "negative": 0,
+            "paired_start_mean_pp": 2.881926218368844,
+            "equal_floor_mean_pp": 2.881926218368844
+          },
+          "J": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.8689938120125151,
+            "equal_floor_mean_pp": -0.8689938120125151
+          }
+        }
+      }
+    },
+    "inspection_attempt_without_crossing": {
+      "paid_96": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 1,
+            "negative": 1,
+            "paired_start_mean_pp": -0.1417769376181488,
+            "equal_floor_mean_pp": -0.1417769376181488
+          },
+          "F1_scene_05cm": {
+            "positive": 1,
+            "tied": 1,
+            "negative": 0,
+            "paired_start_mean_pp": 0.00812290497709256,
+            "equal_floor_mean_pp": 0.00812290497709256
+          },
+          "J": {
+            "positive": 0,
+            "tied": 1,
+            "negative": 1,
+            "paired_start_mean_pp": -0.11111078829414422,
+            "equal_floor_mean_pp": -0.11111078829414422
+          }
+        }
+      },
+      "paid_192": {
+        "registered_pairs": 2,
+        "observed_pairs": 1,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.4725897920604849,
+            "equal_floor_mean_pp": -0.4725897920604849
+          },
+          "F1_scene_05cm": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -1.08476324289567,
+            "equal_floor_mean_pp": -1.08476324289567
+          },
+          "J": {
+            "positive": 0,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -1.470699491287708,
+            "equal_floor_mean_pp": -1.470699491287708
+          }
+        }
+      },
+      "last_common_paid": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": true,
+        "metrics": {
+          "C_free": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.04725897920604405,
+            "equal_floor_mean_pp": -0.04725897920604405
+          },
+          "F1_scene_05cm": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.1138222474129591,
+            "equal_floor_mean_pp": -0.1138222474129591
+          },
+          "J": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.17006431981024805,
+            "equal_floor_mean_pp": -0.17006431981024805
+          }
+        }
+      },
+      "terminal": {
+        "registered_pairs": 2,
+        "observed_pairs": 2,
+        "observed_source_floors": 1,
+        "same_paid_is_required": false,
+        "metrics": {
+          "C_free": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.04725897920604405,
+            "equal_floor_mean_pp": -0.04725897920604405
+          },
+          "F1_scene_05cm": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.1138222474129591,
+            "equal_floor_mean_pp": -0.1138222474129591
+          },
+          "J": {
+            "positive": 1,
+            "tied": 0,
+            "negative": 1,
+            "paired_start_mean_pp": -0.17006431981024805,
+            "equal_floor_mean_pp": -0.17006431981024805
+          }
+        }
+      }
+    }
+  },
+  "result_sha256": {
+    "AUTONOMOUS_EVIDENCE_AUDIT.json": "df2c4c59caeab78b291e61aa3bc44b4ab959f89b35a5fd741e9bf50514c8558f",
+    "checkpoints.csv": "130a9e0f7b80762ff0fcf6feb50f046b15b30345914a865aa12164b6583b9379",
+    "coverage_curve.csv": "5d38e6736642fe6aace0b5e4b5b0ab3323dcc3caf902c33ad93176eef4b26f7e",
+    "episodes.csv": "409356d11657861b112584cceea233079020bb89ba7468738d9400553c18a54f",
+    "inspection_attempts.csv": "ccc8955dea9cd9833db2343500c31917024cf54a69f6a0834d2c596d0fcc9682",
+    "paired_metrics.csv": "838ab66f796ac9b8e5608474987e1325beded09510e7c3e469b432364c579bb1"
+  }
+}
