@@ -5,6 +5,7 @@
 | 日期 | 实验 | 成果入口 |
 | --- | --- | --- |
 | 11 月 26 日 | RAS 四楼因子消融（8 轮新增、8 轮复用） | [协议与结果](offline_20261126_ras_regional_factorial/README.md) · [交互与逐楼结果](offline_20261126_ras_regional_factorial/factor_audit/A_FACTOR_RESULTS.md) · [原生地图图件](offline_20261126_ras_regional_factorial/paper/checkpoints_a96.pdf) |
+| 11 月 26 日 | Replica／HM3D 地面支撑修正复跑（12 轮） | [原始证据与协议](offline_20261126_external_support_repair/README.md) · [修正前后对照](offline_20261126_external_support_repair/FINDINGS.md) · [新停止点核验](offline_20261126_external_support_repair/RERUN_COLLISION_AUDIT.json) |
 | 11 月 26 日 | Replica／HM3D 异源楼层验证（12 轮） | [场景与复跑](offline_20261126_ras_external_scans/README.md) · [逐楼终点与失败](offline_20261126_ras_external_scans/FAILURE_ANALYSIS.md) · [核验](offline_20261126_ras_external_scans/results/formal/verification.json) |
 | 11 月 24 日 | TARE 共用传感器对照（四楼） | [协议与复跑](offline_20261124_tare_four_floor/README.md) · [逐楼结果](offline_20261124_tare_four_floor/RESULTS.md) · [逐帧核验](offline_20261124_tare_four_floor/results/formal/transport_audit.json) |
 | 11 月 24 日 | Explore Lite 和 ARiADNE 同楼层对照（8 轮仿真） | [协议、结果与复跑](offline_20261124_external_exploration_baselines/README.md) · [Explore Lite 配对](offline_20261124_external_exploration_baselines/results/explore/pairs.csv) · [ARiADNE 配对](offline_20261124_external_exploration_baselines/results/ariadne/pairs.csv) · [TARE 接口验证](offline_20261124_external_exploration_baselines/work/tare/PROBE.md) |
