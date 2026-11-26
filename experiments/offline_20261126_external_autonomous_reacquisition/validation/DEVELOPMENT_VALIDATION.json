@@ -1,0 +1,574 @@
+{
+  "schema": "nso_v5_autonomous_ground_development_validation_v1",
+  "run": "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/execution/development/b26_hm3d_00770_s1/B/attempt_001/run",
+  "autonomous_evidence_gain": true,
+  "actual_certified_crossing": true,
+  "safety_rejection": true,
+  "event_counts": {
+    "ground_reacquisition_rejected": 19,
+    "ground_reacquisition_dispatch": 3,
+    "ground_reacquisition_support": 3,
+    "ground_reacquisition_view": 3,
+    "ground_reacquisition_replan": 2,
+    "ground_reacquisition_cross": 2,
+    "ground_reacquisition_end": 3
+  },
+  "positive_chains": [
+    {
+      "view": {
+        "event": "ground_reacquisition_view",
+        "inspection_id": 1,
+        "paid": 46,
+        "pose": [
+          45,
+          18,
+          1
+        ],
+        "edge": [
+          [
+            52,
+            26
+          ],
+          [
+            53,
+            26
+          ]
+        ],
+        "fresh_packet": true,
+        "packet_sha256": "9c936515a5e944f0178959fd592556d57827ed37298e1f20dd603ef7d6ace867",
+        "scan_ranges_sha256": "912cc1df275275611cfd0c59e49c3089995635adfa4443bc89f9609d186fe3fc",
+        "depth_values_sha256": "cddef6601cd4267525cffb66aef2a7e5910d26181d777ff854280655ea68a6c9",
+        "prior_certificate": {
+          "allowed": false,
+          "reason": "missing_positive_ground_support",
+          "nearest_measured_m": {
+            "lidar": 0.32972435759505453,
+            "rgbd": 0.327608286794933,
+            "lower_support": null
+          },
+          "unsupported_xy_probes": 1,
+          "probes": 604,
+          "missing_only_starting_disk": false
+        },
+        "certificate": {
+          "allowed": true,
+          "reason": "measured_full_capsule",
+          "nearest_measured_m": {
+            "lidar": 0.32972170692931135,
+            "rgbd": 0.327608286794933,
+            "lower_support": null
+          },
+          "probes": 604,
+          "missing_only_starting_disk": false
+        },
+        "unsupported_before": 1,
+        "unsupported_after": 0,
+        "newly_supported": 1,
+        "remaining_missing_xy_m": [],
+        "action_cost": 20
+      },
+      "crossing": {
+        "event": "ground_reacquisition_cross",
+        "inspection_id": 1,
+        "paid": 65,
+        "edge": [
+          [
+            52,
+            26
+          ],
+          [
+            53,
+            26
+          ]
+        ],
+        "pose": [
+          53,
+          26,
+          2
+        ],
+        "certificate": {
+          "allowed": true,
+          "reason": "measured_full_capsule",
+          "nearest_measured_m": {
+            "lidar": 0.32972170692931135,
+            "rgbd": 0.327608286794933,
+            "lower_support": null
+          },
+          "probes": 604,
+          "missing_only_starting_disk": false
+        },
+        "measured_view_paid": 46,
+        "packet_sha256": "e0fa1ec97ab9880421fbd73cf3fe4544204eadfc88bc2e509599c489df0ddd87",
+        "native_assessment": {
+          "allowed": true,
+          "reason": "known_safe_return_within_budget",
+          "action": "forward",
+          "next_pose": [
+            53,
+            26,
+            2
+          ],
+          "remaining_budget": 128,
+          "reserved_return_cost": 29,
+          "learned_probability": null,
+          "calibrated_uncertainty": null,
+          "observed_gain_prediction": {
+            "action_id": 65,
+            "next_pose": [
+              53,
+              26,
+              2
+            ],
+            "predicted_radar_cells": 0,
+            "predicted_camera_cells": 0,
+            "attempted_camera_sha256": "01475811e7942194f821fd7e16be152dc67d1c2e35eb9536de9869005916de03",
+            "posterior_before": {
+              "radar": 0.1743119266055046,
+              "camera": 0.75
+            }
+          }
+        },
+        "action_cost": 39
+      },
+      "native_guard_return_actions": 29
+    },
+    {
+      "view": {
+        "event": "ground_reacquisition_view",
+        "inspection_id": 3,
+        "paid": 88,
+        "pose": [
+          62,
+          26,
+          0
+        ],
+        "edge": [
+          [
+            53,
+            26
+          ],
+          [
+            53,
+            25
+          ]
+        ],
+        "fresh_packet": true,
+        "packet_sha256": "87789dffadaa4a4365164ad0e851fed71977009b7c0d1165921af8958cc3ca46",
+        "scan_ranges_sha256": "f28cb60e5ae2ccc8086551cfa8a757c797c3ed66b768ffbc044b66ce6f2d6f0c",
+        "depth_values_sha256": "a1acdab85ce99cc1431d303faf4890fffe4cbbaba745d8b542639d015c9343d5",
+        "prior_certificate": {
+          "allowed": false,
+          "reason": "missing_positive_ground_support",
+          "nearest_measured_m": {
+            "lidar": null,
+            "rgbd": null,
+            "lower_support": null
+          },
+          "unsupported_xy_probes": 1,
+          "probes": 603,
+          "missing_only_starting_disk": false
+        },
+        "certificate": {
+          "allowed": true,
+          "reason": "measured_full_capsule",
+          "nearest_measured_m": {
+            "lidar": null,
+            "rgbd": null,
+            "lower_support": null
+          },
+          "probes": 603,
+          "missing_only_starting_disk": false
+        },
+        "unsupported_before": 1,
+        "unsupported_after": 0,
+        "newly_supported": 1,
+        "remaining_missing_xy_m": [],
+        "action_cost": 7
+      },
+      "crossing": {
+        "event": "ground_reacquisition_cross",
+        "inspection_id": 3,
+        "paid": 99,
+        "edge": [
+          [
+            53,
+            26
+          ],
+          [
+            53,
+            25
+          ]
+        ],
+        "pose": [
+          53,
+          25,
+          3
+        ],
+        "certificate": {
+          "allowed": true,
+          "reason": "measured_full_capsule",
+          "nearest_measured_m": {
+            "lidar": null,
+            "rgbd": null,
+            "lower_support": null
+          },
+          "probes": 603,
+          "missing_only_starting_disk": false
+        },
+        "measured_view_paid": 88,
+        "packet_sha256": "57ceeaac93d8babc8309029db9bf9a8e9ffa1d1cb3ee47c3cfe8cace4ad95549",
+        "native_assessment": {
+          "allowed": true,
+          "reason": "known_safe_return_within_budget",
+          "action": "forward",
+          "next_pose": [
+            53,
+            25,
+            3
+          ],
+          "remaining_budget": 94,
+          "reserved_return_cost": 25,
+          "learned_probability": null,
+          "calibrated_uncertainty": null,
+          "observed_gain_prediction": {
+            "action_id": 99,
+            "next_pose": [
+              53,
+              25,
+              3
+            ],
+            "predicted_radar_cells": 0,
+            "predicted_camera_cells": 0,
+            "attempted_camera_sha256": "01475811e7942194f821fd7e16be152dc67d1c2e35eb9536de9869005916de03",
+            "posterior_before": {
+              "radar": 0.30332681017612523,
+              "camera": 0.75
+            }
+          }
+        },
+        "action_cost": 18
+      },
+      "native_guard_return_actions": 25
+    }
+  ],
+  "safety_rejections": [
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 0,
+      "paid": 19,
+      "edge": [
+        [
+          49,
+          25
+        ],
+        [
+          49,
+          26
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.17392532011140002,
+          "rgbd": 0.16448301050758887,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 0,
+      "paid": 22,
+      "edge": [
+        [
+          51,
+          25
+        ],
+        [
+          51,
+          24
+        ]
+      ],
+      "reason": "measured_occupied_center"
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 0,
+      "paid": 24,
+      "edge": [
+        [
+          51,
+          26
+        ],
+        [
+          51,
+          27
+        ]
+      ],
+      "reason": "measured_occupied_center"
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 0,
+      "paid": 26,
+      "edge": [
+        [
+          52,
+          26
+        ],
+        [
+          52,
+          27
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.14826960772522502,
+          "rgbd": 0.1409196024094741,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 1,
+      "paid": 65,
+      "edge": [
+        [
+          53,
+          26
+        ],
+        [
+          53,
+          27
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.19203770845576262,
+          "rgbd": 0.1912237938718672,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 3,
+      "paid": 99,
+      "edge": [
+        [
+          53,
+          25
+        ],
+        [
+          53,
+          24
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.12140809297561628,
+          "rgbd": 0.12147415415001565,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 3,
+      "paid": 101,
+      "edge": [
+        [
+          54,
+          25
+        ],
+        [
+          54,
+          24
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.12008247648381214,
+          "rgbd": 0.12003927632958053,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 3,
+      "paid": 102,
+      "edge": [
+        [
+          55,
+          25
+        ],
+        [
+          55,
+          24
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.11876009702682477,
+          "rgbd": 0.11884980895120859,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 3,
+      "paid": 103,
+      "edge": [
+        [
+          56,
+          25
+        ],
+        [
+          56,
+          24
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.11743937730789167,
+          "rgbd": 0.10299801460871919,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 3,
+      "paid": 107,
+      "edge": [
+        [
+          60,
+          25
+        ],
+        [
+          61,
+          25
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.21670685802747985,
+          "rgbd": 0.20140102871282403,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 3,
+      "paid": 127,
+      "edge": [
+        [
+          63,
+          40
+        ],
+        [
+          63,
+          39
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.20847975733696908,
+          "rgbd": 0.15806002606956593,
+          "lower_support": null
+        }
+      }
+    },
+    {
+      "event": "ground_reacquisition_rejected",
+      "inspection_id": 3,
+      "paid": 128,
+      "edge": [
+        [
+          64,
+          40
+        ],
+        [
+          64,
+          39
+        ]
+      ],
+      "reason": "measured_body_hit_in_padded_capsule",
+      "certificate": {
+        "allowed": false,
+        "reason": "measured_body_hit_in_padded_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.10494809150695872,
+          "rgbd": 0.10407097714487104,
+          "lower_support": null
+        }
+      }
+    }
+  ],
+  "actual_terminal_paid": 138,
+  "coverage_evaluator_only": {
+    "v1": {
+      "reachable_cells": 1640,
+      "terminal_correct_free": 827,
+      "peak_correct_free": 827
+    },
+    "v2": {
+      "reachable_cells": 5153,
+      "terminal_correct_free": 865,
+      "peak_correct_free": 865
+    }
+  },
+  "parameters": {
+    "MISSING_GROUND": "missing_positive_ground_support",
+    "HEIGHT_OFFSETS_M": [
+      -0.01,
+      0.0,
+      0.01
+    ],
+    "MAX_VIEWS_PER_EDGE": 3,
+    "MAX_VIEWS_WITHOUT_GAIN": 2,
+    "MAX_VIEWS_PER_EPISODE": 6,
+    "LOOKAHEAD_M": 3.0
+  },
+  "evidence_sha256": {
+    "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/DEVELOPMENT_FREEZE.json": "48da1130bf4673a9f9184b5047c1d305c2f9a9e13a7133e494c18faa7dab4176",
+    "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/execution/development/b26_hm3d_00770_s1/B/attempt_001/run/audit.json": "8c93e6251d24a6195dc8285c108a4341d8dd4ed9bbb74ed50a13d1512d4a3f58",
+    "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/execution/development/b26_hm3d_00770_s1/B/attempt_001/run/initial_raw_rgbd_scan_sha256.json": "3d7d9104e8c3b662399b4c068e7b98a75983cf99f95b27275f48a581eb20d8d8",
+    "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/execution/development/b26_hm3d_00770_s1/B/attempt_001/run/manifest.json": "be28ec0ba6ec415bdb2d0ad2e5aed49a041a8b070fb7e21aea21d221e0da5387",
+    "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/execution/development/b26_hm3d_00770_s1/B/attempt_001/run/observed_belief_trace.npz": "0b613b7282103025e2717b7e24f6ea7a042af65cf37d8d356cf1918cef990db8",
+    "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/execution/development/b26_hm3d_00770_s1/B/attempt_001/run/steps.json": "e18af71c59df23430788f171366d5f3b9c6728c26630c5e8ad200da9b441050d",
+    "/home/ouc/nso_robot/analyses/external_autonomous_reacquisition_20261126/execution/development/phase_receipt.json": "46ea57015f8c1f551d6a6bb8e5eb0161874940dbcb5d4b12e6113b3abca38a6a",
+    "/home/ouc/nso_robot/analyses/external_support_repair_20261126/scenes/evaluator_references/b26_hm3d_00770_s1/evaluator_truth.npz": "b732f50b502b9222a3dabc735ca29651a8d69658d451898d4965f8ac08a79060",
+    "/home/ouc/nso_robot/analyses/external_support_continuity_20261126/scenes/evaluator_references/b26_hm3d_00770_s1/evaluator_truth.npz": "3df0ac32cef82ba2c9081aeebcf624db6f17dd6d264116814256c4459559b002"
+  }
+}

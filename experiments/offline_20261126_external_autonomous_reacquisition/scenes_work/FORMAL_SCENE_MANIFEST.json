@@ -1,0 +1,272 @@
+{
+  "schema": "nso.external_autonomous_reacquisition_fixed_scene_manifest_v1",
+  "admission_actor_calls": 0,
+  "paid_actions_during_scene_selection": 0,
+  "budget_paid_actions": 192,
+  "registered_distinct_start_count": 4,
+  "unseen_native_scan_count": 0,
+  "independent_unit": "The two distinct scanned floors are floor-level units. Starts from the same floor are dependent.",
+  "selection_scope": "Prerecorded source provenance + original geometry/cold-sensor admission only, no policy outputs consulted.",
+  "candidates": {
+    "habitat_skokloster": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "dominant_upward_area_bin_has_no_inherited_body_obstacle_and_floor_support",
+      "preflight_sha256": "86b3153c804d99dd57d4fc9c341a2ed19c4581ae5d4369c4947de4b52768e943"
+    },
+    "mp3d_habitat_example": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "bb925c3173648ae13ee5643538d7bd41cbb2746d874ac193d5bb34b819baab38"
+    },
+    "scenenn_015": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "1e1d7c275dc1843fd00d50253e12e244c7652855d7fc46e82b7d5b5c09872afd"
+    },
+    "scenenn_217": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "20bed4ba9f93929b342abbf8bdacb7a8dac60a71c7ddb0e64d5c4cdbf3ec85d7"
+    },
+    "scenenn_030": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "45b33e9eeee00c13a8aa6593dd1986e6e7eb5c87d4011d4740e008d7750e8648"
+    },
+    "scenenn_061": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "93e4a88a9f81690184e56571dd5a893fc436d7858ecff16393e0862250da4c01"
+    },
+    "bundlefusion_apt0": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "public source download incomplete at registration; geometry unassessed",
+      "preflight_sha256": "4bbf595426cde61aa9b98fc553e4f327f1e4177c3001a5951af15a713dab127c"
+    },
+    "bundlefusion_apt1": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "public source download incomplete at registration; geometry unassessed",
+      "preflight_sha256": "7885b6570264d2c8a7e98f1817ad18fc7d02a09602dfc270cf8d36d0ec51e80c"
+    },
+    "replica_apartment1": {
+      "eligible": true,
+      "fallback": true,
+      "reason": null,
+      "preflight_sha256": "e2e6acf854ce1f8dd1ffb7079addab27a7a91c08a9a91889088f373b9e59f2bb"
+    },
+    "hm3d_00770": {
+      "eligible": true,
+      "fallback": true,
+      "reason": null,
+      "preflight_sha256": "418a8e6b9071de3e4e42b9c0cd0a34c1b38624a46603d4758cb504f5eb53ebbe"
+    }
+  },
+  "floors": [
+    {
+      "id": "replica_apartment1",
+      "admitted_source_bytes_sha256": "c0b1314d1b948170e4110d1cf1a001c54ef02788092d49586ad73591b871785e",
+      "prior_source_role": "already evaluated and used in simulator geometry diagnostics; new-start fallback only",
+      "asset_source_url": "https://huggingface.co/datasets/ai-habitat/habitat_test_scenes/tree/910c783fb954da8497ea5f811b843a76590ddddc",
+      "source_revision": "910c783fb954da8497ea5f811b843a76590ddddc",
+      "license": "https://huggingface.co/datasets/ai-habitat/habitat_test_scenes/blob/910c783fb954da8497ea5f811b843a76590ddddc/README.md",
+      "source_axis": "Z",
+      "fresh_independent_floor": false,
+      "strict_admission": {
+        "path": "source_preflights/replica_apartment1.json",
+        "sha256": "e2e6acf854ce1f8dd1ffb7079addab27a7a91c08a9a91889088f373b9e59f2bb"
+      },
+      "fixed_formal_motion": {
+        "path": "motion_receipts/replica_apartment1.json",
+        "sha256": "77ec22f612ec9610520678ac04602434f863bbfc0a3d2c44fc9afde0ece6bf52"
+      },
+      "strict_room_cores": [
+        97,
+        37,
+        19
+      ],
+      "start_swept_separation_m": 8.4,
+      "common_evaluator_mask_within_floor": true,
+      "starts": [
+        {
+          "layout": "b26v5_replica_apartment1_s1",
+          "anchor": [
+            43,
+            20,
+            2
+          ],
+          "seed": 20261126541,
+          "reachable_centres": 1058,
+          "initial_packet_sha256": "9fa3351abdabf6294849a8c26f6059b4a0f7fb6d69d425f7410a23d3a4f38b81",
+          "initial_owner_sha256": "c15a958bf2806ac93920a2a2b014d7fbc81e9dfd5f20eef74175eee08928e2d1",
+          "initial_packet_files": [
+            {
+              "path": "prepared/b26v5_replica_apartment1_s1/initial_frame.npz",
+              "sha256": "abee0574e63ecce956cc4c964c74a535f80ce27101235d02125c44b7a2be0b2d"
+            },
+            {
+              "path": "prepared/b26v5_replica_apartment1_s1/initial_scan.npz",
+              "sha256": "8184a70f5775e8c6313dafceecd6e890dab8b473919d4aa9caf631683bf898e8"
+            }
+          ],
+          "initial_unknown_reachable_cells": 605,
+          "evaluator_mask": {
+            "path": "evaluator_references/b26v5_replica_apartment1_s1/evaluator_truth.npz",
+            "sha256": "3981c64e661e938331f64324501afc625c257df1efc276b4ddb8a8e16bd431bc"
+          },
+          "reference_points": {
+            "path": "evaluator_references/b26v5_replica_apartment1_s1/fixed_reference.npz",
+            "sha256": "d8b69d511d2f5a3e36f2f85ac1b7af6437ab9a8599f32ae66b65eab94fefd5f2"
+          },
+          "scene_role": "new_starts_on_previously_used_scan"
+        },
+        {
+          "layout": "b26v5_replica_apartment1_s2",
+          "anchor": [
+            14,
+            11,
+            1
+          ],
+          "seed": 20261126542,
+          "reachable_centres": 1058,
+          "initial_packet_sha256": "1e37e45255466b5ed4db3365f09359882d28d0772fb479596ef9ecd339670684",
+          "initial_owner_sha256": "c15a958bf2806ac93920a2a2b014d7fbc81e9dfd5f20eef74175eee08928e2d1",
+          "initial_packet_files": [
+            {
+              "path": "prepared/b26v5_replica_apartment1_s2/initial_frame.npz",
+              "sha256": "e11a974eb1d989c88173a499f307112979f3d998c70f202c0aa692ee34de4324"
+            },
+            {
+              "path": "prepared/b26v5_replica_apartment1_s2/initial_scan.npz",
+              "sha256": "99d6d53f127659aa9af92e090843345fcf74b08fb7e4f15e95d1591df491eb28"
+            }
+          ],
+          "initial_unknown_reachable_cells": 602,
+          "evaluator_mask": {
+            "path": "evaluator_references/b26v5_replica_apartment1_s2/evaluator_truth.npz",
+            "sha256": "3981c64e661e938331f64324501afc625c257df1efc276b4ddb8a8e16bd431bc"
+          },
+          "reference_points": {
+            "path": "evaluator_references/b26v5_replica_apartment1_s2/fixed_reference.npz",
+            "sha256": "d8b69d511d2f5a3e36f2f85ac1b7af6437ab9a8599f32ae66b65eab94fefd5f2"
+          },
+          "scene_role": "new_starts_on_previously_used_scan"
+        }
+      ]
+    },
+    {
+      "id": "hm3d_00770",
+      "admitted_source_bytes_sha256": "9c78e2f3f4e993baaaf3dd76a9ac123ef6e3d26082e7f7e80bee5639bad3430d",
+      "prior_source_role": "already examined deeply in V1–V4 and used for method-development gate; new-start fallback only",
+      "asset_source_url": "https://github.com/matterport/habitat-matterport-3dresearch",
+      "source_revision": "9b74d5aa58e371c9bc16b2ccb64748cddf9bf1c6",
+      "license": "https://matterport.com/legal/matterport-end-user-license-agreement-academic-use-model-data",
+      "source_axis": "Z",
+      "fresh_independent_floor": false,
+      "strict_admission": {
+        "path": "source_preflights/hm3d_00770.json",
+        "sha256": "418a8e6b9071de3e4e42b9c0cd0a34c1b38624a46603d4758cb504f5eb53ebbe"
+      },
+      "fixed_formal_motion": {
+        "path": "motion_receipts/hm3d_00770.json",
+        "sha256": "274c80be8c0e5329e397d73814c878cb2771725016f879b38d1ab56ecbb01992"
+      },
+      "strict_room_cores": [
+        262,
+        192,
+        59,
+        38,
+        22
+      ],
+      "start_swept_separation_m": 23.8,
+      "common_evaluator_mask_within_floor": true,
+      "starts": [
+        {
+          "layout": "b26v5_hm3d_00770_s1",
+          "anchor": [
+            41,
+            14,
+            1
+          ],
+          "seed": 20261126551,
+          "reachable_centres": 5153,
+          "initial_packet_sha256": "37b713c2b7945738ae66ad96beb3c2704812bbe846298da8538fb83332f08a52",
+          "initial_owner_sha256": "c15a958bf2806ac93920a2a2b014d7fbc81e9dfd5f20eef74175eee08928e2d1",
+          "initial_packet_files": [
+            {
+              "path": "prepared/b26v5_hm3d_00770_s1/initial_frame.npz",
+              "sha256": "a04062fb0dc7b6551d4aeb31feaa8d94143691200b0f125acde811a090f2cad8"
+            },
+            {
+              "path": "prepared/b26v5_hm3d_00770_s1/initial_scan.npz",
+              "sha256": "ded2fed22565a05491ca89e66195485d123aeb384e5f2f6eba161dec3b7eebcc"
+            }
+          ],
+          "initial_unknown_reachable_cells": 4711,
+          "evaluator_mask": {
+            "path": "evaluator_references/b26v5_hm3d_00770_s1/evaluator_truth.npz",
+            "sha256": "3df0ac32cef82ba2c9081aeebcf624db6f17dd6d264116814256c4459559b002"
+          },
+          "reference_points": {
+            "path": "evaluator_references/b26v5_hm3d_00770_s1/fixed_reference.npz",
+            "sha256": "fd6872da4fc8e6270703eda7dcd8351e9e5f600ab54ecccdb754055d9e3feca5"
+          },
+          "scene_role": "new_starts_on_previously_used_scan"
+        },
+        {
+          "layout": "b26v5_hm3d_00770_s2",
+          "anchor": [
+            39,
+            37,
+            1
+          ],
+          "seed": 20261126552,
+          "reachable_centres": 5153,
+          "initial_packet_sha256": "3c227698ac0deb98935667c4f78c5408dc374d87d33d4a1bcb899371aa0b3594",
+          "initial_owner_sha256": "c15a958bf2806ac93920a2a2b014d7fbc81e9dfd5f20eef74175eee08928e2d1",
+          "initial_packet_files": [
+            {
+              "path": "prepared/b26v5_hm3d_00770_s2/initial_frame.npz",
+              "sha256": "163976cd7a0904326f8305f4099927a7e4a094c3e2e178b255b4b7485454374b"
+            },
+            {
+              "path": "prepared/b26v5_hm3d_00770_s2/initial_scan.npz",
+              "sha256": "e005cd5b24ea67a7bf4c08c55acdcae243b8b427d7c16cd2ace0f717931f631b"
+            }
+          ],
+          "initial_unknown_reachable_cells": 4850,
+          "evaluator_mask": {
+            "path": "evaluator_references/b26v5_hm3d_00770_s2/evaluator_truth.npz",
+            "sha256": "3df0ac32cef82ba2c9081aeebcf624db6f17dd6d264116814256c4459559b002"
+          },
+          "reference_points": {
+            "path": "evaluator_references/b26v5_hm3d_00770_s2/fixed_reference.npz",
+            "sha256": "fd6872da4fc8e6270703eda7dcd8351e9e5f600ab54ecccdb754055d9e3feca5"
+          },
+          "scene_role": "new_starts_on_previously_used_scan"
+        }
+      ]
+    }
+  ],
+  "frozen_inputs": {
+    "preregistration": {
+      "path": "STARTS.json",
+      "sha256": "7b03fbea45d276477eb945824e127cb532af1e74bed44b5529922493caf71f14"
+    },
+    "actor_freeze": {
+      "path": "actor_freeze_holdout.json",
+      "sha256": "c7aac38faddc850f73a99b34d4cec585f6f2941c908a67bd8996dd6a9bf515e2"
+    },
+    "evaluator_freeze": {
+      "path": "evaluator_freeze_holdout.json",
+      "sha256": "4237f78da99c5ed64bf8e2464b6dec990979d4ff95f7969bd92fc80b7ba9302a"
+    }
+  }
+}
