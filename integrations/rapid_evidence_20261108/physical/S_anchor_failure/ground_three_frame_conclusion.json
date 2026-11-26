@@ -1,0 +1,82 @@
+{
+  "schema": "nso.fixed_ground_three_frame_conclusion.v1",
+  "frames": [
+    {
+      "action_id": 0,
+      "new_inlier_fraction": 0.9826654240447343,
+      "new_median_residual_mm": 0.7954306177845177,
+      "new_local_base_ground_z_m": -0.14047481563753939,
+      "new_offset_from_declared_floor_m": 0.09252518436246063,
+      "new_camera_plane_distance_m": 0.4324126745654838,
+      "new_plane_slope_deg": 1.7021580398520773,
+      "old_counterfactual_local_base_ground_z_m": -0.1302138510492427,
+      "old_counterfactual_plane_slope_deg": 0.6404023521325654,
+      "old_counterfactual_fixed_pixel_z_range_m": [
+        0.10274182332791418,
+        0.11223964857811106
+      ]
+    },
+    {
+      "action_id": 6,
+      "new_inlier_fraction": 0.9524697110904008,
+      "new_median_residual_mm": 0.7018117811600777,
+      "new_local_base_ground_z_m": -0.13644700424509787,
+      "new_offset_from_declared_floor_m": 0.09655299575490214,
+      "new_camera_plane_distance_m": 0.4286082142233081,
+      "new_plane_slope_deg": 1.6504664288363127,
+      "old_counterfactual_local_base_ground_z_m": -0.12626383956356133,
+      "old_counterfactual_plane_slope_deg": 0.5359279110425235,
+      "old_counterfactual_fixed_pixel_z_range_m": [
+        0.10483826291557621,
+        0.11206686786286227
+      ]
+    },
+    {
+      "action_id": 13,
+      "new_inlier_fraction": 1.0,
+      "new_median_residual_mm": 1.0665004320444607,
+      "new_local_base_ground_z_m": -0.13238352352053678,
+      "new_offset_from_declared_floor_m": 0.10061647647946323,
+      "new_camera_plane_distance_m": 0.42461837593175195,
+      "new_plane_slope_deg": 1.6204891156764416,
+      "old_counterfactual_local_base_ground_z_m": -0.12246374489429775,
+      "old_counterfactual_plane_slope_deg": 0.8007453038859355,
+      "old_counterfactual_fixed_pixel_z_range_m": [
+        0.10986780783465669,
+        0.11621872947086334
+      ]
+    }
+  ],
+  "root_S13_fit_reproduced": {
+    "normal_max_abs_difference": 0.0,
+    "d_abs_difference_m": 2.7755575615628914e-17,
+    "median_residual_abs_difference_m": 8.326672684688674e-17
+  },
+  "main_finding": "All3fixedROIs support a coherent plane; localbaseheight differs from fixedfloor-.233 by about.093-.101m with Nov06TF. It is not just isolated arbitrary outliers. WholeROIclassification remains a visualfloor hypothesis.",
+  "old_TF_counterfactual": "Same points reproject flatter with oldTF, and sixS13supportpixels shift below native.15planning-heightthreshold; fixedfloorheight mismatch remains about.103-.111m. No actualmappingrun or physicalaccuracycomparison performed.",
+  "geometry_boundary": "OdomoriginS13+.12584m is plane extrapolation; the corresponding currentbase localoffset is+.10062m. Camera-to-planeperpendicular distances .4324/.4286/.4246m are invariant under rigidTF replacement.",
+  "physical_cause": "Which extrinsic/baseheight/flooroffset/depthmodel is correct remains unverified pending independentheightmeasurements; no coordinate or occupancy clearing applied.",
+  "thesis_changed": false,
+  "files": [
+    {
+      "path": "check_ground_frames.py",
+      "sha256": "2cb187c07ffbfe99ed618783089723971c133167f21cf94d57303d58aa0f7fa3"
+    },
+    {
+      "path": "ground_frames_protocol.json",
+      "sha256": "b8b5f426600789d5c78e6a89dba71a4867260fd249644807dd38f4f4adebbb8d"
+    },
+    {
+      "path": "ground_frames_result.json",
+      "sha256": "60451607a4cad0501f16f3378c3e0a569312e5aeb79247065241be1c3e8091ae"
+    },
+    {
+      "path": "old_tf_counterfactual.py",
+      "sha256": "dbca5ca3a69eba1caaa3773f7b43d3f31330e31c4147bfddd9ce20b484107a9d"
+    },
+    {
+      "path": "old_tf_counterfactual_result.json",
+      "sha256": "dd3794edaa42512b1d5d4b07c600238d30dab28a41d62fbc7245126295ab850f"
+    }
+  ]
+}

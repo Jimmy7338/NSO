@@ -1,0 +1,42 @@
+{
+  "schema": "nso.joint_coverage_pair.v2",
+  "created_unix_s": 1794125700.650056,
+  "status": "frozen_before_first_arm_capture",
+  "pair_id": "fresh_calibrated_pair_20261108_01",
+  "order": [
+    "C",
+    "S"
+  ],
+  "paid_action_budget_per_episode": 40,
+  "duration_limit_s": 900,
+  "deadline_rationale": "Same predeclared limit for both arms; calibrated S24 took368.85s, so historical600s could externally truncate a40-action run.",
+  "policy_variant": "exploration_joint_v1",
+  "planner_revision": "v10_3_1",
+  "robot_radius_m": 0.7212185868375829,
+  "policy_difference": "score_mode C vs S only; existing candidates, quality/coverage objectives, circle and return rules retained",
+  "primary_question": "Does adding the existing measured-surface objective and declared structural prior change full-budget exploration/return and observed surface metrics relative to C?",
+  "not_a_semantic_only_ablation": true,
+  "semantic_same_state_audit": "Record original G/S candidate scores without different physical execution",
+  "map_source": {
+    "topic": "/nso_pair/map",
+    "publisher": "/nso_pair/gmapping",
+    "map_frame": "nso_pair_map"
+  },
+  "initialization": "Fresh independent gmapping map per arm, shared planning grid anchored at actual C start, actual fresh captures per arm; retain new Nov08 CSM/display epoch.",
+  "initial_information_identical": false,
+  "comparison_limits": [
+    "One ordered pair in one scene; dependent episodes, no independent-scene inference.",
+    "Actual start poses/maps/semantic inputs and return deviations must be reported.",
+    "Coverage and surface proxies are internal estimates; no ground-truth reconstruction accuracy.",
+    "Report all failures, interventions and unequal completed exposure; no failed shorter run as efficiency win."
+  ],
+  "execution": "Same ROS/CAN configuration with endpoint-only <=0.05m/s reverse authorization; original collision/hardware protection.",
+  "analysis_before_outcome": "Complete return, paid/forward/turn actions, CAN travel, elapsed time, per-arm observed area and bootstrap-fixed surface proxy, common initial/final measured grid, same-state C/G/S rankings.",
+  "CSM_epoch": "/home/ouc/nso_robot/analyses/map_reset_20261108_01/processes.json",
+  "calibration": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/tf_verification.json",
+  "no_policy_variants_enabled": [
+    "entry_projection_relaxed_v1",
+    "heading_rectangle"
+  ],
+  "no_videos_or_rosbags": true
+}

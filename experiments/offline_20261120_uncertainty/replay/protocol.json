@@ -1,0 +1,82 @@
+{
+  "schema": "B8_five_arm_fixed_replay_protocol_v1",
+  "status": "frozen_before_five_arm_prediction_replay",
+  "states": {
+    "shelf_left": [
+      24,
+      54,
+      109
+    ],
+    "shelf_right": [
+      24,
+      53,
+      110
+    ]
+  },
+  "arms": {
+    "G_fixed": {
+      "class_prior": "neutral",
+      "extent_mode": "fixed"
+    },
+    "S_fixed": {
+      "class_prior": "acquired_category",
+      "extent_mode": "fixed"
+    },
+    "G_uncertainty": {
+      "class_prior": "neutral",
+      "extent_mode": "uncertainty"
+    },
+    "S_uncertainty": {
+      "class_prior": "acquired_category",
+      "extent_mode": "uncertainty"
+    },
+    "S_mean_collapse": {
+      "class_prior": "acquired_category",
+      "extent_mode": "mean_collapse"
+    }
+  },
+  "selected_scale": {
+    "path": "/home/ouc/nso_robot/analyses/dual_template_uncertainty_20261120/audit/calibration_attempt_001/selected_scale.json",
+    "sha256": "c92367d5c17719b42e235d42af3123c28c3970ccdcb97bb79fd0a16715beeeb1",
+    "sigma_m": 0.01,
+    "selection": "train-only equal-object CRPS, frozen before old-prefix inference"
+  },
+  "scope": "Six repeatedly inspected development prefixes from two furniture permutations of one floorplan, not held-out geometry or independent scenes.",
+  "calibration_boundary": "Declared CRPS promotion criterion passed; informative 95% intervals cover 9/12 validation and 8/12 held-out, so nominal probabilistic calibration is NOT established. No retuning after these outcomes.",
+  "acquisition": {
+    "reused_candidate_branches": 66,
+    "reused_prior_candidate_actions": 1569,
+    "new_candidate_actions": 0,
+    "prefixes_reconstructed_from_original_sealed_actions": true,
+    "new_policy_rollouts": 0,
+    "hardware": false
+  },
+  "actor_invariants": [
+    "Original acquired prefix packets/feedback and before-TSDF must match byte hashes.",
+    "Original candidate routes and common coverage/measured-surface scores must remain exactly as sealed.",
+    "Every state builds one observed-data particle bank shared by all five arms.",
+    "G/S within each fixed/uncertainty mode have identical points, hypothesis/object/particle IDs and scenes; weights can differ.",
+    "Mean-collapse has a separate basis derived from the S joint posterior, with no second likelihood update.",
+    "All acquired quality fields, memberships, frames, keyframes, belief and native TSDF remain unchanged by predictions.",
+    "Inherited B2 trace gain, history, per-sample route maximum, area coefficient1, outbound-only predicted area, and original stops/budget/navigation unchanged."
+  ],
+  "outputs": {
+    "arm_files": "Each of five arms has complete points, posterior/base/history weights, hypothesis/object/particle/shape IDs, support tracks, named per-candidate gain vectors and the complete candidate-by-point union matrix.",
+    "metadata": "Full posterior/conditional geometry/support hashes and B2 trace audits; scale resource and pre/post acquired-evidence hashes.",
+    "evaluation_rows": 330,
+    "actual_outcomes": "Exactly the same 66 previously measured branch outcomes; no reexecution and no independent sample multiplication."
+  },
+  "evaluation": {
+    "reference": "Frozen B evaluator source triangles and before/after native TSDF, accessed only after predictions by independent evaluator.",
+    "metrics": [
+      "absolute source-supported and realized forecast area",
+      "supported fraction",
+      "rank association with realized target surface increment",
+      "selected actual gross/net surface and unknown coverage increment",
+      "action/path cost and all ties/negative effects"
+    ],
+    "baseline": "B6 AB prediction is an explicit historical reference; G_fixed/S_fixed are new controls, not old O."
+  },
+  "failure_accounting": "Retain every failed attempt and missing/invalid comparison; never report partial states as complete. No candidate or object deletion to improve a result.",
+  "runtime_protection": "No hardware/ROS endpoint or actuator in this replay."
+}

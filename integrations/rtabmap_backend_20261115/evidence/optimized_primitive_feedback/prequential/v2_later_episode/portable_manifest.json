@@ -1,0 +1,1503 @@
+{
+  "schema": "portable_prequential_mask_bundle/1",
+  "version": "v2_later_episode",
+  "results_sha256": "95dc2477b771e8e787edf680208288225f52a3d204b1a8d4986af324384edf65",
+  "method_sources": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/observed_gain_calibration_v10_1.py",
+      "sha256": "d366a532c1b2ba4ca5e30414ceebe44ab401dbbf7bc85fceeef8e52a17b95aef",
+      "class_name": "ObservedGainCalibration",
+      "portable_path": "source/observed_gain_calibration_v10_1.py"
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/exploration_joint_policy.py",
+      "sha256": "c9f077cb92e3006541a24a4f73ab573c4829e0a38cfb7febe7b59ee5432ef1df",
+      "class_name": "ExplorationObservedGainCalibration",
+      "portable_path": "source/exploration_joint_policy.py"
+    }
+  ],
+  "episodes": [
+    {
+      "label": "S3",
+      "shape": [
+        800,
+        800
+      ],
+      "records_portable_path": "episodes/S3/records_mask_only.json",
+      "original_records_manifest_sha256": "660ffd03b68bb1870ad3f29d5dcce084fac6f61661a2479df4800408ef681a55",
+      "actual_completed_attempts": 3,
+      "held_out_interpretation": null,
+      "count_reconciliation": {
+        "supervisor_primitive_attempts": 3,
+        "committed_worker_attempts": 3,
+        "supervisor_count_minus_committed_worker": 0,
+        "raw_supervisor_summary_preserved": true,
+        "note": "Calibration uses every actual worker-committed frozen mask event; a supervisor cleanup count may lag an accepted in-flight worker response."
+      }
+    },
+    {
+      "label": "G3",
+      "shape": [
+        800,
+        800
+      ],
+      "records_portable_path": "episodes/G3/records_mask_only.json",
+      "original_records_manifest_sha256": "a4cb13ffb9a154515c9feeca13d3323e0dca24889119d8a8dc0650570af63a05",
+      "actual_completed_attempts": 3,
+      "held_out_interpretation": null,
+      "count_reconciliation": {
+        "supervisor_primitive_attempts": 3,
+        "committed_worker_attempts": 3,
+        "supervisor_count_minus_committed_worker": 0,
+        "raw_supervisor_summary_preserved": true,
+        "note": "Calibration uses every actual worker-committed frozen mask event; a supervisor cleanup count may lag an accepted in-flight worker response."
+      }
+    },
+    {
+      "label": "S26",
+      "shape": [
+        800,
+        800
+      ],
+      "records_portable_path": "episodes/S26/records_mask_only.json",
+      "original_records_manifest_sha256": "84ed6c8a80d1115c93f722c4dcf40e53106f51f40dbe26e1564dec6c11b4b0bf",
+      "actual_completed_attempts": 26,
+      "held_out_interpretation": null,
+      "count_reconciliation": {
+        "supervisor_primitive_attempts": 26,
+        "committed_worker_attempts": 26,
+        "supervisor_count_minus_committed_worker": 0,
+        "raw_supervisor_summary_preserved": true,
+        "note": "Calibration uses every actual worker-committed frozen mask event; a supervisor cleanup count may lag an accepted in-flight worker response."
+      }
+    },
+    {
+      "label": "L19",
+      "shape": [
+        800,
+        800
+      ],
+      "records_portable_path": "episodes/L19/records_mask_only.json",
+      "original_records_manifest_sha256": "b54d0c06e44df45d18f2aa7c524dc6a41d645e44c1d72be167468438fbe33c69",
+      "actual_completed_attempts": 19,
+      "held_out_interpretation": {
+        "role": "Previously unanalyzed later episode; metric definitions unchanged, no outcome-based tuning",
+        "wholly_prospectively_collected_after_v1_freeze": false,
+        "collection_overlapped_v1_analysis": true,
+        "original_result_freeze_unix_ns": 1794755003061651387,
+        "original_bundle_freeze_unix_ns": 1794755026336904555,
+        "per_action_actual_RGBD_acquisition_unix_ns": {
+          "1": 1794754853548113116,
+          "2": 1794754866848239116,
+          "3": 1794754881715147116,
+          "4": 1794754897116442116,
+          "5": 1794754916517309116,
+          "6": 1794754935381323116,
+          "7": 1794754957781240116,
+          "8": 1794754981281595116,
+          "9": 1794755002281678116,
+          "10": 1794755025248303116,
+          "11": 1794755048915306116,
+          "12": 1794755076949058116,
+          "13": 1794755102882721116,
+          "14": 1794755130249826116,
+          "15": 1794755157816951116,
+          "16": 1794755186283951116,
+          "17": 1794755216151490116,
+          "18": 1794755247618584116,
+          "19": 1794755282987130116
+        },
+        "action_ids_acquired_after_result_freeze": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "action_ids_acquired_after_whole_bundle_freeze": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "after_result_freeze_metrics": {
+          "radar": {
+            "completed_actions": 10,
+            "nonempty_prediction_actions": 8,
+            "zero_prediction_action_ids": [
+              10,
+              13
+            ],
+            "predicted_cell_events": 27,
+            "realized_predicted_cell_events": 11,
+            "unrealized_predicted_cell_events": 16,
+            "unpredicted_realized_cell_events": 573,
+            "actual_new_cell_events": 584,
+            "realized_in_prediction_fraction": 0.018835616438356163,
+            "event_counts_are_not_independent_samples": true,
+            "prediction_metrics_have_nonempty_support": true,
+            "units": {
+              "logloss": "natural logarithm, nats per predicted cell event",
+              "gain_error": "cell events within frozen predicted mask"
+            },
+            "online": {
+              "cell_event_weighted_brier": 0.2505526842322264,
+              "cell_event_weighted_logloss": 0.6946047501439018,
+              "macro_action_brier_nonempty": 0.2511597379752153,
+              "macro_action_logloss_nonempty": 0.6959534926991066,
+              "gain_count_MAE_all_completed": 0.4199855072463768,
+              "gain_count_MSE_all_completed": 0.3276144948540223,
+              "gain_count_MAE_nonempty": 0.524981884057971,
+              "gain_count_MSE_nonempty": 0.40951811856752784,
+              "total_predicted_in_mask_gain": 11.233188405797101,
+              "absolute_total_gain_count_error": 0.23318840579710098,
+              "squared_total_gain_count_error": 0.05437683259819344
+            },
+            "fixed_half": {
+              "cell_event_weighted_brier": 0.25,
+              "cell_event_weighted_logloss": 0.6931471805599452,
+              "macro_action_brier_nonempty": 0.25,
+              "macro_action_logloss_nonempty": 0.6931471805599453,
+              "gain_count_MAE_all_completed": 0.45,
+              "gain_count_MSE_all_completed": 0.325,
+              "gain_count_MAE_nonempty": 0.5625,
+              "gain_count_MSE_nonempty": 0.40625,
+              "total_predicted_in_mask_gain": 13.5,
+              "absolute_total_gain_count_error": 2.5,
+              "squared_total_gain_count_error": 6.25
+            },
+            "relative_reduction_online_vs_fixed_half": {
+              "cell_event_weighted_brier": -0.002210736928905499,
+              "cell_event_weighted_logloss": -0.002102828410524671,
+              "macro_action_brier_nonempty": -0.004638951900861166,
+              "macro_action_logloss_nonempty": -0.004048652606354564,
+              "gain_count_MAE_all_completed": 0.06669887278582942,
+              "gain_count_MSE_all_completed": -0.008044599550837805,
+              "gain_count_MAE_nonempty": 0.06669887278582942,
+              "gain_count_MSE_nonempty": -0.008044599550837805,
+              "absolute_total_gain_count_error": 0.9067246376811596,
+              "squared_total_gain_count_error": 0.991299706784289
+            }
+          },
+          "camera": {
+            "completed_actions": 10,
+            "nonempty_prediction_actions": 0,
+            "zero_prediction_action_ids": [
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "predicted_cell_events": 0,
+            "realized_predicted_cell_events": 0,
+            "unrealized_predicted_cell_events": 0,
+            "unpredicted_realized_cell_events": 9,
+            "actual_new_cell_events": 9,
+            "realized_in_prediction_fraction": 0.0,
+            "event_counts_are_not_independent_samples": true,
+            "prediction_metrics_have_nonempty_support": false,
+            "units": {
+              "logloss": "natural logarithm, nats per predicted cell event",
+              "gain_error": "cell events within frozen predicted mask"
+            },
+            "online": {
+              "cell_event_weighted_brier": null,
+              "cell_event_weighted_logloss": null,
+              "macro_action_brier_nonempty": null,
+              "macro_action_logloss_nonempty": null,
+              "gain_count_MAE_all_completed": 0.0,
+              "gain_count_MSE_all_completed": 0.0,
+              "gain_count_MAE_nonempty": null,
+              "gain_count_MSE_nonempty": null,
+              "total_predicted_in_mask_gain": 0.0,
+              "absolute_total_gain_count_error": 0.0,
+              "squared_total_gain_count_error": 0.0
+            },
+            "fixed_half": {
+              "cell_event_weighted_brier": null,
+              "cell_event_weighted_logloss": null,
+              "macro_action_brier_nonempty": null,
+              "macro_action_logloss_nonempty": null,
+              "gain_count_MAE_all_completed": 0.0,
+              "gain_count_MSE_all_completed": 0.0,
+              "gain_count_MAE_nonempty": null,
+              "gain_count_MSE_nonempty": null,
+              "total_predicted_in_mask_gain": 0.0,
+              "absolute_total_gain_count_error": 0.0,
+              "squared_total_gain_count_error": 0.0
+            },
+            "relative_reduction_online_vs_fixed_half": {
+              "cell_event_weighted_brier": null,
+              "cell_event_weighted_logloss": null,
+              "macro_action_brier_nonempty": null,
+              "macro_action_logloss_nonempty": null,
+              "gain_count_MAE_all_completed": null,
+              "gain_count_MSE_all_completed": null,
+              "gain_count_MAE_nonempty": null,
+              "gain_count_MSE_nonempty": null,
+              "absolute_total_gain_count_error": null,
+              "squared_total_gain_count_error": null
+            }
+          }
+        },
+        "after_whole_bundle_freeze_metrics": {
+          "radar": {
+            "completed_actions": 9,
+            "nonempty_prediction_actions": 8,
+            "zero_prediction_action_ids": [
+              13
+            ],
+            "predicted_cell_events": 27,
+            "realized_predicted_cell_events": 11,
+            "unrealized_predicted_cell_events": 16,
+            "unpredicted_realized_cell_events": 520,
+            "actual_new_cell_events": 531,
+            "realized_in_prediction_fraction": 0.02071563088512241,
+            "event_counts_are_not_independent_samples": true,
+            "prediction_metrics_have_nonempty_support": true,
+            "units": {
+              "logloss": "natural logarithm, nats per predicted cell event",
+              "gain_error": "cell events within frozen predicted mask"
+            },
+            "online": {
+              "cell_event_weighted_brier": 0.2505526842322264,
+              "cell_event_weighted_logloss": 0.6946047501439018,
+              "macro_action_brier_nonempty": 0.2511597379752153,
+              "macro_action_logloss_nonempty": 0.6959534926991066,
+              "gain_count_MAE_all_completed": 0.4666505636070853,
+              "gain_count_MSE_all_completed": 0.3640161053933581,
+              "gain_count_MAE_nonempty": 0.524981884057971,
+              "gain_count_MSE_nonempty": 0.40951811856752784,
+              "total_predicted_in_mask_gain": 11.233188405797101,
+              "absolute_total_gain_count_error": 0.23318840579710098,
+              "squared_total_gain_count_error": 0.05437683259819344
+            },
+            "fixed_half": {
+              "cell_event_weighted_brier": 0.25,
+              "cell_event_weighted_logloss": 0.6931471805599452,
+              "macro_action_brier_nonempty": 0.25,
+              "macro_action_logloss_nonempty": 0.6931471805599453,
+              "gain_count_MAE_all_completed": 0.5,
+              "gain_count_MSE_all_completed": 0.3611111111111111,
+              "gain_count_MAE_nonempty": 0.5625,
+              "gain_count_MSE_nonempty": 0.40625,
+              "total_predicted_in_mask_gain": 13.5,
+              "absolute_total_gain_count_error": 2.5,
+              "squared_total_gain_count_error": 6.25
+            },
+            "relative_reduction_online_vs_fixed_half": {
+              "cell_event_weighted_brier": -0.002210736928905499,
+              "cell_event_weighted_logloss": -0.002102828410524671,
+              "macro_action_brier_nonempty": -0.004638951900861166,
+              "macro_action_logloss_nonempty": -0.004048652606354564,
+              "gain_count_MAE_all_completed": 0.06669887278582942,
+              "gain_count_MSE_all_completed": -0.008044599550837805,
+              "gain_count_MAE_nonempty": 0.06669887278582942,
+              "gain_count_MSE_nonempty": -0.008044599550837805,
+              "absolute_total_gain_count_error": 0.9067246376811596,
+              "squared_total_gain_count_error": 0.991299706784289
+            }
+          },
+          "camera": {
+            "completed_actions": 9,
+            "nonempty_prediction_actions": 0,
+            "zero_prediction_action_ids": [
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "predicted_cell_events": 0,
+            "realized_predicted_cell_events": 0,
+            "unrealized_predicted_cell_events": 0,
+            "unpredicted_realized_cell_events": 8,
+            "actual_new_cell_events": 8,
+            "realized_in_prediction_fraction": 0.0,
+            "event_counts_are_not_independent_samples": true,
+            "prediction_metrics_have_nonempty_support": false,
+            "units": {
+              "logloss": "natural logarithm, nats per predicted cell event",
+              "gain_error": "cell events within frozen predicted mask"
+            },
+            "online": {
+              "cell_event_weighted_brier": null,
+              "cell_event_weighted_logloss": null,
+              "macro_action_brier_nonempty": null,
+              "macro_action_logloss_nonempty": null,
+              "gain_count_MAE_all_completed": 0.0,
+              "gain_count_MSE_all_completed": 0.0,
+              "gain_count_MAE_nonempty": null,
+              "gain_count_MSE_nonempty": null,
+              "total_predicted_in_mask_gain": 0.0,
+              "absolute_total_gain_count_error": 0.0,
+              "squared_total_gain_count_error": 0.0
+            },
+            "fixed_half": {
+              "cell_event_weighted_brier": null,
+              "cell_event_weighted_logloss": null,
+              "macro_action_brier_nonempty": null,
+              "macro_action_logloss_nonempty": null,
+              "gain_count_MAE_all_completed": 0.0,
+              "gain_count_MSE_all_completed": 0.0,
+              "gain_count_MAE_nonempty": null,
+              "gain_count_MSE_nonempty": null,
+              "total_predicted_in_mask_gain": 0.0,
+              "absolute_total_gain_count_error": 0.0,
+              "squared_total_gain_count_error": 0.0
+            },
+            "relative_reduction_online_vs_fixed_half": {
+              "cell_event_weighted_brier": null,
+              "cell_event_weighted_logloss": null,
+              "macro_action_brier_nonempty": null,
+              "macro_action_logloss_nonempty": null,
+              "gain_count_MAE_all_completed": null,
+              "gain_count_MSE_all_completed": null,
+              "gain_count_MAE_nonempty": null,
+              "gain_count_MSE_nonempty": null,
+              "absolute_total_gain_count_error": null,
+              "squared_total_gain_count_error": null
+            }
+          }
+        },
+        "suffix_does_not_reset_or_import_Beta": "Stored same-episode posterior_before retained; not a new independent episode",
+        "efficacy": "Later Brier/logloss do not improve; S26 benefit is episode-specific"
+      },
+      "count_reconciliation": {
+        "supervisor_primitive_attempts": 18,
+        "committed_worker_attempts": 19,
+        "supervisor_count_minus_committed_worker": -1,
+        "raw_supervisor_summary_preserved": true,
+        "note": "Calibration uses every actual worker-committed frozen mask event; a supervisor cleanup count may lag an accepted in-flight worker response."
+      }
+    }
+  ],
+  "distributed_mask_count": 102,
+  "distributed_mask_bytes": 405156,
+  "local_verification_artifact_count": 157,
+  "local_full_checks": [
+    {
+      "episode": "S3",
+      "role": "raw_original",
+      "action_id": 0,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint_inputs/joint-1794751155686138116.npz",
+      "sha256": "656b9ca20db56ad021713548126e44c38fd2b80e31cd735fc70456a6262846a7"
+    },
+    {
+      "episode": "S3",
+      "role": "raw_original",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint_inputs/joint-1794751191855904116.npz",
+      "sha256": "bd06ae46391833ee3e7bb160f9d5aa9407ee74dc27461def3017d804b6c9f367"
+    },
+    {
+      "episode": "S3",
+      "role": "raw_original",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint_inputs/joint-1794751202123512116.npz",
+      "sha256": "e13583c40f9d78494e88598e9e2cc285be72b88a18e4b78166fa041bce1952bf"
+    },
+    {
+      "episode": "S3",
+      "role": "raw_original",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint_inputs/joint-1794751212357631116.npz",
+      "sha256": "971f84a5ced453278abb9d79ec582f80f8408d99aa35f3b2962e9c55d47923a6"
+    },
+    {
+      "episode": "S3",
+      "role": "frozen_prediction",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint/primitive_feedback/prediction_inputs_000001.npz",
+      "sha256": "4043837b6a18a42e60dabd19d4c9abdc354fe9164e81ea00360ba1983bcea4e3"
+    },
+    {
+      "episode": "S3",
+      "role": "frozen_actual_feedback",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000001.npz",
+      "sha256": "1c4339c7be04595e29f45522eae48a15828b410d8740679015d899d264aabcbf"
+    },
+    {
+      "episode": "S3",
+      "role": "frozen_prediction",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint/primitive_feedback/prediction_inputs_000002.npz",
+      "sha256": "e4fa33f3fa15c58b8dda44fcd922c95ea7a6b59f9813adf59a9e73dafcc30727"
+    },
+    {
+      "episode": "S3",
+      "role": "frozen_actual_feedback",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000002.npz",
+      "sha256": "309dfae7f86467d54bb78a9bc1c2e7dc21a4c94629027897c1af59f013462a1a"
+    },
+    {
+      "episode": "S3",
+      "role": "frozen_prediction",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint/primitive_feedback/prediction_inputs_000003.npz",
+      "sha256": "eebdb025c5ee7e2c43a9f885062e356ab2679cfb580ae0969fd439753893de0a"
+    },
+    {
+      "episode": "S3",
+      "role": "frozen_actual_feedback",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_S_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000003.npz",
+      "sha256": "4551cffac3bee515d668da0064e56aada4c501da03a4d3ae6c3df0b0f7dbf7a7"
+    },
+    {
+      "episode": "G3",
+      "role": "raw_original",
+      "action_id": 0,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint_inputs/joint-1794752006586943116.npz",
+      "sha256": "dfa12aa806745c006852b9c7b4af90a1cecb76255027db78e412c34296033245"
+    },
+    {
+      "episode": "G3",
+      "role": "raw_original",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint_inputs/joint-1794752047023345116.npz",
+      "sha256": "8e0e6d41e986f9610843d8cbb4ab2e7f5a6087452601a0f7aa3bfeaa8f989697"
+    },
+    {
+      "episode": "G3",
+      "role": "raw_original",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint_inputs/joint-1794752060892531116.npz",
+      "sha256": "f743b7af1bb03b1aa55bdf66bda8a635f8a4afd2d534b678a1ad2f3d31411e18"
+    },
+    {
+      "episode": "G3",
+      "role": "raw_original",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint_inputs/joint-1794752072192440116.npz",
+      "sha256": "ac117087f535bfcc55ae40ab0bbd4c2a4d4d09f1844db1f9e9a9d85431024147"
+    },
+    {
+      "episode": "G3",
+      "role": "frozen_prediction",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint/primitive_feedback/prediction_inputs_000001.npz",
+      "sha256": "71792521f2a1ca400d50c99e787195b582dc15e8ec1e0c039c51d1a6b8b0ec48"
+    },
+    {
+      "episode": "G3",
+      "role": "frozen_actual_feedback",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000001.npz",
+      "sha256": "05ba32908796fc30a167df93e55ba8a95d3d2478e13b12e77064341cf5b41a5e"
+    },
+    {
+      "episode": "G3",
+      "role": "frozen_prediction",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint/primitive_feedback/prediction_inputs_000002.npz",
+      "sha256": "347ffc2bb34d2c212c3bef30c5ee2fb3e8c450ab73dd65e6eead805dca6bd867"
+    },
+    {
+      "episode": "G3",
+      "role": "frozen_actual_feedback",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000002.npz",
+      "sha256": "f2067c26c2e5031f91b52fd2d17a4c2090f1f29de15b58612205a26e0a7552be"
+    },
+    {
+      "episode": "G3",
+      "role": "frozen_prediction",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint/primitive_feedback/prediction_inputs_000003.npz",
+      "sha256": "c722197bb0e7cbc451aaac93240f94f0e87aa2e11ea662ac91ae357762fc5077"
+    },
+    {
+      "episode": "G3",
+      "role": "frozen_actual_feedback",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_feedback_fresh_G_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000003.npz",
+      "sha256": "3a8f737d740328a2e8e9dbe5ef2cdfb08c42d991fd41975fd6d5dac5b50aa8a8"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 0,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794752866814575116.npz",
+      "sha256": "42228f99a6c954c4484465ca529be89e1716921073a1404bff0c2e3c67b248ea"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794752927785566116.npz",
+      "sha256": "583314538893e831a2bb8fa34fffc079f9292a0ab2495e8dcafd8044bb12998b"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794752941553411116.npz",
+      "sha256": "24dc36f363e42c2d605f8bbbf0d0e2f579bfdee980e8005c2762a1fa10def63f"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794752958387766116.npz",
+      "sha256": "d598f329d9bb61f65fd33fb24774250336d9e2349171368d21a2f2b7bdb40865"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 4,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794752977656024116.npz",
+      "sha256": "fbdb7cf7e7df63e389e81885c9af38d98a82c857e69afb45bf8aebd027635c69"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 5,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794752998690670116.npz",
+      "sha256": "edc9bdad0cbb35e7960f2c7427ea90afe733245171c3b07d133fa3b9101cac72"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 6,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753022292629116.npz",
+      "sha256": "56a73a0b19931cbed88273b81db31607db55e1cb57c40ec3b1582152b1f432a2"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 7,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753048027688116.npz",
+      "sha256": "63248386ceab902ad967ab07615b8dbd207d62350684411662e58a9183bd275a"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 8,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753076429715116.npz",
+      "sha256": "2f2995cc9edcec06164e9f8baef9e97e657a0a13d6457100496c8e783dda02b1"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 9,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753105898487116.npz",
+      "sha256": "11753a8264bf007de52ae27080c566a4ba355b238dda13f9128fad8808384c52"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 10,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753137501534116.npz",
+      "sha256": "a15ad899b2ed1b515b65552500a88e0879b53153c706b2bad756ced329094cc8"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 11,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753171603216116.npz",
+      "sha256": "c8dc414f2909bb11ef421abd9876f736bbe2c89b21d0fb3207ecba6512e1c8f7"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 12,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753207805633116.npz",
+      "sha256": "94011c089577b21b6cf08001bccdf1af50493618c1d17774ec82de338e83f511"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 13,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753246275158116.npz",
+      "sha256": "580ddf66e324fb5627cea4aa3de10430305148263f217781caaec18b30f82e80"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 14,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753286278069116.npz",
+      "sha256": "cdca3bfab924890e8acf25fb28ceb9f1e7df571059f97c5049c3a5f7cb950fcb"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 15,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753329081127116.npz",
+      "sha256": "7d0dd02bc7b1367a4d43f654133fdfd3dcfe300658ada10ea22b8bbfa8dd9c90"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 16,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753373984423116.npz",
+      "sha256": "6fa3d8b824dc7a89831f8e8bc807b62be367ff39478a6c9fd18504d06721726f"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 17,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753422621029116.npz",
+      "sha256": "21efa615090980fc76a48f39e89a1d6849eb3e59cac6b74c13d58c7230f99dde"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 18,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753475524843116.npz",
+      "sha256": "e11a1d43258886331aa52fa37ffcfa36c627cab1d4376c12d77c19392425cfe8"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 19,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753527161867116.npz",
+      "sha256": "3c42da910d6788ed4abb44d03f4b315b8be44784c103c903bc92100d709573c6"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 20,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753582432521116.npz",
+      "sha256": "32bffa26ce332ca282ac5a07e0a520dbcc56937bb9e2174d85fd44be3e2441e4"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 21,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753637536671116.npz",
+      "sha256": "bc1d8023bc90ae90ef5545b278f2109cb252cc14a41bd9c9a8f448bc4f1cd454"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 22,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753695307508116.npz",
+      "sha256": "4f778869953a12a6fdd6e20a01171fd56861021a05f88a5240c33d18f94086e6"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 23,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753756546528116.npz",
+      "sha256": "fb675e276521dec16a44b206f80450855c54f6f286233720f4cdc36cff6286b3"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 24,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753826616993116.npz",
+      "sha256": "0c3106c0afbb88b67354c8d5c13289d1c4784069fdad2cb904f929dedc7878a5"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 25,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794753934591250116.npz",
+      "sha256": "bbc7fd31f7d4b65384541ad6b822cad7ffa85698cdc93131d6033b39efe5adb4"
+    },
+    {
+      "episode": "S26",
+      "role": "raw_original",
+      "action_id": 26,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint_inputs/joint-1794754047566312116.npz",
+      "sha256": "56d1845798ee4ac2d8a1919fba0e503f5aa1cd9f7482400eaff0dc7d42a347bd"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/prediction_inputs_000001.npz",
+      "sha256": "ed0a4e02e912d4959533e294a844afc48f05851d3248c4123c6770820bc50954"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000001.npz",
+      "sha256": "c342036546d677cd85cda6aeda500ac70147dffe86ca5f7bf45764617713c454"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000001/prediction_inputs_000002.npz",
+      "sha256": "a23019c8b27f6ff1e4e73c27f1c8121c82db2f373774566c19310b5b7d9819df"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000001/actual_feedback_inputs_000002.npz",
+      "sha256": "085e68425c1215ee7dab725c30152755fef35c58762345d8ba32e4d746bf2a86"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000002/prediction_inputs_000003.npz",
+      "sha256": "9c61b6e3a78b06cf58da8c688570352323120cc701aefaa3d2f92ccdd986a5c4"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000002/actual_feedback_inputs_000003.npz",
+      "sha256": "8f5b5ef7e0aebf2ff251d5039265e4479b881522cf673370aaba0ed4b217f28b"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 4,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000003/prediction_inputs_000004.npz",
+      "sha256": "46623e036d40281032f2958ec59cde5e9839dc012943a546bb24cffd38b049ea"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 4,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000003/actual_feedback_inputs_000004.npz",
+      "sha256": "153524af762c60d62d6553cb52b6865ef81b44d4d8eb453a328eeb09e2f105de"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 5,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000004/prediction_inputs_000005.npz",
+      "sha256": "9fbcd5d5792389a1491572e363055645dd7c4f14aa43eada6c5e626b170ae819"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 5,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000004/actual_feedback_inputs_000005.npz",
+      "sha256": "7f990a8cffa5f205a48d0c568bb6e7471ccc77fde35f35c83e11aff803e3020c"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 6,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000005/prediction_inputs_000006.npz",
+      "sha256": "2447f920c25867f235fae5f42501fdd55f3374f5e0947e9de3e3db6b50c6912c"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 6,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000005/actual_feedback_inputs_000006.npz",
+      "sha256": "2c7c0643abd81ec49365dc7cc1bbd65d27af4f7d414b71b55af3be49635c3b4d"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 7,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000006/prediction_inputs_000007.npz",
+      "sha256": "5ac83494a4e78a21923e17bc3448f1e546ce91ac71aa0422537648fd2f9e4a49"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 7,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000006/actual_feedback_inputs_000007.npz",
+      "sha256": "d7f6ec8e0ca9cb8320919db3906c9e569f6d0a224049b2c482abee06bd9b8940"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 8,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000007/prediction_inputs_000008.npz",
+      "sha256": "5d0a19caf0c336976615f29397522672919dae974c70b350e1ea328ebb210b5d"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 8,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000007/actual_feedback_inputs_000008.npz",
+      "sha256": "c4298babe39601f18f4e000d5acd009aa83bde384a1d58db97823ff6e888fad0"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 9,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000008/prediction_inputs_000009.npz",
+      "sha256": "8a6f722192d2011316f50297264ed1e28688e01c89431eaa1861430e58e9f1ab"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 9,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000008/actual_feedback_inputs_000009.npz",
+      "sha256": "08f3a9d5ebfef54010e708d824a2ed698a3e4a80baa643a76aa3e1535ae8fe45"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 10,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000009/prediction_inputs_000010.npz",
+      "sha256": "c708e60bb76297f835a9036cbd2dd455380c57db9a21cc611c9bf97f5cb9fda6"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 10,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000009/actual_feedback_inputs_000010.npz",
+      "sha256": "c32706c9c763cf40626da3898e32c7ff66daaa995a50c0d24caf82683bb2b7ba"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 11,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000010/prediction_inputs_000011.npz",
+      "sha256": "e9d3c15c7fa2c9b62cf37769602f68f45761fc57aa36d2b7ea8cbec0c348ebe8"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 11,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000010/actual_feedback_inputs_000011.npz",
+      "sha256": "e2882e3d964288026c67a5ad0c9b6f9c92bcaa28088a180248b3486598c17c7a"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 12,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000011/prediction_inputs_000012.npz",
+      "sha256": "36549221638af296091553c32b842ae17540083936a2e629da8b1e2974ed3bf1"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 12,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000011/actual_feedback_inputs_000012.npz",
+      "sha256": "d275c129e298d4a3fdd5c6968d6ff14a84238e39918fad3336a274d22adb4930"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 13,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000012/prediction_inputs_000013.npz",
+      "sha256": "3a29d80c324dcb2d4bba05a3942b175c0d119b2da29943581980fa0e38331654"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 13,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000012/actual_feedback_inputs_000013.npz",
+      "sha256": "51b893a0d658fb0fa6b89d9dc8125f4a8dda707623a350dcb13988ab3a8a5230"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 14,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000013/prediction_inputs_000014.npz",
+      "sha256": "cba4aa5ff0c40492bfe0133f1f943347028e5adb63dc54586f46a4d1d0c0f97f"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 14,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000013/actual_feedback_inputs_000014.npz",
+      "sha256": "15d77166298293665b1b18288ad2844dac96520cc9d18114779ed99c228cf932"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 15,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000014/prediction_inputs_000015.npz",
+      "sha256": "995cc54194e426fb5fd6763f606adf514519c65ff98a97e58ad8851f8f4e4771"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 15,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000014/actual_feedback_inputs_000015.npz",
+      "sha256": "4c393f77c5dfc7dea69b89bc42ddc1e66d0acee76b7123aec66fc39286e826a4"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 16,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000015/prediction_inputs_000016.npz",
+      "sha256": "8d5fba5a2d4366f178b850526dc5ad52cfd52aad1324f374ff9d993e99c38912"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 16,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000015/actual_feedback_inputs_000016.npz",
+      "sha256": "67277bf37f89e62bfdc3fed42bafbe1b5eef98556dde1dc5a00f0f9aa737f4c3"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 17,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000016/prediction_inputs_000017.npz",
+      "sha256": "a44c28101d333d1985764d8bf6acbc08f28c75a6335e85c44e04a431c6678551"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 17,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000016/actual_feedback_inputs_000017.npz",
+      "sha256": "403f331543a00602bd8c71b458b566feba53428fa956d4d86577e38f9c924d2b"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 18,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000017/prediction_inputs_000018.npz",
+      "sha256": "6c7957813bfe75c2e9c60575e96f76503be092cda899ad11527673246c7421d9"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 18,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000017/actual_feedback_inputs_000018.npz",
+      "sha256": "489170eba36fd6d5040674245c548639fc7a925172e2d5ac34110aa019cd4208"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 19,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000018/prediction_inputs_000019.npz",
+      "sha256": "92c7f0ed6c2e631c06149484d17e513f710a279cdf0c6537d52a25c3d7186199"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 19,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000018/actual_feedback_inputs_000019.npz",
+      "sha256": "7434b97583cecc3e2149d5ef8a6b2ced5ead08bfb82e8e55eaaab65374c9cfc1"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 20,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000019/prediction_inputs_000020.npz",
+      "sha256": "a46d39b091a671886a92b1433f933c232abca18267b33f7bf5d51f17489ade9c"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 20,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000019/actual_feedback_inputs_000020.npz",
+      "sha256": "8ba30bfc9e3988fef1e40f9516a5989b75ae576f044f6a617f02abd112bf9e29"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 21,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000020/prediction_inputs_000021.npz",
+      "sha256": "b43cfde72b92a9c856b89c082e0adea8153ec0f9d65196ed706f5cead33a6c23"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 21,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000020/actual_feedback_inputs_000021.npz",
+      "sha256": "83a0bd23c1f5f08a96b5c3f8bc1c39077cac3b2ee5842a5b0fa6610f85a75c4d"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 22,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000021/prediction_inputs_000022.npz",
+      "sha256": "4410f61632ee390af87b66ec58770a8be1077f469c18979919bba536bd2c9214"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 22,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000021/actual_feedback_inputs_000022.npz",
+      "sha256": "11f89702e6c11b0885313ebb9403dc5fccf4df79ddfdc2df480eb57cd0a0bba1"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 23,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000022/prediction_inputs_000023.npz",
+      "sha256": "b2e5b862f7555c3d45d3eabbd7506c889f0b3fa7695dd900de9b944ec8a0be50"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 23,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000022/actual_feedback_inputs_000023.npz",
+      "sha256": "fe125d0a4efd0a9b4b772a6795de834f3785ed2fa06cecee0d7d3e8dd3dbfc6f"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 24,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000023/prediction_inputs_000024.npz",
+      "sha256": "b6c23ecf5b28ea38e03e6ce053a3db84533174456468309f24e22e910b321a2f"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 24,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000023/actual_feedback_inputs_000024.npz",
+      "sha256": "35c1e2b6f1bc824a2bdeeee6df601955f9a2585dd84bdb9dffbcaae73fd0f6f5"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 25,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000024/prediction_inputs_000025.npz",
+      "sha256": "63bf643a0c0124cb8afe8a3096e626c933ef2bcf48166a55055907932ae74faa"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 25,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000024/actual_feedback_inputs_000025.npz",
+      "sha256": "1d2128a9cf0fa8b59233b3b7cc24c601422c85ce727277585cfe44e8af382b8d"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_prediction",
+      "action_id": 26,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000025/prediction_inputs_000026.npz",
+      "sha256": "0622a32b698c00e72d31238d3ef160818138f335c03ce29d6b5f8b1f19b1fcf8"
+    },
+    {
+      "episode": "S26",
+      "role": "frozen_actual_feedback",
+      "action_id": 26,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_primitive_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000025/actual_feedback_inputs_000026.npz",
+      "sha256": "e5f45c2b2f74247def88bac7a04ae0f1c30714178436a5aef5e0c871dc6c8c19"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 0,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754808782811116.npz",
+      "sha256": "04e5a666e6b2f15a974d9ab0de1c6f4dc6b61e1a2e86a203e4628f9a18103c10"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754853548113116.npz",
+      "sha256": "815f2998e6572c4046def982ffc195ed03538b77c556e970f89f4812d8f6084e"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754866848239116.npz",
+      "sha256": "7f3ac821ab3e2d6f9acdf18c395d126d41516756cb588fa181ffe08cceb22c0d"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754881715147116.npz",
+      "sha256": "97abcf9c84cbda99347b541dd10167b19de85968c05d6d7ffa3a499480766418"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 4,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754897116442116.npz",
+      "sha256": "458e0af76b377e7b0ef82d75b45c42cf1d949173dcbe6e68e42353f342f3989b"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 5,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754916517309116.npz",
+      "sha256": "d558a4ffed0a715215a83796fbd6c25dba0ac9d66de316c99f87fedde20d8fc0"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 6,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754935381323116.npz",
+      "sha256": "5330ed8d230ef32a7610660e690e87668228e1eecfaab8a4ddb5ce374a06b74b"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 7,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754957781240116.npz",
+      "sha256": "4e6b62682e08228330c1f4b4b0f6d529c78f9c28218e1dae6bc6db670428a9dc"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 8,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794754981281595116.npz",
+      "sha256": "f632be56e22c519c0b1895022e71997eea70c17bccfa5e8812b64f2620e20a1e"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 9,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755002281678116.npz",
+      "sha256": "4848664da25b98c2a54d65ed20884de7a2521ef3aa1877c7b317236bc239e717"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 10,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755025248303116.npz",
+      "sha256": "8e372fcd08309167b0ff19a672c839b1d32887563205a300aaab35729813d67c"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 11,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755048915306116.npz",
+      "sha256": "ad223652b7b44e21a07eb0dafbd163a6d1b49f09c284f446c14dd31d5c8b7b5f"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 12,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755076949058116.npz",
+      "sha256": "be7d3fd02647a726ddc3d74c531d8bb491fc2639c32e4f6b92cc4aceda8b0841"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 13,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755102882721116.npz",
+      "sha256": "412d80ded971e24dc507468ba69c3cd5c352dd484d13f0bef960db46eb1110d0"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 14,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755130249826116.npz",
+      "sha256": "940fa2460a272454cd1e9caa11df5daf84c35b45b12779f0a8183e14381ce2d4"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 15,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755157816951116.npz",
+      "sha256": "6ec19d678f857751aaa21ecc814ae3fa73dcfe548eba151ed9d3a621b55392aa"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 16,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755186283951116.npz",
+      "sha256": "860295efe825cf3befa6fe8c9a3943807f74a70f06a1f4933392003b514a4f0e"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 17,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755216151490116.npz",
+      "sha256": "275b84f8ffadd65e69a52c4ced25e9ec7b094798dd37cb41c6d739f6eed22286"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 18,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755247618584116.npz",
+      "sha256": "fd0ef75487c1e1ba74f362322e964ef546f32a493f732c94220d34e0f5c5e842"
+    },
+    {
+      "episode": "L19",
+      "role": "raw_original",
+      "action_id": 19,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint_inputs/joint-1794755282987130116.npz",
+      "sha256": "731245d29c4d23cf076155df3872f39b4f157c302cd4ee2a60111e3c308237c4"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/prediction_inputs_000001.npz",
+      "sha256": "ebbb0f6e78cca15bc1eeaa12113db45875f15fc4ec7e8c00f4c90aa09fa72707"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 1,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/actual_feedback_inputs_000001.npz",
+      "sha256": "a014e0214f9e9929bdc82e3170e0627c91ec70a141ace49207ead360f5ca8763"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000001/prediction_inputs_000002.npz",
+      "sha256": "3b46f431ad7a9268c190d8d2c67062f960f3c6e7295a6763ed487297d0514c76"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 2,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000001/actual_feedback_inputs_000002.npz",
+      "sha256": "a28a3b87bb7fc2ac6962f4040bc87704ec1b22f80b8affb84cecf92c6646e9da"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000002/prediction_inputs_000003.npz",
+      "sha256": "4c1c2b58239f7c52803bf70234b917a08d5f1ab97cfa80ab4de8f70364bca594"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 3,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000002/actual_feedback_inputs_000003.npz",
+      "sha256": "2766faf036cdcb4ebe1869bdc7114c1b3551494348549c310df83d3c211d391b"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 4,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000003/prediction_inputs_000004.npz",
+      "sha256": "e657197873aa4569479279d062af5cc80e39302cc4440e1633738a67f0a1783a"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 4,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000003/actual_feedback_inputs_000004.npz",
+      "sha256": "c2bfd41c055214bbf65d17faef2d977a1b15de8c7827f428684961b83d84af30"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 5,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000004/prediction_inputs_000005.npz",
+      "sha256": "2dfa95ff67f38aeca6f3d4e3f051f2b38c41a20e1283d4dc9aab001bef173f36"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 5,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000004/actual_feedback_inputs_000005.npz",
+      "sha256": "cc09de484365264dc443ab59919296384da161d46c7ea827a2c766deb013afc1"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 6,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000005/prediction_inputs_000006.npz",
+      "sha256": "1ef3dd2fec15c95ac3d9349c9f1c19a47482125d36f6c579345c6c734a391e8c"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 6,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000005/actual_feedback_inputs_000006.npz",
+      "sha256": "4492398a949615cd11af2dfc1979cb1d78908e8420af63b01affa26ae2b6b81c"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 7,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000006/prediction_inputs_000007.npz",
+      "sha256": "8355f04841e84831761a7809f33202b75be2053fd1a03dc356e537cfd31e7d56"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 7,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000006/actual_feedback_inputs_000007.npz",
+      "sha256": "c7c556f996239e6fdf53e93455e37e9239dd7785d2f4f764210c021527c573af"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 8,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000007/prediction_inputs_000008.npz",
+      "sha256": "c869c62697e2d32eb253ccf8dc5b3738c501e557defbe140d748e913db6f39f1"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 8,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000007/actual_feedback_inputs_000008.npz",
+      "sha256": "c6922891c8899bf8f5e1a4c1226652342eebcdb2baf488875f513dd29c446dcf"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 9,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000008/prediction_inputs_000009.npz",
+      "sha256": "9890b17adfa009e5e57e0633393a0927d75310c5fc6d058cf002911b5b1d76bb"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 9,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000008/actual_feedback_inputs_000009.npz",
+      "sha256": "0ee9a687ce87ac6f99f3ce2e2555e16a27b1270baceac8506ca29f7d9b35ec11"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 10,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000009/prediction_inputs_000010.npz",
+      "sha256": "a93df7647c01542d9bcfd532f41b0212f515be7cec8048751e07d1b8c75320e4"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 10,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000009/actual_feedback_inputs_000010.npz",
+      "sha256": "47f296ac396b32127a73eed328c392332ae57a2b5438e17da3d6829339e2bbc0"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 11,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000010/prediction_inputs_000011.npz",
+      "sha256": "0513b881acb96e4f1885597657110a8e16366598305446b2e54ab1bd4fb2038d"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 11,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000010/actual_feedback_inputs_000011.npz",
+      "sha256": "86c2fe15d66c16ecf4846813d2489bc11c076a2cd9cb9816ff99ce567058369d"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 12,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000011/prediction_inputs_000012.npz",
+      "sha256": "d80f2f3838609d7498fa19ff11b5e4be367f1109dbcdd934a1477f597cd70082"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 12,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000011/actual_feedback_inputs_000012.npz",
+      "sha256": "2bc621f0acccf71c6b8a138f87618b8ea7e25c5ba268dd8b51e204647c8ed40f"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 13,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000012/prediction_inputs_000013.npz",
+      "sha256": "1c30187a78a5dd7a8b79345813ce6aabf77bb8e989f0b1a7daefed4599f8147a"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 13,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000012/actual_feedback_inputs_000013.npz",
+      "sha256": "3af7d2354050f70199a3286fc2771e6c844b642938ab15ca212ea9dd90ae1f7d"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 14,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000013/prediction_inputs_000014.npz",
+      "sha256": "fab52fb4e2bc6cd4ec9a36837946990cacaa5c1713125774d04db0f17e691363"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 14,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000013/actual_feedback_inputs_000014.npz",
+      "sha256": "782f7f1740431c887a282e56ce1a30a7f4a220a60e865e299262dd3e3e709ecc"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 15,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000014/prediction_inputs_000015.npz",
+      "sha256": "5bd90b00f9ead0bb8038eed3c124da39f761a5e305858b96d0217b2fa51a0166"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 15,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000014/actual_feedback_inputs_000015.npz",
+      "sha256": "d4db74c050473c61868ed24c52937319995b6d07581e728e040eebee61aac8a6"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 16,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000015/prediction_inputs_000016.npz",
+      "sha256": "fe3bcfc53155b95facdf43c2a845f5aca98e1c474c5b88afa2b0f609398f6d8d"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 16,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000015/actual_feedback_inputs_000016.npz",
+      "sha256": "d6c42ff6a95076116810019df5afe72b76f7b1adf1647201c9ef53f855e389f4"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 17,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000016/prediction_inputs_000017.npz",
+      "sha256": "17317c4da327042621fdc222d8ac35036910d80c90b9b904a69ae23e43086515"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 17,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000016/actual_feedback_inputs_000017.npz",
+      "sha256": "2afd7fb59cfbf7d82f30b5fff39df3c82942e7ef1cef5e86039956ee2eb35ddc"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 18,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000017/prediction_inputs_000018.npz",
+      "sha256": "a7c52bdcef062e29be72625d845b6f7fb21fb0230ab846c52ea07cd72ffc0ff4"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 18,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000017/actual_feedback_inputs_000018.npz",
+      "sha256": "a4289037aa39d0c8b5b72cde0928687c3303dd7b9c5d0595b861c05b71126ddd"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_prediction",
+      "action_id": 19,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000018/prediction_inputs_000019.npz",
+      "sha256": "fb83c7e37a0f5c61be8d84d3da742217de459899e73ed63831d1c2ef061d6e0e"
+    },
+    {
+      "episode": "L19",
+      "role": "frozen_actual_feedback",
+      "action_id": 19,
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_exterior_optimized_S_20261115_01/joint/primitive_feedback/optimized_geometry/generation_000018/actual_feedback_inputs_000019.npz",
+      "sha256": "bb3a7021aa209f09de2f803ec24a327ac04343c20e5f814efe6e521f75ecdb95"
+    }
+  ],
+  "portable_scope": "Verifies distributed masks/method sources/events/chronology/metrics. Raw originals deliberately absent; their local SHA checks are an attestation, not a portable raw-data verification.",
+  "new_robot_actions": 0,
+  "new_feedback_events": 0,
+  "raw_sensor_archives_distributed": false
+}

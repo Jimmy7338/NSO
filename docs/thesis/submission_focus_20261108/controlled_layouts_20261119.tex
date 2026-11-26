@@ -1,0 +1,55 @@
+\subsection{Additional constructed layouts and incorrect category cues}\label{nov19-controlled}
+
+Two further background layouts were fixed before execution: staggered aisles (L04) and an offset rear gate (L05). Each retains the P00 equipment family and both public configuration hypotheses. The complete batch crosses two layouts, two configurations and G/S/X, where X uses the swapped category interpretation with geometric correction retained. All 12 declared routes complete the common 18-action prefix and 42-action total budget, travel 28 m with 14 turns, avoid simulated collisions and return to the full initial pose. Source hashes and the nonsemantic observation prefixes agree across matched conditions. These are two constructed layout units with related configurations, not 12 independent environments.
+
+\begin{table}[!htbp]
+
+\caption{All twelve additional controlled routes. Coverage, F1 at 5 cm and joint quality are reported separately; higher is better. Budget and motion cost are identical across all rows. X is the incorrect category cue with correction enabled.}\label{tab:nov19-controlled}
+
+\centering\small
+
+\begin{tabular}{@{}llrrr@{}}
+
+\toprule
+
+Layout/config. & Policy & Coverage (\%) & F1 at 5 cm & $J_5$ \\
+
+\midrule
+
+L04/h0 & G & 97.09 & 0.648048 & 0.629191 \\
+
+L04/h0 & S & 94.67 & 0.726418 & 0.687666 \\
+
+L04/h0 & X & 97.09 & 0.648048 & 0.629191 \\
+
+\addlinespace
+
+L04/h1 & G & 97.09 & 0.715053 & 0.694247 \\
+
+L04/h1 & S & 97.09 & 0.715053 & 0.694247 \\
+
+L04/h1 & X & 94.67 & 0.659373 & 0.624198 \\
+
+\addlinespace
+
+L05/h0 & G & 97.19 & 0.658529 & 0.640055 \\
+
+L05/h0 & S & 88.70 & 0.765657 & 0.679110 \\
+
+L05/h0 & X & 97.19 & 0.658529 & 0.640055 \\
+
+\addlinespace
+
+L05/h1 & G & 97.19 & 0.763930 & 0.742499 \\
+
+L05/h1 & S & 97.19 & 0.763930 & 0.742499 \\
+
+L05/h1 & X & 88.70 & 0.665028 & 0.589856 \\
+
+\bottomrule
+
+\end{tabular}
+
+\end{table}
+
+S improves $J_5$ in two of the four G/S configuration pairs and ties in two. The ratio of the four-condition means increases by 3.60\% (0.676498 to 0.700881); mean surface F1 increases from 0.696390 to 0.742764. Mean planar coverage falls from 97.14\% to 94.41\%, including an 8.50 percentage-point loss in L05/h0. The joint-score gain therefore describes a surface--coverage tradeoff, not faster exploration. S exceeds X in all four configurations; X matches G in h0 and is worse in h1. Divergent routes first differ at action 19 after identical nonsemantic measurements. These controlled outcomes remain within one equipment family and do not by themselves exclude a generic geometric-weight explanation.

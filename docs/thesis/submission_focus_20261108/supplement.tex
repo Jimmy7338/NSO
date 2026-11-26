@@ -1,0 +1,187 @@
+% Venue-neutral research review; NOT SUBMITTED. Author fields intentionally blank.
+% Standard article class; retained publisher files are not compiled.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=27mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{url}
+\providecommand{\hypersetup}[1]{}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
+\providecommand{\href}[2]{#2}
+\providecommand{\texorpdfstring}[2]{#1}
+\usepackage{graphicx,amsmath,amssymb,booktabs,array,textcomp,float}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,pdfauthor={}}
+\setlength{\emergencystretch}{3em}
+\newlength{\JournalTableWidth}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\raggedbottom
+\begin{document}
+\title{Supplement: Category-Conditioned Observation in Joint Unknown-Space Exploration and Reconstruction}
+\author{}\date{Anonymous research draft, 20 November 2026}\maketitle
+\section*{Evidence scope}
+The main task is unknown-environment coverage and measured surface reconstruction. This supplement preserves earlier diagnostics, the reduced supplied-graph mechanism, physical integration failures and all later calibration/branch comparisons. Related policy trajectories, object viewing conditions and reused branches are not independent environments. The archived supplied-graph method has a different initialization, planner and stopping contract from the main observed-state exploration system.
+\renewcommand{\thetable}{S\arabic{table}}
+\input{Table8.tex}
+\input{Table9.tex}
+\input{joint_diagnostic_detail.tex}
+\section{Two-room attribution control}
+The two-room construction adds a divider with a 1.6 m opening to Q0 shelf-west. The blocked initial doorway position was corrected during geometry preflight before policy trajectories were observed. G, S and a post-hoc G$\times$2 control each complete 96 actions, return to the anchor and record zero simulated collisions. Initial/final coverage is 60.12/99.01\% in all three runs. Newly visible surface is 123.965208, 126.576693 and 126.576693 m$^2$; F1 at 5 cm is 0.911938, 0.922122 and 0.922122; path length is 16.8, 16.4 and 16.4 m. First 99\% coverage occurs at actions 58, 56 and 56. G$\times$2 and S have identical action traces, so this diagnostic does not isolate a category-specific advantage from geometric-prior reweighting. The control was chosen after the G/S results and scalar audit, not preregistered.
+\section{Prospectively fixed Q1 synthetic parent}
+
+A further comparison fixed Q1 (outer seed 952), the shelf-west arrangement, a 96-action limit and native G/S/X modes before constructing the scene or observing trajectories. Each mode was executed once with the existing exploration\_joint\_v1/v10\_3\_1 policy, a fresh actual simulated first frame, exact poses and the original 0.2 m circular radius. X swaps the native class-prior scores. The category channel uses synthetic markers, without a natural-image detector. This adds one synthetic parent and three related policy trajectories, not three independent scenes. All three use 96 paid actions, return to the complete anchor and record zero simulated collisions. G and X have exactly identical step records.
+
+\begin{table}[!htbp]
+\centering
+\caption{All Q1 outcomes. Initial/final coverage is measured over reachable cells; surface gain excludes the initial frame; F1 uses 5 cm.}\label{tab:Q1}
+\small\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Mode & Coverage start/end (\%) & Area gain (m$^2$) & Surface gain (m$^2$) & F1 \\
+\midrule
+G & 63.104 / 99.164 & 15.52 & 107.233302 & 0.929464 \\
+S & 63.104 / 99.628 & 15.72 & 118.952383 & 0.978022 \\
+X & 63.104 / 99.164 & 15.52 & 107.233302 & 0.929464 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+S exceeds G/X by 11.719081 m$^2$ newly reference-visible surface, 0.20 m$^2$ observed area and 0.048558 F1. The first changed planning choice occurs after 19 actions at 88.475836\% coverage, with identical complete inputs, candidate sets and score components. The actual actions first differ at action 33. S has a temporary surface deficit before the terminal gain (Figure~\ref{fig:Q1}); the endpoint does not imply uniformly better progress.
+
+All 25 recorded planning states admit a nonnegative uniform geometric-prior weight that reproduces the S-selected candidate within that state's saved set. Moreover, every actually visited S state shares the feasible interval $\lambda\ge6.037968585111318$ under the audit's exact rational constraints and tie rule. No weighted-control rollout or weight search was added. Thus, saved-state selection remains consistent with generic reweighting; the audit does not prove that an unexecuted weighted policy reproduces the full S route. This complete-route gain supports controlled synthetic observation allocation while leaving category-specific advantage, early unknown-exploration efficiency and natural-semantic transfer unresolved.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=.90\linewidth]{Q1_curves.pdf}
+\caption{One prospectively fixed Q1 synthetic parent with native G/S/X. Left: observed reachable-cell coverage. Right: reference-visible surface added since the initial frame. G and X coincide exactly; S has a temporary surface deficit before the final gain. Each arm returns after 96 paid actions with no simulated collision. These related trajectories provide no between-scene uncertainty estimate.}\label{fig:Q1}
+\end{figure}
+
+
+\section{Saved-scan physical evidence and execution profiles}
+The 10 November snapshot S40 and 12 November S96 episodes are separate real-robot S trajectories. The S40 record has 40 paid actions, 41 accepted observations and 40 verified ROS primitive arrivals, with a recorded return. The S96 attempt has 60 paid actions, 61 observations and 60 arrivals before interruption on the next goal; no return is recorded. Their CAN distances and wall durations are 6.756875 m/440.470694 s and 11.081836 m/652.883974 s. Zero feedback after stopping is retained for both. The native option-endpoint arrival counter is distinct from the ROS primitive-arrival count.
+
+The cumulative laser estimator uses one archived real scan per accepted RGB-D packet, its own historical laser transform, a fixed 0.2 m planning grid and a 12.5 m-radius measurement region. Finite valid returns are capped at 8 m; a capped/max-range endpoint provides free-ray evidence without a hit. Invalid returns contribute no synthesized evidence. Cell unions include acquired rays and hit endpoints, which can conflict across observations. The S40 and S96 unions increase by 34.32 and 56.20 m$^2$, respectively. The S96 last-scan time is 640.190679 s after its first scan, whereas 652.883974 s is the complete run duration; scan and episode endpoints must not be substituted for each other. These figures provide no independent traversable-space denominator, localization reference or surface accuracy. The accompanying plotting script consumes the evaluated scan curve directly and exports all 61 dependent checkpoints.
+
+The S96 stop was triggered by measured CAN feedback of 0.154 m/s against the strict 0.15 m/s limit. The later 0.05 m/s positive-command profile changes execution clipping while retaining all speed-stop predicates and expiry limits. Its completed S12 record has 12 paid actions, 13 observations and 12 arrivals, with 0.998883 m travel, 152.766800 s duration and recorded return. The subsequent 0.05 m/s S40 attempt was interrupted after 9 paid actions, 10 observations and 9 verified arrivals, with 1.483731 m travel and 136.336224 s duration, without returning. A passive CAN observer recorded a 0.159 m/s maximum feedback velocity despite command frames bounded by 0.05 m/s. Local command-frame observation does not prove controller acceptance or independently measured physical speed. The shorter completion does not establish that the execution fault was resolved. Profile changes and unequal initial observations prevent a matched before/after efficacy claim. The S96 negative fixed-support quality change and failed return remain included.
+
+
+\paragraph{Modified outcomes.}
+The reverse-enabled ros\_checked\_exploration\_v2 episode ended at its external deadline after 19 accepted attempts, including 16 exact primitive successes and three failed actual-pose observations (20 observations with bootstrap). Its 7.031573 m/603.310025 s totals include three ROS backoffs, whose brackets sum to 3.180978 m/230.314087 s; one succeeded and two aborted. The accepted-scan union increased by 33.04 m$^2$, while own-support quality decreased by 0.008163. The subsequent navigation-geometry trial ended on native driver fault 5: 39 ROS goals arrived, but only 38 paid observations plus bootstrap were accepted. Its 7.356553 m/470.210617 s totals, 37.68 m$^2$ scan-union gain and $-0.030885$ quality change remain interrupted outcomes without verified return. The trial's padded width of 0.48 m is below the current Mini URDF's 0.585 m; the physical envelope is unresolved and the prior navigation default was restored. G/S score separation appeared in one geometry-trial state but changed no recorded winner. These unmatched episodes support no efficacy or accuracy ranking.
+
+The optional viewpoint controller is installed but physically unexecuted. It preserves the candidate-score formulas while separating waypoint-attempt accounting from fixed nominal grid-motion predictions and freezing primitive gain calibration; no failed-goal blacklist or added re-ranking is active. The independent RTAB-Map interface processed parked mapping and database-localization inputs with navigation TF ownership unchanged. Initial counts were 475 information messages, 11 proximity events and zero descriptor-loop events; lean mapping and existing-database localization were exercised while parked, with no displaced relocalization proof. RTAB-Map is off. Interface operation does not validate closed-loop exploration or the original controlled method.
+
+\section{Measured correction and forecast diagnosis factorial}
+A separately frozen $2\times2$ factorial separates measured posterior correction from forecast diagnostic anticipation (Table~\ref{tab:correction-factorial}). All eight routes use the same regenerated public cache for P00, its two configurations, the fixed incorrect category interpretation, a 42-action budget, an 18-action common prefix, and disparity-noise seed 1901. The original renderer, planner, return rules, fusion backend and evaluator are retained. Four endpoint equivalence runs compare the wrapper with the original X and Xnf controllers on identical acquired packets; every action, posterior and planning receipt agrees. These implementation checks are excluded from the eight factorial routes. The eight routes represent one parent layout and two related configurations, with no additional independent layout replication; their endpoints are not pooled with the older development-cache results.
+
+\begin{table}[!htbp]
+\caption{Complete correction factorial on one P00 parent and two configurations: eight actual simulated routes with a common public cache, wrong prior, budget 42, prefix 18 and noise seed 1901. All routes return without collision and share $C_{\rm map}=0.957483$. Higher $J_5$ and F1 are better.}
+\label{tab:correction-factorial}
+\centering\small\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}lllrr@{}}
+\toprule
+Configuration & Measured correction & Forecast diagnosis & $J_5$ & F1 at 5 cm \\
+\midrule
+h0 & Off & Off & 0.651868 & 0.680814 \\
+h0 & Off & On & 0.651868 & 0.680814 \\
+h0 & On & Off & 0.669091 & 0.698802 \\
+h0 & On & On & 0.669091 & 0.698802 \\
+h1 & Off & Off & 0.657205 & 0.686388 \\
+h1 & Off & On & 0.657205 & 0.686388 \\
+h1 & On & Off & 0.674799 & 0.704764 \\
+h1 & On & On & 0.674799 & 0.704764 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Measured correction raises mean $J_5$ from 0.654537 to 0.671945, a relative increase of 2.6597\%, within this controlled P00 setting. Forecast diagnosis changes neither trajectory nor endpoint in any of the four matched on/off contrasts: each pair has an identical complete trajectory SHA-256 digest. Thus, the factorial supports a measured-correction effect under these conditions and supplies no observed independent benefit of diagnostic anticipation. It does not show that diagnostic lookahead is generally ineffective, or that the measured-correction gain transfers to other layouts. No confidence interval or significance test treats the eight routes as independent scenes.
+
+
+The complete recorded inputs and results are indexed in \texttt{supplement.md}. The editable numeric table export is \texttt{figure\_source/correction\_factorial\_20261115.csv}; all eight endpoints are retained. These V35 supplied-graph simulations are separate from the unknown-exploration matrix and modified physical deployments.
+
+\input{four_room_completion_supplement_20261119.tex}
+\input{replicacad_diagnostic_20261119.tex}
+\input{dual_template_exploration_20261119.tex}
+\input{dual_template_repair_20261119.tex}
+\input{dual_template_geometry_20261120.tex}
+\input{observed_object_parts_20261120.tex}
+
+\input{conditional_depth_calibration_20261120.tex}
+\input{joint_depth_policy_results.tex}
+
+\input{archived_supplied_graph_20261120.tex}
+\input{archived_exploration_history_20261120.tex}
+\input{archived_physical_history_20261120.tex}
+\clearpage
+\section{Independent follow-up calibration and native decisions}
+The following follow-up studies retain separate object splits, fixed-prefix branch evaluation and complete policy outcomes. The 24 calibration and 24 test objects are shared by the structural and interval studies; they are not 96 independent objects. The interval predictor remains neutral $T=1$, and its correction is report-only. Structural temperature changes only the declared class mixture in the policy comparison.
+\input{structural_temperature_20261120.tex}
+\input{interval_diagnostic_20261120.tex}
+\input{controlled_semantic_mechanism_20261120.tex}
+\subsection{Complete structural-temperature policies}
+\input{temperature_policy_table.tex}
+The main text reports the complete coverage curves and adverse left-layout semantic outcome. Full T1 control rows are reused, not new repeats. The first changed left planning decision is at paid action 54; the actual action streams first diverge at action 71. All runs continue after first complete coverage to the declared 256-action endpoint and return. Elapsed timings are recorded under three concurrent runs with numerical-library thread limits set to one; they are host computation rather than physical execution or independent real-time benchmarks.
+\begin{figure}[!htbp]
+\centering\includegraphics[width=\linewidth]{figures/structure_calibration_decision.pdf}
+\caption{Independent structural calibration and a fixed acquired decision. Left: each line joins one held-out object's mean class NLL over four dependent conditions, for neutral G or a supplied correct-category S$^*$ prior. Right: all eleven original candidates at the retained left-layout prefix after 54 paid actions, with unchanged common terms. Probability-loss improvement and a changed local winner do not establish complete exploration benefit. The complete-policy left S result is adverse.}
+\end{figure}
+
+\clearpage
+\input{acquisition_supplement_20261120.tex}
+
+\clearpage
+\input{b11_unseen_supplement_20261120.tex}
+
+\input{b11_followup_calibration.tex}
+
+\clearpage
+\begin{thebibliography}{99}
+\bibitem{ref9} World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White paper, 2025-09-04. \href{https://www.weforum.org/publications/physical-ai-powering-the-new-age-of-industrial-operations/}{Official white paper}.
+
+\bibitem{ref10} Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \url{https://doi.org/10.1109/TRO.2023.3248510}.
+
+\bibitem{ref5} Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \url{https://doi.org/10.15607/RSS.2021.XVII.018}.
+
+\bibitem{ref1} Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. Author manuscript: \url{https://doi.org/10.48550/arXiv.2004.05155}.
+
+\bibitem{ref6} Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \url{https://doi.org/10.1109/CVPR52733.2024.01555}.
+
+\bibitem{ref4} Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \url{https://doi.org/10.48550/arXiv.1801.09847}.
+
+\bibitem{ref11} Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \url{https://doi.org/10.1145/237170.237269}.
+
+\bibitem{ref2} Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \url{https://doi.org/10.1109/ICRA48891.2023.10160469}.
+
+\bibitem{ref7} Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \url{https://doi.org/10.1109/TFR.2025.3578402}.
+
+\bibitem{ref3} Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \url{https://doi.org/10.1109/LRA.2026.3653276}.
+
+\bibitem{ref8} Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \url{https://doi.org/10.52202/085713-1113}.
+
+\bibitem{ref12} Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \url{https://doi.org/10.1016/S0004-3702(98)00023-X}.
+
+\bibitem{ref13} Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \url{https://doi.org/10.1177/0278364914533443}.
+
+\bibitem{ref14} Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \url{https://doi.org/10.1145/3072959.3073599}.
+\bibitem{bissiri2016} P. G. Bissiri, C. C. Holmes, and S. G. Walker,
+``A general framework for updating belief distributions,''
+\emph{Journal of the Royal Statistical Society: Series B}, vol. 78,
+no. 5, pp. 1103--1130, 2016. doi:10.1111/rssb.12158.
+\bibitem{syring2019} N. Syring and R. Martin,
+``Calibrating general posterior credible regions,''
+\emph{Biometrika}, vol. 106, no. 2, pp. 479--486, 2019.
+doi:10.1093/biomet/asy054.
+
+
+\bibitem{pmlr-v70-guo17a} C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger.
+On Calibration of Modern Neural Networks. \emph{Proceedings of ICML},
+PMLR 70, pp. 1321--1330, 2017. \url{https://proceedings.mlr.press/v70/guo17a.html}.
+\bibitem{Angelopoulos_2023} A. N. Angelopoulos and S. Bates.
+Conformal Prediction: A Gentle Introduction. \emph{Foundations and Trends in Machine Learning},
+16(4), pp. 494--591, 2023. doi:10.1561/2200000101.
+
+\end{thebibliography}
+
+\end{document}

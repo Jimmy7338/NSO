@@ -1,0 +1,222 @@
+{
+  "schema": "nso.measured_template_geometry_staged.v1",
+  "created_date": "2026-11-20",
+  "status": "frozen_before_staged_diagnostic_runs",
+  "purpose": "Sequential full integration sampling, observed-geometry template fitting and historical free-space negative evidence, fixed action replay and all-candidate acquisition branches before policy reruns.",
+  "layouts": {
+    "shelf_left": {
+      "scene_id": "controlled_functional_shelf_left",
+      "role": "paired_controlled_development_layout",
+      "difference": "open shelf left, closed cabinet right"
+    },
+    "shelf_right": {
+      "scene_id": "controlled_functional_shelf_right",
+      "role": "paired_controlled_development_layout",
+      "difference": "closed cabinet left, open shelf right"
+    }
+  },
+  "independence": "Two furniture-position permutations of one synthetic floorplan family; not two independent natural environments or stochastic replications.",
+  "arms": {
+    "C": {
+      "score_mode": "C",
+      "meaning": "original coverage-only common controls"
+    },
+    "J": {
+      "score_mode": "N",
+      "meaning": "original coverage and measured surface quality"
+    },
+    "G": {
+      "score_mode": "G",
+      "meaning": "same fitted templates with neutral structure prior"
+    },
+    "S": {
+      "score_mode": "S",
+      "meaning": "same fitted templates with visible category prior"
+    },
+    "S_no_geometry": {
+      "score_mode": "S",
+      "meaning": "disable new geometry parameter fit only"
+    },
+    "S_no_free_evidence": {
+      "score_mode": "S",
+      "meaning": "disable new free-space likelihood only; visibility and historical-free reward masks retained"
+    },
+    "S_no_history": {
+      "score_mode": "S",
+      "meaning": "disable measured-surface reward consumption only; historical-free rejection retained"
+    }
+  },
+  "environment": {
+    "config": {
+      "resolution_m": 0.2,
+      "robot_radius_m": 0.2,
+      "camera_height_m": 1.2,
+      "width_px": 120,
+      "height_px": 90,
+      "fov_deg": 90.0,
+      "max_depth_m": 8.0,
+      "depth_sigma_m": 0.0,
+      "dropout": 0.0,
+      "action_duration_s": 1.0,
+      "voxel_m": 0.06,
+      "max_steps": 256,
+      "laser_height_m": 0.25,
+      "laser_rays": 180,
+      "truncation_m": 0.12
+    },
+    "noise_seed": 20261119,
+    "initial_position": [
+      34,
+      25
+    ],
+    "initial_heading": 0,
+    "world_adapter": "scene.controlled_world.ControlledFunctionalWorld",
+    "mesh_assets": "Unscaled original ReplicaCAD shelf31 and complete cabinet118; custom declared architecture/placements",
+    "sensor_limits": "Opaque first-hit mesh RGBD/laser, noiseless exact discrete pose, no glass/lighting/localization model; render natively at 120x90, not resizing old sensor frame"
+  },
+  "policy": {
+    "version": "measured_template_geometry_v1_N20",
+    "base": "frozen exploration_joint_v1/v10_3_1 + declared measured instance frontend",
+    "paid_action_budget": 256,
+    "return_anchor_required": true,
+    "args": {
+      "nso_backend": "cpu_v10",
+      "eval": true,
+      "train_global": false,
+      "use_open_vocab_semantic": true,
+      "use_topo_graph": true,
+      "use_rpn_uq": true,
+      "use_igcr": true,
+      "cpu_disable_feedback": false,
+      "cpu_force_gain_feedback": false,
+      "cpu_freeze_gain_posterior": false,
+      "cpu_max_candidates": 12,
+      "cpu_coverage_slots": 4,
+      "cpu_planner_revision": "v10_3_1",
+      "cpu_measured_novelty_floor": 0.25
+    },
+    "changes": [
+      "Replace analytic AABB prior with outbound union of expected unobserved surface area from original box/shelf hypotheses",
+      "Original V3 category dictionary adapted only at template input: current2open/3closed -> V3 3shelf/2box",
+      "Shared measured-instance partition prevents wall merging; unknown measured partition retained",
+      "Skip only template self-occlusion ray intersections strictly contradicted by existing real depth; measured-surface and unobserved intersections remain opaque. Other template/candidate/scoring settings remain frozen.",
+      "All original template quadrature points retained; history uses zero-weight masks instead of changing quadrature samples.",
+      "Observed geometry parameter fitting staged separately from free-space evidence likelihood; G/S share shape fit and likelihood; only semantic prior differs."
+    ],
+    "unchanged": [
+      "unknown coverage posterior and measured-surface quality",
+      "v10 candidate generator and original stopping/return rules",
+      "native measured-only TSDF and mapping",
+      "Original two layouts/assets/perception and both source/reference geometries",
+      "No score normalization or additional weight, no candidate expansion, no new research policy gate; unchanged 256-action simulation return budget.",
+      "B2 measured-free self-occlusion logic retained."
+    ],
+    "completion_area_coefficient": 1.0,
+    "coefficient_reason": "Same square-metre units as replaced v10 prior; old V3 planner weight4 used different objective normalization and is not transferred.",
+    "original_method_equivalence": false,
+    "V3_candidate_proposer_used": false,
+    "RPN_trained_model_active": false
+  },
+  "perception": {
+    "natural_detector": false,
+    "labels": "Only current valid-depth first-hit furniture surfaces, 2open/3closed; all other surfaces0",
+    "instance_support": "Same partial ideal visible instance boundaries for all arms, associated through measured voxel overlap",
+    "global_bounds_hidden_geometry_or_global_object_ID_to_actor": false,
+    "geometry_parameters": "Inferred from measured points using original V3 dimension priors, never source-model bounds"
+  },
+  "evaluation": {
+    "thresholds": [
+      0.9,
+      0.95,
+      0.99,
+      1.0
+    ],
+    "primary": "start-reachable reference free coverage vs paid actions, correct-free and false-occupied separately",
+    "secondary": [
+      "native TSDF precision recall F1 at5cm and10cm on independently fixed visible source surface",
+      "path length",
+      "simulated collisions",
+      "goal outcomes",
+      "first threshold actions",
+      "no coverage gain streak",
+      "template hypotheses/posterior/history and candidate score audits"
+    ],
+    "paired_rule": "same scene/start/sensors/frontend/budget; all seven declared arms each layout if promoted; no selected winners or automatic budget extension",
+    "failure_accounting": "All failed/interrupted attempts retained, no complete result for partial attempts",
+    "reference_actor_separation": true
+  },
+  "execution": {
+    "hardware": false,
+    "library_threads": 1,
+    "runs_planned": 14,
+    "no_continuous_images_or_video": true,
+    "only_root_starts_rollouts": true,
+    "source_and_protocol_frozen_before_runs": true,
+    "conditional_policy_runs": true
+  },
+  "geometry_acceptance": "scene/acceptance.json: two layouts, all four-side views reachable, initial known reference fraction0.4260614934",
+  "method_tests": "method/tests.log:11 mechanism checks including original constructor parity; no robot actions",
+  "parent_protocol": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/protocol.json",
+  "parent_evaluation_reference": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/audit/references",
+  "fixed_trace_evidence": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/replay/attempt_001/result.json",
+  "candidate_audit": "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/candidate_audit/evidence.json",
+  "stages": {
+    "B2": {
+      "role": "frozen_previous_model_and_visibility_repair"
+    },
+    "sampling": {
+      "geometry_fit": false,
+      "free_space_likelihood": false
+    },
+    "geometry": {
+      "geometry_fit": true,
+      "free_space_likelihood": false
+    },
+    "geometry_free": {
+      "geometry_fit": true,
+      "free_space_likelihood": true
+    }
+  },
+  "fixed_replay": {
+    "source": "original B S attempt001 each layout",
+    "states": {
+      "shelf_left": [
+        24,
+        54,
+        109
+      ],
+      "shelf_right": [
+        24,
+        53,
+        110
+      ]
+    },
+    "all_candidates_at_each_state": true,
+    "actor_actions_targets": "sealed old trace only",
+    "sensor_prefix_validation": "old packet, position, heading, owner and measured source checks; old scorer equality before diagnostic calls",
+    "branches": "Execute every originally proposed outbound sequence from the same measured prefix; each physical sensor branch reused for all prediction stages; no replan or oracle choice",
+    "branch_scope": "counterfactual acquisition diagnostic, not autonomous policy experiment",
+    "reference": "unchanged B evaluator source reference; never passed into actor or fitting",
+    "storage": "compact receipts, gains and native meshes; no persistent raw RGBD or video",
+    "candidate_total": 66,
+    "planned_outbound_action_total": 1569
+  },
+  "readiness_assessment": {
+    "role": "offline development stage selection only, never an added runtime decision filter",
+    "required": "sampling integrity tests; strict actor/evaluator separation; complete declared fixed states and branches; report both layouts and all states including failures",
+    "metrics": [
+      "weighted source support of positive hypothetical reward at5cm",
+      "actual new source surface reconstructed at5cm, gross/lost/net separate",
+      "candidate rank association and prediction residuals",
+      "selected candidate actual increment and action cost",
+      "measured-fit residual and historical-free conflict",
+      "wall time and integral sample counts"
+    ],
+    "rule": "Do not promote a stage just because G/S diverges. Geometry/free-evidence must improve prediction consistency and avoid worsening aggregate candidate value ranking/selected actual increment. Mixed effects remain development findings, and only a justified stage receives a sealed full rollout protocol; no blind retuning to force a positive result.",
+    "independence": "These old states and reference data are development evidence; not independent held-out validation.",
+    "aggregation": "Per-state ranks and absolute quantities first, then equal-weight summary over six paired development states; 66 candidates are dependent, not 66 independent trials.",
+    "shrinkage_check": "Check absolute supported and realized hypothesis weight alongside supported fraction and unique actual source area. Source-to-predicted-point nearest-neighbor recall at5cm is not used because template quadrature spacing can exceed5cm."
+  },
+  "method_specification": "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/method/METHOD_SPEC.md",
+  "method_specification_sha256": "0676834a8438cc4e4267683b3c70acdf83985932daa9e402526c645b639ab304"
+}

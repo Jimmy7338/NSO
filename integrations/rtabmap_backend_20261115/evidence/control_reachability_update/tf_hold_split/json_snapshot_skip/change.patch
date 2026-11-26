@@ -1,0 +1,49 @@
+--- runtime/rtabmap_mapping_backend.py
++++ runtime/rtabmap_mapping_backend.py
+@@ -196,21 +196,24 @@
+             if recorded is not None:receipt['recorded_epoch_graph']=copy.deepcopy(recorded)
+             return out,copy.deepcopy(graph),receipt  # Graph copy is small; no grid-array deepcopy.
+ 
+-    def node_metadata(self, msg):
++    def node_metadata(self, msg, include_changed=False):
+         if caller(msg)!=self.source_caller or msg.header.frame_id!=self.source_frame:
+             raise ValueError('unexpected MapData source/frame')
+         with self.lock:
++            changed=set()
+             for node in msg.nodes:
+                 proxy=type('Transform',(),dict(translation=node.pose.position,rotation=node.pose.orientation))()
+                 if node.id>0 and math.isfinite(node.stamp) and node.stamp>0 and finite_transform(proxy):
+-                    self.nodes[node.id]=dict(id=node.id,map_id=node.map_id,stamp_s=node.stamp,
++                    row=dict(id=node.id,map_id=node.map_id,stamp_s=node.stamp,
+                         raw_odom_pose=transform_record(proxy),source='MapData.nodes: Node.pose uncorrected odometry')
++                    if row!=self.nodes.get(node.id):changed.add(node.id)
++                    self.nodes[node.id]=row
+             graph=copy.copy(msg.graph)
+             # Installed mapDataToROS does not populate nested graph Header.
+             # Its enclosing MapData header is the actual shared processing epoch.
+             graph.header=copy.copy(msg.header)
+             graph._connection_header={'callerid':self.source_caller}
+-            return graph
++            return (graph,changed) if include_changed else graph
+ 
+     def graph_snapshot(self, graph, receipt):
+         with self.lock:
+@@ -321,9 +324,15 @@
+     def map_data(msg):
+         try:
+             with publication_lock:
+-                receive('graph',adapter.node_metadata(msg),'/nso_loop/mapData.graph:enclosing_header')
+-                # MapGraph may arrive before metadata at the same epoch.
+-                if adapter.epoch is not None and latest_receipt[0] is not None:
++                previous_epoch=adapter.epoch
++                graph,changed=adapter.node_metadata(msg,include_changed=True)
++                receive('graph',graph,'/nso_loop/mapData.graph:enclosing_header')
++                # A newly accepted epoch already wrote its snapshot in receive.
++                # Otherwise only metadata used by the retained exact graph can
++                # change that snapshot; off-graph or identical nodes cannot.
++                if (adapter.epoch is previous_epoch and adapter.epoch is not None
++                        and latest_receipt[0] is not None
++                        and changed.intersection(adapter.epoch[2].posesId)):
+                     write_snapshot(adapter.epoch[2],latest_receipt[0])
+         except ValueError as exc:rospy.logerr_throttle(5.,'RTAB backend rejected metadata: %s',exc)
+     subscribers=[rospy.Subscriber('/nso_loop/grid_map',OccupancyGrid,lambda m:receive('grid',m),queue_size=2),

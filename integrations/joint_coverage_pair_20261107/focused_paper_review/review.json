@@ -1,0 +1,54 @@
+{
+  "reviewer": "focused_paper_review_gpt61",
+  "review_type": "independent_read_only_focused_manuscript_review",
+  "verdict": "usable_after_two_small_factual_traceability_fixes",
+  "reviewed_files": {
+    "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107/main.tex": "ef2de1013dc43a5554d7b44957673c4f62604bbeb6ae14fc57ac1f52e59276ad",
+    "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107/main.pdf": "0a5c4402fa6235260f4f55d909ee0146d114f9d2b6fd96388fdf69ac8e320d98",
+    "/home/ouc/nso_robot/workspaces/nso_research_20261029/NSO/docs/thesis/submission_focus_20261107/supplement.md": "dd5ae75df557416c22f34d9992104b7840cf3bb1a092c41568f61c594487c52e"
+  },
+  "scope": "Local manuscript, original 32-page evidence manuscript and PROJECT_PRIORITIES only; no robot, policy changes, remote actions or new experiments.",
+  "layout": {
+    "pages": 16,
+    "all_pages_rendered_and_visually_inspected": true,
+    "renderer": "pdftoppm",
+    "contact_sheets": [
+      "contact_1.png",
+      "contact_5.png",
+      "contact_9.png",
+      "contact_13.png"
+    ],
+    "result": "No visible clipping, overflow, blank pages or broken table/figure boundaries. Page 14 leaves one bibliography entry before page 15; page 16 is sparse declarations, acceptable in venue-neutral author-review draft."
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "medium",
+      "file": "main.tex",
+      "line": 422,
+      "problem": "Physical variant identity is compressed too far: V10.3.1 decision framework names the ancestor but omits the declared exploration_joint_v1 / revised unknown-space candidate generation. Original full manuscript explicitly calls candidate generation revised. Sensor-range/extent adapters alone do not communicate that policy-level difference.",
+      "requested_fix": "Name exploration_joint_v1 derived from v10_3_1, explicitly retain revised joint unknown-coverage/measured-surface candidate generation, and preserve distinction from controlled V35. Reuse existing declaration and source index; no method change or experiment."
+    },
+    {
+      "id": "F2",
+      "priority": "low",
+      "file": "main.tex",
+      "line": 488,
+      "problem": "Reproducibility paragraph says the two physical episodes, although this focused text directly reports three episodes: retained-map S40, fresh-map C40, fresh-map S32. The full archive includes more historical episodes. Wording makes the denominator ambiguous.",
+      "requested_fix": "Say the three physical episodes summarized here are from one scene, or refer specifically to the two fresh-map arms; do not call them independent scene replications."
+    }
+  ],
+  "checks_passed": [
+    "Public two-template/safe-graph/exact-pose/synthetic-cue assumptions remain explicit; common 18-action prefix and terminal coverage/heading/return gates remain.",
+    "Diagnostic-branch equations, prior registration, residual caps, TSDF measurement-only boundary and bundled correction/diagnosis caveat remain.",
+    "All four primary pairs, four changed-background pairs/eight tasks, 128 extension attempts, 32 failures and budget-54 reversal remain; independent layout counts are explicit.",
+    "C40 returned and S32 failed without return, 0.0701m/0.0672rad bootstrap difference, 205-cell initial-map mismatch, own-support quality proxy, and no causal efficiency/semantic claim remain.",
+    "G/S equality is correctly restricted to recorded same states; cached-label replay does not claim detector reproduction. Camera relocation/unrecalibrated extrinsics remain disclosed.",
+    "Supplement maps removed baselines, component comparisons, historical robot failures, multi-instance adverse findings and unknown-exploration diagnostics to retained full manuscript/evidence; no newly invented citation or contribution identified by internal comparison."
+  ],
+  "limitations": [
+    "Bibliography was checked for internal consistency and unchanged source entries, not independently reverified against external publisher pages; no remote calls performed.",
+    "Primary simulation trajectory/mesh visual evidence now lives in full manuscript/ESM rather than focused body. This is a presentation tradeoff, not a missing-experiment requirement."
+  ],
+  "recommendation": "Keep focused local mechanism paper and primary unknown-exploration thesis system distinct. No additional experiments or new innovations requested by this review."
+}

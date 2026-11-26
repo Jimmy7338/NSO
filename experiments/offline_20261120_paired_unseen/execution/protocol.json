@@ -1,0 +1,124 @@
+{
+  "schema": "B11_paired_unseen_gain_execution_v1",
+  "status": "frozen_before_B11_predictions_and_policy_runs",
+  "environment": {
+    "noise_seed": 20261120
+  },
+  "policy": {
+    "version": "B11_full_posterior_paired_gain_v1",
+    "base": "frozen exploration_joint_v1/v10_3_1 action loop plus shared observed-instance frontend and B8/B9 T16 full conditional particle geometry",
+    "paid_action_budget": 256,
+    "return_anchor_required": true,
+    "args": {
+      "nso_backend": "cpu_v10",
+      "eval": true,
+      "train_global": false,
+      "use_open_vocab_semantic": true,
+      "use_topo_graph": true,
+      "use_rpn_uq": true,
+      "use_igcr": true,
+      "cpu_disable_feedback": false,
+      "cpu_force_gain_feedback": false,
+      "cpu_freeze_gain_posterior": false,
+      "cpu_max_candidates": 12,
+      "cpu_coverage_slots": 4,
+      "cpu_planner_revision": "v10_3_1",
+      "cpu_measured_novelty_floor": 0.25
+    },
+    "changes": [
+      "Shared frozen B9 T16 full geometry/structure posterior with original B8 0.22m surface quadrature in both arms.",
+      "S_visibility retains the repaired original point visibility and 10cm measured history consumption.",
+      "S_acquisition replaces only that predicted template-area estimator with acquired-past plus synthetic-future RGBD/TSDF gross-new area at5cm; original strict-free evidence remains.",
+      "Short branches only use the openly declared pre-gain cost-band design; full policies retain all original candidates."
+    ],
+    "unchanged": [
+      "same observed inputs, instance frontend, geometry hypotheses, full posterior, original surface quadrature and class priors",
+      "unknown coverage posterior and measured-surface quality common score",
+      "original complete-policy candidate generator, stops,256 paid-action budget and return rules",
+      "native measured-only mapper and actual TSDF; no predicted geometry fusion"
+    ],
+    "completion_area_coefficient": 1.0,
+    "coefficient_reason": "Same square-metre units as replaced v10 prior; old V3 planner weight4 used different objective normalization and is not transferred.",
+    "original_method_equivalence": false,
+    "V3_candidate_proposer_used": false,
+    "RPN_trained_model_active": false
+  },
+  "evaluation": {
+    "thresholds": [
+      0.9,
+      0.95,
+      0.99,
+      1.0
+    ],
+    "primary": "start-reachable reference free coverage vs paid actions, correct-free and false-occupied separately",
+    "secondary": [
+      "native TSDF precision recall F1 at5cm and10cm on independently fixed visible source surface",
+      "path length",
+      "simulated collisions",
+      "goal outcomes",
+      "first threshold actions",
+      "no coverage gain streak",
+      "template hypotheses/posterior/history and candidate score audits"
+    ],
+    "paired_rule": "Two estimator arms per layout; four new layouts, eight complete runs; same start/sensors/frontend/geometry/prior/budget; all failures retained without automatic budget extension",
+    "failure_accounting": "All failed/interrupted attempts retained, no complete result for partial attempts",
+    "reference_actor_separation": true
+  },
+  "arms": {
+    "S_visibility": {
+      "score_mode": "S",
+      "predictor": "visibility"
+    },
+    "S_acquisition": {
+      "score_mode": "S",
+      "predictor": "acquisition"
+    }
+  },
+  "layouts": {
+    "chain_a": {
+      "scene_id": "B11-chain_a"
+    },
+    "chain_b": {
+      "scene_id": "B11-chain_b"
+    },
+    "cycle_a": {
+      "scene_id": "B11-cycle_a"
+    },
+    "cycle_b": {
+      "scene_id": "B11-cycle_b"
+    }
+  },
+  "scope_file": "/home/ouc/nso_robot/analyses/paired_unseen_gain_20261120/STUDY_SCOPE.json",
+  "short_cost_band_width_actions": 3,
+  "short_candidates": 3,
+  "method": {
+    "sigma_m": 0.01,
+    "structural_temperature": 16.0,
+    "extent_mode": "uncertainty",
+    "quadrature": "original_B8_pointwise_0.22m",
+    "probability_pruning": false,
+    "full_runs": "S_visibility and S_acquisition each4layouts, original candidates,256paid includingreturn"
+  },
+  "layout_execution_order": [
+    "chain_a",
+    "cycle_a",
+    "chain_b",
+    "cycle_b"
+  ],
+  "exact_execution_backend": {
+    "name": "fork copy-on-write snapshot of acquired TSDF, exact fresh replay fallback",
+    "worker_timeout_seconds": 120,
+    "effect_on_policy": "no change to scores, no route skipped, no navigation stop",
+    "depth_LRU_capacity": 8192,
+    "after_distance_LRU_capacity": 256,
+    "identical_future_frame_sequence_hash": "includes depth,world_from_camera,K,order and repetitions"
+  },
+  "short_prefix_preparation": {
+    "version": 2,
+    "declaration": "/home/ouc/nso_robot/analyses/paired_unseen_gain_20261120/PREFIX_PREPARATION_V2.json",
+    "frozen_overrides": "/home/ouc/nso_robot/analyses/paired_unseen_gain_20261120/preparation_v2/prefix_override.json",
+    "v1_failures_retained": true,
+    "short_only": true,
+    "cold_start_full_runs_unchanged": true
+  }
+}

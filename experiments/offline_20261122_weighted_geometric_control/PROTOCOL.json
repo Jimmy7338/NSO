@@ -1,0 +1,67 @@
+{
+  "schema": "nso_weighted_neutral_same_goal_192_v1",
+  "source_repository": "Jimmy7338/NSO",
+  "source_visibility_commit": "4c388a5c06d51e53251a9c901bbefd511d5b2a95",
+  "research_questions": [
+    "Can a nonnegative weighted neutral local planner reproduce category-policy routes on the same acquired states?",
+    "Can separately tuned neutral local weights deliver comparable actual-stop map quality at the same action cap?",
+    "Does the correct category-conditioned area term add value when all other scoring weights are held fixed?"
+  ],
+  "development_layouts": ["chain_a", "cycle_a"],
+  "heldout_layouts": ["paired_chain_17", "paired_cycle_18", "paired_chain_19", "paired_cycle_20"],
+  "native_budget": 192,
+  "capture_paid": [0, 48, 96, 144, 192],
+  "shared_initialization": "Use the byte-bound cold first frame, scan, base heading and native return anchor of each building, without a scripted paid prefix. Actual layout units are independent.",
+  "frozen_online_fields": {
+    "max_extra_outbound_actions": 8,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-9
+  },
+  "local_score": {
+    "formula": "A_prior_m2 + unknown_weight * (U_candidate_cells - U_native_cells) * grid_resolution_m^2 - action_cost * (K_out_candidate - K_out_native)",
+    "prior": {"G": "neutral visible-surface prior", "S": "correct supplied visible facility category", "X": "exchange open/closed category prior only, preserve observations, geometry, prior bank, global mode and candidate feasibility"},
+    "unknown_weight": [0.0, 0.05, 0.25],
+    "action_cost_m2_per_charged_action": [0.0, 0.05, 0.2],
+    "zero_regression": "Zero added weights exactly reproduce the respective unweighted ranking and selected outbound actions and states on archived common states. The full trajectory and terminal mesh are also covered by same-seed native regressions where an exact 192-step comparator is available.",
+    "tie_break": "Use all admitted maxima within 1e-9 of the best score. Prefer fewer charged outbound actions, then native, then the original deterministic outbound trace digest. Apply the same rule to every prior."
+  },
+  "runtime_contract": "Use the neutral B11 global target scoring in every arm. Per normal local selection assess all original distinct observed-safe one-waypoint proposals plus the native route, retaining original target, heading, guard, eligibility, geometry fitting, viewpoint rule, deduplication, replan, sensor model, map updates, and return reserve. No change to the native safety or physical budget. Replan separately on each arm's own acquired observations after execution differs. Category-conditioned scores used only where declared at local ranking. Shared inherited diagnostics may calculate both global scores; document and check that they have no influence on the neutral decision.",
+  "legacy_regressions": [
+    "Reproduce old Q1 single common nonnegative geometric weight feasibility across the saved states with the archived feature definitions.",
+    "Reproduce old deployed shelf west/96 paid action 41 lack of a single nonnegative geometric weight explaining its actual category winner.",
+    "Both are engineering regression evidence for older scoring models and excluded from fresh fitting and evaluation."
+  ],
+  "development_execution": {
+    "all_cells_of_weight_grid_run": true,
+    "number_of_configurations_per_building": 10,
+    "configuration": "One original S run and every neutral (u,c) grid point from each developer building's same initial observations under the 192-action cap. The pair (0,0) is original G.",
+    "decision_fit": "On each developer original S acquisition trace, replay scoring only from its original retained legal pool. Exact match means identical outbound commands and states to S. Choose the nonnegative grid setting with the largest unweighted mean of per-building multi-candidate exact-match rates over buildings with at least one such state. Ties favor higher unweighted mean of all local decisions, then lower (u/0.25+c/0.20), lower u, lower c. Retain each building with zero informative states as undefined for that rate. If neither building has an informative state use the all-local-decision macro as the first criterion. If no route choice exists anywhere, select (0,0) and mark the fit uninformative.",
+    "performance_fit": "Use actual terminal mesh and belief at the measured stop from every 192-cap developer episode. Prefer grid settings where both episodes have measured terminals, return and zero collisions. Maximize mean building terminal J, then minimum building terminal J within 1e-9, then lower (u/0.25+c/0.20), lower u, lower c. If no setting satisfies normal eligibility, choose lexicographically among all settings by most measured terminals, most returned, fewest observed collisions, then the same J and weight criteria; report the absence of an eligible setting. Any budget violation invalidates execution and must be resolved before it can be used to fit.",
+    "separation": "Freeze fitted route and performance selections and their complete dev result tables before launching any held-out policy. S is unweighted on the held-out audit trajectory. Nothing fitted on held-out policy, raw scoring or metric outputs."
+  },
+  "heldout_modes": {
+    "G": {"prior": "G", "weights": "zero"},
+    "G_route": {"prior": "G", "weights": "frozen_decision_fit"},
+    "G_perf": {"prior": "G", "weights": "frozen_performance_fit"},
+    "S": {"prior": "S", "weights": "zero"},
+    "X": {"prior": "X", "weights": "zero"},
+    "S_perf": {"prior": "S", "weights": "frozen_performance_fit"}
+  },
+  "identity_reuse": "Within a building, if two declared arms have precisely the same prior, weights and all runtime/frozen inputs, they may use one literal episode and an explicit identical-configuration alias receipt. Full same-start and exact tuple identity are required. An observed equality between different policies does not qualify for reuse. Independent n is four buildings regardless of aliases.",
+  "evaluation": {
+    "terminal": "Correctly measured reachable free-space fraction, whole-scene measured TSDF precision/recall/F1 at 5 cm, and J=C_free*F1_scene; use actual stopping state. Polygon geometry and truth occupancy only in evaluator. Also report charged count, path size/length, total planner wall time, simulator wall time, one-second native charged-action clock, collisions, returned, stop and failures.",
+    "equal_paid_clocks": [0, 48, 96, 144, 192],
+    "timing_and_early_stop": "An early native termination gets its actual terminal measurements and stop reason. Later planned clocks are unavailable, never padded. Planning/episode wall time is measured on a shared host and may include prior-table diagnostics. Native charged seconds and wall time are listed separately. Non-technical nonreturn/collision outcomes stay measured and count against engineering gates. Preserve any interrupted attempt and its logs separately, and resume only the same frozen configuration. Never drop a layout or replace an adverse completed run. Technical interruptions without a sealed terminal has no terminal metric.",
+    "route_audit": "Evaluate all recorded legal local decisions on measured original S states and separately the subset with at least two legal routes, including the native one. Report the closed-loop first actually charged command and first raw observation difference separately, on the same budget clock and with shorter traces flagged. Count and disclose native global events that selected no goal outside local ranking. No independent-sample claim about decisions.",
+    "primary_performance_contrasts": ["G_perf - S", "S_perf - G_perf", "S - X"],
+    "secondary_performance_contrasts": ["G_perf - G", "G_route - S", "S - G"],
+    "preregistered_engineering_rules": {
+      "route_replication": "All four held-out buildings must supply an informative multi-candidate local decision and a complete S record. Macro exact route accuracy on those decisions must be at least 90%, with no building below 80%. Otherwise evidence is insufficient to claim route replication in this family.",
+      "map_noninferiority": "Every held-out pair G_perf vs S must have sealed terminal outcomes, G_perf minus S terminal J ≥ -0.005, and neither C_free nor F1 lower by more than 0.010. No excess collisions, no loss of an achieved S return, no budget breach.",
+      "category_increment": "At least three of four S_perf minus G_perf terminal J gains must strictly exceed +0.005. No pair may be below -0.005 in J, lose an achieved G_perf return, add collisions, or breach the cap. All four pairs must be measured.",
+      "units": "Fractions in tests. Report percentage-point equivalents in the manuscript. These are descriptive engineering tolerances, not statistical significance or equivalence tests."
+    }
+  },
+  "post_policy_boundaries": "Report all predeclared buildings, attempts and registered contrasts. No culling, added states, new thresholds or post-result weight searches for this study. Claims apply only to the registered local weight family, fixed layouts, shared input conditions and 192 charged actions."
+}

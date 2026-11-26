@@ -1,0 +1,53 @@
+\section{Four-room budget and six-arm diagnostics}
+
+This extension concerns exploration\_joint\_v1/v10\_3\_1, not the supplied-graph V35 method. Three object-layout seeds are fixed at 20261119 (development), 20261120 and 20261121. They share one wall-topology family, one initial-view rule, ideal visible semantic labels and exact odometry. The default gray RGB pixels do not support an evaluation of natural-image recognition. The scene uses regularly arranged object slots rather than a distribution estimated from real rooms. Expanding the category list or adding textures alone would not establish realistic semantic distributions.
+
+\subsection{Budget and interruption accounting}
+
+All completed G diagnostics retain the fixed-anchor return contract. Their different budgets are not additional independent environments. The S/1024 process ends with exit code 143 after SIGTERM, with 398 accepted actions and 93.3816\% last coverage. No result or verified final return exists; the interruption has no established sender/cause and is not classified as an algorithmic failure.
+
+\begin{table}[!htbp]\centering\small\caption{All completed G budget diagnostics. Dashes denote thresholds not reached. Distance is the full episode, including return.}\label{tab:s-four-room-budget}
+
+\begin{tabular}{@{}rrrrrrr@{}}\toprule Budget & Executed & Coverage (\%) & First 95\% & First 99\% & First 100\% & Distance (m) \\ \midrule
+
+96 & 96 & 39.84 & -- & -- & -- & 17.2 \\
+
+256 & 256 & 85.18 & -- & -- & -- & 46.0 \\
+
+512 & 512 & 93.38 & -- & -- & -- & 93.2 \\
+
+1024 & 1024 & 100.00 & 448 & 716 & 727 & 189.6 \\
+
+\bottomrule\end{tabular}\end{table}
+
+The 96-action pilot stops gaining coverage at action 53, leaving 43 actions while the minimum return needs 41. In the 512/1024 pair, the first 366 actions and sensor-packet hashes, belief map and safe-grid hashes coincide. At that state, the longer-budget run selects a route with 92 outbound and 78 return actions. Its 170-action round trip is infeasible under the shorter run\textquotesingle s remaining 146 actions. Thus, a comparison restricted to the 512-action candidate set cannot attribute the plateau solely to score ordering. G/1024 first reaches full coverage at action 727 and 135.0 m; its final 1024-action return is a separate event.
+
+\subsection{Surface reference and fairness}
+
+The evaluator constructs the exterior boundary of the simulator axis-aligned box union, removing internal and duplicate coplanar faces. It draws 100,000 area-weighted samples with seed 20261119; a fixed 0.8 m lattice of start-reachable camera origins and a first-hit ray test retain the sensor-observable reference. The reference permits arbitrary planar yaw and is an approximation to observation opportunity on that fixed lattice, not all exterior surface. D retains 56,620 reference points. Precision uses 12,000 area-weighted reconstructed samples with seed 812 and distance to exterior triangles; recall uses the reverse distance from the fixed reference to the reconstructed mesh. Thresholds are 5 and 10 cm. This is a local adaptation of thresholded surface comparison, not an official benchmark score. No geometric alignment to the reference is performed.
+
+All arms share 512-action caps, return and collision rules, candidate generation, initial packet and per-layout reference hashes. C is a coverage-only score on the same candidate generator, not an external frontier implementation. G2 multiplies the generic prior by two without scaling the public common term. The frozen-gain arm retains camera history, direction observations and mapping. Every completed attempt and its artifacts are hashed; the development G mesh is additionally reproduced from all 513 packets, with identical coverage at every frame and identical final mesh vertices and triangles. Known-cell coverage can include false occupied labels on the free reference, so the records also retain those errors and per-room coverage. Coverage-curve area uses trapezoidal integration over the common budget, holding the final observation after an early stop without inventing actions.
+
+\subsection{Same-state scalar explainability}
+
+For each recorded S winner $w$, the audit solves all inequalities $c_w+\lambda p_w\ge c_j+\lambda p_j$ for $\lambda\ge0$, using strict inequality whenever the original full-round-trip-cost/id tie rule favors $j$. A selected score must be positive. Recorded binary floating-point values are represented as exact rationals for interval intersection; interior solutions are checked with the original floating-point selector. This is a post-hoc analysis of S states, not an additional weighted trajectory.
+
+\begin{table}[!htbp]\centering\small\caption{Weights reproducing every recorded S choice in each layout. Counts are planning calls, not independent samples.}\label{tab:s-four-room-scalar}
+
+\begin{tabular}{@{}lrl@{}}\toprule Layout & Calls & Feasible common $\lambda$ interval \\ \midrule
+
+D & 21 & $[0.838004716,\,2.082011542]$ \\
+
+E1 & 15 & Empty \\
+
+E2 & 17 & $(0.806291688,\,6.089982889]$ \\
+
+All three & 53 & Empty \\ \bottomrule\end{tabular}\end{table}
+
+E1 decisions after actions 198, 373, 408 and 464 each have an empty feasible interval. At action 373, the S winner has $(c,p_G)=(0.883156,5.107287)$ while another candidate has $(1.146875,5.665380)$ and therefore strictly dominates it for every nonnegative scalar weight. Category-conditioned priors reverse their ordering, but this decision effect produces no terminal coverage improvement and slightly lower F1. The result excludes this scalar explanation only, not richer geometric decision models.
+
+\subsection{Predicted and realized surface benefit}
+
+In D, G/S have identical complete traces. Replaying the 98-action segment from action 366 to 464 yields zero reference coverage gain but raises 5 cm recall from 79.1169\% to 80.2490\% and F1 from 88.1847\% to 88.9299\%. It adds 886 measured 15 cm patch keys; among the fixed 1,600 old points used by the quality proxy, 241 acquire a new direction and 255 improve measured information. Patch counts are not surface area or accuracy. Holding the starting assets and route fixed while updating only their measured direction support reduces generic prior value from 7.2256 to 5.7445 and category prior value from 9.4781 to 7.8134. The prior is consumed partially, leaving a large residual. The preceding 92-action segment gains 4.2476 coverage percentage points and 4.1613 F1 points, so local observation benefit does not establish efficient allocation.
+
+The coverage posteriors at action 366 are 0.97778 for radar and 0.07990 for camera. These are conditional yields of predicted cells, not calibrated sensor correctness: the episode realizes 483 of 493 predicted radar events and 30 of 386 predicted camera events, while also recording 3,438 and 952 unpredicted new-cell events. The old-quality score deduplicates route observations by pointwise maximum; its route-cost normalization cancels when converted back to total gain. No repeated-sum or sorting error is found. Candidate limitation, uncalibrated structural residuals and the observation--coverage tradeoff remain distinct explanations. Calibrating structural priors against actual new support is a proposed method change, not an implemented correction or a result of this experiment.

@@ -1,0 +1,33 @@
+{
+  "schema": "nso_same_goal_exhaustive_pool_audit_v1",
+  "source_commit": "02e9c5dcc0da7df61f23d8683fec2dd92c145c1e",
+  "source_experiment": "experiments/offline_20261121_same_goal_route_choice/",
+  "source_local": "/home/ouc/nso_robot/analyses/same_goal_route_choice_20261121",
+  "frozen_before_expanded_scores": true,
+  "scope": {
+    "layouts_in_order": ["warehouse_left", "warehouse_right", "gallery_left", "gallery_right"],
+    "states_per_layout": {"warehouse_left": 8, "warehouse_right": 6, "gallery_left": 5, "gallery_right": 6},
+    "common_states": 25,
+    "include_rule": "Both source arms share the exact acquired packet history, goal pose, observed map and capped ranking. Include a state iff at least one non-native route was admitted in the frozen original decision.",
+    "archive": "Verify and preserve all eight original development run seals and zero pair differences. For each parent placement recreate active runtime/mapper state using the exact recorded cold start and own observed action prefix. Runtime proposals generated for source-score verification may never issue an expanded route. No new paid trajectory, branch continuation, threshold sweep, new layout or held-out actor.",
+    "policy_scope": "Audit only the original one-waypoint heading-state generator's distinct traces skipped after the four-admitted-alternate cap. Keep its existing graph, waypoint order, deduplication, early-goal exclusion and view-direction predicate, including the original native route. No new proposer or path search family."
+  },
+  "frozen_online_fields": {
+    "max_alternates": 4,
+    "max_extra_outbound_actions": 8,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-9
+  },
+  "execution_order": {
+    "baseline": "Recompute the full original candidate list including exclusions, G/S scores, digest and both tie-broken winners. Require exact parity with both archived decisions on the same observed state before the expansion at that state may proceed.",
+    "expansion": "Only for this offline call, remove the cap by using an upper bound beyond the original generator's complete distinct trace count. Preserve the original occupied/unknown map and other checks, exact endpoint cell and heading, original return actions and reserve, budget already spent and all deterministic tie rules. Record each post-cap path accepted or rejected, unmodified original row prefix and replay hashes. No predicted views are fused or archive packets changed.",
+    "safety_boundary": "Check alternate primitive states and edges with the original observed-safe pose graph at the recovered state, and check coverage/cost/return using the unchanged rule and current ledger. Future runtime observations, changing footprints during execution and terminal outcomes remain unobserved for these paths."
+  },
+  "reporting": {
+    "definitions": "Compare nominal outbound command sequences, not IDs or floating score changes. Mark common pool-driven change only when both expanded winners have the same action sequence and it differs from the original common winner. Mark potential category effect iff the expanded G and S command sequences differ on one verified common state.",
+    "numeric_margins": "Report both winners' G and S values, each arm's same-score comparison to the other's winner, the winner's score change against its original cap-four selected route, and actual candidate/exclusion counts when available; all original area units are m^2. Use the archived tie tolerance only for winner selection.",
+    "earliest": "Among verified states with different command sequences, sort by count of paid actions before the decision, then by frozen layout order and native option ID. Record the first differing index from one and the common-grid pose/heading before that action, each nominal action, hash of the archived packet/map, full selected traces and action clock. A shorter trace is reported as end of sequence at the first differing index."
+  },
+  "stop": "If 25 exact states have no category-dependent action-sequence split, close this week's iteration at the offline audit. If a split occurs, deliver the earliest common recorded state and first nominal differing action for a future independent experiment. Do not execute the counterfactual routes in this goal."
+}

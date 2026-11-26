@@ -1,0 +1,40 @@
+{
+  "schema": "nso_independent_region_floor_comparison_v1",
+  "repository": "Jimmy7338/NSO",
+  "branch": "codex/robot-evidence-20261104",
+  "base_commit": "f482722f6cbfc3135358080b08f27274f54cb535",
+  "purpose": "Test the frozen global region score for action savings at high correct reachable free-space coverage and measure joint reconstruction quality on four prospective floors.",
+  "layouts": ["ind26_vertical_spine", "ind26_bent_corridor", "ind26_offset_ring", "ind26_double_loop"],
+  "known_cases": ["attr26_corridor_crosspass", "attr26_loop_bypass"],
+  "arms": ["region_S", "combined_S", "F_strict"],
+  "budget": 192,
+  "capture_paid": [0, 48, 96, 144, 192],
+  "local_auxiliary_weights": {"unknown_weight": 0.25, "action_cost": 0.2},
+  "local_route_invariants": {
+    "max_extra_outbound_actions": 8,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-9
+  },
+  "intervention": {
+    "region_S": "Published original observed-region scoring with unchanged local S.",
+    "combined_S": "Published region scoring with doorway destination attribution and original measured coverage plus surface-quality reward along the whole outbound route. Same local S and region candidate set as region_S.",
+    "F_strict": "Published strict nearest-reachable-frontier baseline and its native execution. Same renderer, observations, fusion, physical action costs and native return guard."
+  },
+  "primary": {
+    "metric": "First actual action with at least 95 percent of independently established reachable true free cells correctly observed. Include cold action zero if eligible.",
+    "contrast": "combined_S versus F_strict, paired by floor",
+    "nonattainment": "Keep every floor. Report did not attain within actual budget and measured final coverage, do not inject an artificial action count into paired time differences."
+  },
+  "quality": {
+    "main_paid": 96,
+    "J": "Correct reachable free area coverage times whole-scene F1 at 5 cm with the published independent evaluator.",
+    "other": "Report C, P, R, F1 and J at actions 48, 96 and 144, and at both actual terminal and actual return where available. Include native action counts, path length, elapsed wall and charged decision timing, guards, collisions and exact return. No interpolation or terminal substitution for a missing checkpoint.",
+    "scope": "Four floors constitute the comparison units. Report older floors separately. Mark unequal terminal action clocks. Use original terminal or budget rules."
+  },
+  "freeze_and_retry": {
+    "conditions": "Novel scene geometry and seeds, reachability, footprint clearance, eligible initial sensor packet and complete independent reference. Selection and preflight must not consume a policy outcome.",
+    "execution": "Run every layout with each arm. Preserve native technical failure attempts and one exact same-freeze process retry. A deterministic engine failure may use a separately recorded published memory-lifetime diagnostic only, with frozen scientific settings and verification of all shared saved prefix checkpoints.",
+    "access": "Policy reads only acquired sensor packets, map state and navigation feedback. Renderer and simulated collision use scene geometry. Independent metric references remain in the evaluator ledger."
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "schema": "nso.reacquisition_independent_scene_candidate_order.v1",
+  "selection_input_scope": "Only asset availability, provenance, inherited geometric admissibility, and original cold RGB-D/LiDAR validity checks. Frozen independent of policy outcomes.",
+  "ordering": "Try official public novel real scans in recorded order. Complete any admission gaps using distinct pre-registered starts on existing eligible scans. Stop admitting when two floors pass; retain prior decisions and report later-priority sources as unchecked.",
+  "sources": [
+    {
+      "id": "habitat_skokloster",
+      "file": "source_assets/skokloster-castle.glb",
+      "role": "evaluation",
+      "source": "Skokloster Castle scan / official Habitat Test Scenes",
+      "revision": "910c783fb954da8497ea5f811b843a76590ddddc",
+      "location": "skokloster-castle.glb",
+      "license": "https://huggingface.co/datasets/ai-habitat/habitat_test_scenes/blob/910c783fb954da8497ea5f811b843a76590ddddc/README.md",
+      "source_url": "https://huggingface.co/datasets/ai-habitat/habitat_test_scenes/resolve/910c783fb954da8497ea5f811b843a76590ddddc/skokloster-castle.glb",
+      "source_axis": "Z",
+      "official_data_sha256": "b14e29e17f5e31d86a1002eefd77b7d345b265006481739ae480a847e6623f56",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "seed_index": 0
+    },
+    {
+      "id": "mp3d_habitat_example",
+      "file": "source_assets/mp3d_habitat_example.glb",
+      "role": "evaluation",
+      "source": "Matterport3D example scan / official Habitat distribution",
+      "revision": "mp3d_example_v1.1",
+      "official_data_sha256": "334456925e056c83a9a7a5c768b3d37cdd23425d8ca20743bfce015be3f56b04",
+      "location": "17DRP5sb8fy/17DRP5sb8fy.glb in mp3d_example_v1.1.zip",
+      "license": "https://github.com/facebookresearch/habitat-sim/blob/main/DATASETS.md#matterport3d-mp3d-dataset",
+      "source_url": "https://dl.fbaipublicfiles.com/habitat/mp3d/mp3d_example_v1.1.zip",
+      "source_axis": "Z",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "seed_index": 1
+    },
+    {
+      "id": "scenenn_015",
+      "file": "source_assets/scenenn_015.ply",
+      "role": "evaluation",
+      "source": "HKUST SceneNN scanned indoor scene",
+      "revision": "official SceneNN main archive as retrieved",
+      "location": "015.zip / native per-vertex RGB triangle mesh",
+      "license": "https://github.com/hkust-vgd/scenenn#license",
+      "source_url": "https://hkust-vgd.ust.hk/scenenn/main/zip/015.zip",
+      "source_axis": "+Y (publisher scan geometry, upward depth-floor bin around Y=0)",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "publisher_room_category": "living room",
+      "seed_index": 6,
+      "native_publisher_asset_sha256": "5c83d3b840a5b7c355ffa1da5f758148038e72b3fa1190d684702d8e60f61a4a",
+      "normalization_xyz_matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "render_asset_sha256": "66039fb50497fbb798b49666f98a90820183a48908868c8565d13f95b30233c6",
+      "normalized_file": "source_assets/scenenn_015.aligned.ply"
+    },
+    {
+      "id": "scenenn_217",
+      "file": "source_assets/scenenn_217.ply",
+      "role": "evaluation",
+      "source": "HKUST SceneNN scanned indoor scene",
+      "revision": "official SceneNN main archive as retrieved",
+      "location": "217.zip / native per-vertex RGB triangle mesh",
+      "license": "https://github.com/hkust-vgd/scenenn#license",
+      "source_url": "https://hkust-vgd.ust.hk/scenenn/main/zip/217.zip",
+      "source_axis": "+Y (publisher scan geometry, upward depth-floor bin around Y=0)",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "publisher_room_category": "living room",
+      "seed_index": 7,
+      "native_publisher_asset_sha256": "ab888a3504de06eae99bbea140b20c31e3fa4be361eafc81dbb4be5744f684e6",
+      "normalization_xyz_matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "render_asset_sha256": "0b9b7f6f39d0eb9aca2e383de40b0469867a1ed5b343b831b3b30dc29c16943e",
+      "normalized_file": "source_assets/scenenn_217.aligned.ply"
+    },
+    {
+      "id": "scenenn_030",
+      "file": "source_assets/scenenn_030.ply",
+      "role": "evaluation",
+      "source": "HKUST SceneNN scanned indoor scene",
+      "revision": "official SceneNN main archive as retrieved",
+      "location": "030.zip / native per-vertex RGB triangle mesh",
+      "license": "https://github.com/hkust-vgd/scenenn#license",
+      "source_url": "https://hkust-vgd.ust.hk/scenenn/main/zip/030.zip",
+      "source_axis": "+Y (publisher scan geometry, upward depth-floor bin around Y=0)",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "publisher_room_category": "workplace",
+      "seed_index": 8,
+      "native_publisher_asset_sha256": "19abd8662c381fba3786d20e054eaf11fdc6fe35353249c67833cb4039c5f9c8",
+      "normalization_xyz_matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "render_asset_sha256": "cf66a8248adb66174a65321ae3423d825e3b5ca858c0bda6c334ca2714c0ec9c",
+      "normalized_file": "source_assets/scenenn_030.aligned.ply"
+    },
+    {
+      "id": "scenenn_061",
+      "file": "source_assets/scenenn_061.ply",
+      "role": "evaluation",
+      "source": "HKUST SceneNN scanned indoor scene",
+      "revision": "official SceneNN main archive as retrieved",
+      "location": "061.zip / native per-vertex RGB triangle mesh",
+      "license": "https://github.com/hkust-vgd/scenenn#license",
+      "source_url": "https://hkust-vgd.ust.hk/scenenn/main/zip/061.zip",
+      "source_axis": "+Y (publisher scan geometry, upward depth-floor bin around Y=0)",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "publisher_room_category": "lounge",
+      "seed_index": 9,
+      "native_publisher_asset_sha256": "1d28fad077ae0e8ea22c8b8914deb72bde879b2d2574ea5f8106915cc3456831",
+      "normalization_xyz_matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "render_asset_sha256": "dba03b36419cf5d9b36abc4b67d84648ab5e1504114a032840d4dcddfaceea0d",
+      "normalized_file": "source_assets/scenenn_061.aligned.ply"
+    },
+    {
+      "id": "bundlefusion_apt0",
+      "file": "source_assets/bundlefusion_apt0.ply",
+      "role": "evaluation",
+      "source": "Stanford BundleFusion authors’ scanned scene mesh",
+      "revision": "authors public downloadable project data",
+      "location": "apt0/apt0.ply",
+      "license": "https://graphics.stanford.edu/projects/bundlefusion/#data",
+      "source_url": "https://graphics.stanford.edu/projects/bundlefusion/data/apt0/apt0.ply",
+      "source_axis": "to be verified from official source coordinates before admission",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "seed_index": 2
+    },
+    {
+      "id": "bundlefusion_apt1",
+      "file": "source_assets/bundlefusion_apt1.ply",
+      "role": "evaluation",
+      "source": "Stanford BundleFusion authors’ scanned scene mesh",
+      "revision": "authors public downloadable project data",
+      "location": "apt1/apt1.ply",
+      "license": "https://graphics.stanford.edu/projects/bundlefusion/#data",
+      "source_url": "https://graphics.stanford.edu/projects/bundlefusion/data/apt1/apt1.ply",
+      "source_axis": "to be verified from official source coordinates before admission",
+      "original_real_scan": true,
+      "prior_source_role": "unused for NSO method development or evaluation",
+      "seed_index": 3
+    },
+    {
+      "id": "replica_apartment1",
+      "file": "../../ras_20261126/heterogeneous/source_assets/apartment_1.glb",
+      "role": "evaluation",
+      "source": "Replica / Habitat Test Scenes",
+      "revision": "910c783fb954da8497ea5f811b843a76590ddddc",
+      "location": "apartment_1.glb",
+      "license": "https://huggingface.co/datasets/ai-habitat/habitat_test_scenes/blob/910c783fb954da8497ea5f811b843a76590ddddc/README.md",
+      "source_url": "https://huggingface.co/datasets/ai-habitat/habitat_test_scenes/tree/910c783fb954da8497ea5f811b843a76590ddddc",
+      "source_axis": "Z",
+      "original_real_scan": true,
+      "prior_source_role": "already evaluated and used in simulator geometry diagnostics; new-start fallback only",
+      "seed_index": 4
+    },
+    {
+      "id": "hm3d_00770",
+      "file": "../../semantic_scene_redesign_20261119/assets/hm3d_example/extracted/00770-NBg5UqG3di3/NBg5UqG3di3.glb",
+      "role": "evaluation",
+      "source": "HM3D v0.2 public example",
+      "revision": "9b74d5aa58e371c9bc16b2ccb64748cddf9bf1c6",
+      "location": "00770-NBg5UqG3di3",
+      "license": "https://matterport.com/legal/matterport-end-user-license-agreement-academic-use-model-data",
+      "source_url": "https://github.com/matterport/habitat-matterport-3dresearch",
+      "source_axis": "Z",
+      "original_real_scan": true,
+      "prior_source_role": "already examined deeply in V1–V4 and used for method-development gate; new-start fallback only",
+      "seed_index": 5
+    }
+  ],
+  "explicit_unavailable_alternatives": [
+    "Official HM3D public v0.2 examples contain only 00337 (development), 00770 (prior formal and development), and 00861 (failed original multiple-room admission). Other official HM3D val assets were unavailable via unauthenticated request.",
+    "Official Habitat Test Scenes van-gogh-room is synthetic and is excluded."
+  ],
+  "fallback_minimum_swept_distance_from_every_old_start_m": 1.0,
+  "fallback_tie_rule": "Use inherited geometry-core ranking and center-nearness after removing cells within 1 m of every prior start. Pick the most swept-distant distinct remote core at least 3 m away. Continue in this fixed pose order after a cold depth rejection. Eligibility and cold-packet checks unchanged.",
+  "layout_seed_base": 20261126500,
+  "surface_reference_seed_protocol": "Inherited 100000-sample original external scan reference with candidate slot offsets.",
+  "actor_calls_before_registration": 0
+}

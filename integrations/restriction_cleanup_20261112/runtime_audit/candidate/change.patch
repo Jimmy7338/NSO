@@ -1,0 +1,193 @@
+--- a/runtime/visual_velocity_adapter.py
++++ b/runtime/visual_velocity_adapter.py
+@@ -105,6 +105,16 @@
+     return value
+ 
+ 
++SENSOR_LOSS_PROFILES = ('legacy_terminal_v1', 'recoverable_sensor_pause_v1')
++RECOVERABLE_SENSOR_REASONS = frozenset(('odom_stale', 'scan_stale',
++    'depth_health_stale', 'odom_health_stale', 'laser_source_stale'))
++
++def validate_sensor_loss_profile(profile):
++    if profile not in SENSOR_LOSS_PROFILES:
++        raise ValueError('unsupported sensor_loss_profile')
++    return profile
++
++
+ def configuration(cfg):
+     """Validate the contract without importing ROS or opening any socket."""
+     result = dict(master_uri='http://127.0.0.1:11382', can_interface='can0',
+@@ -116,6 +126,8 @@
+                   driver_publisher='/nso_scout_radius_driver_v1',
+                   odom_frame='odom', base_frame='base_link', depth_frame='zed2i_left_camera_optical_frame')
+     result.update(cfg)
++    result.setdefault('sensor_loss_profile', 'legacy_terminal_v1')
++    validate_sensor_loss_profile(result['sensor_loss_profile'])
+     result.setdefault('maximum_feedback_linear_m_s', .15)
+     validate_feedback_linear(result['maximum_feedback_linear_m_s'])
+     result.setdefault('maximum_linear_m_s', .1)
+@@ -173,7 +185,7 @@
+         raise ValueError('finite actuator snapshot clocks required')
+     reason=gate.hardware_reason(now)
+     return dict(schema='nso_visual_actuator_state/1',session_id=getattr(gate,'session_id',None),
+-        navigation_source=gate.navigation_source, laser_source=deepcopy(gate.laser_health),
++        navigation_source=gate.navigation_source,sensor_loss_profile=gate.sensor_loss_profile, laser_source=deepcopy(gate.laser_health),
+         sampled_monotonic=now,sampled_unix_s=wall,
+         CAN_timestamp_basis='original kernel timestamps converted to host monotonic by receive-only reader',
+         fault=gate.fault,armed=gate.armed,ever_armed=gate.ever_armed,
+@@ -207,7 +219,8 @@
+                  depth_frame='zed2i_left_camera_optical_frame', navigation_source='visual',
+                  navigation_allow_reverse=False, mission_mode=None, nso_correction_reverse=False,
+                  correction_supervisor='/nso_onboard_supervisor', duration_profile=STANDARD,
+-                 maximum_linear_m_s=.1, maximum_feedback_linear_m_s=.15):
++                 maximum_linear_m_s=.1, maximum_feedback_linear_m_s=.15, sensor_loss_profile="legacy_terminal_v1"):
++        self.sensor_loss_profile = validate_sensor_loss_profile(sensor_loss_profile)
+         self.maximum_feedback_linear_m_s = validate_feedback_linear(maximum_feedback_linear_m_s)
+         self.maximum_linear_m_s = validate_maximum_linear(maximum_linear_m_s)
+         self.duration_profile = validate_duration(duration_s, duration_profile, mission_mode)
+@@ -247,6 +260,7 @@
+             raise ValueError('unsupported navigation source')
+         self.navigation_source = navigation_source
+         self.laser_health = None
++        self.laser_unavailable_reason = None
+         self.pending_sources = {}
+         self.bridge_publisher = bridge_publisher
+         self.proposal_publisher = proposal_publisher
+@@ -411,6 +425,11 @@
+             self.fail('laser_source_fault:'+str(row['fault'])); return
+         if row.get('valid') is not True:
+             self.laser_health = None
++            stamp_ns=row.get('source_stamp_ns')
++            self.laser_unavailable_reason = ('laser_source_stale' if
++                row.get('reason') == 'laser_source_stale_or_missing'
++                and type(stamp_ns) is int and 0 < stamp_ns/1e9 <= wall+.02
++                else None)
+             return
+         stamp_ns = row.get('source_stamp_ns')
+         if (type(stamp_ns) is not int or stamp_ns <= 0
+@@ -425,6 +444,7 @@
+                 return
+         if wall-stamp > self.observation_ttl:
+             return
++        self.laser_unavailable_reason = None
+         self.laser_health = dict(stamp=stamp, stamp_ns=stamp_ns, receipt=receipt,
+                                  source=row['source'], caller=row['caller'], frame=row['frame'])
+ 
+@@ -456,7 +476,8 @@
+         if self.navigation_source == 'lidar_rgbd':
+             laser = self.laser_health
+             if laser is None:
+-                return 'laser_source_missing_or_invalid'
++                return (self.laser_unavailable_reason if self.sensor_loss_profile == 'recoverable_sensor_pause_v1'
++                        and self.laser_unavailable_reason else 'laser_source_missing_or_invalid')
+             if laser['receipt'] > now or laser['stamp'] > wall+.02:
+                 self.fail('laser_source_clock_regressed')
+                 return self.fault
+@@ -539,7 +560,9 @@
+             self.await_proposal_after = now
+             if self.wait_started is None:
+                 self.wait_started = now
+-            if now-self.wait_started > 1.:
++            if now-self.wait_started > 1. and not (
++                    self.sensor_loss_profile == "recoverable_sensor_pause_v1"
++                    and reason in RECOVERABLE_SENSOR_REASONS):
+                 self.fail('source_loss:'+reason)
+             return 0., 0., self.fault or reason
+         self.wait_started = None
+@@ -742,7 +765,7 @@
+     if Path('/proc/sys/kernel/random/boot_id').read_text().strip() != cfg['boot_id']:
+         raise ValueError('boot changed')
+     gate = Gate(cfg.get('duration_s',600.), **{key:cfg[key] for key in
+-        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile','maximum_linear_m_s','maximum_feedback_linear_m_s']})
++        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile','maximum_linear_m_s','maximum_feedback_linear_m_s','sensor_loss_profile']})
+     gate.session_id=session
+     if not args.run:
+         print(json.dumps(dict(status='configuration_validated_only',no_ros_started=True)))
+@@ -889,7 +912,7 @@
+         started_monotonic=started,config_sha256=args.config_sha256,zero_only_until_arm=True,
+         correction_reverse_authorized=gate.nso_correction_reverse,
+         correction_reverse_service=None if not gate.nso_correction_reverse else '/nso_visual/correction_reverse/'+session,
+-        passive_chassis_supervision=True,duration_s=gate.duration,duration_profile=gate.duration_profile,navigation_source=cfg['navigation_source'],
++        sensor_loss_profile=gate.sensor_loss_profile,passive_chassis_supervision=True,duration_s=gate.duration,duration_profile=gate.duration_profile,navigation_source=cfg['navigation_source'],
+         actuator_state_topic='/nso_visual/actuator_state',actuator_state_frequency_hz=10.,
+         disk_recording=dict(periodic_sample_hz=1.,motion_and_fault_transitions=True,
+                             CAN_counters_use_all_original_feedback=True),
+--- a/runtime/mission.py
++++ b/runtime/mission.py
+@@ -190,6 +190,31 @@
+     return None
+ 
+ 
++def recoverable_sensor_health_reason(reason, health, odom, now, wall):
++    """Exact stale-only admission; never turn future/invalid/fault into recovery."""
++    if reason not in {'bridge_health_receipt_stale', 'visual_odometry_receipt_stale',
++            'odom_source_stamp_stale_or_future', 'depth_source_stamp_stale_or_future',
++            'laser_source_stamp_stale_or_future', 'visual_odometry_source_stale_or_future',
++            'odom:odom_source_stale_or_missing', 'depth:depth_stale_or_missing',
++            'laser_source:laser_source_stale_or_missing'}:
++        return False
++    if health is None or odom is None:
++        return False
++    if not (math.isfinite(now) and math.isfinite(wall) and health[0] <= now and odom[0] <= now):
++        return False
++    for kind in ('odom', 'depth', 'laser_source'):
++        row=health[1].get(kind,{})
++        stamp=row.get('source_stamp_ns')
++        stale_reason={'odom':'odom_source_stale_or_missing', 'depth':'depth_stale_or_missing',
++                      'laser_source':'laser_source_stale_or_missing'}[kind]
++        if (row.get('fault') or (row.get('valid') is not True and row.get('reason') != stale_reason)
++                or type(stamp) not in (int,float)
++                or not math.isfinite(stamp) or stamp<=0 or stamp/1e9>wall+.02):
++            return False
++    stamp=odom[1].header.stamp.to_sec()
++    return math.isfinite(stamp) and 0<stamp<=wall+.02
++
++
+ def load_experiment_config(path):
+     """Read exact experiment bytes once; the same bytes are frozen per attempt."""
+     if path is None:
+@@ -403,6 +428,7 @@
+     ap.add_argument('--joint-xy-goal-tolerance',type=float,choices=(.03,.08),default=.08,
+         help='ROS execution only: retain .08m default or test .03m grid-center stopping; original NSO cell/heading acceptance unchanged')
+     ap.add_argument('--navigation-allow-reverse',action='store_true',help='Navigation setup only: temporarily allow DWA and adapter reverse down to -0.05m/s; restore DWA afterwards')
++    ap.add_argument('--sensor-loss-profile',choices=['legacy_terminal_v1','recoverable_sensor_pause_v1'],default='legacy_terminal_v1',help='Explicit stale sensor pause profile; zero while stale, recover only with fresh sources/proposal')
+     ap.add_argument('--feedback-speed-profile',choices=['original_015_v1','measured_020_v1'],default='original_015_v1',help='Explicit stop-behavior change: measured_020_v1 raises linear CAN feedback stop threshold to .20 m/s; requires user approval')
+     ap.add_argument('--nso-correction-reverse',action='store_true',help='Explicit nso/joint nominal endpoint retry only: reverse down to -.05m/s and center-point correction; ordinary execution remains forward-only')
+     ap.add_argument('--navigation-goal-json',help='Standard ROS setup reposition only; JSON target_odom, never an NSO episode')
+@@ -584,7 +610,7 @@
+     execution_max_linear = .05 if args.mode in ('nso', 'joint') else .1
+     execution_profile = ('nso_dwa_linear_consistency_005_v1' if args.mode in ('nso', 'joint')
+                          else 'legacy_linear_010_v1')
+-    adapter_cfg=dict(maximum_feedback_linear_m_s=maximum_feedback_linear,feedback_speed_profile=args.feedback_speed_profile,maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
++    adapter_cfg=dict(sensor_loss_profile=args.sensor_loss_profile,maximum_feedback_linear_m_s=maximum_feedback_linear,feedback_speed_profile=args.feedback_speed_profile,maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
+         duration_s=args.duration,duration_profile=args.duration_profile,mission_mode=args.mode,output_directory=str(output/'adapter'),master_uri=MASTER,
+         navigation_source='lidar_rgbd')
+     if args.nso_correction_reverse:
+@@ -596,6 +622,7 @@
+     adapter_hash=hashlib.sha256((output/'adapter-config.json').read_bytes()).hexdigest()
+     save(output/'authorization.json',dict(source='direct user instruction to continue the recommended experiment; onsite readiness confirmed',
+         maximum_linear_m_s=execution_max_linear,execution_clipping_profile=execution_profile,
++        sensor_loss_profile=args.sensor_loss_profile,
+         maximum_feedback_linear_m_s=maximum_feedback_linear,maximum_feedback_angular_rad_s=.45,
+         feedback_speed_profile=args.feedback_speed_profile,
+         feedback_stop_behavior_changed=args.feedback_speed_profile != "original_015_v1",
+@@ -739,6 +766,8 @@
+         deadline=time.monotonic()+30.
+         while True:
+             now=time.monotonic()
++            if active and run_start is not None and now-run_start>=args.duration:
++                raise RuntimeError('execution_duration_complete')
+             if interrupted.is_set() or rospy.is_shutdown() or (output/'STOP').exists():
+                 raise RuntimeError('operator_stop')
+             with lock:
+@@ -766,7 +795,9 @@
+                 last_health_reason=reason
+             disposition=(active_window if active else prepare_window).update(reason,now,preparing=not active)
+             if disposition=='ready':return
+-            if disposition=='expired':raise RuntimeError('hybrid_health_loss_at_least_one_second:'+str(reason))
++            if disposition=='expired' and not (args.sensor_loss_profile=='recoverable_sensor_pause_v1'
++                    and recoverable_sensor_health_reason(reason,h,o,now,rospy.Time.now().to_sec())):
++                raise RuntimeError('hybrid_health_loss_at_least_one_second:'+str(reason))
+             if not active and now>=deadline:raise RuntimeError('prearm_health_not_stable:'+str(reason))
+             # Adapter alone admits commands and zeroes stale sources. Wait here
+             # without a stop latch, so no new decision runs during recovery.

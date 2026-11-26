@@ -1,0 +1,58 @@
+{
+  "schema": "nso.CAN_capture_audit07.v1",
+  "input_can_sha256": "d2491f30c585471670a6847300e952b1e618b946dff1e78a49860ce6cdad582b",
+  "retained_frames": 800,
+  "maximum_frames": 800,
+  "source_counters": {
+    "can_interface": "can0",
+    "can_id": "0x221",
+    "data_filter_mask": "0xc00007ff",
+    "timestamp_socket_option": 35,
+    "source_timestamp_semantics": "original SocketCAN SO_TIMESTAMPNS kernel realtime nanoseconds",
+    "source_ttl_ns": 150000000,
+    "received_frames": 1038,
+    "accepted_frames": 1038,
+    "dropped_frames": 0,
+    "reader_error": null,
+    "started_monotonic_ns": 124911541891638,
+    "realtime_monotonic_offset_ns": 1793930458194369504
+  },
+  "kernel_strictly_increasing": true,
+  "receipt_monotonic_strictly_increasing": true,
+  "raw_frame_id_dlc_signed_decode_all_verified": true,
+  "retained_kernel_range_ns": [
+    1794055374505003969,
+    1794055390486822107
+  ],
+  "CAN_gap_ns": {
+    "min": 19673316,
+    "max": 20346992,
+    "median": 20001578.0
+  },
+  "receipt_age_using_recorded_clock_offset_ns": {
+    "min": 48289,
+    "max": 4217036
+  },
+  "scan_count": 150,
+  "scan_header_metadata_matches_npz": true,
+  "scan_kernel_range_ns": [
+    1794055375412707329,
+    1794055390302384853
+  ],
+  "scan_intervals": 149,
+  "eligible_C_intervals": 149,
+  "ineligible": [],
+  "max_held_source_age_ns": 20346992,
+  "CAN_records_per_interval": {
+    "min": 5,
+    "max": 6
+  },
+  "interpretation": "All eligible intervals use original kernel nanoseconds and original decoded body vx,w. ZOH integrates retained actual50Hz samples across scan endpoints; between-sample physical motion is modeled, not independently measured continuous ground truth.",
+  "limits": [
+    "Retained800 of1038 accepted frames is a rolling window; earlier238 frames are absent but all scan-interval boundary coverage is explicitly checked",
+    "Source counters dropped_frames0 and near20ms gaps show no observed loss; no bus sequence counter exists to prove absence of every possible upstream loss",
+    "Receipt-before-scan check uses recorded realtime/monotonic offset; capture receipt is not necessarily exact original matcher callback instant",
+    "Scan motion deskew unchanged; no invented beam timestamps; no guard limit changes",
+    "Successful07 has different start; not paired localization accuracy or proof of fixture06 fix"
+  ]
+}

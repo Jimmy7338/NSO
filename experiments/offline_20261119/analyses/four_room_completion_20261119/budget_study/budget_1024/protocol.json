@@ -1,0 +1,88 @@
+{
+  "schema": "nso.complex_unknown_pilot.v1",
+  "created_date": "2026-11-19",
+  "scene_id": "N19_ROOMS_SEED20261119",
+  "purpose": "Separately declared G1024 budget sufficiency development probe after G512 remained below95%; original science/scoring/candidates/return guards preserved.",
+  "independent_layouts": 1,
+  "declared_initial_runs": [
+    "G"
+  ],
+  "optional_existing_ablation": "Only G is declared in this budget study; no alternative methods are auto-run",
+  "environment": {
+    "generator": "env.virtual3d_v2.VirtualWorldV2",
+    "layout": "rooms",
+    "seed": 20261119,
+    "config": {
+      "width_m": 16.0,
+      "height_m": 12.0,
+      "resolution_m": 0.2,
+      "max_steps": 1024,
+      "pose_noise_m": 0.0,
+      "occluded_objects": true
+    },
+    "start": "Unchanged generator start projection in a fixed 1m neighborhood; single initial rendered frame, no exploratory prefix"
+  },
+  "policy": {
+    "version": "Frozen Nov04 exploration_joint_v1 on v10_3_1",
+    "paid_action_budget": 1024,
+    "return_anchor_required": true,
+    "guard_and_scores_unchanged": true,
+    "physical_runtime_equivalence": false,
+    "args": {
+      "nso_backend": "cpu_v10",
+      "eval": true,
+      "train_global": false,
+      "use_open_vocab_semantic": true,
+      "use_topo_graph": true,
+      "use_rpn_uq": true,
+      "use_igcr": true,
+      "cpu_disable_feedback": false,
+      "cpu_max_candidates": 12,
+      "cpu_coverage_slots": 4,
+      "cpu_planner_revision": "v10_3_1",
+      "cpu_measured_novelty_floor": 0.25
+    },
+    "capability_note": "Legacy flags select CPU module interfaces; actual recorded capabilities are authoritative. No trained reachability network or open-vocabulary detector is being evaluated."
+  },
+  "sensor_adapter": {
+    "name": "visible_semantic_dictionary_v1",
+    "source_dictionary": "VirtualWorldV2 class 2 = solid box, class 3 = open shelf (env/virtual3d_v2.py lines 59-73)",
+    "policy_dictionary": "v10 competition prior class 2 = open, class 3 = closed (nso/competition_prior_v8.py lines 35-48; cpu_four_modules_v10.py lines 189-204)",
+    "mapping": {
+      "0": 0,
+      "1": 1,
+      "2": 3,
+      "3": 2
+    },
+    "applied_to": "Currently visible label pixels returned by renderer only; invalid depth labels stay zero",
+    "RGB_depth_scan_unchanged": true,
+    "natural_detection": false,
+    "semantic_information": "Ideal synthetic visible labels, not RGB marker detection; no hidden object labels, mesh or reachable map passed to actor",
+    "odometry": "Exact simulated centred discrete base/camera pose"
+  },
+  "evaluation": {
+    "coverage": "Known cells intersected with simulator start-reachable free-cell mask; truth used only after policy action for evaluation",
+    "primary": [
+      "coverage_fraction versus paid actions",
+      "path_length_m",
+      "turn_actions",
+      "collisions",
+      "return/termination",
+      "decision latency",
+      "first action reaching 90/95/99 percent coverage",
+      "final observed grid",
+      "per-plan feasibility, return cost and coverage scores"
+    ],
+    "surface": "Measured mapper patch count only in this pilot; not surface area, F1, map accuracy or completeness",
+    "deferred": "Exterior-union reference and TSDF P/R/F1 evaluation; robust semantic controls and frontier; larger matched budget adequacy",
+    "outcomes": "All attempts retained; no replacement of failed slots or result-based layout tuning",
+    "independence": "G/S are paired trajectories in one new generated layout, not two independent scenes"
+  },
+  "execution": {
+    "hardware": "None; no ROS imports or launchers",
+    "libraries_threads": 1,
+    "default_batch": false,
+    "prepare_steps": 0,
+    "recording": "Compact initial sensor, evaluation map, decisions, steps and results; no videos/rosbags/full-frame sequences"
+  }
+}

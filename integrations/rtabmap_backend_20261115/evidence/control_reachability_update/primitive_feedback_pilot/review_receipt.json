@@ -1,0 +1,105 @@
+{
+  "schema": "primitive_feedback_pilot_review/1",
+  "status": "staged_ready_for_root_review_no_actuation",
+  "profile": "primitive_feedback_unbounded_v1",
+  "original_revision": "v10_3_1",
+  "original_git_commit": null,
+  "original_commit_qualification": "Local migrated source has no git metadata; provenance is exact source manifest/hash, not an invented commit.",
+  "original_source_checks": [
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/env/virtual3d.py",
+      "manifest_sha256": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+      "actual_sha256": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+      "exact_original": true
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py",
+      "manifest_sha256": "76f4327fefa8fafd37d7c520cf6e1c92c05f5b9777f9f621605653ad2fb1568b",
+      "actual_sha256": "76f4327fefa8fafd37d7c520cf6e1c92c05f5b9777f9f621605653ad2fb1568b",
+      "exact_original": true
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_sensor_contract_v10.py",
+      "manifest_sha256": "28d0870913d67bd102b83b61025a992cf68c76021c270eabd267fb021f14db02",
+      "actual_sha256": "28d0870913d67bd102b83b61025a992cf68c76021c270eabd267fb021f14db02",
+      "exact_original": true
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/observed_gain_calibration_v10_1.py",
+      "manifest_sha256": "d366a532c1b2ba4ca5e30414ceebe44ab401dbbf7bc85fceeef8e52a17b95aef",
+      "actual_sha256": "d366a532c1b2ba4ca5e30414ceebe44ab401dbbf7bc85fceeef8e52a17b95aef",
+      "exact_original": true
+    },
+    {
+      "path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/runtime_integration.py",
+      "manifest_sha256": "3a0e5bd587f20a023565b2b773750a3b78bb4bfde03249f2585baad047150b7e",
+      "actual_sha256": "3a0e5bd587f20a023565b2b773750a3b78bb4bfde03249f2585baad047150b7e",
+      "exact_original": true
+    }
+  ],
+  "files": {
+    "/home/ouc/nso_robot/analyses/resume_20261115/primitive_feedback_pilot/candidate/mission.py": "c9fbc3b11a368e7c9ee38293039faf87e76cc0984cccfaadcdb9aadb4319bef4",
+    "/home/ouc/nso_robot/analyses/resume_20261115/primitive_feedback_pilot/candidate/primitive_feedback_coordinator.py": "ec1b61f9e6de157e40ba72f205c58e7d1cd1544f1b4f58061fff05c1939888f1",
+    "/home/ouc/nso_robot/analyses/resume_20261115/primitive_feedback_pilot/candidate/primitive_feedback_unbounded_v1.py": "c033946ac2a29028c54303395a2f92a0522da48146d655e4c7d36e8372b26006",
+    "/home/ouc/nso_robot/analyses/resume_20261115/primitive_feedback_pilot/candidate/joint_engine.py.patch": "2c696f91b296943259b1c2f41c8a7f14400cbbb1dcc4bccdf5fcaaccb06bb20f",
+    "/home/ouc/nso_robot/analyses/resume_20261115/primitive_feedback_pilot/candidate/mission.py.patch": "ed4cadbd02f3c59da335b014a115f83bd46eb47a2c9f0597999e47c40cd41e8d",
+    "/home/ouc/nso_robot/analyses/resume_20261115/primitive_feedback_pilot/candidate/joint_engine.py": "a7ed657d6cd7f3b9b442d9e511666f2e154fbab3514cfdebd11194a5973c161c"
+  },
+  "tests": {
+    "core_original_gain_pair_and_prefix": 4,
+    "coordinator_transport_and_failed_outcome": 2,
+    "mission_summary_profile_flag": 3,
+    "all_passed": true,
+    "software_tests_not_physical_efficacy": true
+  },
+  "actual_model_bootstrap": {
+    "success": true,
+    "elapsed_s": 13.492235437966883,
+    "all_rpc_ok": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "methods": [
+      "init",
+      "observe_primitive_result",
+      "summary",
+      "shutdown"
+    ],
+    "actual_real_semantic_frontend": true,
+    "execution_allowed_identity": true,
+    "real_validate_joint_identity_passed": true,
+    "actual_source_packet": "/home/ouc/nso_robot/reports/nso-hybrid-20261115/NSO_rtabmap_integrated_20261115_04/joint_inputs/joint-1794749165053971116.npz",
+    "actual_source_sha256": "b1e54e267b0f2f6d103c2be9224faa9fad601cebde662756d6821e3adbd4dcc0",
+    "synthetic_sensor_inputs": false,
+    "controller_or_native_loaded": false,
+    "ROS_goal_sent": false,
+    "physical_experiment": false,
+    "geometry_scope": "frozen actual bootstrap RTAB epoch; no optimized replay claim",
+    "policy_profile": "primitive_feedback_unbounded_v1"
+  },
+  "recorded_first_prediction": {
+    "source_frame": "1794749165053971116",
+    "action": "forward",
+    "predicted_radar_cells": 0,
+    "predicted_camera_cells": 0,
+    "posterior_change_claimed": false
+  },
+  "feedback_scope": "Original per-primitive-intent realized support; failed ROS attempts are separately recorded and never counted as arrivals. No macro-as-primitive event.",
+  "geometry_scope": "Frozen actual bootstrap RTAB epoch + immutable original inputs/prediction/after-support; no full optimized-history replay or independent pose accuracy claim.",
+  "policy_preserved": [
+    "same original joint candidate/score formulas and selected outbound prefix",
+    "unknown remains permitted by current ROSChecked admission",
+    "no total duration/action/roundtrip policy budget or automatic return",
+    "existing ROS/hardware protections unchanged"
+  ],
+  "explicit_adaptations": [
+    "0.2m/90degree original logical actions executed by standard ROS",
+    "real continuous pose projected for original discrete acceptance; never overwritten with destination",
+    "failed real ROS partial observations integrated as paid attempts without arrival",
+    "short pilot freezes actual bootstrap RTAB geometry and external nav grid; own actual RGBD/scan remains measured"
+  ],
+  "active_code_changed": false,
+  "robot_actuation": false
+}

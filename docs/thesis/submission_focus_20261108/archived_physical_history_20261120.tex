@@ -1,0 +1,41 @@
+\clearpage
+\section{Physical Deployment Pilot}\label{physical-deployment}
+The physical deployment is a declared joint-exploration variant, distinct from the supplied-graph, two-template controlled study. It uses exploration\_joint\_v1 derived from v10\_3\_1, with revised joint unknown-coverage and measured-surface candidate generation, real-scene semantics, measured sensor-range and 3 m extent adapters (rather than the original 2.2 m applicability cap), default CSM keyframes, measured CAN controller velocity and fixed SE2 alignment. The camera had been relocated without recalibrating its earlier extrinsics; its earlier self-mask was disabled. The navigation map retained prior observations in the first episode.
+
+One S40 episode completed 40 paid actions and 40 arrivals, returned to its grid anchor, and acquired 41 frames over 7.394 m of CAN-estimated travel and 542.444 s. Its observed-area proxy increased from 72.08 to 128.28 m$^2$, while its fixed old-surface quality proxy decreased from 0.213760 to 0.199107. These are internal proxies, without an independent map or surface-accuracy reference. All 12 recorded planning states gave equal G and S scores for shared candidates; only two had multiple candidates. This does not constitute a separate G trial.
+
+\subsection{Fresh-map ordered C/S physical pilot}
+
+A subsequent pilot executed coverage-only C followed by joint S in the same physical scene. Each arm used a fresh, separately supervised stock gmapping instance and a new policy session, with the same 40-action budget, 600 s limit, circular footprint, candidates, return rule, sensing configuration and execution protection. Only score mode differed within the policy configuration; C retained the same candidate generator and sensor modalities. CSM odometry and the display TSDF remained continuous. The actual bootstraps differed by 0.0701 m and 0.0672 rad, and their initial navigation-known masks differed in 205 cells (8.20 m$^2$) on the common 0.2 m planning grid. This is an approximate starting-condition comparison, not identical-input pairing.
+
+\begin{table}[!htbp]
+\caption{One ordered physical C/S pilot with fresh navigation maps; failures remain included}\label{tab:physical-pair}
+\small\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.18\linewidth}p{.12\linewidth}p{.18\linewidth}p{.17\linewidth}p{.23\linewidth}@{}}
+\toprule
+Arm and termination & Paid / obs. & CAN / time & Internal area (m$^2$) & Own-support old-quality \\
+\midrule
+C: budget exhausted, returned & 40 / 41 & 6.741 m /\newline 558.214 s & 66.40 $\to$ 123.44 & 0.249536 $\to$ 0.190989 (270 points) \\
+S: method failure, no return & 32 / 33 & 5.233 m /\newline 451.992 s & 65.32 $\to$ 122.00 & 0.234949 $\to$ 0.299275 (290 points) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{PhysicalPair_C_S_20261107.pdf}
+\caption{Recorded aligned-odometry poses and internal observed-area proxy in the ordered C/S pilot. S stops after action 32; no continuation is inferred. The two episodes use different initial measurements and provide no independent accuracy reference.}
+\label{fig:physical-pair}
+\end{figure}
+
+C completed its budget and returned to the discrete anchor. S stopped after its 32nd accepted action when the existing circular-footprint check reported \texttt{current\_footprint\_not\_known\_safe}; it did not return. This was an original method check, not a newly introduced policy gate. CAN feedback was zero after both runs. Unequal completed actions, the failed S return, and different initial information prevent an efficiency ranking or a causal policy-benefit claim. Quality is reported separately on each arm's own fixed bootstrap support, whose identities differ; the C decrease and S increase are not a matched reconstruction-accuracy comparison. This C/S objective ablation does not isolate a semantic S/G effect.
+
+At paid action 12, both runs replanned after the original next-footprint check; at each run's own state, C and S selected the same candidate, while the maps differed across runs. At S action 31, frozen-state C had no positive candidate whereas G and S selected the same positive candidate. These recorded counterfactuals are not additional physical trials, and G/S ties do not establish a semantic decision effect.
+
+A mapper-only replay of the retained S observations reproduced the final belief: a measured 0.504 m laser return inserted a nearby occupied cell before depth fusion, while the input navigation grid alone still passed the footprint check. This identifies the recorded fusion source, not the physical object or a verified noise or localization cause.
+
+
+\input{physical_update_20261108.tex}
+

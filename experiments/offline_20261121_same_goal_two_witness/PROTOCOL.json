@@ -1,0 +1,53 @@
+{
+  "schema": "nso_same_goal_two_witness_single_choice_continuation_v1",
+  "frozen_before_any_new_trajectory": true,
+  "source_commit": "3855d5d710e659adf665aa61dbc66eafb217c467",
+  "source_experiment": "experiments/offline_20261121_same_goal_pool_audit/",
+  "source_local": "/home/ouc/nso_robot/analyses/same_goal_pool_audit_20261121",
+  "stage": "two_known_development_states",
+  "layouts_in_order": ["gallery_left", "warehouse_right"],
+  "modes": ["G", "S"],
+  "maximum_continuations": 4,
+  "total_paid_action_budget": 256,
+  "pairs": {
+    "gallery_left": {
+      "state_id": "gallery_left:56:230", "paid_before": 56, "global_call_id": 230,
+      "source_state": "replay/runs/gallery_left/states/01_paid_056.json",
+      "archived_expected_winners_for_verification_only": {"G": "via_24_40_2", "S": "via_14_41_2"},
+      "archived_nominal_outbound_for_verification_only": {"G": 48, "S": 48}, "native_reserved_return": 74,
+      "expected_first_nominal_split": {"paid": 66, "G": "forward", "S": "right"},
+      "verify_common_first_outbound_observations": 9,
+      "equal_paid_checkpoint": 104,
+      "checkpoints": [56, 65, 66, 80, 104, 128, 160, 192, 224, 256]
+    },
+    "warehouse_right": {
+      "state_id": "warehouse_right:142:578", "paid_before": 142, "global_call_id": 578,
+      "source_state": "replay/runs/warehouse_right/states/04_paid_142.json",
+      "archived_expected_winners_for_verification_only": {"G": "via_40_15_1", "S": "via_23_41_2"},
+      "archived_nominal_outbound_for_verification_only": {"G": 62, "S": 64}, "native_reserved_return": 48,
+      "expected_first_nominal_split": {"paid": 143, "G": "left", "S": "right"},
+      "verify_guard_order": "Replay the original native guard rejection at paid142 on the old option, then its native replanning choice call578 in the same tick before issuing paid action143. Apply the treatment only inside the replanned common target's local-choice callback. Preserve the old rejection and new route guard events in actual runtime order.",
+      "equal_paid_checkpoint": 206,
+      "checkpoints": [142, 143, 160, 176, 192, 206, 224, 240, 256]
+    }
+  },
+  "treatment": {
+    "scope": "Exactly the one archived local choice per arm. The original neutral G global selector must recover the same goal and heading. Arm G uses frozen neutral prior and S uses frozen acquired visible-category prior for this one local choice.",
+    "frozen_local_rule": "Recompute the source four-alternate pool, G/S scores and original winner exactly before the one treatment. Use the original local chooser and original generator; at treatment only, set its candidate cap beyond all original distinct traces, preserving original safety graph, <=8 extra outbound paid actions, original counted return reserve, >=95% native unknown-visibility union, and 1e-9 tie rule. Verify the expanded pool, both score hashes and nominal winners against the archive. The selected option installed is emitted by the selector. IDs, route actions and expected divergence in this document are validation data, not control inputs.",
+    "continuation": "At the next native normal decision both arms resume the same source newG policy with native neutral global G and its original capped local G (up to four alternatives). Keep immediate native guard-triggered replans, runtime acquisition, observed TSDF/map fusion, safety, return and stop unchanged. No reference geometry, target mesh or future truth is injected into the actor.",
+    "restore_rng": "Use the same source simulator seed and deterministic pose/time keyed sensor functions. Replay archived history and verify packet and action hashes plus source budget and native active state. Record any live RNG-state mechanism and equality before the treatment. If there is no stateful simulator RNG, bind deterministic RNG inputs and explain that fact. No stochastic data selection."
+  },
+  "execution_and_measurement": {
+    "paths": "Run both predeclared pairs independently. At most four actual continuations, with no replacement for a negative comparison. Retain early stop and any error/interruption. Prefix-only recovery time checks do not count as new test trajectories. Record all actual paid commands and guard decisions, execution/pose/packet outcome, return and collisions.",
+    "non_divergent_pair": "Only if both arms reach the next neutral decision without a differing paid command and have exactly matching full state and RNG may paired duplicate continuation stop. Label such a pair never actually diverged and indicate terminal measured status. Do not synthesize missing observations.",
+    "primary": "Actual native stop C_free, scene F1 at 5 cm and J=C_free * F1_scene_05cm (both factors as fractions), S minus G in percentage points; report paid actions, return, collision and native stop reason. Known reference and native TSDF evaluator from the source development layouts are held separate from the actor.",
+    "checkpoint_comparability": "Record actual measurements on listed paid action clocks when reached, and terminal at its actual clock. At 104/206 show both only when actually observed without substituting an extrapolated row. Lines in the J plot connect measured checkpoints without extrapolation or synthesized frames. Report actual first command/pose and physical sensor divergence independently from packet bookkeeping differences."
+  },
+  "engineering_gate": {
+    "required_actual_split_pairs": 2,
+    "required_terminal_J_gain_strictly_greater_than_fraction": 0.001,
+    "safety": "All arms obey the original time/budget and have no new simulated collisions or return failures. Both measured terminal comparisons must independently pass. Threshold is practical, not statistical.",
+    "conclusion_if_gate_passes": "Can propose a separately frozen from-zero policy validation. Do not execute it in this goal.",
+    "conclusion_if_gate_fails": "Close the implementation for the current week with both measured development comparisons; leave four unseen buildings frozen for a future separate study."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "B8_readonly_method_claim_review_v1",
+  "status": "review_pass_with_two_minor_clarifications",
+  "reviewed_at_utc": "2026-11-20T08:49:03.452605+00:00",
+  "scope": "Read-only manuscript/method/figure-source review; no formal manuscript or frozen method modified. Publication remains draft until all declared policy outcomes are complete.",
+  "inputs": {
+    "paper_update/conditional_depth_calibration_20261120.tex": "d9a022c6b6b05bbc227700bebac7a74abdb4564c3bd2c27ca99b10cd3c6b283e",
+    "paper_update/main_insert.tex": "6f57b45c99a17bb975af4bc50c284434d4fb2b073d11e48f1673ebdc89f6f0dd",
+    "ARCHITECTURE_DELTA.json": "3f740954e847a3f94dd9e7c97174a03226f77b89edaa1e0198eb46d15d363950",
+    "figure/CAPTION.md": "c94bf956e5b80462a5dcd30aef281947662f757018a8efa73ba3905f9d01498f",
+    "figure/build_calibration_figure.py": "51e564a6533282b477fcb8b17146efd85c41462666e058d60617ad7217c66d01",
+    "figure/calibration_plot_data.csv": "8b0e6143cdfeda0ac5432832d0d32286a86ed7ba1b5427c2fd3fdccb45f4fe8b",
+    "figure/validation.json": "bf21846fc6202066e114f483e566f7d5df853bdcfff4f3ada437b0444a29b42b",
+    "audit/summary.json": "e1c767c7c82f9a8f50837a04c519405d047aef81b136ca046d7e28abacec646f",
+    "method/model.py": "dddd54a2d0347571b48e3aacc3f428a2dccfd23747362d333360fe2223584c45"
+  },
+  "checks": {
+    "joint_update_replaces_old_likelihood_and_clip_not_depth_only": true,
+    "G_S_common_geometry_but_class_prior_can_change_depth_marginal_disclosed": true,
+    "24_geometry_units_96_dependent_cases_288_frames_distinguished": true,
+    "training_only_scale_selection_and_smallest_grid_value_disclosed": true,
+    "validation_front_CRPS_negative_preserved": true,
+    "95_percent_undercoverage_counts_and_no_nominal_calibration_claim": true,
+    "ideal_masks_exact_poses_and_no_real_detector_accuracy_claim": true,
+    "no_G_S_exploration_advantage_claim_from_calibration": true,
+    "figure_source_hash_and_all_declared_conditions_verified": true,
+    "figure_SD_not_CI_and_dependent_views_disclosed": true
+  },
+  "minor_clarifications": [
+    {
+      "file": "paper_update/conditional_depth_calibration_20261120.tex",
+      "line": 54,
+      "issue": "The area formula omits object index while the implementation normalizes structure/geometry mass separately for each object and sums objects.",
+      "suggestion": "State that the equation is for one object and add the sum over objects, or write the object index explicitly."
+    },
+    {
+      "file": "paper_update/conditional_depth_calibration_20261120.tex",
+      "line": 62,
+      "issue": "Original visibility contribution is ambiguous after the declared B2 repair.",
+      "suggestion": "Use retained B2 visibility contribution. No formula or code change is needed."
+    }
+  ],
+  "figure_review_limit": "Verified editable plotting source, data and caption/hash chain. This receipt does not assert a new rendered-image visual inspection.",
+  "not_final_publication": true
+}

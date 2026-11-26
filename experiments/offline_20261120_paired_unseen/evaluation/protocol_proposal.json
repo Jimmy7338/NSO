@@ -1,0 +1,102 @@
+{
+  "schema": "B11_independent_evaluation_protocol_proposal_v1",
+  "status": "evaluator_protocol_root_short_candidate_design_confirmed_pending_full_freeze",
+  "actor_launch_authority": "root",
+  "hardware": false,
+  "experiment": {
+    "layouts": 4,
+    "minimum_distinct_room_connection_topologies": 2,
+    "predeclared_acquired_states_per_layout": 2,
+    "controlled_actual_branches_per_state": 3,
+    "short_branch_total": 24,
+    "first_release": "First two frozen layouts:12 branches and one complete table, before executing remaining12 branches",
+    "complete_policy_runs": "old/new on each of four layouts:8 runs, matched sensor/start/budget/execution contract"
+  },
+  "single_change_requirement": {
+    "shared": [
+      "acquired prefix and all past frames",
+      "fitted furniture geometry",
+      "full conditional geometry posterior",
+      "area quadrature and shape basis",
+      "category/neutral prior condition",
+      "candidate set",
+      "common score terms",
+      "execution and return budget",
+      "mapping and source-reference evaluator"
+    ],
+    "vary": "Observation acquisition-gain estimator only:paper visibility surrogate versus prediction-only virtual-camera/TSDF acquisition forecast",
+    "prohibited_confound": "No conditional-mean collapse or changed surface quadrature applied to just one estimator; no candidate filtering or weight changes hidden as engineering."
+  },
+  "surface_evaluation": {
+    "tolerance_m": 0.05,
+    "reference": "Fixed source-surface samples and sampling area weights, evaluation-only; frozen before branch outcomes",
+    "native_mesh": "Actual measured-only TSDF; no predicted surface fusion or alignment",
+    "metrics": [
+      "object gross-new correctly recovered area",
+      "object previously-correct lost area",
+      "object net-new area",
+      "whole-scene gross/lost/net area",
+      "object recall",
+      "whole-scene precision/recall/F1"
+    ],
+    "point_pairing": "Use identical fixed reference points for prefix and every candidate endpoint. Gross minus lost equals net, exactly before rounding."
+  },
+  "primary_table": {
+    "state_rows": [
+      "layout",
+      "topology",
+      "state",
+      "old selected candidate",
+      "new selected candidate",
+      "old selected measured object gross area",
+      "new selected measured object gross area",
+      "best observed area among three candidates",
+      "old and new gap from candidate best",
+      "target unchanged",
+      "failed/incomplete candidate count",
+      "source/evaluation receipts"
+    ],
+    "layout_rows": "Equal mean over both predeclared states, retain both state rows in source data; independent unit is layout, not branch or repeated state.",
+    "secondary": [
+      "all candidate predictions and actuals",
+      "gross MAE",
+      "net MAE",
+      "candidate Spearman rank if nonconstant",
+      "actual/forecast wall times",
+      "actions and path",
+      "endpoint status and collisions",
+      "95/100 coverage action and return outcome for complete policies"
+    ]
+  },
+  "prior_ablation": "Compute both neutral and category priors under each estimator on the exact same three executed candidates. Keep all four selected routes and their actual outcomes; broader unexecuted-candidate winners must be marked as lacking an actual outcome.",
+  "failure_accounting": {
+    "never_drop": [
+      "unchanged winners",
+      "zero/negative net gains",
+      "collisions",
+      "failed arrivals",
+      "partial runs",
+      "external interruptions",
+      "empty or unmodeled furniture support",
+      "undefined/constant rank",
+      "missed coverage thresholds",
+      "non-return"
+    ],
+    "no_native_endpoint": "Use missing/null area, never invented zero. Report the missing candidate and best-area incompleteness.",
+    "partial_native_endpoint": "Evaluate observed partial area but label partial; candidate-best value is only best observed, not a guarantee of full-route optimum.",
+    "complete_policy_run": "Only a finalized result plus valid artifact manifest is complete. A partial100% coverage heartbeat is not a completed matched run."
+  },
+  "claim_boundaries": [
+    "Four constructed layouts and two topology families are controlled synthetic cases, not four natural environments.",
+    "Exact pose/ideal visible labels do not validate natural recognition or SLAM accuracy.",
+    "Better area MAE, better candidate ranking, larger selected object surface, coverage efficiency and whole-scene F1 are distinct outcomes.",
+    "The candidate oracle is limited to the three attempted controlled routes, not all physical routes or future policies."
+  ],
+  "short_candidate_design": {
+    "rule": "On original native routes and before reading prediction gains or outcome truth, choose the largest outbound-action cost band of width3actions; ties choose lower band then lower ordered candidate IDs. Require at least3 routes. Rank old/new S within that shared cost-matched pool, retain both selected routes and fill to3 by ascending original candidate ID. Re-rank neutral/semantic priors on that final shared3 for all matched diagnostics.",
+    "winner_definition": "Actual maximizer in this declared controlled short-replay pool, not a claim to be the winner over every original full-run route.",
+    "best_area_definition": "Best actual gross-new object area among the3 executed short branches; not global-optimal or best-over-unexecuted route evidence.",
+    "infeasible_band": "Keep as protocol preparation failure with route costs; do not replace states/layouts using outcomes. No widening after gains.",
+    "full_policy": "The controlled cost band is used only for short replay; complete runs keep all original native candidates."
+  }
+}

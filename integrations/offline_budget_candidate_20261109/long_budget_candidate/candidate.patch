@@ -1,0 +1,172 @@
+--- /dev/null
++++ b/runtime/duration_profile.py
+@@ -0,0 +1,22 @@
++"""Explicit external execution time profiles; independent of research policy."""
++import math
++
++STANDARD = 'standard_600s_v1'
++LONG = 'long_budget_1200s_v1'
++PROFILES = (STANDARD, LONG)
++
++
++def validate_duration(duration_s, profile=STANDARD, mission_mode=None):
++    if profile not in PROFILES:
++        raise ValueError('unknown duration profile')
++    if profile == LONG and mission_mode not in ('nso', 'joint'):
++        raise ValueError('long duration profile requires explicit nso/joint mode')
++    maximum = 1200. if profile == LONG else 600.
++    if isinstance(duration_s, bool) or not isinstance(duration_s, (int, float)) or not math.isfinite(duration_s):
++        raise ValueError('finite numeric duration required')
++    if not 1. <= duration_s <= maximum:
++        raise ValueError('duration outside selected profile bounds')
++    return dict(profile=profile, duration_s=duration_s, maximum_duration_s=maximum,
++                mission_mode=mission_mode, adapter_deadline_starts_at_arm=True,
++                supervisor_deadline_uses_run_start=True,
++                historical_40_action_equivalence=False if profile == LONG else None)
+--- a/runtime/mission.py
++++ b/runtime/mission.py
+@@ -16,6 +16,7 @@
+ from stop_feedback_wait import stop_feedback_cleanup_sequence
+ from standby_native_handshake import NativeStartOnce
+ from lifecycle_receipt import LifecycleReceipt
++from duration_profile import STANDARD, PROFILES, validate_duration
+ 
+ WORK = Path(__file__).resolve().parents[1]
+ ROOT = Path('/home/ouc/nso_robot')
+@@ -390,6 +391,7 @@
+     ap=argparse.ArgumentParser(description=__doc__)
+     ap.add_argument('--mode',choices=['visual','nso','joint','reference','navigation'],default='nso')
+     ap.add_argument('--duration',type=float,default=600.)
++    ap.add_argument('--duration-profile',choices=PROFILES,default=STANDARD)
+     ap.add_argument('--execute',action='store_true')
+     ap.add_argument('--report')
+     ap.add_argument('--experiment-config',help='experiment identity metadata; cannot enable an unavailable NSO task')
+@@ -422,8 +424,7 @@
+ 
+ def main(argv=None):
+     args=argument_parser().parse_args(argv)
+-    if not 1<=args.duration<=600:
+-        raise ValueError('duration must be 1..600 seconds')
++    duration_profile = validate_duration(args.duration, args.duration_profile, args.mode)
+     if args.navigation_allow_reverse and args.mode!='navigation':
+         raise ValueError('navigation-allow-reverse is restricted to navigation setup mode')
+     if args.nso_correction_reverse and args.mode not in ('nso','joint'):
+@@ -513,7 +514,7 @@
+     adapter_path=WORK/'runtime/visual_velocity_adapter.py'
+     if not args.execute:
+         print(json.dumps(dict(status='validated_no_motion',mode=args.mode,
+-            duration_s=args.duration,master=MASTER,native_exists=NATIVE.is_file(),
++            duration_s=args.duration,duration_profile=duration_profile,master=MASTER,native_exists=NATIVE.is_file(),
+             adapter_exists=adapter_path.is_file(),navigation_source='lidar_rgbd',
+             experiment_config_sha256=experiment_sha,recording='navigation_only')))
+         return
+@@ -556,7 +557,7 @@
+         session_id=session,experiment_config_sha256=experiment_sha,
+         source_config_path=None if args.experiment_config is None else str(Path(args.experiment_config).resolve()),
+         navigation_source='lidar_rgbd',mode=args.mode,
+-        duration_s=args.duration,created_unix_s=time.time(),status='attempt_registered_before_prearm'))
++        duration_s=args.duration,duration_profile=duration_profile,created_unix_s=time.time(),status='attempt_registered_before_prearm'))
+     write_source_manifest(output)
+     save(output/'runtime_parameters.json',dict(captured_unix_s=time.time(),
+         navigation_source='lidar_rgbd',experiment_config_sha256=experiment_sha,
+@@ -578,7 +579,7 @@
+         global_obstacles=rospy.get_param('/nso_visual/move_base/global_costmap/obstacle_layer',{}),
+         local_obstacles=rospy.get_param('/nso_visual/move_base/local_costmap/obstacle_layer',{})))
+     adapter_cfg=dict(session_id=session,boot_id=Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
+-        duration_s=args.duration,output_directory=str(output/'adapter'),master_uri=MASTER,
++        duration_s=args.duration,duration_profile=args.duration_profile,mission_mode=args.mode,output_directory=str(output/'adapter'),master_uri=MASTER,
+         navigation_source='lidar_rgbd')
+     if args.nso_correction_reverse:
+         adapter_cfg.update(nso_correction_reverse=True,mission_mode=args.mode,
+@@ -588,7 +589,7 @@
+     save(output/'adapter-config.json',adapter_cfg)
+     adapter_hash=hashlib.sha256((output/'adapter-config.json').read_bytes()).hexdigest()
+     save(output/'authorization.json',dict(source='direct user instruction to continue the recommended experiment; onsite readiness confirmed',
+-        maximum_linear_m_s=.1,maximum_angular_rad_s=.3,duration_s=args.duration,
++        maximum_linear_m_s=.1,maximum_angular_rad_s=.3,duration_s=args.duration,duration_profile=duration_profile,
+         automatic_reverse=args.navigation_allow_reverse,
+         minimum_linear_m_s=-.05 if args.navigation_allow_reverse else 0.,
+         reverse_scope='navigation_setup_only' if args.navigation_allow_reverse else None,
+@@ -605,7 +606,7 @@
+                goal_starts={},terminal_goals=set(),arrival_records=[])
+     children=[]; streams=[]; run_start=None
+     result=dict(session_id=session,mode=args.mode,status='preparing',navigation_source='lidar_rgbd',
+-        experiment_config_sha256=experiment_sha,
++        experiment_config_sha256=experiment_sha,duration_profile=duration_profile,
+         successful_arrivals=[],physical_stop_independently_observed=False,cleanup=[])
+     stop=rospy.Publisher('/nso_radius/stop',Bool,queue_size=1,latch=True)
+     tfbuf=tf2_ros.Buffer(cache_time=rospy.Duration(30.))
+@@ -971,7 +972,7 @@
+         lifecycle.record('worker_close_end')
+         # Only termination verification gets its own receive-only socket, when
+         # this process no longer performs image conversion, inference or NPZ I/O.
+-        stop_gate=mod.Gate(args.duration)
++        stop_gate=mod.Gate(args.duration, duration_profile=args.duration_profile, mission_mode=args.mode)
+         stop_feedback=None
+         try:stop_feedback=mod.FeedbackReader(stop_gate,lock,journal)
+         except Exception as exc:result['stop_feedback_error']=str(exc)
+--- a/runtime/visual_velocity_adapter.py
++++ b/runtime/visual_velocity_adapter.py
+@@ -3,10 +3,11 @@
+ 
+ The native driver remains the sole actuator sender. A receive-only CAN socket
+ checks original chassis feedback. This independent attended version runs at
+-most 600 seconds after arm, with no displacement/path/angular travel limit.
++most 600 seconds after arm by default (explicit nso/joint long profile:1200 seconds), with no displacement/path/angular travel limit.
+ Visual odometry, its velocity-fit health, and depth-derived scan/health must
+ be fresh and published by the configured bridge. Importing opens no devices.
+ """
++from duration_profile import STANDARD, validate_duration
+ import argparse
+ from collections import deque
+ from copy import deepcopy
+@@ -105,6 +106,8 @@
+     result.update(cfg)
+     reverse = result.setdefault('navigation_allow_reverse', False)
+     mission_mode = result.setdefault('mission_mode', None)
++    profile = result.setdefault('duration_profile', STANDARD)
++    validate_duration(result.get('duration_s', 600.), profile, mission_mode)
+     correction = result.setdefault('nso_correction_reverse', False)
+     result.setdefault('correction_supervisor', '/nso_onboard_supervisor')
+     if type(correction) is not bool or (correction and mission_mode not in ('nso','joint')):
+@@ -158,7 +161,7 @@
+         sampled_monotonic=now,sampled_unix_s=wall,
+         CAN_timestamp_basis='original kernel timestamps converted to host monotonic by receive-only reader',
+         fault=gate.fault,armed=gate.armed,ever_armed=gate.ever_armed,
+-        started_monotonic=gate.started,duration_s=gate.duration,
++        started_monotonic=gate.started,duration_s=gate.duration,duration_profile=gate.duration_profile,
+         can_status=deepcopy(gate.can_status),can_velocity=deepcopy(gate.can_velocity),
+         can_distance_m=gate.can_distance,can_absolute_yaw_rad=gate.can_absolute_yaw,
+         can_zero_since_monotonic=gate.can_zero_since,
+@@ -184,10 +187,11 @@
+                  odom_frame='odom', base_frame='base_link',
+                  depth_frame='zed2i_left_camera_optical_frame', navigation_source='visual',
+                  navigation_allow_reverse=False, mission_mode=None, nso_correction_reverse=False,
+-                 correction_supervisor='/nso_onboard_supervisor'):
++                 correction_supervisor='/nso_onboard_supervisor', duration_profile=STANDARD):
++        self.duration_profile = validate_duration(duration_s, duration_profile, mission_mode)
+         if not finite(duration_s, proposal_ttl_s, observation_ttl_s):
+             raise ValueError('finite durations required')
+-        if not 1 <= duration_s <= 600 or not .05 <= proposal_ttl_s <= .25 or not .15 <= observation_ttl_s <= .5:
++        if not .05 <= proposal_ttl_s <= .25 or not .15 <= observation_ttl_s <= .5:
+             raise ValueError('duration or freshness bound outside supported limits')
+         if type(navigation_allow_reverse) is not bool or (navigation_allow_reverse and mission_mode != 'navigation'):
+             raise ValueError('reverse is an explicit navigation setup-only option')
+@@ -710,7 +714,7 @@
+     if Path('/proc/sys/kernel/random/boot_id').read_text().strip() != cfg['boot_id']:
+         raise ValueError('boot changed')
+     gate = Gate(cfg.get('duration_s',600.), **{key:cfg[key] for key in
+-        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor']})
++        ['bridge_publisher','proposal_publisher','odom_frame','base_frame','depth_frame','navigation_source','navigation_allow_reverse','mission_mode','nso_correction_reverse','correction_supervisor','duration_profile']})
+     gate.session_id=session
+     if not args.run:
+         print(json.dumps(dict(status='configuration_validated_only',no_ros_started=True)))
+@@ -857,7 +861,7 @@
+         started_monotonic=started,config_sha256=args.config_sha256,zero_only_until_arm=True,
+         correction_reverse_authorized=gate.nso_correction_reverse,
+         correction_reverse_service=None if not gate.nso_correction_reverse else '/nso_visual/correction_reverse/'+session,
+-        passive_chassis_supervision=True,duration_s=gate.duration,navigation_source=cfg['navigation_source'],
++        passive_chassis_supervision=True,duration_s=gate.duration,duration_profile=gate.duration_profile,navigation_source=cfg['navigation_source'],
+         actuator_state_topic='/nso_visual/actuator_state',actuator_state_frequency_hz=10.,
+         disk_recording=dict(periodic_sample_hz=1.,motion_and_fault_transitions=True,
+                             CAN_counters_use_all_original_feedback=True),

@@ -1,0 +1,23 @@
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{3.5pt}
+\caption{Independent conditional-depth evaluation. All-case CRPS averages the four conditions within each object, then objects. The remaining columns use the predeclared front--side and around-object subset, with two dependent conditions per object. Errors and widths are in metres; $n$ in the split label counts objects. Fallback counts for all conditions are 5/48, 1/24 and 1/24. Fixed-size intervals are point distributions, not confidence estimates.}
+\label{tab:depth-calibration-aggregate}
+\begin{tabular}{llrrrrr}
+\toprule
+Split ($n$) & Distribution & All CRPS & Subset CRPS & Median MAE & 95\% count & Width \\
+\midrule
+Train (12) & Loss update & 0.1142 & 0.0610 & 0.0768 & 13/24 & 0.1813 \\
+ & Conditioned prior & 0.2298 & 0.1808 & 0.2549 & 11/24 & 0.4953 \\
+ & Fixed 0.65 m & 0.3408 & 0.3072 & 0.3072 & 0/24 & 0.0000 \\
+\midrule
+Validation (6) & Loss update & 0.0851 & 0.0213 & 0.0396 & 9/12 & 0.1220 \\
+ & Conditioned prior & 0.1948 & 0.1761 & 0.2669 & 9/12 & 0.5637 \\
+ & Fixed 0.65 m & 0.2620 & 0.2369 & 0.2369 & 0/12 & 0.0000 \\
+\midrule
+Held out (6) & Loss update & 0.0448 & 0.0229 & 0.0295 & 8/12 & 0.1081 \\
+ & Conditioned prior & 0.1661 & 0.1570 & 0.2278 & 3/12 & 0.4944 \\
+ & Fixed 0.65 m & 0.2330 & 0.2449 & 0.2449 & 0/12 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{table}

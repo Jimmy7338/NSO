@@ -1,0 +1,150 @@
+--- before/reference_observation.py
++++ runtime/reference_observation.py
+@@ -155,12 +155,12 @@
+     def close(self):
+         for sub in self.filters+[self.scan_sub]:sub.unregister()
+ 
+-    def capture_live_joint(self,output_directory,heartbeat,motion_snapshot,calibration=None):
++    def capture_live_joint(self,output_directory,heartbeat,motion_snapshot,calibration=None,*,timings=None):
+         return self.capture(output_directory,calibration,heartbeat,None,
+-                            scope='live_joint_observation',motion_snapshot=motion_snapshot)
++                            scope='live_joint_observation',motion_snapshot=motion_snapshot,timings=timings)
+ 
+     def capture(self,output_directory,calibration,heartbeat,stopped_check,scope='paid_stopped_observation',
+-                *,motion_snapshot=None):
++                *,motion_snapshot=None,timings=None):
+         import rospy
+         if scope not in ('paid_stopped_observation','diagnostic_not_paid','live_joint_observation'):
+             raise ValueError('explicit observation scope required')
+@@ -216,6 +216,7 @@
+                     'map_from_base':('map','base_link',depth.header.stamp),
+                     'odom_from_laser':('odom',scan.header.frame_id,scan.header.stamp),
+                     'base_from_laser':('base_link',scan.header.frame_id,scan.header.stamp)}
++                tf_started=time.monotonic()
+                 transforms={};tf_receipts={}
+                 for name,(target,source,stamp) in queries.items():
+                     heartbeat()
+@@ -226,6 +227,9 @@
+                         query_stamp_ns=stamp.to_nsec(),response_header=_header(tf),
+                         matrix=matrix(tf.transform).tolist(),
+                         timestamp_semantics='actual historical TF response; static-only chains may have zero stamp')
++                if timings is not None:
++                    timings['reference_wait_and_validate_s']=tf_started-started
++                    timings['reference_historical_tf_s']=time.monotonic()-tf_started
+                 raw=dict(rgb_raw=rgb_array(rgb),depth_m=source_depth_metres(depth),
+                     intrinsic=np.asarray(info.K).reshape(3,3),
+                     world_from_camera=matrix(transforms['world_from_camera'].transform),
+@@ -285,9 +289,13 @@
+             receipt.update(stopped_before=initial_stop,stopped_after=final_stop)
+         serialized={name+'_received_ros_serialized':_serialized(m) for name,m in messages.items()}
+         encoded_receipt=json.dumps(receipt,sort_keys=True,allow_nan=False)
++        save_started=time.monotonic()
+         np.savez_compressed(path,**raw,**samples,**serialized,frame_id=str(stamp_ns),
+             capture_scope=scope,calibration_sha256='' if calibration is None else calibration_sha256(calibration),
+             receipt_json=encoded_receipt,source_receipt_json=encoded_receipt,
+             calibration_json=json.dumps(calibration,sort_keys=True,allow_nan=False))
++        if timings is not None:
++            timings['reference_npz_compress_write_s']=time.monotonic()-save_started
++            timings['reference_capture_total_s']=time.monotonic()-started
+         self.last_stamp_ns=stamp_ns
+         return str(path)
+--- before/joint_observation.py
++++ runtime/joint_observation.py
+@@ -158,9 +158,10 @@
+ 
+     def close(self):self.subscriber.unregister()
+ 
+-    def capture(self,output_directory,observation_path,heartbeat=lambda:None,*,source_role='current_observation'):
++    def capture(self,output_directory,observation_path,heartbeat=lambda:None,*,source_role='current_observation',timings=None):
+         import rospy
+-        deadline=time.monotonic()+5.
++        capture_started=time.monotonic()
++        deadline=capture_started+5.
+         while True:
+             heartbeat()
+             with self.lock:row=self.latest
+@@ -179,11 +180,15 @@
+         map_from_odom=_transform(map_odom.transform)
+         planning_from_odom=np.asarray(self.joint_grid['planning_from_odom'],dtype=float)
+         planning_from_grid=planning_from_odom@np.linalg.inv(map_from_odom)@arrays['map_from_grid']
++        resample_started=time.monotonic()
+         belief=conservative_belief(arrays['occupancy'],float(arrays['resolution_m']),
+             planning_from_grid,self.joint_grid['shape'],self.joint_grid['resolution_m'])
++        if timings is not None:timings['joint_map_resample_s']=time.monotonic()-resample_started
++        read_started=time.monotonic()
+         raw_path=Path(observation_path).resolve();source_bytes=raw_path.read_bytes()
+         with np.load(io.BytesIO(source_bytes),allow_pickle=False) as data:
+             source={name:data[name].copy() for name in data.files}
++        if timings is not None:timings['joint_source_npz_read_s']=time.monotonic()-read_started
+         receipt=json.loads(str(source['receipt_json']))
+         historical=receipt['historical_tf'];base=np.asarray(historical['odom_from_base']['matrix'])
+         base_pose=np.array([base[0,3],base[1,3],np.arctan2(base[1,0],base[0,0])])
+@@ -218,9 +223,11 @@
+             geometry_world_frame='odom',semantic_labels_invented=False,truth_map_used=False,
+             surface_coverage_not_available_from_occupancy_alone=True)
+         serialized=io.BytesIO();message.serialize(serialized)
++        map_save_started=time.monotonic()
+         np.savez_compressed(map_path,**arrays,
+             map_received_ros_serialized=np.frombuffer(serialized.getvalue(),dtype=np.uint8),
+             map_from_odom=map_from_odom,receipt_json=json.dumps(metadata,sort_keys=True,allow_nan=False))
++        if timings is not None:timings['joint_map_npz_compress_write_s']=time.monotonic()-map_save_started
+         metadata.update(raw_map_path=str(map_path.resolve()),
+                         raw_map_sha256=hashlib.sha256(map_path.read_bytes()).hexdigest())
+         source.update(canonical_sensor_arrays(source,receipt,pixel_stride=self.pixel_stride,
+@@ -231,5 +238,9 @@
+             if key in source:source['source_reference_'+key]=source.pop(key)
+         source.update(base_odom_pose=base_pose,joint_belief_grid=belief,
+             joint_metadata_json=json.dumps(metadata,sort_keys=True,allow_nan=False))
++        joint_save_started=time.monotonic()
+         np.savez_compressed(path,**source)
++        if timings is not None:
++            timings['joint_input_npz_compress_write_s']=time.monotonic()-joint_save_started
++            timings['joint_capture_total_s']=time.monotonic()-capture_started
+         return str(path.resolve())
+--- before/joint_ros_coordinator.py
++++ runtime/joint_ros_coordinator.py
+@@ -198,8 +198,10 @@
+             raise RuntimeError('external_execution_duration_complete')
+ 
+     def call(method, params):
++        rpc_started = time.monotonic()
+         response = worker.call(method, params, heartbeat)
+-        record('NSO_joint_rpc', method=method, params=params, response=response)
++        rpc_elapsed_s = time.monotonic() - rpc_started
++        record('NSO_joint_rpc', method=method, params=params, response=response, rpc_elapsed_s=rpc_elapsed_s)
+         if 'summary' in response:
+             ctx['result']['joint_summary'] = response['summary']
+         return response
+@@ -222,7 +224,7 @@
+         after = ctx['capture_odom_pose']()
+         response = call('observe', dict(path=str(path), action_id=action_id, action=action))
+         record('NSO_joint_observation_accepted', action_id=action_id, action=action,
+-               path=str(path), actual_odom_before=before, actual_odom_after=after,
++               capture_timings=dict(ctx.get('capture_timings', {})), path=str(path), actual_odom_before=before, actual_odom_after=after,
+                processing_pose_polls_are_diagnostic=True,
+                exposure_pose_source='joint_NPZ_actual_historical_base_TF_validated_by_worker',
+                state=response['state'])
+--- before/mission.py
++++ runtime/mission.py
+@@ -877,9 +877,11 @@
+                 with lock:
+                     return dict(feedback=can_snapshot(),can_status=hardware.can_status,
+                         can_velocity=hardware.can_velocity,zero_since=hardware.can_zero_since)
++            joint_capture_timings={}
+             def capture_joint_observation(calibration,action_id,pose,action):
+-                path=collector.capture_live_joint(output/'observed',heartbeat,motion_snapshot)
+-                return joint_collector.capture(output/'joint_inputs',path,heartbeat)
++                joint_capture_timings.clear()
++                path=collector.capture_live_joint(output/'observed',heartbeat,motion_snapshot,timings=joint_capture_timings)
++                return joint_collector.capture(output/'joint_inputs',path,heartbeat,timings=joint_capture_timings)
+             correction_scope=None
+             if args.nso_correction_reverse:
+                 from correction_reverse_scope import correction_reverse_scope
+@@ -904,6 +906,7 @@
+                     client=client,tfbuf=tfbuf,capture_pose=capture_pose,capture_odom_pose=capture_odom_pose,
+                     execution_frame=navigation_execution_frame,
+                     can_snapshot=can_snapshot,check=check,progress=progress,capture_observation=capture_joint_observation,
++                    capture_timings=joint_capture_timings,
+                     run_start=run_start,duration=args.duration,
+                     correction_reverse_scope=correction_scope,
+                     xy_tolerance_m=rospy.get_param('/nso_visual/move_base/DWAPlannerROS/xy_goal_tolerance'),

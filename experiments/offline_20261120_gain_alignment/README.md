@@ -1,0 +1,9 @@
+# Measured-surface novelty alignment (B10)
+
+This bundle preserves the declared5cm current-native-TSDF consumption correction to the B9 T16 template observation reward, all six-prefix fixed-replay predictions, complete point-level error partitions, independent12-object/36-route accounting fixtures, and four full virtual G/S executions. The primary task remains unknown exploration plus measured reconstruction. Physical robot experiments remain paused.
+
+The correction multiplies the original predicted point weights by a category-independent mask from the acquired native mesh before route visibility evaluation. It changes decision reward values; geometry, posterior probabilities, common score terms, candidate generation and the virtual execution contract are retained. It removes only one source of repeated reward. Fitted false surfaces, unreconstructed visible surfaces, and object-versus-whole-scene objective differences remain distinct failure modes.
+
+Known-geometry fixtures isolate accounting and do not validate fitted geometry, natural detection or NSO navigation. The six inspected development prefixes reuse66 actual candidate endpoints; these are not new independent trials. Full comparisons reuse B9 as the matched baseline and preserve all ties and adverse outcomes.
+
+SOURCE_INDEX.json lists direct and archived evidence with SHA256 hashes. ZIP members reconstruct this study tree. Large raw arrays, native/source meshes and image captures remain local and are listed in OMITTED_ARRAYS.json. Complete sources, protocols, per-condition/candidate scalar records, failures and editable figure data are retained. Prior B3/B8/B9 frozen dependencies are referenced by hash; this compact archive is not a standalone simulator. Formal manuscript PDFs/sources are published under docs/thesis/submission_focus_20261108.

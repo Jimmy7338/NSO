@@ -1,0 +1,158 @@
+{
+  "schema": "nso_fixed_body_side_mask_candidate/1",
+  "status": "deployed_fixed_visible_body_correction",
+  "application_authorized": true,
+  "original_upper_polygon_preserved": [
+    [
+      615,
+      719
+    ],
+    [
+      616,
+      688
+    ],
+    [
+      632,
+      673
+    ],
+    [
+      657,
+      661
+    ],
+    [
+      700,
+      654
+    ],
+    [
+      1125,
+      644
+    ],
+    [
+      1230,
+      654
+    ],
+    [
+      1279,
+      664
+    ],
+    [
+      1279,
+      719
+    ]
+  ],
+  "additional_side_polygon_uv": [
+    [
+      598,
+      719
+    ],
+    [
+      599,
+      704
+    ],
+    [
+      602,
+      693
+    ],
+    [
+      610,
+      682
+    ],
+    [
+      620,
+      675
+    ],
+    [
+      633,
+      673
+    ],
+    [
+      616,
+      688
+    ],
+    [
+      615,
+      719
+    ]
+  ],
+  "rasterization": "Positive-area intersection of approved continuous polygon with centered unit pixel support squares; union with existing upper pixel-coverage mask. No dilation, no laser absence test.",
+  "pixels": 46005,
+  "added_pixels": 650,
+  "removed_pixels": 0,
+  "npy_sha256": "44c66b4aa642f11ee53134c2b1d075282cfb1f3c34060cd5cb0bc8c9aa5c0e2a",
+  "raw_bool_sha256": "5778c2743105dc78eaa8361113145020a7ab61461e73b8a2ec398488539b7025",
+  "parent_mask_npy_sha256": "e61022b40475831b71379705ba72b234c1fa314ce4fadbcd706f6f9a02f65226",
+  "parent_mask_pixels": 45355,
+  "source_original_rgb_evidence": [
+    {
+      "path": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261030/resume_camera.png",
+      "sha256": "b0dd92f3b140bc6b2dfd3ffd0bd863c8c9e8278cb82d42ad291c07ef9daf9968"
+    },
+    {
+      "path": "/home/ouc/nso_robot/experiments/semantic_integration_20261030/capture_01/current_raw_rgb.png",
+      "sha256": "104db6ff5f2e7e29776996389e01e863e4e112dbd903d3e26c0c71d1f5f141e2"
+    },
+    {
+      "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261029/joint_unknown_02/joint_inputs/joint-1793284154921641859.npz",
+      "sha256": "e19a9e879325713b06ea481801bfdb4b385114007c0274245ffca513bf0acd62"
+    }
+  ],
+  "identification_basis": "User/parent identified fixed IMU dark left side. Three archived same-mount RGB views inspected, boundary spatially stable despite lighting changes. Side polygon follows visible outside edge and joins preserved upper polygon.",
+  "limitations": "Single fixed mounting/image geometry, not independent physical metric calibration. Must invalidate on mount/resolution/self-body changes. No floor pixels selected as a noise filter; uniform gray-floor anomaly pixels from earlier runs remain unmasked.",
+  "excluded_is_free": false,
+  "raw_sources_modified": false,
+  "active_configuration_modified": false,
+  "used_for_motion": false,
+  "replay_source": {
+    "path": "/home/ouc/nso_robot/experiments/semantic_integration_20261030/capture_01/joint_inputs/joint-1793356537789941787.npz",
+    "sha256": "6c378e67cffa2c71cf6b4e9e17c201d4a90f093ce828a6280d3f63ed66ffd01b"
+  },
+  "replay": [
+    {
+      "mask": "before",
+      "current_footprint_known_safe": false,
+      "bad_cells": [
+        [
+          197,
+          200
+        ]
+      ],
+      "target_depth": 0.46198296546936035,
+      "cell_197_200": 1
+    },
+    {
+      "mask": "side_union",
+      "current_footprint_known_safe": true,
+      "bad_cells": [],
+      "target_depth": 0.0,
+      "cell_197_200": 0
+    }
+  ],
+  "gray_floor_pixels_remain_unmasked": [
+    {
+      "raw_uv": [
+        336,
+        704
+      ],
+      "masked": false
+    },
+    {
+      "raw_uv": [
+        512,
+        672
+      ],
+      "masked": false
+    },
+    {
+      "raw_uv": [
+        320,
+        680
+      ],
+      "masked": false
+    }
+  ],
+  "deployed": true,
+  "deployed_unix_s": 1793356998.1572623,
+  "authorization_basis": "Current user-directed integration and correction work; previously identified fixed IMU foreground; three real images independently reviewed by root and audit agent; only fixed visible side added",
+  "old_mask_retained": true,
+  "old_measurements_unchanged": true
+}

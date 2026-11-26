@@ -1,0 +1,36 @@
+{
+  "schema": "B7_independent_observed_depth_profile_review_v1",
+  "reviewer": "next_method_policy",
+  "status": "no_blocking_issue_for_frozen_diagnostic_only",
+  "reviewed_files_sha256": {
+    "method/profile.py": "194fced5f4fbf79f84c9b593c2c908d8470faf55ea21a4fe433688a46170ebca",
+    "method/test_profile.py": "178603e2823b7f8e80ae6c25e95a93d9564efeb5a68922c36f3c1ff07403f00d",
+    "method/METHOD_SPEC.md": "44d79d29304bc3b645f1fef7e42d8bf2290aa82dba4aa7376da55d94a3466d63",
+    "method/validation.json": "1c35abb08b99384977c7dd9eab42e180e4304062bbe4634cbf6eaf5881ea25bf",
+    "method/tests.log": "cc755817f80e92b6837a824b70fbe93aaaac9d27ffdd356064da3043ac9c2f48",
+    "replay/run_depth_profiles.py": "ed7a7acb3020ea0ab09aea39acc844baa7d6b9fe5ab55ca91012d29da1b8de0b"
+  },
+  "scope": "Read-only code review and review of 11 passing pre-profile tests; no new policy execution or evaluation outcome used.",
+  "checks": {
+    "actor_observation_isolation": "profile_model receives acquired mapper and neutral B6 AB model only; no source geometry, hidden extent, future branch mesh or evaluation metric read by profile.py.",
+    "common_ray_basis": "Rays selected once per object from finite positive acquired depth pixels, stride 3, maximum-search envelope, with exact pose/K/pixel/depth deduplication; same fixed denominator for every depth and both hypotheses.",
+    "roi_parts": "ROI includes every absolute slab height, including layers beyond box/leg height; width, yaw and measured depth anchor fixed.",
+    "camera_depth_units": "World ray direction is rotation applied to camera [x,y,1]; cast parameter t remains camera-z metres, consistent with frame.depth_m.",
+    "historical_veto": "Inherited B2 hash-pinned classify_history applied to predicted front hits; measured surface in any acquired frame vetoes strict-free classification. Closer actual hits are occlusion, not free evidence.",
+    "B6_primitive_equivalence": "Construction uses world center transformed into rotation-local coordinates, then rotates at origin, equivalent to frozen B6 centered construction; layer intervals, posts and bit-derived backboard orientation preserved. Pre-profile test checks mesh distances and sample-to-surface parity.",
+    "neutral_geometry": "Equal .5/.5 structural mixture and common acquired support; no S category prior or reward weight enters the profile.",
+    "declared_estimator_condition": "Selection requires exclusion of prior from connected min+1 band with finite internal upper crossing plus improvement of measured-free discrepancy in at least one structural hypothesis; explicitly recorded in METHOD_SPEC and tested. It is a depth-estimator condition, not a navigation-candidate filter.",
+    "uncertainty": "Heuristic grid band explicitly not a confidence interval; no-anchor/two-anchor/degenerate support retains dimensions; prior-in-band and artificial upper-bound cases retain dimensions; measured lower boundary may yield finite upper constraint.",
+    "runner_parity": "Runner checks exact frozen B6 G/S points, weights and hypothesis IDs, original prefix receipt/routes/native TSDF bytes, fit-support hashes, frame fingerprints, all acquired mapper arrays and both model/object audit snapshots before/after.",
+    "no_new_branch": "Runner does not score candidates or acquire branches; root/model remain unchanged. No 66-branch reevaluation is needed if all diagnostic dimensions are retained."
+  },
+  "limitations": [
+    "The fixed camera-z residual and Euclidean surface residual share metre units but represent heuristic discrepancies, not calibrated independent sensor likelihoods.",
+    "Valid rays with earlier real occluders remain in the fixed denominator with zero free penalty; this avoids hypothesis-dependent sampling but may dilute evidence.",
+    "The 1e-12 free-improvement comparison tests existence rather than effect size; prior exclusion by the predeclared neutral profile band remains the main finite-evidence condition.",
+    "Only exactly one anchored local-depth endpoint is profiled. Missing anchors, orientation errors, width errors and unsupported layer/post hypotheses remain unresolved.",
+    "Six reused development prefixes are dependent diagnostic evidence, not independent policy trials or real-world accuracy validation."
+  ],
+  "pre_freeze_requirement": "Final protocol must replace draft status and pending profile-design placeholder with fixed method specification; runner may add this receipt to freeze list without changing execution logic.",
+  "post_profile_review": "Inspect all objects and curves, immutable support/ray fingerprints, grid extrema, prior exclusion and retained/adopted reasons before any separately frozen parameter-update study. No post-result threshold tuning."
+}

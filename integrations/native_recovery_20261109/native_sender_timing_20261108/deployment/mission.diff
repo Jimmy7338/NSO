@@ -1,0 +1,37 @@
+--- mission.before.py
++++ mission.py
+@@ -20,7 +20,8 @@
+ WORK = Path(__file__).resolve().parents[1]
+ ROOT = Path('/home/ouc/nso_robot')
+ MASTER = 'http://127.0.0.1:11382'
+-NATIVE = ROOT/'staging/ans-live-20261023-standard-attended-a1/build/devel/lib/nso_scout_radius_driver_v1/nso_scout_attended_node'
++NATIVE_STAGE = ROOT/'staging/ans-live-20261108-native-timing-v2'
++NATIVE = NATIVE_STAGE/'bin/nso_scout_attended_node'
+ SDK = ROOT/'staging/scout-owned-sdk-build-20261009-r0/workspace/devel/lib'
+ 
+ def paid_frame_source_provenance(rgb, depth, info, science_tf, navigation_tf, payloads):
+@@ -374,7 +375,14 @@
+                  and p.suffix in ('.npy','.json'))
+     rows=[dict(path=str(p.relative_to(WORK)),sha256=hashlib.sha256(p.read_bytes()).hexdigest())
+           for p in sorted(set(paths)) if p.is_file()]
++    native_paths=dict(node_source=NATIVE_STAGE/'native/radius_driver_node.cpp',
++        gate_header=NATIVE_STAGE/'native/scout_radius_command_timeout_v1.hpp',
++        binary=NATIVE, sdk=SDK/'libugv_sdk.so', profile_manifest=NATIVE_STAGE/'manifest.json')
++    native_identity={k:dict(path=str(p),sha256=hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None)
++                     for k,p in native_paths.items()}
+     save(output/'source_manifest.json',dict(files=rows,source_root=str(WORK),
++        native_sender=dict(profile='native_sender_timing_v2',files=native_identity,
++            sdk_resolution='SDK directory prepended to LD_LIBRARY_PATH at native spawn'),
+         source_copies_created=False,recording='navigation_results_and_sampled_chassis_feedback'))
+ 
+ 
+@@ -809,7 +817,8 @@
+         rospy.wait_for_service('/nso_visual/arm',timeout=6.)
+         def launch_native():
+             spawn([NATIVE,'_execute:=true','_session_id:='+session,'_expected_boot_id:='+adapter_cfg['boot_id'],
+-                   '_can_interface:=can0','_guard_node:=/nso_radius_guard','__name:=nso_scout_radius_driver_v1'],'native')
++                   '_can_interface:=can0','_guard_node:=/nso_radius_guard',
++                   '_timing_output:='+str(output/'native_timing.json'),'__name:=nso_scout_radius_driver_v1'],'native')
+         native_start=NativeStartOnce(launch_native)
+         end=time.monotonic()+8.
+         while time.monotonic()<end:

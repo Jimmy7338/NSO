@@ -1,0 +1,5 @@
+Exact immediate cause: new supplied navigation occupancy at planningcell[199,195] (free at8, occupied at9). Its one overlapping5cm rawmapcell[254,117] is occupied100 and overlaps a corner of the20cmcell. No current depthobstaclepoint or laserendpoint hits thatplanningcell. Nominal current[202,198] is0.84853m from badcellcenter, inside unchanged conservative footprint radius0.86264m. Actualbase differs from nominalcenter by0.03735m; occupied rawmapcellcenter is1.02963m fromactualbase. This demonstrates conservative raster/map geometry cause, not verified collision or verified camera-floor artifact.
+
+Original circle0.7212186retained; no candidatefilter/stopoverride or experiment. C9didnotreturn; Gcannotclaimmatchedinitialpose fromcurrentlocation. Details summary.json,bounded.json,raw_map_sources.json.
+
+Critical refinement: rawmapcell[254,117] was already100at8 and remains100at9. Changed map_from_odom reprojection makes it overlap planningcell[199,195] at9. Thus new coarse occupancy is from frame reprojection of an existing map obstacle, not a newly inserted raw obstacle.

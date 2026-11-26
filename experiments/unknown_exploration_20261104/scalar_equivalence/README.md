@@ -1,0 +1,3 @@
+# Scalar equivalence audit
+
+Retrospective exact-rational constraints on recorded decision states; actual S decisions are distinguished from counterfactual S-score winners on G-visited states. No policy was rolled out and no new sample was acquired. Input path strings in the frozen JSON are historical provenance. Run `python audit.py` using sibling `source`, `evidence` and `two_room_diagnostic`; output is written to `audit_recomputed.json`. Exact equality excludes the relocated input/source path keys, while input hashes and all numerical conclusions remain checked. Mathematical boundaries can differ from floating execution due to rounding.

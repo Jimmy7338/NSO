@@ -1,0 +1,94 @@
+{
+  "unix_s": 1794748803.9969246,
+  "previous": [
+    {
+      "name": "sensor_bridge",
+      "pid": 3640400,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,2,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+        "--run",
+        "--localization-source",
+        "lidar_csm",
+        "--no-self-mask",
+        "--depth-projection-profile",
+        "source_tf_v1"
+      ],
+      "started_unix_s": 1794740366.5740206,
+      "active": true
+    },
+    {
+      "name": "navigation",
+      "pid": 3640401,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,2,4,5,6,7",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom",
+        "map_topic:=/nso_pair/map",
+        "navigation_params:=/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation_teb_rtabmap_062x059_v1.yaml"
+      ],
+      "started_unix_s": 1794740366.5768392,
+      "environment": {
+        "ROS_PACKAGE_PATH": "/home/ouc/nso_robot/staging/teb-noetic-20261115/rootfs/opt/ros/noetic/share:/home/ouc/nso_robot/staging/global-planner-copy-20261115:/home/ouc/nso_robot/staging/global-planner-copy-20261115:/home/ouc/Voxel-SVIO-HA/src:/home/ouc/voxel_svio_all_ws/src:/home/ouc/voxel_svio_modified_ws/src:/home/ouc/voxel_svio_ws/src:/home/ouc/scout_nav/src:/opt/ros/noetic/share",
+        "CMAKE_PREFIX_PATH": "/home/ouc/nso_robot/staging/teb-noetic-20261115/rootfs/opt/ros/noetic:/home/ouc/nso_robot/staging/global-planner-copy-20261115/build/devel:/home/ouc/Voxel-SVIO-HA/devel:/home/ouc/voxel_svio_all_ws/devel:/home/ouc/voxel_svio_modified_ws/devel:/home/ouc/voxel_svio_ws/devel:/home/ouc/scout_nav/devel:/opt/ros/noetic:/home/ouc/2D-SLAM/devel_isolated/cartographer",
+        "LD_LIBRARY_PATH": "/home/ouc/nso_robot/staging/teb-noetic-20261115/rootfs/opt/ros/noetic/lib:/home/ouc/nso_robot/staging/global-planner-copy-20261115/build/devel/lib:/home/ouc/Voxel-SVIO-HA/devel/lib:/home/ouc/voxel_svio_all_ws/devel/lib:/home/ouc/voxel_svio_modified_ws/devel/lib:/home/ouc/voxel_svio_ws/devel/lib:/home/ouc/scout_nav/devel/lib:/opt/ros/noetic/lib:/opt/ros/noetic/lib/aarch64-linux-gnu:/home/ouc/ORB_SLAM3_backup_20260414/lib:/home/ouc/ORB_SLAM3_backup_20260414/Thirdparty/DBoW2/lib:/home/ouc/ORB_SLAM3_backup_20260414/Thirdparty/g2o/lib:/usr/local/lib:/home/ouc/2D-SLAM/devel_isolated/cartographer/lib:/usr/local/cuda/lib64"
+      },
+      "active": true
+    }
+  ],
+  "started": [
+    {
+      "name": "sensor_bridge",
+      "pid": 3840902,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+        "--run",
+        "--localization-source",
+        "lidar_csm",
+        "--no-self-mask",
+        "--depth-projection-profile",
+        "source_tf_v1"
+      ],
+      "started_unix_s": 1794748803.1885579,
+      "previous_pid": 3640400
+    },
+    {
+      "name": "navigation",
+      "pid": 3840944,
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0,1,4,5,6,7",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom",
+        "map_topic:=/nso_pair/map",
+        "navigation_params:=/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation_teb_rtabmap_062x059_v1.yaml"
+      ],
+      "started_unix_s": 1794748803.9968922,
+      "previous_pid": 3640401
+    }
+  ],
+  "actuator": false,
+  "NSO_policy_changed": false,
+  "watchdog_thresholds_changed": false,
+  "sensor_output_bytes_equivalent": true,
+  "only_TEB_change": "WaitforactualrequestedTFstampupto.2seconds",
+  "same_mapping_epoch": true
+}

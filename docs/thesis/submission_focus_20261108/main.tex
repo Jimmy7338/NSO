@@ -1,0 +1,103 @@
+% Venue-neutral research review; NOT SUBMITTED. Author fields intentionally blank.
+% Standard article class; retained publisher files are not compiled.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=27mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{url}
+\providecommand{\hypersetup}[1]{}
+\providecommand{\hypertarget}[2]{#2}
+\providecommand{\hyperlink}[2]{#2}
+\providecommand{\href}[2]{#2}
+\providecommand{\texorpdfstring}[2]{#1}
+\usepackage{graphicx,amsmath,amssymb,booktabs,array,textcomp,float}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,pdfauthor={}}
+\setlength{\emergencystretch}{3em}
+\newlength{\JournalTableWidth}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+\providecommand{\pandocbounded}[1]{#1}
+\raggedbottom
+\begin{document}
+\title{Category-Conditioned Observation in Joint Unknown-Space Exploration and Reconstruction}
+\author{}
+\date{Anonymous research draft, 20 November 2026}
+\maketitle
+\begin{abstract}
+Unknown-environment exploration must discover accessible space while reconstructing surfaces. We test a joint planner that adds category-conditioned closed/open structural observation value to acquired-state coverage and measured-quality scores. Hypothetical geometry guides selection and never enters the measured map. An exact score decomposition explains unchanged semantic targets, while independently calibrated structural evidence addresses overconfidence. On 24 held-out procedural objects, neutral class negative log likelihood falls from 5.0804 to 0.6791 without improving class accuracy. Four synthetic layouts span two room-connectivity topologies with exact poses and ideal visible instance labels. A full-posterior acquisition forecast reduces full-coverage outcomes from three layouts to two relative to visibility. In a matched visibility comparison, neutral and category-conditioned priors produce three identical trajectories, and category conditioning reduces object recall in the remaining layout. A nearest-frontier baseline reaches 95\% coverage sooner in three layouts. The joint planner yields higher terminal scene F1 in three. On four separate held-out furniture layouts, support-based calibration lowers acquisition area MAE from 0.5722 to 0.1994\,m$^2$ and keeps every highest-ranked branch unchanged. Earlier native-cue controls demonstrate conditional category effects with objective tradeoffs. These results support controlled planning feasibility and improved probability loss while leaving general semantic efficiency and physical reconstruction accuracy unestablished.
+\end{abstract}
+\noindent\textbf{Keywords:} unknown-space exploration, active reconstruction, category priors, structural calibration, observation planning
+
+\noindent\textit{Anonymous manuscript draft; not submitted.}
+
+\input{main_intro_20261120.tex}
+\input{main_problem_20261120.tex}
+\input{main_joint_method_20261120.tex}
+\input{main_results_20261120.tex}
+\input{main_discussion_20261120.tex}
+
+\begin{thebibliography}{99}
+\bibitem{ref9} World Economic Forum. Physical AI: Powering the New Age of Industrial Operations. White paper, 2025-09-04. \href{https://www.weforum.org/publications/physical-ai-powering-the-new-age-of-industrial-operations/}{Official white paper}.
+
+\bibitem{ref10} Placed J. A., Strader J., Carrillo H., Atanasov N., Indelman V., Carlone L., Castellanos J. A. A Survey on Active Simultaneous Localization and Mapping: State of the Art and New Frontiers. IEEE Transactions on Robotics, 2023. \url{https://doi.org/10.1109/TRO.2023.3248510}.
+
+\bibitem{ref5} Cao C., Zhu H., Choset H., Zhang J. TARE: A Hierarchical Framework for Efficiently Exploring Complex 3D Environments. RSS, 2021. \url{https://doi.org/10.15607/RSS.2021.XVII.018}.
+
+\bibitem{ref1} Chaplot D. S., Gandhi D., Gupta S., Gupta A., Salakhutdinov R. Learning to Explore using Active Neural SLAM. ICLR, 2020. Author manuscript: \url{https://doi.org/10.48550/arXiv.2004.05155}.
+
+\bibitem{ref6} Chen X., Li Q., Wang T., Xue T., Pang J. GenNBV: Generalizable Next-Best-View Policy for Active 3D Reconstruction. CVPR, 2024:16436--16445. \url{https://doi.org/10.1109/CVPR52733.2024.01555}.
+
+\bibitem{ref4} Zhou Q.-Y., Park J., Koltun V. Open3D: A Modern Library for 3D Data Processing. arXiv:1801.09847, 2018. \url{https://doi.org/10.48550/arXiv.1801.09847}.
+
+\bibitem{ref11} Curless B., Levoy M. A Volumetric Method for Building Complex Models from Range Images. Proceedings of SIGGRAPH, 1996:303--312. \url{https://doi.org/10.1145/237170.237269}.
+
+\bibitem{ref2} Dharmadhikari M., Alexis K. Semantics-aware Exploration and Inspection Path Planning. ICRA, 2023. \url{https://doi.org/10.1109/ICRA48891.2023.10160469}.
+
+\bibitem{ref7} Dharmadhikari M., Alexis K. Semantics-Aware Predictive Inspection Path Planning. IEEE Transactions on Field Robotics, 2025. \url{https://doi.org/10.1109/TFR.2025.3578402}.
+
+\bibitem{ref3} Nagami K., Chen T., Yu J., Shorinwa O., Adang M., Dougherty C., Cristofalo E., Schwager M. VISTA: Open-Vocabulary, Task-Relevant Robot Exploration With Online Semantic Gaussian Splatting. IEEE Robotics and Automation Letters, 11(3):3150--3157, 2026. \url{https://doi.org/10.1109/LRA.2026.3653276}.
+
+\bibitem{ref8} Chen L., Zhan H., Yin H., Xu Y., Mordohai P. Understanding while Exploring: Semantics-driven Active Mapping. Advances in Neural Information Processing Systems, 38, 2025. \url{https://doi.org/10.52202/085713-1113}.
+
+\bibitem{ref12} Kaelbling L. P., Littman M. L., Cassandra A. R. Planning and Acting in Partially Observable Stochastic Domains. Artificial Intelligence, 101(1--2):99--134, 1998. \url{https://doi.org/10.1016/S0004-3702(98)00023-X}.
+
+\bibitem{ref13} Hollinger G. A., Sukhatme G. S. Sampling-based Robotic Information Gathering Algorithms. The International Journal of Robotics Research, 33(9):1271--1287, 2014. \url{https://doi.org/10.1177/0278364914533443}.
+
+\bibitem{ref14} Knapitsch A., Park J., Zhou Q.-Y., Koltun V. Tanks and Temples: Benchmarking Large-Scale Scene Reconstruction. ACM Transactions on Graphics, 36(4), 2017. \url{https://doi.org/10.1145/3072959.3073599}.
+\bibitem{bissiri2016} P. G. Bissiri, C. C. Holmes, and S. G. Walker,
+``A general framework for updating belief distributions,''
+\emph{Journal of the Royal Statistical Society: Series B}, vol. 78,
+no. 5, pp. 1103--1130, 2016. doi:10.1111/rssb.12158.
+\bibitem{syring2019} N. Syring and R. Martin,
+``Calibrating general posterior credible regions,''
+\emph{Biometrika}, vol. 106, no. 2, pp. 479--486, 2019.
+doi:10.1093/biomet/asy054.
+
+
+\bibitem{pmlr-v70-guo17a} C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger.
+On Calibration of Modern Neural Networks. \emph{Proceedings of ICML},
+PMLR 70, pp. 1321--1330, 2017. \url{https://proceedings.mlr.press/v70/guo17a.html}.
+\bibitem{Angelopoulos_2023} A. N. Angelopoulos and S. Bates.
+Conformal Prediction: A Gentle Introduction. \emph{Foundations and Trends in Machine Learning},
+16(4), pp. 494--591, 2023. doi:10.1561/2200000101.
+
+\end{thebibliography}
+
+\section*{Statements and Declarations}
+\subsection*{Funding}
+\textit{} \underline{\hspace{5cm}}
+\subsection*{Competing interests}
+\textit{} \underline{\hspace{5cm}}
+\subsection*{Author contributions}
+\textit{} \underline{\hspace{5cm}}
+\subsection*{Data and code availability}
+See the Reproducibility and Data section and accompanying supplement.
+The final public version identifier and any access restrictions require author confirmation.
+\subsection*{AI assistance disclosure: draft for author confirmation}
+OpenAI Codex assisted with manuscript organization and revision and with developing
+experiment, analysis, and plotting code. Tool/model versions, the extent of assistance,
+and the authors' verification and responsibility statement must be completed before submission.
+This draft disclosure does not assert that the authors have already approved the manuscript.
+
+\end{document}

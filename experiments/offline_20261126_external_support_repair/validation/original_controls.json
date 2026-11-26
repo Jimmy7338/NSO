@@ -1,0 +1,136 @@
+{
+  "robot_radius_m": 0.2,
+  "revision": "blind_swept_support_controls_v2",
+  "original": [
+    {
+      "fixture": "continuous_level_floor",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.9,
+      "basis": "flat floor is analytically complete"
+    },
+    {
+      "fixture": "allow_in_band_portion_of_crossing_ramp",
+      "expected_valid": true,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": false,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "swept z is within the support band and rise is 4 cm/m"
+    },
+    {
+      "fixture": "steep_ramp_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "slope exceeds the declared normal threshold"
+    },
+    {
+      "fixture": "exterior_edge_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.07999999999999999,
+      "basis": "endpoint centre stands 0.08 m from unsupported exterior"
+    },
+    {
+      "fixture": "open_notch_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "notch connects to unsupported exterior"
+    },
+    {
+      "fixture": "measured_enclosed_drop_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "original mesh shows a 0.20 m lower surface and vertical sides"
+    },
+    {
+      "fixture": "open_step_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "original mesh shows a continuous leading edge with 0.20 m vertical drop"
+    },
+    {
+      "fixture": "body_band_obstacle_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.9,
+      "basis": "recorded 0.50 m fixture intersects the body sweep"
+    },
+    {
+      "fixture": "measured_shallow_continuity_recovered",
+      "expected_valid": true,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": false,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "steep facets form a continuous measured bump only 5 mm high"
+    },
+    {
+      "fixture": "measured_submillimetre_seam_recovered",
+      "expected_valid": true,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": false,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "0.8 mm seam has same-level raw geometry with 1 mm relief"
+    },
+    {
+      "fixture": "measured_high_relief_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "steep facets supply raw X/Y support but 60 mm relief"
+    },
+    {
+      "fixture": "enclosed_absent_faces",
+      "expected_valid": null,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": null,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "analytical missing-face scenario has known true flat floor, but archive XY topology alone cannot prove it"
+    },
+    {
+      "fixture": "preexisting_within_band_step_behavior",
+      "expected_valid": null,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": null,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.9,
+      "basis": "diagnostic for an actual 70 mm depression within the inherited support band, outside the collision band"
+    }
+  ]
+}

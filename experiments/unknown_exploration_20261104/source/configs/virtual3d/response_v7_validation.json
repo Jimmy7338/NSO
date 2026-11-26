@@ -1,0 +1,30 @@
+{
+  "schema_version": "response_v7_validation/1",
+  "status": "fixed_after_T0_acquisition_before_any_T_fitting_or_C_preparation",
+  "extends": "configs/virtual3d/response_v7_pipeline.json",
+  "changes_to_acquisition_or_primary_ranking": false,
+  "ood": {
+    "source": "all T candidate G features, columns 0 through 7",
+    "fit_role": "T only",
+    "minimum_margin": 0.000001,
+    "range_margin_fraction": 0.25,
+    "lower": "column_min - max(0.25 * (column_max - column_min), 1e-6)",
+    "upper": "column_max + max(0.25 * (column_max - column_min), 1e-6)",
+    "history_trigger": "any candidate outside any bound",
+    "fallback": "entire history uses the frozen independent N predictions",
+    "report": "raw and guarded predictions, choices and outcomes separately; retain every history",
+    "probabilistic_coverage_guarantee": false,
+    "changes_absolute_calibration": false
+  },
+  "training_structure": {
+    "expected_parent_contexts": 8,
+    "expected_histories": 16,
+    "expected_candidates_per_history": 6,
+    "semantic_codes": [2, 3],
+    "require_equal_paired_geometry_and_nonsemantic_features": true,
+    "require_nonzero_conditional_projection_residual": true,
+    "direction_support": "report all available and missing roles; require at least two marked directional roles per history as in acquisition contract"
+  },
+  "calibration_release": "seal all four C paired prefix predictions before executing any C branch",
+  "stop_rules": "retain all failures; no extension of alpha grid or outcome-dependent context/candidate replacement; do not open E after failed T/C gates"
+}

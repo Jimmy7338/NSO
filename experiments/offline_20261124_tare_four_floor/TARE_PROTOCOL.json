@@ -1,0 +1,66 @@
+{
+  "schema": "nso_tare_transfer_four_floors_v1",
+  "arm": "TARE_sensor_transfer",
+  "scope": "Published TARE planner on common acquired RGB-D and planar laser, shared observed-map executor and TSDF; stock internal native sensor model retained.",
+  "upstream_commit": "44500592b86138257273e0cab264e6a847ccefc7",
+  "layouts": [
+    "ind26_vertical_spine",
+    "ind26_bent_corridor",
+    "ind26_offset_ring",
+    "ind26_double_loop"
+  ],
+  "frozen_unix_s": 1795503434.169255,
+  "budget": 192,
+  "action_duration_s": 1.0,
+  "checkpoints": [
+    0,
+    48,
+    96,
+    144,
+    192
+  ],
+  "return": "Shared observed-map return and exact original xy/heading verification; turns and return are charged.",
+  "sensors": {
+    "rgbd_pixels": [
+      120,
+      90
+    ],
+    "camera_horizontal_fov_deg": 90,
+    "camera_axial_max_m": 8,
+    "camera_height_m": 1.2,
+    "planar_ray_count": 180,
+    "planar_height_m": 0.25,
+    "planar_range_m": 8,
+    "reported_pose_source": "exact simulation",
+    "acquired_channels": "Same raw recorded camera depth, intrinsics, pose and planar scan as shared fusion. Only finite measured hit points forwarded to TARE. Ground truth not exposed. No synthetic 3D sensor, boundary or terrain input."
+  },
+  "native": {
+    "config": "Upstream indoor.yaml with kExtendWayPoint false for shared executor (no output extrapolation). All internal viewpoint/sensor parameters and native sampler unchanged.",
+    "registered_clouds_per_keypose": 5,
+    "sensor_coverage_model_fov_deg": [
+      360,
+      24
+    ],
+    "native_internal_range_m": 7.5,
+    "timer_hz_wall_clock": 1,
+    "reports_stochastic_sampler": true,
+    "pointcloud_origin_convention": "registered cloud references camera-height odometry, planar hits retain true sensor height in world points"
+  },
+  "adapter": {
+    "startup": "one cold frame, then four paid right turns if not interrupted by shared guard",
+    "outbound": "new native plan preempts path, target uses exact reachable observed-map cell or last positive contiguous observed prefix towards that same waypoint; final path leg defines discrete heading",
+    "no_waypoint": "one five-action bounded panorama refresh, then common return; immediate return on native finish; independent technical failures retained"
+  },
+  "files_sha256": {
+    "run_tare.py": "30e75b2533db2998c5dcbacfd6233329e3a20b942ad92290b2c7010ca0911156",
+    "run_matrix.py": "d4f9c3d887622130d5fbb2e5e07978d41dbab7632d7375b0a6f333fe572cdcac",
+    "tare_worker.py": "b92a6b69af9776833122f21c891f15887ebade92e56744b0b7e3e389bb6789db",
+    "tare_indoor_overrides.json": "3f56f873fc1003bf95b45bf5811f7ab984c2fce631396db1d1ba924d29ea6e8c",
+    "../region_independent_floors_20261123/FORMAL_FREEZE.json": "94f4641774319280ffb0ddd64254ecaca4d9fa684f5edc260d1cbfdf1b449887",
+    "../region_independent_floors_20261123/runner.py": "ba573a5fef1d1efa60a4c59e776c0804bc38cd2a626ecf08175bb5757492143e",
+    "../external_exploration_baselines_20261124/work/tare/catkin/devel/lib/tare_planner/tare_planner_node": "a41fd3967455594eed3f3eafbb5e130d89b5d9077ea0a19b1178c2af7435258e",
+    "../external_exploration_baselines_20261124/work/tare/catkin/src/tare_planner/config/indoor.yaml": "f41086a82d38a172391479556d03d90120bff1112e1e25f0f49bdb1a03bf651e",
+    "../external_exploration_baselines_20261124/work/tare/tare_4450059.tar.gz": "a3adfcab09a669a2a1b9bf0aaec734171cc46ce0fa5cc16a3b54fc51fdb36024",
+    "../external_exploration_baselines_20261124/evaluate_explore.py": "ebf7d18383818d5fc9c7ad65491a2aa5c54a13314f27b1cf21e21082aa79d7d9"
+  }
+}

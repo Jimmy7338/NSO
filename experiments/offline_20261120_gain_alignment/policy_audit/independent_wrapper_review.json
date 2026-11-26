@@ -1,0 +1,29 @@
+{
+  "status": "read_only_review_no_blocking_implementation_or_design_issue",
+  "scope": "Draft wrapper plus declared native novelty function; no prepare, selfcheck or policy action executed by reviewer.",
+  "files_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/rollouts/native_novelty/run.py": "57a28ff568c5d85ce645243d78094a3fd493c316dc05504ee0239bacaadeb412",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/rollouts/native_novelty/protocol.json": "d2c57e2de3eb6c919d20fa65fb2ddc6e8f60160e858c5f97ebd50aaac6026b8a",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/method/measured_novelty.py": "e6966c52423e71f6b9b73f9bd7181bb88c0dff551a272d900ff0e5e51aeaa011",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/method/test_measured_novelty.py": "2be0bf49f8d6e54fdd1da1a64a228dc902d085112c1a61cf2c72ce4b54532144",
+    "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/rollouts/temperature/run.py": "39a5f0d5a0df21b957c3b2e6a4bde3c95d48cf5c49ad1f23ccbd0aa15b229158"
+  },
+  "checks": [
+    "The wrapper diff retains the original B policy loop, candidates, common score, sensor/TSDF fusion, action accounting, 256 budget and return contract.",
+    "B8 models share one bank; B9 T1 identity check and T16 reweight precede native consumption.",
+    "Native scene comes from the current mapper.mesh(), with no future or evaluator source mesh passed into novelty.",
+    "Novelty applies before creating empty per-pose gain caches; each changed mapper.frames rebuilds the cached pair.",
+    "G/S masks are exactly equal; base weights and existing history_keep are asserted unchanged.",
+    "Original model gain reads modified weights and scatters active-point values onto the complete basis.",
+    "Prepare verifies frozen scientific parents; protocol retains historical controls as reused development evidence.",
+    "The declared arms use uncertainty mode only; unused mean-collapse comment does not introduce an arm."
+  ],
+  "limits": [
+    "Zero-action selfcheck still pending; initial empty object support cannot prove later nonempty reward binding, so fixed-prefix checks remain relevant.",
+    "Observed native geometry may be inaccurate: removal of near-native gain is not a guarantee of new true-surface or full-exploration benefit.",
+    "Additional mask removes about 7.5\u20137.7 percent of existing predicted gain; larger geometry support and realization gaps remain.",
+    "The novelty threshold is aligned with the stated surface metric but projected history and native distance are distinct operations."
+  ],
+  "blocking_issues": [],
+  "nonblocking_note": "Protocol is still draft; freeze source hashes after its planned status transition and before launch. The audit source hashes identify this reviewed draft exactly."
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "nso.formal_floor_csm_offline_replay_protocol/1",
+  "layout": "floor26_ordinary",
+  "arms": ["original_G", "region_G"],
+  "paid_action_prefix": 36,
+  "sample_interval_fraction_of_charged_action": 0.1,
+  "input": "Fresh ranging at fixed in-action intervals along the exact recorded action trace, endpoint scan hashes checked against the original episode",
+  "frame_payload": "Planar ranges, stamps, calibration and static sensor mounting transform",
+  "estimator": "/opt/ros/noetic/lib/laser_scan_matcher/laser_scan_matcher_node",
+  "configuration": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/csm_primary.launch",
+  "evaluation": "Exact stamp association, native action-end ATE and adjacent-paid-action RPE, all matched scan ATE, report every missing output",
+  "origin_alignment": "Use the known common start to express reference in the estimator's odom frame, no best-fit registration to estimates",
+  "reference_visible_to_estimator": false,
+  "robot_i_o": false,
+  "estimated_pose_closed_loop": false,
+  "rtab_pose_graph_applied": false
+}

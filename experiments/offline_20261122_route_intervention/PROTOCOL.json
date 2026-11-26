@@ -1,0 +1,46 @@
+{
+  "schema": "nso_same_state_one_time_route_intervention_v1",
+  "study_scope": "Post-observation mechanism experiment. The forks were selected from prior documented strategy disagreements. Independent comparison units are two fixed simulated buildings.",
+  "repository": "Jimmy7338/NSO",
+  "source_commit": "8071a50fc7d04980d2eb390f633be7cae950706e",
+  "source_path": "experiments/offline_20261122_weighted_geometric_control",
+  "native_budget_including_return": 192,
+  "source_policy": {"global": "G", "local": "S", "unknown_weight": 0.0, "action_cost": 0.0, "predictor": "visibility"},
+  "continuation_policy": {"global": "G", "local": "G", "unknown_weight": 0.25, "action_cost": 0.20, "predictor": "visibility"},
+  "cases": [
+    {
+      "layout": "paired_chain_17",
+      "paid_before": 105,
+      "selection_call_id": 428,
+      "category_route": "via_32_37_0",
+      "geometry_route": "via_33_29_3",
+      "equal_nominal_outbound_actions": 67,
+      "category_minus_geometry_forecast_unknown_cells": 0,
+      "nominal_paid_arrival": 172
+    },
+    {
+      "layout": "paired_cycle_20",
+      "paid_before": 0,
+      "selection_call_id": 5,
+      "category_route": "via_21_15_2",
+      "geometry_route": "via_18_14_2",
+      "equal_nominal_outbound_actions": 47,
+      "category_minus_geometry_forecast_unknown_cells": -27,
+      "nominal_paid_arrival": 47
+    }
+  ],
+  "candidate_policy": "Geometry is the user-declared equal-outbound-cost competitor, regardless of its actual position in the complete G_perf ranking at this S state. Rank all legal candidates using frozen G_perf and the original tolerance and tie breakers. Use actual chosen category routes by source S. No eligibility rule, planning score, global choice or original goal is changed.",
+  "fork_recovery": "Use the identical cold seed, configuration and first input. Restore a byte-exact snapshot if it contains all estimator, policy, RNG and mapping state. Otherwise rerun the original S policy through the fork and audit every action, position, heading, observation packet, RGB/depth/laser and instance ownership digest, plus observed belief at each step. Audit original checkpoint-equivalent map bytes or arrays wherever recorded. Before issuing a divergent action independently verify fork steps, full legal candidate pool and score tables, neutral global goal, return path reservation, each candidate's route hash, and identical measured-map and state evidence of both reconstructions. Save both actual fork meshes and the original source bindings.",
+  "execution": "In the declared native local selection only, substitute the designated legal member of the identical candidate pool. Continue the original executor, observation, fusion, safety, cancellation, target-reached tolerance, policy event sequencing and return accounting. Every subsequent local choice uses the frozen G_perf continuation weights; global mode stays neutral. The routes remain subject to native guard and may be partially executed or never produce different actual actions. Preserve every adverse event and do not force any command, alternate global goal, retries following native stops, or fabricated return.",
+  "injected_route_end": "Use the first native acquisition of the exact requested goal pose while the injected option is active, the first native abandonment or guard replan of that option, or the actual run termination if the option remained unresolved. An abandonment before charging a new action uses the last executed paid clock; a rejected action consumes no additional budget unless the original native executor charged it. Preserve the actual reason from native audit and record executed count and actual endpoint pose.",
+  "measurement_protocol": "evaluation/MEASUREMENT_PROTOCOL.json",
+  "primary_endpoint": "Gross newly measured target-facility reference surface area in square metres relative to the common fork mesh, measured from the actual depth-fused TSDF surface. Count each evaluable, area-weighted source sample once, using the prebound facility identities, common source geometry and 5 cm surface proximity. Compare category minus geometry at the common paid clock. Publish each facility, their aggregate, target recall, recovered/faded samples and common/category-only/geometry-only newly measured area.",
+  "measurement_times": {
+    "baseline": "Exact fork before the injected option is executed.",
+    "own_event": "Each arm's actual first requested-goal arrival or injected-route abandonment clock with a separate status. Report both clocks and the corresponding area separately.",
+    "common": "Maximum of both first route end/abandonment clocks. An arm which terminated earlier is missing at the shared clock. Never carry its terminal mesh forward. If no exact snapshot was captured online, rematerialize the missing clock from a deterministic replay of the actual observed lineage with per-action evidence and terminal equivalence checks.",
+    "terminal": "At 192 paid actions, or actual earlier native terminal, report retained target-facility gain and C_free, scene F1 at 5 cm, J=C_free × F1, path length, return, and collisions. Keep both actual counts. No padding or treating unequal actual counts as matched clocks."
+  },
+  "truth_access": "Frozen evaluator references serve offline evaluation only. No evaluator truth, scoring by true area or evaluation results may enter the actor inputs.",
+  "reporting": "Keep both layouts, both directions, all serializable proof and all native failure outcomes. A software failure before a valid run requires a visible minimal repair receipt; archive the failed attempt and reseal without changing scenarios, scoring, route IDs, measurements or scope. Report first actual action and position/heading divergence, and compare paired absolute and directional effects. No aggregate generalization, significance, hardware, facility-recognition or efficacy claim follows from these two selected examples."
+}

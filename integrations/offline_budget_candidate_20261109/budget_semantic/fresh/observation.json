@@ -1,0 +1,337 @@
+{
+  "accepted": true,
+  "duplicate": false,
+  "state": {
+    "action_id": 0,
+    "step": 0,
+    "pose": [
+      200,
+      200,
+      0
+    ],
+    "actual_base_pose_planning": [
+      40.1,
+      39.900000000000006,
+      1.5707963267948966
+    ],
+    "frame_id": "1794223232178023868"
+  },
+  "summary": {
+    "policy_revision": "v10_3_1",
+    "actual_paid_actions": 0,
+    "policy_variant": "exploration_joint_v1",
+    "sensor_ranges": {
+      "profile": "sensor_range_matched_v1",
+      "camera_depth_quality_aperture_range_m": 4.0,
+      "lidar_forecast_range_m": 8.0,
+      "lidar_canonical_support_range_m": 8.0,
+      "observed_navigation_map_range_m": 8.0,
+      "original_paper_equivalence": false,
+      "last_scan_adapter_receipt": {
+        "profile": "sensor_range_matched_v1",
+        "raw_range_max_m": 25.0,
+        "canonical_range_max_m": 8.0,
+        "clipped_finite_returns": 82,
+        "rejected_beyond_source_max": 0,
+        "missing_nonfinite_returns": 135,
+        "source_ranges_sha256": "87a673d527fe77d9c1e5464aa9cc4d104d67c4933b4c821c78b497b12af3fbb8",
+        "canonical_ranges_sha256": "a2ff261549827341826624758a269d1e587b7ae6063cd36a4883e068ac743e12",
+        "endpoint_policy": "finite measured >8m clipped to8m free-only; NaN/Inf remain nonfinite",
+        "raw_source_file_unchanged": true
+      }
+    },
+    "system_variant": "exploration_joint_v1+real_scene_structural_v1+sensor_range_matched_v1",
+    "total_budget": 40,
+    "closed": false,
+    "semantics_available": true,
+    "semantic_diagnostics": {
+      "frontend_enabled": true,
+      "receipt": {
+        "schema": "real_semantic_frontend/1",
+        "frame_id": "1794223232178023868",
+        "model_execution_performed": true,
+        "image_detection_alignment_verified": true,
+        "rgb_sha256": "371fdf31cc1eced2c87f423c60c2c06a411523a9efa463a14d0dd6833c421e84",
+        "image_shape": [
+          720,
+          1280,
+          3
+        ],
+        "prompts": [
+          "shelves",
+          "bookcase",
+          "closed equipment cabinet",
+          "cabinet",
+          "table",
+          "chair",
+          "display counter",
+          "floor",
+          "wall"
+        ],
+        "prior_profile": "real_scene_structural_v1",
+        "v10_mapping": {
+          "shelves": 2,
+          "bookcase": 2,
+          "closed equipment cabinet": 3,
+          "cabinet": 3,
+          "display counter": 3
+        },
+        "unknown_label": 0,
+        "per_class_interpretation": {
+          "shelves": "original V10 class2 open multilayer structural prior",
+          "bookcase": "original V10 class2 open multilayer structural prior",
+          "closed equipment cabinet": "original V10 class3 prior from predicted closed equipment cabinet category",
+          "cabinet": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains cabinet; not recognition of a closed equipment cabinet or measurement of hidden structure",
+          "table": "no V10 structural prior; retain original prompt namespace",
+          "chair": "no V10 structural prior; retain original prompt namespace",
+          "display counter": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains display counter; not recognition of a closed equipment cabinet or measurement of hidden structure",
+          "floor": "no V10 structural prior; retain original prompt namespace",
+          "wall": "no V10 structural prior; retain original prompt namespace"
+        },
+        "semantic_prior_extended": true,
+        "core_formula_unchanged": true,
+        "class_semantics": "uncalibrated prompt predictions; closed state and class accuracy not independently validated",
+        "box_is_segmentation_mask": false,
+        "mask_source": "YOLOE retina instance segmentation",
+        "valid_depth_pixels": 701244,
+        "semantic_pixels": 2196,
+        "prediction_wall_seconds": 1.564598554999975,
+        "confidence_threshold": 0.25,
+        "imgsz": 640,
+        "device": "cpu",
+        "model_manifest": {
+          "schema": "pinned_yoloe_model_assets/1",
+          "files": [
+            {
+              "filename": "yoloe-v8s-seg.pt",
+              "sha256": "ac2b90ed23011495a3e86d89caeb3432a15129cac8d849ba121293c8fc1e0536",
+              "bytes": 31135890,
+              "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yoloe-v8s-seg.pt"
+            },
+            {
+              "filename": "mobileclip_blt.ts",
+              "sha256": "a67804d1b0f07b8b9a20c1761ec0847f34660f5fa338ec70e8f3fce68ed95e54",
+              "bytes": 599764649,
+              "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/mobileclip_blt.ts"
+            },
+            {
+              "filename": "prompt_embeddings.pt",
+              "sha256": "96aa04ebecac9540e2d013fb862cc8e6c2f704009bb57328a677760fc0b211fd",
+              "bytes": 19662,
+              "source_url": null
+            }
+          ],
+          "prompts": [
+            "shelves",
+            "bookcase",
+            "closed equipment cabinet",
+            "cabinet",
+            "table",
+            "chair",
+            "display counter",
+            "floor",
+            "wall"
+          ],
+          "embedding_generation": "TorchScript MobileCLIP encode_text + YOLOE head.get_tpe; no model weights changed",
+          "ultralytics_version": "8.3.200",
+          "torch_version": "2.6.0+cpu",
+          "clip_source": "https://github.com/ultralytics/CLIP",
+          "clip_commit": "7ffa84b3bfa40c42ecc1c77147a855e69cb2dd40",
+          "generation_wall_seconds": 4.014119435014436
+        },
+        "detections": [
+          {
+            "instance_index": 0,
+            "source_class_id": 7,
+            "source_label": "floor",
+            "class_key": "yoloe_prompt:floor",
+            "detector_score": 0.4364151656627655,
+            "box_xyxy": [
+              0.43212890625,
+              392.3338623046875,
+              1278.066650390625,
+              717.473876953125
+            ],
+            "v10_class_id": null,
+            "mask_pixels": 318245,
+            "valid_depth_pixels": 315993,
+            "assigned_pixels": 315993,
+            "mask_sha256": "9f9bb80959935a746fc6b91edbb7a16c090a0f9456f1c8dbeabf68ac74f80297"
+          },
+          {
+            "instance_index": 1,
+            "source_class_id": 2,
+            "source_label": "closed equipment cabinet",
+            "class_key": "yoloe_prompt:closed equipment cabinet",
+            "detector_score": 0.2666288912296295,
+            "box_xyxy": [
+              320.81097412109375,
+              10.59649658203125,
+              468.86431884765625,
+              348.5144348144531
+            ],
+            "v10_class_id": 3,
+            "mask_pixels": 40502,
+            "valid_depth_pixels": 2196,
+            "assigned_pixels": 2196,
+            "mask_sha256": "41c8ab26ce22997577a7faed865881f98defc910d264be1f1ca15aade79695ff"
+          }
+        ],
+        "overlap_assignment": "highest detector confidence owns each measured pixel including non-V10 classes",
+        "research_policy_changed": true,
+        "source_file_sha256": "79ef361a23fd05273cf2ec14b0e97cfc09ef09d405bfb0af64fae9a8762d3a15",
+        "pixel_stride": 4,
+        "canonical_labelled_pixels": 133,
+        "canonical_semantic_sha256": "287c9b09d499cff235ed8f279801c7f09c8e2e7e17c2acfd3518d21b753a0134",
+        "decision_effect_validated": false,
+        "mask_file": "/home/ouc/nso_robot/analyses/budget_semantic_20261109/fresh/semantics/49b683bc8e924a7cefb16a43.npz",
+        "mask_file_sha256": "84b0dbee67810d40049367bbd0dc9f1799cd2c22d19e9c41d2853643453c6050"
+      },
+      "quality_labels": {
+        "2": 0,
+        "3": 0
+      },
+      "measured_assets": [
+        {
+          "group": 1,
+          "marked_points": 0,
+          "class_vote": 0.0
+        },
+        {
+          "group": 3,
+          "marked_points": 0,
+          "class_vote": 0.0
+        }
+      ],
+      "same_candidate_S_minus_G": [],
+      "decision_effect_validated": false
+    },
+    "runtime": {
+      "scene_id": "depth_ground_unknown_exploration_20261108",
+      "episode_id": "post_reboot_budget_diagnostic_20261109",
+      "closed": false,
+      "mapper_frames": 1,
+      "unique_packet_count": 1,
+      "arrived_count": 0,
+      "externally_scripted_prefix_actions": 0,
+      "termination": null,
+      "modules": {
+        "plans": 0,
+        "graph_version": 1,
+        "semantic_version": 1,
+        "feedback": {
+          "algorithm_version": "observed_feedback_v10.2",
+          "scene_id": "depth_ground_unknown_exploration_20261108",
+          "episode_id": "post_reboot_budget_diagnostic_20261109",
+          "initialized": true,
+          "feedback_enabled": true,
+          "feedback_version": 1,
+          "planning_feedback_version": 1,
+          "total_budget": 40,
+          "paid_actions": 0,
+          "remaining_budget": 40,
+          "map_version": 1,
+          "last_action_id": 0,
+          "done": false,
+          "consumed_frame_ids": [
+            "1794223232178023868"
+          ],
+          "consumed_action_ids": [],
+          "prefix_frame_ids": [
+            "1794223232178023868"
+          ],
+          "actual_camera_pose_count": 1,
+          "planning_camera_pose_count": 1,
+          "actual_camera_poses_sha256": "45e1e76fa1ee1c3976829d1aeea246fc8594a1135758a3d93db9af3d183c1863",
+          "planning_camera_poses_sha256": "45e1e76fa1ee1c3976829d1aeea246fc8594a1135758a3d93db9af3d183c1863",
+          "fixed_old_support_count": 295,
+          "fixed_old_support_sha256": "64cc26c244e3827459a0c2cd91d7d6c92752f7e2c0eaf3c8d55fc1775d2ffce8",
+          "initial_old_quality_proxy": 0.23876286999001725,
+          "old_quality_proxy": 0.23876286999001725,
+          "old_quality_proxy_total_change": 0.0,
+          "paid_measurement_support_count": 0,
+          "observed_2d_area_m2": 65.84000000000002,
+          "no_progress_events": 0,
+          "failure_events": 0,
+          "last_event": {
+            "module": "IGCR",
+            "algorithm_version": "observed_feedback_v10.2",
+            "scene_id": "depth_ground_unknown_exploration_20261108",
+            "episode_id": "post_reboot_budget_diagnostic_20261109",
+            "event_type": "bootstrap",
+            "accepted": true,
+            "duplicate": false,
+            "feedback_version": 1,
+            "planning_feedback_version": 1,
+            "frame_id": "1794223232178023868",
+            "action_id": 0,
+            "before_map_version": null,
+            "map_version": 1,
+            "timestamp_s": 1794223232.178024,
+            "action_cost": 0,
+            "paid_actions": 0,
+            "remaining_budget": 40,
+            "actual_camera_pose_count": 1,
+            "planning_camera_pose_count": 1,
+            "fixed_old_support_count": 295,
+            "old_quality_proxy": 0.23876286999001725,
+            "reward": 0.0,
+            "parts": {},
+            "arrived": false,
+            "failed": false,
+            "collision": false,
+            "done": false,
+            "reason": null
+          },
+          "capability_status": {
+            "interface": "IGCR",
+            "backend": "observed_sensor_ledger",
+            "ground_truth_input": false,
+            "learned_reward": false,
+            "calibrated_information_gain": false,
+            "ppo_training_active": false,
+            "quality_is_ground_truth_f1": false
+          }
+        },
+        "observed_gain_calibration": {
+          "schema_version": "observed_gain_calibration_v10_1/1",
+          "feedback_enabled": true,
+          "consume_predicted_attempts": false,
+          "posterior_mean": {
+            "radar": 0.5,
+            "camera": 0.5
+          },
+          "alpha": {
+            "radar": 1,
+            "camera": 1
+          },
+          "beta": {
+            "radar": 1,
+            "camera": 1
+          },
+          "observed_actions": 0,
+          "pending_action_ids": [],
+          "events": []
+        },
+        "planner_revision": "v10_3_1",
+        "conditional_gain_residual": {
+          "schema_version": "conditional_gain_residual_v11/1",
+          "feedback_enabled": true,
+          "prior_strength": 8.0,
+          "minimum_updates": 2,
+          "maximum_adjustment": 0.25,
+          "posteriors": [],
+          "events": [],
+          "observed_actions": 0
+        },
+        "semantic_gain_model": null,
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "retained_hierarchy": "region -> pose option -> paid action"
+      }
+    }
+  }
+}

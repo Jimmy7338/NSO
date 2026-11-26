@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "isolated_python": true,
+  "active_runtime_not_on_import_path": true,
+  "test_paths_not_on_import_path": true,
+  "audit_function_module": "ros_viewpoint_coordinator",
+  "modules": [
+    {
+      "module": "duration_profile",
+      "file": "duration_profile.py",
+      "sha256": "2b9fc2a9324b8f7ef89592a7af256a1e5122f4f8bbdc5ec61a8a56e38b75bc1a"
+    },
+    {
+      "module": "joint_ros_coordinator",
+      "file": "joint_ros_coordinator.py",
+      "sha256": "8b76b160c38838eeed5416a094daebc3de075ec510df4e0b95aff595cf68a48e"
+    },
+    {
+      "module": "lifecycle_receipt",
+      "file": "lifecycle_receipt.py",
+      "sha256": "b3cd1365ff4a91c349414fff0aa8fbd15b5d2df23a019640cf32441c6439a3a4"
+    },
+    {
+      "module": "mission",
+      "file": "mission.py",
+      "sha256": "1ebcf9430610b518b3dc984e14c64a996d21a537be79de3e369082ebbf5a20f8"
+    },
+    {
+      "module": "nso_ros_coordinator",
+      "file": "nso_ros_coordinator.py",
+      "sha256": "9b8511e860dc0f3c3924ae175ae0068294e292ccfa11f8c0441209333d5b217b"
+    },
+    {
+      "module": "ros_viewpoint_coordinator",
+      "file": "ros_viewpoint_coordinator.py",
+      "sha256": "18dc11b2c1a28e415dcffd28dd40f9bf91f20800d9d60a4d6d99fa24e12c6a4c"
+    },
+    {
+      "module": "standby_native_handshake",
+      "file": "standby_native_handshake.py",
+      "sha256": "ec4584f32afaf5addeace0bc97b9e89203fd08190d016d68ef7919f47691a109"
+    },
+    {
+      "module": "stop_feedback_wait",
+      "file": "stop_feedback_wait.py",
+      "sha256": "b6562287fe66a5fe3e62064e5f0ca40b3c7a55ab6c59c9bf06f203fe852174e9"
+    }
+  ],
+  "deployment_files": [
+    {
+      "path": "runtime/mission.py",
+      "baseline_sha256": "43033e5387838219cf48c7baae39c1d85f6e7e8aaacf57f4d99bc30109731382",
+      "candidate_sha256": "1ebcf9430610b518b3dc984e14c64a996d21a537be79de3e369082ebbf5a20f8"
+    },
+    {
+      "path": "runtime/ros_viewpoint_coordinator.py",
+      "baseline_sha256": null,
+      "candidate_sha256": "18dc11b2c1a28e415dcffd28dd40f9bf91f20800d9d60a4d6d99fa24e12c6a4c"
+    }
+  ],
+  "scope": "Fresh copy of unchanged active runtime Python dependencies overlaid with exactly the two manifest candidate files. Isolated child Python import check only; no ROS/main invocation, devices, workers or actuators."
+}

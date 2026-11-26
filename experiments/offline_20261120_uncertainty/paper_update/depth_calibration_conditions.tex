@@ -1,0 +1,21 @@
+\begin{table}[tbp]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\caption{All four observation conditions on untouched evaluation objects. Each row contains six objects. CRPS and posterior median absolute error (MAE) are in metres. The 95\% count and width describe the loss-updated depth distribution, with declared failed cases retained through the public-prior fallback.}
+\label{tab:depth-calibration-conditions}
+\begin{tabular}{llrrrrrr}
+\toprule
+Split & Condition & Fixed & Prior & Update & MAE & 95\% count & Width \\
+\midrule
+Validation (6) & Front & 0.3395 & 0.2027 & 0.2684 & 0.3395 & 3/6 & 0.5067 \\
+ & Front + side & 0.2355 & 0.2241 & 0.0291 & 0.0592 & 6/6 & 0.2136 \\
+ & Around object & 0.2383 & 0.1282 & 0.0134 & 0.0201 & 3/6 & 0.0305 \\
+ & Occluded & 0.2346 & 0.2243 & 0.0296 & 0.0580 & 6/6 & 0.2115 \\
+\midrule
+Held out (6) & Front & 0.2017 & 0.1844 & 0.0760 & 0.0970 & 6/6 & 0.6050 \\
+ & Front + side & 0.2427 & 0.2088 & 0.0334 & 0.0469 & 6/6 & 0.2088 \\
+ & Around object & 0.2471 & 0.1052 & 0.0124 & 0.0121 & 2/6 & 0.0073 \\
+ & Occluded & 0.2405 & 0.1662 & 0.0574 & 0.0650 & 6/6 & 0.3997 \\
+\bottomrule
+\end{tabular}
+\end{table}

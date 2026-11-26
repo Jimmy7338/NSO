@@ -1,0 +1,100 @@
+[
+  {
+    "id": "native_sender_gap",
+    "source": "native/scout_radius_command_timeout_v1.hpp:25,174",
+    "current": "40ms sendtick gap permanently latches sender_late",
+    "origin": "custom software watchdog; no manufacturer derivation found",
+    "proposal": "replace scheduling-overrun latch with immediate zero and require newly received command after gap; keep clock regression latched"
+  },
+  {
+    "id": "native_source_age",
+    "source": "native/scout_radius_command_timeout_v1.hpp:50; radius_driver_node.cpp:77-82",
+    "current": "80ms original command age rejection -> external_guard permanent latch",
+    "origin": "custom stream/source contract",
+    "proposal": "drop stale sample, force zero/invalidate accepted command; recover only from strictly newer original stamp/sequence; retain publisher/session provenance"
+  },
+  {
+    "id": "native_command_expiry",
+    "source": "native/scout_radius_command_timeout_v1.hpp:23,151,179",
+    "current": "100ms input expiry permanently latches",
+    "origin": "custom software watchdog",
+    "proposal": "keep100ms maximum command age and zero at expiry; permit next valid fresh proposal to recover"
+  },
+  {
+    "id": "adapter_tick_gap",
+    "source": "runtime/visual_velocity_adapter.py:520",
+    "current": "80ms controltick gap permanently latches",
+    "origin": "custom scheduling bound",
+    "proposal": "zero on overrun, discard cachedproposal, require original receipt later than recovery; clock regression still latches"
+  },
+  {
+    "id": "adapter_source_loss",
+    "source": "runtime/visual_velocity_adapter.py:457-476,537-544",
+    "current": "500ms source TTL then1s loss latches whole session",
+    "origin": "custom duplicate watchdog on top ROS navigation",
+    "proposal": "preserve500ms source validity/zero; remove1s terminal timeout for recoverable missing/stale measurements; wait indefinitely bounded by mission/operator deadline, require new proposal"
+  },
+  {
+    "id": "supervisor_health_loss",
+    "source": "runtime/mission.py:103-115,767-770",
+    "current": "HealthWindow1s loss raises terminal RuntimeError",
+    "origin": "custom supervisor timeout",
+    "proposal": "change active health loss to waiting state while adapter zeroes; no new action until source health recovers; preserve missiondeadline"
+  },
+  {
+    "id": "CAN_speed",
+    "source": "runtime/visual_velocity_adapter.py:322",
+    "current": "original .15 linear, approved deployed .20; angular .45 singleframe terminal",
+    "origin": "custom threshold not manufacturer fault",
+    "proposal": "retain approved.20 now; no evidence justifies further increase. Nov12 S96/.05S40 .154 stops demonstrated. .05cap alone insufficient"
+  },
+  {
+    "id": "CAN_frame_gaps",
+    "source": "runtime/visual_velocity_adapter.py:313-315,332-337",
+    "current": "150ms velocity gap/source age and500ms status TTL terminal",
+    "origin": "custom measurement availability checks",
+    "proposal": "later candidate: unavailablefeedback ->zero/wait + accountingincomplete untilfresh, never describe missinginterval as measuredzero. Do notfirstchange due no latestactualfailure"
+  },
+  {
+    "id": "odometry_jump",
+    "source": "runtime/visual_velocity_adapter.py:370",
+    "current": "distance>.02+.20dt or angle>.04+.60dt singleframe terminal",
+    "origin": "custom localization continuity heuristic",
+    "proposal": "record diagnostic and pause until renewed stablepose instead of irreversible stop; this changes localization admission so separate scopedpatch"
+  },
+  {
+    "id": "health_pairing",
+    "source": "runtime/visual_velocity_adapter.py:381-396",
+    "current": "exact source-health matching1microsecond",
+    "origin": "custom synchronization contract",
+    "proposal": "retain: prevents health heartbeat refreshing stale data, no evidence currentstallcause"
+  },
+  {
+    "id": "arm_stationarity",
+    "source": "runtime/visual_velocity_adapter.py:484-513",
+    "current": "1s measuredzero plus1s stationaryhealth preparation",
+    "origin": "custom startup guard",
+    "proposal": "not ongoing exploration stall; retain initially"
+  },
+  {
+    "id": "command_caps",
+    "source": "runtime/mission.py:584; visual_velocity_adapter.py:449",
+    "current": "NSOpositive.05 angular.3; reverse\u2212.05 authorizedphase",
+    "origin": "declared physical execution adaptation, not manufacturer limit",
+    "proposal": "retain latest declaredcaps; unknown-space permission doesnotrequire fastercommands"
+  },
+  {
+    "id": "provenance_hardware",
+    "source": "runtime/visual_velocity_adapter.py:293-305,434-441",
+    "current": "native fault/nonautomatic CANstatus/nonfinite/nonplanar/unexpectedpublisher/clockregression",
+    "origin": "realreported chassis faults + command integrity",
+    "proposal": "retain terminal hardwarestate/error/driverfault; retain emergency/operatorstop and malformedcommand/provenance rejection"
+  },
+  {
+    "id": "navigation_plan_rejection",
+    "source": "runtime/mission.py joint execution callsites",
+    "current": "terminal handling delegated navigation/runtime returncontract",
+    "origin": "ROS planner failure distinct custom mission stop",
+    "proposal": "research/navigation agent owns retry/unknown guard; no edits here; never turn ROS collision rejection into blind nonzero command"
+  }
+]

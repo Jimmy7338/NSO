@@ -1,0 +1,330 @@
+{
+  "schema": "nso.reacquisition_geometry_only_preregistered_starts.v1",
+  "frozen_unix_s": 1795681762.3019602,
+  "actor_select_calls": 0,
+  "candidate_registry_sha256": "729688e8192746efaeeeda6014536fd1eaafb9b09ac785fce54ce0678cad1a55",
+  "admitted_test_floors": [
+    "replica_apartment1",
+    "hm3d_00770"
+  ],
+  "admission": {
+    "reference": "Supplied textured triangle mesh, fixed and never exposed to actors.",
+    "motion": "Metric 0.20 m cells, 0.20 m circular footprint and continuous swept capsules.",
+    "body_collision_band_m": [
+      0.15,
+      1.2
+    ],
+    "scan_floor_support_band_m": [
+      -0.09,
+      0.09
+    ],
+    "scan_floor_normal_abs_cosine_minimum": 0.96,
+    "floor_choice": "Largest upward horizontal area in a 0.05 m Z bin; weighted mean of that bin's face heights. Other floors remain in the renderer but are not part of the traversability reference.",
+    "component_choice": "Largest floor-support/capsule connected component. Require at least 20 sq m and at least two geometry-separated room cores.",
+    "room_core": "Connected after clearance threshold 0.48 m, minimum core area 0.64 sq m (16 grid cells); assign underlying navigable catchments by graph distance and report descriptive topology rather than official room labels. Initial 2 sq m core check and all source rejections retained in admission_v1.",
+    "unrelated_development_only": "Require 8 sq m of connected capsule-reachable floor and one 0.64 sq m core. Development scan never included in formal sample.",
+    "starts": "Two room-core starts, graph-separated by at least 3 m. Candidate near each largest/separated core's center, then descending capsule clearance; cardinal heading maximizing forward unclipped geometric visibility. Require valid RGB-D and planar scan with >0 unseen reachable cells at each frozen start.",
+    "selection": "Use evaluation roles in registry order. Reserve fills a rejected HM3D source only. Source eligibility is completely established before inspecting any policy output.",
+    "minimum_fraction_depth_hits": 0.5,
+    "budget": 192,
+    "assume_labels": "Both regional modes retain the inherited local S implementation with all-zero visible category/instance channels (geometry-only fallback)."
+  },
+  "layouts": {
+    "b26v5_replica_apartment1_s1": {
+      "start": [
+        43,
+        20
+      ],
+      "heading": 2,
+      "xy_world_m": [
+        4.1000000000000005,
+        4.1000000000000005
+      ],
+      "xyz_source_m": [
+        2.1000000000000005,
+        -5.1000000000000005,
+        -0.47605901058911804
+      ],
+      "depth_hit_fraction": 0.5219444444444444,
+      "initial_cardinal_range_m": [
+        2.968668222427368,
+        0.885828971862793,
+        null,
+        null
+      ],
+      "source_floor": "replica_apartment1",
+      "start_index": 1,
+      "shape": [
+        64,
+        50
+      ],
+      "world_from_source": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          2.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          9.200000000000001
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.676059010589118
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": 20261126541,
+      "scene_role": "new_starts_on_previously_used_scan",
+      "source_preflight_sha256": "e2e6acf854ce1f8dd1ffb7079addab27a7a91c08a9a91889088f373b9e59f2bb"
+    },
+    "b26v5_replica_apartment1_s2": {
+      "start": [
+        14,
+        11
+      ],
+      "heading": 1,
+      "xy_world_m": [
+        2.3000000000000003,
+        9.9
+      ],
+      "xyz_source_m": [
+        0.30000000000000027,
+        0.6999999999999993,
+        -0.47605901058911804
+      ],
+      "depth_hit_fraction": 1.0,
+      "initial_cardinal_range_m": [
+        1.8166030645370483,
+        6.5152482986450195,
+        2.76600980758667,
+        1.1672645807266235
+      ],
+      "source_floor": "replica_apartment1",
+      "start_index": 2,
+      "shape": [
+        64,
+        50
+      ],
+      "world_from_source": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          2.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          9.200000000000001
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.676059010589118
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": 20261126542,
+      "scene_role": "new_starts_on_previously_used_scan",
+      "source_preflight_sha256": "e2e6acf854ce1f8dd1ffb7079addab27a7a91c08a9a91889088f373b9e59f2bb"
+    },
+    "b26v5_hm3d_00770_s1": {
+      "start": [
+        41,
+        14
+      ],
+      "heading": 1,
+      "xy_world_m": [
+        2.9000000000000004,
+        12.3
+      ],
+      "xyz_source_m": [
+        -23.9,
+        -2.9000000000000004,
+        1.2041983851814324
+      ],
+      "depth_hit_fraction": 1.0,
+      "initial_cardinal_range_m": [
+        2.7110259532928467,
+        2.8826849460601807,
+        2.086573362350464,
+        1.7947922945022583
+      ],
+      "source_floor": "hm3d_00770",
+      "start_index": 1,
+      "shape": [
+        103,
+        193
+      ],
+      "world_from_source": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          26.8
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          15.200000000000001
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.004198385181432558
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": 20261126551,
+      "scene_role": "new_starts_on_previously_used_scan",
+      "source_preflight_sha256": "418a8e6b9071de3e4e42b9c0cd0a34c1b38624a46603d4758cb504f5eb53ebbe"
+    },
+    "b26v5_hm3d_00770_s2": {
+      "start": [
+        39,
+        37
+      ],
+      "heading": 1,
+      "xy_world_m": [
+        7.5,
+        12.700000000000001
+      ],
+      "xyz_source_m": [
+        -19.3,
+        -2.5,
+        1.2041983851814324
+      ],
+      "depth_hit_fraction": 0.9953703703703703,
+      "initial_cardinal_range_m": [
+        2.8479318618774414,
+        6.2342939376831055,
+        1.5968879461288452,
+        1.4853460788726807
+      ],
+      "source_floor": "hm3d_00770",
+      "start_index": 2,
+      "shape": [
+        103,
+        193
+      ],
+      "world_from_source": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          26.8
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          15.200000000000001
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.004198385181432558
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "seed": 20261126552,
+      "scene_role": "new_starts_on_previously_used_scan",
+      "source_preflight_sha256": "418a8e6b9071de3e4e42b9c0cd0a34c1b38624a46603d4758cb504f5eb53ebbe"
+    }
+  },
+  "verdicts": {
+    "habitat_skokloster": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "dominant_upward_area_bin_has_no_inherited_body_obstacle_and_floor_support",
+      "preflight_sha256": "86b3153c804d99dd57d4fc9c341a2ed19c4581ae5d4369c4947de4b52768e943"
+    },
+    "mp3d_habitat_example": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "bb925c3173648ae13ee5643538d7bd41cbb2746d874ac193d5bb34b819baab38"
+    },
+    "scenenn_015": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "1e1d7c275dc1843fd00d50253e12e244c7652855d7fc46e82b7d5b5c09872afd"
+    },
+    "scenenn_217": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "20bed4ba9f93929b342abbf8bdacb7a8dac60a71c7ddb0e64d5c4cdbf3ec85d7"
+    },
+    "scenenn_030": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "45b33e9eeee00c13a8aa6593dd1986e6e7eb5c87d4011d4740e008d7750e8648"
+    },
+    "scenenn_061": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "main_component_or_multiple_room_requirement_failed",
+      "preflight_sha256": "93e4a88a9f81690184e56571dd5a893fc436d7858ecff16393e0862250da4c01"
+    },
+    "bundlefusion_apt0": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "public source download incomplete at registration; geometry unassessed",
+      "preflight_sha256": "4bbf595426cde61aa9b98fc553e4f327f1e4177c3001a5951af15a713dab127c"
+    },
+    "bundlefusion_apt1": {
+      "eligible": false,
+      "fallback": false,
+      "reason": "public source download incomplete at registration; geometry unassessed",
+      "preflight_sha256": "7885b6570264d2c8a7e98f1817ad18fc7d02a09602dfc270cf8d36d0ec51e80c"
+    },
+    "replica_apartment1": {
+      "eligible": true,
+      "fallback": true,
+      "reason": null,
+      "preflight_sha256": "e2e6acf854ce1f8dd1ffb7079addab27a7a91c08a9a91889088f373b9e59f2bb"
+    },
+    "hm3d_00770": {
+      "eligible": true,
+      "fallback": true,
+      "reason": null,
+      "preflight_sha256": "418a8e6b9071de3e4e42b9c0cd0a34c1b38624a46603d4758cb504f5eb53ebbe"
+    }
+  },
+  "holdout_floor_count": 0,
+  "frozen_budget": 192
+}

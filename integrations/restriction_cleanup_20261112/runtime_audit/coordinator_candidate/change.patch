@@ -1,0 +1,80 @@
+--- a/runtime/joint_ros_coordinator.py
++++ b/runtime/joint_ros_coordinator.py
+@@ -180,6 +180,7 @@
+ 
+     worker, client = ctx['worker'], ctx['client']
+     grid = identity['grid']
++    recover_failed_attempt = identity.get('configuration', {}).get('policy_variant') == 'ros_checked_exploration_v2'
+     execution_frame = ctx.get('execution_frame', 'map')
+     if execution_frame not in ('map', 'odom'):
+         raise ValueError('joint execution_frame must be map or odom')
+@@ -212,7 +213,7 @@
+         ctx['result'].update(status='navigation_execution_failed', execution_interrupted=True,
+                              reason=reason, method_stop=False)
+ 
+-    def capture(action_id, action, endpoint=None):
++    def capture(action_id, action, endpoint=None, *, failed_reason=None):
+         heartbeat()
+         before = ctx['capture_odom_pose']()
+         # No ideal cell or pose is supplied to the measured sensor capture.
+@@ -222,8 +223,22 @@
+         # with newer odometry after compression/map resampling.
+         path = ctx['capture_observation'](identity['calibration'], action_id, None, action)
+         after = ctx['capture_odom_pose']()
+-        response = call('observe', dict(path=str(path), action_id=action_id, action=action))
+-        record('NSO_joint_observation_accepted', action_id=action_id, action=action,
++        params=dict(path=str(path), action_id=action_id, action=action)
++        method='observe'
++        if failed_reason is not None:
++            if not recover_failed_attempt:
++                raise RuntimeError('failed attempt observation requires explicit v2 profile')
++            method='observe_failed_action'
++            params['reason']=failed_reason
++        response = call(method, params)
++        if failed_reason is not None:
++            outcome=response.get('failed_execution_attempt', {})
++            if (outcome.get('arrival_credited') is not False
++                    or outcome.get('paid_attempt_charged') is not True):
++                raise RuntimeError('failed attempt RPC lacks no-arrival/charged-attempt receipt')
++        record('NSO_joint_failed_attempt_observed' if failed_reason is not None else 'NSO_joint_observation_accepted',
++               arrival_credited=False if failed_reason is not None else None, failed_reason=failed_reason,
++               action_id=action_id, action=action,
+                capture_timings=dict(ctx.get('capture_timings', {})), path=str(path), actual_odom_before=before, actual_odom_after=after,
+                processing_pose_polls_are_diagnostic=True,
+                exposure_pose_source='joint_NPZ_actual_historical_base_TF_validated_by_worker',
+@@ -247,6 +262,7 @@
+                                 method_failed=bool(termination.get('failed')))
+             return
+         previous_projection_goal = None
++        recovered_state = False
+         while True:
+             # Opt-in execution capability exists only during the existing
+             # same-pending nominal retry; first attempts never enter this scope.
+@@ -310,6 +326,16 @@
+                 record('NSO_joint_action_result', **execution)
+                 if arrival['verified'] and scientific['verified']:
+                     break
++                if recover_failed_attempt and terminal['status'] in (3, 4):
++                    reason=('ROS_ABORTED' if terminal['status'] == 4 else 'ROS_success_endpoint_not_verified')
++                    execution.update(failed_execution_attempt=True,arrival_credited=False,
++                                     recovery='fresh_actual_observation_then_replan')
++                    state=capture(endpoint['action_id'], endpoint['action'], failed_reason=reason)
++                    record('NSO_joint_failed_attempt_replan', action_id=endpoint['action_id'],
++                           reason=reason, terminal=terminal, actual_state=state,
++                           arrival_credited=False, nominal_retry_skipped=True)
++                    recovered_state = True
++                    break
+                 retry_reason = nominal_endpoint_retry_reason(terminal, arrival, scientific,
+                     dict(metric_execution, action=endpoint['action']), source, actual_odom,
+                     retry_used=previous_projection_goal is not None)
+@@ -325,6 +351,10 @@
+                     continue
+                 fail('ROS_action_or_joint_endpoint_not_verified', execution)
+                 return
++        if recovered_state:
++            if state is None:
++                return
++            continue
+         state = capture(endpoint['action_id'], endpoint['action'], endpoint)
+         if state is None:
+             return

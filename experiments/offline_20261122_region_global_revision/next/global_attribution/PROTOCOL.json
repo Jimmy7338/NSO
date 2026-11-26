@@ -1,0 +1,32 @@
+{
+  "schema": "nso_region_destination_and_native_outbound_v1",
+  "source_original_freeze_sha256": "9280106beda7a3a0fc8fbc365456949121af170df68a47dd8c749abf5c24831f",
+  "budget": 192,
+  "capture_paid": [0, 48, 96, 144, 192],
+  "local_auxiliary_weights": {"unknown_weight": 0.25, "action_cost": 0.2},
+  "local_route_invariants": {
+    "max_extra_outbound_actions": 8,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-9
+  },
+  "score": {
+    "destination": "For a doorway view with a presently defined destination region, use the target region for visit and remaining-frontier terms. With no presently defined destination use the recorded standing region. Keep the observed doorway and entrance traversal bonuses and the same dispatch history.",
+    "outbound": "Replace only the old clipped endpoint visible-unknown term with the frozen native neutral observed-only common_total_proxy, exact sum of coverage_only_proxy and quality_total_proxy on the full outbound path. Do not include the native hidden generic template. Keep the candidate pool, native return certification, other feature weights, and roundtrip and repeat penalties.",
+    "execution": "All arms use unmodified local S where applicable, directed native return and common per-action safety. Rankings use the same eligible items and ties by go+return, then pose. If the v1 region ranking is empty the same native fallback runs."
+  },
+  "development": {
+    "layouts": ["floor26_corridor", "floor26_loop", "floor26_ordinary"],
+    "arms": ["attribution_once", "outbound_once"],
+    "source_states": {
+      "floor26_corridor": "floor26_corridor/region_S/paid-000/call-5",
+      "floor26_loop": "floor26_loop/region_S/paid-059/call-243",
+      "floor26_ordinary": "floor26_ordinary/region_S/paid-000/call-5"
+    },
+    "purpose": "Intervene exactly once at the first old corridor decision, the diagnosed old ring detour and the first remaining case in the previously frozen floor order showing target-only effect on the cold packet. Independently reproduce the original region_S prefix. Execute all distinct alternative goals across the two isolated and combined switches at those cases. If both switches pick the same route as an isolated switch it shares that fork. Compare with the original archived trajectory and shared clock map; subsequent global decisions use v1. The four original floors and both earlier clamp-only validation floors are viewed development or regression and excluded from the new formal sample."
+  },
+  "formal": {
+    "arms": ["region_S", "combined_S", "F_strict"],
+    "purpose": "Launch independent cold starts on newly sealed floors whose geometry and seed have not run a policy under any earlier variant. Compare full closed-loop application of both fixed effects with v1, with strict frontier on the same initial rendered inputs and native action budget. No result-driven case replacement or thresholds."
+  }
+}

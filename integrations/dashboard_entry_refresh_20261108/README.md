@@ -1,0 +1,9 @@
+# Live map display update
+
+The deployed read-only view is http://127.0.0.1:8766/. Old 8765 bookmarks now select the overlay when its image endpoint responds, then fall back to 8765/?basic=1 if the first overlay state request fails. The explicit basic query also bypasses automatic selection. This changes static assets only; the in-memory reconstruction, overlay history, detector and ROS nodes were not restarted.
+
+Map pose/state is polled at 2 Hz; the existing independent trajectory sampler remains 5 Hz. The page shows pose source time, coordinates, heading and trajectory point count. During stale localization, the same-frame last pose is hollow and labeled, and recorded trajectory remains as a dashed history instead of disappearing.
+
+Actual YOLOE classifications and detector confidence are projected from measured RGB-D mask support into map coordinates. The visible-surface hull is approximate and is not a complete object footprint. Class predictions are unverified; the relocated camera still uses old extrinsics. This is a current-observation overlay, not persistent object tracking or evidence of semantic policy benefit. Semantic current/history styling now respects the backend flag and the 10-second source-age bound.
+
+Validation: isolated Firefox against the running service checked old-entry routing, all map view buttons, semantic toggle, actual RGB/map rendering and lack of horizontal overflow. Browser-only injected stale pose/semantic states retained dashed history and marked historical observations. A one-day Date.now skew did not hide live pose; restoration succeeded. These synthetic UI checks did not modify ROS data. The base-view escape path was checked. Final live API samples confirmed advancing pose stamps and retained trajectory, and original process IDs remained alive. No robot movement was issued for this display task.

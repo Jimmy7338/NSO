@@ -1,0 +1,29 @@
+{
+  "status": "reviewed_no_blocker_for_native_consumption_diagnostic",
+  "sources_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/audit_native_consumption.py": "3a5b771c7f47a4897d64d67f277d512145ed829ec66db77f4bbc13cd6975aab8",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/summary.json": "028d10da769328b6d53007fcc37923fd5a876c792cf727a543158f779f0d1a98",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/candidate_consumption.csv": "bb1c27f4ded302f6f26817950f13b00b2010994d6bde231f4ba35d63d837354a",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/policy_audit/point_support_summary.json": "90285dbfc29f560e843a9f50cec92c6bf612b0dfb3706855ef145a41090052e9",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/policy_audit/summary.json": "ba52a5f284c020b525d34abecfa6bc3bbbd12c0e740b98e3e5e71e65cb2b93e5"
+  },
+  "independent_recalculation": {
+    "G": {
+      "predicted_gain_m2_absolute_difference": 0.0,
+      "native_already_before_gain_m2_absolute_difference": 0.0
+    },
+    "S": {
+      "predicted_gain_m2_absolute_difference": 0.0,
+      "native_already_before_gain_m2_absolute_difference": 0.0
+    }
+  },
+  "coverage_check": "All 132 before/after coverage endpoints of the 66 fixed branches have known_fraction=correct_free_fraction and false_occupied_cells=0.",
+  "notes": [
+    "Execution audit source_true means full-scene geometry support, not necessarily object geometry.",
+    "Its ratio_of_state_mean equally weights six states; mean_per_candidate_native_already_fraction equally weights 66 candidates.",
+    "Native5cm mask depends only on the current acquired TSDF; source truth is used only by post-hoc evaluation.",
+    "The four-way partition is conserved, but probability-weighted hypothesis surface is not unique physical source area.",
+    "Native-already reward is about 7.5\u20137.7 percent of total; this does not explain or solve all unsupported geometry and unrealized visibility.",
+    "Changing consumption is a declared method change, not proof of improved full-policy results."
+  ]
+}

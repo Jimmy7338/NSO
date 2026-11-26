@@ -1,0 +1,30 @@
+{
+  "status": "independent_full_posterior_forecast_code_review_passed",
+  "scope": "Code,unit-cache equivalence and runtime binding review before new-layout predictions;not evidence of superiority.",
+  "tests_reproduced": 10,
+  "files_sha256": {
+    "/home/ouc/nso_robot/analyses/paired_unseen_gain_20261120/execution/full_posterior_forecast.py": "fff05a9bd1a9adf2c5742ee9b3ec26b4f60b232ff13380844ba9777084ab625f",
+    "/home/ouc/nso_robot/analyses/paired_unseen_gain_20261120/execution/test_full_posterior_forecast.py": "ed2fe9df2518b201a7c27c6f69055baa3cf9ebba94710d99822ecab91d890dbd",
+    "/home/ouc/nso_robot/analyses/paired_unseen_gain_20261120/execution/runtime_binding.py": "ed2a633841d55bf6c610b94419d5abc47b9ae8aecc082882dca364eab8ef0aad",
+    "/home/ouc/nso_robot/analyses/paired_unseen_gain_20261120/evaluation/engine_tests.log": "d5e70825c289f00b472fbd8b4ac2089a67735f571002bd9bddbaf7753469be64"
+  },
+  "checks": [
+    "Original B8 full uncertainty bank and raw0.22m quadrature shared;no conditional-mean or fine-basis replacement",
+    "G/S share geometries and original history;class priors alone differ",
+    "Old gain uses original B2 visibility and original measurement history",
+    "New gross/lost area uses same point basis/base posterior weights with strict-free retained and direct before/after5cm reconstruction",
+    "Real mapper/native mesh is not initialized from hypothetical geometry;each predicted aftervolume replays all actual past plus hypothetical future",
+    "Only exactlyzero mass terms omitted;positive masses including1e-18 retained",
+    "Cache keys include exact geometry,state,depth,pose,intrinsics and ordered frame sequence;different poses and repeated frames remain distinct",
+    "LRU eviction capacities1/100 produce identical outputs and uncachedCORE agrees",
+    "All original candidate provider/common score/256 return contract retained;shortcostband is separate declared experimental design",
+    "Acquired frames and model point/probability weights hash-checked unchanged"
+  ],
+  "render_source_sha_asserted": true,
+  "no_new_scene_prediction_or_branch_executed": true,
+  "limits": [
+    "Virtual renderer omits unobserved occluders not represented by one latent object hypothesis or measured scene.",
+    "Correct full-mixture integration does not guarantee fitted-geometry accuracy or exploration benefit.",
+    "Performance110s on one old development route is not a controlled real-time benchmark."
+  ]
+}

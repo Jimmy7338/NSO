@@ -1,0 +1,270 @@
+{
+  "status": "post_terminal_readonly_timing_audit",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02",
+  "root_status": "nso_joint_core_stopped",
+  "root_reason": "budget_exhausted",
+  "adapter_reason": "native_driver_fault:8",
+  "root_zero_after": true,
+  "timing_sidecar_present": true,
+  "fault_evidence": null,
+  "first_fault_record": {
+    "event": "command",
+    "at_monotonic": 33667.542997675,
+    "guard_stamp_ns": 1794136844531022548,
+    "v": 0.0,
+    "w": 0.0,
+    "reason": "native_driver_fault:8",
+    "proposal": {
+      "v": 0.0,
+      "w": 0.0,
+      "receipt": 33660.691239618,
+      "number": 2848
+    },
+    "odom_source_stamp": 1794136844.4090784,
+    "scan_source_stamp": 1794136844.3265138,
+    "depth_health_source_stamp": 1794136844.3265138,
+    "odom_health_source_stamp": 1794136844.4090784
+  },
+  "first_fault_before_supervisor_stop_s": -0.03001713752746582,
+  "current_fault_iteration": {
+    "cycle_enter_ns": 33667542984363,
+    "lock_wait_ns": 9216,
+    "pre_decision_ns": 86786,
+    "gate_now_monotonic": 33667.542997675,
+    "decision_ns": 74913,
+    "guard_message_build_ns": 55009,
+    "guarded_publish_ns": 138818,
+    "pre_journal_ns": 4160,
+    "journal_add_ns": 79457,
+    "snapshot_ns": 113474,
+    "lock_exit_ns": 1920,
+    "state_publish_ns": 1538200,
+    "state_published": true,
+    "outcome": "native_driver_fault:8"
+  },
+  "current_stage_ms": {
+    "lock_wait_ms": 0.009216,
+    "pre_decision_ms": 0.086786,
+    "decision_ms": 0.074913,
+    "guard_message_build_ms": 0.055009,
+    "guarded_publish_ms": 0.138818,
+    "pre_journal_ms": 0.00416,
+    "journal_add_ms": 0.079457,
+    "snapshot_ms": 0.113474,
+    "lock_exit_ms": 0.00192,
+    "state_publish_ms": 1.5382
+  },
+  "previous_iteration": {
+    "cycle_enter_ns": 33667522529068,
+    "lock_wait_ns": 22912,
+    "pre_decision_ns": 84609,
+    "gate_now_monotonic": 33667.522557196,
+    "decision_ns": 59297,
+    "guard_message_build_ns": 54273,
+    "guarded_publish_ns": 132738,
+    "pre_journal_ns": 3232,
+    "journal_add_ns": 49633,
+    "snapshot_ns": 2464,
+    "lock_exit_ns": 1664,
+    "state_publish_ns": 2752,
+    "state_published": false,
+    "pre_sleep_ns": 6048,
+    "sleep_requested_s": 0.01961135400371859,
+    "sleep_ns": 19987096,
+    "outcome": "continue"
+  },
+  "previous_stage_ms": {
+    "lock_wait_ms": 0.022912,
+    "pre_decision_ms": 0.084609,
+    "decision_ms": 0.059297,
+    "guard_message_build_ms": 0.054273,
+    "guarded_publish_ms": 0.132738,
+    "pre_journal_ms": 0.003232,
+    "journal_add_ms": 0.049633,
+    "snapshot_ms": 0.002464,
+    "lock_exit_ms": 0.001664,
+    "state_publish_ms": 0.002752,
+    "pre_sleep_ms": 0.006048,
+    "sleep_ms": 19.987096
+  },
+  "last_recorded_iteration": {
+    "cycle_enter_ns": 33667542984363,
+    "lock_wait_ns": 9216,
+    "pre_decision_ns": 86786,
+    "gate_now_monotonic": 33667.542997675,
+    "decision_ns": 74913,
+    "guard_message_build_ns": 55009,
+    "guarded_publish_ns": 138818,
+    "pre_journal_ns": 4160,
+    "journal_add_ns": 79457,
+    "snapshot_ns": 113474,
+    "lock_exit_ns": 1920,
+    "state_publish_ns": 1538200,
+    "state_published": true,
+    "outcome": "native_driver_fault:8"
+  },
+  "signal_receipts": [],
+  "can_previous1s": null,
+  "interpretation": [
+    "Tick delta comes from first-fault evidence previous_tick/now; journal command rows are deduplicated and do not measure tick intervals.",
+    "Stage elapsed times describe where wall time was spent, not unique OS/GIL/lock root causes.",
+    "Current fault row and previous complete row are reported separately. Missing stages mean no measurement, not zero time.",
+    "adapter_shutdown/native_driver_fault8 may arise in ordinary shutdown; compare supervisor stop and received signals before attributing cause. A final sleep can include signal handling or shutdown interruption and must not be called a watchdog overrun unless first-fault evidence says so.",
+    "While-AST dry test validates row/sleep instrumentation and diagnostic I/O exception swallowing; production finally stop order was inspected in source, not executed by that test."
+  ],
+  "input_sha256": {
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/result.json": "cb3a906c747a56abff4acbf321b591d7ff09482a83fc5a80a5d61dab4768860a",
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/adapter/result.json": "9de06ce5ed208acd17779f5f737a4d38459f7ae5bb89ae2f49cd90ba1a116f49",
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/adapter/events.jsonl": "184fa188f4413255736f55caf4cfae4dc0434753bd75d945e27d956a642f27c4",
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02/adapter/control_timing_fault.json": "b130da67dda29698038c66d1890ad5aa8b3ab09b21d912545cc3847a352bfde2"
+  },
+  "verdict": "normal_budget_completion_no_recorded_tick_fault",
+  "all_adapter_journal_tick_fault_count": 0,
+  "first_fault_is_after_supervisor_stop": true,
+  "ring": {
+    "capacity": 256,
+    "rows": 256,
+    "outcomes": {
+      "continue": 255,
+      "native_driver_fault:8": 1
+    },
+    "gate_time_span_s": 5.249644324998371,
+    "maximum_adjacent_gate_interval_s": 0.027455691997602116,
+    "negative_gate_interval_count": 0,
+    "stage_stats": {
+      "lock_wait_ms": {
+        "n": 256,
+        "maximum": 0.042817,
+        "mean": 0.013726308593750007
+      },
+      "decision_ms": {
+        "n": 256,
+        "maximum": 1.732475,
+        "mean": 0.08166140625000005
+      },
+      "guarded_publish_ms": {
+        "n": 256,
+        "maximum": 5.350451,
+        "mean": 0.22174644921875
+      },
+      "journal_add_ms": {
+        "n": 256,
+        "maximum": 2.123809,
+        "mean": 0.05708596484375003
+      },
+      "snapshot_ms": {
+        "n": 256,
+        "maximum": 0.361926,
+        "mean": 0.027438332031249995
+      },
+      "state_publish_ms": {
+        "n": 256,
+        "maximum": 3.210866,
+        "mean": 0.10634781640625011
+      },
+      "sleep_ms": {
+        "n": 255,
+        "maximum": 26.925348,
+        "mean": 19.812724294117654
+      }
+    },
+    "diagnostic_errors": []
+  },
+  "normal_cleanup_interpretation": "Sidecar filename is not a fault verdict. Supervisor requests stop first; native external_guard8 then reaches adapter and is latched. Terminal row has no sleep; previous row sleep is19.987ms, not cleanup1.25s. The finally1.25s feedback wait occurs after loop ring recording, so it is not a control interval. No supervisor signal receipt exists.",
+  "signal_receipt_count": 0,
+  "CAN_final": {
+    "accounting_complete": true,
+    "adapter_zero_feedback_confirmed": true,
+    "stop_before": {
+      "confirmed": true,
+      "status": "confirmed",
+      "timeout": false,
+      "reason": null,
+      "error": null,
+      "timeout_s": 5.0,
+      "started_monotonic": 33669.011200412,
+      "ended_monotonic": 33669.967681405,
+      "elapsed_s": 0.9564809930016054,
+      "sample_count": 48,
+      "last_sample": {
+        "confirmed": true,
+        "reason": null,
+        "snapshot": {
+          "sampled_monotonic": 33669.96763142,
+          "zero_since_monotonic": 33668.96375155449,
+          "zero_interval_s": 1.0038798655077699,
+          "can_status": {
+            "source": 33669.78882908821,
+            "receipt": 33669.788919252,
+            "state": 0,
+            "mode": 1,
+            "error": 0
+          },
+          "can_velocity": {
+            "source": 33669.96387696266,
+            "receipt": 33669.964099653,
+            "v": 0.0,
+            "w": 0.0,
+            "uninterpreted_tail_hex": "00000000"
+          },
+          "status_source_age_s": 0.17880233178584604,
+          "velocity_source_age_s": 0.003754457335162442,
+          "hardware_reason": null,
+          "reader_fault": null
+        }
+      }
+    },
+    "stop_after": {
+      "confirmed": true,
+      "status": "confirmed",
+      "timeout": false,
+      "reason": null,
+      "error": null,
+      "timeout_s": 3.0,
+      "started_monotonic": 33670.442473081,
+      "ended_monotonic": 33670.442506682,
+      "elapsed_s": 3.360099799465388e-05,
+      "sample_count": 1,
+      "last_sample": {
+        "confirmed": true,
+        "reason": null,
+        "snapshot": {
+          "sampled_monotonic": 33670.442479097,
+          "zero_since_monotonic": 33668.96375155449,
+          "zero_interval_s": 1.4787275425114785,
+          "can_status": {
+            "source": 33670.38843894005,
+            "receipt": 33670.388522062,
+            "state": 0,
+            "mode": 1,
+            "error": 0
+          },
+          "can_velocity": {
+            "source": 33670.423931360245,
+            "receipt": 33670.424035353,
+            "v": 0.0,
+            "w": 0.0,
+            "uninterpreted_tail_hex": "00000000"
+          },
+          "status_source_age_s": 0.0540401569523965,
+          "velocity_source_age_s": 0.018547736755863298,
+          "hardware_reason": null,
+          "reader_fault": null
+        }
+      }
+    },
+    "cleanup_error": null
+  },
+  "observer_result": {
+    "returncode": 0,
+    "status": "nso_joint_core_stopped",
+    "reason": "budget_exhausted",
+    "raw_fault_ring_retained": false,
+    "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_timing_S40_20261108_02"
+  },
+  "limits": [
+    "The bounded timing ring covers only the final~5s, not every timing stage across the whole mission.",
+    "Full adapter journal has no tick fault; first-fault latch and normal core completion support no control-tick protection trip in this mission. This is not proof of zero subthreshold jitter or universal timing reliability.",
+    "No raw fault CAN ring is expected after normal observer completion. Final source-age and zero-duration checks are explicit but are not external physical-stop truth."
+  ]
+}

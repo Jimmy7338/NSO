@@ -1,0 +1,29 @@
+\subsection{Q0-derived two-room mechanism diagnostic}\label{two-room-diagnostic}
+
+We separately evaluated one controlled two-room construction derived from Q0 shelf-west. A divider with a 1.6 m opening was added to the same assets, sensor configuration, noise seed and synthetic RGB marker semantics. An initial doorway position was found blocked during geometry preflight and moved before any policy trajectory was observed. Simulator/reference geometry is used for rendering and evaluation, not supplied to the policy, which receives virtual RGB-D, scan and exact simulated odometry. These two trajectories are distinct from the preceding 24-run Q0 matrix, but are related to it and do not constitute independent natural scenes or physical evidence.
+
+\begin{table}[!htbp]
+\centering
+\caption{Two-room diagnostic. Surface is new reference-visible surface since the initial frame; F1 uses 5 cm.}
+\label{tab:two-room}
+\small
+\begin{tabular}{lccccc}
+\toprule
+Mode & Coverage start/end & First 90/95/99\% & Surface m$^2$ & F1 & Path m \\
+\midrule
+G & 60.12/99.01\% & 22/26/58 & 123.97 & 0.9119 & 16.8 \\
+S & 60.12/99.01\% & 22/26/56 & 126.58 & 0.9221 & 16.4 \\
+G$\times$2 (post hoc) & 60.12/99.01\% & 22/26/56 & 126.58 & 0.9221 & 16.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both crossed the doorway at action 19, completed 96 paid actions, returned to the anchor and recorded zero simulated collisions. Final coverage was equal. At the second planning call after 19 actions, coverage was 86.61\% and common history, candidate lists and audit hashes matched. G selected candidate 3 and S candidate 7: common coverage-plus-quality scores were 9.953 and 9.415; G prior contributions were 6.838 and 7.332 and S prior contributions 11.721 and 12.550. Prior-conditioned rankings reversed at this observed state (Figure~\ref{fig:two-room-score}). G selected candidate 3 over candidate 7 by 0.044313, while S selected candidate 7 over candidate 3 by 0.290468; both margins are strict rather than tie breaks. A post-hoc scalar reweighting of the geometric prior also selects candidate 7 when $\lambda > 1.08973877$ on this same candidate set, so this trace does not isolate a category-specific advantage over reweighting. This scalar audit alone is a single-state calculation. After observing the original G/S results and the scalar audit, one post-hoc control fixed the geometric-object prior weight to 2 and executed one 96-action run. Its 96 recorded actions, poses, observation hashes, coverage and surface progress match S exactly; all 13 planning targets and terminal F1, surface area and distance also match. This is not a prospective independent baseline; in this case the complete S difference is reproducible by geometric-prior weighting and does not isolate a category-specific benefit. The first executed action and surface difference occurred at action 31, when both coverage values were 98.31\%. Endpoint differences describe complete trajectories, not the causal effect of one action. This supports a synthetic-marker-conditioned scoring mechanism, not generalization, natural semantic benefit or real-robot efficiency.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{Fig13.pdf}
+\caption{Recorded simulator policy scores for the two selected candidates after 19 paid actions. Common terms and G/S object priors are planning proxies, not measured reconstruction quality or additional observations. Reference geometry is used only for simulation and evaluation.}
+\label{fig:two-room-score}
+\end{figure}
+

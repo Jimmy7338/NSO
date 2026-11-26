@@ -1,0 +1,4948 @@
+{
+  "schema": "nso.semantic_development_view.first_state.v1",
+  "development_only": true,
+  "scope": "Single observed development view; within-state shadow scores are not executed trajectories or physical counterfactuals.",
+  "configuration": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/central/fresh/configuration.json",
+  "configuration_sha256": "227c0bf40fa1f275aa81575b259da9cc4766c12395c800249914747fe15e592b",
+  "source": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/central/fresh/source.json",
+  "source_sha256": "43ba0099b9be93ca2036e99c34a8f118506b456bf3e37f14548350714aa7c831",
+  "joint_packet": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/central/fresh/joint_inputs/joint-1794138862813148822.npz",
+  "joint_packet_sha256": "80f49ec12c28b4509839d1097330dfb421298b9f6490bcaced17004c4caa87a9",
+  "contract_checks": {
+    "score_S": true,
+    "revision": true,
+    "policy": true,
+    "budget40": true,
+    "circle": true,
+    "range": true,
+    "extent": true,
+    "no_instance_adapter": true,
+    "camera_Nov06": true,
+    "camera_TF_receipt_match": true,
+    "ground_profile": true,
+    "ground_training_scalar": true,
+    "camera_nominal": true,
+    "laser_nominal": true,
+    "frontend": true,
+    "no_motion_capture": true
+  },
+  "first_state": {
+    "action_id": 0,
+    "step": 0,
+    "pose": [
+      200,
+      200,
+      0
+    ],
+    "actual_base_pose_planning": [
+      40.1,
+      39.900000000000006,
+      1.5707963267948966
+    ],
+    "frame_id": "1794138862813148822"
+  },
+  "semantic_diagnostics": {
+    "frontend_enabled": true,
+    "receipt": {
+      "schema": "real_semantic_frontend/1",
+      "frame_id": "1794138862813148822",
+      "model_execution_performed": true,
+      "image_detection_alignment_verified": true,
+      "rgb_sha256": "7e7afaab4611a0abd469b8d12e5d2ed39c967a255581b985ee1db7152cc167d3",
+      "image_shape": [
+        720,
+        1280,
+        3
+      ],
+      "prompts": [
+        "shelves",
+        "bookcase",
+        "closed equipment cabinet",
+        "cabinet",
+        "table",
+        "chair",
+        "display counter",
+        "floor",
+        "wall"
+      ],
+      "prior_profile": "real_scene_structural_v1",
+      "v10_mapping": {
+        "shelves": 2,
+        "bookcase": 2,
+        "closed equipment cabinet": 3,
+        "cabinet": 3,
+        "display counter": 3
+      },
+      "unknown_label": 0,
+      "per_class_interpretation": {
+        "shelves": "original V10 class2 open multilayer structural prior",
+        "bookcase": "original V10 class2 open multilayer structural prior",
+        "closed equipment cabinet": "original V10 class3 prior from predicted closed equipment cabinet category",
+        "cabinet": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains cabinet; not recognition of a closed equipment cabinet or measurement of hidden structure",
+        "table": "no V10 structural prior; retain original prompt namespace",
+        "chair": "no V10 structural prior; retain original prompt namespace",
+        "display counter": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains display counter; not recognition of a closed equipment cabinet or measurement of hidden structure",
+        "floor": "no V10 structural prior; retain original prompt namespace",
+        "wall": "no V10 structural prior; retain original prompt namespace"
+      },
+      "semantic_prior_extended": true,
+      "core_formula_unchanged": true,
+      "class_semantics": "uncalibrated prompt predictions; closed state and class accuracy not independently validated",
+      "box_is_segmentation_mask": false,
+      "mask_source": "YOLOE retina instance segmentation",
+      "valid_depth_pixels": 792614,
+      "semantic_pixels": 137485,
+      "prediction_wall_seconds": 1.9870462879989645,
+      "confidence_threshold": 0.25,
+      "imgsz": 640,
+      "device": "cpu",
+      "model_manifest": {
+        "schema": "pinned_yoloe_model_assets/1",
+        "files": [
+          {
+            "filename": "yoloe-v8s-seg.pt",
+            "sha256": "ac2b90ed23011495a3e86d89caeb3432a15129cac8d849ba121293c8fc1e0536",
+            "bytes": 31135890,
+            "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yoloe-v8s-seg.pt"
+          },
+          {
+            "filename": "mobileclip_blt.ts",
+            "sha256": "a67804d1b0f07b8b9a20c1761ec0847f34660f5fa338ec70e8f3fce68ed95e54",
+            "bytes": 599764649,
+            "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/mobileclip_blt.ts"
+          },
+          {
+            "filename": "prompt_embeddings.pt",
+            "sha256": "96aa04ebecac9540e2d013fb862cc8e6c2f704009bb57328a677760fc0b211fd",
+            "bytes": 19662,
+            "source_url": null
+          }
+        ],
+        "prompts": [
+          "shelves",
+          "bookcase",
+          "closed equipment cabinet",
+          "cabinet",
+          "table",
+          "chair",
+          "display counter",
+          "floor",
+          "wall"
+        ],
+        "embedding_generation": "TorchScript MobileCLIP encode_text + YOLOE head.get_tpe; no model weights changed",
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "clip_source": "https://github.com/ultralytics/CLIP",
+        "clip_commit": "7ffa84b3bfa40c42ecc1c77147a855e69cb2dd40",
+        "generation_wall_seconds": 4.014119435014436
+      },
+      "detections": [
+        {
+          "instance_index": 0,
+          "source_class_id": 2,
+          "source_label": "closed equipment cabinet",
+          "class_key": "yoloe_prompt:closed equipment cabinet",
+          "detector_score": 0.5539002418518066,
+          "box_xyxy": [
+            584.7933349609375,
+            194.5711212158203,
+            983.7347412109375,
+            576.8276977539062
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 123988,
+          "valid_depth_pixels": 122218,
+          "assigned_pixels": 122218,
+          "mask_sha256": "1350f05ed89f510dcd7eeee872a6ef774675a3d52a14742ca1e6dd6dc0e42db1"
+        },
+        {
+          "instance_index": 1,
+          "source_class_id": 3,
+          "source_label": "cabinet",
+          "class_key": "yoloe_prompt:cabinet",
+          "detector_score": 0.4934641420841217,
+          "box_xyxy": [
+            487.4127502441406,
+            312.345458984375,
+            587.4351806640625,
+            406.80780029296875
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 8866,
+          "valid_depth_pixels": 4622,
+          "assigned_pixels": 4571,
+          "mask_sha256": "714af241c70629f8beec2e545694aee0442897452b99bae956885201c9b655e8"
+        },
+        {
+          "instance_index": 2,
+          "source_class_id": 2,
+          "source_label": "closed equipment cabinet",
+          "class_key": "yoloe_prompt:closed equipment cabinet",
+          "detector_score": 0.41791069507598877,
+          "box_xyxy": [
+            396.62811279296875,
+            333.74884033203125,
+            472.35626220703125,
+            412.83245849609375
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 5642,
+          "valid_depth_pixels": 5313,
+          "assigned_pixels": 5313,
+          "mask_sha256": "bb93502b5627bdb3bab87d5ae6e527fa5307d6639c0f5362a07845d002f26286"
+        },
+        {
+          "instance_index": 3,
+          "source_class_id": 2,
+          "source_label": "closed equipment cabinet",
+          "class_key": "yoloe_prompt:closed equipment cabinet",
+          "detector_score": 0.38850587606430054,
+          "box_xyxy": [
+            0.0,
+            290.617431640625,
+            37.56888198852539,
+            445.61761474609375
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 5383,
+          "valid_depth_pixels": 5383,
+          "assigned_pixels": 5383,
+          "mask_sha256": "f715e189573df536fe77770e8a0649206333c944911d94c08ca0bcd62de680d2"
+        },
+        {
+          "instance_index": 4,
+          "source_class_id": 7,
+          "source_label": "floor",
+          "class_key": "yoloe_prompt:floor",
+          "detector_score": 0.30390506982803345,
+          "box_xyxy": [
+            0.0,
+            411.30902099609375,
+            1260.83740234375,
+            717.7896118164062
+          ],
+          "v10_class_id": null,
+          "mask_pixels": 302560,
+          "valid_depth_pixels": 302521,
+          "assigned_pixels": 302521,
+          "mask_sha256": "eaf2d0058fac4754cb0a64af4133bf46c0851547bd209b2e4aa36aa3ffaa2864"
+        }
+      ],
+      "overlap_assignment": "highest detector confidence owns each measured pixel including non-V10 classes",
+      "research_policy_changed": true,
+      "source_file_sha256": "80f49ec12c28b4509839d1097330dfb421298b9f6490bcaced17004c4caa87a9",
+      "pixel_stride": 4,
+      "canonical_labelled_pixels": 8595,
+      "canonical_semantic_sha256": "6e8d420a2ee848f0b5843a0fad4f6b18d16b2351df78f569872934d766e84bd4",
+      "decision_effect_validated": false,
+      "mask_file": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/central/score/semantics/fa5abacdf40ca51b390c0d5f.npz",
+      "mask_file_sha256": "9da3ede36dff95ebd9f1e8ec37ee7ba5ae9c0c3adc9c3e3f78ef9eac6952552a"
+    },
+    "quality_labels": {
+      "2": 0,
+      "3": 119
+    },
+    "measured_assets": [
+      {
+        "group": 1,
+        "marked_points": 36,
+        "class_vote": 1.0
+      },
+      {
+        "group": 3,
+        "marked_points": 83,
+        "class_vote": 1.0
+      }
+    ],
+    "same_candidate_S_minus_G": [],
+    "decision_effect_validated": false
+  },
+  "semantic_diagnostics_stage": "after_observe0_before_planning",
+  "post_plan_semantic_diagnostics": {
+    "frontend_enabled": true,
+    "receipt": {
+      "schema": "real_semantic_frontend/1",
+      "frame_id": "1794138862813148822",
+      "model_execution_performed": true,
+      "image_detection_alignment_verified": true,
+      "rgb_sha256": "7e7afaab4611a0abd469b8d12e5d2ed39c967a255581b985ee1db7152cc167d3",
+      "image_shape": [
+        720,
+        1280,
+        3
+      ],
+      "prompts": [
+        "shelves",
+        "bookcase",
+        "closed equipment cabinet",
+        "cabinet",
+        "table",
+        "chair",
+        "display counter",
+        "floor",
+        "wall"
+      ],
+      "prior_profile": "real_scene_structural_v1",
+      "v10_mapping": {
+        "shelves": 2,
+        "bookcase": 2,
+        "closed equipment cabinet": 3,
+        "cabinet": 3,
+        "display counter": 3
+      },
+      "unknown_label": 0,
+      "per_class_interpretation": {
+        "shelves": "original V10 class2 open multilayer structural prior",
+        "bookcase": "original V10 class2 open multilayer structural prior",
+        "closed equipment cabinet": "original V10 class3 prior from predicted closed equipment cabinet category",
+        "cabinet": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains cabinet; not recognition of a closed equipment cabinet or measurement of hidden structure",
+        "table": "no V10 structural prior; retain original prompt namespace",
+        "chair": "no V10 structural prior; retain original prompt namespace",
+        "display counter": "explicit real-scene extension: assume closed enclosure structural prior (V10 slot3); source category remains display counter; not recognition of a closed equipment cabinet or measurement of hidden structure",
+        "floor": "no V10 structural prior; retain original prompt namespace",
+        "wall": "no V10 structural prior; retain original prompt namespace"
+      },
+      "semantic_prior_extended": true,
+      "core_formula_unchanged": true,
+      "class_semantics": "uncalibrated prompt predictions; closed state and class accuracy not independently validated",
+      "box_is_segmentation_mask": false,
+      "mask_source": "YOLOE retina instance segmentation",
+      "valid_depth_pixels": 792614,
+      "semantic_pixels": 137485,
+      "prediction_wall_seconds": 1.9870462879989645,
+      "confidence_threshold": 0.25,
+      "imgsz": 640,
+      "device": "cpu",
+      "model_manifest": {
+        "schema": "pinned_yoloe_model_assets/1",
+        "files": [
+          {
+            "filename": "yoloe-v8s-seg.pt",
+            "sha256": "ac2b90ed23011495a3e86d89caeb3432a15129cac8d849ba121293c8fc1e0536",
+            "bytes": 31135890,
+            "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yoloe-v8s-seg.pt"
+          },
+          {
+            "filename": "mobileclip_blt.ts",
+            "sha256": "a67804d1b0f07b8b9a20c1761ec0847f34660f5fa338ec70e8f3fce68ed95e54",
+            "bytes": 599764649,
+            "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/mobileclip_blt.ts"
+          },
+          {
+            "filename": "prompt_embeddings.pt",
+            "sha256": "96aa04ebecac9540e2d013fb862cc8e6c2f704009bb57328a677760fc0b211fd",
+            "bytes": 19662,
+            "source_url": null
+          }
+        ],
+        "prompts": [
+          "shelves",
+          "bookcase",
+          "closed equipment cabinet",
+          "cabinet",
+          "table",
+          "chair",
+          "display counter",
+          "floor",
+          "wall"
+        ],
+        "embedding_generation": "TorchScript MobileCLIP encode_text + YOLOE head.get_tpe; no model weights changed",
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "clip_source": "https://github.com/ultralytics/CLIP",
+        "clip_commit": "7ffa84b3bfa40c42ecc1c77147a855e69cb2dd40",
+        "generation_wall_seconds": 4.014119435014436
+      },
+      "detections": [
+        {
+          "instance_index": 0,
+          "source_class_id": 2,
+          "source_label": "closed equipment cabinet",
+          "class_key": "yoloe_prompt:closed equipment cabinet",
+          "detector_score": 0.5539002418518066,
+          "box_xyxy": [
+            584.7933349609375,
+            194.5711212158203,
+            983.7347412109375,
+            576.8276977539062
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 123988,
+          "valid_depth_pixels": 122218,
+          "assigned_pixels": 122218,
+          "mask_sha256": "1350f05ed89f510dcd7eeee872a6ef774675a3d52a14742ca1e6dd6dc0e42db1"
+        },
+        {
+          "instance_index": 1,
+          "source_class_id": 3,
+          "source_label": "cabinet",
+          "class_key": "yoloe_prompt:cabinet",
+          "detector_score": 0.4934641420841217,
+          "box_xyxy": [
+            487.4127502441406,
+            312.345458984375,
+            587.4351806640625,
+            406.80780029296875
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 8866,
+          "valid_depth_pixels": 4622,
+          "assigned_pixels": 4571,
+          "mask_sha256": "714af241c70629f8beec2e545694aee0442897452b99bae956885201c9b655e8"
+        },
+        {
+          "instance_index": 2,
+          "source_class_id": 2,
+          "source_label": "closed equipment cabinet",
+          "class_key": "yoloe_prompt:closed equipment cabinet",
+          "detector_score": 0.41791069507598877,
+          "box_xyxy": [
+            396.62811279296875,
+            333.74884033203125,
+            472.35626220703125,
+            412.83245849609375
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 5642,
+          "valid_depth_pixels": 5313,
+          "assigned_pixels": 5313,
+          "mask_sha256": "bb93502b5627bdb3bab87d5ae6e527fa5307d6639c0f5362a07845d002f26286"
+        },
+        {
+          "instance_index": 3,
+          "source_class_id": 2,
+          "source_label": "closed equipment cabinet",
+          "class_key": "yoloe_prompt:closed equipment cabinet",
+          "detector_score": 0.38850587606430054,
+          "box_xyxy": [
+            0.0,
+            290.617431640625,
+            37.56888198852539,
+            445.61761474609375
+          ],
+          "v10_class_id": 3,
+          "mask_pixels": 5383,
+          "valid_depth_pixels": 5383,
+          "assigned_pixels": 5383,
+          "mask_sha256": "f715e189573df536fe77770e8a0649206333c944911d94c08ca0bcd62de680d2"
+        },
+        {
+          "instance_index": 4,
+          "source_class_id": 7,
+          "source_label": "floor",
+          "class_key": "yoloe_prompt:floor",
+          "detector_score": 0.30390506982803345,
+          "box_xyxy": [
+            0.0,
+            411.30902099609375,
+            1260.83740234375,
+            717.7896118164062
+          ],
+          "v10_class_id": null,
+          "mask_pixels": 302560,
+          "valid_depth_pixels": 302521,
+          "assigned_pixels": 302521,
+          "mask_sha256": "eaf2d0058fac4754cb0a64af4133bf46c0851547bd209b2e4aa36aa3ffaa2864"
+        }
+      ],
+      "overlap_assignment": "highest detector confidence owns each measured pixel including non-V10 classes",
+      "research_policy_changed": true,
+      "source_file_sha256": "80f49ec12c28b4509839d1097330dfb421298b9f6490bcaced17004c4caa87a9",
+      "pixel_stride": 4,
+      "canonical_labelled_pixels": 8595,
+      "canonical_semantic_sha256": "6e8d420a2ee848f0b5843a0fad4f6b18d16b2351df78f569872934d766e84bd4",
+      "decision_effect_validated": false,
+      "mask_file": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/central/score/semantics/fa5abacdf40ca51b390c0d5f.npz",
+      "mask_file_sha256": "9da3ede36dff95ebd9f1e8ec37ee7ba5ae9c0c3adc9c3e3f78ef9eac6952552a"
+    },
+    "quality_labels": {
+      "2": 0,
+      "3": 119
+    },
+    "measured_assets": [
+      {
+        "group": 1,
+        "marked_points": 36,
+        "class_vote": 1.0
+      },
+      {
+        "group": 3,
+        "marked_points": 83,
+        "class_vote": 1.0
+      }
+    ],
+    "same_candidate_S_minus_G": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "decision_effect_validated": false
+  },
+  "post_plan_semantic_diagnostics_stage": "after_next_action",
+  "proposed_S_action": "left",
+  "proposed_S_selected": {
+    "candidate_id": 0,
+    "group": "coverage_total_0",
+    "asset_index": null,
+    "pose": [
+      200,
+      182,
+      2
+    ],
+    "states": [
+      [
+        200,
+        200,
+        0
+      ],
+      [
+        200,
+        200,
+        3
+      ],
+      [
+        200,
+        199,
+        3
+      ],
+      [
+        200,
+        198,
+        3
+      ],
+      [
+        200,
+        197,
+        3
+      ],
+      [
+        200,
+        196,
+        3
+      ],
+      [
+        200,
+        195,
+        3
+      ],
+      [
+        200,
+        194,
+        3
+      ],
+      [
+        200,
+        193,
+        3
+      ],
+      [
+        200,
+        192,
+        3
+      ],
+      [
+        200,
+        191,
+        3
+      ],
+      [
+        200,
+        190,
+        3
+      ],
+      [
+        200,
+        189,
+        3
+      ],
+      [
+        200,
+        188,
+        3
+      ],
+      [
+        200,
+        187,
+        3
+      ],
+      [
+        200,
+        186,
+        3
+      ],
+      [
+        200,
+        185,
+        3
+      ],
+      [
+        200,
+        184,
+        3
+      ],
+      [
+        200,
+        183,
+        3
+      ],
+      [
+        200,
+        182,
+        3
+      ],
+      [
+        200,
+        182,
+        2
+      ],
+      [
+        200,
+        182,
+        1
+      ],
+      [
+        200,
+        183,
+        1
+      ],
+      [
+        200,
+        184,
+        1
+      ],
+      [
+        200,
+        185,
+        1
+      ],
+      [
+        200,
+        186,
+        1
+      ],
+      [
+        200,
+        187,
+        1
+      ],
+      [
+        200,
+        188,
+        1
+      ],
+      [
+        200,
+        189,
+        1
+      ],
+      [
+        200,
+        190,
+        1
+      ],
+      [
+        200,
+        191,
+        1
+      ],
+      [
+        200,
+        192,
+        1
+      ],
+      [
+        200,
+        193,
+        1
+      ],
+      [
+        200,
+        194,
+        1
+      ],
+      [
+        200,
+        195,
+        1
+      ],
+      [
+        200,
+        196,
+        1
+      ],
+      [
+        200,
+        197,
+        1
+      ],
+      [
+        200,
+        198,
+        1
+      ],
+      [
+        200,
+        199,
+        1
+      ],
+      [
+        200,
+        200,
+        1
+      ],
+      [
+        200,
+        200,
+        0
+      ]
+    ],
+    "actions": [
+      "left",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "left",
+      "left",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "left"
+    ],
+    "outbound_actions": [
+      "left",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "left"
+    ],
+    "return_actions": [
+      "left",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "forward",
+      "left"
+    ],
+    "return_states": [
+      [
+        200,
+        182,
+        2
+      ],
+      [
+        200,
+        182,
+        1
+      ],
+      [
+        200,
+        183,
+        1
+      ],
+      [
+        200,
+        184,
+        1
+      ],
+      [
+        200,
+        185,
+        1
+      ],
+      [
+        200,
+        186,
+        1
+      ],
+      [
+        200,
+        187,
+        1
+      ],
+      [
+        200,
+        188,
+        1
+      ],
+      [
+        200,
+        189,
+        1
+      ],
+      [
+        200,
+        190,
+        1
+      ],
+      [
+        200,
+        191,
+        1
+      ],
+      [
+        200,
+        192,
+        1
+      ],
+      [
+        200,
+        193,
+        1
+      ],
+      [
+        200,
+        194,
+        1
+      ],
+      [
+        200,
+        195,
+        1
+      ],
+      [
+        200,
+        196,
+        1
+      ],
+      [
+        200,
+        197,
+        1
+      ],
+      [
+        200,
+        198,
+        1
+      ],
+      [
+        200,
+        199,
+        1
+      ],
+      [
+        200,
+        200,
+        1
+      ],
+      [
+        200,
+        200,
+        0
+      ]
+    ],
+    "outbound_states": [
+      [
+        200,
+        200,
+        0
+      ],
+      [
+        200,
+        200,
+        3
+      ],
+      [
+        200,
+        199,
+        3
+      ],
+      [
+        200,
+        198,
+        3
+      ],
+      [
+        200,
+        197,
+        3
+      ],
+      [
+        200,
+        196,
+        3
+      ],
+      [
+        200,
+        195,
+        3
+      ],
+      [
+        200,
+        194,
+        3
+      ],
+      [
+        200,
+        193,
+        3
+      ],
+      [
+        200,
+        192,
+        3
+      ],
+      [
+        200,
+        191,
+        3
+      ],
+      [
+        200,
+        190,
+        3
+      ],
+      [
+        200,
+        189,
+        3
+      ],
+      [
+        200,
+        188,
+        3
+      ],
+      [
+        200,
+        187,
+        3
+      ],
+      [
+        200,
+        186,
+        3
+      ],
+      [
+        200,
+        185,
+        3
+      ],
+      [
+        200,
+        184,
+        3
+      ],
+      [
+        200,
+        183,
+        3
+      ],
+      [
+        200,
+        182,
+        3
+      ],
+      [
+        200,
+        182,
+        2
+      ]
+    ],
+    "cost": 40,
+    "outbound_cost": 20,
+    "return_cost": 20,
+    "arrival_action": 20,
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "is_coverage_anchor": false,
+    "endpoint_measured_fov_support": 0.0,
+    "option_id": "depth_ground_unknown_exploration_20261108/semantic_dev_central/plan-1",
+    "selection_call_id": 4,
+    "selected_map_version": 1,
+    "selected_feedback_version": 1,
+    "parent_region": 1
+  },
+  "within_state_choices": {
+    "C": {
+      "candidate_id": 0,
+      "pose": [
+        200,
+        182,
+        2
+      ],
+      "score": 26.860000000000007
+    },
+    "G": {
+      "candidate_id": 0,
+      "pose": [
+        200,
+        182,
+        2
+      ],
+      "score": 27.476823025111965
+    },
+    "S": {
+      "candidate_id": 0,
+      "pose": [
+        200,
+        182,
+        2
+      ],
+      "score": 27.476823025111965
+    },
+    "X": {
+      "candidate_id": 0,
+      "pose": [
+        200,
+        182,
+        2
+      ],
+      "score": 27.476823025111965
+    }
+  },
+  "selection": {
+    "selected": {
+      "candidate_id": 0,
+      "group": "coverage_total_0",
+      "asset_index": null,
+      "pose": [
+        200,
+        182,
+        2
+      ],
+      "states": [
+        [
+          200,
+          200,
+          0
+        ],
+        [
+          200,
+          200,
+          3
+        ],
+        [
+          200,
+          199,
+          3
+        ],
+        [
+          200,
+          198,
+          3
+        ],
+        [
+          200,
+          197,
+          3
+        ],
+        [
+          200,
+          196,
+          3
+        ],
+        [
+          200,
+          195,
+          3
+        ],
+        [
+          200,
+          194,
+          3
+        ],
+        [
+          200,
+          193,
+          3
+        ],
+        [
+          200,
+          192,
+          3
+        ],
+        [
+          200,
+          191,
+          3
+        ],
+        [
+          200,
+          190,
+          3
+        ],
+        [
+          200,
+          189,
+          3
+        ],
+        [
+          200,
+          188,
+          3
+        ],
+        [
+          200,
+          187,
+          3
+        ],
+        [
+          200,
+          186,
+          3
+        ],
+        [
+          200,
+          185,
+          3
+        ],
+        [
+          200,
+          184,
+          3
+        ],
+        [
+          200,
+          183,
+          3
+        ],
+        [
+          200,
+          182,
+          3
+        ],
+        [
+          200,
+          182,
+          2
+        ],
+        [
+          200,
+          182,
+          1
+        ],
+        [
+          200,
+          183,
+          1
+        ],
+        [
+          200,
+          184,
+          1
+        ],
+        [
+          200,
+          185,
+          1
+        ],
+        [
+          200,
+          186,
+          1
+        ],
+        [
+          200,
+          187,
+          1
+        ],
+        [
+          200,
+          188,
+          1
+        ],
+        [
+          200,
+          189,
+          1
+        ],
+        [
+          200,
+          190,
+          1
+        ],
+        [
+          200,
+          191,
+          1
+        ],
+        [
+          200,
+          192,
+          1
+        ],
+        [
+          200,
+          193,
+          1
+        ],
+        [
+          200,
+          194,
+          1
+        ],
+        [
+          200,
+          195,
+          1
+        ],
+        [
+          200,
+          196,
+          1
+        ],
+        [
+          200,
+          197,
+          1
+        ],
+        [
+          200,
+          198,
+          1
+        ],
+        [
+          200,
+          199,
+          1
+        ],
+        [
+          200,
+          200,
+          1
+        ],
+        [
+          200,
+          200,
+          0
+        ]
+      ],
+      "actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left"
+      ],
+      "outbound_actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left"
+      ],
+      "return_actions": [
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left"
+      ],
+      "return_states": [
+        [
+          200,
+          182,
+          2
+        ],
+        [
+          200,
+          182,
+          1
+        ],
+        [
+          200,
+          183,
+          1
+        ],
+        [
+          200,
+          184,
+          1
+        ],
+        [
+          200,
+          185,
+          1
+        ],
+        [
+          200,
+          186,
+          1
+        ],
+        [
+          200,
+          187,
+          1
+        ],
+        [
+          200,
+          188,
+          1
+        ],
+        [
+          200,
+          189,
+          1
+        ],
+        [
+          200,
+          190,
+          1
+        ],
+        [
+          200,
+          191,
+          1
+        ],
+        [
+          200,
+          192,
+          1
+        ],
+        [
+          200,
+          193,
+          1
+        ],
+        [
+          200,
+          194,
+          1
+        ],
+        [
+          200,
+          195,
+          1
+        ],
+        [
+          200,
+          196,
+          1
+        ],
+        [
+          200,
+          197,
+          1
+        ],
+        [
+          200,
+          198,
+          1
+        ],
+        [
+          200,
+          199,
+          1
+        ],
+        [
+          200,
+          200,
+          1
+        ],
+        [
+          200,
+          200,
+          0
+        ]
+      ],
+      "outbound_states": [
+        [
+          200,
+          200,
+          0
+        ],
+        [
+          200,
+          200,
+          3
+        ],
+        [
+          200,
+          199,
+          3
+        ],
+        [
+          200,
+          198,
+          3
+        ],
+        [
+          200,
+          197,
+          3
+        ],
+        [
+          200,
+          196,
+          3
+        ],
+        [
+          200,
+          195,
+          3
+        ],
+        [
+          200,
+          194,
+          3
+        ],
+        [
+          200,
+          193,
+          3
+        ],
+        [
+          200,
+          192,
+          3
+        ],
+        [
+          200,
+          191,
+          3
+        ],
+        [
+          200,
+          190,
+          3
+        ],
+        [
+          200,
+          189,
+          3
+        ],
+        [
+          200,
+          188,
+          3
+        ],
+        [
+          200,
+          187,
+          3
+        ],
+        [
+          200,
+          186,
+          3
+        ],
+        [
+          200,
+          185,
+          3
+        ],
+        [
+          200,
+          184,
+          3
+        ],
+        [
+          200,
+          183,
+          3
+        ],
+        [
+          200,
+          182,
+          3
+        ],
+        [
+          200,
+          182,
+          2
+        ]
+      ],
+      "cost": 40,
+      "outbound_cost": 20,
+      "return_cost": 20,
+      "arrival_action": 20,
+      "return_anchor": [
+        200,
+        200,
+        0
+      ],
+      "is_coverage_anchor": false,
+      "endpoint_measured_fov_support": 0.0,
+      "option_id": "depth_ground_unknown_exploration_20261108/semantic_dev_central/plan-1",
+      "selection_call_id": 4,
+      "selected_map_version": 1,
+      "selected_feedback_version": 1,
+      "parent_region": 1
+    },
+    "candidates": [
+      {
+        "candidate_id": 0,
+        "group": "coverage_total_0",
+        "asset_index": null,
+        "pose": [
+          200,
+          182,
+          2
+        ],
+        "states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            199,
+            3
+          ],
+          [
+            200,
+            198,
+            3
+          ],
+          [
+            200,
+            197,
+            3
+          ],
+          [
+            200,
+            196,
+            3
+          ],
+          [
+            200,
+            195,
+            3
+          ],
+          [
+            200,
+            194,
+            3
+          ],
+          [
+            200,
+            193,
+            3
+          ],
+          [
+            200,
+            192,
+            3
+          ],
+          [
+            200,
+            191,
+            3
+          ],
+          [
+            200,
+            190,
+            3
+          ],
+          [
+            200,
+            189,
+            3
+          ],
+          [
+            200,
+            188,
+            3
+          ],
+          [
+            200,
+            187,
+            3
+          ],
+          [
+            200,
+            186,
+            3
+          ],
+          [
+            200,
+            185,
+            3
+          ],
+          [
+            200,
+            184,
+            3
+          ],
+          [
+            200,
+            183,
+            3
+          ],
+          [
+            200,
+            182,
+            3
+          ],
+          [
+            200,
+            182,
+            2
+          ],
+          [
+            200,
+            182,
+            1
+          ],
+          [
+            200,
+            183,
+            1
+          ],
+          [
+            200,
+            184,
+            1
+          ],
+          [
+            200,
+            185,
+            1
+          ],
+          [
+            200,
+            186,
+            1
+          ],
+          [
+            200,
+            187,
+            1
+          ],
+          [
+            200,
+            188,
+            1
+          ],
+          [
+            200,
+            189,
+            1
+          ],
+          [
+            200,
+            190,
+            1
+          ],
+          [
+            200,
+            191,
+            1
+          ],
+          [
+            200,
+            192,
+            1
+          ],
+          [
+            200,
+            193,
+            1
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "outbound_actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "return_actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "return_states": [
+          [
+            200,
+            182,
+            2
+          ],
+          [
+            200,
+            182,
+            1
+          ],
+          [
+            200,
+            183,
+            1
+          ],
+          [
+            200,
+            184,
+            1
+          ],
+          [
+            200,
+            185,
+            1
+          ],
+          [
+            200,
+            186,
+            1
+          ],
+          [
+            200,
+            187,
+            1
+          ],
+          [
+            200,
+            188,
+            1
+          ],
+          [
+            200,
+            189,
+            1
+          ],
+          [
+            200,
+            190,
+            1
+          ],
+          [
+            200,
+            191,
+            1
+          ],
+          [
+            200,
+            192,
+            1
+          ],
+          [
+            200,
+            193,
+            1
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "outbound_states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            199,
+            3
+          ],
+          [
+            200,
+            198,
+            3
+          ],
+          [
+            200,
+            197,
+            3
+          ],
+          [
+            200,
+            196,
+            3
+          ],
+          [
+            200,
+            195,
+            3
+          ],
+          [
+            200,
+            194,
+            3
+          ],
+          [
+            200,
+            193,
+            3
+          ],
+          [
+            200,
+            192,
+            3
+          ],
+          [
+            200,
+            191,
+            3
+          ],
+          [
+            200,
+            190,
+            3
+          ],
+          [
+            200,
+            189,
+            3
+          ],
+          [
+            200,
+            188,
+            3
+          ],
+          [
+            200,
+            187,
+            3
+          ],
+          [
+            200,
+            186,
+            3
+          ],
+          [
+            200,
+            185,
+            3
+          ],
+          [
+            200,
+            184,
+            3
+          ],
+          [
+            200,
+            183,
+            3
+          ],
+          [
+            200,
+            182,
+            3
+          ],
+          [
+            200,
+            182,
+            2
+          ]
+        ],
+        "cost": 40,
+        "outbound_cost": 20,
+        "return_cost": 20,
+        "arrival_action": 20,
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "is_coverage_anchor": false,
+        "endpoint_measured_fov_support": 0.0
+      },
+      {
+        "candidate_id": 1,
+        "group": "coverage_total_1",
+        "asset_index": null,
+        "pose": [
+          203,
+          214,
+          2
+        ],
+        "states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            201,
+            1
+          ],
+          [
+            200,
+            202,
+            1
+          ],
+          [
+            200,
+            203,
+            1
+          ],
+          [
+            200,
+            204,
+            1
+          ],
+          [
+            200,
+            205,
+            1
+          ],
+          [
+            200,
+            206,
+            1
+          ],
+          [
+            200,
+            207,
+            1
+          ],
+          [
+            200,
+            208,
+            1
+          ],
+          [
+            200,
+            209,
+            1
+          ],
+          [
+            200,
+            210,
+            1
+          ],
+          [
+            200,
+            211,
+            1
+          ],
+          [
+            200,
+            212,
+            1
+          ],
+          [
+            200,
+            212,
+            2
+          ],
+          [
+            201,
+            212,
+            2
+          ],
+          [
+            202,
+            212,
+            2
+          ],
+          [
+            203,
+            212,
+            2
+          ],
+          [
+            203,
+            212,
+            1
+          ],
+          [
+            203,
+            213,
+            1
+          ],
+          [
+            203,
+            214,
+            1
+          ],
+          [
+            203,
+            214,
+            2
+          ],
+          [
+            203,
+            214,
+            3
+          ],
+          [
+            203,
+            213,
+            3
+          ],
+          [
+            203,
+            212,
+            3
+          ],
+          [
+            203,
+            211,
+            3
+          ],
+          [
+            203,
+            210,
+            3
+          ],
+          [
+            203,
+            209,
+            3
+          ],
+          [
+            203,
+            208,
+            3
+          ],
+          [
+            203,
+            207,
+            3
+          ],
+          [
+            203,
+            206,
+            3
+          ],
+          [
+            203,
+            205,
+            3
+          ],
+          [
+            203,
+            204,
+            3
+          ],
+          [
+            203,
+            203,
+            3
+          ],
+          [
+            203,
+            202,
+            3
+          ],
+          [
+            203,
+            201,
+            3
+          ],
+          [
+            203,
+            200,
+            3
+          ],
+          [
+            203,
+            200,
+            0
+          ],
+          [
+            202,
+            200,
+            0
+          ],
+          [
+            201,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "actions": [
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "right",
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "forward"
+        ],
+        "outbound_actions": [
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "right"
+        ],
+        "return_actions": [
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "forward"
+        ],
+        "return_states": [
+          [
+            203,
+            214,
+            2
+          ],
+          [
+            203,
+            214,
+            3
+          ],
+          [
+            203,
+            213,
+            3
+          ],
+          [
+            203,
+            212,
+            3
+          ],
+          [
+            203,
+            211,
+            3
+          ],
+          [
+            203,
+            210,
+            3
+          ],
+          [
+            203,
+            209,
+            3
+          ],
+          [
+            203,
+            208,
+            3
+          ],
+          [
+            203,
+            207,
+            3
+          ],
+          [
+            203,
+            206,
+            3
+          ],
+          [
+            203,
+            205,
+            3
+          ],
+          [
+            203,
+            204,
+            3
+          ],
+          [
+            203,
+            203,
+            3
+          ],
+          [
+            203,
+            202,
+            3
+          ],
+          [
+            203,
+            201,
+            3
+          ],
+          [
+            203,
+            200,
+            3
+          ],
+          [
+            203,
+            200,
+            0
+          ],
+          [
+            202,
+            200,
+            0
+          ],
+          [
+            201,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "outbound_states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            201,
+            1
+          ],
+          [
+            200,
+            202,
+            1
+          ],
+          [
+            200,
+            203,
+            1
+          ],
+          [
+            200,
+            204,
+            1
+          ],
+          [
+            200,
+            205,
+            1
+          ],
+          [
+            200,
+            206,
+            1
+          ],
+          [
+            200,
+            207,
+            1
+          ],
+          [
+            200,
+            208,
+            1
+          ],
+          [
+            200,
+            209,
+            1
+          ],
+          [
+            200,
+            210,
+            1
+          ],
+          [
+            200,
+            211,
+            1
+          ],
+          [
+            200,
+            212,
+            1
+          ],
+          [
+            200,
+            212,
+            2
+          ],
+          [
+            201,
+            212,
+            2
+          ],
+          [
+            202,
+            212,
+            2
+          ],
+          [
+            203,
+            212,
+            2
+          ],
+          [
+            203,
+            212,
+            1
+          ],
+          [
+            203,
+            213,
+            1
+          ],
+          [
+            203,
+            214,
+            1
+          ],
+          [
+            203,
+            214,
+            2
+          ]
+        ],
+        "cost": 40,
+        "outbound_cost": 21,
+        "return_cost": 19,
+        "arrival_action": 21,
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "is_coverage_anchor": false,
+        "endpoint_measured_fov_support": 0.0
+      },
+      {
+        "candidate_id": 2,
+        "group": "coverage_total_2",
+        "asset_index": null,
+        "pose": [
+          199,
+          183,
+          2
+        ],
+        "states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            199,
+            200,
+            0
+          ],
+          [
+            199,
+            200,
+            3
+          ],
+          [
+            199,
+            199,
+            3
+          ],
+          [
+            199,
+            198,
+            3
+          ],
+          [
+            199,
+            197,
+            3
+          ],
+          [
+            199,
+            196,
+            3
+          ],
+          [
+            199,
+            195,
+            3
+          ],
+          [
+            199,
+            194,
+            3
+          ],
+          [
+            199,
+            193,
+            3
+          ],
+          [
+            199,
+            192,
+            3
+          ],
+          [
+            199,
+            191,
+            3
+          ],
+          [
+            199,
+            190,
+            3
+          ],
+          [
+            199,
+            189,
+            3
+          ],
+          [
+            199,
+            188,
+            3
+          ],
+          [
+            199,
+            187,
+            3
+          ],
+          [
+            199,
+            186,
+            3
+          ],
+          [
+            199,
+            185,
+            3
+          ],
+          [
+            199,
+            184,
+            3
+          ],
+          [
+            199,
+            183,
+            3
+          ],
+          [
+            199,
+            183,
+            2
+          ],
+          [
+            200,
+            183,
+            2
+          ],
+          [
+            200,
+            183,
+            1
+          ],
+          [
+            200,
+            184,
+            1
+          ],
+          [
+            200,
+            185,
+            1
+          ],
+          [
+            200,
+            186,
+            1
+          ],
+          [
+            200,
+            187,
+            1
+          ],
+          [
+            200,
+            188,
+            1
+          ],
+          [
+            200,
+            189,
+            1
+          ],
+          [
+            200,
+            190,
+            1
+          ],
+          [
+            200,
+            191,
+            1
+          ],
+          [
+            200,
+            192,
+            1
+          ],
+          [
+            200,
+            193,
+            1
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "actions": [
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "outbound_actions": [
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "return_actions": [
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "return_states": [
+          [
+            199,
+            183,
+            2
+          ],
+          [
+            200,
+            183,
+            2
+          ],
+          [
+            200,
+            183,
+            1
+          ],
+          [
+            200,
+            184,
+            1
+          ],
+          [
+            200,
+            185,
+            1
+          ],
+          [
+            200,
+            186,
+            1
+          ],
+          [
+            200,
+            187,
+            1
+          ],
+          [
+            200,
+            188,
+            1
+          ],
+          [
+            200,
+            189,
+            1
+          ],
+          [
+            200,
+            190,
+            1
+          ],
+          [
+            200,
+            191,
+            1
+          ],
+          [
+            200,
+            192,
+            1
+          ],
+          [
+            200,
+            193,
+            1
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "outbound_states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            199,
+            200,
+            0
+          ],
+          [
+            199,
+            200,
+            3
+          ],
+          [
+            199,
+            199,
+            3
+          ],
+          [
+            199,
+            198,
+            3
+          ],
+          [
+            199,
+            197,
+            3
+          ],
+          [
+            199,
+            196,
+            3
+          ],
+          [
+            199,
+            195,
+            3
+          ],
+          [
+            199,
+            194,
+            3
+          ],
+          [
+            199,
+            193,
+            3
+          ],
+          [
+            199,
+            192,
+            3
+          ],
+          [
+            199,
+            191,
+            3
+          ],
+          [
+            199,
+            190,
+            3
+          ],
+          [
+            199,
+            189,
+            3
+          ],
+          [
+            199,
+            188,
+            3
+          ],
+          [
+            199,
+            187,
+            3
+          ],
+          [
+            199,
+            186,
+            3
+          ],
+          [
+            199,
+            185,
+            3
+          ],
+          [
+            199,
+            184,
+            3
+          ],
+          [
+            199,
+            183,
+            3
+          ],
+          [
+            199,
+            183,
+            2
+          ]
+        ],
+        "cost": 40,
+        "outbound_cost": 20,
+        "return_cost": 20,
+        "arrival_action": 20,
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "is_coverage_anchor": false,
+        "endpoint_measured_fov_support": 0.0
+      },
+      {
+        "candidate_id": 3,
+        "group": "coverage_total_3",
+        "asset_index": null,
+        "pose": [
+          189,
+          194,
+          0
+        ],
+        "states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            199,
+            3
+          ],
+          [
+            200,
+            198,
+            3
+          ],
+          [
+            200,
+            197,
+            3
+          ],
+          [
+            200,
+            196,
+            3
+          ],
+          [
+            200,
+            195,
+            3
+          ],
+          [
+            200,
+            194,
+            3
+          ],
+          [
+            200,
+            194,
+            0
+          ],
+          [
+            199,
+            194,
+            0
+          ],
+          [
+            198,
+            194,
+            0
+          ],
+          [
+            197,
+            194,
+            0
+          ],
+          [
+            196,
+            194,
+            0
+          ],
+          [
+            195,
+            194,
+            0
+          ],
+          [
+            194,
+            194,
+            0
+          ],
+          [
+            193,
+            194,
+            0
+          ],
+          [
+            192,
+            194,
+            0
+          ],
+          [
+            191,
+            194,
+            0
+          ],
+          [
+            190,
+            194,
+            0
+          ],
+          [
+            189,
+            194,
+            0
+          ],
+          [
+            189,
+            194,
+            3
+          ],
+          [
+            189,
+            194,
+            2
+          ],
+          [
+            190,
+            194,
+            2
+          ],
+          [
+            191,
+            194,
+            2
+          ],
+          [
+            192,
+            194,
+            2
+          ],
+          [
+            193,
+            194,
+            2
+          ],
+          [
+            194,
+            194,
+            2
+          ],
+          [
+            195,
+            194,
+            2
+          ],
+          [
+            196,
+            194,
+            2
+          ],
+          [
+            197,
+            194,
+            2
+          ],
+          [
+            198,
+            194,
+            2
+          ],
+          [
+            199,
+            194,
+            2
+          ],
+          [
+            200,
+            194,
+            2
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "outbound_actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "right",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward"
+        ],
+        "return_actions": [
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "return_states": [
+          [
+            189,
+            194,
+            0
+          ],
+          [
+            189,
+            194,
+            3
+          ],
+          [
+            189,
+            194,
+            2
+          ],
+          [
+            190,
+            194,
+            2
+          ],
+          [
+            191,
+            194,
+            2
+          ],
+          [
+            192,
+            194,
+            2
+          ],
+          [
+            193,
+            194,
+            2
+          ],
+          [
+            194,
+            194,
+            2
+          ],
+          [
+            195,
+            194,
+            2
+          ],
+          [
+            196,
+            194,
+            2
+          ],
+          [
+            197,
+            194,
+            2
+          ],
+          [
+            198,
+            194,
+            2
+          ],
+          [
+            199,
+            194,
+            2
+          ],
+          [
+            200,
+            194,
+            2
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "outbound_states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            199,
+            3
+          ],
+          [
+            200,
+            198,
+            3
+          ],
+          [
+            200,
+            197,
+            3
+          ],
+          [
+            200,
+            196,
+            3
+          ],
+          [
+            200,
+            195,
+            3
+          ],
+          [
+            200,
+            194,
+            3
+          ],
+          [
+            200,
+            194,
+            0
+          ],
+          [
+            199,
+            194,
+            0
+          ],
+          [
+            198,
+            194,
+            0
+          ],
+          [
+            197,
+            194,
+            0
+          ],
+          [
+            196,
+            194,
+            0
+          ],
+          [
+            195,
+            194,
+            0
+          ],
+          [
+            194,
+            194,
+            0
+          ],
+          [
+            193,
+            194,
+            0
+          ],
+          [
+            192,
+            194,
+            0
+          ],
+          [
+            191,
+            194,
+            0
+          ],
+          [
+            190,
+            194,
+            0
+          ],
+          [
+            189,
+            194,
+            0
+          ]
+        ],
+        "cost": 40,
+        "outbound_cost": 19,
+        "return_cost": 21,
+        "arrival_action": 19,
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "is_coverage_anchor": false,
+        "endpoint_measured_fov_support": 0.20607375271149675
+      },
+      {
+        "candidate_id": 4,
+        "group": "old_surface_rotation",
+        "asset_index": null,
+        "pose": [
+          200,
+          200,
+          3
+        ],
+        "states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "actions": [
+          "left",
+          "right"
+        ],
+        "outbound_actions": [
+          "left"
+        ],
+        "return_actions": [
+          "right"
+        ],
+        "return_states": [
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "outbound_states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ]
+        ],
+        "cost": 2,
+        "outbound_cost": 1,
+        "return_cost": 1,
+        "arrival_action": 1,
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "is_coverage_anchor": false,
+        "endpoint_measured_fov_support": 0.2603036876355748
+      }
+    ],
+    "scores": {
+      "N": [
+        27.476823025111965,
+        21.209458111682252,
+        24.62459688524041,
+        24.440391933530467,
+        0.12438396052208167
+      ],
+      "G": [
+        27.476823025111965,
+        21.209458111682252,
+        24.62459688524041,
+        24.440391933530467,
+        0.12438396052208167
+      ],
+      "O": [
+        27.476823025111965,
+        21.209458111682252,
+        24.62459688524041,
+        24.440391933530467,
+        0.12438396052208167
+      ],
+      "S": [
+        27.476823025111965,
+        21.209458111682252,
+        24.62459688524041,
+        24.440391933530467,
+        0.12438396052208167
+      ],
+      "X": [
+        27.476823025111965,
+        21.209458111682252,
+        24.62459688524041,
+        24.440391933530467,
+        0.12438396052208167
+      ],
+      "M": [
+        27.476823025111965,
+        21.209458111682252,
+        24.62459688524041,
+        24.440391933530467,
+        0.12438396052208167
+      ],
+      "C": [
+        26.860000000000007,
+        21.040000000000003,
+        23.900000000000006,
+        22.100000000000005,
+        0.0
+      ]
+    },
+    "score_audit": [
+      {
+        "candidate_id": 0,
+        "common_total_proxy": 27.476823025111965,
+        "predicted_radar_cells": 1239,
+        "predicted_camera_cells": 104,
+        "quality_total_proxy": 0.6168230251119595,
+        "gain_posterior": {
+          "radar": 0.5,
+          "camera": 0.5
+        },
+        "incremental_aperture": [
+          0.0,
+          0.0
+        ],
+        "prior_potentials": {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        "measured_direction_support": [
+          [
+            0.0,
+            0.0,
+            0.6328125,
+            0.3671875,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.109375,
+            0.8359375,
+            0.0546875,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "measured_novelty_floor": 0.25,
+        "coverage_only_proxy": 26.860000000000007
+      },
+      {
+        "candidate_id": 1,
+        "common_total_proxy": 21.209458111682252,
+        "predicted_radar_cells": 889,
+        "predicted_camera_cells": 163,
+        "quality_total_proxy": 0.16945811168224448,
+        "gain_posterior": {
+          "radar": 0.5,
+          "camera": 0.5
+        },
+        "incremental_aperture": [
+          0.0,
+          0.0
+        ],
+        "prior_potentials": {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        "measured_direction_support": [
+          [
+            0.0,
+            0.0,
+            0.6328125,
+            0.3671875,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.109375,
+            0.8359375,
+            0.0546875,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "measured_novelty_floor": 0.25,
+        "coverage_only_proxy": 21.040000000000003
+      },
+      {
+        "candidate_id": 2,
+        "common_total_proxy": 24.62459688524041,
+        "predicted_radar_cells": 1119,
+        "predicted_camera_cells": 76,
+        "quality_total_proxy": 0.7245968852404046,
+        "gain_posterior": {
+          "radar": 0.5,
+          "camera": 0.5
+        },
+        "incremental_aperture": [
+          0.0,
+          0.0
+        ],
+        "prior_potentials": {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        "measured_direction_support": [
+          [
+            0.0,
+            0.0,
+            0.6328125,
+            0.3671875,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.109375,
+            0.8359375,
+            0.0546875,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "measured_novelty_floor": 0.25,
+        "coverage_only_proxy": 23.900000000000006
+      },
+      {
+        "candidate_id": 3,
+        "common_total_proxy": 24.440391933530467,
+        "predicted_radar_cells": 1026,
+        "predicted_camera_cells": 79,
+        "quality_total_proxy": 2.3403919335304635,
+        "gain_posterior": {
+          "radar": 0.5,
+          "camera": 0.5
+        },
+        "incremental_aperture": [
+          0.0,
+          0.0
+        ],
+        "prior_potentials": {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        "measured_direction_support": [
+          [
+            0.0,
+            0.0,
+            0.6328125,
+            0.3671875,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.109375,
+            0.8359375,
+            0.0546875,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "measured_novelty_floor": 0.25,
+        "coverage_only_proxy": 22.100000000000005
+      },
+      {
+        "candidate_id": 4,
+        "common_total_proxy": 0.12438396052208167,
+        "predicted_radar_cells": 0,
+        "predicted_camera_cells": 0,
+        "quality_total_proxy": 0.12438396052208167,
+        "gain_posterior": {
+          "radar": 0.5,
+          "camera": 0.5
+        },
+        "incremental_aperture": [
+          0.0,
+          0.0
+        ],
+        "prior_potentials": {
+          "N": 0.0,
+          "G": 0.0,
+          "O": 0.0,
+          "S": 0.0,
+          "X": 0.0,
+          "M": 0.0
+        },
+        "measured_direction_support": [
+          [
+            0.0,
+            0.0,
+            0.6328125,
+            0.3671875,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.109375,
+            0.8359375,
+            0.0546875,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "measured_novelty_floor": 0.25,
+        "coverage_only_proxy": 0.0
+      }
+    ],
+    "candidate_audit": {
+      "schema_version": "exploration_joint_v1/options/1",
+      "remaining_budget": 40,
+      "max_candidates": 12,
+      "current_pose": [
+        200,
+        200,
+        0
+      ],
+      "return_anchor": [
+        200,
+        200,
+        0
+      ],
+      "safe_sha256": "0ecacda453f1f3b70cc491c884c995019cdc6d766915b04b8721fb35f9abb7a0",
+      "belief_sha256": "c3ea752107aac8cdd0ca99fea916ee76d7513e0cd88e28043e5a7b8f760cec8f",
+      "camera_seen_sha256": "9350e8b1b446edacd87cf9732b03d8fc5539f227b9f7fc3c47bf402bf93a9bc8",
+      "labels_used_for_selection": false,
+      "truth_used_for_selection": false,
+      "future_outcome_used": false,
+      "all_costs_include_return_heading": true,
+      "coverage_strategy": "total_diverse",
+      "coverage_slots": 4,
+      "attempted_camera_sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+      "runtime_commits_only_outbound": true,
+      "planned_return_is_observed_evidence": false,
+      "missing_roles": [
+        "asset_0_entry",
+        "asset_1_entry",
+        "asset_0_deep",
+        "asset_1_deep"
+      ],
+      "omitted_by_cap": [],
+      "target_audit": [
+        {
+          "role": "asset_0_entry",
+          "asset_index": 0,
+          "desired_xy": [
+            38.03095108003147,
+            44.6
+          ],
+          "navigation_rear_boundary_xy": [
+            38.03095108003147,
+            44.2
+          ],
+          "measured_point_rear_boundary_xy": [
+            38.03095108003147,
+            43.950015351233176
+          ],
+          "nearest_error_m": null,
+          "actual_back_axis_offset_m": null,
+          "aperture_support_fraction": null,
+          "reason": "no_unused_feasible_aperture_pose"
+        },
+        {
+          "role": "asset_1_entry",
+          "asset_index": 1,
+          "desired_xy": [
+            40.985715421886525,
+            43.2
+          ],
+          "navigation_rear_boundary_xy": [
+            40.985715421886525,
+            42.800000000000004
+          ],
+          "measured_point_rear_boundary_xy": [
+            40.985715421886525,
+            42.52195348657812
+          ],
+          "nearest_error_m": null,
+          "actual_back_axis_offset_m": null,
+          "aperture_support_fraction": null,
+          "reason": "no_unused_feasible_aperture_pose"
+        },
+        {
+          "role": "asset_0_deep",
+          "asset_index": 0,
+          "desired_xy": [
+            38.03095108003147,
+            45.0
+          ],
+          "navigation_rear_boundary_xy": [
+            38.03095108003147,
+            44.2
+          ],
+          "measured_point_rear_boundary_xy": [
+            38.03095108003147,
+            43.950015351233176
+          ],
+          "nearest_error_m": null,
+          "actual_back_axis_offset_m": null,
+          "aperture_support_fraction": null,
+          "reason": "deep_requires_available_entry"
+        },
+        {
+          "role": "asset_1_deep",
+          "asset_index": 1,
+          "desired_xy": [
+            40.985715421886525,
+            43.6
+          ],
+          "navigation_rear_boundary_xy": [
+            40.985715421886525,
+            42.800000000000004
+          ],
+          "measured_point_rear_boundary_xy": [
+            40.985715421886525,
+            42.52195348657812
+          ],
+          "nearest_error_m": null,
+          "actual_back_axis_offset_m": null,
+          "aperture_support_fraction": null,
+          "reason": "deep_requires_available_entry"
+        }
+      ],
+      "common_role_audit": [
+        {
+          "role": "coverage_total_0",
+          "reason": "top_total_observable_support_per_spatial_bin",
+          "pose": [
+            200,
+            182,
+            2
+          ],
+          "planned_paid_cost": 40,
+          "outbound_cost": 20,
+          "radar_unknown_cells": 899,
+          "camera_unknown_cells": 104,
+          "radar_camera_proxies_may_overlap": true,
+          "positive_unknown_proxy": true
+        },
+        {
+          "role": "coverage_total_1",
+          "reason": "top_total_observable_support_per_spatial_bin",
+          "pose": [
+            203,
+            214,
+            2
+          ],
+          "planned_paid_cost": 40,
+          "outbound_cost": 21,
+          "radar_unknown_cells": 830,
+          "camera_unknown_cells": 162,
+          "radar_camera_proxies_may_overlap": true,
+          "positive_unknown_proxy": true
+        },
+        {
+          "role": "coverage_total_2",
+          "reason": "top_total_observable_support_per_spatial_bin",
+          "pose": [
+            199,
+            183,
+            2
+          ],
+          "planned_paid_cost": 40,
+          "outbound_cost": 20,
+          "radar_unknown_cells": 792,
+          "camera_unknown_cells": 76,
+          "radar_camera_proxies_may_overlap": true,
+          "positive_unknown_proxy": true
+        },
+        {
+          "role": "coverage_total_3",
+          "reason": "top_total_observable_support_per_spatial_bin",
+          "pose": [
+            189,
+            194,
+            0
+          ],
+          "planned_paid_cost": 40,
+          "outbound_cost": 19,
+          "radar_unknown_cells": 742,
+          "camera_unknown_cells": 69,
+          "radar_camera_proxies_may_overlap": true,
+          "positive_unknown_proxy": true
+        },
+        {
+          "role": "old_surface_rotation",
+          "reason": "selected",
+          "pose": [
+            200,
+            200,
+            3
+          ],
+          "measured_fov_support": 0.2603036876355748
+        }
+      ],
+      "measured_assets": [
+        {
+          "group": 1,
+          "observed_low": [
+            36.890433243853046,
+            42.37604665385705,
+            0.16053647501137136
+          ],
+          "observed_high": [
+            39.17146891620989,
+            43.950015351233176,
+            1.7034675982462437
+          ],
+          "aabb_center": [
+            38.03095108003147,
+            43.16303100254511,
+            0.9320020366288075
+          ],
+          "front_axis": [
+            0.0,
+            -1.0
+          ],
+          "back_axis": [
+            -0.0,
+            1.0
+          ],
+          "side_axis": [
+            -1.0,
+            -0.0
+          ],
+          "rear_boundary_xy": [
+            38.03095108003147,
+            43.950015351233176
+          ],
+          "measured_width_m": 2.2810356723568432,
+          "measured_depth_m": 1.5739686973761238,
+          "measured_height_m": 1.5429311232348724,
+          "support_points": 243
+        },
+        {
+          "group": 3,
+          "observed_low": [
+            39.982503213093636,
+            41.235901618277815,
+            0.14314132630013793
+          ],
+          "observed_high": [
+            41.98892763067942,
+            42.52195348657812,
+            1.642340185277961
+          ],
+          "aabb_center": [
+            40.985715421886525,
+            41.87892755242797,
+            0.8927407557890495
+          ],
+          "front_axis": [
+            0.0,
+            -1.0
+          ],
+          "back_axis": [
+            -0.0,
+            1.0
+          ],
+          "side_axis": [
+            -1.0,
+            -0.0
+          ],
+          "rear_boundary_xy": [
+            40.985715421886525,
+            42.52195348657812
+          ],
+          "measured_width_m": 2.0064244175857837,
+          "measured_depth_m": 1.286051868300305,
+          "measured_height_m": 1.4991988589778231,
+          "support_points": 216
+        }
+      ],
+      "observed_asset_count": 2,
+      "feasible_states": 1349,
+      "minimum_current_return_cost": 0,
+      "status": "options_available",
+      "available_roles": [
+        "coverage_total_0",
+        "coverage_total_1",
+        "coverage_total_2",
+        "coverage_total_3",
+        "old_surface_rotation"
+      ],
+      "candidate_count": 5,
+      "all_target_poses_unique": true
+    },
+    "mode": "S",
+    "plan_number": 1,
+    "planner_revision": "v10_3_1",
+    "policy_variant": "exploration_joint_v1",
+    "gain_calibration": {
+      "schema_version": "observed_gain_calibration_v10_1/1",
+      "feedback_enabled": true,
+      "consume_predicted_attempts": false,
+      "posterior_mean": {
+        "radar": 0.5,
+        "camera": 0.5
+      },
+      "alpha": {
+        "radar": 1,
+        "camera": 1
+      },
+      "beta": {
+        "radar": 1,
+        "camera": 1
+      },
+      "observed_actions": 0,
+      "pending_action_ids": [],
+      "events": []
+    }
+  },
+  "runtime_events": [
+    {
+      "event": "global_choice",
+      "scene_idx": 0,
+      "frame_id": "1794138862813148822",
+      "map_version": 1,
+      "option": {
+        "candidate_id": 0,
+        "group": "coverage_total_0",
+        "asset_index": null,
+        "pose": [
+          200,
+          182,
+          2
+        ],
+        "states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            199,
+            3
+          ],
+          [
+            200,
+            198,
+            3
+          ],
+          [
+            200,
+            197,
+            3
+          ],
+          [
+            200,
+            196,
+            3
+          ],
+          [
+            200,
+            195,
+            3
+          ],
+          [
+            200,
+            194,
+            3
+          ],
+          [
+            200,
+            193,
+            3
+          ],
+          [
+            200,
+            192,
+            3
+          ],
+          [
+            200,
+            191,
+            3
+          ],
+          [
+            200,
+            190,
+            3
+          ],
+          [
+            200,
+            189,
+            3
+          ],
+          [
+            200,
+            188,
+            3
+          ],
+          [
+            200,
+            187,
+            3
+          ],
+          [
+            200,
+            186,
+            3
+          ],
+          [
+            200,
+            185,
+            3
+          ],
+          [
+            200,
+            184,
+            3
+          ],
+          [
+            200,
+            183,
+            3
+          ],
+          [
+            200,
+            182,
+            3
+          ],
+          [
+            200,
+            182,
+            2
+          ],
+          [
+            200,
+            182,
+            1
+          ],
+          [
+            200,
+            183,
+            1
+          ],
+          [
+            200,
+            184,
+            1
+          ],
+          [
+            200,
+            185,
+            1
+          ],
+          [
+            200,
+            186,
+            1
+          ],
+          [
+            200,
+            187,
+            1
+          ],
+          [
+            200,
+            188,
+            1
+          ],
+          [
+            200,
+            189,
+            1
+          ],
+          [
+            200,
+            190,
+            1
+          ],
+          [
+            200,
+            191,
+            1
+          ],
+          [
+            200,
+            192,
+            1
+          ],
+          [
+            200,
+            193,
+            1
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left",
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "outbound_actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "return_actions": [
+          "left",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "forward",
+          "left"
+        ],
+        "return_states": [
+          [
+            200,
+            182,
+            2
+          ],
+          [
+            200,
+            182,
+            1
+          ],
+          [
+            200,
+            183,
+            1
+          ],
+          [
+            200,
+            184,
+            1
+          ],
+          [
+            200,
+            185,
+            1
+          ],
+          [
+            200,
+            186,
+            1
+          ],
+          [
+            200,
+            187,
+            1
+          ],
+          [
+            200,
+            188,
+            1
+          ],
+          [
+            200,
+            189,
+            1
+          ],
+          [
+            200,
+            190,
+            1
+          ],
+          [
+            200,
+            191,
+            1
+          ],
+          [
+            200,
+            192,
+            1
+          ],
+          [
+            200,
+            193,
+            1
+          ],
+          [
+            200,
+            194,
+            1
+          ],
+          [
+            200,
+            195,
+            1
+          ],
+          [
+            200,
+            196,
+            1
+          ],
+          [
+            200,
+            197,
+            1
+          ],
+          [
+            200,
+            198,
+            1
+          ],
+          [
+            200,
+            199,
+            1
+          ],
+          [
+            200,
+            200,
+            1
+          ],
+          [
+            200,
+            200,
+            0
+          ]
+        ],
+        "outbound_states": [
+          [
+            200,
+            200,
+            0
+          ],
+          [
+            200,
+            200,
+            3
+          ],
+          [
+            200,
+            199,
+            3
+          ],
+          [
+            200,
+            198,
+            3
+          ],
+          [
+            200,
+            197,
+            3
+          ],
+          [
+            200,
+            196,
+            3
+          ],
+          [
+            200,
+            195,
+            3
+          ],
+          [
+            200,
+            194,
+            3
+          ],
+          [
+            200,
+            193,
+            3
+          ],
+          [
+            200,
+            192,
+            3
+          ],
+          [
+            200,
+            191,
+            3
+          ],
+          [
+            200,
+            190,
+            3
+          ],
+          [
+            200,
+            189,
+            3
+          ],
+          [
+            200,
+            188,
+            3
+          ],
+          [
+            200,
+            187,
+            3
+          ],
+          [
+            200,
+            186,
+            3
+          ],
+          [
+            200,
+            185,
+            3
+          ],
+          [
+            200,
+            184,
+            3
+          ],
+          [
+            200,
+            183,
+            3
+          ],
+          [
+            200,
+            182,
+            3
+          ],
+          [
+            200,
+            182,
+            2
+          ]
+        ],
+        "cost": 40,
+        "outbound_cost": 20,
+        "return_cost": 20,
+        "arrival_action": 20,
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "is_coverage_anchor": false,
+        "endpoint_measured_fov_support": 0.0,
+        "option_id": "depth_ground_unknown_exploration_20261108/semantic_dev_central/plan-1",
+        "selection_call_id": 4,
+        "selected_map_version": 1,
+        "selected_feedback_version": 1,
+        "parent_region": 1
+      },
+      "heading_preserved": true
+    },
+    {
+      "event": "paid_action_authorized",
+      "frame_id": "1794138862813148822",
+      "next_action_id": 1,
+      "phase": "outbound",
+      "assessment": {
+        "allowed": true,
+        "reason": "known_safe_return_within_budget",
+        "action": "left",
+        "next_pose": [
+          200,
+          200,
+          3
+        ],
+        "remaining_budget": 40,
+        "reserved_return_cost": 1,
+        "learned_probability": null,
+        "calibrated_uncertainty": null,
+        "observed_gain_prediction": {
+          "action_id": 1,
+          "next_pose": [
+            200,
+            200,
+            3
+          ],
+          "predicted_radar_cells": 0,
+          "predicted_camera_cells": 0,
+          "attempted_camera_sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+          "posterior_before": {
+            "radar": 0.5,
+            "camera": 0.5
+          }
+        }
+      },
+      "option_id": "depth_ground_unknown_exploration_20261108/semantic_dev_central/plan-1",
+      "selection_call_id": 4
+    }
+  ],
+  "decisions_sha256": "229461ec23c4bdf87ee5de039e3bebeface21f4df8665e08f9d33d260a3088b5"
+}

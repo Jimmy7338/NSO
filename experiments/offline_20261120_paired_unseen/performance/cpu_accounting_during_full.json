@@ -1,0 +1,65 @@
+{
+  "status": "read_only_runtime_cpu_accounting",
+  "recorded_at_utc": "2026-11-20T13:10:12.115249+00:00",
+  "actor_pids": [
+    104478,
+    105830,
+    107475
+  ],
+  "online_cpu_count": 8,
+  "all_observed_actor_and_child_affinities": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "cpu_cgroup": "/user.slice",
+  "cfs_quota_us": -1,
+  "cfs_period_us": 100000,
+  "cpu_shares": 1024,
+  "cgroup_throttling_before_and_after": {
+    "nr_periods": 0,
+    "nr_throttled": 0,
+    "throttled_time": 0
+  },
+  "sample_seconds": 5.0068274949881015,
+  "sample_source": "two /proc/PID/stat samples; utime+stime versus cutime+cstime; /proc/stat for system busy; /proc/PID/status,cgroup and sched_getaffinity for bindings",
+  "process_accounting": [
+    {
+      "pid": 104478,
+      "self_cpu_percent": 20.97136362399271,
+      "reaped_child_cpu_percent": 81.08927267943847,
+      "combined_cpu_percent": 102.06063630343118
+    },
+    {
+      "pid": 105830,
+      "self_cpu_percent": 26.16427271183852,
+      "reaped_child_cpu_percent": 67.70754541460504,
+      "combined_cpu_percent": 93.87181812644356
+    },
+    {
+      "pid": 107475,
+      "self_cpu_percent": 27.762090892714152,
+      "reaped_child_cpu_percent": 67.30809086938612,
+      "combined_cpu_percent": 95.07018176210028
+    }
+  ],
+  "system_busy_percent": 40.2,
+  "per_cpu_busy_percent": [
+    40.0,
+    21.8,
+    51.0,
+    53.1,
+    23.8,
+    57.2,
+    37.9,
+    37.1
+  ],
+  "interpretation": "Parent-only ps CPU excludes reaped fork children. Combined sampled CPU is about one core per actor, not three actors sharing one constrained core. Short-window child reaping can shift accounting across boundaries, including a value slightly above 100%.",
+  "runtime_changes": [],
+  "new_simulator_actions": 0
+}

@@ -1,0 +1,73 @@
+{
+  "status": "independent_design_recommendation_before_new_predictions",
+  "scope": "Shared observed-object template applicability and partial geometry; no actor, frozen-source edit, or manuscript edit.",
+  "code_findings": [
+    {
+      "file": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/method/model.py",
+      "lines": "15-34, 66-92",
+      "finding": "track0 participates in measured_groups; each eligible component gets full box/shelf pair and object_probability defaults1. SemanticFalse also preserves this default."
+    },
+    {
+      "file": "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/method/model.py",
+      "finding": "Full quadrature corrects the cap/history confound; geometry/free toggles do not correct template applicability to unassigned background fragments."
+    },
+    {
+      "file": "/home/ouc/nso_robot/analyses/dual_template_instance_20261120/method/model.py",
+      "finding": "Pooling only joins track>0; track0 unchanged. Z may remain1 for unrefuted unassigned hypotheses while penalizing misfitted true objects."
+    },
+    {
+      "file": "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/instance_frontend_study/run.py",
+      "lines": "42-46",
+      "finding": "owner map maps visible categories2/3 to labels1/2. Current one-shelf/one-cabinet scene supports this controlled use, but same-category multi-instance separation is not established."
+    },
+    {
+      "file": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/instance_support.py",
+      "lines": "95-133",
+      "finding": "Associations use sampled measured voxel overlap; track IDs are not true object identity. Ambiguous overlaps create unassigned support."
+    }
+  ],
+  "minimal_method": {
+    "object_domain": "Construct furniture completion hypotheses only for acquired track>0 support, shared by G/S. Keep track0 as unassociated geometry, not asserted background or unreachable space.",
+    "unchanged_roles": "All measured points remain in TSDF, coverage, measured-surface quality and collision/execution representations. No navigation candidate is removed by this object-template eligibility.",
+    "pooling": "One unique acquired support union pertrack. Retain historical P baseline to separate pooling from new template-domain restriction.",
+    "G_definition": "Instance-aware geometry baseline with the same ideal visible object masks as S and neutral .5 category prior. Do not call it pure no-semantics geometry.",
+    "S_definition": "Same tracks, clouds, fitted dimensions, quadrature, likelihood and history. Only the fine open/closed prior changes.",
+    "null_meaning": "No furniture template for unassociated support is absence of model support, not geometric absence or evidence of background.",
+    "required_disclosure": "This changes the research reward model domain, not merely engineering. Current ideal labels/object masks are oracle sensor inputs restricted to visible valid-depth pixels; no source bounds or hidden geometry enters the actor.",
+    "geometry": "Fit candidate shape/pose using only acquired clouds/normals and acquired valid-depth free-space constraints, with unobserved extents retaining explicit priors/uncertainty. Do not use the full source asset, evaluator distance, unknown max extent or per-object truth-sized bounds.",
+    "geometry_trap": "Observed tangential span is a lower bound; unconstrained nearest-neighbor fitting to a partial front face can collapse thickness. Internal shelf planes are not necessarily outer extent planes.",
+    "no_new_Z": "Do not couple a new absolute confidence discount to the first object-domain and geometry tests; V2 Z failed and would confound cause."
+  },
+  "pre_registration": {
+    "inputs": "Same original B S prefixes left24/54/109 andright24/53/110, exact packets/poses/owners and byte-identical prefix native meshes. All66 old fixed outbound branches retained without re-execution.",
+    "variants": "Retain old F andP predictions; new O=pooled observed tracks only with inherited template fit; OF=O plus declared measured-data partial shape fit. If pooling itself changes again, give that another explicit ablation.",
+    "fairness_checks": [
+      "Swap/neutralize category scores while holding masks fixed: admitted point/track set and all fitted geometry/hypothesis samples identical up to track renaming.",
+      "Initial absence of object masks must leave all common coverage/quality terms and candidates unchanged, with no fabricated furniture surface.",
+      "Same-class duplicate objects and ambiguous track associations must be disclosed as unsupported by the current owner adapter, not silently treated as oneobject.",
+      "Log all admitted/unadmitted groups, support counts, frame provenance, and inherited eligibility exclusions."
+    ],
+    "primary_metrics": [
+      "Within each state, candidate-wise absolute source-supported predicted weight and realized source-supported previously-unmatched weight, not merely supportfraction.",
+      "Separate open31/closed118 actual before/after native-TSDF recall and gross/lost/net source-area increments using the frozen reference.",
+      "Template-only rank association against each actual object and their summed actual new surface; report undefined ranks for constant predictions.",
+      "Unchanged full-score selected candidate actual object/global surface change, coverage change, actions andpath; G/S disagreement alone is not benefit."
+    ],
+    "object_retention": [
+      "Report observed true-object admission recall over currently visible/associated valid support, including no-hypothesis and size-exclusion counts. Denominator cannot exclude a visible object because the newmethod failed to model it.",
+      "Report per-object absolute predicted/realized weights and selectedactual reconstruction recall. High global supportfraction is insufficient when actualobject contribution collapses.",
+      "For optional shape-representation recall, source samples must be matched to complete hypothesis triangles at5cm, not sparsely spaced template quadrature points (up to22cm). Report before-unmatched realobject area coverage separately; do not call a mesh-union representation metric candidatevisibility or realized area."
+    ],
+    "aggregation": "Candidate summaries/ranks within eachstate, then equal6state summary; preserve allstate/layout outcomes. These development states are dependent and not held-out validation or independent66samples.",
+    "promotion": "Require improved object-supported prediction/rank plus no systematic loss of modeled observed objects or actual selected object recovery. Expose globalcoverage/cost tradeoffs; decline promotion if only smaller totalweight or higherprecision changes. Do not retune coefficients to forceS superiority.",
+    "heldout_limit": "Any stage selection uses already-inspected development data. A later complete paired run is needed for policy effects; more diverse held-out scenes would be needed for generalization."
+  },
+  "input_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/method/model.py": "ec98759a9f6d45d57bcaa3dc08ee0aef1e954938ab99eea8926740d4f526ee99",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/method/model.py": "82258f2e01a802d08fb6c4b9853b99b822fed33ffb7a5c250b06143348e40607",
+    "/home/ouc/nso_robot/analyses/dual_template_geometry_20261120/method/geometry.py": "b0a0490e2166cb0ebcb520df0a2f70c2a72eb7b0b8a81712eeb16377698caf09",
+    "/home/ouc/nso_robot/analyses/dual_template_instance_20261120/method/model.py": "d8a07782110d284abe415c8471240008e7c222d4e52f056432f2bb1f23447e9f",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/instance_frontend_study/run.py": "99b1df5d0380701605dc276ca6719c10d4ba74de578c9347ffb26539a40eae39",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/instance_support.py": "c1e49e4e433e783d9456be1724bc698d4adb33bd5fdd3e31f8369a28ae005165"
+  }
+}

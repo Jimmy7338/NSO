@@ -1,0 +1,257 @@
+{
+  "schema": "nso.frozen_semantic_availability.v1",
+  "observation_count": 41,
+  "semantic_version": 41,
+  "graph_version": 41,
+  "current_state": [
+    200,
+    200,
+    0
+  ],
+  "return_anchor": [
+    200,
+    200,
+    0
+  ],
+  "actual_base_pose_planning": [
+    40.12107504434806,
+    39.91113765127974,
+    1.63751132242257
+  ],
+  "current_state_source": "unchanged final native packet discrete pose; actual measured continuous pose reported separately",
+  "current_equals_anchor": true,
+  "original_remaining_budget": 0,
+  "fresh_additional_budgets": [
+    40,
+    80
+  ],
+  "prefix_acquisition": {
+    "paid_actions": 40,
+    "CAN_distance_m": 7.393505834221814,
+    "elapsed_s": 542.4439440459973,
+    "source": "exploration_resume_S40_01/result.json; not a free prefix"
+  },
+  "interpretation": "Frozen accumulated measured map; additional-budget availability only, not original episode policy output or physical efficacy.",
+  "grid_resolution_m": 0.2,
+  "robot_radius_m": 0.7212185868375829,
+  "belief_sha256": "50e449d0dd4078ec9618ec3e737197c15338c579c47fe1a6a1fad05dcd36421c",
+  "safe_sha256": "13752782ac39d278c984fd8dae77801b561ed117064fa6e8cf53b136c94f4e06",
+  "cost_contract": "native orientation_graph: paid forward/left/right; current to target plus target to original anchor including final heading; at least one outbound action",
+  "assets": [],
+  "limits": [
+    "Aperture is hypothetical measured-geometry support, not ray-traced visibility or physical reachability proof.",
+    "No candidate shortlist, entry/deep projection, candidate-cap or G/S selection has been run.",
+    "No unobserved map cells have been filled or traversed; no policy or guard changed.",
+    "Blocked-cell attribution describes inflation masks; it does not establish unseen free space."
+  ],
+  "raw_geometry_group_audit": {
+    "status": "ok",
+    "profile": "measured_extent_3m_v1",
+    "algorithm": "original quality_evidence(max_points=10000),0.2m XY cells,3x3 binary_closing,label,5/95quantiles; no changed thresholds",
+    "thresholds": {
+      "min_support_points": 8,
+      "max_horizontal_extent_m": 3.0,
+      "min_vertical_extent_m": 0.25
+    },
+    "quality_sample_points": 4228,
+    "quality_sample_class2": 0,
+    "quality_sample_class3": 859,
+    "outside_grid_points": 0,
+    "groups": [
+      {
+        "group": 1,
+        "support_points": 23,
+        "marked_class2": 0,
+        "marked_class3": 0,
+        "observed_low": [
+          36.3717869763796,
+          44.704423993015624,
+          0.29393549966968685
+        ],
+        "observed_high": [
+          36.49508889762783,
+          44.82571977751166,
+          1.7088022275827819
+        ],
+        "observed_spans_m": [
+          0.12330192124822759,
+          0.12129578449603429,
+          1.414866727913095
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": null,
+        "accepted": true
+      },
+      {
+        "group": 2,
+        "support_points": 1062,
+        "marked_class2": 0,
+        "marked_class3": 133,
+        "observed_low": [
+          38.00956123425164,
+          41.093728828851944,
+          0.21109508910300495
+        ],
+        "observed_high": [
+          42.920912625495355,
+          44.02935966200861,
+          1.587740264754093
+        ],
+        "observed_spans_m": [
+          4.911351391243713,
+          2.935630833156665,
+          1.376645175651088
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": true,
+          "min_vertical_extent": false
+        },
+        "first_failed": "max_horizontal_extent",
+        "accepted": false
+      },
+      {
+        "group": 3,
+        "support_points": 1473,
+        "marked_class2": 0,
+        "marked_class3": 518,
+        "observed_low": [
+          43.33681640233933,
+          36.45255952255861,
+          0.14119440104562386
+        ],
+        "observed_high": [
+          47.686070239493944,
+          43.04019737918134,
+          1.7534118478614475
+        ],
+        "observed_spans_m": [
+          4.349253837154613,
+          6.5876378566227345,
+          1.6122174468158237
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": true,
+          "min_vertical_extent": false
+        },
+        "first_failed": "max_horizontal_extent",
+        "accepted": false
+      },
+      {
+        "group": 4,
+        "support_points": 53,
+        "marked_class2": 0,
+        "marked_class3": 0,
+        "observed_low": [
+          43.18752227530361,
+          43.20227589283559,
+          1.0008936215837927
+        ],
+        "observed_high": [
+          44.13807289414961,
+          43.933804628129124,
+          1.7665432910657901
+        ],
+        "observed_spans_m": [
+          0.9505506188460018,
+          0.7315287352935371,
+          0.7656496694819974
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": null,
+        "accepted": true
+      },
+      {
+        "group": 5,
+        "support_points": 3,
+        "marked_class2": 0,
+        "marked_class3": 0,
+        "observed_low": [
+          43.049373653062815,
+          42.82861478595318,
+          1.4790468475440626
+        ],
+        "observed_high": [
+          43.10985274154817,
+          42.886251403526785,
+          1.7388016379120697
+        ],
+        "observed_spans_m": [
+          0.06047908848535144,
+          0.05763661757360694,
+          0.2597547903680071
+        ],
+        "failed_predicates": {
+          "min_support": true,
+          "max_horizontal_extent": false,
+          "min_vertical_extent": false
+        },
+        "first_failed": "min_support",
+        "accepted": false
+      },
+      {
+        "group": 6,
+        "support_points": 1614,
+        "marked_class2": 0,
+        "marked_class3": 208,
+        "observed_low": [
+          36.73230808428206,
+          36.16653920963583,
+          0.12431404903776974
+        ],
+        "observed_high": [
+          40.824467312969496,
+          41.189107763137365,
+          1.723445017908492
+        ],
+        "observed_spans_m": [
+          4.092159228687436,
+          5.022568553501536,
+          1.5991309688707223
+        ],
+        "failed_predicates": {
+          "min_support": false,
+          "max_horizontal_extent": true,
+          "min_vertical_extent": false
+        },
+        "first_failed": "max_horizontal_extent",
+        "accepted": false
+      }
+    ],
+    "passed_group_ids": [
+      1,
+      4
+    ],
+    "native_asset_group_ids": [
+      1,
+      4
+    ],
+    "passed_groups_equal_native": true,
+    "passed_support_and_marked_counts_equal_native": true,
+    "identity_limit": "Connected geometry groups may mix surfaces; no physical object identity or reason for physical scene arrangement is established."
+  },
+  "native_asset_count": 2,
+  "marked_native_asset_count": 0,
+  "status": "ok",
+  "known_safe_cells": 449,
+  "known_safe_orientation_states": 1796,
+  "reachable_nonzero_outbound_states": 979,
+  "minimum_current_return_cost": 0.0,
+  "read_only_state_fingerprint_unchanged": true,
+  "elapsed_s": 0.1730685940128751,
+  "native_source": {
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/nso/route_coverage_v2.py": "f01e604ea866bf19609f382527e5475d25010f5fda4f2ca0ab9478d66f57c3bb",
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/nso/competition_candidates_v8_1.py": "20f2c09f32dcd0cfd1443d289abadf75df5ebee1680670d57cb13060edb03dab",
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/env/virtual3d.py": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133",
+    "/home/ouc/nso_robot/analyses/exploration_resume_20261107/publication/code/joint_vendor/utils/grid_geometry.py": "209a8c8bf1914ed0175dbaafa70f046dc13c1d26290f8f89836510b45d96832b"
+  }
+}

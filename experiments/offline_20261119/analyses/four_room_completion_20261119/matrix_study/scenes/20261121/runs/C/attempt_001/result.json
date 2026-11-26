@@ -1,0 +1,143 @@
+{
+  "status": "completed_execution",
+  "mode": "C",
+  "arm": "C",
+  "seed": 20261121,
+  "scene_id": "N19_ROOMS_SEED20261121",
+  "scene_role": "held_out_generated_layout",
+  "independent_layouts": 1,
+  "topology_family": "four_room_cross",
+  "paid_actions": 512,
+  "initial_coverage_fraction": 0.08914473684210526,
+  "final_coverage_fraction": 0.9802631578947368,
+  "coverage_gain_percentage_points": 89.11184210526316,
+  "free_correct_fraction": 0.9802631578947368,
+  "false_occupied_fraction": 0.0,
+  "per_room": {
+    "NW": {
+      "reference_free_cells": 762,
+      "known_cells": 762,
+      "correctly_free_cells": 762,
+      "false_occupied_cells": 0,
+      "coverage_fraction": 1.0,
+      "free_correct_fraction": 1.0,
+      "false_occupied_fraction": 0.0
+    },
+    "NE": {
+      "reference_free_cells": 767,
+      "known_cells": 707,
+      "correctly_free_cells": 707,
+      "false_occupied_cells": 0,
+      "coverage_fraction": 0.9217731421121251,
+      "free_correct_fraction": 0.9217731421121251,
+      "false_occupied_fraction": 0.0
+    },
+    "SW": {
+      "reference_free_cells": 762,
+      "known_cells": 762,
+      "correctly_free_cells": 762,
+      "false_occupied_cells": 0,
+      "coverage_fraction": 1.0,
+      "free_correct_fraction": 1.0,
+      "false_occupied_fraction": 0.0
+    },
+    "SE": {
+      "reference_free_cells": 749,
+      "known_cells": 749,
+      "correctly_free_cells": 749,
+      "false_occupied_cells": 0,
+      "coverage_fraction": 1.0,
+      "free_correct_fraction": 1.0,
+      "false_occupied_fraction": 0.0
+    }
+  },
+  "reference_free_cells": 3040,
+  "path_length_m": 94.4,
+  "turn_actions": 40,
+  "collisions": 0,
+  "termination": {
+    "reason": "sensor_terminal",
+    "returned_to_anchor": true,
+    "failed": false,
+    "current_footprint_known_safe": true,
+    "final_frame_id": "frame-512",
+    "final_action_id": 512
+  },
+  "initial_packet_sha256": "3c93608bb3625f6217f39f75f6b957e1d61de1965baf66fbec62cba3e91aa51e",
+  "trajectory_sha256": "d1936f9d7ec8f1f6d01138e99ca3f8a4e4e92ace9a67ac779ddd860e4a5b61ed",
+  "global_planning_calls": 9,
+  "paid_action_budget": 512,
+  "first_coverage_action": {
+    "0.9": 267,
+    "0.95": 378,
+    "0.99": null
+  },
+  "first_free_correct_action": {
+    "0.9": 267,
+    "0.95": 378,
+    "0.99": null
+  },
+  "decision_wall_seconds_total": 59.67992315997617,
+  "elapsed_s": 473.5658599260005,
+  "measured_patch_count": 22807,
+  "reconstruction_accuracy_evaluated": false,
+  "quality_export": {
+    "all_measured_patches": 22807,
+    "quality_height_filtered_patches": 8470,
+    "quality_height_range_m": [
+      0.12,
+      1.8
+    ],
+    "quality_sampling_cap_applied": false,
+    "evidence_voxel_m": 0.15,
+    "mesh_vertices": 129823,
+    "mesh_triangles": 247266,
+    "tsdf_voxel_m": 0.06,
+    "mesh_exported": true,
+    "surface_accuracy_evaluated": false
+  },
+  "final_gain_calibration": {
+    "schema_version": "observed_gain_calibration_v10_1/1",
+    "feedback_enabled": true,
+    "consume_predicted_attempts": false,
+    "posterior_mean": {
+      "radar": 0.9928571428571429,
+      "camera": 0.10144927536231885
+    },
+    "alpha": {
+      "radar": 556,
+      "camera": 42
+    },
+    "beta": {
+      "radar": 4,
+      "camera": 372
+    },
+    "observed_actions": 512,
+    "pending_action_ids": []
+  },
+  "effective_args": {
+    "nso_backend": "cpu_v10",
+    "eval": true,
+    "train_global": false,
+    "use_open_vocab_semantic": true,
+    "use_topo_graph": true,
+    "use_rpn_uq": true,
+    "use_igcr": true,
+    "cpu_disable_feedback": false,
+    "cpu_force_gain_feedback": false,
+    "cpu_freeze_gain_posterior": false,
+    "cpu_max_candidates": 12,
+    "cpu_coverage_slots": 4,
+    "cpu_planner_revision": "v10_3_1",
+    "cpu_measured_novelty_floor": 0.25,
+    "cpu_score_mode": "C",
+    "run_id": "N19-20261121-C"
+  },
+  "capabilities": {
+    "semantic": "measured RGB-D marker support; declared category prior; open vocabulary unavailable",
+    "topology": "observed connected-region graph and full pose options; room segmentation unvalidated",
+    "reachability_uq": "deterministic observed-map guard; trained/calibrated uncertainty unavailable",
+    "igcr": "actual sensor feedback consumed in next option score; quality is an observed proxy"
+  },
+  "source_hashes_unchanged": true
+}

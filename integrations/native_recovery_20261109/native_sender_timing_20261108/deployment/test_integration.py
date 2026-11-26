@@ -1,0 +1,8 @@
+import ast,hashlib,json,pathlib,tempfile
+W=pathlib.Path('/home/ouc/nso_robot/workspaces/nso_hybrid_20261029');R=pathlib.Path('/home/ouc/nso_robot');p=W/'runtime/mission.py';code=p.read_text();tree=ast.parse(code);fn=next(x for x in tree.body if isinstance(x,ast.FunctionDef) and x.name=='write_source_manifest');N=R/'staging/ans-live-20261108-native-timing-v2';SDK=R/'staging/scout-owned-sdk-build-20261009-r0/workspace/devel/lib'
+def save(p,x):p.write_text(json.dumps(x))
+env={'WORK':W,'NATIVE_STAGE':N,'NATIVE':N/'bin/nso_scout_attended_node','SDK':SDK,'hashlib':hashlib,'save':save};exec(compile(ast.Module(body=[fn],type_ignores=[]),str(p),'exec'),env)
+with tempfile.TemporaryDirectory() as d:
+ env['write_source_manifest'](pathlib.Path(d));x=json.load(open(pathlib.Path(d)/'source_manifest.json'));n=x['native_sender'];assert n['profile']=='native_sender_timing_v2';assert all(v['sha256']==hashlib.sha256(pathlib.Path(v['path']).read_bytes()).hexdigest() for v in n['files'].values());assert n['files']['binary']['sha256']=='3c35da96051d4096185b7bf6772a6190f3223016e073c9e5b1db4cc6586cacb0';assert n['files']['sdk']['sha256']=='6d989e815080503efd6e1904a2bae6fd436273d4d5a7f5626deb6d172c9109fc'
+launch=next(x for x in ast.walk(tree) if isinstance(x,ast.FunctionDef) and x.name=='launch_native');calls=[x for x in ast.walk(launch) if isinstance(x,ast.Call) and isinstance(x.func,ast.Name) and x.func.id=='spawn'];assert len(calls)==1;s=ast.get_source_segment(code,calls[0]);assert "'_timing_output:='+str(output/'native_timing.json')" in s and "'_execute:=true'" in s and "'_guard_node:=/nso_radius_guard'" in s
+print('source manifest actual hash checks and native argv AST checks passed')

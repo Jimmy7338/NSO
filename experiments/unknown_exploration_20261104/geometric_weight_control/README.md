@@ -1,0 +1,5 @@
+# Post-hoc geometric weight control
+
+This single 96-action Q0-derived two-room control was selected after seeing G/S and the one-decision lambda analysis. It uses G with `common + 2 * prior_G`; it is not a predeclared baseline, parameter search, or independent sample. The recorded G_weight2 run matches S in all 96 executed steps and 13 planning target poses, with the same reported coverage and surface metrics. The observation prevents attributing this single-case S outcome uniquely to category-specific gain; it does not establish general equivalence or physical benefit.
+
+The original pre-execution `frozen_protocol.json`, original scripts, wrapper, full execution and comparison are retained. The portable protocol adjusts only the adapted runner hash; the runner references sibling `source`, `evidence`, and `two_room_diagnostic`. Reproduce with `NSO_OUTPUT_ROOT=/absolute/empty/output python runner.py`; repetitions are verification, not new independent experiments. Run `python compare.py` to check the frozen comparisons and write `comparison_recomputed.json`.

@@ -1,0 +1,28 @@
+{
+  "status": "staged_only_not_launched",
+  "offline_contract_passed": true,
+  "checks": [
+    "finite XYZ only",
+    "explicit .05m preview voxel dedup",
+    "frame nso_loop_map enforced",
+    "positions/colors schema matches existing WebGL",
+    "no ROS imported by offline contract",
+    "no cloud/history disk write",
+    "latest RAM limit50000 voxels"
+  ],
+  "bind": "192.168.31.216:8767",
+  "upstream": "127.0.0.1:8766",
+  "voxel_scope": "Viewer actively applies .05m spatial dedup; source assembler resolution parameters reported separately when available, never assumed .05",
+  "launch": "bash /home/ouc/nso_robot/analyses/resume_20261115/optimized3d_future_preview/viewer_candidate/run.sh",
+  "dependencies": [
+    "ROS Noetic rospy/sensor_msgs point_cloud2 (existing system Python)",
+    "standard Python library; copied existing local WebGL assets; no npm/pip"
+  ],
+  "files": {
+    "optimized_preview.py": "0344df65aef9804c9e1d611be870144209cc9198e4a5772524e9aa855c5c61cd",
+    "run.sh": "583b2f9921f3d6b43e55598a8e661d17580bc0e74cd399b42c2f64f480e4dc04",
+    "assets/index.html": "7aa21780ad1d67e008e4be571284a2751f59e7816231289fd53ad73f8d0e75e6",
+    "assets/dashboard.css": "905bb988694a49c50e88fc3092d2ba6ca39b03101fe41970b7d2ca25d787efe0",
+    "assets/dashboard.js": "19560f548f101f3b88c62adfa032554dca584bcdc31014c5044796642f1606ee"
+  }
+}

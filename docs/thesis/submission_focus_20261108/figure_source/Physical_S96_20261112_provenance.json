@@ -1,0 +1,29 @@
+{
+  "source": "/home/ouc/nso_robot/analyses/resume_20261112/laser_coverage.json",
+  "sha256": "4d1d0a64a26132b64ff4d27e06f4d3778c45d647da64a480db8a2a4ff5ded2b7",
+  "samples": 61,
+  "unit": "one robot trajectory; dependent checkpoints",
+  "metric": "Cumulative observed/free-ray/hit-endpoint evidence unions; free evidence may overlap hit evidence across scans or coarse cells. free_without_ever_hit removes all ever-hit cells, and need not be monotone. Neither quantity is GT free space.",
+  "sampling": "Only one archived real lidar scan per accepted RGBD observation; not every continuously received scan. Sensor/source/phase and capture procedure must be common across pilot arms.",
+  "roi": {
+    "center_planning_xy": [
+      40.1,
+      39.900000000000006
+    ],
+    "radius_m": 12.5,
+    "cell_rule": "cell center inside closed circle",
+    "raster_area_m2": 491.2400000000001,
+    "purpose": "Predefined measurement ROI, not a guarantee enclosing all executed trajectories or known traversable environment."
+  },
+  "sensor": {
+    "source": "/scan /lslidar_driver_node laser_link",
+    "cap_m": 8.0,
+    "provenance": "All raw ranges, geometry and source stamps checked against saved ROS1 LaserScan bytes; own-source historical odom_from_laser required.",
+    "invalid": "Nonfinite/nonpositive/outside original range limits skipped; no synthesized rays.",
+    "endpoint": "Native matched-range convention: finite returns clipped at8m, hit only below effective_max\u22121mm; exact/max boundary is free-only.",
+    "raster": "Native grid_cell + supercover_line between endpoint cells; discretization can include portions/centers beyond exact8m metric radius.",
+    "within_scan_motion": "One historical TF per scan source stamp; recorded scan time_increment=0 does not enable ray deskew."
+  },
+  "endpoint": "last accepted observation at paid60; episode interrupted later on goal61",
+  "dotted_lines": "recorded replans at paid29 and56, next_footprint_not_known_safe"
+}

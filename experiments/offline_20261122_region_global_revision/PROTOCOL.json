@@ -1,0 +1,28 @@
+{
+  "schema": "nso_regional_visibility_uncapping_v1",
+  "source_formal_commit": "9e392c4f8604aa4ff303e48545cdb8f9d68618ea",
+  "source_formal_freeze_sha256": "9280106beda7a3a0fc8fbc365456949121af170df68a47dd8c749abf5c24831f",
+  "budget": 192,
+  "capture_paid": [0, 48, 96, 144, 192],
+  "local_auxiliary_weights": {"unknown_weight": 0.25, "action_cost": 0.2},
+  "local_route_invariants": {
+    "max_extra_outbound_actions": 8,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-9
+  },
+  "single_intervention": "Only the existing regional candidate term min(visible unknown cells x cell area, 2.0 m^2) becomes visible unknown cells x cell area. Neither the base planner scoring nor the local S visibility predictor changes. Keep the old regional candidate sources, other regional terms, tie ordering, native weighted S route selection, collision guard and return reserve. No new decision or stopping gate.",
+  "development": {
+    "layouts": ["floor26_corridor", "floor26_loop"],
+    "arms": ["revised_S"],
+    "archived_controls": ["original_S", "region_S", "F_strict"],
+    "purpose": "Both layouts were inspected before the intervention. Test causal ranking arithmetic on the old observed states and rerun only the new arm. The archived arms use the same seed, initial packet, native source, local S or strict frontier and 192-action accounting. Do not include development outcomes in the hold-out sample."
+  },
+  "formal": {
+    "layouts": ["rev26_corridor_receiving", "rev26_loop_courtyard"],
+    "arms": ["region_S", "revised_S", "F_strict"],
+    "purpose": "One independent new floor per family. All three arms start independently from the same cold observations on each floor. Revised S versus region S isolates the global scoring change. Strict frontier gives a competitive reference without the NSO scoring layer."
+  },
+  "outcomes": "Evaluate the actual sensed map. Report C_free, whole-scene F1 at 5 cm, J=C_free*F1, first A95 clock, repeated translated metres, actual visited rooms, first new room, duration, return, guards and simulated collision. Use actual stops and retain absent clocks. Report paired differences per floor and show the development outcomes separately.",
+  "limits": "Raw visible unknown area is an optimistic observability proxy. The ray would pass through currently unknown cells and thus may count behind unseen barriers. No target is forced, no technical failure silently removed, and no threshold or alternative score selected on the two new layouts. Two independent floors yield descriptive evidence. Keep failures and weaker or imbalanced outcomes. Offline simulator only."
+}

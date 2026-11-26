@@ -1,0 +1,437 @@
+{
+  "status": "readonly_baseline_diagnostic_not_accuracy_ground_truth",
+  "correspondence_audit_added_after_initial_residuals": "Predicted ray-plane intersection polygon membership added to expose potential false 2D-overlap correspondences; initial metrics retained; no residual-based filtering or transform optimization.",
+  "interpretation": {
+    "0": "No expected ray-plane intersections inside white-face polygon: laser passes above visible white cabinet top under baseline geometry. Actual-hit image overlap alone is false correspondence; large residuals do not diagnose extrinsic error.",
+    "18": "91 geometrically plausible returns; median signed plane residual +2.54mm with P05/P95 -9.46/+17.98mm. Supports local depth-laser consistency only.",
+    "22": "80 plausible intersections; median +21.99mm, P05/P95 -116.46/+32.12mm. Negative tail concentrated near right ROI edge (raw u~1171..1197); physical edge/other surface/multipath or calibration/depth error cannot be distinguished from these data; no tail exclusion."
+  },
+  "protocol_sha256": "b1909d79771ce6b902b87c7a0e957779d50374f1404fa5171f0cfd75598a7842",
+  "script_sha256": "293ac40161cd6e90a671e4c2617eaeff843a8c8b3265c2426c63e1409ad8938d",
+  "frames": [
+    {
+      "action_id": 0,
+      "source": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01/joint_inputs/joint-1794129182125903370.npz",
+      "sha256": "5f277eb7f6c616b8c7c9fec68188ee21505f248bf364fdbcbc388434c02df8d7",
+      "source_stamp_ns": {
+        "rgb": 1794129182125903370,
+        "depth": 1794129182125903370,
+        "scan": 1794129182088216066
+      },
+      "scan_minus_rgbd_s": -0.03768730163574219,
+      "motion_before": {
+        "receipt": 26004.963056972,
+        "source": 26004.96070408821,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.0
+      },
+      "motion_after": {
+        "receipt": 26005.260816633,
+        "source": 26005.260738134384,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.0
+      },
+      "depth_roi_raw_xyxy": [
+        373,
+        347,
+        733,
+        413
+      ],
+      "depth_valid_n": 1530,
+      "plane_odom_normal": [
+        -0.9887585883307108,
+        -0.14882662829208385,
+        0.014390577245893177
+      ],
+      "plane_odom_offset": 2.7751491618669566,
+      "depth_fit_residual_m": {
+        "n": 1530,
+        "median": 0.00011926122474315015,
+        "p05_p95": [
+          -0.022078326151036175,
+          0.02100869803984879
+        ],
+        "max_abs": 0.053473002790418445
+      },
+      "scan_face_overlap_n": 91,
+      "expected_plane_intersection_v_for_selected_hits_p05_p95": [
+        333.496377755649,
+        334.7065832081357
+      ],
+      "expected_intersection_in_face_n": 0,
+      "both_actual_and_expected_in_face_n": 0,
+      "both_actual_and_expected_residual_m": null,
+      "scan_signed_residual_m": {
+        "n": 91,
+        "median": -0.3133421378482981,
+        "p05_p95": [
+          -4.401453762277934,
+          -0.27712009784138525
+        ],
+        "max_abs": 4.495340133669554
+      },
+      "scan_indices_pixels": {
+        "file": "frame0_returns.npz",
+        "sha256": "d43007ea4eb903b95e50948e86a2fc5962ec02eda9f42458416c9b3613188066",
+        "count": 91,
+        "scan_index_min_max": [
+          939,
+          1036
+        ],
+        "angle_min_max_rad": [
+          -0.19163717469200492,
+          0.11309731937944889
+        ]
+      },
+      "scan_horizontal_domain_n": 199,
+      "horizontal_projected_v_raw_p05_p95": [
+        333.14420744316675,
+        351.6021850070343
+      ],
+      "actual_camera_tf": [
+        [
+          0.00045358836579389994,
+          2.220446049250313e-16,
+          0.9999998971287922,
+          0.061129764658020336
+        ],
+        [
+          -0.9999998971287922,
+          -2.220446049250313e-16,
+          0.000453588365794122,
+          0.0585011849610666
+        ],
+        [
+          0.0,
+          -1.0000000000000002,
+          0.0,
+          0.30300000000000005
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "actual_laser_tf": [
+        [
+          0.9999998758022982,
+          -0.0004983928049931878,
+          0.0,
+          -0.01133241620714649
+        ],
+        [
+          0.0004983928049931878,
+          0.9999998758022982,
+          0.0,
+          0.0028257015817629155
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.4510000000000001
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "action_id": 18,
+      "source": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01/joint_inputs/joint-1794129418472766370.npz",
+      "sha256": "2eab9f6b84382da5fa6e191f932aa93ea08c063faefa732755d95d262175cef7",
+      "source_stamp_ns": {
+        "rgb": 1794129418472766370,
+        "depth": 1794129418472766370,
+        "scan": 1794129418488954544
+      },
+      "scan_minus_rgbd_s": 0.01618814468383789,
+      "motion_before": {
+        "receipt": 26241.408018324,
+        "source": 26241.40776872635,
+        "uninterpreted_tail_hex": "00000000",
+        "v": -0.009000000000000001,
+        "w": 0.02
+      },
+      "motion_after": {
+        "receipt": 26241.627852067,
+        "source": 26241.627794742584,
+        "uninterpreted_tail_hex": "00000000",
+        "v": -0.004,
+        "w": 0.01
+      },
+      "depth_roi_raw_xyxy": [
+        947,
+        313,
+        1227,
+        407
+      ],
+      "depth_valid_n": 1680,
+      "plane_odom_normal": [
+        -0.9710065587944666,
+        -0.2390413341508676,
+        -0.0023459210347548795
+      ],
+      "plane_odom_offset": -1.0451454789720547,
+      "depth_fit_residual_m": {
+        "n": 1680,
+        "median": -7.296726976990797e-05,
+        "p05_p95": [
+          -0.0027449296346573893,
+          0.0031290158676222533
+        ],
+        "max_abs": 0.006172811128222655
+      },
+      "scan_face_overlap_n": 91,
+      "expected_plane_intersection_v_for_selected_hits_p05_p95": [
+        267.4195191591933,
+        301.2694123655078
+      ],
+      "expected_intersection_in_face_n": 91,
+      "both_actual_and_expected_in_face_n": 91,
+      "both_actual_and_expected_residual_m": {
+        "n": 91,
+        "median": 0.002542922479899623,
+        "p05_p95": [
+          -0.009458468355829752,
+          0.017975573635494624
+        ],
+        "max_abs": 0.02149293246157158
+      },
+      "scan_signed_residual_m": {
+        "n": 91,
+        "median": 0.002542922479899623,
+        "p05_p95": [
+          -0.009458468355829752,
+          0.017975573635494624
+        ],
+        "max_abs": 0.02149293246157158
+      },
+      "scan_indices_pixels": {
+        "file": "frame18_returns.npz",
+        "sha256": "23ad0a7ba26d387efb8396d8fcf3423a6640b32b8b70602d1b0e5a846014636b",
+        "count": 91,
+        "scan_index_min_max": [
+          752,
+          842
+        ],
+        "angle_min_max_rad": [
+          -0.7791150137782097,
+          -0.49637166876345873
+        ]
+      },
+      "scan_horizontal_domain_n": 91,
+      "horizontal_projected_v_raw_p05_p95": [
+        268.0859161396125,
+        300.24374089156186
+      ],
+      "actual_camera_tf": [
+        [
+          0.9997479971550729,
+          -1.734723475976807e-18,
+          -0.022448656628411258,
+          -2.2700788635199407
+        ],
+        [
+          0.022448656628411258,
+          2.220446049250313e-16,
+          0.9997479971550728,
+          0.37886312280005524
+        ],
+        [
+          1.734723475976807e-18,
+          -0.9999999999999999,
+          2.220446049250313e-16,
+          0.303
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "actual_laser_tf": [
+        [
+          -0.022468541822575405,
+          -0.9997475504487958,
+          0.0,
+          -2.213094041760261
+        ],
+        [
+          0.9997475504487958,
+          -0.022468541822575405,
+          0.0,
+          0.3079164511331824
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.45100000000000007
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "action_id": 22,
+      "source": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/legacy_mount_S40_20261108_01/joint_inputs/joint-1794129472075951370.npz",
+      "sha256": "6afbc9edbe10d98e347a48164b3e9faa84d94b86c25267983d4056c240b26dd9",
+      "source_stamp_ns": {
+        "rgb": 1794129472075951370,
+        "depth": 1794129472075951370,
+        "scan": 1794129472044163227
+      },
+      "scan_minus_rgbd_s": -0.03178811073303223,
+      "motion_before": {
+        "receipt": 26294.973987643,
+        "source": 26294.97390437126,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.08
+      },
+      "motion_after": {
+        "receipt": 26295.174190839,
+        "source": 26295.17399907112,
+        "uninterpreted_tail_hex": "00000000",
+        "v": 0.0,
+        "w": 0.02
+      },
+      "depth_roi_raw_xyxy": [
+        960,
+        313,
+        1200,
+        407
+      ],
+      "depth_valid_n": 1440,
+      "plane_odom_normal": [
+        0.9538088617870611,
+        0.29740121478100295,
+        0.042440224118808004
+      ],
+      "plane_odom_offset": 3.4461281780785398,
+      "depth_fit_residual_m": {
+        "n": 1440,
+        "median": 0.0007596239731517684,
+        "p05_p95": [
+          -0.00690846536412566,
+          0.005260922760710817
+        ],
+        "max_abs": 0.013282692276428865
+      },
+      "scan_face_overlap_n": 81,
+      "expected_plane_intersection_v_for_selected_hits_p05_p95": [
+        293.2838111123151,
+        315.28972415419935
+      ],
+      "expected_intersection_in_face_n": 80,
+      "both_actual_and_expected_in_face_n": 80,
+      "both_actual_and_expected_residual_m": {
+        "n": 80,
+        "median": 0.02199014542527644,
+        "p05_p95": [
+          -0.11645673332111081,
+          0.03212243539550645
+        ],
+        "max_abs": 0.15844744296649171
+      },
+      "scan_signed_residual_m": {
+        "n": 81,
+        "median": 0.021783890252762728,
+        "p05_p95": [
+          -0.12893631553414275,
+          0.03211081509972136
+        ],
+        "max_abs": 0.16830887164942876
+      },
+      "scan_indices_pixels": {
+        "file": "frame22_returns.npz",
+        "sha256": "b93b0d27eb106b4f99a499a0d627f05dd1a0340f3fafcfb606fb1cbbc9295a7d",
+        "count": 81,
+        "scan_index_min_max": [
+          752,
+          832
+        ],
+        "angle_min_max_rad": [
+          -0.7791150137782097,
+          -0.52778759598732
+        ]
+      },
+      "scan_horizontal_domain_n": 81,
+      "horizontal_projected_v_raw_p05_p95": [
+        297.8445546257441,
+        314.39036201829003
+      ],
+      "actual_camera_tf": [
+        [
+          -0.9964797879898044,
+          -2.0816681711721685e-17,
+          0.08383335927776808,
+          -2.138515352985044
+        ],
+        [
+          -0.08383335927776808,
+          -4.440892098500626e-16,
+          -0.9964797879898041,
+          -0.0016846127548428777
+        ],
+        [
+          3.469446951953614e-17,
+          -1.0000000000000002,
+          0.0,
+          0.303
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "actual_laser_tf": [
+        [
+          0.08306078704258524,
+          0.9965444825274317,
+          0.0,
+          -2.1992209398305764
+        ],
+        [
+          -0.9965444825274317,
+          0.08306078704258524,
+          -0.0,
+          0.06478065884085471
+        ],
+        [
+          -0.0,
+          0.0,
+          1.0,
+          0.45100000000000007
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "limitations": [
+    "No spatial registration or residual-based correspondence selection.",
+    "All poses from one trajectory; not independent scenes.",
+    "Matching polygon alone cannot exclude different-height occluders; residuals are conditional consistency diagnostics, not accuracy ground truth.",
+    "Source timestamp separation retained; historical odom TF compensates recorded motion but cannot remove TF/depth error."
+  ]
+}

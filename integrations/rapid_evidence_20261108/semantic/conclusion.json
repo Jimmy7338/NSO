@@ -1,0 +1,119 @@
+{
+  "schema": "nso.rapid.semantic_conclusion.v1",
+  "status": "completed",
+  "new_rollouts": 3,
+  "worlds": "one Q1 synthetic parent, one west arrangement, same actual first frame",
+  "outer_seed": 952,
+  "budget_each": 96,
+  "simulation_radius_m": 0.2,
+  "physical_radius_untouched_m": 0.7212185868375829,
+  "policy": "existing exploration_joint_v1/v10_3_1, original nativeG/S/X; no candidate/score changes or physical adapters",
+  "hypothesis_selection": "fixed before firstQ1worldconstruction; no outcome-driven retries, no budget/seed sweep",
+  "endpoints": [
+    {
+      "mode": "G",
+      "steps": 96,
+      "collisions": 0,
+      "full_anchor_return": true,
+      "termination": {
+        "current_footprint_known_safe": true,
+        "failed": false,
+        "final_action_id": 96,
+        "final_frame_id": "frame-96",
+        "reason": "budget_exhausted",
+        "returned_to_anchor": true
+      },
+      "initial_coverage": 0.6310408921933085,
+      "final_coverage": 0.991635687732342,
+      "coverage_gain_m2": 15.520000000000003,
+      "new_reference_visible_surface_m2": 107.23330155000042,
+      "final_F1_5cm": 0.9294640543325501,
+      "final_F1_10cm": 0.9446700158282294
+    },
+    {
+      "mode": "S",
+      "steps": 96,
+      "collisions": 0,
+      "full_anchor_return": true,
+      "termination": {
+        "current_footprint_known_safe": true,
+        "failed": false,
+        "final_action_id": 96,
+        "final_frame_id": "frame-96",
+        "reason": "budget_exhausted",
+        "returned_to_anchor": true
+      },
+      "initial_coverage": 0.6310408921933085,
+      "final_coverage": 0.9962825278810409,
+      "coverage_gain_m2": 15.720000000000006,
+      "new_reference_visible_surface_m2": 118.95238275000047,
+      "final_F1_5cm": 0.9780223563732611,
+      "final_F1_10cm": 0.9871536607113371
+    },
+    {
+      "mode": "X",
+      "steps": 96,
+      "collisions": 0,
+      "full_anchor_return": true,
+      "termination": {
+        "current_footprint_known_safe": true,
+        "failed": false,
+        "final_action_id": 96,
+        "final_frame_id": "frame-96",
+        "reason": "budget_exhausted",
+        "returned_to_anchor": true
+      },
+      "initial_coverage": 0.6310408921933085,
+      "final_coverage": 0.991635687732342,
+      "coverage_gain_m2": 15.520000000000003,
+      "new_reference_visible_surface_m2": 107.23330155000042,
+      "final_F1_5cm": 0.9294640543325501,
+      "final_F1_10cm": 0.9446700158282294
+    }
+  ],
+  "deltas": {
+    "S_minus_G": {
+      "new_reference_visible_surface_m2": 11.719081200000048,
+      "coverage_m2": 0.20000000000000284,
+      "F1_5cm": 0.04855830204071099
+    },
+    "S_minus_X": {
+      "new_reference_visible_surface_m2": 11.719081200000048,
+      "coverage_m2": 0.20000000000000284,
+      "F1_5cm": 0.04855830204071099
+    }
+  },
+  "first_actual_action_difference": 33,
+  "first_planning_difference": {
+    "paid": 19,
+    "coverage_percent": 88.47583643122675,
+    "shared_complete_state_verified": true
+  },
+  "G_X_steps_exact": true,
+  "generic_weight_boundary": {
+    "lower_fraction": "4168222968352668/690335318840653",
+    "lower": 6.037968585111318,
+    "lower_inclusive": true,
+    "upper_fraction": null,
+    "upper": null,
+    "upper_inclusive": false,
+    "scope": "Recorded actualS states only; no added weighted rollout or parameter search. A positive interval prevents a claim of category-specific advantage from this comparison."
+  },
+  "supported_claim": "Under one additional predeclared synthetic parent, nativeS changes the retained candidate ranking and surface allocation relative to nativeG/X and ends with higher surface/F1/coverage, with full return and zero simulated collision.",
+  "unsupported_claims": [
+    "Category-specific advantage over every geometric weighting: common uniformgenericweight remains feasible.",
+    "Improvement during early unknown-space exploration: trajectories firstdiverge only after88.48%priorcoverage.",
+    "Independentnatural-scene generalization or autonomous recognition: syntheticmarkersemantics used.",
+    "Physicalrobotfeasibility/accuracy: originalsimulatorradius.2 differs fromphysical.7212186; no hardware action."
+  ],
+  "prior_evidence": "existing_evidence.json",
+  "plot_caption": "One fixedQ1syntheticparent, shelf_west,96paidactions per nativeG/S/X. Left: observed reachable2Darea fraction. Right: additional mesh-reference-visible surface after actual firstframe; not total meshreconstructionquality. G andX traces coincide exactly; S has a temporary surface deficit before the terminalgain. Shared initialcoverage63.104%, fullanchorreturn and0simulatedcollisions all3modes. Oneparent, correlated trajectories, no errorbars or statistical generalization.",
+  "commands": {
+    "run": "/home/ouc/nso_robot/envs/science312/bin/python -B run_fixed_Q1.py",
+    "analysis": "/home/ouc/nso_robot/envs/science312/bin/python -B analyze.py",
+    "plot": "/home/ouc/nso_robot/envs/science312/bin/python -B plot.py"
+  },
+  "runtime_s": 109.64154801800032,
+  "source_status": "all declared source hashes unchanged after execution",
+  "no_robot_actions": true
+}

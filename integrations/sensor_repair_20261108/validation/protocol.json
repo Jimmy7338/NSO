@@ -1,0 +1,16 @@
+{
+  "schema": "nso.floor_heldout_ROI.v1",
+  "selection": "Three prior actual episode frames 0,18,22; all distinct from pretrial profile training. Rectangles selected by visual inspection of RGB only before numerical classification; preview 960x540, coordinates converted to raw 1280x720 by 4/3.",
+  "rectangles_preview_xyxy": {
+    "0": {"floor":[390,390,620,500],"vertical":[280,260,550,310]},
+    "18": {"floor":[160,390,500,500],"vertical":[710,235,920,305]},
+    "22": {"floor":[390,390,620,500],"vertical":[720,235,900,305]}
+  },
+  "identity": "Floor and white exhibition cabinet face visible in RGB, boundaries excluded. Camera and depth errors can still misproject pixels; visual region is not point-level ground truth.",
+  "height_band_m": [0.15,1.2], "sample_stride_raw":4,
+  "baseline_floor_base_m": -0.233,
+  "candidate_profile": "execution_frozen_profile.json; base-relative floor -0.12447258789516671; pretrial fixed before trial",
+  "floor_ground_reference": "projected z vs candidate plane z=0, not independent measured physical truth",
+  "no_connected_based_roi_selection": true,
+  "no_runtime_or_policy_change": true
+}

@@ -1,0 +1,20 @@
+\begin{table}[!htbp]
+\centering\small\setlength{\tabcolsep}{4pt}
+\caption{Complete unknown-exploration comparisons. All runs start at 42.606\% correct-free coverage, execute 256 actions, finish at 100\%, return and record zero simulated collisions. $A_{100}$ is the first full-coverage action. $T=1$ reuses four previously frozen distribution runs; $T=16$ adds four runs on the same two inspected furniture permutations, not new independent scenes. Surface metrics use measured TSDFs at 5\,cm.}
+\label{tab:temperature-policy}
+\begin{tabular}{llrrrrrr}
+\toprule
+Layout & Policy & $T$ & $A_{100}$ & Path (m) & F1 (\%) & Shelf (\%) & Cabinet (\%) \\
+\midrule
+Left & G & 1 & 88 & 42.0 & 92.758 & 82.170 & 88.709 \\
+Left & S & 1 & 88 & 42.0 & 92.758 & 82.170 & 88.709 \\
+Left & G & 16 & 88 & 42.0 & 92.758 & 82.170 & 88.709 \\
+Left & S & 16 & 97 & 43.2 & 92.381 & 83.464 & 85.874 \\
+\midrule
+Right & G & 1 & 100 & 43.2 & 92.596 & 81.088 & 79.214 \\
+Right & S & 1 & 100 & 43.2 & 92.596 & 81.088 & 79.214 \\
+Right & G & 16 & 100 & 43.2 & 92.596 & 81.088 & 79.214 \\
+Right & S & 16 & 100 & 43.2 & 92.596 & 81.088 & 79.214 \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,67 @@
+{
+  "status": "complete_clean_consumption_ablation_and_integrity_check",
+  "summary_sha256": "d8b676124beff5b9198fae2438f77bba2fe3643e85966f8cbc603a0f5c774e0a",
+  "results_csv_sha256": "2a26044a64553f7c340407224a119788f908e6795ce5d228354340ae47b091f3",
+  "new_runs": 6,
+  "new_independent_floorplan_families": 0,
+  "controlled_floorplan_families_total": 1,
+  "paired_object_permutations": 2,
+  "stochastic_replications": 0,
+  "validated": [
+    "All6runs achieved100percent reachable-free coverage with256paid actions andzero simulatedcollisions.",
+    "G andS native meshes and trajectories match eachother and frozen B2 same-arm hashes inbothlayouts. Removing the pointcap alone didnot change these2G/S comparisons.",
+    "All model calls use full quadrature and history zero weights. The no-consumption arm retains free-space rejection, haszero measured-consumption events, and hasno sampling truncation.",
+    "At256actions, retaining measured-surface consumption improves global5cmF1 by0.34975pp and0.06036pp, and closedcabinet recall by9.48571pp and0.82778pp inleft/right respectively."
+  ],
+  "qualifications": [
+    "The left no-consumption arm reachesfullcoverage at67rather than97actions and improves openshelf recall by0.56719pp; quality and coverage efficiency do not uniformly favor the full arm.",
+    "The right no-consumption arm hasthesame100action coverage milestone and43.2mfinalpath, but a different trajectory and slightly lower source-referenced reconstruction metrics.",
+    "G/Ssemantic efficiency or reconstruction superiority remains unproven: bothnew pairedcomparisons areexactties.",
+    "Historical J exceeds S globalF1 inleft andties inright; retain thisstrongjointbaseline result. Historical C haslower finalreconstruction but finishescoverage earlier andtravelsless.",
+    "No realworld detector, noisy localization, learned reachability, calibration, or hardware result follows fromthese controlled simulations."
+  ],
+  "historical_controls_comparison": {
+    "shelf_left": {
+      "C": {
+        "source": "retained B2 control, not new execution",
+        "source_paid_actions": 130,
+        "S_paid_actions": 256,
+        "difference_direction": "S minus historical C",
+        "F1_5cm_delta_pp": 0.7131644711593554,
+        "path_delta_m": 20.400000000000002,
+        "coverage100_action_delta": 30
+      },
+      "J": {
+        "source": "retained B2 control, not new execution",
+        "source_paid_actions": 256,
+        "S_paid_actions": 256,
+        "difference_direction": "S minus historical J",
+        "F1_5cm_delta_pp": -0.12307165309434209,
+        "path_delta_m": 0.8000000000000043,
+        "coverage100_action_delta": 9
+      }
+    },
+    "shelf_right": {
+      "C": {
+        "source": "retained B2 control, not new execution",
+        "source_paid_actions": 130,
+        "S_paid_actions": 256,
+        "difference_direction": "S minus historical C",
+        "F1_5cm_delta_pp": 0.16797615056952653,
+        "path_delta_m": 20.8,
+        "coverage100_action_delta": 34
+      },
+      "J": {
+        "source": "retained B2 control, not new execution",
+        "source_paid_actions": 256,
+        "S_paid_actions": 256,
+        "difference_direction": "S minus historical J",
+        "F1_5cm_delta_pp": 0.0,
+        "path_delta_m": 0.0,
+        "coverage100_action_delta": 0
+      }
+    }
+  },
+  "interpretation": "Supports the conditional contribution of measured-surface reward consumption to final reconstruction in this controlled pair, with explicit coverage and per-object tradeoffs. Does not establish a semantic-prior benefit or general robustness.",
+  "publication_guidance": "Present all6newruns andretained C/J controls withprovenance. Do notcount repeated identical G/S reruns asindependent statisticalreplications. Keep old jointno-history ablation separate because it also disabledfree-space evidence andchanged thinning."
+}

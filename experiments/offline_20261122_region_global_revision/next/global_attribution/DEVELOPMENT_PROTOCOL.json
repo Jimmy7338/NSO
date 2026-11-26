@@ -1,0 +1,36 @@
+{
+  "budget": 192,
+  "capture_paid": [
+    0,
+    48,
+    96,
+    144,
+    192
+  ],
+  "local_auxiliary_weights": {
+    "unknown_weight": 0.25,
+    "action_cost": 0.2
+  },
+  "local_route_invariants": {
+    "max_extra_outbound_actions": 8,
+    "min_unknown_union_ratio": 0.95,
+    "azimuth_bins": 8,
+    "score_equality_tolerance": 1e-09
+  },
+  "layouts": [
+    "floor26_corridor",
+    "floor26_loop",
+    "floor26_ordinary"
+  ],
+  "arms": [
+    "attribution_once",
+    "outbound_once"
+  ],
+  "source_states": {
+    "floor26_corridor": "floor26_corridor/region_S/paid-000/call-5",
+    "floor26_loop": "floor26_loop/region_S/paid-059/call-243",
+    "floor26_ordinary": "floor26_ordinary/region_S/paid-000/call-5"
+  },
+  "purpose": "Intervene exactly once at the first old corridor decision, the diagnosed old ring detour and the first remaining case in the previously frozen floor order showing target-only effect on the cold packet. Independently reproduce the original region_S prefix. Execute all distinct alternative goals across the two isolated and combined switches at those cases. If both switches pick the same route as an isolated switch it shares that fork. Compare with the original archived trajectory and shared clock map; subsequent global decisions use v1. The four original floors and both earlier clamp-only validation floors are viewed development or regression and excluded from the new formal sample.",
+  "joint_protocol_sha256": "f1ba3a425a49a8b6ae238231b21727a3fbe4114ab42a0aa1978734608ffa5693"
+}

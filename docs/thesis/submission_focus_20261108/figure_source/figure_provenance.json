@@ -1,0 +1,30 @@
+{
+  "mode": "terminal_raw_report_extraction",
+  "sources": {
+    "C": {
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/fresh_map_C_then_S_01_C_1794063422561485948",
+      "status": "nso_joint_core_stopped",
+      "reason": "budget_exhausted",
+      "source_sha256": {
+        "result.json": "1fb4008e163210bf8ed85a5cac5b4a193cb0449ecae08ffcd6d06bb1b07c3067",
+        "joint/decisions.jsonl": "b3c3b6372538ad9cceffe8ce42e905a607f57225edd27f29bbbd98b350af7b1f"
+      }
+    },
+    "S": {
+      "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261107/fresh_map_C_then_S_01_S_1794064101296331873",
+      "status": "nso_joint_core_failed",
+      "reason": "current_footprint_not_known_safe",
+      "source_sha256": {
+        "result.json": "8ff8e6b5ef2c87690333f9be12efd70ea94877b304328a42df09f79604c3dd4a",
+        "joint/decisions.jsonl": "713923ff2c0ed3d33a5f66618b0c68fbc6de42ccd9b539350f41d483a980a80e"
+      }
+    }
+  },
+  "limits": [
+    "One scene, one ordered C-then-S pair; two dependent episodes",
+    "Distinct actual bootstraps, not byte-identical initial information",
+    "Connected RGBD-time base-odom samples are not a dense or independently ground-truthed trajectory",
+    "Area is the internal observed-grid proxy",
+    "No cross-bootstrap quality/accuracy claim; no error bars"
+  ]
+}

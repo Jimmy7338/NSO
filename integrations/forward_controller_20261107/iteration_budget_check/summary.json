@@ -1,0 +1,132 @@
+{
+  "schema": "nso.CSM_iteration_budget_summary.v1",
+  "comparison": "Only existing native max_iterations10 vs50; fixed exact same06 state and recursive defaultA97..104",
+  "exact_baseline_live_fault_reproduced": true,
+  "unchanged_fixed_inputs_first_guess_verified": true,
+  "fixed": {
+    "10": {
+      "valid": true,
+      "error": 64.7565731504332,
+      "nvalid": 1652,
+      "iterations": 11,
+      "max_iterations": 10,
+      "at_or_above_iteration_budget": true,
+      "result_pose": [
+        0.5308784908706593,
+        0.6844681534492013,
+        2.2790793425373477
+      ],
+      "planar_jump_m": 0.050105966472451156,
+      "icp_microseconds": 7638,
+      "would_switch_keyframe": false
+    },
+    "50": {
+      "valid": true,
+      "error": 64.7047526524854,
+      "nvalid": 1651,
+      "iterations": 19,
+      "max_iterations": 50,
+      "at_or_above_iteration_budget": false,
+      "result_pose": [
+        0.5308803786956054,
+        0.6845247669031113,
+        2.2790827993040943
+      ],
+      "planar_jump_m": 0.05015932266875127,
+      "icp_microseconds": 15502,
+      "would_switch_keyframe": false
+    }
+  },
+  "recursive": {
+    "10": {
+      "n": 8,
+      "all_valid": true,
+      "guard_exceedance_indices": [
+        99,
+        100
+      ],
+      "iterations": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        9,
+        8
+      ],
+      "maximum_jump_m": 0.050105966472451156,
+      "icp_us_median": 5849.0405,
+      "final_pose": [
+        0.5014175514039885,
+        0.6438656234751687,
+        2.31678479728785
+      ],
+      "keyframe_reference_indices": [
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96
+      ]
+    },
+    "50": {
+      "n": 8,
+      "all_valid": true,
+      "guard_exceedance_indices": [
+        99,
+        100
+      ],
+      "iterations": [
+        12,
+        13,
+        21,
+        15,
+        22,
+        16,
+        8,
+        8
+      ],
+      "maximum_jump_m": 0.05013512981590162,
+      "icp_us_median": 8566.865,
+      "final_pose": [
+        0.5014175514039885,
+        0.6438656234751687,
+        2.31678479728785
+      ],
+      "keyframe_reference_indices": [
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96,
+        96
+      ]
+    }
+  },
+  "conclusion": "Raising iteration budget does not remove fault99/100 jumps.50 stops before budget19iterations fixed,8\u201322recursive, while jumps persist. Budget exhaustion is not sufficient explanation/solution for this fixture.",
+  "limits": [
+    "Single fixed call and8dependent recursive steps per profile; timing descriptive only, not benchmark",
+    "Reported iterations11 at configured10 is retained as native library convention; no assumed off-by-one correction",
+    "Stopping below50 does not establish global-optimum convergence; no detailed solver termination reason recorded",
+    "ICP error is raw native residual over different correspondence counts, not independent pose/reconstruction accuracy",
+    "Recursive replay continues after unchanged guard would stop, solely for offline diagnosis",
+    "No output filtering/clipping,threshold relaxation,new sampling or live deployment"
+  ],
+  "artifacts": [
+    "results.json",
+    "state_fixture.cpp",
+    "run.py",
+    "fixed_10.stdout.log",
+    "fixed_50.stdout.log",
+    "recursive_10.stdout.log",
+    "recursive_50.stdout.log"
+  ],
+  "live_modified": false,
+  "master_closed": true
+}

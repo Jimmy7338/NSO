@@ -1,0 +1,45 @@
+{
+  "schema": "B10_gain_alignment_scope_v1",
+  "status": "completed_three_negative_accounting_variants_and_C_prediction_operator_tests",
+  "parent": "B9 T16 conditional geometry/structural mixture",
+  "user_request": "\u4fee\u6b63\u9884\u6d4b\u89c2\u5bdf\u6536\u76ca\u4e0e\u5b9e\u9645\u65b0\u589e\u8868\u9762\u7684\u504f\u5dee",
+  "hardware": false,
+  "development_data": "All existing B9 six fixed prefixes/66 actual branches and eight controlled mechanism branches; complete rows retained. These are development diagnostics, not independent test samples.",
+  "primary_mismatch_hypotheses": [
+    "Sparse keyframe history misses surface recovered by intermediate RGB-D frames fused in native TSDF",
+    "Template point visibility is a continuous point-center surrogate for finite sampled RGB-D reconstruction",
+    "Template expected object gross area is not whole-scene net area or complete coverage efficiency"
+  ],
+  "minimal_revision_under_review": "For acquisition gain, consume template surface already recovered in current native TSDF within the stated5cm reconstruction tolerance in addition to original history. This changes reward values and is a declared decision-affecting method revision, not merely an engineering fix.",
+  "unchanged": [
+    "B9 frozen geometry/posterior/T16",
+    "candidate generator",
+    "common score terms and weights",
+    "unknown coverage primary objective",
+    "virtual execution action budget/return/collision contract",
+    "frozen B9 evidence",
+    "hardware pause"
+  ],
+  "validation": "Keep gross new, lost and net source area distinct, and object vs whole-scene metrics distinct. Source reference is evaluator-only. No score scaling selected to make S win. Independent sample validation must use frozen new observations before results; otherwise report development-only.",
+  "next_steps": [
+    "Quantify complete candidate point-level errors",
+    "Test native-mesh duplicate consumption in fixed replay with one-change ablation",
+    "If gain alignment improves or targets change, rerun matched full policies using frozen protocol",
+    "Update paper with actual results including null/adverse outcomes"
+  ],
+  "conservative_novelty_validation": {
+    "existing6prefix_grossMAE_improves": true,
+    "independent12fixture_grossMAE_worsens": [
+      0.15634217400649353,
+      0.16687267411275414
+    ],
+    "promoted_default": false
+  },
+  "additional_development_diagnostics": [
+    "Replace historical axial measured-surface band by native5cm consumption:36-route MAE .186515",
+    "Same replacement plus0.06m area-conserving quadrature:MAE .231342",
+    "All12fixture samples already opened become development data for these revisions; no new independent test claim"
+  ],
+  "next_declared_revision": "Acquisition forward model: render each mutually exclusive hypothesis at route camera poses, integrate observed-past plus hypothesis-future depth into independent prediction TSDF, estimate new reconstructed hypothesis surface using fixed separate surface quadrature. No synthetic depth enters actual measured TSDF. New geometry test must be frozen before predictions.",
+  "default_policy_promoted": false
+}

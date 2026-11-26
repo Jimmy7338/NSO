@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "date_local": "2026-11-21",
+  "declared_before_opening_new_endpoint_metrics": true,
+  "source_commit": "1f06bb5d93bbe93a40b9d4499861101aa7555c09",
+  "previous_local_archive": "/home/ouc/nso_robot/analyses/semantic_large_scene_20261121",
+  "layouts_in_order": ["warehouse_left", "warehouse_right", "gallery_left", "gallery_right"],
+  "candidates_in_order": [0, 1, 2, 3],
+  "original_candidate": {"warehouse_left": 2, "warehouse_right": 2, "gallery_left": 1, "gallery_right": 1},
+  "native_budget_including_return": 256,
+  "common_paid_checkpoints_by_parent": {"warehouse": 30, "gallery": 58},
+  "strict_pairs_by_parent": {"warehouse": [[0, 1], [2, 3]], "gallery": [[2, 3]]},
+  "additional_pairs_by_parent": {"gallery": [[0, 1]]},
+  "actual_annotated_outbound_return_costs": {"warehouse": [[28, 30], [28, 30], [30, 32], [30, 32]], "gallery": [[58, 58], [56, 56], [38, 40], [38, 40]]},
+  "execution": {
+    "start": "Restore original first intervention at paid zero with exact observed RGB-D, scan, pose, and belief. Verify archive's candidate bank, full scores and original choice. Bind one original route with its original local and return protection. S/G/X scores are three predictions of the same rollout.",
+    "snapshots": ["start", "arrival", "paid_30 or paid_58"],
+    "arrival": "First paid sample at the original selected target pose including heading for the bound route. If a guard or collision intervenes before target, retain and label; no substitution route may count as its arrival.",
+    "continuation": "At natural completion of the initial option, continue exact inherited neutral G under its original total cap of 256 to reach the common short paid observation index. Use actual early stop as censored; never pad with artificial observations. Use no reference to plan or stop.",
+    "reuse": "Deterministic partial sensor recovery of the old chosen option is allowed from its original action and packet receipts, verified by matching every recovered packet hash, pose, action, actual first target-arrival and equal-paid sample. Matching archive trajectory is required. No ideal rendered observations enter the map except the original simulator sensor calls.",
+    "cost": "Report native nominal outbound and reserved return as frozen; report paid actions and actual outcome separately. Short checkpoints do not claim completed return."
+  },
+  "metrics": {
+    "object_primary": "Area-weighted net newly represented shelf plus cabinet on original fixed first-hit source samples at 0.05 m. Also report gross, lost, shelf-only, cabinet-only, reference sample counts and baseline-to-checkpoint differences.",
+    "J": "C_free × whole-scene F1 at 0.05 m. C_free = correctly mapped free cells / frozen true start-reachable free cells. Reuse the independent fixed reference and predicted mesh sampling seed. Report endpoint components and delta from the common prefix.",
+    "numeric_score_tie": 1e-9,
+    "numeric_J_tie": 1e-9,
+    "material_object_area_m2": 0.05,
+    "material_J_fraction": 0.001,
+    "material_threshold_interpretation": "Declared practical equivalence bands for these finite deterministic trials. Raw values always reported; material thresholds not a significance test. Use strict greater-than beyond the band."
+  },
+  "ranking_and_upper_bound": {
+    "orientation": "Pair difference is candidate with lower ID minus the higher ID. Compare signs for each mode on exact same two candidates. Ties are explicit; missing/broken arrivals are excluded from direction tally and retained in the CSV.",
+    "scores": "Publish raw common N and total G/S/X, object G−N/S−N/X−N, and category corrections S−G/X−G. Compare object component rankings with object net and gross, and separately with J. Compare total rankings with J. Category correction signs diagnose marginal effects only.",
+    "primary": "Strict same-outbound and same-reserved-return pairs at arrival, then report those pairs again at the layout's common paid sample. Gallery pair 0/1 only has a fair primary time point at paid 58. Its asynchronous arrivals are separately descriptive.",
+    "oracle": "Per placement report all four candidates' common-paid J, best minus original and best ID. If any missing, report the best observed with explicit missingness. This is a counterfactual upper bound within the recorded candidate set and horizon, not online performance. Also compare each original candidate with its strict matched peer."
+  },
+  "branch_decision": {
+    "paired_design_unit": "Two parent layouts. A swap-qualified pair compares the same two IDs across both placements of one parent; use all three nominated pair families, not a per-placement hindsight selection. A comparator's pair-direction agreement is 0 or 1 on each material actual difference. Predictions tied on a material actual difference score zero.",
+    "S_predicts_object": "At least one strict pair family has material actual net object advantage in both placements that flips with the swap and S−N correctly ranks both directions. The gross direction must not materially contradict the net. Across that parent's eligible strict comparisons S−N must have more agreements than both G−N and X−N. Report marginal corrections and secondary pairs irrespective of the gate.",
+    "A": "An object-qualified parent also shows a material observed J advantage on both swap placements of a strict pair whose actual J ordering switches and whose S−N correctly predicts both directions, with more J agreements than both G−N and X−N across that parent's strict comparisons. Only then consider one score-scale calibration and frozen unused same-kind validation with amplified neutral-object reference.",
+    "B": "Object gate passes and A does not. Among eligible strict comparisons correctly ranked by S−N for object net, prioritize those with no material J improvement in the object-preferred direction and pick the largest absolute net gap, tie by layout order then candidate IDs. If none, use the same fixed order by largest absolute net gap. Continue precisely this pair under identical neutral G and the 256-action full cap, reusing exact archive if applicable.",
+    "C": "Object gate does not pass, or no valid material candidate opportunity is demonstrable. Stop the weight experiment. Explain separate native-candidate opportunity and prediction alignment using all outcomes. Specify one smallest next change with no outcome-conditioned execution changes."
+  },
+  "out_of_scope": ["The previous E1 and full S/G/X episodes are retained without retrospective alteration.", "No ordinary unseen large-scene confirmation batch and no hardware activity."]
+}

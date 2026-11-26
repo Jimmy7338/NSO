@@ -1,0 +1,37 @@
+{
+  "schema": "nso_candidate_route_persistence_v1",
+  "frozen_before_new_terminal_outcomes": true,
+  "source_commit": "7fda64686ecd9b2adbc5aa35bc3e277eb720d00f",
+  "source_repo_directory": "experiments/offline_20261121_candidate_route_yield/",
+  "source_local": "/home/ouc/nso_robot/analyses/candidate_route_yield_20261121",
+  "layouts_in_order": ["warehouse_left", "warehouse_right", "gallery_left", "gallery_right"],
+  "new_routes": {"warehouse_left": [3], "gallery_left": [2, 3], "gallery_right": [2, 3]},
+  "archived_full_routes": {"warehouse_left": [2], "warehouse_right": [2, 3], "gallery_left": [1], "gallery_right": [1]},
+  "native_total_paid_cap": 256,
+  "native_commitment_cost_by_parent": {"warehouse": [30, 32], "gallery": [38, 40]},
+  "required_checkpoints": {"warehouse": [30, "terminal"], "gallery": [38, 58, 128, "terminal"]},
+  "optional_diagnostic_checkpoints": [96, 160, 192, 224],
+  "source_recovery": {
+    "new_warehouse_prefix_paid": [30],
+    "new_gallery_prefix_paid": [38, 58],
+    "rule": "Replay exact recorded per-action histories from the common frozen start state. Verify pose, selected option, sensor packet and observation chain before release. At the specified paid indices recover the archived native mesh and belief exactly and independently remeasure metrics. Once recovered, run the same neutral G policy with the inherited local feasibility, action accounting, return protection and native stop reasons. No reference or label correction may be read by the actor.",
+    "archive_rule": "Use sealed trajectories/terminals for five comparator records. Any missing gallery archived 1 intermediate mesh is recovered deterministically by replaying its paid controls and validating original packet/pose and unchanged terminal if possible, without new planning or scoring. Log missingness if historical raw inputs cannot support exact recovery. Reused evidence does not count as a new continuation.",
+    "early_stop": "Retain actual paid count, reason, collisions, return status, and measured terminal state. Do not fill later scheduled checkpoints or treat a transported/failed result as a complete trajectory. Additional frozen diagnostic snapshots do not affect action count or policy."
+  },
+  "measurement": {
+    "J": "Correctly mapped reachable free cells / true reachable free cells times whole-scene F1 at 5 cm.",
+    "object_net": "Fixed-reference area-weighted newly matched object surface since the initial measured map minus the previously matched area lost.",
+    "main_interval": [38, 58],
+    "interval_geometry": "Record first and all neutral targets issued from paid 38 through action 58, their reached or partial endpoints, oriented path and observed correct-free cell gain/loss. Attribute new and lost fixed-reference samples by original scene surface groups and spatial positions, using all measured mesh surfaces. Continuous scene F1 includes whole-scene precision and recall.",
+    "interval_decomposition": "For paired J_A-J_B exactly factor into (C_A-C_B)*(F_A+F_B)/2 + (F_A-F_B)*(C_A+C_B)/2. Show signed components at steps 38 and 58 and their changes. Record both sides even when components offset.",
+    "terminal_equivalence_J_fraction": 0.001,
+    "numerical_tolerance": 1e-9,
+    "crossing_rule": "Report the first observed later checkpoint at which the short-horizon side advantage falls within the practical band or reverses. Use objective-free per-action true coverage and measured surfaces at fixed checkpoints to bracket, and distinguish a later recovery of the lead. If comparator terminal clocks differ, give both actual budgets at terminal and separately report any exact shared-clock comparisons."
+  },
+  "decision": {
+    "warehouse": {"warehouse_left": [2, 3], "warehouse_right": [3, 2]},
+    "gallery_vs_other_side": {"gallery_left": [2, 3], "gallery_right": [3, 2]},
+    "gallery_vs_original": {"gallery_left": [2, 1], "gallery_right": [3, 1]},
+    "interpretation": "A practical advantage is a signed terminal delta greater than +0.001 in J. Values between -0.001 and +0.001 inclusive are practically equivalent. This is a diagnostic band, without a statistical test. A sustained usable gallery preference needs both per-placement advantages (shelf vs other side and shelf vs original 1) and no per-placement return or collision deterioration relative to those two comparators. Only if both placements meet these conditions propose one minimal online-observation-only scoring change for future unseen-layout validation. Otherwise retain both outcomes and locate any observed erosion or reversal. There is no weight sweep or new layout run."
+  }
+}

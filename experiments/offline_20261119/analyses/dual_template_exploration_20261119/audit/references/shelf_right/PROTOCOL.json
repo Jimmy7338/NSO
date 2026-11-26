@@ -1,0 +1,83 @@
+{
+  "schema": "controlled_dual_template_independent_surface_reference_v1",
+  "declared_before_actor_results": true,
+  "layouts": [
+    "shelf_left",
+    "shelf_right"
+  ],
+  "global_area_samples": 100000,
+  "per_target_area_samples": 10000,
+  "source_seed": 20261119,
+  "target_seeds": {
+    "open31": 20261150,
+    "closed118": 20261237
+  },
+  "predicted_area_samples": 12000,
+  "predicted_seed": 812,
+  "distance_thresholds_m": [
+    0.05,
+    0.1
+  ],
+  "fixed_lattice_stride_cells": 4,
+  "include_start": true,
+  "headings": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "first_hit_tolerance_m": 0.001,
+  "target_definitions": {
+    "all": "All actual architecture and placed original furniture triangles",
+    "open31": "All original source shelf31 triangles in this layout",
+    "closed118": "All original source closed cabinet118 triangles in this layout"
+  },
+  "reference_visibility": "Retain a source area sample only if visible from at least one fixed start-reachable camera lattice position under calibrated FOV/range and actual whole-scene first-hit geometry. This removes hidden internal surfaces without a box-union formula.",
+  "prediction": "Only exported native TSDF fused from actual rendered depth, never completion-template meshes",
+  "precision": "Predicted area samples to full true source triangles",
+  "completeness": "Fixed reachable-camera-visible source area samples to predicted triangles",
+  "target_metric": "Completeness only; no claimed per-instance predicted mesh precision",
+  "alignment": "Fixed shared world metric coordinates, no per-run registration",
+  "independence": "Reference depends only on declared world geometry, source metadata, prepared reachable graph and sensor calibration, never policy paths or outcomes",
+  "limits": [
+    "Two furniture permutations of one controlled floorplan family",
+    "Opaque first-hit sensor representation, exact pose and noiseless simulated inputs",
+    "Finite area sampling and discrete reachable camera lattice approximate visible surface extent"
+  ],
+  "layout": "shelf_right",
+  "actual_camera_config": {
+    "resolution_m": 0.2,
+    "robot_radius_m": 0.2,
+    "camera_height_m": 1.2,
+    "width_px": 120,
+    "height_px": 90,
+    "fov_deg": 90.0,
+    "max_depth_m": 8.0,
+    "depth_sigma_m": 0.0,
+    "dropout": 0.0,
+    "action_duration_s": 1.0,
+    "voxel_m": 0.06,
+    "max_steps": 256,
+    "laser_height_m": 0.25,
+    "laser_rays": 180,
+    "truncation_m": 0.12
+  },
+  "prepared_directory": "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/prepared",
+  "source_inputs_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/protocol.json": "ab3b3c0bc3fd56aa1cc4b2c0b8f8a20a833d26fc6f656ff08e33a5161fd79b83",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/scene/controlled_world.py": "76750572d7562be1317b2f0e8f8cf33be6c8396e9c3c8a5d1d9fc9d78560bfab",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/prepared/initial_state.json": "5c6abe9c3ff5a429aa0ba9f49565e4ca081cb69f958e61e19feff2293b34310a",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/prepared/evaluator_truth.npz": "3008e89d51ed9888350fe492e78a2c1ef715bea5703e5935e54ddf04e08d1875",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/prepared/initial_sensor.npz": "45afc930bfc2aaf890bc04844e57f00c6801c0f2bff15b0e92a20e84be5906b9",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/audit/reference_protocol.json": "827a508e5baf12ea8e75792a5115db4393f8afbc1adab7223498b5f9b1c39f80",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/audit/prepare_surface_reference.py": "b520b80c50b2d2e0f5560cacd6f635871b4e2f3f9f22913d6d52ef1570b833ba",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/audit/surface_metrics.py": "70abf00907801f5e9b20e1c2dfb8985b888f4e2801303fc18f0fa70eb69a3e7b",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/exploration_evaluation/surface_reference.py": "8d8488a56f28729abe858b9f978ddabf4a5c67a3dbbf529d38956a6de7bed409",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/scene_adapter/replicacad_world.py": "195e7b9e33f95c88501608edf393e790418347258cddef5f90d7674ab5fe06f1",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/assemble_apt0.py": "86ef4c84adb6970a884780a896087eb2913aaf5648cae1b5ba1bb83a655c9426",
+    "/home/ouc/nso_robot/analyses/semantic_scene_redesign_20261119/assets/replicacad/download_receipt.json": "b7319aab0fea9298a4ce5cb7f3429608c62b17ca9a1d3185b56073db514292e3",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/layouts/shelf_right/prepared/freeze.json": "e5546f3ca1830f5a0d685c633b23b442dfcc289078f010dbad7e991e758ed3ea",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/scene/precomputed_assets/29907fae6ae198e7b1c115adaedee2a3a38a8f20cf3074f11031722a11372c78.npz": "05effbf966f9dff086aa0348e6743793617f3092f252cacdcb762f240da4fe80",
+    "/home/ouc/nso_robot/analyses/dual_template_exploration_20261119/scene/precomputed_assets/29907fae6ae198e7b1c115adaedee2a3a38a8f20cf3074f11031722a11372c78.json": "e0636f8712012f9e926d99b621869d43b6f1f188dc8101a41c45c126b106727a"
+  }
+}

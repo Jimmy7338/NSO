@@ -1,0 +1,11 @@
+"""Offline point visibility audit; does not clear or alter any map."""
+import numpy as np,json
+from pathlib import Path
+from depth_mask import anchor_depth_support
+O=Path(__file__).parent;P=Path('/home/ouc/nso_robot/reports/nso-hybrid-20261110/expand_history_S96_20261110_01');cfg=json.loads((P/'joint_configuration.json').read_text())['configuration'];T=np.array(cfg['planning_from_odom']);z=np.load(P/'joint_inputs/joint-1794292130668983305.npz');oldT=T@z['world_from_camera'];s=anchor_depth_support(z['depth'],z['intrinsic'],oldT);points=np.array(s['planning_points']);cells=np.c_[399-np.floor(points[:,1]/.2).astype(int),np.floor(points[:,0]/.2).astype(int)];out=[]
+for name in ['baseline_1','baseline_20','restored_1','restored_20']:
+ a=np.load(O/'confidence_probe'/f'{name}.npz');A=a['planning_from_camera'];pc=(points-A[:3,3])@A[:3,:3];q=pc@a['intrinsic'].T;uv=np.rint(q[:,:2]/q[:,2,None]).astype(int);visible=(pc[:,2]>0)&(uv[:,0]>=0)&(uv[:,0]<320)&(uv[:,1]>=0)&(uv[:,1]<180);d=np.zeros(len(pc));d[visible]=a['depth'][uv[visible,1],uv[visible,0]];labels=np.full(len(pc),'outside',dtype='U16');valid=visible&np.isfinite(d)&(d>0);labels[visible&~valid]='invalid';labels[valid&(d>pc[:,2]+.12)]='farther_free';labels[valid&(d<pc[:,2]-.12)]='occluded';labels[valid&(np.abs(d-pc[:,2])<=.12)]='within';by=[]
+ for cell in np.unique(cells,axis=0):
+  m=np.all(cells==cell,axis=1);u,n=np.unique(labels[m],return_counts=True);by.append(dict(cell=cell.tolist(),counts=dict(zip(u,n.tolist()))))
+ u,n=np.unique(labels,return_counts=True);out.append(dict(name=name,counts=dict(zip(u,n.tolist())),per_cell=by,camera_translation_delta_m=float(np.linalg.norm(A[:3,3]-oldT[:3,3])),camera_rotation_delta_rad=float(np.arccos(np.clip((np.trace(A[:3,:3].T@oldT[:3,:3])-1)/2,-1,1))),points=[dict(cell=c.tolist(),uv=p.tolist(),old_optical_z=float(x[2]),current_depth=float(v),classification=str(l)) for c,p,x,v,l in zip(cells,uv,pc,d,labels)]))
+(O/'free_evidence.json').write_text(json.dumps(dict(old_point_count=len(points),threshold_m=.12,sampling='nearest pixel; actual canonical K and TF; positive depth required',frames=out),indent=2));print(json.dumps([{k:v for k,v in r.items() if k not in ('points','per_cell')} for r in out]))

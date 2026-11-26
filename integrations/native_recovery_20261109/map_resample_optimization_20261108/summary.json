@@ -1,0 +1,118 @@
+{
+  "status": "offline_only_not_deployed_no_ros_or_motion",
+  "real_saved_maps": 66,
+  "episodes": [
+    "matched_system_pilot_20261108_B1_C",
+    "nov06_timing_S40_20261108_02"
+  ],
+  "all_outputs_exact_to_current_production_and_saved_belief": true,
+  "original_tile_candidate": {
+    "result": "negative: slower and more peak allocation",
+    "aggregate": {
+      "production": {
+        "mean_s": 0.6138509816363363,
+        "median_s": 0.6079171619999215
+      },
+      "candidate": {
+        "mean_s": 0.6441916586060429,
+        "median_s": 0.6455500649999522
+      }
+    },
+    "memory": {
+      "production": {
+        "tracemalloc_peak_bytes": 19045776,
+        "note": "Includes NumPy allocations tracked by Python allocator; not process RSS; timing excludes tracing"
+      },
+      "candidate": {
+        "tracemalloc_peak_bytes": 27980401,
+        "note": "Includes NumPy allocations tracked by Python allocator; not process RSS; timing excludes tracing"
+      }
+    }
+  },
+  "compact_candidate": {
+    "aggregate": {
+      "production": {
+        "mean_s": 0.630014022378873,
+        "median_s": 0.6282334840002477
+      },
+      "candidate": {
+        "mean_s": 0.053037501833304385,
+        "median_s": 0.0452097360002881
+      }
+    },
+    "representative_repeat": {
+      "production": {
+        "samples_s": [
+          0.607151328999862,
+          0.6032018240002799,
+          0.6020761730005688,
+          0.6039618039994821,
+          0.6016718450000553
+        ],
+        "median_s": 0.6032018240002799
+      },
+      "candidate": {
+        "samples_s": [
+          0.04246818399951735,
+          0.042186355000012554,
+          0.04226805300004344,
+          0.042245747999913874,
+          0.042324180999457894
+        ],
+        "median_s": 0.04226805300004344
+      }
+    },
+    "memory": {
+      "production": {
+        "tracemalloc_peak_bytes": 19045776,
+        "note": "Includes NumPy allocations tracked by Python allocator; not process RSS; timing excludes tracing"
+      },
+      "candidate": {
+        "tracemalloc_peak_bytes": 9281992,
+        "note": "Includes NumPy allocations tracked by Python allocator; not process RSS; timing excludes tracing"
+      }
+    },
+    "edge_cases": 200
+  },
+  "latency_context": [
+    {
+      "episode": "matched_system_pilot_20261108_B1_C",
+      "successful_goal_mean_s": 6.487116564957735,
+      "successful_forward_mean_s": 6.408388518903632,
+      "capture_mean_s": 3.30597428115987,
+      "observe_RPC_mean_s": 2.322554309719708,
+      "prediction_subset_mean_s": 1.5027678029195521,
+      "new_frame_wait_validate_mean_s": 0.20119370868109399,
+      "nav_resample_mean_s": 1.231340758119768,
+      "reference_NPZwrite_mean_s": 0.810502014439553,
+      "joint_NPZwrite_mean_s": 0.6654717695602449,
+      "source_NPZread_mean_s": 0.2960403107601451,
+      "planning_RPC_mean_s": 0.29294870303943754
+    },
+    {
+      "episode": "nov06_timing_S40_20261108_02",
+      "successful_goal_mean_s": 7.010375555425708,
+      "successful_forward_mean_s": 6.990722934594714,
+      "capture_mean_s": 4.067793336706683,
+      "observe_RPC_mean_s": 2.2633276997556804,
+      "prediction_subset_mean_s": 1.45258023536664,
+      "new_frame_wait_validate_mean_s": 0.19485420795056754,
+      "nav_resample_mean_s": 1.062098243243981,
+      "reference_NPZwrite_mean_s": 1.325936068244074,
+      "joint_NPZwrite_mean_s": 1.1192606170241162,
+      "source_NPZread_mean_s": 0.2553168696339992,
+      "planning_RPC_mean_s": 0.47493747014693616
+    }
+  ],
+  "production_sha256": "eab243c06eff3491fe7b57190cfec306bbe7917ef44d723b137997584d7aa194",
+  "reference_function_sha256": "8ebf04a1768f6f33181e3ef8900d064a946e340db1f652e7160b7948cdc3a91e",
+  "production_source_unchanged": true,
+  "limitations": [
+    "Offline wall-clock timing on restarted idle system does not establish real ROS capture latency or 1 second actual-cycle reduction.",
+    "Aggregate timings include initial overlap with preceding benchmark and the small edge validation; five-repeat representative measurements follow completion and are serial.",
+    "Fresh idle production median is ~0.60s, unlike recorded loaded runtime 1.06-1.23s; do not subtract offline candidate directly from historical live runtime to claim a measured saving.",
+    "Tracemalloc peak tracked allocation is not process RSS.",
+    "Equivalence covered all 66 saved maps and 200 synthetic cases; no universal proof over arbitrary floating point inputs is claimed.",
+    "Source hashes, saved input hashes and exact output hashes are recorded per case in offline_validation files."
+  ]
+}

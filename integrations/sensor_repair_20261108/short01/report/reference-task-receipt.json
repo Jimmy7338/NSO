@@ -1,0 +1,387 @@
+{
+  "schema": "nso_joint_runtime_v10/1",
+  "execution_allowed": true,
+  "calibration": {
+    "source": "actual RGBD/scan and per-sensor historical TF",
+    "pixel_stride": 4,
+    "initial_grid": {
+      "shape": [
+        400,
+        400
+      ],
+      "resolution_m": 0.2,
+      "planning_from_odom": [
+        [
+          -0.9961727187231807,
+          -0.08740660427946303,
+          0.0,
+          37.90331971249298
+        ],
+        [
+          0.08740660427946303,
+          -0.9961727187231807,
+          0.0,
+          40.150402457786875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.12447258789516671
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "return_anchor": [
+        200,
+        200,
+        0
+      ],
+      "floor_odom_z_m": -0.12447258789516671,
+      "planning_domain_is_resource_extent_not_observed_world": true,
+      "initial_actual_base_odom_pose": [
+        -2.2101598027098674,
+        0.057439732529892214,
+        -1.483278041636387
+      ]
+    },
+    "initial_actual_base_odom_pose": [
+      -2.2101598027098674,
+      0.057439732529892214,
+      -1.483278041636387
+    ],
+    "initial_odom_stamp_ns": 1794130889167378370,
+    "initial_odom_stamp_semantics": "actual historical query",
+    "initial_odom_frame": "odom",
+    "initialization_unix_s": 1794130892.8752222,
+    "initialization_scope": "current legacy-mount epoch; existing stationary navigation map retained; no old paid/semantic ledger",
+    "source_registration": "fresh current epoch with no previous SE2 alignment",
+    "localization_source": "lidar_csm",
+    "navigation_map_source": {
+      "topic": "/nso_visual/map",
+      "publisher": "/slam_gmapping",
+      "map_frame": "map"
+    },
+    "joint_turn_execution_profile": "measured_in_place_turn_v1",
+    "apply_approved_self_mask": false,
+    "self_mask_pixels": 0,
+    "self_mask_profile": "unmasked_after_camera_relocation_v1",
+    "camera_mount_calibrated": false,
+    "camera_extrinsic_policy": "user_requested_legacy_mount_rollback",
+    "camera_extrinsics_verified": false,
+    "captured_base_from_camera": [
+      [
+        2.220446049250313e-16,
+        2.220446049250313e-16,
+        1.0,
+        0.06099999999999999
+      ],
+      [
+        -1.0,
+        0.0,
+        2.220446049250313e-16,
+        0.0591
+      ],
+      [
+        0.0,
+        -1.0,
+        2.220446049250313e-16,
+        0.303
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "captured_base_from_laser": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -0.011
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0035
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.451
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "floor_reference_profile": "depth_ground_reference_v1",
+    "input_geometry_profile": "depth_ground_reference_v1",
+    "candidate_floor_profile_deployed": true,
+    "ground_reference_receipt": {
+      "path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/execution_ground_profile.json",
+      "sha256": "094feddd52dfc8e125e62ceebe046d5b0312f0742439511cb89ef8a3fa6df9e5",
+      "training_source": {
+        "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/current_capture/raw/1794128889309241370.npz",
+        "sha256": "b60b1ee6badd332c45eb5d2e42520c9fea2769ad3fc97cf8c00745744284b434",
+        "points": 10730,
+        "ransac_inliers": 10730
+      },
+      "floor_relative_to_training_base_m": -0.12447258789516671,
+      "actual_base_z_m": 0.0,
+      "actual_floor_odom_z_m": -0.12447258789516671,
+      "original_floor_odom_z_m": -0.233,
+      "method_effect": "vertical input projection, occupancy and quality/asset heights change; original thresholds and scorer/candidates unchanged",
+      "independent_physical_truth_verified": false
+    },
+    "nominal_view_forecast_calibrated": false,
+    "physical_reconstruction_accuracy_verified": false,
+    "nominal_camera_height_m": 0.536,
+    "actual_camera_height_from_base_TF_and_fixed_floor_m": 0.42747258789516673,
+    "depth_confidence": 80,
+    "depth_texture_confidence": 100,
+    "SDK_depth_mode": "NEURAL",
+    "ROS_execution_frame": "odom",
+    "ROS_xy_latch": true,
+    "ROS_xy_goal_tolerance_m": 0.08,
+    "Navfn_default_tolerance": 0,
+    "controller_odometry_source": "/nso_csm/control_odom",
+    "controller_odometry_projection": "original default-keyframe CSM pose and kernel-timestamped CAN control velocity",
+    "correction_reverse_profile": "endpoint_only_max0.05_mps_existing_authorization",
+    "external_deadline_s": 240,
+    "evidence_scope": "explicit depth_ground_reference_v1 integration diagnostic; legacy camera TF retained; forecast heights unchanged and exceed candidate actual heights by .108527412m; no matched efficacy or independent accuracy claim",
+    "prior_episode_ledger_imported": false,
+    "history_acquisition": "current stationary navigation epoch retained; actual fresh paid observations"
+  },
+  "configuration": {
+    "robot_radius_m": 0.7212185868375829,
+    "sensor_config": {
+      "width_px": 320,
+      "height_px": 180,
+      "fov_deg": 101.34615631189132,
+      "max_depth_m": 4.0,
+      "camera_height_m": 0.536,
+      "laser_height_m": 0.684,
+      "laser_rays": 2000,
+      "voxel_m": 0.03,
+      "truncation_m": 0.12
+    },
+    "planner_revision": "v10_3_1",
+    "policy_variant": "exploration_joint_v1",
+    "sensor_range_profile": "sensor_range_matched_v1",
+    "measured_extent_profile": "measured_extent_3m_v1",
+    "shape": [
+      400,
+      400
+    ],
+    "planning_from_odom": [
+      [
+        -0.9961727187231807,
+        -0.08740660427946303,
+        0.0,
+        37.90331971249298
+      ],
+      [
+        0.08740660427946303,
+        -0.9961727187231807,
+        0.0,
+        40.150402457786875
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.12447258789516671
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "total_budget": 12,
+    "score_mode": "S",
+    "episode_id": "depth_ground_S12_20261108_01",
+    "scene_id": "depth_ground_unknown_exploration_20261108"
+  },
+  "grid": {
+    "shape": [
+      400,
+      400
+    ],
+    "resolution_m": 0.2,
+    "origin_xy_m": [
+      0.0,
+      0.0
+    ],
+    "planning_from_odom": [
+      [
+        -0.9961727187231807,
+        -0.08740660427946303,
+        0.0,
+        37.90331971249298
+      ],
+      [
+        0.08740660427946303,
+        -0.9961727187231807,
+        0.0,
+        40.150402457786875
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.12447258789516671
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "receipt": {
+    "source_manifest_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/SOURCE_MANIFEST.json",
+    "source_manifest_sha256": "e110a56f2dc3b059a796db027dc7784da4cfee824e047258ab4ec9a7118be209",
+    "policy_revision": "v10_3_1",
+    "policy_variant": "exploration_joint_v1",
+    "sensor_ranges": {
+      "profile": "sensor_range_matched_v1",
+      "camera_depth_quality_aperture_range_m": 4.0,
+      "lidar_forecast_range_m": 8.0,
+      "lidar_canonical_support_range_m": 8.0,
+      "observed_navigation_map_range_m": 8.0,
+      "original_paper_equivalence": false,
+      "last_scan_adapter_receipt": null
+    },
+    "research_policy_changes": [
+      "camera coverage and camera yield target actual unknown cells only",
+      "coverage candidate shortlist uses historical spatial bins",
+      "invalidated outbound macro replans on latest measured map before return"
+    ],
+    "geometry_adapter": {
+      "profile": "measured_extent_3m_v1",
+      "geometry_change": true,
+      "original_method_equivalence": false,
+      "original_max_horizontal_extent_m": 2.2,
+      "max_horizontal_extent_m": 3.0,
+      "predicate": "original measured planning-frame XY AABB 5th/95th span; fixed3m cap",
+      "rotation_invariant": false,
+      "parameter_scope": "horizontal applicability cap only",
+      "point_cropping": false,
+      "semantic_dependent": false,
+      "scoring_weights_and_guards_unchanged": true,
+      "evidence_scope": "geometry applicability variant; no semantic efficacy or physical accuracy claim"
+    },
+    "original_vendor_sources_unchanged": true,
+    "semantic_prior_profile": "real_scene_structural_v1",
+    "semantic_prior_extended": true,
+    "original_policy_parameters": {
+      "max_candidates": 12,
+      "coverage_slots": 4,
+      "measured_novelty_floor": 0.25
+    },
+    "physical_adapter": "actual extrinsics/K/timestamps; discrete base-state projection; observed-map union",
+    "semantic_scope": "explicit real_scene_structural_v1 structural prior extension; measured instance masks only",
+    "semantic_frontend": {
+      "implementation": "RealSemanticFrontend",
+      "configuration": {
+        "model_dir": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/models/real_semantics_20261030",
+        "confidence": 0.25,
+        "imgsz": 640,
+        "prior_profile": "real_scene_structural_v1"
+      },
+      "model_manifest": {
+        "schema": "pinned_yoloe_model_assets/1",
+        "files": [
+          {
+            "filename": "yoloe-v8s-seg.pt",
+            "sha256": "ac2b90ed23011495a3e86d89caeb3432a15129cac8d849ba121293c8fc1e0536",
+            "bytes": 31135890,
+            "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yoloe-v8s-seg.pt"
+          },
+          {
+            "filename": "mobileclip_blt.ts",
+            "sha256": "a67804d1b0f07b8b9a20c1761ec0847f34660f5fa338ec70e8f3fce68ed95e54",
+            "bytes": 599764649,
+            "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/mobileclip_blt.ts"
+          },
+          {
+            "filename": "prompt_embeddings.pt",
+            "sha256": "96aa04ebecac9540e2d013fb862cc8e6c2f704009bb57328a677760fc0b211fd",
+            "bytes": 19662,
+            "source_url": null
+          }
+        ],
+        "prompts": [
+          "shelves",
+          "bookcase",
+          "closed equipment cabinet",
+          "cabinet",
+          "table",
+          "chair",
+          "display counter",
+          "floor",
+          "wall"
+        ],
+        "embedding_generation": "TorchScript MobileCLIP encode_text + YOLOE head.get_tpe; no model weights changed",
+        "ultralytics_version": "8.3.200",
+        "torch_version": "2.6.0+cpu",
+        "clip_source": "https://github.com/ultralytics/CLIP",
+        "clip_commit": "7ffa84b3bfa40c42ecc1c77147a855e69cb2dd40",
+        "generation_wall_seconds": 4.014119435014436
+      }
+    },
+    "nominal_forecast_camera": "original centered/cardinal planner camera; physical forecast calibration unverified"
+  },
+  "current_state": null,
+  "pending": null,
+  "selected": null,
+  "summary": {
+    "policy_revision": "v10_3_1",
+    "actual_paid_actions": 0,
+    "policy_variant": "exploration_joint_v1",
+    "sensor_ranges": {
+      "profile": "sensor_range_matched_v1",
+      "camera_depth_quality_aperture_range_m": 4.0,
+      "lidar_forecast_range_m": 8.0,
+      "lidar_canonical_support_range_m": 8.0,
+      "observed_navigation_map_range_m": 8.0,
+      "original_paper_equivalence": false,
+      "last_scan_adapter_receipt": null
+    },
+    "system_variant": "exploration_joint_v1+real_scene_structural_v1+sensor_range_matched_v1",
+    "total_budget": 12,
+    "closed": false,
+    "semantics_available": false,
+    "semantic_diagnostics": {
+      "frontend_enabled": true,
+      "receipt": null,
+      "quality_labels": {
+        "2": 0,
+        "3": 0
+      },
+      "measured_assets": [],
+      "same_candidate_S_minus_G": [],
+      "decision_effect_validated": false
+    },
+    "runtime": null
+  }
+}

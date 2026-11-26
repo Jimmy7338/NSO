@@ -1,0 +1,5 @@
+# Same-state post-hoc semantic intervention
+
+Three deterministic continuations branch from the same saved S prefix after 41 paid actions, at about 99.73% reachable coverage; they are not independent natural scenes. Selection followed a retrospective audit, so this is post-hoc. The original execution order S, G, G_weight2 and stop-on-S-reproduction-failure contract are retained. G and G_weight2 agree in this case; S yields a small extra simulated visible-surface gain but lower coverage and F1. Preserve both positive and negative results; no physical semantic benefit or generalization follows.
+
+Original frozen protocol, source scripts, wrapper hash, asset audit and all three complete execution records are retained. The portable runner uses the sibling `source`, `evidence`, and `geometric_weight_control` wrapper. Create an empty directory, then run `NSO_OUTPUT_ROOT=/absolute/empty/directory python intervention.py`; this verification replay is not an additional independent experiment. `python assets_audit.py` replays the saved prefix and writes `assets_audit_recomputed.json`.

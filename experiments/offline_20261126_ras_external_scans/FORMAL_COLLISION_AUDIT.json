@@ -1,0 +1,599 @@
+{
+  "scope": "original scanned triangle and raw sensor verification; no rerun of any formal policy",
+  "source_geometry_postprocess_changed": false,
+  "runtime_changed": false,
+  "failure_classification_limit": "Floor support failure concerns the scanned support mesh under the frozen tolerance; an actual drop-off versus scan fragmentation cannot be inferred from this test.",
+  "total_formal_outcomes": 12,
+  "total_collision_outcomes": 11,
+  "distinct_source_swept_edges": 6,
+  "unique_pose_failure_counts": {
+    "floor_support_only": 6
+  },
+  "run_failure_counts": {
+    "floor_support_only": 11
+  },
+  "run_outcomes": [
+    {
+      "layout": "b26_hm3d_00770_s1",
+      "arm": "F_strict",
+      "termination": "frontier_policy_stopped_at_anchor",
+      "actual_paid": 24,
+      "returned": true
+    },
+    {
+      "layout": "b26_hm3d_00770_s1",
+      "arm": "combined_S",
+      "termination": "collision",
+      "actual_paid": 37,
+      "returned": false
+    },
+    {
+      "layout": "b26_hm3d_00770_s1",
+      "arm": "region_S",
+      "termination": "collision",
+      "actual_paid": 37,
+      "returned": false
+    },
+    {
+      "layout": "b26_hm3d_00770_s2",
+      "arm": "F_strict",
+      "termination": "collision",
+      "actual_paid": 4,
+      "returned": false
+    },
+    {
+      "layout": "b26_hm3d_00770_s2",
+      "arm": "combined_S",
+      "termination": "collision",
+      "actual_paid": 4,
+      "returned": false
+    },
+    {
+      "layout": "b26_hm3d_00770_s2",
+      "arm": "region_S",
+      "termination": "collision",
+      "actual_paid": 4,
+      "returned": false
+    },
+    {
+      "layout": "b26_replica_apartment1_s1",
+      "arm": "F_strict",
+      "termination": "collision",
+      "actual_paid": 22,
+      "returned": false
+    },
+    {
+      "layout": "b26_replica_apartment1_s1",
+      "arm": "combined_S",
+      "termination": "collision",
+      "actual_paid": 9,
+      "returned": false
+    },
+    {
+      "layout": "b26_replica_apartment1_s1",
+      "arm": "region_S",
+      "termination": "collision",
+      "actual_paid": 9,
+      "returned": false
+    },
+    {
+      "layout": "b26_replica_apartment1_s2",
+      "arm": "F_strict",
+      "termination": "collision",
+      "actual_paid": 22,
+      "returned": false
+    },
+    {
+      "layout": "b26_replica_apartment1_s2",
+      "arm": "combined_S",
+      "termination": "collision",
+      "actual_paid": 10,
+      "returned": false
+    },
+    {
+      "layout": "b26_replica_apartment1_s2",
+      "arm": "region_S",
+      "termination": "collision",
+      "actual_paid": 10,
+      "returned": false
+    }
+  ],
+  "failures": [
+    {
+      "source_floor": "hm3d_00770",
+      "cell": [
+        45,
+        24
+      ],
+      "heading": 1,
+      "target": [
+        45,
+        25
+      ],
+      "capsule_radius_m": 0.2,
+      "centerline_supported": true,
+      "floor_clearance_m": 0.12104241353429927,
+      "body_clearance_m": 0.5361784856992954,
+      "geometry_window_triangles": 778,
+      "geometry_window_floor_support_triangles": 19,
+      "nearest_body_face": {
+        "native_node": "chunk158_group000_sub019",
+        "face_index": 3737,
+        "world_triangle_m": [
+          [
+            5.39962272644043,
+            11.024929237365724,
+            0.2826556137180273
+          ],
+          [
+            5.39682846069336,
+            11.053479862213136,
+            0.30265562444686334
+          ],
+          [
+            5.417889404296876,
+            11.039681148529054,
+            0.30265461116790215
+          ]
+        ],
+        "distance_to_centerline_m": 0.5361784856992954
+      },
+      "floor_support_rejection": true,
+      "body_band_intersection": false,
+      "disposition": "floor_support_only",
+      "original_triangle_recheck_matches_frozen_edge": true,
+      "before_action_sensor": {
+        "raw_value_hashes_verified": {
+          "scan_ranges_sha256": "f8d244c227d772ff688948e9a8c55811203915df1534c882cc6a7a2177590e9b",
+          "depth_values_sha256": "42374cb58c45330643a2ecd7ff87d951e89892a0ea52c77845954c3d7014c5c5",
+          "rgb_values_sha256": "2c2d8576799709b0b28b971982ada0dc4fede3e706e6118e0e8441a01fd4e656"
+        },
+        "laser_forward_depth_m": 0.8690939545631409,
+        "laser_height_m": 0.25,
+        "rgbd_valid_count": 10800,
+        "lidar": {
+          "body_band_hits": 180,
+          "min_centerline_distance_m": 0.536890989618453,
+          "points_inside_swept_footprint": 0
+        },
+        "rgbd": {
+          "body_band_hits": 5400,
+          "min_centerline_distance_m": 0.5381194516194366,
+          "points_inside_swept_footprint": 0
+        }
+      },
+      "runs": [
+        {
+          "layout": "b26_hm3d_00770_s1",
+          "policy": "combined_S",
+          "paid_collision": 37,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_hm3d_00770_s1/combined_S/attempt_001/run/steps.json",
+          "steps_sha256": "963a1a4b9575cf4a3dfa5a4918da91407d7e1042056828103ff624d9ed79d24d",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        },
+        {
+          "layout": "b26_hm3d_00770_s1",
+          "policy": "region_S",
+          "paid_collision": 37,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_hm3d_00770_s1/region_S/attempt_001/run/steps.json",
+          "steps_sha256": "e3ccd13893e5ca007b7ed7fc6f6f77fa3f9b9d2c7e2634d07fc19e49386a1d5b",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        }
+      ]
+    },
+    {
+      "source_floor": "hm3d_00770",
+      "cell": [
+        81,
+        80
+      ],
+      "heading": 0,
+      "target": [
+        80,
+        80
+      ],
+      "capsule_radius_m": 0.2,
+      "centerline_supported": true,
+      "floor_clearance_m": 0.025385699693511607,
+      "body_clearance_m": 0.4114205832223006,
+      "geometry_window_triangles": 3546,
+      "geometry_window_floor_support_triangles": 48,
+      "nearest_body_face": {
+        "native_node": "chunk066_group000_sub008_filled001",
+        "face_index": 2581,
+        "world_triangle_m": [
+          [
+            16.2578914642334,
+            4.883149337768556,
+            0.76265458971023
+          ],
+          [
+            16.2578914642334,
+            4.879917335510255,
+            0.7826546302413885
+          ],
+          [
+            16.253330993652344,
+            4.885002326965333,
+            0.7826546302413885
+          ]
+        ],
+        "distance_to_centerline_m": 0.4114205832223006
+      },
+      "floor_support_rejection": true,
+      "body_band_intersection": false,
+      "disposition": "floor_support_only",
+      "original_triangle_recheck_matches_frozen_edge": true,
+      "before_action_sensor": {
+        "raw_value_hashes_verified": {
+          "scan_ranges_sha256": "ef969eae7ccd7706ee6f9e31d0b9b279d374bcd75310a6c462b7fa81bc569871",
+          "depth_values_sha256": "5f330436ab1392873568fe393621b5e70b21a6f524cc41502a674c6f69181258",
+          "rgb_values_sha256": "b0b13b632cb5ff0a6c9182bb05c5f3478ae4a7812b1da332d49d930298e138fc"
+        },
+        "laser_forward_depth_m": 4.828408718109131,
+        "laser_height_m": 0.25,
+        "rgbd_valid_count": 10654,
+        "lidar": {
+          "body_band_hits": 177,
+          "min_centerline_distance_m": 0.43042791667067415,
+          "points_inside_swept_footprint": 0
+        },
+        "rgbd": {
+          "body_band_hits": 3456,
+          "min_centerline_distance_m": 0.41320376975930806,
+          "points_inside_swept_footprint": 0
+        }
+      },
+      "runs": [
+        {
+          "layout": "b26_hm3d_00770_s2",
+          "policy": "F_strict",
+          "paid_collision": 4,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_hm3d_00770_s2/F_strict/attempt_001/run/steps.json",
+          "steps_sha256": "f549a9f887597fe7f364e828aae5d053c96663a3d918463c31422b8deaa00715",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        },
+        {
+          "layout": "b26_hm3d_00770_s2",
+          "policy": "combined_S",
+          "paid_collision": 4,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_hm3d_00770_s2/combined_S/attempt_001/run/steps.json",
+          "steps_sha256": "b66b29ade9185b7dd2bb93bd6d32ab9f7da90570c193cd249de71bb42e02e818",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        },
+        {
+          "layout": "b26_hm3d_00770_s2",
+          "policy": "region_S",
+          "paid_collision": 4,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_hm3d_00770_s2/region_S/attempt_001/run/steps.json",
+          "steps_sha256": "e1bd99b695cb80b97a51f63658e668aeca91e8a48c67cbb5bba1c0706e4b8299",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        }
+      ]
+    },
+    {
+      "source_floor": "replica_apartment1",
+      "cell": [
+        23,
+        13
+      ],
+      "heading": 1,
+      "target": [
+        23,
+        14
+      ],
+      "capsule_radius_m": 0.2,
+      "centerline_supported": true,
+      "floor_clearance_m": 0.10994057860063548,
+      "body_clearance_m": null,
+      "geometry_window_triangles": 3103,
+      "geometry_window_floor_support_triangles": 1663,
+      "nearest_body_face": null,
+      "floor_support_rejection": true,
+      "body_band_intersection": false,
+      "disposition": "floor_support_only",
+      "original_triangle_recheck_matches_frozen_edge": true,
+      "before_action_sensor": {
+        "raw_value_hashes_verified": {
+          "scan_ranges_sha256": "977809be8eca03aad4a71f610963490c9da0e26d788f17fac99c2b7dcf7f40dd",
+          "depth_values_sha256": "70a9e7db29eb50338cfb357593d022013acf05a7d8bf6c757acc33a135c3d88f",
+          "rgb_values_sha256": "30f7b036ecab605ed4538c69a99525bf1b24319111b0e4d09a02070e4d9ba7ec"
+        },
+        "laser_forward_depth_m": 5.982609272003174,
+        "laser_height_m": 0.25,
+        "rgbd_valid_count": 10800,
+        "lidar": {
+          "body_band_hits": 158,
+          "min_centerline_distance_m": 0.9475532812910918,
+          "points_inside_swept_footprint": 0
+        },
+        "rgbd": {
+          "body_band_hits": 3524,
+          "min_centerline_distance_m": 1.2216781755059936,
+          "points_inside_swept_footprint": 0
+        }
+      },
+      "runs": [
+        {
+          "layout": "b26_replica_apartment1_s2",
+          "policy": "combined_S",
+          "paid_collision": 10,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_replica_apartment1_s2/combined_S/attempt_001/run/steps.json",
+          "steps_sha256": "ed66a58e7a0446aa29416c409ad44ed2866fc6d769b6243c5b61d6ac1594d823",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        },
+        {
+          "layout": "b26_replica_apartment1_s2",
+          "policy": "region_S",
+          "paid_collision": 10,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_replica_apartment1_s2/region_S/attempt_001/run/steps.json",
+          "steps_sha256": "80c33fb53b255b77d5b5382c4d00308068f95623fbfd0cce37e4c42b31c8a2bb",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        }
+      ]
+    },
+    {
+      "source_floor": "replica_apartment1",
+      "cell": [
+        31,
+        7
+      ],
+      "heading": 3,
+      "target": [
+        31,
+        6
+      ],
+      "capsule_radius_m": 0.2,
+      "centerline_supported": true,
+      "floor_clearance_m": 0.09741002050071362,
+      "body_clearance_m": 0.4962182260006607,
+      "geometry_window_triangles": 3487,
+      "geometry_window_floor_support_triangles": 1072,
+      "nearest_body_face": {
+        "native_node": "apartment_1",
+        "face_index": 18721,
+        "world_triangle_m": [
+          [
+            1.33331611099807,
+            6.996328067779542,
+            1.184444884284316
+          ],
+          [
+            1.3627710445083125,
+            7.014574956893922,
+            1.2616019098188953
+          ],
+          [
+            1.3347490500748438,
+            6.995650005340577,
+            1.2804679076544023
+          ]
+        ],
+        "distance_to_centerline_m": 0.4962182260006607
+      },
+      "floor_support_rejection": true,
+      "body_band_intersection": false,
+      "disposition": "floor_support_only",
+      "original_triangle_recheck_matches_frozen_edge": true,
+      "before_action_sensor": {
+        "raw_value_hashes_verified": {
+          "scan_ranges_sha256": "df3157f2d943add12681eec8cddb0be5fb081c04d6512a66c9467de3535ade4e",
+          "depth_values_sha256": "e19d750c09c65857034cb57d3021349141c001da44d8e310a5281090f9b1f78a",
+          "rgb_values_sha256": "4ed3cb967aea5234d12683b7a7c1605fb618de88acb36a411bb41bb94963aa36"
+        },
+        "laser_forward_depth_m": 8.0,
+        "laser_height_m": 0.25,
+        "rgbd_valid_count": 0,
+        "lidar": {
+          "body_band_hits": 94,
+          "min_centerline_distance_m": 0.5098728807713453,
+          "points_inside_swept_footprint": 0
+        },
+        "rgbd": {
+          "body_band_hits": 0,
+          "min_centerline_distance_m": null,
+          "points_inside_swept_footprint": 0
+        }
+      },
+      "runs": [
+        {
+          "layout": "b26_replica_apartment1_s2",
+          "policy": "F_strict",
+          "paid_collision": 22,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_replica_apartment1_s2/F_strict/attempt_001/run/steps.json",
+          "steps_sha256": "d46b731a73a829fd7ed2d1eed4ad4f63adcbc7f4e404b591f83094b840061919",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        }
+      ]
+    },
+    {
+      "source_floor": "replica_apartment1",
+      "cell": [
+        32,
+        27
+      ],
+      "heading": 2,
+      "target": [
+        33,
+        27
+      ],
+      "capsule_radius_m": 0.2,
+      "centerline_supported": true,
+      "floor_clearance_m": 0.14631657123879865,
+      "body_clearance_m": 0.4802565131529809,
+      "geometry_window_triangles": 7204,
+      "geometry_window_floor_support_triangles": 917,
+      "nearest_body_face": {
+        "native_node": "apartment_1",
+        "face_index": 89075,
+        "world_triangle_m": [
+          [
+            5.020753007195257,
+            5.979087066650392,
+            1.0805465336668294
+          ],
+          [
+            5.02995310384707,
+            6.001500082015992,
+            1.077453530991165
+          ],
+          [
+            5.024967051280552,
+            5.992387008666993,
+            1.1060545209228272
+          ]
+        ],
+        "distance_to_centerline_m": 0.4802565131529809
+      },
+      "floor_support_rejection": true,
+      "body_band_intersection": false,
+      "disposition": "floor_support_only",
+      "original_triangle_recheck_matches_frozen_edge": true,
+      "before_action_sensor": {
+        "raw_value_hashes_verified": {
+          "scan_ranges_sha256": "824f8b0bbb2949015b6c9d9beb8580fcafbbd4816516e31fbe46ace0ef2c714c",
+          "depth_values_sha256": "9cdb9e0cf43a6b5e8f6370cc992c13abfdb9b7e6c717e06fbf4bb6632dd1b4af",
+          "rgb_values_sha256": "402302dff3a3d455124a8f54eb361a6b4ff029f95bff6de31e3bc73fd74de96b"
+        },
+        "laser_forward_depth_m": 4.960365295410156,
+        "laser_height_m": 0.25,
+        "rgbd_valid_count": 10078,
+        "lidar": {
+          "body_band_hits": 154,
+          "min_centerline_distance_m": 0.48720184753777196,
+          "points_inside_swept_footprint": 0
+        },
+        "rgbd": {
+          "body_band_hits": 3531,
+          "min_centerline_distance_m": 0.7421962804529246,
+          "points_inside_swept_footprint": 0
+        }
+      },
+      "runs": [
+        {
+          "layout": "b26_replica_apartment1_s1",
+          "policy": "F_strict",
+          "paid_collision": 22,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_replica_apartment1_s1/F_strict/attempt_001/run/steps.json",
+          "steps_sha256": "e5aeeeb854c97b568f29b07f3aa0cb3f1a999a4f94e7ceb9759015fdbf2f4cb6",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        }
+      ]
+    },
+    {
+      "source_floor": "replica_apartment1",
+      "cell": [
+        35,
+        21
+      ],
+      "heading": 0,
+      "target": [
+        34,
+        21
+      ],
+      "capsule_radius_m": 0.2,
+      "centerline_supported": true,
+      "floor_clearance_m": 0.054383719864264934,
+      "body_clearance_m": 0.6062008801015606,
+      "geometry_window_triangles": 1815,
+      "geometry_window_floor_support_triangles": 981,
+      "nearest_body_face": {
+        "native_node": "apartment_1",
+        "face_index": 94905,
+        "world_triangle_m": [
+          [
+            4.886787127012955,
+            6.054968070983888,
+            0.5532034763376001
+          ],
+          [
+            4.885973158764653,
+            6.055289936065675,
+            0.5960254795649391
+          ],
+          [
+            4.905764300564179,
+            6.069319915771485,
+            0.5037985007847756
+          ]
+        ],
+        "distance_to_centerline_m": 0.6062008801015606
+      },
+      "floor_support_rejection": true,
+      "body_band_intersection": false,
+      "disposition": "floor_support_only",
+      "original_triangle_recheck_matches_frozen_edge": true,
+      "before_action_sensor": {
+        "raw_value_hashes_verified": {
+          "scan_ranges_sha256": "ff42bbb8f8d5bce80639850b91affb8f33381f167fb64c3b2f30b0094deb47d5",
+          "depth_values_sha256": "46bdb9fe3ba53f26d8172e7264a9c1e1dd5fb3e63efb7b282394c643599f0596",
+          "rgb_values_sha256": "291b2f777acb4ee46fc6634269b11caca93158562cbb0e87dd892f131367a373"
+        },
+        "laser_forward_depth_m": 1.3855395317077637,
+        "laser_height_m": 0.25,
+        "rgbd_valid_count": 10800,
+        "lidar": {
+          "body_band_hits": 119,
+          "min_centerline_distance_m": 0.6192430001851109,
+          "points_inside_swept_footprint": 0
+        },
+        "rgbd": {
+          "body_band_hits": 5400,
+          "min_centerline_distance_m": 1.1769015438209247,
+          "points_inside_swept_footprint": 0
+        }
+      },
+      "runs": [
+        {
+          "layout": "b26_replica_apartment1_s1",
+          "policy": "combined_S",
+          "paid_collision": 9,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_replica_apartment1_s1/combined_S/attempt_001/run/steps.json",
+          "steps_sha256": "a697be9b2c7b32d1b0bc6183143a87322b692aef5ab6c8c403cad9bb6985d5f2",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        },
+        {
+          "layout": "b26_replica_apartment1_s1",
+          "policy": "region_S",
+          "paid_collision": 9,
+          "steps_path": "/home/ouc/nso_robot/analyses/ras_20261126/heterogeneous/execution/formal/b26_replica_apartment1_s1/region_S/attempt_001/run/steps.json",
+          "steps_sha256": "c74cabe1b5a6ea4b15175185dce2227376dd8498d30e973fbe572855ede73356",
+          "observed_start_belief": 0,
+          "observed_target_belief": 0,
+          "adjacent_3x3_observed_occupied": 0,
+          "guard_reason": "known_safe_return_within_budget"
+        }
+      ]
+    }
+  ]
+}

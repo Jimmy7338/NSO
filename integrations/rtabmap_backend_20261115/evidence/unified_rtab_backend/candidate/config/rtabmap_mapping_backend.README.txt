@@ -1,0 +1,72 @@
+OPTIONAL backend, no autonomous actions. Defaults of existing runtime untouched.
+Run using system ROS Python after deployment:
+  /usr/bin/python3 -s -B runtime/rtabmap_mapping_backend.py _graph_snapshot_path:=/ABS/SESSION/rtab_graph_snapshot.json
+Stop owned pair gmapping + isolated_mapping_tf adapter before launch; they must not
+publish /nso_pair/map or odom->nso_pair_map concurrently. RTAB publish_tf remains false.
+Keep CSM odom/base TF and hardware protection unchanged. Global primary map->odom
+may remain a separate shadow; it is NOT this backend's map authority.
+
+Input /nso_loop/grid_map + /nso_loop/mapGraph and /nso_loop/mapData, exact source
+/nso_loop/rtabmap and frame nso_loop_map; /nso_csm/odom strict CSM source/frame.
+Output /nso_pair/map and map_metadata (alias frame nso_pair_map, unchanged grid,
+source stamp preserved), /nso_pair/optimized_graph (original source frame and
+source epoch; MapData-derived graph uses actual enclosing header because installed
+conversion leaves nested Header empty), /nso_pair/mapping_provenance latched JSON.
+TF inverse odom->nso_pair_map evaluated at actual CSM header stamp, graph correction
+held until next exact paired epoch. No wall-now/future-dating, no new expiry gate.
+The TF evaluation stamp is derived, NOT a claim of a new RTAB optimization.
+
+IMPORTANT INITIAL LATCHING: existing stationary shadow has latched grid stamp
+1794739718491810799 and graph1794739717392876863. They are NOT paired. Installed
+RTAB's latch=true can independently publish a grid on new subscription without
+new graph, and stopped processing produces no fresh MapData. On fresh unified RTAB
+launch, explicitly set parameter /nso_loop/rtabmap/latch=false (private node param).
+This makes maps and graph publish every actual processed frame with the same
+stamp; source proof CoreWrapper.cpp2185/2188,4115+, MapsManager.cpp1363+,1450.
+No nearest-time or service-grid matching is implemented. Wait for an actual paired
+processing epoch before considering integration ready; do not fabricate a match.
+No backend launched by this candidate. Root owns fresh launch and validation.
+
+Graph snapshot path is explicit optional param, atomic rename, same epoch as output
+map. Contains full optimized node poses, mapToOdom, available Node.id/map_id/stamp
+and original uncorrected Node.pose from mapData. No RGB/depth/scan persisted/cached.
+Historical missing metadata is explicit null + coverage count. Start subscriber at
+fresh DB epoch for complete future coverage; no implicit old NSO prefix importing.
+GetMap2 flags exist: global,optimized,with_images,with_scans,with_user_data,with_grids,
+with_words,with_global_descriptors. Optional manual metadata recovery would request
+all with_* false, but NOT called here (no historical bulk service request).
+
+History replay belongs to consumer: predecessor RTAB node by actual source time,
+optimized_node * inverse(raw_node) * actual_frame_raw_odom. This preserves actual
+relative odometry and is NOT an independently optimized pose for every policy frame.
+Global single-rigid correction alone does not replay historical geometry after loops.
+Rollback: stop new backend, restart original owned pair mapper/adapter, select their
+original source caller; do not run both TF authorities together. Existing raw data
+and DB are preserved. No claim of independently measured map accuracy.
+
+Canonical JSON schema rtabmap_mapping_backend/1; fields map_stamp_ns,
+graph_source_stamp_ns,map_frame,alias_frame,map_from_odom (4x4),graph_revision_sha256
+(stable optimized poses+links only),nodes{id,stamp_ns,odom_from_base,map_from_base}.
+Missing old-node metadata yields null stamp/odom matrix; never substitute old poses.
+_latest_snapshot_path:=ABS is canonical path option (_graph_snapshot_path alias).
+_source_database_path:=ABS and _source_epoch:=SESSION bind provenance explicitly.
+Source graph/map original stamps remain separate from derived TF evaluation stamp.
+
+OPTIONAL EXISTING-SESSION METADATA BOOTSTRAP (no service calls by backend):
+_initial_metadata_path:=ABS loads schema='rtabmap_node_metadata/1' before subscriptions.
+JSON source_database_path and source_epoch must exactly match configured backend
+_source_database_path and _source_epoch (must be specified); caller must equal
+/nso_loop/rtabmap; source_service must be /nso_loop/get_map_data2.
+request={global:true,optimized:false,with_images:false,with_scans:false,
+with_user_data:false,with_grids:false,with_words:false,with_global_descriptors:false}.
+nodes=[{id:int,map_id:int,stamp_s:original Node.stamp,
+raw_odom_pose:{translation:[x,y,z],rotation_xyzw:[x,y,z,w]}}].
+File metadata must be captured from the actual service configured with that DB
+and epoch; label those actual values, not a guessed database or new session ID.
+Invalid identity/request/node fails startup before subscribing/publishing; all
+rows are validated before any import. Snapshot retains file SHA/service/caller
+receipt. This is explicit service provenance, NOT a forged MapData caller.
+Root may bootstrap an exact paired epoch through installed PublishMap once;
+this avoids restarting the existing mapping session. Backend never invokes it.
+Previously noted latch=false is an alternative future fresh-launch config, not
+necessary when a verified same-epoch PublishMap+live MapData route is used.

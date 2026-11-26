@@ -1,0 +1,40 @@
+{
+  "upstream_commit": "773ebcf60334b2a16a865f1207938f53fee92031",
+  "scope": "Official ARiADNE exploration graph and greedy checkpoint inference with shared NSO planar execution, observed occupancy and TSDF. Upstream ROS waypoint scheduling and waypoint controller are replaced by the shared driver. Results characterize an ARiADNE policy adapter.",
+  "layouts": [
+    "ind26_vertical_spine",
+    "ind26_bent_corridor",
+    "ind26_offset_ring",
+    "ind26_double_loop"
+  ],
+  "frozen_unix_s": 1795497429.1088576,
+  "budget": 192,
+  "graph": {
+    "grid_resolution_m": 0.2,
+    "sensor_range_m": 8.0,
+    "node_spacing_m": 2.0,
+    "utility_range_factor": 0.5,
+    "frontier_downsample_factor": 1
+  },
+  "adapter": {
+    "input": "Measured occupancy plus common footprint inflation; same observed start anchor translated to the upstream graph's origin. Constant unknown padding uses node spacing divided by grid spacing plus one. Stable floor axes, no scale or reflection.",
+    "output": "Select the first greedy target of the released model on its published graph. Execute its exact cell along the common four-connected observed-free shortest route with final heading along the arrival leg. No target substitution; an empty graph, exhausted graph utility or an unreachable target ends outbound and asks the common driver to return.",
+    "replan": "Select at native shared-driver target dispatch and invalidation points. Common return, path collision checks, TSDF, sensor packages, paid clocks and terminal rules are inherited from the frozen driver."
+  },
+  "files_sha256": {
+    "run.py": "39742d52188bcbe2080b27ddd1ccb4471d4c2129105ebcdfb088e8b48eaecb96",
+    "worker.py": "6afbbec8547b515583a2af9723c4e27db012ad61cc8a8844bdeecf756f30d818",
+    "source/LICENSE": "bf9b10508b576111a4588a86949ff76e90fc4b2cadf45932fa76573589dc6a75",
+    "source/src/scripts/agent.py": "35f1d9f6730d19252f8201e17eb307ee021a587aa2ed20868a6c77e05bab219f",
+    "source/src/scripts/node_manager.py": "fb87b29e10c747458cd20fca21a6fb497f1564d1922eadf175f49cb251c55ce0",
+    "source/src/scripts/model.py": "fe0eb86db82b4b7a568cf66131b19b94744cc1c3c6a912a22418fed5f6557a59",
+    "source/src/scripts/model/checkpoint.pth": "faf89aa18de06f1d6fc8541463516bc1517c0b3544a61bf0a711f300b937bcc0",
+    "source/src/scripts/parameter.py": "d5503b548f4d1b5dbe16e26652864770dd1e948a119766513cd19a06e8468c80",
+    "source/src/scripts/quads.py": "b6e2efa63d526d89973c271f98cb30231dfd02f79c08bce69c08d57f2217d242",
+    "source/src/scripts/utils.py": "cd5533741386d6e3a7d38c3e2709763adf962ed5181d62c6c2ff170ca4ec9931",
+    "source/src/scripts/rl_planner.py": "f98b7b2042d9917689b5f53d316bf4335b09bb6251bbd0d88aeaa652e9365b83",
+    "../../../region_independent_floors_20261123/FORMAL_FREEZE.json": "94f4641774319280ffb0ddd64254ecaca4d9fa684f5edc260d1cbfdf1b449887",
+    "../../../region_independent_floors_20261123/runner.py": "ba573a5fef1d1efa60a4c59e776c0804bc38cd2a626ecf08175bb5757492143e",
+    "../../../region_structure_floor_20261122/formal_runner.py": "91c767fb7dfee4690d96c6f5363435c49835e4c2af4d77a46a9ef644c87aa9a5"
+  }
+}

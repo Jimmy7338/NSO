@@ -1,0 +1,153 @@
+{
+  "schema": "actual_joint_weight_and_domain_audit/1",
+  "source_frame": "1794749165053971116",
+  "active_score_method": "ExplorationJointCPUFourModules._scores_v10_1 -> CPUFourModules._scores_v10_1 (revision v10_3_1)",
+  "actual_score_equation": "resolution_m^2*(radar_unknown_cells*p_radar+camera_unknown_cells*p_camera)+quality_total_proxy+category_structural_potential",
+  "dynamic_lambda_or_global_coverage_fraction_in_active_score": false,
+  "logged_lambda_field": null,
+  "actual_gain_calibration": {
+    "schema_version": "observed_gain_calibration_v10_1/1",
+    "feedback_enabled": true,
+    "consume_predicted_attempts": false,
+    "posterior_mean": {
+      "radar": 0.5,
+      "camera": 0.5
+    },
+    "alpha": {
+      "radar": 1,
+      "camera": 1
+    },
+    "beta": {
+      "radar": 1,
+      "camera": 1
+    },
+    "observed_actions": 0,
+    "pending_action_ids": [],
+    "events": []
+  },
+  "actual_selected": {
+    "candidate_id": 0,
+    "group": "coverage_total_0",
+    "outbound_cost": 134,
+    "world_target": [
+      13.299254473212372,
+      -23.767967711089256,
+      -0.9403790254085486
+    ],
+    "input_grid_endpoint_belief": -1,
+    "input_grid_nominal_route_counts": {
+      "-1": 95,
+      "0": 39,
+      "1": 0
+    },
+    "score_audit": {
+      "candidate_id": 0,
+      "common_total_proxy": 185.64703250349424,
+      "predicted_radar_cells": 6563,
+      "predicted_camera_cells": 2716,
+      "quality_total_proxy": 0.06703250349420002,
+      "gain_posterior": {
+        "radar": 0.5,
+        "camera": 0.5
+      },
+      "incremental_aperture": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prior_potentials": {
+        "N": 0.0,
+        "G": 0.0,
+        "O": 0.0,
+        "S": 0.0,
+        "X": 0.0,
+        "M": 0.0
+      },
+      "measured_direction_support": [
+        [
+          0.0,
+          0.0,
+          0.3,
+          0.7,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.21052631578947367,
+          0.7894736842105263,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "measured_novelty_floor": 0.25,
+      "coverage_only_proxy": 185.58000000000004
+    }
+  },
+  "input_navigation_grid": {
+    "shape": [
+      800,
+      800
+    ],
+    "resolution_m": 0.2,
+    "declared_resource_extent_m": [
+      160,
+      160
+    ],
+    "cell_counts": {
+      "-1": 619733,
+      "0": 15091,
+      "1": 5176
+    },
+    "unknown_fraction": 0.9683328125,
+    "qualification": "Counts here are immutable packet navigation-grid input, not the mapper after additional actual depth/scan fusion and not surveyed environmental area."
+  },
+  "domain_effect": "Unbounded V4 admits all not-known-occupied resource cells, including unobserved outside the actual map; accumulated route-union gain can remain large. The800-square resource extent affects feasible targets and possible unknown union, not a global lambda denominator in this active scorer.",
+  "legacy_inactive": {
+    "module": "joint_vendor/nso/joint_planner_v2.py:79-94",
+    "equations": [
+      "normalizer=max(1,count(belief!=1))",
+      "c0=count(belief==0)/normalizer",
+      "coverage_gate=.05+.95*c0**3",
+      "utility=q0*dc+c0*dq+dc*dq"
+    ],
+    "why_inactive": "response_features constructs CameraJointPlannerV2 but calls only _quality_gain; it does not execute _select. The active V10.3.1 caller restores the unnormalized quality total and substitutes its own route-union coverage.",
+    "do_not_report_legacy_gate_as_current_lambda": true
+  },
+  "macro_feedback_difference": "ViewpointCPU.compute_reward observes actual waypoint ledger but deliberately does not call gain.prepare_action/gain.observe. Primitive calibration is disabled for macro execution, so alpha/beta and p_radar/p_camera stay at prior0.5 in this run; actual observed masks and direction support still update.",
+  "asset_only_counterfactual": {
+    "executed": false,
+    "full_NSO_selection": false,
+    "conditional_scope": "Diagnostic restriction to existing asset-role candidates only; not a deployed policy, new experiment or full-system G/S difference.",
+    "G_candidate": 7,
+    "G_role": "asset_2_entry",
+    "G_score": 8.595594152056554,
+    "S_candidate": 9,
+    "S_role": "asset_1_deep",
+    "S_score": 5.80542438359087,
+    "full_choice_remains_same": true
+  },
+  "active_policy_modified": false,
+  "sources": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/cpu_four_modules_v10.py": "76f4327fefa8fafd37d7c520cf6e1c92c05f5b9777f9f621605653ad2fb1568b",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/joint_planner_v2.py": "dd51dfbb329224ef97de755b919ec97a95d443c676d3e6c5decd9d298deed9a3",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/joint_vendor/nso/response_features_v7.py": "3317f74c906b62434de3b7b46051e8edbdd4d7214eb88d0eb0580d31a2129a91",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/ros_viewpoint_exploration_v3.py": "9cf70ab254d3b669ea3e3463495ade4dab9baf1b1aa17e6777567128818ce1e9",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/nso_bridge/ros_viewpoint_unbounded_v4.py": "f8681da866667fa62cfd007b01d5bd6a2b781c993569a73053b888ac0013aaf0"
+  }
+}

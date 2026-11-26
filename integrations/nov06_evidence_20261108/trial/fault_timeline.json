@@ -1,0 +1,124 @@
+{
+  "schema": "nso.adapter_control_tick_fault_timeline.v1",
+  "status": "readonly_completed_current_episode_fault_not_rewritten",
+  "report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_sameground_S40_20261108_01",
+  "session_id": "hybrid_nso_1794135012502027126",
+  "recorded_root_reason": "chassis_before_stop:adapter_control_tick_invalid",
+  "code_semantics": {
+    "source": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/visual_velocity_adapter.py",
+    "line": 434,
+    "trigger": "last_tick exists AND (now < last_tick OR now-last_tick >0.08), using time.monotonic sampled after adapter gate lock acquisition.",
+    "effect": "fail latches first fault, disarms; decision returns zero; control loop publishes zero then breaks; finally requests native stop and waits for feedback.",
+    "first_fault_retention": "Gate.fail sets fault only when previously None; adapter result retains adapter_control_tick_invalid, not later native external_guard8.",
+    "period_s": 0.02,
+    "threshold_s": 0.08
+  },
+  "timeline": [
+    {
+      "event": "last_nonzero_feedback_before_fault",
+      "kernel_stamp_ns": 1794135390088039827,
+      "vx": -0.004,
+      "w": -0.01
+    },
+    {
+      "event": "first_fault_zero_command",
+      "at_monotonic": 32215.849804086,
+      "guard_stamp_ns": 1794135392837829589,
+      "v": 0.0,
+      "w": 0.0,
+      "reason": "adapter_control_tick_invalid"
+    },
+    {
+      "event": "first_fault_in_CAN_journal",
+      "kernel_unix_s": 1794135392.8483155,
+      "receipt_monotonic": 32215.860745758,
+      "fault": "adapter_control_tick_invalid",
+      "v": 0.0,
+      "w": 0.0
+    },
+    {
+      "event": "stop_request_begin",
+      "unix_ns": 1794135392896893889,
+      "monotonic_ns": 32215908881110
+    },
+    {
+      "event": "stop_requested",
+      "unix_ns": 1794135392899155409,
+      "monotonic_ns": 32215911141446
+    },
+    {
+      "event": "worker_close_begin",
+      "unix_ns": 1794135392900733683,
+      "monotonic_ns": 32215912721000
+    },
+    {
+      "event": "worker_close_end",
+      "unix_ns": 1794135395132143640,
+      "monotonic_ns": 32218144130253
+    },
+    {
+      "event": "zero_before",
+      "unix_ns": 1794135396160046796,
+      "monotonic_ns": 32219172034017
+    },
+    {
+      "event": "actuator_close_begin",
+      "unix_ns": 1794135396162174777,
+      "monotonic_ns": 32219174162382
+    },
+    {
+      "event": "actuator_close_end",
+      "unix_ns": 1794135396684115019,
+      "monotonic_ns": 32219696101792
+    },
+    {
+      "event": "zero_after",
+      "unix_ns": 1794135396686460444,
+      "monotonic_ns": 32219698447441
+    },
+    {
+      "event": "root_saved",
+      "unix_ns": 1794135396814474701,
+      "monotonic_ns": 32219826461378
+    }
+  ],
+  "pre_fault_can_1s": {
+    "n": 50,
+    "maximum_abs_v_m_s": 0.0,
+    "maximum_abs_w_rad_s": 0.0,
+    "maximum_source_interval_s": 0.020082249,
+    "last_nonzero_age_at_fault_s": 2.7497897148132324
+  },
+  "observations": [
+    "Fault zero command precedes supervisor stop_request_begin by~59ms; this is an execution-time adapter protection, not a normal-stop-induced fault.",
+    "Only one control_tick_invalid command is recorded and loop exits immediately; persistence of the latched reason does not demonstrate repeated timing violations or sustained loss of control.",
+    "Prior command reason was proposal_expired and output zero. Independent CAN reports zero throughout the1s before fault; no sustained nonzero velocity is evidenced around trigger.",
+    "Root stop-before and stop-after verification both confirmed; lifecycle reaches root_saved and observer exits normally.",
+    "Recorded CAN status entries around cleanup show state0/mode1/error0; native fault8 after adapter stop is separate protection state, not chassis error8."
+  ],
+  "unresolved": [
+    "Previous actual last_tick and triggering interval are not retained: command journal deduplicates same signature to1s, so adjacent journal timestamps are not control-tick timestamps. Cannot recover precise gap, distinguish gap from monotonic regression solely from this record, or quantify multiple subthreshold delays.",
+    "Root actuator telemetry is subscribed but per-tick snapshots are not archived here. Snapshot last_control_tick is updated to current decision time, so even final state alone cannot recover previous interval.",
+    "No scheduler/lock-duration/CPU-trace evidence establishes cause; do not attribute to inference load, filesystem, CAN delay or driver malfunction.",
+    "Fault ring is post-trigger bounded data, not complete whole-run telemetry; raw scan/CSM ring spans~15s and includes original source timestamps."
+  ],
+  "source_checks": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/visual_velocity_adapter.py": {
+      "current_sha256": "f1535ae6bf3546707bac8e83705e31f6dac7a561e7d5fd8521e40422ca7efe2a",
+      "recorded_sha256": "f1535ae6bf3546707bac8e83705e31f6dac7a561e7d5fd8521e40422ca7efe2a"
+    },
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py": {
+      "current_sha256": "fc8c78572aea468f332fb189a1a19aa77ae9939a81a6e54b6ff2092980b9a063",
+      "recorded_sha256": "fc8c78572aea468f332fb189a1a19aa77ae9939a81a6e54b6ff2092980b9a063"
+    }
+  },
+  "input_sha256": {
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_sameground_S40_20261108_01/result.json": "16fa6b2a98e3c9763e642a8aaa7e549c684e03697a3b3c12f04660f00b78db19",
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_sameground_S40_20261108_01/adapter/result.json": "569e7bce6c8ed109971ad38c42b82543e945da36e91373a02b07dbc743506159",
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_sameground_S40_20261108_01/adapter/events.jsonl": "4308478f655b65ad8c9c8db4dbed945751daec4ecc8abd8b049b7f3db8d30b8f",
+    "/home/ouc/nso_robot/reports/nso-hybrid-20261108/nov06_sameground_S40_20261108_01/events.jsonl": "7fff7012d8c41e437b43d62e8bec8860293a41eb827792b0af06cafe91f0e1a1",
+    "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_restore_trial/run/fault_ring/failure_can_ring.json": "261cec787bcd5c8781cfcfa0bc962dd54f9b1b9418f42750e5a964528ea5cf93",
+    "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_restore_trial/run/fault_ring/failure_scan_ring.json": "7badabe7a4dd6ba729b87b671bc1595b491a7b20ab2c3f92b91ec066dcceb2ca"
+  },
+  "operations": "No robot commands, source edits, process termination/restarts or threshold changes."
+}

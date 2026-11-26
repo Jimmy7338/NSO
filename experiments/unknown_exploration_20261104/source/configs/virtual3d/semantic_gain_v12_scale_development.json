@@ -1,0 +1,40 @@
+{
+  "schema_version": "semantic_gain_v12_scale_development/1",
+  "status": "development_scenes_only_no_planner_outcomes_viewed",
+  "architecture": "ANS global/local hierarchy with OV-SDF, STGHP, RPN-UQ and IGCR interfaces",
+  "feature_schema": "semantic_gain_v12_candidate_set_features/1",
+  "primary_metric": "delta(covered_2d_area_m2 * global_3d_f1_at_5cm) from a shared prefix",
+  "shared_conditions": {
+    "resolution_m": 0.2,
+    "bay_width_m": 4.8,
+    "bay_depth_m": 5.2,
+    "corridor_width_m": 2.4,
+    "entrance_buffer_m": 2.0,
+    "doorway_width_m": 1.6,
+    "observation_condition": "ambiguous",
+    "appearance": "marked",
+    "semantic_source": "rgb_marker",
+    "depth_sigma_m": 0.0,
+    "dropout": 0.0
+  },
+  "contexts": [
+    {"id": "D12-00", "seed": 27101, "bays_per_side": 4, "transfer_length_m": 4.0, "complex_fraction": 0.5, "hidden_parts": "shelves", "semantic_relation": "correlated", "max_steps": 720},
+    {"id": "D12-01", "seed": 27102, "bays_per_side": 4, "transfer_length_m": 8.0, "complex_fraction": 0.5, "hidden_parts": "vertical_baffles", "semantic_relation": "correlated", "max_steps": 900},
+    {"id": "D12-02", "seed": 27103, "bays_per_side": 5, "transfer_length_m": 5.2, "complex_fraction": 0.4, "hidden_parts": "shelves", "semantic_relation": "correlated", "max_steps": 960},
+    {"id": "D12-03", "seed": 27104, "bays_per_side": 5, "transfer_length_m": 7.2, "complex_fraction": 0.6, "hidden_parts": "vertical_baffles", "semantic_relation": "independent", "max_steps": 1080},
+    {"id": "D12-04", "seed": 27105, "bays_per_side": 6, "transfer_length_m": 5.2, "complex_fraction": 0.5, "hidden_parts": "shelves", "semantic_relation": "correlated", "max_steps": 1200},
+    {"id": "D12-05", "seed": 27106, "bays_per_side": 6, "transfer_length_m": 8.0, "complex_fraction": 0.5, "hidden_parts": "vertical_baffles", "semantic_relation": "reversed", "max_steps": 1440}
+  ],
+  "semantic_interventions": ["aligned", "shuffled", "absent"],
+  "required_baselines": [
+    "same-capacity geometry network",
+    "measured-geometry quality-aware NBV",
+    "fixed semantic prior",
+    "coverage-only hierarchy",
+    "adapted official TARE after bridge closure"
+  ],
+  "candidate_budget_rule": "coverage_slots + optional rotation + entry and deep candidate for every measured asset; no asset may be omitted only because a fixed two-asset cap was retained",
+  "training_rule": "training targets may be computed only after physically executing each development candidate; decision features may use observed audits only",
+  "confirmation_rule": "freeze model, feature guard, candidate rule, budgets and gates before creating a disjoint future confirmation manifest",
+  "claim_boundary": "Development preparation for large multi-asset artificial facilities; not confirmation, natural semantics, external-baseline performance or robot evidence"
+}

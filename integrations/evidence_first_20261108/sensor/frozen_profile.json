@@ -1,0 +1,60 @@
+{
+  "schema": "nso.floor_reference_candidate.v1",
+  "status": "offline_internal_consistency_only_not_physical_truth_not_deployed",
+  "epoch": "rollback_20261108",
+  "camera_transform_mode": "captured",
+  "source_training": {
+    "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/current_capture/raw/1794128889309241370.npz",
+    "sha256": "b60b1ee6badd332c45eb5d2e42520c9fea2769ad3fc97cf8c00745744284b434",
+    "points": 10730,
+    "ransac_inliers": 10730
+  },
+  "heldout": [
+    {
+      "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/current_capture/raw/1794128893942825370.npz",
+      "sha256": "4d4b2fbb9086149f5044e770fea9f059f2cfb8eb44fc3a8638a85d161f9c39d2",
+      "points": 10730,
+      "median_abs_residual_m": 0.0007263159690322624,
+      "p95_abs_residual_m": 0.0038425040228686033,
+      "within_1cm_fraction": 1.0
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/current_capture/raw/1794128898342884370.npz",
+      "sha256": "f589e81a020577d327cce28c244674eacbbcbf9b8fdf79790345ff3b14d50af5",
+      "points": 10730,
+      "median_abs_residual_m": 0.0007324657069223417,
+      "p95_abs_residual_m": 0.0027763023661565773,
+      "within_1cm_fraction": 1.0
+    }
+  ],
+  "protocol": {
+    "crop_uv": [
+      360,
+      480,
+      1100,
+      710
+    ],
+    "stride": 4,
+    "seed": 0,
+    "ransac_trials": 120,
+    "tolerance_m": 0.01,
+    "refinement": "SVD over highest count, first tie retained",
+    "training_selection": "caller predeclared; no anchor/safety criterion",
+    "heldout_selection": "distinct caller predeclared frames; no fit updates"
+  },
+  "normal_odom": [
+    -0.0017568691930924026,
+    -0.012972999942351246,
+    0.9999143036696364
+  ],
+  "plane_d_odom_m": 0.12446651831330456,
+  "floor_odom_z_at_origin_m": -0.1244771855513203,
+  "floor_odom_z_at_training_base_m": -0.12447258789516671,
+  "floor_relative_to_training_base_m": -0.12447258789516671,
+  "scope": "Fixed visually hypothesized floor ROI; scalar floor height at training base XY relative to training base, not odom origin; plane slope and depth/extrinsic errors remain. No independent physical truth or current physical mount accuracy is asserted.",
+  "old_mount_matrix": null,
+  "scope_correction": {
+    "previous_profile_sha256": "094feddd52dfc8e125e62ceebe046d5b0312f0742439511cb89ef8a3fa6df9e5",
+    "reason": "Text previously said scalar at odom origin; executed mapper used floor_relative_to_training_base_m at the training base. No numeric value or fit changed."
+  }
+}

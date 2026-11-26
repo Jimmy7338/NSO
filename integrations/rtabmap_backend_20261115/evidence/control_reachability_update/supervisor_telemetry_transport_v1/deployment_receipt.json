@@ -1,0 +1,49 @@
+{
+  "schema": "supervisor_telemetry_transport_deployment/1",
+  "active_source_updated_for_next_process": true,
+  "root_owns_motion": true,
+  "baseline_mission_sha256": "de2f6b848c50fdcab6441b72ec2875a869637fd557b128cf569a829864a38ef3",
+  "source_bindings": {
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/mission.py": "fa9b8d2a22aae6d40d2a352763bd18f474a9f4bfe25c9d55fa27a4f1b548402e",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/visual_velocity_adapter.py": "dc0eced935bd77ec760e1ea658a1f0391f3d421f74af5dbcccf05cf638eed2e1",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_mission_contract.py": "11e92033fcbbba7c8fb080d95539b0a6401d15d53cb2ff799c5554c8aaff16b1",
+    "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/tests/test_adapter_control_timing.py": "a4ebed3559ff9c60544f910c1855f4224ea824c9ca95f6a6c5a8cc4bfad81d72"
+  },
+  "tests": "58 targeted tests PASS;40 ROS serialized OccupancyGrid cases byte-identical;216 old-vs-new mirrored-source guard cases identical",
+  "transport_changes": [
+    "numpy_msg occupancy input for three large map/costmap subscriptions; same ROS wire values",
+    "actuator JSON snapshot subscriber queue1/tcp_nodelay"
+  ],
+  "diagnostics": [
+    "first-fault cached adapter sample/receipt/originalCAN clocks captured at same check",
+    "atomic first_chassis_health_failure.json after native zero request, before worker/actuator cleanup",
+    "two originalCAN source-time numbers in existing256-row adapter timing ring"
+  ],
+  "unchanged": [
+    "supervisor original-source<=.5s checks",
+    "adapter status<=.5s/velocity<=.15s and speedguards",
+    "adapter80ms/native40ms+80ms+100msguards",
+    "NSO scores/candidates/stop rules",
+    "camera/geometry/ROS collision avoidance"
+  ],
+  "measured_decoder_cost": {
+    "original_tuple": {
+      "n": 40,
+      "median_ms": 6.2865815000000005,
+      "p95_ms": 7.612526,
+      "max_ms": 15.959882,
+      "mean_ms": 6.4796794250000005
+    },
+    "numpy_msg": {
+      "n": 40,
+      "median_ms": 0.9540500000000001,
+      "p95_ms": 3.051609,
+      "max_ms": 3.27619,
+      "mean_ms": 1.5804288249999998
+    }
+  },
+  "NSO04_cause": "Unresolved: 0x211 per-frame history and supervisor failed-cache snapshot were not persisted; actual hardware gap vs stale JSON mirror cannot be determined retrospectively. Native8 was externallyrequestedstop, not independenttimingfailure.",
+  "next_trial_discriminator": "Compare first_chassis_health_failure.checked_monotonic/cachedCANsource with nearby adapterring actualCANsource entries",
+  "scope": "Performance/transport fix preserving original stop predicates; no claim that04causewasprovedorallstallseliminated",
+  "updated_unix_s": 1794749867.6192515
+}

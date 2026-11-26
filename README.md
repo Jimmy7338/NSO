@@ -1,6 +1,8 @@
 # NSO：面向工业设施的语义主动三维建图
 
-> **当前成果与换设备入口（2026-09-29）：** [最新 main（22 页）](docs/thesis/submission_20260929_revised/main.pdf) · [主文源稿与材料包](docs/thesis/CURRENT_MAIN.md) · [换设备交接](docs/research/DEVICE_MIGRATION_HANDOFF_20260929.md)。最新实验、论文和代码继续在本 NSO 仓库维护。
+> **近期实验（2026-11-23）**　[实验归档与复现入口](experiments/RECENT_EXPERIMENTS.md) · [当前小论文主文](docs/thesis/submission_focus_20261108/main.pdf) · [货架遮挡实验英文结果](experiments/offline_20261122_shelf_occlusion_pairs/paper/manuscript_results_discussion.md)
+>
+> **2026-09-29 论文与换设备资料**　[当时主文（22 页）](docs/thesis/submission_20260929_revised/main.pdf) · [主文源稿与材料包](docs/thesis/CURRENT_MAIN.md) · [换设备交接](docs/research/DEVICE_MIGRATION_HANDOFF_20260929.md)。最新实验、论文和代码继续在本 NSO 仓库维护。
 
 > **仓库用途更新（2026-09-28）：** 清理后的独立项目已完整复制至 [SGAM 仓库](https://github.com/Jimmy7338/Semantic-Geometric-Active-Mapping)。本 NSO 仓库同时保存当前实现与恢复后的历史源码、依赖和实验资料，用于追溯与复现。恢复范围、旧环境缺件及两个仓库的区别见[迁移与恢复说明](docs/research/REPOSITORY_SPLIT_AND_RECOVERY_20260928.md)。
 

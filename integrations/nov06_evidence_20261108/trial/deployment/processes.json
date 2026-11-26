@@ -1,0 +1,198 @@
+{
+  "scope": "Existing user-confirmed Nov06 camera-lidar mount restored after fixed held-out consistency checks; no new research rule or actuator",
+  "old_mount": {
+    "cam_pos_x": 0.071,
+    "cam_pos_y": -0.0009,
+    "cam_pos_z": 0.288,
+    "cam_roll": 0.0,
+    "cam_pitch": 0.0,
+    "cam_yaw": 0.0
+  },
+  "restored_mount": {
+    "cam_pos_x": 0.19988985757484776,
+    "cam_pos_y": 0.007777808584314198,
+    "cam_pos_z": 0.28354361655830895,
+    "cam_roll": -0.004036561226381356,
+    "cam_pitch": -0.026839223148191933,
+    "cam_yaw": 0.03752627690049044
+  },
+  "started_unix_s": 1794134787.3883357,
+  "old_launch_sha256": "58ea968ec11ee9fbdb235b099b54cdb1246e56b5f0dfb383996bacbec58edeb1",
+  "old_display_retained": "/home/ouc/nso_robot/experiments/live_dashboard_mount_rollback_20261108",
+  "odometry_and_lidar_mapper_retained": true,
+  "stopped": [
+    {
+      "pid": 538158,
+      "argv": [
+        "/home/ouc/nso_robot/envs/science312/bin/python",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_semantic_worker.py",
+        "--input",
+        "/home/ouc/nso_robot/experiments/live_dashboard_mount_rollback_20261108/latest_display_frame.npz",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_mount_rollback_20261108/semantic_state.json",
+        "--interval",
+        "5"
+      ]
+    },
+    {
+      "pid": 538122,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_overlay_server.py",
+        "--port",
+        "8766",
+        "--upstream",
+        "http://127.0.0.1:8765",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_mount_rollback_20261108",
+        "--semantic-state",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_mount_rollback_20261108/semantic_state.json"
+      ]
+    },
+    {
+      "pid": 538071,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/live_dashboard.py",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_mount_rollback_20261108",
+        "--port",
+        "8765",
+        "--no-self-mask"
+      ]
+    },
+    {
+      "pid": 538022,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+        "--run",
+        "--localization-source",
+        "lidar_csm",
+        "--no-self-mask"
+      ]
+    },
+    {
+      "pid": 537831,
+      "argv": [
+        "/usr/bin/python3",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_camera_neural.launch"
+      ]
+    }
+  ],
+  "started": [
+    {
+      "name": "camera",
+      "pid": 630917,
+      "argv": [
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_camera_neural.launch"
+      ],
+      "started_unix_s": 1794134794.3320415
+    },
+    {
+      "name": "sensor_bridge",
+      "pid": 631092,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+        "--run",
+        "--localization-source",
+        "lidar_csm",
+        "--no-self-mask"
+      ],
+      "started_unix_s": 1794134803.7141886
+    },
+    {
+      "name": "dashboard",
+      "pid": 631093,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/live_dashboard.py",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_nov06_restore_20261108",
+        "--port",
+        "8765",
+        "--no-self-mask"
+      ],
+      "started_unix_s": 1794134803.7194993
+    },
+    {
+      "name": "overlay",
+      "pid": 631094,
+      "argv": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_overlay_server.py",
+        "--port",
+        "8766",
+        "--upstream",
+        "http://127.0.0.1:8765",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_nov06_restore_20261108",
+        "--semantic-state",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_nov06_restore_20261108/semantic_state.json"
+      ],
+      "started_unix_s": 1794134803.7249277
+    },
+    {
+      "name": "semantics",
+      "pid": 631095,
+      "argv": [
+        "/home/ouc/nso_robot/envs/science312/bin/python",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_semantic_worker.py",
+        "--input",
+        "/home/ouc/nso_robot/experiments/live_dashboard_nov06_restore_20261108/latest_display_frame.npz",
+        "--output",
+        "/home/ouc/nso_robot/experiments/live_dashboard_semantic_nov06_restore_20261108/semantic_state.json",
+        "--interval",
+        "5"
+      ],
+      "started_unix_s": 1794134803.746486
+    }
+  ],
+  "restored_launch_sha256": "37ba84e1862f8e63ab3a727cc2304e31251d0a36bf051df42e01965b2792cdb7",
+  "fresh_depth_stamp_ns": 1794134803509538822,
+  "display_output": "/home/ouc/nso_robot/experiments/live_dashboard_nov06_restore_20261108",
+  "semantic_output": "/home/ouc/nso_robot/experiments/live_dashboard_semantic_nov06_restore_20261108",
+  "completed_unix_s": 1794134803.747934,
+  "no_motion_commands": true,
+  "overlay_metadata_restart": {
+    "old_pid": 631094,
+    "new_pid": 633168,
+    "argv": [
+      "/usr/bin/python3",
+      "-s",
+      "-B",
+      "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_overlay_server.py",
+      "--port",
+      "8766",
+      "--upstream",
+      "http://127.0.0.1:8765",
+      "--output",
+      "/home/ouc/nso_robot/experiments/live_dashboard_semantic_nov06_restore_20261108",
+      "--semantic-state",
+      "/home/ouc/nso_robot/experiments/live_dashboard_semantic_nov06_restore_20261108/semantic_state.json",
+      "--camera-calibration-receipt",
+      "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_restore_trial/deployment/tf_verification.json"
+    ],
+    "source_TF_verified": true,
+    "unix_s": 1794134942.5040846
+  }
+}

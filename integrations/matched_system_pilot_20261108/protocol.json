@@ -1,0 +1,589 @@
+{
+  "schema": "nso.matched_system_pilot.review_protocol.v1",
+  "status": "frozen_before_first_pilot_preparation",
+  "created_unix_s": 1794139141.41211,
+  "scope": "Six-run descriptive scenario-specific null-sensitive C/G/S system pilot; selected using three predeclared development views, not confirmatory semantic-benefit evidence.",
+  "design": {
+    "scenes": 1,
+    "blocks": 2,
+    "episodes_per_arm_per_block": 1,
+    "planned_episodes": 6,
+    "arms": {
+      "C": "Existing coverage-only score",
+      "G": "Existing coverage plus measured-surface/generic geometry score",
+      "S": "Existing geometry score plus declared category prior"
+    },
+    "contrasts": {
+      "C_vs_G": "Increment from existing measured-surface/generic geometry terms",
+      "G_vs_S": "Category-conditioned scoring contrast with shared frozen perception/candidate pipeline",
+      "C_vs_S": "Combined package contrast; not semantic-only attribution"
+    },
+    "proposed_order_fixed_in_this_draft": [
+      [
+        "C",
+        "G",
+        "S"
+      ],
+      [
+        "S",
+        "G",
+        "C"
+      ]
+    ],
+    "order_rule": "Order C,G,S / S,G,C is fixed in this review protocol and must be frozen before pilot outcomes; no result-dependent reordering.",
+    "balance_limit": "Two blocks cannot balance all three absolute positions. G remains middle in this proposed sequence; descriptive pilot only, not a fully position-balanced design.",
+    "experimental_units": "One scene, two related blocks and six episodes; frames, actions and checkpoints are not independent scene samples.",
+    "episode_order": [
+      {
+        "slot": 1,
+        "block": 1,
+        "arm": "C",
+        "episode_id": "matched_system_pilot_20261108_B1_C",
+        "intended_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_C"
+      },
+      {
+        "slot": 2,
+        "block": 1,
+        "arm": "G",
+        "episode_id": "matched_system_pilot_20261108_B1_G",
+        "intended_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_G"
+      },
+      {
+        "slot": 3,
+        "block": 1,
+        "arm": "S",
+        "episode_id": "matched_system_pilot_20261108_B1_S",
+        "intended_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_S"
+      },
+      {
+        "slot": 4,
+        "block": 2,
+        "arm": "S",
+        "episode_id": "matched_system_pilot_20261108_B2_S",
+        "intended_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_S"
+      },
+      {
+        "slot": 5,
+        "block": 2,
+        "arm": "G",
+        "episode_id": "matched_system_pilot_20261108_B2_G",
+        "intended_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_G"
+      },
+      {
+        "slot": 6,
+        "block": 2,
+        "arm": "C",
+        "episode_id": "matched_system_pilot_20261108_B2_C",
+        "intended_report": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_C"
+      }
+    ]
+  },
+  "common_contract": {
+    "policy": "Freeze one disclosed implementation/source/configuration manifest for all arms before execution; score mode is the intended arm difference.",
+    "budget_paid_actions_per_arm": 40,
+    "external_duration_limit_s_per_arm": 600,
+    "radius_m": 0.7212185868375829,
+    "decision_rules": "Retain original declared circle, candidates, scoring terms/weights, stopping rules and return contract; any newly approved variant must be named and common to all arms, not silently substituted.",
+    "protection": "Same ROS collision avoidance and hardware stop protection; record interventions separately.",
+    "sensor_inputs": "Same frozen Nov06 mount TF, declared floor reference, sensor settings, semantic prompts/model and navigation configuration; exact source receipts to be bound before freeze.",
+    "configuration_reference": {
+      "path": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+      "sha256": "d1e17da8b981a6a9e9dd4a8d5a601eb8046c2c4403b9a015150f11648658d662",
+      "configuration": {
+        "robot_radius_m": 0.7212185868375829,
+        "sensor_config": {
+          "width_px": 320,
+          "height_px": 180,
+          "fov_deg": 101.34615631189132,
+          "max_depth_m": 4.0,
+          "camera_height_m": 0.536,
+          "laser_height_m": 0.684,
+          "laser_rays": 2000,
+          "voxel_m": 0.03,
+          "truncation_m": 0.12
+        },
+        "planner_revision": "v10_3_1",
+        "policy_variant": "exploration_joint_v1",
+        "sensor_range_profile": "sensor_range_matched_v1",
+        "measured_extent_profile": "measured_extent_3m_v1",
+        "shape": [
+          400,
+          400
+        ],
+        "planning_from_odom": [
+          [
+            -0.08936022427792444,
+            0.9959993726488984,
+            0.0,
+            39.36091491802433
+          ],
+          [
+            -0.9959993726488984,
+            -0.08936022427792444,
+            0.0,
+            39.9451144902335
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.12447258789516671
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "total_budget": 40,
+        "score_mode": "S",
+        "episode_id": "semantic_dev_plus20",
+        "scene_id": "depth_ground_unknown_exploration_20261108"
+      },
+      "semantic_configuration": {
+        "model_dir": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/models/real_semantics_20261030",
+        "confidence": 0.25,
+        "imgsz": 640,
+        "prior_profile": "real_scene_structural_v1"
+      },
+      "allowed_between_arm_configuration_differences": [
+        "score_mode C/G/S",
+        "unique episode_id only"
+      ],
+      "scene_id": "depth_ground_unknown_exploration_20261108",
+      "note": "Use per-arm fresh calibration/source receipts while preserving these common policy/sensor/grid parameters. Actual capture stamps and maps differ."
+    },
+    "unapproved_variants_disabled": [
+      "measured_instance_support_v1 / measured_instance_association_v1",
+      "clearance_matched_entries_v1",
+      "entry tolerance/heading/scoring changes"
+    ],
+    "source_snapshot": {
+      "path": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/source_snapshot_manifest.json",
+      "sha256": "6bf12f6e727780df9a3eaf3e064244f792711d8ffab1890a411629d33933fcd2",
+      "status": "root_verified_frozen",
+      "per_arm_native_source_manifest": "<actual_report>/source_manifest.json",
+      "per_arm_parameters": "<actual_report>/runtime_parameters.json",
+      "last_setup_operational_manifest": {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/semantic_view_setup_plus20_01/source_manifest.json",
+        "sha256": "da77e6f0e3983812f29ded58967a841cd96370312b8fc9d5fd86a919ceaac770",
+        "current_bytes_verification": {
+          "matched": 114,
+          "changed": 0,
+          "missing": 0
+        },
+        "recommendation": "Root may copy and bind this completed operational manifest, including active codec/timing sources, after confirming unchanged; retain review manifest for evaluator/development/preparation artifact bindings."
+      }
+    }
+  },
+  "initialization": {
+    "physical_start": "Use the actually achieved plus20 bootstrap anchor below, not the ideal requested development pose.",
+    "pose_tolerance": {
+      "status": "no_new_numerical_screen_or_online_gate",
+      "procedure": "Aim at the same actual common XY/yaw using existing setup/controller checks; record achieved continuous errors and retain existing native discrete anchor legality. No exclusion/rerun based on initial map similarity or score outcome."
+    },
+    "research_state": "Fresh mapper, paid-action ledger and semantic/quality history for each episode; no preceding-arm evidence leakage.",
+    "navigation_state": "Fresh independent experiment gmapping/costmaps under identical initialization procedure; do not require bitwise-identical particles, SLAM internals or maps.",
+    "coordinate_frame": "Common fixed planning transform/ROI registration; grid-from alone establishes coordinates, not identical initial belief.",
+    "capture": "Same predeclared no-motion first-capture procedure; preserve each actual initial packet and source stamps.",
+    "record_initial": [
+      "Actual base XY/yaw and deviation",
+      "Map/localization epoch and source/configuration hashes",
+      "Known/free/occupied counts and area",
+      "Initial known-mask XOR on common grid",
+      "Quality support count/hash and label support",
+      "Initial perception/candidate diagnostics"
+    ],
+    "strict_information_control": "Reserve exact same packet/map/support comparisons for offline mechanism replay; this does not block physical pilot execution.",
+    "common_grid_reference": {
+      "path": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+      "sha256": "d1e17da8b981a6a9e9dd4a8d5a601eb8046c2c4403b9a015150f11648658d662",
+      "grid": {
+        "shape": [
+          400,
+          400
+        ],
+        "resolution_m": 0.2,
+        "planning_from_odom": [
+          [
+            -0.08936022427792444,
+            0.9959993726488984,
+            0.0,
+            39.36091491802433
+          ],
+          [
+            -0.9959993726488984,
+            -0.08936022427792444,
+            0.0,
+            39.9451144902335
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.12447258789516671
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "return_anchor": [
+          200,
+          200,
+          0
+        ],
+        "floor_odom_z_m": -0.12447258789516671,
+        "planning_domain_is_resource_extent_not_observed_world": true,
+        "initial_actual_base_odom_pose": [
+          -0.021110804715877195,
+          0.7401597189473775,
+          -3.052113072636933
+        ]
+      },
+      "capture_argument": "--grid-from /home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json"
+    },
+    "physical_anchor_odom_xy_yaw": [
+      -0.021110804715877195,
+      0.7401597189473775,
+      -3.052113072636933
+    ],
+    "shared_odom_epoch": "Retain and verify the same current odom epoch throughout; an actual epoch change requires an explicit pre-outcome registration/protocol amendment, not silent reuse of the old grid.",
+    "capture_tool": {
+      "path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/prepare_matched_capture.py",
+      "sha256": "5fdb82e1d2ef0312f890a40594b5c3e3c2bc3286442b992c9120910c3298f8d2",
+      "score_modes_supported": [
+        "C",
+        "G",
+        "S"
+      ],
+      "grid_helper_path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/matched_helpers.py",
+      "grid_helper_sha256": "38cf412a38fa5f6daeb6350000fa64373aee4dd693fde851ed2dadb652ddb54a",
+      "fresh_capture_required": true,
+      "reuse_development_packet_as_live_observation": false
+    },
+    "no_initial_top1_admission_rule": "Keep every arm even if fresh first-state G/S choices tie or initial information changes; those are outcomes/diagnostics, not new online eligibility conditions."
+  },
+  "evaluation": {
+    "common_ROI": {
+      "status": "frozen_before_outcomes",
+      "source": "Common plus20 actual-anchor planning frame, predefined radius12.5m circle, center-in-circle .2m cells.",
+      "frame_config": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+      "frame_config_sha256": "d1e17da8b981a6a9e9dd4a8d5a601eb8046c2c4403b9a015150f11648658d662",
+      "center_planning_xy_m": [
+        40.1,
+        39.9
+      ],
+      "radius_m": 12.5,
+      "resolution_m": 0.2,
+      "laser_cap_m": 8.0,
+      "not_claimed": "ROI does not guarantee containing every actual trajectory; out-of-ROI origins/endpoints/cells are recorded."
+    },
+    "primary_descriptive_outputs": [
+      "Completion/return/failure/interruption and reasons",
+      "Actual paid actions, verified arrivals, elapsed time and original CAN travel",
+      "Observed coverage proxy versus paid actions and CAN cost on common ROI",
+      "Initial-to-final observed-area changes with initial-mask differences disclosed"
+    ],
+    "surface_outputs": "Report signed fixed-bootstrap reliability Q=mean[I/(I+.25+100r)], support count/hash and all decreases. Q is nonmonotone; positive predicted quality yield is not measured Q improvement. Different bootstrap supports are not an external matched quality reference.",
+    "semantic_mechanism": "Log every real global plan: G/S/X component values and rankings, actual selected macro target/actions, label projection/group retention/aperture eligibility. Same-state score differences are mechanism diagnostics, not hypothetical physical outcome estimates.",
+    "independent_reconstruction_reference": {
+      "status": "missing",
+      "accuracy_claim_allowed": false
+    },
+    "failures": "Retain all six scheduled slots, starts, startup rejections, failures, interruptions and unequal exposure. No result-dependent reruns, replacement of losing/failed arms, reordering, filtering or budget changes. A safety/operator halt stops work under existing protections and leaves remaining slots unexecuted; any later amended study keeps original records.",
+    "inference_limit": "Descriptive within-scene system performance and preliminary repeatability only. No sufficient statistical superiority, cross-scene generalization or independent reconstruction accuracy.",
+    "independent_laser_measurement": {
+      "path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py",
+      "sha256": "ec3ea38dba594cb8693078aac0568b27642dcee527a1e0be517659419c87db08",
+      "validation": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator_validation.json",
+      "validation_sha256": "b86728321c02927a64e99486fb51929308c0fb7557e30527ab3040a0794eccc8",
+      "validation_checks": 15,
+      "source": "Actual saved /scan from /lslidar_driver_node, laser_link, own-source historical odom_from_laser and serialized ranges verified. Not depth scan.",
+      "primary_measure": "Cumulative observed union m2 and increment over first archived scan; no percentage denominator from unknown environment.",
+      "secondary_measure": "Free-ray evidence union and ever-hit-excluded free, including conflict counts.",
+      "sampling": "One saved actual scan per accepted observation; not the full continuous scan stream. Same capture procedure across arms.",
+      "CAN_alignment": "Use bracketing recorded integrated original CAN counters with ages/leads, without synthetic interpolation.",
+      "time": "Report full mission elapsed separately from first-to-last saved scan elapsed.",
+      "initial_information": "Report absolute initial/final and own-first-scan increments together with initial-mask differences; per-arm baseline subtraction does not remove all confounding."
+    }
+  },
+  "before_freeze": [
+    "Root review of selection/evidence limits and common anchor/configuration",
+    "Verify review source snapshot hashes unchanged and bind final protocol/source receipt before first motion",
+    "Bind identical codec/timing/runtime source and controller/sensor parameters to every arm; keep per-arm native manifests/actual captures",
+    "Retain same epoch, common-grid capture procedure, per-arm independent fresh experiment map and unchanged protections",
+    "Freeze this protocol/order/evaluator before pilot outcomes; no additional score/opportunity threshold or map-bitwise gate"
+  ],
+  "authorization": {
+    "preparation_only": false,
+    "protocol_frozen": true,
+    "pilot_executed": false,
+    "robot_or_ROS_operations_performed_by_this_task": false,
+    "production_modified": false,
+    "manuscript_modified": false,
+    "publication_requested": false,
+    "root_next_action": "Execute frozen slots in stated order using existing robot authorization; no research-policy changes."
+  },
+  "protocol_id": "matched_system_pilot_20261108",
+  "source_draft": {
+    "path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/matched_pilot_protocol_draft.json",
+    "sha256": "61130dc8aa8ad8a58d13d7c2d3a722d6e6fb5e49247e5627068b411e581d0b58"
+  },
+  "development_selection": {
+    "protocol": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/protocol.json",
+    "protocol_sha256": "1a74450c156550e3fe71ff1f2ae6d39610763c3d9af3708b782f83ef6969e760",
+    "views_retained": [
+      "minus20",
+      "central",
+      "plus20"
+    ],
+    "selected_view": "plus20",
+    "basis": "Select view showing nonzero native category/aperture factors and different C vs combined-objective choice, without changing original rules or selecting on realized rollout outcome.",
+    "development_results_used_for_efficacy": false,
+    "first_state_choices": {
+      "C": {
+        "candidate_id": 2,
+        "pose": [
+          196,
+          187,
+          3
+        ],
+        "score": 17.960000000000004
+      },
+      "G": {
+        "candidate_id": 1,
+        "pose": [
+          189,
+          197,
+          1
+        ],
+        "score": 22.217556992518798
+      },
+      "S": {
+        "candidate_id": 1,
+        "pose": [
+          189,
+          197,
+          1
+        ],
+        "score": 21.12102785549076
+      },
+      "X": {
+        "candidate_id": 1,
+        "pose": [
+          189,
+          197,
+          1
+        ],
+        "score": 23.314086129546833
+      }
+    },
+    "G_S_initial_top1_same": true,
+    "initial_mechanism": "G/S/X scores differ on some candidates but G/S/X all choose candidate1; C chooses candidate2. This is not an observed semantic decision benefit.",
+    "class_support": {
+      "2": 0,
+      "3": 121
+    },
+    "source_summary": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/score/summary.json",
+    "source_summary_sha256": "3092b695230262c180d90f492dbbd62dabccbd1bcaec1101b8d872f0d905567a",
+    "all_three_summary_receipts": [
+      {
+        "path": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/minus20/score/summary.json",
+        "sha256": "1d440bdf089ffd88f3eff01715eea3f51b8320bcc76214a56b202a6a44df3153"
+      },
+      {
+        "path": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/central/score/summary.json",
+        "sha256": "8c8c614b54c37c0f919cfd8cc8c2b9fc3951879eabbca6941c625f1c49705bdf"
+      },
+      {
+        "path": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/score/summary.json",
+        "sha256": "3092b695230262c180d90f492dbbd62dabccbd1bcaec1101b8d872f0d905567a"
+      }
+    ],
+    "generic_weight_confound": {
+      "status": "observed_same_state_score_equivalence_not_additional_rollout",
+      "single_active_asset": true,
+      "S_prior_equals_uniform_G_prior_weight": 0.4135188632241265,
+      "X_prior_equals_uniform_G_prior_weight": 1.5864811367758738,
+      "maximum_S_prior_residual": 1.1102230246251565e-16,
+      "maximum_X_prior_residual": 4.440892098500626e-16,
+      "ranking": {
+        "G": [
+          1,
+          3,
+          2,
+          0,
+          4
+        ],
+        "S": [
+          1,
+          2,
+          3,
+          0,
+          4
+        ],
+        "X": [
+          1,
+          3,
+          2,
+          0,
+          4
+        ]
+      },
+      "lower_order_S_ranking_differs": true,
+      "top1_identical_G_S_X": true,
+      "interpretation": "Lower-rank category scoring flip exists, but all current candidate priors are exactly reproducible by one generic-prior scalar. This is not evidence of indispensable category-specific selection or task benefit.",
+      "control_scope": "Record this confound; no new runtime weights, tuned generic arm or extra rollout added to six-slot pilot.",
+      "source_summary": "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/score/summary.json",
+      "source_summary_sha256": "3092b695230262c180d90f492dbbd62dabccbd1bcaec1101b8d872f0d905567a"
+    }
+  },
+  "preparation_and_evaluation_templates": {
+    "capture_argv": [
+      "python3",
+      "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/prepare_matched_capture.py",
+      "--output",
+      "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_C/fresh",
+      "--episode",
+      "matched_system_pilot_20261108_B1_C",
+      "--budget",
+      "40",
+      "--duration",
+      "600",
+      "--map-source-receipt",
+      "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_C/map_epoch/start_receipt.json",
+      "--score-mode",
+      "C",
+      "--grid-from",
+      "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json"
+    ],
+    "capture_template_note": "Preparation capture reads ROS but is NOT executed by this artifact. Root substitutes each scheduled slot and its actual fresh map-epoch receipt. No mission command issued here.",
+    "evaluator_per_episode": [
+      {
+        "slot": 1,
+        "argv": [
+          "python3",
+          "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py",
+          "--report",
+          "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_C",
+          "--frame-config",
+          "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+          "--output",
+          "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_C/laser_coverage.json"
+        ],
+        "shell_command": "python3 /home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py --report /home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_C --frame-config /home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json --output /home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_C/laser_coverage.json",
+        "output_parent_must_exist": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_C"
+      },
+      {
+        "slot": 2,
+        "argv": [
+          "python3",
+          "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py",
+          "--report",
+          "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_G",
+          "--frame-config",
+          "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+          "--output",
+          "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_G/laser_coverage.json"
+        ],
+        "shell_command": "python3 /home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py --report /home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_G --frame-config /home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json --output /home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_G/laser_coverage.json",
+        "output_parent_must_exist": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_G"
+      },
+      {
+        "slot": 3,
+        "argv": [
+          "python3",
+          "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py",
+          "--report",
+          "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_S",
+          "--frame-config",
+          "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+          "--output",
+          "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_S/laser_coverage.json"
+        ],
+        "shell_command": "python3 /home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py --report /home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B1_S --frame-config /home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json --output /home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_S/laser_coverage.json",
+        "output_parent_must_exist": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B1_S"
+      },
+      {
+        "slot": 4,
+        "argv": [
+          "python3",
+          "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py",
+          "--report",
+          "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_S",
+          "--frame-config",
+          "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+          "--output",
+          "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_S/laser_coverage.json"
+        ],
+        "shell_command": "python3 /home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py --report /home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_S --frame-config /home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json --output /home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_S/laser_coverage.json",
+        "output_parent_must_exist": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_S"
+      },
+      {
+        "slot": 5,
+        "argv": [
+          "python3",
+          "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py",
+          "--report",
+          "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_G",
+          "--frame-config",
+          "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+          "--output",
+          "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_G/laser_coverage.json"
+        ],
+        "shell_command": "python3 /home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py --report /home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_G --frame-config /home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json --output /home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_G/laser_coverage.json",
+        "output_parent_must_exist": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_G"
+      },
+      {
+        "slot": 6,
+        "argv": [
+          "python3",
+          "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py",
+          "--report",
+          "/home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_C",
+          "--frame-config",
+          "/home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json",
+          "--output",
+          "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_C/laser_coverage.json"
+        ],
+        "shell_command": "python3 /home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_timing_trial/laser_coverage_evaluator.py --report /home/ouc/nso_robot/reports/nso-hybrid-20261108/matched_system_pilot_20261108_B2_C --frame-config /home/ouc/nso_robot/analyses/semantic_development_views_20261108/plus20/fresh/configuration.json --output /home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_C/laser_coverage.json",
+        "output_parent_must_exist": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/B2_C"
+      }
+    ]
+  },
+  "frozen_unix_s": 1794139223.5597742,
+  "review_source_sha256": "f7d9a4092d977dd2de641ffe33ee0aec6cd3428141252807d09162953e9daaf2",
+  "root_review": {
+    "existing_motion_authorization_used": true,
+    "original_policy_unchanged": true,
+    "all_initial_outcomes_kept": true,
+    "exact_common_belief_not_claimed": true,
+    "nonzero_prior_not_semantic_efficacy": true,
+    "metadata": {
+      "path": "/home/ouc/nso_robot/analyses/matched_system_pilot_20261108/source_snapshot_manifest.json",
+      "sha256": "6bf12f6e727780df9a3eaf3e064244f792711d8ffab1890a411629d33933fcd2",
+      "status": "root_verified_frozen",
+      "per_arm_native_source_manifest": "<actual_report>/source_manifest.json",
+      "per_arm_parameters": "<actual_report>/runtime_parameters.json",
+      "last_setup_operational_manifest": {
+        "path": "/home/ouc/nso_robot/reports/nso-hybrid-20261108/semantic_view_setup_plus20_01/source_manifest.json",
+        "sha256": "da77e6f0e3983812f29ded58967a841cd96370312b8fc9d5fd86a919ceaac770",
+        "current_bytes_verification": {
+          "matched": 114,
+          "changed": 0,
+          "missing": 0
+        },
+        "recommendation": "Root may copy and bind this completed operational manifest, including active codec/timing sources, after confirming unchanged; retain review manifest for evaluator/development/preparation artifact bindings."
+      }
+    }
+  }
+}

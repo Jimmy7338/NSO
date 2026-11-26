@@ -1,0 +1,106 @@
+{
+  "name": "measured_instance_association_v1",
+  "status": "reviewable_offline_prototype_not_deployed",
+  "scope": "One development episode,23actualcachedframes;no detector rerun,planner,score comparison,physical rollout or manuscript edit.",
+  "why_method_changes": "Observed instance ownership and inferred cross-view association partition geometry before native eligibility;this changes asset grouping,derived annotations and potentially candidate geometry/count/set.Original-method equivalence is not asserted.",
+  "unknown_coverage_preserved": "No original quality point is removed:each has one inferred track or remains unassigned0.Original measured map hashes match at0/18/22.Coverage objective,ROS/hardware protection,circle,budget,return,nominal config and native8point/3m/.25m thresholds are not changed by this prototype.",
+  "comparison_contract": "All G/S/X conditions must share frozen prompts,masks,confidence ownership,association and partition;category annotations act after geometry construction.YOLOE masks are prompt dependent,soG is a geometry-scoring control conditional on common semantic perception,not semantics-free perception.",
+  "data": {
+    "full_cached_masks": 61,
+    "sampled_instance_observations": 54,
+    "inferred_tracks": 17,
+    "tracks_are_not_physical_object_counts": true,
+    "terminal_marked_components": 8,
+    "components_are_not_physical_object_counts": true
+  },
+  "checkpoints": [
+    {
+      "paid_action": 0,
+      "quality_points": 439,
+      "native_eligible_patches": 2,
+      "associated_eligible_patches": 4,
+      "native_eligible_marked_points": 0,
+      "associated_eligible_marked_points": 0,
+      "marked_components": 0,
+      "max_marked_horizontal_span_m": null,
+      "unassigned_points": 300,
+      "native_class3": 0,
+      "associated_class3": 0,
+      "same_track_annotation_loss": 0,
+      "associated_class3_not_eligible": 0
+    },
+    {
+      "paid_action": 3,
+      "quality_points": 1431,
+      "native_eligible_patches": 2,
+      "associated_eligible_patches": 10,
+      "native_eligible_marked_points": 0,
+      "associated_eligible_marked_points": 185,
+      "marked_components": 4,
+      "max_marked_horizontal_span_m": 0.8603756579336803,
+      "unassigned_points": 951,
+      "native_class3": 196,
+      "associated_class3": 196,
+      "same_track_annotation_loss": 0,
+      "associated_class3_not_eligible": 11
+    },
+    {
+      "paid_action": 18,
+      "quality_points": 3247,
+      "native_eligible_patches": 2,
+      "associated_eligible_patches": 12,
+      "native_eligible_marked_points": 0,
+      "associated_eligible_marked_points": 356,
+      "marked_components": 7,
+      "max_marked_horizontal_span_m": 1.0896088501661083,
+      "unassigned_points": 2209,
+      "native_class3": 411,
+      "associated_class3": 370,
+      "same_track_annotation_loss": 41,
+      "associated_class3_not_eligible": 14
+    },
+    {
+      "paid_action": 22,
+      "quality_points": 3625,
+      "native_eligible_patches": 2,
+      "associated_eligible_patches": 13,
+      "native_eligible_marked_points": 0,
+      "associated_eligible_marked_points": 387,
+      "marked_components": 8,
+      "max_marked_horizontal_span_m": 1.1111891715591113,
+      "unassigned_points": 2497,
+      "native_class3": 437,
+      "associated_class3": 401,
+      "same_track_annotation_loss": 36,
+      "associated_class3_not_eligible": 14
+    }
+  ],
+  "verification": {
+    "all_cached_masks_and_semantics_reproduced": true,
+    "native_quality_sampling_matches": true,
+    "category_swap_does_not_change_tracks_membership_or_patch_geometry": true,
+    "all_quality_points_preserved_exactly_once": true,
+    "native_mapping_hash_checks": [
+      0,
+      18,
+      22
+    ]
+  },
+  "frozen_proposal_and_code_hashes_unchanged": true,
+  "limitations": [
+    "Terminal2497/3625qualitypoints remain unassigned,with geometry retained.",
+    "Terminal36/437nativeclass3labels lack same-track annotation;14of401associatedclass3points do not become legalpatchsupport.",
+    "Association thresholds3sharedvoxels/Jaccard.20 and deterministic one-to-one rule are new predeclared choices,not verified identity estimators.",
+    "Higher-confidence floor/wall mask ownership is retained;pixels already assigned to background are not recovered as object support.",
+    "No score,selected action,unknown-coverage efficiency,physical success or safety benefit has been demonstrated."
+  ],
+  "review_files": {
+    "proposal": "proposal.json",
+    "implementation": "association.py",
+    "entrypoint": "run_review.py",
+    "audit": "review.json",
+    "preexecution_identity": "preexecution.json"
+  },
+  "deployment": false,
+  "production_files_changed": false
+}

@@ -1,0 +1,351 @@
+{
+  "configuration": {
+    "shape": [
+      400,
+      400
+    ],
+    "planning_from_odom": [
+      [
+        0.469065560268529,
+        0.8831633485205164,
+        0.0,
+        39.339850791970434
+      ],
+      [
+        -0.8831633485205164,
+        0.469065560268529,
+        0.0,
+        39.703382155367294
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.233
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "total_budget": 40,
+    "scene_id": "real_unknown_reachable_20261107",
+    "episode_id": "nso_exploration_resume_S40_20261107_01",
+    "robot_radius_m": 0.7212185868375829,
+    "sensor_config": {
+      "width_px": 320,
+      "height_px": 180,
+      "fov_deg": 101.34615631189132,
+      "max_depth_m": 4.0,
+      "camera_height_m": 0.536,
+      "laser_height_m": 0.684,
+      "laser_rays": 2000,
+      "voxel_m": 0.03,
+      "truncation_m": 0.12
+    },
+    "planner_revision": "v10_3_1",
+    "score_mode": "S",
+    "policy_variant": "exploration_joint_v1",
+    "sensor_range_profile": "sensor_range_matched_v1",
+    "measured_extent_profile": "measured_extent_3m_v1"
+  },
+  "execution_allowed": true,
+  "calibration": {
+    "source": "actual ZED K and actual camera/laser TF retained per capture",
+    "pixel_stride": 4,
+    "raw_observations_preserved": true,
+    "initial_grid": {
+      "shape": [
+        400,
+        400
+      ],
+      "resolution_m": 0.2,
+      "planning_from_odom": [
+        [
+          0.469065560268529,
+          0.8831633485205164,
+          0.0,
+          39.339850791970434
+        ],
+        [
+          -0.8831633485205164,
+          0.469065560268529,
+          0.0,
+          39.703382155367294
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.233
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "return_anchor": [
+        200,
+        200,
+        0
+      ],
+      "floor_odom_z_m": -0.233,
+      "planning_domain_is_resource_extent_not_observed_world": true,
+      "initial_actual_base_odom_pose": [
+        0.18291414010735346,
+        0.7635625793900424,
+        2.6533602331406048
+      ]
+    },
+    "initial_odom_stamp_ns": 1794064084719867857,
+    "floor_source": "/home/ouc/nso_robot/experiments/hybrid_pilot_20261029/reference_pillar_20261029/pillar_visible_geometry.json",
+    "semantic_labels_available": "model predictions, not ground truth",
+    "nominal_view_forecast_calibrated": false,
+    "initialization_unix_s": 1794064089.1836371,
+    "self_mask_asset_directory": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031",
+    "self_mask_file_sha256": "119af867a47bb7092ede51a3838cae386788081e0bc551411f1156ee8387b32b",
+    "initialization_scope": "fresh actual capture at current aligned odom pose; original matcher/odom/display-TSDF retained; independent fresh experiment map; preparation only, no actuator or robot action",
+    "depth_texture_confidence": 100,
+    "execution_contract": "ROS success and actual original pending grid state; metric error retained as diagnostic",
+    "SDK_depth_mode": "NEURAL",
+    "sparse_actual_RGBD_observation_allowed": true,
+    "ROS_xy_latch": true,
+    "depth_confidence": 80,
+    "ROS_execution_frame": "odom",
+    "ROS_short_goal_forward_point_distance_m": 0.325,
+    "native_depth_calibration_evidence": "/home/ouc/nso_robot/analyses/exploration_20261031/native_depth_calibration_02/result.json",
+    "joint_turn_execution_profile": "measured_in_place_turn_v1",
+    "self_mask_pixels": 0,
+    "initialization_evidence": "one fresh actual RGBD/scan/current-map packet; no prior paid or semantic observation ledger imported",
+    "source_state": "original uninterrupted default-keyframe CSM, CAN control velocity and fixed SE2 odom coordinate continuity after bounded B diagnostic",
+    "history_acquisition": "no old joint/paid/semantic ledger imported; new independent measured ROS experiment map; old display map is excluded from research input/navigation; no prior paid or semantic ledger imported",
+    "source_registration": "aligned odom/display-TSDF retained; experiment map has fresh independent epoch; planning origin frozen from first arm actual base pose",
+    "historical_semantic_source": "no semantic predictions or history imported in preparation; original pinned frontend will infer from actual runtime observation",
+    "initial_odom_stamp_semantics": "actual historical TF query stamp",
+    "localization_source": "lidar_csm",
+    "controller_odometry_source": "/nso_csm/control_odom",
+    "controller_odometry_projection": "unfiltered original CSM registration in a fixed SE2-aligned odom frame; source stamps preserved; control vx/w are measured original-kernel CAN at or before scan with150ms TTL; control vy=0; raw derived CSM twist retained",
+    "execution_controller_profile": "exact_ros_goal_v1",
+    "ROS_xy_goal_tolerance_m": 0.08,
+    "Navfn_default_tolerance": 0,
+    "correction_reverse_profile": "nso_nominal_correction_reverse_v1; same-pending endpoint correction only, maxreverse .05m/s; ordinary motion no reverse",
+    "apply_approved_self_mask": false,
+    "self_mask_profile": "unmasked_after_camera_relocation_v1",
+    "camera_mount_calibrated": false,
+    "camera_extrinsic_policy": "user_deferred_update_reusing_old_TF_integration_only",
+    "evidence_scope": "uncalibrated_camera_integration_only_no_accuracy_or_benefit_claim",
+    "initialization_source_state": {
+      "localization_source": "lidar_csm",
+      "active_matcher": "/nso_csm/matcher",
+      "matcher_parameters": {
+        "base_frame": "base_link",
+        "fixed_frame": "odom",
+        "publish_tf": false,
+        "publish_pose": false,
+        "publish_pose_stamped": true,
+        "publish_pose_with_covariance": false,
+        "publish_pose_with_covariance_stamped": false,
+        "use_imu": false,
+        "use_odom": false,
+        "use_vel": false,
+        "use_tf": false
+      },
+      "effective_keyframe_parameters": {
+        "kf_dist_linear": 0.1,
+        "kf_dist_angular": 0.17453292519943295
+      },
+      "control_velocity_source": "can_feedback",
+      "pose_source": {
+        "profile": "fixed_se2_pose_source_diagnostic_v1",
+        "pose_topic": "/nso_csm/pose_stamped",
+        "expected_caller": "/nso_csm/matcher",
+        "source_frame": "odom",
+        "target_frame": "odom",
+        "fixed_coordinate_transform_applied": true,
+        "raw_registration_preserved": true,
+        "source_stamp_preserved": true,
+        "nanosecond_stamp_encoding": "decimal_string_in_ROS_parameters_only",
+        "alignment": {
+          "schema": "csm_fixed_se2_alignment/1",
+          "source_topic": "/nso_csm/pose_stamped",
+          "expected_caller": "/nso_csm/matcher",
+          "source_frame": "odom",
+          "target_frame": "odom",
+          "path": "/home/ouc/nso_robot/analyses/forward_controller_20261107/zero_keyframe_candidate/live_deployment/restore_alignment.json",
+          "sha256": "1f1777d476dbea3057c4a330c68d59e27d655e584680470341090d968fa95f00",
+          "odom_from_source": [
+            0.016166110131489362,
+            -0.028621712372425057,
+            0.014678487554931507
+          ],
+          "anchor": {
+            "source_stamp_ns": "1794056665825573921",
+            "odom_stamp_ns": "1794056665825573921",
+            "source_pose": [
+              0.1693285498088515,
+              0.7595266559602172,
+              2.565198047829644
+            ],
+            "odom_pose": [
+              0.17432811644750693,
+              0.7333085197699746,
+              2.5798765353845754
+            ]
+          },
+          "anchor_position_error_m": 0.0,
+          "anchor_angle_error_rad": 0.0,
+          "operation": "fixed rigid SE2 coordinates only; no smoothing/fallback/stamp replacement",
+          "physical_accuracy_verified": false
+        }
+      },
+      "controller_odom_topic": "/nso_csm/control_odom",
+      "camera_extrinsics_verified": false,
+      "old_camera_TF_retained": true,
+      "old_approved_self_mask_applied": false,
+      "semantic_model_executed_during_preparation": false,
+      "semantic_configuration_reused": true,
+      "map_and_TSDF_epoch_retained": false,
+      "display_TSDF_epoch_retained": true,
+      "experiment_map_source": {
+        "topic": "/nso_pair/map",
+        "publisher": "/nso_pair/gmapping",
+        "map_frame": "nso_pair_map"
+      },
+      "experiment_map_receipt": {
+        "scope": "fresh per-arm stock gmapping and ROS costmaps; original CSM/display map/TSDF retained",
+        "no_motion": true,
+        "stopped_navigation": [
+          "/usr/bin/python3",
+          "/opt/ros/noetic/bin/roslaunch",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+          "latch_xy_goal_tolerance:=true",
+          "odom_topic:=/nso_csm/control_odom",
+          "map_topic:=/nso_pair/map"
+        ],
+        "stopped_helper": [
+          "/usr/bin/python3",
+          "-s",
+          "-B",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+          "--launch-mapper"
+        ],
+        "mapper_helper": {
+          "pid": 1229455,
+          "argv": [
+            "/usr/bin/python3",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+            "--launch-mapper"
+          ],
+          "started_unix_s": 1794064025.7461936
+        },
+        "initial_map": {
+          "stamp_ns": 1794064027418068912,
+          "frame": "nso_pair_map",
+          "publisher": "/nso_pair/gmapping",
+          "known_cells": 20219,
+          "occupied_cells": 620
+        },
+        "navigation": {
+          "pid": 1229595,
+          "argv": [
+            "/opt/ros/noetic/bin/roslaunch",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+            "latch_xy_goal_tolerance:=true",
+            "odom_topic:=/nso_csm/control_odom",
+            "map_topic:=/nso_pair/map"
+          ],
+          "started_unix_s": 1794064027.454492
+        },
+        "costmap_sources": {
+          "global_costmap": "/nso_pair/map",
+          "local_costmap": "/nso_pair/map"
+        },
+        "ready_unix_s": 1794064029.8796415
+      },
+      "preparation_no_motion": true
+    },
+    "initial_odom_frame": "odom",
+    "coordinate_alignment_scope": "fixed same-stamp SE2 coordinate continuity, not independent accuracy correction",
+    "navigation_map_source": {
+      "topic": "/nso_pair/map",
+      "publisher": "/nso_pair/gmapping",
+      "map_frame": "nso_pair_map"
+    },
+    "initial_base_odom_pose_this_arm": [
+      0.24924836503712883,
+      0.7392333451705062,
+      2.7206257368875932
+    ],
+    "paired_map_epoch_receipt": {
+      "scope": "fresh per-arm stock gmapping and ROS costmaps; original CSM/display map/TSDF retained",
+      "no_motion": true,
+      "stopped_navigation": [
+        "/usr/bin/python3",
+        "/opt/ros/noetic/bin/roslaunch",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+        "latch_xy_goal_tolerance:=true",
+        "odom_topic:=/nso_csm/control_odom",
+        "map_topic:=/nso_pair/map"
+      ],
+      "stopped_helper": [
+        "/usr/bin/python3",
+        "-s",
+        "-B",
+        "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+        "--launch-mapper"
+      ],
+      "mapper_helper": {
+        "pid": 1229455,
+        "argv": [
+          "/usr/bin/python3",
+          "-s",
+          "-B",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+          "--launch-mapper"
+        ],
+        "started_unix_s": 1794064025.7461936
+      },
+      "initial_map": {
+        "stamp_ns": 1794064027418068912,
+        "frame": "nso_pair_map",
+        "publisher": "/nso_pair/gmapping",
+        "known_cells": 20219,
+        "occupied_cells": 620
+      },
+      "navigation": {
+        "pid": 1229595,
+        "argv": [
+          "/opt/ros/noetic/bin/roslaunch",
+          "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+          "latch_xy_goal_tolerance:=true",
+          "odom_topic:=/nso_csm/control_odom",
+          "map_topic:=/nso_pair/map"
+        ],
+        "started_unix_s": 1794064027.454492
+      },
+      "costmap_sources": {
+        "global_costmap": "/nso_pair/map",
+        "local_costmap": "/nso_pair/map"
+      },
+      "ready_unix_s": 1794064029.8796415
+    },
+    "common_grid_source": "/home/ouc/nso_robot/analyses/joint_coverage_pair_20261107/fresh_C/configuration.json"
+  },
+  "semantic_configuration": {
+    "model_dir": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/models/real_semantics_20261030",
+    "confidence": 0.25,
+    "imgsz": 640,
+    "prior_profile": "real_scene_structural_v1"
+  }
+}

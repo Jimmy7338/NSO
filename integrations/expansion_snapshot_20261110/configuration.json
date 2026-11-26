@@ -1,0 +1,891 @@
+{
+  "configuration": {
+    "robot_radius_m": 0.7212185868375829,
+    "sensor_config": {
+      "width_px": 320,
+      "height_px": 180,
+      "fov_deg": 101.34615631189132,
+      "max_depth_m": 4.0,
+      "camera_height_m": 0.536,
+      "laser_height_m": 0.684,
+      "laser_rays": 2000,
+      "voxel_m": 0.03,
+      "truncation_m": 0.12
+    },
+    "planner_revision": "v10_3_1",
+    "policy_variant": "exploration_joint_v1",
+    "sensor_range_profile": "sensor_range_matched_v1",
+    "measured_extent_profile": "measured_extent_3m_v1",
+    "shape": [
+      400,
+      400
+    ],
+    "planning_from_odom": [
+      [
+        0.05314278481975499,
+        -0.9985869238186534,
+        0.0,
+        40.10946136267716
+      ],
+      [
+        0.9985869238186534,
+        0.05314278481975499,
+        0.0,
+        39.97582879985896
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.12447258789516671
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "return_anchor": [
+      200,
+      200,
+      0
+    ],
+    "total_budget": 96,
+    "score_mode": "S",
+    "episode_id": "expand_history_S96_20261110_01",
+    "scene_id": "depth_ground_unknown_exploration_20261108"
+  },
+  "execution_allowed": true,
+  "calibration": {
+    "source": "actual RGBD/scan and per-sensor historical TF",
+    "pixel_stride": 4,
+    "initial_grid": {
+      "shape": [
+        400,
+        400
+      ],
+      "resolution_m": 0.2,
+      "planning_from_odom": [
+        [
+          0.05314278481975499,
+          -0.9985869238186534,
+          0.0,
+          40.10946136267716
+        ],
+        [
+          0.9985869238186534,
+          0.05314278481975499,
+          0.0,
+          39.97582879985896
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.12447258789516671
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "return_anchor": [
+        200,
+        200,
+        0
+      ],
+      "floor_odom_z_m": -0.12447258789516671,
+      "planning_domain_is_resource_extent_not_observed_world": true,
+      "initial_actual_base_odom_pose": [
+        -0.07622445114886585,
+        0.005418239456873615,
+        0.053167830578099005
+      ]
+    },
+    "initial_actual_base_odom_pose": [
+      -0.07622445114886585,
+      0.005418239456873615,
+      0.053167830578099005
+    ],
+    "initial_odom_stamp_ns": 1794291203569541305,
+    "initial_odom_stamp_semantics": "actual historical query",
+    "initial_odom_frame": "odom",
+    "initialization_unix_s": 1794291206.0885224,
+    "initialization_scope": "Current stopped actual pose/anchor in continuous Nov10 odom; accumulated navigation map retained,41actual historical RGBD/laser observations imported via existing measured-prefix support",
+    "source_registration": "Same verified continuous boot and bridge owner; no external localization accuracy claim",
+    "localization_source": "lidar_csm",
+    "navigation_map_source": {
+      "topic": "/nso_pair/map",
+      "publisher": "/nso_pair/gmapping",
+      "map_frame": "nso_pair_map"
+    },
+    "paired_map_epoch_receipt": {
+      "new_localization_epoch": true,
+      "old_grid_reused": false,
+      "no_actuator": true,
+      "started": [
+        {
+          "name": "master",
+          "pid": 1667229,
+          "argv": [
+            "/opt/ros/noetic/bin/roscore",
+            "-p",
+            "11382"
+          ],
+          "started_unix_s": 1794289165.7589307
+        },
+        {
+          "name": "camera",
+          "pid": 1667913,
+          "argv": [
+            "/opt/ros/noetic/bin/roslaunch",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_camera_neural.launch"
+          ],
+          "started_unix_s": 1794289167.306484
+        },
+        {
+          "name": "csm_bridge",
+          "pid": 1667914,
+          "argv": [
+            "/usr/bin/python3",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/csm_odometry_bridge.py",
+            "--control-velocity-source",
+            "can_feedback",
+            "--can-interface",
+            "can0"
+          ],
+          "started_unix_s": 1794289167.3122416
+        },
+        {
+          "name": "sensors",
+          "pid": 1667915,
+          "argv": [
+            "/opt/ros/noetic/bin/roslaunch",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/hybrid_sensors_csm.launch"
+          ],
+          "started_unix_s": 1794289167.3186731
+        },
+        {
+          "name": "sensor_bridge",
+          "pid": 1668698,
+          "argv": [
+            "/usr/bin/python3",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/hybrid_sensor_bridge.py",
+            "--run",
+            "--localization-source",
+            "lidar_csm",
+            "--no-self-mask"
+          ],
+          "started_unix_s": 1794289169.1481347
+        },
+        {
+          "name": "pair_helper",
+          "pid": 1669286,
+          "argv": [
+            "/usr/bin/python3",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/isolated_mapping_tf.py",
+            "--launch-mapper"
+          ],
+          "started_unix_s": 1794289178.8830192
+        },
+        {
+          "name": "navigation",
+          "pid": 1669384,
+          "argv": [
+            "/opt/ros/noetic/bin/roslaunch",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/joint_navigation.launch",
+            "latch_xy_goal_tolerance:=true",
+            "odom_topic:=/nso_csm/control_odom",
+            "map_topic:=/nso_pair/map"
+          ],
+          "started_unix_s": 1794289180.6629987
+        },
+        {
+          "name": "dashboard",
+          "pid": 1669441,
+          "argv": [
+            "/usr/bin/python3",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/live_dashboard.py",
+            "--output",
+            "/home/ouc/nso_robot/experiments/live_dashboard_reboot_20261110",
+            "--port",
+            "8765",
+            "--no-self-mask"
+          ],
+          "started_unix_s": 1794289183.093379
+        },
+        {
+          "name": "overlay",
+          "pid": 1669442,
+          "argv": [
+            "/usr/bin/python3",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_overlay_server.py",
+            "--port",
+            "8766",
+            "--upstream",
+            "http://127.0.0.1:8765",
+            "--output",
+            "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261110",
+            "--semantic-state",
+            "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261110/semantic_state.json",
+            "--camera-calibration-receipt",
+            "/home/ouc/nso_robot/analyses/sensor_repair_20261108/nov06_restore_trial/deployment/tf_verification.json"
+          ],
+          "started_unix_s": 1794289183.101559
+        },
+        {
+          "name": "semantics",
+          "pid": 1669443,
+          "argv": [
+            "/home/ouc/nso_robot/envs/science312/bin/python",
+            "-s",
+            "-B",
+            "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/runtime/dashboard_semantic_worker.py",
+            "--input",
+            "/home/ouc/nso_robot/experiments/live_dashboard_reboot_20261110/latest_display_frame.npz",
+            "--output",
+            "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261110/semantic_state.json",
+            "--interval",
+            "5"
+          ],
+          "started_unix_s": 1794289183.1112394
+        }
+      ],
+      "boot_id": "d07b49f3-60fe-4f41-b06b-acbfffb223e1",
+      "last_health": {
+        "schema": "nso_hybrid_sensor_bridge/1",
+        "navigation_source": "lidar_rgbd",
+        "sampled_unix_s": 1794289178.858225,
+        "sampled_monotonic": 17794.399793355,
+        "odom": {
+          "valid": true,
+          "reason": "ok",
+          "source_stamp_ns": 1794289178788824320,
+          "receipt_monotonic": 17794.355520383,
+          "fault": null,
+          "source": "lidar_csm",
+          "source_topic": "/nso_csm/odom",
+          "source_publisher": "/nso_csm_odometry_bridge",
+          "timestamp_semantics": "scan_acquisition_timestamp_preserved",
+          "velocity_source": "CSM_derived_SE2_base_twist"
+        },
+        "depth": {
+          "valid": true,
+          "reason": "ok",
+          "source_stamp_ns": 1794289178654176305,
+          "receipt_monotonic": 17794.323277164,
+          "fault": null,
+          "source": "ZED_RGBD",
+          "statistics": {
+            "valid_fraction": 0.6552256944444445,
+            "valid_pixels": 37741,
+            "sampled_pixels": 57600,
+            "obstacle_points": 6582,
+            "supported_rows": 180,
+            "supported_columns": 320,
+            "minimum_valid_points": 0,
+            "minimum_support_rows": 0,
+            "minimum_support_columns": 0,
+            "whole_image_completeness_required": false,
+            "unknown_is_free": false,
+            "clearing_allowed": false
+          }
+        },
+        "laser_source": {
+          "valid": true,
+          "reason": "ok",
+          "source_stamp_ns": 1794289178788824320,
+          "receipt_monotonic": 17794.349295646,
+          "fault": null,
+          "source": "lslidar_N301",
+          "source_topic": "/scan",
+          "source_publisher": "/lslidar_driver_node",
+          "caller": "/lslidar_driver_node",
+          "frame": "laser_link",
+          "frame_id": "laser_link",
+          "finite_returns": 1804,
+          "range_count": 2000
+        },
+        "self_mask": {
+          "file_sha256": "119af867a47bb7092ede51a3838cae386788081e0bc551411f1156ee8387b32b",
+          "raw_bool_sha256": "22ea770d293bf0134b29bc36c1541e7661863106cc5a69a9aee0ca4711c2c90b",
+          "pixels": 46499,
+          "asset_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask.npy",
+          "provenance_path": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/config/assets/fixed_imu_left_curve_20261031/fixed-imu-mask-provenance.json",
+          "excluded_is_free": false,
+          "physical_calibration": false,
+          "applied": false,
+          "profile": "unmasked_after_camera_relocation_v1",
+          "reason": "User relocated the camera; the original IMU no longer occludes the view."
+        },
+        "recent_errors": [],
+        "no_actuator": true,
+        "localization_source": "lidar_csm",
+        "mapping_source": "gmapping",
+        "localization_tf_owner": "/nso_csm_odometry_bridge",
+        "velocity_source": "CSM_derived_SE2_base_twist",
+        "dynamic_TF_published": false,
+        "legacy_topic_namespace_only": true,
+        "physical_extrinsic_calibration_verified": false,
+        "covariance_is_measured_accuracy": false,
+        "depth_scan_clearing_allowed": false
+      },
+      "initial_map": {
+        "stamp_ns": 1794289180643906671,
+        "frame": "nso_pair_map",
+        "publisher": "/nso_pair/gmapping"
+      },
+      "costmap_sources": {
+        "global_costmap": "/nso_pair/map",
+        "local_costmap": "/nso_pair/map"
+      },
+      "status": "data_started",
+      "display_output": "/home/ouc/nso_robot/experiments/live_dashboard_reboot_20261110",
+      "semantic_output": "/home/ouc/nso_robot/experiments/live_dashboard_semantic_reboot_20261110",
+      "completed_unix_s": 1794289183.1134834,
+      "scope_note": "Data epoch created beforeS40; map not cleared for this continuation"
+    },
+    "paired_map_epoch_receipt_sha256": "c88d2040187ff9afb229973e15f46ba4ebdff7581fe4d01b8a460b21cab07fa5",
+    "joint_turn_execution_profile": "measured_in_place_turn_v1",
+    "apply_approved_self_mask": false,
+    "self_mask_pixels": 0,
+    "self_mask_profile": "unmasked_after_camera_relocation_v1",
+    "camera_mount_calibrated": true,
+    "camera_mount_user_confirmed_unchanged_since_Nov06": true,
+    "camera_extrinsic_policy": "confirmed_Nov06_composed_TF_actual_capture_match",
+    "camera_extrinsics_verified": false,
+    "camera_TF_receipt_path": "/home/ouc/nso_robot/analyses/calibrated_mount_20261108/tf_verification.json",
+    "camera_TF_receipt_sha256": "8e09f91d66efca2514d7d165a0bb83b119de382c21cc9bc351e284ce90acb1ad",
+    "camera_TF_max_abs_error": 4.150325916274511e-16,
+    "captured_base_from_camera": [
+      [
+        0.037408915714802315,
+        0.026968330397190154,
+        0.9989360751222429,
+        0.18725143692477933
+      ],
+      [
+        -0.9992918948041567,
+        -0.0030268977598475466,
+        0.0375039580400533,
+        0.06740568615856077
+      ],
+      [
+        0.004035096499644564,
+        -0.9996317057024251,
+        0.02683600101913708,
+        0.2980276263436753
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "captured_base_from_laser": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -0.011
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0035
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.451
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "floor_reference_profile": "depth_ground_reference_v1",
+    "input_geometry_profile": "depth_ground_reference_v1",
+    "candidate_floor_profile_deployed": true,
+    "ground_profile_reuse": "legacy mount training scalar reused unchanged for single camera-TF input comparison; not the separately fitted Nov06 ground profile",
+    "ground_reference_receipt": {
+      "path": "/home/ouc/nso_robot/analyses/sensor_repair_20261108/execution_ground_profile.json",
+      "sha256": "094feddd52dfc8e125e62ceebe046d5b0312f0742439511cb89ef8a3fa6df9e5",
+      "training_source": {
+        "path": "/home/ouc/nso_robot/analyses/evidence_first_20261108/sensor/current_capture/raw/1794128889309241370.npz",
+        "sha256": "b60b1ee6badd332c45eb5d2e42520c9fea2769ad3fc97cf8c00745744284b434",
+        "points": 10730,
+        "ransac_inliers": 10730
+      },
+      "floor_relative_to_training_base_m": -0.12447258789516671,
+      "actual_base_z_m": 0.0,
+      "actual_floor_odom_z_m": -0.12447258789516671,
+      "original_floor_odom_z_m": -0.233,
+      "method_effect": "vertical input projection, occupancy and quality/asset heights change; original thresholds and scorer/candidates unchanged",
+      "independent_physical_truth_verified": false
+    },
+    "nominal_view_forecast_calibrated": false,
+    "physical_reconstruction_accuracy_verified": false,
+    "nominal_camera_height_m": 0.536,
+    "actual_camera_origin_height_over_ground_profile_m": 0.422500214238842,
+    "actual_laser_origin_height_over_ground_profile_m": 0.5754725878951668,
+    "forecast_geometry_limit": "Nominal camera .536m and laser .684m unchanged; actual origin heights use reused old-mount training scalar, not independent ground truth; original nominal camera projection does not encode measured camera pitch/offset or actual intrinsics.",
+    "depth_confidence": 80,
+    "depth_texture_confidence": 100,
+    "SDK_depth_mode": "NEURAL",
+    "ROS_execution_frame": "odom",
+    "ROS_xy_latch": true,
+    "ROS_xy_goal_tolerance_m": 0.08,
+    "Navfn_default_tolerance": 0,
+    "controller_odometry_source": "/nso_csm/control_odom",
+    "controller_odometry_projection": "original default-keyframe CSM pose and kernel-timestamped CAN control velocity",
+    "correction_reverse_profile": "endpoint_only_max0.05_mps_existing_authorization",
+    "external_deadline_s": 1200,
+    "evidence_scope": "Expanded current-scene exploration and semantic opportunity search; cumulative acquisition cost disclosed; not matched comparison or independent accuracy result",
+    "prior_episode_ledger_imported": false,
+    "history_acquisition": "Previous40paid actions/7.167796040415737m/502.0928253150014s,41accepted observations are prior acquisition cost; new96action/1200s continuation budget excludes earlier acquisition",
+    "duration_profile": "long_budget_1200s_v1",
+    "source_state": "continuation of current partially explored scene, not independent repeat",
+    "historical_semantic_source": "hash-verified cached automatic YOLOE canonical labels, not manually supplied categories",
+    "prior_navigation_grid_discarded_from_prefix": true,
+    "live_current_navigation_map_retained": true,
+    "history_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/summary.json",
+    "history_continuity_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/continuity.json"
+  },
+  "semantic_configuration": {
+    "model_dir": "/home/ouc/nso_robot/workspaces/nso_hybrid_20261029/nso_bridge/models/real_semantics_20261030",
+    "confidence": 0.25,
+    "imgsz": 640,
+    "prior_profile": "real_scene_structural_v1"
+  },
+  "shared_observed_prefix": [
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_00_1794289259325431305.npz",
+      "sha256": "4618ecfb1e9e67eb43e066a67bfefa8237d16891dcf32e80ca6571e8e831422b",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_00_1794289259325431305.receipt.json",
+      "annotation_receipt_sha256": "3b4ff73b7116f8679c684daf295f4924cff34269f4861fd85d10106aa75a1b94",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_01_1794289272726033305.npz",
+      "sha256": "87e6485ec22a313696603da53e1b610b7ea7ae77871e7bb558498a5bb99e7dc2",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_01_1794289272726033305.receipt.json",
+      "annotation_receipt_sha256": "866f3c6328cf5ee24babf6a8e21054db09368593e03cc5fc9e95b083986e7408",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_02_1794289282726805305.npz",
+      "sha256": "7ebe11c31e4a44f8c39c5fac905255a49015a65c48e9e97f04de32759b366068",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_02_1794289282726805305.receipt.json",
+      "annotation_receipt_sha256": "ca96601128bcc054339d5b37074e48de2aa2f8ce71f27c7ed9985e7f2bdd9a5a",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_03_1794289291860453305.npz",
+      "sha256": "c33c3a6da6e8242e15e280707de2ff3824790f916250cb16929aa3be3a8b01de",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_03_1794289291860453305.receipt.json",
+      "annotation_receipt_sha256": "91c77684b995df6c6e3db9da33834a6df18cbe46a06ba6bae504515d7c95b22b",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_04_1794289301460975305.npz",
+      "sha256": "81ed579c8036f6730701a2ff2cf7410b3d3af2897f97564471fe8b335fed2afc",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_04_1794289301460975305.receipt.json",
+      "annotation_receipt_sha256": "ec3bacf7e89bd9d66d44e2c5957c05e42cf378267f34cf90ad7c0ea405607d17",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_05_1794289311361772305.npz",
+      "sha256": "f88e9e5d8c334d3d15561495b15770f7f203fcb74ee5cb75896c5cbb7450ad8b",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_05_1794289311361772305.receipt.json",
+      "annotation_receipt_sha256": "36fec837ba58096e789bc7b236ab3a0d7015f05da51fd682883c5b944faee298",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_06_1794289323795582305.npz",
+      "sha256": "1ff47ac7d88d378fb94e4406ca6180ff2395993a92473ef4881de395d27d2378",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_06_1794289323795582305.receipt.json",
+      "annotation_receipt_sha256": "a5ede9d5652fd51a4bfcff3c8b3bba53e5fefe7ff1b2b852f047b717ff18facc",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_07_1794289348730357305.npz",
+      "sha256": "f4f5d81de719a39c464edeffdc515dffa7d9eab7916819811bb5f1611c0187b4",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_07_1794289348730357305.receipt.json",
+      "annotation_receipt_sha256": "80af41cf99dbfc045918974c7b1d79f4e20028fca9a6f56d5d513806a9df32f5",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_08_1794289369031708305.npz",
+      "sha256": "bd94e7f98e07e9c4bbe181300b68e166f6074f4a68ad58526cbabea4982dfd44",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_08_1794289369031708305.receipt.json",
+      "annotation_receipt_sha256": "03d3c96a436764787041c7828638372f6ac39d9ba95766ad932217f747c07ead",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_09_1794289391066285305.npz",
+      "sha256": "1ca047a0edbbcd499ac7e2ae8ef1da864f02bb3a04276d8b4e26865e67fe8d27",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_09_1794289391066285305.receipt.json",
+      "annotation_receipt_sha256": "b326422967c48a3f1a822e238f87788d612086000f56e48877cdc19361a0ea4d",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_10_1794289400067307305.npz",
+      "sha256": "389bf611e00099b50bda6bfd1a99525a4445036d1dee0ecaad525d187fe1ee11",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_10_1794289400067307305.receipt.json",
+      "annotation_receipt_sha256": "7cf107d507ccd619802ae1d302111111751565bb4a0e5dd4c415f772b5a67d07",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_11_1794289409933848305.npz",
+      "sha256": "7184b18d84cdb6fa7d15f604eace80439c1ac63ff519a2ab23d813b1b044b8c4",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_11_1794289409933848305.receipt.json",
+      "annotation_receipt_sha256": "b0b3eef55502419565463a57a920951c8d9f345d2888a0242cdaa2aa74582fa8",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_12_1794289422034656305.npz",
+      "sha256": "0bcf896c9b4045e0aa1002b12bfe9a3472b31c8cc21e4af4eb706d20e8c1480f",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_12_1794289422034656305.receipt.json",
+      "annotation_receipt_sha256": "a27dd8c986b56ca20ebe57e624f980fcab52ff374a2049aea35b8b3d2dd3de78",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_13_1794289432868464305.npz",
+      "sha256": "848b04fcd60ae8d4189164cb023e82dc6f13b7c2eaadce41c92695eb8625f749",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_13_1794289432868464305.receipt.json",
+      "annotation_receipt_sha256": "faff3f878eb77852b820cc8da92888de5e00adcda96d87e47ae3252243576cc2",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_14_1794289443902635305.npz",
+      "sha256": "3e9bed2736533d342943d3bf7aa0053f7cd2b719ef3c95ee21e6a6cef63f21e7",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_14_1794289443902635305.receipt.json",
+      "annotation_receipt_sha256": "31ff8d009be653936f0a076363cc12647fcc739e3dc09408b0e13b43a10f4247",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_15_1794289457503354305.npz",
+      "sha256": "11e142ea73e886b1df06833c26d4da4ad421dd1d20e7a9e77d656ec7b8da4d18",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_15_1794289457503354305.receipt.json",
+      "annotation_receipt_sha256": "39c17f90047c9f2bbc6ecf660a1f18839c3d7d969732786a4ef2aee6e7ee8e54",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_16_1794289468137302305.npz",
+      "sha256": "79f68c0c03057e644b685e5ca5e7b0d3d95b78e8e34bd86cd187d2fd8a6a3817",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_16_1794289468137302305.receipt.json",
+      "annotation_receipt_sha256": "bfe90a5d5808637784a3b8f77b569db30a37bf4dca35f759dd96fcaedc2d5d00",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_17_1794289478437766305.npz",
+      "sha256": "a5f4e42231d674733b8a5eff4b2a48a3f5ef1e1d72fb6c6fe07085804a90ffdc",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_17_1794289478437766305.receipt.json",
+      "annotation_receipt_sha256": "784da292678731fb11dcf82dd0e88a37e9c20899bdcabda6798a4bf079e11ab9",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_18_1794289491771788305.npz",
+      "sha256": "8f514cd7c13684d0d89f054e008cebc91c37869cd8bf6a74c41eef4fba2fcc85",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_18_1794289491771788305.receipt.json",
+      "annotation_receipt_sha256": "e41fb55a2b6a5b060ab939410f99ea701da7ce7440c8446e6af6132a7385fb25",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_19_1794289506406189305.npz",
+      "sha256": "91c5c5d6226e146c28f93a1078d223aad3358f4104d7aa5187960b237c6d0637",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_19_1794289506406189305.receipt.json",
+      "annotation_receipt_sha256": "abee197ff6762784ee44bb92ad1356fb9734360436a91577685ccade719ec48b",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_20_1794289513406585305.npz",
+      "sha256": "7d358e4b4958f8f2a4fccd72b562f1cd3bda47f11a22dd42416d2323c343ac2a",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_20_1794289513406585305.receipt.json",
+      "annotation_receipt_sha256": "ad9b27fb03eb5b92965b6f1fe06166bc71aa504f4f8b42f5f7147cab44cc1593",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_21_1794289524106969305.npz",
+      "sha256": "8f66dbe29c4648a620df64dffa85864865b42d681a1d6d52388f783e2665bb16",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_21_1794289524106969305.receipt.json",
+      "annotation_receipt_sha256": "464e25ee261e7ed1a8e91547b4ec18ac42d91922c2e72a73ae6e79aff9fffbf4",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_22_1794289542841389305.npz",
+      "sha256": "63312ceebecfd2b9563376f1713e1c62ef06b4580f4ac1635f8533f321a3de1e",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_22_1794289542841389305.receipt.json",
+      "annotation_receipt_sha256": "015899a48a25426b0449375620def413565c2517d1d589efad97979f5441eaba",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_23_1794289551975389305.npz",
+      "sha256": "59fd88b807850b5ee82027f4fd056084705e09d4da7333f6ab38b1c39353e0f4",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_23_1794289551975389305.receipt.json",
+      "annotation_receipt_sha256": "5b94cf22bf80f6702ff69935caa7539a72e159a3d38d99f1b611adf9f126807a",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_24_1794289563109324305.npz",
+      "sha256": "0bfcde132a45dde051d9e9145d076f423381c79f8546014b12ca21d42dbc0885",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_24_1794289563109324305.receipt.json",
+      "annotation_receipt_sha256": "e336bb9fc2c7d49440d5391d81f789076fbd827a7157ce400e304f83cb924e23",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_25_1794289573309655305.npz",
+      "sha256": "fc84fcfd6fd167cf26741f6354b8e3ece81995063c7ef4310a9e3fa1fb4ccb46",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_25_1794289573309655305.receipt.json",
+      "annotation_receipt_sha256": "c719c50bfdec7d0ffc947c7e5ae698e3400deffaad8a081e4658822b23fd5ca6",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_26_1794289582946502305.npz",
+      "sha256": "0121860c7cc8bb383fab24423eac4f2418abe3a1b18b5b93dde810db17cab2a1",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_26_1794289582946502305.receipt.json",
+      "annotation_receipt_sha256": "343236b92cb2256625cbed51ded1bcb97c01a3ac033319bcd4639cb964e6453c",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_27_1794289592744197305.npz",
+      "sha256": "d1e22c0c4468ac03fc58a11be3aa312339c882149bc9e0d47b783578d8c71dbb",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_27_1794289592744197305.receipt.json",
+      "annotation_receipt_sha256": "dbc2007fc40eb0016ac2c0aa9a8ffa1527ee6f1eed53e1f7c1c34d39fc17d5f0",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_28_1794289604778842305.npz",
+      "sha256": "a3053d32fc7aea8a7d92b04d8e4831ae076b260a17bcb22ab5063dbd6c4158fe",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_28_1794289604778842305.receipt.json",
+      "annotation_receipt_sha256": "6f7ca383019cc5feb37c1a3d50aa93367d06f026edf7497ad5d4e053a1a09e19",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_29_1794289615112320305.npz",
+      "sha256": "71aa68cf028c5f39b6dd14b5dde291bb7a01aea14db62be217e287eff5f4a333",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_29_1794289615112320305.receipt.json",
+      "annotation_receipt_sha256": "40990a1cce5da2b17e38add35cbfc253e10cdc9153495694894e3ee682a54c2d",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_30_1794289625312929305.npz",
+      "sha256": "1f36f6b84d048b3fbfb77d23174efd95bf17b7dadf28883df22e5c2c8cef7f3f",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_30_1794289625312929305.receipt.json",
+      "annotation_receipt_sha256": "f1c2c7628fb12815db5fe251ccdf49b83e86a3e58ab5f29cb47f78cbaca30ee9",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_31_1794289646214124305.npz",
+      "sha256": "194b40f53464104be6d0387e9667e3ffd50d46ec57daf163dc5f70df4f8cd3a8",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_31_1794289646214124305.receipt.json",
+      "annotation_receipt_sha256": "b76acaa756e917f0a56eba15bce2090b1655f1226752b20defe7049eda1769e3",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_32_1794289658718787305.npz",
+      "sha256": "1537e5ab0d0b32d181d10d2283140d35d651888c6f03d43a11b1fc3260d1d9d7",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_32_1794289658718787305.receipt.json",
+      "annotation_receipt_sha256": "a693e53b63c00992cdd10dfd5b66fe922d046a8b9932b77bb3ce67cb082c3ef8",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_33_1794289671515493305.npz",
+      "sha256": "aa4f22aca31649be7d47ad5de1c37f2a8762236023227fe77d6ca5f10090e857",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_33_1794289671515493305.receipt.json",
+      "annotation_receipt_sha256": "5a90590a3e96b54ceb068456d63a34302a253e5cf881ee9737ce50ee863fc55e",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_34_1794289681116028305.npz",
+      "sha256": "8641e6aacb9802257930d09fcdf7c7d8f062a3d44d6d6e2fbf38eaba9e49d9e4",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_34_1794289681116028305.receipt.json",
+      "annotation_receipt_sha256": "431f8161eb26fbda516d18ee3074348ee775ef93d92cf35c0dc0e3c35237cc42",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_35_1794289693649980305.npz",
+      "sha256": "63d83e03a5dc67590d2cdaed64e1bef8bee20a8da5d3d22fed8cc34bbed49013",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_35_1794289693649980305.receipt.json",
+      "annotation_receipt_sha256": "767df64a93ab8d2769e8ec3b0c5e1ee83b89e4e23f15e837589ced4cf1f43548",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_36_1794289705550574305.npz",
+      "sha256": "b5532442ce4d5c6ad83e41ba12ce6425d3fcc0f3de7afcfaed6aa4eb663560c6",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_36_1794289705550574305.receipt.json",
+      "annotation_receipt_sha256": "931f3cd23ca20ff9df9f5079942cbd3d2c7be9070ade618b9825af68c2d23ccf",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_37_1794289718651558305.npz",
+      "sha256": "9bc625e8bfeadd59693216a1792aa92f8a9e120df8c513f725f93b84df109ad9",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_37_1794289718651558305.receipt.json",
+      "annotation_receipt_sha256": "d0426e65e60c60bfed664cd99ec837320d7b81fe82945ccaafb2fb7d39911a2c",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_38_1794289728652056305.npz",
+      "sha256": "c9f50efc9b6013ffb282f226bb28b5e349e00dc4d18e9b28a963a53dfca932cc",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_38_1794289728652056305.receipt.json",
+      "annotation_receipt_sha256": "282101ffb94181819a0d986a1fbcd179af34528a08e73c79d8adbfb0e52daab3",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_39_1794289742686165305.npz",
+      "sha256": "64d47d9b6763e50d017b4f4b1089a5438887277b6b9fbb09a72588a7aad10e1f",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_39_1794289742686165305.receipt.json",
+      "annotation_receipt_sha256": "62e897395eafb470444364dc64fe235be31525bf5476d500e76a3acd90c0b7e3",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    },
+    {
+      "path": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_40_1794289753953495305.npz",
+      "sha256": "5a1b3f480962286b916f332313e33e493e7c3997077b0d37c24da89a5b12dfe9",
+      "annotation_receipt": "/home/ouc/nso_robot/analyses/expand_scene_20261110/history/frame_40_1794289753953495305.receipt.json",
+      "annotation_receipt_sha256": "2dd8abb453fa7c3294c4ff0664ce891025a325cf4df9c99f7b5e45a34ed8acaa",
+      "registration": {
+        "kind": "same_continuous_odom",
+        "externally_verified": true
+      }
+    }
+  ]
+}

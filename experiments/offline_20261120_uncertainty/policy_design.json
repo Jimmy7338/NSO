@@ -1,0 +1,24 @@
+{
+  "schema": "B8_policy_design_before_calibration_outcomes_v1",
+  "status": "declared_not_started",
+  "hardware": false,
+  "layouts": ["shelf_left", "shelf_right"],
+  "scope": "Two previously inspected furniture permutations of one floorplan; dependent development evaluation, not new held-out scenes.",
+  "arms": {
+    "G_fixed": {"class_prior": "neutral", "extent_mode": "fixed"},
+    "S_fixed": {"class_prior": "acquired_category", "extent_mode": "fixed"},
+    "G_uncertainty": {"class_prior": "neutral", "extent_mode": "uncertainty"},
+    "S_uncertainty": {"class_prior": "acquired_category", "extent_mode": "uncertainty"},
+    "S_mean_collapse": {"class_prior": "acquired_category", "extent_mode": "mean_collapse"}
+  },
+  "common_geometry": "Frozen B6 observed instance support, qualified outer orientation, width, box/leg height and absolute layers, with B8 calibrated surface/free discrepancy.",
+  "fixed_extent": "For unresolved extent, max(0.65 m, acquired lower span); directly observed opposing endpoints retain their measured span. Keep the same unobserved-position allocation nodes and their observation update as the uncertainty arm.",
+  "mean_collapse": "Compute full S joint distribution once. For each structure retain its marginal probability and collapse geometry to conditional expected extent and lower endpoint. Do not recompute class likelihood or weights after collapse.",
+  "old_controls": "O8 results may be shown as historical references only; they are not equivalent to the new fixed-depth control.",
+  "paired_conditions": "Use original shared sensor prefix, renderer, mapper, observation labels, candidate generation, score coefficients, navigation and 256 paid-action/return protocol. Record already observed initial coverage separately.",
+  "fixed_replay": "Reuse exactly the six original prefixes and 66 acquired candidate branches. Report absolute supported and realized prediction weight, rank, selected object/global surface increments, coverage gain and action/path cost. No precision-only promotion and no requirement that S wins.",
+  "progression": "First require valid probability/invariance/source-isolation tests and validation plus held-out informative-view equal-object CRPS improvements over prior-only and fixed-0.65 baselines, including all declared fallback cases. Then audit the full fixed replay for absolute reward support and decision consequences before any new closed loop.",
+  "calibration_failure_handling": "Missing/multiple/unusable tracks remain explicit inference failures. Evaluator uses public unconditional prior as a sigma-independent fallback for complete denominators, with fixed world-y target extent if no valid inferred axis. No truth-based best-track selection; report failures and valid-only results alongside full-cohort results. This does not calibrate a complete tracking pipeline.",
+  "preserve": ["all five arms and both layouts", "all failures, interventions and negative effects", "original source and previous frozen records", "primary unknown coverage objective"],
+  "avoid": ["temperature selected by G/S advantage", "new candidate or score filters", "silent budget or stop changes", "counting views or repeated prefixes as independent objects"]
+}

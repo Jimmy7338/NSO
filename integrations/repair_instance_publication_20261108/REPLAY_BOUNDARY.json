@@ -1,0 +1,29 @@
+{
+  "schema": "nso.published_replay_boundary.v1",
+  "complete_online_reconstruction_replay": false,
+  "included": [
+    "Lossless actual RPC/mission/adapter journals with uncompressed and compressed SHA256.",
+    "Actual loadedconfig/source manifests and available terminal records;originalfull01 missing supervisor terminal files remain absent.",
+    "Actual selected measured sampleUV/depth/K/pose/voxel keys/owner/label arrays from the frozen23frame instanceprototype episode.",
+    "Native sampledquality arrays atpaid0/3/18/22,including original voxelkeys.",
+    "OneexplicitlyauthorizedoriginalfullresolutionRGBframeforfull02paid19sourceinterpretation;nofullRGB-Dsequenceorcompletemasks."
+  ],
+  "checks_implemented": [
+    "Losslessgzip decompression exactly reproduces archived originalbytes.",
+    "Projection/voxelquantization of supplied selectedsamples matches every exported key across23frames.",
+    "Fixed measured_instance_association_v1 votes/memberships and native groupeligibility recompute at0/3/18/22 from compactarrays."
+  ],
+  "checks_not_implemented_or_not_possible_from_package": [
+    "No complete RGB-D or fullretina masks:cannot rerun YOLOE or independently reconstruct fullimage ownership from masks.",
+    "Without full neighboring depth cannot independently re-establish every originalnormal/validity/sample-selection predicate.",
+    "Supplied sampledquality arrays are verified against original mapper duringexport,but cannot be re-fused from full rawRGB-D/scan/TSDF using thiscompactpackage.",
+    "No complete online sensing/navigation/policy reproduction;no physical accuracy,associationidentity or semantic-benefit claim."
+  ],
+  "stage_self_contained_derived_test": "verify_derived_inputs.py ran from staged package paths usingnumpy/scipy and packagedassociation.py,without readingrawarchive paths.",
+  "dependencies": "ScientificPython numpy/scipy;originalonline runtime/libraries and rawrecords remain local and are not vendored here.",
+  "lifecycle_status": "Snapshotincludesshort01,full01incompletefinalization,full02failedresearchoutcomewithsuccessfulfinalization,validatedlifecyclecodeandtests,andfrozenfailureaudit.Nooutcomeselectivelyomitted.",
+  "offline_scoring_probe_boundary": "Both completed probe directories are later saved-state counterfactual analyses;they are not deployed in full02 anddo not establish a physical G/S comparison or benefit.Without full rawdata/masks the scoring probe scripts are not completely reproducible from this compactpackage.",
+  "failure_audit_boundary": "139sampleddepthsupportarrays,hashboundattributionandoneauthorizedsourceRGBincluded;visualinspectiondoesnotestablishobjectgroundtruth/calibrationaccuracy.No fullonlineRGB-Dmappingreplay.",
+  "entry_audit_boundary": "Originalentryprojection/FOV/budgetpredicatesexaminedonfrozensavedstatesonly.Noenabledpolicychangeorbenefitclaimed.",
+  "cross_sensor_current_boundary": "Completedfrozenactualfull02cross-modalitydiagnosticincluded.Leftface70conditionalcorrespondencesretainapprox40mmmedianresidual;rightfaceprojected142havezerojointactual/predictedfacequalification.Thusnotallmodalitydisagreementcanbeattributedtogridquantization;noabsolute/extrinsic/sensorerrorcauseestablished."
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "C_fitted_acquisition_forward_L54_v1",
+  "status": "frozen_before_all_44_predictions",
+  "states": [
+    {
+      "layout": "shelf_left",
+      "paid_actions": 54
+    }
+  ],
+  "original_candidates": 11,
+  "hypotheses": 4,
+  "hypothesis_candidate_pairs": 44,
+  "new_acquisition_actions": 0,
+  "development_reuse": true,
+  "independent_test": false,
+  "input": "55 actually acquired RGB-D frames,21 original keyframes, unchanged native TSDF/current instance supports and11 sealed outbound routes; no actual future or source geometry enters forecasting.",
+  "geometry": "B9 sigma.01/T16 per-structure conditional-mean depth and lower coordinate from shared q(k|h,D), fixed other B6 parameters; this explicitly replaces within-structure distribution integration for this probe. G/S share each single-hypothesis forecast; differ only by original P_T16(h|D,class).",
+  "acquisition": "For each one object/structure mean hypothesis, current measured mesh plus this hypothesis renders future RGB-D. Hypothesis first-hit is removed only under B2 strict-free with measured-surface veto; nearest remaining hypothesis and current native hits determine image. Unknown unmodeled occluders are absent.",
+  "surface_basis": "Frozen C hypothesis-own0.06m outward primitive surface quadrature with coincident-area splitting and12 own orbital visibility, no evaluator source-reference points. This is a discrete modeled surface basis, not exact analytic union area.",
+  "formula": "Per hypothesis area * not original strict_free * (d_current_native>.05) * (d_predicted_native<=.05). Candidate template gross=sum_object sum_structure P_T16(h)*gross_h. Score=unchanged original common_total_proxy+template gross. Predicted lost/net retained separately, never added as a new score term.",
+  "history": "Old10cm measured_surface consumption is not applied again. Original strict_free remains both in surface area and hypothetical ray intersections, with cross-history measured-surface veto.",
+  "controls": [
+    "Same geometry/surface basis andG/S probabilities with original B2 point visibility+old measured history",
+    "Same geometry/surface basis andG/S probabilities with B2 point visibility+native5cm measurement consumption"
+  ],
+  "sensor_contract": {
+    "width": 120,
+    "height": 90,
+    "fx": 60.0,
+    "fy": 60.0,
+    "min_depth_m": 0.15,
+    "min_inclusive": true,
+    "max_depth_m": 8.0,
+    "max_inclusive": true,
+    "actual_chain": "ControlledFunctionalWorld._render -> TexturedRayRenderer(depth>=.15); ReplicaCADWorld.sense skips noisy>.15 branch when sigma=dropout=0",
+    "toy_core_boundary_difference": "Frozen known-geometry core render uses>.15. This fitted renderer preserves actual noiseless controlled-layout >=.15. Do not claim boundary-bitwise equivalence of the two render helpers."
+  },
+  "evaluation": "After all44 predictions freeze, independent evaluation against all11 already acquired native branch endpoints/source surface, compare gross/net/global and rank/target withB9 and matched fine comparators. Retain every outcome, no positive-gain filter.",
+  "cache": "Only identical model/camera predicted depth and point-visibility queries reused across routes. Each forecast native volume independently replays all55 acquired frames plus that route future.",
+  "source_files_and_inputs_sealed": true,
+  "files_sha256": {
+    "/home/ouc/nso_robot/analyses/dual_template_followup_20261120/structure/model.py": "abd1850ad3f4756f2aff0dbff6f6f908cfc0cfae6c6bcd1f5bcc1b7447fff1df",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_forecast/render_observed_free.py": "385a6a16ee0b9d1e7970df02282170945bc92e0fcbabd72bd48479ae9531dc79",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_forecast/run_fitted.py": "cb2dd0dd85df05bf353edb6081433d7d019b34cf213c24a6fffc8fa6472a4db9",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_forecast/test_render_observed_free.py": "66eac54e065d39a054273b5f26567d2b977eea5df8c08b92da1289d86edc44d1",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/acquired_frames.npz": "b096889f3b31178f6e979d83ff0df1d725feeb09e848c26147d9e3e5dc5fd245",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/conditional_history_audit.json": "74cd357d8b533f1aadaa9b145cbc48a51156abbe837c434e255ad6b711d6701d",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/conditional_hypotheses.json": "7abc8d55fc5ed46218967b2e822ca6fe3a6e149827be1224ca410b0fcb86db6b",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/fixed_candidates.json": "ff9da975fc372402636ede4aee3c1d7d2f5577a3b81e5811b24c68b5f3f9918b",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/native_prefix.ply": "64104ba683620d4afd628bb9c077b29d3181fff7b8831d7cc748fa8ef8257f9e",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/object_0_shape_0.ply": "d07234b4bdfba7b152178e4050d13cf7d358e7a3402b9b49e90e8a90a2e56175",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/object_0_shape_1.ply": "42083effebd5b6509d7d4a541a14d5f9130bcb95636b3ebbc71b450e19643ce2",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/object_1_shape_0.ply": "d1074cf63d097c440e431ed3949dbe9fb12bf4697d66011c185736ccc1b5debc",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/object_1_shape_1.ply": "b8ee337138c6d719146a0fedd6e38c26197636952ddbad254bc44b4eba811877",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/acquisition_prefix/shelf_left_54_attempt_001/receipt.json": "91b8c4ab8d66af35380a4e538695e35a0318cadd99f80881b9be682408fd1c82",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/prefix_adapter.py": "22721ad70c4436498d7c8363d2e2bdbd95643f99a08c7e53ad8cfd2ecd3652b0",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/execution_audit/prepare_acquisition_prefix.py": "f47ebb99b7fd47299a2616d6897bfe44ed2125a38d4fcef21f0d3d00d1f544a0",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/geometry_audit/forecast_development/acquisition_forecast.py": "0a912e44f474d6a97c62c674f822e3b9b216bddc30e4b29c91ac07a3c646d259",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/geometry_audit/forecast_development/protocol.json": "4c76283ec3ad550d091014f6a4e6fc9925d54623aa5090b44081ff4cb580d894",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/geometry_audit/forecast_development/surface_basis.py": "2c61e76ae8d3d99902676166980c9f77bac70dae9954d878c4becc694450c040",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/geometry_audit/forecast_development/validation.json": "e0de75631701d95cef72418d21152fa3fe9b210f774ffa2eb0902fd63a1b047b",
+    "/home/ouc/nso_robot/analyses/dual_template_gain_alignment_20261120/geometry_audit/parts_audit.py": "0ac076816422ed6962fe8aedb10cda29b5af21eaaade34468da5af2e35ef61da",
+    "/home/ouc/nso_robot/analyses/dual_template_repair_20261119/method/occlusion_repair.py": "57c5cd1bb58a2e816d81184014cbfbad2a3d5ddeb872c43c7b5d9895378bb2fb",
+    "/home/ouc/nso_robot/analyses/dual_template_uncertainty_20261120/method/model.py": "dddd54a2d0347571b48e3aacc3f428a2dccfd23747362d333360fe2223584c45",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/env/grid_exploration.py": "50ea90774a24951b54a68a088ec82ed94801be3b05a291005ad4d2d89fc2bb30",
+    "/home/ouc/nso_robot/analyses/reproduction_20261104/simulation_publication_stage/experiments/unknown_exploration_20261104/source/env/virtual3d.py": "db715833d2c1de4d04b59483bdc965436aa9aa8bcfe5f78be0418b1418d47133"
+  }
+}
