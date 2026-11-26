@@ -1,0 +1,243 @@
+{
+  "schema": "nso_blind_support_continuity_v3",
+  "adapter": "/home/ouc/nso_robot/analyses/external_support_continuity_20261126/repair_geometry.py:RepairedMotionGeometry",
+  "robot_radius_m": 0.2,
+  "adapter_sha256": "67247aa346b0331234b59fd9677187df1a38e4ff8fc11a16c6d3e07643d9f46b",
+  "inherited": [
+    {
+      "fixture": "continuous_level_floor",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.9,
+      "basis": "flat floor is analytically complete"
+    },
+    {
+      "fixture": "allow_in_band_portion_of_crossing_ramp",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.2846049894151542,
+      "basis": "swept z is within the support band and rise is 4 cm/m"
+    },
+    {
+      "fixture": "steep_ramp_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "slope exceeds the declared normal threshold"
+    },
+    {
+      "fixture": "exterior_edge_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.07999999999999999,
+      "basis": "endpoint centre stands 0.08 m from unsupported exterior"
+    },
+    {
+      "fixture": "open_notch_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "notch connects to unsupported exterior"
+    },
+    {
+      "fixture": "measured_enclosed_drop_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "original mesh shows a 0.20 m lower surface and vertical sides"
+    },
+    {
+      "fixture": "open_step_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "original mesh shows a continuous leading edge with 0.20 m vertical drop"
+    },
+    {
+      "fixture": "body_band_obstacle_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.9,
+      "basis": "recorded 0.50 m fixture intersects the body sweep"
+    },
+    {
+      "fixture": "measured_shallow_continuity_recovered",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "steep facets form a continuous measured bump only 5 mm high"
+    },
+    {
+      "fixture": "measured_submillimetre_seam_recovered",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "0.8 mm seam has same-level raw geometry with 1 mm relief"
+    },
+    {
+      "fixture": "measured_high_relief_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "steep facets supply raw X/Y support but 60 mm relief"
+    },
+    {
+      "fixture": "enclosed_absent_faces",
+      "expected_valid": null,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": null,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.10999999999999999,
+      "basis": "analytical missing-face scenario has known true flat floor, but archive XY topology alone cannot prove it"
+    },
+    {
+      "fixture": "preexisting_within_band_step_behavior",
+      "expected_valid": null,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": null,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.9,
+      "basis": "diagnostic for an actual 70 mm depression within the inherited support band, outside the collision band"
+    }
+  ],
+  "continuity": [
+    {
+      "fixture": "observed_rough_patch_larger_than_legacy_area",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.039999999999999994,
+      "basis": "0.012 m² observed surface, 7 mm peak-to-trough continuous roughness"
+    },
+    {
+      "fixture": "observed_rough_patch_crosses_centreline",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "same 0.012 m² continuous roughness intersects the centreline"
+    },
+    {
+      "fixture": "observed_large_high_relief_patch_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.039999999999999994,
+      "basis": "same geometry and complete raw XY support, but 50 mm peak-to-trough relief"
+    },
+    {
+      "fixture": "tiny_true_missing_seam_between_flat_banks",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.07999999999999999,
+      "basis": "0.5 mm enclosed gap has no raw triangles and both banks are measured level"
+    },
+    {
+      "fixture": "tiny_true_missing_seam_crosses_centreline",
+      "expected_valid": true,
+      "valid": true,
+      "reverse_valid": true,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "0.5 mm enclosed same-level gap cuts the centreline"
+    },
+    {
+      "fixture": "tiny_slit_with_height_mismatch_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": false,
+      "geometry_clearance_m": 0.0,
+      "basis": "banks are each flat but differ in elevation by 20 mm"
+    },
+    {
+      "fixture": "tiny_slit_with_lower_surface_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.07999999999999999,
+      "basis": "banks agree but the raw scan shows a floor 180 mm below them through the hole"
+    },
+    {
+      "fixture": "tiny_exterior_connected_slit_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.07999999999999999,
+      "basis": "same-level 0.5 mm slit opens to the exterior and lacks an enclosing floor"
+    },
+    {
+      "fixture": "enclosed_large_unobserved_hole_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.05,
+      "basis": "unsupported 0.014 m² hole has no measured support despite same-level banks"
+    },
+    {
+      "fixture": "too_wide_slit_grazing_sweep_rejected",
+      "expected_valid": false,
+      "valid": false,
+      "reverse_valid": false,
+      "matches": true,
+      "centreline_supported": true,
+      "geometry_clearance_m": 0.1997,
+      "basis": "true cross-bank gap is 1.6 mm although only a 0.36 mm strip enters the sweep"
+    }
+  ],
+  "passed": 21,
+  "total": 21,
+  "all_required_pass": true
+}
