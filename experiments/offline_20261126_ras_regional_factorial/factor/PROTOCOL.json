@@ -1,0 +1,19 @@
+{
+  "schema": "nso_ras_regional_factorial_v1",
+  "archive_head": "74ecf883503d5a117d1e566417aff0213f76472a",
+  "execution_source_base": "f482722f6cbfc3135358080b08f27274f54cb535",
+  "archive_branch": "codex/robot-evidence-20261104",
+  "layouts": ["ind26_vertical_spine", "ind26_bent_corridor", "ind26_offset_ring", "ind26_double_loop"],
+  "budget": 192,
+  "capture_paid": [0, 48, 96, 144, 192],
+  "arms": {
+    "D0G0": {"target": false, "outbound": false, "archive_arm": "region_S"},
+    "D1G0": {"target": true, "outbound": false},
+    "D0G1": {"target": false, "outbound": true},
+    "D1G1": {"target": true, "outbound": true, "archive_arm": "combined_S"}
+  },
+  "D": "D1 credits the observed destination only for doorway candidates with an identified destination; otherwise it credits the standing region as D0.",
+  "G": "G1 replaces the capped endpoint-gain term with the entire frozen outbound coverage plus measured surface reobservation reward, without endpoint cap. All three changes are one estimator replacement.",
+  "common": "Local S, original candidate generator, weights, source randomness handling, exact pose, scene seed, acquired laser/depth and labels, collision checks, TSDF, start, motion accounting and return remain those of the archived four floors.",
+  "evaluation": "Floor is the independent unit. Report discrete A95 with censoring, C/P/R/F1@5 cm/J, start and requested clocks if acquired, true endpoint and return, and D at both G settings plus G at both D settings and J96 interaction."
+}
