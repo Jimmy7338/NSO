@@ -1,0 +1,440 @@
+{
+  "schema": "nso_active_observation_gate_audit_v1",
+  "run": "/home/ouc/nso_robot/analyses/external_active_sweep_observation_20261126/execution/gate/b26_hm3d_00770_s1/region_S/attempt_001/run",
+  "input_validation": {
+    "freeze_sha256": "5df779e36e7b3b24fa26c5f2db93d589bd232d616f77583be921d1b4ea1c8e83",
+    "verified_file_counts": {
+      "actor_files": 225,
+      "actor_initial_files": 12,
+      "simulator_only_files": 15,
+      "evaluator_files": 80
+    },
+    "native_files_sha256": {
+      "steps.json": "e1604203b4cadaada2fc8d1ef0d57d9bebf91150cbf3e7f9b3176920bd8e5789",
+      "audit.json": "a627f4a02ea0ed33e39dae99e68f2cb425f6f7f7e997c597143f14ff41d1ad08",
+      "observed_belief_trace.npz": "84209fe8c1df2e6dbc89ccb6ac76f1a6a6326d2163b07561a9d05c5e365eea15",
+      "initial_raw_rgbd_scan_sha256.json": "3d7d9104e8c3b662399b4c068e7b98a75983cf99f95b27275f48a581eb20d8d8",
+      "attempt.json": "de09f6cd88d680e764750873ceefbbdeb4ed715d7c27884ef1911a3d3d4f6eaa"
+    }
+  },
+  "received_events": [
+    {
+      "event": "active_observation_dispatched",
+      "paid_before": 26,
+      "pose": [
+        52,
+        26,
+        2
+      ],
+      "packet_sha256": "ac77d8ab6927b7565879943f1f2c53dba0a9865e9dfa30357ce9963aa4ad92db",
+      "selected_view": [
+        44,
+        25,
+        2
+      ],
+      "target_edge": [
+        [
+          52,
+          26
+        ],
+        [
+          53,
+          26
+        ]
+      ],
+      "graph_sha256": "f8e7542a09f9c94b096bbdc73c7301b0abc50c176c57efb86c6868acf59019f8",
+      "prior_sweep": {
+        "allowed": false,
+        "reason": "missing_positive_ground_support",
+        "nearest_measured_m": {
+          "lidar": 0.32972435759505453,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "unsupported_xy_probes": 1,
+        "probes": 604,
+        "missing_only_starting_disk": false
+      },
+      "outbound_states": [
+        [
+          52,
+          26,
+          2
+        ],
+        [
+          52,
+          26,
+          1
+        ],
+        [
+          52,
+          26,
+          0
+        ],
+        [
+          51,
+          26,
+          0
+        ],
+        [
+          50,
+          26,
+          0
+        ],
+        [
+          50,
+          26,
+          3
+        ],
+        [
+          50,
+          25,
+          3
+        ],
+        [
+          50,
+          24,
+          3
+        ],
+        [
+          50,
+          24,
+          0
+        ],
+        [
+          49,
+          24,
+          0
+        ],
+        [
+          48,
+          24,
+          0
+        ],
+        [
+          47,
+          24,
+          0
+        ],
+        [
+          46,
+          24,
+          0
+        ],
+        [
+          45,
+          24,
+          0
+        ],
+        [
+          44,
+          24,
+          0
+        ],
+        [
+          44,
+          24,
+          1
+        ],
+        [
+          44,
+          25,
+          1
+        ],
+        [
+          44,
+          25,
+          2
+        ]
+      ],
+      "outbound_actions": [
+        "left",
+        "left",
+        "forward",
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "right"
+      ],
+      "known_return_from_plan_goal": 17,
+      "plan_total": 34
+    },
+    {
+      "event": "active_observation_acquired",
+      "paid": 43,
+      "pose": [
+        44,
+        25,
+        2
+      ],
+      "packet_sha256": "ee5d90986fd358ef485ab283bac0ae94edaaca9b593c89d46762dd95f93db245",
+      "scan_ranges_sha256": "dc8e3c5ea6826360200df81e92a9350914aabaccb9e5c483a16aa0f73d44dbf6",
+      "depth_values_sha256": "bc6f9353982262212b9ee63f9c04aa853afaa165b8ea1a92dc12a371daaa72ce",
+      "novel_sensor_values": true,
+      "prior_sweep": {
+        "allowed": false,
+        "reason": "missing_positive_ground_support",
+        "nearest_measured_m": {
+          "lidar": 0.32972435759505453,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "unsupported_xy_probes": 1,
+        "probes": 604,
+        "missing_only_starting_disk": false
+      },
+      "target_sweep_certificate": {
+        "allowed": true,
+        "reason": "measured_full_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.32972170692931135,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "probes": 604,
+        "missing_only_starting_disk": false
+      }
+    },
+    {
+      "event": "active_observation_crossing_replanned",
+      "paid_before": 43,
+      "pose": [
+        44,
+        25,
+        2
+      ],
+      "packet_sha256": "ee5d90986fd358ef485ab283bac0ae94edaaca9b593c89d46762dd95f93db245",
+      "selected_view": null,
+      "target_edge": [
+        [
+          52,
+          26
+        ],
+        [
+          53,
+          26
+        ]
+      ],
+      "graph_sha256": "2ab363a07fde419c52e391826c315a7840c6c7deddd9ecf42c767c7dd1217132",
+      "target_sweep_certificate": {
+        "allowed": true,
+        "reason": "measured_full_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.32972170692931135,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "probes": 604,
+        "missing_only_starting_disk": false
+      },
+      "outbound_states": [
+        [
+          44,
+          25,
+          2
+        ],
+        [
+          45,
+          25,
+          2
+        ],
+        [
+          45,
+          25,
+          3
+        ],
+        [
+          45,
+          24,
+          3
+        ],
+        [
+          45,
+          24,
+          2
+        ],
+        [
+          46,
+          24,
+          2
+        ],
+        [
+          47,
+          24,
+          2
+        ],
+        [
+          48,
+          24,
+          2
+        ],
+        [
+          49,
+          24,
+          2
+        ],
+        [
+          50,
+          24,
+          2
+        ],
+        [
+          50,
+          24,
+          1
+        ],
+        [
+          50,
+          25,
+          1
+        ],
+        [
+          50,
+          26,
+          1
+        ],
+        [
+          50,
+          26,
+          2
+        ],
+        [
+          51,
+          26,
+          2
+        ],
+        [
+          52,
+          26,
+          2
+        ],
+        [
+          53,
+          26,
+          2
+        ]
+      ],
+      "outbound_actions": [
+        "forward",
+        "right",
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "forward",
+        "forward"
+      ],
+      "known_return_from_plan_goal": 29,
+      "plan_total": 45
+    },
+    {
+      "event": "active_observed_edge_executed",
+      "scan_paid": 43,
+      "edge_paid": 59,
+      "from_cell": [
+        52,
+        26
+      ],
+      "to_cell": [
+        53,
+        26
+      ],
+      "complete_sweep": true,
+      "scan_packet_sha256": "ee5d90986fd358ef485ab283bac0ae94edaaca9b593c89d46762dd95f93db245",
+      "edge_packet_sha256": "9ef03d21b4ed03d82d40e548fad1cb328a7983f49c12e4bc5d09c180b2bc23a2",
+      "target_sweep_certificate": {
+        "allowed": true,
+        "reason": "measured_full_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.32972170692931135,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "probes": 604,
+        "missing_only_starting_disk": false
+      }
+    }
+  ],
+  "independent_observation_and_sweep": {
+    "full_packet_and_observed_belief_checks": 60,
+    "certificate_checks": {
+      "26": {
+        "allowed": false,
+        "reason": "missing_positive_ground_support",
+        "nearest_measured_m": {
+          "lidar": 0.32972435759505453,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "unsupported_xy_probes": 1,
+        "probes": 604,
+        "missing_only_starting_disk": false
+      },
+      "42": {
+        "allowed": false,
+        "reason": "missing_positive_ground_support",
+        "nearest_measured_m": {
+          "lidar": 0.32972170692931135,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "unsupported_xy_probes": 1,
+        "probes": 604,
+        "missing_only_starting_disk": false
+      },
+      "43": {
+        "allowed": true,
+        "reason": "measured_full_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.32972170692931135,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "probes": 604,
+        "missing_only_starting_disk": false
+      },
+      "58": {
+        "allowed": true,
+        "reason": "measured_full_capsule",
+        "nearest_measured_m": {
+          "lidar": 0.32972170692931135,
+          "rgbd": 0.327608286794933,
+          "lower_support": null
+        },
+        "probes": 604,
+        "missing_only_starting_disk": false
+      }
+    },
+    "first_qualified_only_after_endpoint_packet": true,
+    "truth_arrays_available_to_sensor_reconstruction": false
+  },
+  "common_mask_coverage": {
+    "common_reference_sha256": "b732f50b502b9222a3dabc735ca29651a8d69658d451898d4965f8ac08a79060",
+    "common_reachable_cells": 1640,
+    "baseline_correct_free_cells": 522,
+    "first_post_crossing_clock_above_baseline": 60,
+    "correct_free_at_crossing": 522,
+    "peak_correct_free_cells": 823,
+    "terminal_correct_free_cells": 823,
+    "paid_actions": 91
+  },
+  "gate_passed": true
+}

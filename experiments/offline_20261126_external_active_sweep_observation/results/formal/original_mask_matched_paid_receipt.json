@@ -1,0 +1,177 @@
+{
+  "schema": "nso_active_sweep_common_v1_mask_sensitivity_v1",
+  "comparison": "V3 and active-observation formal runs compared by policy and exact paid clock on the V1 reachable mask. C is correctly observed free cells divided by reachable cells in the V1 mask. J multiplies this C by audited same-clock F1@5cm, with terminal mesh permitted only at the exact requested clock. No carry forward. The last shared clock is pair-dependent and is not a fixed-budget comparison.",
+  "original_measurement_audit_sha256": "aa228fe6f1c690d8627301b3697ea3cbc89cfbbc4f9bb94b9f758f218906ad66",
+  "repaired_measurement_audit_sha256": "48131f771d6a14d5c7c57e83dbd37839a97d58fb7ac29d101d5926a6c29abd6d",
+  "hm3d_start1_previous_regional_plateau_on_v1_mask": {
+    "reachable_cells": 1640,
+    "correct_free_cells": 522,
+    "coverage": 0.3182926829268293,
+    "arms": {
+      "region_S": {
+        "v3": {
+          "actual_terminal_paid": 192,
+          "terminal_correct_free_cells_on_v1": 522,
+          "terminal_coverage_on_v1": 0.3182926829268293,
+          "paid_192_coverage_on_v1": 0.3182926829268293,
+          "terminal_exceeds_v3_regional_baseline": false
+        },
+        "active_observation": {
+          "actual_terminal_paid": 91,
+          "terminal_correct_free_cells_on_v1": 823,
+          "terminal_coverage_on_v1": 0.5018292682926829,
+          "paid_192_coverage_on_v1": null,
+          "terminal_exceeds_v3_regional_baseline": true
+        }
+      },
+      "combined_S": {
+        "v3": {
+          "actual_terminal_paid": 192,
+          "terminal_correct_free_cells_on_v1": 522,
+          "terminal_coverage_on_v1": 0.3182926829268293,
+          "paid_192_coverage_on_v1": 0.3182926829268293,
+          "terminal_exceeds_v3_regional_baseline": false
+        },
+        "active_observation": {
+          "actual_terminal_paid": 192,
+          "terminal_correct_free_cells_on_v1": 1136,
+          "terminal_coverage_on_v1": 0.6926829268292682,
+          "paid_192_coverage_on_v1": 0.6926829268292682,
+          "terminal_exceeds_v3_regional_baseline": true
+        }
+      },
+      "F_strict": {
+        "v3": {
+          "actual_terminal_paid": 24,
+          "terminal_correct_free_cells_on_v1": 495,
+          "terminal_coverage_on_v1": 0.3018292682926829,
+          "paid_192_coverage_on_v1": null,
+          "terminal_exceeds_v3_regional_baseline": false
+        },
+        "active_observation": {
+          "actual_terminal_paid": 24,
+          "terminal_correct_free_cells_on_v1": 495,
+          "terminal_coverage_on_v1": 0.3018292682926829,
+          "paid_192_coverage_on_v1": null,
+          "terminal_exceeds_v3_regional_baseline": false
+        }
+      }
+    }
+  },
+  "scheduled_paid_clocks": [
+    0,
+    48,
+    96,
+    144,
+    192
+  ],
+  "by_scheduled_paid_clock": {
+    "0": {
+      "coverage_pairs": 12,
+      "joint_pairs": 12
+    },
+    "48": {
+      "coverage_pairs": 8,
+      "joint_pairs": 8
+    },
+    "96": {
+      "coverage_pairs": 5,
+      "joint_pairs": 5
+    },
+    "144": {
+      "coverage_pairs": 3,
+      "joint_pairs": 3
+    },
+    "192": {
+      "coverage_pairs": 2,
+      "joint_pairs": 2
+    }
+  },
+  "pair_last_common_clocks": [
+    {
+      "layout": "b26_replica_apartment1_s1",
+      "arm": "region_S",
+      "paid": 141,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_replica_apartment1_s1",
+      "arm": "combined_S",
+      "paid": 135,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_replica_apartment1_s1",
+      "arm": "F_strict",
+      "paid": 53,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_replica_apartment1_s2",
+      "arm": "region_S",
+      "paid": 165,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_replica_apartment1_s2",
+      "arm": "combined_S",
+      "paid": 192,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_replica_apartment1_s2",
+      "arm": "F_strict",
+      "paid": 23,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_hm3d_00770_s1",
+      "arm": "region_S",
+      "paid": 91,
+      "delta_C_original_mask_pp": 18.353658536585364,
+      "delta_J_original_mask_pp": null
+    },
+    {
+      "layout": "b26_hm3d_00770_s1",
+      "arm": "combined_S",
+      "paid": 192,
+      "delta_C_original_mask_pp": 37.439024390243894,
+      "delta_J_original_mask_pp": 32.942093461933766
+    },
+    {
+      "layout": "b26_hm3d_00770_s1",
+      "arm": "F_strict",
+      "paid": 24,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_hm3d_00770_s2",
+      "arm": "region_S",
+      "paid": 39,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_hm3d_00770_s2",
+      "arm": "combined_S",
+      "paid": 51,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    },
+    {
+      "layout": "b26_hm3d_00770_s2",
+      "arm": "F_strict",
+      "paid": 41,
+      "delta_C_original_mask_pp": 0.0,
+      "delta_J_original_mask_pp": 0.0
+    }
+  ],
+  "csv_sha256": "1c35538c9dd2dfe43609c1941802e27cccee2a585b6d127783a820c2d0050b05"
+}
